@@ -1,0 +1,362 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+          "DTD/xhtml1-strict.dtd">
+<html>
+  <head>
+    <title>docutils.statemachine : API documentation</title>
+
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+    <link rel="stylesheet" type="text/css" href="bootstrap.min.css" />
+    <link rel="stylesheet" type="text/css" href="apidocs.css" />
+  </head>
+  <body>
+
+    <nav class="navbar navbar-default">
+      <div class="container">
+        <div class="navbar-header navbar-brand">
+          <a href="../">docutils-0.17.1</a>
+          <a href="index.html">API Documentation</a>
+        </div>
+      </div>
+    </nav>
+
+    <div class="container">
+
+      <div class="page-header">
+        <h1 class="module"><code><code><a href="docutils.html">docutils</a></code>.<code><a href="docutils.statemachine.html">statemachine</a></code></code></h1>
+        <div id="showPrivate">
+          <button class="btn btn-link" onclick="togglePrivate()">Toggle Private API</button>
+        </div>
+      </div>
+
+      <div class="categoryHeader">
+        module documentation
+      </div>
+
+      <div class="extrasDocstring">
+        
+        <p></p>
+      </div>
+
+      <div class="moduleDocstring">
+        <div><p>A finite state machine specialized for regular-expression-based text filters,
+this module defines the following classes:</p>
+<ul class="rst-simple">
+<li><code><a href="docutils.statemachine.StateMachine.html">StateMachine</a></code>, a state machine</li>
+<li><code><a href="docutils.statemachine.State.html">State</a></code>, a state superclass</li>
+<li><code><a href="docutils.statemachine.StateMachineWS.html">StateMachineWS</a></code>, a whitespace-sensitive version of <code><a href="docutils.statemachine.StateMachine.html">StateMachine</a></code></li>
+<li><code><a href="docutils.statemachine.StateWS.html">StateWS</a></code>, a state superclass for use with <code><a href="docutils.statemachine.StateMachineWS.html">StateMachineWS</a></code></li>
+<li><code><a href="docutils.statemachine.SearchStateMachine.html">SearchStateMachine</a></code>, uses <code>re.search()</code> instead of <code>re.match()</code></li>
+<li><code><a href="docutils.statemachine.SearchStateMachineWS.html">SearchStateMachineWS</a></code>, uses <code>re.search()</code> instead of <code>re.match()</code></li>
+<li><code><a href="docutils.statemachine.ViewList.html">ViewList</a></code>, extends standard Python lists.</li>
+<li><code><a href="docutils.statemachine.StringList.html">StringList</a></code>, string-specific ViewList.</li>
+</ul>
+<p>Exception classes:</p>
+<ul class="rst-simple">
+<li><code><a href="docutils.statemachine.StateMachineError.html">StateMachineError</a></code></li>
+<li><code><a href="docutils.statemachine.UnknownStateError.html">UnknownStateError</a></code></li>
+<li><code><a href="docutils.statemachine.DuplicateStateError.html">DuplicateStateError</a></code></li>
+<li><code><a href="docutils.statemachine.UnknownTransitionError.html">UnknownTransitionError</a></code></li>
+<li><code><a href="docutils.statemachine.DuplicateTransitionError.html">DuplicateTransitionError</a></code></li>
+<li><code><a href="docutils.statemachine.TransitionPatternNotFound.html">TransitionPatternNotFound</a></code></li>
+<li><code><a href="docutils.statemachine.TransitionMethodNotFound.html">TransitionMethodNotFound</a></code></li>
+<li><code><a href="docutils.statemachine.UnexpectedIndentationError.html">UnexpectedIndentationError</a></code></li>
+<li><code><a href="docutils.statemachine.TransitionCorrection.html">TransitionCorrection</a></code>: Raised to switch to another transition.</li>
+<li><code><a href="docutils.statemachine.StateCorrection.html">StateCorrection</a></code>: Raised to switch to another state &amp; transition.</li>
+</ul>
+<p>Functions:</p>
+<ul class="rst-simple">
+<li><code>string2lines()</code>: split a multi-line string into a list of one-line strings</li>
+</ul>
+<div class="rst-section" id="rst-how-to-use-this-module">
+<h1 class="heading">How To Use This Module</h1>
+<p>(See the individual classes, methods, and attributes for details.)</p>
+<ol class="rst-arabic">
+<li><p class="rst-first">Import it: <tt class="rst-docutils literal">import statemachine</tt> or <tt class="rst-docutils literal">from statemachine import ...</tt>.
+You will also need to <tt class="rst-docutils literal">import re</tt>.</p>
+</li>
+<li><p class="rst-first">Derive a subclass of <code><a href="docutils.statemachine.State.html">State</a></code> (or <code><a href="docutils.statemachine.StateWS.html">StateWS</a></code>) for each state in your state
+machine:</p>
+<pre class="rst-literal-block">
+class MyState(statemachine.State):
+</pre>
+<p>Within the state's class definition:</p>
+<ol class="rst-loweralpha">
+<li><p class="rst-first">Include a pattern for each transition, in <code><a href="docutils.statemachine.State.html#patterns">State.patterns</a></code>:</p>
+<pre class="rst-literal-block">
+patterns = {'atransition': r'pattern', ...}
+</pre>
+</li>
+<li><p class="rst-first">Include a list of initial transitions to be set up automatically, in
+<code><a href="docutils.statemachine.State.html#initial_transitions">State.initial_transitions</a></code>:</p>
+<pre class="rst-literal-block">
+initial_transitions = ['atransition', ...]
+</pre>
+</li>
+<li><p class="rst-first">Define a method for each transition, with the same name as the
+transition pattern:</p>
+<pre class="rst-literal-block">
+def atransition(self, match, context, next_state):
+    # do something
+    result = [...]  # a list
+    return context, next_state, result
+    # context, next_state may be altered
+</pre>
+<p>Transition methods may raise an <code>EOFError</code> to cut processing short.</p>
+</li>
+<li><p class="rst-first">You may wish to override the <code>State.bof()</code> and/or <code>State.eof()</code> implicit
+transition methods, which handle the beginning- and end-of-file.</p>
+</li>
+<li><p class="rst-first">In order to handle nested processing, you may wish to override the
+attributes <code><a href="docutils.statemachine.State.html#nested_sm">State.nested_sm</a></code> and/or <code><a href="docutils.statemachine.State.html#nested_sm_kwargs">State.nested_sm_kwargs</a></code>.</p>
+<p>If you are using <code><a href="docutils.statemachine.StateWS.html">StateWS</a></code> as a base class, in order to handle nested
+indented blocks, you may wish to:</p>
+<ul class="rst-simple">
+<li>override the attributes <code><a href="docutils.statemachine.StateWS.html#indent_sm">StateWS.indent_sm</a></code>,
+<code><a href="docutils.statemachine.StateWS.html#indent_sm_kwargs">StateWS.indent_sm_kwargs</a></code>, <code><a href="docutils.statemachine.StateWS.html#known_indent_sm">StateWS.known_indent_sm</a></code>, and/or
+<code><a href="docutils.statemachine.StateWS.html#known_indent_sm_kwargs">StateWS.known_indent_sm_kwargs</a></code>;</li>
+<li>override the <code>StateWS.blank()</code> method; and/or</li>
+<li>override or extend the <code>StateWS.indent()</code>, <code>StateWS.known_indent()</code>,
+and/or <code>StateWS.firstknown_indent()</code> methods.</li>
+</ul>
+</li>
+</ol>
+</li>
+<li><p class="rst-first">Create a state machine object:</p>
+<pre class="rst-literal-block">
+sm = StateMachine(state_classes=[MyState, ...],
+                  initial_state='MyState')
+</pre>
+</li>
+<li><p class="rst-first">Obtain the input text, which needs to be converted into a tab-free list of
+one-line strings. For example, to read text from a file called
+'inputfile':</p>
+<pre class="rst-literal-block">
+input_string = open('inputfile').read()
+input_lines = statemachine.string2lines(input_string)
+</pre>
+</li>
+<li><p class="rst-first">Run the state machine on the input text and collect the results, a list:</p>
+<pre class="rst-literal-block">
+results = sm.run(input_lines)
+</pre>
+</li>
+<li><p class="rst-first">Remove any lingering circular references:</p>
+<pre class="rst-literal-block">
+sm.unlink()
+</pre>
+</li>
+</ol>
+</div>
+</div>
+      </div>
+
+      <div id="splitTables">
+        <table class="children sortable" id="id705">
+  
+  <tr class="variable">
+    
+    <td>Variable</td>
+    <td><code><a href="#__docformat__">__docformat__</a></code></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="class">
+    
+    <td>Class</td>
+    <td><code><a href="docutils.statemachine.StateMachine.html">StateMachine</a></code></td>
+    <td><span>A finite state machine for text filters using regular expressions.</span></td>
+  </tr><tr class="class">
+    
+    <td>Class</td>
+    <td><code><a href="docutils.statemachine.State.html">State</a></code></td>
+    <td><span>State superclass. Contains a list of transitions, and transition methods.</span></td>
+  </tr><tr class="class">
+    
+    <td>Class</td>
+    <td><code><a href="docutils.statemachine.StateMachineWS.html">StateMachineWS</a></code></td>
+    <td><span><code><a href="docutils.statemachine.StateMachine.html">StateMachine</a></code> subclass specialized for whitespace recognition.</span></td>
+  </tr><tr class="class">
+    
+    <td>Class</td>
+    <td><code><a href="docutils.statemachine.StateWS.html">StateWS</a></code></td>
+    <td><span>State superclass specialized for whitespace (blank lines &amp; indents).</span></td>
+  </tr><tr class="class">
+    
+    <td>Class</td>
+    <td><code><a href="docutils.statemachine.SearchStateMachine.html">SearchStateMachine</a></code></td>
+    <td><span><code><a href="docutils.statemachine.StateMachine.html">StateMachine</a></code> which uses <code>re.search()</code> instead of <code>re.match()</code>.</span></td>
+  </tr><tr class="class">
+    
+    <td>Class</td>
+    <td><code><a href="docutils.statemachine.SearchStateMachineWS.html">SearchStateMachineWS</a></code></td>
+    <td><span><code><a href="docutils.statemachine.StateMachineWS.html">StateMachineWS</a></code> which uses <code>re.search()</code> instead of <code>re.match()</code>.</span></td>
+  </tr><tr class="class">
+    
+    <td>Class</td>
+    <td><code><a href="docutils.statemachine.ViewList.html">ViewList</a></code></td>
+    <td><span class="undocumented">No summary</span></td>
+  </tr><tr class="class">
+    
+    <td>Class</td>
+    <td><code><a href="docutils.statemachine.StringList.html">StringList</a></code></td>
+    <td><span>A <code><a href="docutils.statemachine.ViewList.html">ViewList</a></code> with string-specific methods.</span></td>
+  </tr><tr class="class">
+    
+    <td>Class</td>
+    <td><code><a href="docutils.statemachine.StateMachineError.html">StateMachineError</a></code></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="class">
+    
+    <td>Class</td>
+    <td><code><a href="docutils.statemachine.UnknownStateError.html">UnknownStateError</a></code></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="class">
+    
+    <td>Class</td>
+    <td><code><a href="docutils.statemachine.DuplicateStateError.html">DuplicateStateError</a></code></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="class">
+    
+    <td>Class</td>
+    <td><code><a href="docutils.statemachine.UnknownTransitionError.html">UnknownTransitionError</a></code></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="class">
+    
+    <td>Class</td>
+    <td><code><a href="docutils.statemachine.DuplicateTransitionError.html">DuplicateTransitionError</a></code></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="class">
+    
+    <td>Class</td>
+    <td><code><a href="docutils.statemachine.TransitionPatternNotFound.html">TransitionPatternNotFound</a></code></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="class">
+    
+    <td>Class</td>
+    <td><code><a href="docutils.statemachine.TransitionMethodNotFound.html">TransitionMethodNotFound</a></code></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="class">
+    
+    <td>Class</td>
+    <td><code><a href="docutils.statemachine.UnexpectedIndentationError.html">UnexpectedIndentationError</a></code></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="class">
+    
+    <td>Class</td>
+    <td><code><a href="docutils.statemachine.TransitionCorrection.html">TransitionCorrection</a></code></td>
+    <td><span>Raise from within a transition method to switch to another transition.</span></td>
+  </tr><tr class="class">
+    
+    <td>Class</td>
+    <td><code><a href="docutils.statemachine.StateCorrection.html">StateCorrection</a></code></td>
+    <td><span>Raise from within a transition method to switch to another state.</span></td>
+  </tr><tr class="function">
+    
+    <td>Function</td>
+    <td><code><a href="#string2lines">string2lines</a></code></td>
+    <td><span>Return a list of one-line strings with tabs expanded, no newlines, and trailing whitespace stripped.</span></td>
+  </tr><tr class="class private">
+    
+    <td>Class</td>
+    <td><code><a href="docutils.statemachine._SearchOverride.html">_SearchOverride</a></code></td>
+    <td><span>Mix-in class to override <code><a href="docutils.statemachine.StateMachine.html">StateMachine</a></code> regular expression behavior.</span></td>
+  </tr><tr class="function private">
+    
+    <td>Function</td>
+    <td><code><a href="#_exception_data">_exception_data</a></code></td>
+    <td><span>Return exception information:</span></td>
+  </tr>
+</table>
+        
+
+          
+      </div>
+
+      <div id="childList">
+
+        <div class="basevariable">
+  
+  <a name="docutils.statemachine.__docformat__">
+    
+  </a>
+  <a name="__docformat__">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-defname">__docformat__</span> =
+    
+  </div>
+  <div class="functionBody">
+    
+    
+    <div><p class="undocumented">Undocumented</p></div> (type: <code>str</code>)
+  </div>
+</div><div class="basefunction">
+  
+  <a name="docutils.statemachine.string2lines">
+    
+  </a>
+  <a name="string2lines">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-keyword">def</span> <span class="py-defname">string2lines</span>(astring, tab_width=8, convert_whitespace=False, whitespace=re.compile('[\x0b\x0c]')):
+    
+  </div>
+  <div class="docstring functionBody">
+    
+    
+    <div><p>Return a list of one-line strings with tabs expanded, no newlines, and
+trailing whitespace stripped.</p>
+<p>Each tab is expanded with between 1 and <code>tab_width</code> spaces, so that the
+next character's index becomes a multiple of <code>tab_width</code> (8 by default).</p>
+<p>Parameters:</p>
+<ul class="rst-simple">
+<li><code>astring</code>: a multi-line string.</li>
+<li><code>tab_width</code>: the number of columns between tab stops.</li>
+<li><code>convert_whitespace</code>: convert form feeds and vertical tabs to spaces?</li>
+<li><code>whitespace</code>: pattern object with the to-be-converted
+whitespace characters (default [vf]).</li>
+</ul>
+</div>
+  </div>
+</div><div class="basefunction private">
+  
+  <a name="docutils.statemachine._exception_data">
+    
+  </a>
+  <a name="_exception_data">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-keyword">def</span> <span class="py-defname">_exception_data</span>():
+    
+  </div>
+  <div class="docstring functionBody">
+    
+    
+    <div><p>Return exception information:</p>
+<ul class="rst-simple">
+<li>the exception's class name;</li>
+<li>the exception object;</li>
+<li>the name of the file containing the offending code;</li>
+<li>the line number of the offending code;</li>
+<li>the function name of the offending code.</li>
+</ul>
+</div>
+  </div>
+</div>
+
+      </div>
+      <address>
+        <a href="index.html">API Documentation</a> for <a href="../">docutils-0.17.1</a>, generated by <a href="https://github.com/twisted/pydoctor/">pydoctor</a> 21.2.2 at 2021-04-22 22:51:43.
+      </address>
+
+    </div>
+
+    <script src="pydoctor.js" type="text/javascript"></script>
+
+  </body>
+</html>

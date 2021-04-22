@@ -1,0 +1,1869 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+          "DTD/xhtml1-strict.dtd">
+<html>
+  <head>
+    <title>docutils.parsers.rst.states.Body : API documentation</title>
+
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+    <link rel="stylesheet" type="text/css" href="bootstrap.min.css" />
+    <link rel="stylesheet" type="text/css" href="apidocs.css" />
+  </head>
+  <body>
+
+    <nav class="navbar navbar-default">
+      <div class="container">
+        <div class="navbar-header navbar-brand">
+          <a href="../">docutils-0.17.1</a>
+          <a href="index.html">API Documentation</a>
+        </div>
+      </div>
+    </nav>
+
+    <div class="container">
+
+      <div class="page-header">
+        <h1 class="class"><code><code><a href="docutils.html">docutils</a></code>.<code><a href="docutils.parsers.html">parsers</a></code>.<code><a href="docutils.parsers.rst.html">rst</a></code>.<code><a href="docutils.parsers.rst.states.html">states</a></code>.<code><a href="docutils.parsers.rst.states.Body.html">Body</a></code></code></h1>
+        <div id="showPrivate">
+          <button class="btn btn-link" onclick="togglePrivate()">Toggle Private API</button>
+        </div>
+      </div>
+
+      <div class="categoryHeader">
+        class documentation
+      </div>
+
+      <div class="extrasDocstring">
+        <p><code><span class="py-keyword">class</span> <span class="py-defname">Body</span>(<a href="docutils.parsers.rst.states.RSTState.html" title="docutils.parsers.rst.states.RSTState">RSTState</a>):</code></p><p>Known subclasses: <code><a href="docutils.parsers.rst.states.RFC2822Body.html">docutils.parsers.rst.states.RFC2822Body</a></code>, <code><a href="docutils.parsers.rst.states.SpecializedBody.html">docutils.parsers.rst.states.SpecializedBody</a></code>, <code><a href="docutils.parsers.rst.states.SubstitutionDef.html">docutils.parsers.rst.states.SubstitutionDef</a></code></p>
+        <p><a href="classIndex.html#docutils.parsers.rst.states.Body">View In Hierarchy</a></p>
+      </div>
+
+      <div class="moduleDocstring">
+        <div>Generic classifier of the first line of a block.</div>
+      </div>
+
+      <div id="splitTables">
+        <table class="children sortable" id="id563">
+  
+  <tr class="classvariable">
+    
+    <td>Class Variable</td>
+    <td><code><a href="#enum">enum</a></code></td>
+    <td><span>Enumerated list parsing information.</span></td>
+  </tr><tr class="classvariable">
+    
+    <td>Class Variable</td>
+    <td><code><a href="#grid_table_top_pat">grid_table_top_pat</a></code></td>
+    <td><span>Matches the top (&amp; bottom) of a full table).</span></td>
+  </tr><tr class="classvariable">
+    
+    <td>Class Variable</td>
+    <td><code><a href="#simple_table_top_pat">simple_table_top_pat</a></code></td>
+    <td><span>Matches the top of a simple table.</span></td>
+  </tr><tr class="classvariable">
+    
+    <td>Class Variable</td>
+    <td><code><a href="#simple_table_border_pat">simple_table_border_pat</a></code></td>
+    <td><span>Matches the bottom &amp; header bottom of a simple table.</span></td>
+  </tr><tr class="classvariable">
+    
+    <td>Class Variable</td>
+    <td><code><a href="#pats">pats</a></code></td>
+    <td><span>Fragments of patterns used by transitions.</span></td>
+  </tr><tr class="classvariable">
+    
+    <td>Class Variable</td>
+    <td><code><a href="#patterns">patterns</a></code></td>
+    <td><span>{Name: pattern} mapping, used by <code>make_transition()</code>. Each pattern may be a string or a compiled <code>re</code> pattern. Override in subclasses.</span></td>
+  </tr><tr class="classvariable">
+    
+    <td>Class Variable</td>
+    <td><code><a href="#initial_transitions">initial_transitions</a></code></td>
+    <td><span>A list of transitions to initialize when a <code><a href="docutils.statemachine.State.html">State</a></code> is instantiated. Each entry is either a transition name string, or a (transition name, next state name) pair. See <code>make_transitions()</code>. Override in subclasses.</span></td>
+  </tr><tr class="method">
+    
+    <td>Method</td>
+    <td><code><a href="#indent">indent</a></code></td>
+    <td><span>Block quote.</span></td>
+  </tr><tr class="method">
+    
+    <td>Method</td>
+    <td><code><a href="#block_quote">block_quote</a></code></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="classvariable">
+    
+    <td>Class Variable</td>
+    <td><code><a href="#attribution_pattern">attribution_pattern</a></code></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="method">
+    
+    <td>Method</td>
+    <td><code><a href="#split_attribution">split_attribution</a></code></td>
+    <td><span>Check for a block quote attribution and split it off:</span></td>
+  </tr><tr class="method">
+    
+    <td>Method</td>
+    <td><code><a href="#check_attribution">check_attribution</a></code></td>
+    <td><span>Check attribution shape. Return the index past the end of the attribution, and the indent.</span></td>
+  </tr><tr class="method">
+    
+    <td>Method</td>
+    <td><code><a href="#parse_attribution">parse_attribution</a></code></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="method">
+    
+    <td>Method</td>
+    <td><code><a href="#bullet">bullet</a></code></td>
+    <td><span>Bullet list item.</span></td>
+  </tr><tr class="method">
+    
+    <td>Method</td>
+    <td><code><a href="#list_item">list_item</a></code></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="method">
+    
+    <td>Method</td>
+    <td><code><a href="#enumerator">enumerator</a></code></td>
+    <td><span>Enumerated List Item</span></td>
+  </tr><tr class="method">
+    
+    <td>Method</td>
+    <td><code><a href="#parse_enumerator">parse_enumerator</a></code></td>
+    <td><span>Analyze an enumerator and return the results.</span></td>
+  </tr><tr class="method">
+    
+    <td>Method</td>
+    <td><code><a href="#is_enumerated_list_item">is_enumerated_list_item</a></code></td>
+    <td><span>Check validity based on the ordinal value and the second line.</span></td>
+  </tr><tr class="method">
+    
+    <td>Method</td>
+    <td><code><a href="#make_enumerator">make_enumerator</a></code></td>
+    <td><span>Construct and return the next enumerated list item marker, and an auto-enumerator ("#" instead of the regular enumerator).</span></td>
+  </tr><tr class="method">
+    
+    <td>Method</td>
+    <td><code><a href="#field_marker">field_marker</a></code></td>
+    <td><span>Field list item.</span></td>
+  </tr><tr class="method">
+    
+    <td>Method</td>
+    <td><code><a href="#field">field</a></code></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="method">
+    
+    <td>Method</td>
+    <td><code><a href="#parse_field_marker">parse_field_marker</a></code></td>
+    <td><span>Extract &amp; return field name from a field marker match.</span></td>
+  </tr><tr class="method">
+    
+    <td>Method</td>
+    <td><code><a href="#parse_field_body">parse_field_body</a></code></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="method">
+    
+    <td>Method</td>
+    <td><code><a href="#option_marker">option_marker</a></code></td>
+    <td><span>Option list item.</span></td>
+  </tr><tr class="method">
+    
+    <td>Method</td>
+    <td><code><a href="#option_list_item">option_list_item</a></code></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="method">
+    
+    <td>Method</td>
+    <td><code><a href="#parse_option_marker">parse_option_marker</a></code></td>
+    <td><span>Return a list of <code>node.option</code> and <code>node.option_argument</code> objects, parsed from an option marker match.</span></td>
+  </tr><tr class="method">
+    
+    <td>Method</td>
+    <td><code><a href="#doctest">doctest</a></code></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="method">
+    
+    <td>Method</td>
+    <td><code><a href="#line_block">line_block</a></code></td>
+    <td><span>First line of a line block.</span></td>
+  </tr><tr class="method">
+    
+    <td>Method</td>
+    <td><code><a href="#line_block_line">line_block_line</a></code></td>
+    <td><span>Return one line element of a line_block.</span></td>
+  </tr><tr class="method">
+    
+    <td>Method</td>
+    <td><code><a href="#nest_line_block_lines">nest_line_block_lines</a></code></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="method">
+    
+    <td>Method</td>
+    <td><code><a href="#nest_line_block_segment">nest_line_block_segment</a></code></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="method">
+    
+    <td>Method</td>
+    <td><code><a href="#grid_table_top">grid_table_top</a></code></td>
+    <td><span>Top border of a full table.</span></td>
+  </tr><tr class="method">
+    
+    <td>Method</td>
+    <td><code><a href="#simple_table_top">simple_table_top</a></code></td>
+    <td><span>Top border of a simple table.</span></td>
+  </tr><tr class="method">
+    
+    <td>Method</td>
+    <td><code><a href="#table_top">table_top</a></code></td>
+    <td><span>Top border of a generic table.</span></td>
+  </tr><tr class="method">
+    
+    <td>Method</td>
+    <td><code><a href="#table">table</a></code></td>
+    <td><span>Parse a table.</span></td>
+  </tr><tr class="method">
+    
+    <td>Method</td>
+    <td><code><a href="#isolate_grid_table">isolate_grid_table</a></code></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="method">
+    
+    <td>Method</td>
+    <td><code><a href="#isolate_simple_table">isolate_simple_table</a></code></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="method">
+    
+    <td>Method</td>
+    <td><code><a href="#malformed_table">malformed_table</a></code></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="method">
+    
+    <td>Method</td>
+    <td><code><a href="#build_table">build_table</a></code></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="method">
+    
+    <td>Method</td>
+    <td><code><a href="#build_table_row">build_table_row</a></code></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="classvariable">
+    
+    <td>Class Variable</td>
+    <td><code><a href="#explicit">explicit</a></code></td>
+    <td><span>Patterns and constants used for explicit markup recognition.</span></td>
+  </tr><tr class="method">
+    
+    <td>Method</td>
+    <td><code><a href="#footnote">footnote</a></code></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="method">
+    
+    <td>Method</td>
+    <td><code><a href="#citation">citation</a></code></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="method">
+    
+    <td>Method</td>
+    <td><code><a href="#hyperlink_target">hyperlink_target</a></code></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="method">
+    
+    <td>Method</td>
+    <td><code><a href="#make_target">make_target</a></code></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="method">
+    
+    <td>Method</td>
+    <td><code><a href="#parse_target">parse_target</a></code></td>
+    <td><span>Determine the type of reference of a target.</span></td>
+  </tr><tr class="method">
+    
+    <td>Method</td>
+    <td><code><a href="#is_reference">is_reference</a></code></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="method">
+    
+    <td>Method</td>
+    <td><code><a href="#add_target">add_target</a></code></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="method">
+    
+    <td>Method</td>
+    <td><code><a href="#substitution_def">substitution_def</a></code></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="method">
+    
+    <td>Method</td>
+    <td><code><a href="#disallowed_inside_substitution_definitions">disallowed_inside_substitution_definitions</a></code></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="method">
+    
+    <td>Method</td>
+    <td><code><a href="#directive">directive</a></code></td>
+    <td><span>Returns a 2-tuple: list of nodes, and a "blank finish" boolean.</span></td>
+  </tr><tr class="method">
+    
+    <td>Method</td>
+    <td><code><a href="#run_directive">run_directive</a></code></td>
+    <td><span>Parse a directive then run its directive function.</span></td>
+  </tr><tr class="method">
+    
+    <td>Method</td>
+    <td><code><a href="#parse_directive_block">parse_directive_block</a></code></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="method">
+    
+    <td>Method</td>
+    <td><code><a href="#parse_directive_options">parse_directive_options</a></code></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="method">
+    
+    <td>Method</td>
+    <td><code><a href="#parse_directive_arguments">parse_directive_arguments</a></code></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="method">
+    
+    <td>Method</td>
+    <td><code><a href="#parse_extension_options">parse_extension_options</a></code></td>
+    <td><span>Parse <code>datalines</code> for a field list containing extension options matching <code>option_spec</code>.</span></td>
+  </tr><tr class="method">
+    
+    <td>Method</td>
+    <td><code><a href="#unknown_directive">unknown_directive</a></code></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="method">
+    
+    <td>Method</td>
+    <td><code><a href="#comment">comment</a></code></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="method">
+    
+    <td>Method</td>
+    <td><code><a href="#explicit_markup">explicit_markup</a></code></td>
+    <td><span>Footnotes, hyperlink targets, directives, comments.</span></td>
+  </tr><tr class="method">
+    
+    <td>Method</td>
+    <td><code><a href="#explicit_construct">explicit_construct</a></code></td>
+    <td><span>Determine which explicit construct this is, parse &amp; return it.</span></td>
+  </tr><tr class="method">
+    
+    <td>Method</td>
+    <td><code><a href="#explicit_list">explicit_list</a></code></td>
+    <td><span>Create a nested state machine for a series of explicit markup constructs (including anonymous hyperlink targets).</span></td>
+  </tr><tr class="method">
+    
+    <td>Method</td>
+    <td><code><a href="#anonymous">anonymous</a></code></td>
+    <td><span>Anonymous hyperlink targets.</span></td>
+  </tr><tr class="method">
+    
+    <td>Method</td>
+    <td><code><a href="#anonymous_target">anonymous_target</a></code></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="method">
+    
+    <td>Method</td>
+    <td><code><a href="#line">line</a></code></td>
+    <td><span>Section title overline or transition marker.</span></td>
+  </tr><tr class="method">
+    
+    <td>Method</td>
+    <td><code><a href="#text">text</a></code></td>
+    <td><span>Titles, definition lists, paragraphs.</span></td>
+  </tr>
+</table>
+        
+          <p class="inheritedFrom">
+            Inherited from <code><a href="docutils.parsers.rst.states.RSTState.html">RSTState</a></code>:
+          </p>
+          <table class="children sortable" id="id564">
+  
+  <tr class="baseclassvariable">
+    
+    <td>Class Variable</td>
+    <td><code><a href="docutils.parsers.rst.states.RSTState.html#nested_sm_cache">nested_sm_cache</a></code></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="basemethod">
+    
+    <td>Method</td>
+    <td><code><a href="docutils.parsers.rst.states.RSTState.html#__init__">__init__</a></code></td>
+    <td><span>Initialize a <code>StateSM</code> object; extends <code>State.__init__()</code>.</span></td>
+  </tr><tr class="baseinstancevariable">
+    
+    <td>Instance Variable</td>
+    <td><code><a href="docutils.parsers.rst.states.RSTState.html#nested_sm_kwargs">nested_sm_kwargs</a></code></td>
+    <td><span>Keyword arguments dictionary, passed to the <code><a href="docutils.parsers.rst.states.NestedStateMachine.html">nested_sm</a></code> constructor.</span></td>
+  </tr><tr class="basemethod">
+    
+    <td>Method</td>
+    <td><code><a href="docutils.parsers.rst.states.RSTState.html#runtime_init">runtime_init</a></code></td>
+    <td><span>Initialize this <code><a href="docutils.statemachine.State.html">State</a></code> before running the state machine; called from <code>self.state_machine.run()</code>.</span></td>
+  </tr><tr class="baseinstancevariable">
+    
+    <td>Instance Variable</td>
+    <td><code><a href="docutils.parsers.rst.states.RSTState.html#memo">memo</a></code></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="baseinstancevariable">
+    
+    <td>Instance Variable</td>
+    <td><code><a href="docutils.parsers.rst.states.RSTState.html#reporter">reporter</a></code></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="baseinstancevariable">
+    
+    <td>Instance Variable</td>
+    <td><code><a href="docutils.parsers.rst.states.RSTState.html#inliner">inliner</a></code></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="baseinstancevariable">
+    
+    <td>Instance Variable</td>
+    <td><code><a href="docutils.parsers.rst.states.RSTState.html#document">document</a></code></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="baseinstancevariable">
+    
+    <td>Instance Variable</td>
+    <td><code><a href="docutils.parsers.rst.states.RSTState.html#parent">parent</a></code></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="basemethod">
+    
+    <td>Method</td>
+    <td><code><a href="docutils.parsers.rst.states.RSTState.html#goto_line">goto_line</a></code></td>
+    <td><span>Jump to input line <code>abs_line_offset</code>, ignoring jumps past the end.</span></td>
+  </tr><tr class="basemethod">
+    
+    <td>Method</td>
+    <td><code><a href="docutils.parsers.rst.states.RSTState.html#no_match">no_match</a></code></td>
+    <td><span>Override <code>StateWS.no_match</code> to generate a system message.</span></td>
+  </tr><tr class="basemethod">
+    
+    <td>Method</td>
+    <td><code><a href="docutils.parsers.rst.states.RSTState.html#bof">bof</a></code></td>
+    <td><span>Called at beginning of file.</span></td>
+  </tr><tr class="basemethod">
+    
+    <td>Method</td>
+    <td><code><a href="docutils.parsers.rst.states.RSTState.html#nested_parse">nested_parse</a></code></td>
+    <td><span>Create a new StateMachine rooted at <code>node</code> and run it over the input <code>block</code>.</span></td>
+  </tr><tr class="basemethod">
+    
+    <td>Method</td>
+    <td><code><a href="docutils.parsers.rst.states.RSTState.html#nested_list_parse">nested_list_parse</a></code></td>
+    <td><span>Create a new StateMachine rooted at <code>node</code> and run it over the input <code>block</code>. Also keep track of optional intermediate blank lines and the required final one.</span></td>
+  </tr><tr class="basemethod">
+    
+    <td>Method</td>
+    <td><code><a href="docutils.parsers.rst.states.RSTState.html#section">section</a></code></td>
+    <td><span>Check for a valid subsection and create one if it checks out.</span></td>
+  </tr><tr class="basemethod">
+    
+    <td>Method</td>
+    <td><code><a href="docutils.parsers.rst.states.RSTState.html#check_subsection">check_subsection</a></code></td>
+    <td><span>Check for a valid subsection header.  Return 1 (true) or None (false).</span></td>
+  </tr><tr class="basemethod">
+    
+    <td>Method</td>
+    <td><code><a href="docutils.parsers.rst.states.RSTState.html#title_inconsistent">title_inconsistent</a></code></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="basemethod">
+    
+    <td>Method</td>
+    <td><code><a href="docutils.parsers.rst.states.RSTState.html#new_subsection">new_subsection</a></code></td>
+    <td><span>Append new subsection to document tree. On return, check level.</span></td>
+  </tr><tr class="basemethod">
+    
+    <td>Method</td>
+    <td><code><a href="docutils.parsers.rst.states.RSTState.html#paragraph">paragraph</a></code></td>
+    <td><span>Return a list (paragraph &amp; messages) &amp; a boolean: literal_block next?</span></td>
+  </tr><tr class="basemethod">
+    
+    <td>Method</td>
+    <td><code><a href="docutils.parsers.rst.states.RSTState.html#inline_text">inline_text</a></code></td>
+    <td><span>Return 2 lists: nodes (text and inline elements), and system_messages.</span></td>
+  </tr><tr class="basemethod">
+    
+    <td>Method</td>
+    <td><code><a href="docutils.parsers.rst.states.RSTState.html#unindent_warning">unindent_warning</a></code></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr>
+</table>
+          
+          <p class="inheritedFrom">
+            Inherited from <code><a href="docutils.statemachine.StateWS.html">StateWS</a></code> (via <code><a href="docutils.parsers.rst.states.RSTState.html">RSTState</a></code>):
+          </p>
+          <table class="children sortable" id="id565">
+  
+  <tr class="baseinstancevariable">
+    
+    <td>Instance Variable</td>
+    <td><code><a href="docutils.statemachine.StateWS.html#indent_sm">indent_sm</a></code></td>
+    <td><span>The <code><a href="docutils.statemachine.StateMachine.html">StateMachine</a></code> class handling indented text blocks.</span></td>
+  </tr><tr class="baseinstancevariable">
+    
+    <td>Instance Variable</td>
+    <td><code><a href="docutils.statemachine.StateWS.html#indent_sm_kwargs">indent_sm_kwargs</a></code></td>
+    <td><span>Keyword arguments dictionary, passed to the <code><a href="#indent_sm">indent_sm</a></code> constructor.</span></td>
+  </tr><tr class="baseinstancevariable">
+    
+    <td>Instance Variable</td>
+    <td><code><a href="docutils.statemachine.StateWS.html#known_indent_sm">known_indent_sm</a></code></td>
+    <td><span>The <code><a href="docutils.statemachine.StateMachine.html">StateMachine</a></code> class handling known-indented text blocks.</span></td>
+  </tr><tr class="baseinstancevariable">
+    
+    <td>Instance Variable</td>
+    <td><code><a href="docutils.statemachine.StateWS.html#known_indent_sm_kwargs">known_indent_sm_kwargs</a></code></td>
+    <td><span>Keyword arguments dictionary, passed to the <code><a href="#known_indent_sm">known_indent_sm</a></code> constructor.</span></td>
+  </tr><tr class="baseclassvariable">
+    
+    <td>Class Variable</td>
+    <td><code><a href="docutils.statemachine.StateWS.html#ws_patterns">ws_patterns</a></code></td>
+    <td><span>Patterns for default whitespace transitions.  May be overridden in subclasses.</span></td>
+  </tr><tr class="baseclassvariable">
+    
+    <td>Class Variable</td>
+    <td><code><a href="docutils.statemachine.StateWS.html#ws_initial_transitions">ws_initial_transitions</a></code></td>
+    <td><span>Default initial whitespace transitions, added before those listed in <code><a href="docutils.statemachine.State.html#initial_transitions">State.initial_transitions</a></code>.  May be overridden in subclasses.</span></td>
+  </tr><tr class="basemethod">
+    
+    <td>Method</td>
+    <td><code><a href="docutils.statemachine.StateWS.html#add_initial_transitions">add_initial_transitions</a></code></td>
+    <td><span>Add whitespace-specific transitions before those defined in subclass.</span></td>
+  </tr><tr class="basemethod">
+    
+    <td>Method</td>
+    <td><code><a href="docutils.statemachine.StateWS.html#blank">blank</a></code></td>
+    <td><span>Handle blank lines. Does nothing. Override in subclasses.</span></td>
+  </tr><tr class="basemethod">
+    
+    <td>Method</td>
+    <td><code><a href="docutils.statemachine.StateWS.html#known_indent">known_indent</a></code></td>
+    <td><span>Handle a known-indent text block. Extend or override in subclasses.</span></td>
+  </tr><tr class="basemethod">
+    
+    <td>Method</td>
+    <td><code><a href="docutils.statemachine.StateWS.html#first_known_indent">first_known_indent</a></code></td>
+    <td><span>Handle an indented text block (first line's indent known).</span></td>
+  </tr>
+</table>
+          
+          <p class="inheritedFrom">
+            Inherited from <code><a href="docutils.statemachine.State.html">State</a></code> (via <code><a href="docutils.parsers.rst.states.RSTState.html">RSTState</a></code>, <code><a href="docutils.statemachine.StateWS.html">StateWS</a></code>):
+          </p>
+          <table class="children sortable" id="id566">
+  
+  <tr class="baseinstancevariable">
+    
+    <td>Instance Variable</td>
+    <td><code><a href="docutils.statemachine.State.html#nested_sm">nested_sm</a></code></td>
+    <td><span>The <code><a href="docutils.statemachine.StateMachine.html">StateMachine</a></code> class for handling nested processing.</span></td>
+  </tr><tr class="baseinstancevariable">
+    
+    <td>Instance Variable</td>
+    <td><code><a href="docutils.statemachine.State.html#transition_order">transition_order</a></code></td>
+    <td><span>A list of transition names in search order.</span></td>
+  </tr><tr class="baseinstancevariable">
+    
+    <td>Instance Variable</td>
+    <td><code><a href="docutils.statemachine.State.html#transitions">transitions</a></code></td>
+    <td><span class="undocumented">No summary</span></td>
+  </tr><tr class="baseinstancevariable">
+    
+    <td>Instance Variable</td>
+    <td><code><a href="docutils.statemachine.State.html#state_machine">state_machine</a></code></td>
+    <td><span>A reference to the controlling <code><a href="docutils.statemachine.StateMachine.html">StateMachine</a></code> object.</span></td>
+  </tr><tr class="baseinstancevariable">
+    
+    <td>Instance Variable</td>
+    <td><code><a href="docutils.statemachine.State.html#debug">debug</a></code></td>
+    <td><span>Debugging mode on/off.</span></td>
+  </tr><tr class="basemethod">
+    
+    <td>Method</td>
+    <td><code><a href="docutils.statemachine.State.html#unlink">unlink</a></code></td>
+    <td><span>Remove circular references to objects no longer required.</span></td>
+  </tr><tr class="basemethod">
+    
+    <td>Method</td>
+    <td><code><a href="docutils.statemachine.State.html#add_transitions">add_transitions</a></code></td>
+    <td><span>Add a list of transitions to the start of the transition list.</span></td>
+  </tr><tr class="basemethod">
+    
+    <td>Method</td>
+    <td><code><a href="docutils.statemachine.State.html#add_transition">add_transition</a></code></td>
+    <td><span>Add a transition to the start of the transition list.</span></td>
+  </tr><tr class="basemethod">
+    
+    <td>Method</td>
+    <td><code><a href="docutils.statemachine.State.html#remove_transition">remove_transition</a></code></td>
+    <td><span>Remove a transition by <code>name</code>.</span></td>
+  </tr><tr class="basemethod">
+    
+    <td>Method</td>
+    <td><code><a href="docutils.statemachine.State.html#make_transition">make_transition</a></code></td>
+    <td><span>Make &amp; return a transition tuple based on <code>name</code>.</span></td>
+  </tr><tr class="basemethod">
+    
+    <td>Method</td>
+    <td><code><a href="docutils.statemachine.State.html#make_transitions">make_transitions</a></code></td>
+    <td><span>Return a list of transition names and a transition mapping.</span></td>
+  </tr><tr class="basemethod">
+    
+    <td>Method</td>
+    <td><code><a href="docutils.statemachine.State.html#eof">eof</a></code></td>
+    <td><span>Handle end-of-file. Return empty result.</span></td>
+  </tr><tr class="basemethod">
+    
+    <td>Method</td>
+    <td><code><a href="docutils.statemachine.State.html#nop">nop</a></code></td>
+    <td><span>A "do nothing" transition method.</span></td>
+  </tr>
+</table>
+          
+
+          
+      </div>
+
+      <div id="childList">
+
+        <div class="baseclassvariable">
+  
+  <a name="docutils.parsers.rst.states.Body.enum">
+    
+  </a>
+  <a name="enum">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-defname">enum</span> =
+    
+  </div>
+  <div class="functionBody">
+    
+    
+    <div>Enumerated list parsing information.</div>
+  </div>
+</div><div class="baseclassvariable">
+  
+  <a name="docutils.parsers.rst.states.Body.grid_table_top_pat">
+    
+  </a>
+  <a name="grid_table_top_pat">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-defname">grid_table_top_pat</span> =
+    
+  </div>
+  <div class="functionBody">
+    
+    
+    <div>Matches the top (&amp; bottom) of a full table).</div>
+  </div>
+</div><div class="baseclassvariable">
+  
+  <a name="docutils.parsers.rst.states.Body.simple_table_top_pat">
+    
+  </a>
+  <a name="simple_table_top_pat">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-defname">simple_table_top_pat</span> =
+    
+  </div>
+  <div class="functionBody">
+    
+    
+    <div>Matches the top of a simple table.</div>
+  </div>
+</div><div class="baseclassvariable">
+  
+  <a name="docutils.parsers.rst.states.Body.simple_table_border_pat">
+    
+  </a>
+  <a name="simple_table_border_pat">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-defname">simple_table_border_pat</span> =
+    
+  </div>
+  <div class="functionBody">
+    
+    
+    <div>Matches the bottom &amp; header bottom of a simple table.</div>
+  </div>
+</div><div class="baseclassvariable">
+  
+  <a name="docutils.parsers.rst.states.Body.pats">
+    
+  </a>
+  <a name="pats">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-defname">pats</span> =
+    
+  </div>
+  <div class="functionBody">
+    
+    
+    <div>Fragments of patterns used by transitions.</div> (type: <code>dict</code>)
+  </div>
+</div><div class="baseclassvariable">
+  
+  <a name="docutils.parsers.rst.states.Body.patterns">
+    
+  </a>
+  <a name="patterns">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-defname">patterns</span> =
+    
+  </div>
+  <div class="functionBody">
+    <div class="interfaceinfo">overrides <code><a href="docutils.statemachine.StateWS.html#patterns">docutils.statemachine.StateWS.patterns</a></code></div><div class="interfaceinfo">overridden in <code><a href="docutils.parsers.rst.states.RFC2822Body.html">docutils.parsers.rst.states.RFC2822Body</a></code>, <code><a href="docutils.parsers.rst.states.SubstitutionDef.html">docutils.parsers.rst.states.SubstitutionDef</a></code></div>
+    
+    <div>{Name: pattern} mapping, used by <code>make_transition()</code>. Each pattern may
+be a string or a compiled <code>re</code> pattern. Override in subclasses.</div>
+  </div>
+</div><div class="baseclassvariable">
+  
+  <a name="docutils.parsers.rst.states.Body.initial_transitions">
+    
+  </a>
+  <a name="initial_transitions">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-defname">initial_transitions</span> =
+    
+  </div>
+  <div class="functionBody">
+    <div class="interfaceinfo">overrides <code><a href="docutils.statemachine.State.html#initial_transitions">docutils.statemachine.State.initial_transitions</a></code></div><div class="interfaceinfo">overridden in <code><a href="docutils.parsers.rst.states.RFC2822Body.html">docutils.parsers.rst.states.RFC2822Body</a></code>, <code><a href="docutils.parsers.rst.states.SubstitutionDef.html">docutils.parsers.rst.states.SubstitutionDef</a></code></div>
+    
+    <div>A list of transitions to initialize when a <code><a href="docutils.statemachine.State.html">State</a></code> is instantiated.
+Each entry is either a transition name string, or a (transition name, next
+state name) pair. See <code>make_transitions()</code>. Override in subclasses.</div> (type: <code>tuple[str, ...]</code>)
+  </div>
+</div><div class="basemethod">
+  
+  <a name="docutils.parsers.rst.states.Body.indent">
+    
+  </a>
+  <a name="indent">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-keyword">def</span> <span class="py-defname">indent</span>(self, match, context, next_state):
+    
+  </div>
+  <div class="docstring functionBody">
+    <div class="interfaceinfo">overrides <code><a href="docutils.statemachine.StateWS.html#indent">docutils.statemachine.StateWS.indent</a></code></div>
+    
+    <div>Block quote.</div>
+  </div>
+</div><div class="basemethod">
+  
+  <a name="docutils.parsers.rst.states.Body.block_quote">
+    
+  </a>
+  <a name="block_quote">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-keyword">def</span> <span class="py-defname">block_quote</span>(self, indented, line_offset):
+    
+  </div>
+  <div class="docstring functionBody">
+    
+    
+    <div><p class="undocumented">Undocumented</p></div>
+  </div>
+</div><div class="baseclassvariable">
+  
+  <a name="docutils.parsers.rst.states.Body.attribution_pattern">
+    
+  </a>
+  <a name="attribution_pattern">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-defname">attribution_pattern</span> =
+    
+  </div>
+  <div class="functionBody">
+    
+    
+    <div><p class="undocumented">Undocumented</p></div>
+  </div>
+</div><div class="basemethod">
+  
+  <a name="docutils.parsers.rst.states.Body.split_attribution">
+    
+  </a>
+  <a name="split_attribution">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-keyword">def</span> <span class="py-defname">split_attribution</span>(self, indented, line_offset):
+    
+  </div>
+  <div class="docstring functionBody">
+    
+    
+    <div><p>Check for a block quote attribution and split it off:</p>
+<ul class="rst-simple">
+<li>First line after a blank line must begin with a dash ("--", "---",
+em-dash; matches <code>self.attribution_pattern</code>).</li>
+<li>Every line after that must have consistent indentation.</li>
+<li>Attributions must be preceded by block quote content.</li>
+</ul>
+<p>Return a tuple of: (block quote content lines, content offset,
+attribution lines, attribution offset, remaining indented lines).</p>
+</div>
+  </div>
+</div><div class="basemethod">
+  
+  <a name="docutils.parsers.rst.states.Body.check_attribution">
+    
+  </a>
+  <a name="check_attribution">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-keyword">def</span> <span class="py-defname">check_attribution</span>(self, indented, attribution_start):
+    
+  </div>
+  <div class="docstring functionBody">
+    
+    
+    <div>Check attribution shape.
+Return the index past the end of the attribution, and the indent.</div>
+  </div>
+</div><div class="basemethod">
+  
+  <a name="docutils.parsers.rst.states.Body.parse_attribution">
+    
+  </a>
+  <a name="parse_attribution">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-keyword">def</span> <span class="py-defname">parse_attribution</span>(self, indented, line_offset):
+    
+  </div>
+  <div class="docstring functionBody">
+    
+    
+    <div><p class="undocumented">Undocumented</p></div>
+  </div>
+</div><div class="basemethod">
+  
+  <a name="docutils.parsers.rst.states.Body.bullet">
+    
+  </a>
+  <a name="bullet">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-keyword">def</span> <span class="py-defname">bullet</span>(self, match, context, next_state):
+    
+  </div>
+  <div class="docstring functionBody">
+    <div class="interfaceinfo">overridden in <code><a href="docutils.parsers.rst.states.BulletList.html">docutils.parsers.rst.states.BulletList</a></code></div>
+    
+    <div>Bullet list item.</div>
+  </div>
+</div><div class="basemethod">
+  
+  <a name="docutils.parsers.rst.states.Body.list_item">
+    
+  </a>
+  <a name="list_item">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-keyword">def</span> <span class="py-defname">list_item</span>(self, indent):
+    
+  </div>
+  <div class="docstring functionBody">
+    
+    
+    <div><p class="undocumented">Undocumented</p></div>
+  </div>
+</div><div class="basemethod">
+  
+  <a name="docutils.parsers.rst.states.Body.enumerator">
+    
+  </a>
+  <a name="enumerator">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-keyword">def</span> <span class="py-defname">enumerator</span>(self, match, context, next_state):
+    
+  </div>
+  <div class="docstring functionBody">
+    <div class="interfaceinfo">overridden in <code><a href="docutils.parsers.rst.states.EnumeratedList.html">docutils.parsers.rst.states.EnumeratedList</a></code></div>
+    
+    <div>Enumerated List Item</div>
+  </div>
+</div><div class="basemethod">
+  
+  <a name="docutils.parsers.rst.states.Body.parse_enumerator">
+    
+  </a>
+  <a name="parse_enumerator">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-keyword">def</span> <span class="py-defname">parse_enumerator</span>(self, match, expected_sequence=None):
+    
+  </div>
+  <div class="docstring functionBody">
+    
+    
+    <div><p>Analyze an enumerator and return the results.</p>
+<p>The enumerator format has already been determined by the regular
+expression match. If <code>expected_sequence</code> is given, that sequence is
+tried first. If not, we check for Roman numeral 1. This way,
+single-character Roman numerals (which are also alphabetical) can be
+matched. If no sequence has been matched, all sequences are checked in
+order.</p>
+<table class="fieldTable"><tr class="fieldStart"><td class="fieldName">Returns</td><td colspan="2"><ul class="rst-simple">
+<li>the enumerator format ('period', 'parens', or 'rparen'),</li>
+<li>the sequence used ('arabic', 'loweralpha', 'upperroman', etc.),</li>
+<li>the text of the enumerator, stripped of formatting, and</li>
+<li>the ordinal value of the enumerator ('a' -&gt; 1, 'ii' -&gt; 2, etc.;
+<tt class="rst-docutils literal">None</tt> is returned for invalid enumerator text).</li>
+</ul>
+</td></tr></table></div>
+  </div>
+</div><div class="basemethod">
+  
+  <a name="docutils.parsers.rst.states.Body.is_enumerated_list_item">
+    
+  </a>
+  <a name="is_enumerated_list_item">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-keyword">def</span> <span class="py-defname">is_enumerated_list_item</span>(self, ordinal, sequence, format):
+    
+  </div>
+  <div class="docstring functionBody">
+    
+    
+    <div><p>Check validity based on the ordinal value and the second line.</p>
+<p>Return true if the ordinal is valid and the second line is blank,
+indented, or starts with the next enumerator or an auto-enumerator.</p>
+</div>
+  </div>
+</div><div class="basemethod">
+  
+  <a name="docutils.parsers.rst.states.Body.make_enumerator">
+    
+  </a>
+  <a name="make_enumerator">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-keyword">def</span> <span class="py-defname">make_enumerator</span>(self, ordinal, sequence, format):
+    
+  </div>
+  <div class="docstring functionBody">
+    
+    
+    <div><p>Construct and return the next enumerated list item marker, and an
+auto-enumerator ("#" instead of the regular enumerator).</p>
+<p>Return <tt class="rst-docutils literal">None</tt> for invalid (out of range) ordinals.</p>
+</div>
+  </div>
+</div><div class="basemethod">
+  
+  <a name="docutils.parsers.rst.states.Body.field_marker">
+    
+  </a>
+  <a name="field_marker">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-keyword">def</span> <span class="py-defname">field_marker</span>(self, match, context, next_state):
+    
+  </div>
+  <div class="docstring functionBody">
+    <div class="interfaceinfo">overridden in <code><a href="docutils.parsers.rst.directives.html.MetaBody.html">docutils.parsers.rst.directives.html.MetaBody</a></code>, <code><a href="docutils.parsers.rst.states.FieldList.html">docutils.parsers.rst.states.FieldList</a></code></div>
+    
+    <div>Field list item.</div>
+  </div>
+</div><div class="basemethod">
+  
+  <a name="docutils.parsers.rst.states.Body.field">
+    
+  </a>
+  <a name="field">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-keyword">def</span> <span class="py-defname">field</span>(self, match):
+    
+  </div>
+  <div class="docstring functionBody">
+    
+    
+    <div><p class="undocumented">Undocumented</p></div>
+  </div>
+</div><div class="basemethod">
+  
+  <a name="docutils.parsers.rst.states.Body.parse_field_marker">
+    
+  </a>
+  <a name="parse_field_marker">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-keyword">def</span> <span class="py-defname">parse_field_marker</span>(self, match):
+    
+  </div>
+  <div class="docstring functionBody">
+    
+    
+    <div>Extract &amp; return field name from a field marker match.</div>
+  </div>
+</div><div class="basemethod">
+  
+  <a name="docutils.parsers.rst.states.Body.parse_field_body">
+    
+  </a>
+  <a name="parse_field_body">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-keyword">def</span> <span class="py-defname">parse_field_body</span>(self, indented, offset, node):
+    
+  </div>
+  <div class="docstring functionBody">
+    <div class="interfaceinfo">overridden in <code><a href="docutils.parsers.rst.states.ExtensionOptions.html">docutils.parsers.rst.states.ExtensionOptions</a></code></div>
+    
+    <div><p class="undocumented">Undocumented</p></div>
+  </div>
+</div><div class="basemethod">
+  
+  <a name="docutils.parsers.rst.states.Body.option_marker">
+    
+  </a>
+  <a name="option_marker">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-keyword">def</span> <span class="py-defname">option_marker</span>(self, match, context, next_state):
+    
+  </div>
+  <div class="docstring functionBody">
+    <div class="interfaceinfo">overridden in <code><a href="docutils.parsers.rst.states.OptionList.html">docutils.parsers.rst.states.OptionList</a></code></div>
+    
+    <div>Option list item.</div>
+  </div>
+</div><div class="basemethod">
+  
+  <a name="docutils.parsers.rst.states.Body.option_list_item">
+    
+  </a>
+  <a name="option_list_item">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-keyword">def</span> <span class="py-defname">option_list_item</span>(self, match):
+    
+  </div>
+  <div class="docstring functionBody">
+    
+    
+    <div><p class="undocumented">Undocumented</p></div>
+  </div>
+</div><div class="basemethod">
+  
+  <a name="docutils.parsers.rst.states.Body.parse_option_marker">
+    
+  </a>
+  <a name="parse_option_marker">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-keyword">def</span> <span class="py-defname">parse_option_marker</span>(self, match):
+    
+  </div>
+  <div class="docstring functionBody">
+    
+    
+    <div>Return a list of <code>node.option</code> and <code>node.option_argument</code> objects,
+parsed from an option marker match.<table class="fieldTable"><tr class="fieldStart"><td class="fieldName">Unknown Field: exception</td><td colspan="2"><code><a href="docutils.parsers.rst.states.MarkupError.html">MarkupError</a></code> for invalid option markers.</td></tr></table></div>
+  </div>
+</div><div class="basemethod">
+  
+  <a name="docutils.parsers.rst.states.Body.doctest">
+    
+  </a>
+  <a name="doctest">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-keyword">def</span> <span class="py-defname">doctest</span>(self, match, context, next_state):
+    
+  </div>
+  <div class="docstring functionBody">
+    
+    
+    <div><p class="undocumented">Undocumented</p></div>
+  </div>
+</div><div class="basemethod">
+  
+  <a name="docutils.parsers.rst.states.Body.line_block">
+    
+  </a>
+  <a name="line_block">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-keyword">def</span> <span class="py-defname">line_block</span>(self, match, context, next_state):
+    
+  </div>
+  <div class="docstring functionBody">
+    <div class="interfaceinfo">overridden in <code><a href="docutils.parsers.rst.states.LineBlock.html">docutils.parsers.rst.states.LineBlock</a></code></div>
+    
+    <div>First line of a line block.</div>
+  </div>
+</div><div class="basemethod">
+  
+  <a name="docutils.parsers.rst.states.Body.line_block_line">
+    
+  </a>
+  <a name="line_block_line">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-keyword">def</span> <span class="py-defname">line_block_line</span>(self, match, lineno):
+    
+  </div>
+  <div class="docstring functionBody">
+    
+    
+    <div>Return one line element of a line_block.</div>
+  </div>
+</div><div class="basemethod">
+  
+  <a name="docutils.parsers.rst.states.Body.nest_line_block_lines">
+    
+  </a>
+  <a name="nest_line_block_lines">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-keyword">def</span> <span class="py-defname">nest_line_block_lines</span>(self, block):
+    
+  </div>
+  <div class="docstring functionBody">
+    
+    
+    <div><p class="undocumented">Undocumented</p></div>
+  </div>
+</div><div class="basemethod">
+  
+  <a name="docutils.parsers.rst.states.Body.nest_line_block_segment">
+    
+  </a>
+  <a name="nest_line_block_segment">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-keyword">def</span> <span class="py-defname">nest_line_block_segment</span>(self, block):
+    
+  </div>
+  <div class="docstring functionBody">
+    
+    
+    <div><p class="undocumented">Undocumented</p></div>
+  </div>
+</div><div class="basemethod">
+  
+  <a name="docutils.parsers.rst.states.Body.grid_table_top">
+    
+  </a>
+  <a name="grid_table_top">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-keyword">def</span> <span class="py-defname">grid_table_top</span>(self, match, context, next_state):
+    
+  </div>
+  <div class="docstring functionBody">
+    
+    
+    <div>Top border of a full table.</div>
+  </div>
+</div><div class="basemethod">
+  
+  <a name="docutils.parsers.rst.states.Body.simple_table_top">
+    
+  </a>
+  <a name="simple_table_top">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-keyword">def</span> <span class="py-defname">simple_table_top</span>(self, match, context, next_state):
+    
+  </div>
+  <div class="docstring functionBody">
+    
+    
+    <div>Top border of a simple table.</div>
+  </div>
+</div><div class="basemethod">
+  
+  <a name="docutils.parsers.rst.states.Body.table_top">
+    
+  </a>
+  <a name="table_top">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-keyword">def</span> <span class="py-defname">table_top</span>(self, match, context, next_state, isolate_function, parser_class):
+    
+  </div>
+  <div class="docstring functionBody">
+    
+    
+    <div>Top border of a generic table.</div>
+  </div>
+</div><div class="basemethod">
+  
+  <a name="docutils.parsers.rst.states.Body.table">
+    
+  </a>
+  <a name="table">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-keyword">def</span> <span class="py-defname">table</span>(self, isolate_function, parser_class):
+    
+  </div>
+  <div class="docstring functionBody">
+    
+    
+    <div>Parse a table.</div>
+  </div>
+</div><div class="basemethod">
+  
+  <a name="docutils.parsers.rst.states.Body.isolate_grid_table">
+    
+  </a>
+  <a name="isolate_grid_table">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-keyword">def</span> <span class="py-defname">isolate_grid_table</span>(self):
+    
+  </div>
+  <div class="docstring functionBody">
+    
+    
+    <div><p class="undocumented">Undocumented</p></div>
+  </div>
+</div><div class="basemethod">
+  
+  <a name="docutils.parsers.rst.states.Body.isolate_simple_table">
+    
+  </a>
+  <a name="isolate_simple_table">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-keyword">def</span> <span class="py-defname">isolate_simple_table</span>(self):
+    
+  </div>
+  <div class="docstring functionBody">
+    
+    
+    <div><p class="undocumented">Undocumented</p></div>
+  </div>
+</div><div class="basemethod">
+  
+  <a name="docutils.parsers.rst.states.Body.malformed_table">
+    
+  </a>
+  <a name="malformed_table">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-keyword">def</span> <span class="py-defname">malformed_table</span>(self, block, detail='', offset=0):
+    
+  </div>
+  <div class="docstring functionBody">
+    
+    
+    <div><p class="undocumented">Undocumented</p></div>
+  </div>
+</div><div class="basemethod">
+  
+  <a name="docutils.parsers.rst.states.Body.build_table">
+    
+  </a>
+  <a name="build_table">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-keyword">def</span> <span class="py-defname">build_table</span>(self, tabledata, tableline, stub_columns=0, widths=None):
+    
+  </div>
+  <div class="docstring functionBody">
+    
+    
+    <div><p class="undocumented">Undocumented</p></div>
+  </div>
+</div><div class="basemethod">
+  
+  <a name="docutils.parsers.rst.states.Body.build_table_row">
+    
+  </a>
+  <a name="build_table_row">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-keyword">def</span> <span class="py-defname">build_table_row</span>(self, rowdata, tableline):
+    
+  </div>
+  <div class="docstring functionBody">
+    
+    
+    <div><p class="undocumented">Undocumented</p></div>
+  </div>
+</div><div class="baseclassvariable">
+  
+  <a name="docutils.parsers.rst.states.Body.explicit">
+    
+  </a>
+  <a name="explicit">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-defname">explicit</span> =
+    
+  </div>
+  <div class="functionBody">
+    
+    
+    <div>Patterns and constants used for explicit markup recognition.</div>
+  </div>
+</div><div class="basemethod">
+  
+  <a name="docutils.parsers.rst.states.Body.footnote">
+    
+  </a>
+  <a name="footnote">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-keyword">def</span> <span class="py-defname">footnote</span>(self, match):
+    
+  </div>
+  <div class="docstring functionBody">
+    
+    
+    <div><p class="undocumented">Undocumented</p></div>
+  </div>
+</div><div class="basemethod">
+  
+  <a name="docutils.parsers.rst.states.Body.citation">
+    
+  </a>
+  <a name="citation">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-keyword">def</span> <span class="py-defname">citation</span>(self, match):
+    
+  </div>
+  <div class="docstring functionBody">
+    
+    
+    <div><p class="undocumented">Undocumented</p></div>
+  </div>
+</div><div class="basemethod">
+  
+  <a name="docutils.parsers.rst.states.Body.hyperlink_target">
+    
+  </a>
+  <a name="hyperlink_target">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-keyword">def</span> <span class="py-defname">hyperlink_target</span>(self, match):
+    
+  </div>
+  <div class="docstring functionBody">
+    
+    
+    <div><p class="undocumented">Undocumented</p></div>
+  </div>
+</div><div class="basemethod">
+  
+  <a name="docutils.parsers.rst.states.Body.make_target">
+    
+  </a>
+  <a name="make_target">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-keyword">def</span> <span class="py-defname">make_target</span>(self, block, block_text, lineno, target_name):
+    
+  </div>
+  <div class="docstring functionBody">
+    
+    
+    <div><p class="undocumented">Undocumented</p></div>
+  </div>
+</div><div class="basemethod">
+  
+  <a name="docutils.parsers.rst.states.Body.parse_target">
+    
+  </a>
+  <a name="parse_target">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-keyword">def</span> <span class="py-defname">parse_target</span>(self, block, block_text, lineno):
+    
+  </div>
+  <div class="docstring functionBody">
+    
+    
+    <div>Determine the type of reference of a target.<table class="fieldTable"><tr class="fieldStart"><td class="fieldName">Returns</td><td colspan="2"><p>A 2-tuple, one of:</p>
+<ul class="rst-simple">
+<li>'refname' and the indirect reference name</li>
+<li>'refuri' and the URI</li>
+<li>'malformed' and a system_message node</li>
+</ul>
+</td></tr></table></div>
+  </div>
+</div><div class="basemethod">
+  
+  <a name="docutils.parsers.rst.states.Body.is_reference">
+    
+  </a>
+  <a name="is_reference">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-keyword">def</span> <span class="py-defname">is_reference</span>(self, reference):
+    
+  </div>
+  <div class="docstring functionBody">
+    
+    
+    <div><p class="undocumented">Undocumented</p></div>
+  </div>
+</div><div class="basemethod">
+  
+  <a name="docutils.parsers.rst.states.Body.add_target">
+    
+  </a>
+  <a name="add_target">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-keyword">def</span> <span class="py-defname">add_target</span>(self, targetname, refuri, target, lineno):
+    
+  </div>
+  <div class="docstring functionBody">
+    
+    
+    <div><p class="undocumented">Undocumented</p></div>
+  </div>
+</div><div class="basemethod">
+  
+  <a name="docutils.parsers.rst.states.Body.substitution_def">
+    
+  </a>
+  <a name="substitution_def">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-keyword">def</span> <span class="py-defname">substitution_def</span>(self, match):
+    
+  </div>
+  <div class="docstring functionBody">
+    
+    
+    <div><p class="undocumented">Undocumented</p></div>
+  </div>
+</div><div class="basemethod">
+  
+  <a name="docutils.parsers.rst.states.Body.disallowed_inside_substitution_definitions">
+    
+  </a>
+  <a name="disallowed_inside_substitution_definitions">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-keyword">def</span> <span class="py-defname">disallowed_inside_substitution_definitions</span>(self, node):
+    
+  </div>
+  <div class="docstring functionBody">
+    
+    
+    <div><p class="undocumented">Undocumented</p></div>
+  </div>
+</div><div class="basemethod">
+  
+  <a name="docutils.parsers.rst.states.Body.directive">
+    
+  </a>
+  <a name="directive">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-keyword">def</span> <span class="py-defname">directive</span>(self, match, **option_presets):
+    
+  </div>
+  <div class="docstring functionBody">
+    
+    
+    <div>Returns a 2-tuple: list of nodes, and a "blank finish" boolean.</div>
+  </div>
+</div><div class="basemethod">
+  
+  <a name="docutils.parsers.rst.states.Body.run_directive">
+    
+  </a>
+  <a name="run_directive">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-keyword">def</span> <span class="py-defname">run_directive</span>(self, directive, match, type_name, option_presets):
+    
+  </div>
+  <div class="docstring functionBody">
+    
+    
+    <div><p>Parse a directive then run its directive function.</p>
+<p>Parameters:</p>
+<ul class="rst-simple">
+<li><code><a href="#directive">directive</a></code>: The class implementing the directive.  Must be
+a subclass of <code><a href="docutils.parsers.rst.Directive.html">rst.Directive</a></code>.</li>
+<li><code>match</code>: A regular expression match object which matched the first
+line of the directive.</li>
+<li><code>type_name</code>: The directive name, as used in the source text.</li>
+<li><code>option_presets</code>: A dictionary of preset options, defaults for the
+directive options.  Currently, only an "alt" option is passed by
+substitution definitions (value: the substitution name), which may
+be used by an embedded image directive.</li>
+</ul>
+<p>Returns a 2-tuple: list of nodes, and a "blank finish" boolean.</p>
+</div>
+  </div>
+</div><div class="basemethod">
+  
+  <a name="docutils.parsers.rst.states.Body.parse_directive_block">
+    
+  </a>
+  <a name="parse_directive_block">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-keyword">def</span> <span class="py-defname">parse_directive_block</span>(self, indented, line_offset, directive, option_presets):
+    
+  </div>
+  <div class="docstring functionBody">
+    
+    
+    <div><p class="undocumented">Undocumented</p></div>
+  </div>
+</div><div class="basemethod">
+  
+  <a name="docutils.parsers.rst.states.Body.parse_directive_options">
+    
+  </a>
+  <a name="parse_directive_options">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-keyword">def</span> <span class="py-defname">parse_directive_options</span>(self, option_presets, option_spec, arg_block):
+    
+  </div>
+  <div class="docstring functionBody">
+    
+    
+    <div><p class="undocumented">Undocumented</p></div>
+  </div>
+</div><div class="basemethod">
+  
+  <a name="docutils.parsers.rst.states.Body.parse_directive_arguments">
+    
+  </a>
+  <a name="parse_directive_arguments">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-keyword">def</span> <span class="py-defname">parse_directive_arguments</span>(self, directive, arg_block):
+    
+  </div>
+  <div class="docstring functionBody">
+    
+    
+    <div><p class="undocumented">Undocumented</p></div>
+  </div>
+</div><div class="basemethod">
+  
+  <a name="docutils.parsers.rst.states.Body.parse_extension_options">
+    
+  </a>
+  <a name="parse_extension_options">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-keyword">def</span> <span class="py-defname">parse_extension_options</span>(self, option_spec, datalines):
+    
+  </div>
+  <div class="docstring functionBody">
+    
+    
+    <div>Parse <code>datalines</code> for a field list containing extension options
+matching <code>option_spec</code>.<table class="fieldTable"><tr class="fieldStart"><td class="fieldName">Parameters</td><td class="fieldArg">option_spec</td><td>a mapping of option name to conversion
+function, which should raise an exception on bad input.</td></tr><tr><td></td><td class="fieldArg">datalines</td><td>a list of input strings.</td></tr><tr class="fieldStart"><td class="fieldName">Returns</td><td colspan="2"><ul class="rst-simple">
+<li>Success value, 1 or 0.</li>
+<li>An option dictionary on success, an error string on failure.</li>
+</ul>
+</td></tr></table></div>
+  </div>
+</div><div class="basemethod">
+  
+  <a name="docutils.parsers.rst.states.Body.unknown_directive">
+    
+  </a>
+  <a name="unknown_directive">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-keyword">def</span> <span class="py-defname">unknown_directive</span>(self, type_name):
+    
+  </div>
+  <div class="docstring functionBody">
+    
+    
+    <div><p class="undocumented">Undocumented</p></div>
+  </div>
+</div><div class="basemethod">
+  
+  <a name="docutils.parsers.rst.states.Body.comment">
+    
+  </a>
+  <a name="comment">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-keyword">def</span> <span class="py-defname">comment</span>(self, match):
+    
+  </div>
+  <div class="docstring functionBody">
+    
+    
+    <div><p class="undocumented">Undocumented</p></div>
+  </div>
+</div><div class="basemethod">
+  
+  <a name="docutils.parsers.rst.states.Body.explicit_markup">
+    
+  </a>
+  <a name="explicit_markup">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-keyword">def</span> <span class="py-defname">explicit_markup</span>(self, match, context, next_state):
+    
+  </div>
+  <div class="docstring functionBody">
+    <div class="interfaceinfo">overridden in <code><a href="docutils.parsers.rst.states.Explicit.html">docutils.parsers.rst.states.Explicit</a></code></div>
+    
+    <div>Footnotes, hyperlink targets, directives, comments.</div>
+  </div>
+</div><div class="basemethod">
+  
+  <a name="docutils.parsers.rst.states.Body.explicit_construct">
+    
+  </a>
+  <a name="explicit_construct">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-keyword">def</span> <span class="py-defname">explicit_construct</span>(self, match):
+    
+  </div>
+  <div class="docstring functionBody">
+    
+    
+    <div>Determine which explicit construct this is, parse &amp; return it.</div>
+  </div>
+</div><div class="basemethod">
+  
+  <a name="docutils.parsers.rst.states.Body.explicit_list">
+    
+  </a>
+  <a name="explicit_list">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-keyword">def</span> <span class="py-defname">explicit_list</span>(self, blank_finish):
+    
+  </div>
+  <div class="docstring functionBody">
+    
+    
+    <div>Create a nested state machine for a series of explicit markup
+constructs (including anonymous hyperlink targets).</div>
+  </div>
+</div><div class="basemethod">
+  
+  <a name="docutils.parsers.rst.states.Body.anonymous">
+    
+  </a>
+  <a name="anonymous">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-keyword">def</span> <span class="py-defname">anonymous</span>(self, match, context, next_state):
+    
+  </div>
+  <div class="docstring functionBody">
+    <div class="interfaceinfo">overridden in <code><a href="docutils.parsers.rst.states.Explicit.html">docutils.parsers.rst.states.Explicit</a></code></div>
+    
+    <div>Anonymous hyperlink targets.</div>
+  </div>
+</div><div class="basemethod">
+  
+  <a name="docutils.parsers.rst.states.Body.anonymous_target">
+    
+  </a>
+  <a name="anonymous_target">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-keyword">def</span> <span class="py-defname">anonymous_target</span>(self, match):
+    
+  </div>
+  <div class="docstring functionBody">
+    
+    
+    <div><p class="undocumented">Undocumented</p></div>
+  </div>
+</div><div class="basemethod">
+  
+  <a name="docutils.parsers.rst.states.Body.line">
+    
+  </a>
+  <a name="line">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-keyword">def</span> <span class="py-defname">line</span>(self, match, context, next_state):
+    
+  </div>
+  <div class="docstring functionBody">
+    
+    
+    <div>Section title overline or transition marker.</div>
+  </div>
+</div><div class="basemethod">
+  
+  <a name="docutils.parsers.rst.states.Body.text">
+    
+  </a>
+  <a name="text">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-keyword">def</span> <span class="py-defname">text</span>(self, match, context, next_state):
+    
+  </div>
+  <div class="docstring functionBody">
+    <div class="interfaceinfo">overridden in <code><a href="docutils.parsers.rst.states.DefinitionList.html">docutils.parsers.rst.states.DefinitionList</a></code>, <code><a href="docutils.parsers.rst.states.SubstitutionDef.html">docutils.parsers.rst.states.SubstitutionDef</a></code></div>
+    
+    <div>Titles, definition lists, paragraphs.</div>
+  </div>
+</div>
+
+      </div>
+      <address>
+        <a href="index.html">API Documentation</a> for <a href="../">docutils-0.17.1</a>, generated by <a href="https://github.com/twisted/pydoctor/">pydoctor</a> 21.2.2 at 2021-04-22 22:51:43.
+      </address>
+
+    </div>
+
+    <script src="pydoctor.js" type="text/javascript"></script>
+
+  </body>
+</html>
