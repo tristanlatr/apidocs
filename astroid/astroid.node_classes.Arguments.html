@@ -1,0 +1,971 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+          "DTD/xhtml1-strict.dtd">
+<html>
+  <head>
+    <title>astroid.node_classes.Arguments : API documentation</title>
+
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+    <link rel="stylesheet" type="text/css" href="bootstrap.min.css" />
+    <link rel="stylesheet" type="text/css" href="apidocs.css" />
+  </head>
+  <body>
+
+    <nav class="navbar navbar-default">
+      <div class="container">
+        <div class="navbar-header navbar-brand">
+          <a href="https://github.com/tristanlatr/apidocs/tree/main">astroid-v2.6.0</a>
+          <a href="index.html">API Documentation</a>
+        </div>
+      </div>
+    </nav>
+
+    <div class="container">
+
+      <div class="page-header">
+        <h1 class="class"><code><code><a href="astroid.html">astroid</a></code>.<code><a href="astroid.node_classes.html">node_classes</a></code>.<code><a href="astroid.node_classes.Arguments.html">Arguments</a></code></code></h1>
+        <div id="showPrivate">
+          <button class="btn btn-link" onclick="togglePrivate()">Toggle Private API</button>
+        </div>
+      </div>
+
+      <div class="categoryHeader">
+        class documentation
+      </div>
+
+      <div class="extrasDocstring">
+        <p><code><span class="py-keyword">class</span> <span class="py-defname">Arguments</span>(<a href="astroid.mixins.AssignTypeMixin.html" title="astroid.mixins.AssignTypeMixin">mixins.AssignTypeMixin</a>, <a href="astroid.node_classes.NodeNG.html" title="astroid.node_classes.NodeNG">NodeNG</a>):</code></p>
+        <p><a href="classIndex.html#astroid.node_classes.Arguments">View In Hierarchy</a></p>
+      </div>
+
+      <div class="moduleDocstring">
+        <div><p>Class representing an <a href="#id1"><span class="rst-problematic" id="rst-id2">:class:`ast.arguments`</span></a> node.</p>
+<p>An <a href="#id3"><span class="rst-problematic" id="rst-id4">:class:`Arguments`</span></a> node represents that arguments in a
+function definition.</p>
+<pre class="py-doctest">
+<span class="py-prompt">&gt;&gt;&gt; </span>node = astroid.extract_node(<span class="py-string">'def foo(bar): pass'</span>)
+<span class="py-prompt">&gt;&gt;&gt; </span>node
+<span class="py-output">&lt;FunctionDef.foo l.1 at 0x7effe1db8198&gt;</span>
+<span class="py-prompt">&gt;&gt;&gt; </span>node.args
+<span class="py-output">&lt;Arguments l.1 at 0x7effe1db82e8&gt;</span>
+</pre></div>
+      </div>
+
+      <div id="splitTables">
+        <table class="children sortable" id="id231">
+  
+  <tr class="method">
+    
+    <td>Method</td>
+    <td><code><a href="#__init__">__init__</a></code></td>
+    <td><span></span></td>
+  </tr><tr class="instancevariable">
+    
+    <td>Instance Variable</td>
+    <td><code><a href="#vararg">vararg</a></code></td>
+    <td><span>The name of the variable length arguments.</span></td>
+  </tr><tr class="instancevariable">
+    
+    <td>Instance Variable</td>
+    <td><code><a href="#kwarg">kwarg</a></code></td>
+    <td><span>The name of the variable length keyword arguments.</span></td>
+  </tr><tr class="instancevariable">
+    
+    <td>Instance Variable</td>
+    <td><code><a href="#args">args</a></code></td>
+    <td><span>The names of the required arguments.</span></td>
+  </tr><tr class="instancevariable">
+    
+    <td>Instance Variable</td>
+    <td><code><a href="#defaults">defaults</a></code></td>
+    <td><span>The default values for arguments that can be passed positionally.</span></td>
+  </tr><tr class="instancevariable">
+    
+    <td>Instance Variable</td>
+    <td><code><a href="#kwonlyargs">kwonlyargs</a></code></td>
+    <td><span>The keyword arguments that cannot be passed positionally.</span></td>
+  </tr><tr class="instancevariable">
+    
+    <td>Instance Variable</td>
+    <td><code><a href="#posonlyargs">posonlyargs</a></code></td>
+    <td><span>The arguments that can only be passed positionally.</span></td>
+  </tr><tr class="instancevariable">
+    
+    <td>Instance Variable</td>
+    <td><code><a href="#kw_defaults">kw_defaults</a></code></td>
+    <td><span>The default values for keyword arguments that cannot be passed positionally.</span></td>
+  </tr><tr class="instancevariable">
+    
+    <td>Instance Variable</td>
+    <td><code><a href="#annotations">annotations</a></code></td>
+    <td><span>The type annotations of arguments that can be passed positionally.</span></td>
+  </tr><tr class="instancevariable">
+    
+    <td>Instance Variable</td>
+    <td><code><a href="#posonlyargs_annotations">posonlyargs_annotations</a></code></td>
+    <td><span>The type annotations of arguments that can only be passed positionally.</span></td>
+  </tr><tr class="instancevariable">
+    
+    <td>Instance Variable</td>
+    <td><code><a href="#kwonlyargs_annotations">kwonlyargs_annotations</a></code></td>
+    <td><span>The type annotations of arguments that cannot be passed positionally.</span></td>
+  </tr><tr class="instancevariable">
+    
+    <td>Instance Variable</td>
+    <td><code><a href="#type_comment_args">type_comment_args</a></code></td>
+    <td><span>The type annotation, passed by a type comment, of each argument.</span></td>
+  </tr><tr class="instancevariable">
+    
+    <td>Instance Variable</td>
+    <td><code><a href="#type_comment_kwonlyargs">type_comment_kwonlyargs</a></code></td>
+    <td><span>The type annotation, passed by a type comment, of each keyword only argument.</span></td>
+  </tr><tr class="instancevariable">
+    
+    <td>Instance Variable</td>
+    <td><code><a href="#type_comment_posonlyargs">type_comment_posonlyargs</a></code></td>
+    <td><span>The type annotation, passed by a type comment, of each positional argument.</span></td>
+  </tr><tr class="instancevariable">
+    
+    <td>Instance Variable</td>
+    <td><code><a href="#varargannotation">varargannotation</a></code></td>
+    <td><span>The type annotation for the variable length arguments.</span></td>
+  </tr><tr class="instancevariable">
+    
+    <td>Instance Variable</td>
+    <td><code><a href="#kwargannotation">kwargannotation</a></code></td>
+    <td><span>The type annotation for the variable length keyword arguments.</span></td>
+  </tr><tr class="method">
+    
+    <td>Method</td>
+    <td><code><a href="#postinit">postinit</a></code></td>
+    <td><span>Do some setup after initialisation.</span></td>
+  </tr><tr class="property">
+    
+    <td>Property</td>
+    <td><code><a href="#fromlineno">fromlineno</a></code></td>
+    <td><span>The first line that this node appears on in the source code.</span></td>
+  </tr><tr class="property">
+    
+    <td>Property</td>
+    <td><code><a href="#arguments">arguments</a></code></td>
+    <td><span>Get all the arguments for this node, including positional only and positional and keyword</span></td>
+  </tr><tr class="method">
+    
+    <td>Method</td>
+    <td><code><a href="#format_args">format_args</a></code></td>
+    <td><span>Get the arguments formatted as string.</span></td>
+  </tr><tr class="method">
+    
+    <td>Method</td>
+    <td><code><a href="#default_value">default_value</a></code></td>
+    <td><span>Get the default value for an argument.</span></td>
+  </tr><tr class="method">
+    
+    <td>Method</td>
+    <td><code><a href="#is_argument">is_argument</a></code></td>
+    <td><span>Check if the given name is defined in the arguments.</span></td>
+  </tr><tr class="method">
+    
+    <td>Method</td>
+    <td><code><a href="#find_argname">find_argname</a></code></td>
+    <td><span>Get the index and <a href="#id1"><span class="rst-problematic" id="rst-id2">:class:`AssignName`</span></a> node for given name.</span></td>
+  </tr><tr class="method">
+    
+    <td>Method</td>
+    <td><code><a href="#get_children">get_children</a></code></td>
+    <td><span>Get the child nodes below this node.</span></td>
+  </tr><tr class="classvariable private">
+    
+    <td>Class Variable</td>
+    <td><code><a href="#_astroid_fields">_astroid_fields</a></code></td>
+    <td><span>Node attributes that contain child nodes.</span></td>
+  </tr><tr class="classvariable private">
+    
+    <td>Class Variable</td>
+    <td><code><a href="#_other_fields">_other_fields</a></code></td>
+    <td><span>Node attributes that do not contain child nodes.</span></td>
+  </tr><tr class="method private">
+    
+    <td>Method</td>
+    <td><code><a href="#_infer_name">_infer_name</a></code></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr>
+</table>
+        
+          <p class="inheritedFrom">
+            Inherited from <code><a href="astroid.mixins.AssignTypeMixin.html">AssignTypeMixin</a></code>:
+          </p>
+          <table class="children sortable" id="id232">
+  
+  <tr class="basemethod">
+    
+    <td>Method</td>
+    <td><code><a href="astroid.mixins.AssignTypeMixin.html#assign_type">assign_type</a></code></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="basemethod private">
+    
+    <td>Method</td>
+    <td><code><a href="astroid.mixins.AssignTypeMixin.html#_get_filtered_stmts">_get_filtered_stmts</a></code></td>
+    <td><span>method used in filter_stmts</span></td>
+  </tr>
+</table>
+          
+          <p class="inheritedFrom">
+            Inherited from <code><a href="astroid.node_classes.NodeNG.html">NodeNG</a></code>:
+          </p>
+          <table class="children sortable" id="id233">
+  
+  <tr class="baseclassvariable">
+    
+    <td>Class Variable</td>
+    <td><code><a href="astroid.node_classes.NodeNG.html#is_statement">is_statement</a></code></td>
+    <td><span>Whether this node indicates a statement.</span></td>
+  </tr><tr class="baseclassvariable">
+    
+    <td>Class Variable</td>
+    <td><code><a href="astroid.node_classes.NodeNG.html#optional_assign">optional_assign</a></code></td>
+    <td><span>Whether this node optionally assigns a variable.</span></td>
+  </tr><tr class="baseclassvariable">
+    
+    <td>Class Variable</td>
+    <td><code><a href="astroid.node_classes.NodeNG.html#is_function">is_function</a></code></td>
+    <td><span>Whether this node indicates a function.</span></td>
+  </tr><tr class="baseclassvariable">
+    
+    <td>Class Variable</td>
+    <td><code><a href="astroid.node_classes.NodeNG.html#is_lambda">is_lambda</a></code></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="baseinstancevariable">
+    
+    <td>Instance Variable</td>
+    <td><code><a href="astroid.node_classes.NodeNG.html#lineno">lineno</a></code></td>
+    <td><span>The line that this node appears on in the source code.</span></td>
+  </tr><tr class="baseinstancevariable">
+    
+    <td>Instance Variable</td>
+    <td><code><a href="astroid.node_classes.NodeNG.html#col_offset">col_offset</a></code></td>
+    <td><span>The column that this node appears on in the source code.</span></td>
+  </tr><tr class="baseinstancevariable">
+    
+    <td>Instance Variable</td>
+    <td><code><a href="astroid.node_classes.NodeNG.html#parent">parent</a></code></td>
+    <td><span>The parent node in the syntax tree.</span></td>
+  </tr><tr class="basemethod">
+    
+    <td>Method</td>
+    <td><code><a href="astroid.node_classes.NodeNG.html#infer">infer</a></code></td>
+    <td><span>Get a generator of the inferred values.</span></td>
+  </tr><tr class="basemethod">
+    
+    <td>Method</td>
+    <td><code><a href="astroid.node_classes.NodeNG.html#__str__">__str__</a></code></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="basemethod">
+    
+    <td>Method</td>
+    <td><code><a href="astroid.node_classes.NodeNG.html#__repr__">__repr__</a></code></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="basemethod">
+    
+    <td>Method</td>
+    <td><code><a href="astroid.node_classes.NodeNG.html#accept">accept</a></code></td>
+    <td><span>Visit this node using the given visitor.</span></td>
+  </tr><tr class="basemethod">
+    
+    <td>Method</td>
+    <td><code><a href="astroid.node_classes.NodeNG.html#last_child">last_child</a></code></td>
+    <td><span>An optimized version of list(get_children())[-1]</span></td>
+  </tr><tr class="basemethod">
+    
+    <td>Method</td>
+    <td><code><a href="astroid.node_classes.NodeNG.html#parent_of">parent_of</a></code></td>
+    <td><span>Check if this node is the parent of the given node.</span></td>
+  </tr><tr class="basemethod">
+    
+    <td>Method</td>
+    <td><code><a href="astroid.node_classes.NodeNG.html#statement">statement</a></code></td>
+    <td><span>The first parent node, including self, marked as statement node.</span></td>
+  </tr><tr class="basemethod">
+    
+    <td>Method</td>
+    <td><code><a href="astroid.node_classes.NodeNG.html#frame">frame</a></code></td>
+    <td><span>The first parent frame node.</span></td>
+  </tr><tr class="basemethod">
+    
+    <td>Method</td>
+    <td><code><a href="astroid.node_classes.NodeNG.html#scope">scope</a></code></td>
+    <td><span>The first parent node defining a new scope.</span></td>
+  </tr><tr class="basemethod">
+    
+    <td>Method</td>
+    <td><code><a href="astroid.node_classes.NodeNG.html#root">root</a></code></td>
+    <td><span>Return the root node of the syntax tree.</span></td>
+  </tr><tr class="basemethod">
+    
+    <td>Method</td>
+    <td><code><a href="astroid.node_classes.NodeNG.html#child_sequence">child_sequence</a></code></td>
+    <td><span>Search for the sequence that contains this child.</span></td>
+  </tr><tr class="basemethod">
+    
+    <td>Method</td>
+    <td><code><a href="astroid.node_classes.NodeNG.html#locate_child">locate_child</a></code></td>
+    <td><span>Find the field of this node that contains the given child.</span></td>
+  </tr><tr class="basemethod">
+    
+    <td>Method</td>
+    <td><code><a href="astroid.node_classes.NodeNG.html#next_sibling">next_sibling</a></code></td>
+    <td><span>The next sibling statement node.</span></td>
+  </tr><tr class="basemethod">
+    
+    <td>Method</td>
+    <td><code><a href="astroid.node_classes.NodeNG.html#previous_sibling">previous_sibling</a></code></td>
+    <td><span>The previous sibling statement.</span></td>
+  </tr><tr class="baseproperty">
+    
+    <td>Property</td>
+    <td><code><a href="astroid.node_classes.NodeNG.html#tolineno">tolineno</a></code></td>
+    <td><span>The last line that this node appears on in the source code.</span></td>
+  </tr><tr class="basemethod">
+    
+    <td>Method</td>
+    <td><code><a href="astroid.node_classes.NodeNG.html#block_range">block_range</a></code></td>
+    <td><span>Get a range from the given line number to where this node ends.</span></td>
+  </tr><tr class="basemethod">
+    
+    <td>Method</td>
+    <td><code><a href="astroid.node_classes.NodeNG.html#set_local">set_local</a></code></td>
+    <td><span>Define that the given name is declared in the given statement node.</span></td>
+  </tr><tr class="basemethod">
+    
+    <td>Method</td>
+    <td><code><a href="astroid.node_classes.NodeNG.html#nodes_of_class">nodes_of_class</a></code></td>
+    <td><span>Get the nodes (including this one or below) of the given types.</span></td>
+  </tr><tr class="basemethod">
+    
+    <td>Method</td>
+    <td><code><a href="astroid.node_classes.NodeNG.html#inferred">inferred</a></code></td>
+    <td><span>Get a list of the inferred values.</span></td>
+  </tr><tr class="basemethod">
+    
+    <td>Method</td>
+    <td><code><a href="astroid.node_classes.NodeNG.html#instantiate_class">instantiate_class</a></code></td>
+    <td><span>Instantiate an instance of the defined class.</span></td>
+  </tr><tr class="basemethod">
+    
+    <td>Method</td>
+    <td><code><a href="astroid.node_classes.NodeNG.html#has_base">has_base</a></code></td>
+    <td><span>Check if this node inherits from the given type.</span></td>
+  </tr><tr class="basemethod">
+    
+    <td>Method</td>
+    <td><code><a href="astroid.node_classes.NodeNG.html#callable">callable</a></code></td>
+    <td><span>Whether this node defines something that is callable.</span></td>
+  </tr><tr class="basemethod">
+    
+    <td>Method</td>
+    <td><code><a href="astroid.node_classes.NodeNG.html#eq">eq</a></code></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="basemethod">
+    
+    <td>Method</td>
+    <td><code><a href="astroid.node_classes.NodeNG.html#as_string">as_string</a></code></td>
+    <td><span>Get the source code that this node represents.</span></td>
+  </tr><tr class="basemethod">
+    
+    <td>Method</td>
+    <td><code><a href="astroid.node_classes.NodeNG.html#repr_tree">repr_tree</a></code></td>
+    <td><span>Get a string representation of the AST from this node.</span></td>
+  </tr><tr class="basemethod">
+    
+    <td>Method</td>
+    <td><code><a href="astroid.node_classes.NodeNG.html#bool_value">bool_value</a></code></td>
+    <td><span>Determine the boolean value of this node.</span></td>
+  </tr><tr class="basemethod">
+    
+    <td>Method</td>
+    <td><code><a href="astroid.node_classes.NodeNG.html#op_precedence">op_precedence</a></code></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="basemethod">
+    
+    <td>Method</td>
+    <td><code><a href="astroid.node_classes.NodeNG.html#op_left_associative">op_left_associative</a></code></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="baseclassvariable private">
+    
+    <td>Class Variable</td>
+    <td><code><a href="astroid.node_classes.NodeNG.html#_other_other_fields">_other_other_fields</a></code></td>
+    <td><span>Attributes that contain AST-dependent fields.</span></td>
+  </tr><tr class="baseclassvariable private">
+    
+    <td>Class Variable</td>
+    <td><code><a href="astroid.node_classes.NodeNG.html#_explicit_inference">_explicit_inference</a></code></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="basemethod private">
+    
+    <td>Method</td>
+    <td><code><a href="astroid.node_classes.NodeNG.html#_repr_name">_repr_name</a></code></td>
+    <td><span>Get a name for nice representation.</span></td>
+  </tr><tr class="basemethod private">
+    
+    <td>Method</td>
+    <td><code><a href="astroid.node_classes.NodeNG.html#_fixed_source_line">_fixed_source_line</a></code></td>
+    <td><span>Attempt to find the line that this node appears on.</span></td>
+  </tr><tr class="basemethod private">
+    
+    <td>Method</td>
+    <td><code><a href="astroid.node_classes.NodeNG.html#_get_assign_nodes">_get_assign_nodes</a></code></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="basemethod private">
+    
+    <td>Method</td>
+    <td><code><a href="astroid.node_classes.NodeNG.html#_get_name_nodes">_get_name_nodes</a></code></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="basemethod private">
+    
+    <td>Method</td>
+    <td><code><a href="astroid.node_classes.NodeNG.html#_get_return_nodes_skip_functions">_get_return_nodes_skip_functions</a></code></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="basemethod private">
+    
+    <td>Method</td>
+    <td><code><a href="astroid.node_classes.NodeNG.html#_get_yield_nodes_skip_lambdas">_get_yield_nodes_skip_lambdas</a></code></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="basemethod private">
+    
+    <td>Method</td>
+    <td><code><a href="astroid.node_classes.NodeNG.html#_infer">_infer</a></code></td>
+    <td><span>we don't know how to resolve a statement by default</span></td>
+  </tr>
+</table>
+          
+
+          
+      </div>
+
+      <div id="childList">
+
+        <div class="baseclassvariable private">
+  
+  <a name="astroid.node_classes.Arguments._astroid_fields">
+    
+  </a>
+  <a name="_astroid_fields">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-defname">_astroid_fields</span> =
+    
+  </div>
+  <div class="functionBody">
+    <div class="interfaceinfo">overrides <code><a href="astroid.node_classes.NodeNG.html#_astroid_fields">astroid.node_classes.NodeNG._astroid_fields</a></code></div>
+    
+    <div><p>Node attributes that contain child nodes.</p>
+<p>This is redefined in most concrete classes.</p>
+</div> (type: <code>tuple[str, ...]</code>)
+  </div>
+</div><div class="baseclassvariable private">
+  
+  <a name="astroid.node_classes.Arguments._other_fields">
+    
+  </a>
+  <a name="_other_fields">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-defname">_other_fields</span> =
+    
+  </div>
+  <div class="functionBody">
+    <div class="interfaceinfo">overrides <code><a href="astroid.node_classes.NodeNG.html#_other_fields">astroid.node_classes.NodeNG._other_fields</a></code></div>
+    
+    <div>Node attributes that do not contain child nodes.</div> (type: <code>tuple[str, ...]</code>)
+  </div>
+</div><div class="basemethod">
+  
+  <a name="astroid.node_classes.Arguments.__init__">
+    
+  </a>
+  <a name="__init__">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-keyword">def</span> <span class="py-defname">__init__</span>(self, vararg=None, kwarg=None, parent=None):
+    
+  </div>
+  <div class="docstring functionBody">
+    <div class="interfaceinfo">overrides <code><a href="astroid.node_classes.NodeNG.html#__init__">astroid.node_classes.NodeNG.__init__</a></code></div>
+    
+    <div><table class="fieldTable"><tr class="fieldStart"><td class="fieldName">Parameters</td><td class="fieldArg">vararg</td><td>The name of the variable length arguments. (type: <code>Optional[str]</code>)</td></tr><tr><td></td><td class="fieldArg">kwarg</td><td>The name of the variable length keyword arguments. (type: <code>Optional[str]</code>)</td></tr><tr><td></td><td class="fieldArg">parent</td><td>The parent node in the syntax tree. (type: <code>Optional[<a href="astroid.node_classes.NodeNG.html">NodeNG</a>]</code>)</td></tr></table></div>
+  </div>
+</div><div class="baseinstancevariable">
+  
+  <a name="astroid.node_classes.Arguments.vararg">
+    
+  </a>
+  <a name="vararg">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-defname">vararg</span> =
+    
+  </div>
+  <div class="functionBody">
+    
+    
+    <div>The name of the variable length arguments.</div> (type: <code>Optional[str]</code>)
+  </div>
+</div><div class="baseinstancevariable">
+  
+  <a name="astroid.node_classes.Arguments.kwarg">
+    
+  </a>
+  <a name="kwarg">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-defname">kwarg</span> =
+    
+  </div>
+  <div class="functionBody">
+    
+    
+    <div>The name of the variable length keyword arguments.</div> (type: <code>Optional[str]</code>)
+  </div>
+</div><div class="baseinstancevariable">
+  
+  <a name="astroid.node_classes.Arguments.args">
+    
+  </a>
+  <a name="args">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-defname">args</span> =
+    
+  </div>
+  <div class="functionBody">
+    
+    
+    <div>The names of the required arguments.</div>
+  </div>
+</div><div class="baseinstancevariable">
+  
+  <a name="astroid.node_classes.Arguments.defaults">
+    
+  </a>
+  <a name="defaults">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-defname">defaults</span> =
+    
+  </div>
+  <div class="functionBody">
+    
+    
+    <div>The default values for arguments that can be passed positionally.</div>
+  </div>
+</div><div class="baseinstancevariable">
+  
+  <a name="astroid.node_classes.Arguments.kwonlyargs">
+    
+  </a>
+  <a name="kwonlyargs">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-defname">kwonlyargs</span> =
+    
+  </div>
+  <div class="functionBody">
+    
+    
+    <div>The keyword arguments that cannot be passed positionally.</div>
+  </div>
+</div><div class="baseinstancevariable">
+  
+  <a name="astroid.node_classes.Arguments.posonlyargs">
+    
+  </a>
+  <a name="posonlyargs">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-defname">posonlyargs</span> =
+    
+  </div>
+  <div class="functionBody">
+    
+    
+    <div>The arguments that can only be passed positionally.</div>
+  </div>
+</div><div class="baseinstancevariable">
+  
+  <a name="astroid.node_classes.Arguments.kw_defaults">
+    
+  </a>
+  <a name="kw_defaults">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-defname">kw_defaults</span> =
+    
+  </div>
+  <div class="functionBody">
+    
+    
+    <div>The default values for keyword arguments that cannot be passed positionally.</div>
+  </div>
+</div><div class="baseinstancevariable">
+  
+  <a name="astroid.node_classes.Arguments.annotations">
+    
+  </a>
+  <a name="annotations">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-defname">annotations</span> =
+    
+  </div>
+  <div class="functionBody">
+    
+    
+    <div>The type annotations of arguments that can be passed positionally.</div>
+  </div>
+</div><div class="baseinstancevariable">
+  
+  <a name="astroid.node_classes.Arguments.posonlyargs_annotations">
+    
+  </a>
+  <a name="posonlyargs_annotations">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-defname">posonlyargs_annotations</span> =
+    
+  </div>
+  <div class="functionBody">
+    
+    
+    <div>The type annotations of arguments that can only be passed positionally.</div>
+  </div>
+</div><div class="baseinstancevariable">
+  
+  <a name="astroid.node_classes.Arguments.kwonlyargs_annotations">
+    
+  </a>
+  <a name="kwonlyargs_annotations">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-defname">kwonlyargs_annotations</span> =
+    
+  </div>
+  <div class="functionBody">
+    
+    
+    <div>The type annotations of arguments that cannot be passed positionally.</div>
+  </div>
+</div><div class="baseinstancevariable">
+  
+  <a name="astroid.node_classes.Arguments.type_comment_args">
+    
+  </a>
+  <a name="type_comment_args">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-defname">type_comment_args</span> =
+    
+  </div>
+  <div class="functionBody">
+    
+    
+    <div><p>The type annotation, passed by a type comment, of each argument.</p>
+<p>If an argument does not have a type comment,
+the value for that argument will be None.</p>
+</div>
+  </div>
+</div><div class="baseinstancevariable">
+  
+  <a name="astroid.node_classes.Arguments.type_comment_kwonlyargs">
+    
+  </a>
+  <a name="type_comment_kwonlyargs">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-defname">type_comment_kwonlyargs</span> =
+    
+  </div>
+  <div class="functionBody">
+    
+    
+    <div><p>The type annotation, passed by a type comment, of each keyword only argument.</p>
+<p>If an argument does not have a type comment,
+the value for that argument will be None.</p>
+</div>
+  </div>
+</div><div class="baseinstancevariable">
+  
+  <a name="astroid.node_classes.Arguments.type_comment_posonlyargs">
+    
+  </a>
+  <a name="type_comment_posonlyargs">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-defname">type_comment_posonlyargs</span> =
+    
+  </div>
+  <div class="functionBody">
+    
+    
+    <div><p>The type annotation, passed by a type comment, of each positional argument.</p>
+<p>If an argument does not have a type comment,
+the value for that argument will be None.</p>
+</div>
+  </div>
+</div><div class="baseinstancevariable">
+  
+  <a name="astroid.node_classes.Arguments.varargannotation">
+    
+  </a>
+  <a name="varargannotation">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-defname">varargannotation</span> =
+    
+  </div>
+  <div class="functionBody">
+    
+    
+    <div>The type annotation for the variable length arguments.</div>
+  </div>
+</div><div class="baseinstancevariable">
+  
+  <a name="astroid.node_classes.Arguments.kwargannotation">
+    
+  </a>
+  <a name="kwargannotation">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-defname">kwargannotation</span> =
+    
+  </div>
+  <div class="functionBody">
+    
+    
+    <div>The type annotation for the variable length keyword arguments.</div>
+  </div>
+</div><div class="basemethod">
+  
+  <a name="astroid.node_classes.Arguments.postinit">
+    
+  </a>
+  <a name="postinit">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-keyword">def</span> <span class="py-defname">postinit</span>(self, args, defaults, kwonlyargs, kw_defaults, annotations, posonlyargs=None, kwonlyargs_annotations=None, posonlyargs_annotations=None, varargannotation=None, kwargannotation=None, type_comment_args=None, type_comment_kwonlyargs=None, type_comment_posonlyargs=None):
+    
+  </div>
+  <div class="docstring functionBody">
+    
+    
+    <div>Do some setup after initialisation.<table class="fieldTable"><tr class="fieldStart"><td class="fieldName">Parameters</td><td class="fieldArg">args</td><td>The names of the required arguments. (type: <code>typing.List[<a href="astroid.node_classes.AssignName.html">AssignName</a>]</code>)</td></tr><tr><td></td><td class="fieldArg">defaults</td><td>The default values for arguments that can be passed
+positionally. (type: <code>typing.List[<a href="astroid.node_classes.NodeNG.html">NodeNG</a>]</code>)</td></tr><tr><td></td><td class="fieldArg">kwonlyargs</td><td>The keyword arguments that cannot be passed
+positionally. (type: <code>typing.List[<a href="astroid.node_classes.AssignName.html">AssignName</a>]</code>)</td></tr><tr><td></td><td class="fieldArg">kw_defaults</td><td>The default values for keyword arguments that
+cannot be passed positionally. (type: <code>typing.List[Optional[<a href="astroid.node_classes.NodeNG.html">NodeNG</a>]]</code>)</td></tr><tr><td></td><td class="fieldArg">annotations</td><td>The type annotations of arguments that can be
+passed positionally. (type: <code>typing.List[Optional[<a href="astroid.node_classes.NodeNG.html">NodeNG</a>]]</code>)</td></tr><tr><td></td><td class="fieldArg">posonlyargs</td><td>The arguments that can only be passed
+positionally. (type: <code>Optional[typing.List[<a href="astroid.node_classes.AssignName.html">AssignName</a>]]</code>)</td></tr><tr><td></td><td class="fieldArg">kwonlyargs_annotations</td><td>The type annotations of arguments that
+cannot be passed positionally. This should always be passed in
+Python 3. (type: <code>Optional[typing.List[Optional[<a href="astroid.node_classes.NodeNG.html">NodeNG</a>]]]</code>)</td></tr><tr><td></td><td class="fieldArg">posonlyargs_annotations</td><td>The type annotations of arguments that
+can only be passed positionally. This should always be passed in
+Python 3. (type: <code>Optional[typing.List[Optional[<a href="astroid.node_classes.NodeNG.html">NodeNG</a>]]]</code>)</td></tr><tr><td></td><td class="fieldArg">varargannotation</td><td>The type annotation for the variable length
+arguments. (type: <code>Optional[<a href="astroid.node_classes.NodeNG.html">NodeNG</a>]</code>)</td></tr><tr><td></td><td class="fieldArg">kwargannotation</td><td>The type annotation for the variable length
+keyword arguments. (type: <code>Optional[<a href="astroid.node_classes.NodeNG.html">NodeNG</a>]</code>)</td></tr><tr><td></td><td class="fieldArg">type_comment_args</td><td>The type annotation,
+passed by a type comment, of each positional argument. (type: <code>Optional[typing.List[Optional[<a href="astroid.node_classes.NodeNG.html">NodeNG</a>]]]</code>)</td></tr><tr><td></td><td class="fieldArg">type_comment_kwonlyargs</td><td><span class="undocumented">Undocumented</span> (type: <code>Optional[typing.List[Optional[<a href="astroid.node_classes.NodeNG.html">NodeNG</a>]]]</code>)</td></tr><tr><td></td><td class="fieldArg">type_comment_posonlyargs</td><td><span class="undocumented">Undocumented</span> (type: <code>Optional[typing.List[Optional[<a href="astroid.node_classes.NodeNG.html">NodeNG</a>]]]</code>)</td></tr></table></div>
+  </div>
+</div><div class="basemethod private">
+  
+  <a name="astroid.node_classes.Arguments._infer_name">
+    
+  </a>
+  <a name="_infer_name">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-keyword">def</span> <span class="py-defname">_infer_name</span>(self, frame, name):
+    
+  </div>
+  <div class="docstring functionBody">
+    <div class="interfaceinfo">overrides <code><a href="astroid.node_classes.NodeNG.html#_infer_name">astroid.node_classes.NodeNG._infer_name</a></code></div>
+    
+    <div><p class="undocumented">Undocumented</p></div>
+  </div>
+</div><div class="baseproperty">
+  
+  <a name="astroid.node_classes.Arguments.fromlineno">
+    
+  </a>
+  <a name="fromlineno">
+    
+  </a>
+  <div class="functionHeader">
+    @decorators.cachedproperty<br />
+    <span class="py-defname">fromlineno</span> =
+    
+  </div>
+  <div class="functionBody">
+    <div class="interfaceinfo">overrides <code><a href="astroid.node_classes.NodeNG.html#fromlineno">astroid.node_classes.NodeNG.fromlineno</a></code></div>
+    
+    <div>The first line that this node appears on in the source code.</div> (type: int or None)
+  </div>
+</div><div class="baseproperty">
+  
+  <a name="astroid.node_classes.Arguments.arguments">
+    
+  </a>
+  <a name="arguments">
+    
+  </a>
+  <div class="functionHeader">
+    @decorators.cachedproperty<br />
+    <span class="py-defname">arguments</span> =
+    
+  </div>
+  <div class="functionBody">
+    
+    
+    <div>Get all the arguments for this node, including positional only and positional and keyword</div>
+  </div>
+</div><div class="basemethod">
+  
+  <a name="astroid.node_classes.Arguments.format_args">
+    
+  </a>
+  <a name="format_args">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-keyword">def</span> <span class="py-defname">format_args</span>(self):
+    
+  </div>
+  <div class="docstring functionBody">
+    
+    
+    <div>Get the arguments formatted as string.<table class="fieldTable"><tr class="fieldStart"><td class="fieldName">Returns</td><td colspan="2">The formatted arguments. (type: str)</td></tr></table></div>
+  </div>
+</div><div class="basemethod">
+  
+  <a name="astroid.node_classes.Arguments.default_value">
+    
+  </a>
+  <a name="default_value">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-keyword">def</span> <span class="py-defname">default_value</span>(self, argname):
+    
+  </div>
+  <div class="docstring functionBody">
+    
+    
+    <div>Get the default value for an argument.<table class="fieldTable"><tr class="fieldStart"><td class="fieldName">Parameters</td><td class="fieldArg">argname</td><td>The name of the argument to get the default value for. (type: str)</td></tr><tr class="fieldStart"><td class="fieldName">Raises</td><td class="fieldArg"><a href="astroid.exceptions.NoDefault.html">NoDefault</a></td><td>If there is no default value defined for the
+given argument.</td></tr></table></div>
+  </div>
+</div><div class="basemethod">
+  
+  <a name="astroid.node_classes.Arguments.is_argument">
+    
+  </a>
+  <a name="is_argument">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-keyword">def</span> <span class="py-defname">is_argument</span>(self, name):
+    
+  </div>
+  <div class="docstring functionBody">
+    
+    
+    <div>Check if the given name is defined in the arguments.<table class="fieldTable"><tr class="fieldStart"><td class="fieldName">Parameters</td><td class="fieldArg">name</td><td>The name to check for. (type: str)</td></tr><tr class="fieldStart"><td class="fieldName">Returns</td><td colspan="2">True if the given name is defined in the arguments,
+False otherwise. (type: bool)</td></tr></table></div>
+  </div>
+</div><div class="basemethod">
+  
+  <a name="astroid.node_classes.Arguments.find_argname">
+    
+  </a>
+  <a name="find_argname">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-keyword">def</span> <span class="py-defname">find_argname</span>(self, argname, rec=False):
+    
+  </div>
+  <div class="docstring functionBody">
+    
+    
+    <div>Get the index and <a href="#id1"><span class="rst-problematic" id="rst-id2">:class:`AssignName`</span></a> node for given name.<table class="fieldTable"><tr class="fieldStart"><td class="fieldName">Parameters</td><td class="fieldArg">argname</td><td>The name of the argument to search for. (type: str)</td></tr><tr><td></td><td class="fieldArg">rec</td><td>Whether or not to include arguments in unpacked tuples
+in the search. (type: bool)</td></tr><tr class="fieldStart"><td class="fieldName">Returns</td><td colspan="2">The index and node for the argument. (type: tuple(str or None, AssignName or None))</td></tr></table></div>
+  </div>
+</div><div class="basemethod">
+  
+  <a name="astroid.node_classes.Arguments.get_children">
+    
+  </a>
+  <a name="get_children">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-keyword">def</span> <span class="py-defname">get_children</span>(self):
+    
+  </div>
+  <div class="docstring functionBody">
+    <div class="interfaceinfo">overrides <code><a href="astroid.node_classes.NodeNG.html#get_children">astroid.node_classes.NodeNG.get_children</a></code></div>
+    
+    <div>Get the child nodes below this node.<table class="fieldTable"><tr class="fieldStart"><td class="fieldName">Returns</td><td colspan="2">The children. (type: iterable(NodeNG))</td></tr></table></div>
+  </div>
+</div>
+
+      </div>
+      <address>
+        <a href="index.html">API Documentation</a> for <a href="https://github.com/tristanlatr/apidocs/tree/main">astroid-v2.6.0</a>, generated by <a href="https://github.com/twisted/pydoctor/">pydoctor</a> 21.2.2 at 2021-06-27 19:18:09.
+      </address>
+
+    </div>
+
+    <script src="pydoctor.js" type="text/javascript"></script>
+
+  </body>
+</html>

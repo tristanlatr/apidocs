@@ -1,0 +1,2105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+          "DTD/xhtml1-strict.dtd">
+<html>
+  <head>
+    <title>astroid.scoped_nodes.ClassDef : API documentation</title>
+
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+    <link rel="stylesheet" type="text/css" href="bootstrap.min.css" />
+    <link rel="stylesheet" type="text/css" href="apidocs.css" />
+  </head>
+  <body>
+
+    <nav class="navbar navbar-default">
+      <div class="container">
+        <div class="navbar-header navbar-brand">
+          <a href="https://github.com/tristanlatr/apidocs/tree/main">astroid-v2.6.0</a>
+          <a href="index.html">API Documentation</a>
+        </div>
+      </div>
+    </nav>
+
+    <div class="container">
+
+      <div class="page-header">
+        <h1 class="class"><code><code><a href="astroid.html">astroid</a></code>.<code><a href="astroid.scoped_nodes.html">scoped_nodes</a></code>.<code><a href="astroid.scoped_nodes.ClassDef.html">ClassDef</a></code></code></h1>
+        <div id="showPrivate">
+          <button class="btn btn-link" onclick="togglePrivate()">Toggle Private API</button>
+        </div>
+      </div>
+
+      <div class="categoryHeader">
+        class documentation
+      </div>
+
+      <div class="extrasDocstring">
+        <p><code><span class="py-keyword">class</span> <span class="py-defname">ClassDef</span>(<a href="astroid.mixins.FilterStmtsMixin.html" title="astroid.mixins.FilterStmtsMixin">mixins.FilterStmtsMixin</a>, <a href="astroid.scoped_nodes.LocalsDictNodeNG.html" title="astroid.scoped_nodes.LocalsDictNodeNG">LocalsDictNodeNG</a>, <a href="astroid.node_classes.Statement.html" title="astroid.node_classes.Statement">node_classes.Statement</a>):</code></p>
+        <p><a href="classIndex.html#astroid.scoped_nodes.ClassDef">View In Hierarchy</a></p>
+      </div>
+
+      <div class="moduleDocstring">
+        <div><p>Class representing an <a href="#id1"><span class="rst-problematic" id="rst-id2">:class:`ast.ClassDef`</span></a> node.</p>
+<pre class="py-doctest">
+<span class="py-prompt">&gt;&gt;&gt; </span>node = astroid.extract_node(<span class="py-string">''</span>'
+<span class="py-output">class Thing:</span>
+<span class="py-output">    def my_meth(self, arg):</span>
+<span class="py-output">        return arg + self.offset</span>
+<span class="py-output">''')</span>
+<span class="py-prompt">&gt;&gt;&gt; </span>node
+<span class="py-output">&lt;ClassDef.Thing l.2 at 0x7f23b2e9e748&gt;</span>
+</pre></div>
+      </div>
+
+      <div id="splitTables">
+        <table class="children sortable" id="id553">
+  
+  <tr class="instancevariable">
+    
+    <td>Instance Variable</td>
+    <td><code><a href="#decorators">decorators</a></code></td>
+    <td><span>The decorators that are applied to this class.</span></td>
+  </tr><tr class="classvariable">
+    
+    <td>Class Variable</td>
+    <td><code><a href="#special_attributes">special_attributes</a></code></td>
+    <td><span>The names of special attributes that this class has.</span></td>
+  </tr><tr class="classvariable">
+    
+    <td>Class Variable</td>
+    <td><code><a href="#hide">hide</a></code></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="classvariable">
+    
+    <td>Class Variable</td>
+    <td><code><a href="#type">type</a></code></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="method">
+    
+    <td>Method</td>
+    <td><code><a href="#__init__">__init__</a></code></td>
+    <td><span></span></td>
+  </tr><tr class="instancevariable">
+    
+    <td>Instance Variable</td>
+    <td><code><a href="#instance_attrs">instance_attrs</a></code></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="instancevariable">
+    
+    <td>Instance Variable</td>
+    <td><code><a href="#locals">locals</a></code></td>
+    <td><span>A map of the name of a local variable to the node defining it.</span></td>
+  </tr><tr class="instancevariable">
+    
+    <td>Instance Variable</td>
+    <td><code><a href="#keywords">keywords</a></code></td>
+    <td><span>The keywords given to the class definition.</span></td>
+  </tr><tr class="instancevariable">
+    
+    <td>Instance Variable</td>
+    <td><code><a href="#bases">bases</a></code></td>
+    <td><span>What the class inherits from.</span></td>
+  </tr><tr class="instancevariable">
+    
+    <td>Instance Variable</td>
+    <td><code><a href="#body">body</a></code></td>
+    <td><span>The contents of the class body.</span></td>
+  </tr><tr class="instancevariable">
+    
+    <td>Instance Variable</td>
+    <td><code><a href="#name">name</a></code></td>
+    <td><span>The name of the class.</span></td>
+  </tr><tr class="instancevariable">
+    
+    <td>Instance Variable</td>
+    <td><code><a href="#doc">doc</a></code></td>
+    <td><span>The class' docstring.</span></td>
+  </tr><tr class="method">
+    
+    <td>Method</td>
+    <td><code><a href="#implicit_parameters">implicit_parameters</a></code></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="method">
+    
+    <td>Method</td>
+    <td><code><a href="#implicit_locals">implicit_locals</a></code></td>
+    <td><span>Get implicitly defined class definition locals.</span></td>
+  </tr><tr class="method">
+    
+    <td>Method</td>
+    <td><code><a href="#postinit">postinit</a></code></td>
+    <td><span>Do some setup after initialisation.</span></td>
+  </tr><tr class="classvariable">
+    
+    <td>Class Variable</td>
+    <td><code><a href="#newstyle">newstyle</a></code></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="property">
+    
+    <td>Property</td>
+    <td><code><a href="#blockstart_tolineno">blockstart_tolineno</a></code></td>
+    <td><span>The line on which the beginning of this block ends.</span></td>
+  </tr><tr class="method">
+    
+    <td>Method</td>
+    <td><code><a href="#block_range">block_range</a></code></td>
+    <td><span>Get a range from the given line number to where this node ends.</span></td>
+  </tr><tr class="method">
+    
+    <td>Method</td>
+    <td><code><a href="#pytype">pytype</a></code></td>
+    <td><span>Get the name of the type that this node represents.</span></td>
+  </tr><tr class="method">
+    
+    <td>Method</td>
+    <td><code><a href="#display_type">display_type</a></code></td>
+    <td><span>A human readable type of this node.</span></td>
+  </tr><tr class="method">
+    
+    <td>Method</td>
+    <td><code><a href="#callable">callable</a></code></td>
+    <td><span>Whether this node defines something that is callable.</span></td>
+  </tr><tr class="method">
+    
+    <td>Method</td>
+    <td><code><a href="#is_subtype_of">is_subtype_of</a></code></td>
+    <td><span>Whether this class is a subtype of the given type.</span></td>
+  </tr><tr class="method">
+    
+    <td>Method</td>
+    <td><code><a href="#infer_call_result">infer_call_result</a></code></td>
+    <td><span>infer what a class is returning when called</span></td>
+  </tr><tr class="method">
+    
+    <td>Method</td>
+    <td><code><a href="#scope_lookup">scope_lookup</a></code></td>
+    <td><span>Lookup where the given name is assigned.</span></td>
+  </tr><tr class="property">
+    
+    <td>Property</td>
+    <td><code><a href="#basenames">basenames</a></code></td>
+    <td><span>The names of the parent classes</span></td>
+  </tr><tr class="method">
+    
+    <td>Method</td>
+    <td><code><a href="#ancestors">ancestors</a></code></td>
+    <td><span>Iterate over the base classes in prefixed depth first order.</span></td>
+  </tr><tr class="method">
+    
+    <td>Method</td>
+    <td><code><a href="#local_attr_ancestors">local_attr_ancestors</a></code></td>
+    <td><span>Iterate over the parents that define the given name.</span></td>
+  </tr><tr class="method">
+    
+    <td>Method</td>
+    <td><code><a href="#instance_attr_ancestors">instance_attr_ancestors</a></code></td>
+    <td><span>Iterate over the parents that define the given name as an attribute.</span></td>
+  </tr><tr class="method">
+    
+    <td>Method</td>
+    <td><code><a href="#has_base">has_base</a></code></td>
+    <td><span>Whether this class directly inherits from the given node.</span></td>
+  </tr><tr class="method">
+    
+    <td>Method</td>
+    <td><code><a href="#local_attr">local_attr</a></code></td>
+    <td><span>Get the list of assign nodes associated to the given name.</span></td>
+  </tr><tr class="method">
+    
+    <td>Method</td>
+    <td><code><a href="#instance_attr">instance_attr</a></code></td>
+    <td><span>Get the list of nodes associated to the given attribute name.</span></td>
+  </tr><tr class="method">
+    
+    <td>Method</td>
+    <td><code><a href="#instantiate_class">instantiate_class</a></code></td>
+    <td><span>Get an <a href="#id1"><span class="rst-problematic" id="rst-id2">:class:`Instance`</span></a> of the <a href="#id3"><span class="rst-problematic" id="rst-id4">:class:`ClassDef`</span></a> node.</span></td>
+  </tr><tr class="method">
+    
+    <td>Method</td>
+    <td><code><a href="#getattr">getattr</a></code></td>
+    <td><span>Get an attribute from this class, using Python's attribute semantic.</span></td>
+  </tr><tr class="method">
+    
+    <td>Method</td>
+    <td><code><a href="#igetattr">igetattr</a></code></td>
+    <td><span>Infer the possible values of the given variable.</span></td>
+  </tr><tr class="method">
+    
+    <td>Method</td>
+    <td><code><a href="#has_dynamic_getattr">has_dynamic_getattr</a></code></td>
+    <td><span>Check if the class has a custom __getattr__ or __getattribute__.</span></td>
+  </tr><tr class="method">
+    
+    <td>Method</td>
+    <td><code><a href="#getitem">getitem</a></code></td>
+    <td><span>Return the inference of a subscript.</span></td>
+  </tr><tr class="method">
+    
+    <td>Method</td>
+    <td><code><a href="#methods">methods</a></code></td>
+    <td><span>Iterate over all of the method defined in this class and its parents.</span></td>
+  </tr><tr class="method">
+    
+    <td>Method</td>
+    <td><code><a href="#mymethods">mymethods</a></code></td>
+    <td><span>Iterate over all of the method defined in this class only.</span></td>
+  </tr><tr class="method">
+    
+    <td>Method</td>
+    <td><code><a href="#implicit_metaclass">implicit_metaclass</a></code></td>
+    <td><span>Get the implicit metaclass of the current class.</span></td>
+  </tr><tr class="method">
+    
+    <td>Method</td>
+    <td><code><a href="#declared_metaclass">declared_metaclass</a></code></td>
+    <td><span>Return the explicit declared metaclass for the current class.</span></td>
+  </tr><tr class="method">
+    
+    <td>Method</td>
+    <td><code><a href="#metaclass">metaclass</a></code></td>
+    <td><span>Get the metaclass of this class.</span></td>
+  </tr><tr class="method">
+    
+    <td>Method</td>
+    <td><code><a href="#has_metaclass_hack">has_metaclass_hack</a></code></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="method">
+    
+    <td>Method</td>
+    <td><code><a href="#slots">slots</a></code></td>
+    <td><span>Get all the slots for this node.</span></td>
+  </tr><tr class="method">
+    
+    <td>Method</td>
+    <td><code><a href="#mro">mro</a></code></td>
+    <td><span>Get the method resolution order, using C3 linearization.</span></td>
+  </tr><tr class="method">
+    
+    <td>Method</td>
+    <td><code><a href="#bool_value">bool_value</a></code></td>
+    <td><span>Determine the boolean value of this node.</span></td>
+  </tr><tr class="method">
+    
+    <td>Method</td>
+    <td><code><a href="#get_children">get_children</a></code></td>
+    <td><span>Get the child nodes below this node.</span></td>
+  </tr><tr class="classvariable private">
+    
+    <td>Class Variable</td>
+    <td><code><a href="#_astroid_fields">_astroid_fields</a></code></td>
+    <td><span>Node attributes that contain child nodes.</span></td>
+  </tr><tr class="classvariable private">
+    
+    <td>Class Variable</td>
+    <td><code><a href="#_type">_type</a></code></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="instancevariable private">
+    
+    <td>Instance Variable</td>
+    <td><code><a href="#_metaclass_hack">_metaclass_hack</a></code></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="classvariable private">
+    
+    <td>Class Variable</td>
+    <td><code><a href="#_other_fields">_other_fields</a></code></td>
+    <td><span>Node attributes that do not contain child nodes.</span></td>
+  </tr><tr class="classvariable private">
+    
+    <td>Class Variable</td>
+    <td><code><a href="#_other_other_fields">_other_other_fields</a></code></td>
+    <td><span>Attributes that contain AST-dependent fields.</span></td>
+  </tr><tr class="instancevariable private">
+    
+    <td>Instance Variable</td>
+    <td><code><a href="#_newstyle">_newstyle</a></code></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="instancevariable private">
+    
+    <td>Instance Variable</td>
+    <td><code><a href="#_metaclass">_metaclass</a></code></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="method private">
+    
+    <td>Method</td>
+    <td><code><a href="#_newstyle_impl">_newstyle_impl</a></code></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="method private">
+    
+    <td>Method</td>
+    <td><code><a href="#_infer_type_call">_infer_type_call</a></code></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="method private">
+    
+    <td>Method</td>
+    <td><code><a href="#_metaclass_lookup_attribute">_metaclass_lookup_attribute</a></code></td>
+    <td><span>Search the given name in the implicit and the explicit metaclass.</span></td>
+  </tr><tr class="method private">
+    
+    <td>Method</td>
+    <td><code><a href="#_get_attribute_from_metaclass">_get_attribute_from_metaclass</a></code></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="method private">
+    
+    <td>Method</td>
+    <td><code><a href="#_find_metaclass">_find_metaclass</a></code></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="method private">
+    
+    <td>Method</td>
+    <td><code><a href="#_islots">_islots</a></code></td>
+    <td><span>Return an iterator with the inferred slots.</span></td>
+  </tr><tr class="method private">
+    
+    <td>Method</td>
+    <td><code><a href="#_slots">_slots</a></code></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="method private">
+    
+    <td>Method</td>
+    <td><code><a href="#_inferred_bases">_inferred_bases</a></code></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="method private">
+    
+    <td>Method</td>
+    <td><code><a href="#_compute_mro">_compute_mro</a></code></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="method private">
+    
+    <td>Method</td>
+    <td><code><a href="#_get_assign_nodes">_get_assign_nodes</a></code></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr>
+</table>
+        
+          <p class="inheritedFrom">
+            Inherited from <code><a href="astroid.mixins.FilterStmtsMixin.html">FilterStmtsMixin</a></code>:
+          </p>
+          <table class="children sortable" id="id554">
+  
+  <tr class="basemethod">
+    
+    <td>Method</td>
+    <td><code><a href="astroid.mixins.FilterStmtsMixin.html#assign_type">assign_type</a></code></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="basemethod private">
+    
+    <td>Method</td>
+    <td><code><a href="astroid.mixins.FilterStmtsMixin.html#_get_filtered_stmts">_get_filtered_stmts</a></code></td>
+    <td><span>method used in _filter_stmts to get statements and trigger break</span></td>
+  </tr>
+</table>
+          
+          <p class="inheritedFrom">
+            Inherited from <code><a href="astroid.scoped_nodes.LocalsDictNodeNG.html">LocalsDictNodeNG</a></code>:
+          </p>
+          <table class="children sortable" id="id555">
+  
+  <tr class="basemethod">
+    
+    <td>Method</td>
+    <td><code><a href="astroid.scoped_nodes.LocalsDictNodeNG.html#qname">qname</a></code></td>
+    <td><span>Get the 'qualified' name of the node.</span></td>
+  </tr><tr class="basemethod">
+    
+    <td>Method</td>
+    <td><code><a href="astroid.scoped_nodes.LocalsDictNodeNG.html#frame">frame</a></code></td>
+    <td><span>The first parent frame node.</span></td>
+  </tr><tr class="basemethod">
+    
+    <td>Method</td>
+    <td><code><a href="astroid.scoped_nodes.LocalsDictNodeNG.html#scope">scope</a></code></td>
+    <td><span>The first parent node defining a new scope.</span></td>
+  </tr><tr class="basemethod">
+    
+    <td>Method</td>
+    <td><code><a href="astroid.scoped_nodes.LocalsDictNodeNG.html#set_local">set_local</a></code></td>
+    <td><span>Define that the given name is declared in the given statement node.</span></td>
+  </tr><tr class="basemethod">
+    
+    <td>Method</td>
+    <td><code><a href="astroid.scoped_nodes.LocalsDictNodeNG.html#add_local_node">add_local_node</a></code></td>
+    <td><span>Append a child that should alter the locals of this scope node.</span></td>
+  </tr><tr class="basemethod">
+    
+    <td>Method</td>
+    <td><code><a href="astroid.scoped_nodes.LocalsDictNodeNG.html#__getitem__">__getitem__</a></code></td>
+    <td><span>The first node the defines the given local.</span></td>
+  </tr><tr class="basemethod">
+    
+    <td>Method</td>
+    <td><code><a href="astroid.scoped_nodes.LocalsDictNodeNG.html#__iter__">__iter__</a></code></td>
+    <td><span>Iterate over the names of locals defined in this scoped node.</span></td>
+  </tr><tr class="basemethod">
+    
+    <td>Method</td>
+    <td><code><a href="astroid.scoped_nodes.LocalsDictNodeNG.html#keys">keys</a></code></td>
+    <td><span>The names of locals defined in this scoped node.</span></td>
+  </tr><tr class="basemethod">
+    
+    <td>Method</td>
+    <td><code><a href="astroid.scoped_nodes.LocalsDictNodeNG.html#values">values</a></code></td>
+    <td><span>The nodes that define the locals in this scoped node.</span></td>
+  </tr><tr class="basemethod">
+    
+    <td>Method</td>
+    <td><code><a href="astroid.scoped_nodes.LocalsDictNodeNG.html#items">items</a></code></td>
+    <td><span>Get the names of the locals and the node that defines the local.</span></td>
+  </tr><tr class="basemethod">
+    
+    <td>Method</td>
+    <td><code><a href="astroid.scoped_nodes.LocalsDictNodeNG.html#__contains__">__contains__</a></code></td>
+    <td><span>Check if a local is defined in this scope.</span></td>
+  </tr><tr class="basemethod private">
+    
+    <td>Method</td>
+    <td><code><a href="astroid.scoped_nodes.LocalsDictNodeNG.html#_scope_lookup">_scope_lookup</a></code></td>
+    <td><span>XXX method for interfacing the scope lookup</span></td>
+  </tr><tr class="basemethod private">
+    
+    <td>Method</td>
+    <td><code><a href="astroid.scoped_nodes.LocalsDictNodeNG.html#_append_node">_append_node</a></code></td>
+    <td><span>append a child, linking it in the tree</span></td>
+  </tr>
+</table>
+          
+          <p class="inheritedFrom">
+            Inherited from <code><a href="astroid.node_classes.LookupMixIn.html">LookupMixIn</a></code> (via <code><a href="astroid.scoped_nodes.LocalsDictNodeNG.html">LocalsDictNodeNG</a></code>):
+          </p>
+          <table class="children sortable" id="id556">
+  
+  <tr class="basemethod">
+    
+    <td>Method</td>
+    <td><code><a href="astroid.node_classes.LookupMixIn.html#lookup">lookup</a></code></td>
+    <td><span>Lookup where the given variable is assigned.</span></td>
+  </tr><tr class="basemethod">
+    
+    <td>Method</td>
+    <td><code><a href="astroid.node_classes.LookupMixIn.html#ilookup">ilookup</a></code></td>
+    <td><span>Lookup the inferred values of the given variable.</span></td>
+  </tr><tr class="basemethod private">
+    
+    <td>Method</td>
+    <td><code><a href="astroid.node_classes.LookupMixIn.html#_get_filtered_node_statements">_get_filtered_node_statements</a></code></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="basemethod private">
+    
+    <td>Method</td>
+    <td><code><a href="astroid.node_classes.LookupMixIn.html#_filter_stmts">_filter_stmts</a></code></td>
+    <td><span>Filter the given list of statements to remove ignorable statements.</span></td>
+  </tr>
+</table>
+          
+          <p class="inheritedFrom">
+            Inherited from <code><a href="astroid.node_classes.NodeNG.html">NodeNG</a></code> (via <code><a href="astroid.scoped_nodes.LocalsDictNodeNG.html">LocalsDictNodeNG</a></code>):
+          </p>
+          <table class="children sortable" id="id557">
+  
+  <tr class="baseclassvariable">
+    
+    <td>Class Variable</td>
+    <td><code><a href="astroid.node_classes.NodeNG.html#is_statement">is_statement</a></code></td>
+    <td><span>Whether this node indicates a statement.</span></td>
+  </tr><tr class="baseclassvariable">
+    
+    <td>Class Variable</td>
+    <td><code><a href="astroid.node_classes.NodeNG.html#optional_assign">optional_assign</a></code></td>
+    <td><span>Whether this node optionally assigns a variable.</span></td>
+  </tr><tr class="baseclassvariable">
+    
+    <td>Class Variable</td>
+    <td><code><a href="astroid.node_classes.NodeNG.html#is_function">is_function</a></code></td>
+    <td><span>Whether this node indicates a function.</span></td>
+  </tr><tr class="baseclassvariable">
+    
+    <td>Class Variable</td>
+    <td><code><a href="astroid.node_classes.NodeNG.html#is_lambda">is_lambda</a></code></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="baseinstancevariable">
+    
+    <td>Instance Variable</td>
+    <td><code><a href="astroid.node_classes.NodeNG.html#lineno">lineno</a></code></td>
+    <td><span>The line that this node appears on in the source code.</span></td>
+  </tr><tr class="baseinstancevariable">
+    
+    <td>Instance Variable</td>
+    <td><code><a href="astroid.node_classes.NodeNG.html#col_offset">col_offset</a></code></td>
+    <td><span>The column that this node appears on in the source code.</span></td>
+  </tr><tr class="baseinstancevariable">
+    
+    <td>Instance Variable</td>
+    <td><code><a href="astroid.node_classes.NodeNG.html#parent">parent</a></code></td>
+    <td><span>The parent node in the syntax tree.</span></td>
+  </tr><tr class="basemethod">
+    
+    <td>Method</td>
+    <td><code><a href="astroid.node_classes.NodeNG.html#infer">infer</a></code></td>
+    <td><span>Get a generator of the inferred values.</span></td>
+  </tr><tr class="basemethod">
+    
+    <td>Method</td>
+    <td><code><a href="astroid.node_classes.NodeNG.html#__str__">__str__</a></code></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="basemethod">
+    
+    <td>Method</td>
+    <td><code><a href="astroid.node_classes.NodeNG.html#__repr__">__repr__</a></code></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="basemethod">
+    
+    <td>Method</td>
+    <td><code><a href="astroid.node_classes.NodeNG.html#accept">accept</a></code></td>
+    <td><span>Visit this node using the given visitor.</span></td>
+  </tr><tr class="basemethod">
+    
+    <td>Method</td>
+    <td><code><a href="astroid.node_classes.NodeNG.html#last_child">last_child</a></code></td>
+    <td><span>An optimized version of list(get_children())[-1]</span></td>
+  </tr><tr class="basemethod">
+    
+    <td>Method</td>
+    <td><code><a href="astroid.node_classes.NodeNG.html#parent_of">parent_of</a></code></td>
+    <td><span>Check if this node is the parent of the given node.</span></td>
+  </tr><tr class="basemethod">
+    
+    <td>Method</td>
+    <td><code><a href="astroid.node_classes.NodeNG.html#statement">statement</a></code></td>
+    <td><span>The first parent node, including self, marked as statement node.</span></td>
+  </tr><tr class="basemethod">
+    
+    <td>Method</td>
+    <td><code><a href="astroid.node_classes.NodeNG.html#root">root</a></code></td>
+    <td><span>Return the root node of the syntax tree.</span></td>
+  </tr><tr class="basemethod">
+    
+    <td>Method</td>
+    <td><code><a href="astroid.node_classes.NodeNG.html#child_sequence">child_sequence</a></code></td>
+    <td><span>Search for the sequence that contains this child.</span></td>
+  </tr><tr class="basemethod">
+    
+    <td>Method</td>
+    <td><code><a href="astroid.node_classes.NodeNG.html#locate_child">locate_child</a></code></td>
+    <td><span>Find the field of this node that contains the given child.</span></td>
+  </tr><tr class="basemethod">
+    
+    <td>Method</td>
+    <td><code><a href="astroid.node_classes.NodeNG.html#next_sibling">next_sibling</a></code></td>
+    <td><span>The next sibling statement node.</span></td>
+  </tr><tr class="basemethod">
+    
+    <td>Method</td>
+    <td><code><a href="astroid.node_classes.NodeNG.html#previous_sibling">previous_sibling</a></code></td>
+    <td><span>The previous sibling statement.</span></td>
+  </tr><tr class="baseproperty">
+    
+    <td>Property</td>
+    <td><code><a href="astroid.node_classes.NodeNG.html#fromlineno">fromlineno</a></code></td>
+    <td><span>The first line that this node appears on in the source code.</span></td>
+  </tr><tr class="baseproperty">
+    
+    <td>Property</td>
+    <td><code><a href="astroid.node_classes.NodeNG.html#tolineno">tolineno</a></code></td>
+    <td><span>The last line that this node appears on in the source code.</span></td>
+  </tr><tr class="basemethod">
+    
+    <td>Method</td>
+    <td><code><a href="astroid.node_classes.NodeNG.html#nodes_of_class">nodes_of_class</a></code></td>
+    <td><span>Get the nodes (including this one or below) of the given types.</span></td>
+  </tr><tr class="basemethod">
+    
+    <td>Method</td>
+    <td><code><a href="astroid.node_classes.NodeNG.html#inferred">inferred</a></code></td>
+    <td><span>Get a list of the inferred values.</span></td>
+  </tr><tr class="basemethod">
+    
+    <td>Method</td>
+    <td><code><a href="astroid.node_classes.NodeNG.html#eq">eq</a></code></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="basemethod">
+    
+    <td>Method</td>
+    <td><code><a href="astroid.node_classes.NodeNG.html#as_string">as_string</a></code></td>
+    <td><span>Get the source code that this node represents.</span></td>
+  </tr><tr class="basemethod">
+    
+    <td>Method</td>
+    <td><code><a href="astroid.node_classes.NodeNG.html#repr_tree">repr_tree</a></code></td>
+    <td><span>Get a string representation of the AST from this node.</span></td>
+  </tr><tr class="basemethod">
+    
+    <td>Method</td>
+    <td><code><a href="astroid.node_classes.NodeNG.html#op_precedence">op_precedence</a></code></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="basemethod">
+    
+    <td>Method</td>
+    <td><code><a href="astroid.node_classes.NodeNG.html#op_left_associative">op_left_associative</a></code></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="baseclassvariable private">
+    
+    <td>Class Variable</td>
+    <td><code><a href="astroid.node_classes.NodeNG.html#_explicit_inference">_explicit_inference</a></code></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="basemethod private">
+    
+    <td>Method</td>
+    <td><code><a href="astroid.node_classes.NodeNG.html#_repr_name">_repr_name</a></code></td>
+    <td><span>Get a name for nice representation.</span></td>
+  </tr><tr class="basemethod private">
+    
+    <td>Method</td>
+    <td><code><a href="astroid.node_classes.NodeNG.html#_fixed_source_line">_fixed_source_line</a></code></td>
+    <td><span>Attempt to find the line that this node appears on.</span></td>
+  </tr><tr class="basemethod private">
+    
+    <td>Method</td>
+    <td><code><a href="astroid.node_classes.NodeNG.html#_get_name_nodes">_get_name_nodes</a></code></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="basemethod private">
+    
+    <td>Method</td>
+    <td><code><a href="astroid.node_classes.NodeNG.html#_get_return_nodes_skip_functions">_get_return_nodes_skip_functions</a></code></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="basemethod private">
+    
+    <td>Method</td>
+    <td><code><a href="astroid.node_classes.NodeNG.html#_get_yield_nodes_skip_lambdas">_get_yield_nodes_skip_lambdas</a></code></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="basemethod private">
+    
+    <td>Method</td>
+    <td><code><a href="astroid.node_classes.NodeNG.html#_infer_name">_infer_name</a></code></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="basemethod private">
+    
+    <td>Method</td>
+    <td><code><a href="astroid.node_classes.NodeNG.html#_infer">_infer</a></code></td>
+    <td><span>we don't know how to resolve a statement by default</span></td>
+  </tr>
+</table>
+          
+          <p class="inheritedFrom">
+            Inherited from <code><a href="astroid.node_classes.Statement.html">Statement</a></code>:
+          </p>
+          <table class="children sortable" id="id558">
+  
+  <tr class="baseclassvariable">
+    
+    <td>Class Variable</td>
+    <td><code><a href="astroid.node_classes.Statement.html#is_statement">is_statement</a></code></td>
+    <td><span>Whether this node indicates a statement.</span></td>
+  </tr><tr class="basemethod">
+    
+    <td>Method</td>
+    <td><code><a href="astroid.node_classes.Statement.html#next_sibling">next_sibling</a></code></td>
+    <td><span>The next sibling statement node.</span></td>
+  </tr><tr class="basemethod">
+    
+    <td>Method</td>
+    <td><code><a href="astroid.node_classes.Statement.html#previous_sibling">previous_sibling</a></code></td>
+    <td><span>The previous sibling statement.</span></td>
+  </tr>
+</table>
+          
+          <p class="inheritedFrom">
+            Inherited from <code><a href="astroid.node_classes.NodeNG.html">NodeNG</a></code> (via <code><a href="astroid.node_classes.Statement.html">Statement</a></code>):
+          </p>
+          <table class="children sortable" id="id559">
+  
+  <tr class="baseclassvariable">
+    
+    <td>Class Variable</td>
+    <td><code><a href="astroid.node_classes.NodeNG.html#optional_assign">optional_assign</a></code></td>
+    <td><span>Whether this node optionally assigns a variable.</span></td>
+  </tr><tr class="baseclassvariable">
+    
+    <td>Class Variable</td>
+    <td><code><a href="astroid.node_classes.NodeNG.html#is_function">is_function</a></code></td>
+    <td><span>Whether this node indicates a function.</span></td>
+  </tr><tr class="baseclassvariable">
+    
+    <td>Class Variable</td>
+    <td><code><a href="astroid.node_classes.NodeNG.html#is_lambda">is_lambda</a></code></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="baseinstancevariable">
+    
+    <td>Instance Variable</td>
+    <td><code><a href="astroid.node_classes.NodeNG.html#lineno">lineno</a></code></td>
+    <td><span>The line that this node appears on in the source code.</span></td>
+  </tr><tr class="baseinstancevariable">
+    
+    <td>Instance Variable</td>
+    <td><code><a href="astroid.node_classes.NodeNG.html#col_offset">col_offset</a></code></td>
+    <td><span>The column that this node appears on in the source code.</span></td>
+  </tr><tr class="baseinstancevariable">
+    
+    <td>Instance Variable</td>
+    <td><code><a href="astroid.node_classes.NodeNG.html#parent">parent</a></code></td>
+    <td><span>The parent node in the syntax tree.</span></td>
+  </tr><tr class="basemethod">
+    
+    <td>Method</td>
+    <td><code><a href="astroid.node_classes.NodeNG.html#infer">infer</a></code></td>
+    <td><span>Get a generator of the inferred values.</span></td>
+  </tr><tr class="basemethod">
+    
+    <td>Method</td>
+    <td><code><a href="astroid.node_classes.NodeNG.html#__str__">__str__</a></code></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="basemethod">
+    
+    <td>Method</td>
+    <td><code><a href="astroid.node_classes.NodeNG.html#__repr__">__repr__</a></code></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="basemethod">
+    
+    <td>Method</td>
+    <td><code><a href="astroid.node_classes.NodeNG.html#accept">accept</a></code></td>
+    <td><span>Visit this node using the given visitor.</span></td>
+  </tr><tr class="basemethod">
+    
+    <td>Method</td>
+    <td><code><a href="astroid.node_classes.NodeNG.html#last_child">last_child</a></code></td>
+    <td><span>An optimized version of list(get_children())[-1]</span></td>
+  </tr><tr class="basemethod">
+    
+    <td>Method</td>
+    <td><code><a href="astroid.node_classes.NodeNG.html#parent_of">parent_of</a></code></td>
+    <td><span>Check if this node is the parent of the given node.</span></td>
+  </tr><tr class="basemethod">
+    
+    <td>Method</td>
+    <td><code><a href="astroid.node_classes.NodeNG.html#statement">statement</a></code></td>
+    <td><span>The first parent node, including self, marked as statement node.</span></td>
+  </tr><tr class="basemethod">
+    
+    <td>Method</td>
+    <td><code><a href="astroid.node_classes.NodeNG.html#frame">frame</a></code></td>
+    <td><span>The first parent frame node.</span></td>
+  </tr><tr class="basemethod">
+    
+    <td>Method</td>
+    <td><code><a href="astroid.node_classes.NodeNG.html#scope">scope</a></code></td>
+    <td><span>The first parent node defining a new scope.</span></td>
+  </tr><tr class="basemethod">
+    
+    <td>Method</td>
+    <td><code><a href="astroid.node_classes.NodeNG.html#root">root</a></code></td>
+    <td><span>Return the root node of the syntax tree.</span></td>
+  </tr><tr class="basemethod">
+    
+    <td>Method</td>
+    <td><code><a href="astroid.node_classes.NodeNG.html#child_sequence">child_sequence</a></code></td>
+    <td><span>Search for the sequence that contains this child.</span></td>
+  </tr><tr class="basemethod">
+    
+    <td>Method</td>
+    <td><code><a href="astroid.node_classes.NodeNG.html#locate_child">locate_child</a></code></td>
+    <td><span>Find the field of this node that contains the given child.</span></td>
+  </tr><tr class="baseproperty">
+    
+    <td>Property</td>
+    <td><code><a href="astroid.node_classes.NodeNG.html#fromlineno">fromlineno</a></code></td>
+    <td><span>The first line that this node appears on in the source code.</span></td>
+  </tr><tr class="baseproperty">
+    
+    <td>Property</td>
+    <td><code><a href="astroid.node_classes.NodeNG.html#tolineno">tolineno</a></code></td>
+    <td><span>The last line that this node appears on in the source code.</span></td>
+  </tr><tr class="basemethod">
+    
+    <td>Method</td>
+    <td><code><a href="astroid.node_classes.NodeNG.html#set_local">set_local</a></code></td>
+    <td><span>Define that the given name is declared in the given statement node.</span></td>
+  </tr><tr class="basemethod">
+    
+    <td>Method</td>
+    <td><code><a href="astroid.node_classes.NodeNG.html#nodes_of_class">nodes_of_class</a></code></td>
+    <td><span>Get the nodes (including this one or below) of the given types.</span></td>
+  </tr><tr class="basemethod">
+    
+    <td>Method</td>
+    <td><code><a href="astroid.node_classes.NodeNG.html#inferred">inferred</a></code></td>
+    <td><span>Get a list of the inferred values.</span></td>
+  </tr><tr class="basemethod">
+    
+    <td>Method</td>
+    <td><code><a href="astroid.node_classes.NodeNG.html#eq">eq</a></code></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="basemethod">
+    
+    <td>Method</td>
+    <td><code><a href="astroid.node_classes.NodeNG.html#as_string">as_string</a></code></td>
+    <td><span>Get the source code that this node represents.</span></td>
+  </tr><tr class="basemethod">
+    
+    <td>Method</td>
+    <td><code><a href="astroid.node_classes.NodeNG.html#repr_tree">repr_tree</a></code></td>
+    <td><span>Get a string representation of the AST from this node.</span></td>
+  </tr><tr class="basemethod">
+    
+    <td>Method</td>
+    <td><code><a href="astroid.node_classes.NodeNG.html#op_precedence">op_precedence</a></code></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="basemethod">
+    
+    <td>Method</td>
+    <td><code><a href="astroid.node_classes.NodeNG.html#op_left_associative">op_left_associative</a></code></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="baseclassvariable private">
+    
+    <td>Class Variable</td>
+    <td><code><a href="astroid.node_classes.NodeNG.html#_explicit_inference">_explicit_inference</a></code></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="basemethod private">
+    
+    <td>Method</td>
+    <td><code><a href="astroid.node_classes.NodeNG.html#_repr_name">_repr_name</a></code></td>
+    <td><span>Get a name for nice representation.</span></td>
+  </tr><tr class="basemethod private">
+    
+    <td>Method</td>
+    <td><code><a href="astroid.node_classes.NodeNG.html#_fixed_source_line">_fixed_source_line</a></code></td>
+    <td><span>Attempt to find the line that this node appears on.</span></td>
+  </tr><tr class="basemethod private">
+    
+    <td>Method</td>
+    <td><code><a href="astroid.node_classes.NodeNG.html#_get_name_nodes">_get_name_nodes</a></code></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="basemethod private">
+    
+    <td>Method</td>
+    <td><code><a href="astroid.node_classes.NodeNG.html#_get_return_nodes_skip_functions">_get_return_nodes_skip_functions</a></code></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="basemethod private">
+    
+    <td>Method</td>
+    <td><code><a href="astroid.node_classes.NodeNG.html#_get_yield_nodes_skip_lambdas">_get_yield_nodes_skip_lambdas</a></code></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="basemethod private">
+    
+    <td>Method</td>
+    <td><code><a href="astroid.node_classes.NodeNG.html#_infer_name">_infer_name</a></code></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="basemethod private">
+    
+    <td>Method</td>
+    <td><code><a href="astroid.node_classes.NodeNG.html#_infer">_infer</a></code></td>
+    <td><span>we don't know how to resolve a statement by default</span></td>
+  </tr>
+</table>
+          
+
+          
+      </div>
+
+      <div id="childList">
+
+        <div class="baseclassvariable private">
+  
+  <a name="astroid.scoped_nodes.ClassDef._astroid_fields">
+    
+  </a>
+  <a name="_astroid_fields">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-defname">_astroid_fields</span> =
+    
+  </div>
+  <div class="functionBody">
+    <div class="interfaceinfo">overrides <code><a href="astroid.node_classes.NodeNG.html#_astroid_fields">astroid.node_classes.NodeNG._astroid_fields</a></code></div>
+    
+    <div><p>Node attributes that contain child nodes.</p>
+<p>This is redefined in most concrete classes.</p>
+</div> (type: <code>tuple[str, ...]</code>)
+  </div>
+</div><div class="baseinstancevariable">
+  
+  <a name="astroid.scoped_nodes.ClassDef.decorators">
+    
+  </a>
+  <a name="decorators">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-defname">decorators</span> =
+    
+  </div>
+  <div class="functionBody">
+    
+    
+    <div>The decorators that are applied to this class.</div> (type: Decorators or None)
+  </div>
+</div><div class="baseclassvariable">
+  
+  <a name="astroid.scoped_nodes.ClassDef.special_attributes">
+    
+  </a>
+  <a name="special_attributes">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-defname">special_attributes</span> =
+    
+  </div>
+  <div class="functionBody">
+    
+    
+    <div>The names of special attributes that this class has.</div> (type: objectmodel.ClassModel)
+  </div>
+</div><div class="baseclassvariable private">
+  
+  <a name="astroid.scoped_nodes.ClassDef._type">
+    
+  </a>
+  <a name="_type">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-defname">_type</span> =
+    
+  </div>
+  <div class="functionBody">
+    
+    
+    <div><p class="undocumented">Undocumented</p></div>
+  </div>
+</div><div class="baseinstancevariable private">
+  
+  <a name="astroid.scoped_nodes.ClassDef._metaclass_hack">
+    
+  </a>
+  <a name="_metaclass_hack">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-defname">_metaclass_hack</span> =
+    
+  </div>
+  <div class="functionBody">
+    
+    
+    <div><p class="undocumented">Undocumented</p></div> (type: <code>bool</code>)
+  </div>
+</div><div class="baseclassvariable">
+  
+  <a name="astroid.scoped_nodes.ClassDef.hide">
+    
+  </a>
+  <a name="hide">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-defname">hide</span> =
+    
+  </div>
+  <div class="functionBody">
+    
+    
+    <div><p class="undocumented">Undocumented</p></div> (type: <code>bool</code>)
+  </div>
+</div><div class="baseclassvariable">
+  
+  <a name="astroid.scoped_nodes.ClassDef.type">
+    
+  </a>
+  <a name="type">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-defname">type</span> =
+    
+  </div>
+  <div class="functionBody">
+    
+    
+    <div><p class="undocumented">Undocumented</p></div>
+  </div>
+</div><div class="baseclassvariable private">
+  
+  <a name="astroid.scoped_nodes.ClassDef._other_fields">
+    
+  </a>
+  <a name="_other_fields">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-defname">_other_fields</span> =
+    
+  </div>
+  <div class="functionBody">
+    <div class="interfaceinfo">overrides <code><a href="astroid.node_classes.NodeNG.html#_other_fields">astroid.node_classes.NodeNG._other_fields</a></code></div>
+    
+    <div>Node attributes that do not contain child nodes.</div> (type: <code>tuple[str, ...]</code>)
+  </div>
+</div><div class="baseclassvariable private">
+  
+  <a name="astroid.scoped_nodes.ClassDef._other_other_fields">
+    
+  </a>
+  <a name="_other_other_fields">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-defname">_other_other_fields</span> =
+    
+  </div>
+  <div class="functionBody">
+    <div class="interfaceinfo">overrides <code><a href="astroid.node_classes.NodeNG.html#_other_other_fields">astroid.node_classes.NodeNG._other_other_fields</a></code></div>
+    
+    <div>Attributes that contain AST-dependent fields.</div> (type: <code>tuple[str, ...]</code>)
+  </div>
+</div><div class="baseinstancevariable private">
+  
+  <a name="astroid.scoped_nodes.ClassDef._newstyle">
+    
+  </a>
+  <a name="_newstyle">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-defname">_newstyle</span> =
+    
+  </div>
+  <div class="functionBody">
+    
+    
+    <div><p class="undocumented">Undocumented</p></div>
+  </div>
+</div><div class="basemethod">
+  
+  <a name="astroid.scoped_nodes.ClassDef.__init__">
+    
+  </a>
+  <a name="__init__">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-keyword">def</span> <span class="py-defname">__init__</span>(self, name=None, doc=None, lineno=None, col_offset=None, parent=None):
+    
+  </div>
+  <div class="docstring functionBody">
+    <div class="interfaceinfo">overrides <code><a href="astroid.node_classes.NodeNG.html#__init__">astroid.node_classes.NodeNG.__init__</a></code></div>
+    
+    <div><table class="fieldTable"><tr class="fieldStart"><td class="fieldName">Parameters</td><td class="fieldArg">name</td><td>The name of the class. (type: str or None)</td></tr><tr><td></td><td class="fieldArg">doc</td><td>The function's docstring. (type: str or None)</td></tr><tr><td></td><td class="fieldArg">lineno</td><td>The line that this node appears on in the source code. (type: int or None)</td></tr><tr><td></td><td class="fieldArg">col_offset</td><td>The column that this node appears on in the
+source code. (type: int or None)</td></tr><tr><td></td><td class="fieldArg">parent</td><td>The parent node in the syntax tree. (type: NodeNG or None)</td></tr></table></div>
+  </div>
+</div><div class="baseinstancevariable">
+  
+  <a name="astroid.scoped_nodes.ClassDef.instance_attrs">
+    
+  </a>
+  <a name="instance_attrs">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-defname">instance_attrs</span> =
+    
+  </div>
+  <div class="functionBody">
+    
+    
+    <div><p class="undocumented">Undocumented</p></div> (type: <code>dict</code>)
+  </div>
+</div><div class="baseinstancevariable">
+  
+  <a name="astroid.scoped_nodes.ClassDef.locals">
+    
+  </a>
+  <a name="locals">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-defname">locals</span> =
+    
+  </div>
+  <div class="functionBody">
+    <div class="interfaceinfo">overrides <code><a href="astroid.scoped_nodes.LocalsDictNodeNG.html#locals">astroid.scoped_nodes.LocalsDictNodeNG.locals</a></code></div>
+    
+    <div>A map of the name of a local variable to the node defining it.</div> (type: dict(str, NodeNG))
+  </div>
+</div><div class="baseinstancevariable">
+  
+  <a name="astroid.scoped_nodes.ClassDef.keywords">
+    
+  </a>
+  <a name="keywords">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-defname">keywords</span> =
+    
+  </div>
+  <div class="functionBody">
+    
+    
+    <div><p>The keywords given to the class definition.</p>
+<p>This is usually for <a class="rst-reference external" href="http://www.python.org/dev/peps/pep-3115" target="_top">PEP 3115</a> style metaclass declaration.</p>
+</div> (type: list(Keyword) or None)
+  </div>
+</div><div class="baseinstancevariable">
+  
+  <a name="astroid.scoped_nodes.ClassDef.bases">
+    
+  </a>
+  <a name="bases">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-defname">bases</span> =
+    
+  </div>
+  <div class="functionBody">
+    
+    
+    <div>What the class inherits from.</div> (type: list(NodeNG))
+  </div>
+</div><div class="baseinstancevariable">
+  
+  <a name="astroid.scoped_nodes.ClassDef.body">
+    
+  </a>
+  <a name="body">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-defname">body</span> =
+    
+  </div>
+  <div class="functionBody">
+    
+    
+    <div>The contents of the class body.</div> (type: list(NodeNG))
+  </div>
+</div><div class="baseinstancevariable">
+  
+  <a name="astroid.scoped_nodes.ClassDef.name">
+    
+  </a>
+  <a name="name">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-defname">name</span> =
+    
+  </div>
+  <div class="functionBody">
+    
+    
+    <div>The name of the class.</div> (type: str or None)
+  </div>
+</div><div class="baseinstancevariable">
+  
+  <a name="astroid.scoped_nodes.ClassDef.doc">
+    
+  </a>
+  <a name="doc">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-defname">doc</span> =
+    
+  </div>
+  <div class="functionBody">
+    
+    
+    <div>The class' docstring.</div> (type: str or None)
+  </div>
+</div><div class="basemethod">
+  
+  <a name="astroid.scoped_nodes.ClassDef.implicit_parameters">
+    
+  </a>
+  <a name="implicit_parameters">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-keyword">def</span> <span class="py-defname">implicit_parameters</span>(self):
+    
+  </div>
+  <div class="docstring functionBody">
+    
+    
+    <div><p class="undocumented">Undocumented</p></div>
+  </div>
+</div><div class="basemethod">
+  
+  <a name="astroid.scoped_nodes.ClassDef.implicit_locals">
+    
+  </a>
+  <a name="implicit_locals">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-keyword">def</span> <span class="py-defname">implicit_locals</span>(self):
+    
+  </div>
+  <div class="docstring functionBody">
+    
+    
+    <div>Get implicitly defined class definition locals.<table class="fieldTable"><tr class="fieldStart"><td class="fieldName">Returns</td><td colspan="2">the the name and Const pair for each local (type: tuple(tuple(str, node_classes.Const), ...))</td></tr></table></div>
+  </div>
+</div><div class="basemethod">
+  
+  <a name="astroid.scoped_nodes.ClassDef.postinit">
+    
+  </a>
+  <a name="postinit">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-keyword">def</span> <span class="py-defname">postinit</span>(self, bases, body, decorators, newstyle=None, metaclass=None, keywords=None):
+    
+  </div>
+  <div class="docstring functionBody">
+    
+    
+    <div>Do some setup after initialisation.<table class="fieldTable"><tr class="fieldStart"><td class="fieldName">Parameters</td><td class="fieldArg">bases</td><td>What the class inherits from. (type: list(NodeNG))</td></tr><tr><td></td><td class="fieldArg">body</td><td>The contents of the class body. (type: list(NodeNG))</td></tr><tr><td></td><td class="fieldArg">decorators</td><td>The decorators that are applied to this class. (type: Decorators or None)</td></tr><tr><td></td><td class="fieldArg">newstyle</td><td>Whether this is a new style class or not. (type: bool or None)</td></tr><tr><td></td><td class="fieldArg">metaclass</td><td>The metaclass of this class. (type: NodeNG or None)</td></tr><tr><td></td><td class="fieldArg">keywords</td><td>The keywords given to the class definition. (type: list(Keyword) or None)</td></tr></table></div>
+  </div>
+</div><div class="baseinstancevariable private">
+  
+  <a name="astroid.scoped_nodes.ClassDef._metaclass">
+    
+  </a>
+  <a name="_metaclass">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-defname">_metaclass</span> =
+    
+  </div>
+  <div class="functionBody">
+    
+    
+    <div><p class="undocumented">Undocumented</p></div>
+  </div>
+</div><div class="basemethod private">
+  
+  <a name="astroid.scoped_nodes.ClassDef._newstyle_impl">
+    
+  </a>
+  <a name="_newstyle_impl">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-keyword">def</span> <span class="py-defname">_newstyle_impl</span>(self, context=None):
+    
+  </div>
+  <div class="docstring functionBody">
+    
+    
+    <div><p class="undocumented">Undocumented</p></div>
+  </div>
+</div><div class="baseclassvariable">
+  
+  <a name="astroid.scoped_nodes.ClassDef.newstyle">
+    
+  </a>
+  <a name="newstyle">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-defname">newstyle</span> =
+    
+  </div>
+  <div class="functionBody">
+    
+    
+    <div><p class="undocumented">Undocumented</p></div>
+  </div>
+</div><div class="baseproperty">
+  
+  <a name="astroid.scoped_nodes.ClassDef.blockstart_tolineno">
+    
+  </a>
+  <a name="blockstart_tolineno">
+    
+  </a>
+  <div class="functionHeader">
+    @decorators_mod.cachedproperty<br />
+    <span class="py-defname">blockstart_tolineno</span> =
+    
+  </div>
+  <div class="functionBody">
+    
+    
+    <div>The line on which the beginning of this block ends.</div> (type: int)
+  </div>
+</div><div class="basemethod">
+  
+  <a name="astroid.scoped_nodes.ClassDef.block_range">
+    
+  </a>
+  <a name="block_range">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-keyword">def</span> <span class="py-defname">block_range</span>(self, lineno):
+    
+  </div>
+  <div class="docstring functionBody">
+    <div class="interfaceinfo">overrides <code><a href="astroid.node_classes.NodeNG.html#block_range">astroid.node_classes.NodeNG.block_range</a></code></div>
+    
+    <div>Get a range from the given line number to where this node ends.<table class="fieldTable"><tr class="fieldStart"><td class="fieldName">Parameters</td><td class="fieldArg">lineno</td><td>Unused. (type: int)</td></tr><tr class="fieldStart"><td class="fieldName">Returns</td><td colspan="2">The range of line numbers that this node belongs to, (type: tuple(int, int))</td></tr></table></div>
+  </div>
+</div><div class="basemethod">
+  
+  <a name="astroid.scoped_nodes.ClassDef.pytype">
+    
+  </a>
+  <a name="pytype">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-keyword">def</span> <span class="py-defname">pytype</span>(self):
+    
+  </div>
+  <div class="docstring functionBody">
+    
+    
+    <div>Get the name of the type that this node represents.<table class="fieldTable"><tr class="fieldStart"><td class="fieldName">Returns</td><td colspan="2">The name of the type. (type: str)</td></tr></table></div>
+  </div>
+</div><div class="basemethod">
+  
+  <a name="astroid.scoped_nodes.ClassDef.display_type">
+    
+  </a>
+  <a name="display_type">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-keyword">def</span> <span class="py-defname">display_type</span>(self):
+    
+  </div>
+  <div class="docstring functionBody">
+    
+    
+    <div>A human readable type of this node.<table class="fieldTable"><tr class="fieldStart"><td class="fieldName">Returns</td><td colspan="2">The type of this node. (type: str)</td></tr></table></div>
+  </div>
+</div><div class="basemethod">
+  
+  <a name="astroid.scoped_nodes.ClassDef.callable">
+    
+  </a>
+  <a name="callable">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-keyword">def</span> <span class="py-defname">callable</span>(self):
+    
+  </div>
+  <div class="docstring functionBody">
+    <div class="interfaceinfo">overrides <code><a href="astroid.node_classes.NodeNG.html#callable">astroid.node_classes.NodeNG.callable</a></code></div>
+    
+    <div>Whether this node defines something that is callable.<table class="fieldTable"><tr class="fieldStart"><td class="fieldName">Returns</td><td colspan="2">True if this defines something that is callable,
+False otherwise.
+For a <a href="#id1"><span class="rst-problematic" id="rst-id2">:class:`ClassDef`</span></a> this is always <tt class="rst-docutils literal">True</tt>. (type: bool)</td></tr></table></div>
+  </div>
+</div><div class="basemethod">
+  
+  <a name="astroid.scoped_nodes.ClassDef.is_subtype_of">
+    
+  </a>
+  <a name="is_subtype_of">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-keyword">def</span> <span class="py-defname">is_subtype_of</span>(self, type_name, context=None):
+    
+  </div>
+  <div class="docstring functionBody">
+    
+    
+    <div>Whether this class is a subtype of the given type.<table class="fieldTable"><tr class="fieldStart"><td class="fieldName">Parameters</td><td class="fieldArg">type_name</td><td>The name of the type of check against. (type: str)</td></tr><tr><td></td><td class="fieldArg">context</td><td><span class="undocumented">Undocumented</span></td></tr><tr class="fieldStart"><td class="fieldName">Returns</td><td colspan="2">True if this class is a subtype of the given type,
+False otherwise. (type: bool)</td></tr></table></div>
+  </div>
+</div><div class="basemethod private">
+  
+  <a name="astroid.scoped_nodes.ClassDef._infer_type_call">
+    
+  </a>
+  <a name="_infer_type_call">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-keyword">def</span> <span class="py-defname">_infer_type_call</span>(self, caller, context):
+    
+  </div>
+  <div class="docstring functionBody">
+    
+    
+    <div><p class="undocumented">Undocumented</p></div>
+  </div>
+</div><div class="basemethod">
+  
+  <a name="astroid.scoped_nodes.ClassDef.infer_call_result">
+    
+  </a>
+  <a name="infer_call_result">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-keyword">def</span> <span class="py-defname">infer_call_result</span>(self, caller, context=None):
+    
+  </div>
+  <div class="docstring functionBody">
+    
+    
+    <div>infer what a class is returning when called</div>
+  </div>
+</div><div class="basemethod">
+  
+  <a name="astroid.scoped_nodes.ClassDef.scope_lookup">
+    
+  </a>
+  <a name="scope_lookup">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-keyword">def</span> <span class="py-defname">scope_lookup</span>(self, node, name, offset=0):
+    
+  </div>
+  <div class="docstring functionBody">
+    
+    
+    <div>Lookup where the given name is assigned.<table class="fieldTable"><tr class="fieldStart"><td class="fieldName">Parameters</td><td class="fieldArg">node</td><td>The node to look for assignments up to.
+Any assignments after the given node are ignored. (type: NodeNG)</td></tr><tr><td></td><td class="fieldArg">name</td><td>The name to find assignments for. (type: str)</td></tr><tr><td></td><td class="fieldArg">offset</td><td>The line offset to filter statements up to. (type: int)</td></tr><tr class="fieldStart"><td class="fieldName">Returns</td><td colspan="2">This scope node and the list of assignments associated to the
+given name according to the scope where it has been found (locals,
+globals or builtin). (type: tuple(str, list(NodeNG)))</td></tr></table></div>
+  </div>
+</div><div class="baseproperty">
+  
+  <a name="astroid.scoped_nodes.ClassDef.basenames">
+    
+  </a>
+  <a name="basenames">
+    
+  </a>
+  <div class="functionHeader">
+    @property<br />
+    <span class="py-defname">basenames</span> =
+    
+  </div>
+  <div class="functionBody">
+    
+    
+    <div><p>The names of the parent classes</p>
+<p>Names are given in the order they appear in the class definition.</p>
+</div> (type: list(str))
+  </div>
+</div><div class="basemethod">
+  
+  <a name="astroid.scoped_nodes.ClassDef.ancestors">
+    
+  </a>
+  <a name="ancestors">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-keyword">def</span> <span class="py-defname">ancestors</span>(self, recurs=True, context=None):
+    
+  </div>
+  <div class="docstring functionBody">
+    
+    
+    <div>Iterate over the base classes in prefixed depth first order.<table class="fieldTable"><tr class="fieldStart"><td class="fieldName">Parameters</td><td class="fieldArg">recurs</td><td>Whether to recurse or return direct ancestors only. (type: bool)</td></tr><tr><td></td><td class="fieldArg">context</td><td><span class="undocumented">Undocumented</span></td></tr><tr class="fieldStart"><td class="fieldName">Returns</td><td colspan="2">The base classes (type: iterable(NodeNG))</td></tr></table></div>
+  </div>
+</div><div class="basemethod">
+  
+  <a name="astroid.scoped_nodes.ClassDef.local_attr_ancestors">
+    
+  </a>
+  <a name="local_attr_ancestors">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-keyword">def</span> <span class="py-defname">local_attr_ancestors</span>(self, name, context=None):
+    
+  </div>
+  <div class="docstring functionBody">
+    
+    
+    <div>Iterate over the parents that define the given name.<table class="fieldTable"><tr class="fieldStart"><td class="fieldName">Parameters</td><td class="fieldArg">name</td><td>The name to find definitions for. (type: str)</td></tr><tr><td></td><td class="fieldArg">context</td><td><span class="undocumented">Undocumented</span></td></tr><tr class="fieldStart"><td class="fieldName">Returns</td><td colspan="2">The parents that define the given name. (type: iterable(NodeNG))</td></tr></table></div>
+  </div>
+</div><div class="basemethod">
+  
+  <a name="astroid.scoped_nodes.ClassDef.instance_attr_ancestors">
+    
+  </a>
+  <a name="instance_attr_ancestors">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-keyword">def</span> <span class="py-defname">instance_attr_ancestors</span>(self, name, context=None):
+    
+  </div>
+  <div class="docstring functionBody">
+    
+    
+    <div>Iterate over the parents that define the given name as an attribute.<table class="fieldTable"><tr class="fieldStart"><td class="fieldName">Parameters</td><td class="fieldArg">name</td><td>The name to find definitions for. (type: str)</td></tr><tr><td></td><td class="fieldArg">context</td><td><span class="undocumented">Undocumented</span></td></tr><tr class="fieldStart"><td class="fieldName">Returns</td><td colspan="2">The parents that define the given name as
+an instance attribute. (type: iterable(NodeNG))</td></tr></table></div>
+  </div>
+</div><div class="basemethod">
+  
+  <a name="astroid.scoped_nodes.ClassDef.has_base">
+    
+  </a>
+  <a name="has_base">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-keyword">def</span> <span class="py-defname">has_base</span>(self, node):
+    
+  </div>
+  <div class="docstring functionBody">
+    <div class="interfaceinfo">overrides <code><a href="astroid.node_classes.NodeNG.html#has_base">astroid.node_classes.NodeNG.has_base</a></code></div>
+    
+    <div>Whether this class directly inherits from the given node.<table class="fieldTable"><tr class="fieldStart"><td class="fieldName">Parameters</td><td class="fieldArg">node</td><td>The node to check for. (type: NodeNG)</td></tr><tr class="fieldStart"><td class="fieldName">Returns</td><td colspan="2">True if this class directly inherits from the given node. (type: bool)</td></tr></table></div>
+  </div>
+</div><div class="basemethod">
+  
+  <a name="astroid.scoped_nodes.ClassDef.local_attr">
+    
+  </a>
+  <a name="local_attr">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-keyword">def</span> <span class="py-defname">local_attr</span>(self, name, context=None):
+    
+  </div>
+  <div class="docstring functionBody">
+    
+    
+    <div><p>Get the list of assign nodes associated to the given name.</p>
+<p>Assignments are looked for in both this class and in parents.</p>
+<table class="fieldTable"><tr class="fieldStart"><td class="fieldName">Returns</td><td colspan="2">The list of assignments to the given name. (type: list(NodeNG))</td></tr><tr class="fieldStart"><td class="fieldName">Raises</td><td class="fieldArg"><a href="astroid.exceptions.AttributeInferenceError.html">AttributeInferenceError</a></td><td>If no attribute with this name
+can be found in this class or parent classes.</td></tr></table></div>
+  </div>
+</div><div class="basemethod">
+  
+  <a name="astroid.scoped_nodes.ClassDef.instance_attr">
+    
+  </a>
+  <a name="instance_attr">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-keyword">def</span> <span class="py-defname">instance_attr</span>(self, name, context=None):
+    
+  </div>
+  <div class="docstring functionBody">
+    
+    
+    <div><p>Get the list of nodes associated to the given attribute name.</p>
+<p>Assignments are looked for in both this class and in parents.</p>
+<table class="fieldTable"><tr class="fieldStart"><td class="fieldName">Returns</td><td colspan="2">The list of assignments to the given name. (type: list(NodeNG))</td></tr><tr class="fieldStart"><td class="fieldName">Raises</td><td class="fieldArg"><a href="astroid.exceptions.AttributeInferenceError.html">AttributeInferenceError</a></td><td>If no attribute with this name
+can be found in this class or parent classes.</td></tr></table></div>
+  </div>
+</div><div class="basemethod">
+  
+  <a name="astroid.scoped_nodes.ClassDef.instantiate_class">
+    
+  </a>
+  <a name="instantiate_class">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-keyword">def</span> <span class="py-defname">instantiate_class</span>(self):
+    
+  </div>
+  <div class="docstring functionBody">
+    <div class="interfaceinfo">overrides <code><a href="astroid.node_classes.NodeNG.html#instantiate_class">astroid.node_classes.NodeNG.instantiate_class</a></code></div>
+    
+    <div>Get an <a href="#id1"><span class="rst-problematic" id="rst-id2">:class:`Instance`</span></a> of the <a href="#id3"><span class="rst-problematic" id="rst-id4">:class:`ClassDef`</span></a> node.<table class="fieldTable"><tr class="fieldStart"><td class="fieldName">Returns</td><td colspan="2">An <a href="#id5"><span class="rst-problematic" id="rst-id6">:class:`Instance`</span></a> of the <a href="#id7"><span class="rst-problematic" id="rst-id8">:class:`ClassDef`</span></a> node,
+or self if this is not possible. (type: Instance or ClassDef)</td></tr></table></div>
+  </div>
+</div><div class="basemethod">
+  
+  <a name="astroid.scoped_nodes.ClassDef.getattr">
+    
+  </a>
+  <a name="getattr">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-keyword">def</span> <span class="py-defname">getattr</span>(self, name, context=None, class_context=True):
+    
+  </div>
+  <div class="docstring functionBody">
+    
+    
+    <div><p>Get an attribute from this class, using Python's attribute semantic.</p>
+<p>This method doesn't look in the <a href="#id1"><span class="rst-problematic" id="rst-id2">:attr:`instance_attrs`</span></a> dictionary
+since it is done by an <a href="#id3"><span class="rst-problematic" id="rst-id4">:class:`Instance`</span></a> proxy at inference time.
+It may return an <a href="#id5"><span class="rst-problematic" id="rst-id6">:class:`Uninferable`</span></a> object if
+the attribute has not been
+found, but a <tt class="rst-docutils literal">__getattr__</tt> or <tt class="rst-docutils literal">__getattribute__</tt> method is defined.
+If <tt class="rst-docutils literal">class_context</tt> is given, then it is considered that the
+attribute is accessed from a class context,
+e.g. ClassDef.attribute, otherwise it might have been accessed
+from an instance as well. If <tt class="rst-docutils literal">class_context</tt> is used in that
+case, then a lookup in the implicit metaclass and the explicit
+metaclass will be done.</p>
+<table class="fieldTable"><tr class="fieldStart"><td class="fieldName">Parameters</td><td class="fieldArg">name</td><td>The attribute to look for. (type: str)</td></tr><tr><td></td><td class="fieldArg">context</td><td><span class="undocumented">Undocumented</span></td></tr><tr><td></td><td class="fieldArg">class_context</td><td>Whether the attribute can be accessed statically. (type: bool)</td></tr><tr class="fieldStart"><td class="fieldName">Returns</td><td colspan="2">The attribute. (type: list(NodeNG))</td></tr><tr class="fieldStart"><td class="fieldName">Raises</td><td class="fieldArg"><a href="astroid.exceptions.AttributeInferenceError.html">AttributeInferenceError</a></td><td>If the attribute cannot be inferred.</td></tr></table></div>
+  </div>
+</div><div class="basemethod private">
+  
+  <a name="astroid.scoped_nodes.ClassDef._metaclass_lookup_attribute">
+    
+  </a>
+  <a name="_metaclass_lookup_attribute">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-keyword">def</span> <span class="py-defname">_metaclass_lookup_attribute</span>(self, name, context):
+    
+  </div>
+  <div class="docstring functionBody">
+    
+    
+    <div>Search the given name in the implicit and the explicit metaclass.</div>
+  </div>
+</div><div class="basemethod private">
+  
+  <a name="astroid.scoped_nodes.ClassDef._get_attribute_from_metaclass">
+    
+  </a>
+  <a name="_get_attribute_from_metaclass">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-keyword">def</span> <span class="py-defname">_get_attribute_from_metaclass</span>(self, cls, name, context):
+    
+  </div>
+  <div class="docstring functionBody">
+    
+    
+    <div><p class="undocumented">Undocumented</p></div>
+  </div>
+</div><div class="basemethod">
+  
+  <a name="astroid.scoped_nodes.ClassDef.igetattr">
+    
+  </a>
+  <a name="igetattr">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-keyword">def</span> <span class="py-defname">igetattr</span>(self, name, context=None, class_context=True):
+    
+  </div>
+  <div class="docstring functionBody">
+    
+    
+    <div>Infer the possible values of the given variable.<table class="fieldTable"><tr class="fieldStart"><td class="fieldName">Parameters</td><td class="fieldArg">name</td><td>The name of the variable to infer. (type: str)</td></tr><tr><td></td><td class="fieldArg">context</td><td><span class="undocumented">Undocumented</span></td></tr><tr><td></td><td class="fieldArg">class_context</td><td><span class="undocumented">Undocumented</span></td></tr><tr class="fieldStart"><td class="fieldName">Returns</td><td colspan="2">The inferred possible values. (type: iterable(NodeNG or Uninferable))</td></tr></table></div>
+  </div>
+</div><div class="basemethod">
+  
+  <a name="astroid.scoped_nodes.ClassDef.has_dynamic_getattr">
+    
+  </a>
+  <a name="has_dynamic_getattr">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-keyword">def</span> <span class="py-defname">has_dynamic_getattr</span>(self, context=None):
+    
+  </div>
+  <div class="docstring functionBody">
+    
+    
+    <div><p>Check if the class has a custom __getattr__ or __getattribute__.</p>
+<p>If any such method is found and it is not from
+builtins, nor from an extension module, then the function
+will return True.</p>
+<table class="fieldTable"><tr class="fieldStart"><td class="fieldName">Returns</td><td colspan="2">True if the class has a custom
+__getattr__ or __getattribute__, False otherwise. (type: bool)</td></tr></table></div>
+  </div>
+</div><div class="basemethod">
+  
+  <a name="astroid.scoped_nodes.ClassDef.getitem">
+    
+  </a>
+  <a name="getitem">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-keyword">def</span> <span class="py-defname">getitem</span>(self, index, context=None):
+    
+  </div>
+  <div class="docstring functionBody">
+    
+    
+    <div><p>Return the inference of a subscript.</p>
+<p>This is basically looking up the method in the metaclass and calling it.</p>
+<table class="fieldTable"><tr class="fieldStart"><td class="fieldName">Returns</td><td colspan="2">The inferred value of a subscript to this class. (type: NodeNG)</td></tr><tr class="fieldStart"><td class="fieldName">Raises</td><td class="fieldArg"><a href="astroid.exceptions.AstroidTypeError.html">AstroidTypeError</a></td><td>If this class does not define a
+<tt class="rst-docutils literal">__getitem__</tt> method.</td></tr></table></div>
+  </div>
+</div><div class="basemethod">
+  
+  <a name="astroid.scoped_nodes.ClassDef.methods">
+    
+  </a>
+  <a name="methods">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-keyword">def</span> <span class="py-defname">methods</span>(self):
+    
+  </div>
+  <div class="docstring functionBody">
+    
+    
+    <div>Iterate over all of the method defined in this class and its parents.<table class="fieldTable"><tr class="fieldStart"><td class="fieldName">Returns</td><td colspan="2">The methods defined on the class. (type: iterable(FunctionDef))</td></tr></table></div>
+  </div>
+</div><div class="basemethod">
+  
+  <a name="astroid.scoped_nodes.ClassDef.mymethods">
+    
+  </a>
+  <a name="mymethods">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-keyword">def</span> <span class="py-defname">mymethods</span>(self):
+    
+  </div>
+  <div class="docstring functionBody">
+    
+    
+    <div>Iterate over all of the method defined in this class only.<table class="fieldTable"><tr class="fieldStart"><td class="fieldName">Returns</td><td colspan="2">The methods defined on the class. (type: iterable(FunctionDef))</td></tr></table></div>
+  </div>
+</div><div class="basemethod">
+  
+  <a name="astroid.scoped_nodes.ClassDef.implicit_metaclass">
+    
+  </a>
+  <a name="implicit_metaclass">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-keyword">def</span> <span class="py-defname">implicit_metaclass</span>(self):
+    
+  </div>
+  <div class="docstring functionBody">
+    
+    
+    <div><p>Get the implicit metaclass of the current class.</p>
+<p>For newstyle classes, this will return an instance of builtins.type.
+For oldstyle classes, it will simply return None, since there's
+no implicit metaclass there.</p>
+<table class="fieldTable"><tr class="fieldStart"><td class="fieldName">Returns</td><td colspan="2">The metaclass. (type: builtins.type or None)</td></tr></table></div>
+  </div>
+</div><div class="basemethod">
+  
+  <a name="astroid.scoped_nodes.ClassDef.declared_metaclass">
+    
+  </a>
+  <a name="declared_metaclass">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-keyword">def</span> <span class="py-defname">declared_metaclass</span>(self, context=None):
+    
+  </div>
+  <div class="docstring functionBody">
+    
+    
+    <div><p>Return the explicit declared metaclass for the current class.</p>
+<p>An explicit declared metaclass is defined
+either by passing the <tt class="rst-docutils literal">metaclass</tt> keyword argument
+in the class definition line (Python 3) or (Python 2) by
+having a <tt class="rst-docutils literal">__metaclass__</tt> class attribute, or if there are
+no explicit bases but there is a global <tt class="rst-docutils literal">__metaclass__</tt> variable.</p>
+<table class="fieldTable"><tr class="fieldStart"><td class="fieldName">Returns</td><td colspan="2">The metaclass of this class,
+or None if one could not be found. (type: NodeNG or None)</td></tr></table></div>
+  </div>
+</div><div class="basemethod private">
+  
+  <a name="astroid.scoped_nodes.ClassDef._find_metaclass">
+    
+  </a>
+  <a name="_find_metaclass">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-keyword">def</span> <span class="py-defname">_find_metaclass</span>(self, seen=None, context=None):
+    
+  </div>
+  <div class="docstring functionBody">
+    
+    
+    <div><p class="undocumented">Undocumented</p></div>
+  </div>
+</div><div class="basemethod">
+  
+  <a name="astroid.scoped_nodes.ClassDef.metaclass">
+    
+  </a>
+  <a name="metaclass">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-keyword">def</span> <span class="py-defname">metaclass</span>(self, context=None):
+    
+  </div>
+  <div class="docstring functionBody">
+    
+    
+    <div><p>Get the metaclass of this class.</p>
+<p>If this class does not define explicitly a metaclass,
+then the first defined metaclass in ancestors will be used
+instead.</p>
+<table class="fieldTable"><tr class="fieldStart"><td class="fieldName">Returns</td><td colspan="2">The metaclass of this class. (type: NodeNG or None)</td></tr></table></div>
+  </div>
+</div><div class="basemethod">
+  
+  <a name="astroid.scoped_nodes.ClassDef.has_metaclass_hack">
+    
+  </a>
+  <a name="has_metaclass_hack">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-keyword">def</span> <span class="py-defname">has_metaclass_hack</span>(self):
+    
+  </div>
+  <div class="docstring functionBody">
+    
+    
+    <div><p class="undocumented">Undocumented</p></div>
+  </div>
+</div><div class="basemethod private">
+  
+  <a name="astroid.scoped_nodes.ClassDef._islots">
+    
+  </a>
+  <a name="_islots">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-keyword">def</span> <span class="py-defname">_islots</span>(self):
+    
+  </div>
+  <div class="docstring functionBody">
+    
+    
+    <div>Return an iterator with the inferred slots.</div>
+  </div>
+</div><div class="basemethod private">
+  
+  <a name="astroid.scoped_nodes.ClassDef._slots">
+    
+  </a>
+  <a name="_slots">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-keyword">def</span> <span class="py-defname">_slots</span>(self):
+    
+  </div>
+  <div class="docstring functionBody">
+    
+    
+    <div><p class="undocumented">Undocumented</p></div>
+  </div>
+</div><div class="basemethod">
+  
+  <a name="astroid.scoped_nodes.ClassDef.slots">
+    
+  </a>
+  <a name="slots">
+    
+  </a>
+  <div class="functionHeader">
+    @decorators_mod.cached<br />
+    <span class="py-keyword">def</span> <span class="py-defname">slots</span>(self):
+    
+  </div>
+  <div class="docstring functionBody">
+    
+    
+    <div>Get all the slots for this node.<table class="fieldTable"><tr class="fieldStart"><td class="fieldName">Returns</td><td colspan="2">The names of slots for this class.
+If the class doesn't define any slot, through the <tt class="rst-docutils literal">__slots__</tt>
+variable, then this function will return a None.
+Also, it will return None in the case the slots were not inferred. (type: list(str) or None)</td></tr></table></div>
+  </div>
+</div><div class="basemethod private">
+  
+  <a name="astroid.scoped_nodes.ClassDef._inferred_bases">
+    
+  </a>
+  <a name="_inferred_bases">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-keyword">def</span> <span class="py-defname">_inferred_bases</span>(self, context=None):
+    
+  </div>
+  <div class="docstring functionBody">
+    
+    
+    <div><p class="undocumented">Undocumented</p></div>
+  </div>
+</div><div class="basemethod private">
+  
+  <a name="astroid.scoped_nodes.ClassDef._compute_mro">
+    
+  </a>
+  <a name="_compute_mro">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-keyword">def</span> <span class="py-defname">_compute_mro</span>(self, context=None):
+    
+  </div>
+  <div class="docstring functionBody">
+    
+    
+    <div><p class="undocumented">Undocumented</p></div>
+  </div>
+</div><div class="basemethod">
+  
+  <a name="astroid.scoped_nodes.ClassDef.mro">
+    
+  </a>
+  <a name="mro">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-keyword">def</span> <span class="py-defname">mro</span>(self, context=None):
+    
+  </div>
+  <div class="docstring functionBody">
+    
+    
+    <div>Get the method resolution order, using C3 linearization.<table class="fieldTable"><tr class="fieldStart"><td class="fieldName">Returns</td><td colspan="2">The list of ancestors, sorted by the mro. (type: list(NodeNG))</td></tr><tr class="fieldStart"><td class="fieldName">Raises</td><td class="fieldArg"><a href="astroid.exceptions.DuplicateBasesError.html">DuplicateBasesError</a></td><td>Duplicate bases in the same class base</td></tr><tr><td></td><td class="fieldArg"><a href="astroid.exceptions.InconsistentMroError.html">InconsistentMroError</a></td><td>A class' MRO is inconsistent</td></tr></table></div>
+  </div>
+</div><div class="basemethod">
+  
+  <a name="astroid.scoped_nodes.ClassDef.bool_value">
+    
+  </a>
+  <a name="bool_value">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-keyword">def</span> <span class="py-defname">bool_value</span>(self, context=None):
+    
+  </div>
+  <div class="docstring functionBody">
+    <div class="interfaceinfo">overrides <code><a href="astroid.node_classes.NodeNG.html#bool_value">astroid.node_classes.NodeNG.bool_value</a></code></div>
+    
+    <div>Determine the boolean value of this node.<table class="fieldTable"><tr class="fieldStart"><td class="fieldName">Returns</td><td colspan="2">The boolean value of this node.
+For a <a href="#id1"><span class="rst-problematic" id="rst-id2">:class:`ClassDef`</span></a> this is always <tt class="rst-docutils literal">True</tt>. (type: bool)</td></tr></table></div>
+  </div>
+</div><div class="basemethod">
+  
+  <a name="astroid.scoped_nodes.ClassDef.get_children">
+    
+  </a>
+  <a name="get_children">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-keyword">def</span> <span class="py-defname">get_children</span>(self):
+    
+  </div>
+  <div class="docstring functionBody">
+    <div class="interfaceinfo">overrides <code><a href="astroid.node_classes.NodeNG.html#get_children">astroid.node_classes.NodeNG.get_children</a></code></div>
+    
+    <div>Get the child nodes below this node.<table class="fieldTable"><tr class="fieldStart"><td class="fieldName">Returns</td><td colspan="2">The children. (type: iterable(NodeNG))</td></tr></table></div>
+  </div>
+</div><div class="basemethod private">
+  
+  <a name="astroid.scoped_nodes.ClassDef._get_assign_nodes">
+    
+  </a>
+  <a name="_get_assign_nodes">
+    
+  </a>
+  <div class="functionHeader">
+    @decorators_mod.cached<br />
+    <span class="py-keyword">def</span> <span class="py-defname">_get_assign_nodes</span>(self):
+    
+  </div>
+  <div class="docstring functionBody">
+    <div class="interfaceinfo">overrides <code><a href="astroid.node_classes.NodeNG.html#_get_assign_nodes">astroid.node_classes.NodeNG._get_assign_nodes</a></code></div>
+    
+    <div><p class="undocumented">Undocumented</p></div>
+  </div>
+</div>
+
+      </div>
+      <address>
+        <a href="index.html">API Documentation</a> for <a href="https://github.com/tristanlatr/apidocs/tree/main">astroid-v2.6.0</a>, generated by <a href="https://github.com/twisted/pydoctor/">pydoctor</a> 21.2.2 at 2021-06-27 19:18:09.
+      </address>
+
+    </div>
+
+    <script src="pydoctor.js" type="text/javascript"></script>
+
+  </body>
+</html>
