@@ -1,0 +1,1231 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+          "DTD/xhtml1-strict.dtd">
+<html>
+  
+
+  <head>
+    
+    <title>twisted.protocols.amp.BinaryBoxProtocol</title>
+    <meta name="generator" content="pydoctor 21.2.2"> 
+        
+    </meta>
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=0.75" />
+    <link rel="stylesheet" type="text/css" href="bootstrap.min.css" />
+    <link rel="stylesheet" type="text/css" href="apidocs.css" />
+    <link rel="stylesheet" type="text/css" href="extra.css" />
+</head>
+
+  <body>
+
+    
+
+    <nav class="navbar navbar-default">
+  
+  <div class="container">
+
+    <div class="navbar-header">
+      
+      <div class="navlinks">
+        <span class="navbar-brand">
+          <a href="http://twistedmatrix.com/" class="projecthome">Twisted</a> <a href="index.html">API Documentation</a>
+        </span>
+
+        <a href="moduleIndex.html">
+          Modules
+        </a>
+
+        <a href="classIndex.html">
+          Classes
+        </a>
+
+        <a href="nameIndex.html">
+          Names
+        </a>
+
+        <form action="search-results.html" id="search-box-container">
+          <div class="input-group">
+            <input id="search-box" name="search-query" placeholder="Search..." aria-label="Search" minlength="2" class="form-control" />
+            <span class="input-group-btn">
+              <button class="btn btn-default" type="submit" title="Search"><img src="fonts/search.svg" alt="Search!" /></button>
+              <a class="btn btn-default" id="search-help-button" title="Help" onclick="toggleSearchHelpText()"><img src="fonts/info.svg" alt="Help!" /></a>
+            </span>
+          </div>
+        </form>
+
+        <div class="rst-admonition hint" id="search-help-box">
+          <p class="rst-last">
+      
+            Search bar offers the following options:
+            <ul>   
+                <li>
+                  <strong>Term presence.</strong> The below example searches for documents that 
+                    must contain “foo”, might contain “bar” and must not contain “baz”:
+                  <br /> <code>'+foo bar -baz'</code>
+                </li> 
+
+                <li>
+                  <strong>Wildcards.</strong> The below example searches for documents with words beginning with “foo”:
+                  <br /> <code>'foo*'</code>
+                </li> 
+
+                <li>
+                  <strong>Search in specific fields.</strong> The following search matches all documents 
+                  that contains "foo" in their full dotted name and with “bar” in any field:
+                  <br /> <code>'+fullName:*foo* +bar'</code>
+
+                  <p>
+                    Possible fields: 'name', 'docstring', 'fullName'.
+                  </p>
+                </li>
+
+                <li>
+                  <strong>Fuzzy matches.</strong> The following search matches all documents 
+                  that have a word within 1 edit distance of “foo”:
+                  <br /> <code>'foo~1'</code>
+                </li>
+            </ul>
+
+          </p>
+        </div>
+
+      </div>
+
+
+    </div>
+  </div>
+
+  <script>
+ 
+    function toggleSearchHelpText() {
+        document.body.classList.toggle("search-help-hidden");
+    }
+    // Init search and help text
+    document.getElementById('search-box-container').style.display = 'block';
+    document.getElementById('search-help-box').style.display = 'block';
+    document.body.classList.add("search-help-hidden");
+
+  </script>
+
+</nav>
+
+    
+
+    <div class="container">
+
+      <div class="page-header">
+        <h1 class="class"><code><code><a href="twisted.html">twisted</a></code><wbr></wbr>.<code><a href="twisted.protocols.html">protocols</a></code><wbr></wbr>.<code><a href="twisted.protocols.amp.html">amp</a></code><wbr></wbr>.<code><a href="twisted.protocols.amp.BinaryBoxProtocol.html">BinaryBoxProtocol</a></code></code></h1>
+        <div id="showPrivate">
+          <button class="btn btn-link" onclick="togglePrivate()">Toggle Private API</button>
+        </div>
+      </div>
+
+      <div class="categoryHeader">
+        class documentation
+      </div>
+
+      <div class="extrasDocstring">
+        <p><code><span class="py-keyword">class</span> <span class="py-defname">BinaryBoxProtocol</span>(<a href="twisted.protocols.basic.StatefulStringProtocol.html" title="twisted.protocols.basic.StatefulStringProtocol">StatefulStringProtocol</a>, <a href="twisted.protocols.basic.Int16StringReceiver.html" title="twisted.protocols.basic.Int16StringReceiver">Int16StringReceiver</a>, <a href="twisted.protocols.amp._DescriptorExchanger.html" title="twisted.protocols.amp._DescriptorExchanger">_DescriptorExchanger</a>): <a href="https://github.com/twisted/twisted/tree/twisted-21.2.0/src/twisted/protocols/amp.py#L2254" class="sourceLink">(source)</a></code></p><p>Known subclasses: <code><a href="twisted.protocols.amp.AMP.html">twisted.protocols.amp.AMP</a></code></p><p>Implements interfaces: <code><a href="twisted.protocols.amp.IBoxSender.html">twisted.protocols.amp.IBoxSender</a></code></p>
+        <p><a href="classIndex.html#twisted.protocols.amp.BinaryBoxProtocol">View In Hierarchy</a></p>
+      </div>
+
+      <div class="moduleDocstring">
+        <div><p>A protocol for receiving <code><a href="twisted.protocols.amp.AmpBox.html">AmpBox</a></code>es - key/value pairs - via length-prefixed strings.  A box is composed of:</p><ul><li>any number of key-value pairs, described by:<ul><li>a 2-byte network-endian packed key length (of which the first byte must be null, and the second must be non-null: i.e. the value of the length must be 1-255)</li><li>a key, comprised of that many bytes</li><li>a 2-byte network-endian unsigned value length (up to the maximum of 65535)</li><li>a value, comprised of that many bytes</li></ul></li><li>2 null bytes</li></ul><p>In other words, an even number of strings prefixed with packed unsigned 16-bit integers, and then a 0-length string to indicate the end of the box.</p><p>This protocol also implements 2 extra private bits of functionality related to the byte boundaries between messages; it can start TLS between two given boxes or switch to an entirely different protocol.  However, due to some tricky elements of the implementation, the public interface to this functionality is <code><a href="twisted.protocols.amp.ProtocolSwitchCommand.html">ProtocolSwitchCommand</a></code> and <code><a href="twisted.protocols.amp.StartTLS.html">StartTLS</a></code>.</p></div>
+      </div>
+
+      <div id="splitTables">
+        <table class="children sortable" id="id2139">
+  
+  
+  <tr class="method">
+    
+    <td>Method</td>
+    <td><code><a href="#__init__">__init__</a></code></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="method">
+    
+    <td>Method</td>
+    <td><code><a href="#connectionLost">connectionLost</a></code></td>
+    <td><span>The connection was lost; notify any nested protocol.</span></td>
+  </tr><tr class="method">
+    
+    <td>Method</td>
+    <td><code><a href="#dataReceived">dataReceived</a></code></td>
+    <td><span>Either parse incoming data as <code><a href="twisted.protocols.amp.AmpBox.html">AmpBox</a></code>es or relay it to our nested protocol.</span></td>
+  </tr><tr class="method">
+    
+    <td>Method</td>
+    <td><code><a href="#lengthLimitExceeded">lengthLimitExceeded</a></code></td>
+    <td><span>The key length limit was exceeded.  Disconnect the transport and make sure a meaningful exception is reported.</span></td>
+  </tr><tr class="method">
+    
+    <td>Method</td>
+    <td><code><a href="#makeConnection">makeConnection</a></code></td>
+    <td><span>Notify <code><a href="#boxReceiver">boxReceiver</a></code> that it is about to receive boxes from this protocol by invoking <code><a href="twisted.protocols.amp.IBoxReceiver.html#startReceivingBoxes">IBoxReceiver.startReceivingBoxes</a></code>.</span></td>
+  </tr><tr class="method">
+    
+    <td>Method</td>
+    <td><code><a href="#proto_init">proto_init</a></code></td>
+    <td><span>String received in the 'init' state.</span></td>
+  </tr><tr class="method">
+    
+    <td>Method</td>
+    <td><code><a href="#proto_key">proto_key</a></code></td>
+    <td><span>String received in the 'key' state.  If the key is empty, a complete box has been received.</span></td>
+  </tr><tr class="method">
+    
+    <td>Method</td>
+    <td><code><a href="#proto_value">proto_value</a></code></td>
+    <td><span>String received in the 'value' state.</span></td>
+  </tr><tr class="method">
+    
+    <td>Method</td>
+    <td><code><a href="#sendBox">sendBox</a></code></td>
+    <td><span>Send a amp.Box to my peer.</span></td>
+  </tr><tr class="method">
+    
+    <td>Method</td>
+    <td><code><a href="#unhandledError">unhandledError</a></code></td>
+    <td><span>The buck stops here.  This error was completely unhandled, time to terminate the connection.</span></td>
+  </tr><tr class="classvariable">
+    
+    <td>Class Variable</td>
+    <td><code><a href="#noPeerCertificate">noPeerCertificate</a></code></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="instancevariable">
+    
+    <td>Instance Variable</td>
+    <td><code><a href="#boxReceiver">boxReceiver</a></code></td>
+    <td><span>an <code><a href="twisted.protocols.amp.IBoxReceiver.html">IBoxReceiver</a></code> provider, whose <code><a href="twisted.protocols.amp.IBoxReceiver.html#ampBoxReceived">IBoxReceiver.ampBoxReceived</a></code> method will be invoked for each <code><a href="twisted.protocols.amp.AmpBox.html">AmpBox</a></code> that is received.</span></td>
+  </tr><tr class="instancevariable">
+    
+    <td>Instance Variable</td>
+    <td><code><a href="#hostCertificate">hostCertificate</a></code></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="instancevariable">
+    
+    <td>Instance Variable</td>
+    <td><code><a href="#innerProtocol">innerProtocol</a></code></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="instancevariable">
+    
+    <td>Instance Variable</td>
+    <td><code><a href="#innerProtocolClientFactory">innerProtocolClientFactory</a></code></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="instancevariable">
+    
+    <td>Instance Variable</td>
+    <td><code><a href="#MAX_LENGTH">MAX_LENGTH</a></code></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="instancevariable">
+    
+    <td>Instance Variable</td>
+    <td><code><a href="#recvd">recvd</a></code></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="instancevariable">
+    
+    <td>Instance Variable</td>
+    <td><code><a href="#transport">transport</a></code></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="property">
+    
+    <td>Property</td>
+    <td><code><a href="#peerCertificate">peerCertificate</a></code></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="method private">
+    
+    <td>Method</td>
+    <td><code><a href="#_defaultStartTLSResponder">_defaultStartTLSResponder</a></code></td>
+    <td><span>The default TLS responder doesn't specify any certificate or anything.</span></td>
+  </tr><tr class="method private">
+    
+    <td>Method</td>
+    <td><code><a href="#_lockForSwitch">_lockForSwitch</a></code></td>
+    <td><span class="undocumented">No summary</span></td>
+  </tr><tr class="method private">
+    
+    <td>Method</td>
+    <td><code><a href="#_prepareTLS">_prepareTLS</a></code></td>
+    <td><span>Used by StartTLSCommand to put us into the state where we don't actually send things that get sent, instead we buffer them.  see <code><a href="twisted.protocols.amp.BoxDispatcher.html#_sendBoxCommand">_sendBoxCommand</a></code>.</span></td>
+  </tr><tr class="method private">
+    
+    <td>Method</td>
+    <td><code><a href="#_startTLS">_startTLS</a></code></td>
+    <td><span>Used by TLSBox to initiate the SSL handshake.</span></td>
+  </tr><tr class="method private">
+    
+    <td>Method</td>
+    <td><code><a href="#_switchTo">_switchTo</a></code></td>
+    <td><span>Switch this BinaryBoxProtocol's transport to a new protocol.  You need to do this 'simultaneously' on both ends of a connection; the easiest way to do this is to use a subclass of ProtocolSwitchCommand.</span></td>
+  </tr><tr class="method private">
+    
+    <td>Method</td>
+    <td><code><a href="#_unlockFromSwitch">_unlockFromSwitch</a></code></td>
+    <td><span>Unlock this locked binary protocol so that further boxes may be sent again.  This is used after an attempt to switch protocols has failed for some reason.</span></td>
+  </tr><tr class="classvariable private">
+    
+    <td>Class Variable</td>
+    <td><code><a href="#_MAX_KEY_LENGTH">_MAX_KEY_LENGTH</a></code></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="classvariable private">
+    
+    <td>Class Variable</td>
+    <td><code><a href="#_MAX_VALUE_LENGTH">_MAX_VALUE_LENGTH</a></code></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="instancevariable private">
+    
+    <td>Instance Variable</td>
+    <td><code><a href="#_currentBox">_currentBox</a></code></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="instancevariable private">
+    
+    <td>Instance Variable</td>
+    <td><code><a href="#_currentKey">_currentKey</a></code></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="instancevariable private">
+    
+    <td>Instance Variable</td>
+    <td><code><a href="#_justStartedTLS">_justStartedTLS</a></code></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="instancevariable private">
+    
+    <td>Instance Variable</td>
+    <td><code><a href="#_keyLengthLimitExceeded">_keyLengthLimitExceeded</a></code></td>
+    <td><span>A flag which is only true when the connection is being closed because a key length prefix which was longer than allowed by the protocol was received.</span></td>
+  </tr><tr class="instancevariable private">
+    
+    <td>Instance Variable</td>
+    <td><code><a href="#_locked">_locked</a></code></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="instancevariable private">
+    
+    <td>Instance Variable</td>
+    <td><code><a href="#_startingTLSBuffer">_startingTLSBuffer</a></code></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr>
+</table>
+        
+          <p class="inheritedFrom">
+            Inherited from <code><a href="twisted.protocols.basic.StatefulStringProtocol.html">StatefulStringProtocol</a></code>:
+          </p>
+          <table class="children sortable" id="id2140">
+  
+  
+  <tr class="basemethod">
+    
+    <td>Method</td>
+    <td><code><a href="twisted.protocols.basic.StatefulStringProtocol.html#stringReceived">stringReceived</a></code></td>
+    <td><span>Choose a protocol phase function and call it.</span></td>
+  </tr><tr class="baseinstancevariable">
+    
+    <td>Instance Variable</td>
+    <td><code><a href="twisted.protocols.basic.StatefulStringProtocol.html#state">state</a></code></td>
+    <td><span>Current state of the protocol. Defaults to <code>'init'</code>.</span></td>
+  </tr>
+</table>
+          
+          <p class="inheritedFrom">
+            Inherited from <code><a href="twisted.protocols.basic.Int16StringReceiver.html">Int16StringReceiver</a></code>:
+          </p>
+          <table class="children sortable" id="id2141">
+  
+  
+  <tr class="baseclassvariable">
+    
+    <td>Class Variable</td>
+    <td><code><a href="twisted.protocols.basic.Int16StringReceiver.html#prefixLength">prefixLength</a></code></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="baseclassvariable">
+    
+    <td>Class Variable</td>
+    <td><code><a href="twisted.protocols.basic.Int16StringReceiver.html#structFormat">structFormat</a></code></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr>
+</table>
+          
+          <p class="inheritedFrom">
+            Inherited from <code><a href="twisted.protocols.basic.IntNStringReceiver.html">IntNStringReceiver</a></code> (via <code><a href="twisted.protocols.basic.Int16StringReceiver.html">Int16StringReceiver</a></code>):
+          </p>
+          <table class="children sortable" id="id2142">
+  
+  
+  <tr class="basemethod">
+    
+    <td>Method</td>
+    <td><code><a href="twisted.protocols.basic.IntNStringReceiver.html#sendString">sendString</a></code></td>
+    <td><span>Send a prefixed string to the other end of the connection.</span></td>
+  </tr><tr class="basemethod">
+    
+    <td>Method</td>
+    <td><code><a href="twisted.protocols.basic.IntNStringReceiver.html#stringReceived">stringReceived</a></code></td>
+    <td><span>Override this for notification when each complete string is received.</span></td>
+  </tr><tr class="baseinstancevariable private">
+    
+    <td>Instance Variable</td>
+    <td><code><a href="twisted.protocols.basic.IntNStringReceiver.html#_compatibilityOffset">_compatibilityOffset</a></code></td>
+    <td><span>the offset within <code>_unprocessed</code> to the next message to be parsed. (used to generate the recvd attribute)</span></td>
+  </tr><tr class="baseinstancevariable private">
+    
+    <td>Instance Variable</td>
+    <td><code><a href="twisted.protocols.basic.IntNStringReceiver.html#_unprocessed">_unprocessed</a></code></td>
+    <td><span>bytes received, but not yet broken up into messages / sent to stringReceived.  _compatibilityOffset must be updated when this value is updated so that the <code>recvd</code> attribute can be generated correctly.</span></td>
+  </tr>
+</table>
+          
+          <p class="inheritedFrom">
+            Inherited from <code><a href="twisted.internet.protocol.Protocol.html">Protocol</a></code> (via <code><a href="twisted.protocols.basic.Int16StringReceiver.html">Int16StringReceiver</a></code>, <code><a href="twisted.protocols.basic.IntNStringReceiver.html">IntNStringReceiver</a></code>):
+          </p>
+          <table class="children sortable" id="id2143">
+  
+  
+  <tr class="basemethod">
+    
+    <td>Method</td>
+    <td><code><a href="twisted.internet.protocol.Protocol.html#logPrefix">logPrefix</a></code></td>
+    <td><span>Return a prefix matching the class name, to identify log messages related to this protocol instance.</span></td>
+  </tr><tr class="baseclassvariable">
+    
+    <td>Class Variable</td>
+    <td><code><a href="twisted.internet.protocol.Protocol.html#factory">factory</a></code></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr>
+</table>
+          
+          <p class="inheritedFrom">
+            Inherited from <code><a href="twisted.internet.protocol.BaseProtocol.html">BaseProtocol</a></code> (via <code><a href="twisted.protocols.basic.Int16StringReceiver.html">Int16StringReceiver</a></code>, <code><a href="twisted.protocols.basic.IntNStringReceiver.html">IntNStringReceiver</a></code>, <code><a href="twisted.internet.protocol.Protocol.html">Protocol</a></code>):
+          </p>
+          <table class="children sortable" id="id2144">
+  
+  
+  <tr class="basemethod">
+    
+    <td>Method</td>
+    <td><code><a href="twisted.internet.protocol.BaseProtocol.html#connectionMade">connectionMade</a></code></td>
+    <td><span>Called when a connection is made.</span></td>
+  </tr><tr class="baseinstancevariable">
+    
+    <td>Instance Variable</td>
+    <td><code><a href="twisted.internet.protocol.BaseProtocol.html#connected">connected</a></code></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr>
+</table>
+          
+          <p class="inheritedFrom">
+            Inherited from <code><a href="twisted.protocols.basic._PauseableMixin.html">_PauseableMixin</a></code> (via <code><a href="twisted.protocols.basic.Int16StringReceiver.html">Int16StringReceiver</a></code>, <code><a href="twisted.protocols.basic.IntNStringReceiver.html">IntNStringReceiver</a></code>):
+          </p>
+          <table class="children sortable" id="id2145">
+  
+  
+  <tr class="basemethod">
+    
+    <td>Method</td>
+    <td><code><a href="twisted.protocols.basic._PauseableMixin.html#pauseProducing">pauseProducing</a></code></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="basemethod">
+    
+    <td>Method</td>
+    <td><code><a href="twisted.protocols.basic._PauseableMixin.html#resumeProducing">resumeProducing</a></code></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="basemethod">
+    
+    <td>Method</td>
+    <td><code><a href="twisted.protocols.basic._PauseableMixin.html#stopProducing">stopProducing</a></code></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="baseinstancevariable">
+    
+    <td>Instance Variable</td>
+    <td><code><a href="twisted.protocols.basic._PauseableMixin.html#paused">paused</a></code></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr>
+</table>
+          
+          <p class="inheritedFrom">
+            Inherited from <code><a href="twisted.protocols.amp._DescriptorExchanger.html">_DescriptorExchanger</a></code>:
+          </p>
+          <table class="children sortable" id="id2146">
+  
+  
+  <tr class="basemethod">
+    
+    <td>Method</td>
+    <td><code><a href="twisted.protocols.amp._DescriptorExchanger.html#fileDescriptorReceived">fileDescriptorReceived</a></code></td>
+    <td><span>Collect received file descriptors to be claimed later by <code><a href="twisted.protocols.amp.Descriptor.html">Descriptor</a></code>.</span></td>
+  </tr><tr class="basemethod private">
+    
+    <td>Method</td>
+    <td><code><a href="twisted.protocols.amp._DescriptorExchanger.html#_sendFileDescriptor">_sendFileDescriptor</a></code></td>
+    <td><span>Assign and return the next ordinal to the given descriptor after sending the descriptor over this protocol's transport.</span></td>
+  </tr><tr class="baseinstancevariable private">
+    
+    <td>Instance Variable</td>
+    <td><code><a href="twisted.protocols.amp._DescriptorExchanger.html#_descriptors">_descriptors</a></code></td>
+    <td><span>Temporary storage for all file descriptors received. Values in this dictionary are the file descriptors (as integers).  Keys in this dictionary are ordinals giving the order in which each descriptor was received.  The ordering information is used to allow <code><a href="twisted.protocols.amp.Descriptor.html">Descriptor</a></code> to determine which is the correct descriptor for any particular usage of that argument type.</span></td>
+  </tr><tr class="baseinstancevariable private">
+    
+    <td>Instance Variable</td>
+    <td><code><a href="twisted.protocols.amp._DescriptorExchanger.html#_getDescriptor">_getDescriptor</a></code></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="baseinstancevariable private">
+    
+    <td>Instance Variable</td>
+    <td><code><a href="twisted.protocols.amp._DescriptorExchanger.html#_receivingDescriptorCounter">_receivingDescriptorCounter</a></code></td>
+    <td><span>A no-argument callable which returns the ordinals, starting from 0.  This is used to construct values for <code>fileDescriptorReceived</code>.</span></td>
+  </tr><tr class="baseinstancevariable private">
+    
+    <td>Instance Variable</td>
+    <td><code><a href="twisted.protocols.amp._DescriptorExchanger.html#_sendingDescriptorCounter">_sendingDescriptorCounter</a></code></td>
+    <td><span>A no-argument callable which returns the ordinals, starting from 0.  This is used to construct values for <code>_sendFileDescriptor</code>.</span></td>
+  </tr>
+</table>
+          
+
+          
+      </div>
+
+      <div id="childList">
+
+        <div class="basemethod">
+  
+  
+  <a name="twisted.protocols.amp.BinaryBoxProtocol.__init__">
+    
+  </a>
+  <a name="__init__">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-keyword">def</span> <span class="py-defname">__init__</span>(self, boxReceiver):
+    <a class="sourceLink" href="https://github.com/twisted/twisted/tree/twisted-21.2.0/src/twisted/protocols/amp.py#L2303">
+      
+      (source)
+    </a>
+  </div>
+  <div class="docstring functionBody">
+    <div class="interfaceinfo">overrides <code><a href="twisted.protocols.amp._DescriptorExchanger.html#__init__">twisted.protocols.amp._DescriptorExchanger.__init__</a></code></div><div class="interfaceinfo">overridden in <code><a href="twisted.protocols.amp.AMP.html">twisted.protocols.amp.AMP</a></code></div>
+    
+    <div><p class="undocumented">Undocumented</p></div>
+  </div>
+</div><div class="basemethod">
+  
+  
+  <a name="twisted.protocols.amp.BinaryBoxProtocol.connectionLost">
+    
+  </a>
+  <a name="connectionLost">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-keyword">def</span> <span class="py-defname">connectionLost</span>(self, reason):
+    <a class="sourceLink" href="https://github.com/twisted/twisted/tree/twisted-21.2.0/src/twisted/protocols/amp.py#L2382">
+      
+      (source)
+    </a>
+  </div>
+  <div class="docstring functionBody">
+    <div class="interfaceinfo">from <code><a href="twisted.internet.interfaces.IProtocol.html#connectionLost">twisted.internet.interfaces.IProtocol</a></code></div><div class="interfaceinfo">overrides <code><a href="twisted.internet.protocol.Protocol.html#connectionLost">twisted.internet.protocol.Protocol.connectionLost</a></code></div><div class="interfaceinfo">overridden in <code><a href="twisted.protocols.amp.AMP.html">twisted.protocols.amp.AMP</a></code></div>
+    
+    <div><p>The connection was lost; notify any nested protocol.</p></div>
+  </div>
+</div><div class="basemethod">
+  
+  
+  <a name="twisted.protocols.amp.BinaryBoxProtocol.dataReceived">
+    
+  </a>
+  <a name="dataReceived">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-keyword">def</span> <span class="py-defname">dataReceived</span>(self, data):
+    <a class="sourceLink" href="https://github.com/twisted/twisted/tree/twisted-21.2.0/src/twisted/protocols/amp.py#L2368">
+      
+      (source)
+    </a>
+  </div>
+  <div class="docstring functionBody">
+    <div class="interfaceinfo">from <code><a href="twisted.internet.interfaces.IProtocol.html#dataReceived">twisted.internet.interfaces.IProtocol</a></code></div><div class="interfaceinfo">overrides <code><a href="twisted.protocols.basic.IntNStringReceiver.html#dataReceived">twisted.protocols.basic.IntNStringReceiver.dataReceived</a></code></div>
+    
+    <div><p>Either parse incoming data as <code><a href="twisted.protocols.amp.AmpBox.html">AmpBox</a></code>es or relay it to our nested protocol.</p></div>
+  </div>
+</div><div class="basemethod">
+  
+  
+  <a name="twisted.protocols.amp.BinaryBoxProtocol.lengthLimitExceeded">
+    
+  </a>
+  <a name="lengthLimitExceeded">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-keyword">def</span> <span class="py-defname">lengthLimitExceeded</span>(self, length):
+    <a class="sourceLink" href="https://github.com/twisted/twisted/tree/twisted-21.2.0/src/twisted/protocols/amp.py#L2444">
+      
+      (source)
+    </a>
+  </div>
+  <div class="docstring functionBody">
+    <div class="interfaceinfo">overrides <code><a href="twisted.protocols.basic.IntNStringReceiver.html#lengthLimitExceeded">twisted.protocols.basic.IntNStringReceiver.lengthLimitExceeded</a></code></div>
+    
+    <div><p>The key length limit was exceeded.  Disconnect the transport and make sure a meaningful exception is reported.</p></div>
+  </div>
+</div><div class="basemethod">
+  
+  
+  <a name="twisted.protocols.amp.BinaryBoxProtocol.makeConnection">
+    
+  </a>
+  <a name="makeConnection">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-keyword">def</span> <span class="py-defname">makeConnection</span>(self, transport):
+    <a class="sourceLink" href="https://github.com/twisted/twisted/tree/twisted-21.2.0/src/twisted/protocols/amp.py#L2359">
+      
+      (source)
+    </a>
+  </div>
+  <div class="docstring functionBody">
+    <div class="interfaceinfo">from <code><a href="twisted.internet.interfaces.IProtocol.html#makeConnection">twisted.internet.interfaces.IProtocol</a></code></div><div class="interfaceinfo">overrides <code><a href="twisted.internet.protocol.BaseProtocol.html#makeConnection">twisted.internet.protocol.BaseProtocol.makeConnection</a></code></div><div class="interfaceinfo">overridden in <code><a href="twisted.protocols.amp.AMP.html">twisted.protocols.amp.AMP</a></code></div>
+    
+    <div><p>Notify <code><a href="#boxReceiver">boxReceiver</a></code> that it is about to receive boxes from this protocol by invoking <code><a href="twisted.protocols.amp.IBoxReceiver.html#startReceivingBoxes">IBoxReceiver.startReceivingBoxes</a></code>.</p></div>
+  </div>
+</div><div class="basemethod">
+  
+  
+  <a name="twisted.protocols.amp.BinaryBoxProtocol.proto_init">
+    
+  </a>
+  <a name="proto_init">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-keyword">def</span> <span class="py-defname">proto_init</span>(self, string):
+    <a class="sourceLink" href="https://github.com/twisted/twisted/tree/twisted-21.2.0/src/twisted/protocols/amp.py#L2414">
+      
+      (source)
+    </a>
+  </div>
+  <div class="docstring functionBody">
+    
+    
+    <div><p>String received in the 'init' state.</p></div>
+  </div>
+</div><div class="basemethod">
+  
+  
+  <a name="twisted.protocols.amp.BinaryBoxProtocol.proto_key">
+    
+  </a>
+  <a name="proto_key">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-keyword">def</span> <span class="py-defname">proto_key</span>(self, string):
+    <a class="sourceLink" href="https://github.com/twisted/twisted/tree/twisted-21.2.0/src/twisted/protocols/amp.py#L2421">
+      
+      (source)
+    </a>
+  </div>
+  <div class="docstring functionBody">
+    
+    
+    <div><p>String received in the 'key' state.  If the key is empty, a complete box has been received.</p></div>
+  </div>
+</div><div class="basemethod">
+  
+  
+  <a name="twisted.protocols.amp.BinaryBoxProtocol.proto_value">
+    
+  </a>
+  <a name="proto_value">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-keyword">def</span> <span class="py-defname">proto_value</span>(self, string):
+    <a class="sourceLink" href="https://github.com/twisted/twisted/tree/twisted-21.2.0/src/twisted/protocols/amp.py#L2435">
+      
+      (source)
+    </a>
+  </div>
+  <div class="docstring functionBody">
+    
+    
+    <div><p>String received in the 'value' state.</p></div>
+  </div>
+</div><div class="basemethod">
+  
+  
+  <a name="twisted.protocols.amp.BinaryBoxProtocol.sendBox">
+    
+  </a>
+  <a name="sendBox">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-keyword">def</span> <span class="py-defname">sendBox</span>(self, box):
+    <a class="sourceLink" href="https://github.com/twisted/twisted/tree/twisted-21.2.0/src/twisted/protocols/amp.py#L2336">
+      
+      (source)
+    </a>
+  </div>
+  <div class="docstring functionBody">
+    <div class="interfaceinfo">from <code><a href="twisted.protocols.amp.IBoxSender.html#sendBox">twisted.protocols.amp.IBoxSender</a></code></div>
+    
+    <div><p>Send a amp.Box to my peer.</p><p>Note: transport.write is never called outside of this method.</p><table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">box</span></td><td class="fieldArgDesc">an AmpBox.</td></tr><tr class="fieldStart"><td class="fieldName" colspan="2">Raises</td></tr><tr><td class="fieldArgContainer"><code><a href="twisted.protocols.amp.ProtocolSwitched.html">ProtocolSwitched</a></code></td><td>if the protocol has previously been switched.</td></tr><tr><td class="fieldArgContainer"><code><a href="twisted.internet.error.ConnectionLost.html">ConnectionLost</a></code></td><td>if the connection has previously been lost.</td></tr></table></div>
+  </div>
+</div><div class="basemethod">
+  
+  
+  <a name="twisted.protocols.amp.BinaryBoxProtocol.unhandledError">
+    
+  </a>
+  <a name="unhandledError">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-keyword">def</span> <span class="py-defname">unhandledError</span>(self, failure):
+    <a class="sourceLink" href="https://github.com/twisted/twisted/tree/twisted-21.2.0/src/twisted/protocols/amp.py#L2516">
+      
+      (source)
+    </a>
+  </div>
+  <div class="docstring functionBody">
+    <div class="interfaceinfo">from <code><a href="twisted.protocols.amp.IBoxSender.html#unhandledError">twisted.protocols.amp.IBoxSender</a></code></div>
+    
+    <div><p>The buck stops here.  This error was completely unhandled, time to terminate the connection.</p></div>
+  </div>
+</div><div class="baseclassvariable">
+  
+  
+  <a name="twisted.protocols.amp.BinaryBoxProtocol.noPeerCertificate">
+    
+  </a>
+  <a name="noPeerCertificate">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-defname">noPeerCertificate</span>: <code><a href="https://docs.python.org/3/library/functions.html#bool">bool</a></code> =
+    <a class="sourceLink" href="https://github.com/twisted/twisted/tree/twisted-21.2.0/src/twisted/protocols/amp.py#L2299">
+      
+      (source)
+    </a>
+  </div>
+  <div class="functionBody">
+    
+    
+    <div><p class="undocumented">Undocumented</p></div>
+  </div>
+</div><div class="baseinstancevariable">
+  
+  
+  <a name="twisted.protocols.amp.BinaryBoxProtocol.boxReceiver">
+    
+  </a>
+  <a name="boxReceiver">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-defname">boxReceiver</span> =
+    <a class="sourceLink" href="https://github.com/twisted/twisted/tree/twisted-21.2.0/src/twisted/protocols/amp.py#L2285">
+      
+      (source)
+    </a>
+  </div>
+  <div class="functionBody">
+    
+    
+    <div>an <code><a href="twisted.protocols.amp.IBoxReceiver.html">IBoxReceiver</a></code> provider, whose <code><a href="twisted.protocols.amp.IBoxReceiver.html#ampBoxReceived">IBoxReceiver.ampBoxReceived</a></code> method will be invoked for each <code><a href="twisted.protocols.amp.AmpBox.html">AmpBox</a></code> that is received.</div>
+  </div>
+</div><div class="baseinstancevariable">
+  
+  
+  <a name="twisted.protocols.amp.BinaryBoxProtocol.hostCertificate">
+    
+  </a>
+  <a name="hostCertificate">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-defname">hostCertificate</span> =
+    <a class="sourceLink" href="https://github.com/twisted/twisted/tree/twisted-21.2.0/src/twisted/protocols/amp.py#L2298">
+      
+      (source)
+    </a>
+  </div>
+  <div class="functionBody">
+    
+    
+    <div><p class="undocumented">Undocumented</p></div>
+  </div>
+</div><div class="baseinstancevariable">
+  
+  
+  <a name="twisted.protocols.amp.BinaryBoxProtocol.innerProtocol">
+    
+  </a>
+  <a name="innerProtocol">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-defname">innerProtocol</span> =
+    <a class="sourceLink" href="https://github.com/twisted/twisted/tree/twisted-21.2.0/src/twisted/protocols/amp.py#L2300">
+      
+      (source)
+    </a>
+  </div>
+  <div class="functionBody">
+    
+    
+    <div><p class="undocumented">Undocumented</p></div>
+  </div>
+</div><div class="baseinstancevariable">
+  
+  
+  <a name="twisted.protocols.amp.BinaryBoxProtocol.innerProtocolClientFactory">
+    
+  </a>
+  <a name="innerProtocolClientFactory">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-defname">innerProtocolClientFactory</span> =
+    <a class="sourceLink" href="https://github.com/twisted/twisted/tree/twisted-21.2.0/src/twisted/protocols/amp.py#L2301">
+      
+      (source)
+    </a>
+  </div>
+  <div class="functionBody">
+    
+    
+    <div><p class="undocumented">Undocumented</p></div>
+  </div>
+</div><div class="baseinstancevariable">
+  
+  
+  <a name="twisted.protocols.amp.BinaryBoxProtocol.MAX_LENGTH">
+    
+  </a>
+  <a name="MAX_LENGTH">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-defname">MAX_LENGTH</span> =
+    <a class="sourceLink" href="https://github.com/twisted/twisted/tree/twisted-21.2.0/src/twisted/protocols/amp.py#L2428">
+      
+      (source)
+    </a>
+  </div>
+  <div class="functionBody">
+    <div class="interfaceinfo">overrides <code><a href="twisted.protocols.basic.IntNStringReceiver.html#MAX_LENGTH">twisted.protocols.basic.IntNStringReceiver.MAX_LENGTH</a></code></div>
+    
+    <div><p class="undocumented">Undocumented</p></div>
+  </div>
+</div><div class="baseinstancevariable">
+  
+  
+  <a name="twisted.protocols.amp.BinaryBoxProtocol.recvd">
+    
+  </a>
+  <a name="recvd">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-defname">recvd</span>: <code><a href="https://docs.python.org/3/library/stdtypes.html#str">str</a></code> =
+    <a class="sourceLink" href="https://github.com/twisted/twisted/tree/twisted-21.2.0/src/twisted/protocols/amp.py#L2327">
+      
+      (source)
+    </a>
+  </div>
+  <div class="functionBody">
+    <div class="interfaceinfo">overrides <code><a href="twisted.protocols.basic.IntNStringReceiver.html#recvd">twisted.protocols.basic.IntNStringReceiver.recvd</a></code></div>
+    
+    <div><p class="undocumented">Undocumented</p></div>
+  </div>
+</div><div class="baseinstancevariable">
+  
+  
+  <a name="twisted.protocols.amp.BinaryBoxProtocol.transport">
+    
+  </a>
+  <a name="transport">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-defname">transport</span> =
+    <a class="sourceLink" href="https://github.com/twisted/twisted/tree/twisted-21.2.0/src/twisted/protocols/amp.py#L2364">
+      
+      (source)
+    </a>
+  </div>
+  <div class="functionBody">
+    <div class="interfaceinfo">overrides <code><a href="twisted.internet.protocol.BaseProtocol.html#transport">twisted.internet.protocol.BaseProtocol.transport</a></code></div><div class="interfaceinfo">overridden in <code><a href="twisted.protocols.amp.AMP.html">twisted.protocols.amp.AMP</a></code></div>
+    
+    <div><p class="undocumented">Undocumented</p></div>
+  </div>
+</div><div class="baseproperty">
+  
+  
+  <a name="twisted.protocols.amp.BinaryBoxProtocol.peerCertificate">
+    
+  </a>
+  <a name="peerCertificate">
+    
+  </a>
+  <div class="functionHeader">
+    @property<br />
+    <span class="py-defname">peerCertificate</span> =
+    <a class="sourceLink" href="https://github.com/twisted/twisted/tree/twisted-21.2.0/src/twisted/protocols/amp.py#L2510">
+      
+      (source)
+    </a>
+  </div>
+  <div class="functionBody">
+    
+    
+    <div><p class="undocumented">Undocumented</p></div>
+  </div>
+</div><div class="basemethod private">
+  
+  
+  <a name="twisted.protocols.amp.BinaryBoxProtocol._defaultStartTLSResponder">
+    
+  </a>
+  <a name="_defaultStartTLSResponder">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-keyword">def</span> <span class="py-defname">_defaultStartTLSResponder</span>(self):
+    <a class="sourceLink" href="https://github.com/twisted/twisted/tree/twisted-21.2.0/src/twisted/protocols/amp.py#L2530">
+      
+      (source)
+    </a>
+  </div>
+  <div class="docstring functionBody">
+    
+    
+    <div><p>The default TLS responder doesn't specify any certificate or anything.</p><p>From a security perspective, it's little better than a plain-text connection - but it is still a *bit* better, so it's included for convenience.</p><p>You probably want to override this by providing your own StartTLS.responder.</p></div>
+  </div>
+</div><div class="basemethod private">
+  
+  
+  <a name="twisted.protocols.amp.BinaryBoxProtocol._lockForSwitch">
+    
+  </a>
+  <a name="_lockForSwitch">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-keyword">def</span> <span class="py-defname">_lockForSwitch</span>(self):
+    <a class="sourceLink" href="https://github.com/twisted/twisted/tree/twisted-21.2.0/src/twisted/protocols/amp.py#L2452">
+      
+      (source)
+    </a>
+  </div>
+  <div class="docstring functionBody">
+    
+    
+    <div><p>Lock this binary protocol so that no further boxes may be sent.  This is used when sending a request to switch underlying protocols.  You probably want to subclass ProtocolSwitchCommand rather than calling this directly.</p></div>
+  </div>
+</div><div class="basemethod private">
+  
+  
+  <a name="twisted.protocols.amp.BinaryBoxProtocol._prepareTLS">
+    
+  </a>
+  <a name="_prepareTLS">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-keyword">def</span> <span class="py-defname">_prepareTLS</span>(self, certificate, verifyAuthorities):
+    <a class="sourceLink" href="https://github.com/twisted/twisted/tree/twisted-21.2.0/src/twisted/protocols/amp.py#L2471">
+      
+      (source)
+    </a>
+  </div>
+  <div class="docstring functionBody">
+    
+    
+    <div><p>Used by StartTLSCommand to put us into the state where we don't actually send things that get sent, instead we buffer them.  see <code><a href="twisted.protocols.amp.BoxDispatcher.html#_sendBoxCommand">_sendBoxCommand</a></code>.</p></div>
+  </div>
+</div><div class="basemethod private">
+  
+  
+  <a name="twisted.protocols.amp.BinaryBoxProtocol._startTLS">
+    
+  </a>
+  <a name="_startTLS">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-keyword">def</span> <span class="py-defname">_startTLS</span>(self, certificate, verifyAuthorities):
+    <a class="sourceLink" href="https://github.com/twisted/twisted/tree/twisted-21.2.0/src/twisted/protocols/amp.py#L2489">
+      
+      (source)
+    </a>
+  </div>
+  <div class="docstring functionBody">
+    
+    
+    <div><p>Used by TLSBox to initiate the SSL handshake.</p><table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">certificate</span></td><td class="fieldArgDesc">a <code><a href="twisted.internet.ssl.PrivateCertificate.html">twisted.internet.ssl.PrivateCertificate</a></code> for use locally.</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">verifyAuthorities</span></td><td class="fieldArgDesc"><code><a href="twisted.internet.ssl.Certificate.html">twisted.internet.ssl.Certificate</a></code> instances representing certificate authorities which will verify our peer.</td></tr></table></div>
+  </div>
+</div><div class="basemethod private">
+  
+  
+  <a name="twisted.protocols.amp.BinaryBoxProtocol._switchTo">
+    
+  </a>
+  <a name="_switchTo">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-keyword">def</span> <span class="py-defname">_switchTo</span>(self, newProto, clientFactory=None):
+    <a class="sourceLink" href="https://github.com/twisted/twisted/tree/twisted-21.2.0/src/twisted/protocols/amp.py#L2307">
+      
+      (source)
+    </a>
+  </div>
+  <div class="docstring functionBody">
+    
+    
+    <div><p>Switch this BinaryBoxProtocol's transport to a new protocol.  You need to do this 'simultaneously' on both ends of a connection; the easiest way to do this is to use a subclass of ProtocolSwitchCommand.</p><table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">newProto</span></td><td class="fieldArgDesc">the new protocol instance to switch to.</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">clientFactory</span></td><td class="fieldArgDesc">the ClientFactory to send the <code><a href="twisted.internet.protocol.ClientFactory.html#clientConnectionLost">twisted.internet.protocol.ClientFactory.clientConnectionLost</a></code> notification to.</td></tr></table></div>
+  </div>
+</div><div class="basemethod private">
+  
+  
+  <a name="twisted.protocols.amp.BinaryBoxProtocol._unlockFromSwitch">
+    
+  </a>
+  <a name="_unlockFromSwitch">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-keyword">def</span> <span class="py-defname">_unlockFromSwitch</span>(self):
+    <a class="sourceLink" href="https://github.com/twisted/twisted/tree/twisted-21.2.0/src/twisted/protocols/amp.py#L2461">
+      
+      (source)
+    </a>
+  </div>
+  <div class="docstring functionBody">
+    
+    
+    <div><p>Unlock this locked binary protocol so that further boxes may be sent again.  This is used after an attempt to switch protocols has failed for some reason.</p></div>
+  </div>
+</div><div class="baseclassvariable private">
+  
+  
+  <a name="twisted.protocols.amp.BinaryBoxProtocol._MAX_KEY_LENGTH">
+    
+  </a>
+  <a name="_MAX_KEY_LENGTH">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-defname">_MAX_KEY_LENGTH</span>: <code><a href="https://docs.python.org/3/library/functions.html#int">int</a></code> =
+    <a class="sourceLink" href="https://github.com/twisted/twisted/tree/twisted-21.2.0/src/twisted/protocols/amp.py#L2405">
+      
+      (source)
+    </a>
+  </div>
+  <div class="functionBody">
+    
+    
+    <div><p class="undocumented">Undocumented</p></div>
+  </div>
+</div><div class="baseclassvariable private">
+  
+  
+  <a name="twisted.protocols.amp.BinaryBoxProtocol._MAX_VALUE_LENGTH">
+    
+  </a>
+  <a name="_MAX_VALUE_LENGTH">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-defname">_MAX_VALUE_LENGTH</span>: <code><a href="https://docs.python.org/3/library/functions.html#int">int</a></code> =
+    <a class="sourceLink" href="https://github.com/twisted/twisted/tree/twisted-21.2.0/src/twisted/protocols/amp.py#L2409">
+      
+      (source)
+    </a>
+  </div>
+  <div class="functionBody">
+    
+    
+    <div><p class="undocumented">Undocumented</p></div>
+  </div>
+</div><div class="baseinstancevariable private">
+  
+  
+  <a name="twisted.protocols.amp.BinaryBoxProtocol._currentBox">
+    
+  </a>
+  <a name="_currentBox">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-defname">_currentBox</span> =
+    <a class="sourceLink" href="https://github.com/twisted/twisted/tree/twisted-21.2.0/src/twisted/protocols/amp.py#L2294">
+      
+      (source)
+    </a>
+  </div>
+  <div class="functionBody">
+    
+    
+    <div><p class="undocumented">Undocumented</p></div>
+  </div>
+</div><div class="baseinstancevariable private">
+  
+  
+  <a name="twisted.protocols.amp.BinaryBoxProtocol._currentKey">
+    
+  </a>
+  <a name="_currentKey">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-defname">_currentKey</span> =
+    <a class="sourceLink" href="https://github.com/twisted/twisted/tree/twisted-21.2.0/src/twisted/protocols/amp.py#L2293">
+      
+      (source)
+    </a>
+  </div>
+  <div class="functionBody">
+    
+    
+    <div><p class="undocumented">Undocumented</p></div>
+  </div>
+</div><div class="baseinstancevariable private">
+  
+  
+  <a name="twisted.protocols.amp.BinaryBoxProtocol._justStartedTLS">
+    
+  </a>
+  <a name="_justStartedTLS">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-defname">_justStartedTLS</span>: <code><a href="https://docs.python.org/3/library/functions.html#bool">bool</a></code> =
+    <a class="sourceLink" href="https://github.com/twisted/twisted/tree/twisted-21.2.0/src/twisted/protocols/amp.py#L2290">
+      
+      (source)
+    </a>
+  </div>
+  <div class="functionBody">
+    
+    
+    <div><p class="undocumented">Undocumented</p></div>
+  </div>
+</div><div class="baseinstancevariable private">
+  
+  
+  <a name="twisted.protocols.amp.BinaryBoxProtocol._keyLengthLimitExceeded">
+    
+  </a>
+  <a name="_keyLengthLimitExceeded">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-defname">_keyLengthLimitExceeded</span>: <code><a href="https://docs.python.org/3/library/functions.html#bool">bool</a></code> =
+    <a class="sourceLink" href="https://github.com/twisted/twisted/tree/twisted-21.2.0/src/twisted/protocols/amp.py#L2281">
+      
+      (source)
+    </a>
+  </div>
+  <div class="functionBody">
+    
+    
+    <div>A flag which is only true when the connection is being closed because a key length prefix which was longer than allowed by the protocol was received.</div>
+  </div>
+</div><div class="baseinstancevariable private">
+  
+  
+  <a name="twisted.protocols.amp.BinaryBoxProtocol._locked">
+    
+  </a>
+  <a name="_locked">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-defname">_locked</span>: <code><a href="https://docs.python.org/3/library/functions.html#bool">bool</a></code> =
+    <a class="sourceLink" href="https://github.com/twisted/twisted/tree/twisted-21.2.0/src/twisted/protocols/amp.py#L2292">
+      
+      (source)
+    </a>
+  </div>
+  <div class="functionBody">
+    
+    
+    <div><p class="undocumented">Undocumented</p></div>
+  </div>
+</div><div class="baseinstancevariable private">
+  
+  
+  <a name="twisted.protocols.amp.BinaryBoxProtocol._startingTLSBuffer">
+    
+  </a>
+  <a name="_startingTLSBuffer">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-defname">_startingTLSBuffer</span> =
+    <a class="sourceLink" href="https://github.com/twisted/twisted/tree/twisted-21.2.0/src/twisted/protocols/amp.py#L2291">
+      
+      (source)
+    </a>
+  </div>
+  <div class="functionBody">
+    
+    
+    <div><p class="undocumented">Undocumented</p></div>
+  </div>
+</div>
+
+      </div>
+    </div>
+
+    <footer class="navbar navbar-default">
+  
+  <div class="container">
+    <a href="index.html">API Documentation</a> for <a href="http://twistedmatrix.com/" class="projecthome">Twisted</a>,
+  generated by <a href="https://github.com/twisted/pydoctor/">pydoctor</a>
+    21.2.2 at 2021-06-29 01:17:05.
+  </div>
+</footer>
+
+    <script src="pydoctor.js" type="text/javascript"></script>
+
+  </body>
+</html>

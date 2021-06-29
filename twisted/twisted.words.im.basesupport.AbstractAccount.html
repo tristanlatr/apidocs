@@ -1,0 +1,903 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+          "DTD/xhtml1-strict.dtd">
+<html>
+  
+
+  <head>
+    
+    <title>twisted.words.im.basesupport.AbstractAccount</title>
+    <meta name="generator" content="pydoctor 21.2.2"> 
+        
+    </meta>
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=0.75" />
+    <link rel="stylesheet" type="text/css" href="bootstrap.min.css" />
+    <link rel="stylesheet" type="text/css" href="apidocs.css" />
+    <link rel="stylesheet" type="text/css" href="extra.css" />
+</head>
+
+  <body>
+
+    
+
+    <nav class="navbar navbar-default">
+  
+  <div class="container">
+
+    <div class="navbar-header">
+      
+      <div class="navlinks">
+        <span class="navbar-brand">
+          <a href="http://twistedmatrix.com/" class="projecthome">Twisted</a> <a href="index.html">API Documentation</a>
+        </span>
+
+        <a href="moduleIndex.html">
+          Modules
+        </a>
+
+        <a href="classIndex.html">
+          Classes
+        </a>
+
+        <a href="nameIndex.html">
+          Names
+        </a>
+
+        <form action="search-results.html" id="search-box-container">
+          <div class="input-group">
+            <input id="search-box" name="search-query" placeholder="Search..." aria-label="Search" minlength="2" class="form-control" />
+            <span class="input-group-btn">
+              <button class="btn btn-default" type="submit" title="Search"><img src="fonts/search.svg" alt="Search!" /></button>
+              <a class="btn btn-default" id="search-help-button" title="Help" onclick="toggleSearchHelpText()"><img src="fonts/info.svg" alt="Help!" /></a>
+            </span>
+          </div>
+        </form>
+
+        <div class="rst-admonition hint" id="search-help-box">
+          <p class="rst-last">
+      
+            Search bar offers the following options:
+            <ul>   
+                <li>
+                  <strong>Term presence.</strong> The below example searches for documents that 
+                    must contain “foo”, might contain “bar” and must not contain “baz”:
+                  <br /> <code>'+foo bar -baz'</code>
+                </li> 
+
+                <li>
+                  <strong>Wildcards.</strong> The below example searches for documents with words beginning with “foo”:
+                  <br /> <code>'foo*'</code>
+                </li> 
+
+                <li>
+                  <strong>Search in specific fields.</strong> The following search matches all documents 
+                  that contains "foo" in their full dotted name and with “bar” in any field:
+                  <br /> <code>'+fullName:*foo* +bar'</code>
+
+                  <p>
+                    Possible fields: 'name', 'docstring', 'fullName'.
+                  </p>
+                </li>
+
+                <li>
+                  <strong>Fuzzy matches.</strong> The following search matches all documents 
+                  that have a word within 1 edit distance of “foo”:
+                  <br /> <code>'foo~1'</code>
+                </li>
+            </ul>
+
+          </p>
+        </div>
+
+      </div>
+
+
+    </div>
+  </div>
+
+  <script>
+ 
+    function toggleSearchHelpText() {
+        document.body.classList.toggle("search-help-hidden");
+    }
+    // Init search and help text
+    document.getElementById('search-box-container').style.display = 'block';
+    document.getElementById('search-help-box').style.display = 'block';
+    document.body.classList.add("search-help-hidden");
+
+  </script>
+
+</nav>
+
+    
+
+    <div class="container">
+
+      <div class="page-header">
+        <h1 class="class"><code><code><a href="twisted.html">twisted</a></code><wbr></wbr>.<code><a href="twisted.words.html">words</a></code><wbr></wbr>.<code><a href="twisted.words.im.html">im</a></code><wbr></wbr>.<code><a href="twisted.words.im.basesupport.html">basesupport</a></code><wbr></wbr>.<code><a href="twisted.words.im.basesupport.AbstractAccount.html">AbstractAccount</a></code></code></h1>
+        <div id="showPrivate">
+          <button class="btn btn-link" onclick="togglePrivate()">Toggle Private API</button>
+        </div>
+      </div>
+
+      <div class="categoryHeader">
+        class documentation
+      </div>
+
+      <div class="extrasDocstring">
+        <p><code><span class="py-keyword">class</span> <span class="py-defname">AbstractAccount</span>(<a href="twisted.persisted.styles.Versioned.html" title="twisted.persisted.styles.Versioned">styles.Versioned</a>): <a href="https://github.com/twisted/twisted/tree/twisted-21.2.0/src/twisted/words/im/basesupport.py#L127" class="sourceLink">(source)</a></code></p><p>Known subclasses: <code><a href="twisted.words.im.ircsupport.IRCAccount.html">twisted.words.im.ircsupport.IRCAccount</a></code>, <code><a href="twisted.words.im.pbsupport.PBAccount.html">twisted.words.im.pbsupport.PBAccount</a></code></p>
+        <p><a href="classIndex.html#twisted.words.im.basesupport.AbstractAccount">View In Hierarchy</a></p>
+      </div>
+
+      <div class="moduleDocstring">
+        <div><p>Base class for Accounts.</p><p>I am the start of an implementation of <code><a href="twisted.words.im.interfaces.IAccount.html">IAccount</a></code>, I implement <code><a href="#isOnline">isOnline</a></code> and most of <code><a href="#logOn">logOn</a></code>, though you'll need to implement <code><a href="#_startLogOn">_startLogOn</a></code> in a subclass.</p></div>
+      </div>
+
+      <div id="splitTables">
+        <table class="children sortable" id="id3504">
+  
+  
+  <tr class="method">
+    
+    <td>Method</td>
+    <td><code><a href="#__getstate__">__getstate__</a></code></td>
+    <td><span>Get state, adding a version number to it on its way out.</span></td>
+  </tr><tr class="method">
+    
+    <td>Method</td>
+    <td><code><a href="#__init__">__init__</a></code></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="method">
+    
+    <td>Method</td>
+    <td><code><a href="#__repr__">__repr__</a></code></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="method">
+    
+    <td>Method</td>
+    <td><code><a href="#getGroup">getGroup</a></code></td>
+    <td><span>Group factory.</span></td>
+  </tr><tr class="method">
+    
+    <td>Method</td>
+    <td><code><a href="#getPerson">getPerson</a></code></td>
+    <td><span>Person factory.</span></td>
+  </tr><tr class="method">
+    
+    <td>Method</td>
+    <td><code><a href="#isOnline">isOnline</a></code></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="method">
+    
+    <td>Method</td>
+    <td><code><a href="#logOn">logOn</a></code></td>
+    <td><span>Log on to this account.</span></td>
+  </tr><tr class="method">
+    
+    <td>Method</td>
+    <td><code><a href="#upgrateToVersion2">upgrateToVersion2</a></code></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="classvariable">
+    
+    <td>Class Variable</td>
+    <td><code><a href="#persistanceVersion">persistanceVersion</a></code></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="instancevariable">
+    
+    <td>Instance Variable</td>
+    <td><code><a href="#accountName">accountName</a></code></td>
+    <td><span></span></td>
+  </tr><tr class="instancevariable">
+    
+    <td>Instance Variable</td>
+    <td><code><a href="#autoLogin">autoLogin</a></code></td>
+    <td><span></span></td>
+  </tr><tr class="instancevariable">
+    
+    <td>Instance Variable</td>
+    <td><code><a href="#client">client</a></code></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="instancevariable">
+    
+    <td>Instance Variable</td>
+    <td><code><a href="#host">host</a></code></td>
+    <td><span></span></td>
+  </tr><tr class="instancevariable">
+    
+    <td>Instance Variable</td>
+    <td><code><a href="#password">password</a></code></td>
+    <td><span></span></td>
+  </tr><tr class="instancevariable">
+    
+    <td>Instance Variable</td>
+    <td><code><a href="#port">port</a></code></td>
+    <td><span></span></td>
+  </tr><tr class="instancevariable">
+    
+    <td>Instance Variable</td>
+    <td><code><a href="#username">username</a></code></td>
+    <td><span></span></td>
+  </tr><tr class="method private">
+    
+    <td>Method</td>
+    <td><code><a href="#_cb_logOn">_cb_logOn</a></code></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="method private">
+    
+    <td>Method</td>
+    <td><code><a href="#_clientLost">_clientLost</a></code></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="method private">
+    
+    <td>Method</td>
+    <td><code><a href="#_loginFailed">_loginFailed</a></code></td>
+    <td><span>Errorback for <code><a href="#logOn">logOn</a></code>.</span></td>
+  </tr><tr class="method private">
+    
+    <td>Method</td>
+    <td><code><a href="#_startLogOn">_startLogOn</a></code></td>
+    <td><span>Start the sign on process.</span></td>
+  </tr><tr class="classvariable private">
+    
+    <td>Class Variable</td>
+    <td><code><a href="#_groupFactory">_groupFactory</a></code></td>
+    <td><span>A Callable that will return a <code><a href="twisted.words.im.interfaces.IGroup.html">IGroup</a></code> appropriate for this account type.</span></td>
+  </tr><tr class="classvariable private">
+    
+    <td>Class Variable</td>
+    <td><code><a href="#_personFactory">_personFactory</a></code></td>
+    <td><span>A Callable that will return a <code><a href="twisted.words.im.interfaces.IPerson.html">IPerson</a></code> appropriate for this account type.</span></td>
+  </tr><tr class="instancevariable private">
+    
+    <td>Instance Variable</td>
+    <td><code><a href="#_groups">_groups</a></code></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="instancevariable private">
+    
+    <td>Instance Variable</td>
+    <td><code><a href="#_isConnecting">_isConnecting</a></code></td>
+    <td><span>Whether I am in the process of establishing a connection to the server.</span></td>
+  </tr><tr class="instancevariable private">
+    
+    <td>Instance Variable</td>
+    <td><code><a href="#_isOnline">_isOnline</a></code></td>
+    <td><span>Whether I am currently on-line with the server.</span></td>
+  </tr><tr class="instancevariable private">
+    
+    <td>Instance Variable</td>
+    <td><code><a href="#_persons">_persons</a></code></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr>
+</table>
+        
+          <p class="inheritedFrom">
+            Inherited from <code><a href="twisted.persisted.styles.Versioned.html">Versioned</a></code>:
+          </p>
+          <table class="children sortable" id="id3505">
+  
+  
+  <tr class="basemethod">
+    
+    <td>Method</td>
+    <td><code><a href="twisted.persisted.styles.Versioned.html#__setstate__">__setstate__</a></code></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="basemethod">
+    
+    <td>Method</td>
+    <td><code><a href="twisted.persisted.styles.Versioned.html#versionUpgrade">versionUpgrade</a></code></td>
+    <td><span>(internal) Do a version upgrade.</span></td>
+  </tr><tr class="baseclassvariable">
+    
+    <td>Class Variable</td>
+    <td><code><a href="twisted.persisted.styles.Versioned.html#persistenceForgets">persistenceForgets</a></code></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="baseclassvariable">
+    
+    <td>Class Variable</td>
+    <td><code><a href="twisted.persisted.styles.Versioned.html#persistenceVersion">persistenceVersion</a></code></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="baseinstancevariable">
+    
+    <td>Instance Variable</td>
+    <td><code><a href="twisted.persisted.styles.Versioned.html#__dict__">__dict__</a></code></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr>
+</table>
+          
+
+          
+      </div>
+
+      <div id="childList">
+
+        <div class="basemethod">
+  
+  
+  <a name="twisted.words.im.basesupport.AbstractAccount.__getstate__">
+    
+  </a>
+  <a name="__getstate__">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-keyword">def</span> <span class="py-defname">__getstate__</span>(self):
+    <a class="sourceLink" href="https://github.com/twisted/twisted/tree/twisted-21.2.0/src/twisted/words/im/basesupport.py#L179">
+      
+      (source)
+    </a>
+  </div>
+  <div class="docstring functionBody">
+    <div class="interfaceinfo">overrides <code><a href="twisted.persisted.styles.Versioned.html#__getstate__">twisted.persisted.styles.Versioned.__getstate__</a></code></div>
+    
+    <div><p>Get state, adding a version number to it on its way out.</p></div>
+  </div>
+</div><div class="basemethod">
+  
+  
+  <a name="twisted.words.im.basesupport.AbstractAccount.__init__">
+    
+  </a>
+  <a name="__init__">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-keyword">def</span> <span class="py-defname">__init__</span>(self, accountName, autoLogin, username, password, host, port):
+    <a class="sourceLink" href="https://github.com/twisted/twisted/tree/twisted-21.2.0/src/twisted/words/im/basesupport.py#L162">
+      
+      (source)
+    </a>
+  </div>
+  <div class="docstring functionBody">
+    <div class="interfaceinfo">overridden in <code><a href="twisted.words.im.ircsupport.IRCAccount.html">twisted.words.im.ircsupport.IRCAccount</a></code>, <code><a href="twisted.words.im.pbsupport.PBAccount.html">twisted.words.im.pbsupport.PBAccount</a></code></div>
+    
+    <div><p class="undocumented">Undocumented</p></div>
+  </div>
+</div><div class="basemethod">
+  
+  
+  <a name="twisted.words.im.basesupport.AbstractAccount.__repr__">
+    
+  </a>
+  <a name="__repr__">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-keyword">def</span> <span class="py-defname">__repr__</span>(self):
+    <a class="sourceLink" href="https://github.com/twisted/twisted/tree/twisted-21.2.0/src/twisted/words/im/basesupport.py#L271">
+      
+      (source)
+    </a>
+  </div>
+  <div class="docstring functionBody">
+    
+    
+    <div><p class="undocumented">Undocumented</p><table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Returns</td></tr><tr><td class="fieldArgContainer"><code><a href="https://docs.python.org/3/library/stdtypes.html#str">str</a></code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr></table></div>
+  </div>
+</div><div class="basemethod">
+  
+  
+  <a name="twisted.words.im.basesupport.AbstractAccount.getGroup">
+    
+  </a>
+  <a name="getGroup">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-keyword">def</span> <span class="py-defname">getGroup</span>(self, name):
+    <a class="sourceLink" href="https://github.com/twisted/twisted/tree/twisted-21.2.0/src/twisted/words/im/basesupport.py#L214">
+      
+      (source)
+    </a>
+  </div>
+  <div class="docstring functionBody">
+    
+    
+    <div><p>Group factory.</p><table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">name:</span>string</td><td class="fieldArgDesc">Name of the group on this account.</td></tr></table></div>
+  </div>
+</div><div class="basemethod">
+  
+  
+  <a name="twisted.words.im.basesupport.AbstractAccount.getPerson">
+    
+  </a>
+  <a name="getPerson">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-keyword">def</span> <span class="py-defname">getPerson</span>(self, name):
+    <a class="sourceLink" href="https://github.com/twisted/twisted/tree/twisted-21.2.0/src/twisted/words/im/basesupport.py#L226">
+      
+      (source)
+    </a>
+  </div>
+  <div class="docstring functionBody">
+    
+    
+    <div><p>Person factory.</p><table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">name:</span>string</td><td class="fieldArgDesc">Name of the person on this account.</td></tr></table></div>
+  </div>
+</div><div class="basemethod">
+  
+  
+  <a name="twisted.words.im.basesupport.AbstractAccount.isOnline">
+    
+  </a>
+  <a name="isOnline">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-keyword">def</span> <span class="py-defname">isOnline</span>(self):
+    <a class="sourceLink" href="https://github.com/twisted/twisted/tree/twisted-21.2.0/src/twisted/words/im/basesupport.py#L188">
+      
+      (source)
+    </a>
+  </div>
+  <div class="docstring functionBody">
+    
+    
+    <div><p class="undocumented">Undocumented</p></div>
+  </div>
+</div><div class="basemethod">
+  
+  
+  <a name="twisted.words.im.basesupport.AbstractAccount.logOn">
+    
+  </a>
+  <a name="logOn">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-keyword">def</span> <span class="py-defname">logOn</span>(self, chatui):
+    <a class="sourceLink" href="https://github.com/twisted/twisted/tree/twisted-21.2.0/src/twisted/words/im/basesupport.py#L191">
+      
+      (source)
+    </a>
+  </div>
+  <div class="docstring functionBody">
+    <div class="interfaceinfo">overridden in <code><a href="twisted.words.im.pbsupport.PBAccount.html">twisted.words.im.pbsupport.PBAccount</a></code></div>
+    
+    <div><p>Log on to this account.</p><p>Takes care to not start a connection if a connection is already in progress.  You will need to implement <code><a href="#_startLogOn">_startLogOn</a></code> for this to work, and it would be a good idea to override <code><a href="#_loginFailed">_loginFailed</a></code> too.</p><table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Returns</td></tr><tr><td class="fieldArgContainer">Deferred <code><a href="twisted.words.im.interfaces.IClient.html">interfaces.IClient</a></code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr></table></div>
+  </div>
+</div><div class="basemethod">
+  
+  
+  <a name="twisted.words.im.basesupport.AbstractAccount.upgrateToVersion2">
+    
+  </a>
+  <a name="upgrateToVersion2">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-keyword">def</span> <span class="py-defname">upgrateToVersion2</span>(self):
+    <a class="sourceLink" href="https://github.com/twisted/twisted/tree/twisted-21.2.0/src/twisted/words/im/basesupport.py#L173">
+      
+      (source)
+    </a>
+  </div>
+  <div class="docstring functionBody">
+    
+    
+    <div><p class="undocumented">Undocumented</p></div>
+  </div>
+</div><div class="baseclassvariable">
+  
+  
+  <a name="twisted.words.im.basesupport.AbstractAccount.persistanceVersion">
+    
+  </a>
+  <a name="persistanceVersion">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-defname">persistanceVersion</span>: <code><a href="https://docs.python.org/3/library/functions.html#int">int</a></code> =
+    <a class="sourceLink" href="https://github.com/twisted/twisted/tree/twisted-21.2.0/src/twisted/words/im/basesupport.py#L160">
+      
+      (source)
+    </a>
+  </div>
+  <div class="functionBody">
+    
+    
+    <div><p class="undocumented">Undocumented</p></div>
+  </div>
+</div><div class="baseinstancevariable">
+  
+  
+  <a name="twisted.words.im.basesupport.AbstractAccount.accountName">
+    
+  </a>
+  <a name="accountName">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-defname">accountName</span> =
+    <a class="sourceLink" href="https://github.com/twisted/twisted/tree/twisted-21.2.0/src/twisted/words/im/basesupport.py#L145">
+      
+      (source)
+    </a>
+  </div>
+  <div class="functionBody">
+    
+    
+    <div></div>
+  </div>
+</div><div class="baseinstancevariable">
+  
+  
+  <a name="twisted.words.im.basesupport.AbstractAccount.autoLogin">
+    
+  </a>
+  <a name="autoLogin">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-defname">autoLogin</span> =
+    <a class="sourceLink" href="https://github.com/twisted/twisted/tree/twisted-21.2.0/src/twisted/words/im/basesupport.py#L146">
+      
+      (source)
+    </a>
+  </div>
+  <div class="functionBody">
+    
+    
+    <div></div>
+  </div>
+</div><div class="baseinstancevariable">
+  
+  
+  <a name="twisted.words.im.basesupport.AbstractAccount.client">
+    
+  </a>
+  <a name="client">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-defname">client</span> =
+    <a class="sourceLink" href="https://github.com/twisted/twisted/tree/twisted-21.2.0/src/twisted/words/im/basesupport.py#L155">
+      
+      (source)
+    </a>
+  </div>
+  <div class="functionBody">
+    
+    
+    <div><p class="undocumented">Undocumented</p></div>
+  </div>
+</div><div class="baseinstancevariable">
+  
+  
+  <a name="twisted.words.im.basesupport.AbstractAccount.host">
+    
+  </a>
+  <a name="host">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-defname">host</span> =
+    <a class="sourceLink" href="https://github.com/twisted/twisted/tree/twisted-21.2.0/src/twisted/words/im/basesupport.py#L149">
+      
+      (source)
+    </a>
+  </div>
+  <div class="functionBody">
+    
+    
+    <div></div>
+  </div>
+</div><div class="baseinstancevariable">
+  
+  
+  <a name="twisted.words.im.basesupport.AbstractAccount.password">
+    
+  </a>
+  <a name="password">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-defname">password</span> =
+    <a class="sourceLink" href="https://github.com/twisted/twisted/tree/twisted-21.2.0/src/twisted/words/im/basesupport.py#L148">
+      
+      (source)
+    </a>
+  </div>
+  <div class="functionBody">
+    
+    
+    <div></div>
+  </div>
+</div><div class="baseinstancevariable">
+  
+  
+  <a name="twisted.words.im.basesupport.AbstractAccount.port">
+    
+  </a>
+  <a name="port">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-defname">port</span> =
+    <a class="sourceLink" href="https://github.com/twisted/twisted/tree/twisted-21.2.0/src/twisted/words/im/basesupport.py#L150">
+      
+      (source)
+    </a>
+  </div>
+  <div class="functionBody">
+    
+    
+    <div></div>
+  </div>
+</div><div class="baseinstancevariable">
+  
+  
+  <a name="twisted.words.im.basesupport.AbstractAccount.username">
+    
+  </a>
+  <a name="username">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-defname">username</span> =
+    <a class="sourceLink" href="https://github.com/twisted/twisted/tree/twisted-21.2.0/src/twisted/words/im/basesupport.py#L147">
+      
+      (source)
+    </a>
+  </div>
+  <div class="functionBody">
+    
+    
+    <div></div>
+  </div>
+</div><div class="basemethod private">
+  
+  
+  <a name="twisted.words.im.basesupport.AbstractAccount._cb_logOn">
+    
+  </a>
+  <a name="_cb_logOn">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-keyword">def</span> <span class="py-defname">_cb_logOn</span>(self, client):
+    <a class="sourceLink" href="https://github.com/twisted/twisted/tree/twisted-21.2.0/src/twisted/words/im/basesupport.py#L247">
+      
+      (source)
+    </a>
+  </div>
+  <div class="docstring functionBody">
+    
+    
+    <div><p class="undocumented">Undocumented</p></div>
+  </div>
+</div><div class="basemethod private">
+  
+  
+  <a name="twisted.words.im.basesupport.AbstractAccount._clientLost">
+    
+  </a>
+  <a name="_clientLost">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-keyword">def</span> <span class="py-defname">_clientLost</span>(self, client, reason):
+    <a class="sourceLink" href="https://github.com/twisted/twisted/tree/twisted-21.2.0/src/twisted/words/im/basesupport.py#L265">
+      
+      (source)
+    </a>
+  </div>
+  <div class="docstring functionBody">
+    
+    
+    <div><p class="undocumented">Undocumented</p></div>
+  </div>
+</div><div class="basemethod private">
+  
+  
+  <a name="twisted.words.im.basesupport.AbstractAccount._loginFailed">
+    
+  </a>
+  <a name="_loginFailed">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-keyword">def</span> <span class="py-defname">_loginFailed</span>(self, reason):
+    <a class="sourceLink" href="https://github.com/twisted/twisted/tree/twisted-21.2.0/src/twisted/words/im/basesupport.py#L253">
+      
+      (source)
+    </a>
+  </div>
+  <div class="docstring functionBody">
+    
+    
+    <div><p>Errorback for <code><a href="#logOn">logOn</a></code>.</p><table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">reason:</span>Failure</td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr class="fieldStart"><td class="fieldName" colspan="2">Returns</td></tr><tr><td class="fieldArgContainer">Failure</td><td class="fieldArgDesc"><i>reason</i>, for further processing in the callback chain.</td></tr></table></div>
+  </div>
+</div><div class="basemethod private">
+  
+  
+  <a name="twisted.words.im.basesupport.AbstractAccount._startLogOn">
+    
+  </a>
+  <a name="_startLogOn">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-keyword">def</span> <span class="py-defname">_startLogOn</span>(self, chatui):
+    <a class="sourceLink" href="https://github.com/twisted/twisted/tree/twisted-21.2.0/src/twisted/words/im/basesupport.py#L238">
+      
+      (source)
+    </a>
+  </div>
+  <div class="docstring functionBody">
+    <div class="interfaceinfo">overridden in <code><a href="twisted.words.im.ircsupport.IRCAccount.html">twisted.words.im.ircsupport.IRCAccount</a></code>, <code><a href="twisted.words.im.pbsupport.PBAccount.html">twisted.words.im.pbsupport.PBAccount</a></code></div>
+    
+    <div><p>Start the sign on process.</p><p>Factored out of <code><a href="#logOn">logOn</a></code>.</p><table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Returns</td></tr><tr><td class="fieldArgContainer">Deferred <code><a href="twisted.words.im.interfaces.IClient.html">interfaces.IClient</a></code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr></table></div>
+  </div>
+</div><div class="baseclassvariable private">
+  
+  
+  <a name="twisted.words.im.basesupport.AbstractAccount._groupFactory">
+    
+  </a>
+  <a name="_groupFactory">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-defname">_groupFactory</span> =
+    <a class="sourceLink" href="https://github.com/twisted/twisted/tree/twisted-21.2.0/src/twisted/words/im/basesupport.py#L134">
+      
+      (source)
+    </a>
+  </div>
+  <div class="functionBody">
+    
+    
+    <div>A Callable that will return a <code><a href="twisted.words.im.interfaces.IGroup.html">IGroup</a></code> appropriate for this account type.</div>
+  </div>
+</div><div class="baseclassvariable private">
+  
+  
+  <a name="twisted.words.im.basesupport.AbstractAccount._personFactory">
+    
+  </a>
+  <a name="_personFactory">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-defname">_personFactory</span> =
+    <a class="sourceLink" href="https://github.com/twisted/twisted/tree/twisted-21.2.0/src/twisted/words/im/basesupport.py#L136">
+      
+      (source)
+    </a>
+  </div>
+  <div class="functionBody">
+    
+    
+    <div>A Callable that will return a <code><a href="twisted.words.im.interfaces.IPerson.html">IPerson</a></code> appropriate for this account type.</div>
+  </div>
+</div><div class="baseinstancevariable private">
+  
+  
+  <a name="twisted.words.im.basesupport.AbstractAccount._groups">
+    
+  </a>
+  <a name="_groups">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-defname">_groups</span>: <code><a href="https://docs.python.org/3/library/stdtypes.html#dict">dict</a></code> =
+    <a class="sourceLink" href="https://github.com/twisted/twisted/tree/twisted-21.2.0/src/twisted/words/im/basesupport.py#L170">
+      
+      (source)
+    </a>
+  </div>
+  <div class="functionBody">
+    
+    
+    <div><p class="undocumented">Undocumented</p></div>
+  </div>
+</div><div class="baseinstancevariable private">
+  
+  
+  <a name="twisted.words.im.basesupport.AbstractAccount._isConnecting">
+    
+  </a>
+  <a name="_isConnecting">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-defname">_isConnecting</span>: boolean =
+    <a class="sourceLink" href="https://github.com/twisted/twisted/tree/twisted-21.2.0/src/twisted/words/im/basesupport.py#L139">
+      
+      (source)
+    </a>
+  </div>
+  <div class="functionBody">
+    <div class="interfaceinfo">overridden in <code><a href="twisted.words.im.pbsupport.PBAccount.html">twisted.words.im.pbsupport.PBAccount</a></code></div>
+    
+    <div>Whether I am in the process of establishing a connection to the server.</div>
+  </div>
+</div><div class="baseinstancevariable private">
+  
+  
+  <a name="twisted.words.im.basesupport.AbstractAccount._isOnline">
+    
+  </a>
+  <a name="_isOnline">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-defname">_isOnline</span>: boolean =
+    <a class="sourceLink" href="https://github.com/twisted/twisted/tree/twisted-21.2.0/src/twisted/words/im/basesupport.py#L142">
+      
+      (source)
+    </a>
+  </div>
+  <div class="functionBody">
+    
+    
+    <div>Whether I am currently on-line with the server.</div>
+  </div>
+</div><div class="baseinstancevariable private">
+  
+  
+  <a name="twisted.words.im.basesupport.AbstractAccount._persons">
+    
+  </a>
+  <a name="_persons">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-defname">_persons</span>: <code><a href="https://docs.python.org/3/library/stdtypes.html#dict">dict</a></code> =
+    <a class="sourceLink" href="https://github.com/twisted/twisted/tree/twisted-21.2.0/src/twisted/words/im/basesupport.py#L171">
+      
+      (source)
+    </a>
+  </div>
+  <div class="functionBody">
+    
+    
+    <div><p class="undocumented">Undocumented</p></div>
+  </div>
+</div>
+
+      </div>
+    </div>
+
+    <footer class="navbar navbar-default">
+  
+  <div class="container">
+    <a href="index.html">API Documentation</a> for <a href="http://twistedmatrix.com/" class="projecthome">Twisted</a>,
+  generated by <a href="https://github.com/twisted/pydoctor/">pydoctor</a>
+    21.2.2 at 2021-06-29 01:17:05.
+  </div>
+</footer>
+
+    <script src="pydoctor.js" type="text/javascript"></script>
+
+  </body>
+</html>
