@@ -1,11 +1,11 @@
-name: docutils-apidocs
+name: twisted-apidocs
 
 on:
   push:
     branches: [ main ]
 
 jobs:
-  docutils:
+  twisted:
     runs-on: ubuntu-latest
 
     steps:
@@ -21,15 +21,13 @@ jobs:
 
     - name: Generate API documentation
       run: |
-
-        # Generate docutils apidocs
-        tox -e docutils-apidocs
+        tox -e twisted-apidocs
 
     - name: Push API documentation to Github Pages
       uses: peaceiris/actions-gh-pages@v3
       with:
         github_token: ${{ secrets.GITHUB_TOKEN }}
-        publish_dir: ./build/docutils/
-        commit_message: "Update docutils API documentations"
-        destination_dir: docutils
+        publish_dir: ./build/twisted/
+        commit_message: "Update twisted API documentations"
+        destination_dir: twisted
         enable_jekyll: true
