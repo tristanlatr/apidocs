@@ -1,0 +1,728 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+          "DTD/xhtml1-strict.dtd">
+<html>
+  
+
+  <head>
+    
+    <title>nltk.metrics.distance</title>
+    <meta name="generator" content="pydoctor 21.2.2"> 
+        
+    </meta>
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=0.75" />
+    <link rel="stylesheet" type="text/css" href="bootstrap.min.css" />
+    <link rel="stylesheet" type="text/css" href="apidocs.css" />
+    <link rel="stylesheet" type="text/css" href="extra.css" />
+</head>
+
+  <body>
+
+    
+
+    <nav class="navbar navbar-default">
+  
+  <div class="container">
+
+    <div class="navbar-header">
+      
+      <div class="navlinks">
+        <span class="navbar-brand">
+          <a href="http://www.nltk.org/" class="projecthome">nltk-3.6.2</a> <a href="index.html">API Documentation</a>
+        </span>
+
+        <a href="moduleIndex.html">
+          Modules
+        </a>
+
+        <a href="classIndex.html">
+          Classes
+        </a>
+
+        <a href="nameIndex.html">
+          Names
+        </a>
+
+        <form action="search-results.html" id="search-box-container">
+          <div class="input-group">
+            <input id="search-box" name="search-query" placeholder="Search..." aria-label="Search" minlength="2" class="form-control" />
+            <span class="input-group-btn">
+              <button class="btn btn-default" type="submit" title="Search"><img src="fonts/search.svg" alt="Search!" /></button>
+              <a class="btn btn-default" id="search-help-button" title="Help" onclick="toggleSearchHelpText()"><img src="fonts/info.svg" alt="Help!" /></a>
+            </span>
+          </div>
+        </form>
+
+        <div class="rst-admonition hint" id="search-help-box">
+          <p class="rst-last">
+      
+            Search bar offers the following options:
+            <ul>   
+                <li>
+                  <strong>Term presence.</strong> The below example searches for documents that 
+                    must contain “foo”, might contain “bar” and must not contain “baz”:
+                  <br /> <code>'+foo bar -baz'</code>
+                </li> 
+
+                <li>
+                  <strong>Wildcards.</strong> The below example searches for documents with words beginning with “foo”:
+                  <br /> <code>'foo*'</code>
+                </li> 
+
+                <li>
+                  <strong>Search in specific fields.</strong> The following search matches all documents 
+                  that contains "foo" in their full dotted name and with “bar” in any field:
+                  <br /> <code>'+fullName:*foo* +bar'</code>
+
+                  <p>
+                    Possible fields: 'name', 'docstring', 'fullName'.
+                  </p>
+                </li>
+
+                <li>
+                  <strong>Fuzzy matches.</strong> The following search matches all documents 
+                  that have a word within 1 edit distance of “foo”:
+                  <br /> <code>'foo~1'</code>
+                </li>
+            </ul>
+
+          </p>
+        </div>
+
+      </div>
+
+
+    </div>
+  </div>
+
+  <script>
+ 
+    function toggleSearchHelpText() {
+        document.body.classList.toggle("search-help-hidden");
+    }
+    // Init search and help text
+    document.getElementById('search-box-container').style.display = 'block';
+    document.getElementById('search-help-box').style.display = 'block';
+    document.body.classList.add("search-help-hidden");
+
+  </script>
+
+</nav>
+
+    
+
+    <div class="container">
+
+      <div class="page-header">
+        <h1 class="module"><code><code><a href="nltk.html">nltk</a></code><wbr></wbr>.<code><a href="nltk.metrics.html">metrics</a></code><wbr></wbr>.<code><a href="nltk.metrics.distance.html">distance</a></code></code></h1>
+        <div id="showPrivate">
+          <button class="btn btn-link" onclick="togglePrivate()">Toggle Private API</button>
+        </div>
+      </div>
+
+      <div class="categoryHeader">
+        module documentation
+      </div>
+
+      <div class="extrasDocstring">
+        <a href="https://github.com/nltk/nltk/tree/3.6.2/nltk/metrics/distance.py" class="sourceLink">(source)</a>
+        <p></p>
+      </div>
+
+      <div class="moduleDocstring">
+        <div><p>Distance Metrics.</p>
+<p>Compute the distance between two items (usually strings).
+As metrics, they must satisfy the following three requirements:</p>
+<ol class="rst-arabic simple">
+<li>d(a, a) = 0</li>
+<li>d(a, b) &gt;= 0</li>
+<li>d(a, c) &lt;= d(a, b) + d(b, c)</li>
+</ol>
+</div>
+      </div>
+
+      <div id="splitTables">
+        <table class="children sortable" id="id823">
+  
+  
+  <tr class="function">
+    
+    <td>Function</td>
+    <td><code><a href="#binary_distance">binary_distance</a></code></td>
+    <td><span>Simple equality test.</span></td>
+  </tr><tr class="function">
+    
+    <td>Function</td>
+    <td><code><a href="#custom_distance">custom_distance</a></code></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="function">
+    
+    <td>Function</td>
+    <td><code><a href="#demo">demo</a></code></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="function">
+    
+    <td>Function</td>
+    <td><code><a href="#edit_distance">edit_distance</a></code></td>
+    <td><span class="undocumented">No summary</span></td>
+  </tr><tr class="function">
+    
+    <td>Function</td>
+    <td><code><a href="#edit_distance_align">edit_distance_align</a></code></td>
+    <td><span class="undocumented">No summary</span></td>
+  </tr><tr class="function">
+    
+    <td>Function</td>
+    <td><code><a href="#fractional_presence">fractional_presence</a></code></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="function">
+    
+    <td>Function</td>
+    <td><code><a href="#interval_distance">interval_distance</a></code></td>
+    <td><span>Krippendorff's interval distance metric</span></td>
+  </tr><tr class="function">
+    
+    <td>Function</td>
+    <td><code><a href="#jaccard_distance">jaccard_distance</a></code></td>
+    <td><span>Distance metric comparing set-similarity.</span></td>
+  </tr><tr class="function">
+    
+    <td>Function</td>
+    <td><code><a href="#jaro_similarity">jaro_similarity</a></code></td>
+    <td><span>Computes the Jaro similarity between 2 sequences from:</span></td>
+  </tr><tr class="function">
+    
+    <td>Function</td>
+    <td><code><a href="#jaro_winkler_similarity">jaro_winkler_similarity</a></code></td>
+    <td><span>The Jaro Winkler distance is an extension of the Jaro similarity in:</span></td>
+  </tr><tr class="function">
+    
+    <td>Function</td>
+    <td><code><a href="#masi_distance">masi_distance</a></code></td>
+    <td><span>Distance metric that takes into account partial agreement when multiple labels are assigned.</span></td>
+  </tr><tr class="function">
+    
+    <td>Function</td>
+    <td><code><a href="#presence">presence</a></code></td>
+    <td><span>Higher-order function to test presence of a given label</span></td>
+  </tr><tr class="function private">
+    
+    <td>Function</td>
+    <td><code><a href="#_edit_dist_backtrace">_edit_dist_backtrace</a></code></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="function private">
+    
+    <td>Function</td>
+    <td><code><a href="#_edit_dist_init">_edit_dist_init</a></code></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="function private">
+    
+    <td>Function</td>
+    <td><code><a href="#_edit_dist_step">_edit_dist_step</a></code></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr>
+</table>
+        
+
+          
+      </div>
+
+      <div id="childList">
+
+        <div class="basefunction">
+  
+  
+  <a name="nltk.metrics.distance.binary_distance">
+    
+  </a>
+  <a name="binary_distance">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-keyword">def</span> <span class="py-defname">binary_distance</span>(label1, label2):
+    <a class="sourceLink" href="https://github.com/nltk/nltk/tree/3.6.2/nltk/metrics/distance.py#L175">
+      
+      (source)
+    </a>
+  </div>
+  <div class="docstring functionBody">
+    
+    
+    <div><p>Simple equality test.</p>
+<p>0.0 if the labels are identical, 1.0 if they are different.</p>
+<pre class="py-doctest">
+<span class="py-prompt">&gt;&gt;&gt; </span><span class="py-keyword">from</span> nltk.metrics <span class="py-keyword">import</span> binary_distance
+<span class="py-prompt">&gt;&gt;&gt; </span>binary_distance(1,1)
+<span class="py-output">0.0</span>
+</pre><pre class="py-doctest">
+<span class="py-prompt">&gt;&gt;&gt; </span>binary_distance(1,3)
+<span class="py-output">1.0</span>
+</pre></div>
+  </div>
+</div><div class="basefunction">
+  
+  
+  <a name="nltk.metrics.distance.custom_distance">
+    
+  </a>
+  <a name="custom_distance">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-keyword">def</span> <span class="py-defname">custom_distance</span>(file):
+    <a class="sourceLink" href="https://github.com/nltk/nltk/tree/3.6.2/nltk/metrics/distance.py#L262">
+      
+      (source)
+    </a>
+  </div>
+  <div class="docstring functionBody">
+    
+    
+    <div><p class="undocumented">Undocumented</p></div>
+  </div>
+</div><div class="basefunction">
+  
+  
+  <a name="nltk.metrics.distance.demo">
+    
+  </a>
+  <a name="demo">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-keyword">def</span> <span class="py-defname">demo</span>():
+    <a class="sourceLink" href="https://github.com/nltk/nltk/tree/3.6.2/nltk/metrics/distance.py#L453">
+      
+      (source)
+    </a>
+  </div>
+  <div class="docstring functionBody">
+    
+    
+    <div><p class="undocumented">Undocumented</p></div>
+  </div>
+</div><div class="basefunction">
+  
+  
+  <a name="nltk.metrics.distance.edit_distance">
+    
+  </a>
+  <a name="edit_distance">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-keyword">def</span> <span class="py-defname">edit_distance</span>(s1, s2, substitution_cost=1, transpositions=False):
+    <a class="sourceLink" href="https://github.com/nltk/nltk/tree/3.6.2/nltk/metrics/distance.py#L59">
+      
+      (source)
+    </a>
+  </div>
+  <div class="docstring functionBody">
+    
+    
+    <div><p>Calculate the Levenshtein edit-distance between two strings.
+The edit distance is the number of characters that need to be
+substituted, inserted, or deleted, to transform s1 into s2.  For
+example, transforming "rain" to "shine" requires three steps,
+consisting of two substitutions and one insertion:
+"rain" -&gt; "sain" -&gt; "shin" -&gt; "shine".  These operations could have
+been done in other orders, but at least three steps are needed.</p>
+<p>Allows specifying the cost of substitution edits (e.g., "a" -&gt; "b"),
+because sometimes it makes sense to assign greater penalties to
+substitutions.</p>
+<p>This also optionally allows transposition edits (e.g., "ab" -&gt; "ba"),
+though this is disabled by default.</p>
+<p>:rtype int</p>
+<table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">s1:</span>str</td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">s2:</span>str</td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">substitution_cost:</span>int</td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">transpositions:</span>bool</td><td class="fieldArgDesc">Whether to allow transposition edits</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">s1, s2</span></td><td class="fieldArgDesc">The strings to be analysed</td></tr></table></div>
+  </div>
+</div><div class="basefunction">
+  
+  
+  <a name="nltk.metrics.distance.edit_distance_align">
+    
+  </a>
+  <a name="edit_distance_align">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-keyword">def</span> <span class="py-defname">edit_distance_align</span>(s1, s2, substitution_cost=1):
+    <a class="sourceLink" href="https://github.com/nltk/nltk/tree/3.6.2/nltk/metrics/distance.py#L125">
+      
+      (source)
+    </a>
+  </div>
+  <div class="docstring functionBody">
+    
+    
+    <div><p>Calculate the minimum Levenshtein edit-distance based alignment
+mapping between two strings. The alignment finds the mapping
+from string s1 to s2 that minimizes the edit distance cost.
+For example, mapping "rain" to "shine" would involve 2
+substitutions, 2 matches and an insertion resulting in
+the following mapping:
+[(0, 0), (1, 1), (2, 2), (3, 3), (4, 4), (4, 5)]
+NB: (0, 0) is the start state without any letters associated
+See more: <a class="rst-reference external" href="https://web.stanford.edu/class/cs124/lec/med.pdf" target="_top">https://web.stanford.edu/class/cs124/lec/med.pdf</a></p>
+<p>In case of multiple valid minimum-distance alignments, the
+backtrace has the following operation precedence:
+1. Skip s1 character
+2. Skip s2 character
+3. Substitute s1 and s2 characters
+The backtrace is carried out in reverse string order.</p>
+<p>This function does not support transposition.</p>
+<p>:rtype List[Tuple(int, int)]</p>
+<table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">s1:</span>str</td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">s2:</span>str</td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">substitution_cost:</span>int</td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">s1, s2</span></td><td class="fieldArgDesc">The strings to be aligned</td></tr></table></div>
+  </div>
+</div><div class="basefunction">
+  
+  
+  <a name="nltk.metrics.distance.fractional_presence">
+    
+  </a>
+  <a name="fractional_presence">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-keyword">def</span> <span class="py-defname">fractional_presence</span>(label):
+    <a class="sourceLink" href="https://github.com/nltk/nltk/tree/3.6.2/nltk/metrics/distance.py#L252">
+      
+      (source)
+    </a>
+  </div>
+  <div class="docstring functionBody">
+    
+    
+    <div><p class="undocumented">Undocumented</p></div>
+  </div>
+</div><div class="basefunction">
+  
+  
+  <a name="nltk.metrics.distance.interval_distance">
+    
+  </a>
+  <a name="interval_distance">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-keyword">def</span> <span class="py-defname">interval_distance</span>(label1, label2):
+    <a class="sourceLink" href="https://github.com/nltk/nltk/tree/3.6.2/nltk/metrics/distance.py#L228">
+      
+      (source)
+    </a>
+  </div>
+  <div class="docstring functionBody">
+    
+    
+    <div><p>Krippendorff's interval distance metric</p>
+<pre class="py-doctest">
+<span class="py-prompt">&gt;&gt;&gt; </span><span class="py-keyword">from</span> nltk.metrics <span class="py-keyword">import</span> interval_distance
+<span class="py-prompt">&gt;&gt;&gt; </span>interval_distance(1,10)
+<span class="py-output">81</span>
+</pre><p>Krippendorff 1980, Content Analysis: An Introduction to its Methodology</p>
+</div>
+  </div>
+</div><div class="basefunction">
+  
+  
+  <a name="nltk.metrics.distance.jaccard_distance">
+    
+  </a>
+  <a name="jaccard_distance">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-keyword">def</span> <span class="py-defname">jaccard_distance</span>(label1, label2):
+    <a class="sourceLink" href="https://github.com/nltk/nltk/tree/3.6.2/nltk/metrics/distance.py#L191">
+      
+      (source)
+    </a>
+  </div>
+  <div class="docstring functionBody">
+    
+    
+    <div>Distance metric comparing set-similarity.</div>
+  </div>
+</div><div class="basefunction">
+  
+  
+  <a name="nltk.metrics.distance.jaro_similarity">
+    
+  </a>
+  <a name="jaro_similarity">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-keyword">def</span> <span class="py-defname">jaro_similarity</span>(s1, s2):
+    <a class="sourceLink" href="https://github.com/nltk/nltk/tree/3.6.2/nltk/metrics/distance.py#L273">
+      
+      (source)
+    </a>
+  </div>
+  <div class="docstring functionBody">
+    
+    
+    <div><p>Computes the Jaro similarity between 2 sequences from:</p>
+<blockquote>
+<blockquote>
+Matthew A. Jaro (1989). Advances in record linkage methodology
+as applied to the 1985 census of Tampa Florida. Journal of the
+American Statistical Association. 84 (406): 414-20.</blockquote>
+<p>The Jaro distance between is the min no. of single-character transpositions
+required to change one word into another. The Jaro similarity formula from
+<a class="rst-reference external" href="https://en.wikipedia.org/wiki/Jaro%E2%80%93Winkler_distance" target="_top">https://en.wikipedia.org/wiki/Jaro%E2%80%93Winkler_distance</a> :</p>
+<blockquote>
+jaro_sim = 0 if m = 0 else 1/3 * (m/<a href="#id1"><span class="rst-problematic" id="rst-id2">|s_1|</span></a> + m/s_2 + (m-t)/m)</blockquote>
+<dl class="rst-docutils">
+<dt>where:</dt>
+<dd><ul class="rst-first rst-last rst-simple">
+<li><a href="#id3"><span class="rst-problematic" id="rst-id4">|s_i|</span></a> is the length of string s_i</li>
+<li>m is the no. of matching characters</li>
+<li>t is the half no. of possible transpositions.</li>
+</ul>
+</dd>
+</dl>
+</blockquote>
+</div>
+  </div>
+</div><div class="basefunction">
+  
+  
+  <a name="nltk.metrics.distance.jaro_winkler_similarity">
+    
+  </a>
+  <a name="jaro_winkler_similarity">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-keyword">def</span> <span class="py-defname">jaro_winkler_similarity</span>(s1, s2, p=0.1, max_l=4):
+    <a class="sourceLink" href="https://github.com/nltk/nltk/tree/3.6.2/nltk/metrics/distance.py#L335">
+      
+      (source)
+    </a>
+  </div>
+  <div class="docstring functionBody">
+    
+    
+    <div><p>The Jaro Winkler distance is an extension of the Jaro similarity in:</p>
+<blockquote>
+William E. Winkler. 1990. String Comparator Metrics and Enhanced
+Decision Rules in the Fellegi-Sunter Model of Record Linkage.
+Proceedings of the Section on Survey Research Methods.
+American Statistical Association: 354-359.</blockquote>
+<p>such that:</p>
+<blockquote>
+jaro_winkler_sim = jaro_sim + ( l * p * (1 - jaro_sim) )</blockquote>
+<p>where,</p>
+<blockquote>
+<ul class="rst-simple">
+<li>jaro_sim is the output from the Jaro Similarity,</li>
+</ul>
+<p>see jaro_similarity()
+- l is the length of common prefix at the start of the string</p>
+<blockquote>
+<ul class="rst-simple">
+<li>this implementation provides an upperbound for the l value
+to keep the prefixes.A common value of this upperbound is 4.</li>
+</ul>
+</blockquote>
+<ul class="rst-simple">
+<li>p is the constant scaling factor to overweigh common prefixes.
+The Jaro-Winkler similarity will fall within the [0, 1] bound,
+given that max(p)&lt;=0.25 , default is p=0.1 in Winkler (1990)</li>
+</ul>
+</blockquote>
+<p>Test using outputs from <a class="rst-reference external" href="https://www.census.gov/srd/papers/pdf/rr93-8.pdf" target="_top">https://www.census.gov/srd/papers/pdf/rr93-8.pdf</a>
+from "Table 5 Comparison of String Comparators Rescaled between 0 and 1"</p>
+<pre class="py-doctest">
+<span class="py-prompt">&gt;&gt;&gt; </span>winkler_examples = [(<span class="py-string">"billy"</span>, <span class="py-string">"billy"</span>), (<span class="py-string">"billy"</span>, <span class="py-string">"bill"</span>), (<span class="py-string">"billy"</span>, <span class="py-string">"blily"</span>),
+<span class="py-more">... </span>(<span class="py-string">"massie"</span>, <span class="py-string">"massey"</span>), (<span class="py-string">"yvette"</span>, <span class="py-string">"yevett"</span>), (<span class="py-string">"billy"</span>, <span class="py-string">"bolly"</span>), (<span class="py-string">"dwayne"</span>, <span class="py-string">"duane"</span>),
+<span class="py-more">... </span>(<span class="py-string">"dixon"</span>, <span class="py-string">"dickson"</span>), (<span class="py-string">"billy"</span>, <span class="py-string">"susan"</span>)]</pre><pre class="py-doctest">
+<span class="py-prompt">&gt;&gt;&gt; </span>winkler_scores = [1.000, 0.967, 0.947, 0.944, 0.911, 0.893, 0.858, 0.853, 0.000]
+<span class="py-prompt">&gt;&gt;&gt; </span>jaro_scores =    [1.000, 0.933, 0.933, 0.889, 0.889, 0.867, 0.822, 0.790, 0.000]</pre><blockquote>
+# One way to match the values on the Winkler's paper is to provide a different</blockquote>
+<p># p scaling factor for different pairs of strings, e.g.
+&gt;&gt;&gt; p_factors = [0.1, 0.125, 0.20, 0.125, 0.20, 0.20, 0.20, 0.15, 0.1]</p>
+<pre class="py-doctest">
+<span class="py-prompt">&gt;&gt;&gt; </span><span class="py-keyword">for</span> (s1, s2), jscore, wscore, p <span class="py-keyword">in</span> <span class="py-builtin">zip</span>(winkler_examples, jaro_scores, winkler_scores, p_factors):
+<span class="py-more">... </span>    <span class="py-keyword">assert</span> <span class="py-builtin">round</span>(jaro_similarity(s1, s2), 3) == jscore
+<span class="py-more">... </span>    <span class="py-keyword">assert</span> <span class="py-builtin">round</span>(jaro_winkler_similarity(s1, s2, p=p), 3) == wscore</pre><p>Test using outputs from <a class="rst-reference external" href="https://www.census.gov/srd/papers/pdf/rr94-5.pdf" target="_top">https://www.census.gov/srd/papers/pdf/rr94-5.pdf</a> from
+"Table 2.1. Comparison of String Comparators Using Last Names, First Names, and Street Names"</p>
+<pre class="py-doctest">
+<span class="py-prompt">&gt;&gt;&gt; </span>winkler_examples = [(<span class="py-string">'SHACKLEFORD'</span>, <span class="py-string">'SHACKELFORD'</span>), (<span class="py-string">'DUNNINGHAM'</span>, <span class="py-string">'CUNNIGHAM'</span>),
+<span class="py-more">... </span>(<span class="py-string">'NICHLESON'</span>, <span class="py-string">'NICHULSON'</span>), (<span class="py-string">'JONES'</span>, <span class="py-string">'JOHNSON'</span>), (<span class="py-string">'MASSEY'</span>, <span class="py-string">'MASSIE'</span>),
+<span class="py-more">... </span>(<span class="py-string">'ABROMS'</span>, <span class="py-string">'ABRAMS'</span>), (<span class="py-string">'HARDIN'</span>, <span class="py-string">'MARTINEZ'</span>), (<span class="py-string">'ITMAN'</span>, <span class="py-string">'SMITH'</span>),
+<span class="py-more">... </span>(<span class="py-string">'JERALDINE'</span>, <span class="py-string">'GERALDINE'</span>), (<span class="py-string">'MARHTA'</span>, <span class="py-string">'MARTHA'</span>), (<span class="py-string">'MICHELLE'</span>, <span class="py-string">'MICHAEL'</span>),
+<span class="py-more">... </span>(<span class="py-string">'JULIES'</span>, <span class="py-string">'JULIUS'</span>), (<span class="py-string">'TANYA'</span>, <span class="py-string">'TONYA'</span>), (<span class="py-string">'DWAYNE'</span>, <span class="py-string">'DUANE'</span>), (<span class="py-string">'SEAN'</span>, <span class="py-string">'SUSAN'</span>),
+<span class="py-more">... </span>(<span class="py-string">'JON'</span>, <span class="py-string">'JOHN'</span>), (<span class="py-string">'JON'</span>, <span class="py-string">'JAN'</span>), (<span class="py-string">'BROOKHAVEN'</span>, <span class="py-string">'BRROKHAVEN'</span>),
+<span class="py-more">... </span>(<span class="py-string">'BROOK HALLOW'</span>, <span class="py-string">'BROOK HLLW'</span>), (<span class="py-string">'DECATUR'</span>, <span class="py-string">'DECATIR'</span>), (<span class="py-string">'FITZRUREITER'</span>, <span class="py-string">'FITZENREITER'</span>),
+<span class="py-more">... </span>(<span class="py-string">'HIGBEE'</span>, <span class="py-string">'HIGHEE'</span>), (<span class="py-string">'HIGBEE'</span>, <span class="py-string">'HIGVEE'</span>), (<span class="py-string">'LACURA'</span>, <span class="py-string">'LOCURA'</span>), (<span class="py-string">'IOWA'</span>, <span class="py-string">'IONA'</span>), (<span class="py-string">'1ST'</span>, <span class="py-string">'IST'</span>)]</pre><pre class="py-doctest">
+<span class="py-prompt">&gt;&gt;&gt; </span>jaro_scores =   [0.970, 0.896, 0.926, 0.790, 0.889, 0.889, 0.722, 0.467, 0.926,
+<span class="py-more">... </span>0.944, 0.869, 0.889, 0.867, 0.822, 0.783, 0.917, 0.000, 0.933, 0.944, 0.905,
+<span class="py-more">... </span>0.856, 0.889, 0.889, 0.889, 0.833, 0.000]</pre><pre class="py-doctest">
+<span class="py-prompt">&gt;&gt;&gt; </span>winkler_scores = [0.982, 0.896, 0.956, 0.832, 0.944, 0.922, 0.722, 0.467, 0.926,
+<span class="py-more">... </span>0.961, 0.921, 0.933, 0.880, 0.858, 0.805, 0.933, 0.000, 0.947, 0.967, 0.943,
+<span class="py-more">... </span>0.913, 0.922, 0.922, 0.900, 0.867, 0.000]</pre><blockquote>
+# One way to match the values on the Winkler's paper is to provide a different</blockquote>
+<p># p scaling factor for different pairs of strings, e.g.
+&gt;&gt;&gt; p_factors = [0.1, 0.1, 0.1, 0.1, 0.125, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.20,
+... 0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1]</p>
+<pre class="py-doctest">
+<span class="py-prompt">&gt;&gt;&gt; </span><span class="py-keyword">for</span> (s1, s2), jscore, wscore, p <span class="py-keyword">in</span> <span class="py-builtin">zip</span>(winkler_examples, jaro_scores, winkler_scores, p_factors):
+<span class="py-more">... </span>    <span class="py-keyword">if</span> (s1, s2) <span class="py-keyword">in</span> [(<span class="py-string">'JON'</span>, <span class="py-string">'JAN'</span>), (<span class="py-string">'1ST'</span>, <span class="py-string">'IST'</span>)]:
+<span class="py-more">... </span>        <span class="py-keyword">continue</span>  <span class="py-comment"># Skip bad examples from the paper.</span>
+<span class="py-more">... </span>    <span class="py-keyword">assert</span> <span class="py-builtin">round</span>(jaro_similarity(s1, s2), 3) == jscore
+<span class="py-more">... </span>    <span class="py-keyword">assert</span> <span class="py-builtin">round</span>(jaro_winkler_similarity(s1, s2, p=p), 3) == wscore</pre><p>This test-case proves that the output of Jaro-Winkler similarity depends on
+the product  l * p and not on the product max_l * p. Here the product max_l * p &gt; 1
+however the product l * p &lt;= 1</p>
+<pre class="py-doctest">
+<span class="py-prompt">&gt;&gt;&gt; </span><span class="py-builtin">round</span>(jaro_winkler_similarity(<span class="py-string">'TANYA'</span>, <span class="py-string">'TONYA'</span>, p=0.1, max_l=100), 3)
+<span class="py-output">0.88</span>
+</pre></div>
+  </div>
+</div><div class="basefunction">
+  
+  
+  <a name="nltk.metrics.distance.masi_distance">
+    
+  </a>
+  <a name="masi_distance">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-keyword">def</span> <span class="py-defname">masi_distance</span>(label1, label2):
+    <a class="sourceLink" href="https://github.com/nltk/nltk/tree/3.6.2/nltk/metrics/distance.py#L200">
+      
+      (source)
+    </a>
+  </div>
+  <div class="docstring functionBody">
+    
+    
+    <div><p>Distance metric that takes into account partial agreement when multiple
+labels are assigned.</p>
+<pre class="py-doctest">
+<span class="py-prompt">&gt;&gt;&gt; </span><span class="py-keyword">from</span> nltk.metrics <span class="py-keyword">import</span> masi_distance
+<span class="py-prompt">&gt;&gt;&gt; </span>masi_distance(<span class="py-builtin">set</span>([1, 2]), <span class="py-builtin">set</span>([1, 2, 3, 4]))
+<span class="py-output">0.665</span>
+</pre><p>Passonneau 2006, Measuring Agreement on Set-Valued Items (MASI)
+for Semantic and Pragmatic Annotation.</p>
+</div>
+  </div>
+</div><div class="basefunction">
+  
+  
+  <a name="nltk.metrics.distance.presence">
+    
+  </a>
+  <a name="presence">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-keyword">def</span> <span class="py-defname">presence</span>(label):
+    <a class="sourceLink" href="https://github.com/nltk/nltk/tree/3.6.2/nltk/metrics/distance.py#L245">
+      
+      (source)
+    </a>
+  </div>
+  <div class="docstring functionBody">
+    
+    
+    <div>Higher-order function to test presence of a given label</div>
+  </div>
+</div><div class="basefunction private">
+  
+  
+  <a name="nltk.metrics.distance._edit_dist_backtrace">
+    
+  </a>
+  <a name="_edit_dist_backtrace">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-keyword">def</span> <span class="py-defname">_edit_dist_backtrace</span>(lev):
+    <a class="sourceLink" href="https://github.com/nltk/nltk/tree/3.6.2/nltk/metrics/distance.py#L104">
+      
+      (source)
+    </a>
+  </div>
+  <div class="docstring functionBody">
+    
+    
+    <div><p class="undocumented">Undocumented</p></div>
+  </div>
+</div><div class="basefunction private">
+  
+  
+  <a name="nltk.metrics.distance._edit_dist_init">
+    
+  </a>
+  <a name="_edit_dist_init">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-keyword">def</span> <span class="py-defname">_edit_dist_init</span>(len1, len2):
+    <a class="sourceLink" href="https://github.com/nltk/nltk/tree/3.6.2/nltk/metrics/distance.py#L27">
+      
+      (source)
+    </a>
+  </div>
+  <div class="docstring functionBody">
+    
+    
+    <div><p class="undocumented">Undocumented</p></div>
+  </div>
+</div><div class="basefunction private">
+  
+  
+  <a name="nltk.metrics.distance._edit_dist_step">
+    
+  </a>
+  <a name="_edit_dist_step">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-keyword">def</span> <span class="py-defname">_edit_dist_step</span>(lev, i, j, s1, s2, substitution_cost=1, transpositions=False):
+    <a class="sourceLink" href="https://github.com/nltk/nltk/tree/3.6.2/nltk/metrics/distance.py#L38">
+      
+      (source)
+    </a>
+  </div>
+  <div class="docstring functionBody">
+    
+    
+    <div><p class="undocumented">Undocumented</p></div>
+  </div>
+</div>
+
+      </div>
+    </div>
+
+    <footer class="navbar navbar-default">
+  
+  <div class="container">
+    <a href="index.html">API Documentation</a> for <a href="http://www.nltk.org/" class="projecthome">nltk-3.6.2</a>,
+  generated by <a href="https://github.com/twisted/pydoctor/">pydoctor</a>
+    21.2.2 at 2021-07-12 23:14:45.
+  </div>
+</footer>
+
+    <script src="pydoctor.js" type="text/javascript"></script>
+
+  </body>
+</html>

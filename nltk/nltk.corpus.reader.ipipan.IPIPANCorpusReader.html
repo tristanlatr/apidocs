@@ -1,0 +1,817 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+          "DTD/xhtml1-strict.dtd">
+<html>
+  
+
+  <head>
+    
+    <title>nltk.corpus.reader.ipipan.IPIPANCorpusReader</title>
+    <meta name="generator" content="pydoctor 21.2.2"> 
+        
+    </meta>
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=0.75" />
+    <link rel="stylesheet" type="text/css" href="bootstrap.min.css" />
+    <link rel="stylesheet" type="text/css" href="apidocs.css" />
+    <link rel="stylesheet" type="text/css" href="extra.css" />
+</head>
+
+  <body>
+
+    
+
+    <nav class="navbar navbar-default">
+  
+  <div class="container">
+
+    <div class="navbar-header">
+      
+      <div class="navlinks">
+        <span class="navbar-brand">
+          <a href="http://www.nltk.org/" class="projecthome">nltk-3.6.2</a> <a href="index.html">API Documentation</a>
+        </span>
+
+        <a href="moduleIndex.html">
+          Modules
+        </a>
+
+        <a href="classIndex.html">
+          Classes
+        </a>
+
+        <a href="nameIndex.html">
+          Names
+        </a>
+
+        <form action="search-results.html" id="search-box-container">
+          <div class="input-group">
+            <input id="search-box" name="search-query" placeholder="Search..." aria-label="Search" minlength="2" class="form-control" />
+            <span class="input-group-btn">
+              <button class="btn btn-default" type="submit" title="Search"><img src="fonts/search.svg" alt="Search!" /></button>
+              <a class="btn btn-default" id="search-help-button" title="Help" onclick="toggleSearchHelpText()"><img src="fonts/info.svg" alt="Help!" /></a>
+            </span>
+          </div>
+        </form>
+
+        <div class="rst-admonition hint" id="search-help-box">
+          <p class="rst-last">
+      
+            Search bar offers the following options:
+            <ul>   
+                <li>
+                  <strong>Term presence.</strong> The below example searches for documents that 
+                    must contain “foo”, might contain “bar” and must not contain “baz”:
+                  <br /> <code>'+foo bar -baz'</code>
+                </li> 
+
+                <li>
+                  <strong>Wildcards.</strong> The below example searches for documents with words beginning with “foo”:
+                  <br /> <code>'foo*'</code>
+                </li> 
+
+                <li>
+                  <strong>Search in specific fields.</strong> The following search matches all documents 
+                  that contains "foo" in their full dotted name and with “bar” in any field:
+                  <br /> <code>'+fullName:*foo* +bar'</code>
+
+                  <p>
+                    Possible fields: 'name', 'docstring', 'fullName'.
+                  </p>
+                </li>
+
+                <li>
+                  <strong>Fuzzy matches.</strong> The following search matches all documents 
+                  that have a word within 1 edit distance of “foo”:
+                  <br /> <code>'foo~1'</code>
+                </li>
+            </ul>
+
+          </p>
+        </div>
+
+      </div>
+
+
+    </div>
+  </div>
+
+  <script>
+ 
+    function toggleSearchHelpText() {
+        document.body.classList.toggle("search-help-hidden");
+    }
+    // Init search and help text
+    document.getElementById('search-box-container').style.display = 'block';
+    document.getElementById('search-help-box').style.display = 'block';
+    document.body.classList.add("search-help-hidden");
+
+  </script>
+
+</nav>
+
+    
+
+    <div class="container">
+
+      <div class="page-header">
+        <h1 class="class"><code><code><a href="nltk.html">nltk</a></code><wbr></wbr>.<code><a href="nltk.corpus.html">corpus</a></code><wbr></wbr>.<code><a href="nltk.corpus.reader.html">reader</a></code><wbr></wbr>.<code><a href="nltk.corpus.reader.ipipan.html">ipipan</a></code><wbr></wbr>.<code><a href="nltk.corpus.reader.ipipan.IPIPANCorpusReader.html">IPIPANCorpusReader</a></code></code></h1>
+        <div id="showPrivate">
+          <button class="btn btn-link" onclick="togglePrivate()">Toggle Private API</button>
+        </div>
+      </div>
+
+      <div class="categoryHeader">
+        class documentation
+      </div>
+
+      <div class="extrasDocstring">
+        <p><code><span class="py-keyword">class</span> <span class="py-defname">IPIPANCorpusReader</span>(<a href="nltk.corpus.reader.api.CorpusReader.html" title="nltk.corpus.reader.api.CorpusReader">CorpusReader</a>): <a href="https://github.com/nltk/nltk/tree/3.6.2/nltk/corpus/reader/ipipan.py#L25" class="sourceLink">(source)</a></code></p>
+        <p><a href="classIndex.html#nltk.corpus.reader.ipipan.IPIPANCorpusReader">View In Hierarchy</a></p>
+      </div>
+
+      <div class="moduleDocstring">
+        <div><p>Corpus reader designed to work with corpus created by IPI PAN.
+See <a class="rst-reference external" href="http://korpus.pl/en/" target="_top">http://korpus.pl/en/</a> for more details about IPI PAN corpus.</p>
+<p>The corpus includes information about text domain, channel and categories.
+You can access possible values using <tt class="rst-docutils literal">domains()</tt>, <tt class="rst-docutils literal">channels()</tt> and
+<tt class="rst-docutils literal">categories()</tt>. You can use also this metadata to filter files, e.g.:
+<tt class="rst-docutils literal"><span class="pre">fileids(channel='prasa')</span></tt>, <tt class="rst-docutils literal"><span class="pre">fileids(categories='publicystyczny')</span></tt>.</p>
+<p>The reader supports methods: words, sents, paras and their tagged versions.
+You can get part of speech instead of full tag by giving "simplify_tags=True"
+parameter, e.g.: <tt class="rst-docutils literal">tagged_sents(simplify_tags=True)</tt>.</p>
+<p>Also you can get all tags disambiguated tags specifying parameter
+"one_tag=False", e.g.: <tt class="rst-docutils literal">tagged_paras(one_tag=False)</tt>.</p>
+<p>You can get all tags that were assigned by a morphological analyzer specifying
+parameter "disamb_only=False", e.g. <tt class="rst-docutils literal">tagged_words(disamb_only=False)</tt>.</p>
+<p>The IPIPAN Corpus contains tags indicating if there is a space between two
+tokens. To add special "no space" markers, you should specify parameter
+"append_no_space=True", e.g. <tt class="rst-docutils literal">tagged_words(append_no_space=True)</tt>.
+As a result in place where there should be no space between two tokens new
+pair ('', 'no-space') will be inserted (for tagged data) and just '' for
+methods without tags.</p>
+<p>The corpus reader can also try to append spaces between words. To enable this
+option, specify parameter "append_space=True", e.g. <tt class="rst-docutils literal">words(append_space=True)</tt>.
+As a result either ' ' or (' ', 'space') will be inserted between tokens.</p>
+<p>By default, xml entities like &amp;quot; and &amp;amp; are replaced by corresponding
+characters. You can turn off this feature, specifying parameter
+"replace_xmlentities=False", e.g. <tt class="rst-docutils literal">words(replace_xmlentities=False)</tt>.</p>
+</div>
+      </div>
+
+      <div id="splitTables">
+        <table class="children sortable" id="id328">
+  
+  
+  <tr class="method">
+    
+    <td>Method</td>
+    <td><code><a href="#__init__">__init__</a></code></td>
+    <td><span class="undocumented">No summary</span></td>
+  </tr><tr class="method">
+    
+    <td>Method</td>
+    <td><code><a href="#categories">categories</a></code></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="method">
+    
+    <td>Method</td>
+    <td><code><a href="#channels">channels</a></code></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="method">
+    
+    <td>Method</td>
+    <td><code><a href="#domains">domains</a></code></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="method">
+    
+    <td>Method</td>
+    <td><code><a href="#fileids">fileids</a></code></td>
+    <td><span>Return a list of file identifiers for the fileids that make up this corpus.</span></td>
+  </tr><tr class="method">
+    
+    <td>Method</td>
+    <td><code><a href="#paras">paras</a></code></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="method">
+    
+    <td>Method</td>
+    <td><code><a href="#raw">raw</a></code></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="method">
+    
+    <td>Method</td>
+    <td><code><a href="#sents">sents</a></code></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="method">
+    
+    <td>Method</td>
+    <td><code><a href="#tagged_paras">tagged_paras</a></code></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="method">
+    
+    <td>Method</td>
+    <td><code><a href="#tagged_sents">tagged_sents</a></code></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="method">
+    
+    <td>Method</td>
+    <td><code><a href="#tagged_words">tagged_words</a></code></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="method">
+    
+    <td>Method</td>
+    <td><code><a href="#words">words</a></code></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="method private">
+    
+    <td>Method</td>
+    <td><code><a href="#_get_tag">_get_tag</a></code></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="method private">
+    
+    <td>Method</td>
+    <td><code><a href="#_list_header_files">_list_header_files</a></code></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="method private">
+    
+    <td>Method</td>
+    <td><code><a href="#_list_morph_files">_list_morph_files</a></code></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="method private">
+    
+    <td>Method</td>
+    <td><code><a href="#_list_morph_files_by">_list_morph_files_by</a></code></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="method private">
+    
+    <td>Method</td>
+    <td><code><a href="#_map_category">_map_category</a></code></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="method private">
+    
+    <td>Method</td>
+    <td><code><a href="#_parse_header">_parse_header</a></code></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="method private">
+    
+    <td>Method</td>
+    <td><code><a href="#_view">_view</a></code></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr>
+</table>
+        
+          <p class="inheritedFrom">
+            Inherited from <code><a href="nltk.corpus.reader.api.CorpusReader.html">CorpusReader</a></code>:
+          </p>
+          <table class="children sortable" id="id329">
+  
+  
+  <tr class="basemethod">
+    
+    <td>Method</td>
+    <td><code><a href="nltk.corpus.reader.api.CorpusReader.html#__repr__">__repr__</a></code></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="basemethod">
+    
+    <td>Method</td>
+    <td><code><a href="nltk.corpus.reader.api.CorpusReader.html#abspath">abspath</a></code></td>
+    <td><span>Return the absolute path for the given file.</span></td>
+  </tr><tr class="basemethod">
+    
+    <td>Method</td>
+    <td><code><a href="nltk.corpus.reader.api.CorpusReader.html#abspaths">abspaths</a></code></td>
+    <td><span>Return a list of the absolute paths for all fileids in this corpus; or for the given list of fileids, if specified.</span></td>
+  </tr><tr class="basemethod">
+    
+    <td>Method</td>
+    <td><code><a href="nltk.corpus.reader.api.CorpusReader.html#citation">citation</a></code></td>
+    <td><span>Return the contents of the corpus citation.bib file, if it exists.</span></td>
+  </tr><tr class="basemethod">
+    
+    <td>Method</td>
+    <td><code><a href="nltk.corpus.reader.api.CorpusReader.html#encoding">encoding</a></code></td>
+    <td><span>Return the unicode encoding for the given corpus file, if known. If the encoding is unknown, or if the given file should be processed using byte strings (str), then return None.</span></td>
+  </tr><tr class="basemethod">
+    
+    <td>Method</td>
+    <td><code><a href="nltk.corpus.reader.api.CorpusReader.html#ensure_loaded">ensure_loaded</a></code></td>
+    <td><span class="undocumented">No summary</span></td>
+  </tr><tr class="basemethod">
+    
+    <td>Method</td>
+    <td><code><a href="nltk.corpus.reader.api.CorpusReader.html#license">license</a></code></td>
+    <td><span>Return the contents of the corpus LICENSE file, if it exists.</span></td>
+  </tr><tr class="basemethod">
+    
+    <td>Method</td>
+    <td><code><a href="nltk.corpus.reader.api.CorpusReader.html#open">open</a></code></td>
+    <td><span>Return an open stream that can be used to read the given file. If the file's encoding is not None, then the stream will automatically decode the file's contents into unicode.</span></td>
+  </tr><tr class="basemethod">
+    
+    <td>Method</td>
+    <td><code><a href="nltk.corpus.reader.api.CorpusReader.html#readme">readme</a></code></td>
+    <td><span>Return the contents of the corpus README file, if it exists.</span></td>
+  </tr><tr class="baseclassvariable">
+    
+    <td>Class Variable</td>
+    <td><code><a href="nltk.corpus.reader.api.CorpusReader.html#root">root</a></code></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="basemethod private">
+    
+    <td>Method</td>
+    <td><code><a href="nltk.corpus.reader.api.CorpusReader.html#_get_root">_get_root</a></code></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="baseinstancevariable private">
+    
+    <td>Instance Variable</td>
+    <td><code><a href="nltk.corpus.reader.api.CorpusReader.html#_encoding">_encoding</a></code></td>
+    <td><span>The default unicode encoding for the fileids that make up this corpus.  If <tt class="rst-docutils literal">encoding</tt> is None, then the file contents are processed using byte strings.</span></td>
+  </tr><tr class="baseinstancevariable private">
+    
+    <td>Instance Variable</td>
+    <td><code><a href="nltk.corpus.reader.api.CorpusReader.html#_fileids">_fileids</a></code></td>
+    <td><span>A list of the relative paths for the fileids that make up this corpus.</span></td>
+  </tr><tr class="baseinstancevariable private">
+    
+    <td>Instance Variable</td>
+    <td><code><a href="nltk.corpus.reader.api.CorpusReader.html#_root">_root</a></code></td>
+    <td><span>The root directory for this corpus.</span></td>
+  </tr><tr class="baseinstancevariable private">
+    
+    <td>Instance Variable</td>
+    <td><code><a href="nltk.corpus.reader.api.CorpusReader.html#_tagset">_tagset</a></code></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr>
+</table>
+          
+
+          
+      </div>
+
+      <div id="childList">
+
+        <div class="basemethod">
+  
+  
+  <a name="nltk.corpus.reader.ipipan.IPIPANCorpusReader.__init__">
+    
+  </a>
+  <a name="__init__">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-keyword">def</span> <span class="py-defname">__init__</span>(self, root, fileids):
+    <a class="sourceLink" href="https://github.com/nltk/nltk/tree/3.6.2/nltk/corpus/reader/ipipan.py#L61">
+      
+      (source)
+    </a>
+  </div>
+  <div class="docstring functionBody">
+    <div class="interfaceinfo">overrides <code><a href="nltk.corpus.reader.api.CorpusReader.html#__init__">nltk.corpus.reader.api.CorpusReader.__init__</a></code></div>
+    
+    <div><table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">root:</span>PathPointer or str</td><td class="fieldArgDesc">A path pointer identifying the root directory for
+this corpus.  If a string is specified, then it will be
+converted to a <tt class="rst-docutils literal">PathPointer</tt> automatically.</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">fileids</span></td><td class="fieldArgDesc">A list of the files that make up this corpus.
+This list can either be specified explicitly, as a list of
+strings; or implicitly, as a regular expression over file
+paths.  The absolute path for each file will be constructed
+by joining the reader's root to each file name.</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">encoding</span></td><td class="fieldArgDesc"><p>The default unicode encoding for the files
+that make up the corpus.  The value of <tt class="rst-docutils literal">encoding</tt> can be any
+of the following:
+- A string: <tt class="rst-docutils literal">encoding</tt> is the encoding name for all files.
+- A dictionary: <tt class="rst-docutils literal">encoding[file_id]</tt> is the encoding</p>
+<blockquote>
+name for the file whose identifier is <tt class="rst-docutils literal">file_id</tt>.  If
+<tt class="rst-docutils literal">file_id</tt> is not in <tt class="rst-docutils literal">encoding</tt>, then the file
+contents will be processed using non-unicode byte strings.</blockquote>
+<ul class="rst-simple">
+<li>A list: <tt class="rst-docutils literal">encoding</tt> should be a list of <tt class="rst-docutils literal">(regexp, encoding)</tt>
+tuples.  The encoding for a file whose identifier is <tt class="rst-docutils literal">file_id</tt>
+will be the <tt class="rst-docutils literal">encoding</tt> value for the first tuple whose
+<tt class="rst-docutils literal">regexp</tt> matches the <tt class="rst-docutils literal">file_id</tt>.  If no tuple's <tt class="rst-docutils literal">regexp</tt>
+matches the <tt class="rst-docutils literal">file_id</tt>, the file contents will be processed
+using non-unicode byte strings.</li>
+<li>None: the file contents of all files will be
+processed using non-unicode byte strings.</li>
+</ul>
+</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">tagset</span></td><td class="fieldArgDesc">The name of the tagset used by this corpus, to be used
+for normalizing or converting the POS tags returned by the
+<a href="#id1"><span class="rst-problematic" id="rst-id2">tagged_</span></a>...() methods.</td></tr></table></div>
+  </div>
+</div><div class="basemethod">
+  
+  
+  <a name="nltk.corpus.reader.ipipan.IPIPANCorpusReader.categories">
+    
+  </a>
+  <a name="categories">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-keyword">def</span> <span class="py-defname">categories</span>(self, fileids=None):
+    <a class="sourceLink" href="https://github.com/nltk/nltk/tree/3.6.2/nltk/corpus/reader/ipipan.py#L84">
+      
+      (source)
+    </a>
+  </div>
+  <div class="docstring functionBody">
+    
+    
+    <div><p class="undocumented">Undocumented</p></div>
+  </div>
+</div><div class="basemethod">
+  
+  
+  <a name="nltk.corpus.reader.ipipan.IPIPANCorpusReader.channels">
+    
+  </a>
+  <a name="channels">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-keyword">def</span> <span class="py-defname">channels</span>(self, fileids=None):
+    <a class="sourceLink" href="https://github.com/nltk/nltk/tree/3.6.2/nltk/corpus/reader/ipipan.py#L74">
+      
+      (source)
+    </a>
+  </div>
+  <div class="docstring functionBody">
+    
+    
+    <div><p class="undocumented">Undocumented</p></div>
+  </div>
+</div><div class="basemethod">
+  
+  
+  <a name="nltk.corpus.reader.ipipan.IPIPANCorpusReader.domains">
+    
+  </a>
+  <a name="domains">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-keyword">def</span> <span class="py-defname">domains</span>(self, fileids=None):
+    <a class="sourceLink" href="https://github.com/nltk/nltk/tree/3.6.2/nltk/corpus/reader/ipipan.py#L79">
+      
+      (source)
+    </a>
+  </div>
+  <div class="docstring functionBody">
+    
+    
+    <div><p class="undocumented">Undocumented</p></div>
+  </div>
+</div><div class="basemethod">
+  
+  
+  <a name="nltk.corpus.reader.ipipan.IPIPANCorpusReader.fileids">
+    
+  </a>
+  <a name="fileids">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-keyword">def</span> <span class="py-defname">fileids</span>(self, channels=None, domains=None, categories=None):
+    <a class="sourceLink" href="https://github.com/nltk/nltk/tree/3.6.2/nltk/corpus/reader/ipipan.py#L91">
+      
+      (source)
+    </a>
+  </div>
+  <div class="docstring functionBody">
+    <div class="interfaceinfo">overrides <code><a href="nltk.corpus.reader.api.CorpusReader.html#fileids">nltk.corpus.reader.api.CorpusReader.fileids</a></code></div>
+    
+    <div>Return a list of file identifiers for the fileids that make up
+this corpus.</div>
+  </div>
+</div><div class="basemethod">
+  
+  
+  <a name="nltk.corpus.reader.ipipan.IPIPANCorpusReader.paras">
+    
+  </a>
+  <a name="paras">
+    
+  </a>
+  <div class="functionHeader">
+    @_parse_args<br />
+    <span class="py-keyword">def</span> <span class="py-defname">paras</span>(self, fileids=None, **kwargs):
+    <a class="sourceLink" href="https://github.com/nltk/nltk/tree/3.6.2/nltk/corpus/reader/ipipan.py#L125">
+      
+      (source)
+    </a>
+  </div>
+  <div class="docstring functionBody">
+    
+    
+    <div><p class="undocumented">Undocumented</p></div>
+  </div>
+</div><div class="basemethod">
+  
+  
+  <a name="nltk.corpus.reader.ipipan.IPIPANCorpusReader.raw">
+    
+  </a>
+  <a name="raw">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-keyword">def</span> <span class="py-defname">raw</span>(self, fileids=None):
+    <a class="sourceLink" href="https://github.com/nltk/nltk/tree/3.6.2/nltk/corpus/reader/ipipan.py#L64">
+      
+      (source)
+    </a>
+  </div>
+  <div class="docstring functionBody">
+    
+    
+    <div><p class="undocumented">Undocumented</p></div>
+  </div>
+</div><div class="basemethod">
+  
+  
+  <a name="nltk.corpus.reader.ipipan.IPIPANCorpusReader.sents">
+    
+  </a>
+  <a name="sents">
+    
+  </a>
+  <div class="functionHeader">
+    @_parse_args<br />
+    <span class="py-keyword">def</span> <span class="py-defname">sents</span>(self, fileids=None, **kwargs):
+    <a class="sourceLink" href="https://github.com/nltk/nltk/tree/3.6.2/nltk/corpus/reader/ipipan.py#L114">
+      
+      (source)
+    </a>
+  </div>
+  <div class="docstring functionBody">
+    
+    
+    <div><p class="undocumented">Undocumented</p></div>
+  </div>
+</div><div class="basemethod">
+  
+  
+  <a name="nltk.corpus.reader.ipipan.IPIPANCorpusReader.tagged_paras">
+    
+  </a>
+  <a name="tagged_paras">
+    
+  </a>
+  <div class="functionHeader">
+    @_parse_args<br />
+    <span class="py-keyword">def</span> <span class="py-defname">tagged_paras</span>(self, fileids=None, **kwargs):
+    <a class="sourceLink" href="https://github.com/nltk/nltk/tree/3.6.2/nltk/corpus/reader/ipipan.py#L154">
+      
+      (source)
+    </a>
+  </div>
+  <div class="docstring functionBody">
+    
+    
+    <div><p class="undocumented">Undocumented</p></div>
+  </div>
+</div><div class="basemethod">
+  
+  
+  <a name="nltk.corpus.reader.ipipan.IPIPANCorpusReader.tagged_sents">
+    
+  </a>
+  <a name="tagged_sents">
+    
+  </a>
+  <div class="functionHeader">
+    @_parse_args<br />
+    <span class="py-keyword">def</span> <span class="py-defname">tagged_sents</span>(self, fileids=None, **kwargs):
+    <a class="sourceLink" href="https://github.com/nltk/nltk/tree/3.6.2/nltk/corpus/reader/ipipan.py#L145">
+      
+      (source)
+    </a>
+  </div>
+  <div class="docstring functionBody">
+    
+    
+    <div><p class="undocumented">Undocumented</p></div>
+  </div>
+</div><div class="basemethod">
+  
+  
+  <a name="nltk.corpus.reader.ipipan.IPIPANCorpusReader.tagged_words">
+    
+  </a>
+  <a name="tagged_words">
+    
+  </a>
+  <div class="functionHeader">
+    @_parse_args<br />
+    <span class="py-keyword">def</span> <span class="py-defname">tagged_words</span>(self, fileids=None, **kwargs):
+    <a class="sourceLink" href="https://github.com/nltk/nltk/tree/3.6.2/nltk/corpus/reader/ipipan.py#L163">
+      
+      (source)
+    </a>
+  </div>
+  <div class="docstring functionBody">
+    
+    
+    <div><p class="undocumented">Undocumented</p></div>
+  </div>
+</div><div class="basemethod">
+  
+  
+  <a name="nltk.corpus.reader.ipipan.IPIPANCorpusReader.words">
+    
+  </a>
+  <a name="words">
+    
+  </a>
+  <div class="functionHeader">
+    @_parse_args<br />
+    <span class="py-keyword">def</span> <span class="py-defname">words</span>(self, fileids=None, **kwargs):
+    <a class="sourceLink" href="https://github.com/nltk/nltk/tree/3.6.2/nltk/corpus/reader/ipipan.py#L136">
+      
+      (source)
+    </a>
+  </div>
+  <div class="docstring functionBody">
+    
+    
+    <div><p class="undocumented">Undocumented</p></div>
+  </div>
+</div><div class="basemethod private">
+  
+  
+  <a name="nltk.corpus.reader.ipipan.IPIPANCorpusReader._get_tag">
+    
+  </a>
+  <a name="_get_tag">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-keyword">def</span> <span class="py-defname">_get_tag</span>(self, f, tag):
+    <a class="sourceLink" href="https://github.com/nltk/nltk/tree/3.6.2/nltk/corpus/reader/ipipan.py#L199">
+      
+      (source)
+    </a>
+  </div>
+  <div class="docstring functionBody">
+    
+    
+    <div><p class="undocumented">Undocumented</p></div>
+  </div>
+</div><div class="basemethod private">
+  
+  
+  <a name="nltk.corpus.reader.ipipan.IPIPANCorpusReader._list_header_files">
+    
+  </a>
+  <a name="_list_header_files">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-keyword">def</span> <span class="py-defname">_list_header_files</span>(self, fileids):
+    <a class="sourceLink" href="https://github.com/nltk/nltk/tree/3.6.2/nltk/corpus/reader/ipipan.py#L172">
+      
+      (source)
+    </a>
+  </div>
+  <div class="docstring functionBody">
+    
+    
+    <div><p class="undocumented">Undocumented</p></div>
+  </div>
+</div><div class="basemethod private">
+  
+  
+  <a name="nltk.corpus.reader.ipipan.IPIPANCorpusReader._list_morph_files">
+    
+  </a>
+  <a name="_list_morph_files">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-keyword">def</span> <span class="py-defname">_list_morph_files</span>(self, fileids):
+    <a class="sourceLink" href="https://github.com/nltk/nltk/tree/3.6.2/nltk/corpus/reader/ipipan.py#L169">
+      
+      (source)
+    </a>
+  </div>
+  <div class="docstring functionBody">
+    
+    
+    <div><p class="undocumented">Undocumented</p></div>
+  </div>
+</div><div class="basemethod private">
+  
+  
+  <a name="nltk.corpus.reader.ipipan.IPIPANCorpusReader._list_morph_files_by">
+    
+  </a>
+  <a name="_list_morph_files_by">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-keyword">def</span> <span class="py-defname">_list_morph_files_by</span>(self, tag, values, map=None):
+    <a class="sourceLink" href="https://github.com/nltk/nltk/tree/3.6.2/nltk/corpus/reader/ipipan.py#L186">
+      
+      (source)
+    </a>
+  </div>
+  <div class="docstring functionBody">
+    
+    
+    <div><p class="undocumented">Undocumented</p></div>
+  </div>
+</div><div class="basemethod private">
+  
+  
+  <a name="nltk.corpus.reader.ipipan.IPIPANCorpusReader._map_category">
+    
+  </a>
+  <a name="_map_category">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-keyword">def</span> <span class="py-defname">_map_category</span>(self, cat):
+    <a class="sourceLink" href="https://github.com/nltk/nltk/tree/3.6.2/nltk/corpus/reader/ipipan.py#L211">
+      
+      (source)
+    </a>
+  </div>
+  <div class="docstring functionBody">
+    
+    
+    <div><p class="undocumented">Undocumented</p></div>
+  </div>
+</div><div class="basemethod private">
+  
+  
+  <a name="nltk.corpus.reader.ipipan.IPIPANCorpusReader._parse_header">
+    
+  </a>
+  <a name="_parse_header">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-keyword">def</span> <span class="py-defname">_parse_header</span>(self, fileids, tag):
+    <a class="sourceLink" href="https://github.com/nltk/nltk/tree/3.6.2/nltk/corpus/reader/ipipan.py#L178">
+      
+      (source)
+    </a>
+  </div>
+  <div class="docstring functionBody">
+    
+    
+    <div><p class="undocumented">Undocumented</p></div>
+  </div>
+</div><div class="basemethod private">
+  
+  
+  <a name="nltk.corpus.reader.ipipan.IPIPANCorpusReader._view">
+    
+  </a>
+  <a name="_view">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-keyword">def</span> <span class="py-defname">_view</span>(self, filename, **kwargs):
+    <a class="sourceLink" href="https://github.com/nltk/nltk/tree/3.6.2/nltk/corpus/reader/ipipan.py#L218">
+      
+      (source)
+    </a>
+  </div>
+  <div class="docstring functionBody">
+    
+    
+    <div><p class="undocumented">Undocumented</p></div>
+  </div>
+</div>
+
+      </div>
+    </div>
+
+    <footer class="navbar navbar-default">
+  
+  <div class="container">
+    <a href="index.html">API Documentation</a> for <a href="http://www.nltk.org/" class="projecthome">nltk-3.6.2</a>,
+  generated by <a href="https://github.com/twisted/pydoctor/">pydoctor</a>
+    21.2.2 at 2021-07-12 23:14:45.
+  </div>
+</footer>
+
+    <script src="pydoctor.js" type="text/javascript"></script>
+
+  </body>
+</html>

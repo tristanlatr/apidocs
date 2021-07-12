@@ -1,0 +1,727 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+          "DTD/xhtml1-strict.dtd">
+<html>
+  
+
+  <head>
+    
+    <title>nltk.sem.relextract</title>
+    <meta name="generator" content="pydoctor 21.2.2"> 
+        
+    </meta>
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=0.75" />
+    <link rel="stylesheet" type="text/css" href="bootstrap.min.css" />
+    <link rel="stylesheet" type="text/css" href="apidocs.css" />
+    <link rel="stylesheet" type="text/css" href="extra.css" />
+</head>
+
+  <body>
+
+    
+
+    <nav class="navbar navbar-default">
+  
+  <div class="container">
+
+    <div class="navbar-header">
+      
+      <div class="navlinks">
+        <span class="navbar-brand">
+          <a href="http://www.nltk.org/" class="projecthome">nltk-3.6.2</a> <a href="index.html">API Documentation</a>
+        </span>
+
+        <a href="moduleIndex.html">
+          Modules
+        </a>
+
+        <a href="classIndex.html">
+          Classes
+        </a>
+
+        <a href="nameIndex.html">
+          Names
+        </a>
+
+        <form action="search-results.html" id="search-box-container">
+          <div class="input-group">
+            <input id="search-box" name="search-query" placeholder="Search..." aria-label="Search" minlength="2" class="form-control" />
+            <span class="input-group-btn">
+              <button class="btn btn-default" type="submit" title="Search"><img src="fonts/search.svg" alt="Search!" /></button>
+              <a class="btn btn-default" id="search-help-button" title="Help" onclick="toggleSearchHelpText()"><img src="fonts/info.svg" alt="Help!" /></a>
+            </span>
+          </div>
+        </form>
+
+        <div class="rst-admonition hint" id="search-help-box">
+          <p class="rst-last">
+      
+            Search bar offers the following options:
+            <ul>   
+                <li>
+                  <strong>Term presence.</strong> The below example searches for documents that 
+                    must contain “foo”, might contain “bar” and must not contain “baz”:
+                  <br /> <code>'+foo bar -baz'</code>
+                </li> 
+
+                <li>
+                  <strong>Wildcards.</strong> The below example searches for documents with words beginning with “foo”:
+                  <br /> <code>'foo*'</code>
+                </li> 
+
+                <li>
+                  <strong>Search in specific fields.</strong> The following search matches all documents 
+                  that contains "foo" in their full dotted name and with “bar” in any field:
+                  <br /> <code>'+fullName:*foo* +bar'</code>
+
+                  <p>
+                    Possible fields: 'name', 'docstring', 'fullName'.
+                  </p>
+                </li>
+
+                <li>
+                  <strong>Fuzzy matches.</strong> The following search matches all documents 
+                  that have a word within 1 edit distance of “foo”:
+                  <br /> <code>'foo~1'</code>
+                </li>
+            </ul>
+
+          </p>
+        </div>
+
+      </div>
+
+
+    </div>
+  </div>
+
+  <script>
+ 
+    function toggleSearchHelpText() {
+        document.body.classList.toggle("search-help-hidden");
+    }
+    // Init search and help text
+    document.getElementById('search-box-container').style.display = 'block';
+    document.getElementById('search-help-box').style.display = 'block';
+    document.body.classList.add("search-help-hidden");
+
+  </script>
+
+</nav>
+
+    
+
+    <div class="container">
+
+      <div class="page-header">
+        <h1 class="module"><code><code><a href="nltk.html">nltk</a></code><wbr></wbr>.<code><a href="nltk.sem.html">sem</a></code><wbr></wbr>.<code><a href="nltk.sem.relextract.html">relextract</a></code></code></h1>
+        <div id="showPrivate">
+          <button class="btn btn-link" onclick="togglePrivate()">Toggle Private API</button>
+        </div>
+      </div>
+
+      <div class="categoryHeader">
+        module documentation
+      </div>
+
+      <div class="extrasDocstring">
+        <a href="https://github.com/nltk/nltk/tree/3.6.2/nltk/sem/relextract.py" class="sourceLink">(source)</a>
+        <p></p>
+      </div>
+
+      <div class="moduleDocstring">
+        <div><p>Code for extracting relational triples from the ieer and conll2002 corpora.</p>
+<p>Relations are stored internally as dictionaries ('reldicts').</p>
+<p>The two serialization outputs are "rtuple" and "clause".</p>
+<ul class="rst-simple">
+<li>An rtuple is a tuple of the form <tt class="rst-docutils literal">(subj, filler, obj)</tt>,
+where <tt class="rst-docutils literal">subj</tt> and <tt class="rst-docutils literal">obj</tt> are pairs of Named Entity mentions, and <tt class="rst-docutils literal">filler</tt> is the string of words
+occurring between <tt class="rst-docutils literal">sub</tt> and <tt class="rst-docutils literal">obj</tt> (with no intervening NEs). Strings are printed via <tt class="rst-docutils literal">repr()</tt> to
+circumvent locale variations in rendering utf-8 encoded strings.</li>
+<li>A clause is an atom of the form <tt class="rst-docutils literal">relsym(subjsym, objsym)</tt>,
+where the relation, subject and object have been canonicalized to single strings.</li>
+</ul>
+</div>
+      </div>
+
+      <div id="splitTables">
+        <table class="children sortable" id="id1453">
+  
+  
+  <tr class="function">
+    
+    <td>Function</td>
+    <td><code><a href="#class_abbrev">class_abbrev</a></code></td>
+    <td><span>Abbreviate an NE class name. :type type: str :rtype: str</span></td>
+  </tr><tr class="function">
+    
+    <td>Function</td>
+    <td><code><a href="#clause">clause</a></code></td>
+    <td><span class="undocumented">No summary</span></td>
+  </tr><tr class="function">
+    
+    <td>Function</td>
+    <td><code><a href="#conllesp">conllesp</a></code></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="function">
+    
+    <td>Function</td>
+    <td><code><a href="#conllned">conllned</a></code></td>
+    <td><span>Find the copula+'van' relation ('of') in the Dutch tagged training corpus from CoNLL 2002.</span></td>
+  </tr><tr class="function">
+    
+    <td>Function</td>
+    <td><code><a href="#descape_entity">descape_entity</a></code></td>
+    <td><span>Translate one entity to its ISO Latin value. Inspired by example from effbot.org</span></td>
+  </tr><tr class="function">
+    
+    <td>Function</td>
+    <td><code><a href="#extract_rels">extract_rels</a></code></td>
+    <td><span>Filter the output of <tt class="rst-docutils literal">semi_rel2reldict</tt> according to specified NE classes and a filler pattern.</span></td>
+  </tr><tr class="function">
+    
+    <td>Function</td>
+    <td><code><a href="#ieer_headlines">ieer_headlines</a></code></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="function">
+    
+    <td>Function</td>
+    <td><code><a href="#in_demo">in_demo</a></code></td>
+    <td><span>Select pairs of organizations and locations whose mentions occur with an intervening occurrence of the preposition "in".</span></td>
+  </tr><tr class="function">
+    
+    <td>Function</td>
+    <td><code><a href="#list2sym">list2sym</a></code></td>
+    <td><span class="undocumented">No summary</span></td>
+  </tr><tr class="function">
+    
+    <td>Function</td>
+    <td><code><a href="#ne_chunked">ne_chunked</a></code></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="function">
+    
+    <td>Function</td>
+    <td><code><a href="#roles_demo">roles_demo</a></code></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="function">
+    
+    <td>Function</td>
+    <td><code><a href="#rtuple">rtuple</a></code></td>
+    <td><span>Pretty print the reldict as an rtuple. :param reldict: a relation dictionary :type reldict: defaultdict</span></td>
+  </tr><tr class="function">
+    
+    <td>Function</td>
+    <td><code><a href="#semi_rel2reldict">semi_rel2reldict</a></code></td>
+    <td><span class="undocumented">No summary</span></td>
+  </tr><tr class="function">
+    
+    <td>Function</td>
+    <td><code><a href="#tree2semi_rel">tree2semi_rel</a></code></td>
+    <td><span>Group a chunk structure into a list of 'semi-relations' of the form (list(str), <tt class="rst-docutils literal">Tree</tt>).</span></td>
+  </tr><tr class="variable">
+    
+    <td>Variable</td>
+    <td><code><a href="#long2short">long2short</a></code></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="variable">
+    
+    <td>Variable</td>
+    <td><code><a href="#NE_CLASSES">NE_CLASSES</a></code></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="variable">
+    
+    <td>Variable</td>
+    <td><code><a href="#short2long">short2long</a></code></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="function private">
+    
+    <td>Function</td>
+    <td><code><a href="#_expand">_expand</a></code></td>
+    <td><span>Expand an NE class name. :type type: str :rtype: str</span></td>
+  </tr><tr class="function private">
+    
+    <td>Function</td>
+    <td><code><a href="#_join">_join</a></code></td>
+    <td><span class="undocumented">No summary</span></td>
+  </tr>
+</table>
+        
+
+          
+      </div>
+
+      <div id="childList">
+
+        <div class="basefunction">
+  
+  
+  <a name="nltk.sem.relextract.class_abbrev">
+    
+  </a>
+  <a name="class_abbrev">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-keyword">def</span> <span class="py-defname">class_abbrev</span>(type):
+    <a class="sourceLink" href="https://github.com/nltk/nltk/tree/3.6.2/nltk/sem/relextract.py#L75">
+      
+      (source)
+    </a>
+  </div>
+  <div class="docstring functionBody">
+    
+    
+    <div>Abbreviate an NE class name.
+:type type: str
+:rtype: str</div>
+  </div>
+</div><div class="basefunction">
+  
+  
+  <a name="nltk.sem.relextract.clause">
+    
+  </a>
+  <a name="clause">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-keyword">def</span> <span class="py-defname">clause</span>(reldict, relsym):
+    <a class="sourceLink" href="https://github.com/nltk/nltk/tree/3.6.2/nltk/sem/relextract.py#L287">
+      
+      (source)
+    </a>
+  </div>
+  <div class="docstring functionBody">
+    
+    
+    <div>Print the relation in clausal form.
+:param reldict: a relation dictionary
+:type reldict: defaultdict
+:param relsym: a label for the relation
+:type relsym: str</div>
+  </div>
+</div><div class="basefunction">
+  
+  
+  <a name="nltk.sem.relextract.conllesp">
+    
+  </a>
+  <a name="conllesp">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-keyword">def</span> <span class="py-defname">conllesp</span>():
+    <a class="sourceLink" href="https://github.com/nltk/nltk/tree/3.6.2/nltk/sem/relextract.py#L491">
+      
+      (source)
+    </a>
+  </div>
+  <div class="docstring functionBody">
+    
+    
+    <div><p class="undocumented">Undocumented</p></div>
+  </div>
+</div><div class="basefunction">
+  
+  
+  <a name="nltk.sem.relextract.conllned">
+    
+  </a>
+  <a name="conllned">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-keyword">def</span> <span class="py-defname">conllned</span>(trace=1):
+    <a class="sourceLink" href="https://github.com/nltk/nltk/tree/3.6.2/nltk/sem/relextract.py#L452">
+      
+      (source)
+    </a>
+  </div>
+  <div class="docstring functionBody">
+    
+    
+    <div>Find the copula+'van' relation ('of') in the Dutch tagged training corpus
+from CoNLL 2002.</div>
+  </div>
+</div><div class="basefunction">
+  
+  
+  <a name="nltk.sem.relextract.descape_entity">
+    
+  </a>
+  <a name="descape_entity">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-keyword">def</span> <span class="py-defname">descape_entity</span>(m, defs=html.entities.entitydefs):
+    <a class="sourceLink" href="https://github.com/nltk/nltk/tree/3.6.2/nltk/sem/relextract.py#L104">
+      
+      (source)
+    </a>
+  </div>
+  <div class="docstring functionBody">
+    
+    
+    <div>Translate one entity to its ISO Latin value.
+Inspired by example from effbot.org</div>
+  </div>
+</div><div class="basefunction">
+  
+  
+  <a name="nltk.sem.relextract.extract_rels">
+    
+  </a>
+  <a name="extract_rels">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-keyword">def</span> <span class="py-defname">extract_rels</span>(subjclass, objclass, doc, corpus='ace', pattern=None, window=10):
+    <a class="sourceLink" href="https://github.com/nltk/nltk/tree/3.6.2/nltk/sem/relextract.py#L202">
+      
+      (source)
+    </a>
+  </div>
+  <div class="docstring functionBody">
+    
+    
+    <div><p>Filter the output of <tt class="rst-docutils literal">semi_rel2reldict</tt> according to specified NE classes and a filler pattern.</p>
+<p>The parameters <tt class="rst-docutils literal">subjclass</tt> and <tt class="rst-docutils literal">objclass</tt> can be used to restrict the
+Named Entities to particular types (any of 'LOCATION', 'ORGANIZATION',
+'PERSON', 'DURATION', 'DATE', 'CARDINAL', 'PERCENT', 'MONEY', 'MEASURE').</p>
+<table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">subjclass:</span>str</td><td class="fieldArgDesc">the class of the subject Named Entity.</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">objclass:</span>str</td><td class="fieldArgDesc">the class of the object Named Entity.</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">doc:</span>ieer document or a list of chunk trees</td><td class="fieldArgDesc">input document</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">corpus:</span>str</td><td class="fieldArgDesc">name of the corpus to take as input; possible values are
+'ieer' and 'conll2002'</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">pattern:</span>SRE_Pattern</td><td class="fieldArgDesc">a regular expression for filtering the fillers of
+retrieved triples.</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">window:</span>int</td><td class="fieldArgDesc">filters out fillers which exceed this threshold</td></tr><tr class="fieldStart"><td class="fieldName" colspan="2">Returns</td></tr><tr><td class="fieldArgContainer">list(defaultdict)</td><td class="fieldArgDesc">see <tt class="rst-docutils literal">mk_reldicts</tt></td></tr></table></div>
+  </div>
+</div><div class="basefunction">
+  
+  
+  <a name="nltk.sem.relextract.ieer_headlines">
+    
+  </a>
+  <a name="ieer_headlines">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-keyword">def</span> <span class="py-defname">ieer_headlines</span>():
+    <a class="sourceLink" href="https://github.com/nltk/nltk/tree/3.6.2/nltk/sem/relextract.py#L429">
+      
+      (source)
+    </a>
+  </div>
+  <div class="docstring functionBody">
+    
+    
+    <div><p class="undocumented">Undocumented</p></div>
+  </div>
+</div><div class="basefunction">
+  
+  
+  <a name="nltk.sem.relextract.in_demo">
+    
+  </a>
+  <a name="in_demo">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-keyword">def</span> <span class="py-defname">in_demo</span>(trace=0, sql=True):
+    <a class="sourceLink" href="https://github.com/nltk/nltk/tree/3.6.2/nltk/sem/relextract.py#L306">
+      
+      (source)
+    </a>
+  </div>
+  <div class="docstring functionBody">
+    
+    
+    <div><p>Select pairs of organizations and locations whose mentions occur with an
+intervening occurrence of the preposition "in".</p>
+<p>If the sql parameter is set to True, then the entity pairs are loaded into
+an in-memory database, and subsequently pulled out using an SQL "SELECT"
+query.</p>
+</div>
+  </div>
+</div><div class="basefunction">
+  
+  
+  <a name="nltk.sem.relextract.list2sym">
+    
+  </a>
+  <a name="list2sym">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-keyword">def</span> <span class="py-defname">list2sym</span>(lst):
+    <a class="sourceLink" href="https://github.com/nltk/nltk/tree/3.6.2/nltk/sem/relextract.py#L118">
+      
+      (source)
+    </a>
+  </div>
+  <div class="docstring functionBody">
+    
+    
+    <div>Convert a list of strings into a canonical symbol.
+:type lst: list
+:return: a Unicode string without whitespace
+:rtype: unicode</div>
+  </div>
+</div><div class="basefunction">
+  
+  
+  <a name="nltk.sem.relextract.ne_chunked">
+    
+  </a>
+  <a name="ne_chunked">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-keyword">def</span> <span class="py-defname">ne_chunked</span>():
+    <a class="sourceLink" href="https://github.com/nltk/nltk/tree/3.6.2/nltk/sem/relextract.py#L516">
+      
+      (source)
+    </a>
+  </div>
+  <div class="docstring functionBody">
+    
+    
+    <div><p class="undocumented">Undocumented</p></div>
+  </div>
+</div><div class="basefunction">
+  
+  
+  <a name="nltk.sem.relextract.roles_demo">
+    
+  </a>
+  <a name="roles_demo">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-keyword">def</span> <span class="py-defname">roles_demo</span>(trace=0):
+    <a class="sourceLink" href="https://github.com/nltk/nltk/tree/3.6.2/nltk/sem/relextract.py#L378">
+      
+      (source)
+    </a>
+  </div>
+  <div class="docstring functionBody">
+    
+    
+    <div><p class="undocumented">Undocumented</p></div>
+  </div>
+</div><div class="basefunction">
+  
+  
+  <a name="nltk.sem.relextract.rtuple">
+    
+  </a>
+  <a name="rtuple">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-keyword">def</span> <span class="py-defname">rtuple</span>(reldict, lcon=False, rcon=False):
+    <a class="sourceLink" href="https://github.com/nltk/nltk/tree/3.6.2/nltk/sem/relextract.py#L263">
+      
+      (source)
+    </a>
+  </div>
+  <div class="docstring functionBody">
+    
+    
+    <div>Pretty print the reldict as an rtuple.
+:param reldict: a relation dictionary
+:type reldict: defaultdict</div>
+  </div>
+</div><div class="basefunction">
+  
+  
+  <a name="nltk.sem.relextract.semi_rel2reldict">
+    
+  </a>
+  <a name="semi_rel2reldict">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-keyword">def</span> <span class="py-defname">semi_rel2reldict</span>(pairs, window=5, trace=False):
+    <a class="sourceLink" href="https://github.com/nltk/nltk/tree/3.6.2/nltk/sem/relextract.py#L162">
+      
+      (source)
+    </a>
+  </div>
+  <div class="docstring functionBody">
+    
+    
+    <div>Converts the pairs generated by <tt class="rst-docutils literal">tree2semi_rel</tt> into a 'reldict': a dictionary which
+stores information about the subject and object NEs plus the filler between them.
+Additionally, a left and right context of length =&lt; window are captured (within
+a given input sentence).<table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">pairs</span></td><td class="fieldArgDesc">a pair of list(str) and <tt class="rst-docutils literal">Tree</tt>, as generated by</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">window:</span>int</td><td class="fieldArgDesc">a threshold for the number of items to include in the left and right context</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">trace</span></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr class="fieldStart"><td class="fieldName" colspan="2">Returns</td></tr><tr><td class="fieldArgContainer">list(defaultdict)</td><td class="fieldArgDesc">'relation' dictionaries whose keys are 'lcon', 'subjclass', 'subjtext', 'subjsym', 'filler', objclass', objtext', 'objsym' and 'rcon'</td></tr></table></div>
+  </div>
+</div><div class="basefunction">
+  
+  
+  <a name="nltk.sem.relextract.tree2semi_rel">
+    
+  </a>
+  <a name="tree2semi_rel">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-keyword">def</span> <span class="py-defname">tree2semi_rel</span>(tree):
+    <a class="sourceLink" href="https://github.com/nltk/nltk/tree/3.6.2/nltk/sem/relextract.py#L133">
+      
+      (source)
+    </a>
+  </div>
+  <div class="docstring functionBody">
+    
+    
+    <div><p>Group a chunk structure into a list of 'semi-relations' of the form (list(str), <tt class="rst-docutils literal">Tree</tt>).</p>
+<p>In order to facilitate the construction of (<tt class="rst-docutils literal">Tree</tt>, string, <tt class="rst-docutils literal">Tree</tt>) triples, this
+identifies pairs whose first member is a list (possibly empty) of terminal
+strings, and whose second member is a <tt class="rst-docutils literal">Tree</tt> of the form (NE_label, terminals).</p>
+<table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">tree</span></td><td class="fieldArgDesc">a chunk tree</td></tr><tr class="fieldStart"><td class="fieldName" colspan="2">Returns</td></tr><tr><td class="fieldArgContainer">list of tuple</td><td class="fieldArgDesc">a list of pairs (list(str), <tt class="rst-docutils literal">Tree</tt>)</td></tr></table></div>
+  </div>
+</div><div class="basevariable">
+  
+  
+  <a name="nltk.sem.relextract.long2short">
+    
+  </a>
+  <a name="long2short">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-defname">long2short</span> =
+    <a class="sourceLink" href="https://github.com/nltk/nltk/tree/3.6.2/nltk/sem/relextract.py#L60">
+      
+      (source)
+    </a>
+  </div>
+  <div class="functionBody">
+    
+    
+    <div><p class="undocumented">Undocumented</p></div>
+  </div>
+</div><div class="basevariable">
+  
+  
+  <a name="nltk.sem.relextract.NE_CLASSES">
+    
+  </a>
+  <a name="NE_CLASSES">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-defname">NE_CLASSES</span>: <code>dict</code> =
+    <a class="sourceLink" href="https://github.com/nltk/nltk/tree/3.6.2/nltk/sem/relextract.py#L30">
+      
+      (source)
+    </a>
+  </div>
+  <div class="functionBody">
+    
+    
+    <div><p class="undocumented">Undocumented</p></div>
+  </div>
+</div><div class="basevariable">
+  
+  
+  <a name="nltk.sem.relextract.short2long">
+    
+  </a>
+  <a name="short2long">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-defname">short2long</span> =
+    <a class="sourceLink" href="https://github.com/nltk/nltk/tree/3.6.2/nltk/sem/relextract.py#L59">
+      
+      (source)
+    </a>
+  </div>
+  <div class="functionBody">
+    
+    
+    <div><p class="undocumented">Undocumented</p></div>
+  </div>
+</div><div class="basefunction private">
+  
+  
+  <a name="nltk.sem.relextract._expand">
+    
+  </a>
+  <a name="_expand">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-keyword">def</span> <span class="py-defname">_expand</span>(type):
+    <a class="sourceLink" href="https://github.com/nltk/nltk/tree/3.6.2/nltk/sem/relextract.py#L63">
+      
+      (source)
+    </a>
+  </div>
+  <div class="docstring functionBody">
+    
+    
+    <div>Expand an NE class name.
+:type type: str
+:rtype: str</div>
+  </div>
+</div><div class="basefunction private">
+  
+  
+  <a name="nltk.sem.relextract._join">
+    
+  </a>
+  <a name="_join">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-keyword">def</span> <span class="py-defname">_join</span>(lst, sep=' ', untag=False):
+    <a class="sourceLink" href="https://github.com/nltk/nltk/tree/3.6.2/nltk/sem/relextract.py#L87">
+      
+      (source)
+    </a>
+  </div>
+  <div class="docstring functionBody">
+    
+    
+    <div>Join a list into a string, turning tags tuples into tag strings or just words.
+:param untag: if <tt class="rst-docutils literal">True</tt>, omit the tag from tagged input strings.
+:type lst: list
+:rtype: str</div>
+  </div>
+</div>
+
+      </div>
+    </div>
+
+    <footer class="navbar navbar-default">
+  
+  <div class="container">
+    <a href="index.html">API Documentation</a> for <a href="http://www.nltk.org/" class="projecthome">nltk-3.6.2</a>,
+  generated by <a href="https://github.com/twisted/pydoctor/">pydoctor</a>
+    21.2.2 at 2021-07-12 23:14:45.
+  </div>
+</footer>
+
+    <script src="pydoctor.js" type="text/javascript"></script>
+
+  </body>
+</html>

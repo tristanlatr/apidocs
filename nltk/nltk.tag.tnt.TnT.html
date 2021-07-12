@@ -1,0 +1,874 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+          "DTD/xhtml1-strict.dtd">
+<html>
+  
+
+  <head>
+    
+    <title>nltk.tag.tnt.TnT</title>
+    <meta name="generator" content="pydoctor 21.2.2"> 
+        
+    </meta>
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=0.75" />
+    <link rel="stylesheet" type="text/css" href="bootstrap.min.css" />
+    <link rel="stylesheet" type="text/css" href="apidocs.css" />
+    <link rel="stylesheet" type="text/css" href="extra.css" />
+</head>
+
+  <body>
+
+    
+
+    <nav class="navbar navbar-default">
+  
+  <div class="container">
+
+    <div class="navbar-header">
+      
+      <div class="navlinks">
+        <span class="navbar-brand">
+          <a href="http://www.nltk.org/" class="projecthome">nltk-3.6.2</a> <a href="index.html">API Documentation</a>
+        </span>
+
+        <a href="moduleIndex.html">
+          Modules
+        </a>
+
+        <a href="classIndex.html">
+          Classes
+        </a>
+
+        <a href="nameIndex.html">
+          Names
+        </a>
+
+        <form action="search-results.html" id="search-box-container">
+          <div class="input-group">
+            <input id="search-box" name="search-query" placeholder="Search..." aria-label="Search" minlength="2" class="form-control" />
+            <span class="input-group-btn">
+              <button class="btn btn-default" type="submit" title="Search"><img src="fonts/search.svg" alt="Search!" /></button>
+              <a class="btn btn-default" id="search-help-button" title="Help" onclick="toggleSearchHelpText()"><img src="fonts/info.svg" alt="Help!" /></a>
+            </span>
+          </div>
+        </form>
+
+        <div class="rst-admonition hint" id="search-help-box">
+          <p class="rst-last">
+      
+            Search bar offers the following options:
+            <ul>   
+                <li>
+                  <strong>Term presence.</strong> The below example searches for documents that 
+                    must contain “foo”, might contain “bar” and must not contain “baz”:
+                  <br /> <code>'+foo bar -baz'</code>
+                </li> 
+
+                <li>
+                  <strong>Wildcards.</strong> The below example searches for documents with words beginning with “foo”:
+                  <br /> <code>'foo*'</code>
+                </li> 
+
+                <li>
+                  <strong>Search in specific fields.</strong> The following search matches all documents 
+                  that contains "foo" in their full dotted name and with “bar” in any field:
+                  <br /> <code>'+fullName:*foo* +bar'</code>
+
+                  <p>
+                    Possible fields: 'name', 'docstring', 'fullName'.
+                  </p>
+                </li>
+
+                <li>
+                  <strong>Fuzzy matches.</strong> The following search matches all documents 
+                  that have a word within 1 edit distance of “foo”:
+                  <br /> <code>'foo~1'</code>
+                </li>
+            </ul>
+
+          </p>
+        </div>
+
+      </div>
+
+
+    </div>
+  </div>
+
+  <script>
+ 
+    function toggleSearchHelpText() {
+        document.body.classList.toggle("search-help-hidden");
+    }
+    // Init search and help text
+    document.getElementById('search-box-container').style.display = 'block';
+    document.getElementById('search-help-box').style.display = 'block';
+    document.body.classList.add("search-help-hidden");
+
+  </script>
+
+</nav>
+
+    
+
+    <div class="container">
+
+      <div class="page-header">
+        <h1 class="class"><code><code><a href="nltk.html">nltk</a></code><wbr></wbr>.<code><a href="nltk.tag.html">tag</a></code><wbr></wbr>.<code><a href="nltk.tag.tnt.html">tnt</a></code><wbr></wbr>.<code><a href="nltk.tag.tnt.TnT.html">TnT</a></code></code></h1>
+        <div id="showPrivate">
+          <button class="btn btn-link" onclick="togglePrivate()">Toggle Private API</button>
+        </div>
+      </div>
+
+      <div class="categoryHeader">
+        class documentation
+      </div>
+
+      <div class="extrasDocstring">
+        <p><code><span class="py-keyword">class</span> <span class="py-defname">TnT</span>(<a href="nltk.tag.api.TaggerI.html" title="nltk.tag.api.TaggerI">TaggerI</a>): <a href="https://github.com/nltk/nltk/tree/3.6.2/nltk/tag/tnt.py#L24" class="sourceLink">(source)</a></code></p>
+        <p><a href="classIndex.html#nltk.tag.tnt.TnT">View In Hierarchy</a></p>
+      </div>
+
+      <div class="moduleDocstring">
+        <div><p>TnT - Statistical POS tagger</p>
+<p>IMPORTANT NOTES:</p>
+<ul class="rst-simple">
+<li>DOES NOT AUTOMATICALLY DEAL WITH UNSEEN WORDS<ul>
+<li>It is possible to provide an untrained POS tagger to
+create tags for unknown words, see __init__ function</li>
+</ul>
+</li>
+<li>SHOULD BE USED WITH SENTENCE-DELIMITED INPUT<ul>
+<li>Due to the nature of this tagger, it works best when
+trained over sentence delimited input.</li>
+<li>However it still produces good results if the training
+data and testing data are separated on all punctuation eg: [,.?!]</li>
+<li>Input for training is expected to be a list of sentences
+where each sentence is a list of (word, tag) tuples</li>
+<li>Input for tag function is a single sentence
+Input for tagdata function is a list of sentences
+Output is of a similar form</li>
+</ul>
+</li>
+<li>Function provided to process text that is unsegmented<ul>
+<li>Please see basic_sent_chop()</li>
+</ul>
+</li>
+</ul>
+<p>TnT uses a second order Markov model to produce tags for
+a sequence of input, specifically:</p>
+<blockquote>
+argmax [Proj(P(t_i|t_i-1,t_i-2)P(w_i|t_i))] P(t_T+1 | t_T)</blockquote>
+<p>IE: the maximum projection of a set of probabilities</p>
+<p>The set of possible tags for a given word is derived
+from the training data. It is the set of all tags
+that exact word has been assigned.</p>
+<p>To speed up and get more precision, we can use log addition
+to instead multiplication, specifically:</p>
+<blockquote>
+<dl class="rst-docutils">
+<dt>argmax [Sigma(log(P(t_i|t_i-1,t_i-2))+log(P(w_i|t_i)))] +</dt>
+<dd>log(P(t_T+1|t_T))</dd>
+</dl>
+</blockquote>
+<p>The probability of a tag for a given word is the linear
+interpolation of 3 markov models; a zero-order, first-order,
+and a second order model.</p>
+<blockquote>
+<dl class="rst-docutils">
+<dt>P(t_i| t_i-1, t_i-2) = l1*P(t_i) + l2*P(t_i| t_i-1) +</dt>
+<dd>l3*P(t_i| t_i-1, t_i-2)</dd>
+</dl>
+</blockquote>
+<p>A beam search is used to limit the memory usage of the algorithm.
+The degree of the beam can be changed using N in the initialization.
+N represents the maximum number of possible solutions to maintain
+while tagging.</p>
+<p>It is possible to differentiate the tags which are assigned to
+capitalized words. However this does not result in a significant
+gain in the accuracy of the results.</p>
+</div>
+      </div>
+
+      <div id="splitTables">
+        <table class="children sortable" id="id1627">
+  
+  
+  <tr class="method">
+    
+    <td>Method</td>
+    <td><code><a href="#__init__">__init__</a></code></td>
+    <td><span>Construct a TnT statistical tagger. Tagger must be trained before being used to tag input.</span></td>
+  </tr><tr class="method">
+    
+    <td>Method</td>
+    <td><code><a href="#tag">tag</a></code></td>
+    <td><span>Tags a single sentence</span></td>
+  </tr><tr class="method">
+    
+    <td>Method</td>
+    <td><code><a href="#tagdata">tagdata</a></code></td>
+    <td><span>Tags each sentence in a list of sentences</span></td>
+  </tr><tr class="method">
+    
+    <td>Method</td>
+    <td><code><a href="#train">train</a></code></td>
+    <td><span>Uses a set of tagged data to train the tagger. If an unknown word tagger is specified, it is trained on the same data.</span></td>
+  </tr><tr class="instancevariable">
+    
+    <td>Instance Variable</td>
+    <td><code><a href="#known">known</a></code></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="instancevariable">
+    
+    <td>Instance Variable</td>
+    <td><code><a href="#unknown">unknown</a></code></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="method private">
+    
+    <td>Method</td>
+    <td><code><a href="#_compute_lambda">_compute_lambda</a></code></td>
+    <td><span>creates lambda values based upon training data</span></td>
+  </tr><tr class="method private">
+    
+    <td>Method</td>
+    <td><code><a href="#_safe_div">_safe_div</a></code></td>
+    <td><span>Safe floating point division function, does not allow division by 0 returns -1 if the denominator is 0</span></td>
+  </tr><tr class="method private">
+    
+    <td>Method</td>
+    <td><code><a href="#_tagword">_tagword</a></code></td>
+    <td><span class="undocumented">No summary</span></td>
+  </tr><tr class="instancevariable private">
+    
+    <td>Instance Variable</td>
+    <td><code><a href="#_bi">_bi</a></code></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="instancevariable private">
+    
+    <td>Instance Variable</td>
+    <td><code><a href="#_C">_C</a></code></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="instancevariable private">
+    
+    <td>Instance Variable</td>
+    <td><code><a href="#_eos">_eos</a></code></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="instancevariable private">
+    
+    <td>Instance Variable</td>
+    <td><code><a href="#_l1">_l1</a></code></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="instancevariable private">
+    
+    <td>Instance Variable</td>
+    <td><code><a href="#_l2">_l2</a></code></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="instancevariable private">
+    
+    <td>Instance Variable</td>
+    <td><code><a href="#_l3">_l3</a></code></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="instancevariable private">
+    
+    <td>Instance Variable</td>
+    <td><code><a href="#_N">_N</a></code></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="instancevariable private">
+    
+    <td>Instance Variable</td>
+    <td><code><a href="#_T">_T</a></code></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="instancevariable private">
+    
+    <td>Instance Variable</td>
+    <td><code><a href="#_tri">_tri</a></code></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="instancevariable private">
+    
+    <td>Instance Variable</td>
+    <td><code><a href="#_uni">_uni</a></code></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="instancevariable private">
+    
+    <td>Instance Variable</td>
+    <td><code><a href="#_unk">_unk</a></code></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="instancevariable private">
+    
+    <td>Instance Variable</td>
+    <td><code><a href="#_wd">_wd</a></code></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr>
+</table>
+        
+          <p class="inheritedFrom">
+            Inherited from <code><a href="nltk.tag.api.TaggerI.html">TaggerI</a></code>:
+          </p>
+          <table class="children sortable" id="id1628">
+  
+  
+  <tr class="basemethod">
+    
+    <td>Method</td>
+    <td><code><a href="nltk.tag.api.TaggerI.html#evaluate">evaluate</a></code></td>
+    <td><span>Score the accuracy of the tagger against the gold standard. Strip the tags from the gold standard text, retag it using the tagger, then compute the accuracy score.</span></td>
+  </tr><tr class="basemethod">
+    
+    <td>Method</td>
+    <td><code><a href="nltk.tag.api.TaggerI.html#tag_sents">tag_sents</a></code></td>
+    <td><span>Apply <tt class="rst-docutils literal">self.tag()</tt> to each element of <em>sentences</em>.  I.e.:</span></td>
+  </tr><tr class="basemethod private">
+    
+    <td>Method</td>
+    <td><code><a href="nltk.tag.api.TaggerI.html#_check_params">_check_params</a></code></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr>
+</table>
+          
+
+          
+      </div>
+
+      <div id="childList">
+
+        <div class="basemethod">
+  
+  
+  <a name="nltk.tag.tnt.TnT.__init__">
+    
+  </a>
+  <a name="__init__">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-keyword">def</span> <span class="py-defname">__init__</span>(self, unk=None, Trained=False, N=1000, C=False):
+    <a class="sourceLink" href="https://github.com/nltk/nltk/tree/3.6.2/nltk/tag/tnt.py#L86">
+      
+      (source)
+    </a>
+  </div>
+  <div class="docstring functionBody">
+    
+    
+    <div><p>Construct a TnT statistical tagger. Tagger must be trained
+before being used to tag input.</p>
+<p>:type  unk:(TaggerI)
+:param Trained: Indication that the POS tagger is trained or not
+:type  Trained: boolean
+:param N: Beam search degree (see above)
+:type  N:(int)
+:param C: Capitalization flag
+:type  C: boolean</p>
+<p>Initializer, creates frequency distributions to be used
+for tagging</p>
+<p>_lx values represent the portion of the tri/bi/uni taggers
+to be used to calculate the probability</p>
+<p>N value is the number of possible solutions to maintain
+while tagging. A good value for this is 1000</p>
+<p>C is a boolean value which specifies to use or
+not use the Capitalization of the word as additional
+information for tagging.
+NOTE: using capitalization may not increase the accuracy
+of the tagger</p>
+<table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">unk</span></td><td class="fieldArgDesc">instance of a POS tagger, conforms to TaggerI</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">Trained</span></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">N</span></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">C</span></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr></table></div>
+  </div>
+</div><div class="basemethod">
+  
+  
+  <a name="nltk.tag.tnt.TnT.tag">
+    
+  </a>
+  <a name="tag">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-keyword">def</span> <span class="py-defname">tag</span>(self, data):
+    <a class="sourceLink" href="https://github.com/nltk/nltk/tree/3.6.2/nltk/tag/tnt.py#L285">
+      
+      (source)
+    </a>
+  </div>
+  <div class="docstring functionBody">
+    <div class="interfaceinfo">overrides <code><a href="nltk.tag.api.TaggerI.html#tag">nltk.tag.api.TaggerI.tag</a></code></div>
+    
+    <div><p>Tags a single sentence</p>
+<p>Calls recursive function '_tagword'
+to produce a list of tags</p>
+<p>Associates the sequence of returned tags
+with the correct words in the input sequence</p>
+<p>returns a list of (word, tag) tuples</p>
+<table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">data:</span>[string,]</td><td class="fieldArgDesc">list of words</td></tr><tr class="fieldStart"><td class="fieldName" colspan="2">Returns</td></tr><tr><td colspan="2">[(word, tag),]</td></tr></table></div>
+  </div>
+</div><div class="basemethod">
+  
+  
+  <a name="nltk.tag.tnt.TnT.tagdata">
+    
+  </a>
+  <a name="tagdata">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-keyword">def</span> <span class="py-defname">tagdata</span>(self, data):
+    <a class="sourceLink" href="https://github.com/nltk/nltk/tree/3.6.2/nltk/tag/tnt.py#L267">
+      
+      (source)
+    </a>
+  </div>
+  <div class="docstring functionBody">
+    
+    
+    <div><p>Tags each sentence in a list of sentences</p>
+<p>:param <a class="rst-reference external" href="data:list" target="_top">data:list</a> of list of words
+:type data: [[string,],]
+:return: list of list of (word, tag) tuples</p>
+<p>Invokes tag(sent) function for each sentence
+compiles the results into a list of tagged sentences
+each tagged sentence is a list of (word, tag) tuples</p>
+</div>
+  </div>
+</div><div class="basemethod">
+  
+  
+  <a name="nltk.tag.tnt.TnT.train">
+    
+  </a>
+  <a name="train">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-keyword">def</span> <span class="py-defname">train</span>(self, data):
+    <a class="sourceLink" href="https://github.com/nltk/nltk/tree/3.6.2/nltk/tag/tnt.py#L134">
+      
+      (source)
+    </a>
+  </div>
+  <div class="docstring functionBody">
+    
+    
+    <div>Uses a set of tagged data to train the tagger.
+If an unknown word tagger is specified,
+it is trained on the same data.<table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">data:</span>tuple(str)</td><td class="fieldArgDesc">List of lists of (word, tag) tuples</td></tr></table></div>
+  </div>
+</div><div class="baseinstancevariable">
+  
+  
+  <a name="nltk.tag.tnt.TnT.known">
+    
+  </a>
+  <a name="known">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-defname">known</span>: <code>int</code> =
+    <a class="sourceLink" href="https://github.com/nltk/nltk/tree/3.6.2/nltk/tag/tnt.py#L132">
+      
+      (source)
+    </a>
+  </div>
+  <div class="functionBody">
+    
+    
+    <div><p class="undocumented">Undocumented</p></div>
+  </div>
+</div><div class="baseinstancevariable">
+  
+  
+  <a name="nltk.tag.tnt.TnT.unknown">
+    
+  </a>
+  <a name="unknown">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-defname">unknown</span>: <code>int</code> =
+    <a class="sourceLink" href="https://github.com/nltk/nltk/tree/3.6.2/nltk/tag/tnt.py#L131">
+      
+      (source)
+    </a>
+  </div>
+  <div class="functionBody">
+    
+    
+    <div><p class="undocumented">Undocumented</p></div>
+  </div>
+</div><div class="basemethod private">
+  
+  
+  <a name="nltk.tag.tnt.TnT._compute_lambda">
+    
+  </a>
+  <a name="_compute_lambda">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-keyword">def</span> <span class="py-defname">_compute_lambda</span>(self):
+    <a class="sourceLink" href="https://github.com/nltk/nltk/tree/3.6.2/nltk/tag/tnt.py#L176">
+      
+      (source)
+    </a>
+  </div>
+  <div class="docstring functionBody">
+    
+    
+    <div><p>creates lambda values based upon training data</p>
+<p>NOTE: no need to explicitly reference C,
+it is contained within the tag variable :: tag == (tag,C)</p>
+<p>for each tag trigram (t1, t2, t3)
+depending on the maximum value of
+- f(t1,t2,t3)-1 / f(t1,t2)-1
+- f(t2,t3)-1 / f(t2)-1
+- f(t3)-1 / N-1</p>
+<p>increment l3,l2, or l1 by f(t1,t2,t3)</p>
+<p>ISSUES -- Resolutions:
+if 2 values are equal, increment both lambda values
+by (f(t1,t2,t3) / 2)</p>
+</div>
+  </div>
+</div><div class="basemethod private">
+  
+  
+  <a name="nltk.tag.tnt.TnT._safe_div">
+    
+  </a>
+  <a name="_safe_div">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-keyword">def</span> <span class="py-defname">_safe_div</span>(self, v1, v2):
+    <a class="sourceLink" href="https://github.com/nltk/nltk/tree/3.6.2/nltk/tag/tnt.py#L257">
+      
+      (source)
+    </a>
+  </div>
+  <div class="docstring functionBody">
+    
+    
+    <div>Safe floating point division function, does not allow division by 0
+returns -1 if the denominator is 0</div>
+  </div>
+</div><div class="basemethod private">
+  
+  
+  <a name="nltk.tag.tnt.TnT._tagword">
+    
+  </a>
+  <a name="_tagword">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-keyword">def</span> <span class="py-defname">_tagword</span>(self, sent, current_states):
+    <a class="sourceLink" href="https://github.com/nltk/nltk/tree/3.6.2/nltk/tag/tnt.py#L317">
+      
+      (source)
+    </a>
+  </div>
+  <div class="docstring functionBody">
+    
+    
+    <div><p>:param sent : List of words remaining in the sentence
+:type sent  : [word,]
+:param current_states : List of possible tag combinations for</p>
+<blockquote>
+the sentence so far, and the log probability
+associated with each tag combination</blockquote>
+<p>:type current_states  : [([tag, ], logprob), ]</p>
+<p>Tags the first word in the sentence and
+recursively tags the reminder of sentence</p>
+<p>Uses formula specified above to calculate the probability
+of a particular tag</p>
+</div>
+  </div>
+</div><div class="baseinstancevariable private">
+  
+  
+  <a name="nltk.tag.tnt.TnT._bi">
+    
+  </a>
+  <a name="_bi">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-defname">_bi</span> =
+    <a class="sourceLink" href="https://github.com/nltk/nltk/tree/3.6.2/nltk/tag/tnt.py#L117">
+      
+      (source)
+    </a>
+  </div>
+  <div class="functionBody">
+    
+    
+    <div><p class="undocumented">Undocumented</p></div>
+  </div>
+</div><div class="baseinstancevariable private">
+  
+  
+  <a name="nltk.tag.tnt.TnT._C">
+    
+  </a>
+  <a name="_C">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-defname">_C</span> =
+    <a class="sourceLink" href="https://github.com/nltk/nltk/tree/3.6.2/nltk/tag/tnt.py#L125">
+      
+      (source)
+    </a>
+  </div>
+  <div class="functionBody">
+    
+    
+    <div><p class="undocumented">Undocumented</p></div>
+  </div>
+</div><div class="baseinstancevariable private">
+  
+  
+  <a name="nltk.tag.tnt.TnT._eos">
+    
+  </a>
+  <a name="_eos">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-defname">_eos</span> =
+    <a class="sourceLink" href="https://github.com/nltk/nltk/tree/3.6.2/nltk/tag/tnt.py#L120">
+      
+      (source)
+    </a>
+  </div>
+  <div class="functionBody">
+    
+    
+    <div><p class="undocumented">Undocumented</p></div>
+  </div>
+</div><div class="baseinstancevariable private">
+  
+  
+  <a name="nltk.tag.tnt.TnT._l1">
+    
+  </a>
+  <a name="_l1">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-defname">_l1</span> =
+    <a class="sourceLink" href="https://github.com/nltk/nltk/tree/3.6.2/nltk/tag/tnt.py#L121">
+      
+      (source)
+    </a>
+  </div>
+  <div class="functionBody">
+    
+    
+    <div><p class="undocumented">Undocumented</p></div>
+  </div>
+</div><div class="baseinstancevariable private">
+  
+  
+  <a name="nltk.tag.tnt.TnT._l2">
+    
+  </a>
+  <a name="_l2">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-defname">_l2</span> =
+    <a class="sourceLink" href="https://github.com/nltk/nltk/tree/3.6.2/nltk/tag/tnt.py#L122">
+      
+      (source)
+    </a>
+  </div>
+  <div class="functionBody">
+    
+    
+    <div><p class="undocumented">Undocumented</p></div>
+  </div>
+</div><div class="baseinstancevariable private">
+  
+  
+  <a name="nltk.tag.tnt.TnT._l3">
+    
+  </a>
+  <a name="_l3">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-defname">_l3</span> =
+    <a class="sourceLink" href="https://github.com/nltk/nltk/tree/3.6.2/nltk/tag/tnt.py#L123">
+      
+      (source)
+    </a>
+  </div>
+  <div class="functionBody">
+    
+    
+    <div><p class="undocumented">Undocumented</p></div>
+  </div>
+</div><div class="baseinstancevariable private">
+  
+  
+  <a name="nltk.tag.tnt.TnT._N">
+    
+  </a>
+  <a name="_N">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-defname">_N</span> =
+    <a class="sourceLink" href="https://github.com/nltk/nltk/tree/3.6.2/nltk/tag/tnt.py#L124">
+      
+      (source)
+    </a>
+  </div>
+  <div class="functionBody">
+    
+    
+    <div><p class="undocumented">Undocumented</p></div>
+  </div>
+</div><div class="baseinstancevariable private">
+  
+  
+  <a name="nltk.tag.tnt.TnT._T">
+    
+  </a>
+  <a name="_T">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-defname">_T</span> =
+    <a class="sourceLink" href="https://github.com/nltk/nltk/tree/3.6.2/nltk/tag/tnt.py#L126">
+      
+      (source)
+    </a>
+  </div>
+  <div class="functionBody">
+    
+    
+    <div><p class="undocumented">Undocumented</p></div>
+  </div>
+</div><div class="baseinstancevariable private">
+  
+  
+  <a name="nltk.tag.tnt.TnT._tri">
+    
+  </a>
+  <a name="_tri">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-defname">_tri</span> =
+    <a class="sourceLink" href="https://github.com/nltk/nltk/tree/3.6.2/nltk/tag/tnt.py#L118">
+      
+      (source)
+    </a>
+  </div>
+  <div class="functionBody">
+    
+    
+    <div><p class="undocumented">Undocumented</p></div>
+  </div>
+</div><div class="baseinstancevariable private">
+  
+  
+  <a name="nltk.tag.tnt.TnT._uni">
+    
+  </a>
+  <a name="_uni">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-defname">_uni</span> =
+    <a class="sourceLink" href="https://github.com/nltk/nltk/tree/3.6.2/nltk/tag/tnt.py#L116">
+      
+      (source)
+    </a>
+  </div>
+  <div class="functionBody">
+    
+    
+    <div><p class="undocumented">Undocumented</p></div>
+  </div>
+</div><div class="baseinstancevariable private">
+  
+  
+  <a name="nltk.tag.tnt.TnT._unk">
+    
+  </a>
+  <a name="_unk">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-defname">_unk</span> =
+    <a class="sourceLink" href="https://github.com/nltk/nltk/tree/3.6.2/nltk/tag/tnt.py#L128">
+      
+      (source)
+    </a>
+  </div>
+  <div class="functionBody">
+    
+    
+    <div><p class="undocumented">Undocumented</p></div>
+  </div>
+</div><div class="baseinstancevariable private">
+  
+  
+  <a name="nltk.tag.tnt.TnT._wd">
+    
+  </a>
+  <a name="_wd">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-defname">_wd</span> =
+    <a class="sourceLink" href="https://github.com/nltk/nltk/tree/3.6.2/nltk/tag/tnt.py#L119">
+      
+      (source)
+    </a>
+  </div>
+  <div class="functionBody">
+    
+    
+    <div><p class="undocumented">Undocumented</p></div>
+  </div>
+</div>
+
+      </div>
+    </div>
+
+    <footer class="navbar navbar-default">
+  
+  <div class="container">
+    <a href="index.html">API Documentation</a> for <a href="http://www.nltk.org/" class="projecthome">nltk-3.6.2</a>,
+  generated by <a href="https://github.com/twisted/pydoctor/">pydoctor</a>
+    21.2.2 at 2021-07-12 23:14:45.
+  </div>
+</footer>
+
+    <script src="pydoctor.js" type="text/javascript"></script>
+
+  </body>
+</html>

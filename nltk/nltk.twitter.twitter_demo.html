@@ -1,0 +1,656 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+          "DTD/xhtml1-strict.dtd">
+<html>
+  
+
+  <head>
+    
+    <title>nltk.twitter.twitter_demo</title>
+    <meta name="generator" content="pydoctor 21.2.2"> 
+        
+    </meta>
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=0.75" />
+    <link rel="stylesheet" type="text/css" href="bootstrap.min.css" />
+    <link rel="stylesheet" type="text/css" href="apidocs.css" />
+    <link rel="stylesheet" type="text/css" href="extra.css" />
+</head>
+
+  <body>
+
+    
+
+    <nav class="navbar navbar-default">
+  
+  <div class="container">
+
+    <div class="navbar-header">
+      
+      <div class="navlinks">
+        <span class="navbar-brand">
+          <a href="http://www.nltk.org/" class="projecthome">nltk-3.6.2</a> <a href="index.html">API Documentation</a>
+        </span>
+
+        <a href="moduleIndex.html">
+          Modules
+        </a>
+
+        <a href="classIndex.html">
+          Classes
+        </a>
+
+        <a href="nameIndex.html">
+          Names
+        </a>
+
+        <form action="search-results.html" id="search-box-container">
+          <div class="input-group">
+            <input id="search-box" name="search-query" placeholder="Search..." aria-label="Search" minlength="2" class="form-control" />
+            <span class="input-group-btn">
+              <button class="btn btn-default" type="submit" title="Search"><img src="fonts/search.svg" alt="Search!" /></button>
+              <a class="btn btn-default" id="search-help-button" title="Help" onclick="toggleSearchHelpText()"><img src="fonts/info.svg" alt="Help!" /></a>
+            </span>
+          </div>
+        </form>
+
+        <div class="rst-admonition hint" id="search-help-box">
+          <p class="rst-last">
+      
+            Search bar offers the following options:
+            <ul>   
+                <li>
+                  <strong>Term presence.</strong> The below example searches for documents that 
+                    must contain “foo”, might contain “bar” and must not contain “baz”:
+                  <br /> <code>'+foo bar -baz'</code>
+                </li> 
+
+                <li>
+                  <strong>Wildcards.</strong> The below example searches for documents with words beginning with “foo”:
+                  <br /> <code>'foo*'</code>
+                </li> 
+
+                <li>
+                  <strong>Search in specific fields.</strong> The following search matches all documents 
+                  that contains "foo" in their full dotted name and with “bar” in any field:
+                  <br /> <code>'+fullName:*foo* +bar'</code>
+
+                  <p>
+                    Possible fields: 'name', 'docstring', 'fullName'.
+                  </p>
+                </li>
+
+                <li>
+                  <strong>Fuzzy matches.</strong> The following search matches all documents 
+                  that have a word within 1 edit distance of “foo”:
+                  <br /> <code>'foo~1'</code>
+                </li>
+            </ul>
+
+          </p>
+        </div>
+
+      </div>
+
+
+    </div>
+  </div>
+
+  <script>
+ 
+    function toggleSearchHelpText() {
+        document.body.classList.toggle("search-help-hidden");
+    }
+    // Init search and help text
+    document.getElementById('search-box-container').style.display = 'block';
+    document.getElementById('search-help-box').style.display = 'block';
+    document.body.classList.add("search-help-hidden");
+
+  </script>
+
+</nav>
+
+    
+
+    <div class="container">
+
+      <div class="page-header">
+        <h1 class="module"><code><code><a href="nltk.html">nltk</a></code><wbr></wbr>.<code><a href="nltk.twitter.html">twitter</a></code><wbr></wbr>.<code><a href="nltk.twitter.twitter_demo.html">twitter_demo</a></code></code></h1>
+        <div id="showPrivate">
+          <button class="btn btn-link" onclick="togglePrivate()">Toggle Private API</button>
+        </div>
+      </div>
+
+      <div class="categoryHeader">
+        module documentation
+      </div>
+
+      <div class="extrasDocstring">
+        <a href="https://github.com/nltk/nltk/tree/3.6.2/nltk/twitter/twitter_demo.py" class="sourceLink">(source)</a>
+        <p></p>
+      </div>
+
+      <div class="moduleDocstring">
+        <div><p>Examples to demo the <a href="#id1"><span class="rst-problematic" id="rst-id2">:py:mod:`twitterclient`</span></a> code.</p>
+<p>These demo functions should all run, with the following caveats:</p>
+<ul class="rst-simple">
+<li>You must have obtained API keys from Twitter, and installed them according to
+the instructions in the <a class="rst-reference external" href="http://www.nltk.org/howto/twitter.html" target="_top">twitter HOWTO</a>.</li>
+<li>If you are on a slow network, some of the calls to the Twitter API may
+timeout.</li>
+<li>If you are being rate limited while searching, you will receive a 420
+error response.</li>
+<li>Your terminal window / console must be able to display UTF-8 encoded characters.</li>
+</ul>
+<p>For documentation about the Twitter APIs, see <a class="rst-reference external" href="https://dev.twitter.com/streaming/overview" target="_top">The Streaming APIs Overview</a> and <a class="rst-reference external" href="https://dev.twitter.com/rest/public" target="_top">The REST APIs Overview</a>.</p>
+<p>For error codes see Twitter's
+<code>Error Codes and Responses</code></p>
+</div>
+      </div>
+
+      <div id="splitTables">
+        <table class="children sortable" id="id1954">
+  
+  
+  <tr class="function">
+    
+    <td>Function</td>
+    <td><code><a href="#corpusreader_demo">corpusreader_demo</a></code></td>
+    <td><span>Use <a href="#id1"><span class="rst-problematic" id="rst-id2">:module:`TwitterCorpusReader`</span></a> tp read a file of tweets, and print out</span></td>
+  </tr><tr class="function">
+    
+    <td>Function</td>
+    <td><code><a href="#expand_tweetids_demo">expand_tweetids_demo</a></code></td>
+    <td><span>Given a file object containing a list of Tweet IDs, fetch the corresponding full Tweets, if available.</span></td>
+  </tr><tr class="function">
+    
+    <td>Function</td>
+    <td><code><a href="#followtoscreen_demo">followtoscreen_demo</a></code></td>
+    <td><span>Using the Streaming API, select just the tweets from a specified list of userIDs.</span></td>
+  </tr><tr class="function">
+    
+    <td>Function</td>
+    <td><code><a href="#limit_by_time_demo">limit_by_time_demo</a></code></td>
+    <td><span>Query the REST API for Tweets about NLTK since yesterday and send the output to terminal.</span></td>
+  </tr><tr class="function">
+    
+    <td>Function</td>
+    <td><code><a href="#lookup_by_userid_demo">lookup_by_userid_demo</a></code></td>
+    <td><span>Use the REST API to convert a userID to a screen name.</span></td>
+  </tr><tr class="function">
+    
+    <td>Function</td>
+    <td><code><a href="#sampletoscreen_demo">sampletoscreen_demo</a></code></td>
+    <td><span>Sample from the Streaming API and send output to terminal.</span></td>
+  </tr><tr class="function">
+    
+    <td>Function</td>
+    <td><code><a href="#search_demo">search_demo</a></code></td>
+    <td><span>Use the REST API to search for past tweets containing a given keyword.</span></td>
+  </tr><tr class="function">
+    
+    <td>Function</td>
+    <td><code><a href="#setup">setup</a></code></td>
+    <td><span>Initialize global variables for the demos.</span></td>
+  </tr><tr class="function">
+    
+    <td>Function</td>
+    <td><code><a href="#streamtofile_demo">streamtofile_demo</a></code></td>
+    <td><span>Write 20 tweets sampled from the public Streaming API to a file.</span></td>
+  </tr><tr class="function">
+    
+    <td>Function</td>
+    <td><code><a href="#tracktoscreen_demo">tracktoscreen_demo</a></code></td>
+    <td><span>Track keywords from the public Streaming API and send output to terminal.</span></td>
+  </tr><tr class="function">
+    
+    <td>Function</td>
+    <td><code><a href="#tweets_by_user_demo">tweets_by_user_demo</a></code></td>
+    <td><span>Use the REST API to search for past tweets by a given user.</span></td>
+  </tr><tr class="function">
+    
+    <td>Function</td>
+    <td><code><a href="#twitterclass_demo">twitterclass_demo</a></code></td>
+    <td><span>Use the simplified <a href="#id1"><span class="rst-problematic" id="rst-id2">:class:`Twitter`</span></a> class to write some tweets to a file.</span></td>
+  </tr><tr class="function">
+    
+    <td>Function</td>
+    <td><code><a href="#verbose">verbose</a></code></td>
+    <td><span>Decorator for demo functions</span></td>
+  </tr><tr class="function">
+    
+    <td>Function</td>
+    <td><code><a href="#yesterday">yesterday</a></code></td>
+    <td><span>Get yesterday's datetime as a 5-tuple.</span></td>
+  </tr><tr class="variable">
+    
+    <td>Variable</td>
+    <td><code><a href="#ALL">ALL</a></code></td>
+    <td><span>Select demo functions to run. E.g. replace the following line with "DEMOS = ALL[8:]" to execute only the final three demos.</span></td>
+  </tr><tr class="variable">
+    
+    <td>Variable</td>
+    <td><code><a href="#DEMOS">DEMOS</a></code></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="variable">
+    
+    <td>Variable</td>
+    <td><code><a href="#SPACER">SPACER</a></code></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr>
+</table>
+        
+
+          
+      </div>
+
+      <div id="childList">
+
+        <div class="basefunction">
+  
+  
+  <a name="nltk.twitter.twitter_demo.corpusreader_demo">
+    
+  </a>
+  <a name="corpusreader_demo">
+    
+  </a>
+  <div class="functionHeader">
+    @verbose<br />
+    <span class="py-keyword">def</span> <span class="py-defname">corpusreader_demo</span>():
+    <a class="sourceLink" href="https://github.com/nltk/nltk/tree/3.6.2/nltk/twitter/twitter_demo.py#L216">
+      
+      (source)
+    </a>
+  </div>
+  <div class="docstring functionBody">
+    
+    
+    <div><p>Use <a href="#id1"><span class="rst-problematic" id="rst-id2">:module:`TwitterCorpusReader`</span></a> tp read a file of tweets, and print out</p>
+<ul class="rst-simple">
+<li>some full tweets in JSON format;</li>
+<li>some raw strings from the tweets (i.e., the value of the <code><a href="nltk.text.html">text</a></code> field); and</li>
+<li>the result of tokenising the raw strings.</li>
+</ul>
+</div>
+  </div>
+</div><div class="basefunction">
+  
+  
+  <a name="nltk.twitter.twitter_demo.expand_tweetids_demo">
+    
+  </a>
+  <a name="expand_tweetids_demo">
+    
+  </a>
+  <div class="functionHeader">
+    @verbose<br />
+    <span class="py-keyword">def</span> <span class="py-defname">expand_tweetids_demo</span>():
+    <a class="sourceLink" href="https://github.com/nltk/nltk/tree/3.6.2/nltk/twitter/twitter_demo.py#L247">
+      
+      (source)
+    </a>
+  </div>
+  <div class="docstring functionBody">
+    
+    
+    <div>Given a file object containing a list of Tweet IDs, fetch the
+corresponding full Tweets, if available.</div>
+  </div>
+</div><div class="basefunction">
+  
+  
+  <a name="nltk.twitter.twitter_demo.followtoscreen_demo">
+    
+  </a>
+  <a name="followtoscreen_demo">
+    
+  </a>
+  <div class="functionHeader">
+    @verbose<br />
+    <span class="py-keyword">def</span> <span class="py-defname">followtoscreen_demo</span>(limit=10):
+    <a class="sourceLink" href="https://github.com/nltk/nltk/tree/3.6.2/nltk/twitter/twitter_demo.py#L168">
+      
+      (source)
+    </a>
+  </div>
+  <div class="docstring functionBody">
+    
+    
+    <div><p>Using the Streaming API, select just the tweets from a specified list of
+userIDs.</p>
+<p>This is will only give results in a reasonable time if the users in
+question produce a high volume of tweets, and may even so show some delay.</p>
+</div>
+  </div>
+</div><div class="basefunction">
+  
+  
+  <a name="nltk.twitter.twitter_demo.limit_by_time_demo">
+    
+  </a>
+  <a name="limit_by_time_demo">
+    
+  </a>
+  <div class="functionHeader">
+    @verbose<br />
+    <span class="py-keyword">def</span> <span class="py-defname">limit_by_time_demo</span>(keywords='nltk'):
+    <a class="sourceLink" href="https://github.com/nltk/nltk/tree/3.6.2/nltk/twitter/twitter_demo.py#L194">
+      
+      (source)
+    </a>
+  </div>
+  <div class="docstring functionBody">
+    
+    
+    <div><p>Query the REST API for Tweets about NLTK since yesterday and send
+the output to terminal.</p>
+<p>This example makes the assumption that there are sufficient Tweets since
+yesterday for the date to be an effective cut-off.</p>
+</div>
+  </div>
+</div><div class="basefunction">
+  
+  
+  <a name="nltk.twitter.twitter_demo.lookup_by_userid_demo">
+    
+  </a>
+  <a name="lookup_by_userid_demo">
+    
+  </a>
+  <div class="functionHeader">
+    @verbose<br />
+    <span class="py-keyword">def</span> <span class="py-defname">lookup_by_userid_demo</span>():
+    <a class="sourceLink" href="https://github.com/nltk/nltk/tree/3.6.2/nltk/twitter/twitter_demo.py#L153">
+      
+      (source)
+    </a>
+  </div>
+  <div class="docstring functionBody">
+    
+    
+    <div>Use the REST API to convert a userID to a screen name.</div>
+  </div>
+</div><div class="basefunction">
+  
+  
+  <a name="nltk.twitter.twitter_demo.sampletoscreen_demo">
+    
+  </a>
+  <a name="sampletoscreen_demo">
+    
+  </a>
+  <div class="functionHeader">
+    @verbose<br />
+    <span class="py-keyword">def</span> <span class="py-defname">sampletoscreen_demo</span>(limit=20):
+    <a class="sourceLink" href="https://github.com/nltk/nltk/tree/3.6.2/nltk/twitter/twitter_demo.py#L109">
+      
+      (source)
+    </a>
+  </div>
+  <div class="docstring functionBody">
+    
+    
+    <div>Sample from the Streaming API and send output to terminal.</div>
+  </div>
+</div><div class="basefunction">
+  
+  
+  <a name="nltk.twitter.twitter_demo.search_demo">
+    
+  </a>
+  <a name="search_demo">
+    
+  </a>
+  <div class="functionHeader">
+    @verbose<br />
+    <span class="py-keyword">def</span> <span class="py-defname">search_demo</span>(keywords='nltk'):
+    <a class="sourceLink" href="https://github.com/nltk/nltk/tree/3.6.2/nltk/twitter/twitter_demo.py#L131">
+      
+      (source)
+    </a>
+  </div>
+  <div class="docstring functionBody">
+    
+    
+    <div>Use the REST API to search for past tweets containing a given keyword.</div>
+  </div>
+</div><div class="basefunction">
+  
+  
+  <a name="nltk.twitter.twitter_demo.setup">
+    
+  </a>
+  <a name="setup">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-keyword">def</span> <span class="py-defname">setup</span>():
+    <a class="sourceLink" href="https://github.com/nltk/nltk/tree/3.6.2/nltk/twitter/twitter_demo.py#L76">
+      
+      (source)
+    </a>
+  </div>
+  <div class="docstring functionBody">
+    
+    
+    <div>Initialize global variables for the demos.</div>
+  </div>
+</div><div class="basefunction">
+  
+  
+  <a name="nltk.twitter.twitter_demo.streamtofile_demo">
+    
+  </a>
+  <a name="streamtofile_demo">
+    
+  </a>
+  <div class="functionHeader">
+    @verbose<br />
+    <span class="py-keyword">def</span> <span class="py-defname">streamtofile_demo</span>(limit=20):
+    <a class="sourceLink" href="https://github.com/nltk/nltk/tree/3.6.2/nltk/twitter/twitter_demo.py#L183">
+      
+      (source)
+    </a>
+  </div>
+  <div class="docstring functionBody">
+    
+    
+    <div>Write 20 tweets sampled from the public Streaming API to a file.</div>
+  </div>
+</div><div class="basefunction">
+  
+  
+  <a name="nltk.twitter.twitter_demo.tracktoscreen_demo">
+    
+  </a>
+  <a name="tracktoscreen_demo">
+    
+  </a>
+  <div class="functionHeader">
+    @verbose<br />
+    <span class="py-keyword">def</span> <span class="py-defname">tracktoscreen_demo</span>(track='taylor swift', limit=10):
+    <a class="sourceLink" href="https://github.com/nltk/nltk/tree/3.6.2/nltk/twitter/twitter_demo.py#L120">
+      
+      (source)
+    </a>
+  </div>
+  <div class="docstring functionBody">
+    
+    
+    <div>Track keywords from the public Streaming API and send output to terminal.</div>
+  </div>
+</div><div class="basefunction">
+  
+  
+  <a name="nltk.twitter.twitter_demo.tweets_by_user_demo">
+    
+  </a>
+  <a name="tweets_by_user_demo">
+    
+  </a>
+  <div class="functionHeader">
+    @verbose<br />
+    <span class="py-keyword">def</span> <span class="py-defname">tweets_by_user_demo</span>(user='NLTK_org', count=200):
+    <a class="sourceLink" href="https://github.com/nltk/nltk/tree/3.6.2/nltk/twitter/twitter_demo.py#L142">
+      
+      (source)
+    </a>
+  </div>
+  <div class="docstring functionBody">
+    
+    
+    <div>Use the REST API to search for past tweets by a given user.</div>
+  </div>
+</div><div class="basefunction">
+  
+  
+  <a name="nltk.twitter.twitter_demo.twitterclass_demo">
+    
+  </a>
+  <a name="twitterclass_demo">
+    
+  </a>
+  <div class="functionHeader">
+    @verbose<br />
+    <span class="py-keyword">def</span> <span class="py-defname">twitterclass_demo</span>():
+    <a class="sourceLink" href="https://github.com/nltk/nltk/tree/3.6.2/nltk/twitter/twitter_demo.py#L88">
+      
+      (source)
+    </a>
+  </div>
+  <div class="docstring functionBody">
+    
+    
+    <div>Use the simplified <a href="#id1"><span class="rst-problematic" id="rst-id2">:class:`Twitter`</span></a> class to write some tweets to a file.</div>
+  </div>
+</div><div class="basefunction">
+  
+  
+  <a name="nltk.twitter.twitter_demo.verbose">
+    
+  </a>
+  <a name="verbose">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-keyword">def</span> <span class="py-defname">verbose</span>(func):
+    <a class="sourceLink" href="https://github.com/nltk/nltk/tree/3.6.2/nltk/twitter/twitter_demo.py#L52">
+      
+      (source)
+    </a>
+  </div>
+  <div class="docstring functionBody">
+    
+    
+    <div>Decorator for demo functions</div>
+  </div>
+</div><div class="basefunction">
+  
+  
+  <a name="nltk.twitter.twitter_demo.yesterday">
+    
+  </a>
+  <a name="yesterday">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-keyword">def</span> <span class="py-defname">yesterday</span>():
+    <a class="sourceLink" href="https://github.com/nltk/nltk/tree/3.6.2/nltk/twitter/twitter_demo.py#L66">
+      
+      (source)
+    </a>
+  </div>
+  <div class="docstring functionBody">
+    
+    
+    <div>Get yesterday's datetime as a 5-tuple.</div>
+  </div>
+</div><div class="basevariable">
+  
+  
+  <a name="nltk.twitter.twitter_demo.ALL">
+    
+  </a>
+  <a name="ALL">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-defname">ALL</span> =
+    <a class="sourceLink" href="https://github.com/nltk/nltk/tree/3.6.2/nltk/twitter/twitter_demo.py#L280">
+      
+      (source)
+    </a>
+  </div>
+  <div class="functionBody">
+    
+    
+    <div>Select demo functions to run. E.g. replace the following line with "DEMOS =
+ALL[8:]" to execute only the final three demos.</div>
+  </div>
+</div><div class="basevariable">
+  
+  
+  <a name="nltk.twitter.twitter_demo.DEMOS">
+    
+  </a>
+  <a name="DEMOS">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-defname">DEMOS</span> =
+    <a class="sourceLink" href="https://github.com/nltk/nltk/tree/3.6.2/nltk/twitter/twitter_demo.py#L298">
+      
+      (source)
+    </a>
+  </div>
+  <div class="functionBody">
+    
+    
+    <div><p class="undocumented">Undocumented</p></div>
+  </div>
+</div><div class="basevariable">
+  
+  
+  <a name="nltk.twitter.twitter_demo.SPACER">
+    
+  </a>
+  <a name="SPACER">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-defname">SPACER</span>: <code>str</code> =
+    <a class="sourceLink" href="https://github.com/nltk/nltk/tree/3.6.2/nltk/twitter/twitter_demo.py#L49">
+      
+      (source)
+    </a>
+  </div>
+  <div class="functionBody">
+    
+    
+    <div><p class="undocumented">Undocumented</p></div>
+  </div>
+</div>
+
+      </div>
+    </div>
+
+    <footer class="navbar navbar-default">
+  
+  <div class="container">
+    <a href="index.html">API Documentation</a> for <a href="http://www.nltk.org/" class="projecthome">nltk-3.6.2</a>,
+  generated by <a href="https://github.com/twisted/pydoctor/">pydoctor</a>
+    21.2.2 at 2021-07-12 23:14:45.
+  </div>
+</footer>
+
+    <script src="pydoctor.js" type="text/javascript"></script>
+
+  </body>
+</html>

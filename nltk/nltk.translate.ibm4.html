@@ -1,0 +1,272 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+          "DTD/xhtml1-strict.dtd">
+<html>
+  
+
+  <head>
+    
+    <title>nltk.translate.ibm4</title>
+    <meta name="generator" content="pydoctor 21.2.2"> 
+        
+    </meta>
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=0.75" />
+    <link rel="stylesheet" type="text/css" href="bootstrap.min.css" />
+    <link rel="stylesheet" type="text/css" href="apidocs.css" />
+    <link rel="stylesheet" type="text/css" href="extra.css" />
+</head>
+
+  <body>
+
+    
+
+    <nav class="navbar navbar-default">
+  
+  <div class="container">
+
+    <div class="navbar-header">
+      
+      <div class="navlinks">
+        <span class="navbar-brand">
+          <a href="http://www.nltk.org/" class="projecthome">nltk-3.6.2</a> <a href="index.html">API Documentation</a>
+        </span>
+
+        <a href="moduleIndex.html">
+          Modules
+        </a>
+
+        <a href="classIndex.html">
+          Classes
+        </a>
+
+        <a href="nameIndex.html">
+          Names
+        </a>
+
+        <form action="search-results.html" id="search-box-container">
+          <div class="input-group">
+            <input id="search-box" name="search-query" placeholder="Search..." aria-label="Search" minlength="2" class="form-control" />
+            <span class="input-group-btn">
+              <button class="btn btn-default" type="submit" title="Search"><img src="fonts/search.svg" alt="Search!" /></button>
+              <a class="btn btn-default" id="search-help-button" title="Help" onclick="toggleSearchHelpText()"><img src="fonts/info.svg" alt="Help!" /></a>
+            </span>
+          </div>
+        </form>
+
+        <div class="rst-admonition hint" id="search-help-box">
+          <p class="rst-last">
+      
+            Search bar offers the following options:
+            <ul>   
+                <li>
+                  <strong>Term presence.</strong> The below example searches for documents that 
+                    must contain “foo”, might contain “bar” and must not contain “baz”:
+                  <br /> <code>'+foo bar -baz'</code>
+                </li> 
+
+                <li>
+                  <strong>Wildcards.</strong> The below example searches for documents with words beginning with “foo”:
+                  <br /> <code>'foo*'</code>
+                </li> 
+
+                <li>
+                  <strong>Search in specific fields.</strong> The following search matches all documents 
+                  that contains "foo" in their full dotted name and with “bar” in any field:
+                  <br /> <code>'+fullName:*foo* +bar'</code>
+
+                  <p>
+                    Possible fields: 'name', 'docstring', 'fullName'.
+                  </p>
+                </li>
+
+                <li>
+                  <strong>Fuzzy matches.</strong> The following search matches all documents 
+                  that have a word within 1 edit distance of “foo”:
+                  <br /> <code>'foo~1'</code>
+                </li>
+            </ul>
+
+          </p>
+        </div>
+
+      </div>
+
+
+    </div>
+  </div>
+
+  <script>
+ 
+    function toggleSearchHelpText() {
+        document.body.classList.toggle("search-help-hidden");
+    }
+    // Init search and help text
+    document.getElementById('search-box-container').style.display = 'block';
+    document.getElementById('search-help-box').style.display = 'block';
+    document.body.classList.add("search-help-hidden");
+
+  </script>
+
+</nav>
+
+    
+
+    <div class="container">
+
+      <div class="page-header">
+        <h1 class="module"><code><code><a href="nltk.html">nltk</a></code><wbr></wbr>.<code><a href="nltk.translate.html">translate</a></code><wbr></wbr>.<code><a href="nltk.translate.ibm4.html">ibm4</a></code></code></h1>
+        <div id="showPrivate">
+          <button class="btn btn-link" onclick="togglePrivate()">Toggle Private API</button>
+        </div>
+      </div>
+
+      <div class="categoryHeader">
+        module documentation
+      </div>
+
+      <div class="extrasDocstring">
+        <a href="https://github.com/nltk/nltk/tree/3.6.2/nltk/translate/ibm4.py" class="sourceLink">(source)</a>
+        <p></p>
+      </div>
+
+      <div class="moduleDocstring">
+        <div><p>Translation model that reorders output words based on their type and
+distance from other related words in the output sentence.</p>
+<p>IBM Model 4 improves the distortion model of Model 3, motivated by the
+observation that certain words tend to be re-ordered in a predictable
+way relative to one another. For example, &lt;adjective&gt;&lt;noun&gt; in English
+usually has its order flipped as &lt;noun&gt;&lt;adjective&gt; in French.</p>
+<p>Model 4 requires words in the source and target vocabularies to be
+categorized into classes. This can be linguistically driven, like parts
+of speech (adjective, nouns, prepositions, etc). Word classes can also
+be obtained by statistical methods. The original IBM Model 4 uses an
+information theoretic approach to group words into 50 classes for each
+vocabulary.</p>
+<p>Terminology:
+Cept:</p>
+<blockquote>
+A source word with non-zero fertility i.e. aligned to one or more
+target words.</blockquote>
+<dl class="rst-docutils">
+<dt>Tablet:</dt>
+<dd>The set of target word(s) aligned to a cept.</dd>
+<dt>Head of cept:</dt>
+<dd>The first word of the tablet of that cept.</dd>
+<dt>Center of cept:</dt>
+<dd>The average position of the words in that cept's tablet. If the
+value is not an integer, the ceiling is taken.
+For example, for a tablet with words in positions 2, 5, 6 in the
+target sentence, the center of the corresponding cept is
+ceil((2 + 5 + 6) / 3) = 5</dd>
+<dt>Displacement:</dt>
+<dd>For a head word, defined as (position of head word - position of
+previous cept's center). Can be positive or negative.
+For a non-head word, defined as (position of non-head word -
+position of previous word in the same tablet). Always positive,
+because successive words in a tablet are assumed to appear to the
+right of the previous word.</dd>
+</dl>
+<p>In contrast to Model 3 which reorders words in a tablet independently of
+other words, Model 4 distinguishes between three cases.
+(1) Words generated by NULL are distributed uniformly.
+(2) For a head word t, its position is modeled by the probability</p>
+<blockquote>
+d_head(displacement | word_class_s(s),word_class_t(t)),
+where s is the previous cept, and word_class_s and word_class_t maps
+s and t to a source and target language word class respectively.</blockquote>
+<ol class="rst-arabic simple" start="3">
+<li>For a non-head word t, its position is modeled by the probability
+d_non_head(displacement | word_class_t(t))</li>
+</ol>
+<p>The EM algorithm used in Model 4 is:
+E step - In the training data, collect counts, weighted by prior</p>
+<blockquote>
+<p>probabilities.
+(a) count how many times a source language word is translated</p>
+<blockquote>
+into a target language word</blockquote>
+<ol class="rst-loweralpha simple" start="2">
+<li>for a particular word class, count how many times a head
+word is located at a particular displacement from the
+previous cept's center</li>
+<li>for a particular word class, count how many times a
+non-head word is located at a particular displacement from
+the previous target word</li>
+<li>count how many times a source word is aligned to phi number
+of target words</li>
+<li>count how many times NULL is aligned to a target word</li>
+</ol>
+</blockquote>
+<p>M step - Estimate new probabilities based on the counts from the E step</p>
+<p>Like Model 3, there are too many possible alignments to consider. Thus,
+a hill climbing approach is used to sample good candidates.</p>
+<p>Notations:
+i: Position in the source sentence</p>
+<blockquote>
+Valid values are 0 (for NULL), 1, 2, ..., length of source sentence</blockquote>
+<dl class="rst-docutils">
+<dt>j: Position in the target sentence</dt>
+<dd>Valid values are 1, 2, ..., length of target sentence</dd>
+</dl>
+<p>l: Number of words in the source sentence, excluding NULL
+m: Number of words in the target sentence
+s: A word in the source language
+t: A word in the target language
+phi: Fertility, the number of target words produced by a source word
+p1: Probability that a target word produced by a source word is</p>
+<blockquote>
+accompanied by another target word that is aligned to NULL</blockquote>
+<p>p0: 1 - p1
+dj: Displacement, Δj</p>
+<p>References:
+Philipp Koehn. 2010. Statistical Machine Translation.
+Cambridge University Press, New York.</p>
+<p>Peter E Brown, Stephen A. Della Pietra, Vincent J. Della Pietra, and
+Robert L. Mercer. 1993. The Mathematics of Statistical Machine
+Translation: Parameter Estimation. Computational Linguistics, 19 (2),
+263-311.</p>
+</div>
+      </div>
+
+      <div id="splitTables">
+        <table class="children sortable" id="id1893">
+  
+  
+  <tr class="class">
+    
+    <td>Class</td>
+    <td><code><a href="nltk.translate.ibm4.IBMModel4.html">IBMModel4</a></code></td>
+    <td><span>Translation model that reorders output words based on their type and their distance from other related words in the output sentence</span></td>
+  </tr><tr class="class">
+    
+    <td>Class</td>
+    <td><code><a href="nltk.translate.ibm4.Model4Counts.html">Model4Counts</a></code></td>
+    <td><span>Data object to store counts of various parameters during training. Includes counts for distortion.</span></td>
+  </tr>
+</table>
+        
+
+          
+      </div>
+
+      <div id="childList">
+
+        
+
+      </div>
+    </div>
+
+    <footer class="navbar navbar-default">
+  
+  <div class="container">
+    <a href="index.html">API Documentation</a> for <a href="http://www.nltk.org/" class="projecthome">nltk-3.6.2</a>,
+  generated by <a href="https://github.com/twisted/pydoctor/">pydoctor</a>
+    21.2.2 at 2021-07-12 23:14:45.
+  </div>
+</footer>
+
+    <script src="pydoctor.js" type="text/javascript"></script>
+
+  </body>
+</html>

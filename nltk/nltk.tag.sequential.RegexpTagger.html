@@ -1,0 +1,451 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+          "DTD/xhtml1-strict.dtd">
+<html>
+  
+
+  <head>
+    
+    <title>nltk.tag.sequential.RegexpTagger</title>
+    <meta name="generator" content="pydoctor 21.2.2"> 
+        
+    </meta>
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=0.75" />
+    <link rel="stylesheet" type="text/css" href="bootstrap.min.css" />
+    <link rel="stylesheet" type="text/css" href="apidocs.css" />
+    <link rel="stylesheet" type="text/css" href="extra.css" />
+</head>
+
+  <body>
+
+    
+
+    <nav class="navbar navbar-default">
+  
+  <div class="container">
+
+    <div class="navbar-header">
+      
+      <div class="navlinks">
+        <span class="navbar-brand">
+          <a href="http://www.nltk.org/" class="projecthome">nltk-3.6.2</a> <a href="index.html">API Documentation</a>
+        </span>
+
+        <a href="moduleIndex.html">
+          Modules
+        </a>
+
+        <a href="classIndex.html">
+          Classes
+        </a>
+
+        <a href="nameIndex.html">
+          Names
+        </a>
+
+        <form action="search-results.html" id="search-box-container">
+          <div class="input-group">
+            <input id="search-box" name="search-query" placeholder="Search..." aria-label="Search" minlength="2" class="form-control" />
+            <span class="input-group-btn">
+              <button class="btn btn-default" type="submit" title="Search"><img src="fonts/search.svg" alt="Search!" /></button>
+              <a class="btn btn-default" id="search-help-button" title="Help" onclick="toggleSearchHelpText()"><img src="fonts/info.svg" alt="Help!" /></a>
+            </span>
+          </div>
+        </form>
+
+        <div class="rst-admonition hint" id="search-help-box">
+          <p class="rst-last">
+      
+            Search bar offers the following options:
+            <ul>   
+                <li>
+                  <strong>Term presence.</strong> The below example searches for documents that 
+                    must contain “foo”, might contain “bar” and must not contain “baz”:
+                  <br /> <code>'+foo bar -baz'</code>
+                </li> 
+
+                <li>
+                  <strong>Wildcards.</strong> The below example searches for documents with words beginning with “foo”:
+                  <br /> <code>'foo*'</code>
+                </li> 
+
+                <li>
+                  <strong>Search in specific fields.</strong> The following search matches all documents 
+                  that contains "foo" in their full dotted name and with “bar” in any field:
+                  <br /> <code>'+fullName:*foo* +bar'</code>
+
+                  <p>
+                    Possible fields: 'name', 'docstring', 'fullName'.
+                  </p>
+                </li>
+
+                <li>
+                  <strong>Fuzzy matches.</strong> The following search matches all documents 
+                  that have a word within 1 edit distance of “foo”:
+                  <br /> <code>'foo~1'</code>
+                </li>
+            </ul>
+
+          </p>
+        </div>
+
+      </div>
+
+
+    </div>
+  </div>
+
+  <script>
+ 
+    function toggleSearchHelpText() {
+        document.body.classList.toggle("search-help-hidden");
+    }
+    // Init search and help text
+    document.getElementById('search-box-container').style.display = 'block';
+    document.getElementById('search-help-box').style.display = 'block';
+    document.body.classList.add("search-help-hidden");
+
+  </script>
+
+</nav>
+
+    
+
+    <div class="container">
+
+      <div class="page-header">
+        <h1 class="class"><code><code><a href="nltk.html">nltk</a></code><wbr></wbr>.<code><a href="nltk.tag.html">tag</a></code><wbr></wbr>.<code><a href="nltk.tag.sequential.html">sequential</a></code><wbr></wbr>.<code><a href="nltk.tag.sequential.RegexpTagger.html">RegexpTagger</a></code></code></h1>
+        <div id="showPrivate">
+          <button class="btn btn-link" onclick="togglePrivate()">Toggle Private API</button>
+        </div>
+      </div>
+
+      <div class="categoryHeader">
+        class documentation
+      </div>
+
+      <div class="extrasDocstring">
+        <p><code><span class="py-keyword">class</span> <span class="py-defname">RegexpTagger</span>(<a href="nltk.tag.sequential.SequentialBackoffTagger.html" title="nltk.tag.sequential.SequentialBackoffTagger">SequentialBackoffTagger</a>): <a href="https://github.com/nltk/nltk/tree/3.6.2/nltk/tag/sequential.py#L490" class="sourceLink">(source)</a></code></p>
+        <p><a href="classIndex.html#nltk.tag.sequential.RegexpTagger">View In Hierarchy</a></p>
+      </div>
+
+      <div class="moduleDocstring">
+        <div><p>Regular Expression Tagger</p>
+<p>The RegexpTagger assigns tags to tokens by comparing their
+word strings to a series of regular expressions.  The following tagger
+uses word suffixes to make guesses about the correct Brown Corpus part
+of speech tag:</p>
+<blockquote>
+<pre class="py-doctest">
+<span class="py-prompt">&gt;&gt;&gt; </span><span class="py-keyword">from</span> nltk.corpus <span class="py-keyword">import</span> brown
+<span class="py-prompt">&gt;&gt;&gt; </span><span class="py-keyword">from</span> nltk.tag <span class="py-keyword">import</span> RegexpTagger
+<span class="py-prompt">&gt;&gt;&gt; </span>test_sent = brown.sents(categories=<span class="py-string">'news'</span>)[0]
+<span class="py-prompt">&gt;&gt;&gt; </span>regexp_tagger = RegexpTagger(
+<span class="py-more">... </span>    [(r<span class="py-string">'^-?[0-9]+(.[0-9]+)?$'</span>, <span class="py-string">'CD'</span>),   <span class="py-comment"># cardinal numbers</span>
+<span class="py-more">... </span>     (r<span class="py-string">'(The|the|A|a|An|an)$'</span>, <span class="py-string">'AT'</span>),   <span class="py-comment"># articles</span>
+<span class="py-more">... </span>     (r<span class="py-string">'.*able$'</span>, <span class="py-string">'JJ'</span>),                <span class="py-comment"># adjectives</span>
+<span class="py-more">... </span>     (r<span class="py-string">'.*ness$'</span>, <span class="py-string">'NN'</span>),                <span class="py-comment"># nouns formed from adjectives</span>
+<span class="py-more">... </span>     (r<span class="py-string">'.*ly$'</span>, <span class="py-string">'RB'</span>),                  <span class="py-comment"># adverbs</span>
+<span class="py-more">... </span>     (r<span class="py-string">'.*s$'</span>, <span class="py-string">'NNS'</span>),                  <span class="py-comment"># plural nouns</span>
+<span class="py-more">... </span>     (r<span class="py-string">'.*ing$'</span>, <span class="py-string">'VBG'</span>),                <span class="py-comment"># gerunds</span>
+<span class="py-more">... </span>     (r<span class="py-string">'.*ed$'</span>, <span class="py-string">'VBD'</span>),                 <span class="py-comment"># past tense verbs</span>
+<span class="py-more">... </span>     (r<span class="py-string">'.*'</span>, <span class="py-string">'NN'</span>)                      <span class="py-comment"># nouns (default)</span>
+<span class="py-more">... </span>])
+<span class="py-prompt">&gt;&gt;&gt; </span>regexp_tagger
+<span class="py-output">&lt;Regexp Tagger: size=9&gt;</span>
+<span class="py-prompt">&gt;&gt;&gt; </span>regexp_tagger.tag(test_sent)
+<span class="py-output">[('The', 'AT'), ('Fulton', 'NN'), ('County', 'NN'), ('Grand', 'NN'), ('Jury', 'NN'),</span>
+<span class="py-output">('said', 'NN'), ('Friday', 'NN'), ('an', 'AT'), ('investigation', 'NN'), ('of', 'NN'),</span>
+<span class="py-output">("Atlanta's", 'NNS'), ('recent', 'NN'), ('primary', 'NN'), ('election', 'NN'),</span>
+<span class="py-output">('produced', 'VBD'), ('``', 'NN'), ('no', 'NN'), ('evidence', 'NN'), ("''", 'NN'),</span>
+<span class="py-output">('that', 'NN'), ('any', 'NN'), ('irregularities', 'NNS'), ('took', 'NN'),</span>
+<span class="py-output">('place', 'NN'), ('.', 'NN')]</span>
+</pre></blockquote>
+<table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">regexps</span></td><td class="fieldArgDesc">A list of <tt class="rst-docutils literal">(regexp, tag)</tt> pairs, each of
+which indicates that a word matching <tt class="rst-docutils literal">regexp</tt> should
+be tagged with <tt class="rst-docutils literal">tag</tt>.  The pairs will be evalutated in
+order.  If none of the regexps match a word, then the
+optional backoff tagger is invoked, else it is
+assigned the tag None.</td></tr></table></div>
+      </div>
+
+      <div id="splitTables">
+        <table class="children sortable" id="id1605">
+  
+  
+  <tr class="classmethod">
+    
+    <td>Class Method</td>
+    <td><code><a href="#decode_json_obj">decode_json_obj</a></code></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="method">
+    
+    <td>Method</td>
+    <td><code><a href="#__init__">__init__</a></code></td>
+    <td><span></span></td>
+  </tr><tr class="method">
+    
+    <td>Method</td>
+    <td><code><a href="#__repr__">__repr__</a></code></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="method">
+    
+    <td>Method</td>
+    <td><code><a href="#choose_tag">choose_tag</a></code></td>
+    <td><span class="undocumented">No summary</span></td>
+  </tr><tr class="method">
+    
+    <td>Method</td>
+    <td><code><a href="#encode_json_obj">encode_json_obj</a></code></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="classvariable">
+    
+    <td>Class Variable</td>
+    <td><code><a href="#json_tag">json_tag</a></code></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="instancevariable private">
+    
+    <td>Instance Variable</td>
+    <td><code><a href="#_regexps">_regexps</a></code></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr>
+</table>
+        
+          <p class="inheritedFrom">
+            Inherited from <code><a href="nltk.tag.sequential.SequentialBackoffTagger.html">SequentialBackoffTagger</a></code>:
+          </p>
+          <table class="children sortable" id="id1606">
+  
+  
+  <tr class="basemethod">
+    
+    <td>Method</td>
+    <td><code><a href="nltk.tag.sequential.SequentialBackoffTagger.html#tag">tag</a></code></td>
+    <td><span>Determine the most appropriate tag sequence for the given token sequence, and return a corresponding list of tagged tokens.  A tagged token is encoded as a tuple <tt class="rst-docutils literal">(token, tag)</tt>.</span></td>
+  </tr><tr class="basemethod">
+    
+    <td>Method</td>
+    <td><code><a href="nltk.tag.sequential.SequentialBackoffTagger.html#tag_one">tag_one</a></code></td>
+    <td><span>Determine an appropriate tag for the specified token, and return that tag.  If this tagger is unable to determine a tag for the specified token, then its backoff tagger is consulted.</span></td>
+  </tr><tr class="baseproperty">
+    
+    <td>Property</td>
+    <td><code><a href="nltk.tag.sequential.SequentialBackoffTagger.html#backoff">backoff</a></code></td>
+    <td><span>The backoff tagger for this tagger.</span></td>
+  </tr><tr class="baseinstancevariable private">
+    
+    <td>Instance Variable</td>
+    <td><code><a href="nltk.tag.sequential.SequentialBackoffTagger.html#_taggers">_taggers</a></code></td>
+    <td><span>A list of all the taggers that should be tried to
+tag a token (i.e., self and its backoff taggers).</span></td>
+  </tr>
+</table>
+          
+          <p class="inheritedFrom">
+            Inherited from <code><a href="nltk.tag.api.TaggerI.html">TaggerI</a></code> (via <code><a href="nltk.tag.sequential.SequentialBackoffTagger.html">SequentialBackoffTagger</a></code>):
+          </p>
+          <table class="children sortable" id="id1607">
+  
+  
+  <tr class="basemethod">
+    
+    <td>Method</td>
+    <td><code><a href="nltk.tag.api.TaggerI.html#evaluate">evaluate</a></code></td>
+    <td><span>Score the accuracy of the tagger against the gold standard. Strip the tags from the gold standard text, retag it using the tagger, then compute the accuracy score.</span></td>
+  </tr><tr class="basemethod">
+    
+    <td>Method</td>
+    <td><code><a href="nltk.tag.api.TaggerI.html#tag_sents">tag_sents</a></code></td>
+    <td><span>Apply <tt class="rst-docutils literal">self.tag()</tt> to each element of <em>sentences</em>.  I.e.:</span></td>
+  </tr><tr class="basemethod private">
+    
+    <td>Method</td>
+    <td><code><a href="nltk.tag.api.TaggerI.html#_check_params">_check_params</a></code></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr>
+</table>
+          
+
+          
+      </div>
+
+      <div id="childList">
+
+        <div class="baseclassmethod">
+  
+  
+  <a name="nltk.tag.sequential.RegexpTagger.decode_json_obj">
+    
+  </a>
+  <a name="decode_json_obj">
+    
+  </a>
+  <div class="functionHeader">
+    @classmethod<br />
+    <span class="py-keyword">def</span> <span class="py-defname">decode_json_obj</span>(cls, obj):
+    <a class="sourceLink" href="https://github.com/nltk/nltk/tree/3.6.2/nltk/tag/sequential.py#L549">
+      
+      (source)
+    </a>
+  </div>
+  <div class="docstring functionBody">
+    
+    
+    <div><p class="undocumented">Undocumented</p></div>
+  </div>
+</div><div class="basemethod">
+  
+  
+  <a name="nltk.tag.sequential.RegexpTagger.__init__">
+    
+  </a>
+  <a name="__init__">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-keyword">def</span> <span class="py-defname">__init__</span>(self, regexps, backoff=None):
+    <a class="sourceLink" href="https://github.com/nltk/nltk/tree/3.6.2/nltk/tag/sequential.py#L535">
+      
+      (source)
+    </a>
+  </div>
+  <div class="docstring functionBody">
+    <div class="interfaceinfo">overrides <code><a href="nltk.tag.sequential.SequentialBackoffTagger.html#__init__">nltk.tag.sequential.SequentialBackoffTagger.__init__</a></code></div>
+    
+    <div></div>
+  </div>
+</div><div class="basemethod">
+  
+  
+  <a name="nltk.tag.sequential.RegexpTagger.__repr__">
+    
+  </a>
+  <a name="__repr__">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-keyword">def</span> <span class="py-defname">__repr__</span>(self):
+    <a class="sourceLink" href="https://github.com/nltk/nltk/tree/3.6.2/nltk/tag/sequential.py#L560">
+      
+      (source)
+    </a>
+  </div>
+  <div class="docstring functionBody">
+    
+    
+    <div><p class="undocumented">Undocumented</p></div>
+  </div>
+</div><div class="basemethod">
+  
+  
+  <a name="nltk.tag.sequential.RegexpTagger.choose_tag">
+    
+  </a>
+  <a name="choose_tag">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-keyword">def</span> <span class="py-defname">choose_tag</span>(self, tokens, index, history):
+    <a class="sourceLink" href="https://github.com/nltk/nltk/tree/3.6.2/nltk/tag/sequential.py#L554">
+      
+      (source)
+    </a>
+  </div>
+  <div class="docstring functionBody">
+    <div class="interfaceinfo">overrides <code><a href="nltk.tag.sequential.SequentialBackoffTagger.html#choose_tag">nltk.tag.sequential.SequentialBackoffTagger.choose_tag</a></code></div>
+    
+    <div>Decide which tag should be used for the specified token, and
+return that tag.  If this tagger is unable to determine a tag
+for the specified token, return None -- do not consult
+the backoff tagger.  This method should be overridden by
+subclasses of SequentialBackoffTagger.<table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">tokens:</span>list</td><td class="fieldArgDesc">The list of words that are being tagged.</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">index:</span>int</td><td class="fieldArgDesc">The index of the word whose tag should be
+returned.</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">history:</span>list(str)</td><td class="fieldArgDesc">A list of the tags for all words before <em>index</em>.</td></tr><tr class="fieldStart"><td class="fieldName" colspan="2">Returns</td></tr><tr><td class="fieldArgContainer">str</td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr></table></div>
+  </div>
+</div><div class="basemethod">
+  
+  
+  <a name="nltk.tag.sequential.RegexpTagger.encode_json_obj">
+    
+  </a>
+  <a name="encode_json_obj">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-keyword">def</span> <span class="py-defname">encode_json_obj</span>(self):
+    <a class="sourceLink" href="https://github.com/nltk/nltk/tree/3.6.2/nltk/tag/sequential.py#L546">
+      
+      (source)
+    </a>
+  </div>
+  <div class="docstring functionBody">
+    
+    
+    <div><p class="undocumented">Undocumented</p></div>
+  </div>
+</div><div class="baseclassvariable">
+  
+  
+  <a name="nltk.tag.sequential.RegexpTagger.json_tag">
+    
+  </a>
+  <a name="json_tag">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-defname">json_tag</span>: <code>str</code> =
+    <a class="sourceLink" href="https://github.com/nltk/nltk/tree/3.6.2/nltk/tag/sequential.py#L533">
+      
+      (source)
+    </a>
+  </div>
+  <div class="functionBody">
+    
+    
+    <div><p class="undocumented">Undocumented</p></div>
+  </div>
+</div><div class="baseinstancevariable private">
+  
+  
+  <a name="nltk.tag.sequential.RegexpTagger._regexps">
+    
+  </a>
+  <a name="_regexps">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-defname">_regexps</span> =
+    <a class="sourceLink" href="https://github.com/nltk/nltk/tree/3.6.2/nltk/tag/sequential.py#L540">
+      
+      (source)
+    </a>
+  </div>
+  <div class="functionBody">
+    
+    
+    <div><p class="undocumented">Undocumented</p></div>
+  </div>
+</div>
+
+      </div>
+    </div>
+
+    <footer class="navbar navbar-default">
+  
+  <div class="container">
+    <a href="index.html">API Documentation</a> for <a href="http://www.nltk.org/" class="projecthome">nltk-3.6.2</a>,
+  generated by <a href="https://github.com/twisted/pydoctor/">pydoctor</a>
+    21.2.2 at 2021-07-12 23:14:45.
+  </div>
+</footer>
+
+    <script src="pydoctor.js" type="text/javascript"></script>
+
+  </body>
+</html>

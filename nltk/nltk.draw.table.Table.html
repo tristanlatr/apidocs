@@ -1,0 +1,1416 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+          "DTD/xhtml1-strict.dtd">
+<html>
+  
+
+  <head>
+    
+    <title>nltk.draw.table.Table</title>
+    <meta name="generator" content="pydoctor 21.2.2"> 
+        
+    </meta>
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=0.75" />
+    <link rel="stylesheet" type="text/css" href="bootstrap.min.css" />
+    <link rel="stylesheet" type="text/css" href="apidocs.css" />
+    <link rel="stylesheet" type="text/css" href="extra.css" />
+</head>
+
+  <body>
+
+    
+
+    <nav class="navbar navbar-default">
+  
+  <div class="container">
+
+    <div class="navbar-header">
+      
+      <div class="navlinks">
+        <span class="navbar-brand">
+          <a href="http://www.nltk.org/" class="projecthome">nltk-3.6.2</a> <a href="index.html">API Documentation</a>
+        </span>
+
+        <a href="moduleIndex.html">
+          Modules
+        </a>
+
+        <a href="classIndex.html">
+          Classes
+        </a>
+
+        <a href="nameIndex.html">
+          Names
+        </a>
+
+        <form action="search-results.html" id="search-box-container">
+          <div class="input-group">
+            <input id="search-box" name="search-query" placeholder="Search..." aria-label="Search" minlength="2" class="form-control" />
+            <span class="input-group-btn">
+              <button class="btn btn-default" type="submit" title="Search"><img src="fonts/search.svg" alt="Search!" /></button>
+              <a class="btn btn-default" id="search-help-button" title="Help" onclick="toggleSearchHelpText()"><img src="fonts/info.svg" alt="Help!" /></a>
+            </span>
+          </div>
+        </form>
+
+        <div class="rst-admonition hint" id="search-help-box">
+          <p class="rst-last">
+      
+            Search bar offers the following options:
+            <ul>   
+                <li>
+                  <strong>Term presence.</strong> The below example searches for documents that 
+                    must contain “foo”, might contain “bar” and must not contain “baz”:
+                  <br /> <code>'+foo bar -baz'</code>
+                </li> 
+
+                <li>
+                  <strong>Wildcards.</strong> The below example searches for documents with words beginning with “foo”:
+                  <br /> <code>'foo*'</code>
+                </li> 
+
+                <li>
+                  <strong>Search in specific fields.</strong> The following search matches all documents 
+                  that contains "foo" in their full dotted name and with “bar” in any field:
+                  <br /> <code>'+fullName:*foo* +bar'</code>
+
+                  <p>
+                    Possible fields: 'name', 'docstring', 'fullName'.
+                  </p>
+                </li>
+
+                <li>
+                  <strong>Fuzzy matches.</strong> The following search matches all documents 
+                  that have a word within 1 edit distance of “foo”:
+                  <br /> <code>'foo~1'</code>
+                </li>
+            </ul>
+
+          </p>
+        </div>
+
+      </div>
+
+
+    </div>
+  </div>
+
+  <script>
+ 
+    function toggleSearchHelpText() {
+        document.body.classList.toggle("search-help-hidden");
+    }
+    // Init search and help text
+    document.getElementById('search-box-container').style.display = 'block';
+    document.getElementById('search-help-box').style.display = 'block';
+    document.body.classList.add("search-help-hidden");
+
+  </script>
+
+</nav>
+
+    
+
+    <div class="container">
+
+      <div class="page-header">
+        <h1 class="class"><code><code><a href="nltk.html">nltk</a></code><wbr></wbr>.<code><a href="nltk.draw.html">draw</a></code><wbr></wbr>.<code><a href="nltk.draw.table.html">table</a></code><wbr></wbr>.<code><a href="nltk.draw.table.Table.html">Table</a></code></code></h1>
+        <div id="showPrivate">
+          <button class="btn btn-link" onclick="togglePrivate()">Toggle Private API</button>
+        </div>
+      </div>
+
+      <div class="categoryHeader">
+        class documentation
+      </div>
+
+      <div class="extrasDocstring">
+        <p><code><span class="py-keyword">class</span> <span class="py-defname">Table</span>(<span title="object">object</span>): <a href="https://github.com/nltk/nltk/tree/3.6.2/nltk/draw/table.py#L582" class="sourceLink">(source)</a></code></p>
+        <p><a href="classIndex.html#nltk.draw.table.Table">View In Hierarchy</a></p>
+      </div>
+
+      <div class="moduleDocstring">
+        <div><p>A display widget for a table of values, based on a <tt class="rst-docutils literal">MultiListbox</tt>
+widget.  For many purposes, <tt class="rst-docutils literal">Table</tt> can be treated as a
+list-of-lists.  E.g., table[i] is a list of the values for row i;
+and table.append(row) adds a new row with the given lits of
+values.  Individual cells can be accessed using table[i,j], which
+refers to the j-th column of the i-th row.  This can be used to
+both read and write values from the table.  E.g.:</p>
+<blockquote>
+<pre class="py-doctest">
+<span class="py-prompt">&gt;&gt;&gt; </span>table[i,j] = <span class="py-string">'hello'</span></pre></blockquote>
+<p>The column (j) can be given either as an index number, or as a
+column name.  E.g., the following prints the value in the 3rd row
+for the 'First Name' column:</p>
+<blockquote>
+<pre class="py-doctest">
+<span class="py-prompt">&gt;&gt;&gt; </span><span class="py-builtin">print</span>(table[3, <span class="py-string">'First Name'</span>])
+<span class="py-output">John</span>
+</pre></blockquote>
+<p>You can configure the colors for individual rows, columns, or
+cells using <tt class="rst-docutils literal">rowconfig()</tt>, <tt class="rst-docutils literal">columnconfig()</tt>, and <tt class="rst-docutils literal">itemconfig()</tt>.
+The color configuration for each row will be preserved if the
+table is modified; however, when new rows are added, any color
+configurations that have been made for <em>columns</em> will not be
+applied to the new row.</p>
+<p>Note: Although <tt class="rst-docutils literal">Table</tt> acts like a widget in some ways (e.g., it
+defines <tt class="rst-docutils literal">grid()</tt>, <tt class="rst-docutils literal">pack()</tt>, and <tt class="rst-docutils literal">bind()</tt>), it is not itself a
+widget; it just contains one.  This is because widgets need to
+define <tt class="rst-docutils literal">__getitem__()</tt>, <tt class="rst-docutils literal">__setitem__()</tt>, and <tt class="rst-docutils literal">__nonzero__()</tt> in
+a way that's incompatible with the fact that <tt class="rst-docutils literal">Table</tt> behaves as a
+list-of-lists.</p>
+</div>
+      </div>
+
+      <div id="splitTables">
+        <table class="children sortable" id="id581">
+  
+  
+  <tr class="method">
+    
+    <td>Method</td>
+    <td><code><a href="#__delitem__">__delitem__</a></code></td>
+    <td><span>Delete the <a href="#id1"><span class="rst-problematic" id="rst-id2">``</span></a>row_index``th row from this table.</span></td>
+  </tr><tr class="method">
+    
+    <td>Method</td>
+    <td><code><a href="#__getitem__">__getitem__</a></code></td>
+    <td><span class="undocumented">No summary</span></td>
+  </tr><tr class="method">
+    
+    <td>Method</td>
+    <td><code><a href="#__init__">__init__</a></code></td>
+    <td><span>Construct a new Table widget.</span></td>
+  </tr><tr class="method">
+    
+    <td>Method</td>
+    <td><code><a href="#__len__">__len__</a></code></td>
+    <td><span></span></td>
+  </tr><tr class="method">
+    
+    <td>Method</td>
+    <td><code><a href="#__setitem__">__setitem__</a></code></td>
+    <td><span>Replace the value of a row or a cell in this table with <tt class="rst-docutils literal">val</tt>.</span></td>
+  </tr><tr class="method">
+    
+    <td>Method</td>
+    <td><code><a href="#append">append</a></code></td>
+    <td><span>Add a new row to the end of the table.</span></td>
+  </tr><tr class="method">
+    
+    <td>Method</td>
+    <td><code><a href="#bind">bind</a></code></td>
+    <td><span>Add a binding to this table's main frame that will call <tt class="rst-docutils literal">func</tt> in response to the event sequence.</span></td>
+  </tr><tr class="method">
+    
+    <td>Method</td>
+    <td><code><a href="#bind_to_columns">bind_to_columns</a></code></td>
+    <td><span></span></td>
+  </tr><tr class="method">
+    
+    <td>Method</td>
+    <td><code><a href="#bind_to_labels">bind_to_labels</a></code></td>
+    <td><span></span></td>
+  </tr><tr class="method">
+    
+    <td>Method</td>
+    <td><code><a href="#bind_to_listboxes">bind_to_listboxes</a></code></td>
+    <td><span></span></td>
+  </tr><tr class="method">
+    
+    <td>Method</td>
+    <td><code><a href="#clear">clear</a></code></td>
+    <td><span>Delete all rows in this table.</span></td>
+  </tr><tr class="method">
+    
+    <td>Method</td>
+    <td><code><a href="#column_index">column_index</a></code></td>
+    <td><span class="undocumented">No summary</span></td>
+  </tr><tr class="method">
+    
+    <td>Method</td>
+    <td><code><a href="#columnconfigure">columnconfigure</a></code></td>
+    <td><span></span></td>
+  </tr><tr class="method">
+    
+    <td>Method</td>
+    <td><code><a href="#extend">extend</a></code></td>
+    <td><span>Add new rows at the end of the table.</span></td>
+  </tr><tr class="method">
+    
+    <td>Method</td>
+    <td><code><a href="#focus">focus</a></code></td>
+    <td><span>Direct (keyboard) input foxus to this widget.</span></td>
+  </tr><tr class="method">
+    
+    <td>Method</td>
+    <td><code><a href="#grid">grid</a></code></td>
+    <td><span>Position this table's main frame widget in its parent widget.  See <tt class="rst-docutils literal">Tkinter.Frame.grid()</tt> for more info.</span></td>
+  </tr><tr class="method">
+    
+    <td>Method</td>
+    <td><code><a href="#hide_column">hide_column</a></code></td>
+    <td><span></span></td>
+  </tr><tr class="method">
+    
+    <td>Method</td>
+    <td><code><a href="#insert">insert</a></code></td>
+    <td><span class="undocumented">No summary</span></td>
+  </tr><tr class="method">
+    
+    <td>Method</td>
+    <td><code><a href="#itemconfigure">itemconfigure</a></code></td>
+    <td><span></span></td>
+  </tr><tr class="method">
+    
+    <td>Method</td>
+    <td><code><a href="#pack">pack</a></code></td>
+    <td><span>Position this table's main frame widget in its parent widget.  See <tt class="rst-docutils literal">Tkinter.Frame.pack()</tt> for more info.</span></td>
+  </tr><tr class="method">
+    
+    <td>Method</td>
+    <td><code><a href="#rowconfigure">rowconfigure</a></code></td>
+    <td><span></span></td>
+  </tr><tr class="method">
+    
+    <td>Method</td>
+    <td><code><a href="#select">select</a></code></td>
+    <td><span></span></td>
+  </tr><tr class="method">
+    
+    <td>Method</td>
+    <td><code><a href="#selected_row">selected_row</a></code></td>
+    <td><span>Return the index of the currently selected row, or None if no row is selected.  To get the row value itself, use <tt class="rst-docutils literal"><span class="pre">table[table.selected_row()]</span></tt>.</span></td>
+  </tr><tr class="method">
+    
+    <td>Method</td>
+    <td><code><a href="#show_column">show_column</a></code></td>
+    <td><span></span></td>
+  </tr><tr class="method">
+    
+    <td>Method</td>
+    <td><code><a href="#sort_by">sort_by</a></code></td>
+    <td><span>Sort the rows in this table, using the specified column's values as a sort key.</span></td>
+  </tr><tr class="property">
+    
+    <td>Property</td>
+    <td><code><a href="#column_names">column_names</a></code></td>
+    <td><span>A list of the names of the columns in this table.</span></td>
+  </tr><tr class="method private">
+    
+    <td>Method</td>
+    <td><code><a href="#_check_table_vs_mlb">_check_table_vs_mlb</a></code></td>
+    <td><span class="undocumented">No summary</span></td>
+  </tr><tr class="method private">
+    
+    <td>Method</td>
+    <td><code><a href="#_checkrow">_checkrow</a></code></td>
+    <td><span>Helper function: check that a given row value has the correct number of elements; and if not, raise an exception.</span></td>
+  </tr><tr class="method private">
+    
+    <td>Method</td>
+    <td><code><a href="#_fill_table">_fill_table</a></code></td>
+    <td><span class="undocumented">No summary</span></td>
+  </tr><tr class="method private">
+    
+    <td>Method</td>
+    <td><code><a href="#_get_itemconfig">_get_itemconfig</a></code></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="method private">
+    
+    <td>Method</td>
+    <td><code><a href="#_restore_config_info">_restore_config_info</a></code></td>
+    <td><span>Restore selection &amp; color configuration information that was saved using <tt class="rst-docutils literal">_save_config_info</tt>.</span></td>
+  </tr><tr class="method private">
+    
+    <td>Method</td>
+    <td><code><a href="#_save_config_info">_save_config_info</a></code></td>
+    <td><span class="undocumented">No summary</span></td>
+  </tr><tr class="method private">
+    
+    <td>Method</td>
+    <td><code><a href="#_sort">_sort</a></code></td>
+    <td><span>Event handler for clicking on a column label -- sort by that column.</span></td>
+  </tr><tr class="classvariable private">
+    
+    <td>Class Variable</td>
+    <td><code><a href="#_DEBUG">_DEBUG</a></code></td>
+    <td><span>If true, then run <tt class="rst-docutils literal">_check_table_vs_mlb()</tt> after any operation that modifies the table.</span></td>
+  </tr><tr class="instancevariable private">
+    
+    <td>Instance Variable</td>
+    <td><code><a href="#_column_name_to_index">_column_name_to_index</a></code></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="instancevariable private">
+    
+    <td>Instance Variable</td>
+    <td><code><a href="#_frame">_frame</a></code></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="instancevariable private">
+    
+    <td>Instance Variable</td>
+    <td><code><a href="#_mlb">_mlb</a></code></td>
+    <td><span>The multi-column listbox used to display this table's data.</span></td>
+  </tr><tr class="instancevariable private">
+    
+    <td>Instance Variable</td>
+    <td><code><a href="#_num_columns">_num_columns</a></code></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="instancevariable private">
+    
+    <td>Instance Variable</td>
+    <td><code><a href="#_reprfunc">_reprfunc</a></code></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="instancevariable private">
+    
+    <td>Instance Variable</td>
+    <td><code><a href="#_rows">_rows</a></code></td>
+    <td><span>A list-of-lists used to hold the cell values of this
+table.  Each element of _rows is a row value, i.e., a list of
+cell values, one for each column in the row.</span></td>
+  </tr><tr class="instancevariable private">
+    
+    <td>Instance Variable</td>
+    <td><code><a href="#_scrollbar">_scrollbar</a></code></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="instancevariable private">
+    
+    <td>Instance Variable</td>
+    <td><code><a href="#_sortkey">_sortkey</a></code></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr>
+</table>
+        
+
+          
+      </div>
+
+      <div id="childList">
+
+        <div class="basemethod">
+  
+  
+  <a name="nltk.draw.table.Table.__delitem__">
+    
+  </a>
+  <a name="__delitem__">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-keyword">def</span> <span class="py-defname">__delitem__</span>(self, row_index):
+    <a class="sourceLink" href="https://github.com/nltk/nltk/tree/3.6.2/nltk/draw/table.py#L866">
+      
+      (source)
+    </a>
+  </div>
+  <div class="docstring functionBody">
+    
+    
+    <div>Delete the <a href="#id1"><span class="rst-problematic" id="rst-id2">``</span></a>row_index``th row from this table.</div>
+  </div>
+</div><div class="basemethod">
+  
+  
+  <a name="nltk.draw.table.Table.__getitem__">
+    
+  </a>
+  <a name="__getitem__">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-keyword">def</span> <span class="py-defname">__getitem__</span>(self, index):
+    <a class="sourceLink" href="https://github.com/nltk/nltk/tree/3.6.2/nltk/draw/table.py#L811">
+      
+      (source)
+    </a>
+  </div>
+  <div class="docstring functionBody">
+    
+    
+    <div><p class="pre">Return the value of a row or a cell in this table.  If
+``index`` is an integer, then the row value for the ``index``th
+row.  This row value consists of a tuple of cell values, one
+for each column in the row.  If ``index`` is a tuple of two
+integers, ``(i,j)``, then return the value of the cell in the
+``i``th row and the ``j``th column.</p></div>
+  </div>
+</div><div class="basemethod">
+  
+  
+  <a name="nltk.draw.table.Table.__init__">
+    
+  </a>
+  <a name="__init__">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-keyword">def</span> <span class="py-defname">__init__</span>(self, master, column_names, rows=None, column_weights=None, scrollbar=True, click_to_sort=True, reprfunc=None, cnf={}, **kw):
+    <a class="sourceLink" href="https://github.com/nltk/nltk/tree/3.6.2/nltk/draw/table.py#L621">
+      
+      (source)
+    </a>
+  </div>
+  <div class="docstring functionBody">
+    
+    
+    <div>Construct a new Table widget.<table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">master:</span>Tkinter.Widget</td><td class="fieldArgDesc">The widget that should contain the new table.</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">column_names:</span>list(str)</td><td class="fieldArgDesc">A list of names for the columns; these
+names will be used to create labels for each column;
+and can be used as an index when reading or writing
+cell values from the table.</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">rows:</span>list(list)</td><td class="fieldArgDesc">A list of row values used to initialze the table.
+Each row value should be a tuple of cell values, one for
+each column in the row.</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">column_weights</span></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">scrollbar:</span>bool</td><td class="fieldArgDesc">If true, then create a scrollbar for the
+new table widget.</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">click_to_sort:</span>bool</td><td class="fieldArgDesc">If true, then create bindings that will
+sort the table's rows by a given column's values if the
+user clicks on that colum's label.</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">reprfunc:</span>function</td><td class="fieldArgDesc">If specified, then use this function to
+convert each table cell value to a string suitable for
+display.  <tt class="rst-docutils literal">reprfunc</tt> has the following signature:
+reprfunc(row_index, col_index, cell_value) -&gt; str
+(Note that the column is specified by index, not by name.)</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">cnf</span></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">kw</span></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">cnf, kw</span></td><td class="fieldArgDesc">Configuration parameters for this widget's
+contained <tt class="rst-docutils literal">MultiListbox</tt>.  See <tt class="rst-docutils literal">MultiListbox.__init__()</tt>
+for details.</td></tr></table></div>
+  </div>
+</div><div class="basemethod">
+  
+  
+  <a name="nltk.draw.table.Table.__len__">
+    
+  </a>
+  <a name="__len__">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-keyword">def</span> <span class="py-defname">__len__</span>(self):
+    <a class="sourceLink" href="https://github.com/nltk/nltk/tree/3.6.2/nltk/draw/table.py#L879">
+      
+      (source)
+    </a>
+  </div>
+  <div class="docstring functionBody">
+    
+    
+    <div><table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Returns</td></tr><tr><td colspan="2">the number of rows in this table.</td></tr></table></div>
+  </div>
+</div><div class="basemethod">
+  
+  
+  <a name="nltk.draw.table.Table.__setitem__">
+    
+  </a>
+  <a name="__setitem__">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-keyword">def</span> <span class="py-defname">__setitem__</span>(self, index, val):
+    <a class="sourceLink" href="https://github.com/nltk/nltk/tree/3.6.2/nltk/draw/table.py#L827">
+      
+      (source)
+    </a>
+  </div>
+  <div class="docstring functionBody">
+    
+    
+    <div><p>Replace the value of a row or a cell in this table with
+<tt class="rst-docutils literal">val</tt>.</p>
+<p>If <tt class="rst-docutils literal">index</tt> is an integer, then <tt class="rst-docutils literal">val</tt> should be a row value
+(i.e., a tuple of cell values, one for each column).  In this
+case, the values of the <tt class="rst-docutils literal"><span class="pre">index``th</span> row of the table will be
+replaced with the values in ``val</tt>.</p>
+<p>If <tt class="rst-docutils literal">index</tt> is a tuple of integers, <tt class="rst-docutils literal">(i,j)</tt>, then replace the
+value of the cell in the <tt class="rst-docutils literal"><span class="pre">i``th</span> row and <span class="pre">``j``th</span> column with
+``val</tt>.</p>
+</div>
+  </div>
+</div><div class="basemethod">
+  
+  
+  <a name="nltk.draw.table.Table.append">
+    
+  </a>
+  <a name="append">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-keyword">def</span> <span class="py-defname">append</span>(self, rowvalue):
+    <a class="sourceLink" href="https://github.com/nltk/nltk/tree/3.6.2/nltk/draw/table.py#L791">
+      
+      (source)
+    </a>
+  </div>
+  <div class="docstring functionBody">
+    
+    
+    <div>Add a new row to the end of the table.<table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">rowvalue</span></td><td class="fieldArgDesc">A tuple of cell values, one for each column
+in the new row.</td></tr></table></div>
+  </div>
+</div><div class="basemethod">
+  
+  
+  <a name="nltk.draw.table.Table.bind">
+    
+  </a>
+  <a name="bind">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-keyword">def</span> <span class="py-defname">bind</span>(self, sequence=None, func=None, add=None):
+    <a class="sourceLink" href="https://github.com/nltk/nltk/tree/3.6.2/nltk/draw/table.py#L719">
+      
+      (source)
+    </a>
+  </div>
+  <div class="docstring functionBody">
+    
+    
+    <div>Add a binding to this table's main frame that will call
+<tt class="rst-docutils literal">func</tt> in response to the event sequence.</div>
+  </div>
+</div><div class="basemethod">
+  
+  
+  <a name="nltk.draw.table.Table.bind_to_columns">
+    
+  </a>
+  <a name="bind_to_columns">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-keyword">def</span> <span class="py-defname">bind_to_columns</span>(self, sequence=None, func=None, add=None):
+    <a class="sourceLink" href="https://github.com/nltk/nltk/tree/3.6.2/nltk/draw/table.py#L746">
+      
+      (source)
+    </a>
+  </div>
+  <div class="docstring functionBody">
+    
+    
+    <div><table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">See Also</td></tr><tr><td colspan="2"><tt class="rst-docutils literal">MultiListbox.bind_to_columns()</tt></td></tr></table></div>
+  </div>
+</div><div class="basemethod">
+  
+  
+  <a name="nltk.draw.table.Table.bind_to_labels">
+    
+  </a>
+  <a name="bind_to_labels">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-keyword">def</span> <span class="py-defname">bind_to_labels</span>(self, sequence=None, func=None, add=None):
+    <a class="sourceLink" href="https://github.com/nltk/nltk/tree/3.6.2/nltk/draw/table.py#L738">
+      
+      (source)
+    </a>
+  </div>
+  <div class="docstring functionBody">
+    
+    
+    <div><table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">See Also</td></tr><tr><td colspan="2"><tt class="rst-docutils literal">MultiListbox.bind_to_labels()</tt></td></tr></table></div>
+  </div>
+</div><div class="basemethod">
+  
+  
+  <a name="nltk.draw.table.Table.bind_to_listboxes">
+    
+  </a>
+  <a name="bind_to_listboxes">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-keyword">def</span> <span class="py-defname">bind_to_listboxes</span>(self, sequence=None, func=None, add=None):
+    <a class="sourceLink" href="https://github.com/nltk/nltk/tree/3.6.2/nltk/draw/table.py#L742">
+      
+      (source)
+    </a>
+  </div>
+  <div class="docstring functionBody">
+    
+    
+    <div><table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">See Also</td></tr><tr><td colspan="2"><tt class="rst-docutils literal">MultiListbox.bind_to_listboxes()</tt></td></tr></table></div>
+  </div>
+</div><div class="basemethod">
+  
+  
+  <a name="nltk.draw.table.Table.clear">
+    
+  </a>
+  <a name="clear">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-keyword">def</span> <span class="py-defname">clear</span>(self):
+    <a class="sourceLink" href="https://github.com/nltk/nltk/tree/3.6.2/nltk/draw/table.py#L802">
+      
+      (source)
+    </a>
+  </div>
+  <div class="docstring functionBody">
+    
+    
+    <div>Delete all rows in this table.</div>
+  </div>
+</div><div class="basemethod">
+  
+  
+  <a name="nltk.draw.table.Table.column_index">
+    
+  </a>
+  <a name="column_index">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-keyword">def</span> <span class="py-defname">column_index</span>(self, i):
+    <a class="sourceLink" href="https://github.com/nltk/nltk/tree/3.6.2/nltk/draw/table.py#L905">
+      
+      (source)
+    </a>
+  </div>
+  <div class="docstring functionBody">
+    
+    
+    <div>If <tt class="rst-docutils literal">i</tt> is a valid column index integer, then return it as is.
+Otherwise, check if <tt class="rst-docutils literal">i</tt> is used as the name for any column;
+if so, return that column's index.  Otherwise, raise a
+<tt class="rst-docutils literal">KeyError</tt> exception.</div>
+  </div>
+</div><div class="basemethod">
+  
+  
+  <a name="nltk.draw.table.Table.columnconfigure">
+    
+  </a>
+  <a name="columnconfigure">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-keyword">def</span> <span class="py-defname">columnconfigure</span>(self, col_index, cnf={}, **kw):
+    <a class="sourceLink" href="https://github.com/nltk/nltk/tree/3.6.2/nltk/draw/table.py#L728">
+      
+      (source)
+    </a>
+  </div>
+  <div class="docstring functionBody">
+    
+    
+    <div><table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">See Also</td></tr><tr><td colspan="2"><tt class="rst-docutils literal">MultiListbox.columnconfigure()</tt></td></tr></table></div>
+  </div>
+</div><div class="basemethod">
+  
+  
+  <a name="nltk.draw.table.Table.extend">
+    
+  </a>
+  <a name="extend">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-keyword">def</span> <span class="py-defname">extend</span>(self, rowvalues):
+    <a class="sourceLink" href="https://github.com/nltk/nltk/tree/3.6.2/nltk/draw/table.py#L778">
+      
+      (source)
+    </a>
+  </div>
+  <div class="docstring functionBody">
+    
+    
+    <div>Add new rows at the end of the table.<table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">rowvalues</span></td><td class="fieldArgDesc">A list of row values used to initialze the
+table.  Each row value should be a tuple of cell values,
+one for each column in the row.</td></tr></table></div>
+  </div>
+</div><div class="basemethod">
+  
+  
+  <a name="nltk.draw.table.Table.focus">
+    
+  </a>
+  <a name="focus">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-keyword">def</span> <span class="py-defname">focus</span>(self):
+    <a class="sourceLink" href="https://github.com/nltk/nltk/tree/3.6.2/nltk/draw/table.py#L715">
+      
+      (source)
+    </a>
+  </div>
+  <div class="docstring functionBody">
+    
+    
+    <div>Direct (keyboard) input foxus to this widget.</div>
+  </div>
+</div><div class="basemethod">
+  
+  
+  <a name="nltk.draw.table.Table.grid">
+    
+  </a>
+  <a name="grid">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-keyword">def</span> <span class="py-defname">grid</span>(self, *args, **kwargs):
+    <a class="sourceLink" href="https://github.com/nltk/nltk/tree/3.6.2/nltk/draw/table.py#L710">
+      
+      (source)
+    </a>
+  </div>
+  <div class="docstring functionBody">
+    
+    
+    <div>Position this table's main frame widget in its parent
+widget.  See <tt class="rst-docutils literal">Tkinter.Frame.grid()</tt> for more info.</div>
+  </div>
+</div><div class="basemethod">
+  
+  
+  <a name="nltk.draw.table.Table.hide_column">
+    
+  </a>
+  <a name="hide_column">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-keyword">def</span> <span class="py-defname">hide_column</span>(self, column_index):
+    <a class="sourceLink" href="https://github.com/nltk/nltk/tree/3.6.2/nltk/draw/table.py#L918">
+      
+      (source)
+    </a>
+  </div>
+  <div class="docstring functionBody">
+    
+    
+    <div><table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">See Also</td></tr><tr><td colspan="2"><tt class="rst-docutils literal">MultiListbox.hide_column()</tt></td></tr></table></div>
+  </div>
+</div><div class="basemethod">
+  
+  
+  <a name="nltk.draw.table.Table.insert">
+    
+  </a>
+  <a name="insert">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-keyword">def</span> <span class="py-defname">insert</span>(self, row_index, rowvalue):
+    <a class="sourceLink" href="https://github.com/nltk/nltk/tree/3.6.2/nltk/draw/table.py#L758">
+      
+      (source)
+    </a>
+  </div>
+  <div class="docstring functionBody">
+    
+    
+    <div>Insert a new row into the table, so that its row index will be
+<tt class="rst-docutils literal">row_index</tt>.  If the table contains any rows whose row index
+is greater than or equal to <tt class="rst-docutils literal">row_index</tt>, then they will be
+shifted down.<table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">row_index</span></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">rowvalue</span></td><td class="fieldArgDesc">A tuple of cell values, one for each column
+in the new row.</td></tr></table></div>
+  </div>
+</div><div class="basemethod">
+  
+  
+  <a name="nltk.draw.table.Table.itemconfigure">
+    
+  </a>
+  <a name="itemconfigure">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-keyword">def</span> <span class="py-defname">itemconfigure</span>(self, row_index, col_index, cnf=None, **kw):
+    <a class="sourceLink" href="https://github.com/nltk/nltk/tree/3.6.2/nltk/draw/table.py#L733">
+      
+      (source)
+    </a>
+  </div>
+  <div class="docstring functionBody">
+    
+    
+    <div><table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">See Also</td></tr><tr><td colspan="2"><tt class="rst-docutils literal">MultiListbox.itemconfigure()</tt></td></tr></table></div>
+  </div>
+</div><div class="basemethod">
+  
+  
+  <a name="nltk.draw.table.Table.pack">
+    
+  </a>
+  <a name="pack">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-keyword">def</span> <span class="py-defname">pack</span>(self, *args, **kwargs):
+    <a class="sourceLink" href="https://github.com/nltk/nltk/tree/3.6.2/nltk/draw/table.py#L705">
+      
+      (source)
+    </a>
+  </div>
+  <div class="docstring functionBody">
+    
+    
+    <div>Position this table's main frame widget in its parent
+widget.  See <tt class="rst-docutils literal">Tkinter.Frame.pack()</tt> for more info.</div>
+  </div>
+</div><div class="basemethod">
+  
+  
+  <a name="nltk.draw.table.Table.rowconfigure">
+    
+  </a>
+  <a name="rowconfigure">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-keyword">def</span> <span class="py-defname">rowconfigure</span>(self, row_index, cnf={}, **kw):
+    <a class="sourceLink" href="https://github.com/nltk/nltk/tree/3.6.2/nltk/draw/table.py#L724">
+      
+      (source)
+    </a>
+  </div>
+  <div class="docstring functionBody">
+    
+    
+    <div><table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">See Also</td></tr><tr><td colspan="2"><tt class="rst-docutils literal">MultiListbox.rowconfigure()</tt></td></tr></table></div>
+  </div>
+</div><div class="basemethod">
+  
+  
+  <a name="nltk.draw.table.Table.select">
+    
+  </a>
+  <a name="select">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-keyword">def</span> <span class="py-defname">select</span>(self, index=None, delta=None, see=True):
+    <a class="sourceLink" href="https://github.com/nltk/nltk/tree/3.6.2/nltk/draw/table.py#L942">
+      
+      (source)
+    </a>
+  </div>
+  <div class="docstring functionBody">
+    
+    
+    <div><table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">See Also</td></tr><tr><td colspan="2"><tt class="rst-docutils literal">MultiListbox.select()</tt></td></tr></table></div>
+  </div>
+</div><div class="basemethod">
+  
+  
+  <a name="nltk.draw.table.Table.selected_row">
+    
+  </a>
+  <a name="selected_row">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-keyword">def</span> <span class="py-defname">selected_row</span>(self):
+    <a class="sourceLink" href="https://github.com/nltk/nltk/tree/3.6.2/nltk/draw/table.py#L930">
+      
+      (source)
+    </a>
+  </div>
+  <div class="docstring functionBody">
+    
+    
+    <div>Return the index of the currently selected row, or None if
+no row is selected.  To get the row value itself, use
+<tt class="rst-docutils literal"><span class="pre">table[table.selected_row()]</span></tt>.</div>
+  </div>
+</div><div class="basemethod">
+  
+  
+  <a name="nltk.draw.table.Table.show_column">
+    
+  </a>
+  <a name="show_column">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-keyword">def</span> <span class="py-defname">show_column</span>(self, column_index):
+    <a class="sourceLink" href="https://github.com/nltk/nltk/tree/3.6.2/nltk/draw/table.py#L922">
+      
+      (source)
+    </a>
+  </div>
+  <div class="docstring functionBody">
+    
+    
+    <div><table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">See Also</td></tr><tr><td colspan="2"><tt class="rst-docutils literal">MultiListbox.show_column()</tt></td></tr></table></div>
+  </div>
+</div><div class="basemethod">
+  
+  
+  <a name="nltk.draw.table.Table.sort_by">
+    
+  </a>
+  <a name="sort_by">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-keyword">def</span> <span class="py-defname">sort_by</span>(self, column_index, order='toggle'):
+    <a class="sourceLink" href="https://github.com/nltk/nltk/tree/3.6.2/nltk/draw/table.py#L950">
+      
+      (source)
+    </a>
+  </div>
+  <div class="docstring functionBody">
+    
+    
+    <div>Sort the rows in this table, using the specified column's
+values as a sort key.<table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">column_index</span></td><td class="fieldArgDesc">Specifies which column to sort, using
+either a column index (int) or a column's label name
+(str).</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">order</span></td><td class="fieldArgDesc"><p>Specifies whether to sort the values in
+ascending or descending order:</p>
+<blockquote>
+<ul class="rst-simple">
+<li><tt class="rst-docutils literal">'ascending'</tt>: Sort from least to greatest.</li>
+<li><tt class="rst-docutils literal">'descending'</tt>: Sort from greatest to least.</li>
+<li><tt class="rst-docutils literal">'toggle'</tt>: If the most recent call to <tt class="rst-docutils literal">sort_by()</tt>
+sorted the table by the same column (<tt class="rst-docutils literal">column_index</tt>),
+then reverse the rows; otherwise sort in ascending
+order.</li>
+</ul>
+</blockquote>
+</td></tr></table></div>
+  </div>
+</div><div class="baseproperty">
+  
+  
+  <a name="nltk.draw.table.Table.column_names">
+    
+  </a>
+  <a name="column_names">
+    
+  </a>
+  <div class="functionHeader">
+    @property<br />
+    <span class="py-defname">column_names</span> =
+    <a class="sourceLink" href="https://github.com/nltk/nltk/tree/3.6.2/nltk/draw/table.py#L900">
+      
+      (source)
+    </a>
+  </div>
+  <div class="functionBody">
+    
+    
+    <div>A list of the names of the columns in this table.</div>
+  </div>
+</div><div class="basemethod private">
+  
+  
+  <a name="nltk.draw.table.Table._check_table_vs_mlb">
+    
+  </a>
+  <a name="_check_table_vs_mlb">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-keyword">def</span> <span class="py-defname">_check_table_vs_mlb</span>(self):
+    <a class="sourceLink" href="https://github.com/nltk/nltk/tree/3.6.2/nltk/draw/table.py#L1111">
+      
+      (source)
+    </a>
+  </div>
+  <div class="docstring functionBody">
+    
+    
+    <div>Verify that the contents of the table's <tt class="rst-docutils literal">_rows</tt> variable match
+the contents of its multi-listbox (<tt class="rst-docutils literal">_mlb</tt>).  This is just
+included for debugging purposes, to make sure that the
+list-modifying operations are working correctly.</div>
+  </div>
+</div><div class="basemethod private">
+  
+  
+  <a name="nltk.draw.table.Table._checkrow">
+    
+  </a>
+  <a name="_checkrow">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-keyword">def</span> <span class="py-defname">_checkrow</span>(self, rowvalue):
+    <a class="sourceLink" href="https://github.com/nltk/nltk/tree/3.6.2/nltk/draw/table.py#L885">
+      
+      (source)
+    </a>
+  </div>
+  <div class="docstring functionBody">
+    
+    
+    <div>Helper function: check that a given row value has the correct
+number of elements; and if not, raise an exception.</div>
+  </div>
+</div><div class="basemethod private">
+  
+  
+  <a name="nltk.draw.table.Table._fill_table">
+    
+  </a>
+  <a name="_fill_table">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-keyword">def</span> <span class="py-defname">_fill_table</span>(self, save_config=True):
+    <a class="sourceLink" href="https://github.com/nltk/nltk/tree/3.6.2/nltk/draw/table.py#L1010">
+      
+      (source)
+    </a>
+  </div>
+  <div class="docstring functionBody">
+    
+    
+    <div>Re-draw the table from scratch, by clearing out the table's
+multi-column listbox; and then filling it in with values from
+<tt class="rst-docutils literal">self._rows</tt>.  Note that any cell-, row-, or column-specific
+color configuration that has been done will be lost.  The
+selection will also be lost -- i.e., no row will be selected
+after this call completes.</div>
+  </div>
+</div><div class="basemethod private">
+  
+  
+  <a name="nltk.draw.table.Table._get_itemconfig">
+    
+  </a>
+  <a name="_get_itemconfig">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-keyword">def</span> <span class="py-defname">_get_itemconfig</span>(self, r, c):
+    <a class="sourceLink" href="https://github.com/nltk/nltk/tree/3.6.2/nltk/draw/table.py#L1025">
+      
+      (source)
+    </a>
+  </div>
+  <div class="docstring functionBody">
+    
+    
+    <div><p class="undocumented">Undocumented</p></div>
+  </div>
+</div><div class="basemethod private">
+  
+  
+  <a name="nltk.draw.table.Table._restore_config_info">
+    
+  </a>
+  <a name="_restore_config_info">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-keyword">def</span> <span class="py-defname">_restore_config_info</span>(self, cookie, index_by_id=False, see=False):
+    <a class="sourceLink" href="https://github.com/nltk/nltk/tree/3.6.2/nltk/draw/table.py#L1077">
+      
+      (source)
+    </a>
+  </div>
+  <div class="docstring functionBody">
+    
+    
+    <div>Restore selection &amp; color configuration information that was
+saved using <tt class="rst-docutils literal">_save_config_info</tt>.</div>
+  </div>
+</div><div class="basemethod private">
+  
+  
+  <a name="nltk.draw.table.Table._save_config_info">
+    
+  </a>
+  <a name="_save_config_info">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-keyword">def</span> <span class="py-defname">_save_config_info</span>(self, row_indices=None, index_by_id=False):
+    <a class="sourceLink" href="https://github.com/nltk/nltk/tree/3.6.2/nltk/draw/table.py#L1036">
+      
+      (source)
+    </a>
+  </div>
+  <div class="docstring functionBody">
+    
+    
+    <div>Return a 'cookie' containing information about which row is
+selected, and what color configurations have been applied.
+this information can the be re-applied to the table (after
+making modifications) using <tt class="rst-docutils literal">_restore_config_info()</tt>.  Color
+configuration information will be saved for any rows in
+<tt class="rst-docutils literal">row_indices</tt>, or in the entire table, if
+<tt class="rst-docutils literal">row_indices=None</tt>.  If <tt class="rst-docutils literal">index_by_id=True</tt>, the the cookie
+will associate rows with their configuration information based
+on the rows' python id.  This is useful when performing
+operations that re-arrange the rows (e.g. <tt class="rst-docutils literal">sort</tt>).  If
+<tt class="rst-docutils literal">index_by_id=False</tt>, then it is assumed that all rows will be
+in the same order when <tt class="rst-docutils literal">_restore_config_info()</tt> is called.</div>
+  </div>
+</div><div class="basemethod private">
+  
+  
+  <a name="nltk.draw.table.Table._sort">
+    
+  </a>
+  <a name="_sort">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-keyword">def</span> <span class="py-defname">_sort</span>(self, event):
+    <a class="sourceLink" href="https://github.com/nltk/nltk/tree/3.6.2/nltk/draw/table.py#L991">
+      
+      (source)
+    </a>
+  </div>
+  <div class="docstring functionBody">
+    
+    
+    <div>Event handler for clicking on a column label -- sort by
+that column.</div>
+  </div>
+</div><div class="baseclassvariable private">
+  
+  
+  <a name="nltk.draw.table.Table._DEBUG">
+    
+  </a>
+  <a name="_DEBUG">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-defname">_DEBUG</span>: <code>bool</code> =
+    <a class="sourceLink" href="https://github.com/nltk/nltk/tree/3.6.2/nltk/draw/table.py#L1107">
+      
+      (source)
+    </a>
+  </div>
+  <div class="functionBody">
+    
+    
+    <div>If true, then run <tt class="rst-docutils literal">_check_table_vs_mlb()</tt> after any operation
+that modifies the table.</div>
+  </div>
+</div><div class="baseinstancevariable private">
+  
+  
+  <a name="nltk.draw.table.Table._column_name_to_index">
+    
+  </a>
+  <a name="_column_name_to_index">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-defname">_column_name_to_index</span> =
+    <a class="sourceLink" href="https://github.com/nltk/nltk/tree/3.6.2/nltk/draw/table.py#L668">
+      
+      (source)
+    </a>
+  </div>
+  <div class="functionBody">
+    
+    
+    <div><p class="undocumented">Undocumented</p></div>
+  </div>
+</div><div class="baseinstancevariable private">
+  
+  
+  <a name="nltk.draw.table.Table._frame">
+    
+  </a>
+  <a name="_frame">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-defname">_frame</span> =
+    <a class="sourceLink" href="https://github.com/nltk/nltk/tree/3.6.2/nltk/draw/table.py#L666">
+      
+      (source)
+    </a>
+  </div>
+  <div class="functionBody">
+    
+    
+    <div><p class="undocumented">Undocumented</p></div>
+  </div>
+</div><div class="baseinstancevariable private">
+  
+  
+  <a name="nltk.draw.table.Table._mlb">
+    
+  </a>
+  <a name="_mlb">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-defname">_mlb</span> =
+    <a class="sourceLink" href="https://github.com/nltk/nltk/tree/3.6.2/nltk/draw/table.py#L615">
+      
+      (source)
+    </a>
+  </div>
+  <div class="functionBody">
+    
+    
+    <div>The multi-column listbox used to display this table's data.</div>
+  </div>
+</div><div class="baseinstancevariable private">
+  
+  
+  <a name="nltk.draw.table.Table._num_columns">
+    
+  </a>
+  <a name="_num_columns">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-defname">_num_columns</span> =
+    <a class="sourceLink" href="https://github.com/nltk/nltk/tree/3.6.2/nltk/draw/table.py#L664">
+      
+      (source)
+    </a>
+  </div>
+  <div class="functionBody">
+    
+    
+    <div><p class="undocumented">Undocumented</p></div>
+  </div>
+</div><div class="baseinstancevariable private">
+  
+  
+  <a name="nltk.draw.table.Table._reprfunc">
+    
+  </a>
+  <a name="_reprfunc">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-defname">_reprfunc</span> =
+    <a class="sourceLink" href="https://github.com/nltk/nltk/tree/3.6.2/nltk/draw/table.py#L665">
+      
+      (source)
+    </a>
+  </div>
+  <div class="functionBody">
+    
+    
+    <div><p class="undocumented">Undocumented</p></div>
+  </div>
+</div><div class="baseinstancevariable private">
+  
+  
+  <a name="nltk.draw.table.Table._rows">
+    
+  </a>
+  <a name="_rows">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-defname">_rows</span>: <code>list</code> =
+    <a class="sourceLink" href="https://github.com/nltk/nltk/tree/3.6.2/nltk/draw/table.py#L616">
+      
+      (source)
+    </a>
+  </div>
+  <div class="functionBody">
+    
+    
+    <div>A list-of-lists used to hold the cell values of this
+table.  Each element of _rows is a row value, i.e., a list of
+cell values, one for each column in the row.</div>
+  </div>
+</div><div class="baseinstancevariable private">
+  
+  
+  <a name="nltk.draw.table.Table._scrollbar">
+    
+  </a>
+  <a name="_scrollbar">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-defname">_scrollbar</span> =
+    <a class="sourceLink" href="https://github.com/nltk/nltk/tree/3.6.2/nltk/draw/table.py#L689">
+      
+      (source)
+    </a>
+  </div>
+  <div class="functionBody">
+    
+    
+    <div><p class="undocumented">Undocumented</p></div>
+  </div>
+</div><div class="baseinstancevariable private">
+  
+  
+  <a name="nltk.draw.table.Table._sortkey">
+    
+  </a>
+  <a name="_sortkey">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-defname">_sortkey</span> =
+    <a class="sourceLink" href="https://github.com/nltk/nltk/tree/3.6.2/nltk/draw/table.py#L692">
+      
+      (source)
+    </a>
+  </div>
+  <div class="functionBody">
+    
+    
+    <div><p class="undocumented">Undocumented</p></div>
+  </div>
+</div>
+
+      </div>
+    </div>
+
+    <footer class="navbar navbar-default">
+  
+  <div class="container">
+    <a href="index.html">API Documentation</a> for <a href="http://www.nltk.org/" class="projecthome">nltk-3.6.2</a>,
+  generated by <a href="https://github.com/twisted/pydoctor/">pydoctor</a>
+    21.2.2 at 2021-07-12 23:14:45.
+  </div>
+</footer>
+
+    <script src="pydoctor.js" type="text/javascript"></script>
+
+  </body>
+</html>

@@ -1,0 +1,695 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+          "DTD/xhtml1-strict.dtd">
+<html>
+  
+
+  <head>
+    
+    <title>nltk.parse.stanford.GenericStanfordParser</title>
+    <meta name="generator" content="pydoctor 21.2.2"> 
+        
+    </meta>
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=0.75" />
+    <link rel="stylesheet" type="text/css" href="bootstrap.min.css" />
+    <link rel="stylesheet" type="text/css" href="apidocs.css" />
+    <link rel="stylesheet" type="text/css" href="extra.css" />
+</head>
+
+  <body>
+
+    
+
+    <nav class="navbar navbar-default">
+  
+  <div class="container">
+
+    <div class="navbar-header">
+      
+      <div class="navlinks">
+        <span class="navbar-brand">
+          <a href="http://www.nltk.org/" class="projecthome">nltk-3.6.2</a> <a href="index.html">API Documentation</a>
+        </span>
+
+        <a href="moduleIndex.html">
+          Modules
+        </a>
+
+        <a href="classIndex.html">
+          Classes
+        </a>
+
+        <a href="nameIndex.html">
+          Names
+        </a>
+
+        <form action="search-results.html" id="search-box-container">
+          <div class="input-group">
+            <input id="search-box" name="search-query" placeholder="Search..." aria-label="Search" minlength="2" class="form-control" />
+            <span class="input-group-btn">
+              <button class="btn btn-default" type="submit" title="Search"><img src="fonts/search.svg" alt="Search!" /></button>
+              <a class="btn btn-default" id="search-help-button" title="Help" onclick="toggleSearchHelpText()"><img src="fonts/info.svg" alt="Help!" /></a>
+            </span>
+          </div>
+        </form>
+
+        <div class="rst-admonition hint" id="search-help-box">
+          <p class="rst-last">
+      
+            Search bar offers the following options:
+            <ul>   
+                <li>
+                  <strong>Term presence.</strong> The below example searches for documents that 
+                    must contain “foo”, might contain “bar” and must not contain “baz”:
+                  <br /> <code>'+foo bar -baz'</code>
+                </li> 
+
+                <li>
+                  <strong>Wildcards.</strong> The below example searches for documents with words beginning with “foo”:
+                  <br /> <code>'foo*'</code>
+                </li> 
+
+                <li>
+                  <strong>Search in specific fields.</strong> The following search matches all documents 
+                  that contains "foo" in their full dotted name and with “bar” in any field:
+                  <br /> <code>'+fullName:*foo* +bar'</code>
+
+                  <p>
+                    Possible fields: 'name', 'docstring', 'fullName'.
+                  </p>
+                </li>
+
+                <li>
+                  <strong>Fuzzy matches.</strong> The following search matches all documents 
+                  that have a word within 1 edit distance of “foo”:
+                  <br /> <code>'foo~1'</code>
+                </li>
+            </ul>
+
+          </p>
+        </div>
+
+      </div>
+
+
+    </div>
+  </div>
+
+  <script>
+ 
+    function toggleSearchHelpText() {
+        document.body.classList.toggle("search-help-hidden");
+    }
+    // Init search and help text
+    document.getElementById('search-box-container').style.display = 'block';
+    document.getElementById('search-help-box').style.display = 'block';
+    document.body.classList.add("search-help-hidden");
+
+  </script>
+
+</nav>
+
+    
+
+    <div class="container">
+
+      <div class="page-header">
+        <h1 class="class"><code><code><a href="nltk.html">nltk</a></code><wbr></wbr>.<code><a href="nltk.parse.html">parse</a></code><wbr></wbr>.<code><a href="nltk.parse.stanford.html">stanford</a></code><wbr></wbr>.<code><a href="nltk.parse.stanford.GenericStanfordParser.html">GenericStanfordParser</a></code></code></h1>
+        <div id="showPrivate">
+          <button class="btn btn-link" onclick="togglePrivate()">Toggle Private API</button>
+        </div>
+      </div>
+
+      <div class="categoryHeader">
+        class documentation
+      </div>
+
+      <div class="extrasDocstring">
+        <p><code><span class="py-keyword">class</span> <span class="py-defname">GenericStanfordParser</span>(<a href="nltk.parse.api.ParserI.html" title="nltk.parse.api.ParserI">ParserI</a>): <a href="https://github.com/nltk/nltk/tree/3.6.2/nltk/parse/stanford.py#L30" class="sourceLink">(source)</a></code></p><p>Known subclasses: <code><a href="nltk.parse.stanford.StanfordDependencyParser.html">nltk.parse.stanford.StanfordDependencyParser</a></code>, <code><a href="nltk.parse.stanford.StanfordNeuralDependencyParser.html">nltk.parse.stanford.StanfordNeuralDependencyParser</a></code>, <code><a href="nltk.parse.stanford.StanfordParser.html">nltk.parse.stanford.StanfordParser</a></code></p>
+        <p><a href="classIndex.html#nltk.parse.stanford.GenericStanfordParser">View In Hierarchy</a></p>
+      </div>
+
+      <div class="moduleDocstring">
+        <div>Interface to the Stanford Parser</div>
+      </div>
+
+      <div id="splitTables">
+        <table class="children sortable" id="id1112">
+  
+  
+  <tr class="method">
+    
+    <td>Method</td>
+    <td><code><a href="#__init__">__init__</a></code></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="method">
+    
+    <td>Method</td>
+    <td><code><a href="#parse_sents">parse_sents</a></code></td>
+    <td><span class="undocumented">No summary</span></td>
+  </tr><tr class="method">
+    
+    <td>Method</td>
+    <td><code><a href="#raw_parse">raw_parse</a></code></td>
+    <td><span>Use StanfordParser to parse a sentence. Takes a sentence as a string; before parsing, it will be automatically tokenized and tagged by the Stanford Parser.</span></td>
+  </tr><tr class="method">
+    
+    <td>Method</td>
+    <td><code><a href="#raw_parse_sents">raw_parse_sents</a></code></td>
+    <td><span>Use StanfordParser to parse multiple sentences. Takes multiple sentences as a list of strings. Each sentence will be automatically tokenized and tagged by the Stanford Parser.</span></td>
+  </tr><tr class="method">
+    
+    <td>Method</td>
+    <td><code><a href="#tagged_parse">tagged_parse</a></code></td>
+    <td><span>Use StanfordParser to parse a sentence. Takes a sentence as a list of (word, tag) tuples; the sentence must have already been tokenized and tagged.</span></td>
+  </tr><tr class="method">
+    
+    <td>Method</td>
+    <td><code><a href="#tagged_parse_sents">tagged_parse_sents</a></code></td>
+    <td><span>Use StanfordParser to parse multiple sentences. Takes multiple sentences where each sentence is a list of (word, tag) tuples. The sentences must have already been tokenized and tagged.</span></td>
+  </tr><tr class="instancevariable">
+    
+    <td>Instance Variable</td>
+    <td><code><a href="#corenlp_options">corenlp_options</a></code></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="instancevariable">
+    
+    <td>Instance Variable</td>
+    <td><code><a href="#java_options">java_options</a></code></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="instancevariable">
+    
+    <td>Instance Variable</td>
+    <td><code><a href="#model_path">model_path</a></code></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="method private">
+    
+    <td>Method</td>
+    <td><code><a href="#_execute">_execute</a></code></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="method private">
+    
+    <td>Method</td>
+    <td><code><a href="#_parse_trees_output">_parse_trees_output</a></code></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="classvariable private">
+    
+    <td>Class Variable</td>
+    <td><code><a href="#_DOUBLE_SPACED_OUTPUT">_DOUBLE_SPACED_OUTPUT</a></code></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="classvariable private">
+    
+    <td>Class Variable</td>
+    <td><code><a href="#_JAR">_JAR</a></code></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="classvariable private">
+    
+    <td>Class Variable</td>
+    <td><code><a href="#_MAIN_CLASS">_MAIN_CLASS</a></code></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="classvariable private">
+    
+    <td>Class Variable</td>
+    <td><code><a href="#_MODEL_JAR_PATTERN">_MODEL_JAR_PATTERN</a></code></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="classvariable private">
+    
+    <td>Class Variable</td>
+    <td><code><a href="#_USE_STDIN">_USE_STDIN</a></code></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="instancevariable private">
+    
+    <td>Instance Variable</td>
+    <td><code><a href="#_classpath">_classpath</a></code></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="instancevariable private">
+    
+    <td>Instance Variable</td>
+    <td><code><a href="#_encoding">_encoding</a></code></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr>
+</table>
+        
+          <p class="inheritedFrom">
+            Inherited from <code><a href="nltk.parse.api.ParserI.html">ParserI</a></code>:
+          </p>
+          <table class="children sortable" id="id1113">
+  
+  
+  <tr class="basemethod">
+    
+    <td>Method</td>
+    <td><code><a href="nltk.parse.api.ParserI.html#grammar">grammar</a></code></td>
+    <td><span></span></td>
+  </tr><tr class="basemethod">
+    
+    <td>Method</td>
+    <td><code><a href="nltk.parse.api.ParserI.html#parse">parse</a></code></td>
+    <td><span></span></td>
+  </tr><tr class="basemethod">
+    
+    <td>Method</td>
+    <td><code><a href="nltk.parse.api.ParserI.html#parse_all">parse_all</a></code></td>
+    <td><span></span></td>
+  </tr><tr class="basemethod">
+    
+    <td>Method</td>
+    <td><code><a href="nltk.parse.api.ParserI.html#parse_one">parse_one</a></code></td>
+    <td><span></span></td>
+  </tr>
+</table>
+          
+
+          
+      </div>
+
+      <div id="childList">
+
+        <div class="basemethod">
+  
+  
+  <a name="nltk.parse.stanford.GenericStanfordParser.__init__">
+    
+  </a>
+  <a name="__init__">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-keyword">def</span> <span class="py-defname">__init__</span>(self, path_to_jar=None, path_to_models_jar=None, model_path='edu/stanford/nlp/models/lexparser/englishPCFG.ser.gz', encoding='utf8', verbose=False, java_options='-mx4g', corenlp_options=''):
+    <a class="sourceLink" href="https://github.com/nltk/nltk/tree/3.6.2/nltk/parse/stanford.py#L40">
+      
+      (source)
+    </a>
+  </div>
+  <div class="docstring functionBody">
+    <div class="interfaceinfo">overridden in <code><a href="nltk.parse.stanford.StanfordDependencyParser.html">nltk.parse.stanford.StanfordDependencyParser</a></code>, <code><a href="nltk.parse.stanford.StanfordNeuralDependencyParser.html">nltk.parse.stanford.StanfordNeuralDependencyParser</a></code>, <code><a href="nltk.parse.stanford.StanfordParser.html">nltk.parse.stanford.StanfordParser</a></code></div>
+    
+    <div><p class="undocumented">Undocumented</p></div>
+  </div>
+</div><div class="basemethod">
+  
+  
+  <a name="nltk.parse.stanford.GenericStanfordParser.parse_sents">
+    
+  </a>
+  <a name="parse_sents">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-keyword">def</span> <span class="py-defname">parse_sents</span>(self, sentences, verbose=False):
+    <a class="sourceLink" href="https://github.com/nltk/nltk/tree/3.6.2/nltk/parse/stanford.py#L112">
+      
+      (source)
+    </a>
+  </div>
+  <div class="docstring functionBody">
+    <div class="interfaceinfo">overrides <code><a href="nltk.parse.api.ParserI.html#parse_sents">nltk.parse.api.ParserI.parse_sents</a></code></div>
+    
+    <div>Use StanfordParser to parse multiple sentences. Takes multiple sentences as a
+list where each sentence is a list of words.
+Each sentence will be automatically tagged with this StanfordParser instance's
+tagger.
+If whitespaces exists inside a token, then the token will be treated as
+separate tokens.<table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">sentences:</span>list(list(str))</td><td class="fieldArgDesc">Input sentences to parse</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">verbose</span></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr class="fieldStart"><td class="fieldName" colspan="2">Returns</td></tr><tr><td class="fieldArgContainer">iter(iter(Tree))</td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr></table></div>
+  </div>
+</div><div class="basemethod">
+  
+  
+  <a name="nltk.parse.stanford.GenericStanfordParser.raw_parse">
+    
+  </a>
+  <a name="raw_parse">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-keyword">def</span> <span class="py-defname">raw_parse</span>(self, sentence, verbose=False):
+    <a class="sourceLink" href="https://github.com/nltk/nltk/tree/3.6.2/nltk/parse/stanford.py#L143">
+      
+      (source)
+    </a>
+  </div>
+  <div class="docstring functionBody">
+    
+    
+    <div>Use StanfordParser to parse a sentence. Takes a sentence as a string;
+before parsing, it will be automatically tokenized and tagged by
+the Stanford Parser.<table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">sentence:</span>str</td><td class="fieldArgDesc">Input sentence to parse</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">verbose</span></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr class="fieldStart"><td class="fieldName" colspan="2">Returns</td></tr><tr><td class="fieldArgContainer">iter(Tree)</td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr></table></div>
+  </div>
+</div><div class="basemethod">
+  
+  
+  <a name="nltk.parse.stanford.GenericStanfordParser.raw_parse_sents">
+    
+  </a>
+  <a name="raw_parse_sents">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-keyword">def</span> <span class="py-defname">raw_parse_sents</span>(self, sentences, verbose=False):
+    <a class="sourceLink" href="https://github.com/nltk/nltk/tree/3.6.2/nltk/parse/stanford.py#L155">
+      
+      (source)
+    </a>
+  </div>
+  <div class="docstring functionBody">
+    
+    
+    <div>Use StanfordParser to parse multiple sentences. Takes multiple sentences as a
+list of strings.
+Each sentence will be automatically tokenized and tagged by the Stanford Parser.<table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">sentences:</span>list(str)</td><td class="fieldArgDesc">Input sentences to parse</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">verbose</span></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr class="fieldStart"><td class="fieldName" colspan="2">Returns</td></tr><tr><td class="fieldArgContainer">iter(iter(Tree))</td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr></table></div>
+  </div>
+</div><div class="basemethod">
+  
+  
+  <a name="nltk.parse.stanford.GenericStanfordParser.tagged_parse">
+    
+  </a>
+  <a name="tagged_parse">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-keyword">def</span> <span class="py-defname">tagged_parse</span>(self, sentence, verbose=False):
+    <a class="sourceLink" href="https://github.com/nltk/nltk/tree/3.6.2/nltk/parse/stanford.py#L178">
+      
+      (source)
+    </a>
+  </div>
+  <div class="docstring functionBody">
+    
+    
+    <div>Use StanfordParser to parse a sentence. Takes a sentence as a list of
+(word, tag) tuples; the sentence must have already been tokenized and
+tagged.<table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">sentence:</span>list(tuple(str, str))</td><td class="fieldArgDesc">Input sentence to parse</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">verbose</span></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr class="fieldStart"><td class="fieldName" colspan="2">Returns</td></tr><tr><td class="fieldArgContainer">iter(Tree)</td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr></table></div>
+  </div>
+</div><div class="basemethod">
+  
+  
+  <a name="nltk.parse.stanford.GenericStanfordParser.tagged_parse_sents">
+    
+  </a>
+  <a name="tagged_parse_sents">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-keyword">def</span> <span class="py-defname">tagged_parse_sents</span>(self, sentences, verbose=False):
+    <a class="sourceLink" href="https://github.com/nltk/nltk/tree/3.6.2/nltk/parse/stanford.py#L190">
+      
+      (source)
+    </a>
+  </div>
+  <div class="docstring functionBody">
+    <div class="interfaceinfo">overridden in <code><a href="nltk.parse.stanford.StanfordNeuralDependencyParser.html">nltk.parse.stanford.StanfordNeuralDependencyParser</a></code></div>
+    
+    <div>Use StanfordParser to parse multiple sentences. Takes multiple sentences
+where each sentence is a list of (word, tag) tuples.
+The sentences must have already been tokenized and tagged.<table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">sentences:</span>list(list(tuple(str, str)))</td><td class="fieldArgDesc">Input sentences to parse</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">verbose</span></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr class="fieldStart"><td class="fieldName" colspan="2">Returns</td></tr><tr><td class="fieldArgContainer">iter(iter(Tree))</td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr></table></div>
+  </div>
+</div><div class="baseinstancevariable">
+  
+  
+  <a name="nltk.parse.stanford.GenericStanfordParser.corenlp_options">
+    
+  </a>
+  <a name="corenlp_options">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-defname">corenlp_options</span> =
+    <a class="sourceLink" href="https://github.com/nltk/nltk/tree/3.6.2/nltk/parse/stanford.py#L86">
+      
+      (source)
+    </a>
+  </div>
+  <div class="functionBody">
+    
+    
+    <div><p class="undocumented">Undocumented</p></div>
+  </div>
+</div><div class="baseinstancevariable">
+  
+  
+  <a name="nltk.parse.stanford.GenericStanfordParser.java_options">
+    
+  </a>
+  <a name="java_options">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-defname">java_options</span> =
+    <a class="sourceLink" href="https://github.com/nltk/nltk/tree/3.6.2/nltk/parse/stanford.py#L87">
+      
+      (source)
+    </a>
+  </div>
+  <div class="functionBody">
+    
+    
+    <div><p class="undocumented">Undocumented</p></div>
+  </div>
+</div><div class="baseinstancevariable">
+  
+  
+  <a name="nltk.parse.stanford.GenericStanfordParser.model_path">
+    
+  </a>
+  <a name="model_path">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-defname">model_path</span> =
+    <a class="sourceLink" href="https://github.com/nltk/nltk/tree/3.6.2/nltk/parse/stanford.py#L84">
+      
+      (source)
+    </a>
+  </div>
+  <div class="functionBody">
+    
+    
+    <div><p class="undocumented">Undocumented</p></div>
+  </div>
+</div><div class="basemethod private">
+  
+  
+  <a name="nltk.parse.stanford.GenericStanfordParser._execute">
+    
+  </a>
+  <a name="_execute">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-keyword">def</span> <span class="py-defname">_execute</span>(self, cmd, input_, verbose=False):
+    <a class="sourceLink" href="https://github.com/nltk/nltk/tree/3.6.2/nltk/parse/stanford.py#L229">
+      
+      (source)
+    </a>
+  </div>
+  <div class="docstring functionBody">
+    
+    
+    <div><p class="undocumented">Undocumented</p></div>
+  </div>
+</div><div class="basemethod private">
+  
+  
+  <a name="nltk.parse.stanford.GenericStanfordParser._parse_trees_output">
+    
+  </a>
+  <a name="_parse_trees_output">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-keyword">def</span> <span class="py-defname">_parse_trees_output</span>(self, output_):
+    <a class="sourceLink" href="https://github.com/nltk/nltk/tree/3.6.2/nltk/parse/stanford.py#L89">
+      
+      (source)
+    </a>
+  </div>
+  <div class="docstring functionBody">
+    
+    
+    <div><p class="undocumented">Undocumented</p></div>
+  </div>
+</div><div class="baseclassvariable private">
+  
+  
+  <a name="nltk.parse.stanford.GenericStanfordParser._DOUBLE_SPACED_OUTPUT">
+    
+  </a>
+  <a name="_DOUBLE_SPACED_OUTPUT">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-defname">_DOUBLE_SPACED_OUTPUT</span>: <code>bool</code> =
+    <a class="sourceLink" href="https://github.com/nltk/nltk/tree/3.6.2/nltk/parse/stanford.py#L38">
+      
+      (source)
+    </a>
+  </div>
+  <div class="functionBody">
+    <div class="interfaceinfo">overridden in <code><a href="nltk.parse.stanford.StanfordNeuralDependencyParser.html">nltk.parse.stanford.StanfordNeuralDependencyParser</a></code></div>
+    
+    <div><p class="undocumented">Undocumented</p></div>
+  </div>
+</div><div class="baseclassvariable private">
+  
+  
+  <a name="nltk.parse.stanford.GenericStanfordParser._JAR">
+    
+  </a>
+  <a name="_JAR">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-defname">_JAR</span>: <code>str</code> =
+    <a class="sourceLink" href="https://github.com/nltk/nltk/tree/3.6.2/nltk/parse/stanford.py#L34">
+      
+      (source)
+    </a>
+  </div>
+  <div class="functionBody">
+    <div class="interfaceinfo">overridden in <code><a href="nltk.parse.stanford.StanfordNeuralDependencyParser.html">nltk.parse.stanford.StanfordNeuralDependencyParser</a></code></div>
+    
+    <div><p class="undocumented">Undocumented</p></div>
+  </div>
+</div><div class="baseclassvariable private">
+  
+  
+  <a name="nltk.parse.stanford.GenericStanfordParser._MAIN_CLASS">
+    
+  </a>
+  <a name="_MAIN_CLASS">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-defname">_MAIN_CLASS</span>: <code>str</code> =
+    <a class="sourceLink" href="https://github.com/nltk/nltk/tree/3.6.2/nltk/parse/stanford.py#L35">
+      
+      (source)
+    </a>
+  </div>
+  <div class="functionBody">
+    <div class="interfaceinfo">overridden in <code><a href="nltk.parse.stanford.StanfordNeuralDependencyParser.html">nltk.parse.stanford.StanfordNeuralDependencyParser</a></code></div>
+    
+    <div><p class="undocumented">Undocumented</p></div>
+  </div>
+</div><div class="baseclassvariable private">
+  
+  
+  <a name="nltk.parse.stanford.GenericStanfordParser._MODEL_JAR_PATTERN">
+    
+  </a>
+  <a name="_MODEL_JAR_PATTERN">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-defname">_MODEL_JAR_PATTERN</span>: <code>str</code> =
+    <a class="sourceLink" href="https://github.com/nltk/nltk/tree/3.6.2/nltk/parse/stanford.py#L33">
+      
+      (source)
+    </a>
+  </div>
+  <div class="functionBody">
+    <div class="interfaceinfo">overridden in <code><a href="nltk.parse.stanford.StanfordNeuralDependencyParser.html">nltk.parse.stanford.StanfordNeuralDependencyParser</a></code></div>
+    
+    <div><p class="undocumented">Undocumented</p></div>
+  </div>
+</div><div class="baseclassvariable private">
+  
+  
+  <a name="nltk.parse.stanford.GenericStanfordParser._USE_STDIN">
+    
+  </a>
+  <a name="_USE_STDIN">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-defname">_USE_STDIN</span>: <code>bool</code> =
+    <a class="sourceLink" href="https://github.com/nltk/nltk/tree/3.6.2/nltk/parse/stanford.py#L37">
+      
+      (source)
+    </a>
+  </div>
+  <div class="functionBody">
+    <div class="interfaceinfo">overridden in <code><a href="nltk.parse.stanford.StanfordNeuralDependencyParser.html">nltk.parse.stanford.StanfordNeuralDependencyParser</a></code></div>
+    
+    <div><p class="undocumented">Undocumented</p></div>
+  </div>
+</div><div class="baseinstancevariable private">
+  
+  
+  <a name="nltk.parse.stanford.GenericStanfordParser._classpath">
+    
+  </a>
+  <a name="_classpath">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-defname">_classpath</span> =
+    <a class="sourceLink" href="https://github.com/nltk/nltk/tree/3.6.2/nltk/parse/stanford.py#L82">
+      
+      (source)
+    </a>
+  </div>
+  <div class="functionBody">
+    
+    
+    <div><p class="undocumented">Undocumented</p></div>
+  </div>
+</div><div class="baseinstancevariable private">
+  
+  
+  <a name="nltk.parse.stanford.GenericStanfordParser._encoding">
+    
+  </a>
+  <a name="_encoding">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-defname">_encoding</span> =
+    <a class="sourceLink" href="https://github.com/nltk/nltk/tree/3.6.2/nltk/parse/stanford.py#L85">
+      
+      (source)
+    </a>
+  </div>
+  <div class="functionBody">
+    
+    
+    <div><p class="undocumented">Undocumented</p></div>
+  </div>
+</div>
+
+      </div>
+    </div>
+
+    <footer class="navbar navbar-default">
+  
+  <div class="container">
+    <a href="index.html">API Documentation</a> for <a href="http://www.nltk.org/" class="projecthome">nltk-3.6.2</a>,
+  generated by <a href="https://github.com/twisted/pydoctor/">pydoctor</a>
+    21.2.2 at 2021-07-12 23:14:45.
+  </div>
+</footer>
+
+    <script src="pydoctor.js" type="text/javascript"></script>
+
+  </body>
+</html>

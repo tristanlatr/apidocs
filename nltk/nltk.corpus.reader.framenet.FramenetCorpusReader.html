@@ -1,0 +1,2249 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+          "DTD/xhtml1-strict.dtd">
+<html>
+  
+
+  <head>
+    
+    <title>nltk.corpus.reader.framenet.FramenetCorpusReader</title>
+    <meta name="generator" content="pydoctor 21.2.2"> 
+        
+    </meta>
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=0.75" />
+    <link rel="stylesheet" type="text/css" href="bootstrap.min.css" />
+    <link rel="stylesheet" type="text/css" href="apidocs.css" />
+    <link rel="stylesheet" type="text/css" href="extra.css" />
+</head>
+
+  <body>
+
+    
+
+    <nav class="navbar navbar-default">
+  
+  <div class="container">
+
+    <div class="navbar-header">
+      
+      <div class="navlinks">
+        <span class="navbar-brand">
+          <a href="http://www.nltk.org/" class="projecthome">nltk-3.6.2</a> <a href="index.html">API Documentation</a>
+        </span>
+
+        <a href="moduleIndex.html">
+          Modules
+        </a>
+
+        <a href="classIndex.html">
+          Classes
+        </a>
+
+        <a href="nameIndex.html">
+          Names
+        </a>
+
+        <form action="search-results.html" id="search-box-container">
+          <div class="input-group">
+            <input id="search-box" name="search-query" placeholder="Search..." aria-label="Search" minlength="2" class="form-control" />
+            <span class="input-group-btn">
+              <button class="btn btn-default" type="submit" title="Search"><img src="fonts/search.svg" alt="Search!" /></button>
+              <a class="btn btn-default" id="search-help-button" title="Help" onclick="toggleSearchHelpText()"><img src="fonts/info.svg" alt="Help!" /></a>
+            </span>
+          </div>
+        </form>
+
+        <div class="rst-admonition hint" id="search-help-box">
+          <p class="rst-last">
+      
+            Search bar offers the following options:
+            <ul>   
+                <li>
+                  <strong>Term presence.</strong> The below example searches for documents that 
+                    must contain “foo”, might contain “bar” and must not contain “baz”:
+                  <br /> <code>'+foo bar -baz'</code>
+                </li> 
+
+                <li>
+                  <strong>Wildcards.</strong> The below example searches for documents with words beginning with “foo”:
+                  <br /> <code>'foo*'</code>
+                </li> 
+
+                <li>
+                  <strong>Search in specific fields.</strong> The following search matches all documents 
+                  that contains "foo" in their full dotted name and with “bar” in any field:
+                  <br /> <code>'+fullName:*foo* +bar'</code>
+
+                  <p>
+                    Possible fields: 'name', 'docstring', 'fullName'.
+                  </p>
+                </li>
+
+                <li>
+                  <strong>Fuzzy matches.</strong> The following search matches all documents 
+                  that have a word within 1 edit distance of “foo”:
+                  <br /> <code>'foo~1'</code>
+                </li>
+            </ul>
+
+          </p>
+        </div>
+
+      </div>
+
+
+    </div>
+  </div>
+
+  <script>
+ 
+    function toggleSearchHelpText() {
+        document.body.classList.toggle("search-help-hidden");
+    }
+    // Init search and help text
+    document.getElementById('search-box-container').style.display = 'block';
+    document.getElementById('search-help-box').style.display = 'block';
+    document.body.classList.add("search-help-hidden");
+
+  </script>
+
+</nav>
+
+    
+
+    <div class="container">
+
+      <div class="page-header">
+        <h1 class="class"><code><code><a href="nltk.html">nltk</a></code><wbr></wbr>.<code><a href="nltk.corpus.html">corpus</a></code><wbr></wbr>.<code><a href="nltk.corpus.reader.html">reader</a></code><wbr></wbr>.<code><a href="nltk.corpus.reader.framenet.html">framenet</a></code><wbr></wbr>.<code><a href="nltk.corpus.reader.framenet.FramenetCorpusReader.html">FramenetCorpusReader</a></code></code></h1>
+        <div id="showPrivate">
+          <button class="btn btn-link" onclick="togglePrivate()">Toggle Private API</button>
+        </div>
+      </div>
+
+      <div class="categoryHeader">
+        class documentation
+      </div>
+
+      <div class="extrasDocstring">
+        <p><code><span class="py-keyword">class</span> <span class="py-defname">FramenetCorpusReader</span>(<span title="nltk.corpus.reader.XMLCorpusReader">XMLCorpusReader</span>): <a href="https://github.com/nltk/nltk/tree/3.6.2/nltk/corpus/reader/framenet.py#L1093" class="sourceLink">(source)</a></code></p>
+        <p><a href="classIndex.html#nltk.corpus.reader.framenet.FramenetCorpusReader">View In Hierarchy</a></p>
+      </div>
+
+      <div class="moduleDocstring">
+        <div><p>A corpus reader for the Framenet Corpus.</p><pre class="py-doctest">
+<span class="py-prompt">&gt;&gt;&gt; </span><span class="py-keyword">from</span> nltk.corpus <span class="py-keyword">import</span> framenet <span class="py-keyword">as</span> fn
+<span class="py-prompt">&gt;&gt;&gt; </span>fn.lu(3238).frame.lexUnit[<span class="py-string">'glint.v'</span>] <span class="py-keyword">is</span> fn.lu(3238)
+<span class="py-output">True</span>
+<span class="py-prompt">&gt;&gt;&gt; </span>fn.frame_by_name(<span class="py-string">'Replacing'</span>) <span class="py-keyword">is</span> fn.lus(<span class="py-string">'replace.v'</span>)[0].frame
+<span class="py-output">True</span>
+<span class="py-prompt">&gt;&gt;&gt; </span>fn.lus(<span class="py-string">'prejudice.n'</span>)[0].frame.frameRelations == fn.frame_relations(<span class="py-string">'Partiality'</span>)
+<span class="py-output">True</span>
+</pre></div>
+      </div>
+
+      <div id="splitTables">
+        <table class="children sortable" id="id317">
+  
+  
+  <tr class="method">
+    
+    <td>Method</td>
+    <td><code><a href="#__init__">__init__</a></code></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="method">
+    
+    <td>Method</td>
+    <td><code><a href="#annotations">annotations</a></code></td>
+    <td><span>Frame annotation sets matching the specified criteria.</span></td>
+  </tr><tr class="method">
+    
+    <td>Method</td>
+    <td><code><a href="#buildindexes">buildindexes</a></code></td>
+    <td><span>Build the internal indexes to make look-ups faster.</span></td>
+  </tr><tr class="method">
+    
+    <td>Method</td>
+    <td><code><a href="#doc">doc</a></code></td>
+    <td><span>Returns the annotated document whose id number is ``fn_docid``. This id number can be obtained by calling the Documents() function.</span></td>
+  </tr><tr class="method">
+    
+    <td>Method</td>
+    <td><code><a href="#docs">docs</a></code></td>
+    <td><span>Return a list of the annotated full-text documents in FrameNet, optionally filtered by a regex to be matched against the document name.</span></td>
+  </tr><tr class="method">
+    
+    <td>Method</td>
+    <td><code><a href="#docs_metadata">docs_metadata</a></code></td>
+    <td><span>Return an index of the annotated documents in Framenet.</span></td>
+  </tr><tr class="method">
+    
+    <td>Method</td>
+    <td><code><a href="#exemplars">exemplars</a></code></td>
+    <td><span class="undocumented">No summary</span></td>
+  </tr><tr class="method">
+    
+    <td>Method</td>
+    <td><code><a href="#fe_relations">fe_relations</a></code></td>
+    <td><span>Obtain a list of frame element relations.</span></td>
+  </tr><tr class="method">
+    
+    <td>Method</td>
+    <td><code><a href="#fes">fes</a></code></td>
+    <td><span class="undocumented">No summary</span></td>
+  </tr><tr class="method">
+    
+    <td>Method</td>
+    <td><code><a href="#frame">frame</a></code></td>
+    <td><span>Get the details for the specified Frame using the frame's name or id number.</span></td>
+  </tr><tr class="method">
+    
+    <td>Method</td>
+    <td><code><a href="#frame_by_id">frame_by_id</a></code></td>
+    <td><span>Get the details for the specified Frame using the frame's id number.</span></td>
+  </tr><tr class="method">
+    
+    <td>Method</td>
+    <td><code><a href="#frame_by_name">frame_by_name</a></code></td>
+    <td><span>Get the details for the specified Frame using the frame's name.</span></td>
+  </tr><tr class="method">
+    
+    <td>Method</td>
+    <td><code><a href="#frame_ids_and_names">frame_ids_and_names</a></code></td>
+    <td><span>Uses the frame index, which is much faster than looking up each frame definition if only the names and IDs are needed.</span></td>
+  </tr><tr class="method">
+    
+    <td>Method</td>
+    <td><code><a href="#frame_relation_types">frame_relation_types</a></code></td>
+    <td><span>Obtain a list of frame relation types.</span></td>
+  </tr><tr class="method">
+    
+    <td>Method</td>
+    <td><code><a href="#frame_relations">frame_relations</a></code></td>
+    <td><span class="undocumented">No summary</span></td>
+  </tr><tr class="method">
+    
+    <td>Method</td>
+    <td><code><a href="#frames">frames</a></code></td>
+    <td><span>Obtain details for a specific frame.</span></td>
+  </tr><tr class="method">
+    
+    <td>Method</td>
+    <td><code><a href="#frames_by_lemma">frames_by_lemma</a></code></td>
+    <td><span class="undocumented">No summary</span></td>
+  </tr><tr class="method">
+    
+    <td>Method</td>
+    <td><code><a href="#ft_sents">ft_sents</a></code></td>
+    <td><span>Full-text annotation sentences, optionally filtered by document name.</span></td>
+  </tr><tr class="method">
+    
+    <td>Method</td>
+    <td><code><a href="#help">help</a></code></td>
+    <td><span>Display help information summarizing the main methods.</span></td>
+  </tr><tr class="method">
+    
+    <td>Method</td>
+    <td><code><a href="#lu">lu</a></code></td>
+    <td><span class="undocumented">No summary</span></td>
+  </tr><tr class="method">
+    
+    <td>Method</td>
+    <td><code><a href="#lu_basic">lu_basic</a></code></td>
+    <td><span>Returns basic information about the LU whose id is ``fn_luid``. This is basically just a wrapper around the ``lu()`` function with "subCorpus" info excluded.</span></td>
+  </tr><tr class="method">
+    
+    <td>Method</td>
+    <td><code><a href="#lu_ids_and_names">lu_ids_and_names</a></code></td>
+    <td><span>Uses the LU index, which is much faster than looking up each LU definition if only the names and IDs are needed.</span></td>
+  </tr><tr class="method">
+    
+    <td>Method</td>
+    <td><code><a href="#lus">lus</a></code></td>
+    <td><span>Obtain details for lexical units. Optionally restrict by lexical unit name pattern, and/or to a certain frame or frames whose name matches a pattern.</span></td>
+  </tr><tr class="method">
+    
+    <td>Method</td>
+    <td><code><a href="#propagate_semtypes">propagate_semtypes</a></code></td>
+    <td><span class="undocumented">No summary</span></td>
+  </tr><tr class="method">
+    
+    <td>Method</td>
+    <td><code><a href="#readme">readme</a></code></td>
+    <td><span>Return the contents of the corpus README.txt (or README) file.</span></td>
+  </tr><tr class="method">
+    
+    <td>Method</td>
+    <td><code><a href="#semtype">semtype</a></code></td>
+    <td><span class="undocumented">No summary</span></td>
+  </tr><tr class="method">
+    
+    <td>Method</td>
+    <td><code><a href="#semtype_inherits">semtype_inherits</a></code></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="method">
+    
+    <td>Method</td>
+    <td><code><a href="#semtypes">semtypes</a></code></td>
+    <td><span>Obtain a list of semantic types.</span></td>
+  </tr><tr class="method">
+    
+    <td>Method</td>
+    <td><code><a href="#sents">sents</a></code></td>
+    <td><span>Annotated sentences matching the specified criteria.</span></td>
+  </tr><tr class="method">
+    
+    <td>Method</td>
+    <td><code><a href="#warnings">warnings</a></code></td>
+    <td><span>Enable or disable warnings of data integrity issues as they are encountered. If v is truthy, warnings will be enabled.</span></td>
+  </tr><tr class="method private">
+    
+    <td>Method</td>
+    <td><code><a href="#_buildcorpusindex">_buildcorpusindex</a></code></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="method private">
+    
+    <td>Method</td>
+    <td><code><a href="#_buildframeindex">_buildframeindex</a></code></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="method private">
+    
+    <td>Method</td>
+    <td><code><a href="#_buildluindex">_buildluindex</a></code></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="method private">
+    
+    <td>Method</td>
+    <td><code><a href="#_buildrelationindex">_buildrelationindex</a></code></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="method private">
+    
+    <td>Method</td>
+    <td><code><a href="#_exemplar_of_fes">_exemplar_of_fes</a></code></td>
+    <td><span>Given an exemplar sentence and a set of FE names, return the subset of FE names that are realized overtly in the sentence on the FE, FE2, or FE3 layer.</span></td>
+  </tr><tr class="method private">
+    
+    <td>Method</td>
+    <td><code><a href="#_handle_elt">_handle_elt</a></code></td>
+    <td><span>Extracts and returns the attributes of the given element</span></td>
+  </tr><tr class="method private">
+    
+    <td>Method</td>
+    <td><code><a href="#_handle_fe_elt">_handle_fe_elt</a></code></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="method private">
+    
+    <td>Method</td>
+    <td><code><a href="#_handle_fecoreset_elt">_handle_fecoreset_elt</a></code></td>
+    <td><span>Load fe coreset info from xml.</span></td>
+  </tr><tr class="method private">
+    
+    <td>Method</td>
+    <td><code><a href="#_handle_frame_elt">_handle_frame_elt</a></code></td>
+    <td><span>Load the info for a Frame from a frame xml file</span></td>
+  </tr><tr class="method private">
+    
+    <td>Method</td>
+    <td><code><a href="#_handle_framelexunit_elt">_handle_framelexunit_elt</a></code></td>
+    <td><span>Load the lexical unit info from an xml element in a frame's xml file.</span></td>
+  </tr><tr class="method private">
+    
+    <td>Method</td>
+    <td><code><a href="#_handle_framerelation_elt">_handle_framerelation_elt</a></code></td>
+    <td><span>Load frame-relation element and its child fe-relation elements from frRelation.xml.</span></td>
+  </tr><tr class="method private">
+    
+    <td>Method</td>
+    <td><code><a href="#_handle_framerelationtype_elt">_handle_framerelationtype_elt</a></code></td>
+    <td><span>Load frame-relation element and its child fe-relation elements from frRelation.xml.</span></td>
+  </tr><tr class="method private">
+    
+    <td>Method</td>
+    <td><code><a href="#_handle_fulltext_sentence_elt">_handle_fulltext_sentence_elt</a></code></td>
+    <td><span>Load information from the given 'sentence' element. Each 'sentence' element contains a "text" and "annotationSet" sub elements.</span></td>
+  </tr><tr class="method private">
+    
+    <td>Method</td>
+    <td><code><a href="#_handle_fulltextannotation_elt">_handle_fulltextannotation_elt</a></code></td>
+    <td><span class="undocumented">No summary</span></td>
+  </tr><tr class="method private">
+    
+    <td>Method</td>
+    <td><code><a href="#_handle_fulltextannotationset_elt">_handle_fulltextannotationset_elt</a></code></td>
+    <td><span>Load information from the given 'annotationSet' element. Each 'annotationSet' contains several "layer" elements.</span></td>
+  </tr><tr class="method private">
+    
+    <td>Method</td>
+    <td><code><a href="#_handle_fulltextindex_elt">_handle_fulltextindex_elt</a></code></td>
+    <td><span>Extracts corpus/document info from the fulltextIndex.xml file.</span></td>
+  </tr><tr class="method private">
+    
+    <td>Method</td>
+    <td><code><a href="#_handle_fulltextlayer_elt">_handle_fulltextlayer_elt</a></code></td>
+    <td><span>Load information from the given 'layer' element. Each 'layer' contains several "label" elements.</span></td>
+  </tr><tr class="method private">
+    
+    <td>Method</td>
+    <td><code><a href="#_handle_lexunit_elt">_handle_lexunit_elt</a></code></td>
+    <td><span>Load full info for a lexical unit from its xml file. This should only be called when accessing corpus annotations (which are not included in frame files).</span></td>
+  </tr><tr class="method private">
+    
+    <td>Method</td>
+    <td><code><a href="#_handle_luannotationset_elt">_handle_luannotationset_elt</a></code></td>
+    <td><span>Load an annotation set from a sentence in an subcorpus of an LU</span></td>
+  </tr><tr class="method private">
+    
+    <td>Method</td>
+    <td><code><a href="#_handle_lulayer_elt">_handle_lulayer_elt</a></code></td>
+    <td><span>Load a layer from an annotation set</span></td>
+  </tr><tr class="method private">
+    
+    <td>Method</td>
+    <td><code><a href="#_handle_lusentence_elt">_handle_lusentence_elt</a></code></td>
+    <td><span>Load a sentence from a subcorpus of an LU from xml.</span></td>
+  </tr><tr class="method private">
+    
+    <td>Method</td>
+    <td><code><a href="#_handle_lusubcorpus_elt">_handle_lusubcorpus_elt</a></code></td>
+    <td><span>Load a subcorpus of a lexical unit from the given xml.</span></td>
+  </tr><tr class="method private">
+    
+    <td>Method</td>
+    <td><code><a href="#_handle_semtype_elt">_handle_semtype_elt</a></code></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="method private">
+    
+    <td>Method</td>
+    <td><code><a href="#_load_xml_attributes">_load_xml_attributes</a></code></td>
+    <td><span>Extracts a subset of the attributes from the given element and returns them in a dictionary.</span></td>
+  </tr><tr class="method private">
+    
+    <td>Method</td>
+    <td><code><a href="#_loadsemtypes">_loadsemtypes</a></code></td>
+    <td><span>Create the semantic types index.</span></td>
+  </tr><tr class="method private">
+    
+    <td>Method</td>
+    <td><code><a href="#_lu_file">_lu_file</a></code></td>
+    <td><span>Augment the LU information that was loaded from the frame file with additional information from the LU file.</span></td>
+  </tr><tr class="method private">
+    
+    <td>Method</td>
+    <td><code><a href="#_strip_tags">_strip_tags</a></code></td>
+    <td><span>Gets rid of all tags and newline characters from the given input</span></td>
+  </tr><tr class="method private">
+    
+    <td>Method</td>
+    <td><code><a href="#_warn">_warn</a></code></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="classvariable private">
+    
+    <td>Class Variable</td>
+    <td><code><a href="#_bad_statuses">_bad_statuses</a></code></td>
+    <td><span class="undocumented">No summary</span></td>
+  </tr><tr class="instancevariable private">
+    
+    <td>Instance Variable</td>
+    <td><code><a href="#_cached_frames">_cached_frames</a></code></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="instancevariable private">
+    
+    <td>Instance Variable</td>
+    <td><code><a href="#_ferel_idx">_ferel_idx</a></code></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="instancevariable private">
+    
+    <td>Instance Variable</td>
+    <td><code><a href="#_fnweb_url">_fnweb_url</a></code></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="instancevariable private">
+    
+    <td>Instance Variable</td>
+    <td><code><a href="#_frame_dir">_frame_dir</a></code></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="instancevariable private">
+    
+    <td>Instance Variable</td>
+    <td><code><a href="#_frame_idx">_frame_idx</a></code></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="instancevariable private">
+    
+    <td>Instance Variable</td>
+    <td><code><a href="#_frel_f_idx">_frel_f_idx</a></code></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="instancevariable private">
+    
+    <td>Instance Variable</td>
+    <td><code><a href="#_frel_idx">_frel_idx</a></code></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="instancevariable private">
+    
+    <td>Instance Variable</td>
+    <td><code><a href="#_freltyp_idx">_freltyp_idx</a></code></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="instancevariable private">
+    
+    <td>Instance Variable</td>
+    <td><code><a href="#_fulltext_dir">_fulltext_dir</a></code></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="instancevariable private">
+    
+    <td>Instance Variable</td>
+    <td><code><a href="#_fulltext_idx">_fulltext_idx</a></code></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="instancevariable private">
+    
+    <td>Instance Variable</td>
+    <td><code><a href="#_lu_dir">_lu_dir</a></code></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="instancevariable private">
+    
+    <td>Instance Variable</td>
+    <td><code><a href="#_lu_idx">_lu_idx</a></code></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="instancevariable private">
+    
+    <td>Instance Variable</td>
+    <td><code><a href="#_semtypes">_semtypes</a></code></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="instancevariable private">
+    
+    <td>Instance Variable</td>
+    <td><code><a href="#_warnings">_warnings</a></code></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr>
+</table>
+        
+
+          
+      </div>
+
+      <div id="childList">
+
+        <div class="basemethod">
+  
+  
+  <a name="nltk.corpus.reader.framenet.FramenetCorpusReader.__init__">
+    
+  </a>
+  <a name="__init__">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-keyword">def</span> <span class="py-defname">__init__</span>(self, root, fileids):
+    <a class="sourceLink" href="https://github.com/nltk/nltk/tree/3.6.2/nltk/corpus/reader/framenet.py#L1124">
+      
+      (source)
+    </a>
+  </div>
+  <div class="docstring functionBody">
+    
+    
+    <div><p class="undocumented">Undocumented</p></div>
+  </div>
+</div><div class="basemethod">
+  
+  
+  <a name="nltk.corpus.reader.framenet.FramenetCorpusReader.annotations">
+    
+  </a>
+  <a name="annotations">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-keyword">def</span> <span class="py-defname">annotations</span>(self, luNamePattern=None, exemplars=True, full_text=True):
+    <a class="sourceLink" href="https://github.com/nltk/nltk/tree/3.6.2/nltk/corpus/reader/framenet.py#L2330">
+      
+      (source)
+    </a>
+  </div>
+  <div class="docstring functionBody">
+    
+    
+    <div><p>Frame annotation sets matching the specified criteria.</p></div>
+  </div>
+</div><div class="basemethod">
+  
+  
+  <a name="nltk.corpus.reader.framenet.FramenetCorpusReader.buildindexes">
+    
+  </a>
+  <a name="buildindexes">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-keyword">def</span> <span class="py-defname">buildindexes</span>(self):
+    <a class="sourceLink" href="https://github.com/nltk/nltk/tree/3.6.2/nltk/corpus/reader/framenet.py#L1312">
+      
+      (source)
+    </a>
+  </div>
+  <div class="docstring functionBody">
+    
+    
+    <div><p>Build the internal indexes to make look-ups faster.</p></div>
+  </div>
+</div><div class="basemethod">
+  
+  
+  <a name="nltk.corpus.reader.framenet.FramenetCorpusReader.doc">
+    
+  </a>
+  <a name="doc">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-keyword">def</span> <span class="py-defname">doc</span>(self, fn_docid):
+    <a class="sourceLink" href="https://github.com/nltk/nltk/tree/3.6.2/nltk/corpus/reader/framenet.py#L1325">
+      
+      (source)
+    </a>
+  </div>
+  <div class="docstring functionBody">
+    
+    
+    <div></div>
+  </div>
+</div><div class="basemethod">
+  
+  
+  <a name="nltk.corpus.reader.framenet.FramenetCorpusReader.docs">
+    
+  </a>
+  <a name="docs">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-keyword">def</span> <span class="py-defname">docs</span>(self, name=None):
+    <a class="sourceLink" href="https://github.com/nltk/nltk/tree/3.6.2/nltk/corpus/reader/framenet.py#L2311">
+      
+      (source)
+    </a>
+  </div>
+  <div class="docstring functionBody">
+    
+    
+    <div><p>Return a list of the annotated full-text documents in FrameNet, optionally filtered by a regex to be matched against the document name.</p></div>
+  </div>
+</div><div class="basemethod">
+  
+  
+  <a name="nltk.corpus.reader.framenet.FramenetCorpusReader.docs_metadata">
+    
+  </a>
+  <a name="docs_metadata">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-keyword">def</span> <span class="py-defname">docs_metadata</span>(self, name=None):
+    <a class="sourceLink" href="https://github.com/nltk/nltk/tree/3.6.2/nltk/corpus/reader/framenet.py#L2264">
+      
+      (source)
+    </a>
+  </div>
+  <div class="docstring functionBody">
+    
+    
+    <div></div>
+  </div>
+</div><div class="basemethod">
+  
+  
+  <a name="nltk.corpus.reader.framenet.FramenetCorpusReader.exemplars">
+    
+  </a>
+  <a name="exemplars">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-keyword">def</span> <span class="py-defname">exemplars</span>(self, luNamePattern=None, frame=None, fe=None, fe2=None):
+    <a class="sourceLink" href="https://github.com/nltk/nltk/tree/3.6.2/nltk/corpus/reader/framenet.py#L2362">
+      
+      (source)
+    </a>
+  </div>
+  <div class="docstring functionBody">
+    
+    
+    <div><p>Lexicographic exemplar sentences, optionally filtered by LU name and/or 1-2 FEs that are realized overtly. 'frame' may be a name pattern, frame ID, or frame instance. 'fe' may be a name pattern or FE instance; if specified, 'fe2' may also be specified to retrieve sentences with both overt FEs (in either order).</p></div>
+  </div>
+</div><div class="basemethod">
+  
+  
+  <a name="nltk.corpus.reader.framenet.FramenetCorpusReader.fe_relations">
+    
+  </a>
+  <a name="fe_relations">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-keyword">def</span> <span class="py-defname">fe_relations</span>(self):
+    <a class="sourceLink" href="https://github.com/nltk/nltk/tree/3.6.2/nltk/corpus/reader/framenet.py#L2615">
+      
+      (source)
+    </a>
+  </div>
+  <div class="docstring functionBody">
+    
+    
+    <div><p>Obtain a list of frame element relations.</p><pre class="py-doctest">
+<span class="py-prompt">&gt;&gt;&gt; </span><span class="py-keyword">from</span> nltk.corpus <span class="py-keyword">import</span> framenet <span class="py-keyword">as</span> fn
+<span class="py-prompt">&gt;&gt;&gt; </span>ferels = fn.fe_relations()
+<span class="py-prompt">&gt;&gt;&gt; </span><span class="py-builtin">isinstance</span>(ferels, <span class="py-builtin">list</span>)
+<span class="py-output">True</span>
+<span class="py-prompt">&gt;&gt;&gt; </span><span class="py-builtin">len</span>(ferels) <span class="py-keyword">in</span> (10020, 12393)   <span class="py-comment"># FN 1.5 and 1.7, resp.</span>
+<span class="py-output">True</span>
+<span class="py-prompt">&gt;&gt;&gt; </span>PrettyDict(ferels[0], breakLines=<span class="py-builtin">True</span>)
+<span class="py-output">{'ID': 14642,</span>
+<span class="py-output">'_type': 'ferelation',</span>
+<span class="py-output">'frameRelation': &lt;Parent=Abounding_with -- Inheritance -&gt; Child=Lively_place&gt;,</span>
+<span class="py-output">'subFE': &lt;fe ID=11370 name=Degree&gt;,</span>
+<span class="py-output">'subFEName': 'Degree',</span>
+<span class="py-output">'subFrame': &lt;frame ID=1904 name=Lively_place&gt;,</span>
+<span class="py-output">'subID': 11370,</span>
+<span class="py-output">'supID': 2271,</span>
+<span class="py-output">'superFE': &lt;fe ID=2271 name=Degree&gt;,</span>
+<span class="py-output">'superFEName': 'Degree',</span>
+<span class="py-output">'superFrame': &lt;frame ID=262 name=Abounding_with&gt;,</span>
+<span class="py-output">'type': &lt;framerelationtype ID=1 name=Inheritance&gt;}</span>
+</pre><p>:return: A list of all of the frame element relations in framenet :rtype: list(dict)</p></div>
+  </div>
+</div><div class="basemethod">
+  
+  
+  <a name="nltk.corpus.reader.framenet.FramenetCorpusReader.fes">
+    
+  </a>
+  <a name="fes">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-keyword">def</span> <span class="py-defname">fes</span>(self, name=None, frame=None):
+    <a class="sourceLink" href="https://github.com/nltk/nltk/tree/3.6.2/nltk/corpus/reader/framenet.py#L2059">
+      
+      (source)
+    </a>
+  </div>
+  <div class="docstring functionBody">
+    
+    
+    <div></div>
+  </div>
+</div><div class="basemethod">
+  
+  
+  <a name="nltk.corpus.reader.framenet.FramenetCorpusReader.frame">
+    
+  </a>
+  <a name="frame">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-keyword">def</span> <span class="py-defname">frame</span>(self, fn_fid_or_fname, ignorekeys=[]):
+    <a class="sourceLink" href="https://github.com/nltk/nltk/tree/3.6.2/nltk/corpus/reader/framenet.py#L1503">
+      
+      (source)
+    </a>
+  </div>
+  <div class="docstring functionBody">
+    
+    
+    <div></div>
+  </div>
+</div><div class="basemethod">
+  
+  
+  <a name="nltk.corpus.reader.framenet.FramenetCorpusReader.frame_by_id">
+    
+  </a>
+  <a name="frame_by_id">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-keyword">def</span> <span class="py-defname">frame_by_id</span>(self, fn_fid, ignorekeys=[]):
+    <a class="sourceLink" href="https://github.com/nltk/nltk/tree/3.6.2/nltk/corpus/reader/framenet.py#L1393">
+      
+      (source)
+    </a>
+  </div>
+  <div class="docstring functionBody">
+    
+    
+    <div></div>
+  </div>
+</div><div class="basemethod">
+  
+  
+  <a name="nltk.corpus.reader.framenet.FramenetCorpusReader.frame_by_name">
+    
+  </a>
+  <a name="frame_by_name">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-keyword">def</span> <span class="py-defname">frame_by_name</span>(self, fn_fname, ignorekeys=[], check_cache=True):
+    <a class="sourceLink" href="https://github.com/nltk/nltk/tree/3.6.2/nltk/corpus/reader/framenet.py#L1435">
+      
+      (source)
+    </a>
+  </div>
+  <div class="docstring functionBody">
+    
+    
+    <div></div>
+  </div>
+</div><div class="basemethod">
+  
+  
+  <a name="nltk.corpus.reader.framenet.FramenetCorpusReader.frame_ids_and_names">
+    
+  </a>
+  <a name="frame_ids_and_names">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-keyword">def</span> <span class="py-defname">frame_ids_and_names</span>(self, name=None):
+    <a class="sourceLink" href="https://github.com/nltk/nltk/tree/3.6.2/nltk/corpus/reader/framenet.py#L2046">
+      
+      (source)
+    </a>
+  </div>
+  <div class="docstring functionBody">
+    
+    
+    <div><p>Uses the frame index, which is much faster than looking up each frame definition if only the names and IDs are needed.</p></div>
+  </div>
+</div><div class="basemethod">
+  
+  
+  <a name="nltk.corpus.reader.framenet.FramenetCorpusReader.frame_relation_types">
+    
+  </a>
+  <a name="frame_relation_types">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-keyword">def</span> <span class="py-defname">frame_relation_types</span>(self):
+    <a class="sourceLink" href="https://github.com/nltk/nltk/tree/3.6.2/nltk/corpus/reader/framenet.py#L2495">
+      
+      (source)
+    </a>
+  </div>
+  <div class="docstring functionBody">
+    
+    
+    <div><p>Obtain a list of frame relation types.</p><pre class="py-doctest">
+<span class="py-prompt">&gt;&gt;&gt; </span><span class="py-keyword">from</span> nltk.corpus <span class="py-keyword">import</span> framenet <span class="py-keyword">as</span> fn
+<span class="py-prompt">&gt;&gt;&gt; </span>frts = <span class="py-builtin">sorted</span>(fn.frame_relation_types(), key=itemgetter(<span class="py-string">'ID'</span>))
+<span class="py-prompt">&gt;&gt;&gt; </span><span class="py-builtin">isinstance</span>(frts, <span class="py-builtin">list</span>)
+<span class="py-output">True</span>
+<span class="py-prompt">&gt;&gt;&gt; </span><span class="py-builtin">len</span>(frts) <span class="py-keyword">in</span> (9, 10)    <span class="py-comment"># FN 1.5 and 1.7, resp.</span>
+<span class="py-output">True</span>
+<span class="py-prompt">&gt;&gt;&gt; </span>PrettyDict(frts[0], breakLines=<span class="py-builtin">True</span>)
+<span class="py-output">{'ID': 1,</span>
+<span class="py-output"> '_type': 'framerelationtype',</span>
+<span class="py-output"> 'frameRelations': [&lt;Parent=Event -- Inheritance -&gt; Child=Change_of_consistency&gt;, &lt;Parent=Event -- Inheritance -&gt; Child=Rotting&gt;, ...],</span>
+<span class="py-output"> 'name': 'Inheritance',</span>
+<span class="py-output"> 'subFrameName': 'Child',</span>
+<span class="py-output"> 'superFrameName': 'Parent'}</span>
+</pre><p>:return: A list of all of the frame relation types in framenet :rtype: list(dict)</p></div>
+  </div>
+</div><div class="basemethod">
+  
+  
+  <a name="nltk.corpus.reader.framenet.FramenetCorpusReader.frame_relations">
+    
+  </a>
+  <a name="frame_relations">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-keyword">def</span> <span class="py-defname">frame_relations</span>(self, frame=None, frame2=None, type=None):
+    <a class="sourceLink" href="https://github.com/nltk/nltk/tree/3.6.2/nltk/corpus/reader/framenet.py#L2520">
+      
+      (source)
+    </a>
+  </div>
+  <div class="docstring functionBody">
+    
+    
+    <div><p>:param frame: (optional) frame object, name, or ID; only relations involving this frame will be returned :param frame2: (optional; 'frame' must be a different frame) only show relations between the two specified frames, in either direction :param type: (optional) frame relation type (name or object); show only relations of this type :type frame: int or str or AttrDict :return: A list of all of the frame relations in framenet :rtype: list(dict)</p><pre class="py-doctest">
+<span class="py-prompt">&gt;&gt;&gt; </span><span class="py-keyword">from</span> nltk.corpus <span class="py-keyword">import</span> framenet <span class="py-keyword">as</span> fn
+<span class="py-prompt">&gt;&gt;&gt; </span>frels = fn.frame_relations()
+<span class="py-prompt">&gt;&gt;&gt; </span><span class="py-builtin">isinstance</span>(frels, <span class="py-builtin">list</span>)
+<span class="py-output">True</span>
+<span class="py-prompt">&gt;&gt;&gt; </span><span class="py-builtin">len</span>(frels) <span class="py-keyword">in</span> (1676, 2070)  <span class="py-comment"># FN 1.5 and 1.7, resp.</span>
+<span class="py-output">True</span>
+<span class="py-prompt">&gt;&gt;&gt; </span>PrettyList(fn.frame_relations(<span class="py-string">'Cooking_creation'</span>), maxReprSize=0, breakLines=<span class="py-builtin">True</span>)
+<span class="py-output">[&lt;Parent=Intentionally_create -- Inheritance -&gt; Child=Cooking_creation&gt;,</span>
+<span class="py-output"> &lt;Parent=Apply_heat -- Using -&gt; Child=Cooking_creation&gt;,</span>
+<span class="py-output"> &lt;MainEntry=Apply_heat -- See_also -&gt; ReferringEntry=Cooking_creation&gt;]</span>
+<span class="py-prompt">&gt;&gt;&gt; </span>PrettyList(fn.frame_relations(274), breakLines=<span class="py-builtin">True</span>)
+<span class="py-output">[&lt;Parent=Avoiding -- Inheritance -&gt; Child=Dodging&gt;,</span>
+<span class="py-output"> &lt;Parent=Avoiding -- Inheritance -&gt; Child=Evading&gt;, ...]</span>
+<span class="py-prompt">&gt;&gt;&gt; </span>PrettyList(fn.frame_relations(fn.frame(<span class="py-string">'Cooking_creation'</span>)), breakLines=<span class="py-builtin">True</span>)
+<span class="py-output">[&lt;Parent=Intentionally_create -- Inheritance -&gt; Child=Cooking_creation&gt;,</span>
+<span class="py-output"> &lt;Parent=Apply_heat -- Using -&gt; Child=Cooking_creation&gt;, ...]</span>
+<span class="py-prompt">&gt;&gt;&gt; </span>PrettyList(fn.frame_relations(<span class="py-string">'Cooking_creation'</span>, <span class="py-builtin">type</span>=<span class="py-string">'Inheritance'</span>))
+<span class="py-output">[&lt;Parent=Intentionally_create -- Inheritance -&gt; Child=Cooking_creation&gt;]</span>
+<span class="py-prompt">&gt;&gt;&gt; </span>PrettyList(fn.frame_relations(<span class="py-string">'Cooking_creation'</span>, <span class="py-string">'Apply_heat'</span>), breakLines=<span class="py-builtin">True</span>)
+<span class="py-output">[&lt;Parent=Apply_heat -- Using -&gt; Child=Cooking_creation&gt;,</span>
+<span class="py-output">&lt;MainEntry=Apply_heat -- See_also -&gt; ReferringEntry=Cooking_creation&gt;]</span>
+</pre></div>
+  </div>
+</div><div class="basemethod">
+  
+  
+  <a name="nltk.corpus.reader.framenet.FramenetCorpusReader.frames">
+    
+  </a>
+  <a name="frames">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-keyword">def</span> <span class="py-defname">frames</span>(self, name=None):
+    <a class="sourceLink" href="https://github.com/nltk/nltk/tree/3.6.2/nltk/corpus/reader/framenet.py#L1972">
+      
+      (source)
+    </a>
+  </div>
+  <div class="docstring functionBody">
+    
+    
+    <div></div>
+  </div>
+</div><div class="basemethod">
+  
+  
+  <a name="nltk.corpus.reader.framenet.FramenetCorpusReader.frames_by_lemma">
+    
+  </a>
+  <a name="frames_by_lemma">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-keyword">def</span> <span class="py-defname">frames_by_lemma</span>(self, pat):
+    <a class="sourceLink" href="https://github.com/nltk/nltk/tree/3.6.2/nltk/corpus/reader/framenet.py#L1579">
+      
+      (source)
+    </a>
+  </div>
+  <div class="docstring functionBody">
+    
+    
+    <div><p>Returns a list of all frames that contain LUs in which the ``name`` attribute of the LU matchs the given regular expression ``pat``. Note that LU names are composed of "lemma.POS", where the "lemma" part can be made up of either a single lexeme (e.g. 'run') or multiple lexemes (e.g. 'a little').</p><p>Note: if you are going to be doing a lot of this type of searching, you'd want to build an index that maps from lemmas to frames because each time frames_by_lemma() is called, it has to search through ALL of the frame XML files in the db.</p><pre class="py-doctest">
+<span class="py-prompt">&gt;&gt;&gt; </span><span class="py-keyword">from</span> nltk.corpus <span class="py-keyword">import</span> framenet <span class="py-keyword">as</span> fn
+<span class="py-prompt">&gt;&gt;&gt; </span><span class="py-keyword">from</span> nltk.corpus.reader.framenet <span class="py-keyword">import</span> PrettyList
+<span class="py-prompt">&gt;&gt;&gt; </span>PrettyList(<span class="py-builtin">sorted</span>(fn.frames_by_lemma(r<span class="py-string">'(?i)a little'</span>), key=itemgetter(<span class="py-string">'ID'</span>))) <span class="py-comment"># doctest: +ELLIPSIS</span>
+<span class="py-output">[&lt;frame ID=189 name=Quanti...&gt;, &lt;frame ID=2001 name=Degree&gt;]</span>
+</pre><p>:return: A list of frame objects. :rtype: list(AttrDict)</p></div>
+  </div>
+</div><div class="basemethod">
+  
+  
+  <a name="nltk.corpus.reader.framenet.FramenetCorpusReader.ft_sents">
+    
+  </a>
+  <a name="ft_sents">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-keyword">def</span> <span class="py-defname">ft_sents</span>(self, docNamePattern=None):
+    <a class="sourceLink" href="https://github.com/nltk/nltk/tree/3.6.2/nltk/corpus/reader/framenet.py#L2487">
+      
+      (source)
+    </a>
+  </div>
+  <div class="docstring functionBody">
+    
+    
+    <div><p>Full-text annotation sentences, optionally filtered by document name.</p></div>
+  </div>
+</div><div class="basemethod">
+  
+  
+  <a name="nltk.corpus.reader.framenet.FramenetCorpusReader.help">
+    
+  </a>
+  <a name="help">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-keyword">def</span> <span class="py-defname">help</span>(self, attrname=None):
+    <a class="sourceLink" href="https://github.com/nltk/nltk/tree/3.6.2/nltk/corpus/reader/framenet.py#L1149">
+      
+      (source)
+    </a>
+  </div>
+  <div class="docstring functionBody">
+    
+    
+    <div><p>Display help information summarizing the main methods.</p></div>
+  </div>
+</div><div class="basemethod">
+  
+  
+  <a name="nltk.corpus.reader.framenet.FramenetCorpusReader.lu">
+    
+  </a>
+  <a name="lu">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-keyword">def</span> <span class="py-defname">lu</span>(self, fn_luid, ignorekeys=[], luName=None, frameID=None, frameName=None):
+    <a class="sourceLink" href="https://github.com/nltk/nltk/tree/3.6.2/nltk/corpus/reader/framenet.py#L1639">
+      
+      (source)
+    </a>
+  </div>
+  <div class="docstring functionBody">
+    
+    
+    <div></div>
+  </div>
+</div><div class="basemethod">
+  
+  
+  <a name="nltk.corpus.reader.framenet.FramenetCorpusReader.lu_basic">
+    
+  </a>
+  <a name="lu_basic">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-keyword">def</span> <span class="py-defname">lu_basic</span>(self, fn_luid):
+    <a class="sourceLink" href="https://github.com/nltk/nltk/tree/3.6.2/nltk/corpus/reader/framenet.py#L1606">
+      
+      (source)
+    </a>
+  </div>
+  <div class="docstring functionBody">
+    
+    
+    <div><p>Returns basic information about the LU whose id is ``fn_luid``. This is basically just a wrapper around the ``lu()`` function with "subCorpus" info excluded.</p><pre class="py-doctest">
+<span class="py-prompt">&gt;&gt;&gt; </span><span class="py-keyword">from</span> nltk.corpus <span class="py-keyword">import</span> framenet <span class="py-keyword">as</span> fn
+<span class="py-prompt">&gt;&gt;&gt; </span>lu = PrettyDict(fn.lu_basic(256), breakLines=<span class="py-builtin">True</span>)
+<span class="py-prompt">&gt;&gt;&gt; </span><span class="py-comment"># ellipses account for differences between FN 1.5 and 1.7</span>
+<span class="py-prompt">&gt;&gt;&gt; </span>lu <span class="py-comment"># doctest: +ELLIPSIS</span>
+<span class="py-output">{'ID': 256,</span>
+<span class="py-output"> 'POS': 'V',</span>
+<span class="py-output"> 'URL': 'https://framenet2.icsi.berkeley.edu/fnReports/data/lu/lu256.xml',</span>
+<span class="py-output"> '_type': 'lu',</span>
+<span class="py-output"> 'cBy': ...,</span>
+<span class="py-output"> 'cDate': '02/08/2001 01:27:50 PST Thu',</span>
+<span class="py-output"> 'definition': 'COD: be aware of beforehand; predict.',</span>
+<span class="py-output"> 'definitionMarkup': 'COD: be aware of beforehand; predict.',</span>
+<span class="py-output"> 'frame': &lt;frame ID=26 name=Expectation&gt;,</span>
+<span class="py-output"> 'lemmaID': 15082,</span>
+<span class="py-output"> 'lexemes': [{'POS': 'V', 'breakBefore': 'false', 'headword': 'false', 'name': 'foresee', 'order': 1}],</span>
+<span class="py-output"> 'name': 'foresee.v',</span>
+<span class="py-output"> 'semTypes': [],</span>
+<span class="py-output"> 'sentenceCount': {'annotated': ..., 'total': ...},</span>
+<span class="py-output"> 'status': 'FN1_Sent'}</span>
+</pre><p>:param fn_luid: The id number of the desired LU :type fn_luid: int :return: Basic information about the lexical unit :rtype: dict</p></div>
+  </div>
+</div><div class="basemethod">
+  
+  
+  <a name="nltk.corpus.reader.framenet.FramenetCorpusReader.lu_ids_and_names">
+    
+  </a>
+  <a name="lu_ids_and_names">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-keyword">def</span> <span class="py-defname">lu_ids_and_names</span>(self, name=None):
+    <a class="sourceLink" href="https://github.com/nltk/nltk/tree/3.6.2/nltk/corpus/reader/framenet.py#L2250">
+      
+      (source)
+    </a>
+  </div>
+  <div class="docstring functionBody">
+    
+    
+    <div><p>Uses the LU index, which is much faster than looking up each LU definition if only the names and IDs are needed.</p></div>
+  </div>
+</div><div class="basemethod">
+  
+  
+  <a name="nltk.corpus.reader.framenet.FramenetCorpusReader.lus">
+    
+  </a>
+  <a name="lus">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-keyword">def</span> <span class="py-defname">lus</span>(self, name=None, frame=None):
+    <a class="sourceLink" href="https://github.com/nltk/nltk/tree/3.6.2/nltk/corpus/reader/framenet.py#L2111">
+      
+      (source)
+    </a>
+  </div>
+  <div class="docstring functionBody">
+    
+    
+    <div></div>
+  </div>
+</div><div class="basemethod">
+  
+  
+  <a name="nltk.corpus.reader.framenet.FramenetCorpusReader.propagate_semtypes">
+    
+  </a>
+  <a name="propagate_semtypes">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-keyword">def</span> <span class="py-defname">propagate_semtypes</span>(self):
+    <a class="sourceLink" href="https://github.com/nltk/nltk/tree/3.6.2/nltk/corpus/reader/framenet.py#L1871">
+      
+      (source)
+    </a>
+  </div>
+  <div class="docstring functionBody">
+    
+    
+    <div><p>Apply inference rules to distribute semtypes over relations between FEs. For FrameNet 1.5, this results in 1011 semtypes being propagated. (Not done by default because it requires loading all frame files, which takes several seconds. If this needed to be fast, it could be rewritten to traverse the neighboring relations on demand for each FE semtype.)</p><pre class="py-doctest">
+<span class="py-prompt">&gt;&gt;&gt; </span><span class="py-keyword">from</span> nltk.corpus <span class="py-keyword">import</span> framenet <span class="py-keyword">as</span> fn
+<span class="py-prompt">&gt;&gt;&gt; </span>x = <span class="py-builtin">sum</span>(1 <span class="py-keyword">for</span> f <span class="py-keyword">in</span> fn.frames() <span class="py-keyword">for</span> fe <span class="py-keyword">in</span> f.FE.values() <span class="py-keyword">if</span> fe.semType)
+<span class="py-prompt">&gt;&gt;&gt; </span>fn.propagate_semtypes()
+<span class="py-prompt">&gt;&gt;&gt; </span>y = <span class="py-builtin">sum</span>(1 <span class="py-keyword">for</span> f <span class="py-keyword">in</span> fn.frames() <span class="py-keyword">for</span> fe <span class="py-keyword">in</span> f.FE.values() <span class="py-keyword">if</span> fe.semType)
+<span class="py-prompt">&gt;&gt;&gt; </span>y-x &gt; 1000
+<span class="py-output">True</span>
+</pre></div>
+  </div>
+</div><div class="basemethod">
+  
+  
+  <a name="nltk.corpus.reader.framenet.FramenetCorpusReader.readme">
+    
+  </a>
+  <a name="readme">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-keyword">def</span> <span class="py-defname">readme</span>(self):
+    <a class="sourceLink" href="https://github.com/nltk/nltk/tree/3.6.2/nltk/corpus/reader/framenet.py#L1301">
+      
+      (source)
+    </a>
+  </div>
+  <div class="docstring functionBody">
+    
+    
+    <div><p>Return the contents of the corpus README.txt (or README) file.</p></div>
+  </div>
+</div><div class="basemethod">
+  
+  
+  <a name="nltk.corpus.reader.framenet.FramenetCorpusReader.semtype">
+    
+  </a>
+  <a name="semtype">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-keyword">def</span> <span class="py-defname">semtype</span>(self, key):
+    <a class="sourceLink" href="https://github.com/nltk/nltk/tree/3.6.2/nltk/corpus/reader/framenet.py#L1928">
+      
+      (source)
+    </a>
+  </div>
+  <div class="docstring functionBody">
+    
+    
+    <div><pre class="py-doctest">
+<span class="py-prompt">&gt;&gt;&gt; </span><span class="py-keyword">from</span> nltk.corpus <span class="py-keyword">import</span> framenet <span class="py-keyword">as</span> fn
+<span class="py-prompt">&gt;&gt;&gt; </span>fn.semtype(233).name
+<span class="py-output">'Temperature'</span>
+<span class="py-prompt">&gt;&gt;&gt; </span>fn.semtype(233).abbrev
+<span class="py-output">'Temp'</span>
+<span class="py-prompt">&gt;&gt;&gt; </span>fn.semtype(<span class="py-string">'Temperature'</span>).ID
+<span class="py-output">233</span>
+</pre><p>:param key: The name, abbreviation, or id number of the semantic type :type key: string or int :return: Information about a semantic type :rtype: dict</p></div>
+  </div>
+</div><div class="basemethod">
+  
+  
+  <a name="nltk.corpus.reader.framenet.FramenetCorpusReader.semtype_inherits">
+    
+  </a>
+  <a name="semtype_inherits">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-keyword">def</span> <span class="py-defname">semtype_inherits</span>(self, st, superST):
+    <a class="sourceLink" href="https://github.com/nltk/nltk/tree/3.6.2/nltk/corpus/reader/framenet.py#L1960">
+      
+      (source)
+    </a>
+  </div>
+  <div class="docstring functionBody">
+    
+    
+    <div><p class="undocumented">Undocumented</p></div>
+  </div>
+</div><div class="basemethod">
+  
+  
+  <a name="nltk.corpus.reader.framenet.FramenetCorpusReader.semtypes">
+    
+  </a>
+  <a name="semtypes">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-keyword">def</span> <span class="py-defname">semtypes</span>(self):
+    <a class="sourceLink" href="https://github.com/nltk/nltk/tree/3.6.2/nltk/corpus/reader/framenet.py#L2657">
+      
+      (source)
+    </a>
+  </div>
+  <div class="docstring functionBody">
+    
+    
+    <div><p>Obtain a list of semantic types.</p><pre class="py-doctest">
+<span class="py-prompt">&gt;&gt;&gt; </span><span class="py-keyword">from</span> nltk.corpus <span class="py-keyword">import</span> framenet <span class="py-keyword">as</span> fn
+<span class="py-prompt">&gt;&gt;&gt; </span>stypes = fn.semtypes()
+<span class="py-prompt">&gt;&gt;&gt; </span><span class="py-builtin">len</span>(stypes) <span class="py-keyword">in</span> (73, 109) <span class="py-comment"># FN 1.5 and 1.7, resp.</span>
+<span class="py-output">True</span>
+<span class="py-prompt">&gt;&gt;&gt; </span><span class="py-builtin">sorted</span>(stypes[0].keys())
+<span class="py-output">['ID', '_type', 'abbrev', 'definition', 'definitionMarkup', 'name', 'rootType', 'subTypes', 'superType']</span>
+</pre><p>:return: A list of all of the semantic types in framenet :rtype: list(dict)</p></div>
+  </div>
+</div><div class="basemethod">
+  
+  
+  <a name="nltk.corpus.reader.framenet.FramenetCorpusReader.sents">
+    
+  </a>
+  <a name="sents">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-keyword">def</span> <span class="py-defname">sents</span>(self, exemplars=True, full_text=True):
+    <a class="sourceLink" href="https://github.com/nltk/nltk/tree/3.6.2/nltk/corpus/reader/framenet.py#L2318">
+      
+      (source)
+    </a>
+  </div>
+  <div class="docstring functionBody">
+    
+    
+    <div><p>Annotated sentences matching the specified criteria.</p></div>
+  </div>
+</div><div class="basemethod">
+  
+  
+  <a name="nltk.corpus.reader.framenet.FramenetCorpusReader.warnings">
+    
+  </a>
+  <a name="warnings">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-keyword">def</span> <span class="py-defname">warnings</span>(self, v):
+    <a class="sourceLink" href="https://github.com/nltk/nltk/tree/3.6.2/nltk/corpus/reader/framenet.py#L1115">
+      
+      (source)
+    </a>
+  </div>
+  <div class="docstring functionBody">
+    
+    
+    <div><p>Enable or disable warnings of data integrity issues as they are encountered. If v is truthy, warnings will be enabled.</p><p>(This is a function rather than just an attribute/property to ensure that if enabling warnings is the first action taken, the corpus reader is instantiated first.)</p></div>
+  </div>
+</div><div class="basemethod private">
+  
+  
+  <a name="nltk.corpus.reader.framenet.FramenetCorpusReader._buildcorpusindex">
+    
+  </a>
+  <a name="_buildcorpusindex">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-keyword">def</span> <span class="py-defname">_buildcorpusindex</span>(self):
+    <a class="sourceLink" href="https://github.com/nltk/nltk/tree/3.6.2/nltk/corpus/reader/framenet.py#L1244">
+      
+      (source)
+    </a>
+  </div>
+  <div class="docstring functionBody">
+    
+    
+    <div><p class="undocumented">Undocumented</p></div>
+  </div>
+</div><div class="basemethod private">
+  
+  
+  <a name="nltk.corpus.reader.framenet.FramenetCorpusReader._buildframeindex">
+    
+  </a>
+  <a name="_buildframeindex">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-keyword">def</span> <span class="py-defname">_buildframeindex</span>(self):
+    <a class="sourceLink" href="https://github.com/nltk/nltk/tree/3.6.2/nltk/corpus/reader/framenet.py#L1233">
+      
+      (source)
+    </a>
+  </div>
+  <div class="docstring functionBody">
+    
+    
+    <div><p class="undocumented">Undocumented</p></div>
+  </div>
+</div><div class="basemethod private">
+  
+  
+  <a name="nltk.corpus.reader.framenet.FramenetCorpusReader._buildluindex">
+    
+  </a>
+  <a name="_buildluindex">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-keyword">def</span> <span class="py-defname">_buildluindex</span>(self):
+    <a class="sourceLink" href="https://github.com/nltk/nltk/tree/3.6.2/nltk/corpus/reader/framenet.py#L1254">
+      
+      (source)
+    </a>
+  </div>
+  <div class="docstring functionBody">
+    
+    
+    <div><p class="undocumented">Undocumented</p></div>
+  </div>
+</div><div class="basemethod private">
+  
+  
+  <a name="nltk.corpus.reader.framenet.FramenetCorpusReader._buildrelationindex">
+    
+  </a>
+  <a name="_buildrelationindex">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-keyword">def</span> <span class="py-defname">_buildrelationindex</span>(self):
+    <a class="sourceLink" href="https://github.com/nltk/nltk/tree/3.6.2/nltk/corpus/reader/framenet.py#L1263">
+      
+      (source)
+    </a>
+  </div>
+  <div class="docstring functionBody">
+    
+    
+    <div><p class="undocumented">Undocumented</p></div>
+  </div>
+</div><div class="basemethod private">
+  
+  
+  <a name="nltk.corpus.reader.framenet.FramenetCorpusReader._exemplar_of_fes">
+    
+  </a>
+  <a name="_exemplar_of_fes">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-keyword">def</span> <span class="py-defname">_exemplar_of_fes</span>(self, ex, fes=None):
+    <a class="sourceLink" href="https://github.com/nltk/nltk/tree/3.6.2/nltk/corpus/reader/framenet.py#L2473">
+      
+      (source)
+    </a>
+  </div>
+  <div class="docstring functionBody">
+    
+    
+    <div><p>Given an exemplar sentence and a set of FE names, return the subset of FE names that are realized overtly in the sentence on the FE, FE2, or FE3 layer.</p><p>If 'fes' is None, returns all overt FE names.</p></div>
+  </div>
+</div><div class="basemethod private">
+  
+  
+  <a name="nltk.corpus.reader.framenet.FramenetCorpusReader._handle_elt">
+    
+  </a>
+  <a name="_handle_elt">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-keyword">def</span> <span class="py-defname">_handle_elt</span>(self, elt, tagspec=None):
+    <a class="sourceLink" href="https://github.com/nltk/nltk/tree/3.6.2/nltk/corpus/reader/framenet.py#L2765">
+      
+      (source)
+    </a>
+  </div>
+  <div class="docstring functionBody">
+    
+    
+    <div><p>Extracts and returns the attributes of the given element</p></div>
+  </div>
+</div><div class="basemethod private">
+  
+  
+  <a name="nltk.corpus.reader.framenet.FramenetCorpusReader._handle_fe_elt">
+    
+  </a>
+  <a name="_handle_fe_elt">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-keyword">def</span> <span class="py-defname">_handle_fe_elt</span>(self, elt):
+    <a class="sourceLink" href="https://github.com/nltk/nltk/tree/3.6.2/nltk/corpus/reader/framenet.py#L3269">
+      
+      (source)
+    </a>
+  </div>
+  <div class="docstring functionBody">
+    
+    
+    <div><p class="undocumented">Undocumented</p></div>
+  </div>
+</div><div class="basemethod private">
+  
+  
+  <a name="nltk.corpus.reader.framenet.FramenetCorpusReader._handle_fecoreset_elt">
+    
+  </a>
+  <a name="_handle_fecoreset_elt">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-keyword">def</span> <span class="py-defname">_handle_fecoreset_elt</span>(self, elt):
+    <a class="sourceLink" href="https://github.com/nltk/nltk/tree/3.6.2/nltk/corpus/reader/framenet.py#L2873">
+      
+      (source)
+    </a>
+  </div>
+  <div class="docstring functionBody">
+    
+    
+    <div><p>Load fe coreset info from xml.</p></div>
+  </div>
+</div><div class="basemethod private">
+  
+  
+  <a name="nltk.corpus.reader.framenet.FramenetCorpusReader._handle_frame_elt">
+    
+  </a>
+  <a name="_handle_frame_elt">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-keyword">def</span> <span class="py-defname">_handle_frame_elt</span>(self, elt, ignorekeys=[]):
+    <a class="sourceLink" href="https://github.com/nltk/nltk/tree/3.6.2/nltk/corpus/reader/framenet.py#L2802">
+      
+      (source)
+    </a>
+  </div>
+  <div class="docstring functionBody">
+    
+    
+    <div><p>Load the info for a Frame from a frame xml file</p></div>
+  </div>
+</div><div class="basemethod private">
+  
+  
+  <a name="nltk.corpus.reader.framenet.FramenetCorpusReader._handle_framelexunit_elt">
+    
+  </a>
+  <a name="_handle_framelexunit_elt">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-keyword">def</span> <span class="py-defname">_handle_framelexunit_elt</span>(self, elt):
+    <a class="sourceLink" href="https://github.com/nltk/nltk/tree/3.6.2/nltk/corpus/reader/framenet.py#L3013">
+      
+      (source)
+    </a>
+  </div>
+  <div class="docstring functionBody">
+    
+    
+    <div><p>Load the lexical unit info from an xml element in a frame's xml file.</p></div>
+  </div>
+</div><div class="basemethod private">
+  
+  
+  <a name="nltk.corpus.reader.framenet.FramenetCorpusReader._handle_framerelation_elt">
+    
+  </a>
+  <a name="_handle_framerelation_elt">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-keyword">def</span> <span class="py-defname">_handle_framerelation_elt</span>(self, elt):
+    <a class="sourceLink" href="https://github.com/nltk/nltk/tree/3.6.2/nltk/corpus/reader/framenet.py#L2898">
+      
+      (source)
+    </a>
+  </div>
+  <div class="docstring functionBody">
+    
+    
+    <div><p>Load frame-relation element and its child fe-relation elements from frRelation.xml.</p></div>
+  </div>
+</div><div class="basemethod private">
+  
+  
+  <a name="nltk.corpus.reader.framenet.FramenetCorpusReader._handle_framerelationtype_elt">
+    
+  </a>
+  <a name="_handle_framerelationtype_elt">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-keyword">def</span> <span class="py-defname">_handle_framerelationtype_elt</span>(self, elt, *args):
+    <a class="sourceLink" href="https://github.com/nltk/nltk/tree/3.6.2/nltk/corpus/reader/framenet.py#L2882">
+      
+      (source)
+    </a>
+  </div>
+  <div class="docstring functionBody">
+    
+    
+    <div><p>Load frame-relation element and its child fe-relation elements from frRelation.xml.</p></div>
+  </div>
+</div><div class="basemethod private">
+  
+  
+  <a name="nltk.corpus.reader.framenet.FramenetCorpusReader._handle_fulltext_sentence_elt">
+    
+  </a>
+  <a name="_handle_fulltext_sentence_elt">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-keyword">def</span> <span class="py-defname">_handle_fulltext_sentence_elt</span>(self, elt):
+    <a class="sourceLink" href="https://github.com/nltk/nltk/tree/3.6.2/nltk/corpus/reader/framenet.py#L2933">
+      
+      (source)
+    </a>
+  </div>
+  <div class="docstring functionBody">
+    
+    
+    <div><p>Load information from the given 'sentence' element. Each 'sentence' element contains a "text" and "annotationSet" sub elements.</p></div>
+  </div>
+</div><div class="basemethod private">
+  
+  
+  <a name="nltk.corpus.reader.framenet.FramenetCorpusReader._handle_fulltextannotation_elt">
+    
+  </a>
+  <a name="_handle_fulltextannotation_elt">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-keyword">def</span> <span class="py-defname">_handle_fulltextannotation_elt</span>(self, elt):
+    <a class="sourceLink" href="https://github.com/nltk/nltk/tree/3.6.2/nltk/corpus/reader/framenet.py#L2914">
+      
+      (source)
+    </a>
+  </div>
+  <div class="docstring functionBody">
+    
+    
+    <div><p>Load full annotation info for a document from its xml file. The main element (fullTextAnnotation) contains a 'header' element (which we ignore here) and a bunch of 'sentence' elements.</p></div>
+  </div>
+</div><div class="basemethod private">
+  
+  
+  <a name="nltk.corpus.reader.framenet.FramenetCorpusReader._handle_fulltextannotationset_elt">
+    
+  </a>
+  <a name="_handle_fulltextannotationset_elt">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-keyword">def</span> <span class="py-defname">_handle_fulltextannotationset_elt</span>(self, elt, is_pos=False):
+    <a class="sourceLink" href="https://github.com/nltk/nltk/tree/3.6.2/nltk/corpus/reader/framenet.py#L2982">
+      
+      (source)
+    </a>
+  </div>
+  <div class="docstring functionBody">
+    
+    
+    <div><p>Load information from the given 'annotationSet' element. Each 'annotationSet' contains several "layer" elements.</p></div>
+  </div>
+</div><div class="basemethod private">
+  
+  
+  <a name="nltk.corpus.reader.framenet.FramenetCorpusReader._handle_fulltextindex_elt">
+    
+  </a>
+  <a name="_handle_fulltextindex_elt">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-keyword">def</span> <span class="py-defname">_handle_fulltextindex_elt</span>(self, elt, tagspec=None):
+    <a class="sourceLink" href="https://github.com/nltk/nltk/tree/3.6.2/nltk/corpus/reader/framenet.py#L2769">
+      
+      (source)
+    </a>
+  </div>
+  <div class="docstring functionBody">
+    
+    
+    <div><p>Extracts corpus/document info from the fulltextIndex.xml file.</p><p>Note that this function "flattens" the information contained in each of the "corpus" elements, so that each "document" element will contain attributes for the corpus and corpusid. Also, each of the "document" items will contain a new attribute called "filename" that is the base file name of the xml file for the document in the "fulltext" subdir of the Framenet corpus.</p></div>
+  </div>
+</div><div class="basemethod private">
+  
+  
+  <a name="nltk.corpus.reader.framenet.FramenetCorpusReader._handle_fulltextlayer_elt">
+    
+  </a>
+  <a name="_handle_fulltextlayer_elt">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-keyword">def</span> <span class="py-defname">_handle_fulltextlayer_elt</span>(self, elt):
+    <a class="sourceLink" href="https://github.com/nltk/nltk/tree/3.6.2/nltk/corpus/reader/framenet.py#L2999">
+      
+      (source)
+    </a>
+  </div>
+  <div class="docstring functionBody">
+    
+    
+    <div><p>Load information from the given 'layer' element. Each 'layer' contains several "label" elements.</p></div>
+  </div>
+</div><div class="basemethod private">
+  
+  
+  <a name="nltk.corpus.reader.framenet.FramenetCorpusReader._handle_lexunit_elt">
+    
+  </a>
+  <a name="_handle_lexunit_elt">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-keyword">def</span> <span class="py-defname">_handle_lexunit_elt</span>(self, elt, ignorekeys):
+    <a class="sourceLink" href="https://github.com/nltk/nltk/tree/3.6.2/nltk/corpus/reader/framenet.py#L3047">
+      
+      (source)
+    </a>
+  </div>
+  <div class="docstring functionBody">
+    
+    
+    <div><p>Load full info for a lexical unit from its xml file. This should only be called when accessing corpus annotations (which are not included in frame files).</p></div>
+  </div>
+</div><div class="basemethod private">
+  
+  
+  <a name="nltk.corpus.reader.framenet.FramenetCorpusReader._handle_luannotationset_elt">
+    
+  </a>
+  <a name="_handle_luannotationset_elt">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-keyword">def</span> <span class="py-defname">_handle_luannotationset_elt</span>(self, elt, is_pos=False):
+    <a class="sourceLink" href="https://github.com/nltk/nltk/tree/3.6.2/nltk/corpus/reader/framenet.py#L3148">
+      
+      (source)
+    </a>
+  </div>
+  <div class="docstring functionBody">
+    
+    
+    <div><p>Load an annotation set from a sentence in an subcorpus of an LU</p></div>
+  </div>
+</div><div class="basemethod private">
+  
+  
+  <a name="nltk.corpus.reader.framenet.FramenetCorpusReader._handle_lulayer_elt">
+    
+  </a>
+  <a name="_handle_lulayer_elt">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-keyword">def</span> <span class="py-defname">_handle_lulayer_elt</span>(self, elt):
+    <a class="sourceLink" href="https://github.com/nltk/nltk/tree/3.6.2/nltk/corpus/reader/framenet.py#L3256">
+      
+      (source)
+    </a>
+  </div>
+  <div class="docstring functionBody">
+    
+    
+    <div><p>Load a layer from an annotation set</p></div>
+  </div>
+</div><div class="basemethod private">
+  
+  
+  <a name="nltk.corpus.reader.framenet.FramenetCorpusReader._handle_lusentence_elt">
+    
+  </a>
+  <a name="_handle_lusentence_elt">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-keyword">def</span> <span class="py-defname">_handle_lusentence_elt</span>(self, elt):
+    <a class="sourceLink" href="https://github.com/nltk/nltk/tree/3.6.2/nltk/corpus/reader/framenet.py#L3102">
+      
+      (source)
+    </a>
+  </div>
+  <div class="docstring functionBody">
+    
+    
+    <div><p>Load a sentence from a subcorpus of an LU from xml.</p></div>
+  </div>
+</div><div class="basemethod private">
+  
+  
+  <a name="nltk.corpus.reader.framenet.FramenetCorpusReader._handle_lusubcorpus_elt">
+    
+  </a>
+  <a name="_handle_lusubcorpus_elt">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-keyword">def</span> <span class="py-defname">_handle_lusubcorpus_elt</span>(self, elt):
+    <a class="sourceLink" href="https://github.com/nltk/nltk/tree/3.6.2/nltk/corpus/reader/framenet.py#L3084">
+      
+      (source)
+    </a>
+  </div>
+  <div class="docstring functionBody">
+    
+    
+    <div><p>Load a subcorpus of a lexical unit from the given xml.</p></div>
+  </div>
+</div><div class="basemethod private">
+  
+  
+  <a name="nltk.corpus.reader.framenet.FramenetCorpusReader._handle_semtype_elt">
+    
+  </a>
+  <a name="_handle_semtype_elt">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-keyword">def</span> <span class="py-defname">_handle_semtype_elt</span>(self, elt, tagspec=None):
+    <a class="sourceLink" href="https://github.com/nltk/nltk/tree/3.6.2/nltk/corpus/reader/framenet.py#L3291">
+      
+      (source)
+    </a>
+  </div>
+  <div class="docstring functionBody">
+    
+    
+    <div><p class="undocumented">Undocumented</p></div>
+  </div>
+</div><div class="basemethod private">
+  
+  
+  <a name="nltk.corpus.reader.framenet.FramenetCorpusReader._load_xml_attributes">
+    
+  </a>
+  <a name="_load_xml_attributes">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-keyword">def</span> <span class="py-defname">_load_xml_attributes</span>(self, d, elt):
+    <a class="sourceLink" href="https://github.com/nltk/nltk/tree/3.6.2/nltk/corpus/reader/framenet.py#L2677">
+      
+      (source)
+    </a>
+  </div>
+  <div class="docstring functionBody">
+    
+    
+    <div><p>Extracts a subset of the attributes from the given element and returns them in a dictionary.</p><p>:param d: A dictionary in which to store the attributes. :type d: dict :param elt: An ElementTree Element :type elt: Element :return: Returns the input dict ``d`` possibly including attributes from ``elt`` :rtype: dict</p></div>
+  </div>
+</div><div class="basemethod private">
+  
+  
+  <a name="nltk.corpus.reader.framenet.FramenetCorpusReader._loadsemtypes">
+    
+  </a>
+  <a name="_loadsemtypes">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-keyword">def</span> <span class="py-defname">_loadsemtypes</span>(self):
+    <a class="sourceLink" href="https://github.com/nltk/nltk/tree/3.6.2/nltk/corpus/reader/framenet.py#L1839">
+      
+      (source)
+    </a>
+  </div>
+  <div class="docstring functionBody">
+    
+    
+    <div><p>Create the semantic types index.</p></div>
+  </div>
+</div><div class="basemethod private">
+  
+  
+  <a name="nltk.corpus.reader.framenet.FramenetCorpusReader._lu_file">
+    
+  </a>
+  <a name="_lu_file">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-keyword">def</span> <span class="py-defname">_lu_file</span>(self, lu, ignorekeys=[]):
+    <a class="sourceLink" href="https://github.com/nltk/nltk/tree/3.6.2/nltk/corpus/reader/framenet.py#L1805">
+      
+      (source)
+    </a>
+  </div>
+  <div class="docstring functionBody">
+    
+    
+    <div><p>Augment the LU information that was loaded from the frame file with additional information from the LU file.</p></div>
+  </div>
+</div><div class="basemethod private">
+  
+  
+  <a name="nltk.corpus.reader.framenet.FramenetCorpusReader._strip_tags">
+    
+  </a>
+  <a name="_strip_tags">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-keyword">def</span> <span class="py-defname">_strip_tags</span>(self, data):
+    <a class="sourceLink" href="https://github.com/nltk/nltk/tree/3.6.2/nltk/corpus/reader/framenet.py#L2722">
+      
+      (source)
+    </a>
+  </div>
+  <div class="docstring functionBody">
+    
+    
+    <div><p>Gets rid of all tags and newline characters from the given input</p><p>:return: A cleaned-up version of the input string :rtype: str</p></div>
+  </div>
+</div><div class="basemethod private">
+  
+  
+  <a name="nltk.corpus.reader.framenet.FramenetCorpusReader._warn">
+    
+  </a>
+  <a name="_warn">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-keyword">def</span> <span class="py-defname">_warn</span>(self, *message, **kwargs):
+    <a class="sourceLink" href="https://github.com/nltk/nltk/tree/3.6.2/nltk/corpus/reader/framenet.py#L1296">
+      
+      (source)
+    </a>
+  </div>
+  <div class="docstring functionBody">
+    
+    
+    <div><p class="undocumented">Undocumented</p></div>
+  </div>
+</div><div class="baseclassvariable private">
+  
+  
+  <a name="nltk.corpus.reader.framenet.FramenetCorpusReader._bad_statuses">
+    
+  </a>
+  <a name="_bad_statuses">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-defname">_bad_statuses</span>: <code>list[<wbr></wbr>str]</code> =
+    <a class="sourceLink" href="https://github.com/nltk/nltk/tree/3.6.2/nltk/corpus/reader/framenet.py#L1105">
+      
+      (source)
+    </a>
+  </div>
+  <div class="functionBody">
+    
+    
+    <div><p>When loading LUs for a frame, those whose status is in this list will be ignored. Due to caching, if user code modifies this, it should do so before loading any data. 'Problem' should always be listed for FrameNet 1.5, as these LUs are not included in the XML index.</p></div>
+  </div>
+</div><div class="baseinstancevariable private">
+  
+  
+  <a name="nltk.corpus.reader.framenet.FramenetCorpusReader._cached_frames">
+    
+  </a>
+  <a name="_cached_frames">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-defname">_cached_frames</span>: <code>dict</code> =
+    <a class="sourceLink" href="https://github.com/nltk/nltk/tree/3.6.2/nltk/corpus/reader/framenet.py#L1140">
+      
+      (source)
+    </a>
+  </div>
+  <div class="functionBody">
+    
+    
+    <div><p class="undocumented">Undocumented</p></div>
+  </div>
+</div><div class="baseinstancevariable private">
+  
+  
+  <a name="nltk.corpus.reader.framenet.FramenetCorpusReader._ferel_idx">
+    
+  </a>
+  <a name="_ferel_idx">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-defname">_ferel_idx</span>: <code>dict</code> =
+    <a class="sourceLink" href="https://github.com/nltk/nltk/tree/3.6.2/nltk/corpus/reader/framenet.py#L1146">
+      
+      (source)
+    </a>
+  </div>
+  <div class="functionBody">
+    
+    
+    <div><p class="undocumented">Undocumented</p></div>
+  </div>
+</div><div class="baseinstancevariable private">
+  
+  
+  <a name="nltk.corpus.reader.framenet.FramenetCorpusReader._fnweb_url">
+    
+  </a>
+  <a name="_fnweb_url">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-defname">_fnweb_url</span>: <code>str</code> =
+    <a class="sourceLink" href="https://github.com/nltk/nltk/tree/3.6.2/nltk/corpus/reader/framenet.py#L1136">
+      
+      (source)
+    </a>
+  </div>
+  <div class="functionBody">
+    
+    
+    <div><p class="undocumented">Undocumented</p></div>
+  </div>
+</div><div class="baseinstancevariable private">
+  
+  
+  <a name="nltk.corpus.reader.framenet.FramenetCorpusReader._frame_dir">
+    
+  </a>
+  <a name="_frame_dir">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-defname">_frame_dir</span>: <code>str</code> =
+    <a class="sourceLink" href="https://github.com/nltk/nltk/tree/3.6.2/nltk/corpus/reader/framenet.py#L1129">
+      
+      (source)
+    </a>
+  </div>
+  <div class="functionBody">
+    
+    
+    <div><p class="undocumented">Undocumented</p></div>
+  </div>
+</div><div class="baseinstancevariable private">
+  
+  
+  <a name="nltk.corpus.reader.framenet.FramenetCorpusReader._frame_idx">
+    
+  </a>
+  <a name="_frame_idx">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-defname">_frame_idx</span>: <code>dict</code> =
+    <a class="sourceLink" href="https://github.com/nltk/nltk/tree/3.6.2/nltk/corpus/reader/framenet.py#L1139">
+      
+      (source)
+    </a>
+  </div>
+  <div class="functionBody">
+    
+    
+    <div><p class="undocumented">Undocumented</p></div>
+  </div>
+</div><div class="baseinstancevariable private">
+  
+  
+  <a name="nltk.corpus.reader.framenet.FramenetCorpusReader._frel_f_idx">
+    
+  </a>
+  <a name="_frel_f_idx">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-defname">_frel_f_idx</span> =
+    <a class="sourceLink" href="https://github.com/nltk/nltk/tree/3.6.2/nltk/corpus/reader/framenet.py#L1147">
+      
+      (source)
+    </a>
+  </div>
+  <div class="functionBody">
+    
+    
+    <div><p class="undocumented">Undocumented</p></div>
+  </div>
+</div><div class="baseinstancevariable private">
+  
+  
+  <a name="nltk.corpus.reader.framenet.FramenetCorpusReader._frel_idx">
+    
+  </a>
+  <a name="_frel_idx">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-defname">_frel_idx</span>: <code>dict</code> =
+    <a class="sourceLink" href="https://github.com/nltk/nltk/tree/3.6.2/nltk/corpus/reader/framenet.py#L1145">
+      
+      (source)
+    </a>
+  </div>
+  <div class="functionBody">
+    
+    
+    <div><p class="undocumented">Undocumented</p></div>
+  </div>
+</div><div class="baseinstancevariable private">
+  
+  
+  <a name="nltk.corpus.reader.framenet.FramenetCorpusReader._freltyp_idx">
+    
+  </a>
+  <a name="_freltyp_idx">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-defname">_freltyp_idx</span>: <code>dict</code> =
+    <a class="sourceLink" href="https://github.com/nltk/nltk/tree/3.6.2/nltk/corpus/reader/framenet.py#L1144">
+      
+      (source)
+    </a>
+  </div>
+  <div class="functionBody">
+    
+    
+    <div><p class="undocumented">Undocumented</p></div>
+  </div>
+</div><div class="baseinstancevariable private">
+  
+  
+  <a name="nltk.corpus.reader.framenet.FramenetCorpusReader._fulltext_dir">
+    
+  </a>
+  <a name="_fulltext_dir">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-defname">_fulltext_dir</span>: <code>str</code> =
+    <a class="sourceLink" href="https://github.com/nltk/nltk/tree/3.6.2/nltk/corpus/reader/framenet.py#L1133">
+      
+      (source)
+    </a>
+  </div>
+  <div class="functionBody">
+    
+    
+    <div><p class="undocumented">Undocumented</p></div>
+  </div>
+</div><div class="baseinstancevariable private">
+  
+  
+  <a name="nltk.corpus.reader.framenet.FramenetCorpusReader._fulltext_idx">
+    
+  </a>
+  <a name="_fulltext_idx">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-defname">_fulltext_idx</span>: <code>dict</code> =
+    <a class="sourceLink" href="https://github.com/nltk/nltk/tree/3.6.2/nltk/corpus/reader/framenet.py#L1142">
+      
+      (source)
+    </a>
+  </div>
+  <div class="functionBody">
+    
+    
+    <div><p class="undocumented">Undocumented</p></div>
+  </div>
+</div><div class="baseinstancevariable private">
+  
+  
+  <a name="nltk.corpus.reader.framenet.FramenetCorpusReader._lu_dir">
+    
+  </a>
+  <a name="_lu_dir">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-defname">_lu_dir</span>: <code>str</code> =
+    <a class="sourceLink" href="https://github.com/nltk/nltk/tree/3.6.2/nltk/corpus/reader/framenet.py#L1131">
+      
+      (source)
+    </a>
+  </div>
+  <div class="functionBody">
+    
+    
+    <div><p class="undocumented">Undocumented</p></div>
+  </div>
+</div><div class="baseinstancevariable private">
+  
+  
+  <a name="nltk.corpus.reader.framenet.FramenetCorpusReader._lu_idx">
+    
+  </a>
+  <a name="_lu_idx">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-defname">_lu_idx</span>: <code>dict</code> =
+    <a class="sourceLink" href="https://github.com/nltk/nltk/tree/3.6.2/nltk/corpus/reader/framenet.py#L1141">
+      
+      (source)
+    </a>
+  </div>
+  <div class="functionBody">
+    
+    
+    <div><p class="undocumented">Undocumented</p></div>
+  </div>
+</div><div class="baseinstancevariable private">
+  
+  
+  <a name="nltk.corpus.reader.framenet.FramenetCorpusReader._semtypes">
+    
+  </a>
+  <a name="_semtypes">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-defname">_semtypes</span> =
+    <a class="sourceLink" href="https://github.com/nltk/nltk/tree/3.6.2/nltk/corpus/reader/framenet.py#L1143">
+      
+      (source)
+    </a>
+  </div>
+  <div class="functionBody">
+    
+    
+    <div><p class="undocumented">Undocumented</p></div>
+  </div>
+</div><div class="baseinstancevariable private">
+  
+  
+  <a name="nltk.corpus.reader.framenet.FramenetCorpusReader._warnings">
+    
+  </a>
+  <a name="_warnings">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-defname">_warnings</span> =
+    <a class="sourceLink" href="https://github.com/nltk/nltk/tree/3.6.2/nltk/corpus/reader/framenet.py#L1113">
+      
+      (source)
+    </a>
+  </div>
+  <div class="functionBody">
+    
+    
+    <div><p class="undocumented">Undocumented</p></div>
+  </div>
+</div>
+
+      </div>
+    </div>
+
+    <footer class="navbar navbar-default">
+  
+  <div class="container">
+    <a href="index.html">API Documentation</a> for <a href="http://www.nltk.org/" class="projecthome">nltk-3.6.2</a>,
+  generated by <a href="https://github.com/twisted/pydoctor/">pydoctor</a>
+    21.2.2 at 2021-07-12 23:14:45.
+  </div>
+</footer>
+
+    <script src="pydoctor.js" type="text/javascript"></script>
+
+  </body>
+</html>

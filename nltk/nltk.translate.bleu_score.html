@@ -1,0 +1,541 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+          "DTD/xhtml1-strict.dtd">
+<html>
+  
+
+  <head>
+    
+    <title>nltk.translate.bleu_score</title>
+    <meta name="generator" content="pydoctor 21.2.2"> 
+        
+    </meta>
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=0.75" />
+    <link rel="stylesheet" type="text/css" href="bootstrap.min.css" />
+    <link rel="stylesheet" type="text/css" href="apidocs.css" />
+    <link rel="stylesheet" type="text/css" href="extra.css" />
+</head>
+
+  <body>
+
+    
+
+    <nav class="navbar navbar-default">
+  
+  <div class="container">
+
+    <div class="navbar-header">
+      
+      <div class="navlinks">
+        <span class="navbar-brand">
+          <a href="http://www.nltk.org/" class="projecthome">nltk-3.6.2</a> <a href="index.html">API Documentation</a>
+        </span>
+
+        <a href="moduleIndex.html">
+          Modules
+        </a>
+
+        <a href="classIndex.html">
+          Classes
+        </a>
+
+        <a href="nameIndex.html">
+          Names
+        </a>
+
+        <form action="search-results.html" id="search-box-container">
+          <div class="input-group">
+            <input id="search-box" name="search-query" placeholder="Search..." aria-label="Search" minlength="2" class="form-control" />
+            <span class="input-group-btn">
+              <button class="btn btn-default" type="submit" title="Search"><img src="fonts/search.svg" alt="Search!" /></button>
+              <a class="btn btn-default" id="search-help-button" title="Help" onclick="toggleSearchHelpText()"><img src="fonts/info.svg" alt="Help!" /></a>
+            </span>
+          </div>
+        </form>
+
+        <div class="rst-admonition hint" id="search-help-box">
+          <p class="rst-last">
+      
+            Search bar offers the following options:
+            <ul>   
+                <li>
+                  <strong>Term presence.</strong> The below example searches for documents that 
+                    must contain “foo”, might contain “bar” and must not contain “baz”:
+                  <br /> <code>'+foo bar -baz'</code>
+                </li> 
+
+                <li>
+                  <strong>Wildcards.</strong> The below example searches for documents with words beginning with “foo”:
+                  <br /> <code>'foo*'</code>
+                </li> 
+
+                <li>
+                  <strong>Search in specific fields.</strong> The following search matches all documents 
+                  that contains "foo" in their full dotted name and with “bar” in any field:
+                  <br /> <code>'+fullName:*foo* +bar'</code>
+
+                  <p>
+                    Possible fields: 'name', 'docstring', 'fullName'.
+                  </p>
+                </li>
+
+                <li>
+                  <strong>Fuzzy matches.</strong> The following search matches all documents 
+                  that have a word within 1 edit distance of “foo”:
+                  <br /> <code>'foo~1'</code>
+                </li>
+            </ul>
+
+          </p>
+        </div>
+
+      </div>
+
+
+    </div>
+  </div>
+
+  <script>
+ 
+    function toggleSearchHelpText() {
+        document.body.classList.toggle("search-help-hidden");
+    }
+    // Init search and help text
+    document.getElementById('search-box-container').style.display = 'block';
+    document.getElementById('search-help-box').style.display = 'block';
+    document.body.classList.add("search-help-hidden");
+
+  </script>
+
+</nav>
+
+    
+
+    <div class="container">
+
+      <div class="page-header">
+        <h1 class="module"><code><code><a href="nltk.html">nltk</a></code><wbr></wbr>.<code><a href="nltk.translate.html">translate</a></code><wbr></wbr>.<code><a href="nltk.translate.bleu_score.html">bleu_score</a></code></code></h1>
+        <div id="showPrivate">
+          <button class="btn btn-link" onclick="togglePrivate()">Toggle Private API</button>
+        </div>
+      </div>
+
+      <div class="categoryHeader">
+        module documentation
+      </div>
+
+      <div class="extrasDocstring">
+        <a href="https://github.com/nltk/nltk/tree/3.6.2/nltk/translate/bleu_score.py" class="sourceLink">(source)</a>
+        <p></p>
+      </div>
+
+      <div class="moduleDocstring">
+        <div>BLEU score implementation.</div>
+      </div>
+
+      <div id="splitTables">
+        <table class="children sortable" id="id1876">
+  
+  
+  <tr class="class">
+    
+    <td>Class</td>
+    <td><code><a href="nltk.translate.bleu_score.SmoothingFunction.html">SmoothingFunction</a></code></td>
+    <td><span class="undocumented">No summary</span></td>
+  </tr><tr class="function">
+    
+    <td>Function</td>
+    <td><code><a href="#brevity_penalty">brevity_penalty</a></code></td>
+    <td><span>Calculate brevity penalty.</span></td>
+  </tr><tr class="function">
+    
+    <td>Function</td>
+    <td><code><a href="#closest_ref_length">closest_ref_length</a></code></td>
+    <td><span>This function finds the reference that is the closest length to the hypothesis. The closest reference length is referred to as <em>r</em> variable from the brevity penalty formula in Papineni et. al. (2002)</span></td>
+  </tr><tr class="function">
+    
+    <td>Function</td>
+    <td><code><a href="#corpus_bleu">corpus_bleu</a></code></td>
+    <td><span>Calculate a single corpus-level BLEU score (aka. system-level BLEU) for all the hypotheses and their respective references.</span></td>
+  </tr><tr class="function">
+    
+    <td>Function</td>
+    <td><code><a href="#modified_precision">modified_precision</a></code></td>
+    <td><span>Calculate modified ngram precision.</span></td>
+  </tr><tr class="function">
+    
+    <td>Function</td>
+    <td><code><a href="#sentence_bleu">sentence_bleu</a></code></td>
+    <td><span class="undocumented">No summary</span></td>
+  </tr>
+</table>
+        
+
+          
+      </div>
+
+      <div id="childList">
+
+        <div class="basefunction">
+  
+  
+  <a name="nltk.translate.bleu_score.brevity_penalty">
+    
+  </a>
+  <a name="brevity_penalty">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-keyword">def</span> <span class="py-defname">brevity_penalty</span>(closest_ref_len, hyp_len):
+    <a class="sourceLink" href="https://github.com/nltk/nltk/tree/3.6.2/nltk/translate/bleu_score.py#L355">
+      
+      (source)
+    </a>
+  </div>
+  <div class="docstring functionBody">
+    
+    
+    <div><p>Calculate brevity penalty.</p>
+<p>As the modified n-gram precision still has the problem from the short
+length sentence, brevity penalty is used to modify the overall BLEU
+score according to length.</p>
+<p>An example from the paper. There are three references with length 12, 15
+and 17. And a concise hypothesis of the length 12. The brevity penalty is 1.</p>
+<blockquote>
+<pre class="py-doctest">
+<span class="py-prompt">&gt;&gt;&gt; </span>reference1 = <span class="py-builtin">list</span>(<span class="py-string">'aaaaaaaaaaaa'</span>)      <span class="py-comment"># i.e. ['a'] * 12</span>
+<span class="py-prompt">&gt;&gt;&gt; </span>reference2 = <span class="py-builtin">list</span>(<span class="py-string">'aaaaaaaaaaaaaaa'</span>)   <span class="py-comment"># i.e. ['a'] * 15</span>
+<span class="py-prompt">&gt;&gt;&gt; </span>reference3 = <span class="py-builtin">list</span>(<span class="py-string">'aaaaaaaaaaaaaaaaa'</span>) <span class="py-comment"># i.e. ['a'] * 17</span>
+<span class="py-prompt">&gt;&gt;&gt; </span>hypothesis = <span class="py-builtin">list</span>(<span class="py-string">'aaaaaaaaaaaa'</span>)      <span class="py-comment"># i.e. ['a'] * 12</span>
+<span class="py-prompt">&gt;&gt;&gt; </span>references = [reference1, reference2, reference3]
+<span class="py-prompt">&gt;&gt;&gt; </span>hyp_len = <span class="py-builtin">len</span>(hypothesis)
+<span class="py-prompt">&gt;&gt;&gt; </span>closest_ref_len =  closest_ref_length(references, hyp_len)
+<span class="py-prompt">&gt;&gt;&gt; </span>brevity_penalty(closest_ref_len, hyp_len)
+<span class="py-output">1.0</span>
+</pre></blockquote>
+<p>In case a hypothesis translation is shorter than the references, penalty is
+applied.</p>
+<blockquote>
+<pre class="py-doctest">
+<span class="py-prompt">&gt;&gt;&gt; </span>references = [[<span class="py-string">'a'</span>] * 28, [<span class="py-string">'a'</span>] * 28]
+<span class="py-prompt">&gt;&gt;&gt; </span>hypothesis = [<span class="py-string">'a'</span>] * 12
+<span class="py-prompt">&gt;&gt;&gt; </span>hyp_len = <span class="py-builtin">len</span>(hypothesis)
+<span class="py-prompt">&gt;&gt;&gt; </span>closest_ref_len =  closest_ref_length(references, hyp_len)
+<span class="py-prompt">&gt;&gt;&gt; </span>brevity_penalty(closest_ref_len, hyp_len)
+<span class="py-output">0.2635971381157267</span>
+</pre></blockquote>
+<p>The length of the closest reference is used to compute the penalty. If the
+length of a hypothesis is 12, and the reference lengths are 13 and 2, the
+penalty is applied because the hypothesis length (12) is less then the
+closest reference length (13).</p>
+<blockquote>
+<pre class="py-doctest">
+<span class="py-prompt">&gt;&gt;&gt; </span>references = [[<span class="py-string">'a'</span>] * 13, [<span class="py-string">'a'</span>] * 2]
+<span class="py-prompt">&gt;&gt;&gt; </span>hypothesis = [<span class="py-string">'a'</span>] * 12
+<span class="py-prompt">&gt;&gt;&gt; </span>hyp_len = <span class="py-builtin">len</span>(hypothesis)
+<span class="py-prompt">&gt;&gt;&gt; </span>closest_ref_len =  closest_ref_length(references, hyp_len)
+<span class="py-prompt">&gt;&gt;&gt; </span>brevity_penalty(closest_ref_len, hyp_len) <span class="py-comment"># doctest: +ELLIPSIS</span>
+<span class="py-output">0.9200...</span>
+</pre></blockquote>
+<p>The brevity penalty doesn't depend on reference order. More importantly,
+when two reference sentences are at the same distance, the shortest
+reference sentence length is used.</p>
+<blockquote>
+<pre class="py-doctest">
+<span class="py-prompt">&gt;&gt;&gt; </span>references = [[<span class="py-string">'a'</span>] * 13, [<span class="py-string">'a'</span>] * 11]
+<span class="py-prompt">&gt;&gt;&gt; </span>hypothesis = [<span class="py-string">'a'</span>] * 12
+<span class="py-prompt">&gt;&gt;&gt; </span>hyp_len = <span class="py-builtin">len</span>(hypothesis)
+<span class="py-prompt">&gt;&gt;&gt; </span>closest_ref_len =  closest_ref_length(references, hyp_len)
+<span class="py-prompt">&gt;&gt;&gt; </span>bp1 = brevity_penalty(closest_ref_len, hyp_len)
+<span class="py-prompt">&gt;&gt;&gt; </span>hyp_len = <span class="py-builtin">len</span>(hypothesis)
+<span class="py-prompt">&gt;&gt;&gt; </span>closest_ref_len =  closest_ref_length(<span class="py-builtin">reversed</span>(references), hyp_len)
+<span class="py-prompt">&gt;&gt;&gt; </span>bp2 = brevity_penalty(closest_ref_len, hyp_len)
+<span class="py-prompt">&gt;&gt;&gt; </span>bp1 == bp2 == 1
+<span class="py-output">True</span>
+</pre></blockquote>
+<p>A test example from mteval-v13a.pl (starting from the line 705):</p>
+<blockquote>
+<pre class="py-doctest">
+<span class="py-prompt">&gt;&gt;&gt; </span>references = [[<span class="py-string">'a'</span>] * 11, [<span class="py-string">'a'</span>] * 8]
+<span class="py-prompt">&gt;&gt;&gt; </span>hypothesis = [<span class="py-string">'a'</span>] * 7
+<span class="py-prompt">&gt;&gt;&gt; </span>hyp_len = <span class="py-builtin">len</span>(hypothesis)
+<span class="py-prompt">&gt;&gt;&gt; </span>closest_ref_len =  closest_ref_length(references, hyp_len)
+<span class="py-prompt">&gt;&gt;&gt; </span>brevity_penalty(closest_ref_len, hyp_len) <span class="py-comment"># doctest: +ELLIPSIS</span>
+<span class="py-output">0.8668...</span>
+</pre><pre class="py-doctest">
+<span class="py-prompt">&gt;&gt;&gt; </span>references = [[<span class="py-string">'a'</span>] * 11, [<span class="py-string">'a'</span>] * 8, [<span class="py-string">'a'</span>] * 6, [<span class="py-string">'a'</span>] * 7]
+<span class="py-prompt">&gt;&gt;&gt; </span>hypothesis = [<span class="py-string">'a'</span>] * 7
+<span class="py-prompt">&gt;&gt;&gt; </span>hyp_len = <span class="py-builtin">len</span>(hypothesis)
+<span class="py-prompt">&gt;&gt;&gt; </span>closest_ref_len =  closest_ref_length(references, hyp_len)
+<span class="py-prompt">&gt;&gt;&gt; </span>brevity_penalty(closest_ref_len, hyp_len)
+<span class="py-output">1.0</span>
+</pre></blockquote>
+<p>sum of all the hypotheses' lengths for a corpus
+:type hyp_len: int
+:param closest_ref_len: The length of the closest reference for a single
+hypothesis OR the sum of all the closest references for every hypotheses.
+:type closest_ref_len: int
+:return: BLEU's brevity penalty.
+:rtype: float</p>
+<table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">closest_ref_len</span></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">hyp_len</span></td><td class="fieldArgDesc">The length of the hypothesis for a single sentence OR the</td></tr></table></div>
+  </div>
+</div><div class="basefunction">
+  
+  
+  <a name="nltk.translate.bleu_score.closest_ref_length">
+    
+  </a>
+  <a name="closest_ref_length">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-keyword">def</span> <span class="py-defname">closest_ref_length</span>(references, hyp_len):
+    <a class="sourceLink" href="https://github.com/nltk/nltk/tree/3.6.2/nltk/translate/bleu_score.py#L335">
+      
+      (source)
+    </a>
+  </div>
+  <div class="docstring functionBody">
+    
+    
+    <div>This function finds the reference that is the closest length to the
+hypothesis. The closest reference length is referred to as <em>r</em> variable
+from the brevity penalty formula in Papineni et. al. (2002)<table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">references:</span>list(list(str))</td><td class="fieldArgDesc">A list of reference translations.</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">hyp_len:</span>int</td><td class="fieldArgDesc">The length of the hypothesis.</td></tr><tr class="fieldStart"><td class="fieldName" colspan="2">Returns</td></tr><tr><td class="fieldArgContainer">int</td><td class="fieldArgDesc">The length of the reference that's closest to the hypothesis.</td></tr></table></div>
+  </div>
+</div><div class="basefunction">
+  
+  
+  <a name="nltk.translate.bleu_score.corpus_bleu">
+    
+  </a>
+  <a name="corpus_bleu">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-keyword">def</span> <span class="py-defname">corpus_bleu</span>(list_of_references, hypotheses, weights=(0.25, 0.25, 0.25, 0.25), smoothing_function=None, auto_reweigh=False):
+    <a class="sourceLink" href="https://github.com/nltk/nltk/tree/3.6.2/nltk/translate/bleu_score.py#L103">
+      
+      (source)
+    </a>
+  </div>
+  <div class="docstring functionBody">
+    
+    
+    <div><p>Calculate a single corpus-level BLEU score (aka. system-level BLEU) for all
+the hypotheses and their respective references.</p>
+<p>Instead of averaging the sentence level BLEU scores (i.e. macro-average
+precision), the original BLEU metric (Papineni et al. 2002) accounts for
+the micro-average precision (i.e. summing the numerators and denominators
+for each hypothesis-reference(s) pairs before the division).</p>
+<pre class="py-doctest">
+<span class="py-prompt">&gt;&gt;&gt; </span>hyp1 = [<span class="py-string">'It'</span>, <span class="py-string">'is'</span>, <span class="py-string">'a'</span>, <span class="py-string">'guide'</span>, <span class="py-string">'to'</span>, <span class="py-string">'action'</span>, <span class="py-string">'which'</span>,
+<span class="py-more">... </span>        <span class="py-string">'ensures'</span>, <span class="py-string">'that'</span>, <span class="py-string">'the'</span>, <span class="py-string">'military'</span>, <span class="py-string">'always'</span>,
+<span class="py-more">... </span>        <span class="py-string">'obeys'</span>, <span class="py-string">'the'</span>, <span class="py-string">'commands'</span>, <span class="py-string">'of'</span>, <span class="py-string">'the'</span>, <span class="py-string">'party'</span>]
+<span class="py-prompt">&gt;&gt;&gt; </span>ref1a = [<span class="py-string">'It'</span>, <span class="py-string">'is'</span>, <span class="py-string">'a'</span>, <span class="py-string">'guide'</span>, <span class="py-string">'to'</span>, <span class="py-string">'action'</span>, <span class="py-string">'that'</span>,
+<span class="py-more">... </span>         <span class="py-string">'ensures'</span>, <span class="py-string">'that'</span>, <span class="py-string">'the'</span>, <span class="py-string">'military'</span>, <span class="py-string">'will'</span>, <span class="py-string">'forever'</span>,
+<span class="py-more">... </span>         <span class="py-string">'heed'</span>, <span class="py-string">'Party'</span>, <span class="py-string">'commands'</span>]
+<span class="py-prompt">&gt;&gt;&gt; </span>ref1b = [<span class="py-string">'It'</span>, <span class="py-string">'is'</span>, <span class="py-string">'the'</span>, <span class="py-string">'guiding'</span>, <span class="py-string">'principle'</span>, <span class="py-string">'which'</span>,
+<span class="py-more">... </span>         <span class="py-string">'guarantees'</span>, <span class="py-string">'the'</span>, <span class="py-string">'military'</span>, <span class="py-string">'forces'</span>, <span class="py-string">'always'</span>,
+<span class="py-more">... </span>         <span class="py-string">'being'</span>, <span class="py-string">'under'</span>, <span class="py-string">'the'</span>, <span class="py-string">'command'</span>, <span class="py-string">'of'</span>, <span class="py-string">'the'</span>, <span class="py-string">'Party'</span>]
+<span class="py-prompt">&gt;&gt;&gt; </span>ref1c = [<span class="py-string">'It'</span>, <span class="py-string">'is'</span>, <span class="py-string">'the'</span>, <span class="py-string">'practical'</span>, <span class="py-string">'guide'</span>, <span class="py-string">'for'</span>, <span class="py-string">'the'</span>,
+<span class="py-more">... </span>         <span class="py-string">'army'</span>, <span class="py-string">'always'</span>, <span class="py-string">'to'</span>, <span class="py-string">'heed'</span>, <span class="py-string">'the'</span>, <span class="py-string">'directions'</span>,
+<span class="py-more">... </span>         <span class="py-string">'of'</span>, <span class="py-string">'the'</span>, <span class="py-string">'party'</span>]</pre><pre class="py-doctest">
+<span class="py-prompt">&gt;&gt;&gt; </span>hyp2 = [<span class="py-string">'he'</span>, <span class="py-string">'read'</span>, <span class="py-string">'the'</span>, <span class="py-string">'book'</span>, <span class="py-string">'because'</span>, <span class="py-string">'he'</span>, <span class="py-string">'was'</span>,
+<span class="py-more">... </span>        <span class="py-string">'interested'</span>, <span class="py-string">'in'</span>, <span class="py-string">'world'</span>, <span class="py-string">'history'</span>]
+<span class="py-prompt">&gt;&gt;&gt; </span>ref2a = [<span class="py-string">'he'</span>, <span class="py-string">'was'</span>, <span class="py-string">'interested'</span>, <span class="py-string">'in'</span>, <span class="py-string">'world'</span>, <span class="py-string">'history'</span>,
+<span class="py-more">... </span>         <span class="py-string">'because'</span>, <span class="py-string">'he'</span>, <span class="py-string">'read'</span>, <span class="py-string">'the'</span>, <span class="py-string">'book'</span>]</pre><pre class="py-doctest">
+<span class="py-prompt">&gt;&gt;&gt; </span>list_of_references = [[ref1a, ref1b, ref1c], [ref2a]]
+<span class="py-prompt">&gt;&gt;&gt; </span>hypotheses = [hyp1, hyp2]
+<span class="py-prompt">&gt;&gt;&gt; </span>corpus_bleu(list_of_references, hypotheses) <span class="py-comment"># doctest: +ELLIPSIS</span>
+<span class="py-output">0.5920...</span>
+</pre><p>The example below show that corpus_bleu() is different from averaging
+sentence_bleu() for hypotheses</p>
+<pre class="py-doctest">
+<span class="py-prompt">&gt;&gt;&gt; </span>score1 = sentence_bleu([ref1a, ref1b, ref1c], hyp1)
+<span class="py-prompt">&gt;&gt;&gt; </span>score2 = sentence_bleu([ref2a], hyp2)
+<span class="py-prompt">&gt;&gt;&gt; </span>(score1 + score2) / 2 <span class="py-comment"># doctest: +ELLIPSIS</span>
+<span class="py-output">0.6223...</span>
+</pre><table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">list_of_references:</span>list(list(list(str)))</td><td class="fieldArgDesc">a corpus of lists of reference sentences, w.r.t. hypotheses</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">hypotheses:</span>list(list(str))</td><td class="fieldArgDesc">a list of hypothesis sentences</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">weights:</span>list(float)</td><td class="fieldArgDesc">weights for unigrams, bigrams, trigrams and so on</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">smoothing_function:</span>SmoothingFunction</td><td class="fieldArgDesc"></td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">auto_reweigh:</span>bool</td><td class="fieldArgDesc">Option to re-normalize the weights uniformly.</td></tr><tr class="fieldStart"><td class="fieldName" colspan="2">Returns</td></tr><tr><td class="fieldArgContainer">float</td><td class="fieldArgDesc">The corpus-level BLEU score.</td></tr></table></div>
+  </div>
+</div><div class="basefunction">
+  
+  
+  <a name="nltk.translate.bleu_score.modified_precision">
+    
+  </a>
+  <a name="modified_precision">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-keyword">def</span> <span class="py-defname">modified_precision</span>(references, hypothesis, n):
+    <a class="sourceLink" href="https://github.com/nltk/nltk/tree/3.6.2/nltk/translate/bleu_score.py#L224">
+      
+      (source)
+    </a>
+  </div>
+  <div class="docstring functionBody">
+    
+    
+    <div><p>Calculate modified ngram precision.</p>
+<p>The normal precision method may lead to some wrong translations with
+high-precision, e.g., the translation, in which a word of reference
+repeats several times, has very high precision.</p>
+<p>This function only returns the Fraction object that contains the numerator
+and denominator necessary to calculate the corpus-level precision.
+To calculate the modified precision for a single pair of hypothesis and
+references, cast the Fraction object into a float.</p>
+<p>The famous "the the the ... " example shows that you can get BLEU precision
+by duplicating high frequency words.</p>
+<blockquote>
+<pre class="py-doctest">
+<span class="py-prompt">&gt;&gt;&gt; </span>reference1 = <span class="py-string">'the cat is on the mat'</span>.split()
+<span class="py-prompt">&gt;&gt;&gt; </span>reference2 = <span class="py-string">'there is a cat on the mat'</span>.split()
+<span class="py-prompt">&gt;&gt;&gt; </span>hypothesis1 = <span class="py-string">'the the the the the the the'</span>.split()
+<span class="py-prompt">&gt;&gt;&gt; </span>references = [reference1, reference2]
+<span class="py-prompt">&gt;&gt;&gt; </span><span class="py-builtin">float</span>(modified_precision(references, hypothesis1, n=1)) <span class="py-comment"># doctest: +ELLIPSIS</span>
+<span class="py-output">0.2857...</span>
+</pre></blockquote>
+<p>In the modified n-gram precision, a reference word will be considered
+exhausted after a matching hypothesis word is identified, e.g.</p>
+<blockquote>
+<pre class="py-doctest">
+<span class="py-prompt">&gt;&gt;&gt; </span>reference1 = [<span class="py-string">'It'</span>, <span class="py-string">'is'</span>, <span class="py-string">'a'</span>, <span class="py-string">'guide'</span>, <span class="py-string">'to'</span>, <span class="py-string">'action'</span>, <span class="py-string">'that'</span>,
+<span class="py-more">... </span>              <span class="py-string">'ensures'</span>, <span class="py-string">'that'</span>, <span class="py-string">'the'</span>, <span class="py-string">'military'</span>, <span class="py-string">'will'</span>,
+<span class="py-more">... </span>              <span class="py-string">'forever'</span>, <span class="py-string">'heed'</span>, <span class="py-string">'Party'</span>, <span class="py-string">'commands'</span>]
+<span class="py-prompt">&gt;&gt;&gt; </span>reference2 = [<span class="py-string">'It'</span>, <span class="py-string">'is'</span>, <span class="py-string">'the'</span>, <span class="py-string">'guiding'</span>, <span class="py-string">'principle'</span>, <span class="py-string">'which'</span>,
+<span class="py-more">... </span>              <span class="py-string">'guarantees'</span>, <span class="py-string">'the'</span>, <span class="py-string">'military'</span>, <span class="py-string">'forces'</span>, <span class="py-string">'always'</span>,
+<span class="py-more">... </span>              <span class="py-string">'being'</span>, <span class="py-string">'under'</span>, <span class="py-string">'the'</span>, <span class="py-string">'command'</span>, <span class="py-string">'of'</span>, <span class="py-string">'the'</span>,
+<span class="py-more">... </span>              <span class="py-string">'Party'</span>]
+<span class="py-prompt">&gt;&gt;&gt; </span>reference3 = [<span class="py-string">'It'</span>, <span class="py-string">'is'</span>, <span class="py-string">'the'</span>, <span class="py-string">'practical'</span>, <span class="py-string">'guide'</span>, <span class="py-string">'for'</span>, <span class="py-string">'the'</span>,
+<span class="py-more">... </span>              <span class="py-string">'army'</span>, <span class="py-string">'always'</span>, <span class="py-string">'to'</span>, <span class="py-string">'heed'</span>, <span class="py-string">'the'</span>, <span class="py-string">'directions'</span>,
+<span class="py-more">... </span>              <span class="py-string">'of'</span>, <span class="py-string">'the'</span>, <span class="py-string">'party'</span>]
+<span class="py-prompt">&gt;&gt;&gt; </span>hypothesis = <span class="py-string">'of the'</span>.split()
+<span class="py-prompt">&gt;&gt;&gt; </span>references = [reference1, reference2, reference3]
+<span class="py-prompt">&gt;&gt;&gt; </span><span class="py-builtin">float</span>(modified_precision(references, hypothesis, n=1))
+<span class="py-output">1.0</span>
+<span class="py-prompt">&gt;&gt;&gt; </span><span class="py-builtin">float</span>(modified_precision(references, hypothesis, n=2))
+<span class="py-output">1.0</span>
+</pre></blockquote>
+<p>An example of a normal machine translation hypothesis:</p>
+<blockquote>
+<pre class="py-doctest">
+<span class="py-prompt">&gt;&gt;&gt; </span>hypothesis1 = [<span class="py-string">'It'</span>, <span class="py-string">'is'</span>, <span class="py-string">'a'</span>, <span class="py-string">'guide'</span>, <span class="py-string">'to'</span>, <span class="py-string">'action'</span>, <span class="py-string">'which'</span>,
+<span class="py-more">... </span>              <span class="py-string">'ensures'</span>, <span class="py-string">'that'</span>, <span class="py-string">'the'</span>, <span class="py-string">'military'</span>, <span class="py-string">'always'</span>,
+<span class="py-more">... </span>              <span class="py-string">'obeys'</span>, <span class="py-string">'the'</span>, <span class="py-string">'commands'</span>, <span class="py-string">'of'</span>, <span class="py-string">'the'</span>, <span class="py-string">'party'</span>]</pre><pre class="py-doctest">
+<span class="py-prompt">&gt;&gt;&gt; </span>hypothesis2 = [<span class="py-string">'It'</span>, <span class="py-string">'is'</span>, <span class="py-string">'to'</span>, <span class="py-string">'insure'</span>, <span class="py-string">'the'</span>, <span class="py-string">'troops'</span>,
+<span class="py-more">... </span>              <span class="py-string">'forever'</span>, <span class="py-string">'hearing'</span>, <span class="py-string">'the'</span>, <span class="py-string">'activity'</span>, <span class="py-string">'guidebook'</span>,
+<span class="py-more">... </span>              <span class="py-string">'that'</span>, <span class="py-string">'party'</span>, <span class="py-string">'direct'</span>]</pre><pre class="py-doctest">
+<span class="py-prompt">&gt;&gt;&gt; </span>reference1 = [<span class="py-string">'It'</span>, <span class="py-string">'is'</span>, <span class="py-string">'a'</span>, <span class="py-string">'guide'</span>, <span class="py-string">'to'</span>, <span class="py-string">'action'</span>, <span class="py-string">'that'</span>,
+<span class="py-more">... </span>              <span class="py-string">'ensures'</span>, <span class="py-string">'that'</span>, <span class="py-string">'the'</span>, <span class="py-string">'military'</span>, <span class="py-string">'will'</span>,
+<span class="py-more">... </span>              <span class="py-string">'forever'</span>, <span class="py-string">'heed'</span>, <span class="py-string">'Party'</span>, <span class="py-string">'commands'</span>]</pre><pre class="py-doctest">
+<span class="py-prompt">&gt;&gt;&gt; </span>reference2 = [<span class="py-string">'It'</span>, <span class="py-string">'is'</span>, <span class="py-string">'the'</span>, <span class="py-string">'guiding'</span>, <span class="py-string">'principle'</span>, <span class="py-string">'which'</span>,
+<span class="py-more">... </span>              <span class="py-string">'guarantees'</span>, <span class="py-string">'the'</span>, <span class="py-string">'military'</span>, <span class="py-string">'forces'</span>, <span class="py-string">'always'</span>,
+<span class="py-more">... </span>              <span class="py-string">'being'</span>, <span class="py-string">'under'</span>, <span class="py-string">'the'</span>, <span class="py-string">'command'</span>, <span class="py-string">'of'</span>, <span class="py-string">'the'</span>,
+<span class="py-more">... </span>              <span class="py-string">'Party'</span>]</pre><pre class="py-doctest">
+<span class="py-prompt">&gt;&gt;&gt; </span>reference3 = [<span class="py-string">'It'</span>, <span class="py-string">'is'</span>, <span class="py-string">'the'</span>, <span class="py-string">'practical'</span>, <span class="py-string">'guide'</span>, <span class="py-string">'for'</span>, <span class="py-string">'the'</span>,
+<span class="py-more">... </span>              <span class="py-string">'army'</span>, <span class="py-string">'always'</span>, <span class="py-string">'to'</span>, <span class="py-string">'heed'</span>, <span class="py-string">'the'</span>, <span class="py-string">'directions'</span>,
+<span class="py-more">... </span>              <span class="py-string">'of'</span>, <span class="py-string">'the'</span>, <span class="py-string">'party'</span>]
+<span class="py-prompt">&gt;&gt;&gt; </span>references = [reference1, reference2, reference3]
+<span class="py-prompt">&gt;&gt;&gt; </span><span class="py-builtin">float</span>(modified_precision(references, hypothesis1, n=1)) <span class="py-comment"># doctest: +ELLIPSIS</span>
+<span class="py-output">0.9444...</span>
+<span class="py-prompt">&gt;&gt;&gt; </span><span class="py-builtin">float</span>(modified_precision(references, hypothesis2, n=1)) <span class="py-comment"># doctest: +ELLIPSIS</span>
+<span class="py-output">0.5714...</span>
+<span class="py-prompt">&gt;&gt;&gt; </span><span class="py-builtin">float</span>(modified_precision(references, hypothesis1, n=2)) <span class="py-comment"># doctest: +ELLIPSIS</span>
+<span class="py-output">0.5882352941176471</span>
+<span class="py-prompt">&gt;&gt;&gt; </span><span class="py-builtin">float</span>(modified_precision(references, hypothesis2, n=2)) <span class="py-comment"># doctest: +ELLIPSIS</span>
+<span class="py-output">0.07692...</span>
+</pre></blockquote>
+<table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">references:</span>list(list(str))</td><td class="fieldArgDesc">A list of reference translations.</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">hypothesis:</span>list(str)</td><td class="fieldArgDesc">A hypothesis translation.</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">n:</span>int</td><td class="fieldArgDesc">The ngram order.</td></tr><tr class="fieldStart"><td class="fieldName" colspan="2">Returns</td></tr><tr><td class="fieldArgContainer">Fraction</td><td class="fieldArgDesc">BLEU's modified precision for the nth order ngram.</td></tr></table></div>
+  </div>
+</div><div class="basefunction">
+  
+  
+  <a name="nltk.translate.bleu_score.sentence_bleu">
+    
+  </a>
+  <a name="sentence_bleu">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-keyword">def</span> <span class="py-defname">sentence_bleu</span>(references, hypothesis, weights=(0.25, 0.25, 0.25, 0.25), smoothing_function=None, auto_reweigh=False):
+    <a class="sourceLink" href="https://github.com/nltk/nltk/tree/3.6.2/nltk/translate/bleu_score.py#L21">
+      
+      (source)
+    </a>
+  </div>
+  <div class="docstring functionBody">
+    
+    
+    <div><p>Calculate BLEU score (Bilingual Evaluation Understudy) from
+Papineni, Kishore, Salim Roukos, Todd Ward, and Wei-Jing Zhu. 2002.
+"BLEU: a method for automatic evaluation of machine translation."
+In Proceedings of ACL. <a class="rst-reference external" href="http://www.aclweb.org/anthology/P02-1040.pdf" target="_top">http://www.aclweb.org/anthology/P02-1040.pdf</a></p>
+<pre class="py-doctest">
+<span class="py-prompt">&gt;&gt;&gt; </span>hypothesis1 = [<span class="py-string">'It'</span>, <span class="py-string">'is'</span>, <span class="py-string">'a'</span>, <span class="py-string">'guide'</span>, <span class="py-string">'to'</span>, <span class="py-string">'action'</span>, <span class="py-string">'which'</span>,
+<span class="py-more">... </span>              <span class="py-string">'ensures'</span>, <span class="py-string">'that'</span>, <span class="py-string">'the'</span>, <span class="py-string">'military'</span>, <span class="py-string">'always'</span>,
+<span class="py-more">... </span>              <span class="py-string">'obeys'</span>, <span class="py-string">'the'</span>, <span class="py-string">'commands'</span>, <span class="py-string">'of'</span>, <span class="py-string">'the'</span>, <span class="py-string">'party'</span>]</pre><pre class="py-doctest">
+<span class="py-prompt">&gt;&gt;&gt; </span>hypothesis2 = [<span class="py-string">'It'</span>, <span class="py-string">'is'</span>, <span class="py-string">'to'</span>, <span class="py-string">'insure'</span>, <span class="py-string">'the'</span>, <span class="py-string">'troops'</span>,
+<span class="py-more">... </span>              <span class="py-string">'forever'</span>, <span class="py-string">'hearing'</span>, <span class="py-string">'the'</span>, <span class="py-string">'activity'</span>, <span class="py-string">'guidebook'</span>,
+<span class="py-more">... </span>              <span class="py-string">'that'</span>, <span class="py-string">'party'</span>, <span class="py-string">'direct'</span>]</pre><pre class="py-doctest">
+<span class="py-prompt">&gt;&gt;&gt; </span>reference1 = [<span class="py-string">'It'</span>, <span class="py-string">'is'</span>, <span class="py-string">'a'</span>, <span class="py-string">'guide'</span>, <span class="py-string">'to'</span>, <span class="py-string">'action'</span>, <span class="py-string">'that'</span>,
+<span class="py-more">... </span>              <span class="py-string">'ensures'</span>, <span class="py-string">'that'</span>, <span class="py-string">'the'</span>, <span class="py-string">'military'</span>, <span class="py-string">'will'</span>, <span class="py-string">'forever'</span>,
+<span class="py-more">... </span>              <span class="py-string">'heed'</span>, <span class="py-string">'Party'</span>, <span class="py-string">'commands'</span>]</pre><pre class="py-doctest">
+<span class="py-prompt">&gt;&gt;&gt; </span>reference2 = [<span class="py-string">'It'</span>, <span class="py-string">'is'</span>, <span class="py-string">'the'</span>, <span class="py-string">'guiding'</span>, <span class="py-string">'principle'</span>, <span class="py-string">'which'</span>,
+<span class="py-more">... </span>              <span class="py-string">'guarantees'</span>, <span class="py-string">'the'</span>, <span class="py-string">'military'</span>, <span class="py-string">'forces'</span>, <span class="py-string">'always'</span>,
+<span class="py-more">... </span>              <span class="py-string">'being'</span>, <span class="py-string">'under'</span>, <span class="py-string">'the'</span>, <span class="py-string">'command'</span>, <span class="py-string">'of'</span>, <span class="py-string">'the'</span>,
+<span class="py-more">... </span>              <span class="py-string">'Party'</span>]</pre><pre class="py-doctest">
+<span class="py-prompt">&gt;&gt;&gt; </span>reference3 = [<span class="py-string">'It'</span>, <span class="py-string">'is'</span>, <span class="py-string">'the'</span>, <span class="py-string">'practical'</span>, <span class="py-string">'guide'</span>, <span class="py-string">'for'</span>, <span class="py-string">'the'</span>,
+<span class="py-more">... </span>              <span class="py-string">'army'</span>, <span class="py-string">'always'</span>, <span class="py-string">'to'</span>, <span class="py-string">'heed'</span>, <span class="py-string">'the'</span>, <span class="py-string">'directions'</span>,
+<span class="py-more">... </span>              <span class="py-string">'of'</span>, <span class="py-string">'the'</span>, <span class="py-string">'party'</span>]</pre><pre class="py-doctest">
+<span class="py-prompt">&gt;&gt;&gt; </span>sentence_bleu([reference1, reference2, reference3], hypothesis1) <span class="py-comment"># doctest: +ELLIPSIS</span>
+<span class="py-output">0.5045...</span>
+</pre><p>If there is no ngrams overlap for any order of n-grams, BLEU returns the
+value 0. This is because the precision for the order of n-grams without
+overlap is 0, and the geometric mean in the final BLEU score computation
+multiplies the 0 with the precision of other n-grams. This results in 0
+(independently of the precision of the othe n-gram orders). The following
+example has zero 3-gram and 4-gram overlaps:</p>
+<pre class="py-doctest">
+<span class="py-prompt">&gt;&gt;&gt; </span><span class="py-builtin">round</span>(sentence_bleu([reference1, reference2, reference3], hypothesis2),4) <span class="py-comment"># doctest: +ELLIPSIS</span>
+<span class="py-output">0.0</span>
+</pre><p>To avoid this harsh behaviour when no ngram overlaps are found a smoothing
+function can be used.</p>
+<pre class="py-doctest">
+<span class="py-prompt">&gt;&gt;&gt; </span>chencherry = SmoothingFunction()
+<span class="py-prompt">&gt;&gt;&gt; </span>sentence_bleu([reference1, reference2, reference3], hypothesis2,
+<span class="py-more">... </span>    smoothing_function=chencherry.method1) <span class="py-comment"># doctest: +ELLIPSIS</span>
+<span class="py-output">0.0370...</span>
+</pre><p>The default BLEU calculates a score for up to 4-grams using uniform
+weights (this is called BLEU-4). To evaluate your translations with
+higher/lower order ngrams, use customized weights. E.g. when accounting
+for up to 5-grams with uniform weights (this is called BLEU-5) use:</p>
+<pre class="py-doctest">
+<span class="py-prompt">&gt;&gt;&gt; </span>weights = (1./5., 1./5., 1./5., 1./5., 1./5.)
+<span class="py-prompt">&gt;&gt;&gt; </span>sentence_bleu([reference1, reference2, reference3], hypothesis1, weights) <span class="py-comment"># doctest: +ELLIPSIS</span>
+<span class="py-output">0.3920...</span>
+</pre><table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">references:</span>list(list(str))</td><td class="fieldArgDesc">reference sentences</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">hypothesis:</span>list(str)</td><td class="fieldArgDesc">a hypothesis sentence</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">weights:</span>list(float)</td><td class="fieldArgDesc">weights for unigrams, bigrams, trigrams and so on</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">smoothing_function:</span>SmoothingFunction</td><td class="fieldArgDesc"></td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">auto_reweigh:</span>bool</td><td class="fieldArgDesc">Option to re-normalize the weights uniformly.</td></tr><tr class="fieldStart"><td class="fieldName" colspan="2">Returns</td></tr><tr><td class="fieldArgContainer">float</td><td class="fieldArgDesc">The sentence-level BLEU score.</td></tr></table></div>
+  </div>
+</div>
+
+      </div>
+    </div>
+
+    <footer class="navbar navbar-default">
+  
+  <div class="container">
+    <a href="index.html">API Documentation</a> for <a href="http://www.nltk.org/" class="projecthome">nltk-3.6.2</a>,
+  generated by <a href="https://github.com/twisted/pydoctor/">pydoctor</a>
+    21.2.2 at 2021-07-12 23:14:45.
+  </div>
+</footer>
+
+    <script src="pydoctor.js" type="text/javascript"></script>
+
+  </body>
+</html>

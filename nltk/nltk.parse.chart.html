@@ -1,0 +1,495 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+          "DTD/xhtml1-strict.dtd">
+<html>
+  
+
+  <head>
+    
+    <title>nltk.parse.chart</title>
+    <meta name="generator" content="pydoctor 21.2.2"> 
+        
+    </meta>
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=0.75" />
+    <link rel="stylesheet" type="text/css" href="bootstrap.min.css" />
+    <link rel="stylesheet" type="text/css" href="apidocs.css" />
+    <link rel="stylesheet" type="text/css" href="extra.css" />
+</head>
+
+  <body>
+
+    
+
+    <nav class="navbar navbar-default">
+  
+  <div class="container">
+
+    <div class="navbar-header">
+      
+      <div class="navlinks">
+        <span class="navbar-brand">
+          <a href="http://www.nltk.org/" class="projecthome">nltk-3.6.2</a> <a href="index.html">API Documentation</a>
+        </span>
+
+        <a href="moduleIndex.html">
+          Modules
+        </a>
+
+        <a href="classIndex.html">
+          Classes
+        </a>
+
+        <a href="nameIndex.html">
+          Names
+        </a>
+
+        <form action="search-results.html" id="search-box-container">
+          <div class="input-group">
+            <input id="search-box" name="search-query" placeholder="Search..." aria-label="Search" minlength="2" class="form-control" />
+            <span class="input-group-btn">
+              <button class="btn btn-default" type="submit" title="Search"><img src="fonts/search.svg" alt="Search!" /></button>
+              <a class="btn btn-default" id="search-help-button" title="Help" onclick="toggleSearchHelpText()"><img src="fonts/info.svg" alt="Help!" /></a>
+            </span>
+          </div>
+        </form>
+
+        <div class="rst-admonition hint" id="search-help-box">
+          <p class="rst-last">
+      
+            Search bar offers the following options:
+            <ul>   
+                <li>
+                  <strong>Term presence.</strong> The below example searches for documents that 
+                    must contain “foo”, might contain “bar” and must not contain “baz”:
+                  <br /> <code>'+foo bar -baz'</code>
+                </li> 
+
+                <li>
+                  <strong>Wildcards.</strong> The below example searches for documents with words beginning with “foo”:
+                  <br /> <code>'foo*'</code>
+                </li> 
+
+                <li>
+                  <strong>Search in specific fields.</strong> The following search matches all documents 
+                  that contains "foo" in their full dotted name and with “bar” in any field:
+                  <br /> <code>'+fullName:*foo* +bar'</code>
+
+                  <p>
+                    Possible fields: 'name', 'docstring', 'fullName'.
+                  </p>
+                </li>
+
+                <li>
+                  <strong>Fuzzy matches.</strong> The following search matches all documents 
+                  that have a word within 1 edit distance of “foo”:
+                  <br /> <code>'foo~1'</code>
+                </li>
+            </ul>
+
+          </p>
+        </div>
+
+      </div>
+
+
+    </div>
+  </div>
+
+  <script>
+ 
+    function toggleSearchHelpText() {
+        document.body.classList.toggle("search-help-hidden");
+    }
+    // Init search and help text
+    document.getElementById('search-box-container').style.display = 'block';
+    document.getElementById('search-help-box').style.display = 'block';
+    document.body.classList.add("search-help-hidden");
+
+  </script>
+
+</nav>
+
+    
+
+    <div class="container">
+
+      <div class="page-header">
+        <h1 class="module"><code><code><a href="nltk.html">nltk</a></code><wbr></wbr>.<code><a href="nltk.parse.html">parse</a></code><wbr></wbr>.<code><a href="nltk.parse.chart.html">chart</a></code></code></h1>
+        <div id="showPrivate">
+          <button class="btn btn-link" onclick="togglePrivate()">Toggle Private API</button>
+        </div>
+      </div>
+
+      <div class="categoryHeader">
+        module documentation
+      </div>
+
+      <div class="extrasDocstring">
+        <a href="https://github.com/nltk/nltk/tree/3.6.2/nltk/parse/chart.py" class="sourceLink">(source)</a>
+        <p></p>
+      </div>
+
+      <div class="moduleDocstring">
+        <div><p>Data classes and parser implementations for "chart parsers", which
+use dynamic programming to efficiently parse a text.  A chart
+parser derives parse trees for a text by iteratively adding "edges"
+to a "chart."  Each edge represents a hypothesis about the tree
+structure for a subsequence of the text.  The chart is a
+"blackboard" for composing and combining these hypotheses.</p>
+<p>When a chart parser begins parsing a text, it creates a new (empty)
+chart, spanning the text.  It then incrementally adds new edges to the
+chart.  A set of "chart rules" specifies the conditions under which
+new edges should be added to the chart.  Once the chart reaches a
+stage where none of the chart rules adds any new edges, parsing is
+complete.</p>
+<p>Charts are encoded with the <tt class="rst-docutils literal">Chart</tt> class, and edges are encoded with
+the <tt class="rst-docutils literal">TreeEdge</tt> and <tt class="rst-docutils literal">LeafEdge</tt> classes.  The chart parser module
+defines three chart parsers:</p>
+<blockquote>
+<ul class="rst-simple">
+<li><tt class="rst-docutils literal">ChartParser</tt> is a simple and flexible chart parser.  Given a
+set of chart rules, it will apply those rules to the chart until
+no more edges are added.</li>
+<li><tt class="rst-docutils literal">SteppingChartParser</tt> is a subclass of <tt class="rst-docutils literal">ChartParser</tt> that can
+be used to step through the parsing process.</li>
+</ul>
+</blockquote>
+</div>
+      </div>
+
+      <div id="splitTables">
+        <table class="children sortable" id="id842">
+  
+  
+  <tr class="class">
+    
+    <td>Class</td>
+    <td><code><a href="nltk.parse.chart.AbstractChartRule.html">AbstractChartRule</a></code></td>
+    <td><span>An abstract base class for chart rules.  <tt class="rst-docutils literal">AbstractChartRule</tt> provides:</span></td>
+  </tr><tr class="class">
+    
+    <td>Class</td>
+    <td><code><a href="nltk.parse.chart.BottomUpChartParser.html">BottomUpChartParser</a></code></td>
+    <td><span>A <tt class="rst-docutils literal">ChartParser</tt> using a bottom-up parsing strategy. See <tt class="rst-docutils literal">ChartParser</tt> for more information.</span></td>
+  </tr><tr class="class">
+    
+    <td>Class</td>
+    <td><code><a href="nltk.parse.chart.BottomUpLeftCornerChartParser.html">BottomUpLeftCornerChartParser</a></code></td>
+    <td><span>A <tt class="rst-docutils literal">ChartParser</tt> using a bottom-up left-corner parsing strategy. This strategy is often more efficient than standard bottom-up. See <tt class="rst-docutils literal">ChartParser</tt> for more information.</span></td>
+  </tr><tr class="class">
+    
+    <td>Class</td>
+    <td><code><a href="nltk.parse.chart.BottomUpPredictCombineRule.html">BottomUpPredictCombineRule</a></code></td>
+    <td><span class="undocumented">No summary</span></td>
+  </tr><tr class="class">
+    
+    <td>Class</td>
+    <td><code><a href="nltk.parse.chart.BottomUpPredictRule.html">BottomUpPredictRule</a></code></td>
+    <td><span class="undocumented">No summary</span></td>
+  </tr><tr class="class">
+    
+    <td>Class</td>
+    <td><code><a href="nltk.parse.chart.CachedTopDownPredictRule.html">CachedTopDownPredictRule</a></code></td>
+    <td><span class="undocumented">No summary</span></td>
+  </tr><tr class="class">
+    
+    <td>Class</td>
+    <td><code><a href="nltk.parse.chart.Chart.html">Chart</a></code></td>
+    <td><span class="undocumented">No summary</span></td>
+  </tr><tr class="class">
+    
+    <td>Class</td>
+    <td><code><a href="nltk.parse.chart.ChartParser.html">ChartParser</a></code></td>
+    <td><span class="undocumented">No summary</span></td>
+  </tr><tr class="class">
+    
+    <td>Class</td>
+    <td><code><a href="nltk.parse.chart.ChartRuleI.html">ChartRuleI</a></code></td>
+    <td><span class="undocumented">No summary</span></td>
+  </tr><tr class="class">
+    
+    <td>Class</td>
+    <td><code><a href="nltk.parse.chart.EdgeI.html">EdgeI</a></code></td>
+    <td><span>A hypothesis about the structure of part of a sentence. Each edge records the fact that a structure is (partially) consistent with the sentence.  An edge contains:</span></td>
+  </tr><tr class="class">
+    
+    <td>Class</td>
+    <td><code><a href="nltk.parse.chart.EmptyPredictRule.html">EmptyPredictRule</a></code></td>
+    <td><span>A rule that inserts all empty productions as passive edges, in every position in the chart.</span></td>
+  </tr><tr class="class">
+    
+    <td>Class</td>
+    <td><code><a href="nltk.parse.chart.FilteredBottomUpPredictCombineRule.html">FilteredBottomUpPredictCombineRule</a></code></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="class">
+    
+    <td>Class</td>
+    <td><code><a href="nltk.parse.chart.FilteredSingleEdgeFundamentalRule.html">FilteredSingleEdgeFundamentalRule</a></code></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="class">
+    
+    <td>Class</td>
+    <td><code><a href="nltk.parse.chart.FundamentalRule.html">FundamentalRule</a></code></td>
+    <td><span>A rule that joins two adjacent edges to form a single combined edge.  In particular, this rule specifies that any pair of edges</span></td>
+  </tr><tr class="class">
+    
+    <td>Class</td>
+    <td><code><a href="nltk.parse.chart.LeafEdge.html">LeafEdge</a></code></td>
+    <td><span>An edge that records the fact that a leaf value is consistent with a word in the sentence.  A leaf edge consists of:</span></td>
+  </tr><tr class="class">
+    
+    <td>Class</td>
+    <td><code><a href="nltk.parse.chart.LeafInitRule.html">LeafInitRule</a></code></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="class">
+    
+    <td>Class</td>
+    <td><code><a href="nltk.parse.chart.LeftCornerChartParser.html">LeftCornerChartParser</a></code></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="class">
+    
+    <td>Class</td>
+    <td><code><a href="nltk.parse.chart.SingleEdgeFundamentalRule.html">SingleEdgeFundamentalRule</a></code></td>
+    <td><span>A rule that joins a given edge with adjacent edges in the chart, to form combined edges.  In particular, this rule specifies that either of the edges:</span></td>
+  </tr><tr class="class">
+    
+    <td>Class</td>
+    <td><code><a href="nltk.parse.chart.SteppingChartParser.html">SteppingChartParser</a></code></td>
+    <td><span class="undocumented">No summary</span></td>
+  </tr><tr class="class">
+    
+    <td>Class</td>
+    <td><code><a href="nltk.parse.chart.TopDownChartParser.html">TopDownChartParser</a></code></td>
+    <td><span>A <tt class="rst-docutils literal">ChartParser</tt> using a top-down parsing strategy. See <tt class="rst-docutils literal">ChartParser</tt> for more information.</span></td>
+  </tr><tr class="class">
+    
+    <td>Class</td>
+    <td><code><a href="nltk.parse.chart.TopDownInitRule.html">TopDownInitRule</a></code></td>
+    <td><span class="undocumented">No summary</span></td>
+  </tr><tr class="class">
+    
+    <td>Class</td>
+    <td><code><a href="nltk.parse.chart.TopDownPredictRule.html">TopDownPredictRule</a></code></td>
+    <td><span class="undocumented">No summary</span></td>
+  </tr><tr class="class">
+    
+    <td>Class</td>
+    <td><code><a href="nltk.parse.chart.TreeEdge.html">TreeEdge</a></code></td>
+    <td><span>An edge that records the fact that a tree is (partially) consistent with the sentence.  A tree edge consists of:</span></td>
+  </tr><tr class="function">
+    
+    <td>Function</td>
+    <td><code><a href="#demo">demo</a></code></td>
+    <td><span>A demonstration of the chart parsers.</span></td>
+  </tr><tr class="function">
+    
+    <td>Function</td>
+    <td><code><a href="#demo_grammar">demo_grammar</a></code></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="variable">
+    
+    <td>Variable</td>
+    <td><code><a href="#BU_LC_STRATEGY">BU_LC_STRATEGY</a></code></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="variable">
+    
+    <td>Variable</td>
+    <td><code><a href="#BU_STRATEGY">BU_STRATEGY</a></code></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="variable">
+    
+    <td>Variable</td>
+    <td><code><a href="#LC_STRATEGY">LC_STRATEGY</a></code></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="variable">
+    
+    <td>Variable</td>
+    <td><code><a href="#TD_STRATEGY">TD_STRATEGY</a></code></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="function private">
+    
+    <td>Function</td>
+    <td><code><a href="#_bottomup_filter">_bottomup_filter</a></code></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr>
+</table>
+        
+
+          
+      </div>
+
+      <div id="childList">
+
+        <div class="basefunction">
+  
+  
+  <a name="nltk.parse.chart.demo">
+    
+  </a>
+  <a name="demo">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-keyword">def</span> <span class="py-defname">demo</span>(choice=None, print_times=True, print_grammar=False, print_trees=True, trace=2, sent='I saw John with a dog with my cookie', numparses=5):
+    <a class="sourceLink" href="https://github.com/nltk/nltk/tree/3.6.2/nltk/parse/chart.py#L1733">
+      
+      (source)
+    </a>
+  </div>
+  <div class="docstring functionBody">
+    
+    
+    <div>A demonstration of the chart parsers.</div>
+  </div>
+</div><div class="basefunction">
+  
+  
+  <a name="nltk.parse.chart.demo_grammar">
+    
+  </a>
+  <a name="demo_grammar">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-keyword">def</span> <span class="py-defname">demo_grammar</span>():
+    <a class="sourceLink" href="https://github.com/nltk/nltk/tree/3.6.2/nltk/parse/chart.py#L1706">
+      
+      (source)
+    </a>
+  </div>
+  <div class="docstring functionBody">
+    
+    
+    <div><p class="undocumented">Undocumented</p></div>
+  </div>
+</div><div class="basevariable">
+  
+  
+  <a name="nltk.parse.chart.BU_LC_STRATEGY">
+    
+  </a>
+  <a name="BU_LC_STRATEGY">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-defname">BU_LC_STRATEGY</span> =
+    <a class="sourceLink" href="https://github.com/nltk/nltk/tree/3.6.2/nltk/parse/chart.py#L1336">
+      
+      (source)
+    </a>
+  </div>
+  <div class="functionBody">
+    
+    
+    <div><p class="undocumented">Undocumented</p></div>
+  </div>
+</div><div class="basevariable">
+  
+  
+  <a name="nltk.parse.chart.BU_STRATEGY">
+    
+  </a>
+  <a name="BU_STRATEGY">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-defname">BU_STRATEGY</span> =
+    <a class="sourceLink" href="https://github.com/nltk/nltk/tree/3.6.2/nltk/parse/chart.py#L1330">
+      
+      (source)
+    </a>
+  </div>
+  <div class="functionBody">
+    
+    
+    <div><p class="undocumented">Undocumented</p></div>
+  </div>
+</div><div class="basevariable">
+  
+  
+  <a name="nltk.parse.chart.LC_STRATEGY">
+    
+  </a>
+  <a name="LC_STRATEGY">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-defname">LC_STRATEGY</span> =
+    <a class="sourceLink" href="https://github.com/nltk/nltk/tree/3.6.2/nltk/parse/chart.py#L1343">
+      
+      (source)
+    </a>
+  </div>
+  <div class="functionBody">
+    
+    
+    <div><p class="undocumented">Undocumented</p></div>
+  </div>
+</div><div class="basevariable">
+  
+  
+  <a name="nltk.parse.chart.TD_STRATEGY">
+    
+  </a>
+  <a name="TD_STRATEGY">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-defname">TD_STRATEGY</span> =
+    <a class="sourceLink" href="https://github.com/nltk/nltk/tree/3.6.2/nltk/parse/chart.py#L1324">
+      
+      (source)
+    </a>
+  </div>
+  <div class="functionBody">
+    
+    
+    <div><p class="undocumented">Undocumented</p></div>
+  </div>
+</div><div class="basefunction private">
+  
+  
+  <a name="nltk.parse.chart._bottomup_filter">
+    
+  </a>
+  <a name="_bottomup_filter">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-keyword">def</span> <span class="py-defname">_bottomup_filter</span>(grammar, nexttoken, rhs, dot=0):
+    <a class="sourceLink" href="https://github.com/nltk/nltk/tree/3.6.2/nltk/parse/chart.py#L1310">
+      
+      (source)
+    </a>
+  </div>
+  <div class="docstring functionBody">
+    
+    
+    <div><p class="undocumented">Undocumented</p></div>
+  </div>
+</div>
+
+      </div>
+    </div>
+
+    <footer class="navbar navbar-default">
+  
+  <div class="container">
+    <a href="index.html">API Documentation</a> for <a href="http://www.nltk.org/" class="projecthome">nltk-3.6.2</a>,
+  generated by <a href="https://github.com/twisted/pydoctor/">pydoctor</a>
+    21.2.2 at 2021-07-12 23:14:45.
+  </div>
+</footer>
+
+    <script src="pydoctor.js" type="text/javascript"></script>
+
+  </body>
+</html>

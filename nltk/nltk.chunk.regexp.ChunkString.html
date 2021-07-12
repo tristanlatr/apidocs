@@ -1,0 +1,792 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+          "DTD/xhtml1-strict.dtd">
+<html>
+  
+
+  <head>
+    
+    <title>nltk.chunk.regexp.ChunkString</title>
+    <meta name="generator" content="pydoctor 21.2.2"> 
+        
+    </meta>
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=0.75" />
+    <link rel="stylesheet" type="text/css" href="bootstrap.min.css" />
+    <link rel="stylesheet" type="text/css" href="apidocs.css" />
+    <link rel="stylesheet" type="text/css" href="extra.css" />
+</head>
+
+  <body>
+
+    
+
+    <nav class="navbar navbar-default">
+  
+  <div class="container">
+
+    <div class="navbar-header">
+      
+      <div class="navlinks">
+        <span class="navbar-brand">
+          <a href="http://www.nltk.org/" class="projecthome">nltk-3.6.2</a> <a href="index.html">API Documentation</a>
+        </span>
+
+        <a href="moduleIndex.html">
+          Modules
+        </a>
+
+        <a href="classIndex.html">
+          Classes
+        </a>
+
+        <a href="nameIndex.html">
+          Names
+        </a>
+
+        <form action="search-results.html" id="search-box-container">
+          <div class="input-group">
+            <input id="search-box" name="search-query" placeholder="Search..." aria-label="Search" minlength="2" class="form-control" />
+            <span class="input-group-btn">
+              <button class="btn btn-default" type="submit" title="Search"><img src="fonts/search.svg" alt="Search!" /></button>
+              <a class="btn btn-default" id="search-help-button" title="Help" onclick="toggleSearchHelpText()"><img src="fonts/info.svg" alt="Help!" /></a>
+            </span>
+          </div>
+        </form>
+
+        <div class="rst-admonition hint" id="search-help-box">
+          <p class="rst-last">
+      
+            Search bar offers the following options:
+            <ul>   
+                <li>
+                  <strong>Term presence.</strong> The below example searches for documents that 
+                    must contain “foo”, might contain “bar” and must not contain “baz”:
+                  <br /> <code>'+foo bar -baz'</code>
+                </li> 
+
+                <li>
+                  <strong>Wildcards.</strong> The below example searches for documents with words beginning with “foo”:
+                  <br /> <code>'foo*'</code>
+                </li> 
+
+                <li>
+                  <strong>Search in specific fields.</strong> The following search matches all documents 
+                  that contains "foo" in their full dotted name and with “bar” in any field:
+                  <br /> <code>'+fullName:*foo* +bar'</code>
+
+                  <p>
+                    Possible fields: 'name', 'docstring', 'fullName'.
+                  </p>
+                </li>
+
+                <li>
+                  <strong>Fuzzy matches.</strong> The following search matches all documents 
+                  that have a word within 1 edit distance of “foo”:
+                  <br /> <code>'foo~1'</code>
+                </li>
+            </ul>
+
+          </p>
+        </div>
+
+      </div>
+
+
+    </div>
+  </div>
+
+  <script>
+ 
+    function toggleSearchHelpText() {
+        document.body.classList.toggle("search-help-hidden");
+    }
+    // Init search and help text
+    document.getElementById('search-box-container').style.display = 'block';
+    document.getElementById('search-help-box').style.display = 'block';
+    document.body.classList.add("search-help-hidden");
+
+  </script>
+
+</nav>
+
+    
+
+    <div class="container">
+
+      <div class="page-header">
+        <h1 class="class"><code><code><a href="nltk.html">nltk</a></code><wbr></wbr>.<code><a href="nltk.chunk.html">chunk</a></code><wbr></wbr>.<code><a href="nltk.chunk.regexp.html">regexp</a></code><wbr></wbr>.<code><a href="nltk.chunk.regexp.ChunkString.html">ChunkString</a></code></code></h1>
+        <div id="showPrivate">
+          <button class="btn btn-link" onclick="togglePrivate()">Toggle Private API</button>
+        </div>
+      </div>
+
+      <div class="categoryHeader">
+        class documentation
+      </div>
+
+      <div class="extrasDocstring">
+        <p><code><span class="py-keyword">class</span> <span class="py-defname">ChunkString</span>(<span title="object">object</span>): <a href="https://github.com/nltk/nltk/tree/3.6.2/nltk/chunk/regexp.py#L19" class="sourceLink">(source)</a></code></p>
+        <p><a href="classIndex.html#nltk.chunk.regexp.ChunkString">View In Hierarchy</a></p>
+      </div>
+
+      <div class="moduleDocstring">
+        <div><p>A string-based encoding of a particular chunking of a text.
+Internally, the <tt class="rst-docutils literal">ChunkString</tt> class uses a single string to
+encode the chunking of the input text.  This string contains a
+sequence of angle-bracket delimited tags, with chunking indicated
+by braces.  An example of this encoding is:</p>
+<pre class="rst-literal-block">
+{&lt;DT&gt;&lt;JJ&gt;&lt;NN&gt;}&lt;VBN&gt;&lt;IN&gt;{&lt;DT&gt;&lt;NN&gt;}&lt;.&gt;{&lt;DT&gt;&lt;NN&gt;}&lt;VBD&gt;&lt;.&gt;
+</pre>
+<p><tt class="rst-docutils literal">ChunkString</tt> are created from tagged texts (i.e., lists of
+<tt class="rst-docutils literal">tokens</tt> whose type is <tt class="rst-docutils literal">TaggedType</tt>).  Initially, nothing is
+chunked.</p>
+<p>The chunking of a <tt class="rst-docutils literal">ChunkString</tt> can be modified with the <tt class="rst-docutils literal">xform()</tt>
+method, which uses a regular expression to transform the string
+representation.  These transformations should only add and remove
+braces; they should <em>not</em> modify the sequence of angle-bracket
+delimited tags.</p>
+</div>
+      </div>
+
+      <div id="splitTables">
+        <table class="children sortable" id="id109">
+  
+  
+  <tr class="method">
+    
+    <td>Method</td>
+    <td><code><a href="#__init__">__init__</a></code></td>
+    <td><span>Construct a new <tt class="rst-docutils literal">ChunkString</tt> that encodes the chunking of the text <tt class="rst-docutils literal">tagged_tokens</tt>.</span></td>
+  </tr><tr class="method">
+    
+    <td>Method</td>
+    <td><code><a href="#__repr__">__repr__</a></code></td>
+    <td><span>Return a string representation of this <tt class="rst-docutils literal">ChunkString</tt>. It has the form:</span></td>
+  </tr><tr class="method">
+    
+    <td>Method</td>
+    <td><code><a href="#__str__">__str__</a></code></td>
+    <td><span class="undocumented">No summary</span></td>
+  </tr><tr class="method">
+    
+    <td>Method</td>
+    <td><code><a href="#to_chunkstruct">to_chunkstruct</a></code></td>
+    <td><span>Return the chunk structure encoded by this <tt class="rst-docutils literal">ChunkString</tt>.</span></td>
+  </tr><tr class="method">
+    
+    <td>Method</td>
+    <td><code><a href="#xform">xform</a></code></td>
+    <td><span class="undocumented">No summary</span></td>
+  </tr><tr class="classvariable">
+    
+    <td>Class Variable</td>
+    <td><code><a href="#CHUNK_TAG">CHUNK_TAG</a></code></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="classvariable">
+    
+    <td>Class Variable</td>
+    <td><code><a href="#CHUNK_TAG_CHAR">CHUNK_TAG_CHAR</a></code></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="classvariable">
+    
+    <td>Class Variable</td>
+    <td><code><a href="#IN_CHUNK_PATTERN">IN_CHUNK_PATTERN</a></code></td>
+    <td><span>A zero-width regexp pattern string that
+will only match positions that are in chunks.</span></td>
+  </tr><tr class="classvariable">
+    
+    <td>Class Variable</td>
+    <td><code><a href="#IN_STRIP_PATTERN">IN_STRIP_PATTERN</a></code></td>
+    <td><span>A zero-width regexp pattern string that
+will only match positions that are in strips.</span></td>
+  </tr><tr class="method private">
+    
+    <td>Method</td>
+    <td><code><a href="#_tag">_tag</a></code></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="method private">
+    
+    <td>Method</td>
+    <td><code><a href="#_verify">_verify</a></code></td>
+    <td><span>Check to make sure that <tt class="rst-docutils literal">s</tt> still corresponds to some chunked version of <tt class="rst-docutils literal">_pieces</tt>.</span></td>
+  </tr><tr class="classvariable private">
+    
+    <td>Class Variable</td>
+    <td><code><a href="#_BALANCED_BRACKETS">_BALANCED_BRACKETS</a></code></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="classvariable private">
+    
+    <td>Class Variable</td>
+    <td><code><a href="#_BRACKETS">_BRACKETS</a></code></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="classvariable private">
+    
+    <td>Class Variable</td>
+    <td><code><a href="#_CHUNK">_CHUNK</a></code></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="classvariable private">
+    
+    <td>Class Variable</td>
+    <td><code><a href="#_STRIP">_STRIP</a></code></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="classvariable private">
+    
+    <td>Class Variable</td>
+    <td><code><a href="#_VALID">_VALID</a></code></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="instancevariable private">
+    
+    <td>Instance Variable</td>
+    <td><code><a href="#_debug">_debug</a></code></td>
+    <td><span>The debug level.  See the constructor docs.</span></td>
+  </tr><tr class="instancevariable private">
+    
+    <td>Instance Variable</td>
+    <td><code><a href="#_pieces">_pieces</a></code></td>
+    <td><span>The tagged tokens and chunks encoded by this <tt class="rst-docutils literal">ChunkString</tt>.</span></td>
+  </tr><tr class="instancevariable private">
+    
+    <td>Instance Variable</td>
+    <td><code><a href="#_root_label">_root_label</a></code></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="instancevariable private">
+    
+    <td>Instance Variable</td>
+    <td><code><a href="#_str">_str</a></code></td>
+    <td><span>The internal string representation of the text's
+encoding.  This string representation contains a sequence of
+angle-bracket delimited tags, with chunking indicated by
+braces.  An example of this encoding is:</span></td>
+  </tr>
+</table>
+        
+
+          
+      </div>
+
+      <div id="childList">
+
+        <div class="basemethod">
+  
+  
+  <a name="nltk.chunk.regexp.ChunkString.__init__">
+    
+  </a>
+  <a name="__init__">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-keyword">def</span> <span class="py-defname">__init__</span>(self, chunk_struct, debug_level=1):
+    <a class="sourceLink" href="https://github.com/nltk/nltk/tree/3.6.2/nltk/chunk/regexp.py#L70">
+      
+      (source)
+    </a>
+  </div>
+  <div class="docstring functionBody">
+    
+    
+    <div>Construct a new <tt class="rst-docutils literal">ChunkString</tt> that encodes the chunking of
+the text <tt class="rst-docutils literal">tagged_tokens</tt>.<table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">chunk_struct:</span>Tree</td><td class="fieldArgDesc">The chunk structure to be further chunked.</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">debug_level:</span>int</td><td class="fieldArgDesc"><p>The level of debugging which should be
+applied to transformations on the <tt class="rst-docutils literal">ChunkString</tt>.  The
+valid levels are:</p>
+<blockquote>
+<ul class="rst-simple">
+<li>0: no checks</li>
+<li>1: full check on to_chunkstruct</li>
+<li><dl class="rst-first rst-docutils">
+<dt>2: full check on to_chunkstruct and cursory check after</dt>
+<dd>each transformation.</dd>
+</dl>
+</li>
+<li><dl class="rst-first rst-docutils">
+<dt>3: full check on to_chunkstruct and full check after</dt>
+<dd>each transformation.</dd>
+</dl>
+</li>
+</ul>
+</blockquote>
+<p>We recommend you use at least level 1.  You should
+probably use level 3 if you use any non-standard
+subclasses of <tt class="rst-docutils literal">RegexpChunkRule</tt>.</p>
+</td></tr></table></div>
+  </div>
+</div><div class="basemethod">
+  
+  
+  <a name="nltk.chunk.regexp.ChunkString.__repr__">
+    
+  </a>
+  <a name="__repr__">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-keyword">def</span> <span class="py-defname">__repr__</span>(self):
+    <a class="sourceLink" href="https://github.com/nltk/nltk/tree/3.6.2/nltk/chunk/regexp.py#L222">
+      
+      (source)
+    </a>
+  </div>
+  <div class="docstring functionBody">
+    
+    
+    <div><p>Return a string representation of this <tt class="rst-docutils literal">ChunkString</tt>.
+It has the form:</p>
+<pre class="rst-literal-block">
+&lt;ChunkString: '{&lt;DT&gt;&lt;JJ&gt;&lt;NN&gt;}&lt;VBN&gt;&lt;IN&gt;{&lt;DT&gt;&lt;NN&gt;}'&gt;
+</pre>
+<table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Returns</td></tr><tr><td class="fieldArgContainer">str</td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr></table></div>
+  </div>
+</div><div class="basemethod">
+  
+  
+  <a name="nltk.chunk.regexp.ChunkString.__str__">
+    
+  </a>
+  <a name="__str__">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-keyword">def</span> <span class="py-defname">__str__</span>(self):
+    <a class="sourceLink" href="https://github.com/nltk/nltk/tree/3.6.2/nltk/chunk/regexp.py#L233">
+      
+      (source)
+    </a>
+  </div>
+  <div class="docstring functionBody">
+    
+    
+    <div><blockquote>
+Return a formatted representation of this <tt class="rst-docutils literal">ChunkString</tt>.
+This representation will include extra spaces to ensure that
+tags will line up with the representation of other
+<tt class="rst-docutils literal">ChunkStrings</tt> for the same text, regardless of the chunking.</blockquote>
+<table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Returns</td></tr><tr><td class="fieldArgContainer">str</td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr></table></div>
+  </div>
+</div><div class="basemethod">
+  
+  
+  <a name="nltk.chunk.regexp.ChunkString.to_chunkstruct">
+    
+  </a>
+  <a name="to_chunkstruct">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-keyword">def</span> <span class="py-defname">to_chunkstruct</span>(self, chunk_label='CHUNK'):
+    <a class="sourceLink" href="https://github.com/nltk/nltk/tree/3.6.2/nltk/chunk/regexp.py#L149">
+      
+      (source)
+    </a>
+  </div>
+  <div class="docstring functionBody">
+    
+    
+    <div>Return the chunk structure encoded by this <tt class="rst-docutils literal">ChunkString</tt>.<table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Returns</td></tr><tr><td class="fieldArgContainer">Tree</td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr class="fieldStart"><td class="fieldName" colspan="2">Raises</td></tr><tr><td class="fieldArgContainer"><code>ValueError</code></td><td>If a transformation has generated an
+invalid chunkstring.</td></tr></table></div>
+  </div>
+</div><div class="basemethod">
+  
+  
+  <a name="nltk.chunk.regexp.ChunkString.xform">
+    
+  </a>
+  <a name="xform">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-keyword">def</span> <span class="py-defname">xform</span>(self, regexp, repl):
+    <a class="sourceLink" href="https://github.com/nltk/nltk/tree/3.6.2/nltk/chunk/regexp.py#L182">
+      
+      (source)
+    </a>
+  </div>
+  <div class="docstring functionBody">
+    
+    
+    <div><p>Apply the given transformation to the string encoding of this
+<tt class="rst-docutils literal">ChunkString</tt>.  In particular, find all occurrences that match
+<tt class="rst-docutils literal">regexp</tt>, and replace them using <tt class="rst-docutils literal">repl</tt> (as done by
+<tt class="rst-docutils literal">re.sub</tt>).</p>
+<p>This transformation should only add and remove braces; it
+should <em>not</em> modify the sequence of angle-bracket delimited
+tags.  Furthermore, this transformation may not result in
+improper bracketing.  Note, in particular, that bracketing may
+not be nested.</p>
+<table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">regexp:</span>str or regexp</td><td class="fieldArgDesc">A regular expression matching the substring
+that should be replaced.  This will typically include a
+named group, which can be used by <tt class="rst-docutils literal">repl</tt>.</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">repl:</span>str</td><td class="fieldArgDesc">An expression specifying what should replace the
+matched substring.  Typically, this will include a named
+replacement group, specified by <tt class="rst-docutils literal">regexp</tt>.</td></tr><tr class="fieldStart"><td class="fieldName" colspan="2">Returns</td></tr><tr><td class="fieldArgContainer">None</td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr class="fieldStart"><td class="fieldName" colspan="2">Raises</td></tr><tr><td class="fieldArgContainer"><code>ValueError</code></td><td>If this transformation generated an
+invalid chunkstring.</td></tr></table></div>
+  </div>
+</div><div class="baseclassvariable">
+  
+  
+  <a name="nltk.chunk.regexp.ChunkString.CHUNK_TAG">
+    
+  </a>
+  <a name="CHUNK_TAG">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-defname">CHUNK_TAG</span> =
+    <a class="sourceLink" href="https://github.com/nltk/nltk/tree/3.6.2/nltk/chunk/regexp.py#L58">
+      
+      (source)
+    </a>
+  </div>
+  <div class="functionBody">
+    
+    
+    <div><p class="undocumented">Undocumented</p></div>
+  </div>
+</div><div class="baseclassvariable">
+  
+  
+  <a name="nltk.chunk.regexp.ChunkString.CHUNK_TAG_CHAR">
+    
+  </a>
+  <a name="CHUNK_TAG_CHAR">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-defname">CHUNK_TAG_CHAR</span>: <code>str</code> =
+    <a class="sourceLink" href="https://github.com/nltk/nltk/tree/3.6.2/nltk/chunk/regexp.py#L57">
+      
+      (source)
+    </a>
+  </div>
+  <div class="functionBody">
+    
+    
+    <div><p class="undocumented">Undocumented</p></div>
+  </div>
+</div><div class="baseclassvariable">
+  
+  
+  <a name="nltk.chunk.regexp.ChunkString.IN_CHUNK_PATTERN">
+    
+  </a>
+  <a name="IN_CHUNK_PATTERN">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-defname">IN_CHUNK_PATTERN</span>: <code>str</code> =
+    <a class="sourceLink" href="https://github.com/nltk/nltk/tree/3.6.2/nltk/chunk/regexp.py#L51">
+      
+      (source)
+    </a>
+  </div>
+  <div class="functionBody">
+    
+    
+    <div>A zero-width regexp pattern string that
+will only match positions that are in chunks.</div>
+  </div>
+</div><div class="baseclassvariable">
+  
+  
+  <a name="nltk.chunk.regexp.ChunkString.IN_STRIP_PATTERN">
+    
+  </a>
+  <a name="IN_STRIP_PATTERN">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-defname">IN_STRIP_PATTERN</span>: <code>str</code> =
+    <a class="sourceLink" href="https://github.com/nltk/nltk/tree/3.6.2/nltk/chunk/regexp.py#L53">
+      
+      (source)
+    </a>
+  </div>
+  <div class="functionBody">
+    
+    
+    <div>A zero-width regexp pattern string that
+will only match positions that are in strips.</div>
+  </div>
+</div><div class="basemethod private">
+  
+  
+  <a name="nltk.chunk.regexp.ChunkString._tag">
+    
+  </a>
+  <a name="_tag">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-keyword">def</span> <span class="py-defname">_tag</span>(self, tok):
+    <a class="sourceLink" href="https://github.com/nltk/nltk/tree/3.6.2/nltk/chunk/regexp.py#L97">
+      
+      (source)
+    </a>
+  </div>
+  <div class="docstring functionBody">
+    
+    
+    <div><p class="undocumented">Undocumented</p></div>
+  </div>
+</div><div class="basemethod private">
+  
+  
+  <a name="nltk.chunk.regexp.ChunkString._verify">
+    
+  </a>
+  <a name="_verify">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-keyword">def</span> <span class="py-defname">_verify</span>(self, s, verify_tags):
+    <a class="sourceLink" href="https://github.com/nltk/nltk/tree/3.6.2/nltk/chunk/regexp.py#L106">
+      
+      (source)
+    </a>
+  </div>
+  <div class="docstring functionBody">
+    
+    
+    <div>Check to make sure that <tt class="rst-docutils literal">s</tt> still corresponds to some chunked
+version of <tt class="rst-docutils literal">_pieces</tt>.<table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">s</span></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">verify_tags:</span>bool</td><td class="fieldArgDesc">Whether the individual tags should be
+checked.  If this is false, <tt class="rst-docutils literal">_verify</tt> will check to make
+sure that <tt class="rst-docutils literal">_str</tt> encodes a chunked version of <em>some</em>
+list of tokens.  If this is true, then <tt class="rst-docutils literal">_verify</tt> will
+check to make sure that the tags in <tt class="rst-docutils literal">_str</tt> match those in
+<tt class="rst-docutils literal">_pieces</tt>.</td></tr><tr class="fieldStart"><td class="fieldName" colspan="2">Raises</td></tr><tr><td class="fieldArgContainer"><code>ValueError</code></td><td>if the internal string representation of
+this <tt class="rst-docutils literal">ChunkString</tt> is invalid or not consistent with _pieces.</td></tr></table></div>
+  </div>
+</div><div class="baseclassvariable private">
+  
+  
+  <a name="nltk.chunk.regexp.ChunkString._BALANCED_BRACKETS">
+    
+  </a>
+  <a name="_BALANCED_BRACKETS">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-defname">_BALANCED_BRACKETS</span> =
+    <a class="sourceLink" href="https://github.com/nltk/nltk/tree/3.6.2/nltk/chunk/regexp.py#L68">
+      
+      (source)
+    </a>
+  </div>
+  <div class="functionBody">
+    
+    
+    <div><p class="undocumented">Undocumented</p></div>
+  </div>
+</div><div class="baseclassvariable private">
+  
+  
+  <a name="nltk.chunk.regexp.ChunkString._BRACKETS">
+    
+  </a>
+  <a name="_BRACKETS">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-defname">_BRACKETS</span> =
+    <a class="sourceLink" href="https://github.com/nltk/nltk/tree/3.6.2/nltk/chunk/regexp.py#L67">
+      
+      (source)
+    </a>
+  </div>
+  <div class="functionBody">
+    
+    
+    <div><p class="undocumented">Undocumented</p></div>
+  </div>
+</div><div class="baseclassvariable private">
+  
+  
+  <a name="nltk.chunk.regexp.ChunkString._CHUNK">
+    
+  </a>
+  <a name="_CHUNK">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-defname">_CHUNK</span> =
+    <a class="sourceLink" href="https://github.com/nltk/nltk/tree/3.6.2/nltk/chunk/regexp.py#L64">
+      
+      (source)
+    </a>
+  </div>
+  <div class="functionBody">
+    
+    
+    <div><p class="undocumented">Undocumented</p></div>
+  </div>
+</div><div class="baseclassvariable private">
+  
+  
+  <a name="nltk.chunk.regexp.ChunkString._STRIP">
+    
+  </a>
+  <a name="_STRIP">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-defname">_STRIP</span> =
+    <a class="sourceLink" href="https://github.com/nltk/nltk/tree/3.6.2/nltk/chunk/regexp.py#L65">
+      
+      (source)
+    </a>
+  </div>
+  <div class="functionBody">
+    
+    
+    <div><p class="undocumented">Undocumented</p></div>
+  </div>
+</div><div class="baseclassvariable private">
+  
+  
+  <a name="nltk.chunk.regexp.ChunkString._VALID">
+    
+  </a>
+  <a name="_VALID">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-defname">_VALID</span> =
+    <a class="sourceLink" href="https://github.com/nltk/nltk/tree/3.6.2/nltk/chunk/regexp.py#L66">
+      
+      (source)
+    </a>
+  </div>
+  <div class="functionBody">
+    
+    
+    <div><p class="undocumented">Undocumented</p></div>
+  </div>
+</div><div class="baseinstancevariable private">
+  
+  
+  <a name="nltk.chunk.regexp.ChunkString._debug">
+    
+  </a>
+  <a name="_debug">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-defname">_debug</span> =
+    <a class="sourceLink" href="https://github.com/nltk/nltk/tree/3.6.2/nltk/chunk/regexp.py#L49">
+      
+      (source)
+    </a>
+  </div>
+  <div class="functionBody">
+    
+    
+    <div>The debug level.  See the constructor docs.</div>
+  </div>
+</div><div class="baseinstancevariable private">
+  
+  
+  <a name="nltk.chunk.regexp.ChunkString._pieces">
+    
+  </a>
+  <a name="_pieces">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-defname">_pieces</span>: list(tagged tokens and chunks) =
+    <a class="sourceLink" href="https://github.com/nltk/nltk/tree/3.6.2/nltk/chunk/regexp.py#L47">
+      
+      (source)
+    </a>
+  </div>
+  <div class="functionBody">
+    
+    
+    <div>The tagged tokens and chunks encoded by this <tt class="rst-docutils literal">ChunkString</tt>.</div>
+  </div>
+</div><div class="baseinstancevariable private">
+  
+  
+  <a name="nltk.chunk.regexp.ChunkString._root_label">
+    
+  </a>
+  <a name="_root_label">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-defname">_root_label</span> =
+    <a class="sourceLink" href="https://github.com/nltk/nltk/tree/3.6.2/nltk/chunk/regexp.py#L91">
+      
+      (source)
+    </a>
+  </div>
+  <div class="functionBody">
+    
+    
+    <div><p class="undocumented">Undocumented</p></div>
+  </div>
+</div><div class="baseinstancevariable private">
+  
+  
+  <a name="nltk.chunk.regexp.ChunkString._str">
+    
+  </a>
+  <a name="_str">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-defname">_str</span>: str =
+    <a class="sourceLink" href="https://github.com/nltk/nltk/tree/3.6.2/nltk/chunk/regexp.py#L39">
+      
+      (source)
+    </a>
+  </div>
+  <div class="functionBody">
+    
+    
+    <div><p>The internal string representation of the text's
+encoding.  This string representation contains a sequence of
+angle-bracket delimited tags, with chunking indicated by
+braces.  An example of this encoding is:</p>
+<pre class="rst-literal-block">
+{&lt;DT&gt;&lt;JJ&gt;&lt;NN&gt;}&lt;VBN&gt;&lt;IN&gt;{&lt;DT&gt;&lt;NN&gt;}&lt;.&gt;{&lt;DT&gt;&lt;NN&gt;}&lt;VBD&gt;&lt;.&gt;
+</pre>
+</div>
+  </div>
+</div>
+
+      </div>
+    </div>
+
+    <footer class="navbar navbar-default">
+  
+  <div class="container">
+    <a href="index.html">API Documentation</a> for <a href="http://www.nltk.org/" class="projecthome">nltk-3.6.2</a>,
+  generated by <a href="https://github.com/twisted/pydoctor/">pydoctor</a>
+    21.2.2 at 2021-07-12 23:14:45.
+  </div>
+</footer>
+
+    <script src="pydoctor.js" type="text/javascript"></script>
+
+  </body>
+</html>

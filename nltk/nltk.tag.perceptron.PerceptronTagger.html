@@ -1,0 +1,653 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+          "DTD/xhtml1-strict.dtd">
+<html>
+  
+
+  <head>
+    
+    <title>nltk.tag.perceptron.PerceptronTagger</title>
+    <meta name="generator" content="pydoctor 21.2.2"> 
+        
+    </meta>
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=0.75" />
+    <link rel="stylesheet" type="text/css" href="bootstrap.min.css" />
+    <link rel="stylesheet" type="text/css" href="apidocs.css" />
+    <link rel="stylesheet" type="text/css" href="extra.css" />
+</head>
+
+  <body>
+
+    
+
+    <nav class="navbar navbar-default">
+  
+  <div class="container">
+
+    <div class="navbar-header">
+      
+      <div class="navlinks">
+        <span class="navbar-brand">
+          <a href="http://www.nltk.org/" class="projecthome">nltk-3.6.2</a> <a href="index.html">API Documentation</a>
+        </span>
+
+        <a href="moduleIndex.html">
+          Modules
+        </a>
+
+        <a href="classIndex.html">
+          Classes
+        </a>
+
+        <a href="nameIndex.html">
+          Names
+        </a>
+
+        <form action="search-results.html" id="search-box-container">
+          <div class="input-group">
+            <input id="search-box" name="search-query" placeholder="Search..." aria-label="Search" minlength="2" class="form-control" />
+            <span class="input-group-btn">
+              <button class="btn btn-default" type="submit" title="Search"><img src="fonts/search.svg" alt="Search!" /></button>
+              <a class="btn btn-default" id="search-help-button" title="Help" onclick="toggleSearchHelpText()"><img src="fonts/info.svg" alt="Help!" /></a>
+            </span>
+          </div>
+        </form>
+
+        <div class="rst-admonition hint" id="search-help-box">
+          <p class="rst-last">
+      
+            Search bar offers the following options:
+            <ul>   
+                <li>
+                  <strong>Term presence.</strong> The below example searches for documents that 
+                    must contain “foo”, might contain “bar” and must not contain “baz”:
+                  <br /> <code>'+foo bar -baz'</code>
+                </li> 
+
+                <li>
+                  <strong>Wildcards.</strong> The below example searches for documents with words beginning with “foo”:
+                  <br /> <code>'foo*'</code>
+                </li> 
+
+                <li>
+                  <strong>Search in specific fields.</strong> The following search matches all documents 
+                  that contains "foo" in their full dotted name and with “bar” in any field:
+                  <br /> <code>'+fullName:*foo* +bar'</code>
+
+                  <p>
+                    Possible fields: 'name', 'docstring', 'fullName'.
+                  </p>
+                </li>
+
+                <li>
+                  <strong>Fuzzy matches.</strong> The following search matches all documents 
+                  that have a word within 1 edit distance of “foo”:
+                  <br /> <code>'foo~1'</code>
+                </li>
+            </ul>
+
+          </p>
+        </div>
+
+      </div>
+
+
+    </div>
+  </div>
+
+  <script>
+ 
+    function toggleSearchHelpText() {
+        document.body.classList.toggle("search-help-hidden");
+    }
+    // Init search and help text
+    document.getElementById('search-box-container').style.display = 'block';
+    document.getElementById('search-help-box').style.display = 'block';
+    document.body.classList.add("search-help-hidden");
+
+  </script>
+
+</nav>
+
+    
+
+    <div class="container">
+
+      <div class="page-header">
+        <h1 class="class"><code><code><a href="nltk.html">nltk</a></code><wbr></wbr>.<code><a href="nltk.tag.html">tag</a></code><wbr></wbr>.<code><a href="nltk.tag.perceptron.html">perceptron</a></code><wbr></wbr>.<code><a href="nltk.tag.perceptron.PerceptronTagger.html">PerceptronTagger</a></code></code></h1>
+        <div id="showPrivate">
+          <button class="btn btn-link" onclick="togglePrivate()">Toggle Private API</button>
+        </div>
+      </div>
+
+      <div class="categoryHeader">
+        class documentation
+      </div>
+
+      <div class="extrasDocstring">
+        <p><code><span class="py-keyword">class</span> <span class="py-defname">PerceptronTagger</span>(<a href="nltk.tag.api.TaggerI.html" title="nltk.tag.api.TaggerI">TaggerI</a>): <a href="https://github.com/nltk/nltk/tree/3.6.2/nltk/tag/perceptron.py#L123" class="sourceLink">(source)</a></code></p>
+        <p><a href="classIndex.html#nltk.tag.perceptron.PerceptronTagger">View In Hierarchy</a></p>
+      </div>
+
+      <div class="moduleDocstring">
+        <div><p>Greedy Averaged Perceptron tagger, as implemented by Matthew Honnibal.
+See more implementation details here:</p>
+<blockquote>
+<a class="rst-reference external" href="https://explosion.ai/blog/part-of-speech-pos-tagger-in-python" target="_top">https://explosion.ai/blog/part-of-speech-pos-tagger-in-python</a></blockquote>
+<pre class="py-doctest">
+<span class="py-prompt">&gt;&gt;&gt; </span><span class="py-keyword">from</span> nltk.tag.perceptron <span class="py-keyword">import</span> PerceptronTagger</pre><p>Train the model</p>
+<pre class="py-doctest">
+<span class="py-prompt">&gt;&gt;&gt; </span>tagger = PerceptronTagger(load=<span class="py-builtin">False</span>)</pre><pre class="py-doctest">
+<span class="py-prompt">&gt;&gt;&gt; </span>tagger.train([[(<span class="py-string">'today'</span>,<span class="py-string">'NN'</span>),(<span class="py-string">'is'</span>,<span class="py-string">'VBZ'</span>),(<span class="py-string">'good'</span>,<span class="py-string">'JJ'</span>),(<span class="py-string">'day'</span>,<span class="py-string">'NN'</span>)],
+<span class="py-more">... </span>[(<span class="py-string">'yes'</span>,<span class="py-string">'NNS'</span>),(<span class="py-string">'it'</span>,<span class="py-string">'PRP'</span>),(<span class="py-string">'beautiful'</span>,<span class="py-string">'JJ'</span>)]])</pre><pre class="py-doctest">
+<span class="py-prompt">&gt;&gt;&gt; </span>tagger.tag([<span class="py-string">'today'</span>,<span class="py-string">'is'</span>,<span class="py-string">'a'</span>,<span class="py-string">'beautiful'</span>,<span class="py-string">'day'</span>])
+<span class="py-output">[('today', 'NN'), ('is', 'PRP'), ('a', 'PRP'), ('beautiful', 'JJ'), ('day', 'NN')]</span>
+</pre><p>Use the pretrain model (the default constructor)</p>
+<pre class="py-doctest">
+<span class="py-prompt">&gt;&gt;&gt; </span>pretrain = PerceptronTagger()</pre><pre class="py-doctest">
+<span class="py-prompt">&gt;&gt;&gt; </span>pretrain.tag(<span class="py-string">'The quick brown fox jumps over the lazy dog'</span>.split())
+<span class="py-output">[('The', 'DT'), ('quick', 'JJ'), ('brown', 'NN'), ('fox', 'NN'), ('jumps', 'VBZ'), ('over', 'IN'), ('the', 'DT'), ('lazy', 'JJ'), ('dog', 'NN')]</span>
+</pre><pre class="py-doctest">
+<span class="py-prompt">&gt;&gt;&gt; </span>pretrain.tag(<span class="py-string">"The red cat"</span>.split())
+<span class="py-output">[('The', 'DT'), ('red', 'JJ'), ('cat', 'NN')]</span>
+</pre></div>
+      </div>
+
+      <div id="splitTables">
+        <table class="children sortable" id="id1567">
+  
+  
+  <tr class="classmethod">
+    
+    <td>Class Method</td>
+    <td><code><a href="#decode_json_obj">decode_json_obj</a></code></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="method">
+    
+    <td>Method</td>
+    <td><code><a href="#__init__">__init__</a></code></td>
+    <td><span></span></td>
+  </tr><tr class="method">
+    
+    <td>Method</td>
+    <td><code><a href="#encode_json_obj">encode_json_obj</a></code></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="method">
+    
+    <td>Method</td>
+    <td><code><a href="#load">load</a></code></td>
+    <td><span></span></td>
+  </tr><tr class="method">
+    
+    <td>Method</td>
+    <td><code><a href="#normalize">normalize</a></code></td>
+    <td><span class="undocumented">No summary</span></td>
+  </tr><tr class="method">
+    
+    <td>Method</td>
+    <td><code><a href="#tag">tag</a></code></td>
+    <td><span>Tag tokenized sentences. :params tokens: list of word :type tokens: list(str)</span></td>
+  </tr><tr class="method">
+    
+    <td>Method</td>
+    <td><code><a href="#train">train</a></code></td>
+    <td><span>Train a model from sentences, and save it at <tt class="rst-docutils literal">save_loc</tt>. <tt class="rst-docutils literal">nr_iter</tt> controls the number of Perceptron training iterations.</span></td>
+  </tr><tr class="classvariable">
+    
+    <td>Class Variable</td>
+    <td><code><a href="#END">END</a></code></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="classvariable">
+    
+    <td>Class Variable</td>
+    <td><code><a href="#json_tag">json_tag</a></code></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="classvariable">
+    
+    <td>Class Variable</td>
+    <td><code><a href="#START">START</a></code></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="instancevariable">
+    
+    <td>Instance Variable</td>
+    <td><code><a href="#classes">classes</a></code></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="instancevariable">
+    
+    <td>Instance Variable</td>
+    <td><code><a href="#model">model</a></code></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="instancevariable">
+    
+    <td>Instance Variable</td>
+    <td><code><a href="#tagdict">tagdict</a></code></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="method private">
+    
+    <td>Method</td>
+    <td><code><a href="#_get_features">_get_features</a></code></td>
+    <td><span>Map tokens into a feature representation, implemented as a {hashable: int} dict. If the features change, a new model must be trained.</span></td>
+  </tr><tr class="method private">
+    
+    <td>Method</td>
+    <td><code><a href="#_make_tagdict">_make_tagdict</a></code></td>
+    <td><span>Make a tag dictionary for single-tag words. :param sentences: A list of list of (word, tag) tuples.</span></td>
+  </tr><tr class="instancevariable private">
+    
+    <td>Instance Variable</td>
+    <td><code><a href="#_sentences">_sentences</a></code></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr>
+</table>
+        
+          <p class="inheritedFrom">
+            Inherited from <code><a href="nltk.tag.api.TaggerI.html">TaggerI</a></code>:
+          </p>
+          <table class="children sortable" id="id1568">
+  
+  
+  <tr class="basemethod">
+    
+    <td>Method</td>
+    <td><code><a href="nltk.tag.api.TaggerI.html#evaluate">evaluate</a></code></td>
+    <td><span>Score the accuracy of the tagger against the gold standard. Strip the tags from the gold standard text, retag it using the tagger, then compute the accuracy score.</span></td>
+  </tr><tr class="basemethod">
+    
+    <td>Method</td>
+    <td><code><a href="nltk.tag.api.TaggerI.html#tag_sents">tag_sents</a></code></td>
+    <td><span>Apply <tt class="rst-docutils literal">self.tag()</tt> to each element of <em>sentences</em>.  I.e.:</span></td>
+  </tr><tr class="basemethod private">
+    
+    <td>Method</td>
+    <td><code><a href="nltk.tag.api.TaggerI.html#_check_params">_check_params</a></code></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr>
+</table>
+          
+
+          
+      </div>
+
+      <div id="childList">
+
+        <div class="baseclassmethod">
+  
+  
+  <a name="nltk.tag.perceptron.PerceptronTagger.decode_json_obj">
+    
+  </a>
+  <a name="decode_json_obj">
+    
+  </a>
+  <div class="functionHeader">
+    @classmethod<br />
+    <span class="py-keyword">def</span> <span class="py-defname">decode_json_obj</span>(cls, obj):
+    <a class="sourceLink" href="https://github.com/nltk/nltk/tree/3.6.2/nltk/tag/perceptron.py#L259">
+      
+      (source)
+    </a>
+  </div>
+  <div class="docstring functionBody">
+    
+    
+    <div><p class="undocumented">Undocumented</p></div>
+  </div>
+</div><div class="basemethod">
+  
+  
+  <a name="nltk.tag.perceptron.PerceptronTagger.__init__">
+    
+  </a>
+  <a name="__init__">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-keyword">def</span> <span class="py-defname">__init__</span>(self, load=True):
+    <a class="sourceLink" href="https://github.com/nltk/nltk/tree/3.6.2/nltk/tag/perceptron.py#L159">
+      
+      (source)
+    </a>
+  </div>
+  <div class="docstring functionBody">
+    
+    
+    <div><table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">load</span></td><td class="fieldArgDesc">Load the pickled model upon instantiation.</td></tr></table></div>
+  </div>
+</div><div class="basemethod">
+  
+  
+  <a name="nltk.tag.perceptron.PerceptronTagger.encode_json_obj">
+    
+  </a>
+  <a name="encode_json_obj">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-keyword">def</span> <span class="py-defname">encode_json_obj</span>(self):
+    <a class="sourceLink" href="https://github.com/nltk/nltk/tree/3.6.2/nltk/tag/perceptron.py#L256">
+      
+      (source)
+    </a>
+  </div>
+  <div class="docstring functionBody">
+    
+    
+    <div><p class="undocumented">Undocumented</p></div>
+  </div>
+</div><div class="basemethod">
+  
+  
+  <a name="nltk.tag.perceptron.PerceptronTagger.load">
+    
+  </a>
+  <a name="load">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-keyword">def</span> <span class="py-defname">load</span>(self, loc):
+    <a class="sourceLink" href="https://github.com/nltk/nltk/tree/3.6.2/nltk/tag/perceptron.py#L247">
+      
+      (source)
+    </a>
+  </div>
+  <div class="docstring functionBody">
+    
+    
+    <div><table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">loc:</span>str</td><td class="fieldArgDesc">Load a pickled model at location.</td></tr></table></div>
+  </div>
+</div><div class="basemethod">
+  
+  
+  <a name="nltk.tag.perceptron.PerceptronTagger.normalize">
+    
+  </a>
+  <a name="normalize">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-keyword">def</span> <span class="py-defname">normalize</span>(self, word):
+    <a class="sourceLink" href="https://github.com/nltk/nltk/tree/3.6.2/nltk/tag/perceptron.py#L267">
+      
+      (source)
+    </a>
+  </div>
+  <div class="docstring functionBody">
+    
+    
+    <div>Normalization used in pre-processing.
+- All words are lower cased
+- Groups of digits of length 4 are represented as !YEAR;
+- Other digits are represented as !DIGITS<table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Returns</td></tr><tr><td class="fieldArgContainer">str</td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr></table></div>
+  </div>
+</div><div class="basemethod">
+  
+  
+  <a name="nltk.tag.perceptron.PerceptronTagger.tag">
+    
+  </a>
+  <a name="tag">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-keyword">def</span> <span class="py-defname">tag</span>(self, tokens, return_conf=False, use_tagdict=True):
+    <a class="sourceLink" href="https://github.com/nltk/nltk/tree/3.6.2/nltk/tag/perceptron.py#L172">
+      
+      (source)
+    </a>
+  </div>
+  <div class="docstring functionBody">
+    <div class="interfaceinfo">overrides <code><a href="nltk.tag.api.TaggerI.html#tag">nltk.tag.api.TaggerI.tag</a></code></div>
+    
+    <div>Tag tokenized sentences.
+:params tokens: list of word
+:type tokens: list(str)</div>
+  </div>
+</div><div class="basemethod">
+  
+  
+  <a name="nltk.tag.perceptron.PerceptronTagger.train">
+    
+  </a>
+  <a name="train">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-keyword">def</span> <span class="py-defname">train</span>(self, sentences, save_loc=None, nr_iter=5):
+    <a class="sourceLink" href="https://github.com/nltk/nltk/tree/3.6.2/nltk/tag/perceptron.py#L196">
+      
+      (source)
+    </a>
+  </div>
+  <div class="docstring functionBody">
+    
+    
+    <div>Train a model from sentences, and save it at <tt class="rst-docutils literal">save_loc</tt>. <tt class="rst-docutils literal">nr_iter</tt>
+controls the number of Perceptron training iterations.<table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">sentences</span></td><td class="fieldArgDesc">A list or iterator of sentences, where each sentence
+is a list of (words, tags) tuples.</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">save_loc</span></td><td class="fieldArgDesc">If not <tt class="rst-docutils literal">None</tt>, saves a pickled model in this location.</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">nr_iter</span></td><td class="fieldArgDesc">Number of training iterations.</td></tr></table></div>
+  </div>
+</div><div class="baseclassvariable">
+  
+  
+  <a name="nltk.tag.perceptron.PerceptronTagger.END">
+    
+  </a>
+  <a name="END">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-defname">END</span>: <code>list[<wbr></wbr>str]</code> =
+    <a class="sourceLink" href="https://github.com/nltk/nltk/tree/3.6.2/nltk/tag/perceptron.py#L157">
+      
+      (source)
+    </a>
+  </div>
+  <div class="functionBody">
+    
+    
+    <div><p class="undocumented">Undocumented</p></div>
+  </div>
+</div><div class="baseclassvariable">
+  
+  
+  <a name="nltk.tag.perceptron.PerceptronTagger.json_tag">
+    
+  </a>
+  <a name="json_tag">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-defname">json_tag</span>: <code>str</code> =
+    <a class="sourceLink" href="https://github.com/nltk/nltk/tree/3.6.2/nltk/tag/perceptron.py#L154">
+      
+      (source)
+    </a>
+  </div>
+  <div class="functionBody">
+    
+    
+    <div><p class="undocumented">Undocumented</p></div>
+  </div>
+</div><div class="baseclassvariable">
+  
+  
+  <a name="nltk.tag.perceptron.PerceptronTagger.START">
+    
+  </a>
+  <a name="START">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-defname">START</span>: <code>list[<wbr></wbr>str]</code> =
+    <a class="sourceLink" href="https://github.com/nltk/nltk/tree/3.6.2/nltk/tag/perceptron.py#L156">
+      
+      (source)
+    </a>
+  </div>
+  <div class="functionBody">
+    
+    
+    <div><p class="undocumented">Undocumented</p></div>
+  </div>
+</div><div class="baseinstancevariable">
+  
+  
+  <a name="nltk.tag.perceptron.PerceptronTagger.classes">
+    
+  </a>
+  <a name="classes">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-defname">classes</span> =
+    <a class="sourceLink" href="https://github.com/nltk/nltk/tree/3.6.2/nltk/tag/perceptron.py#L165">
+      
+      (source)
+    </a>
+  </div>
+  <div class="functionBody">
+    
+    
+    <div><p class="undocumented">Undocumented</p></div>
+  </div>
+</div><div class="baseinstancevariable">
+  
+  
+  <a name="nltk.tag.perceptron.PerceptronTagger.model">
+    
+  </a>
+  <a name="model">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-defname">model</span> =
+    <a class="sourceLink" href="https://github.com/nltk/nltk/tree/3.6.2/nltk/tag/perceptron.py#L163">
+      
+      (source)
+    </a>
+  </div>
+  <div class="functionBody">
+    
+    
+    <div><p class="undocumented">Undocumented</p></div>
+  </div>
+</div><div class="baseinstancevariable">
+  
+  
+  <a name="nltk.tag.perceptron.PerceptronTagger.tagdict">
+    
+  </a>
+  <a name="tagdict">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-defname">tagdict</span> =
+    <a class="sourceLink" href="https://github.com/nltk/nltk/tree/3.6.2/nltk/tag/perceptron.py#L164">
+      
+      (source)
+    </a>
+  </div>
+  <div class="functionBody">
+    
+    
+    <div><p class="undocumented">Undocumented</p></div>
+  </div>
+</div><div class="basemethod private">
+  
+  
+  <a name="nltk.tag.perceptron.PerceptronTagger._get_features">
+    
+  </a>
+  <a name="_get_features">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-keyword">def</span> <span class="py-defname">_get_features</span>(self, i, word, context, prev, prev2):
+    <a class="sourceLink" href="https://github.com/nltk/nltk/tree/3.6.2/nltk/tag/perceptron.py#L284">
+      
+      (source)
+    </a>
+  </div>
+  <div class="docstring functionBody">
+    
+    
+    <div>Map tokens into a feature representation, implemented as a
+{hashable: int} dict. If the features change, a new model must be
+trained.</div>
+  </div>
+</div><div class="basemethod private">
+  
+  
+  <a name="nltk.tag.perceptron.PerceptronTagger._make_tagdict">
+    
+  </a>
+  <a name="_make_tagdict">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-keyword">def</span> <span class="py-defname">_make_tagdict</span>(self, sentences):
+    <a class="sourceLink" href="https://github.com/nltk/nltk/tree/3.6.2/nltk/tag/perceptron.py#L312">
+      
+      (source)
+    </a>
+  </div>
+  <div class="docstring functionBody">
+    
+    
+    <div>Make a tag dictionary for single-tag words.
+:param sentences: A list of list of (word, tag) tuples.</div>
+  </div>
+</div><div class="baseinstancevariable private">
+  
+  
+  <a name="nltk.tag.perceptron.PerceptronTagger._sentences">
+    
+  </a>
+  <a name="_sentences">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-defname">_sentences</span> =
+    <a class="sourceLink" href="https://github.com/nltk/nltk/tree/3.6.2/nltk/tag/perceptron.py#L212">
+      
+      (source)
+    </a>
+  </div>
+  <div class="functionBody">
+    
+    
+    <div><p class="undocumented">Undocumented</p></div>
+  </div>
+</div>
+
+      </div>
+    </div>
+
+    <footer class="navbar navbar-default">
+  
+  <div class="container">
+    <a href="index.html">API Documentation</a> for <a href="http://www.nltk.org/" class="projecthome">nltk-3.6.2</a>,
+  generated by <a href="https://github.com/twisted/pydoctor/">pydoctor</a>
+    21.2.2 at 2021-07-12 23:14:45.
+  </div>
+</footer>
+
+    <script src="pydoctor.js" type="text/javascript"></script>
+
+  </body>
+</html>

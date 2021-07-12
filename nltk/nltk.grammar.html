@@ -1,0 +1,1004 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+          "DTD/xhtml1-strict.dtd">
+<html>
+  
+
+  <head>
+    
+    <title>nltk.grammar</title>
+    <meta name="generator" content="pydoctor 21.2.2"> 
+        
+    </meta>
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=0.75" />
+    <link rel="stylesheet" type="text/css" href="bootstrap.min.css" />
+    <link rel="stylesheet" type="text/css" href="apidocs.css" />
+    <link rel="stylesheet" type="text/css" href="extra.css" />
+</head>
+
+  <body>
+
+    
+
+    <nav class="navbar navbar-default">
+  
+  <div class="container">
+
+    <div class="navbar-header">
+      
+      <div class="navlinks">
+        <span class="navbar-brand">
+          <a href="http://www.nltk.org/" class="projecthome">nltk-3.6.2</a> <a href="index.html">API Documentation</a>
+        </span>
+
+        <a href="moduleIndex.html">
+          Modules
+        </a>
+
+        <a href="classIndex.html">
+          Classes
+        </a>
+
+        <a href="nameIndex.html">
+          Names
+        </a>
+
+        <form action="search-results.html" id="search-box-container">
+          <div class="input-group">
+            <input id="search-box" name="search-query" placeholder="Search..." aria-label="Search" minlength="2" class="form-control" />
+            <span class="input-group-btn">
+              <button class="btn btn-default" type="submit" title="Search"><img src="fonts/search.svg" alt="Search!" /></button>
+              <a class="btn btn-default" id="search-help-button" title="Help" onclick="toggleSearchHelpText()"><img src="fonts/info.svg" alt="Help!" /></a>
+            </span>
+          </div>
+        </form>
+
+        <div class="rst-admonition hint" id="search-help-box">
+          <p class="rst-last">
+      
+            Search bar offers the following options:
+            <ul>   
+                <li>
+                  <strong>Term presence.</strong> The below example searches for documents that 
+                    must contain “foo”, might contain “bar” and must not contain “baz”:
+                  <br /> <code>'+foo bar -baz'</code>
+                </li> 
+
+                <li>
+                  <strong>Wildcards.</strong> The below example searches for documents with words beginning with “foo”:
+                  <br /> <code>'foo*'</code>
+                </li> 
+
+                <li>
+                  <strong>Search in specific fields.</strong> The following search matches all documents 
+                  that contains "foo" in their full dotted name and with “bar” in any field:
+                  <br /> <code>'+fullName:*foo* +bar'</code>
+
+                  <p>
+                    Possible fields: 'name', 'docstring', 'fullName'.
+                  </p>
+                </li>
+
+                <li>
+                  <strong>Fuzzy matches.</strong> The following search matches all documents 
+                  that have a word within 1 edit distance of “foo”:
+                  <br /> <code>'foo~1'</code>
+                </li>
+            </ul>
+
+          </p>
+        </div>
+
+      </div>
+
+
+    </div>
+  </div>
+
+  <script>
+ 
+    function toggleSearchHelpText() {
+        document.body.classList.toggle("search-help-hidden");
+    }
+    // Init search and help text
+    document.getElementById('search-box-container').style.display = 'block';
+    document.getElementById('search-help-box').style.display = 'block';
+    document.body.classList.add("search-help-hidden");
+
+  </script>
+
+</nav>
+
+    
+
+    <div class="container">
+
+      <div class="page-header">
+        <h1 class="module"><code><code><a href="nltk.html">nltk</a></code><wbr></wbr>.<code><a href="nltk.grammar.html">grammar</a></code></code></h1>
+        <div id="showPrivate">
+          <button class="btn btn-link" onclick="togglePrivate()">Toggle Private API</button>
+        </div>
+      </div>
+
+      <div class="categoryHeader">
+        module documentation
+      </div>
+
+      <div class="extrasDocstring">
+        <a href="https://github.com/nltk/nltk/tree/3.6.2/nltk/grammar.py" class="sourceLink">(source)</a>
+        <p></p>
+      </div>
+
+      <div class="moduleDocstring">
+        <div><p>Basic data classes for representing context free grammars.  A
+"grammar" specifies which trees can represent the structure of a
+given text.  Each of these trees is called a "parse tree" for the
+text (or simply a "parse").  In a "context free" grammar, the set of
+parse trees for any piece of a text can depend only on that piece, and
+not on the rest of the text (i.e., the piece's context).  Context free
+grammars are often used to find possible syntactic structures for
+sentences.  In this context, the leaves of a parse tree are word
+tokens; and the node values are phrasal categories, such as <tt class="rst-docutils literal">NP</tt>
+and <tt class="rst-docutils literal">VP</tt>.</p>
+<p>The <tt class="rst-docutils literal">CFG</tt> class is used to encode context free grammars.  Each
+<tt class="rst-docutils literal">CFG</tt> consists of a start symbol and a set of productions.
+The "start symbol" specifies the root node value for parse trees.  For example,
+the start symbol for syntactic parsing is usually <tt class="rst-docutils literal">S</tt>.  Start
+symbols are encoded using the <tt class="rst-docutils literal">Nonterminal</tt> class, which is discussed
+below.</p>
+<p>A Grammar's "productions" specify what parent-child relationships a parse
+tree can contain.  Each production specifies that a particular
+node can be the parent of a particular set of children.  For example,
+the production <tt class="rst-docutils literal">&lt;S&gt; <span class="pre">-&gt;</span> &lt;NP&gt; &lt;VP&gt;</tt> specifies that an <tt class="rst-docutils literal">S</tt> node can
+be the parent of an <tt class="rst-docutils literal">NP</tt> node and a <tt class="rst-docutils literal">VP</tt> node.</p>
+<p>Grammar productions are implemented by the <tt class="rst-docutils literal">Production</tt> class.
+Each <tt class="rst-docutils literal">Production</tt> consists of a left hand side and a right hand
+side.  The "left hand side" is a <tt class="rst-docutils literal">Nonterminal</tt> that specifies the
+node type for a potential parent; and the "right hand side" is a list
+that specifies allowable children for that parent.  This lists
+consists of <tt class="rst-docutils literal">Nonterminals</tt> and text types: each <tt class="rst-docutils literal">Nonterminal</tt>
+indicates that the corresponding child may be a <tt class="rst-docutils literal">TreeToken</tt> with the
+specified node type; and each text type indicates that the
+corresponding child may be a <tt class="rst-docutils literal">Token</tt> with the with that type.</p>
+<p>The <tt class="rst-docutils literal">Nonterminal</tt> class is used to distinguish node values from leaf
+values.  This prevents the grammar from accidentally using a leaf
+value (such as the English word "A") as the node of a subtree.  Within
+a <tt class="rst-docutils literal">CFG</tt>, all node values are wrapped in the <tt class="rst-docutils literal">Nonterminal</tt>
+class. Note, however, that the trees that are specified by the grammar do
+<em>not</em> include these <tt class="rst-docutils literal">Nonterminal</tt> wrappers.</p>
+<p>Grammars can also be given a more procedural interpretation.  According to
+this interpretation, a Grammar specifies any tree structure <em>tree</em> that
+can be produced by the following procedure:</p>
+<div class="rst-line-block">
+<div class="rst-line">Set tree to the start symbol</div>
+<div class="rst-line">Repeat until tree contains no more nonterminal leaves:</div>
+<div class="rst-line-block">
+<div class="rst-line">Choose a production prod with whose left hand side</div>
+<div class="rst-line-block">
+<div class="rst-line">lhs is a nonterminal leaf of tree.</div>
+</div>
+<div class="rst-line">Replace the nonterminal leaf with a subtree, whose node</div>
+<div class="rst-line-block">
+<div class="rst-line">value is the value wrapped by the nonterminal lhs, and</div>
+<div class="rst-line">whose children are the right hand side of prod.</div>
+</div>
+</div>
+</div>
+<p>The operation of replacing the left hand side (<em>lhs</em>) of a production
+with the right hand side (<em>rhs</em>) in a tree (<em>tree</em>) is known as
+"expanding" <em>lhs</em> to <em>rhs</em> in <em>tree</em>.</p>
+</div>
+      </div>
+
+      <div id="splitTables">
+        <table class="children sortable" id="id645">
+  
+  
+  <tr class="class">
+    
+    <td>Class</td>
+    <td><code><a href="nltk.grammar.CFG.html">CFG</a></code></td>
+    <td><span>A context-free grammar.  A grammar consists of a start state and a set of productions.  The set of terminals and nonterminals is implicitly specified by the productions.</span></td>
+  </tr><tr class="class">
+    
+    <td>Class</td>
+    <td><code><a href="nltk.grammar.DependencyGrammar.html">DependencyGrammar</a></code></td>
+    <td><span>A dependency grammar.  A DependencyGrammar consists of a set of productions.  Each production specifies a head/modifier relationship between a pair of words.</span></td>
+  </tr><tr class="class">
+    
+    <td>Class</td>
+    <td><code><a href="nltk.grammar.DependencyProduction.html">DependencyProduction</a></code></td>
+    <td><span>A dependency grammar production.  Each production maps a single head word to an unordered list of one or more modifier words.</span></td>
+  </tr><tr class="class">
+    
+    <td>Class</td>
+    <td><code><a href="nltk.grammar.FeatStructNonterminal.html">FeatStructNonterminal</a></code></td>
+    <td><span>A feature structure that's also a nonterminal.  It acts as its own symbol, and automatically freezes itself when hashed.</span></td>
+  </tr><tr class="class">
+    
+    <td>Class</td>
+    <td><code><a href="nltk.grammar.FeatureGrammar.html">FeatureGrammar</a></code></td>
+    <td><span>A feature-based grammar.  This is equivalent to a <tt class="rst-docutils literal">CFG</tt> whose nonterminals are all <tt class="rst-docutils literal">FeatStructNonterminal</tt>.</span></td>
+  </tr><tr class="class">
+    
+    <td>Class</td>
+    <td><code><a href="nltk.grammar.FeatureValueType.html">FeatureValueType</a></code></td>
+    <td><span>A helper class for <tt class="rst-docutils literal">FeatureGrammars</tt>, designed to be different from ordinary strings.  This is to stop the <tt class="rst-docutils literal">FeatStruct</tt> <tt class="rst-docutils literal">FOO[]</tt> from being compare equal to the terminal "FOO".</span></td>
+  </tr><tr class="class">
+    
+    <td>Class</td>
+    <td><code><a href="nltk.grammar.Nonterminal.html">Nonterminal</a></code></td>
+    <td><span class="undocumented">No summary</span></td>
+  </tr><tr class="class">
+    
+    <td>Class</td>
+    <td><code><a href="nltk.grammar.PCFG.html">PCFG</a></code></td>
+    <td><span>A probabilistic context-free grammar.  A PCFG consists of a start state and a set of productions with probabilities.  The set of terminals and nonterminals is implicitly specified by the productions.</span></td>
+  </tr><tr class="class">
+    
+    <td>Class</td>
+    <td><code><a href="nltk.grammar.ProbabilisticDependencyGrammar.html">ProbabilisticDependencyGrammar</a></code></td>
+    <td><span></span></td>
+  </tr><tr class="class">
+    
+    <td>Class</td>
+    <td><code><a href="nltk.grammar.ProbabilisticProduction.html">ProbabilisticProduction</a></code></td>
+    <td><span class="undocumented">No summary</span></td>
+  </tr><tr class="class">
+    
+    <td>Class</td>
+    <td><code><a href="nltk.grammar.Production.html">Production</a></code></td>
+    <td><span class="undocumented">No summary</span></td>
+  </tr><tr class="function">
+    
+    <td>Function</td>
+    <td><code><a href="#cfg_demo">cfg_demo</a></code></td>
+    <td><span>A demonstration showing how <tt class="rst-docutils literal">CFGs</tt> can be created and used.</span></td>
+  </tr><tr class="function">
+    
+    <td>Function</td>
+    <td><code><a href="#demo">demo</a></code></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="function">
+    
+    <td>Function</td>
+    <td><code><a href="#dg_demo">dg_demo</a></code></td>
+    <td><span>A demonstration showing the creation and inspection of a <tt class="rst-docutils literal">DependencyGrammar</tt>.</span></td>
+  </tr><tr class="function">
+    
+    <td>Function</td>
+    <td><code><a href="#fcfg_demo">fcfg_demo</a></code></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="function">
+    
+    <td>Function</td>
+    <td><code><a href="#induce_pcfg">induce_pcfg</a></code></td>
+    <td><span>Induce a PCFG grammar from a list of productions.</span></td>
+  </tr><tr class="function">
+    
+    <td>Function</td>
+    <td><code><a href="#is_nonterminal">is_nonterminal</a></code></td>
+    <td><span></span></td>
+  </tr><tr class="function">
+    
+    <td>Function</td>
+    <td><code><a href="#is_terminal">is_terminal</a></code></td>
+    <td><span>Return True if the item is a terminal, which currently is if it is hashable and not a <tt class="rst-docutils literal">Nonterminal</tt>.</span></td>
+  </tr><tr class="function">
+    
+    <td>Function</td>
+    <td><code><a href="#nonterminals">nonterminals</a></code></td>
+    <td><span>Given a string containing a list of symbol names, return a list of <tt class="rst-docutils literal">Nonterminals</tt> constructed from those symbols.</span></td>
+  </tr><tr class="function">
+    
+    <td>Function</td>
+    <td><code><a href="#pcfg_demo">pcfg_demo</a></code></td>
+    <td><span>A demonstration showing how a <tt class="rst-docutils literal">PCFG</tt> can be created and used.</span></td>
+  </tr><tr class="function">
+    
+    <td>Function</td>
+    <td><code><a href="#read_grammar">read_grammar</a></code></td>
+    <td><span>Return a pair consisting of a starting category and a list of <tt class="rst-docutils literal">Productions</tt>.</span></td>
+  </tr><tr class="function">
+    
+    <td>Function</td>
+    <td><code><a href="#sdg_demo">sdg_demo</a></code></td>
+    <td><span>A demonstration of how to read a string representation of a CoNLL format dependency tree.</span></td>
+  </tr><tr class="function">
+    
+    <td>Function</td>
+    <td><code><a href="#standard_nonterm_parser">standard_nonterm_parser</a></code></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="variable">
+    
+    <td>Variable</td>
+    <td><code><a href="#toy_pcfg1">toy_pcfg1</a></code></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="variable">
+    
+    <td>Variable</td>
+    <td><code><a href="#toy_pcfg2">toy_pcfg2</a></code></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="function private">
+    
+    <td>Function</td>
+    <td><code><a href="#_read_cfg_production">_read_cfg_production</a></code></td>
+    <td><span>Return a list of context-free <tt class="rst-docutils literal">Productions</tt>.</span></td>
+  </tr><tr class="function private">
+    
+    <td>Function</td>
+    <td><code><a href="#_read_dependency_production">_read_dependency_production</a></code></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="function private">
+    
+    <td>Function</td>
+    <td><code><a href="#_read_fcfg_production">_read_fcfg_production</a></code></td>
+    <td><span>Return a list of feature-based <tt class="rst-docutils literal">Productions</tt>.</span></td>
+  </tr><tr class="function private">
+    
+    <td>Function</td>
+    <td><code><a href="#_read_pcfg_production">_read_pcfg_production</a></code></td>
+    <td><span>Return a list of PCFG <tt class="rst-docutils literal">ProbabilisticProductions</tt>.</span></td>
+  </tr><tr class="function private">
+    
+    <td>Function</td>
+    <td><code><a href="#_read_production">_read_production</a></code></td>
+    <td><span>Parse a grammar rule, given as a string, and return a list of productions.</span></td>
+  </tr><tr class="variable private">
+    
+    <td>Variable</td>
+    <td><code><a href="#_ARROW_RE">_ARROW_RE</a></code></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="variable private">
+    
+    <td>Variable</td>
+    <td><code><a href="#_DISJUNCTION_RE">_DISJUNCTION_RE</a></code></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="variable private">
+    
+    <td>Variable</td>
+    <td><code><a href="#_PROBABILITY_RE">_PROBABILITY_RE</a></code></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="variable private">
+    
+    <td>Variable</td>
+    <td><code><a href="#_READ_DG_RE">_READ_DG_RE</a></code></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="variable private">
+    
+    <td>Variable</td>
+    <td><code><a href="#_SPLIT_DG_RE">_SPLIT_DG_RE</a></code></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="variable private">
+    
+    <td>Variable</td>
+    <td><code><a href="#_STANDARD_NONTERM_RE">_STANDARD_NONTERM_RE</a></code></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="variable private">
+    
+    <td>Variable</td>
+    <td><code><a href="#_TERMINAL_RE">_TERMINAL_RE</a></code></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr>
+</table>
+        
+
+          
+      </div>
+
+      <div id="childList">
+
+        <div class="basefunction">
+  
+  
+  <a name="nltk.grammar.cfg_demo">
+    
+  </a>
+  <a name="cfg_demo">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-keyword">def</span> <span class="py-defname">cfg_demo</span>():
+    <a class="sourceLink" href="https://github.com/nltk/nltk/tree/3.6.2/nltk/grammar.py#L1510">
+      
+      (source)
+    </a>
+  </div>
+  <div class="docstring functionBody">
+    
+    
+    <div>A demonstration showing how <tt class="rst-docutils literal">CFGs</tt> can be created and used.</div>
+  </div>
+</div><div class="basefunction">
+  
+  
+  <a name="nltk.grammar.demo">
+    
+  </a>
+  <a name="demo">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-keyword">def</span> <span class="py-defname">demo</span>():
+    <a class="sourceLink" href="https://github.com/nltk/nltk/tree/3.6.2/nltk/grammar.py#L1701">
+      
+      (source)
+    </a>
+  </div>
+  <div class="docstring functionBody">
+    
+    
+    <div><p class="undocumented">Undocumented</p></div>
+  </div>
+</div><div class="basefunction">
+  
+  
+  <a name="nltk.grammar.dg_demo">
+    
+  </a>
+  <a name="dg_demo">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-keyword">def</span> <span class="py-defname">dg_demo</span>():
+    <a class="sourceLink" href="https://github.com/nltk/nltk/tree/3.6.2/nltk/grammar.py#L1658">
+      
+      (source)
+    </a>
+  </div>
+  <div class="docstring functionBody">
+    
+    
+    <div>A demonstration showing the creation and inspection of a
+<tt class="rst-docutils literal">DependencyGrammar</tt>.</div>
+  </div>
+</div><div class="basefunction">
+  
+  
+  <a name="nltk.grammar.fcfg_demo">
+    
+  </a>
+  <a name="fcfg_demo">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-keyword">def</span> <span class="py-defname">fcfg_demo</span>():
+    <a class="sourceLink" href="https://github.com/nltk/nltk/tree/3.6.2/nltk/grammar.py#L1650">
+      
+      (source)
+    </a>
+  </div>
+  <div class="docstring functionBody">
+    
+    
+    <div><p class="undocumented">Undocumented</p></div>
+  </div>
+</div><div class="basefunction">
+  
+  
+  <a name="nltk.grammar.induce_pcfg">
+    
+  </a>
+  <a name="induce_pcfg">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-keyword">def</span> <span class="py-defname">induce_pcfg</span>(start, productions):
+    <a class="sourceLink" href="https://github.com/nltk/nltk/tree/3.6.2/nltk/grammar.py#L1273">
+      
+      (source)
+    </a>
+  </div>
+  <div class="docstring functionBody">
+    
+    
+    <div><p>Induce a PCFG grammar from a list of productions.</p>
+<p>The probability of a production A -&gt; B C in a PCFG is:</p>
+<div class="rst-line-block">
+<div class="rst-line-block">
+<div class="rst-line">count(A -&gt; B C)</div>
+</div>
+<div class="rst-line">P(B, C | A) = ---------------       where * is any right hand side</div>
+<div class="rst-line-block">
+<div class="rst-line">count(A -&gt; *)</div>
+</div>
+</div>
+<table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">start:</span>Nonterminal</td><td class="fieldArgDesc">The start symbol</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">productions:</span>list(Production)</td><td class="fieldArgDesc">The list of productions that defines the grammar</td></tr></table></div>
+  </div>
+</div><div class="basefunction">
+  
+  
+  <a name="nltk.grammar.is_nonterminal">
+    
+  </a>
+  <a name="is_nonterminal">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-keyword">def</span> <span class="py-defname">is_nonterminal</span>(item):
+    <a class="sourceLink" href="https://github.com/nltk/nltk/tree/3.6.2/nltk/grammar.py#L227">
+      
+      (source)
+    </a>
+  </div>
+  <div class="docstring functionBody">
+    
+    
+    <div><table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Returns</td></tr><tr><td class="fieldArgContainer">bool</td><td class="fieldArgDesc">True if the item is a <tt class="rst-docutils literal">Nonterminal</tt>.</td></tr></table></div>
+  </div>
+</div><div class="basefunction">
+  
+  
+  <a name="nltk.grammar.is_terminal">
+    
+  </a>
+  <a name="is_terminal">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-keyword">def</span> <span class="py-defname">is_terminal</span>(item):
+    <a class="sourceLink" href="https://github.com/nltk/nltk/tree/3.6.2/nltk/grammar.py#L240">
+      
+      (source)
+    </a>
+  </div>
+  <div class="docstring functionBody">
+    
+    
+    <div>Return True if the item is a terminal, which currently is
+if it is hashable and not a <tt class="rst-docutils literal">Nonterminal</tt>.<table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Returns</td></tr><tr><td class="fieldArgContainer">bool</td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr></table></div>
+  </div>
+</div><div class="basefunction">
+  
+  
+  <a name="nltk.grammar.nonterminals">
+    
+  </a>
+  <a name="nonterminals">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-keyword">def</span> <span class="py-defname">nonterminals</span>(symbols):
+    <a class="sourceLink" href="https://github.com/nltk/nltk/tree/3.6.2/nltk/grammar.py#L195">
+      
+      (source)
+    </a>
+  </div>
+  <div class="docstring functionBody">
+    
+    
+    <div>Given a string containing a list of symbol names, return a list of
+<tt class="rst-docutils literal">Nonterminals</tt> constructed from those symbols.<table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">symbols:</span>str</td><td class="fieldArgDesc">The symbol name string.  This string can be
+delimited by either spaces or commas.</td></tr><tr class="fieldStart"><td class="fieldName" colspan="2">Returns</td></tr><tr><td class="fieldArgContainer">list(Nonterminal)</td><td class="fieldArgDesc">A list of <tt class="rst-docutils literal">Nonterminals</tt> constructed from the symbol
+names given in <tt class="rst-docutils literal">symbols</tt>.  The <tt class="rst-docutils literal">Nonterminals</tt> are sorted
+in the same order as the symbols names.</td></tr></table></div>
+  </div>
+</div><div class="basefunction">
+  
+  
+  <a name="nltk.grammar.pcfg_demo">
+    
+  </a>
+  <a name="pcfg_demo">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-keyword">def</span> <span class="py-defname">pcfg_demo</span>():
+    <a class="sourceLink" href="https://github.com/nltk/nltk/tree/3.6.2/nltk/grammar.py#L1592">
+      
+      (source)
+    </a>
+  </div>
+  <div class="docstring functionBody">
+    
+    
+    <div>A demonstration showing how a <tt class="rst-docutils literal">PCFG</tt> can be created and used.</div>
+  </div>
+</div><div class="basefunction">
+  
+  
+  <a name="nltk.grammar.read_grammar">
+    
+  </a>
+  <a name="read_grammar">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-keyword">def</span> <span class="py-defname">read_grammar</span>(input, nonterm_parser, probabilistic=False, encoding=None):
+    <a class="sourceLink" href="https://github.com/nltk/nltk/tree/3.6.2/nltk/grammar.py#L1404">
+      
+      (source)
+    </a>
+  </div>
+  <div class="docstring functionBody">
+    
+    
+    <div>Return a pair consisting of a starting category and a list of
+<tt class="rst-docutils literal">Productions</tt>.<table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">input</span></td><td class="fieldArgDesc">a grammar, either in the form of a string or else
+as a list of strings.</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">nonterm_parser</span></td><td class="fieldArgDesc">a function for parsing nonterminals.
+It should take a <tt class="rst-docutils literal">(string, position)</tt> as argument and
+return a <tt class="rst-docutils literal">(nonterminal, position)</tt> as result.</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">probabilistic:</span>bool</td><td class="fieldArgDesc">are the grammar rules probabilistic?</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">encoding:</span>str</td><td class="fieldArgDesc">the encoding of the grammar, if it is a binary string</td></tr></table></div>
+  </div>
+</div><div class="basefunction">
+  
+  
+  <a name="nltk.grammar.sdg_demo">
+    
+  </a>
+  <a name="sdg_demo">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-keyword">def</span> <span class="py-defname">sdg_demo</span>():
+    <a class="sourceLink" href="https://github.com/nltk/nltk/tree/3.6.2/nltk/grammar.py#L1673">
+      
+      (source)
+    </a>
+  </div>
+  <div class="docstring functionBody">
+    
+    
+    <div>A demonstration of how to read a string representation of
+a CoNLL format dependency tree.</div>
+  </div>
+</div><div class="basefunction">
+  
+  
+  <a name="nltk.grammar.standard_nonterm_parser">
+    
+  </a>
+  <a name="standard_nonterm_parser">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-keyword">def</span> <span class="py-defname">standard_nonterm_parser</span>(string, pos):
+    <a class="sourceLink" href="https://github.com/nltk/nltk/tree/3.6.2/nltk/grammar.py#L1463">
+      
+      (source)
+    </a>
+  </div>
+  <div class="docstring functionBody">
+    
+    
+    <div><p class="undocumented">Undocumented</p></div>
+  </div>
+</div><div class="basevariable">
+  
+  
+  <a name="nltk.grammar.toy_pcfg1">
+    
+  </a>
+  <a name="toy_pcfg1">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-defname">toy_pcfg1</span> =
+    <a class="sourceLink" href="https://github.com/nltk/nltk/tree/3.6.2/nltk/grammar.py#L1550">
+      
+      (source)
+    </a>
+  </div>
+  <div class="functionBody">
+    
+    
+    <div><p class="undocumented">Undocumented</p></div>
+  </div>
+</div><div class="basevariable">
+  
+  
+  <a name="nltk.grammar.toy_pcfg2">
+    
+  </a>
+  <a name="toy_pcfg2">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-defname">toy_pcfg2</span> =
+    <a class="sourceLink" href="https://github.com/nltk/nltk/tree/3.6.2/nltk/grammar.py#L1563">
+      
+      (source)
+    </a>
+  </div>
+  <div class="functionBody">
+    
+    
+    <div><p class="undocumented">Undocumented</p></div>
+  </div>
+</div><div class="basefunction private">
+  
+  
+  <a name="nltk.grammar._read_cfg_production">
+    
+  </a>
+  <a name="_read_cfg_production">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-keyword">def</span> <span class="py-defname">_read_cfg_production</span>(input):
+    <a class="sourceLink" href="https://github.com/nltk/nltk/tree/3.6.2/nltk/grammar.py#L1310">
+      
+      (source)
+    </a>
+  </div>
+  <div class="docstring functionBody">
+    
+    
+    <div>Return a list of context-free <tt class="rst-docutils literal">Productions</tt>.</div>
+  </div>
+</div><div class="basefunction private">
+  
+  
+  <a name="nltk.grammar._read_dependency_production">
+    
+  </a>
+  <a name="_read_dependency_production">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-keyword">def</span> <span class="py-defname">_read_dependency_production</span>(s):
+    <a class="sourceLink" href="https://github.com/nltk/nltk/tree/3.6.2/nltk/grammar.py#L1490">
+      
+      (source)
+    </a>
+  </div>
+  <div class="docstring functionBody">
+    
+    
+    <div><p class="undocumented">Undocumented</p></div>
+  </div>
+</div><div class="basefunction private">
+  
+  
+  <a name="nltk.grammar._read_fcfg_production">
+    
+  </a>
+  <a name="_read_fcfg_production">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-keyword">def</span> <span class="py-defname">_read_fcfg_production</span>(input, fstruct_reader):
+    <a class="sourceLink" href="https://github.com/nltk/nltk/tree/3.6.2/nltk/grammar.py#L1324">
+      
+      (source)
+    </a>
+  </div>
+  <div class="docstring functionBody">
+    
+    
+    <div>Return a list of feature-based <tt class="rst-docutils literal">Productions</tt>.</div>
+  </div>
+</div><div class="basefunction private">
+  
+  
+  <a name="nltk.grammar._read_pcfg_production">
+    
+  </a>
+  <a name="_read_pcfg_production">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-keyword">def</span> <span class="py-defname">_read_pcfg_production</span>(input):
+    <a class="sourceLink" href="https://github.com/nltk/nltk/tree/3.6.2/nltk/grammar.py#L1317">
+      
+      (source)
+    </a>
+  </div>
+  <div class="docstring functionBody">
+    
+    
+    <div>Return a list of PCFG <tt class="rst-docutils literal">ProbabilisticProductions</tt>.</div>
+  </div>
+</div><div class="basefunction private">
+  
+  
+  <a name="nltk.grammar._read_production">
+    
+  </a>
+  <a name="_read_production">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-keyword">def</span> <span class="py-defname">_read_production</span>(line, nonterm_parser, probabilistic=False):
+    <a class="sourceLink" href="https://github.com/nltk/nltk/tree/3.6.2/nltk/grammar.py#L1339">
+      
+      (source)
+    </a>
+  </div>
+  <div class="docstring functionBody">
+    
+    
+    <div>Parse a grammar rule, given as a string, and return
+a list of productions.</div>
+  </div>
+</div><div class="basevariable private">
+  
+  
+  <a name="nltk.grammar._ARROW_RE">
+    
+  </a>
+  <a name="_ARROW_RE">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-defname">_ARROW_RE</span> =
+    <a class="sourceLink" href="https://github.com/nltk/nltk/tree/3.6.2/nltk/grammar.py#L1333">
+      
+      (source)
+    </a>
+  </div>
+  <div class="functionBody">
+    
+    
+    <div><p class="undocumented">Undocumented</p></div>
+  </div>
+</div><div class="basevariable private">
+  
+  
+  <a name="nltk.grammar._DISJUNCTION_RE">
+    
+  </a>
+  <a name="_DISJUNCTION_RE">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-defname">_DISJUNCTION_RE</span> =
+    <a class="sourceLink" href="https://github.com/nltk/nltk/tree/3.6.2/nltk/grammar.py#L1336">
+      
+      (source)
+    </a>
+  </div>
+  <div class="functionBody">
+    
+    
+    <div><p class="undocumented">Undocumented</p></div>
+  </div>
+</div><div class="basevariable private">
+  
+  
+  <a name="nltk.grammar._PROBABILITY_RE">
+    
+  </a>
+  <a name="_PROBABILITY_RE">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-defname">_PROBABILITY_RE</span> =
+    <a class="sourceLink" href="https://github.com/nltk/nltk/tree/3.6.2/nltk/grammar.py#L1334">
+      
+      (source)
+    </a>
+  </div>
+  <div class="functionBody">
+    
+    
+    <div><p class="undocumented">Undocumented</p></div>
+  </div>
+</div><div class="basevariable private">
+  
+  
+  <a name="nltk.grammar._READ_DG_RE">
+    
+  </a>
+  <a name="_READ_DG_RE">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-defname">_READ_DG_RE</span> =
+    <a class="sourceLink" href="https://github.com/nltk/nltk/tree/3.6.2/nltk/grammar.py#L1474">
+      
+      (source)
+    </a>
+  </div>
+  <div class="functionBody">
+    
+    
+    <div><p class="undocumented">Undocumented</p></div>
+  </div>
+</div><div class="basevariable private">
+  
+  
+  <a name="nltk.grammar._SPLIT_DG_RE">
+    
+  </a>
+  <a name="_SPLIT_DG_RE">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-defname">_SPLIT_DG_RE</span> =
+    <a class="sourceLink" href="https://github.com/nltk/nltk/tree/3.6.2/nltk/grammar.py#L1487">
+      
+      (source)
+    </a>
+  </div>
+  <div class="functionBody">
+    
+    
+    <div><p class="undocumented">Undocumented</p></div>
+  </div>
+</div><div class="basevariable private">
+  
+  
+  <a name="nltk.grammar._STANDARD_NONTERM_RE">
+    
+  </a>
+  <a name="_STANDARD_NONTERM_RE">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-defname">_STANDARD_NONTERM_RE</span> =
+    <a class="sourceLink" href="https://github.com/nltk/nltk/tree/3.6.2/nltk/grammar.py#L1460">
+      
+      (source)
+    </a>
+  </div>
+  <div class="functionBody">
+    
+    
+    <div><p class="undocumented">Undocumented</p></div>
+  </div>
+</div><div class="basevariable private">
+  
+  
+  <a name="nltk.grammar._TERMINAL_RE">
+    
+  </a>
+  <a name="_TERMINAL_RE">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-defname">_TERMINAL_RE</span> =
+    <a class="sourceLink" href="https://github.com/nltk/nltk/tree/3.6.2/nltk/grammar.py#L1335">
+      
+      (source)
+    </a>
+  </div>
+  <div class="functionBody">
+    
+    
+    <div><p class="undocumented">Undocumented</p></div>
+  </div>
+</div>
+
+      </div>
+    </div>
+
+    <footer class="navbar navbar-default">
+  
+  <div class="container">
+    <a href="index.html">API Documentation</a> for <a href="http://www.nltk.org/" class="projecthome">nltk-3.6.2</a>,
+  generated by <a href="https://github.com/twisted/pydoctor/">pydoctor</a>
+    21.2.2 at 2021-07-12 23:14:45.
+  </div>
+</footer>
+
+    <script src="pydoctor.js" type="text/javascript"></script>
+
+  </body>
+</html>

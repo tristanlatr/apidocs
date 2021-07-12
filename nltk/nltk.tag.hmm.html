@@ -1,0 +1,606 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+          "DTD/xhtml1-strict.dtd">
+<html>
+  
+
+  <head>
+    
+    <title>nltk.tag.hmm</title>
+    <meta name="generator" content="pydoctor 21.2.2"> 
+        
+    </meta>
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=0.75" />
+    <link rel="stylesheet" type="text/css" href="bootstrap.min.css" />
+    <link rel="stylesheet" type="text/css" href="apidocs.css" />
+    <link rel="stylesheet" type="text/css" href="extra.css" />
+</head>
+
+  <body>
+
+    
+
+    <nav class="navbar navbar-default">
+  
+  <div class="container">
+
+    <div class="navbar-header">
+      
+      <div class="navlinks">
+        <span class="navbar-brand">
+          <a href="http://www.nltk.org/" class="projecthome">nltk-3.6.2</a> <a href="index.html">API Documentation</a>
+        </span>
+
+        <a href="moduleIndex.html">
+          Modules
+        </a>
+
+        <a href="classIndex.html">
+          Classes
+        </a>
+
+        <a href="nameIndex.html">
+          Names
+        </a>
+
+        <form action="search-results.html" id="search-box-container">
+          <div class="input-group">
+            <input id="search-box" name="search-query" placeholder="Search..." aria-label="Search" minlength="2" class="form-control" />
+            <span class="input-group-btn">
+              <button class="btn btn-default" type="submit" title="Search"><img src="fonts/search.svg" alt="Search!" /></button>
+              <a class="btn btn-default" id="search-help-button" title="Help" onclick="toggleSearchHelpText()"><img src="fonts/info.svg" alt="Help!" /></a>
+            </span>
+          </div>
+        </form>
+
+        <div class="rst-admonition hint" id="search-help-box">
+          <p class="rst-last">
+      
+            Search bar offers the following options:
+            <ul>   
+                <li>
+                  <strong>Term presence.</strong> The below example searches for documents that 
+                    must contain “foo”, might contain “bar” and must not contain “baz”:
+                  <br /> <code>'+foo bar -baz'</code>
+                </li> 
+
+                <li>
+                  <strong>Wildcards.</strong> The below example searches for documents with words beginning with “foo”:
+                  <br /> <code>'foo*'</code>
+                </li> 
+
+                <li>
+                  <strong>Search in specific fields.</strong> The following search matches all documents 
+                  that contains "foo" in their full dotted name and with “bar” in any field:
+                  <br /> <code>'+fullName:*foo* +bar'</code>
+
+                  <p>
+                    Possible fields: 'name', 'docstring', 'fullName'.
+                  </p>
+                </li>
+
+                <li>
+                  <strong>Fuzzy matches.</strong> The following search matches all documents 
+                  that have a word within 1 edit distance of “foo”:
+                  <br /> <code>'foo~1'</code>
+                </li>
+            </ul>
+
+          </p>
+        </div>
+
+      </div>
+
+
+    </div>
+  </div>
+
+  <script>
+ 
+    function toggleSearchHelpText() {
+        document.body.classList.toggle("search-help-hidden");
+    }
+    // Init search and help text
+    document.getElementById('search-box-container').style.display = 'block';
+    document.getElementById('search-help-box').style.display = 'block';
+    document.body.classList.add("search-help-hidden");
+
+  </script>
+
+</nav>
+
+    
+
+    <div class="container">
+
+      <div class="page-header">
+        <h1 class="module"><code><code><a href="nltk.html">nltk</a></code><wbr></wbr>.<code><a href="nltk.tag.html">tag</a></code><wbr></wbr>.<code><a href="nltk.tag.hmm.html">hmm</a></code></code></h1>
+        <div id="showPrivate">
+          <button class="btn btn-link" onclick="togglePrivate()">Toggle Private API</button>
+        </div>
+      </div>
+
+      <div class="categoryHeader">
+        module documentation
+      </div>
+
+      <div class="extrasDocstring">
+        <a href="https://github.com/nltk/nltk/tree/3.6.2/nltk/tag/hmm.py" class="sourceLink">(source)</a>
+        <p></p>
+      </div>
+
+      <div class="moduleDocstring">
+        <div><p>Hidden Markov Models (HMMs) largely used to assign the correct label sequence
+to sequential data or assess the probability of a given label and data
+sequence. These models are finite state machines characterised by a number of
+states, transitions between these states, and output symbols emitted while in
+each state. The HMM is an extension to the Markov chain, where each state
+corresponds deterministically to a given event. In the HMM the observation is
+a probabilistic function of the state. HMMs share the Markov chain's
+assumption, being that the probability of transition from one state to another
+only depends on the current state - i.e. the series of states that led to the
+current state are not used. They are also time invariant.</p>
+<p>The HMM is a directed graph, with probability weighted edges (representing the
+probability of a transition between the source and sink states) where each
+vertex emits an output symbol when entered. The symbol (or observation) is
+non-deterministically generated. For this reason, knowing that a sequence of
+output observations was generated by a given HMM does not mean that the
+corresponding sequence of states (and what the current state is) is known.
+This is the 'hidden' in the hidden markov model.</p>
+<p>Formally, a HMM can be characterised by:</p>
+<ul class="rst-simple">
+<li>the output observation alphabet. This is the set of symbols which may be
+observed as output of the system.</li>
+<li>the set of states.</li>
+<li>the transition probabilities <em>a_{ij} = P(s_t = j | s_{t-1} = i)</em>. These
+represent the probability of transition to each state from a given state.</li>
+<li>the output probability matrix <em>b_i(k) = P(X_t = o_k | s_t = i)</em>. These
+represent the probability of observing each symbol in a given state.</li>
+<li>the initial state distribution. This gives the probability of starting
+in each state.</li>
+</ul>
+<p>To ground this discussion, take a common NLP application, part-of-speech (POS)
+tagging. An HMM is desirable for this task as the highest probability tag
+sequence can be calculated for a given sequence of word forms. This differs
+from other tagging techniques which often tag each word individually, seeking
+to optimise each individual tagging greedily without regard to the optimal
+combination of tags for a larger unit, such as a sentence. The HMM does this
+with the Viterbi algorithm, which efficiently computes the optimal path
+through the graph given the sequence of words forms.</p>
+<p>In POS tagging the states usually have a 1:1 correspondence with the tag
+alphabet - i.e. each state represents a single tag. The output observation
+alphabet is the set of word forms (the lexicon), and the remaining three
+parameters are derived by a training regime. With this information the
+probability of a given sentence can be easily derived, by simply summing the
+probability of each distinct path through the model. Similarly, the highest
+probability tagging sequence can be derived with the Viterbi algorithm,
+yielding a state sequence which can be mapped into a tag sequence.</p>
+<p>This discussion assumes that the HMM has been trained. This is probably the
+most difficult task with the model, and requires either MLE estimates of the
+parameters or unsupervised learning using the Baum-Welch algorithm, a variant
+of EM.</p>
+<p>For more information, please consult the source code for this module,
+which includes extensive demonstration code.</p>
+</div>
+      </div>
+
+      <div id="splitTables">
+        <table class="children sortable" id="id1557">
+  
+  
+  <tr class="class">
+    
+    <td>Class</td>
+    <td><code><a href="nltk.tag.hmm.HiddenMarkovModelTagger.html">HiddenMarkovModelTagger</a></code></td>
+    <td><span class="undocumented">No summary</span></td>
+  </tr><tr class="class">
+    
+    <td>Class</td>
+    <td><code><a href="nltk.tag.hmm.HiddenMarkovModelTrainer.html">HiddenMarkovModelTrainer</a></code></td>
+    <td><span>Algorithms for learning HMM parameters from training data. These include both supervised learning (MLE) and unsupervised learning (Baum-Welch).</span></td>
+  </tr><tr class="function">
+    
+    <td>Function</td>
+    <td><code><a href="#demo">demo</a></code></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="function">
+    
+    <td>Function</td>
+    <td><code><a href="#demo_bw">demo_bw</a></code></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="function">
+    
+    <td>Function</td>
+    <td><code><a href="#demo_pos">demo_pos</a></code></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="function">
+    
+    <td>Function</td>
+    <td><code><a href="#demo_pos_bw">demo_pos_bw</a></code></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="function">
+    
+    <td>Function</td>
+    <td><code><a href="#load_pos">load_pos</a></code></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="function">
+    
+    <td>Function</td>
+    <td><code><a href="#logsumexp2">logsumexp2</a></code></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="function private">
+    
+    <td>Function</td>
+    <td><code><a href="#_create_hmm_tagger">_create_hmm_tagger</a></code></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="function private">
+    
+    <td>Function</td>
+    <td><code><a href="#_identity">_identity</a></code></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="function private">
+    
+    <td>Function</td>
+    <td><code><a href="#_log_add">_log_add</a></code></td>
+    <td><span>Adds the logged values, returning the logarithm of the addition.</span></td>
+  </tr><tr class="function private">
+    
+    <td>Function</td>
+    <td><code><a href="#_market_hmm_example">_market_hmm_example</a></code></td>
+    <td><span>Return an example HMM (described at page 381, Huang et al)</span></td>
+  </tr><tr class="function private">
+    
+    <td>Function</td>
+    <td><code><a href="#_ninf_array">_ninf_array</a></code></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="function private">
+    
+    <td>Function</td>
+    <td><code><a href="#_untag">_untag</a></code></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="variable private">
+    
+    <td>Variable</td>
+    <td><code><a href="#_TAG">_TAG</a></code></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="variable private">
+    
+    <td>Variable</td>
+    <td><code><a href="#_TEXT">_TEXT</a></code></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr>
+</table>
+        
+
+          
+      </div>
+
+      <div id="childList">
+
+        <div class="basefunction">
+  
+  
+  <a name="nltk.tag.hmm.demo">
+    
+  </a>
+  <a name="demo">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-keyword">def</span> <span class="py-defname">demo</span>():
+    <a class="sourceLink" href="https://github.com/nltk/nltk/tree/3.6.2/nltk/tag/hmm.py#L1192">
+      
+      (source)
+    </a>
+  </div>
+  <div class="docstring functionBody">
+    
+    
+    <div><p class="undocumented">Undocumented</p></div>
+  </div>
+</div><div class="basefunction">
+  
+  
+  <a name="nltk.tag.hmm.demo_bw">
+    
+  </a>
+  <a name="demo_bw">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-keyword">def</span> <span class="py-defname">demo_bw</span>():
+    <a class="sourceLink" href="https://github.com/nltk/nltk/tree/3.6.2/nltk/tag/hmm.py#L1308">
+      
+      (source)
+    </a>
+  </div>
+  <div class="docstring functionBody">
+    
+    
+    <div><p class="undocumented">Undocumented</p></div>
+  </div>
+</div><div class="basefunction">
+  
+  
+  <a name="nltk.tag.hmm.demo_pos">
+    
+  </a>
+  <a name="demo_pos">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-keyword">def</span> <span class="py-defname">demo_pos</span>():
+    <a class="sourceLink" href="https://github.com/nltk/nltk/tree/3.6.2/nltk/tag/hmm.py#L1247">
+      
+      (source)
+    </a>
+  </div>
+  <div class="docstring functionBody">
+    
+    
+    <div><p class="undocumented">Undocumented</p></div>
+  </div>
+</div><div class="basefunction">
+  
+  
+  <a name="nltk.tag.hmm.demo_pos_bw">
+    
+  </a>
+  <a name="demo_pos_bw">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-keyword">def</span> <span class="py-defname">demo_pos_bw</span>(test=10, supervised=20, unsupervised=10, verbose=True, max_iterations=5):
+    <a class="sourceLink" href="https://github.com/nltk/nltk/tree/3.6.2/nltk/tag/hmm.py#L1273">
+      
+      (source)
+    </a>
+  </div>
+  <div class="docstring functionBody">
+    
+    
+    <div><p class="undocumented">Undocumented</p></div>
+  </div>
+</div><div class="basefunction">
+  
+  
+  <a name="nltk.tag.hmm.load_pos">
+    
+  </a>
+  <a name="load_pos">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-keyword">def</span> <span class="py-defname">load_pos</span>(num_sents):
+    <a class="sourceLink" href="https://github.com/nltk/nltk/tree/3.6.2/nltk/tag/hmm.py#L1223">
+      
+      (source)
+    </a>
+  </div>
+  <div class="docstring functionBody">
+    
+    
+    <div><p class="undocumented">Undocumented</p></div>
+  </div>
+</div><div class="basefunction">
+  
+  
+  <a name="nltk.tag.hmm.logsumexp2">
+    
+  </a>
+  <a name="logsumexp2">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-keyword">def</span> <span class="py-defname">logsumexp2</span>(arr):
+    <a class="sourceLink" href="https://github.com/nltk/nltk/tree/3.6.2/nltk/tag/hmm.py#L1140">
+      
+      (source)
+    </a>
+  </div>
+  <div class="docstring functionBody">
+    
+    
+    <div><p class="undocumented">Undocumented</p></div>
+  </div>
+</div><div class="basefunction private">
+  
+  
+  <a name="nltk.tag.hmm._create_hmm_tagger">
+    
+  </a>
+  <a name="_create_hmm_tagger">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-keyword">def</span> <span class="py-defname">_create_hmm_tagger</span>(states, symbols, A, B, pi):
+    <a class="sourceLink" href="https://github.com/nltk/nltk/tree/3.6.2/nltk/tag/hmm.py#L1159">
+      
+      (source)
+    </a>
+  </div>
+  <div class="docstring functionBody">
+    
+    
+    <div><p class="undocumented">Undocumented</p></div>
+  </div>
+</div><div class="basefunction private">
+  
+  
+  <a name="nltk.tag.hmm._identity">
+    
+  </a>
+  <a name="_identity">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-keyword">def</span> <span class="py-defname">_identity</span>(labeled_symbols):
+    <a class="sourceLink" href="https://github.com/nltk/nltk/tree/3.6.2/nltk/tag/hmm.py#L100">
+      
+      (source)
+    </a>
+  </div>
+  <div class="docstring functionBody">
+    
+    
+    <div><p class="undocumented">Undocumented</p></div>
+  </div>
+</div><div class="basefunction private">
+  
+  
+  <a name="nltk.tag.hmm._log_add">
+    
+  </a>
+  <a name="_log_add">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-keyword">def</span> <span class="py-defname">_log_add</span>(*values):
+    <a class="sourceLink" href="https://github.com/nltk/nltk/tree/3.6.2/nltk/tag/hmm.py#L1145">
+      
+      (source)
+    </a>
+  </div>
+  <div class="docstring functionBody">
+    
+    
+    <div>Adds the logged values, returning the logarithm of the addition.</div>
+  </div>
+</div><div class="basefunction private">
+  
+  
+  <a name="nltk.tag.hmm._market_hmm_example">
+    
+  </a>
+  <a name="_market_hmm_example">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-keyword">def</span> <span class="py-defname">_market_hmm_example</span>():
+    <a class="sourceLink" href="https://github.com/nltk/nltk/tree/3.6.2/nltk/tag/hmm.py#L1178">
+      
+      (source)
+    </a>
+  </div>
+  <div class="docstring functionBody">
+    
+    
+    <div>Return an example HMM (described at page 381, Huang et al)</div>
+  </div>
+</div><div class="basefunction private">
+  
+  
+  <a name="nltk.tag.hmm._ninf_array">
+    
+  </a>
+  <a name="_ninf_array">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-keyword">def</span> <span class="py-defname">_ninf_array</span>(shape):
+    <a class="sourceLink" href="https://github.com/nltk/nltk/tree/3.6.2/nltk/tag/hmm.py#L1134">
+      
+      (source)
+    </a>
+  </div>
+  <div class="docstring functionBody">
+    
+    
+    <div><p class="undocumented">Undocumented</p></div>
+  </div>
+</div><div class="basefunction private">
+  
+  
+  <a name="nltk.tag.hmm._untag">
+    
+  </a>
+  <a name="_untag">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-keyword">def</span> <span class="py-defname">_untag</span>(sentences):
+    <a class="sourceLink" href="https://github.com/nltk/nltk/tree/3.6.2/nltk/tag/hmm.py#L1266">
+      
+      (source)
+    </a>
+  </div>
+  <div class="docstring functionBody">
+    
+    
+    <div><p class="undocumented">Undocumented</p></div>
+  </div>
+</div><div class="basevariable private">
+  
+  
+  <a name="nltk.tag.hmm._TAG">
+    
+  </a>
+  <a name="_TAG">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-defname">_TAG</span>: <code>int</code> =
+    <a class="sourceLink" href="https://github.com/nltk/nltk/tree/3.6.2/nltk/tag/hmm.py#L97">
+      
+      (source)
+    </a>
+  </div>
+  <div class="functionBody">
+    
+    
+    <div><p class="undocumented">Undocumented</p></div>
+  </div>
+</div><div class="basevariable private">
+  
+  
+  <a name="nltk.tag.hmm._TEXT">
+    
+  </a>
+  <a name="_TEXT">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-defname">_TEXT</span>: <code>int</code> =
+    <a class="sourceLink" href="https://github.com/nltk/nltk/tree/3.6.2/nltk/tag/hmm.py#L96">
+      
+      (source)
+    </a>
+  </div>
+  <div class="functionBody">
+    
+    
+    <div><p class="undocumented">Undocumented</p></div>
+  </div>
+</div>
+
+      </div>
+    </div>
+
+    <footer class="navbar navbar-default">
+  
+  <div class="container">
+    <a href="index.html">API Documentation</a> for <a href="http://www.nltk.org/" class="projecthome">nltk-3.6.2</a>,
+  generated by <a href="https://github.com/twisted/pydoctor/">pydoctor</a>
+    21.2.2 at 2021-07-12 23:14:45.
+  </div>
+</footer>
+
+    <script src="pydoctor.js" type="text/javascript"></script>
+
+  </body>
+</html>

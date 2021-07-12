@@ -1,0 +1,1117 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+          "DTD/xhtml1-strict.dtd">
+<html>
+  
+
+  <head>
+    
+    <title>nltk.featstruct.FeatStruct</title>
+    <meta name="generator" content="pydoctor 21.2.2"> 
+        
+    </meta>
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=0.75" />
+    <link rel="stylesheet" type="text/css" href="bootstrap.min.css" />
+    <link rel="stylesheet" type="text/css" href="apidocs.css" />
+    <link rel="stylesheet" type="text/css" href="extra.css" />
+</head>
+
+  <body>
+
+    
+
+    <nav class="navbar navbar-default">
+  
+  <div class="container">
+
+    <div class="navbar-header">
+      
+      <div class="navlinks">
+        <span class="navbar-brand">
+          <a href="http://www.nltk.org/" class="projecthome">nltk-3.6.2</a> <a href="index.html">API Documentation</a>
+        </span>
+
+        <a href="moduleIndex.html">
+          Modules
+        </a>
+
+        <a href="classIndex.html">
+          Classes
+        </a>
+
+        <a href="nameIndex.html">
+          Names
+        </a>
+
+        <form action="search-results.html" id="search-box-container">
+          <div class="input-group">
+            <input id="search-box" name="search-query" placeholder="Search..." aria-label="Search" minlength="2" class="form-control" />
+            <span class="input-group-btn">
+              <button class="btn btn-default" type="submit" title="Search"><img src="fonts/search.svg" alt="Search!" /></button>
+              <a class="btn btn-default" id="search-help-button" title="Help" onclick="toggleSearchHelpText()"><img src="fonts/info.svg" alt="Help!" /></a>
+            </span>
+          </div>
+        </form>
+
+        <div class="rst-admonition hint" id="search-help-box">
+          <p class="rst-last">
+      
+            Search bar offers the following options:
+            <ul>   
+                <li>
+                  <strong>Term presence.</strong> The below example searches for documents that 
+                    must contain “foo”, might contain “bar” and must not contain “baz”:
+                  <br /> <code>'+foo bar -baz'</code>
+                </li> 
+
+                <li>
+                  <strong>Wildcards.</strong> The below example searches for documents with words beginning with “foo”:
+                  <br /> <code>'foo*'</code>
+                </li> 
+
+                <li>
+                  <strong>Search in specific fields.</strong> The following search matches all documents 
+                  that contains "foo" in their full dotted name and with “bar” in any field:
+                  <br /> <code>'+fullName:*foo* +bar'</code>
+
+                  <p>
+                    Possible fields: 'name', 'docstring', 'fullName'.
+                  </p>
+                </li>
+
+                <li>
+                  <strong>Fuzzy matches.</strong> The following search matches all documents 
+                  that have a word within 1 edit distance of “foo”:
+                  <br /> <code>'foo~1'</code>
+                </li>
+            </ul>
+
+          </p>
+        </div>
+
+      </div>
+
+
+    </div>
+  </div>
+
+  <script>
+ 
+    function toggleSearchHelpText() {
+        document.body.classList.toggle("search-help-hidden");
+    }
+    // Init search and help text
+    document.getElementById('search-box-container').style.display = 'block';
+    document.getElementById('search-help-box').style.display = 'block';
+    document.body.classList.add("search-help-hidden");
+
+  </script>
+
+</nav>
+
+    
+
+    <div class="container">
+
+      <div class="page-header">
+        <h1 class="class"><code><code><a href="nltk.html">nltk</a></code><wbr></wbr>.<code><a href="nltk.featstruct.html">featstruct</a></code><wbr></wbr>.<code><a href="nltk.featstruct.FeatStruct.html">FeatStruct</a></code></code></h1>
+        <div id="showPrivate">
+          <button class="btn btn-link" onclick="togglePrivate()">Toggle Private API</button>
+        </div>
+      </div>
+
+      <div class="categoryHeader">
+        class documentation
+      </div>
+
+      <div class="extrasDocstring">
+        <p><code><span class="py-keyword">class</span> <span class="py-defname">FeatStruct</span>(<a href="nltk.sem.logic.SubstituteBindingsI.html" title="nltk.sem.logic.SubstituteBindingsI">SubstituteBindingsI</a>): <a href="https://github.com/nltk/nltk/tree/3.6.2/nltk/featstruct.py#L110" class="sourceLink">(source)</a></code></p><p>Known subclasses: <code><a href="nltk.featstruct.FeatDict.html">nltk.featstruct.FeatDict</a></code>, <code><a href="nltk.featstruct.FeatList.html">nltk.featstruct.FeatList</a></code></p>
+        <p><a href="classIndex.html#nltk.featstruct.FeatStruct">View In Hierarchy</a></p>
+      </div>
+
+      <div class="moduleDocstring">
+        <div><p>A mapping from feature identifiers to feature values, where each
+feature value is either a basic value (such as a string or an
+integer), or a nested feature structure.  There are two types of
+feature structure:</p>
+<blockquote>
+<ul class="rst-simple">
+<li>feature dictionaries, implemented by <tt class="rst-docutils literal">FeatDict</tt>, act like
+Python dictionaries.  Feature identifiers may be strings or
+instances of the <tt class="rst-docutils literal">Feature</tt> class.</li>
+<li>feature lists, implemented by <tt class="rst-docutils literal">FeatList</tt>, act like Python
+lists.  Feature identifiers are integers.</li>
+</ul>
+</blockquote>
+<p>Feature structures may be indexed using either simple feature
+identifiers or 'feature paths.'  A feature path is a sequence
+of feature identifiers that stand for a corresponding sequence of
+indexing operations.  In particular, <tt class="rst-docutils literal"><span class="pre">fstruct[(f1,f2,...,fn)]</span></tt> is
+equivalent to <tt class="rst-docutils literal"><span class="pre">fstruct[f1][f2]...[fn]</span></tt>.</p>
+<p>Feature structures may contain reentrant feature structures.  A
+"reentrant feature structure" is a single feature structure
+object that can be accessed via multiple feature paths.  Feature
+structures may also be cyclic.  A feature structure is "cyclic"
+if there is any feature path from the feature structure to itself.</p>
+<p>Two feature structures are considered equal if they assign the
+same values to all features, and have the same reentrancies.</p>
+<p>By default, feature structures are mutable.  They may be made
+immutable with the <tt class="rst-docutils literal">freeze()</tt> method.  Once they have been
+frozen, they may be hashed, and thus used as dictionary keys.</p>
+</div>
+      </div>
+
+      <div id="splitTables">
+        <table class="children sortable" id="id623">
+  
+  
+  <tr class="method">
+    
+    <td>Method</td>
+    <td><code><a href="#__deepcopy__">__deepcopy__</a></code></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="method">
+    
+    <td>Method</td>
+    <td><code><a href="#__eq__">__eq__</a></code></td>
+    <td><span class="undocumented">No summary</span></td>
+  </tr><tr class="method">
+    
+    <td>Method</td>
+    <td><code><a href="#__hash__">__hash__</a></code></td>
+    <td><span>If this feature structure is frozen, return its hash value; otherwise, raise <tt class="rst-docutils literal">TypeError</tt>.</span></td>
+  </tr><tr class="method">
+    
+    <td>Method</td>
+    <td><code><a href="#__lt__">__lt__</a></code></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="method">
+    
+    <td>Method</td>
+    <td><code><a href="#__ne__">__ne__</a></code></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="method">
+    
+    <td>Method</td>
+    <td><code><a href="#__new__">__new__</a></code></td>
+    <td><span class="undocumented">No summary</span></td>
+  </tr><tr class="method">
+    
+    <td>Method</td>
+    <td><code><a href="#__repr__">__repr__</a></code></td>
+    <td><span>Display a single-line representation of this feature structure, suitable for embedding in other representations.</span></td>
+  </tr><tr class="method">
+    
+    <td>Method</td>
+    <td><code><a href="#copy">copy</a></code></td>
+    <td><span>Return a new copy of <tt class="rst-docutils literal">self</tt>.  The new copy will not be frozen.</span></td>
+  </tr><tr class="method">
+    
+    <td>Method</td>
+    <td><code><a href="#cyclic">cyclic</a></code></td>
+    <td><span>Return True if this feature structure contains itself.</span></td>
+  </tr><tr class="method">
+    
+    <td>Method</td>
+    <td><code><a href="#equal_values">equal_values</a></code></td>
+    <td><span class="undocumented">No summary</span></td>
+  </tr><tr class="method">
+    
+    <td>Method</td>
+    <td><code><a href="#freeze">freeze</a></code></td>
+    <td><span class="undocumented">No summary</span></td>
+  </tr><tr class="method">
+    
+    <td>Method</td>
+    <td><code><a href="#frozen">frozen</a></code></td>
+    <td><span class="undocumented">No summary</span></td>
+  </tr><tr class="method">
+    
+    <td>Method</td>
+    <td><code><a href="#remove_variables">remove_variables</a></code></td>
+    <td><span>Return the feature structure that is obtained by deleting any feature whose value is a <tt class="rst-docutils literal">Variable</tt>.</span></td>
+  </tr><tr class="method">
+    
+    <td>Method</td>
+    <td><code><a href="#rename_variables">rename_variables</a></code></td>
+    <td><span></span></td>
+  </tr><tr class="method">
+    
+    <td>Method</td>
+    <td><code><a href="#retract_bindings">retract_bindings</a></code></td>
+    <td><span></span></td>
+  </tr><tr class="method">
+    
+    <td>Method</td>
+    <td><code><a href="#substitute_bindings">substitute_bindings</a></code></td>
+    <td><span></span></td>
+  </tr><tr class="method">
+    
+    <td>Method</td>
+    <td><code><a href="#subsumes">subsumes</a></code></td>
+    <td><span>Return True if <tt class="rst-docutils literal">self</tt> subsumes <tt class="rst-docutils literal">other</tt>.  I.e., return true If unifying <tt class="rst-docutils literal">self</tt> with <tt class="rst-docutils literal">other</tt> would result in a feature structure equal to <tt class="rst-docutils literal">other</tt>.</span></td>
+  </tr><tr class="method">
+    
+    <td>Method</td>
+    <td><code><a href="#unify">unify</a></code></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="method">
+    
+    <td>Method</td>
+    <td><code><a href="#variables">variables</a></code></td>
+    <td><span></span></td>
+  </tr><tr class="method">
+    
+    <td>Method</td>
+    <td><code><a href="#walk">walk</a></code></td>
+    <td><span>Return an iterator that generates this feature structure, and each feature structure it contains.  Each feature structure will be generated exactly once.</span></td>
+  </tr><tr class="method private">
+    
+    <td>Method</td>
+    <td><code><a href="#_calculate_hashvalue">_calculate_hashvalue</a></code></td>
+    <td><span>Return a hash value for this feature structure.</span></td>
+  </tr><tr class="method private">
+    
+    <td>Method</td>
+    <td><code><a href="#_equal">_equal</a></code></td>
+    <td><span>Return True iff self and other have equal values.</span></td>
+  </tr><tr class="method private">
+    
+    <td>Method</td>
+    <td><code><a href="#_find_reentrances">_find_reentrances</a></code></td>
+    <td><span>Return a dictionary that maps from the <tt class="rst-docutils literal">id</tt> of each feature structure contained in <tt class="rst-docutils literal">self</tt> (including <tt class="rst-docutils literal">self</tt>) to a boolean value, indicating whether it is reentrant or not.</span></td>
+  </tr><tr class="method private">
+    
+    <td>Method</td>
+    <td><code><a href="#_freeze">_freeze</a></code></td>
+    <td><span>Make this feature structure, and any feature structure it contains, immutable.</span></td>
+  </tr><tr class="method private">
+    
+    <td>Method</td>
+    <td><code><a href="#_items">_items</a></code></td>
+    <td><span>Return an iterable of (fid,fval) pairs, where fid is a feature identifier and fval is the corresponding feature value, for all features defined by this FeatStruct.</span></td>
+  </tr><tr class="method private">
+    
+    <td>Method</td>
+    <td><code><a href="#_keys">_keys</a></code></td>
+    <td><span>Return an iterable of the feature identifiers used by this FeatStruct.</span></td>
+  </tr><tr class="method private">
+    
+    <td>Method</td>
+    <td><code><a href="#_repr">_repr</a></code></td>
+    <td><span>Return a string representation of this feature structure.</span></td>
+  </tr><tr class="method private">
+    
+    <td>Method</td>
+    <td><code><a href="#_values">_values</a></code></td>
+    <td><span>Return an iterable of the feature values directly defined by this FeatStruct.</span></td>
+  </tr><tr class="method private">
+    
+    <td>Method</td>
+    <td><code><a href="#_walk">_walk</a></code></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="classvariable private">
+    
+    <td>Class Variable</td>
+    <td><code><a href="#_FROZEN_ERROR">_FROZEN_ERROR</a></code></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="instancevariable private">
+    
+    <td>Instance Variable</td>
+    <td><code><a href="#_frozen">_frozen</a></code></td>
+    <td><span class="undocumented">No summary</span></td>
+  </tr><tr class="instancevariable private">
+    
+    <td>Instance Variable</td>
+    <td><code><a href="#_hash">_hash</a></code></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr>
+</table>
+        
+
+          
+      </div>
+
+      <div id="childList">
+
+        <div class="basemethod">
+  
+  
+  <a name="nltk.featstruct.FeatStruct.__deepcopy__">
+    
+  </a>
+  <a name="__deepcopy__">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-keyword">def</span> <span class="py-defname">__deepcopy__</span>(self, memo):
+    <a class="sourceLink" href="https://github.com/nltk/nltk/tree/3.6.2/nltk/featstruct.py#L435">
+      
+      (source)
+    </a>
+  </div>
+  <div class="docstring functionBody">
+    <div class="interfaceinfo">overridden in <code><a href="nltk.featstruct.FeatDict.html">nltk.featstruct.FeatDict</a></code>, <code><a href="nltk.featstruct.FeatList.html">nltk.featstruct.FeatList</a></code></div>
+    
+    <div><p class="undocumented">Undocumented</p></div>
+  </div>
+</div><div class="basemethod">
+  
+  
+  <a name="nltk.featstruct.FeatStruct.__eq__">
+    
+  </a>
+  <a name="__eq__">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-keyword">def</span> <span class="py-defname">__eq__</span>(self, other):
+    <a class="sourceLink" href="https://github.com/nltk/nltk/tree/3.6.2/nltk/featstruct.py#L241">
+      
+      (source)
+    </a>
+  </div>
+  <div class="docstring functionBody">
+    
+    
+    <div>Return true if <tt class="rst-docutils literal">self</tt> and <tt class="rst-docutils literal">other</tt> are both feature structures,
+assign the same values to all features, and contain the same
+reentrances.  I.e., return
+<tt class="rst-docutils literal">self.equal_values(other, check_reentrance=True)</tt>.<table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">See Also</td></tr><tr><td colspan="2"><tt class="rst-docutils literal">equal_values()</tt></td></tr></table></div>
+  </div>
+</div><div class="basemethod">
+  
+  
+  <a name="nltk.featstruct.FeatStruct.__hash__">
+    
+  </a>
+  <a name="__hash__">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-keyword">def</span> <span class="py-defname">__hash__</span>(self):
+    <a class="sourceLink" href="https://github.com/nltk/nltk/tree/3.6.2/nltk/featstruct.py#L264">
+      
+      (source)
+    </a>
+  </div>
+  <div class="docstring functionBody">
+    <div class="interfaceinfo">overridden in <code><a href="nltk.grammar.FeatStructNonterminal.html">nltk.grammar.FeatStructNonterminal</a></code></div>
+    
+    <div>If this feature structure is frozen, return its hash value;
+otherwise, raise <tt class="rst-docutils literal">TypeError</tt>.</div>
+  </div>
+</div><div class="basemethod">
+  
+  
+  <a name="nltk.featstruct.FeatStruct.__lt__">
+    
+  </a>
+  <a name="__lt__">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-keyword">def</span> <span class="py-defname">__lt__</span>(self, other):
+    <a class="sourceLink" href="https://github.com/nltk/nltk/tree/3.6.2/nltk/featstruct.py#L255">
+      
+      (source)
+    </a>
+  </div>
+  <div class="docstring functionBody">
+    
+    
+    <div><p class="undocumented">Undocumented</p></div>
+  </div>
+</div><div class="basemethod">
+  
+  
+  <a name="nltk.featstruct.FeatStruct.__ne__">
+    
+  </a>
+  <a name="__ne__">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-keyword">def</span> <span class="py-defname">__ne__</span>(self, other):
+    <a class="sourceLink" href="https://github.com/nltk/nltk/tree/3.6.2/nltk/featstruct.py#L252">
+      
+      (source)
+    </a>
+  </div>
+  <div class="docstring functionBody">
+    
+    
+    <div><p class="undocumented">Undocumented</p></div>
+  </div>
+</div><div class="basemethod">
+  
+  
+  <a name="nltk.featstruct.FeatStruct.__new__">
+    
+  </a>
+  <a name="__new__">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-keyword">def</span> <span class="py-defname">__new__</span>(cls, features=None, **morefeatures):
+    <a class="sourceLink" href="https://github.com/nltk/nltk/tree/3.6.2/nltk/featstruct.py#L154">
+      
+      (source)
+    </a>
+  </div>
+  <div class="docstring functionBody">
+    
+    
+    <div>Construct and return a new feature structure.  If this
+constructor is called directly, then the returned feature
+structure will be an instance of either the <tt class="rst-docutils literal">FeatDict</tt> class
+or the <tt class="rst-docutils literal">FeatList</tt> class.<table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">features</span></td><td class="fieldArgDesc"><p>The initial feature values for this feature
+structure:</p>
+<blockquote>
+<ul class="rst-simple">
+<li>FeatStruct(string) -&gt; FeatStructReader().read(string)</li>
+<li>FeatStruct(mapping) -&gt; FeatDict(mapping)</li>
+<li>FeatStruct(sequence) -&gt; FeatList(sequence)</li>
+<li>FeatStruct() -&gt; FeatDict()</li>
+</ul>
+</blockquote>
+</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">morefeatures</span></td><td class="fieldArgDesc">If <tt class="rst-docutils literal">features</tt> is a mapping or None,
+then <tt class="rst-docutils literal">morefeatures</tt> provides additional features for the
+<tt class="rst-docutils literal">FeatDict</tt> constructor.</td></tr></table></div>
+  </div>
+</div><div class="basemethod">
+  
+  
+  <a name="nltk.featstruct.FeatStruct.__repr__">
+    
+  </a>
+  <a name="__repr__">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-keyword">def</span> <span class="py-defname">__repr__</span>(self):
+    <a class="sourceLink" href="https://github.com/nltk/nltk/tree/3.6.2/nltk/featstruct.py#L547">
+      
+      (source)
+    </a>
+  </div>
+  <div class="docstring functionBody">
+    
+    
+    <div>Display a single-line representation of this feature structure,
+suitable for embedding in other representations.</div>
+  </div>
+</div><div class="basemethod">
+  
+  
+  <a name="nltk.featstruct.FeatStruct.copy">
+    
+  </a>
+  <a name="copy">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-keyword">def</span> <span class="py-defname">copy</span>(self, deep=True):
+    <a class="sourceLink" href="https://github.com/nltk/nltk/tree/3.6.2/nltk/featstruct.py#L421">
+      
+      (source)
+    </a>
+  </div>
+  <div class="docstring functionBody">
+    
+    
+    <div>Return a new copy of <tt class="rst-docutils literal">self</tt>.  The new copy will not be frozen.<table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">deep</span></td><td class="fieldArgDesc">If true, create a deep copy; if false, create
+a shallow copy.</td></tr></table></div>
+  </div>
+</div><div class="basemethod">
+  
+  
+  <a name="nltk.featstruct.FeatStruct.cyclic">
+    
+  </a>
+  <a name="cyclic">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-keyword">def</span> <span class="py-defname">cyclic</span>(self):
+    <a class="sourceLink" href="https://github.com/nltk/nltk/tree/3.6.2/nltk/featstruct.py#L442">
+      
+      (source)
+    </a>
+  </div>
+  <div class="docstring functionBody">
+    
+    
+    <div>Return True if this feature structure contains itself.</div>
+  </div>
+</div><div class="basemethod">
+  
+  
+  <a name="nltk.featstruct.FeatStruct.equal_values">
+    
+  </a>
+  <a name="equal_values">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-keyword">def</span> <span class="py-defname">equal_values</span>(self, other, check_reentrance=False):
+    <a class="sourceLink" href="https://github.com/nltk/nltk/tree/3.6.2/nltk/featstruct.py#L225">
+      
+      (source)
+    </a>
+  </div>
+  <div class="docstring functionBody">
+    
+    
+    <div>Return True if <tt class="rst-docutils literal">self</tt> and <tt class="rst-docutils literal">other</tt> assign the same value to
+to every feature.  In particular, return true if
+<tt class="rst-docutils literal"><span class="pre">self[p]==other[p]</span></tt> for every feature path <em>p</em> such
+that <tt class="rst-docutils literal">self[p]</tt> or <tt class="rst-docutils literal">other[p]</tt> is a base value (i.e.,
+not a nested feature structure).<table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">other</span></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">check_reentrance</span></td><td class="fieldArgDesc">If True, then also return False if
+there is any difference between the reentrances of <tt class="rst-docutils literal">self</tt>
+and <tt class="rst-docutils literal">other</tt>.</td></tr><tr class="fieldStart"><td class="fieldName" colspan="2">Note</td></tr><tr><td colspan="2">the <tt class="rst-docutils literal">==</tt> is equivalent to <tt class="rst-docutils literal">equal_values()</tt> with
+<tt class="rst-docutils literal">check_reentrance=True</tt>.</td></tr></table></div>
+  </div>
+</div><div class="basemethod">
+  
+  
+  <a name="nltk.featstruct.FeatStruct.freeze">
+    
+  </a>
+  <a name="freeze">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-keyword">def</span> <span class="py-defname">freeze</span>(self):
+    <a class="sourceLink" href="https://github.com/nltk/nltk/tree/3.6.2/nltk/featstruct.py#L381">
+      
+      (source)
+    </a>
+  </div>
+  <div class="docstring functionBody">
+    
+    
+    <div>Make this feature structure, and any feature structures it
+contains, immutable.  Note: this method does not attempt to
+'freeze' any feature value that is not a <tt class="rst-docutils literal">FeatStruct</tt>; it
+is recommended that you use only immutable feature values.</div>
+  </div>
+</div><div class="basemethod">
+  
+  
+  <a name="nltk.featstruct.FeatStruct.frozen">
+    
+  </a>
+  <a name="frozen">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-keyword">def</span> <span class="py-defname">frozen</span>(self):
+    <a class="sourceLink" href="https://github.com/nltk/nltk/tree/3.6.2/nltk/featstruct.py#L392">
+      
+      (source)
+    </a>
+  </div>
+  <div class="docstring functionBody">
+    
+    
+    <div>Return True if this feature structure is immutable.  Feature
+structures can be made immutable with the <tt class="rst-docutils literal">freeze()</tt> method.
+Immutable feature structures may not be made mutable again,
+but new mutable copies can be produced with the <tt class="rst-docutils literal">copy()</tt> method.</div>
+  </div>
+</div><div class="basemethod">
+  
+  
+  <a name="nltk.featstruct.FeatStruct.remove_variables">
+    
+  </a>
+  <a name="remove_variables">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-keyword">def</span> <span class="py-defname">remove_variables</span>(self):
+    <a class="sourceLink" href="https://github.com/nltk/nltk/tree/3.6.2/nltk/featstruct.py#L519">
+      
+      (source)
+    </a>
+  </div>
+  <div class="docstring functionBody">
+    
+    
+    <div>Return the feature structure that is obtained by deleting
+any feature whose value is a <tt class="rst-docutils literal">Variable</tt>.<table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Returns</td></tr><tr><td class="fieldArgContainer">FeatStruct</td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr></table></div>
+  </div>
+</div><div class="basemethod">
+  
+  
+  <a name="nltk.featstruct.FeatStruct.rename_variables">
+    
+  </a>
+  <a name="rename_variables">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-keyword">def</span> <span class="py-defname">rename_variables</span>(self, vars=None, used_vars=(), new_vars=None):
+    <a class="sourceLink" href="https://github.com/nltk/nltk/tree/3.6.2/nltk/featstruct.py#L515">
+      
+      (source)
+    </a>
+  </div>
+  <div class="docstring functionBody">
+    
+    
+    <div><table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">See Also</td></tr><tr><td colspan="2"><tt class="rst-docutils literal">nltk.featstruct.rename_variables()</tt></td></tr></table></div>
+  </div>
+</div><div class="basemethod">
+  
+  
+  <a name="nltk.featstruct.FeatStruct.retract_bindings">
+    
+  </a>
+  <a name="retract_bindings">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-keyword">def</span> <span class="py-defname">retract_bindings</span>(self, bindings):
+    <a class="sourceLink" href="https://github.com/nltk/nltk/tree/3.6.2/nltk/featstruct.py#L507">
+      
+      (source)
+    </a>
+  </div>
+  <div class="docstring functionBody">
+    
+    
+    <div><table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">See Also</td></tr><tr><td colspan="2"><tt class="rst-docutils literal">nltk.featstruct.retract_bindings()</tt></td></tr></table></div>
+  </div>
+</div><div class="basemethod">
+  
+  
+  <a name="nltk.featstruct.FeatStruct.substitute_bindings">
+    
+  </a>
+  <a name="substitute_bindings">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-keyword">def</span> <span class="py-defname">substitute_bindings</span>(self, bindings):
+    <a class="sourceLink" href="https://github.com/nltk/nltk/tree/3.6.2/nltk/featstruct.py#L503">
+      
+      (source)
+    </a>
+  </div>
+  <div class="docstring functionBody">
+    <div class="interfaceinfo">overrides <code><a href="nltk.sem.logic.SubstituteBindingsI.html#substitute_bindings">nltk.sem.logic.SubstituteBindingsI.substitute_bindings</a></code></div>
+    
+    <div><table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">See Also</td></tr><tr><td colspan="2"><tt class="rst-docutils literal">nltk.featstruct.substitute_bindings()</tt></td></tr></table></div>
+  </div>
+</div><div class="basemethod">
+  
+  
+  <a name="nltk.featstruct.FeatStruct.subsumes">
+    
+  </a>
+  <a name="subsumes">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-keyword">def</span> <span class="py-defname">subsumes</span>(self, other):
+    <a class="sourceLink" href="https://github.com/nltk/nltk/tree/3.6.2/nltk/featstruct.py#L535">
+      
+      (source)
+    </a>
+  </div>
+  <div class="docstring functionBody">
+    
+    
+    <div>Return True if <tt class="rst-docutils literal">self</tt> subsumes <tt class="rst-docutils literal">other</tt>.  I.e., return true
+If unifying <tt class="rst-docutils literal">self</tt> with <tt class="rst-docutils literal">other</tt> would result in a feature
+structure equal to <tt class="rst-docutils literal">other</tt>.</div>
+  </div>
+</div><div class="basemethod">
+  
+  
+  <a name="nltk.featstruct.FeatStruct.unify">
+    
+  </a>
+  <a name="unify">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-keyword">def</span> <span class="py-defname">unify</span>(self, other, bindings=None, trace=False, fail=None, rename_vars=True):
+    <a class="sourceLink" href="https://github.com/nltk/nltk/tree/3.6.2/nltk/featstruct.py#L532">
+      
+      (source)
+    </a>
+  </div>
+  <div class="docstring functionBody">
+    
+    
+    <div><p class="undocumented">Undocumented</p></div>
+  </div>
+</div><div class="basemethod">
+  
+  
+  <a name="nltk.featstruct.FeatStruct.variables">
+    
+  </a>
+  <a name="variables">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-keyword">def</span> <span class="py-defname">variables</span>(self):
+    <a class="sourceLink" href="https://github.com/nltk/nltk/tree/3.6.2/nltk/featstruct.py#L511">
+      
+      (source)
+    </a>
+  </div>
+  <div class="docstring functionBody">
+    <div class="interfaceinfo">overrides <code><a href="nltk.sem.logic.SubstituteBindingsI.html#variables">nltk.sem.logic.SubstituteBindingsI.variables</a></code></div>
+    
+    <div><table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">See Also</td></tr><tr><td colspan="2"><tt class="rst-docutils literal">nltk.featstruct.find_variables()</tt></td></tr></table></div>
+  </div>
+</div><div class="basemethod">
+  
+  
+  <a name="nltk.featstruct.FeatStruct.walk">
+    
+  </a>
+  <a name="walk">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-keyword">def</span> <span class="py-defname">walk</span>(self):
+    <a class="sourceLink" href="https://github.com/nltk/nltk/tree/3.6.2/nltk/featstruct.py#L448">
+      
+      (source)
+    </a>
+  </div>
+  <div class="docstring functionBody">
+    
+    
+    <div>Return an iterator that generates this feature structure, and
+each feature structure it contains.  Each feature structure will
+be generated exactly once.</div>
+  </div>
+</div><div class="basemethod private">
+  
+  
+  <a name="nltk.featstruct.FeatStruct._calculate_hashvalue">
+    
+  </a>
+  <a name="_calculate_hashvalue">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-keyword">def</span> <span class="py-defname">_calculate_hashvalue</span>(self, visited):
+    <a class="sourceLink" href="https://github.com/nltk/nltk/tree/3.6.2/nltk/featstruct.py#L348">
+      
+      (source)
+    </a>
+  </div>
+  <div class="docstring functionBody">
+    
+    
+    <div>Return a hash value for this feature structure.<table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">visited</span></td><td class="fieldArgDesc">A set containing the ids of all feature
+structures we've already visited while hashing.</td></tr><tr class="fieldStart"><td class="fieldName" colspan="2">Unknown Field: require</td></tr><tr><td colspan="2"><tt class="rst-docutils literal">self</tt> must be frozen.</td></tr></table></div>
+  </div>
+</div><div class="basemethod private">
+  
+  
+  <a name="nltk.featstruct.FeatStruct._equal">
+    
+  </a>
+  <a name="_equal">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-keyword">def</span> <span class="py-defname">_equal</span>(self, other, check_reentrance, visited_self, visited_other, visited_pairs):
+    <a class="sourceLink" href="https://github.com/nltk/nltk/tree/3.6.2/nltk/featstruct.py#L277">
+      
+      (source)
+    </a>
+  </div>
+  <div class="docstring functionBody">
+    
+    
+    <div>Return True iff self and other have equal values.<table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">other</span></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">check_reentrance</span></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">visited_self</span></td><td class="fieldArgDesc">A set containing the ids of all <tt class="rst-docutils literal">self</tt>
+feature structures we've already visited.</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">visited_other</span></td><td class="fieldArgDesc">A set containing the ids of all <tt class="rst-docutils literal">other</tt>
+feature structures we've already visited.</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">visited_pairs</span></td><td class="fieldArgDesc">A set containing <tt class="rst-docutils literal">(selfid, otherid)</tt> pairs
+for all pairs of feature structures we've already visited.</td></tr></table></div>
+  </div>
+</div><div class="basemethod private">
+  
+  
+  <a name="nltk.featstruct.FeatStruct._find_reentrances">
+    
+  </a>
+  <a name="_find_reentrances">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-keyword">def</span> <span class="py-defname">_find_reentrances</span>(self, reentrances):
+    <a class="sourceLink" href="https://github.com/nltk/nltk/tree/3.6.2/nltk/featstruct.py#L479">
+      
+      (source)
+    </a>
+  </div>
+  <div class="docstring functionBody">
+    
+    
+    <div>Return a dictionary that maps from the <tt class="rst-docutils literal">id</tt> of each feature
+structure contained in <tt class="rst-docutils literal">self</tt> (including <tt class="rst-docutils literal">self</tt>) to a
+boolean value, indicating whether it is reentrant or not.</div>
+  </div>
+</div><div class="basemethod private">
+  
+  
+  <a name="nltk.featstruct.FeatStruct._freeze">
+    
+  </a>
+  <a name="_freeze">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-keyword">def</span> <span class="py-defname">_freeze</span>(self, visited):
+    <a class="sourceLink" href="https://github.com/nltk/nltk/tree/3.6.2/nltk/featstruct.py#L401">
+      
+      (source)
+    </a>
+  </div>
+  <div class="docstring functionBody">
+    
+    
+    <div>Make this feature structure, and any feature structure it
+contains, immutable.<table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">visited</span></td><td class="fieldArgDesc">A set containing the ids of all feature
+structures we've already visited while freezing.</td></tr></table></div>
+  </div>
+</div><div class="basemethod private">
+  
+  
+  <a name="nltk.featstruct.FeatStruct._items">
+    
+  </a>
+  <a name="_items">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-keyword">def</span> <span class="py-defname">_items</span>(self):
+    <a class="sourceLink" href="https://github.com/nltk/nltk/tree/3.6.2/nltk/featstruct.py#L215">
+      
+      (source)
+    </a>
+  </div>
+  <div class="docstring functionBody">
+    <div class="interfaceinfo">overridden in <code><a href="nltk.featstruct.FeatDict.html">nltk.featstruct.FeatDict</a></code>, <code><a href="nltk.featstruct.FeatList.html">nltk.featstruct.FeatList</a></code></div>
+    
+    <div>Return an iterable of (fid,fval) pairs, where fid is a
+feature identifier and fval is the corresponding feature
+value, for all features defined by this FeatStruct.</div>
+  </div>
+</div><div class="basemethod private">
+  
+  
+  <a name="nltk.featstruct.FeatStruct._keys">
+    
+  </a>
+  <a name="_keys">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-keyword">def</span> <span class="py-defname">_keys</span>(self):
+    <a class="sourceLink" href="https://github.com/nltk/nltk/tree/3.6.2/nltk/featstruct.py#L205">
+      
+      (source)
+    </a>
+  </div>
+  <div class="docstring functionBody">
+    <div class="interfaceinfo">overridden in <code><a href="nltk.featstruct.FeatDict.html">nltk.featstruct.FeatDict</a></code>, <code><a href="nltk.featstruct.FeatList.html">nltk.featstruct.FeatList</a></code></div>
+    
+    <div>Return an iterable of the feature identifiers used by this
+FeatStruct.</div>
+  </div>
+</div><div class="basemethod private">
+  
+  
+  <a name="nltk.featstruct.FeatStruct._repr">
+    
+  </a>
+  <a name="_repr">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-keyword">def</span> <span class="py-defname">_repr</span>(self, reentrances, reentrance_ids):
+    <a class="sourceLink" href="https://github.com/nltk/nltk/tree/3.6.2/nltk/featstruct.py#L554">
+      
+      (source)
+    </a>
+  </div>
+  <div class="docstring functionBody">
+    <div class="interfaceinfo">overridden in <code><a href="nltk.featstruct.FeatDict.html">nltk.featstruct.FeatDict</a></code>, <code><a href="nltk.featstruct.FeatList.html">nltk.featstruct.FeatList</a></code></div>
+    
+    <div>Return a string representation of this feature structure.<table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">reentrances</span></td><td class="fieldArgDesc">A dictionary that maps from the <tt class="rst-docutils literal">id</tt> of
+each feature value in self, indicating whether that value
+is reentrant or not.</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">reentrance_ids</span></td><td class="fieldArgDesc">A dictionary mapping from each <tt class="rst-docutils literal">id</tt>
+of a feature value to a unique identifier.  This is modified
+by <tt class="rst-docutils literal">repr</tt>: the first time a reentrant feature value is
+displayed, an identifier is added to <tt class="rst-docutils literal">reentrance_ids</tt> for it.</td></tr></table></div>
+  </div>
+</div><div class="basemethod private">
+  
+  
+  <a name="nltk.featstruct.FeatStruct._values">
+    
+  </a>
+  <a name="_values">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-keyword">def</span> <span class="py-defname">_values</span>(self):
+    <a class="sourceLink" href="https://github.com/nltk/nltk/tree/3.6.2/nltk/featstruct.py#L210">
+      
+      (source)
+    </a>
+  </div>
+  <div class="docstring functionBody">
+    <div class="interfaceinfo">overridden in <code><a href="nltk.featstruct.FeatDict.html">nltk.featstruct.FeatDict</a></code>, <code><a href="nltk.featstruct.FeatList.html">nltk.featstruct.FeatList</a></code></div>
+    
+    <div>Return an iterable of the feature values directly defined
+by this FeatStruct.</div>
+  </div>
+</div><div class="basemethod private">
+  
+  
+  <a name="nltk.featstruct.FeatStruct._walk">
+    
+  </a>
+  <a name="_walk">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-keyword">def</span> <span class="py-defname">_walk</span>(self, visited):
+    <a class="sourceLink" href="https://github.com/nltk/nltk/tree/3.6.2/nltk/featstruct.py#L466">
+      
+      (source)
+    </a>
+  </div>
+  <div class="docstring functionBody">
+    
+    
+    <div><p class="undocumented">Undocumented</p></div>
+  </div>
+</div><div class="baseclassvariable private">
+  
+  
+  <a name="nltk.featstruct.FeatStruct._FROZEN_ERROR">
+    
+  </a>
+  <a name="_FROZEN_ERROR">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-defname">_FROZEN_ERROR</span>: <code>str</code> =
+    <a class="sourceLink" href="https://github.com/nltk/nltk/tree/3.6.2/nltk/featstruct.py#L379">
+      
+      (source)
+    </a>
+  </div>
+  <div class="functionBody">
+    
+    
+    <div><p class="undocumented">Undocumented</p></div>
+  </div>
+</div><div class="baseinstancevariable private">
+  
+  
+  <a name="nltk.featstruct.FeatStruct._frozen">
+    
+  </a>
+  <a name="_frozen">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-defname">_frozen</span>: <code>bool</code> =
+    <a class="sourceLink" href="https://github.com/nltk/nltk/tree/3.6.2/nltk/featstruct.py#L144">
+      
+      (source)
+    </a>
+  </div>
+  <div class="functionBody">
+    
+    
+    <div>frozen or not.  Once this flag is set, it should never be
+un-set; and no further modification should be made to this
+feature structue.</div>
+  </div>
+</div><div class="baseinstancevariable private">
+  
+  
+  <a name="nltk.featstruct.FeatStruct._hash">
+    
+  </a>
+  <a name="_hash">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-defname">_hash</span> =
+    <a class="sourceLink" href="https://github.com/nltk/nltk/tree/3.6.2/nltk/featstruct.py#L274">
+      
+      (source)
+    </a>
+  </div>
+  <div class="functionBody">
+    
+    
+    <div><p class="undocumented">Undocumented</p></div>
+  </div>
+</div>
+
+      </div>
+    </div>
+
+    <footer class="navbar navbar-default">
+  
+  <div class="container">
+    <a href="index.html">API Documentation</a> for <a href="http://www.nltk.org/" class="projecthome">nltk-3.6.2</a>,
+  generated by <a href="https://github.com/twisted/pydoctor/">pydoctor</a>
+    21.2.2 at 2021-07-12 23:14:45.
+  </div>
+</footer>
+
+    <script src="pydoctor.js" type="text/javascript"></script>
+
+  </body>
+</html>

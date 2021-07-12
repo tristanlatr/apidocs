@@ -1,0 +1,1064 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+          "DTD/xhtml1-strict.dtd">
+<html>
+  
+
+  <head>
+    
+    <title>nltk.stem.porter.PorterStemmer</title>
+    <meta name="generator" content="pydoctor 21.2.2"> 
+        
+    </meta>
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=0.75" />
+    <link rel="stylesheet" type="text/css" href="bootstrap.min.css" />
+    <link rel="stylesheet" type="text/css" href="apidocs.css" />
+    <link rel="stylesheet" type="text/css" href="extra.css" />
+</head>
+
+  <body>
+
+    
+
+    <nav class="navbar navbar-default">
+  
+  <div class="container">
+
+    <div class="navbar-header">
+      
+      <div class="navlinks">
+        <span class="navbar-brand">
+          <a href="http://www.nltk.org/" class="projecthome">nltk-3.6.2</a> <a href="index.html">API Documentation</a>
+        </span>
+
+        <a href="moduleIndex.html">
+          Modules
+        </a>
+
+        <a href="classIndex.html">
+          Classes
+        </a>
+
+        <a href="nameIndex.html">
+          Names
+        </a>
+
+        <form action="search-results.html" id="search-box-container">
+          <div class="input-group">
+            <input id="search-box" name="search-query" placeholder="Search..." aria-label="Search" minlength="2" class="form-control" />
+            <span class="input-group-btn">
+              <button class="btn btn-default" type="submit" title="Search"><img src="fonts/search.svg" alt="Search!" /></button>
+              <a class="btn btn-default" id="search-help-button" title="Help" onclick="toggleSearchHelpText()"><img src="fonts/info.svg" alt="Help!" /></a>
+            </span>
+          </div>
+        </form>
+
+        <div class="rst-admonition hint" id="search-help-box">
+          <p class="rst-last">
+      
+            Search bar offers the following options:
+            <ul>   
+                <li>
+                  <strong>Term presence.</strong> The below example searches for documents that 
+                    must contain “foo”, might contain “bar” and must not contain “baz”:
+                  <br /> <code>'+foo bar -baz'</code>
+                </li> 
+
+                <li>
+                  <strong>Wildcards.</strong> The below example searches for documents with words beginning with “foo”:
+                  <br /> <code>'foo*'</code>
+                </li> 
+
+                <li>
+                  <strong>Search in specific fields.</strong> The following search matches all documents 
+                  that contains "foo" in their full dotted name and with “bar” in any field:
+                  <br /> <code>'+fullName:*foo* +bar'</code>
+
+                  <p>
+                    Possible fields: 'name', 'docstring', 'fullName'.
+                  </p>
+                </li>
+
+                <li>
+                  <strong>Fuzzy matches.</strong> The following search matches all documents 
+                  that have a word within 1 edit distance of “foo”:
+                  <br /> <code>'foo~1'</code>
+                </li>
+            </ul>
+
+          </p>
+        </div>
+
+      </div>
+
+
+    </div>
+  </div>
+
+  <script>
+ 
+    function toggleSearchHelpText() {
+        document.body.classList.toggle("search-help-hidden");
+    }
+    // Init search and help text
+    document.getElementById('search-box-container').style.display = 'block';
+    document.getElementById('search-help-box').style.display = 'block';
+    document.body.classList.add("search-help-hidden");
+
+  </script>
+
+</nav>
+
+    
+
+    <div class="container">
+
+      <div class="page-header">
+        <h1 class="class"><code><code><a href="nltk.html">nltk</a></code><wbr></wbr>.<code><a href="nltk.stem.html">stem</a></code><wbr></wbr>.<code><a href="nltk.stem.porter.html">porter</a></code><wbr></wbr>.<code><a href="nltk.stem.porter.PorterStemmer.html">PorterStemmer</a></code></code></h1>
+        <div id="showPrivate">
+          <button class="btn btn-link" onclick="togglePrivate()">Toggle Private API</button>
+        </div>
+      </div>
+
+      <div class="categoryHeader">
+        class documentation
+      </div>
+
+      <div class="extrasDocstring">
+        <p><code><span class="py-keyword">class</span> <span class="py-defname">PorterStemmer</span>(<a href="nltk.stem.api.StemmerI.html" title="nltk.stem.api.StemmerI">StemmerI</a>): <a href="https://github.com/nltk/nltk/tree/3.6.2/nltk/stem/porter.py#L28" class="sourceLink">(source)</a></code></p><p>Known subclasses: <code><a href="nltk.stem.snowball.PorterStemmer.html">nltk.stem.snowball.PorterStemmer</a></code></p>
+        <p><a href="classIndex.html#nltk.stem.porter.PorterStemmer">View In Hierarchy</a></p>
+      </div>
+
+      <div class="moduleDocstring">
+        <div><p class="pre">A word stemmer based on the Porter stemming algorithm.
+
+    Porter, M. "An algorithm for suffix stripping."
+    Program 14.3 (1980): 130-137.
+
+See http://www.tartarus.org/~martin/PorterStemmer/ for the homepage
+of the algorithm.
+
+Martin Porter has endorsed several modifications to the Porter
+algorithm since writing his original paper, and those extensions are
+included in the implementations on his website. Additionally, others
+have proposed further improvements to the algorithm, including NLTK
+contributors. There are thus three modes that can be selected by
+passing the appropriate constant to the class constructor's `mode`
+attribute:
+
+    PorterStemmer.ORIGINAL_ALGORITHM
+    - Implementation that is faithful to the original paper.
+
+      Note that Martin Porter has deprecated this version of the
+      algorithm. Martin distributes implementations of the Porter
+      Stemmer in many languages, hosted at:
+
+        http://www.tartarus.org/~martin/PorterStemmer/
+
+      and all of these implementations include his extensions. He
+      strongly recommends against using the original, published
+      version of the algorithm; only use this mode if you clearly
+      understand why you are choosing to do so.
+
+    PorterStemmer.MARTIN_EXTENSIONS
+    - Implementation that only uses the modifications to the
+      algorithm that are included in the implementations on Martin
+      Porter's website. He has declared Porter frozen, so the
+      behaviour of those implementations should never change.
+
+    PorterStemmer.NLTK_EXTENSIONS (default)
+    - Implementation that includes further improvements devised by
+      NLTK contributors or taken from other modified implementations
+      found on the web.
+
+For the best stemming, you should use the default NLTK_EXTENSIONS
+version. However, if you need to get the same results as either the
+original algorithm or one of Martin Porter's hosted versions for
+compatibility with an existing implementation or dataset, you can use
+one of the other modes instead.</p></div>
+      </div>
+
+      <div id="splitTables">
+        <table class="children sortable" id="id1478">
+  
+  
+  <tr class="method">
+    
+    <td>Method</td>
+    <td><code><a href="#__init__">__init__</a></code></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="method">
+    
+    <td>Method</td>
+    <td><code><a href="#__repr__">__repr__</a></code></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="method">
+    
+    <td>Method</td>
+    <td><code><a href="#stem">stem</a></code></td>
+    <td><span>:param to_lowercase: if `to_lowercase=True` the word always lowercase</span></td>
+  </tr><tr class="classvariable">
+    
+    <td>Class Variable</td>
+    <td><code><a href="#MARTIN_EXTENSIONS">MARTIN_EXTENSIONS</a></code></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="classvariable">
+    
+    <td>Class Variable</td>
+    <td><code><a href="#NLTK_EXTENSIONS">NLTK_EXTENSIONS</a></code></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="classvariable">
+    
+    <td>Class Variable</td>
+    <td><code><a href="#ORIGINAL_ALGORITHM">ORIGINAL_ALGORITHM</a></code></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="instancevariable">
+    
+    <td>Instance Variable</td>
+    <td><code><a href="#mode">mode</a></code></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="instancevariable">
+    
+    <td>Instance Variable</td>
+    <td><code><a href="#pool">pool</a></code></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="instancevariable">
+    
+    <td>Instance Variable</td>
+    <td><code><a href="#vowels">vowels</a></code></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="method private">
+    
+    <td>Method</td>
+    <td><code><a href="#_apply_rule_list">_apply_rule_list</a></code></td>
+    <td><span>Applies the first applicable suffix-removal rule to the word</span></td>
+  </tr><tr class="method private">
+    
+    <td>Method</td>
+    <td><code><a href="#_contains_vowel">_contains_vowel</a></code></td>
+    <td><span>Returns True if stem contains a vowel, else False</span></td>
+  </tr><tr class="method private">
+    
+    <td>Method</td>
+    <td><code><a href="#_ends_cvc">_ends_cvc</a></code></td>
+    <td><span>Implements condition *o from the paper</span></td>
+  </tr><tr class="method private">
+    
+    <td>Method</td>
+    <td><code><a href="#_ends_double_consonant">_ends_double_consonant</a></code></td>
+    <td><span>Implements condition *d from the paper</span></td>
+  </tr><tr class="method private">
+    
+    <td>Method</td>
+    <td><code><a href="#_has_positive_measure">_has_positive_measure</a></code></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="method private">
+    
+    <td>Method</td>
+    <td><code><a href="#_is_consonant">_is_consonant</a></code></td>
+    <td><span>Returns True if word[i] is a consonant, False otherwise</span></td>
+  </tr><tr class="method private">
+    
+    <td>Method</td>
+    <td><code><a href="#_measure">_measure</a></code></td>
+    <td><span>Returns the 'measure' of stem, per definition in the paper</span></td>
+  </tr><tr class="method private">
+    
+    <td>Method</td>
+    <td><code><a href="#_replace_suffix">_replace_suffix</a></code></td>
+    <td><span>Replaces `suffix` of `word` with `replacement</span></td>
+  </tr><tr class="method private">
+    
+    <td>Method</td>
+    <td><code><a href="#_step1a">_step1a</a></code></td>
+    <td><span>Implements Step 1a from "An algorithm for suffix stripping"</span></td>
+  </tr><tr class="method private">
+    
+    <td>Method</td>
+    <td><code><a href="#_step1b">_step1b</a></code></td>
+    <td><span>Implements Step 1b from "An algorithm for suffix stripping"</span></td>
+  </tr><tr class="method private">
+    
+    <td>Method</td>
+    <td><code><a href="#_step1c">_step1c</a></code></td>
+    <td><span>Implements Step 1c from "An algorithm for suffix stripping"</span></td>
+  </tr><tr class="method private">
+    
+    <td>Method</td>
+    <td><code><a href="#_step2">_step2</a></code></td>
+    <td><span>Implements Step 2 from "An algorithm for suffix stripping"</span></td>
+  </tr><tr class="method private">
+    
+    <td>Method</td>
+    <td><code><a href="#_step3">_step3</a></code></td>
+    <td><span>Implements Step 3 from "An algorithm for suffix stripping"</span></td>
+  </tr><tr class="method private">
+    
+    <td>Method</td>
+    <td><code><a href="#_step4">_step4</a></code></td>
+    <td><span>Implements Step 4 from "An algorithm for suffix stripping"</span></td>
+  </tr><tr class="method private">
+    
+    <td>Method</td>
+    <td><code><a href="#_step5a">_step5a</a></code></td>
+    <td><span>Implements Step 5a from "An algorithm for suffix stripping"</span></td>
+  </tr><tr class="method private">
+    
+    <td>Method</td>
+    <td><code><a href="#_step5b">_step5b</a></code></td>
+    <td><span>Implements Step 5a from "An algorithm for suffix stripping"</span></td>
+  </tr>
+</table>
+        
+
+          
+      </div>
+
+      <div id="childList">
+
+        <div class="basemethod">
+  
+  
+  <a name="nltk.stem.porter.PorterStemmer.__init__">
+    
+  </a>
+  <a name="__init__">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-keyword">def</span> <span class="py-defname">__init__</span>(self, mode=NLTK_EXTENSIONS):
+    <a class="sourceLink" href="https://github.com/nltk/nltk/tree/3.6.2/nltk/stem/porter.py#L83">
+      
+      (source)
+    </a>
+  </div>
+  <div class="docstring functionBody">
+    <div class="interfaceinfo">overridden in <code><a href="nltk.stem.snowball.PorterStemmer.html">nltk.stem.snowball.PorterStemmer</a></code></div>
+    
+    <div><p class="undocumented">Undocumented</p></div>
+  </div>
+</div><div class="basemethod">
+  
+  
+  <a name="nltk.stem.porter.PorterStemmer.__repr__">
+    
+  </a>
+  <a name="__repr__">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-keyword">def</span> <span class="py-defname">__repr__</span>(self):
+    <a class="sourceLink" href="https://github.com/nltk/nltk/tree/3.6.2/nltk/stem/porter.py#L678">
+      
+      (source)
+    </a>
+  </div>
+  <div class="docstring functionBody">
+    
+    
+    <div><p class="undocumented">Undocumented</p></div>
+  </div>
+</div><div class="basemethod">
+  
+  
+  <a name="nltk.stem.porter.PorterStemmer.stem">
+    
+  </a>
+  <a name="stem">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-keyword">def</span> <span class="py-defname">stem</span>(self, word, to_lowercase=True):
+    <a class="sourceLink" href="https://github.com/nltk/nltk/tree/3.6.2/nltk/stem/porter.py#L651">
+      
+      (source)
+    </a>
+  </div>
+  <div class="docstring functionBody">
+    <div class="interfaceinfo">overrides <code><a href="nltk.stem.api.StemmerI.html#stem">nltk.stem.api.StemmerI.stem</a></code></div>
+    
+    <div><p class="pre">:param to_lowercase: if `to_lowercase=True` the word always lowercase</p></div>
+  </div>
+</div><div class="baseclassvariable">
+  
+  
+  <a name="nltk.stem.porter.PorterStemmer.MARTIN_EXTENSIONS">
+    
+  </a>
+  <a name="MARTIN_EXTENSIONS">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-defname">MARTIN_EXTENSIONS</span>: <code>str</code> =
+    <a class="sourceLink" href="https://github.com/nltk/nltk/tree/3.6.2/nltk/stem/porter.py#L80">
+      
+      (source)
+    </a>
+  </div>
+  <div class="functionBody">
+    
+    
+    <div><p class="undocumented">Undocumented</p></div>
+  </div>
+</div><div class="baseclassvariable">
+  
+  
+  <a name="nltk.stem.porter.PorterStemmer.NLTK_EXTENSIONS">
+    
+  </a>
+  <a name="NLTK_EXTENSIONS">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-defname">NLTK_EXTENSIONS</span>: <code>str</code> =
+    <a class="sourceLink" href="https://github.com/nltk/nltk/tree/3.6.2/nltk/stem/porter.py#L79">
+      
+      (source)
+    </a>
+  </div>
+  <div class="functionBody">
+    
+    
+    <div><p class="undocumented">Undocumented</p></div>
+  </div>
+</div><div class="baseclassvariable">
+  
+  
+  <a name="nltk.stem.porter.PorterStemmer.ORIGINAL_ALGORITHM">
+    
+  </a>
+  <a name="ORIGINAL_ALGORITHM">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-defname">ORIGINAL_ALGORITHM</span>: <code>str</code> =
+    <a class="sourceLink" href="https://github.com/nltk/nltk/tree/3.6.2/nltk/stem/porter.py#L81">
+      
+      (source)
+    </a>
+  </div>
+  <div class="functionBody">
+    
+    
+    <div><p class="undocumented">Undocumented</p></div>
+  </div>
+</div><div class="baseinstancevariable">
+  
+  
+  <a name="nltk.stem.porter.PorterStemmer.mode">
+    
+  </a>
+  <a name="mode">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-defname">mode</span> =
+    <a class="sourceLink" href="https://github.com/nltk/nltk/tree/3.6.2/nltk/stem/porter.py#L95">
+      
+      (source)
+    </a>
+  </div>
+  <div class="functionBody">
+    
+    
+    <div><p class="undocumented">Undocumented</p></div>
+  </div>
+</div><div class="baseinstancevariable">
+  
+  
+  <a name="nltk.stem.porter.PorterStemmer.pool">
+    
+  </a>
+  <a name="pool">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-defname">pool</span>: <code>dict</code> =
+    <a class="sourceLink" href="https://github.com/nltk/nltk/tree/3.6.2/nltk/stem/porter.py#L116">
+      
+      (source)
+    </a>
+  </div>
+  <div class="functionBody">
+    
+    
+    <div><p class="undocumented">Undocumented</p></div>
+  </div>
+</div><div class="baseinstancevariable">
+  
+  
+  <a name="nltk.stem.porter.PorterStemmer.vowels">
+    
+  </a>
+  <a name="vowels">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-defname">vowels</span> =
+    <a class="sourceLink" href="https://github.com/nltk/nltk/tree/3.6.2/nltk/stem/porter.py#L121">
+      
+      (source)
+    </a>
+  </div>
+  <div class="functionBody">
+    
+    
+    <div><p class="undocumented">Undocumented</p></div>
+  </div>
+</div><div class="basemethod private">
+  
+  
+  <a name="nltk.stem.porter.PorterStemmer._apply_rule_list">
+    
+  </a>
+  <a name="_apply_rule_list">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-keyword">def</span> <span class="py-defname">_apply_rule_list</span>(self, word, rules):
+    <a class="sourceLink" href="https://github.com/nltk/nltk/tree/3.6.2/nltk/stem/porter.py#L245">
+      
+      (source)
+    </a>
+  </div>
+  <div class="docstring functionBody">
+    
+    
+    <div><p class="pre">Applies the first applicable suffix-removal rule to the word
+
+Takes a word and a list of suffix-removal rules represented as
+3-tuples, with the first element being the suffix to remove,
+the second element being the string to replace it with, and the
+final element being the condition for the rule to be applicable,
+or None if the rule is unconditional.</p></div>
+  </div>
+</div><div class="basemethod private">
+  
+  
+  <a name="nltk.stem.porter.PorterStemmer._contains_vowel">
+    
+  </a>
+  <a name="_contains_vowel">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-keyword">def</span> <span class="py-defname">_contains_vowel</span>(self, stem):
+    <a class="sourceLink" href="https://github.com/nltk/nltk/tree/3.6.2/nltk/stem/porter.py#L198">
+      
+      (source)
+    </a>
+  </div>
+  <div class="docstring functionBody">
+    
+    
+    <div><p class="pre">Returns True if stem contains a vowel, else False</p></div>
+  </div>
+</div><div class="basemethod private">
+  
+  
+  <a name="nltk.stem.porter.PorterStemmer._ends_cvc">
+    
+  </a>
+  <a name="_ends_cvc">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-keyword">def</span> <span class="py-defname">_ends_cvc</span>(self, word):
+    <a class="sourceLink" href="https://github.com/nltk/nltk/tree/3.6.2/nltk/stem/porter.py#L216">
+      
+      (source)
+    </a>
+  </div>
+  <div class="docstring functionBody">
+    
+    
+    <div><p class="pre">Implements condition *o from the paper
+
+From the paper:
+
+    *o  - the stem ends cvc, where the second c is not W, X or Y
+          (e.g. -WIL, -HOP).</p></div>
+  </div>
+</div><div class="basemethod private">
+  
+  
+  <a name="nltk.stem.porter.PorterStemmer._ends_double_consonant">
+    
+  </a>
+  <a name="_ends_double_consonant">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-keyword">def</span> <span class="py-defname">_ends_double_consonant</span>(self, word):
+    <a class="sourceLink" href="https://github.com/nltk/nltk/tree/3.6.2/nltk/stem/porter.py#L205">
+      
+      (source)
+    </a>
+  </div>
+  <div class="docstring functionBody">
+    
+    
+    <div><p class="pre">Implements condition *d from the paper
+
+Returns True if word ends with a double consonant</p></div>
+  </div>
+</div><div class="basemethod private">
+  
+  
+  <a name="nltk.stem.porter.PorterStemmer._has_positive_measure">
+    
+  </a>
+  <a name="_has_positive_measure">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-keyword">def</span> <span class="py-defname">_has_positive_measure</span>(self, stem):
+    <a class="sourceLink" href="https://github.com/nltk/nltk/tree/3.6.2/nltk/stem/porter.py#L195">
+      
+      (source)
+    </a>
+  </div>
+  <div class="docstring functionBody">
+    
+    
+    <div><p class="undocumented">Undocumented</p></div>
+  </div>
+</div><div class="basemethod private">
+  
+  
+  <a name="nltk.stem.porter.PorterStemmer._is_consonant">
+    
+  </a>
+  <a name="_is_consonant">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-keyword">def</span> <span class="py-defname">_is_consonant</span>(self, word, i):
+    <a class="sourceLink" href="https://github.com/nltk/nltk/tree/3.6.2/nltk/stem/porter.py#L123">
+      
+      (source)
+    </a>
+  </div>
+  <div class="docstring functionBody">
+    
+    
+    <div><p class="pre">Returns True if word[i] is a consonant, False otherwise
+
+A consonant is defined in the paper as follows:
+
+    A consonant in a word is a letter other than A, E, I, O or
+    U, and other than Y preceded by a consonant. (The fact that
+    the term `consonant' is defined to some extent in terms of
+    itself does not make it ambiguous.) So in TOY the consonants
+    are T and Y, and in SYZYGY they are S, Z and G. If a letter
+    is not a consonant it is a vowel.</p></div>
+  </div>
+</div><div class="basemethod private">
+  
+  
+  <a name="nltk.stem.porter.PorterStemmer._measure">
+    
+  </a>
+  <a name="_measure">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-keyword">def</span> <span class="py-defname">_measure</span>(self, stem):
+    <a class="sourceLink" href="https://github.com/nltk/nltk/tree/3.6.2/nltk/stem/porter.py#L144">
+      
+      (source)
+    </a>
+  </div>
+  <div class="docstring functionBody">
+    
+    
+    <div><p class="pre">Returns the 'measure' of stem, per definition in the paper
+
+From the paper:
+
+    A consonant will be denoted by c, a vowel by v. A list
+    ccc... of length greater than 0 will be denoted by C, and a
+    list vvv... of length greater than 0 will be denoted by V.
+    Any word, or part of a word, therefore has one of the four
+    forms:
+
+        CVCV ... C
+        CVCV ... V
+        VCVC ... C
+        VCVC ... V
+
+    These may all be represented by the single form
+
+        [C]VCVC ... [V]
+
+    where the square brackets denote arbitrary presence of their
+    contents. Using (VC){m} to denote VC repeated m times, this
+    may again be written as
+
+        [C](VC){m}[V].
+
+    m will be called the \measure\ of any word or word part when
+    represented in this form. The case m = 0 covers the null
+    word. Here are some examples:
+
+        m=0    TR,  EE,  TREE,  Y,  BY.
+        m=1    TROUBLE,  OATS,  TREES,  IVY.
+        m=2    TROUBLES,  PRIVATE,  OATEN,  ORRERY.</p></div>
+  </div>
+</div><div class="basemethod private">
+  
+  
+  <a name="nltk.stem.porter.PorterStemmer._replace_suffix">
+    
+  </a>
+  <a name="_replace_suffix">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-keyword">def</span> <span class="py-defname">_replace_suffix</span>(self, word, suffix, replacement):
+    <a class="sourceLink" href="https://github.com/nltk/nltk/tree/3.6.2/nltk/stem/porter.py#L237">
+      
+      (source)
+    </a>
+  </div>
+  <div class="docstring functionBody">
+    
+    
+    <div><p class="pre">Replaces `suffix` of `word` with `replacement</p></div>
+  </div>
+</div><div class="basemethod private">
+  
+  
+  <a name="nltk.stem.porter.PorterStemmer._step1a">
+    
+  </a>
+  <a name="_step1a">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-keyword">def</span> <span class="py-defname">_step1a</span>(self, word):
+    <a class="sourceLink" href="https://github.com/nltk/nltk/tree/3.6.2/nltk/stem/porter.py#L273">
+      
+      (source)
+    </a>
+  </div>
+  <div class="docstring functionBody">
+    
+    
+    <div><p class="pre">Implements Step 1a from "An algorithm for suffix stripping"
+
+From the paper:
+
+    SSES -&gt; SS                         caresses  -&gt;  caress
+    IES  -&gt; I                          ponies    -&gt;  poni
+                                       ties      -&gt;  ti
+    SS   -&gt; SS                         caress    -&gt;  caress
+    S    -&gt;                            cats      -&gt;  cat</p></div>
+  </div>
+</div><div class="basemethod private">
+  
+  
+  <a name="nltk.stem.porter.PorterStemmer._step1b">
+    
+  </a>
+  <a name="_step1b">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-keyword">def</span> <span class="py-defname">_step1b</span>(self, word):
+    <a class="sourceLink" href="https://github.com/nltk/nltk/tree/3.6.2/nltk/stem/porter.py#L300">
+      
+      (source)
+    </a>
+  </div>
+  <div class="docstring functionBody">
+    
+    
+    <div><p class="pre">Implements Step 1b from "An algorithm for suffix stripping"
+
+From the paper:
+
+    (m&gt;0) EED -&gt; EE                    feed      -&gt;  feed
+                                       agreed    -&gt;  agree
+    (*v*) ED  -&gt;                       plastered -&gt;  plaster
+                                       bled      -&gt;  bled
+    (*v*) ING -&gt;                       motoring  -&gt;  motor
+                                       sing      -&gt;  sing
+
+If the second or third of the rules in Step 1b is successful,
+the following is done:
+
+    AT -&gt; ATE                       conflat(ed)  -&gt;  conflate
+    BL -&gt; BLE                       troubl(ed)   -&gt;  trouble
+    IZ -&gt; IZE                       siz(ed)      -&gt;  size
+    (*d and not (*L or *S or *Z))
+       -&gt; single letter
+                                    hopp(ing)    -&gt;  hop
+                                    tann(ed)     -&gt;  tan
+                                    fall(ing)    -&gt;  fall
+                                    hiss(ing)    -&gt;  hiss
+                                    fizz(ed)     -&gt;  fizz
+    (m=1 and *o) -&gt; E               fail(ing)    -&gt;  fail
+                                    fil(ing)     -&gt;  file
+
+The rule to map to a single letter causes the removal of one of
+the double letter pair. The -E is put back on -AT, -BL and -IZ,
+so that the suffixes -ATE, -BLE and -IZE can be recognised
+later. This E may be removed in step 4.</p></div>
+  </div>
+</div><div class="basemethod private">
+  
+  
+  <a name="nltk.stem.porter.PorterStemmer._step1c">
+    
+  </a>
+  <a name="_step1c">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-keyword">def</span> <span class="py-defname">_step1c</span>(self, word):
+    <a class="sourceLink" href="https://github.com/nltk/nltk/tree/3.6.2/nltk/stem/porter.py#L384">
+      
+      (source)
+    </a>
+  </div>
+  <div class="docstring functionBody">
+    
+    
+    <div><p class="pre">Implements Step 1c from "An algorithm for suffix stripping"
+
+From the paper:
+
+Step 1c
+
+    (*v*) Y -&gt; I                    happy        -&gt;  happi
+                                    sky          -&gt;  sky</p></div>
+  </div>
+</div><div class="basemethod private">
+  
+  
+  <a name="nltk.stem.porter.PorterStemmer._step2">
+    
+  </a>
+  <a name="_step2">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-keyword">def</span> <span class="py-defname">_step2</span>(self, word):
+    <a class="sourceLink" href="https://github.com/nltk/nltk/tree/3.6.2/nltk/stem/porter.py#L432">
+      
+      (source)
+    </a>
+  </div>
+  <div class="docstring functionBody">
+    
+    
+    <div><p class="pre">Implements Step 2 from "An algorithm for suffix stripping"
+
+From the paper:
+
+Step 2
+
+    (m&gt;0) ATIONAL -&gt;  ATE       relational     -&gt;  relate
+    (m&gt;0) TIONAL  -&gt;  TION      conditional    -&gt;  condition
+                                rational       -&gt;  rational
+    (m&gt;0) ENCI    -&gt;  ENCE      valenci        -&gt;  valence
+    (m&gt;0) ANCI    -&gt;  ANCE      hesitanci      -&gt;  hesitance
+    (m&gt;0) IZER    -&gt;  IZE       digitizer      -&gt;  digitize
+    (m&gt;0) ABLI    -&gt;  ABLE      conformabli    -&gt;  conformable
+    (m&gt;0) ALLI    -&gt;  AL        radicalli      -&gt;  radical
+    (m&gt;0) ENTLI   -&gt;  ENT       differentli    -&gt;  different
+    (m&gt;0) ELI     -&gt;  E         vileli        - &gt;  vile
+    (m&gt;0) OUSLI   -&gt;  OUS       analogousli    -&gt;  analogous
+    (m&gt;0) IZATION -&gt;  IZE       vietnamization -&gt;  vietnamize
+    (m&gt;0) ATION   -&gt;  ATE       predication    -&gt;  predicate
+    (m&gt;0) ATOR    -&gt;  ATE       operator       -&gt;  operate
+    (m&gt;0) ALISM   -&gt;  AL        feudalism      -&gt;  feudal
+    (m&gt;0) IVENESS -&gt;  IVE       decisiveness   -&gt;  decisive
+    (m&gt;0) FULNESS -&gt;  FUL       hopefulness    -&gt;  hopeful
+    (m&gt;0) OUSNESS -&gt;  OUS       callousness    -&gt;  callous
+    (m&gt;0) ALITI   -&gt;  AL        formaliti      -&gt;  formal
+    (m&gt;0) IVITI   -&gt;  IVE       sensitiviti    -&gt;  sensitive
+    (m&gt;0) BILITI  -&gt;  BLE       sensibiliti    -&gt;  sensible</p></div>
+  </div>
+</div><div class="basemethod private">
+  
+  
+  <a name="nltk.stem.porter.PorterStemmer._step3">
+    
+  </a>
+  <a name="_step3">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-keyword">def</span> <span class="py-defname">_step3</span>(self, word):
+    <a class="sourceLink" href="https://github.com/nltk/nltk/tree/3.6.2/nltk/stem/porter.py#L512">
+      
+      (source)
+    </a>
+  </div>
+  <div class="docstring functionBody">
+    
+    
+    <div><p class="pre">Implements Step 3 from "An algorithm for suffix stripping"
+
+From the paper:
+
+Step 3
+
+    (m&gt;0) ICATE -&gt;  IC              triplicate     -&gt;  triplic
+    (m&gt;0) ATIVE -&gt;                  formative      -&gt;  form
+    (m&gt;0) ALIZE -&gt;  AL              formalize      -&gt;  formal
+    (m&gt;0) ICITI -&gt;  IC              electriciti    -&gt;  electric
+    (m&gt;0) ICAL  -&gt;  IC              electrical     -&gt;  electric
+    (m&gt;0) FUL   -&gt;                  hopeful        -&gt;  hope
+    (m&gt;0) NESS  -&gt;                  goodness       -&gt;  good</p></div>
+  </div>
+</div><div class="basemethod private">
+  
+  
+  <a name="nltk.stem.porter.PorterStemmer._step4">
+    
+  </a>
+  <a name="_step4">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-keyword">def</span> <span class="py-defname">_step4</span>(self, word):
+    <a class="sourceLink" href="https://github.com/nltk/nltk/tree/3.6.2/nltk/stem/porter.py#L540">
+      
+      (source)
+    </a>
+  </div>
+  <div class="docstring functionBody">
+    
+    
+    <div><p class="pre">Implements Step 4 from "An algorithm for suffix stripping"
+
+Step 4
+
+    (m&gt;1) AL    -&gt;                  revival        -&gt;  reviv
+    (m&gt;1) ANCE  -&gt;                  allowance      -&gt;  allow
+    (m&gt;1) ENCE  -&gt;                  inference      -&gt;  infer
+    (m&gt;1) ER    -&gt;                  airliner       -&gt;  airlin
+    (m&gt;1) IC    -&gt;                  gyroscopic     -&gt;  gyroscop
+    (m&gt;1) ABLE  -&gt;                  adjustable     -&gt;  adjust
+    (m&gt;1) IBLE  -&gt;                  defensible     -&gt;  defens
+    (m&gt;1) ANT   -&gt;                  irritant       -&gt;  irrit
+    (m&gt;1) EMENT -&gt;                  replacement    -&gt;  replac
+    (m&gt;1) MENT  -&gt;                  adjustment     -&gt;  adjust
+    (m&gt;1) ENT   -&gt;                  dependent      -&gt;  depend
+    (m&gt;1 and (*S or *T)) ION -&gt;     adoption       -&gt;  adopt
+    (m&gt;1) OU    -&gt;                  homologou      -&gt;  homolog
+    (m&gt;1) ISM   -&gt;                  communism      -&gt;  commun
+    (m&gt;1) ATE   -&gt;                  activate       -&gt;  activ
+    (m&gt;1) ITI   -&gt;                  angulariti     -&gt;  angular
+    (m&gt;1) OUS   -&gt;                  homologous     -&gt;  homolog
+    (m&gt;1) IVE   -&gt;                  effective      -&gt;  effect
+    (m&gt;1) IZE   -&gt;                  bowdlerize     -&gt;  bowdler
+
+The suffixes are now removed. All that remains is a little
+tidying up.</p></div>
+  </div>
+</div><div class="basemethod private">
+  
+  
+  <a name="nltk.stem.porter.PorterStemmer._step5a">
+    
+  </a>
+  <a name="_step5a">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-keyword">def</span> <span class="py-defname">_step5a</span>(self, word):
+    <a class="sourceLink" href="https://github.com/nltk/nltk/tree/3.6.2/nltk/stem/porter.py#L600">
+      
+      (source)
+    </a>
+  </div>
+  <div class="docstring functionBody">
+    
+    
+    <div><p class="pre">Implements Step 5a from "An algorithm for suffix stripping"
+
+From the paper:
+
+Step 5a
+
+    (m&gt;1) E     -&gt;                  probate        -&gt;  probat
+                                    rate           -&gt;  rate
+    (m=1 and not *o) E -&gt;           cease          -&gt;  ceas</p></div>
+  </div>
+</div><div class="basemethod private">
+  
+  
+  <a name="nltk.stem.porter.PorterStemmer._step5b">
+    
+  </a>
+  <a name="_step5b">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-keyword">def</span> <span class="py-defname">_step5b</span>(self, word):
+    <a class="sourceLink" href="https://github.com/nltk/nltk/tree/3.6.2/nltk/stem/porter.py#L636">
+      
+      (source)
+    </a>
+  </div>
+  <div class="docstring functionBody">
+    
+    
+    <div><p class="pre">Implements Step 5a from "An algorithm for suffix stripping"
+
+From the paper:
+
+Step 5b
+
+    (m &gt; 1 and *d and *L) -&gt; single letter
+                            controll       -&gt;  control
+                            roll           -&gt;  roll</p></div>
+  </div>
+</div>
+
+      </div>
+    </div>
+
+    <footer class="navbar navbar-default">
+  
+  <div class="container">
+    <a href="index.html">API Documentation</a> for <a href="http://www.nltk.org/" class="projecthome">nltk-3.6.2</a>,
+  generated by <a href="https://github.com/twisted/pydoctor/">pydoctor</a>
+    21.2.2 at 2021-07-12 23:14:45.
+  </div>
+</footer>
+
+    <script src="pydoctor.js" type="text/javascript"></script>
+
+  </body>
+</html>

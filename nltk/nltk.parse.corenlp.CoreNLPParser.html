@@ -1,0 +1,536 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+          "DTD/xhtml1-strict.dtd">
+<html>
+  
+
+  <head>
+    
+    <title>nltk.parse.corenlp.CoreNLPParser</title>
+    <meta name="generator" content="pydoctor 21.2.2"> 
+        
+    </meta>
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=0.75" />
+    <link rel="stylesheet" type="text/css" href="bootstrap.min.css" />
+    <link rel="stylesheet" type="text/css" href="apidocs.css" />
+    <link rel="stylesheet" type="text/css" href="extra.css" />
+</head>
+
+  <body>
+
+    
+
+    <nav class="navbar navbar-default">
+  
+  <div class="container">
+
+    <div class="navbar-header">
+      
+      <div class="navlinks">
+        <span class="navbar-brand">
+          <a href="http://www.nltk.org/" class="projecthome">nltk-3.6.2</a> <a href="index.html">API Documentation</a>
+        </span>
+
+        <a href="moduleIndex.html">
+          Modules
+        </a>
+
+        <a href="classIndex.html">
+          Classes
+        </a>
+
+        <a href="nameIndex.html">
+          Names
+        </a>
+
+        <form action="search-results.html" id="search-box-container">
+          <div class="input-group">
+            <input id="search-box" name="search-query" placeholder="Search..." aria-label="Search" minlength="2" class="form-control" />
+            <span class="input-group-btn">
+              <button class="btn btn-default" type="submit" title="Search"><img src="fonts/search.svg" alt="Search!" /></button>
+              <a class="btn btn-default" id="search-help-button" title="Help" onclick="toggleSearchHelpText()"><img src="fonts/info.svg" alt="Help!" /></a>
+            </span>
+          </div>
+        </form>
+
+        <div class="rst-admonition hint" id="search-help-box">
+          <p class="rst-last">
+      
+            Search bar offers the following options:
+            <ul>   
+                <li>
+                  <strong>Term presence.</strong> The below example searches for documents that 
+                    must contain “foo”, might contain “bar” and must not contain “baz”:
+                  <br /> <code>'+foo bar -baz'</code>
+                </li> 
+
+                <li>
+                  <strong>Wildcards.</strong> The below example searches for documents with words beginning with “foo”:
+                  <br /> <code>'foo*'</code>
+                </li> 
+
+                <li>
+                  <strong>Search in specific fields.</strong> The following search matches all documents 
+                  that contains "foo" in their full dotted name and with “bar” in any field:
+                  <br /> <code>'+fullName:*foo* +bar'</code>
+
+                  <p>
+                    Possible fields: 'name', 'docstring', 'fullName'.
+                  </p>
+                </li>
+
+                <li>
+                  <strong>Fuzzy matches.</strong> The following search matches all documents 
+                  that have a word within 1 edit distance of “foo”:
+                  <br /> <code>'foo~1'</code>
+                </li>
+            </ul>
+
+          </p>
+        </div>
+
+      </div>
+
+
+    </div>
+  </div>
+
+  <script>
+ 
+    function toggleSearchHelpText() {
+        document.body.classList.toggle("search-help-hidden");
+    }
+    // Init search and help text
+    document.getElementById('search-box-container').style.display = 'block';
+    document.getElementById('search-help-box').style.display = 'block';
+    document.body.classList.add("search-help-hidden");
+
+  </script>
+
+</nav>
+
+    
+
+    <div class="container">
+
+      <div class="page-header">
+        <h1 class="class"><code><code><a href="nltk.html">nltk</a></code><wbr></wbr>.<code><a href="nltk.parse.html">parse</a></code><wbr></wbr>.<code><a href="nltk.parse.corenlp.html">corenlp</a></code><wbr></wbr>.<code><a href="nltk.parse.corenlp.CoreNLPParser.html">CoreNLPParser</a></code></code></h1>
+        <div id="showPrivate">
+          <button class="btn btn-link" onclick="togglePrivate()">Toggle Private API</button>
+        </div>
+      </div>
+
+      <div class="categoryHeader">
+        class documentation
+      </div>
+
+      <div class="extrasDocstring">
+        <p><code><span class="py-keyword">class</span> <span class="py-defname">CoreNLPParser</span>(<a href="nltk.parse.corenlp.GenericCoreNLPParser.html" title="nltk.parse.corenlp.GenericCoreNLPParser">GenericCoreNLPParser</a>): <a href="https://github.com/nltk/nltk/tree/3.6.2/nltk/parse/corenlp.py#L396" class="sourceLink">(source)</a></code></p>
+        <p><a href="classIndex.html#nltk.parse.corenlp.CoreNLPParser">View In Hierarchy</a></p>
+      </div>
+
+      <div class="moduleDocstring">
+        <div><pre class="py-doctest">
+<span class="py-prompt">&gt;&gt;&gt; </span>parser = CoreNLPParser(url=<span class="py-string">'http://localhost:9000'</span>)</pre><pre class="py-doctest">
+<span class="py-prompt">&gt;&gt;&gt; </span><span class="py-builtin">next</span>(
+<span class="py-more">... </span>    parser.raw_parse(<span class="py-string">'The quick brown fox jumps over the lazy dog.'</span>)
+<span class="py-more">... </span>).pretty_print()  <span class="py-comment"># doctest: +NORMALIZE_WHITESPACE</span>
+<span class="py-output">                     ROOT</span>
+<span class="py-output">                      |</span>
+<span class="py-output">                      S</span>
+<span class="py-output">       _______________|__________________________</span>
+<span class="py-output">      |                         VP               |</span>
+<span class="py-output">      |                _________|___             |</span>
+<span class="py-output">      |               |             PP           |</span>
+<span class="py-output">      |               |     ________|___         |</span>
+<span class="py-output">      NP              |    |            NP       |</span>
+<span class="py-output">  ____|__________     |    |     _______|____    |</span>
+<span class="py-output"> DT   JJ    JJ   NN  VBZ   IN   DT      JJ   NN  .</span>
+<span class="py-output"> |    |     |    |    |    |    |       |    |   |</span>
+<span class="py-output">The quick brown fox jumps over the     lazy dog  .</span>
+</pre><pre class="py-doctest">
+<span class="py-prompt">&gt;&gt;&gt; </span>(parse_fox, ), (parse_wolf, ) = parser.raw_parse_sents(
+<span class="py-more">... </span>    [
+<span class="py-more">... </span>        <span class="py-string">'The quick brown fox jumps over the lazy dog.'</span>,
+<span class="py-more">... </span>        <span class="py-string">'The quick grey wolf jumps over the lazy fox.'</span>,
+<span class="py-more">... </span>    ]
+<span class="py-more">... </span>)</pre><pre class="py-doctest">
+<span class="py-prompt">&gt;&gt;&gt; </span>parse_fox.pretty_print()  <span class="py-comment"># doctest: +NORMALIZE_WHITESPACE</span>
+<span class="py-output">                     ROOT</span>
+<span class="py-output">                      |</span>
+<span class="py-output">                      S</span>
+<span class="py-output">       _______________|__________________________</span>
+<span class="py-output">      |                         VP               |</span>
+<span class="py-output">      |                _________|___             |</span>
+<span class="py-output">      |               |             PP           |</span>
+<span class="py-output">      |               |     ________|___         |</span>
+<span class="py-output">      NP              |    |            NP       |</span>
+<span class="py-output">  ____|__________     |    |     _______|____    |</span>
+<span class="py-output"> DT   JJ    JJ   NN  VBZ   IN   DT      JJ   NN  .</span>
+<span class="py-output"> |    |     |    |    |    |    |       |    |   |</span>
+<span class="py-output">The quick brown fox jumps over the     lazy dog  .</span>
+</pre><pre class="py-doctest">
+<span class="py-prompt">&gt;&gt;&gt; </span>parse_wolf.pretty_print()  <span class="py-comment"># doctest: +NORMALIZE_WHITESPACE</span>
+<span class="py-output">                     ROOT</span>
+<span class="py-output">                      |</span>
+<span class="py-output">                      S</span>
+<span class="py-output">       _______________|__________________________</span>
+<span class="py-output">      |                         VP               |</span>
+<span class="py-output">      |                _________|___             |</span>
+<span class="py-output">      |               |             PP           |</span>
+<span class="py-output">      |               |     ________|___         |</span>
+<span class="py-output">      NP              |    |            NP       |</span>
+<span class="py-output">  ____|_________      |    |     _______|____    |</span>
+<span class="py-output"> DT   JJ   JJ   NN   VBZ   IN   DT      JJ   NN  .</span>
+<span class="py-output"> |    |    |    |     |    |    |       |    |   |</span>
+<span class="py-output">The quick grey wolf jumps over the     lazy fox  .</span>
+</pre><pre class="py-doctest">
+<span class="py-prompt">&gt;&gt;&gt; </span>(parse_dog, ), (parse_friends, ) = parser.parse_sents(
+<span class="py-more">... </span>    [
+<span class="py-more">... </span>        <span class="py-string">"I 'm a dog"</span>.split(),
+<span class="py-more">... </span>        <span class="py-string">"This is my friends ' cat ( the tabby )"</span>.split(),
+<span class="py-more">... </span>    ]
+<span class="py-more">... </span>)</pre><pre class="py-doctest">
+<span class="py-prompt">&gt;&gt;&gt; </span>parse_dog.pretty_print()  <span class="py-comment"># doctest: +NORMALIZE_WHITESPACE</span>
+<span class="py-output">        ROOT</span>
+<span class="py-output">         |</span>
+<span class="py-output">         S</span>
+<span class="py-output">  _______|____</span>
+<span class="py-output"> |            VP</span>
+<span class="py-output"> |    ________|___</span>
+<span class="py-output"> NP  |            NP</span>
+<span class="py-output"> |   |         ___|___</span>
+<span class="py-output">PRP VBP       DT      NN</span>
+<span class="py-output"> |   |        |       |</span>
+<span class="py-output"> I   'm       a      dog</span>
+</pre><pre class="py-doctest">
+<span class="py-prompt">&gt;&gt;&gt; </span>parse_friends.pretty_print()  <span class="py-comment"># doctest: +NORMALIZE_WHITESPACE</span>
+<span class="py-output">     ROOT</span>
+<span class="py-output">      |</span>
+<span class="py-output">      S</span>
+<span class="py-output">  ____|___________</span>
+<span class="py-output"> |                VP</span>
+<span class="py-output"> |     ___________|_____________</span>
+<span class="py-output"> |    |                         NP</span>
+<span class="py-output"> |    |                  _______|_________</span>
+<span class="py-output"> |    |                 NP               PRN</span>
+<span class="py-output"> |    |            _____|_______      ____|______________</span>
+<span class="py-output"> NP   |           NP            |    |        NP         |</span>
+<span class="py-output"> |    |     ______|_________    |    |     ___|____      |</span>
+<span class="py-output"> DT  VBZ  PRP$   NNS       POS  NN -LRB-  DT       NN  -RRB-</span>
+<span class="py-output"> |    |    |      |         |   |    |    |        |     |</span>
+<span class="py-output">This  is   my  friends      '  cat -LRB- the     tabby -RRB-</span>
+</pre><pre class="py-doctest">
+<span class="py-prompt">&gt;&gt;&gt; </span>parse_john, parse_mary, = parser.parse_text(
+<span class="py-more">... </span>    <span class="py-string">'John loves Mary. Mary walks.'</span>
+<span class="py-more">... </span>)</pre><pre class="py-doctest">
+<span class="py-prompt">&gt;&gt;&gt; </span>parse_john.pretty_print()  <span class="py-comment"># doctest: +NORMALIZE_WHITESPACE</span>
+<span class="py-output">      ROOT</span>
+<span class="py-output">       |</span>
+<span class="py-output">       S</span>
+<span class="py-output">  _____|_____________</span>
+<span class="py-output"> |          VP       |</span>
+<span class="py-output"> |      ____|___     |</span>
+<span class="py-output"> NP    |        NP   |</span>
+<span class="py-output"> |     |        |    |</span>
+<span class="py-output">NNP   VBZ      NNP   .</span>
+<span class="py-output"> |     |        |    |</span>
+<span class="py-output">John loves     Mary  .</span>
+</pre><pre class="py-doctest">
+<span class="py-prompt">&gt;&gt;&gt; </span>parse_mary.pretty_print()  <span class="py-comment"># doctest: +NORMALIZE_WHITESPACE</span>
+<span class="py-output">      ROOT</span>
+<span class="py-output">       |</span>
+<span class="py-output">       S</span>
+<span class="py-output">  _____|____</span>
+<span class="py-output"> NP    VP   |</span>
+<span class="py-output"> |     |    |</span>
+<span class="py-output">NNP   VBZ   .</span>
+<span class="py-output"> |     |    |</span>
+<span class="py-output">Mary walks  .</span>
+</pre><div class="rst-section" id="rst-special-cases">
+<h1 class="heading">Special cases</h1>
+<pre class="py-doctest">
+<span class="py-prompt">&gt;&gt;&gt; </span><span class="py-builtin">next</span>(
+<span class="py-more">... </span>    parser.raw_parse(
+<span class="py-more">... </span>        <span class="py-string">'NASIRIYA, Iraq—Iraqi doctors who treated former prisoner of war '</span>
+<span class="py-more">... </span>        <span class="py-string">'Jessica Lynch have angrily dismissed claims made in her biography '</span>
+<span class="py-more">... </span>        <span class="py-string">'that she was raped by her Iraqi captors.'</span>
+<span class="py-more">... </span>    )
+<span class="py-more">... </span>).height()
+<span class="py-output">20</span>
+</pre><pre class="py-doctest">
+<span class="py-prompt">&gt;&gt;&gt; </span><span class="py-builtin">next</span>(
+<span class="py-more">... </span>    parser.raw_parse(
+<span class="py-more">... </span>        <span class="py-string">"The broader Standard &amp; Poor's 500 Index &lt;.SPX&gt; was 0.46 points lower, or "</span>
+<span class="py-more">... </span>        <span class="py-string">'0.05 percent, at 997.02.'</span>
+<span class="py-more">... </span>    )
+<span class="py-more">... </span>).height()
+<span class="py-output">9</span>
+</pre></div>
+</div>
+      </div>
+
+      <div id="splitTables">
+        <table class="children sortable" id="id900">
+  
+  
+  <tr class="method">
+    
+    <td>Method</td>
+    <td><code><a href="#make_tree">make_tree</a></code></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="classvariable">
+    
+    <td>Class Variable</td>
+    <td><code><a href="#parser_annotator">parser_annotator</a></code></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="classvariable private">
+    
+    <td>Class Variable</td>
+    <td><code><a href="#_OUTPUT_FORMAT">_OUTPUT_FORMAT</a></code></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr>
+</table>
+        
+          <p class="inheritedFrom">
+            Inherited from <code><a href="nltk.parse.corenlp.GenericCoreNLPParser.html">GenericCoreNLPParser</a></code>:
+          </p>
+          <table class="children sortable" id="id901">
+  
+  
+  <tr class="basemethod">
+    
+    <td>Method</td>
+    <td><code><a href="nltk.parse.corenlp.GenericCoreNLPParser.html#__init__">__init__</a></code></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="basemethod">
+    
+    <td>Method</td>
+    <td><code><a href="nltk.parse.corenlp.GenericCoreNLPParser.html#api_call">api_call</a></code></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="basemethod">
+    
+    <td>Method</td>
+    <td><code><a href="nltk.parse.corenlp.GenericCoreNLPParser.html#parse_sents">parse_sents</a></code></td>
+    <td><span>Parse multiple sentences.</span></td>
+  </tr><tr class="basemethod">
+    
+    <td>Method</td>
+    <td><code><a href="nltk.parse.corenlp.GenericCoreNLPParser.html#parse_text">parse_text</a></code></td>
+    <td><span>Parse a piece of text.</span></td>
+  </tr><tr class="basemethod">
+    
+    <td>Method</td>
+    <td><code><a href="nltk.parse.corenlp.GenericCoreNLPParser.html#raw_parse">raw_parse</a></code></td>
+    <td><span>Parse a sentence.</span></td>
+  </tr><tr class="basemethod">
+    
+    <td>Method</td>
+    <td><code><a href="nltk.parse.corenlp.GenericCoreNLPParser.html#raw_parse_sents">raw_parse_sents</a></code></td>
+    <td><span>Parse multiple sentences.</span></td>
+  </tr><tr class="basemethod">
+    
+    <td>Method</td>
+    <td><code><a href="nltk.parse.corenlp.GenericCoreNLPParser.html#raw_tag_sents">raw_tag_sents</a></code></td>
+    <td><span>Tag multiple sentences.</span></td>
+  </tr><tr class="basemethod">
+    
+    <td>Method</td>
+    <td><code><a href="nltk.parse.corenlp.GenericCoreNLPParser.html#tag">tag</a></code></td>
+    <td><span>Tag a list of tokens.</span></td>
+  </tr><tr class="basemethod">
+    
+    <td>Method</td>
+    <td><code><a href="nltk.parse.corenlp.GenericCoreNLPParser.html#tag_sents">tag_sents</a></code></td>
+    <td><span>Tag multiple sentences.</span></td>
+  </tr><tr class="basemethod">
+    
+    <td>Method</td>
+    <td><code><a href="nltk.parse.corenlp.GenericCoreNLPParser.html#tokenize">tokenize</a></code></td>
+    <td><span>Tokenize a string of text.</span></td>
+  </tr><tr class="baseinstancevariable">
+    
+    <td>Instance Variable</td>
+    <td><code><a href="nltk.parse.corenlp.GenericCoreNLPParser.html#encoding">encoding</a></code></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="baseinstancevariable">
+    
+    <td>Instance Variable</td>
+    <td><code><a href="nltk.parse.corenlp.GenericCoreNLPParser.html#session">session</a></code></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="baseinstancevariable">
+    
+    <td>Instance Variable</td>
+    <td><code><a href="nltk.parse.corenlp.GenericCoreNLPParser.html#tagtype">tagtype</a></code></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="baseinstancevariable">
+    
+    <td>Instance Variable</td>
+    <td><code><a href="nltk.parse.corenlp.GenericCoreNLPParser.html#url">url</a></code></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr>
+</table>
+          
+          <p class="inheritedFrom">
+            Inherited from <code><a href="nltk.parse.api.ParserI.html">ParserI</a></code> (via <code><a href="nltk.parse.corenlp.GenericCoreNLPParser.html">GenericCoreNLPParser</a></code>):
+          </p>
+          <table class="children sortable" id="id902">
+  
+  
+  <tr class="basemethod">
+    
+    <td>Method</td>
+    <td><code><a href="nltk.parse.api.ParserI.html#grammar">grammar</a></code></td>
+    <td><span></span></td>
+  </tr><tr class="basemethod">
+    
+    <td>Method</td>
+    <td><code><a href="nltk.parse.api.ParserI.html#parse">parse</a></code></td>
+    <td><span></span></td>
+  </tr><tr class="basemethod">
+    
+    <td>Method</td>
+    <td><code><a href="nltk.parse.api.ParserI.html#parse_all">parse_all</a></code></td>
+    <td><span></span></td>
+  </tr><tr class="basemethod">
+    
+    <td>Method</td>
+    <td><code><a href="nltk.parse.api.ParserI.html#parse_one">parse_one</a></code></td>
+    <td><span></span></td>
+  </tr>
+</table>
+          
+          <p class="inheritedFrom">
+            Inherited from <code><a href="nltk.tokenize.api.TokenizerI.html">TokenizerI</a></code> (via <code><a href="nltk.parse.corenlp.GenericCoreNLPParser.html">GenericCoreNLPParser</a></code>):
+          </p>
+          <table class="children sortable" id="id903">
+  
+  
+  <tr class="basemethod">
+    
+    <td>Method</td>
+    <td><code><a href="nltk.tokenize.api.TokenizerI.html#span_tokenize">span_tokenize</a></code></td>
+    <td><span>Identify the tokens using integer offsets <tt class="rst-docutils literal">(start_i, end_i)</tt>, where <tt class="rst-docutils literal">s[start_i:end_i]</tt> is the corresponding token.</span></td>
+  </tr><tr class="basemethod">
+    
+    <td>Method</td>
+    <td><code><a href="nltk.tokenize.api.TokenizerI.html#span_tokenize_sents">span_tokenize_sents</a></code></td>
+    <td><span>Apply <tt class="rst-docutils literal">self.span_tokenize()</tt> to each element of <tt class="rst-docutils literal">strings</tt>.  I.e.:</span></td>
+  </tr><tr class="basemethod">
+    
+    <td>Method</td>
+    <td><code><a href="nltk.tokenize.api.TokenizerI.html#tokenize_sents">tokenize_sents</a></code></td>
+    <td><span>Apply <tt class="rst-docutils literal">self.tokenize()</tt> to each element of <tt class="rst-docutils literal">strings</tt>.  I.e.:</span></td>
+  </tr>
+</table>
+          
+          <p class="inheritedFrom">
+            Inherited from <code><a href="nltk.tag.api.TaggerI.html">TaggerI</a></code> (via <code><a href="nltk.parse.corenlp.GenericCoreNLPParser.html">GenericCoreNLPParser</a></code>):
+          </p>
+          <table class="children sortable" id="id904">
+  
+  
+  <tr class="basemethod">
+    
+    <td>Method</td>
+    <td><code><a href="nltk.tag.api.TaggerI.html#evaluate">evaluate</a></code></td>
+    <td><span>Score the accuracy of the tagger against the gold standard. Strip the tags from the gold standard text, retag it using the tagger, then compute the accuracy score.</span></td>
+  </tr><tr class="basemethod private">
+    
+    <td>Method</td>
+    <td><code><a href="nltk.tag.api.TaggerI.html#_check_params">_check_params</a></code></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr>
+</table>
+          
+
+          
+      </div>
+
+      <div id="childList">
+
+        <div class="basemethod">
+  
+  
+  <a name="nltk.parse.corenlp.CoreNLPParser.make_tree">
+    
+  </a>
+  <a name="make_tree">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-keyword">def</span> <span class="py-defname">make_tree</span>(self, result):
+    <a class="sourceLink" href="https://github.com/nltk/nltk/tree/3.6.2/nltk/parse/corenlp.py#L544">
+      
+      (source)
+    </a>
+  </div>
+  <div class="docstring functionBody">
+    
+    
+    <div><p class="undocumented">Undocumented</p></div>
+  </div>
+</div><div class="baseclassvariable">
+  
+  
+  <a name="nltk.parse.corenlp.CoreNLPParser.parser_annotator">
+    
+  </a>
+  <a name="parser_annotator">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-defname">parser_annotator</span>: <code>str</code> =
+    <a class="sourceLink" href="https://github.com/nltk/nltk/tree/3.6.2/nltk/parse/corenlp.py#L542">
+      
+      (source)
+    </a>
+  </div>
+  <div class="functionBody">
+    
+    
+    <div><p class="undocumented">Undocumented</p></div>
+  </div>
+</div><div class="baseclassvariable private">
+  
+  
+  <a name="nltk.parse.corenlp.CoreNLPParser._OUTPUT_FORMAT">
+    
+  </a>
+  <a name="_OUTPUT_FORMAT">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-defname">_OUTPUT_FORMAT</span>: <code>str</code> =
+    <a class="sourceLink" href="https://github.com/nltk/nltk/tree/3.6.2/nltk/parse/corenlp.py#L541">
+      
+      (source)
+    </a>
+  </div>
+  <div class="functionBody">
+    
+    
+    <div><p class="undocumented">Undocumented</p></div>
+  </div>
+</div>
+
+      </div>
+    </div>
+
+    <footer class="navbar navbar-default">
+  
+  <div class="container">
+    <a href="index.html">API Documentation</a> for <a href="http://www.nltk.org/" class="projecthome">nltk-3.6.2</a>,
+  generated by <a href="https://github.com/twisted/pydoctor/">pydoctor</a>
+    21.2.2 at 2021-07-12 23:14:45.
+  </div>
+</footer>
+
+    <script src="pydoctor.js" type="text/javascript"></script>
+
+  </body>
+</html>

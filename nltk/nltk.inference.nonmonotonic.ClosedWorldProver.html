@@ -1,0 +1,435 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+          "DTD/xhtml1-strict.dtd">
+<html>
+  
+
+  <head>
+    
+    <title>nltk.inference.nonmonotonic.ClosedWorldProver</title>
+    <meta name="generator" content="pydoctor 21.2.2"> 
+        
+    </meta>
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=0.75" />
+    <link rel="stylesheet" type="text/css" href="bootstrap.min.css" />
+    <link rel="stylesheet" type="text/css" href="apidocs.css" />
+    <link rel="stylesheet" type="text/css" href="extra.css" />
+</head>
+
+  <body>
+
+    
+
+    <nav class="navbar navbar-default">
+  
+  <div class="container">
+
+    <div class="navbar-header">
+      
+      <div class="navlinks">
+        <span class="navbar-brand">
+          <a href="http://www.nltk.org/" class="projecthome">nltk-3.6.2</a> <a href="index.html">API Documentation</a>
+        </span>
+
+        <a href="moduleIndex.html">
+          Modules
+        </a>
+
+        <a href="classIndex.html">
+          Classes
+        </a>
+
+        <a href="nameIndex.html">
+          Names
+        </a>
+
+        <form action="search-results.html" id="search-box-container">
+          <div class="input-group">
+            <input id="search-box" name="search-query" placeholder="Search..." aria-label="Search" minlength="2" class="form-control" />
+            <span class="input-group-btn">
+              <button class="btn btn-default" type="submit" title="Search"><img src="fonts/search.svg" alt="Search!" /></button>
+              <a class="btn btn-default" id="search-help-button" title="Help" onclick="toggleSearchHelpText()"><img src="fonts/info.svg" alt="Help!" /></a>
+            </span>
+          </div>
+        </form>
+
+        <div class="rst-admonition hint" id="search-help-box">
+          <p class="rst-last">
+      
+            Search bar offers the following options:
+            <ul>   
+                <li>
+                  <strong>Term presence.</strong> The below example searches for documents that 
+                    must contain “foo”, might contain “bar” and must not contain “baz”:
+                  <br /> <code>'+foo bar -baz'</code>
+                </li> 
+
+                <li>
+                  <strong>Wildcards.</strong> The below example searches for documents with words beginning with “foo”:
+                  <br /> <code>'foo*'</code>
+                </li> 
+
+                <li>
+                  <strong>Search in specific fields.</strong> The following search matches all documents 
+                  that contains "foo" in their full dotted name and with “bar” in any field:
+                  <br /> <code>'+fullName:*foo* +bar'</code>
+
+                  <p>
+                    Possible fields: 'name', 'docstring', 'fullName'.
+                  </p>
+                </li>
+
+                <li>
+                  <strong>Fuzzy matches.</strong> The following search matches all documents 
+                  that have a word within 1 edit distance of “foo”:
+                  <br /> <code>'foo~1'</code>
+                </li>
+            </ul>
+
+          </p>
+        </div>
+
+      </div>
+
+
+    </div>
+  </div>
+
+  <script>
+ 
+    function toggleSearchHelpText() {
+        document.body.classList.toggle("search-help-hidden");
+    }
+    // Init search and help text
+    document.getElementById('search-box-container').style.display = 'block';
+    document.getElementById('search-help-box').style.display = 'block';
+    document.body.classList.add("search-help-hidden");
+
+  </script>
+
+</nav>
+
+    
+
+    <div class="container">
+
+      <div class="page-header">
+        <h1 class="class"><code><code><a href="nltk.html">nltk</a></code><wbr></wbr>.<code><a href="nltk.inference.html">inference</a></code><wbr></wbr>.<code><a href="nltk.inference.nonmonotonic.html">nonmonotonic</a></code><wbr></wbr>.<code><a href="nltk.inference.nonmonotonic.ClosedWorldProver.html">ClosedWorldProver</a></code></code></h1>
+        <div id="showPrivate">
+          <button class="btn btn-link" onclick="togglePrivate()">Toggle Private API</button>
+        </div>
+      </div>
+
+      <div class="categoryHeader">
+        class documentation
+      </div>
+
+      <div class="extrasDocstring">
+        <p><code><span class="py-keyword">class</span> <span class="py-defname">ClosedWorldProver</span>(<a href="nltk.inference.api.ProverCommandDecorator.html" title="nltk.inference.api.ProverCommandDecorator">ProverCommandDecorator</a>): <a href="https://github.com/nltk/nltk/tree/3.6.2/nltk/inference/nonmonotonic.py#L165" class="sourceLink">(source)</a></code></p>
+        <p><a href="classIndex.html#nltk.inference.nonmonotonic.ClosedWorldProver">View In Hierarchy</a></p>
+      </div>
+
+      <div class="moduleDocstring">
+        <div><p>This is a prover decorator that completes predicates before proving.</p>
+<p>If the assumptions contain "P(A)", then "all x.(P(x) -&gt; (x=A))" is the completion of "P".
+If the assumptions contain "all x.(ostrich(x) -&gt; bird(x))", then "all x.(bird(x) -&gt; ostrich(x))" is the completion of "bird".
+If the assumptions don't contain anything that are "P", then "all x.-P(x)" is the completion of "P".</p>
+<p>walk(Socrates)
+Socrates != Bill
++ all x.(walk(x) -&gt; (x=Socrates))
+----------------
+-walk(Bill)</p>
+<p>see(Socrates, John)
+see(John, Mary)
+Socrates != John
+John != Mary
++ all x.all y.(see(x,y) -&gt; ((x=Socrates &amp; y=John) | (x=John &amp; y=Mary)))
+----------------
+-see(Socrates, Mary)</p>
+<p>all x.(ostrich(x) -&gt; bird(x))
+bird(Tweety)
+-ostrich(Sam)
+Sam != Tweety
++ all x.(bird(x) -&gt; (ostrich(x) | x=Tweety))
++ all x.-ostrich(x)
+-------------------
+-bird(Sam)</p>
+</div>
+      </div>
+
+      <div id="splitTables">
+        <table class="children sortable" id="id726">
+  
+  
+  <tr class="method">
+    
+    <td>Method</td>
+    <td><code><a href="#assumptions">assumptions</a></code></td>
+    <td><span>List the current assumptions.</span></td>
+  </tr><tr class="method private">
+    
+    <td>Method</td>
+    <td><code><a href="#_make_antecedent">_make_antecedent</a></code></td>
+    <td><span>Return an application expression with 'predicate' as the predicate and 'signature' as the list of arguments.</span></td>
+  </tr><tr class="method private">
+    
+    <td>Method</td>
+    <td><code><a href="#_make_predicate_dict">_make_predicate_dict</a></code></td>
+    <td><span>Create a dictionary of predicates from the assumptions.</span></td>
+  </tr><tr class="method private">
+    
+    <td>Method</td>
+    <td><code><a href="#_make_unique_signature">_make_unique_signature</a></code></td>
+    <td><span>This method figures out how many arguments the predicate takes and returns a tuple containing that number of unique variables.</span></td>
+  </tr><tr class="method private">
+    
+    <td>Method</td>
+    <td><code><a href="#_map_predicates">_map_predicates</a></code></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr>
+</table>
+        
+          <p class="inheritedFrom">
+            Inherited from <code><a href="nltk.inference.api.ProverCommandDecorator.html">ProverCommandDecorator</a></code>:
+          </p>
+          <table class="children sortable" id="id727">
+  
+  
+  <tr class="basemethod">
+    
+    <td>Method</td>
+    <td><code><a href="nltk.inference.api.ProverCommandDecorator.html#__init__">__init__</a></code></td>
+    <td><span></span></td>
+  </tr><tr class="basemethod">
+    
+    <td>Method</td>
+    <td><code><a href="nltk.inference.api.ProverCommandDecorator.html#decorate_proof">decorate_proof</a></code></td>
+    <td><span class="undocumented">No summary</span></td>
+  </tr><tr class="basemethod">
+    
+    <td>Method</td>
+    <td><code><a href="nltk.inference.api.ProverCommandDecorator.html#get_prover">get_prover</a></code></td>
+    <td><span>Return the prover object :return: <tt class="rst-docutils literal">Prover</tt></span></td>
+  </tr><tr class="basemethod">
+    
+    <td>Method</td>
+    <td><code><a href="nltk.inference.api.ProverCommandDecorator.html#proof">proof</a></code></td>
+    <td><span>Return the proof string :param simplify: bool simplify the proof? :return: str</span></td>
+  </tr><tr class="basemethod">
+    
+    <td>Method</td>
+    <td><code><a href="nltk.inference.api.ProverCommandDecorator.html#prove">prove</a></code></td>
+    <td><span>Perform the actual proof.</span></td>
+  </tr><tr class="baseinstancevariable private">
+    
+    <td>Instance Variable</td>
+    <td><code><a href="nltk.inference.api.ProverCommandDecorator.html#_proof">_proof</a></code></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="baseinstancevariable private">
+    
+    <td>Instance Variable</td>
+    <td><code><a href="nltk.inference.api.ProverCommandDecorator.html#_result">_result</a></code></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr>
+</table>
+          
+          <p class="inheritedFrom">
+            Inherited from <code><a href="nltk.inference.api.TheoremToolCommandDecorator.html">TheoremToolCommandDecorator</a></code> (via <code><a href="nltk.inference.api.ProverCommandDecorator.html">ProverCommandDecorator</a></code>):
+          </p>
+          <table class="children sortable" id="id728">
+  
+  
+  <tr class="basemethod">
+    
+    <td>Method</td>
+    <td><code><a href="nltk.inference.api.TheoremToolCommandDecorator.html#add_assumptions">add_assumptions</a></code></td>
+    <td><span>Add new assumptions to the assumption list.</span></td>
+  </tr><tr class="basemethod">
+    
+    <td>Method</td>
+    <td><code><a href="nltk.inference.api.TheoremToolCommandDecorator.html#goal">goal</a></code></td>
+    <td><span>Return the goal</span></td>
+  </tr><tr class="basemethod">
+    
+    <td>Method</td>
+    <td><code><a href="nltk.inference.api.TheoremToolCommandDecorator.html#print_assumptions">print_assumptions</a></code></td>
+    <td><span>Print the list of the current assumptions.</span></td>
+  </tr><tr class="basemethod">
+    
+    <td>Method</td>
+    <td><code><a href="nltk.inference.api.TheoremToolCommandDecorator.html#retract_assumptions">retract_assumptions</a></code></td>
+    <td><span>Retract assumptions from the assumption list.</span></td>
+  </tr><tr class="baseinstancevariable private">
+    
+    <td>Instance Variable</td>
+    <td><code><a href="nltk.inference.api.TheoremToolCommandDecorator.html#_command">_command</a></code></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr>
+</table>
+          
+          <p class="inheritedFrom">
+            Inherited from <code><a href="nltk.inference.api.TheoremToolCommand.html">TheoremToolCommand</a></code> (via <code><a href="nltk.inference.api.ProverCommandDecorator.html">ProverCommandDecorator</a></code>, <code><a href="nltk.inference.api.ProverCommand.html">ProverCommand</a></code>):
+          </p>
+          <table class="children sortable" id="id729">
+  
+  
+  <tr class="basemethod">
+    
+    <td>Method</td>
+    <td><code><a href="nltk.inference.api.TheoremToolCommand.html#add_assumptions">add_assumptions</a></code></td>
+    <td><span>Add new assumptions to the assumption list.</span></td>
+  </tr><tr class="basemethod">
+    
+    <td>Method</td>
+    <td><code><a href="nltk.inference.api.TheoremToolCommand.html#goal">goal</a></code></td>
+    <td><span>Return the goal</span></td>
+  </tr><tr class="basemethod">
+    
+    <td>Method</td>
+    <td><code><a href="nltk.inference.api.TheoremToolCommand.html#print_assumptions">print_assumptions</a></code></td>
+    <td><span>Print the list of the current assumptions.</span></td>
+  </tr><tr class="basemethod">
+    
+    <td>Method</td>
+    <td><code><a href="nltk.inference.api.TheoremToolCommand.html#retract_assumptions">retract_assumptions</a></code></td>
+    <td><span>Retract assumptions from the assumption list.</span></td>
+  </tr>
+</table>
+          
+
+          
+      </div>
+
+      <div id="childList">
+
+        <div class="basemethod">
+  
+  
+  <a name="nltk.inference.nonmonotonic.ClosedWorldProver.assumptions">
+    
+  </a>
+  <a name="assumptions">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-keyword">def</span> <span class="py-defname">assumptions</span>(self):
+    <a class="sourceLink" href="https://github.com/nltk/nltk/tree/3.6.2/nltk/inference/nonmonotonic.py#L197">
+      
+      (source)
+    </a>
+  </div>
+  <div class="docstring functionBody">
+    <div class="interfaceinfo">overrides <code><a href="nltk.inference.api.TheoremToolCommandDecorator.html#assumptions">nltk.inference.api.TheoremToolCommandDecorator.assumptions</a></code></div>
+    
+    <div>List the current assumptions.<table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Returns</td></tr><tr><td colspan="2">list of <tt class="rst-docutils literal">Expression</tt></td></tr></table></div>
+  </div>
+</div><div class="basemethod private">
+  
+  
+  <a name="nltk.inference.nonmonotonic.ClosedWorldProver._make_antecedent">
+    
+  </a>
+  <a name="_make_antecedent">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-keyword">def</span> <span class="py-defname">_make_antecedent</span>(self, predicate, signature):
+    <a class="sourceLink" href="https://github.com/nltk/nltk/tree/3.6.2/nltk/inference/nonmonotonic.py#L249">
+      
+      (source)
+    </a>
+  </div>
+  <div class="docstring functionBody">
+    
+    
+    <div>Return an application expression with 'predicate' as the predicate
+and 'signature' as the list of arguments.</div>
+  </div>
+</div><div class="basemethod private">
+  
+  
+  <a name="nltk.inference.nonmonotonic.ClosedWorldProver._make_predicate_dict">
+    
+  </a>
+  <a name="_make_predicate_dict">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-keyword">def</span> <span class="py-defname">_make_predicate_dict</span>(self, assumptions):
+    <a class="sourceLink" href="https://github.com/nltk/nltk/tree/3.6.2/nltk/inference/nonmonotonic.py#L259">
+      
+      (source)
+    </a>
+  </div>
+  <div class="docstring functionBody">
+    
+    
+    <div>Create a dictionary of predicates from the assumptions.<table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">assumptions</span></td><td class="fieldArgDesc">a list of <a href="#id1"><span class="rst-problematic" id="rst-id2">``</span></a>Expression``s</td></tr><tr class="fieldStart"><td class="fieldName" colspan="2">Returns</td></tr><tr><td colspan="2">dict mapping <tt class="rst-docutils literal">AbstractVariableExpression</tt> to <tt class="rst-docutils literal">PredHolder</tt></td></tr></table></div>
+  </div>
+</div><div class="basemethod private">
+  
+  
+  <a name="nltk.inference.nonmonotonic.ClosedWorldProver._make_unique_signature">
+    
+  </a>
+  <a name="_make_unique_signature">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-keyword">def</span> <span class="py-defname">_make_unique_signature</span>(self, predHolder):
+    <a class="sourceLink" href="https://github.com/nltk/nltk/tree/3.6.2/nltk/inference/nonmonotonic.py#L242">
+      
+      (source)
+    </a>
+  </div>
+  <div class="docstring functionBody">
+    
+    
+    <div>This method figures out how many arguments the predicate takes and
+returns a tuple containing that number of unique variables.</div>
+  </div>
+</div><div class="basemethod private">
+  
+  
+  <a name="nltk.inference.nonmonotonic.ClosedWorldProver._map_predicates">
+    
+  </a>
+  <a name="_map_predicates">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-keyword">def</span> <span class="py-defname">_map_predicates</span>(self, expression, predDict):
+    <a class="sourceLink" href="https://github.com/nltk/nltk/tree/3.6.2/nltk/inference/nonmonotonic.py#L271">
+      
+      (source)
+    </a>
+  </div>
+  <div class="docstring functionBody">
+    
+    
+    <div><p class="undocumented">Undocumented</p></div>
+  </div>
+</div>
+
+      </div>
+    </div>
+
+    <footer class="navbar navbar-default">
+  
+  <div class="container">
+    <a href="index.html">API Documentation</a> for <a href="http://www.nltk.org/" class="projecthome">nltk-3.6.2</a>,
+  generated by <a href="https://github.com/twisted/pydoctor/">pydoctor</a>
+    21.2.2 at 2021-07-12 23:14:45.
+  </div>
+</footer>
+
+    <script src="pydoctor.js" type="text/javascript"></script>
+
+  </body>
+</html>

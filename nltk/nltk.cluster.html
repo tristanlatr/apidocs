@@ -1,0 +1,259 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+          "DTD/xhtml1-strict.dtd">
+<html>
+  
+
+  <head>
+    
+    <title>nltk.cluster</title>
+    <meta name="generator" content="pydoctor 21.2.2"> 
+        
+    </meta>
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=0.75" />
+    <link rel="stylesheet" type="text/css" href="bootstrap.min.css" />
+    <link rel="stylesheet" type="text/css" href="apidocs.css" />
+    <link rel="stylesheet" type="text/css" href="extra.css" />
+</head>
+
+  <body>
+
+    
+
+    <nav class="navbar navbar-default">
+  
+  <div class="container">
+
+    <div class="navbar-header">
+      
+      <div class="navlinks">
+        <span class="navbar-brand">
+          <a href="http://www.nltk.org/" class="projecthome">nltk-3.6.2</a> <a href="index.html">API Documentation</a>
+        </span>
+
+        <a href="moduleIndex.html">
+          Modules
+        </a>
+
+        <a href="classIndex.html">
+          Classes
+        </a>
+
+        <a href="nameIndex.html">
+          Names
+        </a>
+
+        <form action="search-results.html" id="search-box-container">
+          <div class="input-group">
+            <input id="search-box" name="search-query" placeholder="Search..." aria-label="Search" minlength="2" class="form-control" />
+            <span class="input-group-btn">
+              <button class="btn btn-default" type="submit" title="Search"><img src="fonts/search.svg" alt="Search!" /></button>
+              <a class="btn btn-default" id="search-help-button" title="Help" onclick="toggleSearchHelpText()"><img src="fonts/info.svg" alt="Help!" /></a>
+            </span>
+          </div>
+        </form>
+
+        <div class="rst-admonition hint" id="search-help-box">
+          <p class="rst-last">
+      
+            Search bar offers the following options:
+            <ul>   
+                <li>
+                  <strong>Term presence.</strong> The below example searches for documents that 
+                    must contain “foo”, might contain “bar” and must not contain “baz”:
+                  <br /> <code>'+foo bar -baz'</code>
+                </li> 
+
+                <li>
+                  <strong>Wildcards.</strong> The below example searches for documents with words beginning with “foo”:
+                  <br /> <code>'foo*'</code>
+                </li> 
+
+                <li>
+                  <strong>Search in specific fields.</strong> The following search matches all documents 
+                  that contains "foo" in their full dotted name and with “bar” in any field:
+                  <br /> <code>'+fullName:*foo* +bar'</code>
+
+                  <p>
+                    Possible fields: 'name', 'docstring', 'fullName'.
+                  </p>
+                </li>
+
+                <li>
+                  <strong>Fuzzy matches.</strong> The following search matches all documents 
+                  that have a word within 1 edit distance of “foo”:
+                  <br /> <code>'foo~1'</code>
+                </li>
+            </ul>
+
+          </p>
+        </div>
+
+      </div>
+
+
+    </div>
+  </div>
+
+  <script>
+ 
+    function toggleSearchHelpText() {
+        document.body.classList.toggle("search-help-hidden");
+    }
+    // Init search and help text
+    document.getElementById('search-box-container').style.display = 'block';
+    document.getElementById('search-help-box').style.display = 'block';
+    document.body.classList.add("search-help-hidden");
+
+  </script>
+
+</nav>
+
+    
+
+    <div class="container">
+
+      <div class="page-header">
+        <h1 class="package"><code><code><a href="nltk.html">nltk</a></code><wbr></wbr>.<code><a href="nltk.cluster.html">cluster</a></code></code></h1>
+        <div id="showPrivate">
+          <button class="btn btn-link" onclick="togglePrivate()">Toggle Private API</button>
+        </div>
+      </div>
+
+      <div class="categoryHeader">
+        package documentation
+      </div>
+
+      <div class="extrasDocstring">
+        <a href="https://github.com/nltk/nltk/tree/3.6.2/nltk/cluster/__init__.py" class="sourceLink">(source)</a>
+        <p></p>
+      </div>
+
+      <div class="moduleDocstring">
+        <div><p>This module contains a number of basic clustering algorithms. Clustering
+describes the task of discovering groups of similar items with a large
+collection. It is also describe as unsupervised machine learning, as the data
+from which it learns is unannotated with class information, as is the case for
+supervised learning.  Annotated data is difficult and expensive to obtain in
+the quantities required for the majority of supervised learning algorithms.
+This problem, the knowledge acquisition bottleneck, is common to most natural
+language processing tasks, thus fueling the need for quality unsupervised
+approaches.</p>
+<p>This module contains a k-means clusterer, E-M clusterer and a group average
+agglomerative clusterer (GAAC). All these clusterers involve finding good
+cluster groupings for a set of vectors in multi-dimensional space.</p>
+<p>The K-means clusterer starts with k arbitrary chosen means then allocates each
+vector to the cluster with the closest mean. It then recalculates the means of
+each cluster as the centroid of the vectors in the cluster. This process
+repeats until the cluster memberships stabilise. This is a hill-climbing
+algorithm which may converge to a local maximum. Hence the clustering is
+often repeated with random initial means and the most commonly occurring
+output means are chosen.</p>
+<p>The GAAC clusterer starts with each of the <em>N</em> vectors as singleton clusters.
+It then iteratively merges pairs of clusters which have the closest centroids.
+This continues until there is only one cluster. The order of merges gives rise
+to a dendrogram - a tree with the earlier merges lower than later merges. The
+membership of a given number of clusters <em>c</em>, <em>1 &lt;= c &lt;= N</em>, can be found by
+cutting the dendrogram at depth <em>c</em>.</p>
+<p>The Gaussian EM clusterer models the vectors as being produced by a mixture
+of k Gaussian sources. The parameters of these sources (prior probability,
+mean and covariance matrix) are then found to maximise the likelihood of the
+given data. This is done with the expectation maximisation algorithm. It
+starts with k arbitrarily chosen means, priors and covariance matrices. It
+then calculates the membership probabilities for each vector in each of the
+clusters - this is the 'E' step. The cluster parameters are then updated in
+the 'M' step using the maximum likelihood estimate from the cluster membership
+probabilities. This process continues until the likelihood of the data does
+not significantly increase.</p>
+<p>They all extend the ClusterI interface which defines common operations
+available with each clusterer. These operations include.</p>
+<blockquote>
+<ul class="rst-simple">
+<li>cluster: clusters a sequence of vectors</li>
+<li>classify: assign a vector to a cluster</li>
+<li>classification_probdist: give the probability distribution over cluster memberships</li>
+</ul>
+</blockquote>
+<p>The current existing classifiers also extend cluster.VectorSpace, an
+abstract class which allows for singular value decomposition (SVD) and vector
+normalisation. SVD is used to reduce the dimensionality of the vector space in
+such a manner as to preserve as much of the variation as possible, by
+reparameterising the axes in order of variability and discarding all bar the
+first d dimensions. Normalisation ensures that vectors fall in the unit
+hypersphere.</p>
+<dl class="rst-docutils">
+<dt>Usage example (see also demo())::</dt>
+<dd><p class="rst-first">from nltk import cluster
+from nltk.cluster import euclidean_distance
+from numpy import array</p>
+<p>vectors = [array(f) for f in [[3, 3], [1, 2], [4, 2], [4, 0]]]</p>
+<p># initialise the clusterer (will also assign the vectors to clusters)
+clusterer = cluster.KMeansClusterer(2, euclidean_distance)
+clusterer.cluster(vectors, True)</p>
+<p class="rst-last"># classify a new vector
+print(clusterer.classify(array([3, 3])))</p>
+</dd>
+</dl>
+<p>Note that the vectors must use numpy array-like
+objects. nltk_contrib.unimelb.tacohn.SparseArrays may be used for
+efficiency when required.</p>
+</div>
+      </div>
+
+      <div id="splitTables">
+        <table class="children sortable" id="id183">
+  
+  
+  <tr class="module">
+    
+    <td>Module</td>
+    <td><code><a href="nltk.cluster.api.html">api</a></code></td>
+    <td><span class="undocumented">No module docstring; 1/1 class documented</span></td>
+  </tr><tr class="module">
+    
+    <td>Module</td>
+    <td><code><a href="nltk.cluster.em.html">em</a></code></td>
+    <td><span class="undocumented">No module docstring; 1/1 function, 1/1 class documented</span></td>
+  </tr><tr class="module">
+    
+    <td>Module</td>
+    <td><code><a href="nltk.cluster.gaac.html">gaac</a></code></td>
+    <td><span class="undocumented">No module docstring; 1/1 function, 1/1 class documented</span></td>
+  </tr><tr class="module">
+    
+    <td>Module</td>
+    <td><code><a href="nltk.cluster.kmeans.html">kmeans</a></code></td>
+    <td><span class="undocumented">No module docstring; 0/1 function, 1/1 class documented</span></td>
+  </tr><tr class="module">
+    
+    <td>Module</td>
+    <td><code><a href="nltk.cluster.util.html">util</a></code></td>
+    <td><span class="undocumented">No module docstring; 2/2 functions, 3/3 classes documented</span></td>
+  </tr>
+</table>
+        
+
+          
+      </div>
+
+      <div id="childList">
+
+        
+
+      </div>
+    </div>
+
+    <footer class="navbar navbar-default">
+  
+  <div class="container">
+    <a href="index.html">API Documentation</a> for <a href="http://www.nltk.org/" class="projecthome">nltk-3.6.2</a>,
+  generated by <a href="https://github.com/twisted/pydoctor/">pydoctor</a>
+    21.2.2 at 2021-07-12 23:14:45.
+  </div>
+</footer>
+
+    <script src="pydoctor.js" type="text/javascript"></script>
+
+  </body>
+</html>
