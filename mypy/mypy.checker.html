@@ -1,0 +1,1545 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+          "DTD/xhtml1-strict.dtd">
+<html>
+  
+
+  <head>
+    
+    <title>mypy.checker</title>
+    <meta name="generator" content="pydoctor 21.2.2"> 
+        
+    </meta>
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=0.75" />
+    <link rel="stylesheet" type="text/css" href="bootstrap.min.css" />
+    <link rel="stylesheet" type="text/css" href="apidocs.css" />
+    <link rel="stylesheet" type="text/css" href="extra.css" />
+</head>
+
+  <body>
+
+    
+
+    <nav class="navbar navbar-default">
+  
+  <div class="container">
+
+    <div class="navbar-header">
+      
+      <div class="navlinks">
+        <span class="navbar-brand">
+          <a href="http://www.nltk.org/" class="projecthome">mypy-0.930</a> <a href="index.html">API Documentation</a>
+        </span>
+
+        <a href="moduleIndex.html">
+          Modules
+        </a>
+
+        <a href="classIndex.html">
+          Classes
+        </a>
+
+        <a href="nameIndex.html">
+          Names
+        </a>
+
+        <form action="search-results.html" id="search-box-container">
+          <div class="input-group">
+            <input id="search-box" name="search-query" placeholder="Search..." aria-label="Search" minlength="2" class="form-control" />
+            <span class="input-group-btn">
+              <button class="btn btn-default" type="submit" title="Search"><img src="fonts/search.svg" alt="Search!" /></button>
+              <a class="btn btn-default" id="search-help-button" title="Help" onclick="toggleSearchHelpText()"><img src="fonts/info.svg" alt="Help!" /></a>
+            </span>
+          </div>
+        </form>
+
+        <div class="rst-admonition hint" id="search-help-box">
+          <p class="rst-last">
+      
+            Search bar offers the following options:
+            <ul>   
+                <li>
+                  <strong>Term presence.</strong> The below example searches for documents that 
+                    must contain “foo”, might contain “bar” and must not contain “baz”:
+                  <br /> <code>'+foo bar -baz'</code>
+                </li> 
+
+                <li>
+                  <strong>Wildcards.</strong> The below example searches for documents with words beginning with “foo”:
+                  <br /> <code>'foo*'</code>
+                </li> 
+
+                <li>
+                  <strong>Search in specific fields.</strong> The following search matches all documents 
+                  that contains "foo" in their full dotted name and with “bar” in any field:
+                  <br /> <code>'+fullName:*foo* +bar'</code>
+
+                  <p>
+                    Possible fields: 'name', 'docstring', 'fullName'.
+                  </p>
+                </li>
+
+                <li>
+                  <strong>Fuzzy matches.</strong> The following search matches all documents 
+                  that have a word within 1 edit distance of “foo”:
+                  <br /> <code>'foo~1'</code>
+                </li>
+            </ul>
+
+          </p>
+        </div>
+
+      </div>
+
+
+    </div>
+  </div>
+
+  <script>
+ 
+    function toggleSearchHelpText() {
+        document.body.classList.toggle("search-help-hidden");
+    }
+    // Init search and help text
+    document.getElementById('search-box-container').style.display = 'block';
+    document.getElementById('search-help-box').style.display = 'block';
+    document.body.classList.add("search-help-hidden");
+
+  </script>
+
+</nav>
+
+    
+
+    <div class="container">
+
+      <div class="page-header">
+        <h1 class="module"><code><code><a href="mypy.html">mypy</a></code><wbr></wbr>.<code><a href="mypy.checker.html">checker</a></code></code></h1>
+        <div id="showPrivate">
+          <button class="btn btn-link" onclick="togglePrivate()">Toggle Private API</button>
+        </div>
+      </div>
+
+      <div class="categoryHeader">
+        module documentation
+      </div>
+
+      <div class="extrasDocstring">
+        <a href="https://github.com/python/mypy/tree/v0.930/mypy/checker.py" class="sourceLink">(source)</a>
+        <p></p>
+      </div>
+
+      <div class="moduleDocstring">
+        <div>Mypy type checker.</div>
+      </div>
+
+      <div id="splitTables">
+        <table class="children sortable" id="id18">
+  
+  
+  <tr class="class">
+    
+    <td>Class</td>
+    <td><code><a href="mypy.checker.CheckerScope.html">CheckerScope</a></code></td>
+    <td><span class="undocumented">No class docstring; 0/1 instance variable, 2/8 methods documented</span></td>
+  </tr><tr class="class">
+    
+    <td>Class</td>
+    <td><code><a href="mypy.checker.DisjointDict.html">DisjointDict</a></code></td>
+    <td><span>An variation of the union-find algorithm/data structure where instead of keeping track of just disjoint sets, we keep track of disjoint dicts -- keep track of multiple Set[Key] -&gt; Set[Value] mappings, where each mapping's keys are guaranteed to be disjoint.</span></td>
+  </tr><tr class="class">
+    
+    <td>Class</td>
+    <td><code><a href="mypy.checker.NothingSeeker.html">NothingSeeker</a></code></td>
+    <td><span>Find any &lt;nothing&gt; types resulting from failed (ambiguous) type inference.</span></td>
+  </tr><tr class="class">
+    
+    <td>Class</td>
+    <td><code><a href="mypy.checker.SetNothingToAny.html">SetNothingToAny</a></code></td>
+    <td><span>Replace all ambiguous &lt;nothing&gt; types with Any (to avoid spurious extra errors).</span></td>
+  </tr><tr class="class">
+    
+    <td>Class</td>
+    <td><code><a href="mypy.checker.TypeChecker.html">TypeChecker</a></code></td>
+    <td><span>Mypy type checker.</span></td>
+  </tr><tr class="class">
+    
+    <td>Class</td>
+    <td><code><a href="mypy.checker.TypeTransformVisitor.html">TypeTransformVisitor</a></code></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="function">
+    
+    <td>Function</td>
+    <td><code><a href="#and_conditional_maps">and_conditional_maps</a></code></td>
+    <td><span>Calculate what information we can learn from the truth of (e1 and e2) in terms of the information that we can learn from the truth of e1 and the truth of e2.</span></td>
+  </tr><tr class="function">
+    
+    <td>Function</td>
+    <td><code><a href="#are_argument_counts_overlapping">are_argument_counts_overlapping</a></code></td>
+    <td><span>Can a single call match both t and s, based just on positional argument counts?</span></td>
+  </tr><tr class="function">
+    
+    <td>Function</td>
+    <td><code><a href="#builtin_item_type">builtin_item_type</a></code></td>
+    <td><span>Get the item type of a builtin container.</span></td>
+  </tr><tr class="function">
+    
+    <td>Function</td>
+    <td><code><a href="#collapse_walrus">collapse_walrus</a></code></td>
+    <td><span>If an expression is an AssignmentExpr, pull out the assignment target.</span></td>
+  </tr><tr class="function">
+    
+    <td>Function</td>
+    <td><code><a href="#conditional_type_map">conditional_type_map</a></code></td>
+    <td><span>Takes in an expression, the current type of the expression, and a proposed type of that expression.</span></td>
+  </tr><tr class="function">
+    
+    <td>Function</td>
+    <td><code><a href="#convert_to_typetype">convert_to_typetype</a></code></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="function">
+    
+    <td>Function</td>
+    <td><code><a href="#detach_callable">detach_callable</a></code></td>
+    <td><span>Ensures that the callable's type variables are 'detached' and independent of the context.</span></td>
+  </tr><tr class="function">
+    
+    <td>Function</td>
+    <td><code><a href="#expand_func">expand_func</a></code></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="function">
+    
+    <td>Function</td>
+    <td><code><a href="#flatten">flatten</a></code></td>
+    <td><span>Flatten a nested sequence of tuples/lists into one list of nodes.</span></td>
+  </tr><tr class="function">
+    
+    <td>Function</td>
+    <td><code><a href="#flatten_types">flatten_types</a></code></td>
+    <td><span>Flatten a nested sequence of tuples into one list of nodes.</span></td>
+  </tr><tr class="function">
+    
+    <td>Function</td>
+    <td><code><a href="#gen_unique_name">gen_unique_name</a></code></td>
+    <td><span>Generate a name that does not appear in table by appending numbers to base.</span></td>
+  </tr><tr class="function">
+    
+    <td>Function</td>
+    <td><code><a href="#get_isinstance_type">get_isinstance_type</a></code></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="function">
+    
+    <td>Function</td>
+    <td><code><a href="#group_comparison_operands">group_comparison_operands</a></code></td>
+    <td><span>Group a series of comparison operands together chained by any operand in the 'operators_to_group' set. All other pairwise operands are kept in groups of size 2.</span></td>
+  </tr><tr class="function">
+    
+    <td>Function</td>
+    <td><code><a href="#has_bool_item">has_bool_item</a></code></td>
+    <td><span>Return True if type is 'bool' or a union with a 'bool' item.</span></td>
+  </tr><tr class="function">
+    
+    <td>Function</td>
+    <td><code><a href="#infer_operator_assignment_method">infer_operator_assignment_method</a></code></td>
+    <td><span>Determine if operator assignment on given value type is in-place, and the method name.</span></td>
+  </tr><tr class="function">
+    
+    <td>Function</td>
+    <td><code><a href="#is_false_literal">is_false_literal</a></code></td>
+    <td><span>Returns true if this expression is the 'False' literal/keyword.</span></td>
+  </tr><tr class="function">
+    
+    <td>Function</td>
+    <td><code><a href="#is_literal_enum">is_literal_enum</a></code></td>
+    <td><span>Returns true if this expression (with the given type context) is an Enum literal.</span></td>
+  </tr><tr class="function">
+    
+    <td>Function</td>
+    <td><code><a href="#is_literal_none">is_literal_none</a></code></td>
+    <td><span>Returns true if this expression is the 'None' literal/keyword.</span></td>
+  </tr><tr class="function">
+    
+    <td>Function</td>
+    <td><code><a href="#is_literal_not_implemented">is_literal_not_implemented</a></code></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="function">
+    
+    <td>Function</td>
+    <td><code><a href="#is_more_general_arg_prefix">is_more_general_arg_prefix</a></code></td>
+    <td><span>Does t have wider arguments than s?</span></td>
+  </tr><tr class="function">
+    
+    <td>Function</td>
+    <td><code><a href="#is_node_static">is_node_static</a></code></td>
+    <td><span>Find out if a node describes a static function method.</span></td>
+  </tr><tr class="function">
+    
+    <td>Function</td>
+    <td><code><a href="#is_overlapping_types_no_promote">is_overlapping_types_no_promote</a></code></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="function">
+    
+    <td>Function</td>
+    <td><code><a href="#is_private">is_private</a></code></td>
+    <td><span>Check if node is private to class definition.</span></td>
+  </tr><tr class="function">
+    
+    <td>Function</td>
+    <td><code><a href="#is_same_arg_prefix">is_same_arg_prefix</a></code></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="function">
+    
+    <td>Function</td>
+    <td><code><a href="#is_static">is_static</a></code></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="function">
+    
+    <td>Function</td>
+    <td><code><a href="#is_subtype_no_promote">is_subtype_no_promote</a></code></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="function">
+    
+    <td>Function</td>
+    <td><code><a href="#is_true_literal">is_true_literal</a></code></td>
+    <td><span>Returns true if this expression is the 'True' literal/keyword.</span></td>
+  </tr><tr class="function">
+    
+    <td>Function</td>
+    <td><code><a href="#is_typed_callable">is_typed_callable</a></code></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="function">
+    
+    <td>Function</td>
+    <td><code><a href="#is_unsafe_overlapping_overload_signatures">is_unsafe_overlapping_overload_signatures</a></code></td>
+    <td><span>Check if two overloaded signatures are unsafely overlapping or partially overlapping.</span></td>
+  </tr><tr class="function">
+    
+    <td>Function</td>
+    <td><code><a href="#is_untyped_decorator">is_untyped_decorator</a></code></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="function">
+    
+    <td>Function</td>
+    <td><code><a href="#is_valid_inferred_type">is_valid_inferred_type</a></code></td>
+    <td><span>Is an inferred type valid?</span></td>
+  </tr><tr class="function">
+    
+    <td>Function</td>
+    <td><code><a href="#or_conditional_maps">or_conditional_maps</a></code></td>
+    <td><span>Calculate what information we can learn from the truth of (e1 or e2) in terms of the information that we can learn from the truth of e1 and the truth of e2.</span></td>
+  </tr><tr class="function">
+    
+    <td>Function</td>
+    <td><code><a href="#overload_can_never_match">overload_can_never_match</a></code></td>
+    <td><span>Check if the 'other' method can never be matched due to 'signature'.</span></td>
+  </tr><tr class="function">
+    
+    <td>Function</td>
+    <td><code><a href="#reduce_conditional_maps">reduce_conditional_maps</a></code></td>
+    <td><span>Reduces a list containing pairs of if/else TypeMaps into a single pair.</span></td>
+  </tr><tr class="variable">
+    
+    <td>Variable</td>
+    <td><code><a href="#DEFAULT_LAST_PASS">DEFAULT_LAST_PASS</a></code></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="variable">
+    
+    <td>Variable</td>
+    <td><code><a href="#DeferredNode">DeferredNode</a></code></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="variable">
+    
+    <td>Variable</td>
+    <td><code><a href="#DeferredNodeType">DeferredNodeType</a></code></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="variable">
+    
+    <td>Variable</td>
+    <td><code><a href="#FineGrainedDeferredNode">FineGrainedDeferredNode</a></code></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="variable">
+    
+    <td>Variable</td>
+    <td><code><a href="#FineGrainedDeferredNodeType">FineGrainedDeferredNodeType</a></code></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="variable">
+    
+    <td>Variable</td>
+    <td><code><a href="#PartialTypeScope">PartialTypeScope</a></code></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="variable">
+    
+    <td>Variable</td>
+    <td><code><a href="#T">T</a></code></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="variable">
+    
+    <td>Variable</td>
+    <td><code><a href="#TKey">TKey</a></code></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="variable">
+    
+    <td>Variable</td>
+    <td><code><a href="#TValue">TValue</a></code></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="variable">
+    
+    <td>Variable</td>
+    <td><code><a href="#TypeMap">TypeMap</a></code></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="variable">
+    
+    <td>Variable</td>
+    <td><code><a href="#TypeRange">TypeRange</a></code></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr>
+</table>
+        
+
+          
+      </div>
+
+      <div id="childList">
+
+        <div class="basefunction">
+  
+  
+  <a name="mypy.checker.and_conditional_maps">
+    
+  </a>
+  <a name="and_conditional_maps">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-keyword">def</span> <span class="py-defname">and_conditional_maps</span>(m1, m2):
+    <a class="sourceLink" href="https://github.com/python/mypy/tree/v0.930/mypy/checker.py#L5493">
+      
+      (source)
+    </a>
+  </div>
+  <div class="docstring functionBody">
+    
+    
+    <div>Calculate what information we can learn from the truth of (e1 and e2)
+in terms of the information that we can learn from the truth of e1 and
+the truth of e2.<table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">m1:</span><code><a href="#TypeMap">TypeMap</a></code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">m2:</span><code><a href="#TypeMap">TypeMap</a></code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr class="fieldStart"><td class="fieldName" colspan="2">Returns</td></tr><tr><td class="fieldArgContainer"><code><a href="#TypeMap">TypeMap</a></code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr></table></div>
+  </div>
+</div><div class="basefunction">
+  
+  
+  <a name="mypy.checker.are_argument_counts_overlapping">
+    
+  </a>
+  <a name="are_argument_counts_overlapping">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-keyword">def</span> <span class="py-defname">are_argument_counts_overlapping</span>(t, s):
+    <a class="sourceLink" href="https://github.com/python/mypy/tree/v0.930/mypy/checker.py#L5661">
+      
+      (source)
+    </a>
+  </div>
+  <div class="docstring functionBody">
+    
+    
+    <div>Can a single call match both t and s, based just on positional argument counts?<table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">t:</span><code><a href="mypy.types.CallableType.html">CallableType</a></code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">s:</span><code><a href="mypy.types.CallableType.html">CallableType</a></code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr class="fieldStart"><td class="fieldName" colspan="2">Returns</td></tr><tr><td class="fieldArgContainer"><code>bool</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr></table></div>
+  </div>
+</div><div class="basefunction">
+  
+  
+  <a name="mypy.checker.builtin_item_type">
+    
+  </a>
+  <a name="builtin_item_type">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-keyword">def</span> <span class="py-defname">builtin_item_type</span>(tp):
+    <a class="sourceLink" href="https://github.com/python/mypy/tree/v0.930/mypy/checker.py#L5454">
+      
+      (source)
+    </a>
+  </div>
+  <div class="docstring functionBody">
+    
+    
+    <div><p>Get the item type of a builtin container.</p>
+<p>If 'tp' is not one of the built containers (these includes NamedTuple and TypedDict)
+or if the container is not parameterized (like List or List[Any])
+return None. This function is used to narrow optional types in situations like this:</p>
+<blockquote>
+<p>x: Optional[int]
+if x in (1, 2, 3):</p>
+<blockquote>
+x + 42  # OK</blockquote>
+</blockquote>
+<p>Note: this is only OK for built-in containers, where we know the behavior
+of __contains__.</p>
+<table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">tp:</span><code><a href="mypy.types.Type.html">Type</a></code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr class="fieldStart"><td class="fieldName" colspan="2">Returns</td></tr><tr><td class="fieldArgContainer"><code>Optional[<wbr></wbr><a href="mypy.types.Type.html">Type</a>]</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr></table></div>
+  </div>
+</div><div class="basefunction">
+  
+  
+  <a name="mypy.checker.collapse_walrus">
+    
+  </a>
+  <a name="collapse_walrus">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-keyword">def</span> <span class="py-defname">collapse_walrus</span>(e):
+    <a class="sourceLink" href="https://github.com/python/mypy/tree/v0.930/mypy/checker.py#L6204">
+      
+      (source)
+    </a>
+  </div>
+  <div class="docstring functionBody">
+    
+    
+    <div><p>If an expression is an AssignmentExpr, pull out the assignment target.</p>
+<p>We don't make any attempt to pull out all the targets in code like <code>x := (y := z)</code>.
+We could support narrowing those if that sort of code turns out to be common.</p>
+<table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">e:</span><code><a href="mypy.nodes.Expression.html">Expression</a></code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr class="fieldStart"><td class="fieldName" colspan="2">Returns</td></tr><tr><td class="fieldArgContainer"><code><a href="mypy.nodes.Expression.html">Expression</a></code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr></table></div>
+  </div>
+</div><div class="basefunction">
+  
+  
+  <a name="mypy.checker.conditional_type_map">
+    
+  </a>
+  <a name="conditional_type_map">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-keyword">def</span> <span class="py-defname">conditional_type_map</span>(expr, current_type, proposed_type_ranges):
+    <a class="sourceLink" href="https://github.com/python/mypy/tree/v0.930/mypy/checker.py#L5343">
+      
+      (source)
+    </a>
+  </div>
+  <div class="docstring functionBody">
+    
+    
+    <div><p>Takes in an expression, the current type of the expression, and a
+proposed type of that expression.</p>
+<p>Returns a 2-tuple: The first element is a map from the expression to
+the proposed type, if the expression can be the proposed type.  The
+second element is a map from the expression to the type it would hold
+if it was not the proposed type, if any. None means bot, {} means top</p>
+<table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">expr:</span><code><a href="mypy.nodes.Expression.html">Expression</a></code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">current_type:</span><code>Optional[<wbr></wbr><a href="mypy.types.Type.html">Type</a>]</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">proposed_type_ranges:</span><code>Optional[<wbr></wbr>List[<wbr></wbr><a href="#TypeRange">TypeRange</a>]]</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr class="fieldStart"><td class="fieldName" colspan="2">Returns</td></tr><tr><td class="fieldArgContainer"><code>Tuple[<wbr></wbr><a href="#TypeMap">TypeMap</a>, <wbr></wbr><a href="#TypeMap">TypeMap</a>]</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr></table></div>
+  </div>
+</div><div class="basefunction">
+  
+  
+  <a name="mypy.checker.convert_to_typetype">
+    
+  </a>
+  <a name="convert_to_typetype">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-keyword">def</span> <span class="py-defname">convert_to_typetype</span>(type_map):
+    <a class="sourceLink" href="https://github.com/python/mypy/tree/v0.930/mypy/checker.py#L5575">
+      
+      (source)
+    </a>
+  </div>
+  <div class="docstring functionBody">
+    
+    
+    <div><p class="undocumented">Undocumented</p><table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">type_map:</span><code><a href="#TypeMap">TypeMap</a></code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr class="fieldStart"><td class="fieldName" colspan="2">Returns</td></tr><tr><td class="fieldArgContainer"><code><a href="#TypeMap">TypeMap</a></code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr></table></div>
+  </div>
+</div><div class="basefunction">
+  
+  
+  <a name="mypy.checker.detach_callable">
+    
+  </a>
+  <a name="detach_callable">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-keyword">def</span> <span class="py-defname">detach_callable</span>(typ):
+    <a class="sourceLink" href="https://github.com/python/mypy/tree/v0.930/mypy/checker.py#L5715">
+      
+      (source)
+    </a>
+  </div>
+  <div class="docstring functionBody">
+    
+    
+    <div><p>Ensures that the callable's type variables are 'detached' and independent of the context.</p>
+<p>A callable normally keeps track of the type variables it uses within its 'variables' field.
+However, if the callable is from a method and that method is using a class type variable,
+the callable will not keep track of that type variable since it belongs to the class.</p>
+<p>This function will traverse the callable and find all used type vars and add them to the
+variables field if it isn't already present.</p>
+<p>The caller can then unify on all type variables whether or not the callable is originally
+from a class or not.</p>
+<table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">typ:</span><code><a href="mypy.types.CallableType.html">CallableType</a></code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr class="fieldStart"><td class="fieldName" colspan="2">Returns</td></tr><tr><td class="fieldArgContainer"><code><a href="mypy.types.CallableType.html">CallableType</a></code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr></table></div>
+  </div>
+</div><div class="basefunction">
+  
+  
+  <a name="mypy.checker.expand_func">
+    
+  </a>
+  <a name="expand_func">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-keyword">def</span> <span class="py-defname">expand_func</span>(defn, map):
+    <a class="sourceLink" href="https://github.com/python/mypy/tree/v0.930/mypy/checker.py#L5645">
+      
+      (source)
+    </a>
+  </div>
+  <div class="docstring functionBody">
+    
+    
+    <div><p class="undocumented">Undocumented</p><table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">defn:</span><code><a href="mypy.nodes.FuncItem.html">FuncItem</a></code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">map:</span><code>Dict[<wbr></wbr><a href="mypy.types.TypeVarId.html">TypeVarId</a>, <wbr></wbr><a href="mypy.types.Type.html">Type</a>]</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr class="fieldStart"><td class="fieldName" colspan="2">Returns</td></tr><tr><td class="fieldArgContainer"><code><a href="mypy.nodes.FuncItem.html">FuncItem</a></code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr></table></div>
+  </div>
+</div><div class="basefunction">
+  
+  
+  <a name="mypy.checker.flatten">
+    
+  </a>
+  <a name="flatten">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-keyword">def</span> <span class="py-defname">flatten</span>(t):
+    <a class="sourceLink" href="https://github.com/python/mypy/tree/v0.930/mypy/checker.py#L5591">
+      
+      (source)
+    </a>
+  </div>
+  <div class="docstring functionBody">
+    
+    
+    <div>Flatten a nested sequence of tuples/lists into one list of nodes.<table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">t:</span><code><a href="mypy.nodes.Expression.html">Expression</a></code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr class="fieldStart"><td class="fieldName" colspan="2">Returns</td></tr><tr><td class="fieldArgContainer"><code>List[<wbr></wbr><a href="mypy.nodes.Expression.html">Expression</a>]</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr></table></div>
+  </div>
+</div><div class="basefunction">
+  
+  
+  <a name="mypy.checker.flatten_types">
+    
+  </a>
+  <a name="flatten_types">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-keyword">def</span> <span class="py-defname">flatten_types</span>(t):
+    <a class="sourceLink" href="https://github.com/python/mypy/tree/v0.930/mypy/checker.py#L5601">
+      
+      (source)
+    </a>
+  </div>
+  <div class="docstring functionBody">
+    
+    
+    <div>Flatten a nested sequence of tuples into one list of nodes.<table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">t:</span><code><a href="mypy.types.Type.html">Type</a></code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr class="fieldStart"><td class="fieldName" colspan="2">Returns</td></tr><tr><td class="fieldArgContainer"><code>List[<wbr></wbr><a href="mypy.types.Type.html">Type</a>]</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr></table></div>
+  </div>
+</div><div class="basefunction">
+  
+  
+  <a name="mypy.checker.gen_unique_name">
+    
+  </a>
+  <a name="gen_unique_name">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-keyword">def</span> <span class="py-defname">gen_unique_name</span>(base, table):
+    <a class="sourceLink" href="https://github.com/python/mypy/tree/v0.930/mypy/checker.py#L5387">
+      
+      (source)
+    </a>
+  </div>
+  <div class="docstring functionBody">
+    
+    
+    <div>Generate a name that does not appear in table by appending numbers to base.<table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">base:</span><code>str</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">table:</span><code><a href="mypy.nodes.SymbolTable.html">SymbolTable</a></code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr class="fieldStart"><td class="fieldName" colspan="2">Returns</td></tr><tr><td class="fieldArgContainer"><code>str</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr></table></div>
+  </div>
+</div><div class="basefunction">
+  
+  
+  <a name="mypy.checker.get_isinstance_type">
+    
+  </a>
+  <a name="get_isinstance_type">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-keyword">def</span> <span class="py-defname">get_isinstance_type</span>(expr, type_map):
+    <a class="sourceLink" href="https://github.com/python/mypy/tree/v0.930/mypy/checker.py#L5610">
+      
+      (source)
+    </a>
+  </div>
+  <div class="docstring functionBody">
+    
+    
+    <div><p class="undocumented">Undocumented</p><table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">expr:</span><code><a href="mypy.nodes.Expression.html">Expression</a></code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">type_map:</span><code>Dict[<wbr></wbr><a href="mypy.nodes.Expression.html">Expression</a>, <wbr></wbr><a href="mypy.types.Type.html">Type</a>]</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr class="fieldStart"><td class="fieldName" colspan="2">Returns</td></tr><tr><td class="fieldArgContainer"><code>Optional[<wbr></wbr>List[<wbr></wbr><a href="#TypeRange">TypeRange</a>]]</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr></table></div>
+  </div>
+</div><div class="basefunction">
+  
+  
+  <a name="mypy.checker.group_comparison_operands">
+    
+  </a>
+  <a name="group_comparison_operands">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-keyword">def</span> <span class="py-defname">group_comparison_operands</span>(pairwise_comparisons, operand_to_literal_hash, operators_to_group):
+    <a class="sourceLink" href="https://github.com/python/mypy/tree/v0.930/mypy/checker.py#L6040">
+      
+      (source)
+    </a>
+  </div>
+  <div class="docstring functionBody">
+    
+    
+    <div><p>Group a series of comparison operands together chained by any operand
+in the 'operators_to_group' set. All other pairwise operands are kept in
+groups of size 2.</p>
+<p>For example, suppose we have the input comparison expression:</p>
+<blockquote>
+x0 == x1 == x2 &lt; x3 &lt; x4 is x5 is x6 is not x7 is not x8</blockquote>
+<p>If we get these expressions in a pairwise way (e.g. by calling ComparisionExpr's
+'pairwise()' method), we get the following as input:</p>
+<blockquote>
+<dl class="rst-docutils">
+<dt>[('==', x0, x1), ('==', x1, x2), ('&lt;', x2, x3), ('&lt;', x3, x4),</dt>
+<dd>('is', x4, x5), ('is', x5, x6), ('is not', x6, x7), ('is not', x7, x8)]</dd>
+</dl>
+</blockquote>
+<p>If <code>operators_to_group</code> is the set {'==', 'is'}, this function will produce
+the following "simplified operator list":</p>
+<blockquote>
+<dl class="rst-docutils">
+<dt>[("==", [0, 1, 2]), ("&lt;", [2, 3]), ("&lt;", [3, 4]),</dt>
+<dd>("is", [4, 5, 6]), ("is not", [6, 7]), ("is not", [7, 8])]</dd>
+</dl>
+</blockquote>
+<p>Note that (a) we yield <em>indices</em> to the operands rather then the operand
+expressions themselves and that (b) operands used in a consecutive chain
+of '==' or 'is' are grouped together.</p>
+<p>If two of these chains happen to contain operands with the same underlying
+literal hash (e.g. are assignable and correspond to the same expression),
+we combine those chains together. For example, if we had:</p>
+<blockquote>
+same == x &lt; y == same</blockquote>
+<p>...and if 'operand_to_literal_hash' contained the same values for the indices
+0 and 3, we'd produce the following output:</p>
+<blockquote>
+[("==", [0, 1, 2, 3]), ("&lt;", [1, 2])]</blockquote>
+<p>But if the 'operand_to_literal_hash' did <em>not</em> contain an entry, we'd instead
+default to returning:</p>
+<blockquote>
+[("==", [0, 1]), ("&lt;", [1, 2]), ("==", [2, 3])]</blockquote>
+<p>This function is currently only used to assist with type-narrowing refinements
+and is extracted out to a helper function so we can unit test it.</p>
+<table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">pairwise_comparisons:</span><code>Iterable[<wbr></wbr>Tuple[<wbr></wbr>str, <wbr></wbr><a href="mypy.nodes.Expression.html">Expression</a>, <wbr></wbr><a href="mypy.nodes.Expression.html">Expression</a>]]</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">operand_to_literal_hash:</span><code>Mapping[<wbr></wbr>int, <wbr></wbr><a href="mypy.literals.html#Key">Key</a>]</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">operators_to_group:</span><code>Set[<wbr></wbr>str]</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr class="fieldStart"><td class="fieldName" colspan="2">Returns</td></tr><tr><td class="fieldArgContainer"><code>List[<wbr></wbr>Tuple[<wbr></wbr>str, <wbr></wbr>List[<wbr></wbr>int]]]</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr></table></div>
+  </div>
+</div><div class="basefunction">
+  
+  
+  <a name="mypy.checker.has_bool_item">
+    
+  </a>
+  <a name="has_bool_item">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-keyword">def</span> <span class="py-defname">has_bool_item</span>(typ):
+    <a class="sourceLink" href="https://github.com/python/mypy/tree/v0.930/mypy/checker.py#L6194">
+      
+      (source)
+    </a>
+  </div>
+  <div class="docstring functionBody">
+    
+    
+    <div>Return True if type is 'bool' or a union with a 'bool' item.<table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">typ:</span><code><a href="mypy.types.ProperType.html">ProperType</a></code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr class="fieldStart"><td class="fieldName" colspan="2">Returns</td></tr><tr><td class="fieldArgContainer"><code>bool</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr></table></div>
+  </div>
+</div><div class="basefunction">
+  
+  
+  <a name="mypy.checker.infer_operator_assignment_method">
+    
+  </a>
+  <a name="infer_operator_assignment_method">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-keyword">def</span> <span class="py-defname">infer_operator_assignment_method</span>(typ, operator):
+    <a class="sourceLink" href="https://github.com/python/mypy/tree/v0.930/mypy/checker.py#L5811">
+      
+      (source)
+    </a>
+  </div>
+  <div class="docstring functionBody">
+    
+    
+    <div><p>Determine if operator assignment on given value type is in-place, and the method name.</p>
+<p>For example, if operator is '+', return (True, '__iadd__') or (False, '__add__')
+depending on which method is supported by the type.</p>
+<table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">typ:</span><code><a href="mypy.types.Type.html">Type</a></code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">operator:</span><code>str</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr class="fieldStart"><td class="fieldName" colspan="2">Returns</td></tr><tr><td class="fieldArgContainer"><code>Tuple[<wbr></wbr>bool, <wbr></wbr>str]</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr></table></div>
+  </div>
+</div><div class="basefunction">
+  
+  
+  <a name="mypy.checker.is_false_literal">
+    
+  </a>
+  <a name="is_false_literal">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-keyword">def</span> <span class="py-defname">is_false_literal</span>(n):
+    <a class="sourceLink" href="https://github.com/python/mypy/tree/v0.930/mypy/checker.py#L5403">
+      
+      (source)
+    </a>
+  </div>
+  <div class="docstring functionBody">
+    
+    
+    <div>Returns true if this expression is the 'False' literal/keyword.<table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">n:</span><code><a href="mypy.nodes.Expression.html">Expression</a></code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr class="fieldStart"><td class="fieldName" colspan="2">Returns</td></tr><tr><td class="fieldArgContainer"><code>bool</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr></table></div>
+  </div>
+</div><div class="basefunction">
+  
+  
+  <a name="mypy.checker.is_literal_enum">
+    
+  </a>
+  <a name="is_literal_enum">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-keyword">def</span> <span class="py-defname">is_literal_enum</span>(type_map, n):
+    <a class="sourceLink" href="https://github.com/python/mypy/tree/v0.930/mypy/checker.py#L5409">
+      
+      (source)
+    </a>
+  </div>
+  <div class="docstring functionBody">
+    
+    
+    <div><p>Returns true if this expression (with the given type context) is an Enum literal.</p>
+<p>For example, if we had an enum:</p>
+<blockquote>
+<dl class="rst-docutils">
+<dt>class Foo(Enum):</dt>
+<dd>A = 1
+B = 2</dd>
+</dl>
+</blockquote>
+<p>...and if the expression 'Foo' referred to that enum within the current type context,
+then the expression 'Foo.A' would be a literal enum. However, if we did 'a = Foo.A',
+then the variable 'a' would <em>not</em> be a literal enum.</p>
+<p>We occasionally special-case expressions like 'Foo.A' and treat them as a single primitive
+unit for the same reasons we sometimes treat 'True', 'False', or 'None' as a single
+primitive unit.</p>
+<table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">type_map:</span><code>Mapping[<wbr></wbr><a href="mypy.nodes.Expression.html">Expression</a>, <wbr></wbr><a href="mypy.types.Type.html">Type</a>]</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">n:</span><code><a href="mypy.nodes.Expression.html">Expression</a></code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr class="fieldStart"><td class="fieldName" colspan="2">Returns</td></tr><tr><td class="fieldArgContainer"><code>bool</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr></table></div>
+  </div>
+</div><div class="basefunction">
+  
+  
+  <a name="mypy.checker.is_literal_none">
+    
+  </a>
+  <a name="is_literal_none">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-keyword">def</span> <span class="py-defname">is_literal_none</span>(n):
+    <a class="sourceLink" href="https://github.com/python/mypy/tree/v0.930/mypy/checker.py#L5445">
+      
+      (source)
+    </a>
+  </div>
+  <div class="docstring functionBody">
+    
+    
+    <div>Returns true if this expression is the 'None' literal/keyword.<table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">n:</span><code><a href="mypy.nodes.Expression.html">Expression</a></code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr class="fieldStart"><td class="fieldName" colspan="2">Returns</td></tr><tr><td class="fieldArgContainer"><code>bool</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr></table></div>
+  </div>
+</div><div class="basefunction">
+  
+  
+  <a name="mypy.checker.is_literal_not_implemented">
+    
+  </a>
+  <a name="is_literal_not_implemented">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-keyword">def</span> <span class="py-defname">is_literal_not_implemented</span>(n):
+    <a class="sourceLink" href="https://github.com/python/mypy/tree/v0.930/mypy/checker.py#L5450">
+      
+      (source)
+    </a>
+  </div>
+  <div class="docstring functionBody">
+    
+    
+    <div><p class="undocumented">Undocumented</p><table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">n:</span><code><a href="mypy.nodes.Expression.html">Expression</a></code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr class="fieldStart"><td class="fieldName" colspan="2">Returns</td></tr><tr><td class="fieldArgContainer"><code>bool</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr></table></div>
+  </div>
+</div><div class="basefunction">
+  
+  
+  <a name="mypy.checker.is_more_general_arg_prefix">
+    
+  </a>
+  <a name="is_more_general_arg_prefix">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-keyword">def</span> <span class="py-defname">is_more_general_arg_prefix</span>(t, s):
+    <a class="sourceLink" href="https://github.com/python/mypy/tree/v0.930/mypy/checker.py#L5786">
+      
+      (source)
+    </a>
+  </div>
+  <div class="docstring functionBody">
+    
+    
+    <div>Does t have wider arguments than s?<table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">t:</span><code><a href="mypy.types.FunctionLike.html">FunctionLike</a></code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">s:</span><code><a href="mypy.types.FunctionLike.html">FunctionLike</a></code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr class="fieldStart"><td class="fieldName" colspan="2">Returns</td></tr><tr><td class="fieldArgContainer"><code>bool</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr></table></div>
+  </div>
+</div><div class="basefunction">
+  
+  
+  <a name="mypy.checker.is_node_static">
+    
+  </a>
+  <a name="is_node_static">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-keyword">def</span> <span class="py-defname">is_node_static</span>(node):
+    <a class="sourceLink" href="https://github.com/python/mypy/tree/v0.930/mypy/checker.py#L5869">
+      
+      (source)
+    </a>
+  </div>
+  <div class="docstring functionBody">
+    
+    
+    <div>Find out if a node describes a static function method.<table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">node:</span><code>Optional[<wbr></wbr><a href="mypy.nodes.Node.html">Node</a>]</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr class="fieldStart"><td class="fieldName" colspan="2">Returns</td></tr><tr><td class="fieldArgContainer"><code>Optional[<wbr></wbr>bool]</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr></table></div>
+  </div>
+</div><div class="basefunction">
+  
+  
+  <a name="mypy.checker.is_overlapping_types_no_promote">
+    
+  </a>
+  <a name="is_overlapping_types_no_promote">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-keyword">def</span> <span class="py-defname">is_overlapping_types_no_promote</span>(left, right):
+    <a class="sourceLink" href="https://github.com/python/mypy/tree/v0.930/mypy/checker.py#L6185">
+      
+      (source)
+    </a>
+  </div>
+  <div class="docstring functionBody">
+    
+    
+    <div><p class="undocumented">Undocumented</p><table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">left:</span><code><a href="mypy.types.Type.html">Type</a></code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">right:</span><code><a href="mypy.types.Type.html">Type</a></code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr class="fieldStart"><td class="fieldName" colspan="2">Returns</td></tr><tr><td class="fieldArgContainer"><code>bool</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr></table></div>
+  </div>
+</div><div class="basefunction">
+  
+  
+  <a name="mypy.checker.is_private">
+    
+  </a>
+  <a name="is_private">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-keyword">def</span> <span class="py-defname">is_private</span>(node_name):
+    <a class="sourceLink" href="https://github.com/python/mypy/tree/v0.930/mypy/checker.py#L6189">
+      
+      (source)
+    </a>
+  </div>
+  <div class="docstring functionBody">
+    
+    
+    <div>Check if node is private to class definition.<table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">node_name:</span><code>str</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr class="fieldStart"><td class="fieldName" colspan="2">Returns</td></tr><tr><td class="fieldArgContainer"><code>bool</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr></table></div>
+  </div>
+</div><div class="basefunction">
+  
+  
+  <a name="mypy.checker.is_same_arg_prefix">
+    
+  </a>
+  <a name="is_same_arg_prefix">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-keyword">def</span> <span class="py-defname">is_same_arg_prefix</span>(t, s):
+    <a class="sourceLink" href="https://github.com/python/mypy/tree/v0.930/mypy/checker.py#L5803">
+      
+      (source)
+    </a>
+  </div>
+  <div class="docstring functionBody">
+    
+    
+    <div><p class="undocumented">Undocumented</p><table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">t:</span><code><a href="mypy.types.CallableType.html">CallableType</a></code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">s:</span><code><a href="mypy.types.CallableType.html">CallableType</a></code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr class="fieldStart"><td class="fieldName" colspan="2">Returns</td></tr><tr><td class="fieldArgContainer"><code>bool</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr></table></div>
+  </div>
+</div><div class="basefunction">
+  
+  
+  <a name="mypy.checker.is_static">
+    
+  </a>
+  <a name="is_static">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-keyword">def</span> <span class="py-defname">is_static</span>(func):
+    <a class="sourceLink" href="https://github.com/python/mypy/tree/v0.930/mypy/checker.py#L6173">
+      
+      (source)
+    </a>
+  </div>
+  <div class="docstring functionBody">
+    
+    
+    <div><p class="undocumented">Undocumented</p><table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">func:</span><code>Union[<wbr></wbr><a href="mypy.nodes.FuncBase.html">FuncBase</a>, <wbr></wbr><a href="mypy.nodes.Decorator.html">Decorator</a>]</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr class="fieldStart"><td class="fieldName" colspan="2">Returns</td></tr><tr><td class="fieldArgContainer"><code>bool</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr></table></div>
+  </div>
+</div><div class="basefunction">
+  
+  
+  <a name="mypy.checker.is_subtype_no_promote">
+    
+  </a>
+  <a name="is_subtype_no_promote">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-keyword">def</span> <span class="py-defname">is_subtype_no_promote</span>(left, right):
+    <a class="sourceLink" href="https://github.com/python/mypy/tree/v0.930/mypy/checker.py#L6181">
+      
+      (source)
+    </a>
+  </div>
+  <div class="docstring functionBody">
+    
+    
+    <div><p class="undocumented">Undocumented</p><table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">left:</span><code><a href="mypy.types.Type.html">Type</a></code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">right:</span><code><a href="mypy.types.Type.html">Type</a></code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr class="fieldStart"><td class="fieldName" colspan="2">Returns</td></tr><tr><td class="fieldArgContainer"><code>bool</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr></table></div>
+  </div>
+</div><div class="basefunction">
+  
+  
+  <a name="mypy.checker.is_true_literal">
+    
+  </a>
+  <a name="is_true_literal">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-keyword">def</span> <span class="py-defname">is_true_literal</span>(n):
+    <a class="sourceLink" href="https://github.com/python/mypy/tree/v0.930/mypy/checker.py#L5397">
+      
+      (source)
+    </a>
+  </div>
+  <div class="docstring functionBody">
+    
+    
+    <div>Returns true if this expression is the 'True' literal/keyword.<table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">n:</span><code><a href="mypy.nodes.Expression.html">Expression</a></code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr class="fieldStart"><td class="fieldName" colspan="2">Returns</td></tr><tr><td class="fieldArgContainer"><code>bool</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr></table></div>
+  </div>
+</div><div class="basefunction">
+  
+  
+  <a name="mypy.checker.is_typed_callable">
+    
+  </a>
+  <a name="is_typed_callable">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-keyword">def</span> <span class="py-defname">is_typed_callable</span>(c):
+    <a class="sourceLink" href="https://github.com/python/mypy/tree/v0.930/mypy/checker.py#L6139">
+      
+      (source)
+    </a>
+  </div>
+  <div class="docstring functionBody">
+    
+    
+    <div><p class="undocumented">Undocumented</p><table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">c:</span><code>Optional[<wbr></wbr><a href="mypy.types.Type.html">Type</a>]</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr class="fieldStart"><td class="fieldName" colspan="2">Returns</td></tr><tr><td class="fieldArgContainer"><code>bool</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr></table></div>
+  </div>
+</div><div class="basefunction">
+  
+  
+  <a name="mypy.checker.is_unsafe_overlapping_overload_signatures">
+    
+  </a>
+  <a name="is_unsafe_overlapping_overload_signatures">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-keyword">def</span> <span class="py-defname">is_unsafe_overlapping_overload_signatures</span>(signature, other):
+    <a class="sourceLink" href="https://github.com/python/mypy/tree/v0.930/mypy/checker.py#L5669">
+      
+      (source)
+    </a>
+  </div>
+  <div class="docstring functionBody">
+    
+    
+    <div><p>Check if two overloaded signatures are unsafely overlapping or partially overlapping.</p>
+<p>We consider two functions 's' and 't' to be unsafely overlapping if both
+of the following are true:</p>
+<ol class="rst-arabic simple">
+<li>s's parameters are all more precise or partially overlapping with t's</li>
+<li>s's return type is NOT a subtype of t's.</li>
+</ol>
+<p>Assumes that 'signature' appears earlier in the list of overload
+alternatives then 'other' and that their argument counts are overlapping.</p>
+<table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">signature:</span><code><a href="mypy.types.CallableType.html">CallableType</a></code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">other:</span><code><a href="mypy.types.CallableType.html">CallableType</a></code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr class="fieldStart"><td class="fieldName" colspan="2">Returns</td></tr><tr><td class="fieldArgContainer"><code>bool</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr></table></div>
+  </div>
+</div><div class="basefunction">
+  
+  
+  <a name="mypy.checker.is_untyped_decorator">
+    
+  </a>
+  <a name="is_untyped_decorator">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-keyword">def</span> <span class="py-defname">is_untyped_decorator</span>(typ):
+    <a class="sourceLink" href="https://github.com/python/mypy/tree/v0.930/mypy/checker.py#L6147">
+      
+      (source)
+    </a>
+  </div>
+  <div class="docstring functionBody">
+    
+    
+    <div><p class="undocumented">Undocumented</p><table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">typ:</span><code>Optional[<wbr></wbr><a href="mypy.types.Type.html">Type</a>]</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr class="fieldStart"><td class="fieldName" colspan="2">Returns</td></tr><tr><td class="fieldArgContainer"><code>bool</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr></table></div>
+  </div>
+</div><div class="basefunction">
+  
+  
+  <a name="mypy.checker.is_valid_inferred_type">
+    
+  </a>
+  <a name="is_valid_inferred_type">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-keyword">def</span> <span class="py-defname">is_valid_inferred_type</span>(typ):
+    <a class="sourceLink" href="https://github.com/python/mypy/tree/v0.930/mypy/checker.py#L5827">
+      
+      (source)
+    </a>
+  </div>
+  <div class="docstring functionBody">
+    
+    
+    <div><p>Is an inferred type valid?</p>
+<p>Examples of invalid types include the None type or List[&lt;uninhabited&gt;].</p>
+<p>When not doing strict Optional checking, all types containing None are
+invalid.  When doing strict Optional checking, only None and types that are
+incompletely defined (i.e. contain UninhabitedType) are invalid.</p>
+<table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">typ:</span><code><a href="mypy.types.Type.html">Type</a></code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr class="fieldStart"><td class="fieldName" colspan="2">Returns</td></tr><tr><td class="fieldArgContainer"><code>bool</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr></table></div>
+  </div>
+</div><div class="basefunction">
+  
+  
+  <a name="mypy.checker.or_conditional_maps">
+    
+  </a>
+  <a name="or_conditional_maps">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-keyword">def</span> <span class="py-defname">or_conditional_maps</span>(m1, m2):
+    <a class="sourceLink" href="https://github.com/python/mypy/tree/v0.930/mypy/checker.py#L5515">
+      
+      (source)
+    </a>
+  </div>
+  <div class="docstring functionBody">
+    
+    
+    <div>Calculate what information we can learn from the truth of (e1 or e2)
+in terms of the information that we can learn from the truth of e1 and
+the truth of e2.<table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">m1:</span><code><a href="#TypeMap">TypeMap</a></code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">m2:</span><code><a href="#TypeMap">TypeMap</a></code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr class="fieldStart"><td class="fieldName" colspan="2">Returns</td></tr><tr><td class="fieldArgContainer"><code><a href="#TypeMap">TypeMap</a></code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr></table></div>
+  </div>
+</div><div class="basefunction">
+  
+  
+  <a name="mypy.checker.overload_can_never_match">
+    
+  </a>
+  <a name="overload_can_never_match">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-keyword">def</span> <span class="py-defname">overload_can_never_match</span>(signature, other):
+    <a class="sourceLink" href="https://github.com/python/mypy/tree/v0.930/mypy/checker.py#L5762">
+      
+      (source)
+    </a>
+  </div>
+  <div class="docstring functionBody">
+    
+    
+    <div><p>Check if the 'other' method can never be matched due to 'signature'.</p>
+<p>This can happen if signature's parameters are all strictly broader then
+other's parameters.</p>
+<p>Assumes that both signatures have overlapping argument counts.</p>
+<table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">signature:</span><code><a href="mypy.types.CallableType.html">CallableType</a></code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">other:</span><code><a href="mypy.types.CallableType.html">CallableType</a></code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr class="fieldStart"><td class="fieldName" colspan="2">Returns</td></tr><tr><td class="fieldArgContainer"><code>bool</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr></table></div>
+  </div>
+</div><div class="basefunction">
+  
+  
+  <a name="mypy.checker.reduce_conditional_maps">
+    
+  </a>
+  <a name="reduce_conditional_maps">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-keyword">def</span> <span class="py-defname">reduce_conditional_maps</span>(type_maps):
+    <a class="sourceLink" href="https://github.com/python/mypy/tree/v0.930/mypy/checker.py#L5537">
+      
+      (source)
+    </a>
+  </div>
+  <div class="docstring functionBody">
+    
+    
+    <div><p>Reduces a list containing pairs of if/else TypeMaps into a single pair.</p>
+<p>We "and" together all of the if TypeMaps and "or" together the else TypeMaps. So
+for example, if we had the input:</p>
+<blockquote>
+<dl class="rst-docutils">
+<dt>[</dt>
+<dd>({x: TypeIfX, shared: TypeIfShared1}, {x: TypeElseX, shared: TypeElseShared1}),
+({y: TypeIfY, shared: TypeIfShared2}, {y: TypeElseY, shared: TypeElseShared2}),</dd>
+</dl>
+<p>]</p>
+</blockquote>
+<p>...we'd return the output:</p>
+<blockquote>
+<dl class="rst-docutils">
+<dt>(</dt>
+<dd>{x: TypeIfX,   y: TypeIfY,   shared: PseudoIntersection[TypeIfShared1, TypeIfShared2]},
+{shared: Union[TypeElseShared1, TypeElseShared2]},</dd>
+</dl>
+<p>)</p>
+</blockquote>
+<p>...where "PseudoIntersection[X, Y] == Y" because mypy actually doesn't understand intersections
+yet, so we settle for just arbitrarily picking the right expr's type.</p>
+<p>We only retain the shared expression in the 'else' case because we don't actually know
+whether x was refined or y was refined -- only just that one of the two was refined.</p>
+<table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">type_maps:</span><code>List[<wbr></wbr>Tuple[<wbr></wbr><a href="#TypeMap">TypeMap</a>, <wbr></wbr><a href="#TypeMap">TypeMap</a>]]</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr class="fieldStart"><td class="fieldName" colspan="2">Returns</td></tr><tr><td class="fieldArgContainer"><code>Tuple[<wbr></wbr><a href="#TypeMap">TypeMap</a>, <wbr></wbr><a href="#TypeMap">TypeMap</a>]</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr></table></div>
+  </div>
+</div><div class="basevariable">
+  
+  
+  <a name="mypy.checker.DEFAULT_LAST_PASS">
+    
+  </a>
+  <a name="DEFAULT_LAST_PASS">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-defname">DEFAULT_LAST_PASS</span>: <code>Final</code> =
+    <a class="sourceLink" href="https://github.com/python/mypy/tree/v0.930/mypy/checker.py#L92">
+      
+      (source)
+    </a>
+  </div>
+  <div class="functionBody">
+    
+    
+    <div><p class="undocumented">Undocumented</p></div>
+  </div>
+</div><div class="basevariable">
+  
+  
+  <a name="mypy.checker.DeferredNode">
+    
+  </a>
+  <a name="DeferredNode">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-defname">DeferredNode</span> =
+    <a class="sourceLink" href="https://github.com/python/mypy/tree/v0.930/mypy/checker.py#L101">
+      
+      (source)
+    </a>
+  </div>
+  <div class="functionBody">
+    
+    
+    <div><p class="undocumented">Undocumented</p></div>
+  </div>
+</div><div class="basevariable">
+  
+  
+  <a name="mypy.checker.DeferredNodeType">
+    
+  </a>
+  <a name="DeferredNodeType">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-defname">DeferredNodeType</span>: <code>_TypeAlias</code> =
+    <a class="sourceLink" href="https://github.com/python/mypy/tree/v0.930/mypy/checker.py#L94">
+      
+      (source)
+    </a>
+  </div>
+  <div class="functionBody">
+    
+    
+    <div><p class="undocumented">Undocumented</p></div>
+  </div>
+</div><div class="basevariable">
+  
+  
+  <a name="mypy.checker.FineGrainedDeferredNode">
+    
+  </a>
+  <a name="FineGrainedDeferredNode">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-defname">FineGrainedDeferredNode</span> =
+    <a class="sourceLink" href="https://github.com/python/mypy/tree/v0.930/mypy/checker.py#L111">
+      
+      (source)
+    </a>
+  </div>
+  <div class="functionBody">
+    
+    
+    <div><p class="undocumented">Undocumented</p></div>
+  </div>
+</div><div class="basevariable">
+  
+  
+  <a name="mypy.checker.FineGrainedDeferredNodeType">
+    
+  </a>
+  <a name="FineGrainedDeferredNodeType">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-defname">FineGrainedDeferredNodeType</span>: <code>_TypeAlias</code> =
+    <a class="sourceLink" href="https://github.com/python/mypy/tree/v0.930/mypy/checker.py#L95">
+      
+      (source)
+    </a>
+  </div>
+  <div class="functionBody">
+    
+    
+    <div><p class="undocumented">Undocumented</p></div>
+  </div>
+</div><div class="basevariable">
+  
+  
+  <a name="mypy.checker.PartialTypeScope">
+    
+  </a>
+  <a name="PartialTypeScope">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-defname">PartialTypeScope</span> =
+    <a class="sourceLink" href="https://github.com/python/mypy/tree/v0.930/mypy/checker.py#L146">
+      
+      (source)
+    </a>
+  </div>
+  <div class="functionBody">
+    
+    
+    <div><p class="undocumented">Undocumented</p></div>
+  </div>
+</div><div class="basevariable">
+  
+  
+  <a name="mypy.checker.T">
+    
+  </a>
+  <a name="T">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-defname">T</span> =
+    <a class="sourceLink" href="https://github.com/python/mypy/tree/v0.930/mypy/checker.py#L90">
+      
+      (source)
+    </a>
+  </div>
+  <div class="functionBody">
+    
+    
+    <div><p class="undocumented">Undocumented</p></div>
+  </div>
+</div><div class="basevariable">
+  
+  
+  <a name="mypy.checker.TKey">
+    
+  </a>
+  <a name="TKey">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-defname">TKey</span> =
+    <a class="sourceLink" href="https://github.com/python/mypy/tree/v0.930/mypy/checker.py#L5942">
+      
+      (source)
+    </a>
+  </div>
+  <div class="functionBody">
+    
+    
+    <div><p class="undocumented">Undocumented</p></div>
+  </div>
+</div><div class="basevariable">
+  
+  
+  <a name="mypy.checker.TValue">
+    
+  </a>
+  <a name="TValue">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-defname">TValue</span> =
+    <a class="sourceLink" href="https://github.com/python/mypy/tree/v0.930/mypy/checker.py#L5943">
+      
+      (source)
+    </a>
+  </div>
+  <div class="functionBody">
+    
+    
+    <div><p class="undocumented">Undocumented</p></div>
+  </div>
+</div><div class="basevariable">
+  
+  
+  <a name="mypy.checker.TypeMap">
+    
+  </a>
+  <a name="TypeMap">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-defname">TypeMap</span>: <code>_TypeAlias</code> =
+    <a class="sourceLink" href="https://github.com/python/mypy/tree/v0.930/mypy/checker.py#L132">
+      
+      (source)
+    </a>
+  </div>
+  <div class="functionBody">
+    
+    
+    <div><p class="undocumented">Undocumented</p></div>
+  </div>
+</div><div class="basevariable">
+  
+  
+  <a name="mypy.checker.TypeRange">
+    
+  </a>
+  <a name="TypeRange">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-defname">TypeRange</span> =
+    <a class="sourceLink" href="https://github.com/python/mypy/tree/v0.930/mypy/checker.py#L136">
+      
+      (source)
+    </a>
+  </div>
+  <div class="functionBody">
+    
+    
+    <div><p class="undocumented">Undocumented</p></div>
+  </div>
+</div>
+
+      </div>
+    </div>
+
+    <footer class="navbar navbar-default">
+  
+  <div class="container">
+    <a href="index.html">API Documentation</a> for <a href="http://www.nltk.org/" class="projecthome">mypy-0.930</a>,
+  generated by <a href="https://github.com/twisted/pydoctor/">pydoctor</a>
+    21.2.2 at 2022-01-06 17:13:29.
+  </div>
+</footer>
+
+    <script src="pydoctor.js" type="text/javascript"></script>
+
+  </body>
+</html>

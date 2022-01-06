@@ -1,0 +1,1230 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+          "DTD/xhtml1-strict.dtd">
+<html>
+  
+
+  <head>
+    
+    <title>mypy.stubgen</title>
+    <meta name="generator" content="pydoctor 21.2.2"> 
+        
+    </meta>
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=0.75" />
+    <link rel="stylesheet" type="text/css" href="bootstrap.min.css" />
+    <link rel="stylesheet" type="text/css" href="apidocs.css" />
+    <link rel="stylesheet" type="text/css" href="extra.css" />
+</head>
+
+  <body>
+
+    
+
+    <nav class="navbar navbar-default">
+  
+  <div class="container">
+
+    <div class="navbar-header">
+      
+      <div class="navlinks">
+        <span class="navbar-brand">
+          <a href="http://www.nltk.org/" class="projecthome">mypy-0.930</a> <a href="index.html">API Documentation</a>
+        </span>
+
+        <a href="moduleIndex.html">
+          Modules
+        </a>
+
+        <a href="classIndex.html">
+          Classes
+        </a>
+
+        <a href="nameIndex.html">
+          Names
+        </a>
+
+        <form action="search-results.html" id="search-box-container">
+          <div class="input-group">
+            <input id="search-box" name="search-query" placeholder="Search..." aria-label="Search" minlength="2" class="form-control" />
+            <span class="input-group-btn">
+              <button class="btn btn-default" type="submit" title="Search"><img src="fonts/search.svg" alt="Search!" /></button>
+              <a class="btn btn-default" id="search-help-button" title="Help" onclick="toggleSearchHelpText()"><img src="fonts/info.svg" alt="Help!" /></a>
+            </span>
+          </div>
+        </form>
+
+        <div class="rst-admonition hint" id="search-help-box">
+          <p class="rst-last">
+      
+            Search bar offers the following options:
+            <ul>   
+                <li>
+                  <strong>Term presence.</strong> The below example searches for documents that 
+                    must contain “foo”, might contain “bar” and must not contain “baz”:
+                  <br /> <code>'+foo bar -baz'</code>
+                </li> 
+
+                <li>
+                  <strong>Wildcards.</strong> The below example searches for documents with words beginning with “foo”:
+                  <br /> <code>'foo*'</code>
+                </li> 
+
+                <li>
+                  <strong>Search in specific fields.</strong> The following search matches all documents 
+                  that contains "foo" in their full dotted name and with “bar” in any field:
+                  <br /> <code>'+fullName:*foo* +bar'</code>
+
+                  <p>
+                    Possible fields: 'name', 'docstring', 'fullName'.
+                  </p>
+                </li>
+
+                <li>
+                  <strong>Fuzzy matches.</strong> The following search matches all documents 
+                  that have a word within 1 edit distance of “foo”:
+                  <br /> <code>'foo~1'</code>
+                </li>
+            </ul>
+
+          </p>
+        </div>
+
+      </div>
+
+
+    </div>
+  </div>
+
+  <script>
+ 
+    function toggleSearchHelpText() {
+        document.body.classList.toggle("search-help-hidden");
+    }
+    // Init search and help text
+    document.getElementById('search-box-container').style.display = 'block';
+    document.getElementById('search-help-box').style.display = 'block';
+    document.body.classList.add("search-help-hidden");
+
+  </script>
+
+</nav>
+
+    
+
+    <div class="container">
+
+      <div class="page-header">
+        <h1 class="module"><code><code><a href="mypy.html">mypy</a></code><wbr></wbr>.<code><a href="mypy.stubgen.html">stubgen</a></code></code></h1>
+        <div id="showPrivate">
+          <button class="btn btn-link" onclick="togglePrivate()">Toggle Private API</button>
+        </div>
+      </div>
+
+      <div class="categoryHeader">
+        module documentation
+      </div>
+
+      <div class="extrasDocstring">
+        <a href="https://github.com/python/mypy/tree/v0.930/mypy/stubgen.py" class="sourceLink">(source)</a>
+        <p></p>
+      </div>
+
+      <div class="moduleDocstring">
+        <div><p>Generator of dynamically typed draft stubs for arbitrary modules.</p>
+<p>The logic of this script can be split in three steps:
+* parsing options and finding sources:</p>
+<blockquote>
+<ul class="rst-simple">
+<li>use runtime imports be default (to find also C modules)</li>
+<li>or use mypy's mechanisms, if importing is prohibited</li>
+</ul>
+</blockquote>
+<ul class="rst-simple">
+<li>(optionally) semantically analysing the sources using mypy (as a single set)</li>
+<li>emitting the stubs text:
+- for Python modules: from ASTs using StubGenerator
+- for C modules using runtime introspection and (optionally) Sphinx docs</li>
+</ul>
+<p>During first and third steps some problematic files can be skipped, but any
+blocking error during second step will cause the whole program to stop.</p>
+<p>Basic usage:</p>
+<blockquote>
+<p>$ stubgen foo.py bar.py some_directory
+=&gt; Generate out/foo.pyi, out/bar.pyi, and stubs for some_directory (recursively).</p>
+<p>$ stubgen -m urllib.parse
+=&gt; Generate out/urllib/parse.pyi.</p>
+<p>$ stubgen -p urllib
+=&gt; Generate stubs for whole urlib package (recursively).</p>
+</blockquote>
+<p>For Python 2 mode, use --py2:</p>
+<blockquote>
+$ stubgen --py2 -m textwrap</blockquote>
+<p>For C modules, you can get more precise function signatures by parsing .rst (Sphinx)
+documentation for extra information. For this, use the --doc-dir option:</p>
+<blockquote>
+$ stubgen --doc-dir &lt;DIR&gt;/Python-3.4.2/Doc/library -m curses</blockquote>
+<p>Note: The generated stubs should be verified manually.</p>
+<dl class="rst-docutils">
+<dt>TODO:</dt>
+<dd><ul class="rst-first rst-last">
+<li><p class="rst-first">support stubs for C modules in Python 2 mode</p>
+</li>
+<li><p class="rst-first">detect 'if PY2 / is_py2' etc. and either preserve those or only include Python 2 or 3 case</p>
+</li>
+<li><p class="rst-first">maybe use .rst docs also for Python modules</p>
+</li>
+<li><p class="rst-first">maybe export more imported names if there is no __all__ (this affects ssl.SSLError, for example)
+- a quick and dirty heuristic would be to turn this on if a module has something like</p>
+<blockquote>
+<p>'from x import y as _y'</p>
+</blockquote>
+</li>
+<li><p class="rst-first">we don't seem to always detect properties ('closed' in 'io', for example)</p>
+</li>
+</ul>
+</dd>
+</dl>
+</div>
+      </div>
+
+      <div id="splitTables">
+        <table class="children sortable" id="id582">
+  
+  
+  <tr class="class">
+    
+    <td>Class</td>
+    <td><code><a href="mypy.stubgen.AliasPrinter.html">AliasPrinter</a></code></td>
+    <td><span>Visitor used to collect type aliases _and_ type variable definitions.</span></td>
+  </tr><tr class="class">
+    
+    <td>Class</td>
+    <td><code><a href="mypy.stubgen.AnnotationPrinter.html">AnnotationPrinter</a></code></td>
+    <td><span>Visitor used to print existing annotations in a file.</span></td>
+  </tr><tr class="class">
+    
+    <td>Class</td>
+    <td><code><a href="mypy.stubgen.DefinitionFinder.html">DefinitionFinder</a></code></td>
+    <td><span>Find names of things defined at the top level of a module.</span></td>
+  </tr><tr class="class">
+    
+    <td>Class</td>
+    <td><code><a href="mypy.stubgen.ImportTracker.html">ImportTracker</a></code></td>
+    <td><span>Record necessary imports during stub generation.</span></td>
+  </tr><tr class="class">
+    
+    <td>Class</td>
+    <td><code><a href="mypy.stubgen.Options.html">Options</a></code></td>
+    <td><span>Represents stubgen options.</span></td>
+  </tr><tr class="class">
+    
+    <td>Class</td>
+    <td><code><a href="mypy.stubgen.ReferenceFinder.html">ReferenceFinder</a></code></td>
+    <td><span>Find all name references (both local and global).</span></td>
+  </tr><tr class="class">
+    
+    <td>Class</td>
+    <td><code><a href="mypy.stubgen.SelfTraverser.html">SelfTraverser</a></code></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="class">
+    
+    <td>Class</td>
+    <td><code><a href="mypy.stubgen.StubGenerator.html">StubGenerator</a></code></td>
+    <td><span>Generate stub text from a mypy AST.</span></td>
+  </tr><tr class="class">
+    
+    <td>Class</td>
+    <td><code><a href="mypy.stubgen.StubSource.html">StubSource</a></code></td>
+    <td><span>A single source for stub: can be a Python or C module.</span></td>
+  </tr><tr class="function">
+    
+    <td>Function</td>
+    <td><code><a href="#collect_build_targets">collect_build_targets</a></code></td>
+    <td><span>Collect files for which we need to generate stubs.</span></td>
+  </tr><tr class="function">
+    
+    <td>Function</td>
+    <td><code><a href="#collect_docs_signatures">collect_docs_signatures</a></code></td>
+    <td><span>Gather all function and class signatures in the docs.</span></td>
+  </tr><tr class="function">
+    
+    <td>Function</td>
+    <td><code><a href="#find_defined_names">find_defined_names</a></code></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="function">
+    
+    <td>Function</td>
+    <td><code><a href="#find_method_names">find_method_names</a></code></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="function">
+    
+    <td>Function</td>
+    <td><code><a href="#find_module_paths_using_imports">find_module_paths_using_imports</a></code></td>
+    <td><span>Find path and runtime value of __all__ (if possible) for modules and packages.</span></td>
+  </tr><tr class="function">
+    
+    <td>Function</td>
+    <td><code><a href="#find_module_paths_using_search">find_module_paths_using_search</a></code></td>
+    <td><span>Find sources for modules and packages requested.</span></td>
+  </tr><tr class="function">
+    
+    <td>Function</td>
+    <td><code><a href="#find_referenced_names">find_referenced_names</a></code></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="function">
+    
+    <td>Function</td>
+    <td><code><a href="#find_self_initializers">find_self_initializers</a></code></td>
+    <td><span>Find attribute initializers in a method.</span></td>
+  </tr><tr class="function">
+    
+    <td>Function</td>
+    <td><code><a href="#generate_asts_for_modules">generate_asts_for_modules</a></code></td>
+    <td><span>Use mypy to parse (and optionally analyze) source files.</span></td>
+  </tr><tr class="function">
+    
+    <td>Function</td>
+    <td><code><a href="#generate_stub_from_ast">generate_stub_from_ast</a></code></td>
+    <td><span>Use analysed (or just parsed) AST to generate type stub for single file.</span></td>
+  </tr><tr class="function">
+    
+    <td>Function</td>
+    <td><code><a href="#generate_stubs">generate_stubs</a></code></td>
+    <td><span>Main entry point for the program.</span></td>
+  </tr><tr class="function">
+    
+    <td>Function</td>
+    <td><code><a href="#get_qualified_name">get_qualified_name</a></code></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="function">
+    
+    <td>Function</td>
+    <td><code><a href="#is_blacklisted_path">is_blacklisted_path</a></code></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="function">
+    
+    <td>Function</td>
+    <td><code><a href="#is_non_library_module">is_non_library_module</a></code></td>
+    <td><span>Does module look like a test module or a script?</span></td>
+  </tr><tr class="function">
+    
+    <td>Function</td>
+    <td><code><a href="#main">main</a></code></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="function">
+    
+    <td>Function</td>
+    <td><code><a href="#mypy_options">mypy_options</a></code></td>
+    <td><span>Generate mypy options using the flag passed by user.</span></td>
+  </tr><tr class="function">
+    
+    <td>Function</td>
+    <td><code><a href="#normalize_path_separators">normalize_path_separators</a></code></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="function">
+    
+    <td>Function</td>
+    <td><code><a href="#parse_options">parse_options</a></code></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="function">
+    
+    <td>Function</td>
+    <td><code><a href="#parse_source_file">parse_source_file</a></code></td>
+    <td><span>Parse a source file.</span></td>
+  </tr><tr class="function">
+    
+    <td>Function</td>
+    <td><code><a href="#remove_blacklisted_modules">remove_blacklisted_modules</a></code></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="function">
+    
+    <td>Function</td>
+    <td><code><a href="#translate_module_name">translate_module_name</a></code></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="variable">
+    
+    <td>Variable</td>
+    <td><code><a href="#BLACKLIST">BLACKLIST</a></code></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="variable">
+    
+    <td>Variable</td>
+    <td><code><a href="#CLASS">CLASS</a></code></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="variable">
+    
+    <td>Variable</td>
+    <td><code><a href="#DESCRIPTION">DESCRIPTION</a></code></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="variable">
+    
+    <td>Variable</td>
+    <td><code><a href="#EMPTY">EMPTY</a></code></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="variable">
+    
+    <td>Variable</td>
+    <td><code><a href="#EMPTY_CLASS">EMPTY_CLASS</a></code></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="variable">
+    
+    <td>Variable</td>
+    <td><code><a href="#ERROR_MARKER">ERROR_MARKER</a></code></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="variable">
+    
+    <td>Variable</td>
+    <td><code><a href="#EXTRA_EXPORTED">EXTRA_EXPORTED</a></code></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="variable">
+    
+    <td>Variable</td>
+    <td><code><a href="#FUNC">FUNC</a></code></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="variable">
+    
+    <td>Variable</td>
+    <td><code><a href="#HEADER">HEADER</a></code></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="variable">
+    
+    <td>Variable</td>
+    <td><code><a href="#IGNORED_DUNDERS">IGNORED_DUNDERS</a></code></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="variable">
+    
+    <td>Variable</td>
+    <td><code><a href="#METHODS_WITH_RETURN_VALUE">METHODS_WITH_RETURN_VALUE</a></code></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="variable">
+    
+    <td>Variable</td>
+    <td><code><a href="#NOT_IN_ALL">NOT_IN_ALL</a></code></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="variable">
+    
+    <td>Variable</td>
+    <td><code><a href="#VAR">VAR</a></code></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="variable">
+    
+    <td>Variable</td>
+    <td><code><a href="#VENDOR_PACKAGES">VENDOR_PACKAGES</a></code></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr>
+</table>
+        
+
+          
+      </div>
+
+      <div id="childList">
+
+        <div class="basefunction">
+  
+  
+  <a name="mypy.stubgen.collect_build_targets">
+    
+  </a>
+  <a name="collect_build_targets">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-keyword">def</span> <span class="py-defname">collect_build_targets</span>(options, mypy_opts):
+    <a class="sourceLink" href="https://github.com/python/mypy/tree/v0.930/mypy/stubgen.py#L1305">
+      
+      (source)
+    </a>
+  </div>
+  <div class="docstring functionBody">
+    
+    
+    <div><p>Collect files for which we need to generate stubs.</p>
+<p>Return list of Python modules and C modules.</p>
+<table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">options:</span><code><a href="mypy.stubgen.Options.html">Options</a></code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">mypy_opts:</span><code><a href="mypy.options.Options.html">MypyOptions</a></code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr class="fieldStart"><td class="fieldName" colspan="2">Returns</td></tr><tr><td class="fieldArgContainer"><code>Tuple[<wbr></wbr>List[<wbr></wbr><a href="mypy.stubgen.StubSource.html">StubSource</a>], <wbr></wbr>List[<wbr></wbr><a href="mypy.stubgen.StubSource.html">StubSource</a>]]</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr></table></div>
+  </div>
+</div><div class="basefunction">
+  
+  
+  <a name="mypy.stubgen.collect_docs_signatures">
+    
+  </a>
+  <a name="collect_docs_signatures">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-keyword">def</span> <span class="py-defname">collect_docs_signatures</span>(doc_dir):
+    <a class="sourceLink" href="https://github.com/python/mypy/tree/v0.930/mypy/stubgen.py#L1538">
+      
+      (source)
+    </a>
+  </div>
+  <div class="docstring functionBody">
+    
+    
+    <div><p>Gather all function and class signatures in the docs.</p>
+<p>Return a tuple (function signatures, class signatures).
+Currently only used for C modules.</p>
+<table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">doc_dir:</span><code>str</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr class="fieldStart"><td class="fieldName" colspan="2">Returns</td></tr><tr><td class="fieldArgContainer"><code>Tuple[<wbr></wbr>Dict[<wbr></wbr>str, <wbr></wbr>str], <wbr></wbr>Dict[<wbr></wbr>str, <wbr></wbr>str]]</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr></table></div>
+  </div>
+</div><div class="basefunction">
+  
+  
+  <a name="mypy.stubgen.find_defined_names">
+    
+  </a>
+  <a name="find_defined_names">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-keyword">def</span> <span class="py-defname">find_defined_names</span>(file):
+    <a class="sourceLink" href="https://github.com/python/mypy/tree/v0.930/mypy/stubgen.py#L457">
+      
+      (source)
+    </a>
+  </div>
+  <div class="docstring functionBody">
+    
+    
+    <div><p class="undocumented">Undocumented</p><table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">file:</span><code><a href="mypy.nodes.MypyFile.html">MypyFile</a></code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr class="fieldStart"><td class="fieldName" colspan="2">Returns</td></tr><tr><td class="fieldArgContainer"><code>Set[<wbr></wbr>str]</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr></table></div>
+  </div>
+</div><div class="basefunction">
+  
+  
+  <a name="mypy.stubgen.find_method_names">
+    
+  </a>
+  <a name="find_method_names">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-keyword">def</span> <span class="py-defname">find_method_names</span>(defs):
+    <a class="sourceLink" href="https://github.com/python/mypy/tree/v0.930/mypy/stubgen.py#L1244">
+      
+      (source)
+    </a>
+  </div>
+  <div class="docstring functionBody">
+    
+    
+    <div><p class="undocumented">Undocumented</p><table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">defs:</span><code>List[<wbr></wbr><a href="mypy.nodes.Statement.html">Statement</a>]</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr class="fieldStart"><td class="fieldName" colspan="2">Returns</td></tr><tr><td class="fieldArgContainer"><code>Set[<wbr></wbr>str]</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr></table></div>
+  </div>
+</div><div class="basefunction">
+  
+  
+  <a name="mypy.stubgen.find_module_paths_using_imports">
+    
+  </a>
+  <a name="find_module_paths_using_imports">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-keyword">def</span> <span class="py-defname">find_module_paths_using_imports</span>(modules, packages, interpreter, pyversion, verbose, quiet):
+    <a class="sourceLink" href="https://github.com/python/mypy/tree/v0.930/mypy/stubgen.py#L1340">
+      
+      (source)
+    </a>
+  </div>
+  <div class="docstring functionBody">
+    
+    
+    <div><p>Find path and runtime value of __all__ (if possible) for modules and packages.</p>
+<p>This function uses runtime Python imports to get the information.</p>
+<table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">modules:</span><code>List[<wbr></wbr>str]</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">packages:</span><code>List[<wbr></wbr>str]</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">interpreter:</span><code>str</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">pyversion:</span><code>Tuple[<wbr></wbr>int, <wbr></wbr>int]</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">verbose:</span><code>bool</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">quiet:</span><code>bool</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr class="fieldStart"><td class="fieldName" colspan="2">Returns</td></tr><tr><td class="fieldArgContainer"><code>Tuple[<wbr></wbr>List[<wbr></wbr><a href="mypy.stubgen.StubSource.html">StubSource</a>], <wbr></wbr>List[<wbr></wbr><a href="mypy.stubgen.StubSource.html">StubSource</a>]]</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr></table></div>
+  </div>
+</div><div class="basefunction">
+  
+  
+  <a name="mypy.stubgen.find_module_paths_using_search">
+    
+  </a>
+  <a name="find_module_paths_using_search">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-keyword">def</span> <span class="py-defname">find_module_paths_using_search</span>(modules, packages, search_path, pyversion):
+    <a class="sourceLink" href="https://github.com/python/mypy/tree/v0.930/mypy/stubgen.py#L1418">
+      
+      (source)
+    </a>
+  </div>
+  <div class="docstring functionBody">
+    
+    
+    <div><p>Find sources for modules and packages requested.</p>
+<p>This function just looks for source files at the file system level.
+This is used if user passes --no-import, and will not find C modules.
+Exit if some of the modules or packages can't be found.</p>
+<table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">modules:</span><code>List[<wbr></wbr>str]</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">packages:</span><code>List[<wbr></wbr>str]</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">search_path:</span><code>List[<wbr></wbr>str]</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">pyversion:</span><code>Tuple[<wbr></wbr>int, <wbr></wbr>int]</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr class="fieldStart"><td class="fieldName" colspan="2">Returns</td></tr><tr><td class="fieldArgContainer"><code>List[<wbr></wbr><a href="mypy.stubgen.StubSource.html">StubSource</a>]</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr></table></div>
+  </div>
+</div><div class="basefunction">
+  
+  
+  <a name="mypy.stubgen.find_referenced_names">
+    
+  </a>
+  <a name="find_referenced_names">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-keyword">def</span> <span class="py-defname">find_referenced_names</span>(file):
+    <a class="sourceLink" href="https://github.com/python/mypy/tree/v0.930/mypy/stubgen.py#L481">
+      
+      (source)
+    </a>
+  </div>
+  <div class="docstring functionBody">
+    
+    
+    <div><p class="undocumented">Undocumented</p><table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">file:</span><code><a href="mypy.nodes.MypyFile.html">MypyFile</a></code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr class="fieldStart"><td class="fieldName" colspan="2">Returns</td></tr><tr><td class="fieldArgContainer"><code>Set[<wbr></wbr>str]</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr></table></div>
+  </div>
+</div><div class="basefunction">
+  
+  
+  <a name="mypy.stubgen.find_self_initializers">
+    
+  </a>
+  <a name="find_self_initializers">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-keyword">def</span> <span class="py-defname">find_self_initializers</span>(fdef):
+    <a class="sourceLink" href="https://github.com/python/mypy/tree/v0.930/mypy/stubgen.py#L1270">
+      
+      (source)
+    </a>
+  </div>
+  <div class="docstring functionBody">
+    
+    
+    <div><p>Find attribute initializers in a method.</p>
+<p>Return a list of pairs (attribute name, r.h.s. expression).</p>
+<table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">fdef:</span><code><a href="mypy.nodes.FuncBase.html">FuncBase</a></code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr class="fieldStart"><td class="fieldName" colspan="2">Returns</td></tr><tr><td class="fieldArgContainer"><code>List[<wbr></wbr>Tuple[<wbr></wbr>str, <wbr></wbr><a href="mypy.nodes.Expression.html">Expression</a>]]</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr></table></div>
+  </div>
+</div><div class="basefunction">
+  
+  
+  <a name="mypy.stubgen.generate_asts_for_modules">
+    
+  </a>
+  <a name="generate_asts_for_modules">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-keyword">def</span> <span class="py-defname">generate_asts_for_modules</span>(py_modules, parse_only, mypy_options, verbose):
+    <a class="sourceLink" href="https://github.com/python/mypy/tree/v0.930/mypy/stubgen.py#L1485">
+      
+      (source)
+    </a>
+  </div>
+  <div class="docstring functionBody">
+    
+    
+    <div>Use mypy to parse (and optionally analyze) source files.<table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">py_modules:</span><code>List[<wbr></wbr><a href="mypy.stubgen.StubSource.html">StubSource</a>]</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">parse_only:</span><code>bool</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">mypy_options:</span><code><a href="mypy.options.Options.html">MypyOptions</a></code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">verbose:</span><code>bool</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr></table></div>
+  </div>
+</div><div class="basefunction">
+  
+  
+  <a name="mypy.stubgen.generate_stub_from_ast">
+    
+  </a>
+  <a name="generate_stub_from_ast">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-keyword">def</span> <span class="py-defname">generate_stub_from_ast</span>(mod, target, parse_only=False, pyversion=defaults.PYTHON3_VERSION, include_private=False, export_less=False):
+    <a class="sourceLink" href="https://github.com/python/mypy/tree/v0.930/mypy/stubgen.py#L1511">
+      
+      (source)
+    </a>
+  </div>
+  <div class="docstring functionBody">
+    
+    
+    <div><p>Use analysed (or just parsed) AST to generate type stub for single file.</p>
+<p>If directory for target doesn't exist it will created. Existing stub
+will be overwritten.</p>
+<table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">mod:</span><code><a href="mypy.stubgen.StubSource.html">StubSource</a></code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">target:</span><code>str</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">parse_only:</span><code>bool</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">pyversion:</span><code>Tuple[<wbr></wbr>int, <wbr></wbr>int]</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">include_private:</span><code>bool</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">export_less:</span><code>bool</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr></table></div>
+  </div>
+</div><div class="basefunction">
+  
+  
+  <a name="mypy.stubgen.generate_stubs">
+    
+  </a>
+  <a name="generate_stubs">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-keyword">def</span> <span class="py-defname">generate_stubs</span>(options):
+    <a class="sourceLink" href="https://github.com/python/mypy/tree/v0.930/mypy/stubgen.py#L1556">
+      
+      (source)
+    </a>
+  </div>
+  <div class="docstring functionBody">
+    
+    
+    <div>Main entry point for the program.<table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">options:</span><code><a href="mypy.stubgen.Options.html">Options</a></code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr></table></div>
+  </div>
+</div><div class="basefunction">
+  
+  
+  <a name="mypy.stubgen.get_qualified_name">
+    
+  </a>
+  <a name="get_qualified_name">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-keyword">def</span> <span class="py-defname">get_qualified_name</span>(o):
+    <a class="sourceLink" href="https://github.com/python/mypy/tree/v0.930/mypy/stubgen.py#L1280">
+      
+      (source)
+    </a>
+  </div>
+  <div class="docstring functionBody">
+    
+    
+    <div><p class="undocumented">Undocumented</p><table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">o:</span><code><a href="mypy.nodes.Expression.html">Expression</a></code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr class="fieldStart"><td class="fieldName" colspan="2">Returns</td></tr><tr><td class="fieldArgContainer"><code>str</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr></table></div>
+  </div>
+</div><div class="basefunction">
+  
+  
+  <a name="mypy.stubgen.is_blacklisted_path">
+    
+  </a>
+  <a name="is_blacklisted_path">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-keyword">def</span> <span class="py-defname">is_blacklisted_path</span>(path):
+    <a class="sourceLink" href="https://github.com/python/mypy/tree/v0.930/mypy/stubgen.py#L1294">
+      
+      (source)
+    </a>
+  </div>
+  <div class="docstring functionBody">
+    
+    
+    <div><p class="undocumented">Undocumented</p><table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">path:</span><code>str</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr class="fieldStart"><td class="fieldName" colspan="2">Returns</td></tr><tr><td class="fieldArgContainer"><code>bool</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr></table></div>
+  </div>
+</div><div class="basefunction">
+  
+  
+  <a name="mypy.stubgen.is_non_library_module">
+    
+  </a>
+  <a name="is_non_library_module">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-keyword">def</span> <span class="py-defname">is_non_library_module</span>(module):
+    <a class="sourceLink" href="https://github.com/python/mypy/tree/v0.930/mypy/stubgen.py#L1380">
+      
+      (source)
+    </a>
+  </div>
+  <div class="docstring functionBody">
+    
+    
+    <div>Does module look like a test module or a script?<table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">module:</span><code>str</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr class="fieldStart"><td class="fieldName" colspan="2">Returns</td></tr><tr><td class="fieldArgContainer"><code>bool</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr></table></div>
+  </div>
+</div><div class="basefunction">
+  
+  
+  <a name="mypy.stubgen.main">
+    
+  </a>
+  <a name="main">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-keyword">def</span> <span class="py-defname">main</span>():
+    <a class="sourceLink" href="https://github.com/python/mypy/tree/v0.930/mypy/stubgen.py#L1693">
+      
+      (source)
+    </a>
+  </div>
+  <div class="docstring functionBody">
+    
+    
+    <div><p class="undocumented">Undocumented</p></div>
+  </div>
+</div><div class="basefunction">
+  
+  
+  <a name="mypy.stubgen.mypy_options">
+    
+  </a>
+  <a name="mypy_options">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-keyword">def</span> <span class="py-defname">mypy_options</span>(stubgen_options):
+    <a class="sourceLink" href="https://github.com/python/mypy/tree/v0.930/mypy/stubgen.py#L1451">
+      
+      (source)
+    </a>
+  </div>
+  <div class="docstring functionBody">
+    
+    
+    <div>Generate mypy options using the flag passed by user.<table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">stubgen_options:</span><code><a href="mypy.stubgen.Options.html">Options</a></code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr class="fieldStart"><td class="fieldName" colspan="2">Returns</td></tr><tr><td class="fieldArgContainer"><code><a href="mypy.options.Options.html">MypyOptions</a></code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr></table></div>
+  </div>
+</div><div class="basefunction">
+  
+  
+  <a name="mypy.stubgen.normalize_path_separators">
+    
+  </a>
+  <a name="normalize_path_separators">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-keyword">def</span> <span class="py-defname">normalize_path_separators</span>(path):
+    <a class="sourceLink" href="https://github.com/python/mypy/tree/v0.930/mypy/stubgen.py#L1299">
+      
+      (source)
+    </a>
+  </div>
+  <div class="docstring functionBody">
+    
+    
+    <div><p class="undocumented">Undocumented</p><table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">path:</span><code>str</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr class="fieldStart"><td class="fieldName" colspan="2">Returns</td></tr><tr><td class="fieldArgContainer"><code>str</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr></table></div>
+  </div>
+</div><div class="basefunction">
+  
+  
+  <a name="mypy.stubgen.parse_options">
+    
+  </a>
+  <a name="parse_options">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-keyword">def</span> <span class="py-defname">parse_options</span>(args):
+    <a class="sourceLink" href="https://github.com/python/mypy/tree/v0.930/mypy/stubgen.py#L1615">
+      
+      (source)
+    </a>
+  </div>
+  <div class="docstring functionBody">
+    
+    
+    <div><p class="undocumented">Undocumented</p><table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">args:</span><code>List[<wbr></wbr>str]</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr class="fieldStart"><td class="fieldName" colspan="2">Returns</td></tr><tr><td class="fieldArgContainer"><code><a href="mypy.stubgen.Options.html">Options</a></code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr></table></div>
+  </div>
+</div><div class="basefunction">
+  
+  
+  <a name="mypy.stubgen.parse_source_file">
+    
+  </a>
+  <a name="parse_source_file">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-keyword">def</span> <span class="py-defname">parse_source_file</span>(mod, mypy_options):
+    <a class="sourceLink" href="https://github.com/python/mypy/tree/v0.930/mypy/stubgen.py#L1464">
+      
+      (source)
+    </a>
+  </div>
+  <div class="docstring functionBody">
+    
+    
+    <div><p>Parse a source file.</p>
+<p>On success, store AST in the corresponding attribute of the stub source.
+If there are syntax errors, print them and exit.</p>
+<table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">mod:</span><code><a href="mypy.stubgen.StubSource.html">StubSource</a></code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">mypy_options:</span><code><a href="mypy.options.Options.html">MypyOptions</a></code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr></table></div>
+  </div>
+</div><div class="basefunction">
+  
+  
+  <a name="mypy.stubgen.remove_blacklisted_modules">
+    
+  </a>
+  <a name="remove_blacklisted_modules">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-keyword">def</span> <span class="py-defname">remove_blacklisted_modules</span>(modules):
+    <a class="sourceLink" href="https://github.com/python/mypy/tree/v0.930/mypy/stubgen.py#L1289">
+      
+      (source)
+    </a>
+  </div>
+  <div class="docstring functionBody">
+    
+    
+    <div><p class="undocumented">Undocumented</p><table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">modules:</span><code>List[<wbr></wbr><a href="mypy.stubgen.StubSource.html">StubSource</a>]</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr class="fieldStart"><td class="fieldName" colspan="2">Returns</td></tr><tr><td class="fieldArgContainer"><code>List[<wbr></wbr><a href="mypy.stubgen.StubSource.html">StubSource</a>]</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr></table></div>
+  </div>
+</div><div class="basefunction">
+  
+  
+  <a name="mypy.stubgen.translate_module_name">
+    
+  </a>
+  <a name="translate_module_name">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-keyword">def</span> <span class="py-defname">translate_module_name</span>(module, relative):
+    <a class="sourceLink" href="https://github.com/python/mypy/tree/v0.930/mypy/stubgen.py#L1406">
+      
+      (source)
+    </a>
+  </div>
+  <div class="docstring functionBody">
+    
+    
+    <div><p class="undocumented">Undocumented</p><table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">module:</span><code>str</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">relative:</span><code>int</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr class="fieldStart"><td class="fieldName" colspan="2">Returns</td></tr><tr><td class="fieldArgContainer"><code>Tuple[<wbr></wbr>str, <wbr></wbr>int]</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr></table></div>
+  </div>
+</div><div class="basevariable">
+  
+  
+  <a name="mypy.stubgen.BLACKLIST">
+    
+  </a>
+  <a name="BLACKLIST">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-defname">BLACKLIST</span>: <code>Final</code> =
+    <a class="sourceLink" href="https://github.com/python/mypy/tree/v0.930/mypy/stubgen.py#L107">
+      
+      (source)
+    </a>
+  </div>
+  <div class="functionBody">
+    
+    
+    <div><p class="undocumented">Undocumented</p></div>
+  </div>
+</div><div class="basevariable">
+  
+  
+  <a name="mypy.stubgen.CLASS">
+    
+  </a>
+  <a name="CLASS">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-defname">CLASS</span>: <code>Final</code> =
+    <a class="sourceLink" href="https://github.com/python/mypy/tree/v0.930/mypy/stubgen.py#L219">
+      
+      (source)
+    </a>
+  </div>
+  <div class="functionBody">
+    
+    
+    <div><p class="undocumented">Undocumented</p></div>
+  </div>
+</div><div class="basevariable">
+  
+  
+  <a name="mypy.stubgen.DESCRIPTION">
+    
+  </a>
+  <a name="DESCRIPTION">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-defname">DESCRIPTION</span>: <code>str</code> =
+    <a class="sourceLink" href="https://github.com/python/mypy/tree/v0.930/mypy/stubgen.py#L1607">
+      
+      (source)
+    </a>
+  </div>
+  <div class="functionBody">
+    
+    
+    <div><p class="undocumented">Undocumented</p></div>
+  </div>
+</div><div class="basevariable">
+  
+  
+  <a name="mypy.stubgen.EMPTY">
+    
+  </a>
+  <a name="EMPTY">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-defname">EMPTY</span>: <code>Final</code> =
+    <a class="sourceLink" href="https://github.com/python/mypy/tree/v0.930/mypy/stubgen.py#L217">
+      
+      (source)
+    </a>
+  </div>
+  <div class="functionBody">
+    
+    
+    <div><p class="undocumented">Undocumented</p></div>
+  </div>
+</div><div class="basevariable">
+  
+  
+  <a name="mypy.stubgen.EMPTY_CLASS">
+    
+  </a>
+  <a name="EMPTY_CLASS">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-defname">EMPTY_CLASS</span>: <code>Final</code> =
+    <a class="sourceLink" href="https://github.com/python/mypy/tree/v0.930/mypy/stubgen.py#L220">
+      
+      (source)
+    </a>
+  </div>
+  <div class="functionBody">
+    
+    
+    <div><p class="undocumented">Undocumented</p></div>
+  </div>
+</div><div class="basevariable">
+  
+  
+  <a name="mypy.stubgen.ERROR_MARKER">
+    
+  </a>
+  <a name="ERROR_MARKER">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-defname">ERROR_MARKER</span>: <code>Final</code> =
+    <a class="sourceLink" href="https://github.com/python/mypy/tree/v0.930/mypy/stubgen.py#L227">
+      
+      (source)
+    </a>
+  </div>
+  <div class="functionBody">
+    
+    
+    <div><p class="undocumented">Undocumented</p></div>
+  </div>
+</div><div class="basevariable">
+  
+  
+  <a name="mypy.stubgen.EXTRA_EXPORTED">
+    
+  </a>
+  <a name="EXTRA_EXPORTED">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-defname">EXTRA_EXPORTED</span>: <code>Final</code> =
+    <a class="sourceLink" href="https://github.com/python/mypy/tree/v0.930/mypy/stubgen.py#L116">
+      
+      (source)
+    </a>
+  </div>
+  <div class="functionBody">
+    
+    
+    <div><p class="undocumented">Undocumented</p></div>
+  </div>
+</div><div class="basevariable">
+  
+  
+  <a name="mypy.stubgen.FUNC">
+    
+  </a>
+  <a name="FUNC">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-defname">FUNC</span>: <code>Final</code> =
+    <a class="sourceLink" href="https://github.com/python/mypy/tree/v0.930/mypy/stubgen.py#L218">
+      
+      (source)
+    </a>
+  </div>
+  <div class="functionBody">
+    
+    
+    <div><p class="undocumented">Undocumented</p></div>
+  </div>
+</div><div class="basevariable">
+  
+  
+  <a name="mypy.stubgen.HEADER">
+    
+  </a>
+  <a name="HEADER">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-defname">HEADER</span>: <code>str</code> =
+    <a class="sourceLink" href="https://github.com/python/mypy/tree/v0.930/mypy/stubgen.py#L1604">
+      
+      (source)
+    </a>
+  </div>
+  <div class="functionBody">
+    
+    
+    <div><p class="undocumented">Undocumented</p></div>
+  </div>
+</div><div class="basevariable">
+  
+  
+  <a name="mypy.stubgen.IGNORED_DUNDERS">
+    
+  </a>
+  <a name="IGNORED_DUNDERS">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-defname">IGNORED_DUNDERS</span>: <code>Final</code> =
+    <a class="sourceLink" href="https://github.com/python/mypy/tree/v0.930/mypy/stubgen.py#L123">
+      
+      (source)
+    </a>
+  </div>
+  <div class="functionBody">
+    
+    
+    <div><p class="undocumented">Undocumented</p></div>
+  </div>
+</div><div class="basevariable">
+  
+  
+  <a name="mypy.stubgen.METHODS_WITH_RETURN_VALUE">
+    
+  </a>
+  <a name="METHODS_WITH_RETURN_VALUE">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-defname">METHODS_WITH_RETURN_VALUE</span>: <code>Final</code> =
+    <a class="sourceLink" href="https://github.com/python/mypy/tree/v0.930/mypy/stubgen.py#L142">
+      
+      (source)
+    </a>
+  </div>
+  <div class="functionBody">
+    
+    
+    <div><p class="undocumented">Undocumented</p></div>
+  </div>
+</div><div class="basevariable">
+  
+  
+  <a name="mypy.stubgen.NOT_IN_ALL">
+    
+  </a>
+  <a name="NOT_IN_ALL">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-defname">NOT_IN_ALL</span>: <code>Final</code> =
+    <a class="sourceLink" href="https://github.com/python/mypy/tree/v0.930/mypy/stubgen.py#L222">
+      
+      (source)
+    </a>
+  </div>
+  <div class="functionBody">
+    
+    
+    <div><p class="undocumented">Undocumented</p></div>
+  </div>
+</div><div class="basevariable">
+  
+  
+  <a name="mypy.stubgen.VAR">
+    
+  </a>
+  <a name="VAR">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-defname">VAR</span>: <code>Final</code> =
+    <a class="sourceLink" href="https://github.com/python/mypy/tree/v0.930/mypy/stubgen.py#L221">
+      
+      (source)
+    </a>
+  </div>
+  <div class="functionBody">
+    
+    
+    <div><p class="undocumented">Undocumented</p></div>
+  </div>
+</div><div class="basevariable">
+  
+  
+  <a name="mypy.stubgen.VENDOR_PACKAGES">
+    
+  </a>
+  <a name="VENDOR_PACKAGES">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-defname">VENDOR_PACKAGES</span>: <code>Final</code> =
+    <a class="sourceLink" href="https://github.com/python/mypy/tree/v0.930/mypy/stubgen.py#L98">
+      
+      (source)
+    </a>
+  </div>
+  <div class="functionBody">
+    
+    
+    <div><p class="undocumented">Undocumented</p></div>
+  </div>
+</div>
+
+      </div>
+    </div>
+
+    <footer class="navbar navbar-default">
+  
+  <div class="container">
+    <a href="index.html">API Documentation</a> for <a href="http://www.nltk.org/" class="projecthome">mypy-0.930</a>,
+  generated by <a href="https://github.com/twisted/pydoctor/">pydoctor</a>
+    21.2.2 at 2022-01-06 17:13:29.
+  </div>
+</footer>
+
+    <script src="pydoctor.js" type="text/javascript"></script>
+
+  </body>
+</html>

@@ -1,0 +1,669 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+          "DTD/xhtml1-strict.dtd">
+<html>
+  
+
+  <head>
+    
+    <title>mypy.nodes.SymbolTableNode</title>
+    <meta name="generator" content="pydoctor 21.2.2"> 
+        
+    </meta>
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=0.75" />
+    <link rel="stylesheet" type="text/css" href="bootstrap.min.css" />
+    <link rel="stylesheet" type="text/css" href="apidocs.css" />
+    <link rel="stylesheet" type="text/css" href="extra.css" />
+</head>
+
+  <body>
+
+    
+
+    <nav class="navbar navbar-default">
+  
+  <div class="container">
+
+    <div class="navbar-header">
+      
+      <div class="navlinks">
+        <span class="navbar-brand">
+          <a href="http://www.nltk.org/" class="projecthome">mypy-0.930</a> <a href="index.html">API Documentation</a>
+        </span>
+
+        <a href="moduleIndex.html">
+          Modules
+        </a>
+
+        <a href="classIndex.html">
+          Classes
+        </a>
+
+        <a href="nameIndex.html">
+          Names
+        </a>
+
+        <form action="search-results.html" id="search-box-container">
+          <div class="input-group">
+            <input id="search-box" name="search-query" placeholder="Search..." aria-label="Search" minlength="2" class="form-control" />
+            <span class="input-group-btn">
+              <button class="btn btn-default" type="submit" title="Search"><img src="fonts/search.svg" alt="Search!" /></button>
+              <a class="btn btn-default" id="search-help-button" title="Help" onclick="toggleSearchHelpText()"><img src="fonts/info.svg" alt="Help!" /></a>
+            </span>
+          </div>
+        </form>
+
+        <div class="rst-admonition hint" id="search-help-box">
+          <p class="rst-last">
+      
+            Search bar offers the following options:
+            <ul>   
+                <li>
+                  <strong>Term presence.</strong> The below example searches for documents that 
+                    must contain “foo”, might contain “bar” and must not contain “baz”:
+                  <br /> <code>'+foo bar -baz'</code>
+                </li> 
+
+                <li>
+                  <strong>Wildcards.</strong> The below example searches for documents with words beginning with “foo”:
+                  <br /> <code>'foo*'</code>
+                </li> 
+
+                <li>
+                  <strong>Search in specific fields.</strong> The following search matches all documents 
+                  that contains "foo" in their full dotted name and with “bar” in any field:
+                  <br /> <code>'+fullName:*foo* +bar'</code>
+
+                  <p>
+                    Possible fields: 'name', 'docstring', 'fullName'.
+                  </p>
+                </li>
+
+                <li>
+                  <strong>Fuzzy matches.</strong> The following search matches all documents 
+                  that have a word within 1 edit distance of “foo”:
+                  <br /> <code>'foo~1'</code>
+                </li>
+            </ul>
+
+          </p>
+        </div>
+
+      </div>
+
+
+    </div>
+  </div>
+
+  <script>
+ 
+    function toggleSearchHelpText() {
+        document.body.classList.toggle("search-help-hidden");
+    }
+    // Init search and help text
+    document.getElementById('search-box-container').style.display = 'block';
+    document.getElementById('search-help-box').style.display = 'block';
+    document.body.classList.add("search-help-hidden");
+
+  </script>
+
+</nav>
+
+    
+
+    <div class="container">
+
+      <div class="page-header">
+        <h1 class="class"><code><code><a href="mypy.html">mypy</a></code><wbr></wbr>.<code><a href="mypy.nodes.html">nodes</a></code><wbr></wbr>.<code><a href="mypy.nodes.SymbolTableNode.html">SymbolTableNode</a></code></code></h1>
+        <div id="showPrivate">
+          <button class="btn btn-link" onclick="togglePrivate()">Toggle Private API</button>
+        </div>
+      </div>
+
+      <div class="categoryHeader">
+        class documentation
+      </div>
+
+      <div class="extrasDocstring">
+        <p><code><span class="py-keyword">class</span> <span class="py-defname">SymbolTableNode</span>: <a href="https://github.com/python/mypy/tree/v0.930/mypy/nodes.py#L3110" class="sourceLink">(source)</a></code></p>
+        <p><a href="classIndex.html#mypy.nodes.SymbolTableNode">View In Hierarchy</a></p>
+      </div>
+
+      <div class="moduleDocstring">
+        <div><p>Description of a name binding in a symbol table.</p>
+<p>These are only used as values in module (global), function (local)
+and class symbol tables (see SymbolTable). The name that is bound is
+the key in SymbolTable.</p>
+<p>Symbol tables don't contain direct references to AST nodes primarily
+because there can be multiple symbol table references to a single
+AST node (due to imports and aliases), and different references can
+behave differently. This class describes the unique properties of
+each reference.</p>
+<p>The most fundamental attribute is 'node', which is the AST node that
+the name refers to.</p>
+<p>The kind is usually one of LDEF, GDEF or MDEF, depending on the scope
+of the definition. These three kinds can usually be used
+interchangeably and the difference between local, global and class
+scopes is mostly descriptive, with no semantic significance.
+However, some tools that consume mypy ASTs may care about these so
+they should be correct.</p>
+<dl class="rst-docutils">
+<dt>Attributes:</dt>
+<dd><dl class="rst-first rst-docutils">
+<dt>node: AST node of definition. Among others, this can be one of</dt>
+<dd>FuncDef, Var, TypeInfo, TypeVarExpr or MypyFile -- or None
+for cross_ref that hasn't been fixed up yet.</dd>
+<dt>kind: Kind of node. Possible values:</dt>
+<dd><ul class="rst-first rst-last rst-simple">
+<li>LDEF: local definition</li>
+<li>GDEF: global (module-level) definition</li>
+<li>MDEF: class member definition</li>
+<li>UNBOUND_IMPORTED: temporary kind for imported names (we
+don't know the final kind yet)</li>
+</ul>
+</dd>
+<dt>module_public: If False, this name won't be imported via</dt>
+<dd>'from &lt;module&gt; import <a href="#system-message-1"><span class="rst-problematic" id="rst-problematic-1">*</span></a>'. This has no effect on names within
+classes.</dd>
+<dt>module_hidden: If True, the name will be never exported (needed for</dt>
+<dd>stub files)</dd>
+<dt>cross_ref: For deserialized MypyFile nodes, the referenced module</dt>
+<dd>name; for other nodes, optionally the name of the referenced object.</dd>
+</dl>
+<p>implicit: Was this defined by assignment to self attribute?
+plugin_generated: Was this symbol generated by a plugin?</p>
+<blockquote>
+(And therefore needs to be removed in aststrip.)</blockquote>
+<dl class="rst-last rst-docutils">
+<dt>no_serialize: Do not serialize this node if True. This is used to prevent</dt>
+<dd><p class="rst-first">keys in the cache that refer to modules on which this file does not
+depend. Currently this can happen if there is a module not in build
+used e.g. like this:</p>
+<blockquote>
+import a.b.c # type: ignore</blockquote>
+<p class="rst-last">This will add a submodule symbol to parent module <code>a</code> symbol table,
+but <code>a.b</code> is _not_ added as its dependency. Therefore, we should
+not serialize these symbols as they may not be found during fixup
+phase, instead they will be re-added during subsequent patch parents
+phase.
+TODO: Refactor build.py to make dependency tracking more transparent
+and/or refactor look-up functions to not require parent patching.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<p>NOTE: No other attributes should be added to this class unless they
+are shared by all node kinds.</p>
+</div>
+      </div>
+
+      <div id="splitTables">
+        <table class="children sortable" id="id440">
+  
+  
+  <tr class="classmethod">
+    
+    <td>Class Method</td>
+    <td><code><a href="#deserialize">deserialize</a></code></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="method">
+    
+    <td>Method</td>
+    <td><code><a href="#__init__">__init__</a></code></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="method">
+    
+    <td>Method</td>
+    <td><code><a href="#__str__">__str__</a></code></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="method">
+    
+    <td>Method</td>
+    <td><code><a href="#copy">copy</a></code></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="method">
+    
+    <td>Method</td>
+    <td><code><a href="#serialize">serialize</a></code></td>
+    <td><span>Serialize a SymbolTableNode.</span></td>
+  </tr><tr class="classvariable">
+    
+    <td>Class Variable</td>
+    <td><code><a href="#__slots__">__slots__</a></code></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="instancevariable">
+    
+    <td>Instance Variable</td>
+    <td><code><a href="#cross_ref">cross_ref</a></code></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="instancevariable">
+    
+    <td>Instance Variable</td>
+    <td><code><a href="#implicit">implicit</a></code></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="instancevariable">
+    
+    <td>Instance Variable</td>
+    <td><code><a href="#kind">kind</a></code></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="instancevariable">
+    
+    <td>Instance Variable</td>
+    <td><code><a href="#module_hidden">module_hidden</a></code></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="instancevariable">
+    
+    <td>Instance Variable</td>
+    <td><code><a href="#module_public">module_public</a></code></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="instancevariable">
+    
+    <td>Instance Variable</td>
+    <td><code><a href="#no_serialize">no_serialize</a></code></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="instancevariable">
+    
+    <td>Instance Variable</td>
+    <td><code><a href="#node">node</a></code></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="instancevariable">
+    
+    <td>Instance Variable</td>
+    <td><code><a href="#plugin_generated">plugin_generated</a></code></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="property">
+    
+    <td>Property</td>
+    <td><code><a href="#fullname">fullname</a></code></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="property">
+    
+    <td>Property</td>
+    <td><code><a href="#type">type</a></code></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr>
+</table>
+        
+
+          
+      </div>
+
+      <div id="childList">
+
+        <div class="baseclassmethod">
+  
+  
+  <a name="mypy.nodes.SymbolTableNode.deserialize">
+    
+  </a>
+  <a name="deserialize">
+    
+  </a>
+  <div class="functionHeader">
+    @classmethod<br />
+    <span class="py-keyword">def</span> <span class="py-defname">deserialize</span>(cls, data):
+    <a class="sourceLink" href="https://github.com/python/mypy/tree/v0.930/mypy/nodes.py#L3270">
+      
+      (source)
+    </a>
+  </div>
+  <div class="docstring functionBody">
+    
+    
+    <div><p class="undocumented">Undocumented</p><table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">data:</span><code><a href="mypy.nodes.html#JsonDict">JsonDict</a></code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr class="fieldStart"><td class="fieldName" colspan="2">Returns</td></tr><tr><td class="fieldArgContainer"><code><a href="mypy.nodes.SymbolTableNode.html">SymbolTableNode</a></code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr></table></div>
+  </div>
+</div><div class="basemethod">
+  
+  
+  <a name="mypy.nodes.SymbolTableNode.__init__">
+    
+  </a>
+  <a name="__init__">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-keyword">def</span> <span class="py-defname">__init__</span>(self, kind, node, module_public=True, implicit=False, module_hidden=False, *, plugin_generated=False, no_serialize=False):
+    <a class="sourceLink" href="https://github.com/python/mypy/tree/v0.930/mypy/nodes.py#L3180">
+      
+      (source)
+    </a>
+  </div>
+  <div class="docstring functionBody">
+    
+    
+    <div><p class="undocumented">Undocumented</p><table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">kind:</span><code>int</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">node:</span><code>Optional[<wbr></wbr><a href="mypy.nodes.SymbolNode.html">SymbolNode</a>]</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">module_public:</span><code>bool</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">implicit:</span><code>bool</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">module_hidden:</span><code>bool</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">plugin_generated:</span><code>bool</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">no_serialize:</span><code>bool</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr></table></div>
+  </div>
+</div><div class="basemethod">
+  
+  
+  <a name="mypy.nodes.SymbolTableNode.__str__">
+    
+  </a>
+  <a name="__str__">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-keyword">def</span> <span class="py-defname">__str__</span>(self):
+    <a class="sourceLink" href="https://github.com/python/mypy/tree/v0.930/mypy/nodes.py#L3224">
+      
+      (source)
+    </a>
+  </div>
+  <div class="docstring functionBody">
+    
+    
+    <div><p class="undocumented">Undocumented</p><table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Returns</td></tr><tr><td class="fieldArgContainer"><code>str</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr></table></div>
+  </div>
+</div><div class="basemethod">
+  
+  
+  <a name="mypy.nodes.SymbolTableNode.copy">
+    
+  </a>
+  <a name="copy">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-keyword">def</span> <span class="py-defname">copy</span>(self):
+    <a class="sourceLink" href="https://github.com/python/mypy/tree/v0.930/mypy/nodes.py#L3215">
+      
+      (source)
+    </a>
+  </div>
+  <div class="docstring functionBody">
+    
+    
+    <div><p class="undocumented">Undocumented</p><table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Returns</td></tr><tr><td class="fieldArgContainer"><code><a href="mypy.nodes.SymbolTableNode.html">SymbolTableNode</a></code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr></table></div>
+  </div>
+</div><div class="basemethod">
+  
+  
+  <a name="mypy.nodes.SymbolTableNode.serialize">
+    
+  </a>
+  <a name="serialize">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-keyword">def</span> <span class="py-defname">serialize</span>(self, prefix, name):
+    <a class="sourceLink" href="https://github.com/python/mypy/tree/v0.930/mypy/nodes.py#L3233">
+      
+      (source)
+    </a>
+  </div>
+  <div class="docstring functionBody">
+    
+    
+    <div><p>Serialize a SymbolTableNode.</p>
+<dl class="rst-docutils">
+<dt>Args:</dt>
+<dd>prefix: full name of the containing module or class; or None
+name: name of this object relative to the containing object</dd>
+</dl>
+<table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">prefix:</span><code>str</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">name:</span><code>str</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr class="fieldStart"><td class="fieldName" colspan="2">Returns</td></tr><tr><td class="fieldArgContainer"><code><a href="mypy.nodes.html#JsonDict">JsonDict</a></code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr></table></div>
+  </div>
+</div><div class="baseclassvariable">
+  
+  
+  <a name="mypy.nodes.SymbolTableNode.__slots__">
+    
+  </a>
+  <a name="__slots__">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-defname">__slots__</span>: <code>tuple[<wbr></wbr>str, <wbr></wbr>...]</code> =
+    <a class="sourceLink" href="https://github.com/python/mypy/tree/v0.930/mypy/nodes.py#L3170">
+      
+      (source)
+    </a>
+  </div>
+  <div class="functionBody">
+    
+    
+    <div><p class="undocumented">Undocumented</p></div>
+  </div>
+</div><div class="baseinstancevariable">
+  
+  
+  <a name="mypy.nodes.SymbolTableNode.cross_ref">
+    
+  </a>
+  <a name="cross_ref">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-defname">cross_ref</span>: <code>Optional[<wbr></wbr>str]</code> =
+    <a class="sourceLink" href="https://github.com/python/mypy/tree/v0.930/mypy/nodes.py#L3194">
+      
+      (source)
+    </a>
+  </div>
+  <div class="functionBody">
+    
+    
+    <div><p class="undocumented">Undocumented</p></div>
+  </div>
+</div><div class="baseinstancevariable">
+  
+  
+  <a name="mypy.nodes.SymbolTableNode.implicit">
+    
+  </a>
+  <a name="implicit">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-defname">implicit</span> =
+    <a class="sourceLink" href="https://github.com/python/mypy/tree/v0.930/mypy/nodes.py#L3192">
+      
+      (source)
+    </a>
+  </div>
+  <div class="functionBody">
+    
+    
+    <div><p class="undocumented">Undocumented</p></div>
+  </div>
+</div><div class="baseinstancevariable">
+  
+  
+  <a name="mypy.nodes.SymbolTableNode.kind">
+    
+  </a>
+  <a name="kind">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-defname">kind</span> =
+    <a class="sourceLink" href="https://github.com/python/mypy/tree/v0.930/mypy/nodes.py#L3189">
+      
+      (source)
+    </a>
+  </div>
+  <div class="functionBody">
+    
+    
+    <div><p class="undocumented">Undocumented</p></div>
+  </div>
+</div><div class="baseinstancevariable">
+  
+  
+  <a name="mypy.nodes.SymbolTableNode.module_hidden">
+    
+  </a>
+  <a name="module_hidden">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-defname">module_hidden</span> =
+    <a class="sourceLink" href="https://github.com/python/mypy/tree/v0.930/mypy/nodes.py#L3193">
+      
+      (source)
+    </a>
+  </div>
+  <div class="functionBody">
+    
+    
+    <div><p class="undocumented">Undocumented</p></div>
+  </div>
+</div><div class="baseinstancevariable">
+  
+  
+  <a name="mypy.nodes.SymbolTableNode.module_public">
+    
+  </a>
+  <a name="module_public">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-defname">module_public</span> =
+    <a class="sourceLink" href="https://github.com/python/mypy/tree/v0.930/mypy/nodes.py#L3191">
+      
+      (source)
+    </a>
+  </div>
+  <div class="functionBody">
+    
+    
+    <div><p class="undocumented">Undocumented</p></div>
+  </div>
+</div><div class="baseinstancevariable">
+  
+  
+  <a name="mypy.nodes.SymbolTableNode.no_serialize">
+    
+  </a>
+  <a name="no_serialize">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-defname">no_serialize</span> =
+    <a class="sourceLink" href="https://github.com/python/mypy/tree/v0.930/mypy/nodes.py#L3196">
+      
+      (source)
+    </a>
+  </div>
+  <div class="functionBody">
+    
+    
+    <div><p class="undocumented">Undocumented</p></div>
+  </div>
+</div><div class="baseinstancevariable">
+  
+  
+  <a name="mypy.nodes.SymbolTableNode.node">
+    
+  </a>
+  <a name="node">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-defname">node</span> =
+    <a class="sourceLink" href="https://github.com/python/mypy/tree/v0.930/mypy/nodes.py#L3190">
+      
+      (source)
+    </a>
+  </div>
+  <div class="functionBody">
+    
+    
+    <div><p class="undocumented">Undocumented</p></div>
+  </div>
+</div><div class="baseinstancevariable">
+  
+  
+  <a name="mypy.nodes.SymbolTableNode.plugin_generated">
+    
+  </a>
+  <a name="plugin_generated">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-defname">plugin_generated</span> =
+    <a class="sourceLink" href="https://github.com/python/mypy/tree/v0.930/mypy/nodes.py#L3195">
+      
+      (source)
+    </a>
+  </div>
+  <div class="functionBody">
+    
+    
+    <div><p class="undocumented">Undocumented</p></div>
+  </div>
+</div><div class="baseproperty">
+  
+  
+  <a name="mypy.nodes.SymbolTableNode.fullname">
+    
+  </a>
+  <a name="fullname">
+    
+  </a>
+  <div class="functionHeader">
+    @property<br />
+    <span class="py-defname">fullname</span>: <code>Optional[<wbr></wbr>str]</code> =
+    <a class="sourceLink" href="https://github.com/python/mypy/tree/v0.930/mypy/nodes.py#L3198">
+      
+      (source)
+    </a>
+  </div>
+  <div class="functionBody">
+    
+    
+    <div><p class="undocumented">Undocumented</p></div>
+  </div>
+</div><div class="baseproperty">
+  
+  
+  <a name="mypy.nodes.SymbolTableNode.type">
+    
+  </a>
+  <a name="type">
+    
+  </a>
+  <div class="functionHeader">
+    @property<br />
+    <span class="py-defname">type</span>: <code>Optional[<wbr></wbr><a href="mypy.types.Type.html">mypy.types.Type</a>]</code> =
+    <a class="sourceLink" href="https://github.com/python/mypy/tree/v0.930/mypy/nodes.py#L3205">
+      
+      (source)
+    </a>
+  </div>
+  <div class="functionBody">
+    
+    
+    <div><p class="undocumented">Undocumented</p></div>
+  </div>
+</div>
+
+      </div>
+    </div>
+
+    <footer class="navbar navbar-default">
+  
+  <div class="container">
+    <a href="index.html">API Documentation</a> for <a href="http://www.nltk.org/" class="projecthome">mypy-0.930</a>,
+  generated by <a href="https://github.com/twisted/pydoctor/">pydoctor</a>
+    21.2.2 at 2022-01-06 17:13:29.
+  </div>
+</footer>
+
+    <script src="pydoctor.js" type="text/javascript"></script>
+
+  </body>
+</html>
