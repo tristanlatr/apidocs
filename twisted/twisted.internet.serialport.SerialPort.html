@@ -126,16 +126,16 @@
       </div>
 
       <div class="extrasDocstring">
-        <p><code><span class="py-keyword">class</span> <span class="py-defname">SerialPort</span>(<a href="twisted.internet.serialport.BaseSerialPort.html" title="twisted.internet.serialport.BaseSerialPort">BaseSerialPort</a>, <a href="twisted.internet.abstract.FileDescriptor.html" title="twisted.internet.abstract.FileDescriptor">abstract.FileDescriptor</a>): <a href="https://github.com/twisted/twisted/tree/twisted-21.2.0/src/twisted/internet/_posixserialport.py#L21" class="sourceLink">(source)</a></code></p>
+        <p><code><span class="py-keyword">class</span> <span class="py-defname">SerialPort</span>(<a href="twisted.internet.serialport.BaseSerialPort.html" title="twisted.internet.serialport.BaseSerialPort">BaseSerialPort</a>, <a href="twisted.internet.abstract.FileDescriptor.html" title="twisted.internet.abstract.FileDescriptor">abstract.FileDescriptor</a>): <a href="https://github.com/twisted/twisted/tree/twisted-21.2.0/src/twisted/internet/_win32serialport.py#L27" class="sourceLink">(source)</a></code></p>
         <p><a href="classIndex.html#twisted.internet.serialport.SerialPort">View In Hierarchy</a></p>
       </div>
 
       <div class="moduleDocstring">
-        <div><p>A select()able serial device, acting as a transport.</p></div>
+        <div><p>A serial device, acting as a transport, that uses a win32 event.</p></div>
       </div>
 
       <div id="splitTables">
-        <table class="children sortable" id="id1148">
+        <table class="children sortable" id="id1154">
   
   
   <tr class="method">
@@ -151,22 +151,37 @@
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#doRead">doRead</a></code></td>
-    <td><span>Some data's readable from serial device.</span></td>
+    <td><code><a href="#serialReadEvent">serialReadEvent</a></code></td>
+    <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#fileno">fileno</a></code></td>
-    <td><span>File Descriptor number for select().</span></td>
+    <td><code><a href="#serialWriteEvent">serialWriteEvent</a></code></td>
+    <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#writeSomeData">writeSomeData</a></code></td>
-    <td><span>Write some data to the serial device.</span></td>
+    <td><code><a href="#write">write</a></code></td>
+    <td><span>Reliably write some data.</span></td>
   </tr><tr class="classvariable">
     
     <td>Class Variable</td>
     <td><code><a href="#connected">connected</a></code></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="instancevariable">
+    
+    <td>Instance Variable</td>
+    <td><code><a href="#closed">closed</a></code></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="instancevariable">
+    
+    <td>Instance Variable</td>
+    <td><code><a href="#closedNotifies">closedNotifies</a></code></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="instancevariable">
+    
+    <td>Instance Variable</td>
+    <td><code><a href="#outQueue">outQueue</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="instancevariable">
     
@@ -177,6 +192,36 @@
     
     <td>Instance Variable</td>
     <td><code><a href="#reactor">reactor</a></code></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="instancevariable">
+    
+    <td>Instance Variable</td>
+    <td><code><a href="#read_buf">read_buf</a></code></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="instancevariable">
+    
+    <td>Instance Variable</td>
+    <td><code><a href="#writeInProgress">writeInProgress</a></code></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="method private">
+    
+    <td>Method</td>
+    <td><code><a href="#_clearCommError">_clearCommError</a></code></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="method private">
+    
+    <td>Method</td>
+    <td><code><a href="#_finishPortSetup">_finishPortSetup</a></code></td>
+    <td><span>Finish setting up the serial port.</span></td>
+  </tr><tr class="instancevariable private">
+    
+    <td>Instance Variable</td>
+    <td><code><a href="#_overlappedRead">_overlappedRead</a></code></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="instancevariable private">
+    
+    <td>Instance Variable</td>
+    <td><code><a href="#_overlappedWrite">_overlappedWrite</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="instancevariable private">
     
@@ -189,7 +234,7 @@
           <p class="inheritedFrom">
             Inherited from <code><a href="twisted.internet.serialport.BaseSerialPort.html">BaseSerialPort</a></code>:
           </p>
-          <table class="children sortable" id="id1149">
+          <table class="children sortable" id="id1155">
   
   
   <tr class="basemethod">
@@ -258,14 +303,24 @@
           <p class="inheritedFrom">
             Inherited from <code><a href="twisted.internet.abstract.FileDescriptor.html">FileDescriptor</a></code>:
           </p>
-          <table class="children sortable" id="id1150">
+          <table class="children sortable" id="id1156">
   
   
   <tr class="basemethod">
     
     <td>Method</td>
+    <td><code><a href="twisted.internet.abstract.FileDescriptor.html#doRead">doRead</a></code></td>
+    <td><span>Called when data is available for reading.</span></td>
+  </tr><tr class="basemethod">
+    
+    <td>Method</td>
     <td><code><a href="twisted.internet.abstract.FileDescriptor.html#doWrite">doWrite</a></code></td>
     <td><span>Called when data can be written.</span></td>
+  </tr><tr class="basemethod">
+    
+    <td>Method</td>
+    <td><code><a href="twisted.internet.abstract.FileDescriptor.html#fileno">fileno</a></code></td>
+    <td><span>File Descriptor number for select().</span></td>
   </tr><tr class="basemethod">
     
     <td>Method</td>
@@ -334,11 +389,6 @@
   </tr><tr class="basemethod">
     
     <td>Method</td>
-    <td><code><a href="twisted.internet.abstract.FileDescriptor.html#write">write</a></code></td>
-    <td><span>Reliably write some data.</span></td>
-  </tr><tr class="basemethod">
-    
-    <td>Method</td>
     <td><code><a href="twisted.internet.abstract.FileDescriptor.html#writeConnectionLost">writeConnectionLost</a></code></td>
     <td><span>Indicates write connection was lost.</span></td>
   </tr><tr class="basemethod">
@@ -346,6 +396,11 @@
     <td>Method</td>
     <td><code><a href="twisted.internet.abstract.FileDescriptor.html#writeSequence">writeSequence</a></code></td>
     <td><span>Reliably write a sequence of data.</span></td>
+  </tr><tr class="basemethod">
+    
+    <td>Method</td>
+    <td><code><a href="twisted.internet.abstract.FileDescriptor.html#writeSomeData">writeSomeData</a></code></td>
+    <td><span>Write as much as possible of the given data, immediately.</span></td>
   </tr><tr class="baseclassvariable">
     
     <td>Class Variable</td>
@@ -432,7 +487,7 @@
           <p class="inheritedFrom">
             Inherited from <code><a href="twisted.internet.abstract._ConsumerMixin.html">_ConsumerMixin</a></code> (via <code><a href="twisted.internet.abstract.FileDescriptor.html">FileDescriptor</a></code>):
           </p>
-          <table class="children sortable" id="id1151">
+          <table class="children sortable" id="id1157">
   
   
   <tr class="basemethod">
@@ -456,7 +511,7 @@
           <p class="inheritedFrom">
             Inherited from <code><a href="twisted.internet.abstract._LogOwner.html">_LogOwner</a></code> (via <code><a href="twisted.internet.abstract.FileDescriptor.html">FileDescriptor</a></code>):
           </p>
-          <table class="children sortable" id="id1152">
+          <table class="children sortable" id="id1158">
   
   
   <tr class="basemethod">
@@ -489,8 +544,8 @@
   </a>
   <div class="functionHeader">
     
-    <span class="py-keyword">def</span> <span class="py-defname">__init__</span>(self, protocol, deviceNameOrPortNumber, reactor, baudrate=9600, bytesize=EIGHTBITS, parity=PARITY_NONE, stopbits=STOPBITS_ONE, timeout=0, xonxoff=0, rtscts=0):
-    <a class="sourceLink" href="https://github.com/twisted/twisted/tree/twisted-21.2.0/src/twisted/internet/_posixserialport.py#L28">
+    <span class="py-keyword">def</span> <span class="py-defname">__init__</span>(self, protocol, deviceNameOrPortNumber, reactor, baudrate=9600, bytesize=EIGHTBITS, parity=PARITY_NONE, stopbits=STOPBITS_ONE, xonxoff=0, rtscts=0):
+    <a class="sourceLink" href="https://github.com/twisted/twisted/tree/twisted-21.2.0/src/twisted/internet/_win32serialport.py#L32">
       
       (source)
     </a>
@@ -498,7 +553,7 @@
   <div class="docstring functionBody">
     <div class="interfaceinfo">overrides <code><a href="twisted.internet.abstract.FileDescriptor.html#__init__">twisted.internet.abstract.FileDescriptor.__init__</a></code></div>
     
-    <div><table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">protocol</span></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">deviceNameOrPortNumber</span></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">reactor</span></td><td class="fieldArgDesc">An <code><a href="twisted.internet.interfaces.IReactorFDSet.html">IReactorFDSet</a></code> provider which this descriptor will use to get readable and writeable event notifications.  If no value is given, the global reactor will be used.</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">baudrate</span></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">bytesize</span></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">parity</span></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">stopbits</span></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">timeout</span></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">xonxoff</span></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">rtscts</span></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr></table></div>
+    <div><table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">protocol</span></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">deviceNameOrPortNumber</span></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">reactor</span></td><td class="fieldArgDesc">An <code><a href="twisted.internet.interfaces.IReactorFDSet.html">IReactorFDSet</a></code> provider which this descriptor will use to get readable and writeable event notifications.  If no value is given, the global reactor will be used.</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">baudrate</span></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">bytesize</span></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">parity</span></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">stopbits</span></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">xonxoff</span></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">rtscts</span></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr></table></div>
   </div>
 </div><div class="basemethod">
   
@@ -512,7 +567,7 @@
   <div class="functionHeader">
     
     <span class="py-keyword">def</span> <span class="py-defname">connectionLost</span>(self, reason):
-    <a class="sourceLink" href="https://github.com/twisted/twisted/tree/twisted-21.2.0/src/twisted/internet/_posixserialport.py#L74">
+    <a class="sourceLink" href="https://github.com/twisted/twisted/tree/twisted-21.2.0/src/twisted/internet/_win32serialport.py#L144">
       
       (source)
     </a>
@@ -525,68 +580,68 @@
 </div><div class="basemethod">
   
   
-  <a name="twisted.internet.serialport.SerialPort.doRead">
+  <a name="twisted.internet.serialport.SerialPort.serialReadEvent">
     
   </a>
-  <a name="doRead">
+  <a name="serialReadEvent">
     
   </a>
   <div class="functionHeader">
     
-    <span class="py-keyword">def</span> <span class="py-defname">doRead</span>(self):
-    <a class="sourceLink" href="https://github.com/twisted/twisted/tree/twisted-21.2.0/src/twisted/internet/_posixserialport.py#L68">
+    <span class="py-keyword">def</span> <span class="py-defname">serialReadEvent</span>(self):
+    <a class="sourceLink" href="https://github.com/twisted/twisted/tree/twisted-21.2.0/src/twisted/internet/_win32serialport.py#L91">
       
       (source)
     </a>
   </div>
   <div class="docstring functionBody">
-    <div class="interfaceinfo">from <code><a href="twisted.internet.interfaces.IReadDescriptor.html#doRead">twisted.internet.interfaces.IReadDescriptor</a></code></div><div class="interfaceinfo">overrides <code><a href="twisted.internet.abstract.FileDescriptor.html#doRead">twisted.internet.abstract.FileDescriptor.doRead</a></code></div>
     
-    <div><p>Some data's readable from serial device.</p></div>
+    
+    <div><p class="undocumented">Undocumented</p></div>
   </div>
 </div><div class="basemethod">
   
   
-  <a name="twisted.internet.serialport.SerialPort.fileno">
+  <a name="twisted.internet.serialport.SerialPort.serialWriteEvent">
     
   </a>
-  <a name="fileno">
+  <a name="serialWriteEvent">
     
   </a>
   <div class="functionHeader">
     
-    <span class="py-keyword">def</span> <span class="py-defname">fileno</span>(self):
-    <a class="sourceLink" href="https://github.com/twisted/twisted/tree/twisted-21.2.0/src/twisted/internet/_posixserialport.py#L59">
+    <span class="py-keyword">def</span> <span class="py-defname">serialWriteEvent</span>(self):
+    <a class="sourceLink" href="https://github.com/twisted/twisted/tree/twisted-21.2.0/src/twisted/internet/_win32serialport.py#L133">
       
       (source)
     </a>
   </div>
   <div class="docstring functionBody">
-    <div class="interfaceinfo">from <code><a href="twisted.internet.interfaces.IFileDescriptor.html#fileno">twisted.internet.interfaces.IFileDescriptor</a></code></div><div class="interfaceinfo">overrides <code><a href="twisted.internet.abstract.FileDescriptor.html#fileno">twisted.internet.abstract.FileDescriptor.fileno</a></code></div>
     
-    <div><p>File Descriptor number for select().</p><p>This method must be overridden or assigned in subclasses to indicate a valid file descriptor for the operating system.</p></div>
+    
+    <div><p class="undocumented">Undocumented</p></div>
   </div>
 </div><div class="basemethod">
   
   
-  <a name="twisted.internet.serialport.SerialPort.writeSomeData">
+  <a name="twisted.internet.serialport.SerialPort.write">
     
   </a>
-  <a name="writeSomeData">
+  <a name="write">
     
   </a>
   <div class="functionHeader">
     
-    <span class="py-keyword">def</span> <span class="py-defname">writeSomeData</span>(self, data):
-    <a class="sourceLink" href="https://github.com/twisted/twisted/tree/twisted-21.2.0/src/twisted/internet/_posixserialport.py#L62">
+    <span class="py-keyword">def</span> <span class="py-defname">write</span>(self, data):
+    <a class="sourceLink" href="https://github.com/twisted/twisted/tree/twisted-21.2.0/src/twisted/internet/_win32serialport.py#L123">
       
       (source)
     </a>
   </div>
   <div class="docstring functionBody">
-    <div class="interfaceinfo">overrides <code><a href="twisted.internet.abstract.FileDescriptor.html#writeSomeData">twisted.internet.abstract.FileDescriptor.writeSomeData</a></code></div>
+    <div class="interfaceinfo">from <code><a href="twisted.internet.interfaces.IConsumer.html#write">twisted.internet.interfaces.IConsumer</a></code></div><div class="interfaceinfo">overrides <code><a href="twisted.internet.abstract.FileDescriptor.html#write">twisted.internet.abstract.FileDescriptor.write</a></code></div>
     
-    <div><p>Write some data to the serial device.</p></div>
+    <div><p>Reliably write some data.</p><p>The data is buffered until the underlying file descriptor is ready for writing. If there is more than <code>self.bufferSize</code> data in the buffer and this descriptor has a registered streaming producer, its <code>pauseProducing()</code> method will be called.</p></div>
   </div>
 </div><div class="baseclassvariable">
   
@@ -600,13 +655,79 @@
   <div class="functionHeader">
     
     <span class="py-defname">connected</span>: <code><a href="https://docs.python.org/3/library/functions.html#int">int</a></code> =
-    <a class="sourceLink" href="https://github.com/twisted/twisted/tree/twisted-21.2.0/src/twisted/internet/_posixserialport.py#L26">
+    <a class="sourceLink" href="https://github.com/twisted/twisted/tree/twisted-21.2.0/src/twisted/internet/_win32serialport.py#L30">
       
       (source)
     </a>
   </div>
   <div class="functionBody">
     <div class="interfaceinfo">overrides <code><a href="twisted.internet.abstract.FileDescriptor.html#connected">twisted.internet.abstract.FileDescriptor.connected</a></code></div>
+    
+    <div><p class="undocumented">Undocumented</p></div>
+  </div>
+</div><div class="baseinstancevariable">
+  
+  
+  <a name="twisted.internet.serialport.SerialPort.closed">
+    
+  </a>
+  <a name="closed">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-defname">closed</span>: <code><a href="https://docs.python.org/3/library/functions.html#int">int</a></code> =
+    <a class="sourceLink" href="https://github.com/twisted/twisted/tree/twisted-21.2.0/src/twisted/internet/_win32serialport.py#L59">
+      
+      (source)
+    </a>
+  </div>
+  <div class="functionBody">
+    
+    
+    <div><p class="undocumented">Undocumented</p></div>
+  </div>
+</div><div class="baseinstancevariable">
+  
+  
+  <a name="twisted.internet.serialport.SerialPort.closedNotifies">
+    
+  </a>
+  <a name="closedNotifies">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-defname">closedNotifies</span>: <code><a href="https://docs.python.org/3/library/functions.html#int">int</a></code> =
+    <a class="sourceLink" href="https://github.com/twisted/twisted/tree/twisted-21.2.0/src/twisted/internet/_win32serialport.py#L60">
+      
+      (source)
+    </a>
+  </div>
+  <div class="functionBody">
+    
+    
+    <div><p class="undocumented">Undocumented</p></div>
+  </div>
+</div><div class="baseinstancevariable">
+  
+  
+  <a name="twisted.internet.serialport.SerialPort.outQueue">
+    
+  </a>
+  <a name="outQueue">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-defname">outQueue</span>: <code><a href="https://docs.python.org/3/library/stdtypes.html#list">list</a></code> =
+    <a class="sourceLink" href="https://github.com/twisted/twisted/tree/twisted-21.2.0/src/twisted/internet/_win32serialport.py#L58">
+      
+      (source)
+    </a>
+  </div>
+  <div class="functionBody">
+    
     
     <div><p class="undocumented">Undocumented</p></div>
   </div>
@@ -622,7 +743,7 @@
   <div class="functionHeader">
     
     <span class="py-defname">protocol</span> =
-    <a class="sourceLink" href="https://github.com/twisted/twisted/tree/twisted-21.2.0/src/twisted/internet/_posixserialport.py#L55">
+    <a class="sourceLink" href="https://github.com/twisted/twisted/tree/twisted-21.2.0/src/twisted/internet/_win32serialport.py#L57">
       
       (source)
     </a>
@@ -644,13 +765,145 @@
   <div class="functionHeader">
     
     <span class="py-defname">reactor</span> =
-    <a class="sourceLink" href="https://github.com/twisted/twisted/tree/twisted-21.2.0/src/twisted/internet/_posixserialport.py#L52">
+    <a class="sourceLink" href="https://github.com/twisted/twisted/tree/twisted-21.2.0/src/twisted/internet/_win32serialport.py#L56">
       
       (source)
     </a>
   </div>
   <div class="functionBody">
     <div class="interfaceinfo">overrides <code><a href="twisted.internet.abstract.FileDescriptor.html#reactor">twisted.internet.abstract.FileDescriptor.reactor</a></code></div>
+    
+    <div><p class="undocumented">Undocumented</p></div>
+  </div>
+</div><div class="baseinstancevariable">
+  
+  
+  <a name="twisted.internet.serialport.SerialPort.read_buf">
+    
+  </a>
+  <a name="read_buf">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-defname">read_buf</span> =
+    <a class="sourceLink" href="https://github.com/twisted/twisted/tree/twisted-21.2.0/src/twisted/internet/_win32serialport.py#L82">
+      
+      (source)
+    </a>
+  </div>
+  <div class="functionBody">
+    
+    
+    <div><p class="undocumented">Undocumented</p></div>
+  </div>
+</div><div class="baseinstancevariable">
+  
+  
+  <a name="twisted.internet.serialport.SerialPort.writeInProgress">
+    
+  </a>
+  <a name="writeInProgress">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-defname">writeInProgress</span>: <code><a href="https://docs.python.org/3/library/functions.html#int">int</a></code> =
+    <a class="sourceLink" href="https://github.com/twisted/twisted/tree/twisted-21.2.0/src/twisted/internet/_win32serialport.py#L61">
+      
+      (source)
+    </a>
+  </div>
+  <div class="functionBody">
+    
+    
+    <div><p class="undocumented">Undocumented</p></div>
+  </div>
+</div><div class="basemethod private">
+  
+  
+  <a name="twisted.internet.serialport.SerialPort._clearCommError">
+    
+  </a>
+  <a name="_clearCommError">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-keyword">def</span> <span class="py-defname">_clearCommError</span>(self):
+    <a class="sourceLink" href="https://github.com/twisted/twisted/tree/twisted-21.2.0/src/twisted/internet/_win32serialport.py#L88">
+      
+      (source)
+    </a>
+  </div>
+  <div class="docstring functionBody">
+    
+    
+    <div><p class="undocumented">Undocumented</p></div>
+  </div>
+</div><div class="basemethod private">
+  
+  
+  <a name="twisted.internet.serialport.SerialPort._finishPortSetup">
+    
+  </a>
+  <a name="_finishPortSetup">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-keyword">def</span> <span class="py-defname">_finishPortSetup</span>(self):
+    <a class="sourceLink" href="https://github.com/twisted/twisted/tree/twisted-21.2.0/src/twisted/internet/_win32serialport.py#L75">
+      
+      (source)
+    </a>
+  </div>
+  <div class="docstring functionBody">
+    
+    
+    <div><p>Finish setting up the serial port.</p><p>This is a separate method to facilitate testing.</p></div>
+  </div>
+</div><div class="baseinstancevariable private">
+  
+  
+  <a name="twisted.internet.serialport.SerialPort._overlappedRead">
+    
+  </a>
+  <a name="_overlappedRead">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-defname">_overlappedRead</span> =
+    <a class="sourceLink" href="https://github.com/twisted/twisted/tree/twisted-21.2.0/src/twisted/internet/_win32serialport.py#L64">
+      
+      (source)
+    </a>
+  </div>
+  <div class="functionBody">
+    
+    
+    <div><p class="undocumented">Undocumented</p></div>
+  </div>
+</div><div class="baseinstancevariable private">
+  
+  
+  <a name="twisted.internet.serialport.SerialPort._overlappedWrite">
+    
+  </a>
+  <a name="_overlappedWrite">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-defname">_overlappedWrite</span> =
+    <a class="sourceLink" href="https://github.com/twisted/twisted/tree/twisted-21.2.0/src/twisted/internet/_win32serialport.py#L66">
+      
+      (source)
+    </a>
+  </div>
+  <div class="functionBody">
+    
     
     <div><p class="undocumented">Undocumented</p></div>
   </div>
@@ -666,7 +919,7 @@
   <div class="functionHeader">
     
     <span class="py-defname">_serial</span> =
-    <a class="sourceLink" href="https://github.com/twisted/twisted/tree/twisted-21.2.0/src/twisted/internet/_posixserialport.py#L42">
+    <a class="sourceLink" href="https://github.com/twisted/twisted/tree/twisted-21.2.0/src/twisted/internet/_win32serialport.py#L44">
       
       (source)
     </a>
@@ -686,7 +939,7 @@
   <div class="container">
     <a href="index.html">API Documentation</a> for <a href="https://twistedmatrix.com/" class="projecthome">Twisted</a>,
   generated by <a href="https://github.com/twisted/pydoctor/">pydoctor</a>
-    21.2.2 at 2022-01-06 17:13:30.
+    21.2.2 at 2022-01-06 17:36:45.
   </div>
 </footer>
 
