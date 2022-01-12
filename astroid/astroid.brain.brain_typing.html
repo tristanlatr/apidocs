@@ -29,7 +29,7 @@
       
       <div class="navlinks">
         <span class="navbar-brand">
-          <a href="https://github.com/PyCQA/astroid/" class="projecthome">astroid-v2.6.0</a> <a href="index.html">API Documentation</a>
+          <a href="https://github.com/PyCQA/astroid/" class="projecthome">astroid-v2.9.3</a> <a href="index.html">API Documentation</a>
         </span>
 
         <a href="moduleIndex.html">
@@ -126,7 +126,7 @@
       </div>
 
       <div class="extrasDocstring">
-        <a href="https://github.com/PyCQA/astroid/tree/v2.6.0/astroid/brain/brain_typing.py" class="sourceLink">(source)</a>
+        <a href="https://github.com/PyCQA/astroid/tree/v2.9.3/astroid/brain/brain_typing.py" class="sourceLink">(source)</a>
         <p></p>
       </div>
 
@@ -135,13 +135,18 @@
       </div>
 
       <div id="splitTables">
-        <table class="children sortable" id="id76">
+        <table class="children sortable" id="id77">
   
   
   <tr class="function">
     
     <td>Function</td>
-    <td><code><a href="#infer_tuple_alias">infer_tuple_alias</a></code></td>
+    <td><code><a href="#infer_old_typedDict">infer_old_typedDict</a></code></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="function">
+    
+    <td>Function</td>
+    <td><code><a href="#infer_special_alias">infer_special_alias</a></code></td>
     <td><span>Infer call to tuple alias as new subscriptable class typing.Tuple.</span></td>
   </tr><tr class="function">
     
@@ -158,6 +163,11 @@
     <td>Function</td>
     <td><code><a href="#infer_typing_attr">infer_typing_attr</a></code></td>
     <td><span>Infer a typing.X[...] subscript</span></td>
+  </tr><tr class="function">
+    
+    <td>Function</td>
+    <td><code><a href="#infer_typing_cast">infer_typing_cast</a></code></td>
+    <td><span>Infer call to cast() returning same type as casted-from var</span></td>
   </tr><tr class="function">
     
     <td>Function</td>
@@ -211,8 +221,8 @@
   </tr><tr class="function private">
     
     <td>Function</td>
-    <td><code><a href="#_looks_like_tuple_alias">_looks_like_tuple_alias</a></code></td>
-    <td><span>Return True if call is for Tuple alias.</span></td>
+    <td><code><a href="#_looks_like_special_alias">_looks_like_special_alias</a></code></td>
+    <td><span>Return True if call is for Tuple or Callable alias.</span></td>
   </tr><tr class="function private">
     
     <td>Function</td>
@@ -223,6 +233,11 @@
     <td>Function</td>
     <td><code><a href="#_looks_like_typing_alias">_looks_like_typing_alias</a></code></td>
     <td><span>Returns True if the node corresponds to a call to _alias function. For example :</span></td>
+  </tr><tr class="function private">
+    
+    <td>Function</td>
+    <td><code><a href="#_looks_like_typing_cast">_looks_like_typing_cast</a></code></td>
+    <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="function private">
     
     <td>Function</td>
@@ -240,16 +255,16 @@
         <div class="basefunction">
   
   
-  <a name="astroid.brain.brain_typing.infer_tuple_alias">
+  <a name="astroid.brain.brain_typing.infer_old_typedDict">
     
   </a>
-  <a name="infer_tuple_alias">
+  <a name="infer_old_typedDict">
     
   </a>
   <div class="functionHeader">
     
-    <span class="py-keyword">def</span> <span class="py-defname">infer_tuple_alias</span>(node, ctx=None):
-    <a class="sourceLink" href="https://github.com/PyCQA/astroid/tree/v2.6.0/astroid/brain/brain_typing.py#L331">
+    <span class="py-keyword">def</span> <span class="py-defname">infer_old_typedDict</span>(node, ctx=None):
+    <a class="sourceLink" href="https://github.com/PyCQA/astroid/tree/v2.9.3/astroid/brain/brain_typing.py#L199">
       
       (source)
     </a>
@@ -257,7 +272,29 @@
   <div class="docstring functionBody">
     
     
-    <div>Infer call to tuple alias as new subscriptable class typing.Tuple.<table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">node:</span><code><a href="astroid.node_classes.Call.html">Call</a></code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">ctx:</span><code><a href="astroid.context.InferenceContext.html">context.InferenceContext</a></code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr class="fieldStart"><td class="fieldName" colspan="2">Returns</td></tr><tr><td class="fieldArgContainer"><code>typing.Iterator[<wbr></wbr><a href="astroid.scoped_nodes.ClassDef.html">ClassDef</a>]</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr></table></div>
+    <div><p class="undocumented">Undocumented</p><table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">node:</span><code><a href="astroid.nodes.scoped_nodes.ClassDef.html">ClassDef</a></code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">ctx:</span><code>typing.Optional[<wbr></wbr><a href="astroid.context.InferenceContext.html">context.InferenceContext</a>]</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr class="fieldStart"><td class="fieldName" colspan="2">Returns</td></tr><tr><td class="fieldArgContainer"><code>typing.Iterator[<wbr></wbr><a href="astroid.nodes.scoped_nodes.ClassDef.html">ClassDef</a>]</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr></table></div>
+  </div>
+</div><div class="basefunction">
+  
+  
+  <a name="astroid.brain.brain_typing.infer_special_alias">
+    
+  </a>
+  <a name="infer_special_alias">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-keyword">def</span> <span class="py-defname">infer_special_alias</span>(node, ctx=None):
+    <a class="sourceLink" href="https://github.com/PyCQA/astroid/tree/v2.9.3/astroid/brain/brain_typing.py#L355">
+      
+      (source)
+    </a>
+  </div>
+  <div class="docstring functionBody">
+    
+    
+    <div>Infer call to tuple alias as new subscriptable class typing.Tuple.<table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">node:</span><code>Call</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">ctx:</span><code>typing.Optional[<wbr></wbr><a href="astroid.context.InferenceContext.html">context.InferenceContext</a>]</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr class="fieldStart"><td class="fieldName" colspan="2">Returns</td></tr><tr><td class="fieldArgContainer"><code>typing.Iterator[<wbr></wbr><a href="astroid.nodes.scoped_nodes.ClassDef.html">ClassDef</a>]</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr></table></div>
   </div>
 </div><div class="basefunction">
   
@@ -271,7 +308,7 @@
   <div class="functionHeader">
     
     <span class="py-keyword">def</span> <span class="py-defname">infer_typedDict</span>(node, ctx=None):
-    <a class="sourceLink" href="https://github.com/PyCQA/astroid/tree/v2.6.0/astroid/brain/brain_typing.py#L194">
+    <a class="sourceLink" href="https://github.com/PyCQA/astroid/tree/v2.9.3/astroid/brain/brain_typing.py#L207">
       
       (source)
     </a>
@@ -279,7 +316,7 @@
   <div class="docstring functionBody">
     
     
-    <div>Replace TypedDict FunctionDef with ClassDef.<table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">node:</span><code><a href="astroid.scoped_nodes.FunctionDef.html">FunctionDef</a></code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">ctx:</span><code><a href="astroid.context.InferenceContext.html">context.InferenceContext</a></code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr class="fieldStart"><td class="fieldName" colspan="2">Returns</td></tr><tr><td class="fieldArgContainer"><code>typing.Iterator[<wbr></wbr><a href="astroid.scoped_nodes.ClassDef.html">ClassDef</a>]</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr></table></div>
+    <div>Replace TypedDict FunctionDef with ClassDef.<table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">node:</span><code><a href="astroid.nodes.scoped_nodes.FunctionDef.html">FunctionDef</a></code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">ctx:</span><code>typing.Optional[<wbr></wbr><a href="astroid.context.InferenceContext.html">context.InferenceContext</a>]</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr class="fieldStart"><td class="fieldName" colspan="2">Returns</td></tr><tr><td class="fieldArgContainer"><code>typing.Iterator[<wbr></wbr><a href="astroid.nodes.scoped_nodes.ClassDef.html">ClassDef</a>]</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr></table></div>
   </div>
 </div><div class="basefunction">
   
@@ -293,7 +330,7 @@
   <div class="functionHeader">
     
     <span class="py-keyword">def</span> <span class="py-defname">infer_typing_alias</span>(node, ctx=None):
-    <a class="sourceLink" href="https://github.com/PyCQA/astroid/tree/v2.6.0/astroid/brain/brain_typing.py#L254">
+    <a class="sourceLink" href="https://github.com/PyCQA/astroid/tree/v2.9.3/astroid/brain/brain_typing.py#L267">
       
       (source)
     </a>
@@ -303,7 +340,7 @@
     
     <div>Infers the call to _alias function
 Insert ClassDef, with same name as aliased class,
-in mro to simulate _GenericAlias.<table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">node:</span><code><a href="astroid.node_classes.Call.html">Call</a></code></td><td class="fieldArgDesc">call node</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">ctx:</span><code><a href="astroid.context.InferenceContext.html">context.InferenceContext</a></code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">context</span></td><td class="fieldArgDesc">inference context</td></tr><tr class="fieldStart"><td class="fieldName" colspan="2">Returns</td></tr><tr><td class="fieldArgContainer"><code>typing.Iterator[<wbr></wbr><a href="astroid.scoped_nodes.ClassDef.html">ClassDef</a>]</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr></table></div>
+in mro to simulate _GenericAlias.<table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">node:</span><code>Call</code></td><td class="fieldArgDesc">call node</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">ctx:</span><code>typing.Optional[<wbr></wbr><a href="astroid.context.InferenceContext.html">context.InferenceContext</a>]</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">context</span></td><td class="fieldArgDesc">inference context</td></tr><tr class="fieldStart"><td class="fieldName" colspan="2">Returns</td></tr><tr><td class="fieldArgContainer"><code>typing.Iterator[<wbr></wbr><a href="astroid.nodes.scoped_nodes.ClassDef.html">ClassDef</a>]</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr></table></div>
   </div>
 </div><div class="basefunction">
   
@@ -317,7 +354,7 @@ in mro to simulate _GenericAlias.<table class="fieldTable"><tr class="fieldStart
   <div class="functionHeader">
     
     <span class="py-keyword">def</span> <span class="py-defname">infer_typing_attr</span>(node, ctx=None):
-    <a class="sourceLink" href="https://github.com/PyCQA/astroid/tree/v2.6.0/astroid/brain/brain_typing.py#L142">
+    <a class="sourceLink" href="https://github.com/PyCQA/astroid/tree/v2.9.3/astroid/brain/brain_typing.py#L147">
       
       (source)
     </a>
@@ -325,7 +362,29 @@ in mro to simulate _GenericAlias.<table class="fieldTable"><tr class="fieldStart
   <div class="docstring functionBody">
     
     
-    <div>Infer a typing.X[...] subscript<table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">node:</span><code><a href="astroid.node_classes.Subscript.html">Subscript</a></code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">ctx:</span><code><a href="astroid.context.InferenceContext.html">context.InferenceContext</a></code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr class="fieldStart"><td class="fieldName" colspan="2">Returns</td></tr><tr><td class="fieldArgContainer"><code>typing.Iterator[<wbr></wbr><a href="astroid.scoped_nodes.ClassDef.html">ClassDef</a>]</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr></table></div>
+    <div>Infer a typing.X[...] subscript<table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">node:</span><code>Subscript</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">ctx:</span><code>typing.Optional[<wbr></wbr><a href="astroid.context.InferenceContext.html">context.InferenceContext</a>]</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr class="fieldStart"><td class="fieldName" colspan="2">Returns</td></tr><tr><td class="fieldArgContainer"><code>typing.Iterator[<wbr></wbr><a href="astroid.nodes.scoped_nodes.ClassDef.html">ClassDef</a>]</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr></table></div>
+  </div>
+</div><div class="basefunction">
+  
+  
+  <a name="astroid.brain.brain_typing.infer_typing_cast">
+    
+  </a>
+  <a name="infer_typing_cast">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-keyword">def</span> <span class="py-defname">infer_typing_cast</span>(node, ctx=None):
+    <a class="sourceLink" href="https://github.com/PyCQA/astroid/tree/v2.9.3/astroid/brain/brain_typing.py#L390">
+      
+      (source)
+    </a>
+  </div>
+  <div class="docstring functionBody">
+    
+    
+    <div>Infer call to cast() returning same type as casted-from var<table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">node:</span><code>Call</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">ctx:</span><code>typing.Optional[<wbr></wbr><a href="astroid.context.InferenceContext.html">context.InferenceContext</a>]</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr class="fieldStart"><td class="fieldName" colspan="2">Returns</td></tr><tr><td class="fieldArgContainer"><code>typing.Iterator[<wbr></wbr>NodeNG]</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr></table></div>
   </div>
 </div><div class="basefunction">
   
@@ -339,7 +398,7 @@ in mro to simulate _GenericAlias.<table class="fieldTable"><tr class="fieldStart
   <div class="functionHeader">
     
     <span class="py-keyword">def</span> <span class="py-defname">infer_typing_typevar_or_newtype</span>(node, context_itton=None):
-    <a class="sourceLink" href="https://github.com/PyCQA/astroid/tree/v2.6.0/astroid/brain/brain_typing.py#L114">
+    <a class="sourceLink" href="https://github.com/PyCQA/astroid/tree/v2.9.3/astroid/brain/brain_typing.py#L119">
       
       (source)
     </a>
@@ -361,7 +420,7 @@ in mro to simulate _GenericAlias.<table class="fieldTable"><tr class="fieldStart
   <div class="functionHeader">
     
     <span class="py-keyword">def</span> <span class="py-defname">looks_like_typing_typevar_or_newtype</span>(node):
-    <a class="sourceLink" href="https://github.com/PyCQA/astroid/tree/v2.6.0/astroid/brain/brain_typing.py#L105">
+    <a class="sourceLink" href="https://github.com/PyCQA/astroid/tree/v2.9.3/astroid/brain/brain_typing.py#L110">
       
       (source)
     </a>
@@ -383,7 +442,7 @@ in mro to simulate _GenericAlias.<table class="fieldTable"><tr class="fieldStart
   <div class="functionHeader">
     
     <span class="py-defname">CLASS_GETITEM_TEMPLATE</span>: <code>str</code> =
-    <a class="sourceLink" href="https://github.com/PyCQA/astroid/tree/v2.6.0/astroid/brain/brain_typing.py#L98">
+    <a class="sourceLink" href="https://github.com/PyCQA/astroid/tree/v2.9.3/astroid/brain/brain_typing.py#L103">
       
       (source)
     </a>
@@ -405,7 +464,7 @@ in mro to simulate _GenericAlias.<table class="fieldTable"><tr class="fieldStart
   <div class="functionHeader">
     
     <span class="py-defname">TYPING_ALIAS</span> =
-    <a class="sourceLink" href="https://github.com/PyCQA/astroid/tree/v2.6.0/astroid/brain/brain_typing.py#L53">
+    <a class="sourceLink" href="https://github.com/PyCQA/astroid/tree/v2.9.3/astroid/brain/brain_typing.py#L58">
       
       (source)
     </a>
@@ -427,7 +486,7 @@ in mro to simulate _GenericAlias.<table class="fieldTable"><tr class="fieldStart
   <div class="functionHeader">
     
     <span class="py-defname">TYPING_MEMBERS</span> =
-    <a class="sourceLink" href="https://github.com/PyCQA/astroid/tree/v2.6.0/astroid/brain/brain_typing.py#L51">
+    <a class="sourceLink" href="https://github.com/PyCQA/astroid/tree/v2.9.3/astroid/brain/brain_typing.py#L56">
       
       (source)
     </a>
@@ -449,7 +508,7 @@ in mro to simulate _GenericAlias.<table class="fieldTable"><tr class="fieldStart
   <div class="functionHeader">
     
     <span class="py-defname">TYPING_NAMEDTUPLE_BASENAMES</span>: <code>set[<wbr></wbr>str]</code> =
-    <a class="sourceLink" href="https://github.com/PyCQA/astroid/tree/v2.6.0/astroid/brain/brain_typing.py#L36">
+    <a class="sourceLink" href="https://github.com/PyCQA/astroid/tree/v2.9.3/astroid/brain/brain_typing.py#L41">
       
       (source)
     </a>
@@ -471,7 +530,7 @@ in mro to simulate _GenericAlias.<table class="fieldTable"><tr class="fieldStart
   <div class="functionHeader">
     
     <span class="py-defname">TYPING_TYPE_TEMPLATE</span>: <code>str</code> =
-    <a class="sourceLink" href="https://github.com/PyCQA/astroid/tree/v2.6.0/astroid/brain/brain_typing.py#L39">
+    <a class="sourceLink" href="https://github.com/PyCQA/astroid/tree/v2.9.3/astroid/brain/brain_typing.py#L44">
       
       (source)
     </a>
@@ -493,7 +552,7 @@ in mro to simulate _GenericAlias.<table class="fieldTable"><tr class="fieldStart
   <div class="functionHeader">
     
     <span class="py-defname">TYPING_TYPEVARS</span>: <code>set[<wbr></wbr>str]</code> =
-    <a class="sourceLink" href="https://github.com/PyCQA/astroid/tree/v2.6.0/astroid/brain/brain_typing.py#L37">
+    <a class="sourceLink" href="https://github.com/PyCQA/astroid/tree/v2.9.3/astroid/brain/brain_typing.py#L42">
       
       (source)
     </a>
@@ -515,7 +574,7 @@ in mro to simulate _GenericAlias.<table class="fieldTable"><tr class="fieldStart
   <div class="functionHeader">
     
     <span class="py-defname">TYPING_TYPEVARS_QUALIFIED</span>: <code>set[<wbr></wbr>str]</code> =
-    <a class="sourceLink" href="https://github.com/PyCQA/astroid/tree/v2.6.0/astroid/brain/brain_typing.py#L38">
+    <a class="sourceLink" href="https://github.com/PyCQA/astroid/tree/v2.9.3/astroid/brain/brain_typing.py#L43">
       
       (source)
     </a>
@@ -537,7 +596,7 @@ in mro to simulate _GenericAlias.<table class="fieldTable"><tr class="fieldStart
   <div class="functionHeader">
     
     <span class="py-keyword">def</span> <span class="py-defname">_forbid_class_getitem_access</span>(node):
-    <a class="sourceLink" href="https://github.com/PyCQA/astroid/tree/v2.6.0/astroid/brain/brain_typing.py#L229">
+    <a class="sourceLink" href="https://github.com/PyCQA/astroid/tree/v2.9.3/astroid/brain/brain_typing.py#L242">
       
       (source)
     </a>
@@ -545,21 +604,21 @@ in mro to simulate _GenericAlias.<table class="fieldTable"><tr class="fieldStart
   <div class="docstring functionBody">
     
     
-    <div>Disable the access to __class_getitem__ method for the node in parameters<table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">node:</span><code><a href="astroid.scoped_nodes.ClassDef.html">ClassDef</a></code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr></table></div>
+    <div>Disable the access to __class_getitem__ method for the node in parameters<table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">node:</span><code><a href="astroid.nodes.scoped_nodes.ClassDef.html">ClassDef</a></code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr></table></div>
   </div>
 </div><div class="basefunction private">
   
   
-  <a name="astroid.brain.brain_typing._looks_like_tuple_alias">
+  <a name="astroid.brain.brain_typing._looks_like_special_alias">
     
   </a>
-  <a name="_looks_like_tuple_alias">
+  <a name="_looks_like_special_alias">
     
   </a>
   <div class="functionHeader">
     
-    <span class="py-keyword">def</span> <span class="py-defname">_looks_like_tuple_alias</span>(node):
-    <a class="sourceLink" href="https://github.com/PyCQA/astroid/tree/v2.6.0/astroid/brain/brain_typing.py#L306">
+    <span class="py-keyword">def</span> <span class="py-defname">_looks_like_special_alias</span>(node):
+    <a class="sourceLink" href="https://github.com/PyCQA/astroid/tree/v2.9.3/astroid/brain/brain_typing.py#L321">
       
       (source)
     </a>
@@ -567,12 +626,14 @@ in mro to simulate _GenericAlias.<table class="fieldTable"><tr class="fieldStart
   <div class="docstring functionBody">
     
     
-    <div><p>Return True if call is for Tuple alias.</p>
+    <div><p>Return True if call is for Tuple or Callable alias.</p>
 <p>In PY37 and PY38 the call is to '_VariadicGenericAlias' with 'tuple' as
 first argument. In PY39+ it is replaced by a call to '_TupleType'.</p>
 <p>PY37: Tuple = _VariadicGenericAlias(tuple, (), inst=False, special=True)
 PY39: Tuple = _TupleType(tuple, -1, inst=False, name='Tuple')</p>
-<table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">node:</span><code><a href="astroid.node_classes.Call.html">Call</a></code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr class="fieldStart"><td class="fieldName" colspan="2">Returns</td></tr><tr><td class="fieldArgContainer"><code>bool</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr></table></div>
+<p>PY37: Callable = _VariadicGenericAlias(collections.abc.Callable, (), special=True)
+PY39: Callable = _CallableType(collections.abc.Callable, 2)</p>
+<table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">node:</span><code>Call</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr class="fieldStart"><td class="fieldName" colspan="2">Returns</td></tr><tr><td class="fieldArgContainer"><code>bool</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr></table></div>
   </div>
 </div><div class="basefunction private">
   
@@ -586,7 +647,7 @@ PY39: Tuple = _TupleType(tuple, -1, inst=False, name='Tuple')</p>
   <div class="functionHeader">
     
     <span class="py-keyword">def</span> <span class="py-defname">_looks_like_typedDict</span>(node):
-    <a class="sourceLink" href="https://github.com/PyCQA/astroid/tree/v2.6.0/astroid/brain/brain_typing.py#L187">
+    <a class="sourceLink" href="https://github.com/PyCQA/astroid/tree/v2.9.3/astroid/brain/brain_typing.py#L192">
       
       (source)
     </a>
@@ -594,7 +655,7 @@ PY39: Tuple = _TupleType(tuple, -1, inst=False, name='Tuple')</p>
   <div class="docstring functionBody">
     
     
-    <div>Check if node is TypedDict FunctionDef.<table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">node:</span><code><a href="astroid.scoped_nodes.FunctionDef.html">FunctionDef</a></code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr class="fieldStart"><td class="fieldName" colspan="2">Returns</td></tr><tr><td class="fieldArgContainer"><code>bool</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr></table></div>
+    <div>Check if node is TypedDict FunctionDef.<table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">node:</span><code>typing.Union[<wbr></wbr><a href="astroid.nodes.scoped_nodes.FunctionDef.html">FunctionDef</a>, <wbr></wbr><a href="astroid.nodes.scoped_nodes.ClassDef.html">ClassDef</a>]</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr class="fieldStart"><td class="fieldName" colspan="2">Returns</td></tr><tr><td class="fieldArgContainer"><code>bool</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr></table></div>
   </div>
 </div><div class="basefunction private">
   
@@ -608,7 +669,7 @@ PY39: Tuple = _TupleType(tuple, -1, inst=False, name='Tuple')</p>
   <div class="functionHeader">
     
     <span class="py-keyword">def</span> <span class="py-defname">_looks_like_typing_alias</span>(node):
-    <a class="sourceLink" href="https://github.com/PyCQA/astroid/tree/v2.6.0/astroid/brain/brain_typing.py#L207">
+    <a class="sourceLink" href="https://github.com/PyCQA/astroid/tree/v2.9.3/astroid/brain/brain_typing.py#L223">
       
       (source)
     </a>
@@ -619,7 +680,29 @@ PY39: Tuple = _TupleType(tuple, -1, inst=False, name='Tuple')</p>
     <div><p>Returns True if the node corresponds to a call to _alias function.
 For example :</p>
 <p>MutableSet = _alias(collections.abc.MutableSet, T)</p>
-<table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">node:</span><code><a href="astroid.node_classes.Call.html">Call</a></code></td><td class="fieldArgDesc">call node</td></tr><tr class="fieldStart"><td class="fieldName" colspan="2">Returns</td></tr><tr><td class="fieldArgContainer"><code>bool</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr></table></div>
+<table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">node:</span><code>Call</code></td><td class="fieldArgDesc">call node</td></tr><tr class="fieldStart"><td class="fieldName" colspan="2">Returns</td></tr><tr><td class="fieldArgContainer"><code>bool</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr></table></div>
+  </div>
+</div><div class="basefunction private">
+  
+  
+  <a name="astroid.brain.brain_typing._looks_like_typing_cast">
+    
+  </a>
+  <a name="_looks_like_typing_cast">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-keyword">def</span> <span class="py-defname">_looks_like_typing_cast</span>(node):
+    <a class="sourceLink" href="https://github.com/PyCQA/astroid/tree/v2.9.3/astroid/brain/brain_typing.py#L381">
+      
+      (source)
+    </a>
+  </div>
+  <div class="docstring functionBody">
+    
+    
+    <div><p class="undocumented">Undocumented</p><table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">node:</span><code>Call</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr class="fieldStart"><td class="fieldName" colspan="2">Returns</td></tr><tr><td class="fieldArgContainer"><code>bool</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr></table></div>
   </div>
 </div><div class="basefunction private">
   
@@ -633,7 +716,7 @@ For example :</p>
   <div class="functionHeader">
     
     <span class="py-keyword">def</span> <span class="py-defname">_looks_like_typing_subscript</span>(node):
-    <a class="sourceLink" href="https://github.com/PyCQA/astroid/tree/v2.6.0/astroid/brain/brain_typing.py#L131">
+    <a class="sourceLink" href="https://github.com/PyCQA/astroid/tree/v2.9.3/astroid/brain/brain_typing.py#L136">
       
       (source)
     </a>
@@ -651,9 +734,9 @@ For example :</p>
     <footer class="navbar navbar-default">
   
   <div class="container">
-    <a href="index.html">API Documentation</a> for <a href="https://github.com/PyCQA/astroid/" class="projecthome">astroid-v2.6.0</a>,
+    <a href="index.html">API Documentation</a> for <a href="https://github.com/PyCQA/astroid/" class="projecthome">astroid-v2.9.3</a>,
   generated by <a href="https://github.com/twisted/pydoctor/">pydoctor</a>
-    21.2.2 at 2022-01-06 17:36:35.
+    21.2.2 at 2022-01-12 04:22:11.
   </div>
 </footer>
 
