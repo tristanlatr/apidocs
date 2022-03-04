@@ -7,7 +7,7 @@
   <head>
     
     <title>docutils.utils.math.math2html.MacroParser</title>
-    <meta name="generator" content="pydoctor 21.2.2"> 
+    <meta name="generator" content="pydoctor 22.2.2.dev0"> 
         
     </meta>
     <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
@@ -44,69 +44,82 @@
           Names
         </a>
 
-        <form action="search-results.html" id="search-box-container">
+        <div id="search-box-container">
           <div class="input-group">
-            <input id="search-box" name="search-query" placeholder="Search..." aria-label="Search" minlength="2" class="form-control" />
+            <input id="search-box" type="search" name="search-query" placeholder="Search..." aria-label="Search" minlength="2" class="form-control" autocomplete="off" />
+            
             <span class="input-group-btn">
-              <button class="btn btn-default" type="submit" title="Search"><img src="fonts/search.svg" alt="Search!" /></button>
-              <a class="btn btn-default" id="search-help-button" title="Help" onclick="toggleSearchHelpText()"><img src="fonts/info.svg" alt="Help!" /></a>
+              <a style="display: none;" class="btn btn-default" id="search-clear-button" title="Clear" onclick="clearSearch()"><img src="fonts/x-circle.svg" alt="Clear" /></a>
+              <a class="btn btn-default" id="search-help-button" title="Help" onclick="toggleSearchHelpText()"><img src="fonts/info.svg" alt="Help" /></a>
             </span>
           </div>
-        </form>
+        </div>
 
-        <div class="rst-admonition hint" id="search-help-box">
+      </div>
+
+      <div id="search-results-container" style="display: none;">
+        <div>
+          <span class="label label-default" id="search-docstrings-button">
+            <a title="Search in docstrings" onclick="toggleSearchInDocstrings()">search in docstrings</a></span>
+        </div>
+
+        <noscript>
+            <h1>Cannot search: JavaScript is not supported/enabled in your browser.</h1>
+        </noscript>
+
+        <div class="hint" id="search-help-box">
           <p class="rst-last">
       
             Search bar offers the following options:
             <ul>   
                 <li>
                   <strong>Term presence.</strong> The below example searches for documents that 
-                    must contain “foo”, might contain “bar” and must not contain “baz”:
-                  <br /> <code>'+foo bar -baz'</code>
+                    must contain “foo”, might contain “bar” and must not contain “baz”: <code>+foo bar -baz</code>
                 </li> 
 
                 <li>
-                  <strong>Wildcards.</strong> The below example searches for documents with words beginning with “foo”:
-                  <br /> <code>'foo*'</code>
+                  <strong>Wildcards.</strong> The below example searches for documents with words beginning with “foo”: <code>foo*</code>
                 </li> 
 
                 <li>
-                  <strong>Search in specific fields.</strong> The following search matches all documents 
-                  that contains "foo" in their full dotted name and with “bar” in any field:
-                  <br /> <code>'+fullName:*foo* +bar'</code>
+                  <strong>Search in specific fields.</strong> The following search matches all objects 
+                  in "twisted.mail" that matches “search”: <code>+qname:twisted.mail.* +search</code>
 
                   <p>
-                    Possible fields: 'name', 'docstring', 'fullName'.
+                    Possible fields: 'name', 'qname' (fully qualified name), 'docstring', and 'kind'.
+                    Last two fields are only applicable if "search in docstrings" is enabled.
                   </p>
                 </li>
 
                 <li>
                   <strong>Fuzzy matches.</strong> The following search matches all documents 
-                  that have a word within 1 edit distance of “foo”:
-                  <br /> <code>'foo~1'</code>
+                  that have a word within 1 edit distance of “foo”: <code>foo~1</code>
                 </li>
             </ul>
 
           </p>
         </div>
 
-      </div>
+        <div id="search-status"> </div>
+        
+        <div class="warning" id="search-warn-box" style="display: none;">
+          <p class="rst-last"><span id="search-warn"></span></p>
+        </div>
 
+        <table id="search-results">
+          <!-- Filled dynamically by JS -->
+        </table>
+        
+        <div style="margin-top: 8px;">
+          <p>Results provided by <a href="https://lunrjs.com">Lunr.js</a></p>
+        </div>
+      </div>
 
     </div>
   </div>
 
-  <script>
- 
-    function toggleSearchHelpText() {
-        document.body.classList.toggle("search-help-hidden");
-    }
-    // Init search and help text
-    document.getElementById('search-box-container').style.display = 'block';
-    document.getElementById('search-help-box').style.display = 'block';
-    document.body.classList.add("search-help-hidden");
-
-  </script>
+  <script src="ajax.js" type="text/javascript"></script>
+  <script src="search.js" type="text/javascript"></script>
 
 </nav>
 
@@ -115,7 +128,7 @@
     <div class="container">
 
       <div class="page-header">
-        <h1 class="class"><code><code><a href="docutils.html">docutils</a></code><wbr></wbr>.<code><a href="docutils.utils.html">utils</a></code><wbr></wbr>.<code><a href="docutils.utils.math.html">math</a></code><wbr></wbr>.<code><a href="docutils.utils.math.math2html.html">math2html</a></code><wbr></wbr>.<code><a href="docutils.utils.math.math2html.MacroParser.html">MacroParser</a></code></code></h1>
+        <h1 class="class"><code><code><a href="index.html" class="internal-link">docutils</a></code><wbr></wbr>.<code><a href="docutils.utils.html" class="internal-link" title="docutils.utils">utils</a></code><wbr></wbr>.<code><a href="docutils.utils.math.html" class="internal-link" title="docutils.utils.math">math</a></code><wbr></wbr>.<code><a href="docutils.utils.math.math2html.html" class="internal-link" title="docutils.utils.math.math2html">math2html</a></code><wbr></wbr>.<code><a href="docutils.utils.math.math2html.MacroParser.html" class="internal-link" title="docutils.utils.math.math2html.MacroParser">MacroParser</a></code></code></h1>
         <div id="showPrivate">
           <button class="btn btn-link" onclick="togglePrivate()">Toggle Private API</button>
         </div>
@@ -126,7 +139,7 @@
       </div>
 
       <div class="extrasDocstring">
-        <p><code><span class="py-keyword">class</span> <span class="py-defname">MacroParser</span>(<a href="docutils.utils.math.math2html.FormulaParser.html" title="docutils.utils.math.math2html.FormulaParser">FormulaParser</a>): <a href="https://sourceforge.net/p/docutils/code/HEAD/tree/tags/docutils-0.17.1//docutils/utils/math/math2html.py#L2559" class="sourceLink">(source)</a></code></p>
+        <p><code><span class="py-keyword">class</span> <span class="py-defname">MacroParser</span>(<a href="docutils.utils.math.math2html.FormulaParser.html" class="internal-link" title="docutils.utils.math.math2html.FormulaParser">FormulaParser</a>): <a href="https://sourceforge.net/p/docutils/code/HEAD/tree/tags/docutils-0.17.1//docutils/utils/math/math2html.py#L2559" class="sourceLink">(source)</a></code></p>
         <p><a href="classIndex.html#docutils.utils.math.math2html.MacroParser">View In Hierarchy</a></p>
       </div>
 
@@ -141,23 +154,23 @@
   <tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#parse">parse</a></code></td>
-    <td><span>Parse the formula until the end</span></td>
+    <td><code><a href="#parse" class="internal-link" title="docutils.utils.math.math2html.MacroParser.parse">parse</a></code></td>
+    <td>Parse the formula until the end</td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#parseheader">parseheader</a></code></td>
-    <td><span>See if the formula is inlined</span></td>
+    <td><code><a href="#parseheader" class="internal-link" title="docutils.utils.math.math2html.MacroParser.parseheader">parseheader</a></code></td>
+    <td>See if the formula is inlined</td>
   </tr><tr class="instancevariable">
     
     <td>Instance Variable</td>
-    <td><code><a href="#begin">begin</a></code></td>
+    <td><code><a href="#begin" class="internal-link" title="docutils.utils.math.math2html.MacroParser.begin">begin</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr>
 </table>
         
           <p class="inheritedFrom">
-            Inherited from <code><a href="docutils.utils.math.math2html.FormulaParser.html">FormulaParser</a></code>:
+            Inherited from <code><a href="docutils.utils.math.math2html.FormulaParser.html" class="internal-link" title="docutils.utils.math.math2html.FormulaParser">FormulaParser</a></code>:
           </p>
           <table class="children sortable" id="id939">
   
@@ -165,28 +178,28 @@
   <tr class="basemethod">
     
     <td>Method</td>
-    <td><code><a href="docutils.utils.math.math2html.FormulaParser.html#parseformula">parseformula</a></code></td>
-    <td><span>Parse the formula contents</span></td>
+    <td><code><a href="docutils.utils.math.math2html.FormulaParser.html#parseformula" class="internal-link" title="docutils.utils.math.math2html.FormulaParser.parseformula">parseformula</a></code></td>
+    <td>Parse the formula contents</td>
   </tr><tr class="basemethod">
     
     <td>Method</td>
-    <td><code><a href="docutils.utils.math.math2html.FormulaParser.html#parsemultiliner">parsemultiliner</a></code></td>
-    <td><span>Parse a formula in multiple lines</span></td>
+    <td><code><a href="docutils.utils.math.math2html.FormulaParser.html#parsemultiliner" class="internal-link" title="docutils.utils.math.math2html.FormulaParser.parsemultiliner">parsemultiliner</a></code></td>
+    <td>Parse a formula in multiple lines</td>
   </tr><tr class="basemethod">
     
     <td>Method</td>
-    <td><code><a href="docutils.utils.math.math2html.FormulaParser.html#parsesingleliner">parsesingleliner</a></code></td>
-    <td><span>Parse a formula in one line</span></td>
+    <td><code><a href="docutils.utils.math.math2html.FormulaParser.html#parsesingleliner" class="internal-link" title="docutils.utils.math.math2html.FormulaParser.parsesingleliner">parsesingleliner</a></code></td>
+    <td>Parse a formula in one line</td>
   </tr><tr class="basemethod">
     
     <td>Method</td>
-    <td><code><a href="docutils.utils.math.math2html.FormulaParser.html#parsetype">parsetype</a></code></td>
-    <td><span>Get the formula type from the first line.</span></td>
+    <td><code><a href="docutils.utils.math.math2html.FormulaParser.html#parsetype" class="internal-link" title="docutils.utils.math.math2html.FormulaParser.parsetype">parsetype</a></code></td>
+    <td>Get the formula type from the first line.</td>
   </tr>
 </table>
           
           <p class="inheritedFrom">
-            Inherited from <code><a href="docutils.utils.math.math2html.Parser.html">Parser</a></code> (via <code><a href="docutils.utils.math.math2html.FormulaParser.html">FormulaParser</a></code>):
+            Inherited from <code><a href="docutils.utils.math.math2html.Parser.html" class="internal-link" title="docutils.utils.math.math2html.Parser">Parser</a></code> (via <code><a href="docutils.utils.math.math2html.FormulaParser.html" class="internal-link" title="docutils.utils.math.math2html.FormulaParser">FormulaParser</a></code>):
           </p>
           <table class="children sortable" id="id940">
   
@@ -194,37 +207,37 @@
   <tr class="basemethod">
     
     <td>Method</td>
-    <td><code><a href="docutils.utils.math.math2html.Parser.html#__init__">__init__</a></code></td>
+    <td><code><a href="docutils.utils.math.math2html.Parser.html#__init__" class="internal-link" title="docutils.utils.math.math2html.Parser.__init__">__init__</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="basemethod">
     
     <td>Method</td>
-    <td><code><a href="docutils.utils.math.math2html.Parser.html#__unicode__">__unicode__</a></code></td>
-    <td><span>Return a description</span></td>
+    <td><code><a href="docutils.utils.math.math2html.Parser.html#__unicode__" class="internal-link" title="docutils.utils.math.math2html.Parser.__unicode__">__unicode__</a></code></td>
+    <td>Return a description</td>
   </tr><tr class="basemethod">
     
     <td>Method</td>
-    <td><code><a href="docutils.utils.math.math2html.Parser.html#parsecontainer">parsecontainer</a></code></td>
+    <td><code><a href="docutils.utils.math.math2html.Parser.html#parsecontainer" class="internal-link" title="docutils.utils.math.math2html.Parser.parsecontainer">parsecontainer</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="basemethod">
     
     <td>Method</td>
-    <td><code><a href="docutils.utils.math.math2html.Parser.html#parseending">parseending</a></code></td>
-    <td><span>Parse until the current ending is found</span></td>
+    <td><code><a href="docutils.utils.math.math2html.Parser.html#parseending" class="internal-link" title="docutils.utils.math.math2html.Parser.parseending">parseending</a></code></td>
+    <td>Parse until the current ending is found</td>
   </tr><tr class="basemethod">
     
     <td>Method</td>
-    <td><code><a href="docutils.utils.math.math2html.Parser.html#parseparameter">parseparameter</a></code></td>
-    <td><span>Parse a parameter</span></td>
+    <td><code><a href="docutils.utils.math.math2html.Parser.html#parseparameter" class="internal-link" title="docutils.utils.math.math2html.Parser.parseparameter">parseparameter</a></code></td>
+    <td>Parse a parameter</td>
   </tr><tr class="basemethod">
     
     <td>Method</td>
-    <td><code><a href="docutils.utils.math.math2html.Parser.html#parsexml">parsexml</a></code></td>
-    <td><span>Parse a parameter in xml form: &lt;param attr1=value...&gt;</span></td>
+    <td><code><a href="docutils.utils.math.math2html.Parser.html#parsexml" class="internal-link" title="docutils.utils.math.math2html.Parser.parsexml">parsexml</a></code></td>
+    <td>Parse a parameter in xml form: &lt;param attr1=value...&gt;</td>
   </tr><tr class="baseinstancevariable">
     
     <td>Instance Variable</td>
-    <td><code><a href="docutils.utils.math.math2html.Parser.html#parameters">parameters</a></code></td>
+    <td><code><a href="docutils.utils.math.math2html.Parser.html#parameters" class="internal-link" title="docutils.utils.math.math2html.Parser.parameters">parameters</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr>
 </table>
@@ -253,7 +266,7 @@
     </a>
   </div>
   <div class="docstring functionBody">
-    <div class="interfaceinfo">overrides <code><a href="docutils.utils.math.math2html.FormulaParser.html#parse">docutils.utils.math.math2html.FormulaParser.parse</a></code></div>
+    <div class="interfaceinfo">overrides <code><a href="docutils.utils.math.math2html.FormulaParser.html#parse" class="internal-link">docutils.utils.math.math2html.FormulaParser.parse</a></code></div>
     
     <div>Parse the formula until the end</div>
   </div>
@@ -275,7 +288,7 @@
     </a>
   </div>
   <div class="docstring functionBody">
-    <div class="interfaceinfo">overrides <code><a href="docutils.utils.math.math2html.FormulaParser.html#parseheader">docutils.utils.math.math2html.FormulaParser.parseheader</a></code></div>
+    <div class="interfaceinfo">overrides <code><a href="docutils.utils.math.math2html.FormulaParser.html#parseheader" class="internal-link">docutils.utils.math.math2html.FormulaParser.parseheader</a></code></div>
     
     <div>See if the formula is inlined</div>
   </div>
@@ -297,9 +310,10 @@
     </a>
   </div>
   <div class="functionBody">
-    <div class="interfaceinfo">overrides <code><a href="docutils.utils.math.math2html.FormulaParser.html#begin">docutils.utils.math.math2html.FormulaParser.begin</a></code></div>
+    <div class="interfaceinfo">overrides <code><a href="docutils.utils.math.math2html.FormulaParser.html#begin" class="internal-link">docutils.utils.math.math2html.FormulaParser.begin</a></code></div>
     
     <div><p class="undocumented">Undocumented</p></div>
+    
   </div>
 </div>
 
@@ -311,7 +325,7 @@
   <div class="container">
     <a href="index.html">API Documentation</a> for <a href="https://docutils.sourceforge.io/" class="projecthome">docutils-0.17.1</a>,
   generated by <a href="https://github.com/twisted/pydoctor/">pydoctor</a>
-    21.2.2 at 2022-01-06 17:36:41.
+    22.2.2.dev0 at 2022-03-04 05:57:20.
   </div>
 </footer>
 

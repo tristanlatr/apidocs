@@ -7,7 +7,7 @@
   <head>
     
     <title>docutils.transforms.references</title>
-    <meta name="generator" content="pydoctor 21.2.2"> 
+    <meta name="generator" content="pydoctor 22.2.2.dev0"> 
         
     </meta>
     <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
@@ -44,69 +44,82 @@
           Names
         </a>
 
-        <form action="search-results.html" id="search-box-container">
+        <div id="search-box-container">
           <div class="input-group">
-            <input id="search-box" name="search-query" placeholder="Search..." aria-label="Search" minlength="2" class="form-control" />
+            <input id="search-box" type="search" name="search-query" placeholder="Search..." aria-label="Search" minlength="2" class="form-control" autocomplete="off" />
+            
             <span class="input-group-btn">
-              <button class="btn btn-default" type="submit" title="Search"><img src="fonts/search.svg" alt="Search!" /></button>
-              <a class="btn btn-default" id="search-help-button" title="Help" onclick="toggleSearchHelpText()"><img src="fonts/info.svg" alt="Help!" /></a>
+              <a style="display: none;" class="btn btn-default" id="search-clear-button" title="Clear" onclick="clearSearch()"><img src="fonts/x-circle.svg" alt="Clear" /></a>
+              <a class="btn btn-default" id="search-help-button" title="Help" onclick="toggleSearchHelpText()"><img src="fonts/info.svg" alt="Help" /></a>
             </span>
           </div>
-        </form>
+        </div>
 
-        <div class="rst-admonition hint" id="search-help-box">
+      </div>
+
+      <div id="search-results-container" style="display: none;">
+        <div>
+          <span class="label label-default" id="search-docstrings-button">
+            <a title="Search in docstrings" onclick="toggleSearchInDocstrings()">search in docstrings</a></span>
+        </div>
+
+        <noscript>
+            <h1>Cannot search: JavaScript is not supported/enabled in your browser.</h1>
+        </noscript>
+
+        <div class="hint" id="search-help-box">
           <p class="rst-last">
       
             Search bar offers the following options:
             <ul>   
                 <li>
                   <strong>Term presence.</strong> The below example searches for documents that 
-                    must contain “foo”, might contain “bar” and must not contain “baz”:
-                  <br /> <code>'+foo bar -baz'</code>
+                    must contain “foo”, might contain “bar” and must not contain “baz”: <code>+foo bar -baz</code>
                 </li> 
 
                 <li>
-                  <strong>Wildcards.</strong> The below example searches for documents with words beginning with “foo”:
-                  <br /> <code>'foo*'</code>
+                  <strong>Wildcards.</strong> The below example searches for documents with words beginning with “foo”: <code>foo*</code>
                 </li> 
 
                 <li>
-                  <strong>Search in specific fields.</strong> The following search matches all documents 
-                  that contains "foo" in their full dotted name and with “bar” in any field:
-                  <br /> <code>'+fullName:*foo* +bar'</code>
+                  <strong>Search in specific fields.</strong> The following search matches all objects 
+                  in "twisted.mail" that matches “search”: <code>+qname:twisted.mail.* +search</code>
 
                   <p>
-                    Possible fields: 'name', 'docstring', 'fullName'.
+                    Possible fields: 'name', 'qname' (fully qualified name), 'docstring', and 'kind'.
+                    Last two fields are only applicable if "search in docstrings" is enabled.
                   </p>
                 </li>
 
                 <li>
                   <strong>Fuzzy matches.</strong> The following search matches all documents 
-                  that have a word within 1 edit distance of “foo”:
-                  <br /> <code>'foo~1'</code>
+                  that have a word within 1 edit distance of “foo”: <code>foo~1</code>
                 </li>
             </ul>
 
           </p>
         </div>
 
-      </div>
+        <div id="search-status"> </div>
+        
+        <div class="warning" id="search-warn-box" style="display: none;">
+          <p class="rst-last"><span id="search-warn"></span></p>
+        </div>
 
+        <table id="search-results">
+          <!-- Filled dynamically by JS -->
+        </table>
+        
+        <div style="margin-top: 8px;">
+          <p>Results provided by <a href="https://lunrjs.com">Lunr.js</a></p>
+        </div>
+      </div>
 
     </div>
   </div>
 
-  <script>
- 
-    function toggleSearchHelpText() {
-        document.body.classList.toggle("search-help-hidden");
-    }
-    // Init search and help text
-    document.getElementById('search-box-container').style.display = 'block';
-    document.getElementById('search-help-box').style.display = 'block';
-    document.body.classList.add("search-help-hidden");
-
-  </script>
+  <script src="ajax.js" type="text/javascript"></script>
+  <script src="search.js" type="text/javascript"></script>
 
 </nav>
 
@@ -115,7 +128,7 @@
     <div class="container">
 
       <div class="page-header">
-        <h1 class="module"><code><code><a href="docutils.html">docutils</a></code><wbr></wbr>.<code><a href="docutils.transforms.html">transforms</a></code><wbr></wbr>.<code><a href="docutils.transforms.references.html">references</a></code></code></h1>
+        <h1 class="module"><code><code><a href="index.html" class="internal-link">docutils</a></code><wbr></wbr>.<code><a href="docutils.transforms.html" class="internal-link" title="docutils.transforms">transforms</a></code><wbr></wbr>.<code><a href="docutils.transforms.references.html" class="internal-link" title="docutils.transforms.references">references</a></code></code></h1>
         <div id="showPrivate">
           <button class="btn btn-link" onclick="togglePrivate()">Toggle Private API</button>
         </div>
@@ -141,61 +154,61 @@
   <tr class="class">
     
     <td>Class</td>
-    <td><code><a href="docutils.transforms.references.AnonymousHyperlinks.html">AnonymousHyperlinks</a></code></td>
-    <td><span>Link anonymous references to targets.  Given:</span></td>
+    <td><code><a href="docutils.transforms.references.AnonymousHyperlinks.html" class="internal-link" title="docutils.transforms.references.AnonymousHyperlinks">​Anonymous​Hyperlinks</a></code></td>
+    <td>Link anonymous references to targets.  Given:</td>
   </tr><tr class="class">
     
     <td>Class</td>
-    <td><code><a href="docutils.transforms.references.CircularSubstitutionDefinitionError.html">CircularSubstitutionDefinitionError</a></code></td>
+    <td><code><a href="docutils.transforms.references.CircularSubstitutionDefinitionError.html" class="internal-link" title="docutils.transforms.references.CircularSubstitutionDefinitionError">​Circular​Substitution​Definition​Error</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="class">
     
     <td>Class</td>
-    <td><code><a href="docutils.transforms.references.DanglingReferences.html">DanglingReferences</a></code></td>
-    <td><span>Check for dangling references (incl. footnote &amp; citation) and for unreferenced targets.</span></td>
+    <td><code><a href="docutils.transforms.references.DanglingReferences.html" class="internal-link" title="docutils.transforms.references.DanglingReferences">​Dangling​References</a></code></td>
+    <td>Check for dangling references (incl. footnote &amp; citation) and for unreferenced targets.</td>
   </tr><tr class="class">
     
     <td>Class</td>
-    <td><code><a href="docutils.transforms.references.DanglingReferencesVisitor.html">DanglingReferencesVisitor</a></code></td>
+    <td><code><a href="docutils.transforms.references.DanglingReferencesVisitor.html" class="internal-link" title="docutils.transforms.references.DanglingReferencesVisitor">​Dangling​References​Visitor</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="class">
     
     <td>Class</td>
-    <td><code><a href="docutils.transforms.references.ExternalTargets.html">ExternalTargets</a></code></td>
-    <td><span>Given:</span></td>
+    <td><code><a href="docutils.transforms.references.ExternalTargets.html" class="internal-link" title="docutils.transforms.references.ExternalTargets">​External​Targets</a></code></td>
+    <td>Given:</td>
   </tr><tr class="class">
     
     <td>Class</td>
-    <td><code><a href="docutils.transforms.references.Footnotes.html">Footnotes</a></code></td>
-    <td><span>Assign numbers to autonumbered footnotes, and resolve links to footnotes, citations, and their references.</span></td>
+    <td><code><a href="docutils.transforms.references.Footnotes.html" class="internal-link" title="docutils.transforms.references.Footnotes">​Footnotes</a></code></td>
+    <td>Assign numbers to autonumbered footnotes, and resolve links to footnotes, citations, and their references.</td>
   </tr><tr class="class">
     
     <td>Class</td>
-    <td><code><a href="docutils.transforms.references.IndirectHyperlinks.html">IndirectHyperlinks</a></code></td>
-    <td><span><ol class="rst-loweralpha simple">
+    <td><code><a href="docutils.transforms.references.IndirectHyperlinks.html" class="internal-link" title="docutils.transforms.references.IndirectHyperlinks">​Indirect​Hyperlinks</a></code></td>
+    <td><ol class="rst-loweralpha simple">
 <li>Indirect external references:</li>
 </ol>
-</span></td>
+</td>
   </tr><tr class="class">
     
     <td>Class</td>
-    <td><code><a href="docutils.transforms.references.InternalTargets.html">InternalTargets</a></code></td>
+    <td><code><a href="docutils.transforms.references.InternalTargets.html" class="internal-link" title="docutils.transforms.references.InternalTargets">​Internal​Targets</a></code></td>
     <td><span class="undocumented">No class docstring; 0/1 class variable, 1/2 method documented</span></td>
   </tr><tr class="class">
     
     <td>Class</td>
-    <td><code><a href="docutils.transforms.references.PropagateTargets.html">PropagateTargets</a></code></td>
-    <td><span>Propagate empty internal targets to the next element.</span></td>
+    <td><code><a href="docutils.transforms.references.PropagateTargets.html" class="internal-link" title="docutils.transforms.references.PropagateTargets">​Propagate​Targets</a></code></td>
+    <td>Propagate empty internal targets to the next element.</td>
   </tr><tr class="class">
     
     <td>Class</td>
-    <td><code><a href="docutils.transforms.references.Substitutions.html">Substitutions</a></code></td>
-    <td><span>Given the following <tt class="rst-docutils literal">document</tt> as input:</span></td>
+    <td><code><a href="docutils.transforms.references.Substitutions.html" class="internal-link" title="docutils.transforms.references.Substitutions">​Substitutions</a></code></td>
+    <td>Given the following <tt class="rst-docutils literal">document</tt> as input:</td>
   </tr><tr class="class">
     
     <td>Class</td>
-    <td><code><a href="docutils.transforms.references.TargetNotes.html">TargetNotes</a></code></td>
-    <td><span>Creates a footnote for each external target in the text, and corresponding footnote references after each reference.</span></td>
+    <td><code><a href="docutils.transforms.references.TargetNotes.html" class="internal-link" title="docutils.transforms.references.TargetNotes">​Target​Notes</a></code></td>
+    <td>Creates a footnote for each external target in the text, and corresponding footnote references after each reference.</td>
   </tr>
 </table>
         
@@ -215,7 +228,7 @@
   <div class="container">
     <a href="index.html">API Documentation</a> for <a href="https://docutils.sourceforge.io/" class="projecthome">docutils-0.17.1</a>,
   generated by <a href="https://github.com/twisted/pydoctor/">pydoctor</a>
-    21.2.2 at 2022-01-06 17:36:41.
+    22.2.2.dev0 at 2022-03-04 05:57:20.
   </div>
 </footer>
 

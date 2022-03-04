@@ -7,7 +7,7 @@
   <head>
     
     <title>docutils.writers.manpage.Translator</title>
-    <meta name="generator" content="pydoctor 21.2.2"> 
+    <meta name="generator" content="pydoctor 22.2.2.dev0"> 
         
     </meta>
     <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
@@ -44,69 +44,82 @@
           Names
         </a>
 
-        <form action="search-results.html" id="search-box-container">
+        <div id="search-box-container">
           <div class="input-group">
-            <input id="search-box" name="search-query" placeholder="Search..." aria-label="Search" minlength="2" class="form-control" />
+            <input id="search-box" type="search" name="search-query" placeholder="Search..." aria-label="Search" minlength="2" class="form-control" autocomplete="off" />
+            
             <span class="input-group-btn">
-              <button class="btn btn-default" type="submit" title="Search"><img src="fonts/search.svg" alt="Search!" /></button>
-              <a class="btn btn-default" id="search-help-button" title="Help" onclick="toggleSearchHelpText()"><img src="fonts/info.svg" alt="Help!" /></a>
+              <a style="display: none;" class="btn btn-default" id="search-clear-button" title="Clear" onclick="clearSearch()"><img src="fonts/x-circle.svg" alt="Clear" /></a>
+              <a class="btn btn-default" id="search-help-button" title="Help" onclick="toggleSearchHelpText()"><img src="fonts/info.svg" alt="Help" /></a>
             </span>
           </div>
-        </form>
+        </div>
 
-        <div class="rst-admonition hint" id="search-help-box">
+      </div>
+
+      <div id="search-results-container" style="display: none;">
+        <div>
+          <span class="label label-default" id="search-docstrings-button">
+            <a title="Search in docstrings" onclick="toggleSearchInDocstrings()">search in docstrings</a></span>
+        </div>
+
+        <noscript>
+            <h1>Cannot search: JavaScript is not supported/enabled in your browser.</h1>
+        </noscript>
+
+        <div class="hint" id="search-help-box">
           <p class="rst-last">
       
             Search bar offers the following options:
             <ul>   
                 <li>
                   <strong>Term presence.</strong> The below example searches for documents that 
-                    must contain “foo”, might contain “bar” and must not contain “baz”:
-                  <br /> <code>'+foo bar -baz'</code>
+                    must contain “foo”, might contain “bar” and must not contain “baz”: <code>+foo bar -baz</code>
                 </li> 
 
                 <li>
-                  <strong>Wildcards.</strong> The below example searches for documents with words beginning with “foo”:
-                  <br /> <code>'foo*'</code>
+                  <strong>Wildcards.</strong> The below example searches for documents with words beginning with “foo”: <code>foo*</code>
                 </li> 
 
                 <li>
-                  <strong>Search in specific fields.</strong> The following search matches all documents 
-                  that contains "foo" in their full dotted name and with “bar” in any field:
-                  <br /> <code>'+fullName:*foo* +bar'</code>
+                  <strong>Search in specific fields.</strong> The following search matches all objects 
+                  in "twisted.mail" that matches “search”: <code>+qname:twisted.mail.* +search</code>
 
                   <p>
-                    Possible fields: 'name', 'docstring', 'fullName'.
+                    Possible fields: 'name', 'qname' (fully qualified name), 'docstring', and 'kind'.
+                    Last two fields are only applicable if "search in docstrings" is enabled.
                   </p>
                 </li>
 
                 <li>
                   <strong>Fuzzy matches.</strong> The following search matches all documents 
-                  that have a word within 1 edit distance of “foo”:
-                  <br /> <code>'foo~1'</code>
+                  that have a word within 1 edit distance of “foo”: <code>foo~1</code>
                 </li>
             </ul>
 
           </p>
         </div>
 
-      </div>
+        <div id="search-status"> </div>
+        
+        <div class="warning" id="search-warn-box" style="display: none;">
+          <p class="rst-last"><span id="search-warn"></span></p>
+        </div>
 
+        <table id="search-results">
+          <!-- Filled dynamically by JS -->
+        </table>
+        
+        <div style="margin-top: 8px;">
+          <p>Results provided by <a href="https://lunrjs.com">Lunr.js</a></p>
+        </div>
+      </div>
 
     </div>
   </div>
 
-  <script>
- 
-    function toggleSearchHelpText() {
-        document.body.classList.toggle("search-help-hidden");
-    }
-    // Init search and help text
-    document.getElementById('search-box-container').style.display = 'block';
-    document.getElementById('search-help-box').style.display = 'block';
-    document.body.classList.add("search-help-hidden");
-
-  </script>
+  <script src="ajax.js" type="text/javascript"></script>
+  <script src="search.js" type="text/javascript"></script>
 
 </nav>
 
@@ -115,7 +128,7 @@
     <div class="container">
 
       <div class="page-header">
-        <h1 class="class"><code><code><a href="docutils.html">docutils</a></code><wbr></wbr>.<code><a href="docutils.writers.html">writers</a></code><wbr></wbr>.<code><a href="docutils.writers.manpage.html">manpage</a></code><wbr></wbr>.<code><a href="docutils.writers.manpage.Translator.html">Translator</a></code></code></h1>
+        <h1 class="class"><code><code><a href="index.html" class="internal-link">docutils</a></code><wbr></wbr>.<code><a href="docutils.writers.html" class="internal-link" title="docutils.writers">writers</a></code><wbr></wbr>.<code><a href="docutils.writers.manpage.html" class="internal-link" title="docutils.writers.manpage">manpage</a></code><wbr></wbr>.<code><a href="docutils.writers.manpage.Translator.html" class="internal-link" title="docutils.writers.manpage.Translator">Translator</a></code></code></h1>
         <div id="showPrivate">
           <button class="btn btn-link" onclick="togglePrivate()">Toggle Private API</button>
         </div>
@@ -126,7 +139,7 @@
       </div>
 
       <div class="extrasDocstring">
-        <p><code><span class="py-keyword">class</span> <span class="py-defname">Translator</span>(<a href="docutils.nodes.NodeVisitor.html" title="docutils.nodes.NodeVisitor">nodes.NodeVisitor</a>): <a href="https://sourceforge.net/p/docutils/code/HEAD/tree/tags/docutils-0.17.1//docutils/writers/manpage.py#L162" class="sourceLink">(source)</a></code></p>
+        <p><code><span class="py-keyword">class</span> <span class="py-defname">Translator</span>(<a href="docutils.nodes.NodeVisitor.html" class="internal-link" title="docutils.nodes.NodeVisitor">nodes.NodeVisitor</a>): <a href="https://sourceforge.net/p/docutils/code/HEAD/tree/tags/docutils-0.17.1//docutils/writers/manpage.py#L162" class="sourceLink">(source)</a></code></p>
         <p><a href="classIndex.html#docutils.writers.manpage.Translator">View In Hierarchy</a></p>
       </div>
 
@@ -135,1107 +148,1107 @@
       </div>
 
       <div id="splitTables">
-        <table class="children sortable" id="id1314">
+        <table class="children sortable" id="id1313">
   
   
   <tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#__init__">__init__</a></code></td>
+    <td><code><a href="#__init__" class="internal-link" title="docutils.writers.manpage.Translator.__init__">__init__</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#append_header">append_header</a></code></td>
-    <td><span>append header with .TH and .SH NAME</span></td>
+    <td><code><a href="#append_header" class="internal-link" title="docutils.writers.manpage.Translator.append_header">append​_header</a></code></td>
+    <td>append header with .TH and .SH NAME</td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#astext">astext</a></code></td>
-    <td><span>Return the final formatted document as a string.</span></td>
+    <td><code><a href="#astext" class="internal-link" title="docutils.writers.manpage.Translator.astext">astext</a></code></td>
+    <td>Return the final formatted document as a string.</td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#comment">comment</a></code></td>
-    <td><span>Return commented version of the passed text.</span></td>
+    <td><code><a href="#comment" class="internal-link" title="docutils.writers.manpage.Translator.comment">comment</a></code></td>
+    <td>Return commented version of the passed text.</td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#comment_begin">comment_begin</a></code></td>
-    <td><span>Return commented version of the passed text WITHOUT end of line/comment.</span></td>
+    <td><code><a href="#comment_begin" class="internal-link" title="docutils.writers.manpage.Translator.comment_begin">comment​_begin</a></code></td>
+    <td>Return commented version of the passed text WITHOUT end of line/comment.</td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#dedent">dedent</a></code></td>
+    <td><code><a href="#dedent" class="internal-link" title="docutils.writers.manpage.Translator.dedent">dedent</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#depart_address">depart_address</a></code></td>
+    <td><code><a href="#depart_address" class="internal-link" title="docutils.writers.manpage.Translator.depart_address">depart​_address</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#depart_admonition">depart_admonition</a></code></td>
+    <td><code><a href="#depart_admonition" class="internal-link" title="docutils.writers.manpage.Translator.depart_admonition">depart​_admonition</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#depart_attribution">depart_attribution</a></code></td>
+    <td><code><a href="#depart_attribution" class="internal-link" title="docutils.writers.manpage.Translator.depart_attribution">depart​_attribution</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#depart_authors">depart_authors</a></code></td>
+    <td><code><a href="#depart_authors" class="internal-link" title="docutils.writers.manpage.Translator.depart_authors">depart​_authors</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#depart_block_quote">depart_block_quote</a></code></td>
+    <td><code><a href="#depart_block_quote" class="internal-link" title="docutils.writers.manpage.Translator.depart_block_quote">depart​_block​_quote</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#depart_bullet_list">depart_bullet_list</a></code></td>
+    <td><code><a href="#depart_bullet_list" class="internal-link" title="docutils.writers.manpage.Translator.depart_bullet_list">depart​_bullet​_list</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#depart_caption">depart_caption</a></code></td>
+    <td><code><a href="#depart_caption" class="internal-link" title="docutils.writers.manpage.Translator.depart_caption">depart​_caption</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#depart_citation">depart_citation</a></code></td>
+    <td><code><a href="#depart_citation" class="internal-link" title="docutils.writers.manpage.Translator.depart_citation">depart​_citation</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#depart_classifier">depart_classifier</a></code></td>
+    <td><code><a href="#depart_classifier" class="internal-link" title="docutils.writers.manpage.Translator.depart_classifier">depart​_classifier</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#depart_colspec">depart_colspec</a></code></td>
+    <td><code><a href="#depart_colspec" class="internal-link" title="docutils.writers.manpage.Translator.depart_colspec">depart​_colspec</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#depart_compound">depart_compound</a></code></td>
+    <td><code><a href="#depart_compound" class="internal-link" title="docutils.writers.manpage.Translator.depart_compound">depart​_compound</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#depart_container">depart_container</a></code></td>
+    <td><code><a href="#depart_container" class="internal-link" title="docutils.writers.manpage.Translator.depart_container">depart​_container</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#depart_decoration">depart_decoration</a></code></td>
+    <td><code><a href="#depart_decoration" class="internal-link" title="docutils.writers.manpage.Translator.depart_decoration">depart​_decoration</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#depart_definition">depart_definition</a></code></td>
+    <td><code><a href="#depart_definition" class="internal-link" title="docutils.writers.manpage.Translator.depart_definition">depart​_definition</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#depart_definition_list">depart_definition_list</a></code></td>
+    <td><code><a href="#depart_definition_list" class="internal-link" title="docutils.writers.manpage.Translator.depart_definition_list">depart​_definition​_list</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#depart_definition_list_item">depart_definition_list_item</a></code></td>
+    <td><code><a href="#depart_definition_list_item" class="internal-link" title="docutils.writers.manpage.Translator.depart_definition_list_item">depart​_definition​_list​_item</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#depart_description">depart_description</a></code></td>
+    <td><code><a href="#depart_description" class="internal-link" title="docutils.writers.manpage.Translator.depart_description">depart​_description</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#depart_docinfo">depart_docinfo</a></code></td>
+    <td><code><a href="#depart_docinfo" class="internal-link" title="docutils.writers.manpage.Translator.depart_docinfo">depart​_docinfo</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#depart_docinfo_item">depart_docinfo_item</a></code></td>
+    <td><code><a href="#depart_docinfo_item" class="internal-link" title="docutils.writers.manpage.Translator.depart_docinfo_item">depart​_docinfo​_item</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#depart_doctest_block">depart_doctest_block</a></code></td>
+    <td><code><a href="#depart_doctest_block" class="internal-link" title="docutils.writers.manpage.Translator.depart_doctest_block">depart​_doctest​_block</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#depart_document">depart_document</a></code></td>
+    <td><code><a href="#depart_document" class="internal-link" title="docutils.writers.manpage.Translator.depart_document">depart​_document</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#depart_emphasis">depart_emphasis</a></code></td>
+    <td><code><a href="#depart_emphasis" class="internal-link" title="docutils.writers.manpage.Translator.depart_emphasis">depart​_emphasis</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#depart_entry">depart_entry</a></code></td>
+    <td><code><a href="#depart_entry" class="internal-link" title="docutils.writers.manpage.Translator.depart_entry">depart​_entry</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#depart_enumerated_list">depart_enumerated_list</a></code></td>
+    <td><code><a href="#depart_enumerated_list" class="internal-link" title="docutils.writers.manpage.Translator.depart_enumerated_list">depart​_enumerated​_list</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#depart_field">depart_field</a></code></td>
+    <td><code><a href="#depart_field" class="internal-link" title="docutils.writers.manpage.Translator.depart_field">depart​_field</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#depart_field_body">depart_field_body</a></code></td>
+    <td><code><a href="#depart_field_body" class="internal-link" title="docutils.writers.manpage.Translator.depart_field_body">depart​_field​_body</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#depart_field_list">depart_field_list</a></code></td>
+    <td><code><a href="#depart_field_list" class="internal-link" title="docutils.writers.manpage.Translator.depart_field_list">depart​_field​_list</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#depart_field_name">depart_field_name</a></code></td>
+    <td><code><a href="#depart_field_name" class="internal-link" title="docutils.writers.manpage.Translator.depart_field_name">depart​_field​_name</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#depart_figure">depart_figure</a></code></td>
+    <td><code><a href="#depart_figure" class="internal-link" title="docutils.writers.manpage.Translator.depart_figure">depart​_figure</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#depart_footer">depart_footer</a></code></td>
+    <td><code><a href="#depart_footer" class="internal-link" title="docutils.writers.manpage.Translator.depart_footer">depart​_footer</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#depart_footnote">depart_footnote</a></code></td>
+    <td><code><a href="#depart_footnote" class="internal-link" title="docutils.writers.manpage.Translator.depart_footnote">depart​_footnote</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#depart_footnote_reference">depart_footnote_reference</a></code></td>
+    <td><code><a href="#depart_footnote_reference" class="internal-link" title="docutils.writers.manpage.Translator.depart_footnote_reference">depart​_footnote​_reference</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#depart_generated">depart_generated</a></code></td>
+    <td><code><a href="#depart_generated" class="internal-link" title="docutils.writers.manpage.Translator.depart_generated">depart​_generated</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#depart_header">depart_header</a></code></td>
+    <td><code><a href="#depart_header" class="internal-link" title="docutils.writers.manpage.Translator.depart_header">depart​_header</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#depart_inline">depart_inline</a></code></td>
+    <td><code><a href="#depart_inline" class="internal-link" title="docutils.writers.manpage.Translator.depart_inline">depart​_inline</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#depart_label">depart_label</a></code></td>
+    <td><code><a href="#depart_label" class="internal-link" title="docutils.writers.manpage.Translator.depart_label">depart​_label</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#depart_legend">depart_legend</a></code></td>
+    <td><code><a href="#depart_legend" class="internal-link" title="docutils.writers.manpage.Translator.depart_legend">depart​_legend</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#depart_line">depart_line</a></code></td>
+    <td><code><a href="#depart_line" class="internal-link" title="docutils.writers.manpage.Translator.depart_line">depart​_line</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#depart_line_block">depart_line_block</a></code></td>
+    <td><code><a href="#depart_line_block" class="internal-link" title="docutils.writers.manpage.Translator.depart_line_block">depart​_line​_block</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#depart_list_item">depart_list_item</a></code></td>
+    <td><code><a href="#depart_list_item" class="internal-link" title="docutils.writers.manpage.Translator.depart_list_item">depart​_list​_item</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#depart_literal">depart_literal</a></code></td>
+    <td><code><a href="#depart_literal" class="internal-link" title="docutils.writers.manpage.Translator.depart_literal">depart​_literal</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#depart_literal_block">depart_literal_block</a></code></td>
+    <td><code><a href="#depart_literal_block" class="internal-link" title="docutils.writers.manpage.Translator.depart_literal_block">depart​_literal​_block</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#depart_math">depart_math</a></code></td>
+    <td><code><a href="#depart_math" class="internal-link" title="docutils.writers.manpage.Translator.depart_math">depart​_math</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#depart_math_block">depart_math_block</a></code></td>
+    <td><code><a href="#depart_math_block" class="internal-link" title="docutils.writers.manpage.Translator.depart_math_block">depart​_math​_block</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#depart_option">depart_option</a></code></td>
+    <td><code><a href="#depart_option" class="internal-link" title="docutils.writers.manpage.Translator.depart_option">depart​_option</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#depart_option_argument">depart_option_argument</a></code></td>
+    <td><code><a href="#depart_option_argument" class="internal-link" title="docutils.writers.manpage.Translator.depart_option_argument">depart​_option​_argument</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#depart_option_group">depart_option_group</a></code></td>
+    <td><code><a href="#depart_option_group" class="internal-link" title="docutils.writers.manpage.Translator.depart_option_group">depart​_option​_group</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#depart_option_list">depart_option_list</a></code></td>
+    <td><code><a href="#depart_option_list" class="internal-link" title="docutils.writers.manpage.Translator.depart_option_list">depart​_option​_list</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#depart_option_list_item">depart_option_list_item</a></code></td>
+    <td><code><a href="#depart_option_list_item" class="internal-link" title="docutils.writers.manpage.Translator.depart_option_list_item">depart​_option​_list​_item</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#depart_option_string">depart_option_string</a></code></td>
+    <td><code><a href="#depart_option_string" class="internal-link" title="docutils.writers.manpage.Translator.depart_option_string">depart​_option​_string</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#depart_organization">depart_organization</a></code></td>
+    <td><code><a href="#depart_organization" class="internal-link" title="docutils.writers.manpage.Translator.depart_organization">depart​_organization</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#depart_paragraph">depart_paragraph</a></code></td>
+    <td><code><a href="#depart_paragraph" class="internal-link" title="docutils.writers.manpage.Translator.depart_paragraph">depart​_paragraph</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#depart_problematic">depart_problematic</a></code></td>
+    <td><code><a href="#depart_problematic" class="internal-link" title="docutils.writers.manpage.Translator.depart_problematic">depart​_problematic</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#depart_reference">depart_reference</a></code></td>
+    <td><code><a href="#depart_reference" class="internal-link" title="docutils.writers.manpage.Translator.depart_reference">depart​_reference</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#depart_row">depart_row</a></code></td>
+    <td><code><a href="#depart_row" class="internal-link" title="docutils.writers.manpage.Translator.depart_row">depart​_row</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#depart_rubric">depart_rubric</a></code></td>
+    <td><code><a href="#depart_rubric" class="internal-link" title="docutils.writers.manpage.Translator.depart_rubric">depart​_rubric</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#depart_section">depart_section</a></code></td>
+    <td><code><a href="#depart_section" class="internal-link" title="docutils.writers.manpage.Translator.depart_section">depart​_section</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#depart_sidebar">depart_sidebar</a></code></td>
+    <td><code><a href="#depart_sidebar" class="internal-link" title="docutils.writers.manpage.Translator.depart_sidebar">depart​_sidebar</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#depart_strong">depart_strong</a></code></td>
+    <td><code><a href="#depart_strong" class="internal-link" title="docutils.writers.manpage.Translator.depart_strong">depart​_strong</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#depart_subscript">depart_subscript</a></code></td>
+    <td><code><a href="#depart_subscript" class="internal-link" title="docutils.writers.manpage.Translator.depart_subscript">depart​_subscript</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#depart_subtitle">depart_subtitle</a></code></td>
+    <td><code><a href="#depart_subtitle" class="internal-link" title="docutils.writers.manpage.Translator.depart_subtitle">depart​_subtitle</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#depart_superscript">depart_superscript</a></code></td>
+    <td><code><a href="#depart_superscript" class="internal-link" title="docutils.writers.manpage.Translator.depart_superscript">depart​_superscript</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#depart_system_message">depart_system_message</a></code></td>
+    <td><code><a href="#depart_system_message" class="internal-link" title="docutils.writers.manpage.Translator.depart_system_message">depart​_system​_message</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#depart_table">depart_table</a></code></td>
+    <td><code><a href="#depart_table" class="internal-link" title="docutils.writers.manpage.Translator.depart_table">depart​_table</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#depart_tbody">depart_tbody</a></code></td>
+    <td><code><a href="#depart_tbody" class="internal-link" title="docutils.writers.manpage.Translator.depart_tbody">depart​_tbody</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#depart_term">depart_term</a></code></td>
+    <td><code><a href="#depart_term" class="internal-link" title="docutils.writers.manpage.Translator.depart_term">depart​_term</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#depart_Text">depart_Text</a></code></td>
+    <td><code><a href="#depart_Text" class="internal-link" title="docutils.writers.manpage.Translator.depart_Text">depart_​Text</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#depart_tgroup">depart_tgroup</a></code></td>
+    <td><code><a href="#depart_tgroup" class="internal-link" title="docutils.writers.manpage.Translator.depart_tgroup">depart​_tgroup</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#depart_thead">depart_thead</a></code></td>
+    <td><code><a href="#depart_thead" class="internal-link" title="docutils.writers.manpage.Translator.depart_thead">depart​_thead</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#depart_title">depart_title</a></code></td>
+    <td><code><a href="#depart_title" class="internal-link" title="docutils.writers.manpage.Translator.depart_title">depart​_title</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#depart_title_reference">depart_title_reference</a></code></td>
+    <td><code><a href="#depart_title_reference" class="internal-link" title="docutils.writers.manpage.Translator.depart_title_reference">depart​_title​_reference</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#depart_topic">depart_topic</a></code></td>
+    <td><code><a href="#depart_topic" class="internal-link" title="docutils.writers.manpage.Translator.depart_topic">depart​_topic</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#depart_transition">depart_transition</a></code></td>
+    <td><code><a href="#depart_transition" class="internal-link" title="docutils.writers.manpage.Translator.depart_transition">depart​_transition</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#deunicode">deunicode</a></code></td>
+    <td><code><a href="#deunicode" class="internal-link" title="docutils.writers.manpage.Translator.deunicode">deunicode</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#ensure_eol">ensure_eol</a></code></td>
-    <td><span>Ensure the last line in body is terminated by new line.</span></td>
+    <td><code><a href="#ensure_eol" class="internal-link" title="docutils.writers.manpage.Translator.ensure_eol">ensure​_eol</a></code></td>
+    <td>Ensure the last line in body is terminated by new line.</td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#first_child">first_child</a></code></td>
+    <td><code><a href="#first_child" class="internal-link" title="docutils.writers.manpage.Translator.first_child">first​_child</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#footnote_backrefs">footnote_backrefs</a></code></td>
+    <td><code><a href="#footnote_backrefs" class="internal-link" title="docutils.writers.manpage.Translator.footnote_backrefs">footnote​_backrefs</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#header">header</a></code></td>
+    <td><code><a href="#header" class="internal-link" title="docutils.writers.manpage.Translator.header">header</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#indent">indent</a></code></td>
+    <td><code><a href="#indent" class="internal-link" title="docutils.writers.manpage.Translator.indent">indent</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#list_end">list_end</a></code></td>
+    <td><code><a href="#list_end" class="internal-link" title="docutils.writers.manpage.Translator.list_end">list​_end</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#list_start">list_start</a></code></td>
+    <td><code><a href="#list_start" class="internal-link" title="docutils.writers.manpage.Translator.list_start">list​_start</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#unimplemented_visit">unimplemented_visit</a></code></td>
+    <td><code><a href="#unimplemented_visit" class="internal-link" title="docutils.writers.manpage.Translator.unimplemented_visit">unimplemented​_visit</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#visit_address">visit_address</a></code></td>
+    <td><code><a href="#visit_address" class="internal-link" title="docutils.writers.manpage.Translator.visit_address">visit​_address</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#visit_admonition">visit_admonition</a></code></td>
+    <td><code><a href="#visit_admonition" class="internal-link" title="docutils.writers.manpage.Translator.visit_admonition">visit​_admonition</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#visit_attention">visit_attention</a></code></td>
+    <td><code><a href="#visit_attention" class="internal-link" title="docutils.writers.manpage.Translator.visit_attention">visit​_attention</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#visit_attribution">visit_attribution</a></code></td>
+    <td><code><a href="#visit_attribution" class="internal-link" title="docutils.writers.manpage.Translator.visit_attribution">visit​_attribution</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#visit_author">visit_author</a></code></td>
+    <td><code><a href="#visit_author" class="internal-link" title="docutils.writers.manpage.Translator.visit_author">visit​_author</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#visit_authors">visit_authors</a></code></td>
+    <td><code><a href="#visit_authors" class="internal-link" title="docutils.writers.manpage.Translator.visit_authors">visit​_authors</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#visit_block_quote">visit_block_quote</a></code></td>
+    <td><code><a href="#visit_block_quote" class="internal-link" title="docutils.writers.manpage.Translator.visit_block_quote">visit​_block​_quote</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#visit_bullet_list">visit_bullet_list</a></code></td>
+    <td><code><a href="#visit_bullet_list" class="internal-link" title="docutils.writers.manpage.Translator.visit_bullet_list">visit​_bullet​_list</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#visit_caption">visit_caption</a></code></td>
+    <td><code><a href="#visit_caption" class="internal-link" title="docutils.writers.manpage.Translator.visit_caption">visit​_caption</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#visit_caution">visit_caution</a></code></td>
+    <td><code><a href="#visit_caution" class="internal-link" title="docutils.writers.manpage.Translator.visit_caution">visit​_caution</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#visit_citation">visit_citation</a></code></td>
+    <td><code><a href="#visit_citation" class="internal-link" title="docutils.writers.manpage.Translator.visit_citation">visit​_citation</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#visit_citation_reference">visit_citation_reference</a></code></td>
+    <td><code><a href="#visit_citation_reference" class="internal-link" title="docutils.writers.manpage.Translator.visit_citation_reference">visit​_citation​_reference</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#visit_classifier">visit_classifier</a></code></td>
+    <td><code><a href="#visit_classifier" class="internal-link" title="docutils.writers.manpage.Translator.visit_classifier">visit​_classifier</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#visit_colspec">visit_colspec</a></code></td>
+    <td><code><a href="#visit_colspec" class="internal-link" title="docutils.writers.manpage.Translator.visit_colspec">visit​_colspec</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#visit_comment">visit_comment</a></code></td>
+    <td><code><a href="#visit_comment" class="internal-link" title="docutils.writers.manpage.Translator.visit_comment">visit​_comment</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#visit_compound">visit_compound</a></code></td>
+    <td><code><a href="#visit_compound" class="internal-link" title="docutils.writers.manpage.Translator.visit_compound">visit​_compound</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#visit_contact">visit_contact</a></code></td>
+    <td><code><a href="#visit_contact" class="internal-link" title="docutils.writers.manpage.Translator.visit_contact">visit​_contact</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#visit_container">visit_container</a></code></td>
+    <td><code><a href="#visit_container" class="internal-link" title="docutils.writers.manpage.Translator.visit_container">visit​_container</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#visit_copyright">visit_copyright</a></code></td>
+    <td><code><a href="#visit_copyright" class="internal-link" title="docutils.writers.manpage.Translator.visit_copyright">visit​_copyright</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#visit_danger">visit_danger</a></code></td>
+    <td><code><a href="#visit_danger" class="internal-link" title="docutils.writers.manpage.Translator.visit_danger">visit​_danger</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#visit_date">visit_date</a></code></td>
+    <td><code><a href="#visit_date" class="internal-link" title="docutils.writers.manpage.Translator.visit_date">visit​_date</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#visit_decoration">visit_decoration</a></code></td>
+    <td><code><a href="#visit_decoration" class="internal-link" title="docutils.writers.manpage.Translator.visit_decoration">visit​_decoration</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#visit_definition">visit_definition</a></code></td>
+    <td><code><a href="#visit_definition" class="internal-link" title="docutils.writers.manpage.Translator.visit_definition">visit​_definition</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#visit_definition_list">visit_definition_list</a></code></td>
+    <td><code><a href="#visit_definition_list" class="internal-link" title="docutils.writers.manpage.Translator.visit_definition_list">visit​_definition​_list</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#visit_definition_list_item">visit_definition_list_item</a></code></td>
+    <td><code><a href="#visit_definition_list_item" class="internal-link" title="docutils.writers.manpage.Translator.visit_definition_list_item">visit​_definition​_list​_item</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#visit_description">visit_description</a></code></td>
+    <td><code><a href="#visit_description" class="internal-link" title="docutils.writers.manpage.Translator.visit_description">visit​_description</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#visit_docinfo">visit_docinfo</a></code></td>
+    <td><code><a href="#visit_docinfo" class="internal-link" title="docutils.writers.manpage.Translator.visit_docinfo">visit​_docinfo</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#visit_docinfo_item">visit_docinfo_item</a></code></td>
+    <td><code><a href="#visit_docinfo_item" class="internal-link" title="docutils.writers.manpage.Translator.visit_docinfo_item">visit​_docinfo​_item</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#visit_doctest_block">visit_doctest_block</a></code></td>
+    <td><code><a href="#visit_doctest_block" class="internal-link" title="docutils.writers.manpage.Translator.visit_doctest_block">visit​_doctest​_block</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#visit_document">visit_document</a></code></td>
+    <td><code><a href="#visit_document" class="internal-link" title="docutils.writers.manpage.Translator.visit_document">visit​_document</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#visit_emphasis">visit_emphasis</a></code></td>
+    <td><code><a href="#visit_emphasis" class="internal-link" title="docutils.writers.manpage.Translator.visit_emphasis">visit​_emphasis</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#visit_entry">visit_entry</a></code></td>
+    <td><code><a href="#visit_entry" class="internal-link" title="docutils.writers.manpage.Translator.visit_entry">visit​_entry</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#visit_enumerated_list">visit_enumerated_list</a></code></td>
+    <td><code><a href="#visit_enumerated_list" class="internal-link" title="docutils.writers.manpage.Translator.visit_enumerated_list">visit​_enumerated​_list</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#visit_error">visit_error</a></code></td>
+    <td><code><a href="#visit_error" class="internal-link" title="docutils.writers.manpage.Translator.visit_error">visit​_error</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#visit_field">visit_field</a></code></td>
+    <td><code><a href="#visit_field" class="internal-link" title="docutils.writers.manpage.Translator.visit_field">visit​_field</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#visit_field_body">visit_field_body</a></code></td>
+    <td><code><a href="#visit_field_body" class="internal-link" title="docutils.writers.manpage.Translator.visit_field_body">visit​_field​_body</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#visit_field_list">visit_field_list</a></code></td>
+    <td><code><a href="#visit_field_list" class="internal-link" title="docutils.writers.manpage.Translator.visit_field_list">visit​_field​_list</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#visit_field_name">visit_field_name</a></code></td>
+    <td><code><a href="#visit_field_name" class="internal-link" title="docutils.writers.manpage.Translator.visit_field_name">visit​_field​_name</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#visit_figure">visit_figure</a></code></td>
+    <td><code><a href="#visit_figure" class="internal-link" title="docutils.writers.manpage.Translator.visit_figure">visit​_figure</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#visit_footer">visit_footer</a></code></td>
+    <td><code><a href="#visit_footer" class="internal-link" title="docutils.writers.manpage.Translator.visit_footer">visit​_footer</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#visit_footnote">visit_footnote</a></code></td>
+    <td><code><a href="#visit_footnote" class="internal-link" title="docutils.writers.manpage.Translator.visit_footnote">visit​_footnote</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#visit_footnote_reference">visit_footnote_reference</a></code></td>
+    <td><code><a href="#visit_footnote_reference" class="internal-link" title="docutils.writers.manpage.Translator.visit_footnote_reference">visit​_footnote​_reference</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#visit_generated">visit_generated</a></code></td>
+    <td><code><a href="#visit_generated" class="internal-link" title="docutils.writers.manpage.Translator.visit_generated">visit​_generated</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#visit_header">visit_header</a></code></td>
+    <td><code><a href="#visit_header" class="internal-link" title="docutils.writers.manpage.Translator.visit_header">visit​_header</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#visit_hint">visit_hint</a></code></td>
+    <td><code><a href="#visit_hint" class="internal-link" title="docutils.writers.manpage.Translator.visit_hint">visit​_hint</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#visit_image">visit_image</a></code></td>
+    <td><code><a href="#visit_image" class="internal-link" title="docutils.writers.manpage.Translator.visit_image">visit​_image</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#visit_important">visit_important</a></code></td>
+    <td><code><a href="#visit_important" class="internal-link" title="docutils.writers.manpage.Translator.visit_important">visit​_important</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#visit_inline">visit_inline</a></code></td>
+    <td><code><a href="#visit_inline" class="internal-link" title="docutils.writers.manpage.Translator.visit_inline">visit​_inline</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#visit_label">visit_label</a></code></td>
+    <td><code><a href="#visit_label" class="internal-link" title="docutils.writers.manpage.Translator.visit_label">visit​_label</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#visit_legend">visit_legend</a></code></td>
+    <td><code><a href="#visit_legend" class="internal-link" title="docutils.writers.manpage.Translator.visit_legend">visit​_legend</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#visit_line">visit_line</a></code></td>
+    <td><code><a href="#visit_line" class="internal-link" title="docutils.writers.manpage.Translator.visit_line">visit​_line</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#visit_line_block">visit_line_block</a></code></td>
+    <td><code><a href="#visit_line_block" class="internal-link" title="docutils.writers.manpage.Translator.visit_line_block">visit​_line​_block</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#visit_list_item">visit_list_item</a></code></td>
+    <td><code><a href="#visit_list_item" class="internal-link" title="docutils.writers.manpage.Translator.visit_list_item">visit​_list​_item</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#visit_literal">visit_literal</a></code></td>
+    <td><code><a href="#visit_literal" class="internal-link" title="docutils.writers.manpage.Translator.visit_literal">visit​_literal</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#visit_literal_block">visit_literal_block</a></code></td>
+    <td><code><a href="#visit_literal_block" class="internal-link" title="docutils.writers.manpage.Translator.visit_literal_block">visit​_literal​_block</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#visit_math">visit_math</a></code></td>
+    <td><code><a href="#visit_math" class="internal-link" title="docutils.writers.manpage.Translator.visit_math">visit​_math</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#visit_math_block">visit_math_block</a></code></td>
+    <td><code><a href="#visit_math_block" class="internal-link" title="docutils.writers.manpage.Translator.visit_math_block">visit​_math​_block</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#visit_note">visit_note</a></code></td>
+    <td><code><a href="#visit_note" class="internal-link" title="docutils.writers.manpage.Translator.visit_note">visit​_note</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#visit_option">visit_option</a></code></td>
+    <td><code><a href="#visit_option" class="internal-link" title="docutils.writers.manpage.Translator.visit_option">visit​_option</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#visit_option_argument">visit_option_argument</a></code></td>
+    <td><code><a href="#visit_option_argument" class="internal-link" title="docutils.writers.manpage.Translator.visit_option_argument">visit​_option​_argument</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#visit_option_group">visit_option_group</a></code></td>
+    <td><code><a href="#visit_option_group" class="internal-link" title="docutils.writers.manpage.Translator.visit_option_group">visit​_option​_group</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#visit_option_list">visit_option_list</a></code></td>
+    <td><code><a href="#visit_option_list" class="internal-link" title="docutils.writers.manpage.Translator.visit_option_list">visit​_option​_list</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#visit_option_list_item">visit_option_list_item</a></code></td>
+    <td><code><a href="#visit_option_list_item" class="internal-link" title="docutils.writers.manpage.Translator.visit_option_list_item">visit​_option​_list​_item</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#visit_option_string">visit_option_string</a></code></td>
+    <td><code><a href="#visit_option_string" class="internal-link" title="docutils.writers.manpage.Translator.visit_option_string">visit​_option​_string</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#visit_organization">visit_organization</a></code></td>
+    <td><code><a href="#visit_organization" class="internal-link" title="docutils.writers.manpage.Translator.visit_organization">visit​_organization</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#visit_paragraph">visit_paragraph</a></code></td>
+    <td><code><a href="#visit_paragraph" class="internal-link" title="docutils.writers.manpage.Translator.visit_paragraph">visit​_paragraph</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#visit_problematic">visit_problematic</a></code></td>
+    <td><code><a href="#visit_problematic" class="internal-link" title="docutils.writers.manpage.Translator.visit_problematic">visit​_problematic</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#visit_raw">visit_raw</a></code></td>
+    <td><code><a href="#visit_raw" class="internal-link" title="docutils.writers.manpage.Translator.visit_raw">visit​_raw</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#visit_reference">visit_reference</a></code></td>
-    <td><span>E.g. link or email address.</span></td>
+    <td><code><a href="#visit_reference" class="internal-link" title="docutils.writers.manpage.Translator.visit_reference">visit​_reference</a></code></td>
+    <td>E.g. link or email address.</td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#visit_revision">visit_revision</a></code></td>
+    <td><code><a href="#visit_revision" class="internal-link" title="docutils.writers.manpage.Translator.visit_revision">visit​_revision</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#visit_row">visit_row</a></code></td>
+    <td><code><a href="#visit_row" class="internal-link" title="docutils.writers.manpage.Translator.visit_row">visit​_row</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#visit_rubric">visit_rubric</a></code></td>
+    <td><code><a href="#visit_rubric" class="internal-link" title="docutils.writers.manpage.Translator.visit_rubric">visit​_rubric</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#visit_section">visit_section</a></code></td>
+    <td><code><a href="#visit_section" class="internal-link" title="docutils.writers.manpage.Translator.visit_section">visit​_section</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#visit_sidebar">visit_sidebar</a></code></td>
+    <td><code><a href="#visit_sidebar" class="internal-link" title="docutils.writers.manpage.Translator.visit_sidebar">visit​_sidebar</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#visit_status">visit_status</a></code></td>
+    <td><code><a href="#visit_status" class="internal-link" title="docutils.writers.manpage.Translator.visit_status">visit​_status</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#visit_strong">visit_strong</a></code></td>
+    <td><code><a href="#visit_strong" class="internal-link" title="docutils.writers.manpage.Translator.visit_strong">visit​_strong</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#visit_subscript">visit_subscript</a></code></td>
+    <td><code><a href="#visit_subscript" class="internal-link" title="docutils.writers.manpage.Translator.visit_subscript">visit​_subscript</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#visit_substitution_definition">visit_substitution_definition</a></code></td>
-    <td><span>Internal only.</span></td>
+    <td><code><a href="#visit_substitution_definition" class="internal-link" title="docutils.writers.manpage.Translator.visit_substitution_definition">visit​_substitution​_definition</a></code></td>
+    <td>Internal only.</td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#visit_substitution_reference">visit_substitution_reference</a></code></td>
+    <td><code><a href="#visit_substitution_reference" class="internal-link" title="docutils.writers.manpage.Translator.visit_substitution_reference">visit​_substitution​_reference</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#visit_subtitle">visit_subtitle</a></code></td>
+    <td><code><a href="#visit_subtitle" class="internal-link" title="docutils.writers.manpage.Translator.visit_subtitle">visit​_subtitle</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#visit_superscript">visit_superscript</a></code></td>
+    <td><code><a href="#visit_superscript" class="internal-link" title="docutils.writers.manpage.Translator.visit_superscript">visit​_superscript</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#visit_system_message">visit_system_message</a></code></td>
+    <td><code><a href="#visit_system_message" class="internal-link" title="docutils.writers.manpage.Translator.visit_system_message">visit​_system​_message</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#visit_table">visit_table</a></code></td>
+    <td><code><a href="#visit_table" class="internal-link" title="docutils.writers.manpage.Translator.visit_table">visit​_table</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#visit_target">visit_target</a></code></td>
+    <td><code><a href="#visit_target" class="internal-link" title="docutils.writers.manpage.Translator.visit_target">visit​_target</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#visit_tbody">visit_tbody</a></code></td>
+    <td><code><a href="#visit_tbody" class="internal-link" title="docutils.writers.manpage.Translator.visit_tbody">visit​_tbody</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#visit_term">visit_term</a></code></td>
+    <td><code><a href="#visit_term" class="internal-link" title="docutils.writers.manpage.Translator.visit_term">visit​_term</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#visit_Text">visit_Text</a></code></td>
+    <td><code><a href="#visit_Text" class="internal-link" title="docutils.writers.manpage.Translator.visit_Text">visit_​Text</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#visit_tgroup">visit_tgroup</a></code></td>
+    <td><code><a href="#visit_tgroup" class="internal-link" title="docutils.writers.manpage.Translator.visit_tgroup">visit​_tgroup</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#visit_thead">visit_thead</a></code></td>
+    <td><code><a href="#visit_thead" class="internal-link" title="docutils.writers.manpage.Translator.visit_thead">visit​_thead</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#visit_tip">visit_tip</a></code></td>
+    <td><code><a href="#visit_tip" class="internal-link" title="docutils.writers.manpage.Translator.visit_tip">visit​_tip</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#visit_title">visit_title</a></code></td>
+    <td><code><a href="#visit_title" class="internal-link" title="docutils.writers.manpage.Translator.visit_title">visit​_title</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#visit_title_reference">visit_title_reference</a></code></td>
-    <td><span>inline citation reference</span></td>
+    <td><code><a href="#visit_title_reference" class="internal-link" title="docutils.writers.manpage.Translator.visit_title_reference">visit​_title​_reference</a></code></td>
+    <td>inline citation reference</td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#visit_topic">visit_topic</a></code></td>
+    <td><code><a href="#visit_topic" class="internal-link" title="docutils.writers.manpage.Translator.visit_topic">visit​_topic</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#visit_transition">visit_transition</a></code></td>
+    <td><code><a href="#visit_transition" class="internal-link" title="docutils.writers.manpage.Translator.visit_transition">visit​_transition</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#visit_version">visit_version</a></code></td>
+    <td><code><a href="#visit_version" class="internal-link" title="docutils.writers.manpage.Translator.visit_version">visit​_version</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#visit_warning">visit_warning</a></code></td>
+    <td><code><a href="#visit_warning" class="internal-link" title="docutils.writers.manpage.Translator.visit_warning">visit​_warning</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#write_colspecs">write_colspecs</a></code></td>
+    <td><code><a href="#write_colspecs" class="internal-link" title="docutils.writers.manpage.Translator.write_colspecs">write​_colspecs</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="classvariable">
     
     <td>Class Variable</td>
-    <td><code><a href="#document_start">document_start</a></code></td>
+    <td><code><a href="#document_start" class="internal-link" title="docutils.writers.manpage.Translator.document_start">document​_start</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="classvariable">
     
     <td>Class Variable</td>
-    <td><code><a href="#possibly_a_roff_command">possibly_a_roff_command</a></code></td>
+    <td><code><a href="#possibly_a_roff_command" class="internal-link" title="docutils.writers.manpage.Translator.possibly_a_roff_command">possibly​_a​_roff​_command</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="classvariable">
     
     <td>Class Variable</td>
-    <td><code><a href="#words_and_spaces">words_and_spaces</a></code></td>
+    <td><code><a href="#words_and_spaces" class="internal-link" title="docutils.writers.manpage.Translator.words_and_spaces">words​_and​_spaces</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="instancevariable">
     
     <td>Instance Variable</td>
-    <td><code><a href="#authors">authors</a></code></td>
+    <td><code><a href="#authors" class="internal-link" title="docutils.writers.manpage.Translator.authors">authors</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="instancevariable">
     
     <td>Instance Variable</td>
-    <td><code><a href="#body">body</a></code></td>
+    <td><code><a href="#body" class="internal-link" title="docutils.writers.manpage.Translator.body">body</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="instancevariable">
     
     <td>Instance Variable</td>
-    <td><code><a href="#colspecs">colspecs</a></code></td>
+    <td><code><a href="#colspecs" class="internal-link" title="docutils.writers.manpage.Translator.colspecs">colspecs</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="instancevariable">
     
     <td>Instance Variable</td>
-    <td><code><a href="#compact_p">compact_p</a></code></td>
+    <td><code><a href="#compact_p" class="internal-link" title="docutils.writers.manpage.Translator.compact_p">compact​_p</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="instancevariable">
     
     <td>Instance Variable</td>
-    <td><code><a href="#compact_simple">compact_simple</a></code></td>
+    <td><code><a href="#compact_simple" class="internal-link" title="docutils.writers.manpage.Translator.compact_simple">compact​_simple</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="instancevariable">
     
     <td>Instance Variable</td>
-    <td><code><a href="#context">context</a></code></td>
+    <td><code><a href="#context" class="internal-link" title="docutils.writers.manpage.Translator.context">context</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="instancevariable">
     
     <td>Instance Variable</td>
-    <td><code><a href="#defs">defs</a></code></td>
+    <td><code><a href="#defs" class="internal-link" title="docutils.writers.manpage.Translator.defs">defs</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="instancevariable">
     
     <td>Instance Variable</td>
-    <td><code><a href="#foot">foot</a></code></td>
+    <td><code><a href="#foot" class="internal-link" title="docutils.writers.manpage.Translator.foot">foot</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="instancevariable">
     
     <td>Instance Variable</td>
-    <td><code><a href="#head">head</a></code></td>
+    <td><code><a href="#head" class="internal-link" title="docutils.writers.manpage.Translator.head">head</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="instancevariable">
     
     <td>Instance Variable</td>
-    <td><code><a href="#header_written">header_written</a></code></td>
+    <td><code><a href="#header_written" class="internal-link" title="docutils.writers.manpage.Translator.header_written">header​_written</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="instancevariable">
     
     <td>Instance Variable</td>
-    <td><code><a href="#language">language</a></code></td>
+    <td><code><a href="#language" class="internal-link" title="docutils.writers.manpage.Translator.language">language</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="instancevariable">
     
     <td>Instance Variable</td>
-    <td><code><a href="#section_level">section_level</a></code></td>
+    <td><code><a href="#section_level" class="internal-link" title="docutils.writers.manpage.Translator.section_level">section​_level</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="instancevariable">
     
     <td>Instance Variable</td>
-    <td><code><a href="#settings">settings</a></code></td>
+    <td><code><a href="#settings" class="internal-link" title="docutils.writers.manpage.Translator.settings">settings</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="instancevariable">
     
     <td>Instance Variable</td>
-    <td><code><a href="#topic_class">topic_class</a></code></td>
+    <td><code><a href="#topic_class" class="internal-link" title="docutils.writers.manpage.Translator.topic_class">topic​_class</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="instancevariable private">
     
     <td>Instance Variable</td>
-    <td><code><a href="#_active_table">_active_table</a></code></td>
+    <td><code><a href="#_active_table" class="internal-link" title="docutils.writers.manpage.Translator._active_table">_active​_table</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="instancevariable private">
     
     <td>Instance Variable</td>
-    <td><code><a href="#_docinfo">_docinfo</a></code></td>
+    <td><code><a href="#_docinfo" class="internal-link" title="docutils.writers.manpage.Translator._docinfo">_docinfo</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="instancevariable private">
     
     <td>Instance Variable</td>
-    <td><code><a href="#_docinfo_keys">_docinfo_keys</a></code></td>
+    <td><code><a href="#_docinfo_keys" class="internal-link" title="docutils.writers.manpage.Translator._docinfo_keys">_docinfo​_keys</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="instancevariable private">
     
     <td>Instance Variable</td>
-    <td><code><a href="#_docinfo_names">_docinfo_names</a></code></td>
+    <td><code><a href="#_docinfo_names" class="internal-link" title="docutils.writers.manpage.Translator._docinfo_names">_docinfo​_names</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="instancevariable private">
     
     <td>Instance Variable</td>
-    <td><code><a href="#_field_name">_field_name</a></code></td>
+    <td><code><a href="#_field_name" class="internal-link" title="docutils.writers.manpage.Translator._field_name">_field​_name</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="instancevariable private">
     
     <td>Instance Variable</td>
-    <td><code><a href="#_in_docinfo">_in_docinfo</a></code></td>
+    <td><code><a href="#_in_docinfo" class="internal-link" title="docutils.writers.manpage.Translator._in_docinfo">_in​_docinfo</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="instancevariable private">
     
     <td>Instance Variable</td>
-    <td><code><a href="#_in_literal">_in_literal</a></code></td>
+    <td><code><a href="#_in_literal" class="internal-link" title="docutils.writers.manpage.Translator._in_literal">_in​_literal</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="instancevariable private">
     
     <td>Instance Variable</td>
-    <td><code><a href="#_indent">_indent</a></code></td>
+    <td><code><a href="#_indent" class="internal-link" title="docutils.writers.manpage.Translator._indent">_indent</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="instancevariable private">
     
     <td>Instance Variable</td>
-    <td><code><a href="#_line_block">_line_block</a></code></td>
+    <td><code><a href="#_line_block" class="internal-link" title="docutils.writers.manpage.Translator._line_block">_line​_block</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="instancevariable private">
     
     <td>Instance Variable</td>
-    <td><code><a href="#_list_char">_list_char</a></code></td>
+    <td><code><a href="#_list_char" class="internal-link" title="docutils.writers.manpage.Translator._list_char">_list​_char</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr>
 </table>
         
           <p class="inheritedFrom">
-            Inherited from <code><a href="docutils.nodes.NodeVisitor.html">NodeVisitor</a></code>:
+            Inherited from <code><a href="docutils.nodes.NodeVisitor.html" class="internal-link" title="docutils.nodes.NodeVisitor">NodeVisitor</a></code>:
           </p>
-          <table class="children sortable" id="id1315">
+          <table class="children sortable" id="id1314">
   
   
   <tr class="basemethod">
     
     <td>Method</td>
-    <td><code><a href="docutils.nodes.NodeVisitor.html#dispatch_departure">dispatch_departure</a></code></td>
-    <td><span>Call self."<tt class="rst-docutils literal">depart_</tt> + node class name" with <code>node</code> as parameter.  If the <tt class="rst-docutils literal"><span class="pre">depart_...</span></tt> method does not exist, call self.unknown_departure.</span></td>
+    <td><code><a href="docutils.nodes.NodeVisitor.html#dispatch_departure" class="internal-link" title="docutils.nodes.NodeVisitor.dispatch_departure">dispatch​_departure</a></code></td>
+    <td>Call self."<tt class="rst-docutils literal">depart_</tt> + node class name" with <code>node</code> as parameter.  If the <tt class="rst-docutils literal"><span class="pre">depart_...</span></tt> method does not exist, call self.unknown_departure.</td>
   </tr><tr class="basemethod">
     
     <td>Method</td>
-    <td><code><a href="docutils.nodes.NodeVisitor.html#dispatch_visit">dispatch_visit</a></code></td>
-    <td><span>Call self."<tt class="rst-docutils literal">visit_</tt> + node class name" with <code>node</code> as parameter.  If the <tt class="rst-docutils literal"><span class="pre">visit_...</span></tt> method does not exist, call self.unknown_visit.</span></td>
+    <td><code><a href="docutils.nodes.NodeVisitor.html#dispatch_visit" class="internal-link" title="docutils.nodes.NodeVisitor.dispatch_visit">dispatch​_visit</a></code></td>
+    <td>Call self."<tt class="rst-docutils literal">visit_</tt> + node class name" with <code>node</code> as parameter.  If the <tt class="rst-docutils literal"><span class="pre">visit_...</span></tt> method does not exist, call self.unknown_visit.</td>
   </tr><tr class="basemethod">
     
     <td>Method</td>
-    <td><code><a href="docutils.nodes.NodeVisitor.html#unknown_departure">unknown_departure</a></code></td>
-    <td><span>Called before exiting unknown <code><a href="docutils.nodes.Node.html">Node</a></code> types.</span></td>
+    <td><code><a href="docutils.nodes.NodeVisitor.html#unknown_departure" class="internal-link" title="docutils.nodes.NodeVisitor.unknown_departure">unknown​_departure</a></code></td>
+    <td>Called before exiting unknown <code><a href="docutils.nodes.Node.html" class="internal-link" title="docutils.nodes.Node">Node</a></code> types.</td>
   </tr><tr class="basemethod">
     
     <td>Method</td>
-    <td><code><a href="docutils.nodes.NodeVisitor.html#unknown_visit">unknown_visit</a></code></td>
-    <td><span>Called when entering unknown <code><a href="docutils.nodes.Node.html">Node</a></code> types.</span></td>
+    <td><code><a href="docutils.nodes.NodeVisitor.html#unknown_visit" class="internal-link" title="docutils.nodes.NodeVisitor.unknown_visit">unknown​_visit</a></code></td>
+    <td>Called when entering unknown <code><a href="docutils.nodes.Node.html" class="internal-link" title="docutils.nodes.Node">Node</a></code> types.</td>
   </tr><tr class="baseclassvariable">
     
     <td>Class Variable</td>
-    <td><code><a href="docutils.nodes.NodeVisitor.html#optional">optional</a></code></td>
-    <td><span>Tuple containing node class names (as strings).</span></td>
+    <td><code><a href="docutils.nodes.NodeVisitor.html#optional" class="internal-link" title="docutils.nodes.NodeVisitor.optional">optional</a></code></td>
+    <td>Tuple containing node class names (as strings).</td>
   </tr><tr class="baseinstancevariable">
     
     <td>Instance Variable</td>
-    <td><code><a href="docutils.nodes.NodeVisitor.html#document">document</a></code></td>
+    <td><code><a href="docutils.nodes.NodeVisitor.html#document" class="internal-link" title="docutils.nodes.NodeVisitor.document">document</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr>
 </table>
@@ -1264,7 +1277,7 @@
     </a>
   </div>
   <div class="docstring functionBody">
-    <div class="interfaceinfo">overrides <code><a href="docutils.nodes.NodeVisitor.html#__init__">docutils.nodes.NodeVisitor.__init__</a></code></div>
+    <div class="interfaceinfo">overrides <code><a href="docutils.nodes.NodeVisitor.html#__init__" class="internal-link">docutils.nodes.NodeVisitor.__init__</a></code></div>
     
     <div><p class="undocumented">Undocumented</p></div>
   </div>
@@ -5338,6 +5351,7 @@ line/comment.</div>
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    
   </div>
 </div><div class="baseclassvariable">
   
@@ -5360,6 +5374,7 @@ line/comment.</div>
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    
   </div>
 </div><div class="baseclassvariable">
   
@@ -5382,6 +5397,7 @@ line/comment.</div>
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    
   </div>
 </div><div class="baseinstancevariable">
   
@@ -5404,6 +5420,7 @@ line/comment.</div>
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    
   </div>
 </div><div class="baseinstancevariable">
   
@@ -5426,6 +5443,7 @@ line/comment.</div>
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    
   </div>
 </div><div class="baseinstancevariable">
   
@@ -5448,6 +5466,7 @@ line/comment.</div>
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    
   </div>
 </div><div class="baseinstancevariable">
   
@@ -5470,6 +5489,7 @@ line/comment.</div>
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    
   </div>
 </div><div class="baseinstancevariable">
   
@@ -5492,6 +5512,7 @@ line/comment.</div>
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    
   </div>
 </div><div class="baseinstancevariable">
   
@@ -5514,6 +5535,7 @@ line/comment.</div>
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    
   </div>
 </div><div class="baseinstancevariable">
   
@@ -5536,6 +5558,7 @@ line/comment.</div>
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    
   </div>
 </div><div class="baseinstancevariable">
   
@@ -5558,6 +5581,7 @@ line/comment.</div>
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    
   </div>
 </div><div class="baseinstancevariable">
   
@@ -5580,6 +5604,7 @@ line/comment.</div>
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    
   </div>
 </div><div class="baseinstancevariable">
   
@@ -5602,6 +5627,7 @@ line/comment.</div>
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    
   </div>
 </div><div class="baseinstancevariable">
   
@@ -5624,6 +5650,7 @@ line/comment.</div>
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    
   </div>
 </div><div class="baseinstancevariable">
   
@@ -5646,6 +5673,7 @@ line/comment.</div>
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    
   </div>
 </div><div class="baseinstancevariable">
   
@@ -5668,6 +5696,7 @@ line/comment.</div>
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    
   </div>
 </div><div class="baseinstancevariable">
   
@@ -5690,6 +5719,7 @@ line/comment.</div>
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    
   </div>
 </div><div class="baseinstancevariable private">
   
@@ -5712,6 +5742,7 @@ line/comment.</div>
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    
   </div>
 </div><div class="baseinstancevariable private">
   
@@ -5734,6 +5765,7 @@ line/comment.</div>
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    
   </div>
 </div><div class="baseinstancevariable private">
   
@@ -5756,6 +5788,7 @@ line/comment.</div>
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    
   </div>
 </div><div class="baseinstancevariable private">
   
@@ -5778,6 +5811,7 @@ line/comment.</div>
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    
   </div>
 </div><div class="baseinstancevariable private">
   
@@ -5800,6 +5834,7 @@ line/comment.</div>
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    
   </div>
 </div><div class="baseinstancevariable private">
   
@@ -5822,6 +5857,7 @@ line/comment.</div>
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    
   </div>
 </div><div class="baseinstancevariable private">
   
@@ -5844,6 +5880,7 @@ line/comment.</div>
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    
   </div>
 </div><div class="baseinstancevariable private">
   
@@ -5866,6 +5903,7 @@ line/comment.</div>
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    
   </div>
 </div><div class="baseinstancevariable private">
   
@@ -5888,6 +5926,7 @@ line/comment.</div>
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    
   </div>
 </div><div class="baseinstancevariable private">
   
@@ -5910,6 +5949,7 @@ line/comment.</div>
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    
   </div>
 </div>
 
@@ -5921,7 +5961,7 @@ line/comment.</div>
   <div class="container">
     <a href="index.html">API Documentation</a> for <a href="https://docutils.sourceforge.io/" class="projecthome">docutils-0.17.1</a>,
   generated by <a href="https://github.com/twisted/pydoctor/">pydoctor</a>
-    21.2.2 at 2022-01-06 17:36:41.
+    22.2.2.dev0 at 2022-03-04 05:57:20.
   </div>
 </footer>
 

@@ -7,7 +7,7 @@
   <head>
     
     <title>docutils.nodes.Node</title>
-    <meta name="generator" content="pydoctor 21.2.2"> 
+    <meta name="generator" content="pydoctor 22.2.2.dev0"> 
         
     </meta>
     <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
@@ -44,69 +44,82 @@
           Names
         </a>
 
-        <form action="search-results.html" id="search-box-container">
+        <div id="search-box-container">
           <div class="input-group">
-            <input id="search-box" name="search-query" placeholder="Search..." aria-label="Search" minlength="2" class="form-control" />
+            <input id="search-box" type="search" name="search-query" placeholder="Search..." aria-label="Search" minlength="2" class="form-control" autocomplete="off" />
+            
             <span class="input-group-btn">
-              <button class="btn btn-default" type="submit" title="Search"><img src="fonts/search.svg" alt="Search!" /></button>
-              <a class="btn btn-default" id="search-help-button" title="Help" onclick="toggleSearchHelpText()"><img src="fonts/info.svg" alt="Help!" /></a>
+              <a style="display: none;" class="btn btn-default" id="search-clear-button" title="Clear" onclick="clearSearch()"><img src="fonts/x-circle.svg" alt="Clear" /></a>
+              <a class="btn btn-default" id="search-help-button" title="Help" onclick="toggleSearchHelpText()"><img src="fonts/info.svg" alt="Help" /></a>
             </span>
           </div>
-        </form>
+        </div>
 
-        <div class="rst-admonition hint" id="search-help-box">
+      </div>
+
+      <div id="search-results-container" style="display: none;">
+        <div>
+          <span class="label label-default" id="search-docstrings-button">
+            <a title="Search in docstrings" onclick="toggleSearchInDocstrings()">search in docstrings</a></span>
+        </div>
+
+        <noscript>
+            <h1>Cannot search: JavaScript is not supported/enabled in your browser.</h1>
+        </noscript>
+
+        <div class="hint" id="search-help-box">
           <p class="rst-last">
       
             Search bar offers the following options:
             <ul>   
                 <li>
                   <strong>Term presence.</strong> The below example searches for documents that 
-                    must contain “foo”, might contain “bar” and must not contain “baz”:
-                  <br /> <code>'+foo bar -baz'</code>
+                    must contain “foo”, might contain “bar” and must not contain “baz”: <code>+foo bar -baz</code>
                 </li> 
 
                 <li>
-                  <strong>Wildcards.</strong> The below example searches for documents with words beginning with “foo”:
-                  <br /> <code>'foo*'</code>
+                  <strong>Wildcards.</strong> The below example searches for documents with words beginning with “foo”: <code>foo*</code>
                 </li> 
 
                 <li>
-                  <strong>Search in specific fields.</strong> The following search matches all documents 
-                  that contains "foo" in their full dotted name and with “bar” in any field:
-                  <br /> <code>'+fullName:*foo* +bar'</code>
+                  <strong>Search in specific fields.</strong> The following search matches all objects 
+                  in "twisted.mail" that matches “search”: <code>+qname:twisted.mail.* +search</code>
 
                   <p>
-                    Possible fields: 'name', 'docstring', 'fullName'.
+                    Possible fields: 'name', 'qname' (fully qualified name), 'docstring', and 'kind'.
+                    Last two fields are only applicable if "search in docstrings" is enabled.
                   </p>
                 </li>
 
                 <li>
                   <strong>Fuzzy matches.</strong> The following search matches all documents 
-                  that have a word within 1 edit distance of “foo”:
-                  <br /> <code>'foo~1'</code>
+                  that have a word within 1 edit distance of “foo”: <code>foo~1</code>
                 </li>
             </ul>
 
           </p>
         </div>
 
-      </div>
+        <div id="search-status"> </div>
+        
+        <div class="warning" id="search-warn-box" style="display: none;">
+          <p class="rst-last"><span id="search-warn"></span></p>
+        </div>
 
+        <table id="search-results">
+          <!-- Filled dynamically by JS -->
+        </table>
+        
+        <div style="margin-top: 8px;">
+          <p>Results provided by <a href="https://lunrjs.com">Lunr.js</a></p>
+        </div>
+      </div>
 
     </div>
   </div>
 
-  <script>
- 
-    function toggleSearchHelpText() {
-        document.body.classList.toggle("search-help-hidden");
-    }
-    // Init search and help text
-    document.getElementById('search-box-container').style.display = 'block';
-    document.getElementById('search-help-box').style.display = 'block';
-    document.body.classList.add("search-help-hidden");
-
-  </script>
+  <script src="ajax.js" type="text/javascript"></script>
+  <script src="search.js" type="text/javascript"></script>
 
 </nav>
 
@@ -115,7 +128,7 @@
     <div class="container">
 
       <div class="page-header">
-        <h1 class="class"><code><code><a href="docutils.html">docutils</a></code><wbr></wbr>.<code><a href="docutils.nodes.html">nodes</a></code><wbr></wbr>.<code><a href="docutils.nodes.Node.html">Node</a></code></code></h1>
+        <h1 class="class"><code><code><a href="index.html" class="internal-link">docutils</a></code><wbr></wbr>.<code><a href="docutils.nodes.html" class="internal-link" title="docutils.nodes">nodes</a></code><wbr></wbr>.<code><a href="docutils.nodes.Node.html" class="internal-link" title="docutils.nodes.Node">Node</a></code></code></h1>
         <div id="showPrivate">
           <button class="btn btn-link" onclick="togglePrivate()">Toggle Private API</button>
         </div>
@@ -126,7 +139,7 @@
       </div>
 
       <div class="extrasDocstring">
-        <p><code><span class="py-keyword">class</span> <span class="py-defname">Node</span>(<span title="object">object</span>): <a href="https://sourceforge.net/p/docutils/code/HEAD/tree/tags/docutils-0.17.1//docutils/nodes.py#L69" class="sourceLink">(source)</a></code></p><p>Known subclasses: <code><a href="docutils.nodes.Element.html">docutils.nodes.Element</a></code>, <code><a href="docutils.nodes.Text.html">docutils.nodes.Text</a></code></p>
+        <p><code><span class="py-keyword">class</span> <span class="py-defname">Node</span>(object): <a href="https://sourceforge.net/p/docutils/code/HEAD/tree/tags/docutils-0.17.1//docutils/nodes.py#L69" class="sourceLink">(source)</a></code></p><p>Known subclasses: <code><a href="docutils.nodes.Element.html" class="internal-link">docutils.nodes.Element</a></code>, <code><a href="docutils.nodes.Text.html" class="internal-link">docutils.nodes.Text</a></code></p>
         <p><a href="classIndex.html#docutils.nodes.Node">View In Hierarchy</a></p>
       </div>
 
@@ -141,107 +154,107 @@
   <tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#__bool__">__bool__</a></code></td>
-    <td><span>Node instances are always true, even if they're empty.  A node is more than a simple container.  Its boolean "truth" does not depend on having one or more subnodes in the doctree.</span></td>
+    <td><code><a href="#__bool__" class="internal-link" title="docutils.nodes.Node.__bool__">__bool__</a></code></td>
+    <td>Node instances are always true, even if they're empty.  A node is more than a simple container.  Its boolean "truth" does not depend on having one or more subnodes in the doctree.</td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#__str__">__str__</a></code></td>
+    <td><code><a href="#__str__" class="internal-link" title="docutils.nodes.Node.__str__">__str__</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#asdom">asdom</a></code></td>
-    <td><span>Return a DOM <strong>fragment</strong> representation of this Node.</span></td>
+    <td><code><a href="#asdom" class="internal-link" title="docutils.nodes.Node.asdom">asdom</a></code></td>
+    <td>Return a DOM <strong>fragment</strong> representation of this Node.</td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#astext">astext</a></code></td>
-    <td><span>Return a string representation of this Node.</span></td>
+    <td><code><a href="#astext" class="internal-link" title="docutils.nodes.Node.astext">astext</a></code></td>
+    <td>Return a string representation of this Node.</td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#copy">copy</a></code></td>
-    <td><span>Return a copy of self.</span></td>
+    <td><code><a href="#copy" class="internal-link" title="docutils.nodes.Node.copy">copy</a></code></td>
+    <td>Return a copy of self.</td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#deepcopy">deepcopy</a></code></td>
-    <td><span>Return a deep copy of self (also copying children).</span></td>
+    <td><code><a href="#deepcopy" class="internal-link" title="docutils.nodes.Node.deepcopy">deepcopy</a></code></td>
+    <td>Return a deep copy of self (also copying children).</td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#document.setter">document.setter</a></code></td>
+    <td><code><a href="#document.setter" class="internal-link" title="docutils.nodes.Node.document.setter">document​.setter</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#next_node">next_node</a></code></td>
-    <td><span>Return the first node in the iterable returned by traverse(), or None if the iterable is empty.</span></td>
+    <td><code><a href="#next_node" class="internal-link" title="docutils.nodes.Node.next_node">next​_node</a></code></td>
+    <td>Return the first node in the iterable returned by traverse(), or None if the iterable is empty.</td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#pformat">pformat</a></code></td>
-    <td><span>Return an indented pseudo-XML representation, for test purposes.</span></td>
+    <td><code><a href="#pformat" class="internal-link" title="docutils.nodes.Node.pformat">pformat</a></code></td>
+    <td>Return an indented pseudo-XML representation, for test purposes.</td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#setup_child">setup_child</a></code></td>
+    <td><code><a href="#setup_child" class="internal-link" title="docutils.nodes.Node.setup_child">setup​_child</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#traverse">traverse</a></code></td>
-    <td><span>Return an iterable containing</span></td>
+    <td><code><a href="#traverse" class="internal-link" title="docutils.nodes.Node.traverse">traverse</a></code></td>
+    <td>Return an iterable containing</td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#walk">walk</a></code></td>
+    <td><code><a href="#walk" class="internal-link" title="docutils.nodes.Node.walk">walk</a></code></td>
     <td><span class="undocumented">No summary</span></td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#walkabout">walkabout</a></code></td>
-    <td><span>Perform a tree traversal similarly to <code>Node.walk()</code> (which see), except also call the <code>dispatch_departure()</code> method before exiting each node.</span></td>
+    <td><code><a href="#walkabout" class="internal-link" title="docutils.nodes.Node.walkabout">walkabout</a></code></td>
+    <td>Perform a tree traversal similarly to <code><a href="#walk" class="internal-link" title="docutils.nodes.Node.walk">Node.walk()</a></code> (which see), except also call the <code><a href="docutils.nodes.NodeVisitor.html#dispatch_departure" class="internal-link" title="docutils.nodes.NodeVisitor.dispatch_departure">dispatch_departure()</a></code> method before exiting each node.</td>
   </tr><tr class="classvariable">
     
     <td>Class Variable</td>
-    <td><code><a href="#line">line</a></code></td>
-    <td><span>The line number (1-based) of the beginning of this Node in <code><a href="#source">source</a></code>.</span></td>
+    <td><code><a href="#line" class="internal-link" title="docutils.nodes.Node.line">line</a></code></td>
+    <td>The line number (1-based) of the beginning of this Node in <code><a href="#source" class="internal-link" title="docutils.nodes.Node.source">source</a></code>.</td>
   </tr><tr class="classvariable">
     
     <td>Class Variable</td>
-    <td><code><a href="#parent">parent</a></code></td>
-    <td><span>Back-reference to the Node immediately containing this Node.</span></td>
+    <td><code><a href="#parent" class="internal-link" title="docutils.nodes.Node.parent">parent</a></code></td>
+    <td>Back-reference to the Node immediately containing this Node.</td>
   </tr><tr class="classvariable">
     
     <td>Class Variable</td>
-    <td><code><a href="#source">source</a></code></td>
-    <td><span>Path or description of the input source which generated this Node.</span></td>
+    <td><code><a href="#source" class="internal-link" title="docutils.nodes.Node.source">source</a></code></td>
+    <td>Path or description of the input source which generated this Node.</td>
   </tr><tr class="property">
     
     <td>Property</td>
-    <td><code><a href="#document">document</a></code></td>
-    <td><span>Return the <code><a href="#document">document</a></code> node at the root of the tree containing this Node.</span></td>
+    <td><code><a href="#document" class="internal-link" title="docutils.nodes.Node.document">document</a></code></td>
+    <td>Return the <code><a href="#document" class="internal-link" title="docutils.nodes.Node.document">document</a></code> node at the root of the tree containing this Node.</td>
   </tr><tr class="method private">
     
     <td>Method</td>
-    <td><code><a href="#_all_traverse">_all_traverse</a></code></td>
-    <td><span>Return iterator that doesn't check for a condition.</span></td>
+    <td><code><a href="#_all_traverse" class="internal-link" title="docutils.nodes.Node._all_traverse">_all​_traverse</a></code></td>
+    <td>Return iterator that doesn't check for a condition.</td>
   </tr><tr class="method private">
     
     <td>Method</td>
-    <td><code><a href="#_fast_traverse">_fast_traverse</a></code></td>
-    <td><span>Return iterator that only supports instance checks.</span></td>
+    <td><code><a href="#_fast_traverse" class="internal-link" title="docutils.nodes.Node._fast_traverse">_fast​_traverse</a></code></td>
+    <td>Return iterator that only supports instance checks.</td>
   </tr><tr class="method private">
     
     <td>Method</td>
-    <td><code><a href="#_traverse">_traverse</a></code></td>
-    <td><span>Return iterator over nodes following <code>self</code>. See <code>traverse()</code>.</span></td>
+    <td><code><a href="#_traverse" class="internal-link" title="docutils.nodes.Node._traverse">_traverse</a></code></td>
+    <td>Return iterator over nodes following <code>self</code>. See <code><a href="#traverse" class="internal-link" title="docutils.nodes.Node.traverse">traverse()</a></code>.</td>
   </tr><tr class="instancevariable private">
     
     <td>Instance Variable</td>
-    <td><code><a href="#_document">_document</a></code></td>
+    <td><code><a href="#_document" class="internal-link" title="docutils.nodes.Node._document">_document</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr>
 </table>
@@ -319,7 +332,7 @@ false value.</p>
     </a>
   </div>
   <div class="docstring functionBody">
-    <div class="interfaceinfo">overridden in <code><a href="docutils.nodes.document.html">docutils.nodes.document</a></code></div>
+    <div class="interfaceinfo">overridden in <code><a href="docutils.nodes.document.html" class="internal-link">docutils.nodes.document</a></code></div>
     
     <div>Return a DOM <strong>fragment</strong> representation of this Node.</div>
   </div>
@@ -341,7 +354,7 @@ false value.</p>
     </a>
   </div>
   <div class="docstring functionBody">
-    <div class="interfaceinfo">overridden in <code><a href="docutils.nodes.Element.html">docutils.nodes.Element</a></code>, <code><a href="docutils.nodes.Text.html">docutils.nodes.Text</a></code></div>
+    <div class="interfaceinfo">overridden in <code><a href="docutils.nodes.Element.html" class="internal-link">docutils.nodes.Element</a></code>, <code><a href="docutils.nodes.Text.html" class="internal-link">docutils.nodes.Text</a></code></div>
     
     <div>Return a string representation of this Node.</div>
   </div>
@@ -363,7 +376,7 @@ false value.</p>
     </a>
   </div>
   <div class="docstring functionBody">
-    <div class="interfaceinfo">overridden in <code><a href="docutils.nodes.Element.html">docutils.nodes.Element</a></code>, <code><a href="docutils.nodes.Text.html">docutils.nodes.Text</a></code></div>
+    <div class="interfaceinfo">overridden in <code><a href="docutils.nodes.Element.html" class="internal-link">docutils.nodes.Element</a></code>, <code><a href="docutils.nodes.Text.html" class="internal-link">docutils.nodes.Text</a></code></div>
     
     <div>Return a copy of self.</div>
   </div>
@@ -385,7 +398,7 @@ false value.</p>
     </a>
   </div>
   <div class="docstring functionBody">
-    <div class="interfaceinfo">overridden in <code><a href="docutils.nodes.Element.html">docutils.nodes.Element</a></code>, <code><a href="docutils.nodes.Text.html">docutils.nodes.Text</a></code></div>
+    <div class="interfaceinfo">overridden in <code><a href="docutils.nodes.Element.html" class="internal-link">docutils.nodes.Element</a></code>, <code><a href="docutils.nodes.Text.html" class="internal-link">docutils.nodes.Text</a></code></div>
     
     <div>Return a deep copy of self (also copying children).</div>
   </div>
@@ -399,7 +412,7 @@ false value.</p>
     
   </a>
   <div class="functionHeader">
-    @document.setter<br />
+    @<a href="#document.setter" class="internal-link" title="docutils.nodes.Node.document.setter">document.setter</a><br />
     <span class="py-keyword">def</span> <span class="py-defname">document</span>(self, value):
     <a class="sourceLink" href="https://sourceforge.net/p/docutils/code/HEAD/tree/tags/docutils-0.17.1//docutils/nodes.py#L94">
       
@@ -448,14 +461,14 @@ include_self defaults to False, though.</p>
   </a>
   <div class="functionHeader">
     
-    <span class="py-keyword">def</span> <span class="py-defname">pformat</span>(self, indent='    ', level=0):
+    <span class="py-keyword">def</span> <span class="py-defname">pformat</span>(self, indent=<span class="rst-variable-quote">'</span><span class="rst-variable-string">    </span><span class="rst-variable-quote">'</span>, level=0):
     <a class="sourceLink" href="https://sourceforge.net/p/docutils/code/HEAD/tree/tags/docutils-0.17.1//docutils/nodes.py#L125">
       
       (source)
     </a>
   </div>
   <div class="docstring functionBody">
-    <div class="interfaceinfo">overridden in <code><a href="docutils.nodes.Element.html">docutils.nodes.Element</a></code>, <code><a href="docutils.nodes.Text.html">docutils.nodes.Text</a></code></div>
+    <div class="interfaceinfo">overridden in <code><a href="docutils.nodes.Element.html" class="internal-link">docutils.nodes.Element</a></code>, <code><a href="docutils.nodes.Text.html" class="internal-link">docutils.nodes.Text</a></code></div>
     
     <div><p>Return an indented pseudo-XML representation, for test purposes.</p>
 <p>Override in subclasses.</p>
@@ -557,10 +570,10 @@ of <tt class="rst-docutils literal">return isinstance(node, cls)</tt>.</p>
   <div class="docstring functionBody">
     
     
-    <div><p>Traverse a tree of <code><a href="docutils.nodes.Node.html">Node</a></code> objects, calling the
-<code>dispatch_visit()</code> method of <code>visitor</code> when entering each
-node.  (The <code>walkabout()</code> method is similar, except it also
-calls the <code>dispatch_departure()</code> method before exiting each
+    <div><p>Traverse a tree of <code><a href="docutils.nodes.Node.html" class="internal-link" title="docutils.nodes.Node">Node</a></code> objects, calling the
+<code><a href="docutils.nodes.NodeVisitor.html#dispatch_visit" class="internal-link" title="docutils.nodes.NodeVisitor.dispatch_visit">dispatch_visit()</a></code> method of <code>visitor</code> when entering each
+node.  (The <code><a href="#walkabout" class="internal-link" title="docutils.nodes.Node.walkabout">walkabout()</a></code> method is similar, except it also
+calls the <code><a href="docutils.nodes.NodeVisitor.html#dispatch_departure" class="internal-link" title="docutils.nodes.NodeVisitor.dispatch_departure">dispatch_departure()</a></code> method before exiting each
 node.)</p>
 <p>This tree traversal supports limited in-place tree
 modifications.  Replacing one node with one or more nodes is
@@ -568,10 +581,10 @@ OK, as is removing an element.  However, if the node removed
 or replaced occurs after the current node, the old node will
 still be traversed, and any new nodes will not.</p>
 <p>Within <tt class="rst-docutils literal">visit</tt> methods (and <tt class="rst-docutils literal">depart</tt> methods for
-<code>walkabout()</code>), <code><a href="docutils.nodes.TreePruningException.html">TreePruningException</a></code> subclasses may be raised
-(<code><a href="docutils.nodes.SkipChildren.html">SkipChildren</a></code>, <code><a href="docutils.nodes.SkipSiblings.html">SkipSiblings</a></code>, <code><a href="docutils.nodes.SkipNode.html">SkipNode</a></code>, <code><a href="docutils.nodes.SkipDeparture.html">SkipDeparture</a></code>).</p>
-<p>Parameter <code>visitor</code>: A <code><a href="docutils.nodes.NodeVisitor.html">NodeVisitor</a></code> object, containing a
-<tt class="rst-docutils literal">visit</tt> implementation for each <code><a href="docutils.nodes.Node.html">Node</a></code> subclass encountered.</p>
+<code><a href="#walkabout" class="internal-link" title="docutils.nodes.Node.walkabout">walkabout()</a></code>), <code><a href="docutils.nodes.TreePruningException.html" class="internal-link" title="docutils.nodes.TreePruningException">TreePruningException</a></code> subclasses may be raised
+(<code><a href="docutils.nodes.SkipChildren.html" class="internal-link" title="docutils.nodes.SkipChildren">SkipChildren</a></code>, <code><a href="docutils.nodes.SkipSiblings.html" class="internal-link" title="docutils.nodes.SkipSiblings">SkipSiblings</a></code>, <code><a href="docutils.nodes.SkipNode.html" class="internal-link" title="docutils.nodes.SkipNode">SkipNode</a></code>, <code><a href="docutils.nodes.SkipDeparture.html" class="internal-link" title="docutils.nodes.SkipDeparture">SkipDeparture</a></code>).</p>
+<p>Parameter <code>visitor</code>: A <code><a href="docutils.nodes.NodeVisitor.html" class="internal-link" title="docutils.nodes.NodeVisitor">NodeVisitor</a></code> object, containing a
+<tt class="rst-docutils literal">visit</tt> implementation for each <code><a href="docutils.nodes.Node.html" class="internal-link" title="docutils.nodes.Node">Node</a></code> subclass encountered.</p>
 <p>Return true if we should stop the traversal.</p>
 </div>
   </div>
@@ -595,11 +608,11 @@ still be traversed, and any new nodes will not.</p>
   <div class="docstring functionBody">
     
     
-    <div><p>Perform a tree traversal similarly to <code>Node.walk()</code> (which
-see), except also call the <code>dispatch_departure()</code> method
+    <div><p>Perform a tree traversal similarly to <code><a href="#walk" class="internal-link" title="docutils.nodes.Node.walk">Node.walk()</a></code> (which
+see), except also call the <code><a href="docutils.nodes.NodeVisitor.html#dispatch_departure" class="internal-link" title="docutils.nodes.NodeVisitor.dispatch_departure">dispatch_departure()</a></code> method
 before exiting each node.</p>
-<p>Parameter <code>visitor</code>: A <code><a href="docutils.nodes.NodeVisitor.html">NodeVisitor</a></code> object, containing a
-<tt class="rst-docutils literal">visit</tt> and <tt class="rst-docutils literal">depart</tt> implementation for each <code><a href="docutils.nodes.Node.html">Node</a></code>
+<p>Parameter <code>visitor</code>: A <code><a href="docutils.nodes.NodeVisitor.html" class="internal-link" title="docutils.nodes.NodeVisitor">NodeVisitor</a></code> object, containing a
+<tt class="rst-docutils literal">visit</tt> and <tt class="rst-docutils literal">depart</tt> implementation for each <code><a href="docutils.nodes.Node.html" class="internal-link" title="docutils.nodes.Node">Node</a></code>
 subclass encountered.</p>
 <p>Return true if we should stop the traversal.</p>
 </div>
@@ -624,7 +637,8 @@ subclass encountered.</p>
   <div class="functionBody">
     
     
-    <div>The line number (1-based) of the beginning of this Node in <code><a href="#source">source</a></code>.</div>
+    <div>The line number (1-based) of the beginning of this Node in <code><a href="#source" class="internal-link" title="docutils.nodes.Node.source">source</a></code>.</div>
+    
   </div>
 </div><div class="baseclassvariable">
   
@@ -647,6 +661,7 @@ subclass encountered.</p>
     
     
     <div>Back-reference to the Node immediately containing this Node.</div>
+    
   </div>
 </div><div class="baseclassvariable">
   
@@ -669,6 +684,7 @@ subclass encountered.</p>
     
     
     <div>Path or description of the input source which generated this Node.</div>
+    
   </div>
 </div><div class="baseproperty">
   
@@ -690,7 +706,8 @@ subclass encountered.</p>
   <div class="functionBody">
     
     
-    <div>Return the <code><a href="#document">document</a></code> node at the root of the tree containing this Node.</div>
+    <div>Return the <code><a href="#document" class="internal-link" title="docutils.nodes.Node.document">document</a></code> node at the root of the tree containing this Node.</div>
+    
   </div>
 </div><div class="basemethod private">
   
@@ -756,7 +773,7 @@ subclass encountered.</p>
   <div class="docstring functionBody">
     
     
-    <div>Return iterator over nodes following <code>self</code>. See <code>traverse()</code>.</div>
+    <div>Return iterator over nodes following <code>self</code>. See <code><a href="#traverse" class="internal-link" title="docutils.nodes.Node.traverse">traverse()</a></code>.</div>
   </div>
 </div><div class="baseinstancevariable private">
   
@@ -776,9 +793,10 @@ subclass encountered.</p>
     </a>
   </div>
   <div class="functionBody">
-    <div class="interfaceinfo">overridden in <code><a href="docutils.nodes.document.html">docutils.nodes.document</a></code></div>
+    <div class="interfaceinfo">overridden in <code><a href="docutils.nodes.document.html" class="internal-link">docutils.nodes.document</a></code></div>
     
     <div><p class="undocumented">Undocumented</p></div>
+    
   </div>
 </div>
 
@@ -790,7 +808,7 @@ subclass encountered.</p>
   <div class="container">
     <a href="index.html">API Documentation</a> for <a href="https://docutils.sourceforge.io/" class="projecthome">docutils-0.17.1</a>,
   generated by <a href="https://github.com/twisted/pydoctor/">pydoctor</a>
-    21.2.2 at 2022-01-06 17:36:41.
+    22.2.2.dev0 at 2022-03-04 05:57:20.
   </div>
 </footer>
 

@@ -7,7 +7,7 @@
   <head>
     
     <title>docutils.utils.math.latex2mathml</title>
-    <meta name="generator" content="pydoctor 21.2.2"> 
+    <meta name="generator" content="pydoctor 22.2.2.dev0"> 
         
     </meta>
     <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
@@ -44,69 +44,82 @@
           Names
         </a>
 
-        <form action="search-results.html" id="search-box-container">
+        <div id="search-box-container">
           <div class="input-group">
-            <input id="search-box" name="search-query" placeholder="Search..." aria-label="Search" minlength="2" class="form-control" />
+            <input id="search-box" type="search" name="search-query" placeholder="Search..." aria-label="Search" minlength="2" class="form-control" autocomplete="off" />
+            
             <span class="input-group-btn">
-              <button class="btn btn-default" type="submit" title="Search"><img src="fonts/search.svg" alt="Search!" /></button>
-              <a class="btn btn-default" id="search-help-button" title="Help" onclick="toggleSearchHelpText()"><img src="fonts/info.svg" alt="Help!" /></a>
+              <a style="display: none;" class="btn btn-default" id="search-clear-button" title="Clear" onclick="clearSearch()"><img src="fonts/x-circle.svg" alt="Clear" /></a>
+              <a class="btn btn-default" id="search-help-button" title="Help" onclick="toggleSearchHelpText()"><img src="fonts/info.svg" alt="Help" /></a>
             </span>
           </div>
-        </form>
+        </div>
 
-        <div class="rst-admonition hint" id="search-help-box">
+      </div>
+
+      <div id="search-results-container" style="display: none;">
+        <div>
+          <span class="label label-default" id="search-docstrings-button">
+            <a title="Search in docstrings" onclick="toggleSearchInDocstrings()">search in docstrings</a></span>
+        </div>
+
+        <noscript>
+            <h1>Cannot search: JavaScript is not supported/enabled in your browser.</h1>
+        </noscript>
+
+        <div class="hint" id="search-help-box">
           <p class="rst-last">
       
             Search bar offers the following options:
             <ul>   
                 <li>
                   <strong>Term presence.</strong> The below example searches for documents that 
-                    must contain “foo”, might contain “bar” and must not contain “baz”:
-                  <br /> <code>'+foo bar -baz'</code>
+                    must contain “foo”, might contain “bar” and must not contain “baz”: <code>+foo bar -baz</code>
                 </li> 
 
                 <li>
-                  <strong>Wildcards.</strong> The below example searches for documents with words beginning with “foo”:
-                  <br /> <code>'foo*'</code>
+                  <strong>Wildcards.</strong> The below example searches for documents with words beginning with “foo”: <code>foo*</code>
                 </li> 
 
                 <li>
-                  <strong>Search in specific fields.</strong> The following search matches all documents 
-                  that contains "foo" in their full dotted name and with “bar” in any field:
-                  <br /> <code>'+fullName:*foo* +bar'</code>
+                  <strong>Search in specific fields.</strong> The following search matches all objects 
+                  in "twisted.mail" that matches “search”: <code>+qname:twisted.mail.* +search</code>
 
                   <p>
-                    Possible fields: 'name', 'docstring', 'fullName'.
+                    Possible fields: 'name', 'qname' (fully qualified name), 'docstring', and 'kind'.
+                    Last two fields are only applicable if "search in docstrings" is enabled.
                   </p>
                 </li>
 
                 <li>
                   <strong>Fuzzy matches.</strong> The following search matches all documents 
-                  that have a word within 1 edit distance of “foo”:
-                  <br /> <code>'foo~1'</code>
+                  that have a word within 1 edit distance of “foo”: <code>foo~1</code>
                 </li>
             </ul>
 
           </p>
         </div>
 
-      </div>
+        <div id="search-status"> </div>
+        
+        <div class="warning" id="search-warn-box" style="display: none;">
+          <p class="rst-last"><span id="search-warn"></span></p>
+        </div>
 
+        <table id="search-results">
+          <!-- Filled dynamically by JS -->
+        </table>
+        
+        <div style="margin-top: 8px;">
+          <p>Results provided by <a href="https://lunrjs.com">Lunr.js</a></p>
+        </div>
+      </div>
 
     </div>
   </div>
 
-  <script>
- 
-    function toggleSearchHelpText() {
-        document.body.classList.toggle("search-help-hidden");
-    }
-    // Init search and help text
-    document.getElementById('search-box-container').style.display = 'block';
-    document.getElementById('search-help-box').style.display = 'block';
-    document.body.classList.add("search-help-hidden");
-
-  </script>
+  <script src="ajax.js" type="text/javascript"></script>
+  <script src="search.js" type="text/javascript"></script>
 
 </nav>
 
@@ -115,7 +128,7 @@
     <div class="container">
 
       <div class="page-header">
-        <h1 class="module"><code><code><a href="docutils.html">docutils</a></code><wbr></wbr>.<code><a href="docutils.utils.html">utils</a></code><wbr></wbr>.<code><a href="docutils.utils.math.html">math</a></code><wbr></wbr>.<code><a href="docutils.utils.math.latex2mathml.html">latex2mathml</a></code></code></h1>
+        <h1 class="module"><code><code><a href="index.html" class="internal-link">docutils</a></code><wbr></wbr>.<code><a href="docutils.utils.html" class="internal-link" title="docutils.utils">utils</a></code><wbr></wbr>.<code><a href="docutils.utils.math.html" class="internal-link" title="docutils.utils.math">math</a></code><wbr></wbr>.<code><a href="docutils.utils.math.latex2mathml.html" class="internal-link" title="docutils.utils.math.latex2mathml">latex2mathml</a></code></code></h1>
         <div id="showPrivate">
           <button class="btn btn-link" onclick="togglePrivate()">Toggle Private API</button>
         </div>
@@ -141,162 +154,162 @@
   <tr class="class">
     
     <td>Class</td>
-    <td><code><a href="docutils.utils.math.latex2mathml.math.html">math</a></code></td>
-    <td><span>Base class for MathML elements.</span></td>
+    <td><code><a href="docutils.utils.math.latex2mathml.math.html" class="internal-link" title="docutils.utils.math.latex2mathml.math">math</a></code></td>
+    <td>Base class for MathML elements.</td>
   </tr><tr class="class">
     
     <td>Class</td>
-    <td><code><a href="docutils.utils.math.latex2mathml.mfenced.html">mfenced</a></code></td>
+    <td><code><a href="docutils.utils.math.latex2mathml.mfenced.html" class="internal-link" title="docutils.utils.math.latex2mathml.mfenced">mfenced</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="class">
     
     <td>Class</td>
-    <td><code><a href="docutils.utils.math.latex2mathml.mfrac.html">mfrac</a></code></td>
+    <td><code><a href="docutils.utils.math.latex2mathml.mfrac.html" class="internal-link" title="docutils.utils.math.latex2mathml.mfrac">mfrac</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="class">
     
     <td>Class</td>
-    <td><code><a href="docutils.utils.math.latex2mathml.mi.html">mi</a></code></td>
+    <td><code><a href="docutils.utils.math.latex2mathml.mi.html" class="internal-link" title="docutils.utils.math.latex2mathml.mi">mi</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="class">
     
     <td>Class</td>
-    <td><code><a href="docutils.utils.math.latex2mathml.mn.html">mn</a></code></td>
+    <td><code><a href="docutils.utils.math.latex2mathml.mn.html" class="internal-link" title="docutils.utils.math.latex2mathml.mn">mn</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="class">
     
     <td>Class</td>
-    <td><code><a href="docutils.utils.math.latex2mathml.mo.html">mo</a></code></td>
+    <td><code><a href="docutils.utils.math.latex2mathml.mo.html" class="internal-link" title="docutils.utils.math.latex2mathml.mo">mo</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="class">
     
     <td>Class</td>
-    <td><code><a href="docutils.utils.math.latex2mathml.mover.html">mover</a></code></td>
+    <td><code><a href="docutils.utils.math.latex2mathml.mover.html" class="internal-link" title="docutils.utils.math.latex2mathml.mover">mover</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="class">
     
     <td>Class</td>
-    <td><code><a href="docutils.utils.math.latex2mathml.mroot.html">mroot</a></code></td>
+    <td><code><a href="docutils.utils.math.latex2mathml.mroot.html" class="internal-link" title="docutils.utils.math.latex2mathml.mroot">mroot</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="class">
     
     <td>Class</td>
-    <td><code><a href="docutils.utils.math.latex2mathml.mrow.html">mrow</a></code></td>
+    <td><code><a href="docutils.utils.math.latex2mathml.mrow.html" class="internal-link" title="docutils.utils.math.latex2mathml.mrow">mrow</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="class">
     
     <td>Class</td>
-    <td><code><a href="docutils.utils.math.latex2mathml.mspace.html">mspace</a></code></td>
+    <td><code><a href="docutils.utils.math.latex2mathml.mspace.html" class="internal-link" title="docutils.utils.math.latex2mathml.mspace">mspace</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="class">
     
     <td>Class</td>
-    <td><code><a href="docutils.utils.math.latex2mathml.msqrt.html">msqrt</a></code></td>
+    <td><code><a href="docutils.utils.math.latex2mathml.msqrt.html" class="internal-link" title="docutils.utils.math.latex2mathml.msqrt">msqrt</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="class">
     
     <td>Class</td>
-    <td><code><a href="docutils.utils.math.latex2mathml.mstyle.html">mstyle</a></code></td>
+    <td><code><a href="docutils.utils.math.latex2mathml.mstyle.html" class="internal-link" title="docutils.utils.math.latex2mathml.mstyle">mstyle</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="class">
     
     <td>Class</td>
-    <td><code><a href="docutils.utils.math.latex2mathml.msub.html">msub</a></code></td>
+    <td><code><a href="docutils.utils.math.latex2mathml.msub.html" class="internal-link" title="docutils.utils.math.latex2mathml.msub">msub</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="class">
     
     <td>Class</td>
-    <td><code><a href="docutils.utils.math.latex2mathml.msubsup.html">msubsup</a></code></td>
+    <td><code><a href="docutils.utils.math.latex2mathml.msubsup.html" class="internal-link" title="docutils.utils.math.latex2mathml.msubsup">msubsup</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="class">
     
     <td>Class</td>
-    <td><code><a href="docutils.utils.math.latex2mathml.msup.html">msup</a></code></td>
+    <td><code><a href="docutils.utils.math.latex2mathml.msup.html" class="internal-link" title="docutils.utils.math.latex2mathml.msup">msup</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="class">
     
     <td>Class</td>
-    <td><code><a href="docutils.utils.math.latex2mathml.mtable.html">mtable</a></code></td>
+    <td><code><a href="docutils.utils.math.latex2mathml.mtable.html" class="internal-link" title="docutils.utils.math.latex2mathml.mtable">mtable</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="class">
     
     <td>Class</td>
-    <td><code><a href="docutils.utils.math.latex2mathml.mtd.html">mtd</a></code></td>
+    <td><code><a href="docutils.utils.math.latex2mathml.mtd.html" class="internal-link" title="docutils.utils.math.latex2mathml.mtd">mtd</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="class">
     
     <td>Class</td>
-    <td><code><a href="docutils.utils.math.latex2mathml.mtext.html">mtext</a></code></td>
+    <td><code><a href="docutils.utils.math.latex2mathml.mtext.html" class="internal-link" title="docutils.utils.math.latex2mathml.mtext">mtext</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="class">
     
     <td>Class</td>
-    <td><code><a href="docutils.utils.math.latex2mathml.mtr.html">mtr</a></code></td>
+    <td><code><a href="docutils.utils.math.latex2mathml.mtr.html" class="internal-link" title="docutils.utils.math.latex2mathml.mtr">mtr</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="class">
     
     <td>Class</td>
-    <td><code><a href="docutils.utils.math.latex2mathml.munder.html">munder</a></code></td>
+    <td><code><a href="docutils.utils.math.latex2mathml.munder.html" class="internal-link" title="docutils.utils.math.latex2mathml.munder">munder</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="class">
     
     <td>Class</td>
-    <td><code><a href="docutils.utils.math.latex2mathml.munderover.html">munderover</a></code></td>
+    <td><code><a href="docutils.utils.math.latex2mathml.munderover.html" class="internal-link" title="docutils.utils.math.latex2mathml.munderover">munderover</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="class">
     
     <td>Class</td>
-    <td><code><a href="docutils.utils.math.latex2mathml.mx.html">mx</a></code></td>
-    <td><span>Base class for mo, mi, and mn</span></td>
+    <td><code><a href="docutils.utils.math.latex2mathml.mx.html" class="internal-link" title="docutils.utils.math.latex2mathml.mx">mx</a></code></td>
+    <td>Base class for mo, mi, and mn</td>
   </tr><tr class="function">
     
     <td>Function</td>
-    <td><code><a href="#handle_keyword">handle_keyword</a></code></td>
+    <td><code><a href="#handle_keyword" class="internal-link" title="docutils.utils.math.latex2mathml.handle_keyword">handle​_keyword</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="function">
     
     <td>Function</td>
-    <td><code><a href="#parse_latex_math">parse_latex_math</a></code></td>
-    <td><span>parse_latex_math(string [,inline]) -&gt; MathML-tree</span></td>
+    <td><code><a href="#parse_latex_math" class="internal-link" title="docutils.utils.math.latex2mathml.parse_latex_math">parse​_latex​_math</a></code></td>
+    <td>parse_latex_math(string [,inline]) -&gt; MathML-tree</td>
   </tr><tr class="function">
     
     <td>Function</td>
-    <td><code><a href="#tex2mathml">tex2mathml</a></code></td>
-    <td><span>Return string with MathML code corresponding to <code>tex_math</code>.</span></td>
+    <td><code><a href="#tex2mathml" class="internal-link" title="docutils.utils.math.latex2mathml.tex2mathml">tex2mathml</a></code></td>
+    <td>Return string with MathML code corresponding to <code>tex_math</code>.</td>
   </tr><tr class="variable">
     
     <td>Variable</td>
-    <td><code><a href="#functions">functions</a></code></td>
+    <td><code><a href="#functions" class="internal-link" title="docutils.utils.math.latex2mathml.functions">functions</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="variable">
     
     <td>Variable</td>
-    <td><code><a href="#Greek">Greek</a></code></td>
+    <td><code><a href="#Greek" class="internal-link" title="docutils.utils.math.latex2mathml.Greek">​Greek</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="variable">
     
     <td>Variable</td>
-    <td><code><a href="#mathbb">mathbb</a></code></td>
+    <td><code><a href="#mathbb" class="internal-link" title="docutils.utils.math.latex2mathml.mathbb">mathbb</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="variable">
     
     <td>Variable</td>
-    <td><code><a href="#mathscr">mathscr</a></code></td>
+    <td><code><a href="#mathscr" class="internal-link" title="docutils.utils.math.latex2mathml.mathscr">mathscr</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="variable">
     
     <td>Variable</td>
-    <td><code><a href="#negatables">negatables</a></code></td>
+    <td><code><a href="#negatables" class="internal-link" title="docutils.utils.math.latex2mathml.negatables">negatables</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="variable">
     
     <td>Variable</td>
-    <td><code><a href="#over">over</a></code></td>
+    <td><code><a href="#over" class="internal-link" title="docutils.utils.math.latex2mathml.over">over</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="variable">
     
     <td>Variable</td>
-    <td><code><a href="#sumintprod">sumintprod</a></code></td>
+    <td><code><a href="#sumintprod" class="internal-link" title="docutils.utils.math.latex2mathml.sumintprod">sumintprod</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr>
 </table>
@@ -400,6 +413,7 @@ inline math and inline=False is for displayed math.</p>
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    
   </div>
 </div><div class="basevariable">
   
@@ -422,6 +436,7 @@ inline math and inline=False is for displayed math.</p>
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    
   </div>
 </div><div class="basevariable">
   
@@ -444,6 +459,7 @@ inline math and inline=False is for displayed math.</p>
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    
   </div>
 </div><div class="basevariable">
   
@@ -466,6 +482,7 @@ inline math and inline=False is for displayed math.</p>
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    
   </div>
 </div><div class="basevariable">
   
@@ -488,6 +505,7 @@ inline math and inline=False is for displayed math.</p>
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    
   </div>
 </div><div class="basevariable">
   
@@ -510,6 +528,7 @@ inline math and inline=False is for displayed math.</p>
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    
   </div>
 </div><div class="basevariable">
   
@@ -532,6 +551,7 @@ inline math and inline=False is for displayed math.</p>
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    
   </div>
 </div>
 
@@ -543,7 +563,7 @@ inline math and inline=False is for displayed math.</p>
   <div class="container">
     <a href="index.html">API Documentation</a> for <a href="https://docutils.sourceforge.io/" class="projecthome">docutils-0.17.1</a>,
   generated by <a href="https://github.com/twisted/pydoctor/">pydoctor</a>
-    21.2.2 at 2022-01-06 17:36:41.
+    22.2.2.dev0 at 2022-03-04 05:57:20.
   </div>
 </footer>
 

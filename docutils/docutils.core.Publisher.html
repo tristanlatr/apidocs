@@ -7,7 +7,7 @@
   <head>
     
     <title>docutils.core.Publisher</title>
-    <meta name="generator" content="pydoctor 21.2.2"> 
+    <meta name="generator" content="pydoctor 22.2.2.dev0"> 
         
     </meta>
     <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
@@ -44,69 +44,82 @@
           Names
         </a>
 
-        <form action="search-results.html" id="search-box-container">
+        <div id="search-box-container">
           <div class="input-group">
-            <input id="search-box" name="search-query" placeholder="Search..." aria-label="Search" minlength="2" class="form-control" />
+            <input id="search-box" type="search" name="search-query" placeholder="Search..." aria-label="Search" minlength="2" class="form-control" autocomplete="off" />
+            
             <span class="input-group-btn">
-              <button class="btn btn-default" type="submit" title="Search"><img src="fonts/search.svg" alt="Search!" /></button>
-              <a class="btn btn-default" id="search-help-button" title="Help" onclick="toggleSearchHelpText()"><img src="fonts/info.svg" alt="Help!" /></a>
+              <a style="display: none;" class="btn btn-default" id="search-clear-button" title="Clear" onclick="clearSearch()"><img src="fonts/x-circle.svg" alt="Clear" /></a>
+              <a class="btn btn-default" id="search-help-button" title="Help" onclick="toggleSearchHelpText()"><img src="fonts/info.svg" alt="Help" /></a>
             </span>
           </div>
-        </form>
+        </div>
 
-        <div class="rst-admonition hint" id="search-help-box">
+      </div>
+
+      <div id="search-results-container" style="display: none;">
+        <div>
+          <span class="label label-default" id="search-docstrings-button">
+            <a title="Search in docstrings" onclick="toggleSearchInDocstrings()">search in docstrings</a></span>
+        </div>
+
+        <noscript>
+            <h1>Cannot search: JavaScript is not supported/enabled in your browser.</h1>
+        </noscript>
+
+        <div class="hint" id="search-help-box">
           <p class="rst-last">
       
             Search bar offers the following options:
             <ul>   
                 <li>
                   <strong>Term presence.</strong> The below example searches for documents that 
-                    must contain “foo”, might contain “bar” and must not contain “baz”:
-                  <br /> <code>'+foo bar -baz'</code>
+                    must contain “foo”, might contain “bar” and must not contain “baz”: <code>+foo bar -baz</code>
                 </li> 
 
                 <li>
-                  <strong>Wildcards.</strong> The below example searches for documents with words beginning with “foo”:
-                  <br /> <code>'foo*'</code>
+                  <strong>Wildcards.</strong> The below example searches for documents with words beginning with “foo”: <code>foo*</code>
                 </li> 
 
                 <li>
-                  <strong>Search in specific fields.</strong> The following search matches all documents 
-                  that contains "foo" in their full dotted name and with “bar” in any field:
-                  <br /> <code>'+fullName:*foo* +bar'</code>
+                  <strong>Search in specific fields.</strong> The following search matches all objects 
+                  in "twisted.mail" that matches “search”: <code>+qname:twisted.mail.* +search</code>
 
                   <p>
-                    Possible fields: 'name', 'docstring', 'fullName'.
+                    Possible fields: 'name', 'qname' (fully qualified name), 'docstring', and 'kind'.
+                    Last two fields are only applicable if "search in docstrings" is enabled.
                   </p>
                 </li>
 
                 <li>
                   <strong>Fuzzy matches.</strong> The following search matches all documents 
-                  that have a word within 1 edit distance of “foo”:
-                  <br /> <code>'foo~1'</code>
+                  that have a word within 1 edit distance of “foo”: <code>foo~1</code>
                 </li>
             </ul>
 
           </p>
         </div>
 
-      </div>
+        <div id="search-status"> </div>
+        
+        <div class="warning" id="search-warn-box" style="display: none;">
+          <p class="rst-last"><span id="search-warn"></span></p>
+        </div>
 
+        <table id="search-results">
+          <!-- Filled dynamically by JS -->
+        </table>
+        
+        <div style="margin-top: 8px;">
+          <p>Results provided by <a href="https://lunrjs.com">Lunr.js</a></p>
+        </div>
+      </div>
 
     </div>
   </div>
 
-  <script>
- 
-    function toggleSearchHelpText() {
-        document.body.classList.toggle("search-help-hidden");
-    }
-    // Init search and help text
-    document.getElementById('search-box-container').style.display = 'block';
-    document.getElementById('search-help-box').style.display = 'block';
-    document.body.classList.add("search-help-hidden");
-
-  </script>
+  <script src="ajax.js" type="text/javascript"></script>
+  <script src="search.js" type="text/javascript"></script>
 
 </nav>
 
@@ -115,7 +128,7 @@
     <div class="container">
 
       <div class="page-header">
-        <h1 class="class"><code><code><a href="docutils.html">docutils</a></code><wbr></wbr>.<code><a href="docutils.core.html">core</a></code><wbr></wbr>.<code><a href="docutils.core.Publisher.html">Publisher</a></code></code></h1>
+        <h1 class="class"><code><code><a href="index.html" class="internal-link">docutils</a></code><wbr></wbr>.<code><a href="docutils.core.html" class="internal-link" title="docutils.core">core</a></code><wbr></wbr>.<code><a href="docutils.core.Publisher.html" class="internal-link" title="docutils.core.Publisher">Publisher</a></code></code></h1>
         <div id="showPrivate">
           <button class="btn btn-link" onclick="togglePrivate()">Toggle Private API</button>
         </div>
@@ -126,7 +139,7 @@
       </div>
 
       <div class="extrasDocstring">
-        <p><code><span class="py-keyword">class</span> <span class="py-defname">Publisher</span>(<span title="object">object</span>): <a href="https://sourceforge.net/p/docutils/code/HEAD/tree/tags/docutils-0.17.1//docutils/core.py#L27" class="sourceLink">(source)</a></code></p>
+        <p><code><span class="py-keyword">class</span> <span class="py-defname">Publisher</span>(object): <a href="https://sourceforge.net/p/docutils/code/HEAD/tree/tags/docutils-0.17.1//docutils/core.py#L27" class="sourceLink">(source)</a></code></p>
         <p><a href="classIndex.html#docutils.core.Publisher">View In Hierarchy</a></p>
       </div>
 
@@ -141,137 +154,137 @@
   <tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#__init__">__init__</a></code></td>
-    <td><span>Initial setup.  If any of <code><a href="#reader">reader</a></code>, <code><a href="#parser">parser</a></code>, or <code><a href="#writer">writer</a></code> are not specified, the corresponding <tt class="rst-docutils literal"><span class="pre">set_...</span></tt> method should be called with a component name (<code><a href="#set_reader">set_reader</a></code> sets the parser as well).</span></td>
+    <td><code><a href="#__init__" class="internal-link" title="docutils.core.Publisher.__init__">__init__</a></code></td>
+    <td>Initial setup.  If any of <code><a href="#reader" class="internal-link" title="docutils.core.Publisher.reader">reader</a></code>, <code><a href="#parser" class="internal-link" title="docutils.core.Publisher.parser">parser</a></code>, or <code><a href="#writer" class="internal-link" title="docutils.core.Publisher.writer">writer</a></code> are not specified, the corresponding <tt class="rst-docutils literal"><span class="pre">set_...</span></tt> method should be called with a component name (<code><a href="#set_reader" class="internal-link" title="docutils.core.Publisher.set_reader">set_reader</a></code> sets the parser as well).</td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#apply_transforms">apply_transforms</a></code></td>
+    <td><code><a href="#apply_transforms" class="internal-link" title="docutils.core.Publisher.apply_transforms">apply​_transforms</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#debugging_dumps">debugging_dumps</a></code></td>
+    <td><code><a href="#debugging_dumps" class="internal-link" title="docutils.core.Publisher.debugging_dumps">debugging​_dumps</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#get_settings">get_settings</a></code></td>
-    <td><span>Set and return default settings (overrides in <code>defaults</code> dict).</span></td>
+    <td><code><a href="#get_settings" class="internal-link" title="docutils.core.Publisher.get_settings">get​_settings</a></code></td>
+    <td>Set and return default settings (overrides in <code>defaults</code> dict).</td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#process_command_line">process_command_line</a></code></td>
-    <td><span>Pass an empty list to <code>argv</code> to avoid reading <code>sys.argv</code> (the default).</span></td>
+    <td><code><a href="#process_command_line" class="internal-link" title="docutils.core.Publisher.process_command_line">process​_command​_line</a></code></td>
+    <td>Pass an empty list to <code>argv</code> to avoid reading <code>sys.argv</code> (the default).</td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#process_programmatic_settings">process_programmatic_settings</a></code></td>
+    <td><code><a href="#process_programmatic_settings" class="internal-link" title="docutils.core.Publisher.process_programmatic_settings">process​_programmatic​_settings</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#publish">publish</a></code></td>
-    <td><span>Process command line options and arguments (if <code>self.settings</code> not already set), run <code>self.reader</code> and then <code>self.writer</code>.  Return <code>self.writer</code>'s output.</span></td>
+    <td><code><a href="#publish" class="internal-link" title="docutils.core.Publisher.publish">publish</a></code></td>
+    <td>Process command line options and arguments (if <code>self.settings</code> not already set), run <code>self.reader</code> and then <code>self.writer</code>.  Return <code>self.writer</code>'s output.</td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#report_Exception">report_Exception</a></code></td>
+    <td><code><a href="#report_Exception" class="internal-link" title="docutils.core.Publisher.report_Exception">report_​Exception</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#report_SystemMessage">report_SystemMessage</a></code></td>
+    <td><code><a href="#report_SystemMessage" class="internal-link" title="docutils.core.Publisher.report_SystemMessage">report_​System​Message</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#report_UnicodeError">report_UnicodeError</a></code></td>
+    <td><code><a href="#report_UnicodeError" class="internal-link" title="docutils.core.Publisher.report_UnicodeError">report_​Unicode​Error</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#set_components">set_components</a></code></td>
+    <td><code><a href="#set_components" class="internal-link" title="docutils.core.Publisher.set_components">set​_components</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#set_destination">set_destination</a></code></td>
+    <td><code><a href="#set_destination" class="internal-link" title="docutils.core.Publisher.set_destination">set​_destination</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#set_io">set_io</a></code></td>
+    <td><code><a href="#set_io" class="internal-link" title="docutils.core.Publisher.set_io">set​_io</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#set_reader">set_reader</a></code></td>
-    <td><span>Set <code>self.reader</code> by name.</span></td>
+    <td><code><a href="#set_reader" class="internal-link" title="docutils.core.Publisher.set_reader">set​_reader</a></code></td>
+    <td>Set <code>self.reader</code> by name.</td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#set_source">set_source</a></code></td>
+    <td><code><a href="#set_source" class="internal-link" title="docutils.core.Publisher.set_source">set​_source</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#set_writer">set_writer</a></code></td>
-    <td><span>Set <code>self.writer</code> by name.</span></td>
+    <td><code><a href="#set_writer" class="internal-link" title="docutils.core.Publisher.set_writer">set​_writer</a></code></td>
+    <td>Set <code>self.writer</code> by name.</td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#setup_option_parser">setup_option_parser</a></code></td>
+    <td><code><a href="#setup_option_parser" class="internal-link" title="docutils.core.Publisher.setup_option_parser">setup​_option​_parser</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="instancevariable">
     
     <td>Instance Variable</td>
-    <td><code><a href="#destination">destination</a></code></td>
-    <td><span>The destination for docutils output, a <code><a href="docutils.io.Output.html">docutils.io.Output</a></code> instance.</span></td>
+    <td><code><a href="#destination" class="internal-link" title="docutils.core.Publisher.destination">destination</a></code></td>
+    <td>The destination for docutils output, a <code><a href="docutils.io.Output.html" class="internal-link">docutils.io.Output</a></code> instance.</td>
   </tr><tr class="instancevariable">
     
     <td>Instance Variable</td>
-    <td><code><a href="#destination_class">destination_class</a></code></td>
-    <td><span>The class for dynamically created destination objects.</span></td>
+    <td><code><a href="#destination_class" class="internal-link" title="docutils.core.Publisher.destination_class">destination​_class</a></code></td>
+    <td>The class for dynamically created destination objects.</td>
   </tr><tr class="instancevariable">
     
     <td>Instance Variable</td>
-    <td><code><a href="#document">document</a></code></td>
-    <td><span>The document tree (<code><a href="docutils.nodes.html">docutils.nodes</a></code> objects).</span></td>
+    <td><code><a href="#document" class="internal-link" title="docutils.core.Publisher.document">document</a></code></td>
+    <td>The document tree (<code><a href="docutils.nodes.html" class="internal-link">docutils.nodes</a></code> objects).</td>
   </tr><tr class="instancevariable">
     
     <td>Instance Variable</td>
-    <td><code><a href="#parser">parser</a></code></td>
-    <td><span>A <code><a href="docutils.parsers.Parser.html">docutils.parsers.Parser</a></code> instance.</span></td>
+    <td><code><a href="#parser" class="internal-link" title="docutils.core.Publisher.parser">parser</a></code></td>
+    <td>A <code><a href="docutils.parsers.Parser.html" class="internal-link">docutils.parsers.Parser</a></code> instance.</td>
   </tr><tr class="instancevariable">
     
     <td>Instance Variable</td>
-    <td><code><a href="#reader">reader</a></code></td>
-    <td><span>A <code><a href="docutils.readers.Reader.html">docutils.readers.Reader</a></code> instance.</span></td>
+    <td><code><a href="#reader" class="internal-link" title="docutils.core.Publisher.reader">reader</a></code></td>
+    <td>A <code><a href="docutils.readers.Reader.html" class="internal-link">docutils.readers.Reader</a></code> instance.</td>
   </tr><tr class="instancevariable">
     
     <td>Instance Variable</td>
-    <td><code><a href="#settings">settings</a></code></td>
-    <td><span>An object containing Docutils settings as instance attributes. Set by <code>self.process_command_line()</code> or <code>self.get_settings()</code>.</span></td>
+    <td><code><a href="#settings" class="internal-link" title="docutils.core.Publisher.settings">settings</a></code></td>
+    <td>An object containing Docutils settings as instance attributes. Set by <code>self.process_command_line()</code> or <code>self.get_settings()</code>.</td>
   </tr><tr class="instancevariable">
     
     <td>Instance Variable</td>
-    <td><code><a href="#source">source</a></code></td>
-    <td><span>The source of input data, a <code><a href="docutils.io.Input.html">docutils.io.Input</a></code> instance.</span></td>
+    <td><code><a href="#source" class="internal-link" title="docutils.core.Publisher.source">source</a></code></td>
+    <td>The source of input data, a <code><a href="docutils.io.Input.html" class="internal-link">docutils.io.Input</a></code> instance.</td>
   </tr><tr class="instancevariable">
     
     <td>Instance Variable</td>
-    <td><code><a href="#source_class">source_class</a></code></td>
-    <td><span>The class for dynamically created source objects.</span></td>
+    <td><code><a href="#source_class" class="internal-link" title="docutils.core.Publisher.source_class">source​_class</a></code></td>
+    <td>The class for dynamically created source objects.</td>
   </tr><tr class="instancevariable">
     
     <td>Instance Variable</td>
-    <td><code><a href="#writer">writer</a></code></td>
-    <td><span>A <code><a href="docutils.writers.Writer.html">docutils.writers.Writer</a></code> instance.</span></td>
+    <td><code><a href="#writer" class="internal-link" title="docutils.core.Publisher.writer">writer</a></code></td>
+    <td>A <code><a href="docutils.writers.Writer.html" class="internal-link">docutils.writers.Writer</a></code> instance.</td>
   </tr><tr class="instancevariable private">
     
     <td>Instance Variable</td>
-    <td><code><a href="#_stderr">_stderr</a></code></td>
+    <td><code><a href="#_stderr" class="internal-link" title="docutils.core.Publisher._stderr">_stderr</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr>
 </table>
@@ -293,7 +306,7 @@
   </a>
   <div class="functionHeader">
     
-    <span class="py-keyword">def</span> <span class="py-defname">__init__</span>(self, reader=None, parser=None, writer=None, source=None, source_class=io.FileInput, destination=None, destination_class=io.FileOutput, settings=None):
+    <span class="py-keyword">def</span> <span class="py-defname">__init__</span>(self, reader=None, parser=None, writer=None, source=None, source_class=<a href="docutils.io.FileInput.html" class="internal-link" title="docutils.io.FileInput">io.FileInput</a>, destination=None, destination_class=<a href="docutils.io.FileOutput.html" class="internal-link" title="docutils.io.FileOutput">io.FileOutput</a>, settings=None):
     <a class="sourceLink" href="https://sourceforge.net/p/docutils/code/HEAD/tree/tags/docutils-0.17.1//docutils/core.py#L33">
       
       (source)
@@ -302,9 +315,9 @@
   <div class="docstring functionBody">
     
     
-    <div>Initial setup.  If any of <code><a href="#reader">reader</a></code>, <code><a href="#parser">parser</a></code>, or <code><a href="#writer">writer</a></code> are not
+    <div>Initial setup.  If any of <code><a href="#reader" class="internal-link" title="docutils.core.Publisher.reader">reader</a></code>, <code><a href="#parser" class="internal-link" title="docutils.core.Publisher.parser">parser</a></code>, or <code><a href="#writer" class="internal-link" title="docutils.core.Publisher.writer">writer</a></code> are not
 specified, the corresponding <tt class="rst-docutils literal"><span class="pre">set_...</span></tt> method should be called with
-a component name (<code><a href="#set_reader">set_reader</a></code> sets the parser as well).</div>
+a component name (<code><a href="#set_reader" class="internal-link" title="docutils.core.Publisher.set_reader">set_reader</a></code> sets the parser as well).</div>
   </div>
 </div><div class="basemethod">
   
@@ -687,8 +700,9 @@ already set), run <code>self.reader</code> and then <code>self.writer</code>.  R
   <div class="functionBody">
     
     
-    <div>The destination for docutils output, a <code><a href="docutils.io.Output.html">docutils.io.Output</a></code>
+    <div>The destination for docutils output, a <code><a href="docutils.io.Output.html" class="internal-link">docutils.io.Output</a></code>
 instance.</div>
+    
   </div>
 </div><div class="baseinstancevariable">
   
@@ -711,6 +725,7 @@ instance.</div>
     
     
     <div>The class for dynamically created destination objects.</div>
+    
   </div>
 </div><div class="baseinstancevariable">
   
@@ -732,7 +747,8 @@ instance.</div>
   <div class="functionBody">
     
     
-    <div>The document tree (<code><a href="docutils.nodes.html">docutils.nodes</a></code> objects).</div>
+    <div>The document tree (<code><a href="docutils.nodes.html" class="internal-link">docutils.nodes</a></code> objects).</div>
+    
   </div>
 </div><div class="baseinstancevariable">
   
@@ -754,7 +770,8 @@ instance.</div>
   <div class="functionBody">
     
     
-    <div>A <code><a href="docutils.parsers.Parser.html">docutils.parsers.Parser</a></code> instance.</div>
+    <div>A <code><a href="docutils.parsers.Parser.html" class="internal-link">docutils.parsers.Parser</a></code> instance.</div>
+    
   </div>
 </div><div class="baseinstancevariable">
   
@@ -776,7 +793,8 @@ instance.</div>
   <div class="functionBody">
     
     
-    <div>A <code><a href="docutils.readers.Reader.html">docutils.readers.Reader</a></code> instance.</div>
+    <div>A <code><a href="docutils.readers.Reader.html" class="internal-link">docutils.readers.Reader</a></code> instance.</div>
+    
   </div>
 </div><div class="baseinstancevariable">
   
@@ -800,6 +818,7 @@ instance.</div>
     
     <div>An object containing Docutils settings as instance attributes.
 Set by <code>self.process_command_line()</code> or <code>self.get_settings()</code>.</div>
+    
   </div>
 </div><div class="baseinstancevariable">
   
@@ -821,7 +840,8 @@ Set by <code>self.process_command_line()</code> or <code>self.get_settings()</co
   <div class="functionBody">
     
     
-    <div>The source of input data, a <code><a href="docutils.io.Input.html">docutils.io.Input</a></code> instance.</div>
+    <div>The source of input data, a <code><a href="docutils.io.Input.html" class="internal-link">docutils.io.Input</a></code> instance.</div>
+    
   </div>
 </div><div class="baseinstancevariable">
   
@@ -844,6 +864,7 @@ Set by <code>self.process_command_line()</code> or <code>self.get_settings()</co
     
     
     <div>The class for dynamically created source objects.</div>
+    
   </div>
 </div><div class="baseinstancevariable">
   
@@ -865,7 +886,8 @@ Set by <code>self.process_command_line()</code> or <code>self.get_settings()</co
   <div class="functionBody">
     
     
-    <div>A <code><a href="docutils.writers.Writer.html">docutils.writers.Writer</a></code> instance.</div>
+    <div>A <code><a href="docutils.writers.Writer.html" class="internal-link">docutils.writers.Writer</a></code> instance.</div>
+    
   </div>
 </div><div class="baseinstancevariable private">
   
@@ -888,6 +910,7 @@ Set by <code>self.process_command_line()</code> or <code>self.get_settings()</co
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    
   </div>
 </div>
 
@@ -899,7 +922,7 @@ Set by <code>self.process_command_line()</code> or <code>self.get_settings()</co
   <div class="container">
     <a href="index.html">API Documentation</a> for <a href="https://docutils.sourceforge.io/" class="projecthome">docutils-0.17.1</a>,
   generated by <a href="https://github.com/twisted/pydoctor/">pydoctor</a>
-    21.2.2 at 2022-01-06 17:36:41.
+    22.2.2.dev0 at 2022-03-04 05:57:20.
   </div>
 </footer>
 

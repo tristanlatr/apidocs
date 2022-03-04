@@ -7,7 +7,7 @@
   <head>
     
     <title>docutils</title>
-    <meta name="generator" content="pydoctor 21.2.2"> 
+    <meta name="generator" content="pydoctor 22.2.2.dev0"> 
         
     </meta>
     <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
@@ -44,69 +44,82 @@
           Names
         </a>
 
-        <form action="search-results.html" id="search-box-container">
+        <div id="search-box-container">
           <div class="input-group">
-            <input id="search-box" name="search-query" placeholder="Search..." aria-label="Search" minlength="2" class="form-control" />
+            <input id="search-box" type="search" name="search-query" placeholder="Search..." aria-label="Search" minlength="2" class="form-control" autocomplete="off" />
+            
             <span class="input-group-btn">
-              <button class="btn btn-default" type="submit" title="Search"><img src="fonts/search.svg" alt="Search!" /></button>
-              <a class="btn btn-default" id="search-help-button" title="Help" onclick="toggleSearchHelpText()"><img src="fonts/info.svg" alt="Help!" /></a>
+              <a style="display: none;" class="btn btn-default" id="search-clear-button" title="Clear" onclick="clearSearch()"><img src="fonts/x-circle.svg" alt="Clear" /></a>
+              <a class="btn btn-default" id="search-help-button" title="Help" onclick="toggleSearchHelpText()"><img src="fonts/info.svg" alt="Help" /></a>
             </span>
           </div>
-        </form>
+        </div>
 
-        <div class="rst-admonition hint" id="search-help-box">
+      </div>
+
+      <div id="search-results-container" style="display: none;">
+        <div>
+          <span class="label label-default" id="search-docstrings-button">
+            <a title="Search in docstrings" onclick="toggleSearchInDocstrings()">search in docstrings</a></span>
+        </div>
+
+        <noscript>
+            <h1>Cannot search: JavaScript is not supported/enabled in your browser.</h1>
+        </noscript>
+
+        <div class="hint" id="search-help-box">
           <p class="rst-last">
       
             Search bar offers the following options:
             <ul>   
                 <li>
                   <strong>Term presence.</strong> The below example searches for documents that 
-                    must contain “foo”, might contain “bar” and must not contain “baz”:
-                  <br /> <code>'+foo bar -baz'</code>
+                    must contain “foo”, might contain “bar” and must not contain “baz”: <code>+foo bar -baz</code>
                 </li> 
 
                 <li>
-                  <strong>Wildcards.</strong> The below example searches for documents with words beginning with “foo”:
-                  <br /> <code>'foo*'</code>
+                  <strong>Wildcards.</strong> The below example searches for documents with words beginning with “foo”: <code>foo*</code>
                 </li> 
 
                 <li>
-                  <strong>Search in specific fields.</strong> The following search matches all documents 
-                  that contains "foo" in their full dotted name and with “bar” in any field:
-                  <br /> <code>'+fullName:*foo* +bar'</code>
+                  <strong>Search in specific fields.</strong> The following search matches all objects 
+                  in "twisted.mail" that matches “search”: <code>+qname:twisted.mail.* +search</code>
 
                   <p>
-                    Possible fields: 'name', 'docstring', 'fullName'.
+                    Possible fields: 'name', 'qname' (fully qualified name), 'docstring', and 'kind'.
+                    Last two fields are only applicable if "search in docstrings" is enabled.
                   </p>
                 </li>
 
                 <li>
                   <strong>Fuzzy matches.</strong> The following search matches all documents 
-                  that have a word within 1 edit distance of “foo”:
-                  <br /> <code>'foo~1'</code>
+                  that have a word within 1 edit distance of “foo”: <code>foo~1</code>
                 </li>
             </ul>
 
           </p>
         </div>
 
-      </div>
+        <div id="search-status"> </div>
+        
+        <div class="warning" id="search-warn-box" style="display: none;">
+          <p class="rst-last"><span id="search-warn"></span></p>
+        </div>
 
+        <table id="search-results">
+          <!-- Filled dynamically by JS -->
+        </table>
+        
+        <div style="margin-top: 8px;">
+          <p>Results provided by <a href="https://lunrjs.com">Lunr.js</a></p>
+        </div>
+      </div>
 
     </div>
   </div>
 
-  <script>
- 
-    function toggleSearchHelpText() {
-        document.body.classList.toggle("search-help-hidden");
-    }
-    // Init search and help text
-    document.getElementById('search-box-container').style.display = 'block';
-    document.getElementById('search-help-box').style.display = 'block';
-    document.body.classList.add("search-help-hidden");
-
-  </script>
+  <script src="ajax.js" type="text/javascript"></script>
+  <script src="search.js" type="text/javascript"></script>
 
 </nav>
 
@@ -115,7 +128,7 @@
     <div class="container">
 
       <div class="page-header">
-        <h1 class="package"><code><code><a href="docutils.html">docutils</a></code></code></h1>
+        <h1 class="package"><code><code><a href="index.html" class="internal-link">docutils</a></code></code></h1>
         <div id="showPrivate">
           <button class="btn btn-link" onclick="togglePrivate()">Toggle Private API</button>
         </div>
@@ -133,7 +146,7 @@
       <div class="moduleDocstring">
         <div><p>This is the Docutils (Python Documentation Utilities) package.</p>
 <div class="rst-section" id="rst-package-structure">
-<h1 class="heading">Package Structure</h1>
+<h2 class="heading">Package Structure</h2>
 <p>Modules:</p>
 <ul class="rst-simple">
 <li>__init__.py: Contains component base classes, exception classes, and
@@ -181,63 +194,63 @@ between different formats (LaTeX, MathML, text, ...).</p>
   <tr class="package">
     
     <td>Package</td>
-    <td><code><a href="docutils.languages.html">languages</a></code></td>
-    <td><span>This package contains modules for language-dependent features of Docutils.</span></td>
+    <td><code><a href="docutils.languages.html" class="internal-link" title="docutils.languages">languages</a></code></td>
+    <td>This package contains modules for language-dependent features of Docutils.</td>
   </tr><tr class="package">
     
     <td>Package</td>
-    <td><code><a href="docutils.parsers.html">parsers</a></code></td>
-    <td><span>This package contains Docutils parser modules.</span></td>
+    <td><code><a href="docutils.parsers.html" class="internal-link" title="docutils.parsers">parsers</a></code></td>
+    <td>This package contains Docutils parser modules.</td>
   </tr><tr class="package">
     
     <td>Package</td>
-    <td><code><a href="docutils.readers.html">readers</a></code></td>
-    <td><span>This package contains Docutils Reader modules.</span></td>
+    <td><code><a href="docutils.readers.html" class="internal-link" title="docutils.readers">readers</a></code></td>
+    <td>This package contains Docutils Reader modules.</td>
   </tr><tr class="package">
     
     <td>Package</td>
-    <td><code><a href="docutils.transforms.html">transforms</a></code></td>
-    <td><span>This package contains modules for standard tree transforms available to Docutils components. Tree transforms serve a variety of purposes:</span></td>
+    <td><code><a href="docutils.transforms.html" class="internal-link" title="docutils.transforms">transforms</a></code></td>
+    <td>This package contains modules for standard tree transforms available to Docutils components. Tree transforms serve a variety of purposes:</td>
   </tr><tr class="package">
     
     <td>Package</td>
-    <td><code><a href="docutils.utils.html">utils</a></code></td>
-    <td><span>Miscellaneous utilities for the documentation utilities.</span></td>
+    <td><code><a href="docutils.utils.html" class="internal-link" title="docutils.utils">utils</a></code></td>
+    <td>Miscellaneous utilities for the documentation utilities.</td>
   </tr><tr class="package">
     
     <td>Package</td>
-    <td><code><a href="docutils.writers.html">writers</a></code></td>
-    <td><span>This package contains Docutils Writer modules.</span></td>
+    <td><code><a href="docutils.writers.html" class="internal-link" title="docutils.writers">writers</a></code></td>
+    <td>This package contains Docutils Writer modules.</td>
   </tr><tr class="module">
     
     <td>Module</td>
-    <td><code><a href="docutils.core.html">core</a></code></td>
+    <td><code><a href="docutils.core.html" class="internal-link" title="docutils.core">core</a></code></td>
     <td><span class="undocumented">No summary</span></td>
   </tr><tr class="module">
     
     <td>Module</td>
-    <td><code><a href="docutils.examples.html">examples</a></code></td>
-    <td><span>This module contains practical examples of Docutils client code.</span></td>
+    <td><code><a href="docutils.examples.html" class="internal-link" title="docutils.examples">examples</a></code></td>
+    <td>This module contains practical examples of Docutils client code.</td>
   </tr><tr class="module">
     
     <td>Module</td>
-    <td><code><a href="docutils.frontend.html">frontend</a></code></td>
-    <td><span>Command-line and common processing for Docutils front-end tools.</span></td>
+    <td><code><a href="docutils.frontend.html" class="internal-link" title="docutils.frontend">frontend</a></code></td>
+    <td>Command-line and common processing for Docutils front-end tools.</td>
   </tr><tr class="module">
     
     <td>Module</td>
-    <td><code><a href="docutils.io.html">io</a></code></td>
-    <td><span>I/O classes provide a uniform API for low-level input and output.  Subclasses exist for a variety of input/output mechanisms.</span></td>
+    <td><code><a href="docutils.io.html" class="internal-link" title="docutils.io">io</a></code></td>
+    <td>I/O classes provide a uniform API for low-level input and output.  Subclasses exist for a variety of input/output mechanisms.</td>
   </tr><tr class="module">
     
     <td>Module</td>
-    <td><code><a href="docutils.nodes.html">nodes</a></code></td>
-    <td><span>Docutils document tree element class library.</span></td>
+    <td><code><a href="docutils.nodes.html" class="internal-link" title="docutils.nodes">nodes</a></code></td>
+    <td>Docutils document tree element class library.</td>
   </tr><tr class="module">
     
     <td>Module</td>
-    <td><code><a href="docutils.statemachine.html">statemachine</a></code></td>
-    <td><span>A finite state machine specialized for regular-expression-based text filters, this module defines the following classes:</span></td>
+    <td><code><a href="docutils.statemachine.html" class="internal-link" title="docutils.statemachine">statemachine</a></code></td>
+    <td>A finite state machine specialized for regular-expression-based text filters, this module defines the following classes:</td>
   </tr>
 </table>
         
@@ -248,48 +261,48 @@ between different formats (LaTeX, MathML, text, ...).</p>
   <tr class="class">
     
     <td>Class</td>
-    <td><code><a href="docutils.ApplicationError.html">ApplicationError</a></code></td>
+    <td><code><a href="docutils.ApplicationError.html" class="internal-link" title="docutils.ApplicationError">​Application​Error</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="class">
     
     <td>Class</td>
-    <td><code><a href="docutils.Component.html">Component</a></code></td>
-    <td><span>Base class for Docutils components.</span></td>
+    <td><code><a href="docutils.Component.html" class="internal-link" title="docutils.Component">​Component</a></code></td>
+    <td>Base class for Docutils components.</td>
   </tr><tr class="class">
     
     <td>Class</td>
-    <td><code><a href="docutils.DataError.html">DataError</a></code></td>
+    <td><code><a href="docutils.DataError.html" class="internal-link" title="docutils.DataError">​Data​Error</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="class">
     
     <td>Class</td>
-    <td><code><a href="docutils.SettingsSpec.html">SettingsSpec</a></code></td>
-    <td><span>Runtime setting specification base class.</span></td>
+    <td><code><a href="docutils.SettingsSpec.html" class="internal-link" title="docutils.SettingsSpec">​Settings​Spec</a></code></td>
+    <td>Runtime setting specification base class.</td>
   </tr><tr class="class">
     
     <td>Class</td>
-    <td><code><a href="docutils.TransformSpec.html">TransformSpec</a></code></td>
-    <td><span>Runtime transform specification base class.</span></td>
+    <td><code><a href="docutils.TransformSpec.html" class="internal-link" title="docutils.TransformSpec">​Transform​Spec</a></code></td>
+    <td>Runtime transform specification base class.</td>
   </tr><tr class="class">
     
     <td>Class</td>
-    <td><code><a href="docutils.VersionInfo.html">VersionInfo</a></code></td>
+    <td><code><a href="docutils.VersionInfo.html" class="internal-link" title="docutils.VersionInfo">​Version​Info</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="variable">
     
     <td>Variable</td>
-    <td><code><a href="#__version__">__version__</a></code></td>
-    <td><span>Docutils version identifier (complies with PEP 440):</span></td>
+    <td><code><a href="#__version__" class="internal-link" title="docutils.__version__">__version__</a></code></td>
+    <td>Docutils version identifier (complies with PEP 440):</td>
   </tr><tr class="variable">
     
     <td>Variable</td>
-    <td><code><a href="#__version_details__">__version_details__</a></code></td>
-    <td><span>Optional extra version details (e.g. 'snapshot 2005-05-29, r3410'). (For development and release status see <code><a href="#__version_info__">__version_info__</a></code>.)</span></td>
+    <td><code><a href="#__version_details__" class="internal-link" title="docutils.__version_details__">__version​_details__</a></code></td>
+    <td>Optional extra version details (e.g. 'snapshot 2005-05-29, r3410'). (For development and release status see <code><a href="#__version_info__" class="internal-link" title="docutils.__version_info__">__version_info__</a></code>.)</td>
   </tr><tr class="variable">
     
     <td>Variable</td>
-    <td><code><a href="#__version_info__">__version_info__</a></code></td>
-    <td><span>Comprehensive version information tuple. See 'Version Numbering' in docs/dev/policies.txt.</span></td>
+    <td><code><a href="#__version_info__" class="internal-link" title="docutils.__version_info__">__version​_info__</a></code></td>
+    <td>Comprehensive version information tuple. See 'Version Numbering' in docs/dev/policies.txt.</td>
   </tr>
 </table>
       </div>
@@ -320,10 +333,11 @@ between different formats (LaTeX, MathML, text, ...).</p>
 <pre class="rst-literal-block">
 major.minor[.micro][releaselevel[serial]][.dev]
 </pre>
-<p>For version comparison operations, use <code><a href="#__version_info__">__version_info__</a></code> (see, below)
-rather than parsing the text of <code><a href="#__version__">__version__</a></code>.</p>
+<p>For version comparison operations, use <code><a href="#__version_info__" class="internal-link" title="docutils.__version_info__">__version_info__</a></code> (see, below)
+rather than parsing the text of <code><a href="#__version__" class="internal-link" title="docutils.__version__">__version__</a></code>.</p>
 <p>See 'Version Numbering' in docs/dev/policies.txt.</p>
 </div>
+    
   </div>
 </div><div class="basevariable">
   
@@ -347,6 +361,7 @@ rather than parsing the text of <code><a href="#__version__">__version__</a></co
     
     <div>Comprehensive version information tuple. See 'Version Numbering' in
 docs/dev/policies.txt.</div>
+    
   </div>
 </div><div class="basevariable">
   
@@ -369,7 +384,8 @@ docs/dev/policies.txt.</div>
     
     
     <div>Optional extra version details (e.g. 'snapshot 2005-05-29, r3410').
-(For development and release status see <code><a href="#__version_info__">__version_info__</a></code>.)</div>
+(For development and release status see <code><a href="#__version_info__" class="internal-link" title="docutils.__version_info__">__version_info__</a></code>.)</div>
+    
   </div>
 </div>
 
@@ -381,7 +397,7 @@ docs/dev/policies.txt.</div>
   <div class="container">
     <a href="index.html">API Documentation</a> for <a href="https://docutils.sourceforge.io/" class="projecthome">docutils-0.17.1</a>,
   generated by <a href="https://github.com/twisted/pydoctor/">pydoctor</a>
-    21.2.2 at 2022-01-06 17:36:41.
+    22.2.2.dev0 at 2022-03-04 05:57:20.
   </div>
 </footer>
 

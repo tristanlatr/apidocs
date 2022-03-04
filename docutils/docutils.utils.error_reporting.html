@@ -7,7 +7,7 @@
   <head>
     
     <title>docutils.utils.error_reporting</title>
-    <meta name="generator" content="pydoctor 21.2.2"> 
+    <meta name="generator" content="pydoctor 22.2.2.dev0"> 
         
     </meta>
     <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
@@ -44,69 +44,82 @@
           Names
         </a>
 
-        <form action="search-results.html" id="search-box-container">
+        <div id="search-box-container">
           <div class="input-group">
-            <input id="search-box" name="search-query" placeholder="Search..." aria-label="Search" minlength="2" class="form-control" />
+            <input id="search-box" type="search" name="search-query" placeholder="Search..." aria-label="Search" minlength="2" class="form-control" autocomplete="off" />
+            
             <span class="input-group-btn">
-              <button class="btn btn-default" type="submit" title="Search"><img src="fonts/search.svg" alt="Search!" /></button>
-              <a class="btn btn-default" id="search-help-button" title="Help" onclick="toggleSearchHelpText()"><img src="fonts/info.svg" alt="Help!" /></a>
+              <a style="display: none;" class="btn btn-default" id="search-clear-button" title="Clear" onclick="clearSearch()"><img src="fonts/x-circle.svg" alt="Clear" /></a>
+              <a class="btn btn-default" id="search-help-button" title="Help" onclick="toggleSearchHelpText()"><img src="fonts/info.svg" alt="Help" /></a>
             </span>
           </div>
-        </form>
+        </div>
 
-        <div class="rst-admonition hint" id="search-help-box">
+      </div>
+
+      <div id="search-results-container" style="display: none;">
+        <div>
+          <span class="label label-default" id="search-docstrings-button">
+            <a title="Search in docstrings" onclick="toggleSearchInDocstrings()">search in docstrings</a></span>
+        </div>
+
+        <noscript>
+            <h1>Cannot search: JavaScript is not supported/enabled in your browser.</h1>
+        </noscript>
+
+        <div class="hint" id="search-help-box">
           <p class="rst-last">
       
             Search bar offers the following options:
             <ul>   
                 <li>
                   <strong>Term presence.</strong> The below example searches for documents that 
-                    must contain “foo”, might contain “bar” and must not contain “baz”:
-                  <br /> <code>'+foo bar -baz'</code>
+                    must contain “foo”, might contain “bar” and must not contain “baz”: <code>+foo bar -baz</code>
                 </li> 
 
                 <li>
-                  <strong>Wildcards.</strong> The below example searches for documents with words beginning with “foo”:
-                  <br /> <code>'foo*'</code>
+                  <strong>Wildcards.</strong> The below example searches for documents with words beginning with “foo”: <code>foo*</code>
                 </li> 
 
                 <li>
-                  <strong>Search in specific fields.</strong> The following search matches all documents 
-                  that contains "foo" in their full dotted name and with “bar” in any field:
-                  <br /> <code>'+fullName:*foo* +bar'</code>
+                  <strong>Search in specific fields.</strong> The following search matches all objects 
+                  in "twisted.mail" that matches “search”: <code>+qname:twisted.mail.* +search</code>
 
                   <p>
-                    Possible fields: 'name', 'docstring', 'fullName'.
+                    Possible fields: 'name', 'qname' (fully qualified name), 'docstring', and 'kind'.
+                    Last two fields are only applicable if "search in docstrings" is enabled.
                   </p>
                 </li>
 
                 <li>
                   <strong>Fuzzy matches.</strong> The following search matches all documents 
-                  that have a word within 1 edit distance of “foo”:
-                  <br /> <code>'foo~1'</code>
+                  that have a word within 1 edit distance of “foo”: <code>foo~1</code>
                 </li>
             </ul>
 
           </p>
         </div>
 
-      </div>
+        <div id="search-status"> </div>
+        
+        <div class="warning" id="search-warn-box" style="display: none;">
+          <p class="rst-last"><span id="search-warn"></span></p>
+        </div>
 
+        <table id="search-results">
+          <!-- Filled dynamically by JS -->
+        </table>
+        
+        <div style="margin-top: 8px;">
+          <p>Results provided by <a href="https://lunrjs.com">Lunr.js</a></p>
+        </div>
+      </div>
 
     </div>
   </div>
 
-  <script>
- 
-    function toggleSearchHelpText() {
-        document.body.classList.toggle("search-help-hidden");
-    }
-    // Init search and help text
-    document.getElementById('search-box-container').style.display = 'block';
-    document.getElementById('search-help-box').style.display = 'block';
-    document.body.classList.add("search-help-hidden");
-
-  </script>
+  <script src="ajax.js" type="text/javascript"></script>
+  <script src="search.js" type="text/javascript"></script>
 
 </nav>
 
@@ -115,7 +128,7 @@
     <div class="container">
 
       <div class="page-header">
-        <h1 class="module"><code><code><a href="docutils.html">docutils</a></code><wbr></wbr>.<code><a href="docutils.utils.html">utils</a></code><wbr></wbr>.<code><a href="docutils.utils.error_reporting.html">error_reporting</a></code></code></h1>
+        <h1 class="module"><code><code><a href="index.html" class="internal-link">docutils</a></code><wbr></wbr>.<code><a href="docutils.utils.html" class="internal-link" title="docutils.utils">utils</a></code><wbr></wbr>.<code><a href="docutils.utils.error_reporting.html" class="internal-link" title="docutils.utils.error_reporting">error_reporting</a></code></code></h1>
         <div id="showPrivate">
           <button class="btn btn-link" onclick="togglePrivate()">Toggle Private API</button>
         </div>
@@ -145,7 +158,7 @@ argument of IOError contains non-ASCII chars.)</li>
 <li>In Python 2, str(&lt;exception instance&gt;) fails, with non-ASCII chars
 in <code>unicode</code> arguments.</li>
 </ul>
-<p>The <code><a href="docutils.utils.error_reporting.SafeString.html">SafeString</a></code>, <code><a href="docutils.utils.error_reporting.ErrorString.html">ErrorString</a></code> and <code><a href="docutils.utils.error_reporting.ErrorOutput.html">ErrorOutput</a></code> classes handle
+<p>The <code><a href="docutils.utils.error_reporting.SafeString.html" class="internal-link" title="docutils.utils.error_reporting.SafeString">SafeString</a></code>, <code><a href="docutils.utils.error_reporting.ErrorString.html" class="internal-link" title="docutils.utils.error_reporting.ErrorString">ErrorString</a></code> and <code><a href="docutils.utils.error_reporting.ErrorOutput.html" class="internal-link" title="docutils.utils.error_reporting.ErrorOutput">ErrorOutput</a></code> classes handle
 common exceptions.</p>
 </div>
       </div>
@@ -157,22 +170,22 @@ common exceptions.</p>
   <tr class="class">
     
     <td>Class</td>
-    <td><code><a href="docutils.utils.error_reporting.ErrorOutput.html">ErrorOutput</a></code></td>
-    <td><span>Wrapper class for file-like error streams with failsave de- and encoding of <code>str</code>, <code>bytes</code>, <code>unicode</code> and <code>Exception</code> instances.</span></td>
+    <td><code><a href="docutils.utils.error_reporting.ErrorOutput.html" class="internal-link" title="docutils.utils.error_reporting.ErrorOutput">​Error​Output</a></code></td>
+    <td>Wrapper class for file-like error streams with failsave de- and encoding of <code>str</code>, <code>bytes</code>, <code>unicode</code> and <code>Exception</code> instances.</td>
   </tr><tr class="class">
     
     <td>Class</td>
-    <td><code><a href="docutils.utils.error_reporting.ErrorString.html">ErrorString</a></code></td>
-    <td><span>Safely report exception type and message.</span></td>
+    <td><code><a href="docutils.utils.error_reporting.ErrorString.html" class="internal-link" title="docutils.utils.error_reporting.ErrorString">​Error​String</a></code></td>
+    <td>Safely report exception type and message.</td>
   </tr><tr class="class">
     
     <td>Class</td>
-    <td><code><a href="docutils.utils.error_reporting.SafeString.html">SafeString</a></code></td>
-    <td><span>A wrapper providing robust conversion to <code>str</code> and <code>unicode</code>.</span></td>
+    <td><code><a href="docutils.utils.error_reporting.SafeString.html" class="internal-link" title="docutils.utils.error_reporting.SafeString">​Safe​String</a></code></td>
+    <td>A wrapper providing robust conversion to <code>str</code> and <code>unicode</code>.</td>
   </tr><tr class="variable">
     
     <td>Variable</td>
-    <td><code><a href="#locale_encoding">locale_encoding</a></code></td>
+    <td><code><a href="#locale_encoding" class="internal-link" title="docutils.utils.error_reporting.locale_encoding">locale​_encoding</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr>
 </table>
@@ -204,6 +217,7 @@ common exceptions.</p>
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    
   </div>
 </div>
 
@@ -215,7 +229,7 @@ common exceptions.</p>
   <div class="container">
     <a href="index.html">API Documentation</a> for <a href="https://docutils.sourceforge.io/" class="projecthome">docutils-0.17.1</a>,
   generated by <a href="https://github.com/twisted/pydoctor/">pydoctor</a>
-    21.2.2 at 2022-01-06 17:36:41.
+    22.2.2.dev0 at 2022-03-04 05:57:20.
   </div>
 </footer>
 

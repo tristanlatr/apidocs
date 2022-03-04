@@ -7,7 +7,7 @@
   <head>
     
     <title>docutils.utils.Reporter</title>
-    <meta name="generator" content="pydoctor 21.2.2"> 
+    <meta name="generator" content="pydoctor 22.2.2.dev0"> 
         
     </meta>
     <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
@@ -44,69 +44,82 @@
           Names
         </a>
 
-        <form action="search-results.html" id="search-box-container">
+        <div id="search-box-container">
           <div class="input-group">
-            <input id="search-box" name="search-query" placeholder="Search..." aria-label="Search" minlength="2" class="form-control" />
+            <input id="search-box" type="search" name="search-query" placeholder="Search..." aria-label="Search" minlength="2" class="form-control" autocomplete="off" />
+            
             <span class="input-group-btn">
-              <button class="btn btn-default" type="submit" title="Search"><img src="fonts/search.svg" alt="Search!" /></button>
-              <a class="btn btn-default" id="search-help-button" title="Help" onclick="toggleSearchHelpText()"><img src="fonts/info.svg" alt="Help!" /></a>
+              <a style="display: none;" class="btn btn-default" id="search-clear-button" title="Clear" onclick="clearSearch()"><img src="fonts/x-circle.svg" alt="Clear" /></a>
+              <a class="btn btn-default" id="search-help-button" title="Help" onclick="toggleSearchHelpText()"><img src="fonts/info.svg" alt="Help" /></a>
             </span>
           </div>
-        </form>
+        </div>
 
-        <div class="rst-admonition hint" id="search-help-box">
+      </div>
+
+      <div id="search-results-container" style="display: none;">
+        <div>
+          <span class="label label-default" id="search-docstrings-button">
+            <a title="Search in docstrings" onclick="toggleSearchInDocstrings()">search in docstrings</a></span>
+        </div>
+
+        <noscript>
+            <h1>Cannot search: JavaScript is not supported/enabled in your browser.</h1>
+        </noscript>
+
+        <div class="hint" id="search-help-box">
           <p class="rst-last">
       
             Search bar offers the following options:
             <ul>   
                 <li>
                   <strong>Term presence.</strong> The below example searches for documents that 
-                    must contain “foo”, might contain “bar” and must not contain “baz”:
-                  <br /> <code>'+foo bar -baz'</code>
+                    must contain “foo”, might contain “bar” and must not contain “baz”: <code>+foo bar -baz</code>
                 </li> 
 
                 <li>
-                  <strong>Wildcards.</strong> The below example searches for documents with words beginning with “foo”:
-                  <br /> <code>'foo*'</code>
+                  <strong>Wildcards.</strong> The below example searches for documents with words beginning with “foo”: <code>foo*</code>
                 </li> 
 
                 <li>
-                  <strong>Search in specific fields.</strong> The following search matches all documents 
-                  that contains "foo" in their full dotted name and with “bar” in any field:
-                  <br /> <code>'+fullName:*foo* +bar'</code>
+                  <strong>Search in specific fields.</strong> The following search matches all objects 
+                  in "twisted.mail" that matches “search”: <code>+qname:twisted.mail.* +search</code>
 
                   <p>
-                    Possible fields: 'name', 'docstring', 'fullName'.
+                    Possible fields: 'name', 'qname' (fully qualified name), 'docstring', and 'kind'.
+                    Last two fields are only applicable if "search in docstrings" is enabled.
                   </p>
                 </li>
 
                 <li>
                   <strong>Fuzzy matches.</strong> The following search matches all documents 
-                  that have a word within 1 edit distance of “foo”:
-                  <br /> <code>'foo~1'</code>
+                  that have a word within 1 edit distance of “foo”: <code>foo~1</code>
                 </li>
             </ul>
 
           </p>
         </div>
 
-      </div>
+        <div id="search-status"> </div>
+        
+        <div class="warning" id="search-warn-box" style="display: none;">
+          <p class="rst-last"><span id="search-warn"></span></p>
+        </div>
 
+        <table id="search-results">
+          <!-- Filled dynamically by JS -->
+        </table>
+        
+        <div style="margin-top: 8px;">
+          <p>Results provided by <a href="https://lunrjs.com">Lunr.js</a></p>
+        </div>
+      </div>
 
     </div>
   </div>
 
-  <script>
- 
-    function toggleSearchHelpText() {
-        document.body.classList.toggle("search-help-hidden");
-    }
-    // Init search and help text
-    document.getElementById('search-box-container').style.display = 'block';
-    document.getElementById('search-help-box').style.display = 'block';
-    document.body.classList.add("search-help-hidden");
-
-  </script>
+  <script src="ajax.js" type="text/javascript"></script>
+  <script src="search.js" type="text/javascript"></script>
 
 </nav>
 
@@ -115,7 +128,7 @@
     <div class="container">
 
       <div class="page-header">
-        <h1 class="class"><code><code><a href="docutils.html">docutils</a></code><wbr></wbr>.<code><a href="docutils.utils.html">utils</a></code><wbr></wbr>.<code><a href="docutils.utils.Reporter.html">Reporter</a></code></code></h1>
+        <h1 class="class"><code><code><a href="index.html" class="internal-link">docutils</a></code><wbr></wbr>.<code><a href="docutils.utils.html" class="internal-link" title="docutils.utils">utils</a></code><wbr></wbr>.<code><a href="docutils.utils.Reporter.html" class="internal-link" title="docutils.utils.Reporter">Reporter</a></code></code></h1>
         <div id="showPrivate">
           <button class="btn btn-link" onclick="togglePrivate()">Toggle Private API</button>
         </div>
@@ -126,14 +139,14 @@
       </div>
 
       <div class="extrasDocstring">
-        <p><code><span class="py-keyword">class</span> <span class="py-defname">Reporter</span>(<span title="object">object</span>): <a href="https://sourceforge.net/p/docutils/code/HEAD/tree/tags/docutils-0.17.1//docutils/utils/__init__.py#L39" class="sourceLink">(source)</a></code></p>
+        <p><code><span class="py-keyword">class</span> <span class="py-defname">Reporter</span>(object): <a href="https://sourceforge.net/p/docutils/code/HEAD/tree/tags/docutils-0.17.1//docutils/utils/__init__.py#L39" class="sourceLink">(source)</a></code></p>
         <p><a href="classIndex.html#docutils.utils.Reporter">View In Hierarchy</a></p>
       </div>
 
       <div class="moduleDocstring">
         <div><p>Info/warning/error reporter and <tt class="rst-docutils literal">system_message</tt> element generator.</p>
 <p>Five levels of system messages are defined, along with corresponding
-methods: <code>debug()</code>, <code>info()</code>, <code>warning()</code>, <code>error()</code>, and <code>severe()</code>.</p>
+methods: <code><a href="#debug" class="internal-link" title="docutils.utils.Reporter.debug">debug()</a></code>, <code><a href="#info" class="internal-link" title="docutils.utils.Reporter.info">info()</a></code>, <code><a href="#warning" class="internal-link" title="docutils.utils.Reporter.warning">warning()</a></code>, <code><a href="#error" class="internal-link" title="docutils.utils.Reporter.error">error()</a></code>, and <code><a href="#severe" class="internal-link" title="docutils.utils.Reporter.severe">severe()</a></code>.</p>
 <p>There is typically one Reporter object per process.  A Reporter object is
 instantiated with thresholds for reporting (generating warnings) and
 halting processing (raising exceptions), a switch to turn debug output on
@@ -145,10 +158,10 @@ messages are produced if the stored debug switch is on, independently of
 other thresholds.  Message output is sent to the stored warning stream if
 not set to ''.</p>
 <p>The Reporter class also employs a modified form of the "Observer" pattern
-<a class="rst-citation-reference" href="#rst-gof95" id="rst-citation-reference-1">[GoF95]</a> to track system messages generated.  The <code><a href="#attach_observer">attach_observer</a></code> method
+<a class="rst-citation-reference" href="#rst-gof95" id="rst-citation-reference-1">[GoF95]</a> to track system messages generated.  The <code><a href="#attach_observer" class="internal-link" title="docutils.utils.Reporter.attach_observer">attach_observer</a></code> method
 should be called before parsing, with a bound method or function which
 accepts system messages.  The observer can be removed with
-<code><a href="#detach_observer">detach_observer</a></code>, and another added in its place.</p>
+<code><a href="#detach_observer" class="internal-link" title="docutils.utils.Reporter.detach_observer">detach_observer</a></code>, and another added in its place.</p>
 <table class="rst-docutils citation" frame="void" id="rst-gof95" rules="none">
 <colgroup><col class="label" /><col /></colgroup>
 <tbody valign="top">
@@ -161,139 +174,139 @@ Reusable Object-Oriented Software</em>. Addison-Wesley, Reading, MA, USA,
       </div>
 
       <div id="splitTables">
-        <table class="children sortable" id="id1246">
+        <table class="children sortable" id="id1245">
   
   
   <tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#__init__">__init__</a></code></td>
+    <td><code><a href="#__init__" class="internal-link" title="docutils.utils.Reporter.__init__">__init__</a></code></td>
     <td><span class="undocumented">No summary</span></td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#attach_observer">attach_observer</a></code></td>
-    <td><span>The <code>observer</code> parameter is a function or bound method which takes one argument, a <code><a href="docutils.nodes.system_message.html">nodes.system_message</a></code> instance.</span></td>
+    <td><code><a href="#attach_observer" class="internal-link" title="docutils.utils.Reporter.attach_observer">attach​_observer</a></code></td>
+    <td>The <code>observer</code> parameter is a function or bound method which takes one argument, a <code><a href="docutils.nodes.system_message.html" class="internal-link" title="docutils.nodes.system_message">nodes.system_message</a></code> instance.</td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#debug">debug</a></code></td>
-    <td><span>Level-0, "DEBUG": an internal reporting issue. Typically, there is no effect on the processing. Level-0 system messages are handled separately from the others.</span></td>
+    <td><code><a href="#debug" class="internal-link" title="docutils.utils.Reporter.debug">debug</a></code></td>
+    <td>Level-0, "DEBUG": an internal reporting issue. Typically, there is no effect on the processing. Level-0 system messages are handled separately from the others.</td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#detach_observer">detach_observer</a></code></td>
+    <td><code><a href="#detach_observer" class="internal-link" title="docutils.utils.Reporter.detach_observer">detach​_observer</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#error">error</a></code></td>
-    <td><span>Level-3, "ERROR": an error that should be addressed. If ignored, the output will contain errors.</span></td>
+    <td><code><a href="#error" class="internal-link" title="docutils.utils.Reporter.error">error</a></code></td>
+    <td>Level-3, "ERROR": an error that should be addressed. If ignored, the output will contain errors.</td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#info">info</a></code></td>
-    <td><span>Level-1, "INFO": a minor issue that can be ignored. Typically there is no effect on processing, and level-1 system messages are not reported.</span></td>
+    <td><code><a href="#info" class="internal-link" title="docutils.utils.Reporter.info">info</a></code></td>
+    <td>Level-1, "INFO": a minor issue that can be ignored. Typically there is no effect on processing, and level-1 system messages are not reported.</td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#notify_observers">notify_observers</a></code></td>
+    <td><code><a href="#notify_observers" class="internal-link" title="docutils.utils.Reporter.notify_observers">notify​_observers</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#set_conditions">set_conditions</a></code></td>
+    <td><code><a href="#set_conditions" class="internal-link" title="docutils.utils.Reporter.set_conditions">set​_conditions</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#severe">severe</a></code></td>
-    <td><span>Level-4, "SEVERE": a severe error that must be addressed. If ignored, the output will contain severe errors. Typically level-4 system messages are turned into exceptions which halt processing.</span></td>
+    <td><code><a href="#severe" class="internal-link" title="docutils.utils.Reporter.severe">severe</a></code></td>
+    <td>Level-4, "SEVERE": a severe error that must be addressed. If ignored, the output will contain severe errors. Typically level-4 system messages are turned into exceptions which halt processing.</td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#system_message">system_message</a></code></td>
-    <td><span>Return a system_message object.</span></td>
+    <td><code><a href="#system_message" class="internal-link" title="docutils.utils.Reporter.system_message">system​_message</a></code></td>
+    <td>Return a system_message object.</td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#warning">warning</a></code></td>
-    <td><span>Level-2, "WARNING": an issue that should be addressed. If ignored, there may be unpredictable problems with the output.</span></td>
+    <td><code><a href="#warning" class="internal-link" title="docutils.utils.Reporter.warning">warning</a></code></td>
+    <td>Level-2, "WARNING": an issue that should be addressed. If ignored, there may be unpredictable problems with the output.</td>
+  </tr><tr class="constant">
+    
+    <td>Constant</td>
+    <td><code><a href="#DEBUG_LEVEL" class="internal-link" title="docutils.utils.Reporter.DEBUG_LEVEL">DEBUG​_LEVEL</a></code></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="constant">
+    
+    <td>Constant</td>
+    <td><code><a href="#ERROR_LEVEL" class="internal-link" title="docutils.utils.Reporter.ERROR_LEVEL">ERROR​_LEVEL</a></code></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="constant">
+    
+    <td>Constant</td>
+    <td><code><a href="#INFO_LEVEL" class="internal-link" title="docutils.utils.Reporter.INFO_LEVEL">INFO​_LEVEL</a></code></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="constant">
+    
+    <td>Constant</td>
+    <td><code><a href="#SEVERE_LEVEL" class="internal-link" title="docutils.utils.Reporter.SEVERE_LEVEL">SEVERE​_LEVEL</a></code></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="constant">
+    
+    <td>Constant</td>
+    <td><code><a href="#WARNING_LEVEL" class="internal-link" title="docutils.utils.Reporter.WARNING_LEVEL">WARNING​_LEVEL</a></code></td>
+    <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="classvariable">
     
     <td>Class Variable</td>
-    <td><code><a href="#DEBUG_LEVEL">DEBUG_LEVEL</a></code></td>
-    <td><span class="undocumented">Undocumented</span></td>
-  </tr><tr class="classvariable">
-    
-    <td>Class Variable</td>
-    <td><code><a href="#ERROR_LEVEL">ERROR_LEVEL</a></code></td>
-    <td><span class="undocumented">Undocumented</span></td>
-  </tr><tr class="classvariable">
-    
-    <td>Class Variable</td>
-    <td><code><a href="#INFO_LEVEL">INFO_LEVEL</a></code></td>
-    <td><span class="undocumented">Undocumented</span></td>
-  </tr><tr class="classvariable">
-    
-    <td>Class Variable</td>
-    <td><code><a href="#levels">levels</a></code></td>
-    <td><span>List of names for system message levels, indexed by level.</span></td>
-  </tr><tr class="classvariable">
-    
-    <td>Class Variable</td>
-    <td><code><a href="#SEVERE_LEVEL">SEVERE_LEVEL</a></code></td>
-    <td><span class="undocumented">Undocumented</span></td>
-  </tr><tr class="classvariable">
-    
-    <td>Class Variable</td>
-    <td><code><a href="#WARNING_LEVEL">WARNING_LEVEL</a></code></td>
-    <td><span class="undocumented">Undocumented</span></td>
+    <td><code><a href="#levels" class="internal-link" title="docutils.utils.Reporter.levels">levels</a></code></td>
+    <td>List of names for system message levels, indexed by level.</td>
   </tr><tr class="instancevariable">
     
     <td>Instance Variable</td>
-    <td><code><a href="#debug_flag">debug_flag</a></code></td>
-    <td><span>Show debug (level=0) system messages?</span></td>
+    <td><code><a href="#debug_flag" class="internal-link" title="docutils.utils.Reporter.debug_flag">debug​_flag</a></code></td>
+    <td>Show debug (level=0) system messages?</td>
   </tr><tr class="instancevariable">
     
     <td>Instance Variable</td>
-    <td><code><a href="#encoding">encoding</a></code></td>
-    <td><span>The output character encoding.</span></td>
+    <td><code><a href="#encoding" class="internal-link" title="docutils.utils.Reporter.encoding">encoding</a></code></td>
+    <td>The output character encoding.</td>
   </tr><tr class="instancevariable">
     
     <td>Instance Variable</td>
-    <td><code><a href="#error_handler">error_handler</a></code></td>
-    <td><span>The character encoding error handler.</span></td>
+    <td><code><a href="#error_handler" class="internal-link" title="docutils.utils.Reporter.error_handler">error​_handler</a></code></td>
+    <td>The character encoding error handler.</td>
   </tr><tr class="instancevariable">
     
     <td>Instance Variable</td>
-    <td><code><a href="#halt_level">halt_level</a></code></td>
-    <td><span>The level at or above which <code><a href="docutils.utils.SystemMessage.html">SystemMessage</a></code> exceptions will be raised, halting execution.</span></td>
+    <td><code><a href="#halt_level" class="internal-link" title="docutils.utils.Reporter.halt_level">halt​_level</a></code></td>
+    <td>The level at or above which <code><a href="docutils.utils.SystemMessage.html" class="internal-link" title="docutils.utils.SystemMessage">SystemMessage</a></code> exceptions will be raised, halting execution.</td>
   </tr><tr class="instancevariable">
     
     <td>Instance Variable</td>
-    <td><code><a href="#max_level">max_level</a></code></td>
-    <td><span>The highest level system message generated so far.</span></td>
+    <td><code><a href="#max_level" class="internal-link" title="docutils.utils.Reporter.max_level">max​_level</a></code></td>
+    <td>The highest level system message generated so far.</td>
   </tr><tr class="instancevariable">
     
     <td>Instance Variable</td>
-    <td><code><a href="#observers">observers</a></code></td>
-    <td><span>List of bound methods or functions to call with each system_message created.</span></td>
+    <td><code><a href="#observers" class="internal-link" title="docutils.utils.Reporter.observers">observers</a></code></td>
+    <td>List of bound methods or functions to call with each system_message created.</td>
   </tr><tr class="instancevariable">
     
     <td>Instance Variable</td>
-    <td><code><a href="#report_level">report_level</a></code></td>
-    <td><span>The level at or above which warning output will be sent to <code>self.stream</code>.</span></td>
+    <td><code><a href="#report_level" class="internal-link" title="docutils.utils.Reporter.report_level">report​_level</a></code></td>
+    <td>The level at or above which warning output will be sent to <code>self.stream</code>.</td>
   </tr><tr class="instancevariable">
     
     <td>Instance Variable</td>
-    <td><code><a href="#source">source</a></code></td>
-    <td><span>The path to or description of the source data.</span></td>
+    <td><code><a href="#source" class="internal-link" title="docutils.utils.Reporter.source">source</a></code></td>
+    <td>The path to or description of the source data.</td>
   </tr><tr class="instancevariable">
     
     <td>Instance Variable</td>
-    <td><code><a href="#stream">stream</a></code></td>
-    <td><span>Where warning output is sent.</span></td>
+    <td><code><a href="#stream" class="internal-link" title="docutils.utils.Reporter.stream">stream</a></code></td>
+    <td>Where warning output is sent.</td>
   </tr>
 </table>
         
@@ -314,7 +327,7 @@ Reusable Object-Oriented Software</em>. Addison-Wesley, Reading, MA, USA,
   </a>
   <div class="functionHeader">
     
-    <span class="py-keyword">def</span> <span class="py-defname">__init__</span>(self, source, report_level, halt_level, stream=None, debug=False, encoding=None, error_handler='backslashreplace'):
+    <span class="py-keyword">def</span> <span class="py-defname">__init__</span>(self, source, report_level, halt_level, stream=None, debug=False, encoding=None, error_handler=<span class="rst-variable-quote">'</span><span class="rst-variable-string">backslashreplace</span><span class="rst-variable-quote">'</span>):
     <a class="sourceLink" href="https://sourceforge.net/p/docutils/code/HEAD/tree/tags/docutils-0.17.1//docutils/utils/__init__.py#L80">
       
       (source)
@@ -323,19 +336,12 @@ Reusable Object-Oriented Software</em>. Addison-Wesley, Reading, MA, USA,
   <div class="docstring functionBody">
     
     
-    <div><p class="pre">:Parameters:
-    - `source`: The path to or description of the source data.
-    - `report_level`: The level at or above which warning output will
-      be sent to `stream`.
-    - `halt_level`: The level at or above which `SystemMessage`
-      exceptions will be raised, halting execution.
-    - `debug`: Show debug (level=0) system messages?
-    - `stream`: Where warning output is sent.  Can be file-like (has a
-      ``.write`` method), a string (file name, opened for writing),
-      '' (empty string) or `False` (for discarding all stream messages)
-      or `None` (implies `sys.stderr`; default).
-    - `encoding`: The output encoding.
-    - `error_handler`: The error handler for stderr output encoding.</p></div>
+    <div><table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">source</span></td><td class="fieldArgDesc">The path to or description of the source data.</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">report​_level</span></td><td class="fieldArgDesc">The level at or above which warning output will
+be sent to <code><a href="#stream" class="internal-link" title="docutils.utils.Reporter.stream">stream</a></code>.</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">halt​_level</span></td><td class="fieldArgDesc">The level at or above which <code><a href="docutils.utils.SystemMessage.html" class="internal-link" title="docutils.utils.SystemMessage">SystemMessage</a></code>
+exceptions will be raised, halting execution.</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">stream</span></td><td class="fieldArgDesc">Where warning output is sent.  Can be file-like (has a
+<tt class="rst-docutils literal">.write</tt> method), a string (file name, opened for writing),
+'' (empty string) or <code>False</code> (for discarding all stream messages)
+or <code>None</code> (implies <code>sys.stderr</code>; default).</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">debug</span></td><td class="fieldArgDesc">Show debug (level=0) system messages?</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">encoding</span></td><td class="fieldArgDesc">The output encoding.</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">error​_handler</span></td><td class="fieldArgDesc">The error handler for stderr output encoding.</td></tr></table></div>
   </div>
 </div><div class="basemethod">
   
@@ -358,7 +364,7 @@ Reusable Object-Oriented Software</em>. Addison-Wesley, Reading, MA, USA,
     
     
     <div>The <code>observer</code> parameter is a function or bound method which takes one
-argument, a <code><a href="docutils.nodes.system_message.html">nodes.system_message</a></code> instance.</div>
+argument, a <code><a href="docutils.nodes.system_message.html" class="internal-link" title="docutils.nodes.system_message">nodes.system_message</a></code> instance.</div>
   </div>
 </div><div class="basemethod">
   
@@ -567,7 +573,7 @@ messages are turned into exceptions which halt processing.</div>
     <div>Level-2, "WARNING": an issue that should be addressed. If ignored,
 there may be unpredictable problems with the output.</div>
   </div>
-</div><div class="baseclassvariable">
+</div><div class="baseconstant">
   
   
   <a name="docutils.utils.Reporter.DEBUG_LEVEL">
@@ -588,8 +594,9 @@ there may be unpredictable problems with the output.</div>
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    
   </div>
-</div><div class="baseclassvariable">
+</div><div class="baseconstant">
   
   
   <a name="docutils.utils.Reporter.ERROR_LEVEL">
@@ -610,8 +617,9 @@ there may be unpredictable problems with the output.</div>
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    
   </div>
-</div><div class="baseclassvariable">
+</div><div class="baseconstant">
   
   
   <a name="docutils.utils.Reporter.INFO_LEVEL">
@@ -632,6 +640,53 @@ there may be unpredictable problems with the output.</div>
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    
+  </div>
+</div><div class="baseconstant">
+  
+  
+  <a name="docutils.utils.Reporter.SEVERE_LEVEL">
+    
+  </a>
+  <a name="SEVERE_LEVEL">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-defname">SEVERE_LEVEL</span> =
+    <a class="sourceLink" href="https://sourceforge.net/p/docutils/code/HEAD/tree/tags/docutils-0.17.1//docutils/utils/__init__.py#L74">
+      
+      (source)
+    </a>
+  </div>
+  <div class="functionBody">
+    
+    
+    <div><p class="undocumented">Undocumented</p></div>
+    
+  </div>
+</div><div class="baseconstant">
+  
+  
+  <a name="docutils.utils.Reporter.WARNING_LEVEL">
+    
+  </a>
+  <a name="WARNING_LEVEL">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-defname">WARNING_LEVEL</span> =
+    <a class="sourceLink" href="https://sourceforge.net/p/docutils/code/HEAD/tree/tags/docutils-0.17.1//docutils/utils/__init__.py#L74">
+      
+      (source)
+    </a>
+  </div>
+  <div class="functionBody">
+    
+    
+    <div><p class="undocumented">Undocumented</p></div>
+    
   </div>
 </div><div class="baseclassvariable">
   
@@ -654,50 +709,7 @@ there may be unpredictable problems with the output.</div>
     
     
     <div>List of names for system message levels, indexed by level.</div>
-  </div>
-</div><div class="baseclassvariable">
-  
-  
-  <a name="docutils.utils.Reporter.SEVERE_LEVEL">
     
-  </a>
-  <a name="SEVERE_LEVEL">
-    
-  </a>
-  <div class="functionHeader">
-    
-    <span class="py-defname">SEVERE_LEVEL</span> =
-    <a class="sourceLink" href="https://sourceforge.net/p/docutils/code/HEAD/tree/tags/docutils-0.17.1//docutils/utils/__init__.py#L74">
-      
-      (source)
-    </a>
-  </div>
-  <div class="functionBody">
-    
-    
-    <div><p class="undocumented">Undocumented</p></div>
-  </div>
-</div><div class="baseclassvariable">
-  
-  
-  <a name="docutils.utils.Reporter.WARNING_LEVEL">
-    
-  </a>
-  <a name="WARNING_LEVEL">
-    
-  </a>
-  <div class="functionHeader">
-    
-    <span class="py-defname">WARNING_LEVEL</span> =
-    <a class="sourceLink" href="https://sourceforge.net/p/docutils/code/HEAD/tree/tags/docutils-0.17.1//docutils/utils/__init__.py#L74">
-      
-      (source)
-    </a>
-  </div>
-  <div class="functionBody">
-    
-    
-    <div><p class="undocumented">Undocumented</p></div>
   </div>
 </div><div class="baseinstancevariable">
   
@@ -720,6 +732,7 @@ there may be unpredictable problems with the output.</div>
     
     
     <div>Show debug (level=0) system messages?</div>
+    
   </div>
 </div><div class="baseinstancevariable">
   
@@ -742,6 +755,7 @@ there may be unpredictable problems with the output.</div>
     
     
     <div>The output character encoding.</div>
+    
   </div>
 </div><div class="baseinstancevariable">
   
@@ -764,6 +778,7 @@ there may be unpredictable problems with the output.</div>
     
     
     <div>The character encoding error handler.</div>
+    
   </div>
 </div><div class="baseinstancevariable">
   
@@ -785,8 +800,9 @@ there may be unpredictable problems with the output.</div>
   <div class="functionBody">
     
     
-    <div>The level at or above which <code><a href="docutils.utils.SystemMessage.html">SystemMessage</a></code> exceptions
+    <div>The level at or above which <code><a href="docutils.utils.SystemMessage.html" class="internal-link" title="docutils.utils.SystemMessage">SystemMessage</a></code> exceptions
 will be raised, halting execution.</div>
+    
   </div>
 </div><div class="baseinstancevariable">
   
@@ -809,6 +825,7 @@ will be raised, halting execution.</div>
     
     
     <div>The highest level system message generated so far.</div>
+    
   </div>
 </div><div class="baseinstancevariable">
   
@@ -832,6 +849,7 @@ will be raised, halting execution.</div>
     
     <div>List of bound methods or functions to call with each system_message
 created.</div>
+    
   </div>
 </div><div class="baseinstancevariable">
   
@@ -855,6 +873,7 @@ created.</div>
     
     <div>The level at or above which warning output will be sent
 to <code>self.stream</code>.</div>
+    
   </div>
 </div><div class="baseinstancevariable">
   
@@ -877,6 +896,7 @@ to <code>self.stream</code>.</div>
     
     
     <div>The path to or description of the source data.</div>
+    
   </div>
 </div><div class="baseinstancevariable">
   
@@ -899,6 +919,7 @@ to <code>self.stream</code>.</div>
     
     
     <div>Where warning output is sent.</div>
+    
   </div>
 </div>
 
@@ -910,7 +931,7 @@ to <code>self.stream</code>.</div>
   <div class="container">
     <a href="index.html">API Documentation</a> for <a href="https://docutils.sourceforge.io/" class="projecthome">docutils-0.17.1</a>,
   generated by <a href="https://github.com/twisted/pydoctor/">pydoctor</a>
-    21.2.2 at 2022-01-06 17:36:41.
+    22.2.2.dev0 at 2022-03-04 05:57:20.
   </div>
 </footer>
 

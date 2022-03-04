@@ -7,7 +7,7 @@
   <head>
     
     <title>docutils.utils.math.math2html.Position</title>
-    <meta name="generator" content="pydoctor 21.2.2"> 
+    <meta name="generator" content="pydoctor 22.2.2.dev0"> 
         
     </meta>
     <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
@@ -44,69 +44,82 @@
           Names
         </a>
 
-        <form action="search-results.html" id="search-box-container">
+        <div id="search-box-container">
           <div class="input-group">
-            <input id="search-box" name="search-query" placeholder="Search..." aria-label="Search" minlength="2" class="form-control" />
+            <input id="search-box" type="search" name="search-query" placeholder="Search..." aria-label="Search" minlength="2" class="form-control" autocomplete="off" />
+            
             <span class="input-group-btn">
-              <button class="btn btn-default" type="submit" title="Search"><img src="fonts/search.svg" alt="Search!" /></button>
-              <a class="btn btn-default" id="search-help-button" title="Help" onclick="toggleSearchHelpText()"><img src="fonts/info.svg" alt="Help!" /></a>
+              <a style="display: none;" class="btn btn-default" id="search-clear-button" title="Clear" onclick="clearSearch()"><img src="fonts/x-circle.svg" alt="Clear" /></a>
+              <a class="btn btn-default" id="search-help-button" title="Help" onclick="toggleSearchHelpText()"><img src="fonts/info.svg" alt="Help" /></a>
             </span>
           </div>
-        </form>
+        </div>
 
-        <div class="rst-admonition hint" id="search-help-box">
+      </div>
+
+      <div id="search-results-container" style="display: none;">
+        <div>
+          <span class="label label-default" id="search-docstrings-button">
+            <a title="Search in docstrings" onclick="toggleSearchInDocstrings()">search in docstrings</a></span>
+        </div>
+
+        <noscript>
+            <h1>Cannot search: JavaScript is not supported/enabled in your browser.</h1>
+        </noscript>
+
+        <div class="hint" id="search-help-box">
           <p class="rst-last">
       
             Search bar offers the following options:
             <ul>   
                 <li>
                   <strong>Term presence.</strong> The below example searches for documents that 
-                    must contain “foo”, might contain “bar” and must not contain “baz”:
-                  <br /> <code>'+foo bar -baz'</code>
+                    must contain “foo”, might contain “bar” and must not contain “baz”: <code>+foo bar -baz</code>
                 </li> 
 
                 <li>
-                  <strong>Wildcards.</strong> The below example searches for documents with words beginning with “foo”:
-                  <br /> <code>'foo*'</code>
+                  <strong>Wildcards.</strong> The below example searches for documents with words beginning with “foo”: <code>foo*</code>
                 </li> 
 
                 <li>
-                  <strong>Search in specific fields.</strong> The following search matches all documents 
-                  that contains "foo" in their full dotted name and with “bar” in any field:
-                  <br /> <code>'+fullName:*foo* +bar'</code>
+                  <strong>Search in specific fields.</strong> The following search matches all objects 
+                  in "twisted.mail" that matches “search”: <code>+qname:twisted.mail.* +search</code>
 
                   <p>
-                    Possible fields: 'name', 'docstring', 'fullName'.
+                    Possible fields: 'name', 'qname' (fully qualified name), 'docstring', and 'kind'.
+                    Last two fields are only applicable if "search in docstrings" is enabled.
                   </p>
                 </li>
 
                 <li>
                   <strong>Fuzzy matches.</strong> The following search matches all documents 
-                  that have a word within 1 edit distance of “foo”:
-                  <br /> <code>'foo~1'</code>
+                  that have a word within 1 edit distance of “foo”: <code>foo~1</code>
                 </li>
             </ul>
 
           </p>
         </div>
 
-      </div>
+        <div id="search-status"> </div>
+        
+        <div class="warning" id="search-warn-box" style="display: none;">
+          <p class="rst-last"><span id="search-warn"></span></p>
+        </div>
 
+        <table id="search-results">
+          <!-- Filled dynamically by JS -->
+        </table>
+        
+        <div style="margin-top: 8px;">
+          <p>Results provided by <a href="https://lunrjs.com">Lunr.js</a></p>
+        </div>
+      </div>
 
     </div>
   </div>
 
-  <script>
- 
-    function toggleSearchHelpText() {
-        document.body.classList.toggle("search-help-hidden");
-    }
-    // Init search and help text
-    document.getElementById('search-box-container').style.display = 'block';
-    document.getElementById('search-help-box').style.display = 'block';
-    document.body.classList.add("search-help-hidden");
-
-  </script>
+  <script src="ajax.js" type="text/javascript"></script>
+  <script src="search.js" type="text/javascript"></script>
 
 </nav>
 
@@ -115,7 +128,7 @@
     <div class="container">
 
       <div class="page-header">
-        <h1 class="class"><code><code><a href="docutils.html">docutils</a></code><wbr></wbr>.<code><a href="docutils.utils.html">utils</a></code><wbr></wbr>.<code><a href="docutils.utils.math.html">math</a></code><wbr></wbr>.<code><a href="docutils.utils.math.math2html.html">math2html</a></code><wbr></wbr>.<code><a href="docutils.utils.math.math2html.Position.html">Position</a></code></code></h1>
+        <h1 class="class"><code><code><a href="index.html" class="internal-link">docutils</a></code><wbr></wbr>.<code><a href="docutils.utils.html" class="internal-link" title="docutils.utils">utils</a></code><wbr></wbr>.<code><a href="docutils.utils.math.html" class="internal-link" title="docutils.utils.math">math</a></code><wbr></wbr>.<code><a href="docutils.utils.math.math2html.html" class="internal-link" title="docutils.utils.math.math2html">math2html</a></code><wbr></wbr>.<code><a href="docutils.utils.math.math2html.Position.html" class="internal-link" title="docutils.utils.math.math2html.Position">Position</a></code></code></h1>
         <div id="showPrivate">
           <button class="btn btn-link" onclick="togglePrivate()">Toggle Private API</button>
         </div>
@@ -126,7 +139,7 @@
       </div>
 
       <div class="extrasDocstring">
-        <p><code><span class="py-keyword">class</span> <span class="py-defname">Position</span>(<a href="docutils.utils.math.math2html.Globable.html" title="docutils.utils.math.math2html.Globable">Globable</a>): <a href="https://sourceforge.net/p/docutils/code/HEAD/tree/tags/docutils-0.17.1//docutils/utils/math/math2html.py#L2003" class="sourceLink">(source)</a></code></p><p>Known subclasses: <code><a href="docutils.utils.math.math2html.FilePosition.html">docutils.utils.math.math2html.FilePosition</a></code>, <code><a href="docutils.utils.math.math2html.TextPosition.html">docutils.utils.math.math2html.TextPosition</a></code></p>
+        <p><code><span class="py-keyword">class</span> <span class="py-defname">Position</span>(<a href="docutils.utils.math.math2html.Globable.html" class="internal-link" title="docutils.utils.math.math2html.Globable">Globable</a>): <a href="https://sourceforge.net/p/docutils/code/HEAD/tree/tags/docutils-0.17.1//docutils/utils/math/math2html.py#L2003" class="sourceLink">(source)</a></code></p><p>Known subclasses: <code><a href="docutils.utils.math.math2html.FilePosition.html" class="internal-link">docutils.utils.math.math2html.FilePosition</a></code>, <code><a href="docutils.utils.math.math2html.TextPosition.html" class="internal-link">docutils.utils.math.math2html.TextPosition</a></code></p>
         <p><a href="classIndex.html#docutils.utils.math.math2html.Position">View In Hierarchy</a></p>
       </div>
 
@@ -143,58 +156,58 @@ skip(), identifier(), extract(), isout() and current().</div>
   <tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#__init__">__init__</a></code></td>
+    <td><code><a href="#__init__" class="internal-link" title="docutils.utils.math.math2html.Position.__init__">__init__</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#__next__">__next__</a></code></td>
-    <td><span>Advance the position and return the next character.</span></td>
+    <td><code><a href="#__next__" class="internal-link" title="docutils.utils.math.math2html.Position.__next__">__next__</a></code></td>
+    <td>Advance the position and return the next character.</td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#checkfor">checkfor</a></code></td>
-    <td><span>Check for a string at the given position.</span></td>
+    <td><code><a href="#checkfor" class="internal-link" title="docutils.utils.math.math2html.Position.checkfor">checkfor</a></code></td>
+    <td>Check for a string at the given position.</td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#checkforlower">checkforlower</a></code></td>
-    <td><span>Check for a string in lower case.</span></td>
+    <td><code><a href="#checkforlower" class="internal-link" title="docutils.utils.math.math2html.Position.checkforlower">checkforlower</a></code></td>
+    <td>Check for a string in lower case.</td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#checkskip">checkskip</a></code></td>
-    <td><span>Check for a string at the given position; if there, skip it</span></td>
+    <td><code><a href="#checkskip" class="internal-link" title="docutils.utils.math.math2html.Position.checkskip">checkskip</a></code></td>
+    <td>Check for a string at the given position; if there, skip it</td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#error">error</a></code></td>
-    <td><span>Show an error message and the position identifier.</span></td>
+    <td><code><a href="#error" class="internal-link" title="docutils.utils.math.math2html.Position.error">error</a></code></td>
+    <td>Show an error message and the position identifier.</td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#extract">extract</a></code></td>
-    <td><span>Extract the next string of the given length, or None if not enough text,</span></td>
+    <td><code><a href="#extract" class="internal-link" title="docutils.utils.math.math2html.Position.extract">extract</a></code></td>
+    <td>Extract the next string of the given length, or None if not enough text,</td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#identifier">identifier</a></code></td>
-    <td><span>Return an identifier for the current position.</span></td>
+    <td><code><a href="#identifier" class="internal-link" title="docutils.utils.math.math2html.Position.identifier">identifier</a></code></td>
+    <td>Return an identifier for the current position.</td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#skip">skip</a></code></td>
-    <td><span>Skip a string</span></td>
+    <td><code><a href="#skip" class="internal-link" title="docutils.utils.math.math2html.Position.skip">skip</a></code></td>
+    <td>Skip a string</td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#skipcurrent">skipcurrent</a></code></td>
-    <td><span>Return the current character and skip it.</span></td>
+    <td><code><a href="#skipcurrent" class="internal-link" title="docutils.utils.math.math2html.Position.skipcurrent">skipcurrent</a></code></td>
+    <td>Return the current character and skip it.</td>
   </tr>
 </table>
         
           <p class="inheritedFrom">
-            Inherited from <code><a href="docutils.utils.math.math2html.Globable.html">Globable</a></code>:
+            Inherited from <code><a href="docutils.utils.math.math2html.Globable.html" class="internal-link" title="docutils.utils.math.math2html.Globable">Globable</a></code>:
           </p>
           <table class="children sortable" id="id915">
   
@@ -202,97 +215,97 @@ skip(), identifier(), extract(), isout() and current().</div>
   <tr class="basemethod">
     
     <td>Method</td>
-    <td><code><a href="docutils.utils.math.math2html.Globable.html#checkbytemark">checkbytemark</a></code></td>
-    <td><span>Check for a Unicode byte mark and skip it.</span></td>
+    <td><code><a href="docutils.utils.math.math2html.Globable.html#checkbytemark" class="internal-link" title="docutils.utils.math.math2html.Globable.checkbytemark">checkbytemark</a></code></td>
+    <td>Check for a Unicode byte mark and skip it.</td>
   </tr><tr class="basemethod">
     
     <td>Method</td>
-    <td><code><a href="docutils.utils.math.math2html.Globable.html#current">current</a></code></td>
-    <td><span>Return the current character.</span></td>
+    <td><code><a href="docutils.utils.math.math2html.Globable.html#current" class="internal-link" title="docutils.utils.math.math2html.Globable.current">current</a></code></td>
+    <td>Return the current character.</td>
   </tr><tr class="basemethod">
     
     <td>Method</td>
-    <td><code><a href="docutils.utils.math.math2html.Globable.html#finished">finished</a></code></td>
-    <td><span>Find out if the current text has finished.</span></td>
+    <td><code><a href="docutils.utils.math.math2html.Globable.html#finished" class="internal-link" title="docutils.utils.math.math2html.Globable.finished">finished</a></code></td>
+    <td>Find out if the current text has finished.</td>
   </tr><tr class="basemethod">
     
     <td>Method</td>
-    <td><code><a href="docutils.utils.math.math2html.Globable.html#glob">glob</a></code></td>
-    <td><span>Glob a bit of text that satisfies a check on the current char.</span></td>
+    <td><code><a href="docutils.utils.math.math2html.Globable.html#glob" class="internal-link" title="docutils.utils.math.math2html.Globable.glob">glob</a></code></td>
+    <td>Glob a bit of text that satisfies a check on the current char.</td>
   </tr><tr class="basemethod">
     
     <td>Method</td>
-    <td><code><a href="docutils.utils.math.math2html.Globable.html#globalpha">globalpha</a></code></td>
-    <td><span>Glob a bit of alpha text</span></td>
+    <td><code><a href="docutils.utils.math.math2html.Globable.html#globalpha" class="internal-link" title="docutils.utils.math.math2html.Globable.globalpha">globalpha</a></code></td>
+    <td>Glob a bit of alpha text</td>
   </tr><tr class="basemethod">
     
     <td>Method</td>
-    <td><code><a href="docutils.utils.math.math2html.Globable.html#globexcluding">globexcluding</a></code></td>
-    <td><span>Glob a bit of text up until (excluding) any excluded character.</span></td>
+    <td><code><a href="docutils.utils.math.math2html.Globable.html#globexcluding" class="internal-link" title="docutils.utils.math.math2html.Globable.globexcluding">globexcluding</a></code></td>
+    <td>Glob a bit of text up until (excluding) any excluded character.</td>
   </tr><tr class="basemethod">
     
     <td>Method</td>
-    <td><code><a href="docutils.utils.math.math2html.Globable.html#globidentifier">globidentifier</a></code></td>
-    <td><span>Glob alphanumeric and _ symbols.</span></td>
+    <td><code><a href="docutils.utils.math.math2html.Globable.html#globidentifier" class="internal-link" title="docutils.utils.math.math2html.Globable.globidentifier">globidentifier</a></code></td>
+    <td>Glob alphanumeric and _ symbols.</td>
   </tr><tr class="basemethod">
     
     <td>Method</td>
-    <td><code><a href="docutils.utils.math.math2html.Globable.html#globincluding">globincluding</a></code></td>
-    <td><span>Glob a bit of text up to (including) the magic char.</span></td>
+    <td><code><a href="docutils.utils.math.math2html.Globable.html#globincluding" class="internal-link" title="docutils.utils.math.math2html.Globable.globincluding">globincluding</a></code></td>
+    <td>Glob a bit of text up to (including) the magic char.</td>
   </tr><tr class="basemethod">
     
     <td>Method</td>
-    <td><code><a href="docutils.utils.math.math2html.Globable.html#globnumber">globnumber</a></code></td>
-    <td><span>Glob a row of digits.</span></td>
+    <td><code><a href="docutils.utils.math.math2html.Globable.html#globnumber" class="internal-link" title="docutils.utils.math.math2html.Globable.globnumber">globnumber</a></code></td>
+    <td>Glob a row of digits.</td>
   </tr><tr class="basemethod">
     
     <td>Method</td>
-    <td><code><a href="docutils.utils.math.math2html.Globable.html#globvalue">globvalue</a></code></td>
-    <td><span>Glob a value: any symbols but brackets.</span></td>
+    <td><code><a href="docutils.utils.math.math2html.Globable.html#globvalue" class="internal-link" title="docutils.utils.math.math2html.Globable.globvalue">globvalue</a></code></td>
+    <td>Glob a value: any symbols but brackets.</td>
   </tr><tr class="basemethod">
     
     <td>Method</td>
-    <td><code><a href="docutils.utils.math.math2html.Globable.html#isidentifier">isidentifier</a></code></td>
-    <td><span>Return if the current character is alphanumeric or _.</span></td>
+    <td><code><a href="docutils.utils.math.math2html.Globable.html#isidentifier" class="internal-link" title="docutils.utils.math.math2html.Globable.isidentifier">isidentifier</a></code></td>
+    <td>Return if the current character is alphanumeric or _.</td>
   </tr><tr class="basemethod">
     
     <td>Method</td>
-    <td><code><a href="docutils.utils.math.math2html.Globable.html#isout">isout</a></code></td>
-    <td><span>Find out if we are out of the position yet.</span></td>
+    <td><code><a href="docutils.utils.math.math2html.Globable.html#isout" class="internal-link" title="docutils.utils.math.math2html.Globable.isout">isout</a></code></td>
+    <td>Find out if we are out of the position yet.</td>
   </tr><tr class="basemethod">
     
     <td>Method</td>
-    <td><code><a href="docutils.utils.math.math2html.Globable.html#isvalue">isvalue</a></code></td>
-    <td><span>Return if the current character is a value character:</span></td>
+    <td><code><a href="docutils.utils.math.math2html.Globable.html#isvalue" class="internal-link" title="docutils.utils.math.math2html.Globable.isvalue">isvalue</a></code></td>
+    <td>Return if the current character is a value character:</td>
   </tr><tr class="basemethod">
     
     <td>Method</td>
-    <td><code><a href="docutils.utils.math.math2html.Globable.html#nextending">nextending</a></code></td>
-    <td><span>Return the next ending in the queue.</span></td>
+    <td><code><a href="docutils.utils.math.math2html.Globable.html#nextending" class="internal-link" title="docutils.utils.math.math2html.Globable.nextending">nextending</a></code></td>
+    <td>Return the next ending in the queue.</td>
   </tr><tr class="basemethod">
     
     <td>Method</td>
-    <td><code><a href="docutils.utils.math.math2html.Globable.html#popending">popending</a></code></td>
-    <td><span>Pop the ending found at the current position</span></td>
+    <td><code><a href="docutils.utils.math.math2html.Globable.html#popending" class="internal-link" title="docutils.utils.math.math2html.Globable.popending">popending</a></code></td>
+    <td>Pop the ending found at the current position</td>
   </tr><tr class="basemethod">
     
     <td>Method</td>
-    <td><code><a href="docutils.utils.math.math2html.Globable.html#pushending">pushending</a></code></td>
-    <td><span>Push a new ending to the bottom</span></td>
+    <td><code><a href="docutils.utils.math.math2html.Globable.html#pushending" class="internal-link" title="docutils.utils.math.math2html.Globable.pushending">pushending</a></code></td>
+    <td>Push a new ending to the bottom</td>
   </tr><tr class="basemethod">
     
     <td>Method</td>
-    <td><code><a href="docutils.utils.math.math2html.Globable.html#skipspace">skipspace</a></code></td>
-    <td><span>Skip all whitespace at current position.</span></td>
+    <td><code><a href="docutils.utils.math.math2html.Globable.html#skipspace" class="internal-link" title="docutils.utils.math.math2html.Globable.skipspace">skipspace</a></code></td>
+    <td>Skip all whitespace at current position.</td>
   </tr><tr class="baseclassvariable">
     
     <td>Class Variable</td>
-    <td><code><a href="docutils.utils.math.math2html.Globable.html#leavepending">leavepending</a></code></td>
+    <td><code><a href="docutils.utils.math.math2html.Globable.html#leavepending" class="internal-link" title="docutils.utils.math.math2html.Globable.leavepending">leavepending</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="baseinstancevariable">
     
     <td>Instance Variable</td>
-    <td><code><a href="docutils.utils.math.math2html.Globable.html#endinglist">endinglist</a></code></td>
+    <td><code><a href="docutils.utils.math.math2html.Globable.html#endinglist" class="internal-link" title="docutils.utils.math.math2html.Globable.endinglist">endinglist</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr>
 </table>
@@ -321,7 +334,7 @@ skip(), identifier(), extract(), isout() and current().</div>
     </a>
   </div>
   <div class="docstring functionBody">
-    <div class="interfaceinfo">overrides <code><a href="docutils.utils.math.math2html.Globable.html#__init__">docutils.utils.math.math2html.Globable.__init__</a></code></div><div class="interfaceinfo">overridden in <code><a href="docutils.utils.math.math2html.FilePosition.html">docutils.utils.math.math2html.FilePosition</a></code>, <code><a href="docutils.utils.math.math2html.TextPosition.html">docutils.utils.math.math2html.TextPosition</a></code></div>
+    <div class="interfaceinfo">overrides <code><a href="docutils.utils.math.math2html.Globable.html#__init__" class="internal-link">docutils.utils.math.math2html.Globable.__init__</a></code></div><div class="interfaceinfo">overridden in <code><a href="docutils.utils.math.math2html.FilePosition.html" class="internal-link">docutils.utils.math.math2html.FilePosition</a></code>, <code><a href="docutils.utils.math.math2html.TextPosition.html" class="internal-link">docutils.utils.math.math2html.TextPosition</a></code></div>
     
     <div><p class="undocumented">Undocumented</p></div>
   </div>
@@ -365,7 +378,7 @@ skip(), identifier(), extract(), isout() and current().</div>
     </a>
   </div>
   <div class="docstring functionBody">
-    <div class="interfaceinfo">overrides <code><a href="docutils.utils.math.math2html.Globable.html#checkfor">docutils.utils.math.math2html.Globable.checkfor</a></code></div>
+    <div class="interfaceinfo">overrides <code><a href="docutils.utils.math.math2html.Globable.html#checkfor" class="internal-link">docutils.utils.math.math2html.Globable.checkfor</a></code></div>
     
     <div>Check for a string at the given position.</div>
   </div>
@@ -453,7 +466,7 @@ skip(), identifier(), extract(), isout() and current().</div>
     </a>
   </div>
   <div class="docstring functionBody">
-    <div class="interfaceinfo">overridden in <code><a href="docutils.utils.math.math2html.FilePosition.html">docutils.utils.math.math2html.FilePosition</a></code>, <code><a href="docutils.utils.math.math2html.TextPosition.html">docutils.utils.math.math2html.TextPosition</a></code></div>
+    <div class="interfaceinfo">overridden in <code><a href="docutils.utils.math.math2html.FilePosition.html" class="internal-link">docutils.utils.math.math2html.FilePosition</a></code>, <code><a href="docutils.utils.math.math2html.TextPosition.html" class="internal-link">docutils.utils.math.math2html.TextPosition</a></code></div>
     
     <div>Extract the next string of the given length, or None if not enough text,</div>
   </div>
@@ -475,7 +488,7 @@ skip(), identifier(), extract(), isout() and current().</div>
     </a>
   </div>
   <div class="docstring functionBody">
-    <div class="interfaceinfo">overridden in <code><a href="docutils.utils.math.math2html.FilePosition.html">docutils.utils.math.math2html.FilePosition</a></code>, <code><a href="docutils.utils.math.math2html.TextPosition.html">docutils.utils.math.math2html.TextPosition</a></code></div>
+    <div class="interfaceinfo">overridden in <code><a href="docutils.utils.math.math2html.FilePosition.html" class="internal-link">docutils.utils.math.math2html.FilePosition</a></code>, <code><a href="docutils.utils.math.math2html.TextPosition.html" class="internal-link">docutils.utils.math.math2html.TextPosition</a></code></div>
     
     <div>Return an identifier for the current position.</div>
   </div>
@@ -497,7 +510,7 @@ skip(), identifier(), extract(), isout() and current().</div>
     </a>
   </div>
   <div class="docstring functionBody">
-    <div class="interfaceinfo">overridden in <code><a href="docutils.utils.math.math2html.FilePosition.html">docutils.utils.math.math2html.FilePosition</a></code>, <code><a href="docutils.utils.math.math2html.TextPosition.html">docutils.utils.math.math2html.TextPosition</a></code></div>
+    <div class="interfaceinfo">overridden in <code><a href="docutils.utils.math.math2html.FilePosition.html" class="internal-link">docutils.utils.math.math2html.FilePosition</a></code>, <code><a href="docutils.utils.math.math2html.TextPosition.html" class="internal-link">docutils.utils.math.math2html.TextPosition</a></code></div>
     
     <div>Skip a string</div>
   </div>
@@ -519,7 +532,7 @@ skip(), identifier(), extract(), isout() and current().</div>
     </a>
   </div>
   <div class="docstring functionBody">
-    <div class="interfaceinfo">overrides <code><a href="docutils.utils.math.math2html.Globable.html#skipcurrent">docutils.utils.math.math2html.Globable.skipcurrent</a></code></div>
+    <div class="interfaceinfo">overrides <code><a href="docutils.utils.math.math2html.Globable.html#skipcurrent" class="internal-link">docutils.utils.math.math2html.Globable.skipcurrent</a></code></div>
     
     <div>Return the current character and skip it.</div>
   </div>
@@ -533,7 +546,7 @@ skip(), identifier(), extract(), isout() and current().</div>
   <div class="container">
     <a href="index.html">API Documentation</a> for <a href="https://docutils.sourceforge.io/" class="projecthome">docutils-0.17.1</a>,
   generated by <a href="https://github.com/twisted/pydoctor/">pydoctor</a>
-    21.2.2 at 2022-01-06 17:36:41.
+    22.2.2.dev0 at 2022-03-04 05:57:20.
   </div>
 </footer>
 

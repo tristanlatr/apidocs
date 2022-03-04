@@ -7,7 +7,7 @@
   <head>
     
     <title>docutils.utils.math.math2html</title>
-    <meta name="generator" content="pydoctor 21.2.2"> 
+    <meta name="generator" content="pydoctor 22.2.2.dev0"> 
         
     </meta>
     <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
@@ -44,69 +44,82 @@
           Names
         </a>
 
-        <form action="search-results.html" id="search-box-container">
+        <div id="search-box-container">
           <div class="input-group">
-            <input id="search-box" name="search-query" placeholder="Search..." aria-label="Search" minlength="2" class="form-control" />
+            <input id="search-box" type="search" name="search-query" placeholder="Search..." aria-label="Search" minlength="2" class="form-control" autocomplete="off" />
+            
             <span class="input-group-btn">
-              <button class="btn btn-default" type="submit" title="Search"><img src="fonts/search.svg" alt="Search!" /></button>
-              <a class="btn btn-default" id="search-help-button" title="Help" onclick="toggleSearchHelpText()"><img src="fonts/info.svg" alt="Help!" /></a>
+              <a style="display: none;" class="btn btn-default" id="search-clear-button" title="Clear" onclick="clearSearch()"><img src="fonts/x-circle.svg" alt="Clear" /></a>
+              <a class="btn btn-default" id="search-help-button" title="Help" onclick="toggleSearchHelpText()"><img src="fonts/info.svg" alt="Help" /></a>
             </span>
           </div>
-        </form>
+        </div>
 
-        <div class="rst-admonition hint" id="search-help-box">
+      </div>
+
+      <div id="search-results-container" style="display: none;">
+        <div>
+          <span class="label label-default" id="search-docstrings-button">
+            <a title="Search in docstrings" onclick="toggleSearchInDocstrings()">search in docstrings</a></span>
+        </div>
+
+        <noscript>
+            <h1>Cannot search: JavaScript is not supported/enabled in your browser.</h1>
+        </noscript>
+
+        <div class="hint" id="search-help-box">
           <p class="rst-last">
       
             Search bar offers the following options:
             <ul>   
                 <li>
                   <strong>Term presence.</strong> The below example searches for documents that 
-                    must contain “foo”, might contain “bar” and must not contain “baz”:
-                  <br /> <code>'+foo bar -baz'</code>
+                    must contain “foo”, might contain “bar” and must not contain “baz”: <code>+foo bar -baz</code>
                 </li> 
 
                 <li>
-                  <strong>Wildcards.</strong> The below example searches for documents with words beginning with “foo”:
-                  <br /> <code>'foo*'</code>
+                  <strong>Wildcards.</strong> The below example searches for documents with words beginning with “foo”: <code>foo*</code>
                 </li> 
 
                 <li>
-                  <strong>Search in specific fields.</strong> The following search matches all documents 
-                  that contains "foo" in their full dotted name and with “bar” in any field:
-                  <br /> <code>'+fullName:*foo* +bar'</code>
+                  <strong>Search in specific fields.</strong> The following search matches all objects 
+                  in "twisted.mail" that matches “search”: <code>+qname:twisted.mail.* +search</code>
 
                   <p>
-                    Possible fields: 'name', 'docstring', 'fullName'.
+                    Possible fields: 'name', 'qname' (fully qualified name), 'docstring', and 'kind'.
+                    Last two fields are only applicable if "search in docstrings" is enabled.
                   </p>
                 </li>
 
                 <li>
                   <strong>Fuzzy matches.</strong> The following search matches all documents 
-                  that have a word within 1 edit distance of “foo”:
-                  <br /> <code>'foo~1'</code>
+                  that have a word within 1 edit distance of “foo”: <code>foo~1</code>
                 </li>
             </ul>
 
           </p>
         </div>
 
-      </div>
+        <div id="search-status"> </div>
+        
+        <div class="warning" id="search-warn-box" style="display: none;">
+          <p class="rst-last"><span id="search-warn"></span></p>
+        </div>
 
+        <table id="search-results">
+          <!-- Filled dynamically by JS -->
+        </table>
+        
+        <div style="margin-top: 8px;">
+          <p>Results provided by <a href="https://lunrjs.com">Lunr.js</a></p>
+        </div>
+      </div>
 
     </div>
   </div>
 
-  <script>
- 
-    function toggleSearchHelpText() {
-        document.body.classList.toggle("search-help-hidden");
-    }
-    // Init search and help text
-    document.getElementById('search-box-container').style.display = 'block';
-    document.getElementById('search-help-box').style.display = 'block';
-    document.body.classList.add("search-help-hidden");
-
-  </script>
+  <script src="ajax.js" type="text/javascript"></script>
+  <script src="search.js" type="text/javascript"></script>
 
 </nav>
 
@@ -115,7 +128,7 @@
     <div class="container">
 
       <div class="page-header">
-        <h1 class="module"><code><code><a href="docutils.html">docutils</a></code><wbr></wbr>.<code><a href="docutils.utils.html">utils</a></code><wbr></wbr>.<code><a href="docutils.utils.math.html">math</a></code><wbr></wbr>.<code><a href="docutils.utils.math.math2html.html">math2html</a></code></code></h1>
+        <h1 class="module"><code><code><a href="index.html" class="internal-link">docutils</a></code><wbr></wbr>.<code><a href="docutils.utils.html" class="internal-link" title="docutils.utils">utils</a></code><wbr></wbr>.<code><a href="docutils.utils.math.html" class="internal-link" title="docutils.utils.math">math</a></code><wbr></wbr>.<code><a href="docutils.utils.math.math2html.html" class="internal-link" title="docutils.utils.math.math2html">math2html</a></code></code></h1>
         <div id="showPrivate">
           <button class="btn btn-link" onclick="togglePrivate()">Toggle Private API</button>
         </div>
@@ -141,728 +154,728 @@
   <tr class="class">
     
     <td>Class</td>
-    <td><code><a href="docutils.utils.math.math2html.Align.html">Align</a></code></td>
-    <td><span>Bit of aligned text</span></td>
+    <td><code><a href="docutils.utils.math.math2html.Align.html" class="internal-link" title="docutils.utils.math.math2html.Align">​Align</a></code></td>
+    <td>Bit of aligned text</td>
   </tr><tr class="class">
     
     <td>Class</td>
-    <td><code><a href="docutils.utils.math.math2html.AlphaCommand.html">AlphaCommand</a></code></td>
-    <td><span>A command without paramters whose result is alphabetical</span></td>
+    <td><code><a href="docutils.utils.math.math2html.AlphaCommand.html" class="internal-link" title="docutils.utils.math.math2html.AlphaCommand">​Alpha​Command</a></code></td>
+    <td>A command without paramters whose result is alphabetical</td>
   </tr><tr class="class">
     
     <td>Class</td>
-    <td><code><a href="docutils.utils.math.math2html.BarredText.html">BarredText</a></code></td>
-    <td><span>Text with a bar somewhere</span></td>
+    <td><code><a href="docutils.utils.math.math2html.BarredText.html" class="internal-link" title="docutils.utils.math.math2html.BarredText">​Barred​Text</a></code></td>
+    <td>Text with a bar somewhere</td>
   </tr><tr class="class">
     
     <td>Class</td>
-    <td><code><a href="docutils.utils.math.math2html.BeginCommand.html">BeginCommand</a></code></td>
-    <td><span>A begin{}...end command and what it entails (array, cases, aligned)</span></td>
+    <td><code><a href="docutils.utils.math.math2html.BeginCommand.html" class="internal-link" title="docutils.utils.math.math2html.BeginCommand">​Begin​Command</a></code></td>
+    <td>A begin{}...end command and what it entails (array, cases, aligned)</td>
   </tr><tr class="class">
     
     <td>Class</td>
-    <td><code><a href="docutils.utils.math.math2html.BibStylesConfig.html">BibStylesConfig</a></code></td>
-    <td><span>Configuration class from elyxer.config file</span></td>
+    <td><code><a href="docutils.utils.math.math2html.BibStylesConfig.html" class="internal-link" title="docutils.utils.math.math2html.BibStylesConfig">​Bib​Styles​Config</a></code></td>
+    <td>Configuration class from elyxer.config file</td>
   </tr><tr class="class">
     
     <td>Class</td>
-    <td><code><a href="docutils.utils.math.math2html.BibTeXConfig.html">BibTeXConfig</a></code></td>
-    <td><span>Configuration class from elyxer.config file</span></td>
+    <td><code><a href="docutils.utils.math.math2html.BibTeXConfig.html" class="internal-link" title="docutils.utils.math.math2html.BibTeXConfig">​Bib​Te​XConfig</a></code></td>
+    <td>Configuration class from elyxer.config file</td>
   </tr><tr class="class">
     
     <td>Class</td>
-    <td><code><a href="docutils.utils.math.math2html.BigBracket.html">BigBracket</a></code></td>
-    <td><span>A big bracket generator.</span></td>
+    <td><code><a href="docutils.utils.math.math2html.BigBracket.html" class="internal-link" title="docutils.utils.math.math2html.BigBracket">​Big​Bracket</a></code></td>
+    <td>A big bracket generator.</td>
   </tr><tr class="class">
     
     <td>Class</td>
-    <td><code><a href="docutils.utils.math.math2html.BigSymbol.html">BigSymbol</a></code></td>
-    <td><span>A big symbol generator.</span></td>
+    <td><code><a href="docutils.utils.math.math2html.BigSymbol.html" class="internal-link" title="docutils.utils.math.math2html.BigSymbol">​Big​Symbol</a></code></td>
+    <td>A big symbol generator.</td>
   </tr><tr class="class">
     
     <td>Class</td>
-    <td><code><a href="docutils.utils.math.math2html.BlackBox.html">BlackBox</a></code></td>
-    <td><span>A container that does not output anything</span></td>
+    <td><code><a href="docutils.utils.math.math2html.BlackBox.html" class="internal-link" title="docutils.utils.math.math2html.BlackBox">​Black​Box</a></code></td>
+    <td>A container that does not output anything</td>
   </tr><tr class="class">
     
     <td>Class</td>
-    <td><code><a href="docutils.utils.math.math2html.BoldText.html">BoldText</a></code></td>
-    <td><span>Bold text</span></td>
+    <td><code><a href="docutils.utils.math.math2html.BoldText.html" class="internal-link" title="docutils.utils.math.math2html.BoldText">​Bold​Text</a></code></td>
+    <td>Bold text</td>
   </tr><tr class="class">
     
     <td>Class</td>
-    <td><code><a href="docutils.utils.math.math2html.BoundedDummy.html">BoundedDummy</a></code></td>
-    <td><span>A bound parser that ignores everything</span></td>
+    <td><code><a href="docutils.utils.math.math2html.BoundedDummy.html" class="internal-link" title="docutils.utils.math.math2html.BoundedDummy">​Bounded​Dummy</a></code></td>
+    <td>A bound parser that ignores everything</td>
   </tr><tr class="class">
     
     <td>Class</td>
-    <td><code><a href="docutils.utils.math.math2html.BoundedParser.html">BoundedParser</a></code></td>
-    <td><span>A parser bound by a final line</span></td>
+    <td><code><a href="docutils.utils.math.math2html.BoundedParser.html" class="internal-link" title="docutils.utils.math.math2html.BoundedParser">​Bounded​Parser</a></code></td>
+    <td>A parser bound by a final line</td>
   </tr><tr class="class">
     
     <td>Class</td>
-    <td><code><a href="docutils.utils.math.math2html.Bracket.html">Bracket</a></code></td>
-    <td><span>A {} bracket inside a formula</span></td>
+    <td><code><a href="docutils.utils.math.math2html.Bracket.html" class="internal-link" title="docutils.utils.math.math2html.Bracket">​Bracket</a></code></td>
+    <td>A {} bracket inside a formula</td>
   </tr><tr class="class">
     
     <td>Class</td>
-    <td><code><a href="docutils.utils.math.math2html.BracketCommand.html">BracketCommand</a></code></td>
-    <td><span>A command which defines a bracket.</span></td>
+    <td><code><a href="docutils.utils.math.math2html.BracketCommand.html" class="internal-link" title="docutils.utils.math.math2html.BracketCommand">​Bracket​Command</a></code></td>
+    <td>A command which defines a bracket.</td>
   </tr><tr class="class">
     
     <td>Class</td>
-    <td><code><a href="docutils.utils.math.math2html.BracketProcessor.html">BracketProcessor</a></code></td>
-    <td><span>A processor for bracket commands.</span></td>
+    <td><code><a href="docutils.utils.math.math2html.BracketProcessor.html" class="internal-link" title="docutils.utils.math.math2html.BracketProcessor">​Bracket​Processor</a></code></td>
+    <td>A processor for bracket commands.</td>
   </tr><tr class="class">
     
     <td>Class</td>
-    <td><code><a href="docutils.utils.math.math2html.BranchOptions.html">BranchOptions</a></code></td>
-    <td><span>A set of options for a branch</span></td>
+    <td><code><a href="docutils.utils.math.math2html.BranchOptions.html" class="internal-link" title="docutils.utils.math.math2html.BranchOptions">​Branch​Options</a></code></td>
+    <td>A set of options for a branch</td>
   </tr><tr class="class">
     
     <td>Class</td>
-    <td><code><a href="docutils.utils.math.math2html.ChapteredGenerator.html">ChapteredGenerator</a></code></td>
-    <td><span>Generate chaptered numbers, as in Chapter.Number.</span></td>
+    <td><code><a href="docutils.utils.math.math2html.ChapteredGenerator.html" class="internal-link" title="docutils.utils.math.math2html.ChapteredGenerator">​Chaptered​Generator</a></code></td>
+    <td>Generate chaptered numbers, as in Chapter.Number.</td>
   </tr><tr class="class">
     
     <td>Class</td>
-    <td><code><a href="docutils.utils.math.math2html.Cloner.html">Cloner</a></code></td>
-    <td><span>An object used to clone other objects.</span></td>
+    <td><code><a href="docutils.utils.math.math2html.Cloner.html" class="internal-link" title="docutils.utils.math.math2html.Cloner">​Cloner</a></code></td>
+    <td>An object used to clone other objects.</td>
   </tr><tr class="class">
     
     <td>Class</td>
-    <td><code><a href="docutils.utils.math.math2html.ColorText.html">ColorText</a></code></td>
-    <td><span>Colored text</span></td>
+    <td><code><a href="docutils.utils.math.math2html.ColorText.html" class="internal-link" title="docutils.utils.math.math2html.ColorText">​Color​Text</a></code></td>
+    <td>Colored text</td>
   </tr><tr class="class">
     
     <td>Class</td>
-    <td><code><a href="docutils.utils.math.math2html.CombiningFunction.html">CombiningFunction</a></code></td>
+    <td><code><a href="docutils.utils.math.math2html.CombiningFunction.html" class="internal-link" title="docutils.utils.math.math2html.CombiningFunction">​Combining​Function</a></code></td>
     <td><span class="undocumented">No class docstring; 0/1 instance variable, 2/2 methods documented</span></td>
   </tr><tr class="class">
     
     <td>Class</td>
-    <td><code><a href="docutils.utils.math.math2html.CommandBit.html">CommandBit</a></code></td>
-    <td><span>A formula bit that includes a command</span></td>
+    <td><code><a href="docutils.utils.math.math2html.CommandBit.html" class="internal-link" title="docutils.utils.math.math2html.CommandBit">​Command​Bit</a></code></td>
+    <td>A formula bit that includes a command</td>
   </tr><tr class="class">
     
     <td>Class</td>
-    <td><code><a href="docutils.utils.math.math2html.CommandLineParser.html">CommandLineParser</a></code></td>
-    <td><span>A parser for runtime options</span></td>
+    <td><code><a href="docutils.utils.math.math2html.CommandLineParser.html" class="internal-link" title="docutils.utils.math.math2html.CommandLineParser">​Command​Line​Parser</a></code></td>
+    <td>A parser for runtime options</td>
   </tr><tr class="class">
     
     <td>Class</td>
-    <td><code><a href="docutils.utils.math.math2html.Comment.html">Comment</a></code></td>
-    <td><span>A LaTeX comment: % to the end of the line.</span></td>
+    <td><code><a href="docutils.utils.math.math2html.Comment.html" class="internal-link" title="docutils.utils.math.math2html.Comment">​Comment</a></code></td>
+    <td>A LaTeX comment: % to the end of the line.</td>
   </tr><tr class="class">
     
     <td>Class</td>
-    <td><code><a href="docutils.utils.math.math2html.Constant.html">Constant</a></code></td>
-    <td><span>A constant string</span></td>
+    <td><code><a href="docutils.utils.math.math2html.Constant.html" class="internal-link" title="docutils.utils.math.math2html.Constant">​Constant</a></code></td>
+    <td>A constant string</td>
   </tr><tr class="class">
     
     <td>Class</td>
-    <td><code><a href="docutils.utils.math.math2html.Container.html">Container</a></code></td>
-    <td><span>A container for text and objects in a lyx file</span></td>
+    <td><code><a href="docutils.utils.math.math2html.Container.html" class="internal-link" title="docutils.utils.math.math2html.Container">​Container</a></code></td>
+    <td>A container for text and objects in a lyx file</td>
   </tr><tr class="class">
     
     <td>Class</td>
-    <td><code><a href="docutils.utils.math.math2html.ContainerConfig.html">ContainerConfig</a></code></td>
-    <td><span>Configuration class from elyxer.config file</span></td>
+    <td><code><a href="docutils.utils.math.math2html.ContainerConfig.html" class="internal-link" title="docutils.utils.math.math2html.ContainerConfig">​Container​Config</a></code></td>
+    <td>Configuration class from elyxer.config file</td>
   </tr><tr class="class">
     
     <td>Class</td>
-    <td><code><a href="docutils.utils.math.math2html.ContainerExtractor.html">ContainerExtractor</a></code></td>
-    <td><span>A class to extract certain containers.</span></td>
+    <td><code><a href="docutils.utils.math.math2html.ContainerExtractor.html" class="internal-link" title="docutils.utils.math.math2html.ContainerExtractor">​Container​Extractor</a></code></td>
+    <td>A class to extract certain containers.</td>
   </tr><tr class="class">
     
     <td>Class</td>
-    <td><code><a href="docutils.utils.math.math2html.ContainerOutput.html">ContainerOutput</a></code></td>
-    <td><span>The generic HTML output for a container.</span></td>
+    <td><code><a href="docutils.utils.math.math2html.ContainerOutput.html" class="internal-link" title="docutils.utils.math.math2html.ContainerOutput">​Container​Output</a></code></td>
+    <td>The generic HTML output for a container.</td>
   </tr><tr class="class">
     
     <td>Class</td>
-    <td><code><a href="docutils.utils.math.math2html.ContainerSize.html">ContainerSize</a></code></td>
-    <td><span>The size of a container.</span></td>
+    <td><code><a href="docutils.utils.math.math2html.ContainerSize.html" class="internal-link" title="docutils.utils.math.math2html.ContainerSize">​Container​Size</a></code></td>
+    <td>The size of a container.</td>
   </tr><tr class="class">
     
     <td>Class</td>
-    <td><code><a href="docutils.utils.math.math2html.ContentsOutput.html">ContentsOutput</a></code></td>
-    <td><span>Outputs the contents converted to HTML</span></td>
+    <td><code><a href="docutils.utils.math.math2html.ContentsOutput.html" class="internal-link" title="docutils.utils.math.math2html.ContentsOutput">​Contents​Output</a></code></td>
+    <td>Outputs the contents converted to HTML</td>
   </tr><tr class="class">
     
     <td>Class</td>
-    <td><code><a href="docutils.utils.math.math2html.DecoratingFunction.html">DecoratingFunction</a></code></td>
-    <td><span>A function that decorates some bit of text</span></td>
+    <td><code><a href="docutils.utils.math.math2html.DecoratingFunction.html" class="internal-link" title="docutils.utils.math.math2html.DecoratingFunction">​Decorating​Function</a></code></td>
+    <td>A function that decorates some bit of text</td>
   </tr><tr class="class">
     
     <td>Class</td>
-    <td><code><a href="docutils.utils.math.math2html.DependentCounter.html">DependentCounter</a></code></td>
-    <td><span>A counter which depends on another one (the master).</span></td>
+    <td><code><a href="docutils.utils.math.math2html.DependentCounter.html" class="internal-link" title="docutils.utils.math.math2html.DependentCounter">​Dependent​Counter</a></code></td>
+    <td>A counter which depends on another one (the master).</td>
   </tr><tr class="class">
     
     <td>Class</td>
-    <td><code><a href="docutils.utils.math.math2html.DocumentParameters.html">DocumentParameters</a></code></td>
-    <td><span>Global parameters for the document.</span></td>
+    <td><code><a href="docutils.utils.math.math2html.DocumentParameters.html" class="internal-link" title="docutils.utils.math.math2html.DocumentParameters">​Document​Parameters</a></code></td>
+    <td>Global parameters for the document.</td>
   </tr><tr class="class">
     
     <td>Class</td>
-    <td><code><a href="docutils.utils.math.math2html.EmphaticText.html">EmphaticText</a></code></td>
-    <td><span>Text with emphatic mode</span></td>
+    <td><code><a href="docutils.utils.math.math2html.EmphaticText.html" class="internal-link" title="docutils.utils.math.math2html.EmphaticText">​Emphatic​Text</a></code></td>
+    <td>Text with emphatic mode</td>
   </tr><tr class="class">
     
     <td>Class</td>
-    <td><code><a href="docutils.utils.math.math2html.EmptyCommand.html">EmptyCommand</a></code></td>
-    <td><span>An empty command (without parameters)</span></td>
+    <td><code><a href="docutils.utils.math.math2html.EmptyCommand.html" class="internal-link" title="docutils.utils.math.math2html.EmptyCommand">​Empty​Command</a></code></td>
+    <td>An empty command (without parameters)</td>
   </tr><tr class="class">
     
     <td>Class</td>
-    <td><code><a href="docutils.utils.math.math2html.EmptyOutput.html">EmptyOutput</a></code></td>
+    <td><code><a href="docutils.utils.math.math2html.EmptyOutput.html" class="internal-link" title="docutils.utils.math.math2html.EmptyOutput">​Empty​Output</a></code></td>
     <td><span class="undocumented">No class docstring; 2/2 methods documented</span></td>
   </tr><tr class="class">
     
     <td>Class</td>
-    <td><code><a href="docutils.utils.math.math2html.EndingList.html">EndingList</a></code></td>
-    <td><span>A list of position endings</span></td>
+    <td><code><a href="docutils.utils.math.math2html.EndingList.html" class="internal-link" title="docutils.utils.math.math2html.EndingList">​Ending​List</a></code></td>
+    <td>A list of position endings</td>
   </tr><tr class="class">
     
     <td>Class</td>
-    <td><code><a href="docutils.utils.math.math2html.EquationEnvironment.html">EquationEnvironment</a></code></td>
-    <td><span>A begin{}...end equation environment with rows and cells.</span></td>
+    <td><code><a href="docutils.utils.math.math2html.EquationEnvironment.html" class="internal-link" title="docutils.utils.math.math2html.EquationEnvironment">​Equation​Environment</a></code></td>
+    <td>A begin{}...end equation environment with rows and cells.</td>
   </tr><tr class="class">
     
     <td>Class</td>
-    <td><code><a href="docutils.utils.math.math2html.EscapeConfig.html">EscapeConfig</a></code></td>
-    <td><span>Configuration class from elyxer.config file</span></td>
+    <td><code><a href="docutils.utils.math.math2html.EscapeConfig.html" class="internal-link" title="docutils.utils.math.math2html.EscapeConfig">​Escape​Config</a></code></td>
+    <td>Configuration class from elyxer.config file</td>
   </tr><tr class="class">
     
     <td>Class</td>
-    <td><code><a href="docutils.utils.math.math2html.ExcludingParser.html">ExcludingParser</a></code></td>
-    <td><span>A parser that excludes the final line</span></td>
+    <td><code><a href="docutils.utils.math.math2html.ExcludingParser.html" class="internal-link" title="docutils.utils.math.math2html.ExcludingParser">​Excluding​Parser</a></code></td>
+    <td>A parser that excludes the final line</td>
   </tr><tr class="class">
     
     <td>Class</td>
-    <td><code><a href="docutils.utils.math.math2html.FilePosition.html">FilePosition</a></code></td>
-    <td><span>A parse position based on an underlying file.</span></td>
+    <td><code><a href="docutils.utils.math.math2html.FilePosition.html" class="internal-link" title="docutils.utils.math.math2html.FilePosition">​File​Position</a></code></td>
+    <td>A parse position based on an underlying file.</td>
   </tr><tr class="class">
     
     <td>Class</td>
-    <td><code><a href="docutils.utils.math.math2html.FilteredOutput.html">FilteredOutput</a></code></td>
-    <td><span>Returns the output in the contents, but filtered:</span></td>
+    <td><code><a href="docutils.utils.math.math2html.FilteredOutput.html" class="internal-link" title="docutils.utils.math.math2html.FilteredOutput">​Filtered​Output</a></code></td>
+    <td>Returns the output in the contents, but filtered:</td>
   </tr><tr class="class">
     
     <td>Class</td>
-    <td><code><a href="docutils.utils.math.math2html.FixedOutput.html">FixedOutput</a></code></td>
-    <td><span>Fixed output</span></td>
+    <td><code><a href="docutils.utils.math.math2html.FixedOutput.html" class="internal-link" title="docutils.utils.math.math2html.FixedOutput">​Fixed​Output</a></code></td>
+    <td>Fixed output</td>
   </tr><tr class="class">
     
     <td>Class</td>
-    <td><code><a href="docutils.utils.math.math2html.FlexURL.html">FlexURL</a></code></td>
-    <td><span>A flexible URL</span></td>
+    <td><code><a href="docutils.utils.math.math2html.FlexURL.html" class="internal-link" title="docutils.utils.math.math2html.FlexURL">​Flex​URL</a></code></td>
+    <td>A flexible URL</td>
   </tr><tr class="class">
     
     <td>Class</td>
-    <td><code><a href="docutils.utils.math.math2html.FontFunction.html">FontFunction</a></code></td>
-    <td><span>A function of one parameter that changes the font</span></td>
+    <td><code><a href="docutils.utils.math.math2html.FontFunction.html" class="internal-link" title="docutils.utils.math.math2html.FontFunction">​Font​Function</a></code></td>
+    <td>A function of one parameter that changes the font</td>
   </tr><tr class="class">
     
     <td>Class</td>
-    <td><code><a href="docutils.utils.math.math2html.Formula.html">Formula</a></code></td>
-    <td><span>A LaTeX formula</span></td>
+    <td><code><a href="docutils.utils.math.math2html.Formula.html" class="internal-link" title="docutils.utils.math.math2html.Formula">​Formula</a></code></td>
+    <td>A LaTeX formula</td>
   </tr><tr class="class">
     
     <td>Class</td>
-    <td><code><a href="docutils.utils.math.math2html.FormulaArray.html">FormulaArray</a></code></td>
-    <td><span>An array within a formula</span></td>
+    <td><code><a href="docutils.utils.math.math2html.FormulaArray.html" class="internal-link" title="docutils.utils.math.math2html.FormulaArray">​Formula​Array</a></code></td>
+    <td>An array within a formula</td>
   </tr><tr class="class">
     
     <td>Class</td>
-    <td><code><a href="docutils.utils.math.math2html.FormulaBit.html">FormulaBit</a></code></td>
-    <td><span>A bit of a formula</span></td>
+    <td><code><a href="docutils.utils.math.math2html.FormulaBit.html" class="internal-link" title="docutils.utils.math.math2html.FormulaBit">​Formula​Bit</a></code></td>
+    <td>A bit of a formula</td>
   </tr><tr class="class">
     
     <td>Class</td>
-    <td><code><a href="docutils.utils.math.math2html.FormulaCases.html">FormulaCases</a></code></td>
-    <td><span>A cases statement</span></td>
+    <td><code><a href="docutils.utils.math.math2html.FormulaCases.html" class="internal-link" title="docutils.utils.math.math2html.FormulaCases">​Formula​Cases</a></code></td>
+    <td>A cases statement</td>
   </tr><tr class="class">
     
     <td>Class</td>
-    <td><code><a href="docutils.utils.math.math2html.FormulaCell.html">FormulaCell</a></code></td>
-    <td><span>An array cell inside a row</span></td>
+    <td><code><a href="docutils.utils.math.math2html.FormulaCell.html" class="internal-link" title="docutils.utils.math.math2html.FormulaCell">​Formula​Cell</a></code></td>
+    <td>An array cell inside a row</td>
   </tr><tr class="class">
     
     <td>Class</td>
-    <td><code><a href="docutils.utils.math.math2html.FormulaCommand.html">FormulaCommand</a></code></td>
-    <td><span>A LaTeX command inside a formula</span></td>
+    <td><code><a href="docutils.utils.math.math2html.FormulaCommand.html" class="internal-link" title="docutils.utils.math.math2html.FormulaCommand">​Formula​Command</a></code></td>
+    <td>A LaTeX command inside a formula</td>
   </tr><tr class="class">
     
     <td>Class</td>
-    <td><code><a href="docutils.utils.math.math2html.FormulaConfig.html">FormulaConfig</a></code></td>
-    <td><span>Configuration class from elyxer.config file</span></td>
+    <td><code><a href="docutils.utils.math.math2html.FormulaConfig.html" class="internal-link" title="docutils.utils.math.math2html.FormulaConfig">​Formula​Config</a></code></td>
+    <td>Configuration class from elyxer.config file</td>
   </tr><tr class="class">
     
     <td>Class</td>
-    <td><code><a href="docutils.utils.math.math2html.FormulaConstant.html">FormulaConstant</a></code></td>
-    <td><span>A constant string in a formula</span></td>
+    <td><code><a href="docutils.utils.math.math2html.FormulaConstant.html" class="internal-link" title="docutils.utils.math.math2html.FormulaConstant">​Formula​Constant</a></code></td>
+    <td>A constant string in a formula</td>
   </tr><tr class="class">
     
     <td>Class</td>
-    <td><code><a href="docutils.utils.math.math2html.FormulaEquation.html">FormulaEquation</a></code></td>
-    <td><span>A simple numbered equation.</span></td>
+    <td><code><a href="docutils.utils.math.math2html.FormulaEquation.html" class="internal-link" title="docutils.utils.math.math2html.FormulaEquation">​Formula​Equation</a></code></td>
+    <td>A simple numbered equation.</td>
   </tr><tr class="class">
     
     <td>Class</td>
-    <td><code><a href="docutils.utils.math.math2html.FormulaFactory.html">FormulaFactory</a></code></td>
-    <td><span>Construct bits of formula</span></td>
+    <td><code><a href="docutils.utils.math.math2html.FormulaFactory.html" class="internal-link" title="docutils.utils.math.math2html.FormulaFactory">​Formula​Factory</a></code></td>
+    <td>Construct bits of formula</td>
   </tr><tr class="class">
     
     <td>Class</td>
-    <td><code><a href="docutils.utils.math.math2html.FormulaMacro.html">FormulaMacro</a></code></td>
-    <td><span>A math macro defined in an inset.</span></td>
+    <td><code><a href="docutils.utils.math.math2html.FormulaMacro.html" class="internal-link" title="docutils.utils.math.math2html.FormulaMacro">​Formula​Macro</a></code></td>
+    <td>A math macro defined in an inset.</td>
   </tr><tr class="class">
     
     <td>Class</td>
-    <td><code><a href="docutils.utils.math.math2html.FormulaMatrix.html">FormulaMatrix</a></code></td>
-    <td><span>A matrix (array with center alignment).</span></td>
+    <td><code><a href="docutils.utils.math.math2html.FormulaMatrix.html" class="internal-link" title="docutils.utils.math.math2html.FormulaMatrix">​Formula​Matrix</a></code></td>
+    <td>A matrix (array with center alignment).</td>
   </tr><tr class="class">
     
     <td>Class</td>
-    <td><code><a href="docutils.utils.math.math2html.FormulaNumber.html">FormulaNumber</a></code></td>
-    <td><span>A string of digits in a formula</span></td>
+    <td><code><a href="docutils.utils.math.math2html.FormulaNumber.html" class="internal-link" title="docutils.utils.math.math2html.FormulaNumber">​Formula​Number</a></code></td>
+    <td>A string of digits in a formula</td>
   </tr><tr class="class">
     
     <td>Class</td>
-    <td><code><a href="docutils.utils.math.math2html.FormulaParser.html">FormulaParser</a></code></td>
-    <td><span>Parses a formula</span></td>
+    <td><code><a href="docutils.utils.math.math2html.FormulaParser.html" class="internal-link" title="docutils.utils.math.math2html.FormulaParser">​Formula​Parser</a></code></td>
+    <td>Parses a formula</td>
   </tr><tr class="class">
     
     <td>Class</td>
-    <td><code><a href="docutils.utils.math.math2html.FormulaProcessor.html">FormulaProcessor</a></code></td>
-    <td><span>A processor specifically for formulas.</span></td>
+    <td><code><a href="docutils.utils.math.math2html.FormulaProcessor.html" class="internal-link" title="docutils.utils.math.math2html.FormulaProcessor">​Formula​Processor</a></code></td>
+    <td>A processor specifically for formulas.</td>
   </tr><tr class="class">
     
     <td>Class</td>
-    <td><code><a href="docutils.utils.math.math2html.FormulaRow.html">FormulaRow</a></code></td>
-    <td><span>An array row inside an array</span></td>
+    <td><code><a href="docutils.utils.math.math2html.FormulaRow.html" class="internal-link" title="docutils.utils.math.math2html.FormulaRow">​Formula​Row</a></code></td>
+    <td>An array row inside an array</td>
   </tr><tr class="class">
     
     <td>Class</td>
-    <td><code><a href="docutils.utils.math.math2html.FormulaSymbol.html">FormulaSymbol</a></code></td>
-    <td><span>A symbol inside a formula</span></td>
+    <td><code><a href="docutils.utils.math.math2html.FormulaSymbol.html" class="internal-link" title="docutils.utils.math.math2html.FormulaSymbol">​Formula​Symbol</a></code></td>
+    <td>A symbol inside a formula</td>
   </tr><tr class="class">
     
     <td>Class</td>
-    <td><code><a href="docutils.utils.math.math2html.GeneralConfig.html">GeneralConfig</a></code></td>
-    <td><span>Configuration class from elyxer.config file</span></td>
+    <td><code><a href="docutils.utils.math.math2html.GeneralConfig.html" class="internal-link" title="docutils.utils.math.math2html.GeneralConfig">​General​Config</a></code></td>
+    <td>Configuration class from elyxer.config file</td>
   </tr><tr class="class">
     
     <td>Class</td>
-    <td><code><a href="docutils.utils.math.math2html.Globable.html">Globable</a></code></td>
-    <td><span>A bit of text which can be globbed (lumped together in bits). Methods current(), skipcurrent(), checkfor() and isout() have to be implemented by subclasses.</span></td>
+    <td><code><a href="docutils.utils.math.math2html.Globable.html" class="internal-link" title="docutils.utils.math.math2html.Globable">​Globable</a></code></td>
+    <td>A bit of text which can be globbed (lumped together in bits). Methods current(), skipcurrent(), checkfor() and isout() have to be implemented by subclasses.</td>
   </tr><tr class="class">
     
     <td>Class</td>
-    <td><code><a href="docutils.utils.math.math2html.HeaderConfig.html">HeaderConfig</a></code></td>
-    <td><span>Configuration class from elyxer.config file</span></td>
+    <td><code><a href="docutils.utils.math.math2html.HeaderConfig.html" class="internal-link" title="docutils.utils.math.math2html.HeaderConfig">​Header​Config</a></code></td>
+    <td>Configuration class from elyxer.config file</td>
   </tr><tr class="class">
     
     <td>Class</td>
-    <td><code><a href="docutils.utils.math.math2html.HeaderParser.html">HeaderParser</a></code></td>
-    <td><span>Parses the LyX header</span></td>
+    <td><code><a href="docutils.utils.math.math2html.HeaderParser.html" class="internal-link" title="docutils.utils.math.math2html.HeaderParser">​Header​Parser</a></code></td>
+    <td>Parses the LyX header</td>
   </tr><tr class="class">
     
     <td>Class</td>
-    <td><code><a href="docutils.utils.math.math2html.Hfill.html">Hfill</a></code></td>
-    <td><span>Horizontall fill</span></td>
+    <td><code><a href="docutils.utils.math.math2html.Hfill.html" class="internal-link" title="docutils.utils.math.math2html.Hfill">​Hfill</a></code></td>
+    <td>Horizontall fill</td>
   </tr><tr class="class">
     
     <td>Class</td>
-    <td><code><a href="docutils.utils.math.math2html.HybridFunction.html">HybridFunction</a></code></td>
+    <td><code><a href="docutils.utils.math.math2html.HybridFunction.html" class="internal-link" title="docutils.utils.math.math2html.HybridFunction">​Hybrid​Function</a></code></td>
     <td><span class="undocumented">No summary</span></td>
   </tr><tr class="class">
     
     <td>Class</td>
-    <td><code><a href="docutils.utils.math.math2html.HybridSize.html">HybridSize</a></code></td>
-    <td><span>The size associated with a hybrid function.</span></td>
+    <td><code><a href="docutils.utils.math.math2html.HybridSize.html" class="internal-link" title="docutils.utils.math.math2html.HybridSize">​Hybrid​Size</a></code></td>
+    <td>The size associated with a hybrid function.</td>
   </tr><tr class="class">
     
     <td>Class</td>
-    <td><code><a href="docutils.utils.math.math2html.ImageConfig.html">ImageConfig</a></code></td>
-    <td><span>Configuration class from elyxer.config file</span></td>
+    <td><code><a href="docutils.utils.math.math2html.ImageConfig.html" class="internal-link" title="docutils.utils.math.math2html.ImageConfig">​Image​Config</a></code></td>
+    <td>Configuration class from elyxer.config file</td>
   </tr><tr class="class">
     
     <td>Class</td>
-    <td><code><a href="docutils.utils.math.math2html.InsetLength.html">InsetLength</a></code></td>
-    <td><span>A length measure inside an inset.</span></td>
+    <td><code><a href="docutils.utils.math.math2html.InsetLength.html" class="internal-link" title="docutils.utils.math.math2html.InsetLength">​Inset​Length</a></code></td>
+    <td>A length measure inside an inset.</td>
   </tr><tr class="class">
     
     <td>Class</td>
-    <td><code><a href="docutils.utils.math.math2html.InsetParser.html">InsetParser</a></code></td>
-    <td><span>Parses a LyX inset</span></td>
+    <td><code><a href="docutils.utils.math.math2html.InsetParser.html" class="internal-link" title="docutils.utils.math.math2html.InsetParser">​Inset​Parser</a></code></td>
+    <td>Parses a LyX inset</td>
   </tr><tr class="class">
     
     <td>Class</td>
-    <td><code><a href="docutils.utils.math.math2html.Label.html">Label</a></code></td>
-    <td><span>A label to be referenced</span></td>
+    <td><code><a href="docutils.utils.math.math2html.Label.html" class="internal-link" title="docutils.utils.math.math2html.Label">​Label</a></code></td>
+    <td>A label to be referenced</td>
   </tr><tr class="class">
     
     <td>Class</td>
-    <td><code><a href="docutils.utils.math.math2html.LabelFunction.html">LabelFunction</a></code></td>
-    <td><span>A function that acts as a label</span></td>
+    <td><code><a href="docutils.utils.math.math2html.LabelFunction.html" class="internal-link" title="docutils.utils.math.math2html.LabelFunction">​Label​Function</a></code></td>
+    <td>A function that acts as a label</td>
   </tr><tr class="class">
     
     <td>Class</td>
-    <td><code><a href="docutils.utils.math.math2html.LangLine.html">LangLine</a></code></td>
-    <td><span>A line with language information</span></td>
+    <td><code><a href="docutils.utils.math.math2html.LangLine.html" class="internal-link" title="docutils.utils.math.math2html.LangLine">​Lang​Line</a></code></td>
+    <td>A line with language information</td>
   </tr><tr class="class">
     
     <td>Class</td>
-    <td><code><a href="docutils.utils.math.math2html.LayoutConfig.html">LayoutConfig</a></code></td>
-    <td><span>Configuration class from elyxer.config file</span></td>
+    <td><code><a href="docutils.utils.math.math2html.LayoutConfig.html" class="internal-link" title="docutils.utils.math.math2html.LayoutConfig">​Layout​Config</a></code></td>
+    <td>Configuration class from elyxer.config file</td>
   </tr><tr class="class">
     
     <td>Class</td>
-    <td><code><a href="docutils.utils.math.math2html.LimitCommand.html">LimitCommand</a></code></td>
-    <td><span>A command which accepts limits above and below, in display mode.</span></td>
+    <td><code><a href="docutils.utils.math.math2html.LimitCommand.html" class="internal-link" title="docutils.utils.math.math2html.LimitCommand">​Limit​Command</a></code></td>
+    <td>A command which accepts limits above and below, in display mode.</td>
   </tr><tr class="class">
     
     <td>Class</td>
-    <td><code><a href="docutils.utils.math.math2html.LimitPreviousCommand.html">LimitPreviousCommand</a></code></td>
-    <td><span>A command to limit the previous command.</span></td>
+    <td><code><a href="docutils.utils.math.math2html.LimitPreviousCommand.html" class="internal-link" title="docutils.utils.math.math2html.LimitPreviousCommand">​Limit​Previous​Command</a></code></td>
+    <td>A command to limit the previous command.</td>
   </tr><tr class="class">
     
     <td>Class</td>
-    <td><code><a href="docutils.utils.math.math2html.LimitsProcessor.html">LimitsProcessor</a></code></td>
-    <td><span>A processor for limits inside an element.</span></td>
+    <td><code><a href="docutils.utils.math.math2html.LimitsProcessor.html" class="internal-link" title="docutils.utils.math.math2html.LimitsProcessor">​Limits​Processor</a></code></td>
+    <td>A processor for limits inside an element.</td>
   </tr><tr class="class">
     
     <td>Class</td>
-    <td><code><a href="docutils.utils.math.math2html.LineReader.html">LineReader</a></code></td>
-    <td><span>Reads a file line by line</span></td>
+    <td><code><a href="docutils.utils.math.math2html.LineReader.html" class="internal-link" title="docutils.utils.math.math2html.LineReader">​Line​Reader</a></code></td>
+    <td>Reads a file line by line</td>
   </tr><tr class="class">
     
     <td>Class</td>
-    <td><code><a href="docutils.utils.math.math2html.LineWriter.html">LineWriter</a></code></td>
-    <td><span>Writes a file as a series of lists</span></td>
+    <td><code><a href="docutils.utils.math.math2html.LineWriter.html" class="internal-link" title="docutils.utils.math.math2html.LineWriter">​Line​Writer</a></code></td>
+    <td>Writes a file as a series of lists</td>
   </tr><tr class="class">
     
     <td>Class</td>
-    <td><code><a href="docutils.utils.math.math2html.Link.html">Link</a></code></td>
-    <td><span>A link to another part of the document</span></td>
+    <td><code><a href="docutils.utils.math.math2html.Link.html" class="internal-link" title="docutils.utils.math.math2html.Link">​Link</a></code></td>
+    <td>A link to another part of the document</td>
   </tr><tr class="class">
     
     <td>Class</td>
-    <td><code><a href="docutils.utils.math.math2html.LinkOutput.html">LinkOutput</a></code></td>
-    <td><span>A link pointing to some destination</span></td>
+    <td><code><a href="docutils.utils.math.math2html.LinkOutput.html" class="internal-link" title="docutils.utils.math.math2html.LinkOutput">​Link​Output</a></code></td>
+    <td>A link pointing to some destination</td>
   </tr><tr class="class">
     
     <td>Class</td>
-    <td><code><a href="docutils.utils.math.math2html.LoneCommand.html">LoneCommand</a></code></td>
-    <td><span>A parser for just one command line</span></td>
+    <td><code><a href="docutils.utils.math.math2html.LoneCommand.html" class="internal-link" title="docutils.utils.math.math2html.LoneCommand">​Lone​Command</a></code></td>
+    <td>A parser for just one command line</td>
   </tr><tr class="class">
     
     <td>Class</td>
-    <td><code><a href="docutils.utils.math.math2html.LstParser.html">LstParser</a></code></td>
-    <td><span>Parse global and local lstparams.</span></td>
+    <td><code><a href="docutils.utils.math.math2html.LstParser.html" class="internal-link" title="docutils.utils.math.math2html.LstParser">​Lst​Parser</a></code></td>
+    <td>Parse global and local lstparams.</td>
   </tr><tr class="class">
     
     <td>Class</td>
-    <td><code><a href="docutils.utils.math.math2html.LyXFormat.html">LyXFormat</a></code></td>
-    <td><span>Read the lyxformat command</span></td>
+    <td><code><a href="docutils.utils.math.math2html.LyXFormat.html" class="internal-link" title="docutils.utils.math.math2html.LyXFormat">​Ly​XFormat</a></code></td>
+    <td>Read the lyxformat command</td>
   </tr><tr class="class">
     
     <td>Class</td>
-    <td><code><a href="docutils.utils.math.math2html.LyXLine.html">LyXLine</a></code></td>
-    <td><span>A Lyx line</span></td>
+    <td><code><a href="docutils.utils.math.math2html.LyXLine.html" class="internal-link" title="docutils.utils.math.math2html.LyXLine">​Ly​XLine</a></code></td>
+    <td>A Lyx line</td>
   </tr><tr class="class">
     
     <td>Class</td>
-    <td><code><a href="docutils.utils.math.math2html.MacroDefinition.html">MacroDefinition</a></code></td>
-    <td><span>A function that defines a new command (a macro).</span></td>
+    <td><code><a href="docutils.utils.math.math2html.MacroDefinition.html" class="internal-link" title="docutils.utils.math.math2html.MacroDefinition">​Macro​Definition</a></code></td>
+    <td>A function that defines a new command (a macro).</td>
   </tr><tr class="class">
     
     <td>Class</td>
-    <td><code><a href="docutils.utils.math.math2html.MacroFunction.html">MacroFunction</a></code></td>
-    <td><span>A function that was defined using a macro.</span></td>
+    <td><code><a href="docutils.utils.math.math2html.MacroFunction.html" class="internal-link" title="docutils.utils.math.math2html.MacroFunction">​Macro​Function</a></code></td>
+    <td>A function that was defined using a macro.</td>
   </tr><tr class="class">
     
     <td>Class</td>
-    <td><code><a href="docutils.utils.math.math2html.MacroParameter.html">MacroParameter</a></code></td>
-    <td><span>A parameter from elyxer.a macro.</span></td>
+    <td><code><a href="docutils.utils.math.math2html.MacroParameter.html" class="internal-link" title="docutils.utils.math.math2html.MacroParameter">​Macro​Parameter</a></code></td>
+    <td>A parameter from elyxer.a macro.</td>
   </tr><tr class="class">
     
     <td>Class</td>
-    <td><code><a href="docutils.utils.math.math2html.MacroParser.html">MacroParser</a></code></td>
-    <td><span>A parser for a formula macro.</span></td>
+    <td><code><a href="docutils.utils.math.math2html.MacroParser.html" class="internal-link" title="docutils.utils.math.math2html.MacroParser">​Macro​Parser</a></code></td>
+    <td>A parser for a formula macro.</td>
   </tr><tr class="class">
     
     <td>Class</td>
-    <td><code><a href="docutils.utils.math.math2html.MathsProcessor.html">MathsProcessor</a></code></td>
-    <td><span>A processor for a maths construction inside the FormulaProcessor.</span></td>
+    <td><code><a href="docutils.utils.math.math2html.MathsProcessor.html" class="internal-link" title="docutils.utils.math.math2html.MathsProcessor">​Maths​Processor</a></code></td>
+    <td>A processor for a maths construction inside the FormulaProcessor.</td>
   </tr><tr class="class">
     
     <td>Class</td>
-    <td><code><a href="docutils.utils.math.math2html.MultiRowFormula.html">MultiRowFormula</a></code></td>
-    <td><span>A formula with multiple rows.</span></td>
+    <td><code><a href="docutils.utils.math.math2html.MultiRowFormula.html" class="internal-link" title="docutils.utils.math.math2html.MultiRowFormula">​Multi​Row​Formula</a></code></td>
+    <td>A formula with multiple rows.</td>
   </tr><tr class="class">
     
     <td>Class</td>
-    <td><code><a href="docutils.utils.math.math2html.NewfangleConfig.html">NewfangleConfig</a></code></td>
-    <td><span>Configuration class from elyxer.config file</span></td>
+    <td><code><a href="docutils.utils.math.math2html.NewfangleConfig.html" class="internal-link" title="docutils.utils.math.math2html.NewfangleConfig">​Newfangle​Config</a></code></td>
+    <td>Configuration class from elyxer.config file</td>
   </tr><tr class="class">
     
     <td>Class</td>
-    <td><code><a href="docutils.utils.math.math2html.Newline.html">Newline</a></code></td>
-    <td><span>A newline</span></td>
+    <td><code><a href="docutils.utils.math.math2html.Newline.html" class="internal-link" title="docutils.utils.math.math2html.Newline">​Newline</a></code></td>
+    <td>A newline</td>
   </tr><tr class="class">
     
     <td>Class</td>
-    <td><code><a href="docutils.utils.math.math2html.NewPage.html">NewPage</a></code></td>
-    <td><span>A new page</span></td>
+    <td><code><a href="docutils.utils.math.math2html.NewPage.html" class="internal-link" title="docutils.utils.math.math2html.NewPage">​New​Page</a></code></td>
+    <td>A new page</td>
   </tr><tr class="class">
     
     <td>Class</td>
-    <td><code><a href="docutils.utils.math.math2html.NumberCounter.html">NumberCounter</a></code></td>
-    <td><span>A counter for numbers (by default).</span></td>
+    <td><code><a href="docutils.utils.math.math2html.NumberCounter.html" class="internal-link" title="docutils.utils.math.math2html.NumberCounter">​Number​Counter</a></code></td>
+    <td>A counter for numbers (by default).</td>
   </tr><tr class="class">
     
     <td>Class</td>
-    <td><code><a href="docutils.utils.math.math2html.NumberGenerator.html">NumberGenerator</a></code></td>
-    <td><span>A number generator for unique sequences and hierarchical structures. Used in:</span></td>
+    <td><code><a href="docutils.utils.math.math2html.NumberGenerator.html" class="internal-link" title="docutils.utils.math.math2html.NumberGenerator">​Number​Generator</a></code></td>
+    <td>A number generator for unique sequences and hierarchical structures. Used in:</td>
   </tr><tr class="class">
     
     <td>Class</td>
-    <td><code><a href="docutils.utils.math.math2html.NumberingConfig.html">NumberingConfig</a></code></td>
-    <td><span>Configuration class from elyxer.config file</span></td>
+    <td><code><a href="docutils.utils.math.math2html.NumberingConfig.html" class="internal-link" title="docutils.utils.math.math2html.NumberingConfig">​Numbering​Config</a></code></td>
+    <td>Configuration class from elyxer.config file</td>
   </tr><tr class="class">
     
     <td>Class</td>
-    <td><code><a href="docutils.utils.math.math2html.OneParamFunction.html">OneParamFunction</a></code></td>
-    <td><span>A function of one parameter</span></td>
+    <td><code><a href="docutils.utils.math.math2html.OneParamFunction.html" class="internal-link" title="docutils.utils.math.math2html.OneParamFunction">​One​Param​Function</a></code></td>
+    <td>A function of one parameter</td>
   </tr><tr class="class">
     
     <td>Class</td>
-    <td><code><a href="docutils.utils.math.math2html.Options.html">Options</a></code></td>
-    <td><span>A set of runtime options</span></td>
+    <td><code><a href="docutils.utils.math.math2html.Options.html" class="internal-link" title="docutils.utils.math.math2html.Options">​Options</a></code></td>
+    <td>A set of runtime options</td>
   </tr><tr class="class">
     
     <td>Class</td>
-    <td><code><a href="docutils.utils.math.math2html.ParameterDefinition.html">ParameterDefinition</a></code></td>
-    <td><span>The definition of a parameter in a hybrid function.</span></td>
+    <td><code><a href="docutils.utils.math.math2html.ParameterDefinition.html" class="internal-link" title="docutils.utils.math.math2html.ParameterDefinition">​Parameter​Definition</a></code></td>
+    <td>The definition of a parameter in a hybrid function.</td>
   </tr><tr class="class">
     
     <td>Class</td>
-    <td><code><a href="docutils.utils.math.math2html.ParameterFunction.html">ParameterFunction</a></code></td>
-    <td><span>A function with a variable number of parameters defined in a template.</span></td>
+    <td><code><a href="docutils.utils.math.math2html.ParameterFunction.html" class="internal-link" title="docutils.utils.math.math2html.ParameterFunction">​Parameter​Function</a></code></td>
+    <td>A function with a variable number of parameters defined in a template.</td>
   </tr><tr class="class">
     
     <td>Class</td>
-    <td><code><a href="docutils.utils.math.math2html.Parser.html">Parser</a></code></td>
-    <td><span>A generic parser</span></td>
+    <td><code><a href="docutils.utils.math.math2html.Parser.html" class="internal-link" title="docutils.utils.math.math2html.Parser">​Parser</a></code></td>
+    <td>A generic parser</td>
   </tr><tr class="class">
     
     <td>Class</td>
-    <td><code><a href="docutils.utils.math.math2html.Position.html">Position</a></code></td>
-    <td><span>A position in a text to parse. Including those in Globable, functions to implement by subclasses are: skip(), identifier(), extract(), isout() and current().</span></td>
+    <td><code><a href="docutils.utils.math.math2html.Position.html" class="internal-link" title="docutils.utils.math.math2html.Position">​Position</a></code></td>
+    <td>A position in a text to parse. Including those in Globable, functions to implement by subclasses are: skip(), identifier(), extract(), isout() and current().</td>
   </tr><tr class="class">
     
     <td>Class</td>
-    <td><code><a href="docutils.utils.math.math2html.PositionEnding.html">PositionEnding</a></code></td>
-    <td><span>An ending for a parsing position</span></td>
+    <td><code><a href="docutils.utils.math.math2html.PositionEnding.html" class="internal-link" title="docutils.utils.math.math2html.PositionEnding">​Position​Ending</a></code></td>
+    <td>An ending for a parsing position</td>
   </tr><tr class="class">
     
     <td>Class</td>
-    <td><code><a href="docutils.utils.math.math2html.Postprocessor.html">Postprocessor</a></code></td>
-    <td><span>Postprocess a container keeping some context</span></td>
+    <td><code><a href="docutils.utils.math.math2html.Postprocessor.html" class="internal-link" title="docutils.utils.math.math2html.Postprocessor">​Postprocessor</a></code></td>
+    <td>Postprocess a container keeping some context</td>
   </tr><tr class="class">
     
     <td>Class</td>
-    <td><code><a href="docutils.utils.math.math2html.PreambleParser.html">PreambleParser</a></code></td>
-    <td><span>A parser for the LyX preamble.</span></td>
+    <td><code><a href="docutils.utils.math.math2html.PreambleParser.html" class="internal-link" title="docutils.utils.math.math2html.PreambleParser">​Preamble​Parser</a></code></td>
+    <td>A parser for the LyX preamble.</td>
   </tr><tr class="class">
     
     <td>Class</td>
-    <td><code><a href="docutils.utils.math.math2html.QuoteContainer.html">QuoteContainer</a></code></td>
-    <td><span>A container for a pretty quote</span></td>
+    <td><code><a href="docutils.utils.math.math2html.QuoteContainer.html" class="internal-link" title="docutils.utils.math.math2html.QuoteContainer">​Quote​Container</a></code></td>
+    <td>A container for a pretty quote</td>
   </tr><tr class="class">
     
     <td>Class</td>
-    <td><code><a href="docutils.utils.math.math2html.RawText.html">RawText</a></code></td>
-    <td><span>A bit of text inside a formula</span></td>
+    <td><code><a href="docutils.utils.math.math2html.RawText.html" class="internal-link" title="docutils.utils.math.math2html.RawText">​Raw​Text</a></code></td>
+    <td>A bit of text inside a formula</td>
   </tr><tr class="class">
     
     <td>Class</td>
-    <td><code><a href="docutils.utils.math.math2html.Reference.html">Reference</a></code></td>
-    <td><span>A reference to a label.</span></td>
+    <td><code><a href="docutils.utils.math.math2html.Reference.html" class="internal-link" title="docutils.utils.math.math2html.Reference">​Reference</a></code></td>
+    <td>A reference to a label.</td>
   </tr><tr class="class">
     
     <td>Class</td>
-    <td><code><a href="docutils.utils.math.math2html.Separator.html">Separator</a></code></td>
-    <td><span>A separator string which is not extracted by extracttext().</span></td>
+    <td><code><a href="docutils.utils.math.math2html.Separator.html" class="internal-link" title="docutils.utils.math.math2html.Separator">​Separator</a></code></td>
+    <td>A separator string which is not extracted by extracttext().</td>
   </tr><tr class="class">
     
     <td>Class</td>
-    <td><code><a href="docutils.utils.math.math2html.ShapedText.html">ShapedText</a></code></td>
-    <td><span>Text shaped (italic, slanted)</span></td>
+    <td><code><a href="docutils.utils.math.math2html.ShapedText.html" class="internal-link" title="docutils.utils.math.math2html.ShapedText">​Shaped​Text</a></code></td>
+    <td>Text shaped (italic, slanted)</td>
   </tr><tr class="class">
     
     <td>Class</td>
-    <td><code><a href="docutils.utils.math.math2html.SizeText.html">SizeText</a></code></td>
-    <td><span>Sized text</span></td>
+    <td><code><a href="docutils.utils.math.math2html.SizeText.html" class="internal-link" title="docutils.utils.math.math2html.SizeText">​Size​Text</a></code></td>
+    <td>Sized text</td>
   </tr><tr class="class">
     
     <td>Class</td>
-    <td><code><a href="docutils.utils.math.math2html.Space.html">Space</a></code></td>
-    <td><span>A space of several types</span></td>
+    <td><code><a href="docutils.utils.math.math2html.Space.html" class="internal-link" title="docutils.utils.math.math2html.Space">​Space</a></code></td>
+    <td>A space of several types</td>
   </tr><tr class="class">
     
     <td>Class</td>
-    <td><code><a href="docutils.utils.math.math2html.SpacedCommand.html">SpacedCommand</a></code></td>
-    <td><span>An empty command which should have math spacing in formulas.</span></td>
+    <td><code><a href="docutils.utils.math.math2html.SpacedCommand.html" class="internal-link" title="docutils.utils.math.math2html.SpacedCommand">​Spaced​Command</a></code></td>
+    <td>An empty command which should have math spacing in formulas.</td>
   </tr><tr class="class">
     
     <td>Class</td>
-    <td><code><a href="docutils.utils.math.math2html.SquareBracket.html">SquareBracket</a></code></td>
-    <td><span>A [] bracket inside a formula</span></td>
+    <td><code><a href="docutils.utils.math.math2html.SquareBracket.html" class="internal-link" title="docutils.utils.math.math2html.SquareBracket">​Square​Bracket</a></code></td>
+    <td>A [] bracket inside a formula</td>
   </tr><tr class="class">
     
     <td>Class</td>
-    <td><code><a href="docutils.utils.math.math2html.StageDict.html">StageDict</a></code></td>
-    <td><span>A dictionary of stages corresponding to classes</span></td>
+    <td><code><a href="docutils.utils.math.math2html.StageDict.html" class="internal-link" title="docutils.utils.math.math2html.StageDict">​Stage​Dict</a></code></td>
+    <td>A dictionary of stages corresponding to classes</td>
   </tr><tr class="class">
     
     <td>Class</td>
-    <td><code><a href="docutils.utils.math.math2html.StartAppendix.html">StartAppendix</a></code></td>
-    <td><span>Mark to start an appendix here.</span></td>
+    <td><code><a href="docutils.utils.math.math2html.StartAppendix.html" class="internal-link" title="docutils.utils.math.math2html.StartAppendix">​Start​Appendix</a></code></td>
+    <td>Mark to start an appendix here.</td>
   </tr><tr class="class">
     
     <td>Class</td>
-    <td><code><a href="docutils.utils.math.math2html.StrikeOut.html">StrikeOut</a></code></td>
-    <td><span>Striken out text.</span></td>
+    <td><code><a href="docutils.utils.math.math2html.StrikeOut.html" class="internal-link" title="docutils.utils.math.math2html.StrikeOut">​Strike​Out</a></code></td>
+    <td>Striken out text.</td>
   </tr><tr class="class">
     
     <td>Class</td>
-    <td><code><a href="docutils.utils.math.math2html.StringContainer.html">StringContainer</a></code></td>
-    <td><span>A container for a single string</span></td>
+    <td><code><a href="docutils.utils.math.math2html.StringContainer.html" class="internal-link" title="docutils.utils.math.math2html.StringContainer">​String​Container</a></code></td>
+    <td>A container for a single string</td>
   </tr><tr class="class">
     
     <td>Class</td>
-    <td><code><a href="docutils.utils.math.math2html.StringOutput.html">StringOutput</a></code></td>
-    <td><span>Returns a bare string as output</span></td>
+    <td><code><a href="docutils.utils.math.math2html.StringOutput.html" class="internal-link" title="docutils.utils.math.math2html.StringOutput">​String​Output</a></code></td>
+    <td>Returns a bare string as output</td>
   </tr><tr class="class">
     
     <td>Class</td>
-    <td><code><a href="docutils.utils.math.math2html.StringParser.html">StringParser</a></code></td>
-    <td><span>Parses just a string</span></td>
+    <td><code><a href="docutils.utils.math.math2html.StringParser.html" class="internal-link" title="docutils.utils.math.math2html.StringParser">​String​Parser</a></code></td>
+    <td>Parses just a string</td>
   </tr><tr class="class">
     
     <td>Class</td>
-    <td><code><a href="docutils.utils.math.math2html.StyleConfig.html">StyleConfig</a></code></td>
-    <td><span>Configuration class from elyxer.config file</span></td>
+    <td><code><a href="docutils.utils.math.math2html.StyleConfig.html" class="internal-link" title="docutils.utils.math.math2html.StyleConfig">​Style​Config</a></code></td>
+    <td>Configuration class from elyxer.config file</td>
   </tr><tr class="class">
     
     <td>Class</td>
-    <td><code><a href="docutils.utils.math.math2html.SymbolFunction.html">SymbolFunction</a></code></td>
-    <td><span>Find a function which is represented by a symbol (like _ or ^)</span></td>
+    <td><code><a href="docutils.utils.math.math2html.SymbolFunction.html" class="internal-link" title="docutils.utils.math.math2html.SymbolFunction">​Symbol​Function</a></code></td>
+    <td>Find a function which is represented by a symbol (like _ or ^)</td>
   </tr><tr class="class">
     
     <td>Class</td>
-    <td><code><a href="docutils.utils.math.math2html.TagConfig.html">TagConfig</a></code></td>
-    <td><span>Configuration class from elyxer.config file</span></td>
+    <td><code><a href="docutils.utils.math.math2html.TagConfig.html" class="internal-link" title="docutils.utils.math.math2html.TagConfig">​Tag​Config</a></code></td>
+    <td>Configuration class from elyxer.config file</td>
   </tr><tr class="class">
     
     <td>Class</td>
-    <td><code><a href="docutils.utils.math.math2html.TaggedBit.html">TaggedBit</a></code></td>
-    <td><span>A tagged string in a formula</span></td>
+    <td><code><a href="docutils.utils.math.math2html.TaggedBit.html" class="internal-link" title="docutils.utils.math.math2html.TaggedBit">​Tagged​Bit</a></code></td>
+    <td>A tagged string in a formula</td>
   </tr><tr class="class">
     
     <td>Class</td>
-    <td><code><a href="docutils.utils.math.math2html.TaggedOutput.html">TaggedOutput</a></code></td>
-    <td><span>Outputs an HTML tag surrounding the contents.</span></td>
+    <td><code><a href="docutils.utils.math.math2html.TaggedOutput.html" class="internal-link" title="docutils.utils.math.math2html.TaggedOutput">​Tagged​Output</a></code></td>
+    <td>Outputs an HTML tag surrounding the contents.</td>
   </tr><tr class="class">
     
     <td>Class</td>
-    <td><code><a href="docutils.utils.math.math2html.TaggedText.html">TaggedText</a></code></td>
-    <td><span>Text inside a tag</span></td>
+    <td><code><a href="docutils.utils.math.math2html.TaggedText.html" class="internal-link" title="docutils.utils.math.math2html.TaggedText">​Tagged​Text</a></code></td>
+    <td>Text inside a tag</td>
   </tr><tr class="class">
     
     <td>Class</td>
-    <td><code><a href="docutils.utils.math.math2html.TextFamily.html">TextFamily</a></code></td>
-    <td><span>A bit of text from elyxer.a different family</span></td>
+    <td><code><a href="docutils.utils.math.math2html.TextFamily.html" class="internal-link" title="docutils.utils.math.math2html.TextFamily">​Text​Family</a></code></td>
+    <td>A bit of text from elyxer.a different family</td>
   </tr><tr class="class">
     
     <td>Class</td>
-    <td><code><a href="docutils.utils.math.math2html.TextFunction.html">TextFunction</a></code></td>
-    <td><span>A function where parameters are read as text.</span></td>
+    <td><code><a href="docutils.utils.math.math2html.TextFunction.html" class="internal-link" title="docutils.utils.math.math2html.TextFunction">​Text​Function</a></code></td>
+    <td>A function where parameters are read as text.</td>
   </tr><tr class="class">
     
     <td>Class</td>
-    <td><code><a href="docutils.utils.math.math2html.TextParser.html">TextParser</a></code></td>
-    <td><span>A parser for a command and a bit of text</span></td>
+    <td><code><a href="docutils.utils.math.math2html.TextParser.html" class="internal-link" title="docutils.utils.math.math2html.TextParser">​Text​Parser</a></code></td>
+    <td>A parser for a command and a bit of text</td>
   </tr><tr class="class">
     
     <td>Class</td>
-    <td><code><a href="docutils.utils.math.math2html.TextPosition.html">TextPosition</a></code></td>
-    <td><span>A parse position based on a raw text.</span></td>
+    <td><code><a href="docutils.utils.math.math2html.TextPosition.html" class="internal-link" title="docutils.utils.math.math2html.TextPosition">​Text​Position</a></code></td>
+    <td>A parse position based on a raw text.</td>
   </tr><tr class="class">
     
     <td>Class</td>
-    <td><code><a href="docutils.utils.math.math2html.TOCConfig.html">TOCConfig</a></code></td>
-    <td><span>Configuration class from elyxer.config file</span></td>
+    <td><code><a href="docutils.utils.math.math2html.TOCConfig.html" class="internal-link" title="docutils.utils.math.math2html.TOCConfig">​TOCConfig</a></code></td>
+    <td>Configuration class from elyxer.config file</td>
   </tr><tr class="class">
     
     <td>Class</td>
-    <td><code><a href="docutils.utils.math.math2html.TodayCommand.html">TodayCommand</a></code></td>
-    <td><span>Shows today's date.</span></td>
+    <td><code><a href="docutils.utils.math.math2html.TodayCommand.html" class="internal-link" title="docutils.utils.math.math2html.TodayCommand">​Today​Command</a></code></td>
+    <td>Shows today's date.</td>
   </tr><tr class="class">
     
     <td>Class</td>
-    <td><code><a href="docutils.utils.math.math2html.Trace.html">Trace</a></code></td>
-    <td><span>A tracing class</span></td>
+    <td><code><a href="docutils.utils.math.math2html.Trace.html" class="internal-link" title="docutils.utils.math.math2html.Trace">​Trace</a></code></td>
+    <td>A tracing class</td>
   </tr><tr class="class">
     
     <td>Class</td>
-    <td><code><a href="docutils.utils.math.math2html.TranslationConfig.html">TranslationConfig</a></code></td>
-    <td><span>Configuration class from elyxer.config file</span></td>
+    <td><code><a href="docutils.utils.math.math2html.TranslationConfig.html" class="internal-link" title="docutils.utils.math.math2html.TranslationConfig">​Translation​Config</a></code></td>
+    <td>Configuration class from elyxer.config file</td>
   </tr><tr class="class">
     
     <td>Class</td>
-    <td><code><a href="docutils.utils.math.math2html.Translator.html">Translator</a></code></td>
-    <td><span>Reads the configuration file and tries to find a translation.</span></td>
+    <td><code><a href="docutils.utils.math.math2html.Translator.html" class="internal-link" title="docutils.utils.math.math2html.Translator">​Translator</a></code></td>
+    <td>Reads the configuration file and tries to find a translation.</td>
   </tr><tr class="class">
     
     <td>Class</td>
-    <td><code><a href="docutils.utils.math.math2html.URL.html">URL</a></code></td>
-    <td><span>A clickable URL</span></td>
+    <td><code><a href="docutils.utils.math.math2html.URL.html" class="internal-link" title="docutils.utils.math.math2html.URL">URL</a></code></td>
+    <td>A clickable URL</td>
   </tr><tr class="class">
     
     <td>Class</td>
-    <td><code><a href="docutils.utils.math.math2html.VersalitasText.html">VersalitasText</a></code></td>
-    <td><span>Text in versalitas</span></td>
+    <td><code><a href="docutils.utils.math.math2html.VersalitasText.html" class="internal-link" title="docutils.utils.math.math2html.VersalitasText">​Versalitas​Text</a></code></td>
+    <td>Text in versalitas</td>
   </tr><tr class="class">
     
     <td>Class</td>
-    <td><code><a href="docutils.utils.math.math2html.VerticalSpace.html">VerticalSpace</a></code></td>
-    <td><span>An inset that contains a vertical space.</span></td>
+    <td><code><a href="docutils.utils.math.math2html.VerticalSpace.html" class="internal-link" title="docutils.utils.math.math2html.VerticalSpace">​Vertical​Space</a></code></td>
+    <td>An inset that contains a vertical space.</td>
   </tr><tr class="class">
     
     <td>Class</td>
-    <td><code><a href="docutils.utils.math.math2html.WhiteSpace.html">WhiteSpace</a></code></td>
-    <td><span>Some white space inside a formula.</span></td>
+    <td><code><a href="docutils.utils.math.math2html.WhiteSpace.html" class="internal-link" title="docutils.utils.math.math2html.WhiteSpace">​White​Space</a></code></td>
+    <td>Some white space inside a formula.</td>
   </tr><tr class="class">
     
     <td>Class</td>
-    <td><code><a href="docutils.utils.math.math2html.WholeFormula.html">WholeFormula</a></code></td>
-    <td><span>Parse a whole formula</span></td>
+    <td><code><a href="docutils.utils.math.math2html.WholeFormula.html" class="internal-link" title="docutils.utils.math.math2html.WholeFormula">​Whole​Formula</a></code></td>
+    <td>Parse a whole formula</td>
   </tr><tr class="function">
     
     <td>Function</td>
-    <td><code><a href="#main">main</a></code></td>
-    <td><span>Main function, called if invoked from elyxer.the command line</span></td>
+    <td><code><a href="#main" class="internal-link" title="docutils.utils.math.math2html.main">main</a></code></td>
+    <td>Main function, called if invoked from elyxer.the command line</td>
   </tr><tr class="function">
     
     <td>Function</td>
-    <td><code><a href="#math2html">math2html</a></code></td>
-    <td><span>Convert some TeX math to HTML.</span></td>
+    <td><code><a href="#math2html" class="internal-link" title="docutils.utils.math.math2html.math2html">math2html</a></code></td>
+    <td>Convert some TeX math to HTML.</td>
   </tr>
 </table>
         
@@ -926,7 +939,7 @@
   <div class="container">
     <a href="index.html">API Documentation</a> for <a href="https://docutils.sourceforge.io/" class="projecthome">docutils-0.17.1</a>,
   generated by <a href="https://github.com/twisted/pydoctor/">pydoctor</a>
-    21.2.2 at 2022-01-06 17:36:41.
+    22.2.2.dev0 at 2022-03-04 05:57:20.
   </div>
 </footer>
 
