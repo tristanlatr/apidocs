@@ -7,7 +7,7 @@
   <head>
     
     <title>nltk.sem.linearlogic.LinearLogicParser</title>
-    <meta name="generator" content="pydoctor 21.2.2"> 
+    <meta name="generator" content="pydoctor 22.2.2.dev0"> 
         
     </meta>
     <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
@@ -44,69 +44,82 @@
           Names
         </a>
 
-        <form action="search-results.html" id="search-box-container">
+        <div id="search-box-container">
           <div class="input-group">
-            <input id="search-box" name="search-query" placeholder="Search..." aria-label="Search" minlength="2" class="form-control" />
+            <input id="search-box" type="search" name="search-query" placeholder="Search..." aria-label="Search" minlength="2" class="form-control" autocomplete="off" />
+            
             <span class="input-group-btn">
-              <button class="btn btn-default" type="submit" title="Search"><img src="fonts/search.svg" alt="Search!" /></button>
-              <a class="btn btn-default" id="search-help-button" title="Help" onclick="toggleSearchHelpText()"><img src="fonts/info.svg" alt="Help!" /></a>
+              <a style="display: none;" class="btn btn-default" id="search-clear-button" title="Clear" onclick="clearSearch()"><img src="fonts/x-circle.svg" alt="Clear" /></a>
+              <a class="btn btn-default" id="search-help-button" title="Help" onclick="toggleSearchHelpText()"><img src="fonts/info.svg" alt="Help" /></a>
             </span>
           </div>
-        </form>
+        </div>
 
-        <div class="rst-admonition hint" id="search-help-box">
+      </div>
+
+      <div id="search-results-container" style="display: none;">
+        <div>
+          <span class="label label-default" id="search-docstrings-button">
+            <a title="Search in docstrings" onclick="toggleSearchInDocstrings()">search in docstrings</a></span>
+        </div>
+
+        <noscript>
+            <h1>Cannot search: JavaScript is not supported/enabled in your browser.</h1>
+        </noscript>
+
+        <div class="hint" id="search-help-box">
           <p class="rst-last">
       
             Search bar offers the following options:
             <ul>   
                 <li>
                   <strong>Term presence.</strong> The below example searches for documents that 
-                    must contain “foo”, might contain “bar” and must not contain “baz”:
-                  <br /> <code>'+foo bar -baz'</code>
+                    must contain “foo”, might contain “bar” and must not contain “baz”: <code>+foo bar -baz</code>
                 </li> 
 
                 <li>
-                  <strong>Wildcards.</strong> The below example searches for documents with words beginning with “foo”:
-                  <br /> <code>'foo*'</code>
+                  <strong>Wildcards.</strong> The below example searches for documents with words beginning with “foo”: <code>foo*</code>
                 </li> 
 
                 <li>
-                  <strong>Search in specific fields.</strong> The following search matches all documents 
-                  that contains "foo" in their full dotted name and with “bar” in any field:
-                  <br /> <code>'+fullName:*foo* +bar'</code>
+                  <strong>Search in specific fields.</strong> The following search matches all objects 
+                  in "twisted.mail" that matches “search”: <code>+qname:twisted.mail.* +search</code>
 
                   <p>
-                    Possible fields: 'name', 'docstring', 'fullName'.
+                    Possible fields: 'name', 'qname' (fully qualified name), 'docstring', and 'kind'.
+                    Last two fields are only applicable if "search in docstrings" is enabled.
                   </p>
                 </li>
 
                 <li>
                   <strong>Fuzzy matches.</strong> The following search matches all documents 
-                  that have a word within 1 edit distance of “foo”:
-                  <br /> <code>'foo~1'</code>
+                  that have a word within 1 edit distance of “foo”: <code>foo~1</code>
                 </li>
             </ul>
 
           </p>
         </div>
 
-      </div>
+        <div id="search-status"> </div>
+        
+        <div class="warning" id="search-warn-box" style="display: none;">
+          <p class="rst-last"><span id="search-warn"></span></p>
+        </div>
 
+        <table id="search-results">
+          <!-- Filled dynamically by JS -->
+        </table>
+        
+        <div style="margin-top: 8px;">
+          <p>Results provided by <a href="https://lunrjs.com">Lunr.js</a></p>
+        </div>
+      </div>
 
     </div>
   </div>
 
-  <script>
- 
-    function toggleSearchHelpText() {
-        document.body.classList.toggle("search-help-hidden");
-    }
-    // Init search and help text
-    document.getElementById('search-box-container').style.display = 'block';
-    document.getElementById('search-help-box').style.display = 'block';
-    document.body.classList.add("search-help-hidden");
-
-  </script>
+  <script src="ajax.js" type="text/javascript"></script>
+  <script src="search.js" type="text/javascript"></script>
 
 </nav>
 
@@ -115,7 +128,7 @@
     <div class="container">
 
       <div class="page-header">
-        <h1 class="class"><code><code><a href="nltk.html">nltk</a></code><wbr></wbr>.<code><a href="nltk.sem.html">sem</a></code><wbr></wbr>.<code><a href="nltk.sem.linearlogic.html">linearlogic</a></code><wbr></wbr>.<code><a href="nltk.sem.linearlogic.LinearLogicParser.html">LinearLogicParser</a></code></code></h1>
+        <h1 class="class"><code><code><a href="index.html" class="internal-link">nltk</a></code><wbr></wbr>.<code><a href="nltk.sem.html" class="internal-link" title="nltk.sem">sem</a></code><wbr></wbr>.<code><a href="nltk.sem.linearlogic.html" class="internal-link" title="nltk.sem.linearlogic">linearlogic</a></code><wbr></wbr>.<code><a href="nltk.sem.linearlogic.LinearLogicParser.html" class="internal-link" title="nltk.sem.linearlogic.LinearLogicParser">LinearLogicParser</a></code></code></h1>
         <div id="showPrivate">
           <button class="btn btn-link" onclick="togglePrivate()">Toggle Private API</button>
         </div>
@@ -126,7 +139,7 @@
       </div>
 
       <div class="extrasDocstring">
-        <p><code><span class="py-keyword">class</span> <span class="py-defname">LinearLogicParser</span>(<a href="nltk.sem.logic.LogicParser.html" title="nltk.sem.logic.LogicParser">LogicParser</a>): <a href="https://github.com/nltk/nltk/tree/3.6.2/nltk/sem/linearlogic.py#L27" class="sourceLink">(source)</a></code></p>
+        <p><code><span class="py-keyword">class</span> <span class="py-defname">LinearLogicParser</span>(<a href="nltk.sem.logic.LogicParser.html" class="internal-link" title="nltk.sem.logic.LogicParser">LogicParser</a>): <a href="https://github.com/nltk/nltk/tree/3.6.2/nltk/sem/linearlogic.py#L27" class="sourceLink">(source)</a></code></p>
         <p><a href="classIndex.html#nltk.sem.linearlogic.LinearLogicParser">View In Hierarchy</a></p>
       </div>
 
@@ -141,48 +154,48 @@
   <tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#__init__">__init__</a></code></td>
-    <td><span></span></td>
+    <td><code><a href="#__init__" class="internal-link" title="nltk.sem.linearlogic.LinearLogicParser.__init__">__init__</a></code></td>
+    <td></td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#attempt_ApplicationExpression">attempt_ApplicationExpression</a></code></td>
+    <td><code><a href="#attempt_ApplicationExpression" class="internal-link" title="nltk.sem.linearlogic.LinearLogicParser.attempt_ApplicationExpression">attempt_​Application​Expression</a></code></td>
     <td><span class="undocumented">No summary</span></td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#get_all_symbols">get_all_symbols</a></code></td>
-    <td><span>This method exists to be overridden</span></td>
+    <td><code><a href="#get_all_symbols" class="internal-link" title="nltk.sem.linearlogic.LinearLogicParser.get_all_symbols">get​_all​_symbols</a></code></td>
+    <td>This method exists to be overridden</td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#get_BooleanExpression_factory">get_BooleanExpression_factory</a></code></td>
-    <td><span>This method serves as a hook for other logic parsers that have different boolean operators</span></td>
+    <td><code><a href="#get_BooleanExpression_factory" class="internal-link" title="nltk.sem.linearlogic.LinearLogicParser.get_BooleanExpression_factory">get_​Boolean​Expression_factory</a></code></td>
+    <td>This method serves as a hook for other logic parsers that have different boolean operators</td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#handle">handle</a></code></td>
-    <td><span>This method is intended to be overridden for logics that use different operators or expressions</span></td>
+    <td><code><a href="#handle" class="internal-link" title="nltk.sem.linearlogic.LinearLogicParser.handle">handle</a></code></td>
+    <td>This method is intended to be overridden for logics that use different operators or expressions</td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#make_BooleanExpression">make_BooleanExpression</a></code></td>
+    <td><code><a href="#make_BooleanExpression" class="internal-link" title="nltk.sem.linearlogic.LinearLogicParser.make_BooleanExpression">make_​Boolean​Expression</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#make_VariableExpression">make_VariableExpression</a></code></td>
+    <td><code><a href="#make_VariableExpression" class="internal-link" title="nltk.sem.linearlogic.LinearLogicParser.make_VariableExpression">make_​Variable​Expression</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="instancevariable">
     
     <td>Instance Variable</td>
-    <td><code><a href="#operator_precedence">operator_precedence</a></code></td>
+    <td><code><a href="#operator_precedence" class="internal-link" title="nltk.sem.linearlogic.LinearLogicParser.operator_precedence">operator​_precedence</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr>
 </table>
         
           <p class="inheritedFrom">
-            Inherited from <code><a href="nltk.sem.logic.LogicParser.html">LogicParser</a></code>:
+            Inherited from <code><a href="nltk.sem.logic.LogicParser.html" class="internal-link" title="nltk.sem.logic.LogicParser">LogicParser</a></code>:
           </p>
           <table class="children sortable" id="id1347">
   
@@ -190,157 +203,157 @@
   <tr class="basemethod">
     
     <td>Method</td>
-    <td><code><a href="nltk.sem.logic.LogicParser.html#__repr__">__repr__</a></code></td>
+    <td><code><a href="nltk.sem.logic.LogicParser.html#__repr__" class="internal-link" title="nltk.sem.logic.LogicParser.__repr__">__repr__</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="basemethod">
     
     <td>Method</td>
-    <td><code><a href="nltk.sem.logic.LogicParser.html#assertNextToken">assertNextToken</a></code></td>
+    <td><code><a href="nltk.sem.logic.LogicParser.html#assertNextToken" class="internal-link" title="nltk.sem.logic.LogicParser.assertNextToken">assert​Next​Token</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="basemethod">
     
     <td>Method</td>
-    <td><code><a href="nltk.sem.logic.LogicParser.html#assertToken">assertToken</a></code></td>
+    <td><code><a href="nltk.sem.logic.LogicParser.html#assertToken" class="internal-link" title="nltk.sem.logic.LogicParser.assertToken">assert​Token</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="basemethod">
     
     <td>Method</td>
-    <td><code><a href="nltk.sem.logic.LogicParser.html#attempt_adjuncts">attempt_adjuncts</a></code></td>
+    <td><code><a href="nltk.sem.logic.LogicParser.html#attempt_adjuncts" class="internal-link" title="nltk.sem.logic.LogicParser.attempt_adjuncts">attempt​_adjuncts</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="basemethod">
     
     <td>Method</td>
-    <td><code><a href="nltk.sem.logic.LogicParser.html#attempt_BooleanExpression">attempt_BooleanExpression</a></code></td>
-    <td><span>Attempt to make a boolean expression.  If the next token is a boolean operator, then a BooleanExpression will be returned.  Otherwise, the parameter will be returned.</span></td>
+    <td><code><a href="nltk.sem.logic.LogicParser.html#attempt_BooleanExpression" class="internal-link" title="nltk.sem.logic.LogicParser.attempt_BooleanExpression">attempt_​Boolean​Expression</a></code></td>
+    <td>Attempt to make a boolean expression.  If the next token is a boolean operator, then a BooleanExpression will be returned.  Otherwise, the parameter will be returned.</td>
   </tr><tr class="basemethod">
     
     <td>Method</td>
-    <td><code><a href="nltk.sem.logic.LogicParser.html#attempt_EqualityExpression">attempt_EqualityExpression</a></code></td>
-    <td><span>Attempt to make an equality expression.  If the next token is an equality operator, then an EqualityExpression will be returned. Otherwise, the parameter will be returned.</span></td>
+    <td><code><a href="nltk.sem.logic.LogicParser.html#attempt_EqualityExpression" class="internal-link" title="nltk.sem.logic.LogicParser.attempt_EqualityExpression">attempt_​Equality​Expression</a></code></td>
+    <td>Attempt to make an equality expression.  If the next token is an equality operator, then an EqualityExpression will be returned. Otherwise, the parameter will be returned.</td>
   </tr><tr class="basemethod">
     
     <td>Method</td>
-    <td><code><a href="nltk.sem.logic.LogicParser.html#get_next_token_variable">get_next_token_variable</a></code></td>
+    <td><code><a href="nltk.sem.logic.LogicParser.html#get_next_token_variable" class="internal-link" title="nltk.sem.logic.LogicParser.get_next_token_variable">get​_next​_token​_variable</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="basemethod">
     
     <td>Method</td>
-    <td><code><a href="nltk.sem.logic.LogicParser.html#get_QuantifiedExpression_factory">get_QuantifiedExpression_factory</a></code></td>
-    <td><span>This method serves as a hook for other logic parsers that have different quantifiers</span></td>
+    <td><code><a href="nltk.sem.logic.LogicParser.html#get_QuantifiedExpression_factory" class="internal-link" title="nltk.sem.logic.LogicParser.get_QuantifiedExpression_factory">get_​Quantified​Expression_factory</a></code></td>
+    <td>This method serves as a hook for other logic parsers that have different quantifiers</td>
   </tr><tr class="basemethod">
     
     <td>Method</td>
-    <td><code><a href="nltk.sem.logic.LogicParser.html#handle_lambda">handle_lambda</a></code></td>
+    <td><code><a href="nltk.sem.logic.LogicParser.html#handle_lambda" class="internal-link" title="nltk.sem.logic.LogicParser.handle_lambda">handle​_lambda</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="basemethod">
     
     <td>Method</td>
-    <td><code><a href="nltk.sem.logic.LogicParser.html#handle_negation">handle_negation</a></code></td>
+    <td><code><a href="nltk.sem.logic.LogicParser.html#handle_negation" class="internal-link" title="nltk.sem.logic.LogicParser.handle_negation">handle​_negation</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="basemethod">
     
     <td>Method</td>
-    <td><code><a href="nltk.sem.logic.LogicParser.html#handle_open">handle_open</a></code></td>
+    <td><code><a href="nltk.sem.logic.LogicParser.html#handle_open" class="internal-link" title="nltk.sem.logic.LogicParser.handle_open">handle​_open</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="basemethod">
     
     <td>Method</td>
-    <td><code><a href="nltk.sem.logic.LogicParser.html#handle_quant">handle_quant</a></code></td>
+    <td><code><a href="nltk.sem.logic.LogicParser.html#handle_quant" class="internal-link" title="nltk.sem.logic.LogicParser.handle_quant">handle​_quant</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="basemethod">
     
     <td>Method</td>
-    <td><code><a href="nltk.sem.logic.LogicParser.html#handle_variable">handle_variable</a></code></td>
+    <td><code><a href="nltk.sem.logic.LogicParser.html#handle_variable" class="internal-link" title="nltk.sem.logic.LogicParser.handle_variable">handle​_variable</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="basemethod">
     
     <td>Method</td>
-    <td><code><a href="nltk.sem.logic.LogicParser.html#has_priority">has_priority</a></code></td>
+    <td><code><a href="nltk.sem.logic.LogicParser.html#has_priority" class="internal-link" title="nltk.sem.logic.LogicParser.has_priority">has​_priority</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="basemethod">
     
     <td>Method</td>
-    <td><code><a href="nltk.sem.logic.LogicParser.html#inRange">inRange</a></code></td>
-    <td><span>Return TRUE if the given location is within the buffer</span></td>
+    <td><code><a href="nltk.sem.logic.LogicParser.html#inRange" class="internal-link" title="nltk.sem.logic.LogicParser.inRange">in​Range</a></code></td>
+    <td>Return TRUE if the given location is within the buffer</td>
   </tr><tr class="basemethod">
     
     <td>Method</td>
-    <td><code><a href="nltk.sem.logic.LogicParser.html#isvariable">isvariable</a></code></td>
+    <td><code><a href="nltk.sem.logic.LogicParser.html#isvariable" class="internal-link" title="nltk.sem.logic.LogicParser.isvariable">isvariable</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="basemethod">
     
     <td>Method</td>
-    <td><code><a href="nltk.sem.logic.LogicParser.html#make_ApplicationExpression">make_ApplicationExpression</a></code></td>
+    <td><code><a href="nltk.sem.logic.LogicParser.html#make_ApplicationExpression" class="internal-link" title="nltk.sem.logic.LogicParser.make_ApplicationExpression">make_​Application​Expression</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="basemethod">
     
     <td>Method</td>
-    <td><code><a href="nltk.sem.logic.LogicParser.html#make_EqualityExpression">make_EqualityExpression</a></code></td>
-    <td><span>This method serves as a hook for other logic parsers that have different equality expression classes</span></td>
+    <td><code><a href="nltk.sem.logic.LogicParser.html#make_EqualityExpression" class="internal-link" title="nltk.sem.logic.LogicParser.make_EqualityExpression">make_​Equality​Expression</a></code></td>
+    <td>This method serves as a hook for other logic parsers that have different equality expression classes</td>
   </tr><tr class="basemethod">
     
     <td>Method</td>
-    <td><code><a href="nltk.sem.logic.LogicParser.html#make_LambdaExpression">make_LambdaExpression</a></code></td>
+    <td><code><a href="nltk.sem.logic.LogicParser.html#make_LambdaExpression" class="internal-link" title="nltk.sem.logic.LogicParser.make_LambdaExpression">make_​Lambda​Expression</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="basemethod">
     
     <td>Method</td>
-    <td><code><a href="nltk.sem.logic.LogicParser.html#make_NegatedExpression">make_NegatedExpression</a></code></td>
+    <td><code><a href="nltk.sem.logic.LogicParser.html#make_NegatedExpression" class="internal-link" title="nltk.sem.logic.LogicParser.make_NegatedExpression">make_​Negated​Expression</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="basemethod">
     
     <td>Method</td>
-    <td><code><a href="nltk.sem.logic.LogicParser.html#make_QuanifiedExpression">make_QuanifiedExpression</a></code></td>
+    <td><code><a href="nltk.sem.logic.LogicParser.html#make_QuanifiedExpression" class="internal-link" title="nltk.sem.logic.LogicParser.make_QuanifiedExpression">make_​Quanified​Expression</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="basemethod">
     
     <td>Method</td>
-    <td><code><a href="nltk.sem.logic.LogicParser.html#parse">parse</a></code></td>
-    <td><span>Parse the expression.</span></td>
+    <td><code><a href="nltk.sem.logic.LogicParser.html#parse" class="internal-link" title="nltk.sem.logic.LogicParser.parse">parse</a></code></td>
+    <td>Parse the expression.</td>
   </tr><tr class="basemethod">
     
     <td>Method</td>
-    <td><code><a href="nltk.sem.logic.LogicParser.html#process">process</a></code></td>
-    <td><span>Split the data into tokens</span></td>
+    <td><code><a href="nltk.sem.logic.LogicParser.html#process" class="internal-link" title="nltk.sem.logic.LogicParser.process">process</a></code></td>
+    <td>Split the data into tokens</td>
   </tr><tr class="basemethod">
     
     <td>Method</td>
-    <td><code><a href="nltk.sem.logic.LogicParser.html#process_next_expression">process_next_expression</a></code></td>
-    <td><span>Parse the next complete expression from the stream and return it.</span></td>
+    <td><code><a href="nltk.sem.logic.LogicParser.html#process_next_expression" class="internal-link" title="nltk.sem.logic.LogicParser.process_next_expression">process​_next​_expression</a></code></td>
+    <td>Parse the next complete expression from the stream and return it.</td>
   </tr><tr class="basemethod">
     
     <td>Method</td>
-    <td><code><a href="nltk.sem.logic.LogicParser.html#process_quoted_token">process_quoted_token</a></code></td>
+    <td><code><a href="nltk.sem.logic.LogicParser.html#process_quoted_token" class="internal-link" title="nltk.sem.logic.LogicParser.process_quoted_token">process​_quoted​_token</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="basemethod">
     
     <td>Method</td>
-    <td><code><a href="nltk.sem.logic.LogicParser.html#token">token</a></code></td>
-    <td><span>Get the next waiting token.  If a location is given, then return the token at currentIndex+location without advancing currentIndex; setting it gives lookahead/lookback capability.</span></td>
+    <td><code><a href="nltk.sem.logic.LogicParser.html#token" class="internal-link" title="nltk.sem.logic.LogicParser.token">token</a></code></td>
+    <td>Get the next waiting token.  If a location is given, then return the token at currentIndex+location without advancing currentIndex; setting it gives lookahead/lookback capability.</td>
   </tr><tr class="baseinstancevariable">
     
     <td>Instance Variable</td>
-    <td><code><a href="nltk.sem.logic.LogicParser.html#quote_chars">quote_chars</a></code></td>
-    <td><span class="undocumented">Undocumented</span></td>
-  </tr><tr class="baseinstancevariable">
-    
-    <td>Instance Variable</td>
-    <td><code><a href="nltk.sem.logic.LogicParser.html#right_associated_operations">right_associated_operations</a></code></td>
+    <td><code><a href="nltk.sem.logic.LogicParser.html#quote_chars" class="internal-link" title="nltk.sem.logic.LogicParser.quote_chars">quote​_chars</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="baseinstancevariable">
     
     <td>Instance Variable</td>
-    <td><code><a href="nltk.sem.logic.LogicParser.html#type_check">type_check</a></code></td>
+    <td><code><a href="nltk.sem.logic.LogicParser.html#right_associated_operations" class="internal-link" title="nltk.sem.logic.LogicParser.right_associated_operations">right​_associated​_operations</a></code></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="baseinstancevariable">
+    
+    <td>Instance Variable</td>
+    <td><code><a href="nltk.sem.logic.LogicParser.html#type_check" class="internal-link" title="nltk.sem.logic.LogicParser.type_check">type​_check</a></code></td>
     <td><span class="undocumented">No summary</span></td>
   </tr><tr class="baseinstancevariable private">
     
     <td>Instance Variable</td>
-    <td><code><a href="nltk.sem.logic.LogicParser.html#_buffer">_buffer</a></code></td>
+    <td><code><a href="nltk.sem.logic.LogicParser.html#_buffer" class="internal-link" title="nltk.sem.logic.LogicParser._buffer">_buffer</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="baseinstancevariable private">
     
     <td>Instance Variable</td>
-    <td><code><a href="nltk.sem.logic.LogicParser.html#_currentIndex">_currentIndex</a></code></td>
+    <td><code><a href="nltk.sem.logic.LogicParser.html#_currentIndex" class="internal-link" title="nltk.sem.logic.LogicParser._currentIndex">_current​Index</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr>
 </table>
@@ -369,9 +382,9 @@
     </a>
   </div>
   <div class="docstring functionBody">
-    <div class="interfaceinfo">overrides <code><a href="nltk.sem.logic.LogicParser.html#__init__">nltk.sem.logic.LogicParser.__init__</a></code></div>
+    <div class="interfaceinfo">overrides <code><a href="nltk.sem.logic.LogicParser.html#__init__" class="internal-link">nltk.sem.logic.LogicParser.__init__</a></code></div>
     
-    <div>to their types.<table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">type_check</span></td><td class="fieldArgDesc">bool should type checking be performed?</td></tr></table></div>
+    <div>to their types.<table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">type​_check</span></td><td class="fieldArgDesc">bool should type checking be performed?</td></tr></table></div>
   </div>
 </div><div class="basemethod">
   
@@ -391,7 +404,7 @@
     </a>
   </div>
   <div class="docstring functionBody">
-    <div class="interfaceinfo">overrides <code><a href="nltk.sem.logic.LogicParser.html#attempt_ApplicationExpression">nltk.sem.logic.LogicParser.attempt_ApplicationExpression</a></code></div>
+    <div class="interfaceinfo">overrides <code><a href="nltk.sem.logic.LogicParser.html#attempt_ApplicationExpression" class="internal-link">nltk.sem.logic.LogicParser.attempt_ApplicationExpression</a></code></div>
     
     <div>Attempt to make an application expression.  If the next tokens
 are an argument in parens, then the argument expression is a
@@ -416,7 +429,7 @@ argument expression.</div>
     </a>
   </div>
   <div class="docstring functionBody">
-    <div class="interfaceinfo">overrides <code><a href="nltk.sem.logic.LogicParser.html#get_all_symbols">nltk.sem.logic.LogicParser.get_all_symbols</a></code></div>
+    <div class="interfaceinfo">overrides <code><a href="nltk.sem.logic.LogicParser.html#get_all_symbols" class="internal-link">nltk.sem.logic.LogicParser.get_all_symbols</a></code></div>
     
     <div>This method exists to be overridden</div>
   </div>
@@ -438,7 +451,7 @@ argument expression.</div>
     </a>
   </div>
   <div class="docstring functionBody">
-    <div class="interfaceinfo">overrides <code><a href="nltk.sem.logic.LogicParser.html#get_BooleanExpression_factory">nltk.sem.logic.LogicParser.get_BooleanExpression_factory</a></code></div>
+    <div class="interfaceinfo">overrides <code><a href="nltk.sem.logic.LogicParser.html#get_BooleanExpression_factory" class="internal-link">nltk.sem.logic.LogicParser.get_BooleanExpression_factory</a></code></div>
     
     <div>This method serves as a hook for other logic parsers that
 have different boolean operators</div>
@@ -461,7 +474,7 @@ have different boolean operators</div>
     </a>
   </div>
   <div class="docstring functionBody">
-    <div class="interfaceinfo">overrides <code><a href="nltk.sem.logic.LogicParser.html#handle">nltk.sem.logic.LogicParser.handle</a></code></div>
+    <div class="interfaceinfo">overrides <code><a href="nltk.sem.logic.LogicParser.html#handle" class="internal-link">nltk.sem.logic.LogicParser.handle</a></code></div>
     
     <div>This method is intended to be overridden for logics that
 use different operators or expressions</div>
@@ -484,7 +497,7 @@ use different operators or expressions</div>
     </a>
   </div>
   <div class="docstring functionBody">
-    <div class="interfaceinfo">overrides <code><a href="nltk.sem.logic.LogicParser.html#make_BooleanExpression">nltk.sem.logic.LogicParser.make_BooleanExpression</a></code></div>
+    <div class="interfaceinfo">overrides <code><a href="nltk.sem.logic.LogicParser.html#make_BooleanExpression" class="internal-link">nltk.sem.logic.LogicParser.make_BooleanExpression</a></code></div>
     
     <div><p class="undocumented">Undocumented</p></div>
   </div>
@@ -506,7 +519,7 @@ use different operators or expressions</div>
     </a>
   </div>
   <div class="docstring functionBody">
-    <div class="interfaceinfo">overrides <code><a href="nltk.sem.logic.LogicParser.html#make_VariableExpression">nltk.sem.logic.LogicParser.make_VariableExpression</a></code></div>
+    <div class="interfaceinfo">overrides <code><a href="nltk.sem.logic.LogicParser.html#make_VariableExpression" class="internal-link">nltk.sem.logic.LogicParser.make_VariableExpression</a></code></div>
     
     <div><p class="undocumented">Undocumented</p></div>
   </div>
@@ -528,9 +541,10 @@ use different operators or expressions</div>
     </a>
   </div>
   <div class="functionBody">
-    <div class="interfaceinfo">overrides <code><a href="nltk.sem.logic.LogicParser.html#operator_precedence">nltk.sem.logic.LogicParser.operator_precedence</a></code></div>
+    <div class="interfaceinfo">overrides <code><a href="nltk.sem.logic.LogicParser.html#operator_precedence" class="internal-link">nltk.sem.logic.LogicParser.operator_precedence</a></code></div>
     
     <div><p class="undocumented">Undocumented</p></div>
+    
   </div>
 </div>
 
@@ -542,7 +556,7 @@ use different operators or expressions</div>
   <div class="container">
     <a href="index.html">API Documentation</a> for <a href="http://www.nltk.org/" class="projecthome">nltk-3.6.2</a>,
   generated by <a href="https://github.com/twisted/pydoctor/">pydoctor</a>
-    21.2.2 at 2022-01-06 17:36:51.
+    22.2.2.dev0 at 2022-03-04 05:57:24.
   </div>
 </footer>
 

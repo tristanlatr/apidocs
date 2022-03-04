@@ -7,7 +7,7 @@
   <head>
     
     <title>nltk.stem.snowball</title>
-    <meta name="generator" content="pydoctor 21.2.2"> 
+    <meta name="generator" content="pydoctor 22.2.2.dev0"> 
         
     </meta>
     <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
@@ -44,69 +44,82 @@
           Names
         </a>
 
-        <form action="search-results.html" id="search-box-container">
+        <div id="search-box-container">
           <div class="input-group">
-            <input id="search-box" name="search-query" placeholder="Search..." aria-label="Search" minlength="2" class="form-control" />
+            <input id="search-box" type="search" name="search-query" placeholder="Search..." aria-label="Search" minlength="2" class="form-control" autocomplete="off" />
+            
             <span class="input-group-btn">
-              <button class="btn btn-default" type="submit" title="Search"><img src="fonts/search.svg" alt="Search!" /></button>
-              <a class="btn btn-default" id="search-help-button" title="Help" onclick="toggleSearchHelpText()"><img src="fonts/info.svg" alt="Help!" /></a>
+              <a style="display: none;" class="btn btn-default" id="search-clear-button" title="Clear" onclick="clearSearch()"><img src="fonts/x-circle.svg" alt="Clear" /></a>
+              <a class="btn btn-default" id="search-help-button" title="Help" onclick="toggleSearchHelpText()"><img src="fonts/info.svg" alt="Help" /></a>
             </span>
           </div>
-        </form>
+        </div>
 
-        <div class="rst-admonition hint" id="search-help-box">
+      </div>
+
+      <div id="search-results-container" style="display: none;">
+        <div>
+          <span class="label label-default" id="search-docstrings-button">
+            <a title="Search in docstrings" onclick="toggleSearchInDocstrings()">search in docstrings</a></span>
+        </div>
+
+        <noscript>
+            <h1>Cannot search: JavaScript is not supported/enabled in your browser.</h1>
+        </noscript>
+
+        <div class="hint" id="search-help-box">
           <p class="rst-last">
       
             Search bar offers the following options:
             <ul>   
                 <li>
                   <strong>Term presence.</strong> The below example searches for documents that 
-                    must contain “foo”, might contain “bar” and must not contain “baz”:
-                  <br /> <code>'+foo bar -baz'</code>
+                    must contain “foo”, might contain “bar” and must not contain “baz”: <code>+foo bar -baz</code>
                 </li> 
 
                 <li>
-                  <strong>Wildcards.</strong> The below example searches for documents with words beginning with “foo”:
-                  <br /> <code>'foo*'</code>
+                  <strong>Wildcards.</strong> The below example searches for documents with words beginning with “foo”: <code>foo*</code>
                 </li> 
 
                 <li>
-                  <strong>Search in specific fields.</strong> The following search matches all documents 
-                  that contains "foo" in their full dotted name and with “bar” in any field:
-                  <br /> <code>'+fullName:*foo* +bar'</code>
+                  <strong>Search in specific fields.</strong> The following search matches all objects 
+                  in "twisted.mail" that matches “search”: <code>+qname:twisted.mail.* +search</code>
 
                   <p>
-                    Possible fields: 'name', 'docstring', 'fullName'.
+                    Possible fields: 'name', 'qname' (fully qualified name), 'docstring', and 'kind'.
+                    Last two fields are only applicable if "search in docstrings" is enabled.
                   </p>
                 </li>
 
                 <li>
                   <strong>Fuzzy matches.</strong> The following search matches all documents 
-                  that have a word within 1 edit distance of “foo”:
-                  <br /> <code>'foo~1'</code>
+                  that have a word within 1 edit distance of “foo”: <code>foo~1</code>
                 </li>
             </ul>
 
           </p>
         </div>
 
-      </div>
+        <div id="search-status"> </div>
+        
+        <div class="warning" id="search-warn-box" style="display: none;">
+          <p class="rst-last"><span id="search-warn"></span></p>
+        </div>
 
+        <table id="search-results">
+          <!-- Filled dynamically by JS -->
+        </table>
+        
+        <div style="margin-top: 8px;">
+          <p>Results provided by <a href="https://lunrjs.com">Lunr.js</a></p>
+        </div>
+      </div>
 
     </div>
   </div>
 
-  <script>
- 
-    function toggleSearchHelpText() {
-        document.body.classList.toggle("search-help-hidden");
-    }
-    // Init search and help text
-    document.getElementById('search-box-container').style.display = 'block';
-    document.getElementById('search-help-box').style.display = 'block';
-    document.body.classList.add("search-help-hidden");
-
-  </script>
+  <script src="ajax.js" type="text/javascript"></script>
+  <script src="search.js" type="text/javascript"></script>
 
 </nav>
 
@@ -115,7 +128,7 @@
     <div class="container">
 
       <div class="page-header">
-        <h1 class="module"><code><code><a href="nltk.html">nltk</a></code><wbr></wbr>.<code><a href="nltk.stem.html">stem</a></code><wbr></wbr>.<code><a href="nltk.stem.snowball.html">snowball</a></code></code></h1>
+        <h1 class="module"><code><code><a href="index.html" class="internal-link">nltk</a></code><wbr></wbr>.<code><a href="nltk.stem.html" class="internal-link" title="nltk.stem">stem</a></code><wbr></wbr>.<code><a href="nltk.stem.snowball.html" class="internal-link" title="nltk.stem.snowball">snowball</a></code></code></h1>
         <div id="showPrivate">
           <button class="btn btn-link" onclick="togglePrivate()">Toggle Private API</button>
         </div>
@@ -134,7 +147,7 @@
         <div><p>Snowball stemmers</p>
 <p>This module provides a port of the Snowball stemmers
 developed by Martin Porter.</p>
-<p>There is also a demo function: <code>snowball.demo()</code>.</p>
+<p>There is also a demo function: <code><a href="#demo" class="internal-link" title="nltk.stem.snowball.demo">snowball.demo()</a></code>.</p>
 </div>
       </div>
 
@@ -145,108 +158,108 @@ developed by Martin Porter.</p>
   <tr class="class">
     
     <td>Class</td>
-    <td><code><a href="nltk.stem.snowball.ArabicStemmer.html">ArabicStemmer</a></code></td>
+    <td><code><a href="nltk.stem.snowball.ArabicStemmer.html" class="internal-link" title="nltk.stem.snowball.ArabicStemmer">​Arabic​Stemmer</a></code></td>
     <td><span class="undocumented">No summary</span></td>
   </tr><tr class="class">
     
     <td>Class</td>
-    <td><code><a href="nltk.stem.snowball.DanishStemmer.html">DanishStemmer</a></code></td>
-    <td><span>The Danish Snowball stemmer.</span></td>
+    <td><code><a href="nltk.stem.snowball.DanishStemmer.html" class="internal-link" title="nltk.stem.snowball.DanishStemmer">​Danish​Stemmer</a></code></td>
+    <td>The Danish Snowball stemmer.</td>
   </tr><tr class="class">
     
     <td>Class</td>
-    <td><code><a href="nltk.stem.snowball.DutchStemmer.html">DutchStemmer</a></code></td>
-    <td><span>The Dutch Snowball stemmer.</span></td>
+    <td><code><a href="nltk.stem.snowball.DutchStemmer.html" class="internal-link" title="nltk.stem.snowball.DutchStemmer">​Dutch​Stemmer</a></code></td>
+    <td>The Dutch Snowball stemmer.</td>
   </tr><tr class="class">
     
     <td>Class</td>
-    <td><code><a href="nltk.stem.snowball.EnglishStemmer.html">EnglishStemmer</a></code></td>
-    <td><span>The English Snowball stemmer.</span></td>
+    <td><code><a href="nltk.stem.snowball.EnglishStemmer.html" class="internal-link" title="nltk.stem.snowball.EnglishStemmer">​English​Stemmer</a></code></td>
+    <td>The English Snowball stemmer.</td>
   </tr><tr class="class">
     
     <td>Class</td>
-    <td><code><a href="nltk.stem.snowball.FinnishStemmer.html">FinnishStemmer</a></code></td>
-    <td><span>The Finnish Snowball stemmer.</span></td>
+    <td><code><a href="nltk.stem.snowball.FinnishStemmer.html" class="internal-link" title="nltk.stem.snowball.FinnishStemmer">​Finnish​Stemmer</a></code></td>
+    <td>The Finnish Snowball stemmer.</td>
   </tr><tr class="class">
     
     <td>Class</td>
-    <td><code><a href="nltk.stem.snowball.FrenchStemmer.html">FrenchStemmer</a></code></td>
-    <td><span>The French Snowball stemmer.</span></td>
+    <td><code><a href="nltk.stem.snowball.FrenchStemmer.html" class="internal-link" title="nltk.stem.snowball.FrenchStemmer">​French​Stemmer</a></code></td>
+    <td>The French Snowball stemmer.</td>
   </tr><tr class="class">
     
     <td>Class</td>
-    <td><code><a href="nltk.stem.snowball.GermanStemmer.html">GermanStemmer</a></code></td>
-    <td><span>The German Snowball stemmer.</span></td>
+    <td><code><a href="nltk.stem.snowball.GermanStemmer.html" class="internal-link" title="nltk.stem.snowball.GermanStemmer">​German​Stemmer</a></code></td>
+    <td>The German Snowball stemmer.</td>
   </tr><tr class="class">
     
     <td>Class</td>
-    <td><code><a href="nltk.stem.snowball.HungarianStemmer.html">HungarianStemmer</a></code></td>
-    <td><span>The Hungarian Snowball stemmer.</span></td>
+    <td><code><a href="nltk.stem.snowball.HungarianStemmer.html" class="internal-link" title="nltk.stem.snowball.HungarianStemmer">​Hungarian​Stemmer</a></code></td>
+    <td>The Hungarian Snowball stemmer.</td>
   </tr><tr class="class">
     
     <td>Class</td>
-    <td><code><a href="nltk.stem.snowball.ItalianStemmer.html">ItalianStemmer</a></code></td>
-    <td><span>The Italian Snowball stemmer.</span></td>
+    <td><code><a href="nltk.stem.snowball.ItalianStemmer.html" class="internal-link" title="nltk.stem.snowball.ItalianStemmer">​Italian​Stemmer</a></code></td>
+    <td>The Italian Snowball stemmer.</td>
   </tr><tr class="class">
     
     <td>Class</td>
-    <td><code><a href="nltk.stem.snowball.NorwegianStemmer.html">NorwegianStemmer</a></code></td>
-    <td><span>The Norwegian Snowball stemmer.</span></td>
+    <td><code><a href="nltk.stem.snowball.NorwegianStemmer.html" class="internal-link" title="nltk.stem.snowball.NorwegianStemmer">​Norwegian​Stemmer</a></code></td>
+    <td>The Norwegian Snowball stemmer.</td>
   </tr><tr class="class">
     
     <td>Class</td>
-    <td><code><a href="nltk.stem.snowball.PorterStemmer.html">PorterStemmer</a></code></td>
-    <td><span>A word stemmer based on the original Porter stemming algorithm.</span></td>
+    <td><code><a href="nltk.stem.snowball.PorterStemmer.html" class="internal-link" title="nltk.stem.snowball.PorterStemmer">​Porter​Stemmer</a></code></td>
+    <td>A word stemmer based on the original Porter stemming algorithm.</td>
   </tr><tr class="class">
     
     <td>Class</td>
-    <td><code><a href="nltk.stem.snowball.PortugueseStemmer.html">PortugueseStemmer</a></code></td>
-    <td><span>The Portuguese Snowball stemmer.</span></td>
+    <td><code><a href="nltk.stem.snowball.PortugueseStemmer.html" class="internal-link" title="nltk.stem.snowball.PortugueseStemmer">​Portuguese​Stemmer</a></code></td>
+    <td>The Portuguese Snowball stemmer.</td>
   </tr><tr class="class">
     
     <td>Class</td>
-    <td><code><a href="nltk.stem.snowball.RomanianStemmer.html">RomanianStemmer</a></code></td>
-    <td><span>The Romanian Snowball stemmer.</span></td>
+    <td><code><a href="nltk.stem.snowball.RomanianStemmer.html" class="internal-link" title="nltk.stem.snowball.RomanianStemmer">​Romanian​Stemmer</a></code></td>
+    <td>The Romanian Snowball stemmer.</td>
   </tr><tr class="class">
     
     <td>Class</td>
-    <td><code><a href="nltk.stem.snowball.RussianStemmer.html">RussianStemmer</a></code></td>
-    <td><span>The Russian Snowball stemmer.</span></td>
+    <td><code><a href="nltk.stem.snowball.RussianStemmer.html" class="internal-link" title="nltk.stem.snowball.RussianStemmer">​Russian​Stemmer</a></code></td>
+    <td>The Russian Snowball stemmer.</td>
   </tr><tr class="class">
     
     <td>Class</td>
-    <td><code><a href="nltk.stem.snowball.SnowballStemmer.html">SnowballStemmer</a></code></td>
-    <td><span>Snowball Stemmer</span></td>
+    <td><code><a href="nltk.stem.snowball.SnowballStemmer.html" class="internal-link" title="nltk.stem.snowball.SnowballStemmer">​Snowball​Stemmer</a></code></td>
+    <td>Snowball Stemmer</td>
   </tr><tr class="class">
     
     <td>Class</td>
-    <td><code><a href="nltk.stem.snowball.SpanishStemmer.html">SpanishStemmer</a></code></td>
-    <td><span>The Spanish Snowball stemmer.</span></td>
+    <td><code><a href="nltk.stem.snowball.SpanishStemmer.html" class="internal-link" title="nltk.stem.snowball.SpanishStemmer">​Spanish​Stemmer</a></code></td>
+    <td>The Spanish Snowball stemmer.</td>
   </tr><tr class="class">
     
     <td>Class</td>
-    <td><code><a href="nltk.stem.snowball.SwedishStemmer.html">SwedishStemmer</a></code></td>
-    <td><span>The Swedish Snowball stemmer.</span></td>
+    <td><code><a href="nltk.stem.snowball.SwedishStemmer.html" class="internal-link" title="nltk.stem.snowball.SwedishStemmer">​Swedish​Stemmer</a></code></td>
+    <td>The Swedish Snowball stemmer.</td>
   </tr><tr class="function">
     
     <td>Function</td>
-    <td><code><a href="#demo">demo</a></code></td>
-    <td><span>This function provides a demonstration of the Snowball stemmers.</span></td>
+    <td><code><a href="#demo" class="internal-link" title="nltk.stem.snowball.demo">demo</a></code></td>
+    <td>This function provides a demonstration of the Snowball stemmers.</td>
   </tr><tr class="class private">
     
     <td>Class</td>
-    <td><code><a href="nltk.stem.snowball._LanguageSpecificStemmer.html">_LanguageSpecificStemmer</a></code></td>
-    <td><span>This helper subclass offers the possibility to invoke a specific stemmer directly. This is useful if you already know the language to be stemmed at runtime.</span></td>
+    <td><code><a href="nltk.stem.snowball._LanguageSpecificStemmer.html" class="internal-link" title="nltk.stem.snowball._LanguageSpecificStemmer">_​Language​Specific​Stemmer</a></code></td>
+    <td>This helper subclass offers the possibility to invoke a specific stemmer directly. This is useful if you already know the language to be stemmed at runtime.</td>
   </tr><tr class="class private">
     
     <td>Class</td>
-    <td><code><a href="nltk.stem.snowball._ScandinavianStemmer.html">_ScandinavianStemmer</a></code></td>
-    <td><span>This subclass encapsulates a method for defining the string region R1. It is used by the Danish, Norwegian, and Swedish stemmer.</span></td>
+    <td><code><a href="nltk.stem.snowball._ScandinavianStemmer.html" class="internal-link" title="nltk.stem.snowball._ScandinavianStemmer">_​Scandinavian​Stemmer</a></code></td>
+    <td>This subclass encapsulates a method for defining the string region R1. It is used by the Danish, Norwegian, and Swedish stemmer.</td>
   </tr><tr class="class private">
     
     <td>Class</td>
-    <td><code><a href="nltk.stem.snowball._StandardStemmer.html">_StandardStemmer</a></code></td>
-    <td><span>This subclass encapsulates two methods for defining the standard versions of the string regions R1, R2, and RV.</span></td>
+    <td><code><a href="nltk.stem.snowball._StandardStemmer.html" class="internal-link" title="nltk.stem.snowball._StandardStemmer">_​Standard​Stemmer</a></code></td>
+    <td>This subclass encapsulates two methods for defining the standard versions of the string regions R1, R2, and RV.</td>
   </tr>
 </table>
         
@@ -293,7 +306,7 @@ out the original and the stemmed text.</p>
   <div class="container">
     <a href="index.html">API Documentation</a> for <a href="http://www.nltk.org/" class="projecthome">nltk-3.6.2</a>,
   generated by <a href="https://github.com/twisted/pydoctor/">pydoctor</a>
-    21.2.2 at 2022-01-06 17:36:51.
+    22.2.2.dev0 at 2022-03-04 05:57:24.
   </div>
 </footer>
 

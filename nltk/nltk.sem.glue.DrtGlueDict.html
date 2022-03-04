@@ -7,7 +7,7 @@
   <head>
     
     <title>nltk.sem.glue.DrtGlueDict</title>
-    <meta name="generator" content="pydoctor 21.2.2"> 
+    <meta name="generator" content="pydoctor 22.2.2.dev0"> 
         
     </meta>
     <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
@@ -44,69 +44,82 @@
           Names
         </a>
 
-        <form action="search-results.html" id="search-box-container">
+        <div id="search-box-container">
           <div class="input-group">
-            <input id="search-box" name="search-query" placeholder="Search..." aria-label="Search" minlength="2" class="form-control" />
+            <input id="search-box" type="search" name="search-query" placeholder="Search..." aria-label="Search" minlength="2" class="form-control" autocomplete="off" />
+            
             <span class="input-group-btn">
-              <button class="btn btn-default" type="submit" title="Search"><img src="fonts/search.svg" alt="Search!" /></button>
-              <a class="btn btn-default" id="search-help-button" title="Help" onclick="toggleSearchHelpText()"><img src="fonts/info.svg" alt="Help!" /></a>
+              <a style="display: none;" class="btn btn-default" id="search-clear-button" title="Clear" onclick="clearSearch()"><img src="fonts/x-circle.svg" alt="Clear" /></a>
+              <a class="btn btn-default" id="search-help-button" title="Help" onclick="toggleSearchHelpText()"><img src="fonts/info.svg" alt="Help" /></a>
             </span>
           </div>
-        </form>
+        </div>
 
-        <div class="rst-admonition hint" id="search-help-box">
+      </div>
+
+      <div id="search-results-container" style="display: none;">
+        <div>
+          <span class="label label-default" id="search-docstrings-button">
+            <a title="Search in docstrings" onclick="toggleSearchInDocstrings()">search in docstrings</a></span>
+        </div>
+
+        <noscript>
+            <h1>Cannot search: JavaScript is not supported/enabled in your browser.</h1>
+        </noscript>
+
+        <div class="hint" id="search-help-box">
           <p class="rst-last">
       
             Search bar offers the following options:
             <ul>   
                 <li>
                   <strong>Term presence.</strong> The below example searches for documents that 
-                    must contain “foo”, might contain “bar” and must not contain “baz”:
-                  <br /> <code>'+foo bar -baz'</code>
+                    must contain “foo”, might contain “bar” and must not contain “baz”: <code>+foo bar -baz</code>
                 </li> 
 
                 <li>
-                  <strong>Wildcards.</strong> The below example searches for documents with words beginning with “foo”:
-                  <br /> <code>'foo*'</code>
+                  <strong>Wildcards.</strong> The below example searches for documents with words beginning with “foo”: <code>foo*</code>
                 </li> 
 
                 <li>
-                  <strong>Search in specific fields.</strong> The following search matches all documents 
-                  that contains "foo" in their full dotted name and with “bar” in any field:
-                  <br /> <code>'+fullName:*foo* +bar'</code>
+                  <strong>Search in specific fields.</strong> The following search matches all objects 
+                  in "twisted.mail" that matches “search”: <code>+qname:twisted.mail.* +search</code>
 
                   <p>
-                    Possible fields: 'name', 'docstring', 'fullName'.
+                    Possible fields: 'name', 'qname' (fully qualified name), 'docstring', and 'kind'.
+                    Last two fields are only applicable if "search in docstrings" is enabled.
                   </p>
                 </li>
 
                 <li>
                   <strong>Fuzzy matches.</strong> The following search matches all documents 
-                  that have a word within 1 edit distance of “foo”:
-                  <br /> <code>'foo~1'</code>
+                  that have a word within 1 edit distance of “foo”: <code>foo~1</code>
                 </li>
             </ul>
 
           </p>
         </div>
 
-      </div>
+        <div id="search-status"> </div>
+        
+        <div class="warning" id="search-warn-box" style="display: none;">
+          <p class="rst-last"><span id="search-warn"></span></p>
+        </div>
 
+        <table id="search-results">
+          <!-- Filled dynamically by JS -->
+        </table>
+        
+        <div style="margin-top: 8px;">
+          <p>Results provided by <a href="https://lunrjs.com">Lunr.js</a></p>
+        </div>
+      </div>
 
     </div>
   </div>
 
-  <script>
- 
-    function toggleSearchHelpText() {
-        document.body.classList.toggle("search-help-hidden");
-    }
-    // Init search and help text
-    document.getElementById('search-box-container').style.display = 'block';
-    document.getElementById('search-help-box').style.display = 'block';
-    document.body.classList.add("search-help-hidden");
-
-  </script>
+  <script src="ajax.js" type="text/javascript"></script>
+  <script src="search.js" type="text/javascript"></script>
 
 </nav>
 
@@ -115,7 +128,7 @@
     <div class="container">
 
       <div class="page-header">
-        <h1 class="class"><code><code><a href="nltk.html">nltk</a></code><wbr></wbr>.<code><a href="nltk.sem.html">sem</a></code><wbr></wbr>.<code><a href="nltk.sem.glue.html">glue</a></code><wbr></wbr>.<code><a href="nltk.sem.glue.DrtGlueDict.html">DrtGlueDict</a></code></code></h1>
+        <h1 class="class"><code><code><a href="index.html" class="internal-link">nltk</a></code><wbr></wbr>.<code><a href="nltk.sem.html" class="internal-link" title="nltk.sem">sem</a></code><wbr></wbr>.<code><a href="nltk.sem.glue.html" class="internal-link" title="nltk.sem.glue">glue</a></code><wbr></wbr>.<code><a href="nltk.sem.glue.DrtGlueDict.html" class="internal-link" title="nltk.sem.glue.DrtGlueDict">DrtGlueDict</a></code></code></h1>
         <div id="showPrivate">
           <button class="btn btn-link" onclick="togglePrivate()">Toggle Private API</button>
         </div>
@@ -126,7 +139,7 @@
       </div>
 
       <div class="extrasDocstring">
-        <p><code><span class="py-keyword">class</span> <span class="py-defname">DrtGlueDict</span>(<a href="nltk.sem.glue.GlueDict.html" title="nltk.sem.glue.GlueDict">GlueDict</a>): <a href="https://github.com/nltk/nltk/tree/3.6.2/nltk/sem/glue.py#L762" class="sourceLink">(source)</a></code></p>
+        <p><code><span class="py-keyword">class</span> <span class="py-defname">DrtGlueDict</span>(<a href="nltk.sem.glue.GlueDict.html" class="internal-link" title="nltk.sem.glue.GlueDict">GlueDict</a>): <a href="https://github.com/nltk/nltk/tree/3.6.2/nltk/sem/glue.py#L762" class="sourceLink">(source)</a></code></p>
         <p><a href="classIndex.html#nltk.sem.glue.DrtGlueDict">View In Hierarchy</a></p>
       </div>
 
@@ -141,13 +154,13 @@
   <tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#get_GlueFormula_factory">get_GlueFormula_factory</a></code></td>
+    <td><code><a href="#get_GlueFormula_factory" class="internal-link" title="nltk.sem.glue.DrtGlueDict.get_GlueFormula_factory">get_​Glue​Formula_factory</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr>
 </table>
         
           <p class="inheritedFrom">
-            Inherited from <code><a href="nltk.sem.glue.GlueDict.html">GlueDict</a></code>:
+            Inherited from <code><a href="nltk.sem.glue.GlueDict.html" class="internal-link" title="nltk.sem.glue.GlueDict">GlueDict</a></code>:
           </p>
           <table class="children sortable" id="id1335">
   
@@ -155,82 +168,82 @@
   <tr class="basemethod">
     
     <td>Method</td>
-    <td><code><a href="nltk.sem.glue.GlueDict.html#__init__">__init__</a></code></td>
+    <td><code><a href="nltk.sem.glue.GlueDict.html#__init__" class="internal-link" title="nltk.sem.glue.GlueDict.__init__">__init__</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="basemethod">
     
     <td>Method</td>
-    <td><code><a href="nltk.sem.glue.GlueDict.html#__str__">__str__</a></code></td>
+    <td><code><a href="nltk.sem.glue.GlueDict.html#__str__" class="internal-link" title="nltk.sem.glue.GlueDict.__str__">__str__</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="basemethod">
     
     <td>Method</td>
-    <td><code><a href="nltk.sem.glue.GlueDict.html#add_missing_dependencies">add_missing_dependencies</a></code></td>
+    <td><code><a href="nltk.sem.glue.GlueDict.html#add_missing_dependencies" class="internal-link" title="nltk.sem.glue.GlueDict.add_missing_dependencies">add​_missing​_dependencies</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="basemethod">
     
     <td>Method</td>
-    <td><code><a href="nltk.sem.glue.GlueDict.html#find_label_name">find_label_name</a></code></td>
+    <td><code><a href="nltk.sem.glue.GlueDict.html#find_label_name" class="internal-link" title="nltk.sem.glue.GlueDict.find_label_name">find​_label​_name</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="basemethod">
     
     <td>Method</td>
-    <td><code><a href="nltk.sem.glue.GlueDict.html#get_glueformulas_from_semtype_entry">get_glueformulas_from_semtype_entry</a></code></td>
+    <td><code><a href="nltk.sem.glue.GlueDict.html#get_glueformulas_from_semtype_entry" class="internal-link" title="nltk.sem.glue.GlueDict.get_glueformulas_from_semtype_entry">get​_glueformulas​_from​_semtype​_entry</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="basemethod">
     
     <td>Method</td>
-    <td><code><a href="nltk.sem.glue.GlueDict.html#get_label">get_label</a></code></td>
-    <td><span>Pick an alphabetic character as identifier for an entity in the model.</span></td>
+    <td><code><a href="nltk.sem.glue.GlueDict.html#get_label" class="internal-link" title="nltk.sem.glue.GlueDict.get_label">get​_label</a></code></td>
+    <td>Pick an alphabetic character as identifier for an entity in the model.</td>
   </tr><tr class="basemethod">
     
     <td>Method</td>
-    <td><code><a href="nltk.sem.glue.GlueDict.html#get_meaning_formula">get_meaning_formula</a></code></td>
-    <td><span></span></td>
+    <td><code><a href="nltk.sem.glue.GlueDict.html#get_meaning_formula" class="internal-link" title="nltk.sem.glue.GlueDict.get_meaning_formula">get​_meaning​_formula</a></code></td>
+    <td></td>
   </tr><tr class="basemethod">
     
     <td>Method</td>
-    <td><code><a href="nltk.sem.glue.GlueDict.html#get_semtypes">get_semtypes</a></code></td>
-    <td><span>Based on the node, return a list of plausible semtypes in order of plausibility.</span></td>
+    <td><code><a href="nltk.sem.glue.GlueDict.html#get_semtypes" class="internal-link" title="nltk.sem.glue.GlueDict.get_semtypes">get​_semtypes</a></code></td>
+    <td>Based on the node, return a list of plausible semtypes in order of plausibility.</td>
   </tr><tr class="basemethod">
     
     <td>Method</td>
-    <td><code><a href="nltk.sem.glue.GlueDict.html#initialize_labels">initialize_labels</a></code></td>
+    <td><code><a href="nltk.sem.glue.GlueDict.html#initialize_labels" class="internal-link" title="nltk.sem.glue.GlueDict.initialize_labels">initialize​_labels</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="basemethod">
     
     <td>Method</td>
-    <td><code><a href="nltk.sem.glue.GlueDict.html#lookup">lookup</a></code></td>
+    <td><code><a href="nltk.sem.glue.GlueDict.html#lookup" class="internal-link" title="nltk.sem.glue.GlueDict.lookup">lookup</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="basemethod">
     
     <td>Method</td>
-    <td><code><a href="nltk.sem.glue.GlueDict.html#lookup_unique">lookup_unique</a></code></td>
-    <td><span>Lookup 'key'. There should be exactly one item in the associated relation.</span></td>
+    <td><code><a href="nltk.sem.glue.GlueDict.html#lookup_unique" class="internal-link" title="nltk.sem.glue.GlueDict.lookup_unique">lookup​_unique</a></code></td>
+    <td>Lookup 'key'. There should be exactly one item in the associated relation.</td>
   </tr><tr class="basemethod">
     
     <td>Method</td>
-    <td><code><a href="nltk.sem.glue.GlueDict.html#read_file">read_file</a></code></td>
+    <td><code><a href="nltk.sem.glue.GlueDict.html#read_file" class="internal-link" title="nltk.sem.glue.GlueDict.read_file">read​_file</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="basemethod">
     
     <td>Method</td>
-    <td><code><a href="nltk.sem.glue.GlueDict.html#to_glueformula_list">to_glueformula_list</a></code></td>
-    <td><span class="undocumented">Undocumented</span></td>
-  </tr><tr class="baseinstancevariable">
-    
-    <td>Instance Variable</td>
-    <td><code><a href="nltk.sem.glue.GlueDict.html#file_encoding">file_encoding</a></code></td>
+    <td><code><a href="nltk.sem.glue.GlueDict.html#to_glueformula_list" class="internal-link" title="nltk.sem.glue.GlueDict.to_glueformula_list">to​_glueformula​_list</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="baseinstancevariable">
     
     <td>Instance Variable</td>
-    <td><code><a href="nltk.sem.glue.GlueDict.html#filename">filename</a></code></td>
+    <td><code><a href="nltk.sem.glue.GlueDict.html#file_encoding" class="internal-link" title="nltk.sem.glue.GlueDict.file_encoding">file​_encoding</a></code></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="baseinstancevariable">
+    
+    <td>Instance Variable</td>
+    <td><code><a href="nltk.sem.glue.GlueDict.html#filename" class="internal-link" title="nltk.sem.glue.GlueDict.filename">filename</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="basemethod private">
     
     <td>Method</td>
-    <td><code><a href="nltk.sem.glue.GlueDict.html#_lookup_semtype_option">_lookup_semtype_option</a></code></td>
+    <td><code><a href="nltk.sem.glue.GlueDict.html#_lookup_semtype_option" class="internal-link" title="nltk.sem.glue.GlueDict._lookup_semtype_option">_lookup​_semtype​_option</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr>
 </table>
@@ -259,7 +272,7 @@
     </a>
   </div>
   <div class="docstring functionBody">
-    <div class="interfaceinfo">overrides <code><a href="nltk.sem.glue.GlueDict.html#get_GlueFormula_factory">nltk.sem.glue.GlueDict.get_GlueFormula_factory</a></code></div>
+    <div class="interfaceinfo">overrides <code><a href="nltk.sem.glue.GlueDict.html#get_GlueFormula_factory" class="internal-link">nltk.sem.glue.GlueDict.get_GlueFormula_factory</a></code></div>
     
     <div><p class="undocumented">Undocumented</p></div>
   </div>
@@ -273,7 +286,7 @@
   <div class="container">
     <a href="index.html">API Documentation</a> for <a href="http://www.nltk.org/" class="projecthome">nltk-3.6.2</a>,
   generated by <a href="https://github.com/twisted/pydoctor/">pydoctor</a>
-    21.2.2 at 2022-01-06 17:36:51.
+    22.2.2.dev0 at 2022-03-04 05:57:24.
   </div>
 </footer>
 

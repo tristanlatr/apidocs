@@ -7,7 +7,7 @@
   <head>
     
     <title>nltk.draw.cfg.CFGEditor</title>
-    <meta name="generator" content="pydoctor 21.2.2"> 
+    <meta name="generator" content="pydoctor 22.2.2.dev0"> 
         
     </meta>
     <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
@@ -44,69 +44,82 @@
           Names
         </a>
 
-        <form action="search-results.html" id="search-box-container">
+        <div id="search-box-container">
           <div class="input-group">
-            <input id="search-box" name="search-query" placeholder="Search..." aria-label="Search" minlength="2" class="form-control" />
+            <input id="search-box" type="search" name="search-query" placeholder="Search..." aria-label="Search" minlength="2" class="form-control" autocomplete="off" />
+            
             <span class="input-group-btn">
-              <button class="btn btn-default" type="submit" title="Search"><img src="fonts/search.svg" alt="Search!" /></button>
-              <a class="btn btn-default" id="search-help-button" title="Help" onclick="toggleSearchHelpText()"><img src="fonts/info.svg" alt="Help!" /></a>
+              <a style="display: none;" class="btn btn-default" id="search-clear-button" title="Clear" onclick="clearSearch()"><img src="fonts/x-circle.svg" alt="Clear" /></a>
+              <a class="btn btn-default" id="search-help-button" title="Help" onclick="toggleSearchHelpText()"><img src="fonts/info.svg" alt="Help" /></a>
             </span>
           </div>
-        </form>
+        </div>
 
-        <div class="rst-admonition hint" id="search-help-box">
+      </div>
+
+      <div id="search-results-container" style="display: none;">
+        <div>
+          <span class="label label-default" id="search-docstrings-button">
+            <a title="Search in docstrings" onclick="toggleSearchInDocstrings()">search in docstrings</a></span>
+        </div>
+
+        <noscript>
+            <h1>Cannot search: JavaScript is not supported/enabled in your browser.</h1>
+        </noscript>
+
+        <div class="hint" id="search-help-box">
           <p class="rst-last">
       
             Search bar offers the following options:
             <ul>   
                 <li>
                   <strong>Term presence.</strong> The below example searches for documents that 
-                    must contain “foo”, might contain “bar” and must not contain “baz”:
-                  <br /> <code>'+foo bar -baz'</code>
+                    must contain “foo”, might contain “bar” and must not contain “baz”: <code>+foo bar -baz</code>
                 </li> 
 
                 <li>
-                  <strong>Wildcards.</strong> The below example searches for documents with words beginning with “foo”:
-                  <br /> <code>'foo*'</code>
+                  <strong>Wildcards.</strong> The below example searches for documents with words beginning with “foo”: <code>foo*</code>
                 </li> 
 
                 <li>
-                  <strong>Search in specific fields.</strong> The following search matches all documents 
-                  that contains "foo" in their full dotted name and with “bar” in any field:
-                  <br /> <code>'+fullName:*foo* +bar'</code>
+                  <strong>Search in specific fields.</strong> The following search matches all objects 
+                  in "twisted.mail" that matches “search”: <code>+qname:twisted.mail.* +search</code>
 
                   <p>
-                    Possible fields: 'name', 'docstring', 'fullName'.
+                    Possible fields: 'name', 'qname' (fully qualified name), 'docstring', and 'kind'.
+                    Last two fields are only applicable if "search in docstrings" is enabled.
                   </p>
                 </li>
 
                 <li>
                   <strong>Fuzzy matches.</strong> The following search matches all documents 
-                  that have a word within 1 edit distance of “foo”:
-                  <br /> <code>'foo~1'</code>
+                  that have a word within 1 edit distance of “foo”: <code>foo~1</code>
                 </li>
             </ul>
 
           </p>
         </div>
 
-      </div>
+        <div id="search-status"> </div>
+        
+        <div class="warning" id="search-warn-box" style="display: none;">
+          <p class="rst-last"><span id="search-warn"></span></p>
+        </div>
 
+        <table id="search-results">
+          <!-- Filled dynamically by JS -->
+        </table>
+        
+        <div style="margin-top: 8px;">
+          <p>Results provided by <a href="https://lunrjs.com">Lunr.js</a></p>
+        </div>
+      </div>
 
     </div>
   </div>
 
-  <script>
- 
-    function toggleSearchHelpText() {
-        document.body.classList.toggle("search-help-hidden");
-    }
-    // Init search and help text
-    document.getElementById('search-box-container').style.display = 'block';
-    document.getElementById('search-help-box').style.display = 'block';
-    document.body.classList.add("search-help-hidden");
-
-  </script>
+  <script src="ajax.js" type="text/javascript"></script>
+  <script src="search.js" type="text/javascript"></script>
 
 </nav>
 
@@ -115,7 +128,7 @@
     <div class="container">
 
       <div class="page-header">
-        <h1 class="class"><code><code><a href="nltk.html">nltk</a></code><wbr></wbr>.<code><a href="nltk.draw.html">draw</a></code><wbr></wbr>.<code><a href="nltk.draw.cfg.html">cfg</a></code><wbr></wbr>.<code><a href="nltk.draw.cfg.CFGEditor.html">CFGEditor</a></code></code></h1>
+        <h1 class="class"><code><code><a href="index.html" class="internal-link">nltk</a></code><wbr></wbr>.<code><a href="nltk.draw.html" class="internal-link" title="nltk.draw">draw</a></code><wbr></wbr>.<code><a href="nltk.draw.cfg.html" class="internal-link" title="nltk.draw.cfg">cfg</a></code><wbr></wbr>.<code><a href="nltk.draw.cfg.CFGEditor.html" class="internal-link" title="nltk.draw.cfg.CFGEditor">CFGEditor</a></code></code></h1>
         <div id="showPrivate">
           <button class="btn btn-link" onclick="togglePrivate()">Toggle Private API</button>
         </div>
@@ -126,7 +139,7 @@
       </div>
 
       <div class="extrasDocstring">
-        <p><code><span class="py-keyword">class</span> <span class="py-defname">CFGEditor</span>(<span title="object">object</span>): <a href="https://github.com/nltk/nltk/tree/3.6.2/nltk/draw/cfg.py#L150" class="sourceLink">(source)</a></code></p>
+        <p><code><span class="py-keyword">class</span> <span class="py-defname">CFGEditor</span>(object): <a href="https://github.com/nltk/nltk/tree/3.6.2/nltk/draw/cfg.py#L150" class="sourceLink">(source)</a></code></p>
         <p><a href="classIndex.html#nltk.draw.cfg.CFGEditor">View In Hierarchy</a></p>
       </div>
 
@@ -149,192 +162,192 @@ and space characters.</li>
   <tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#__init__">__init__</a></code></td>
+    <td><code><a href="#__init__" class="internal-link" title="nltk.draw.cfg.CFGEditor.__init__">__init__</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
-  </tr><tr class="classvariable">
+  </tr><tr class="constant">
     
-    <td>Class Variable</td>
-    <td><code><a href="#ARROW">ARROW</a></code></td>
+    <td>Constant</td>
+    <td><code><a href="#ARROW" class="internal-link" title="nltk.draw.cfg.CFGEditor.ARROW">ARROW</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method private">
     
     <td>Method</td>
-    <td><code><a href="#_analyze">_analyze</a></code></td>
-    <td><span>Replace <tt class="rst-docutils literal"><span class="pre">-&gt;</span></tt> with arrows, and colorize the entire buffer.</span></td>
+    <td><code><a href="#_analyze" class="internal-link" title="nltk.draw.cfg.CFGEditor._analyze">_analyze</a></code></td>
+    <td>Replace <tt class="rst-docutils literal"><span class="pre">-&gt;</span></tt> with arrows, and colorize the entire buffer.</td>
   </tr><tr class="method private">
     
     <td>Method</td>
-    <td><code><a href="#_analyze_line">_analyze_line</a></code></td>
-    <td><span>Colorize a given line.</span></td>
+    <td><code><a href="#_analyze_line" class="internal-link" title="nltk.draw.cfg.CFGEditor._analyze_line">_analyze​_line</a></code></td>
+    <td>Colorize a given line.</td>
   </tr><tr class="method private">
     
     <td>Method</td>
-    <td><code><a href="#_analyze_token">_analyze_token</a></code></td>
+    <td><code><a href="#_analyze_token" class="internal-link" title="nltk.draw.cfg.CFGEditor._analyze_token">_analyze​_token</a></code></td>
     <td><span class="undocumented">No summary</span></td>
   </tr><tr class="method private">
     
     <td>Method</td>
-    <td><code><a href="#_apply">_apply</a></code></td>
+    <td><code><a href="#_apply" class="internal-link" title="nltk.draw.cfg.CFGEditor._apply">_apply</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method private">
     
     <td>Method</td>
-    <td><code><a href="#_cancel">_cancel</a></code></td>
+    <td><code><a href="#_cancel" class="internal-link" title="nltk.draw.cfg.CFGEditor._cancel">_cancel</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method private">
     
     <td>Method</td>
-    <td><code><a href="#_check_analyze">_check_analyze</a></code></td>
-    <td><span>Check if we've moved to a new line.  If we have, then remove all colorization from the line we moved to, and re-colorize the line that we moved from.</span></td>
+    <td><code><a href="#_check_analyze" class="internal-link" title="nltk.draw.cfg.CFGEditor._check_analyze">_check​_analyze</a></code></td>
+    <td>Check if we've moved to a new line.  If we have, then remove all colorization from the line we moved to, and re-colorize the line that we moved from.</td>
   </tr><tr class="method private">
     
     <td>Method</td>
-    <td><code><a href="#_clear_tags">_clear_tags</a></code></td>
-    <td><span>Remove all tags (except <tt class="rst-docutils literal">arrow</tt> and <tt class="rst-docutils literal">sel</tt>) from the given line of the text widget used for editing the productions.</span></td>
+    <td><code><a href="#_clear_tags" class="internal-link" title="nltk.draw.cfg.CFGEditor._clear_tags">_clear​_tags</a></code></td>
+    <td>Remove all tags (except <tt class="rst-docutils literal">arrow</tt> and <tt class="rst-docutils literal">sel</tt>) from the given line of the text widget used for editing the productions.</td>
   </tr><tr class="method private">
     
     <td>Method</td>
-    <td><code><a href="#_destroy">_destroy</a></code></td>
+    <td><code><a href="#_destroy" class="internal-link" title="nltk.draw.cfg.CFGEditor._destroy">_destroy</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method private">
     
     <td>Method</td>
-    <td><code><a href="#_help">_help</a></code></td>
+    <td><code><a href="#_help" class="internal-link" title="nltk.draw.cfg.CFGEditor._help">_help</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method private">
     
     <td>Method</td>
-    <td><code><a href="#_init_bindings">_init_bindings</a></code></td>
+    <td><code><a href="#_init_bindings" class="internal-link" title="nltk.draw.cfg.CFGEditor._init_bindings">_init​_bindings</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method private">
     
     <td>Method</td>
-    <td><code><a href="#_init_buttons">_init_buttons</a></code></td>
+    <td><code><a href="#_init_buttons" class="internal-link" title="nltk.draw.cfg.CFGEditor._init_buttons">_init​_buttons</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method private">
     
     <td>Method</td>
-    <td><code><a href="#_init_nonterminal_tag">_init_nonterminal_tag</a></code></td>
+    <td><code><a href="#_init_nonterminal_tag" class="internal-link" title="nltk.draw.cfg.CFGEditor._init_nonterminal_tag">_init​_nonterminal​_tag</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method private">
     
     <td>Method</td>
-    <td><code><a href="#_init_prodframe">_init_prodframe</a></code></td>
+    <td><code><a href="#_init_prodframe" class="internal-link" title="nltk.draw.cfg.CFGEditor._init_prodframe">_init​_prodframe</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method private">
     
     <td>Method</td>
-    <td><code><a href="#_init_startframe">_init_startframe</a></code></td>
+    <td><code><a href="#_init_startframe" class="internal-link" title="nltk.draw.cfg.CFGEditor._init_startframe">_init​_startframe</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method private">
     
     <td>Method</td>
-    <td><code><a href="#_mark_error">_mark_error</a></code></td>
-    <td><span>Mark the location of an error in a line.</span></td>
+    <td><code><a href="#_mark_error" class="internal-link" title="nltk.draw.cfg.CFGEditor._mark_error">_mark​_error</a></code></td>
+    <td>Mark the location of an error in a line.</td>
   </tr><tr class="method private">
     
     <td>Method</td>
-    <td><code><a href="#_ok">_ok</a></code></td>
+    <td><code><a href="#_ok" class="internal-link" title="nltk.draw.cfg.CFGEditor._ok">_ok</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method private">
     
     <td>Method</td>
-    <td><code><a href="#_parse_productions">_parse_productions</a></code></td>
-    <td><span>Parse the current contents of the textwidget buffer, to create a list of productions.</span></td>
+    <td><code><a href="#_parse_productions" class="internal-link" title="nltk.draw.cfg.CFGEditor._parse_productions">_parse​_productions</a></code></td>
+    <td>Parse the current contents of the textwidget buffer, to create a list of productions.</td>
   </tr><tr class="method private">
     
     <td>Method</td>
-    <td><code><a href="#_replace_arrows">_replace_arrows</a></code></td>
-    <td><span>Replace any <tt class="rst-docutils literal"><span class="pre">'-&gt;'</span></tt> text strings with arrows (char 256, in symbol font).  This searches the whole buffer, but is fast enough to be done anytime they press '&gt;'.</span></td>
+    <td><code><a href="#_replace_arrows" class="internal-link" title="nltk.draw.cfg.CFGEditor._replace_arrows">_replace​_arrows</a></code></td>
+    <td>Replace any <tt class="rst-docutils literal"><span class="pre">'-&gt;'</span></tt> text strings with arrows (char 256, in symbol font).  This searches the whole buffer, but is fast enough to be done anytime they press '&gt;'.</td>
   </tr><tr class="method private">
     
     <td>Method</td>
-    <td><code><a href="#_reset">_reset</a></code></td>
+    <td><code><a href="#_reset" class="internal-link" title="nltk.draw.cfg.CFGEditor._reset">_reset</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
-  </tr><tr class="classvariable private">
+  </tr><tr class="constant private">
     
-    <td>Class Variable</td>
-    <td><code><a href="#_ARROW_RE">_ARROW_RE</a></code></td>
+    <td>Constant</td>
+    <td><code><a href="#_ARROW_RE" class="internal-link" title="nltk.draw.cfg.CFGEditor._ARROW_RE">_ARROW​_RE</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
-  </tr><tr class="classvariable private">
+  </tr><tr class="constant private">
     
-    <td>Class Variable</td>
-    <td><code><a href="#_BOLD">_BOLD</a></code></td>
+    <td>Constant</td>
+    <td><code><a href="#_BOLD" class="internal-link" title="nltk.draw.cfg.CFGEditor._BOLD">_BOLD</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
-  </tr><tr class="classvariable private">
+  </tr><tr class="constant private">
     
-    <td>Class Variable</td>
-    <td><code><a href="#_LHS_RE">_LHS_RE</a></code></td>
+    <td>Constant</td>
+    <td><code><a href="#_LHS_RE" class="internal-link" title="nltk.draw.cfg.CFGEditor._LHS_RE">_LHS​_RE</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
-  </tr><tr class="classvariable private">
+  </tr><tr class="constant private">
     
-    <td>Class Variable</td>
-    <td><code><a href="#_PRODUCTION_RE">_PRODUCTION_RE</a></code></td>
+    <td>Constant</td>
+    <td><code><a href="#_PRODUCTION_RE" class="internal-link" title="nltk.draw.cfg.CFGEditor._PRODUCTION_RE">_PRODUCTION​_RE</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
-  </tr><tr class="classvariable private">
+  </tr><tr class="constant private">
     
-    <td>Class Variable</td>
-    <td><code><a href="#_TOKEN_RE">_TOKEN_RE</a></code></td>
+    <td>Constant</td>
+    <td><code><a href="#_TOKEN_RE" class="internal-link" title="nltk.draw.cfg.CFGEditor._TOKEN_RE">_TOKEN​_RE</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="instancevariable private">
     
     <td>Instance Variable</td>
-    <td><code><a href="#_buttonframe">_buttonframe</a></code></td>
+    <td><code><a href="#_buttonframe" class="internal-link" title="nltk.draw.cfg.CFGEditor._buttonframe">_buttonframe</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="instancevariable private">
     
     <td>Instance Variable</td>
-    <td><code><a href="#_cfg">_cfg</a></code></td>
+    <td><code><a href="#_cfg" class="internal-link" title="nltk.draw.cfg.CFGEditor._cfg">_cfg</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="instancevariable private">
     
     <td>Instance Variable</td>
-    <td><code><a href="#_highlight_matching_nonterminals">_highlight_matching_nonterminals</a></code></td>
+    <td><code><a href="#_highlight_matching_nonterminals" class="internal-link" title="nltk.draw.cfg.CFGEditor._highlight_matching_nonterminals">_highlight​_matching​_nonterminals</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="instancevariable private">
     
     <td>Instance Variable</td>
-    <td><code><a href="#_linenum">_linenum</a></code></td>
+    <td><code><a href="#_linenum" class="internal-link" title="nltk.draw.cfg.CFGEditor._linenum">_linenum</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="instancevariable private">
     
     <td>Instance Variable</td>
-    <td><code><a href="#_parent">_parent</a></code></td>
+    <td><code><a href="#_parent" class="internal-link" title="nltk.draw.cfg.CFGEditor._parent">_parent</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="instancevariable private">
     
     <td>Instance Variable</td>
-    <td><code><a href="#_prodframe">_prodframe</a></code></td>
+    <td><code><a href="#_prodframe" class="internal-link" title="nltk.draw.cfg.CFGEditor._prodframe">_prodframe</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="instancevariable private">
     
     <td>Instance Variable</td>
-    <td><code><a href="#_set_cfg_callback">_set_cfg_callback</a></code></td>
+    <td><code><a href="#_set_cfg_callback" class="internal-link" title="nltk.draw.cfg.CFGEditor._set_cfg_callback">_set​_cfg​_callback</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="instancevariable private">
     
     <td>Instance Variable</td>
-    <td><code><a href="#_start">_start</a></code></td>
+    <td><code><a href="#_start" class="internal-link" title="nltk.draw.cfg.CFGEditor._start">_start</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="instancevariable private">
     
     <td>Instance Variable</td>
-    <td><code><a href="#_startframe">_startframe</a></code></td>
+    <td><code><a href="#_startframe" class="internal-link" title="nltk.draw.cfg.CFGEditor._startframe">_startframe</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="instancevariable private">
     
     <td>Instance Variable</td>
-    <td><code><a href="#_textscroll">_textscroll</a></code></td>
+    <td><code><a href="#_textscroll" class="internal-link" title="nltk.draw.cfg.CFGEditor._textscroll">_textscroll</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="instancevariable private">
     
     <td>Instance Variable</td>
-    <td><code><a href="#_textwidget">_textwidget</a></code></td>
+    <td><code><a href="#_textwidget" class="internal-link" title="nltk.draw.cfg.CFGEditor._textwidget">_textwidget</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="instancevariable private">
     
     <td>Instance Variable</td>
-    <td><code><a href="#_top">_top</a></code></td>
+    <td><code><a href="#_top" class="internal-link" title="nltk.draw.cfg.CFGEditor._top">_top</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr>
 </table>
@@ -367,7 +380,7 @@ and space characters.</li>
     
     <div><p class="undocumented">Undocumented</p></div>
   </div>
-</div><div class="baseclassvariable">
+</div><div class="baseconstant">
   
   
   <a name="nltk.draw.cfg.CFGEditor.ARROW">
@@ -388,6 +401,7 @@ and space characters.</li>
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    <table class="valueTable"><tr class="fieldStart"><td class="fieldName">Value</td></tr><tr><td><pre class="constant-value"><code><a href="nltk.draw.util.SymbolWidget.html#SYMBOLS" class="internal-link" title="nltk.draw.util.SymbolWidget.SYMBOLS">SymbolWidget.SYMBOLS</a>[<wbr></wbr><span class="rst-variable-quote">'</span><span class="rst-variable-string">rightarrow</span><span class="rst-variable-quote">'</span>]</code></pre></td></tr></table>
   </div>
 </div><div class="basemethod private">
   
@@ -648,7 +662,7 @@ line of the text widget used for editing the productions.</div>
   </a>
   <div class="functionHeader">
     
-    <span class="py-keyword">def</span> <span class="py-defname">_init_nonterminal_tag</span>(self, tag, foreground='blue'):
+    <span class="py-keyword">def</span> <span class="py-defname">_init_nonterminal_tag</span>(self, tag, foreground=<span class="rst-variable-quote">'</span><span class="rst-variable-string">blue</span><span class="rst-variable-quote">'</span>):
     <a class="sourceLink" href="https://github.com/nltk/nltk/tree/3.6.2/nltk/draw/cfg.py#L404">
       
       (source)
@@ -816,7 +830,7 @@ enough to be done anytime they press '&gt;'.</div>
     
     <div><p class="undocumented">Undocumented</p></div>
   </div>
-</div><div class="baseclassvariable private">
+</div><div class="baseconstant private">
   
   
   <a name="nltk.draw.cfg.CFGEditor._ARROW_RE">
@@ -837,8 +851,9 @@ enough to be done anytime they press '&gt;'.</div>
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    <table class="valueTable"><tr class="fieldStart"><td class="fieldName">Value</td></tr><tr><td><pre class="constant-value"><code>re.compile(<wbr></wbr>(<span class="rst-variable-quote">'</span><span class="rst-variable-string">\\s*(-&gt;|(</span><span class="rst-variable-quote">'</span>+<a href="#ARROW" class="internal-link" title="nltk.draw.cfg.CFGEditor.ARROW">ARROW</a>)+<span class="rst-variable-quote">'</span><span class="rst-variable-string">))\\s*</span><span class="rst-variable-quote">'</span>)</code></pre></td></tr></table>
   </div>
-</div><div class="baseclassvariable private">
+</div><div class="baseconstant private">
   
   
   <a name="nltk.draw.cfg.CFGEditor._BOLD">
@@ -859,8 +874,9 @@ enough to be done anytime they press '&gt;'.</div>
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    <table class="valueTable"><tr class="fieldStart"><td class="fieldName">Value</td></tr><tr><td><pre class="constant-value"><code>(<wbr></wbr><span class="rst-variable-quote">'</span><span class="rst-variable-string">helvetica</span><span class="rst-variable-quote">'</span>, <wbr></wbr>-12, <wbr></wbr><span class="rst-variable-quote">'</span><span class="rst-variable-string">bold</span><span class="rst-variable-quote">'</span>)</code></pre></td></tr></table>
   </div>
-</div><div class="baseclassvariable private">
+</div><div class="baseconstant private">
   
   
   <a name="nltk.draw.cfg.CFGEditor._LHS_RE">
@@ -881,8 +897,9 @@ enough to be done anytime they press '&gt;'.</div>
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    <table class="valueTable"><tr class="fieldStart"><td class="fieldName">Value</td></tr><tr><td><pre class="constant-value"><code>re.compile(<wbr></wbr>(<span class="rst-variable-quote">'</span><span class="rst-variable-string">(^\\s*\\w+\\s*)(-&gt;|(</span><span class="rst-variable-quote">'</span>+<a href="#ARROW" class="internal-link" title="nltk.draw.cfg.CFGEditor.ARROW">ARROW</a>)+<span class="rst-variable-quote">'</span><span class="rst-variable-string">))</span><span class="rst-variable-quote">'</span>)</code></pre></td></tr></table>
   </div>
-</div><div class="baseclassvariable private">
+</div><div class="baseconstant private">
   
   
   <a name="nltk.draw.cfg.CFGEditor._PRODUCTION_RE">
@@ -903,8 +920,9 @@ enough to be done anytime they press '&gt;'.</div>
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    <table class="valueTable"><tr class="fieldStart"><td class="fieldName">Value</td></tr><tr><td><pre class="constant-value"><code>re.compile(<wbr></wbr>(((<span class="rst-variable-quote">'</span><span class="rst-variable-string">(^\\s*\\w+\\s*)</span><span class="rst-variable-quote">'</span>+<span class="rst-variable-quote">'</span><span class="rst-variable-string">(-&gt;|(</span><span class="rst-variable-quote">'</span>)+<a href="#ARROW" class="internal-link" title="nltk.draw.cfg.CFGEditor.ARROW">ARROW</a>)+<span class="rst-variable-quote">'</span><span class="rst-variable-string">))\\s*</span><span class="rst-variable-quote">'</span>)+<span class="rst-variable-quote">'</span><span class="rst-variable-string">((\\w+|\'[\\w ]*\'|\\"[\\w ]*\\"|\\|)\\s*)*$</span><span class="rst-variable-quote">'</span>)</code></pre></td></tr></table>
   </div>
-</div><div class="baseclassvariable private">
+</div><div class="baseconstant private">
   
   
   <a name="nltk.draw.cfg.CFGEditor._TOKEN_RE">
@@ -925,6 +943,7 @@ enough to be done anytime they press '&gt;'.</div>
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    <table class="valueTable"><tr class="fieldStart"><td class="fieldName">Value</td></tr><tr><td><pre class="constant-value"><code>re.compile(<wbr></wbr>(<span class="rst-variable-quote">'</span><span class="rst-variable-string">\\w+|-&gt;|\'[\\w ]+\'|"[\\w ]+"|(</span><span class="rst-variable-quote">'</span>+<a href="#ARROW" class="internal-link" title="nltk.draw.cfg.CFGEditor.ARROW">ARROW</a>)+<span class="rst-variable-quote">'</span><span class="rst-variable-string">)</span><span class="rst-variable-quote">'</span>)</code></pre></td></tr></table>
   </div>
 </div><div class="baseinstancevariable private">
   
@@ -947,6 +966,7 @@ enough to be done anytime they press '&gt;'.</div>
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    
   </div>
 </div><div class="baseinstancevariable private">
   
@@ -969,6 +989,7 @@ enough to be done anytime they press '&gt;'.</div>
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    
   </div>
 </div><div class="baseinstancevariable private">
   
@@ -991,6 +1012,7 @@ enough to be done anytime they press '&gt;'.</div>
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    
   </div>
 </div><div class="baseinstancevariable private">
   
@@ -1013,6 +1035,7 @@ enough to be done anytime they press '&gt;'.</div>
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    
   </div>
 </div><div class="baseinstancevariable private">
   
@@ -1035,6 +1058,7 @@ enough to be done anytime they press '&gt;'.</div>
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    
   </div>
 </div><div class="baseinstancevariable private">
   
@@ -1057,6 +1081,7 @@ enough to be done anytime they press '&gt;'.</div>
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    
   </div>
 </div><div class="baseinstancevariable private">
   
@@ -1079,6 +1104,7 @@ enough to be done anytime they press '&gt;'.</div>
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    
   </div>
 </div><div class="baseinstancevariable private">
   
@@ -1101,6 +1127,7 @@ enough to be done anytime they press '&gt;'.</div>
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    
   </div>
 </div><div class="baseinstancevariable private">
   
@@ -1123,6 +1150,7 @@ enough to be done anytime they press '&gt;'.</div>
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    
   </div>
 </div><div class="baseinstancevariable private">
   
@@ -1145,6 +1173,7 @@ enough to be done anytime they press '&gt;'.</div>
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    
   </div>
 </div><div class="baseinstancevariable private">
   
@@ -1167,6 +1196,7 @@ enough to be done anytime they press '&gt;'.</div>
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    
   </div>
 </div><div class="baseinstancevariable private">
   
@@ -1189,6 +1219,7 @@ enough to be done anytime they press '&gt;'.</div>
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    
   </div>
 </div>
 
@@ -1200,7 +1231,7 @@ enough to be done anytime they press '&gt;'.</div>
   <div class="container">
     <a href="index.html">API Documentation</a> for <a href="http://www.nltk.org/" class="projecthome">nltk-3.6.2</a>,
   generated by <a href="https://github.com/twisted/pydoctor/">pydoctor</a>
-    21.2.2 at 2022-01-06 17:36:51.
+    22.2.2.dev0 at 2022-03-04 05:57:24.
   </div>
 </footer>
 

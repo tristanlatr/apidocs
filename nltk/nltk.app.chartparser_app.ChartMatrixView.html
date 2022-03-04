@@ -7,7 +7,7 @@
   <head>
     
     <title>nltk.app.chartparser_app.ChartMatrixView</title>
-    <meta name="generator" content="pydoctor 21.2.2"> 
+    <meta name="generator" content="pydoctor 22.2.2.dev0"> 
         
     </meta>
     <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
@@ -44,69 +44,82 @@
           Names
         </a>
 
-        <form action="search-results.html" id="search-box-container">
+        <div id="search-box-container">
           <div class="input-group">
-            <input id="search-box" name="search-query" placeholder="Search..." aria-label="Search" minlength="2" class="form-control" />
+            <input id="search-box" type="search" name="search-query" placeholder="Search..." aria-label="Search" minlength="2" class="form-control" autocomplete="off" />
+            
             <span class="input-group-btn">
-              <button class="btn btn-default" type="submit" title="Search"><img src="fonts/search.svg" alt="Search!" /></button>
-              <a class="btn btn-default" id="search-help-button" title="Help" onclick="toggleSearchHelpText()"><img src="fonts/info.svg" alt="Help!" /></a>
+              <a style="display: none;" class="btn btn-default" id="search-clear-button" title="Clear" onclick="clearSearch()"><img src="fonts/x-circle.svg" alt="Clear" /></a>
+              <a class="btn btn-default" id="search-help-button" title="Help" onclick="toggleSearchHelpText()"><img src="fonts/info.svg" alt="Help" /></a>
             </span>
           </div>
-        </form>
+        </div>
 
-        <div class="rst-admonition hint" id="search-help-box">
+      </div>
+
+      <div id="search-results-container" style="display: none;">
+        <div>
+          <span class="label label-default" id="search-docstrings-button">
+            <a title="Search in docstrings" onclick="toggleSearchInDocstrings()">search in docstrings</a></span>
+        </div>
+
+        <noscript>
+            <h1>Cannot search: JavaScript is not supported/enabled in your browser.</h1>
+        </noscript>
+
+        <div class="hint" id="search-help-box">
           <p class="rst-last">
       
             Search bar offers the following options:
             <ul>   
                 <li>
                   <strong>Term presence.</strong> The below example searches for documents that 
-                    must contain “foo”, might contain “bar” and must not contain “baz”:
-                  <br /> <code>'+foo bar -baz'</code>
+                    must contain “foo”, might contain “bar” and must not contain “baz”: <code>+foo bar -baz</code>
                 </li> 
 
                 <li>
-                  <strong>Wildcards.</strong> The below example searches for documents with words beginning with “foo”:
-                  <br /> <code>'foo*'</code>
+                  <strong>Wildcards.</strong> The below example searches for documents with words beginning with “foo”: <code>foo*</code>
                 </li> 
 
                 <li>
-                  <strong>Search in specific fields.</strong> The following search matches all documents 
-                  that contains "foo" in their full dotted name and with “bar” in any field:
-                  <br /> <code>'+fullName:*foo* +bar'</code>
+                  <strong>Search in specific fields.</strong> The following search matches all objects 
+                  in "twisted.mail" that matches “search”: <code>+qname:twisted.mail.* +search</code>
 
                   <p>
-                    Possible fields: 'name', 'docstring', 'fullName'.
+                    Possible fields: 'name', 'qname' (fully qualified name), 'docstring', and 'kind'.
+                    Last two fields are only applicable if "search in docstrings" is enabled.
                   </p>
                 </li>
 
                 <li>
                   <strong>Fuzzy matches.</strong> The following search matches all documents 
-                  that have a word within 1 edit distance of “foo”:
-                  <br /> <code>'foo~1'</code>
+                  that have a word within 1 edit distance of “foo”: <code>foo~1</code>
                 </li>
             </ul>
 
           </p>
         </div>
 
-      </div>
+        <div id="search-status"> </div>
+        
+        <div class="warning" id="search-warn-box" style="display: none;">
+          <p class="rst-last"><span id="search-warn"></span></p>
+        </div>
 
+        <table id="search-results">
+          <!-- Filled dynamically by JS -->
+        </table>
+        
+        <div style="margin-top: 8px;">
+          <p>Results provided by <a href="https://lunrjs.com">Lunr.js</a></p>
+        </div>
+      </div>
 
     </div>
   </div>
 
-  <script>
- 
-    function toggleSearchHelpText() {
-        document.body.classList.toggle("search-help-hidden");
-    }
-    // Init search and help text
-    document.getElementById('search-box-container').style.display = 'block';
-    document.getElementById('search-help-box').style.display = 'block';
-    document.body.classList.add("search-help-hidden");
-
-  </script>
+  <script src="ajax.js" type="text/javascript"></script>
+  <script src="search.js" type="text/javascript"></script>
 
 </nav>
 
@@ -115,7 +128,7 @@
     <div class="container">
 
       <div class="page-header">
-        <h1 class="class"><code><code><a href="nltk.html">nltk</a></code><wbr></wbr>.<code><a href="nltk.app.html">app</a></code><wbr></wbr>.<code><a href="nltk.app.chartparser_app.html">chartparser_app</a></code><wbr></wbr>.<code><a href="nltk.app.chartparser_app.ChartMatrixView.html">ChartMatrixView</a></code></code></h1>
+        <h1 class="class"><code><code><a href="index.html" class="internal-link">nltk</a></code><wbr></wbr>.<code><a href="nltk.app.html" class="internal-link" title="nltk.app">app</a></code><wbr></wbr>.<code><a href="nltk.app.chartparser_app.html" class="internal-link" title="nltk.app.chartparser_app">chartparser_app</a></code><wbr></wbr>.<code><a href="nltk.app.chartparser_app.ChartMatrixView.html" class="internal-link" title="nltk.app.chartparser_app.ChartMatrixView">ChartMatrixView</a></code></code></h1>
         <div id="showPrivate">
           <button class="btn btn-link" onclick="togglePrivate()">Toggle Private API</button>
         </div>
@@ -126,7 +139,7 @@
       </div>
 
       <div class="extrasDocstring">
-        <p><code><span class="py-keyword">class</span> <span class="py-defname">ChartMatrixView</span>(<span title="object">object</span>): <a href="https://github.com/nltk/nltk/tree/3.6.2/nltk/app/chartparser_app.py#L124" class="sourceLink">(source)</a></code></p>
+        <p><code><span class="py-keyword">class</span> <span class="py-defname">ChartMatrixView</span>(object): <a href="https://github.com/nltk/nltk/tree/3.6.2/nltk/app/chartparser_app.py#L124" class="sourceLink">(source)</a></code></p>
         <p><a href="classIndex.html#nltk.app.chartparser_app.ChartMatrixView">View In Hierarchy</a></p>
       </div>
 
@@ -141,162 +154,162 @@
   <tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#__init__">__init__</a></code></td>
+    <td><code><a href="#__init__" class="internal-link" title="nltk.app.chartparser_app.ChartMatrixView.__init__">__init__</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#activate">activate</a></code></td>
+    <td><code><a href="#activate" class="internal-link" title="nltk.app.chartparser_app.ChartMatrixView.activate">activate</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#add_callback">add_callback</a></code></td>
+    <td><code><a href="#add_callback" class="internal-link" title="nltk.app.chartparser_app.ChartMatrixView.add_callback">add​_callback</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#deselect_cell">deselect_cell</a></code></td>
+    <td><code><a href="#deselect_cell" class="internal-link" title="nltk.app.chartparser_app.ChartMatrixView.deselect_cell">deselect​_cell</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#destroy">destroy</a></code></td>
+    <td><code><a href="#destroy" class="internal-link" title="nltk.app.chartparser_app.ChartMatrixView.destroy">destroy</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#draw">draw</a></code></td>
+    <td><code><a href="#draw" class="internal-link" title="nltk.app.chartparser_app.ChartMatrixView.draw">draw</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#inactivate">inactivate</a></code></td>
+    <td><code><a href="#inactivate" class="internal-link" title="nltk.app.chartparser_app.ChartMatrixView.inactivate">inactivate</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#mark_edge">mark_edge</a></code></td>
+    <td><code><a href="#mark_edge" class="internal-link" title="nltk.app.chartparser_app.ChartMatrixView.mark_edge">mark​_edge</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#markonly_edge">markonly_edge</a></code></td>
+    <td><code><a href="#markonly_edge" class="internal-link" title="nltk.app.chartparser_app.ChartMatrixView.markonly_edge">markonly​_edge</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#pack">pack</a></code></td>
+    <td><code><a href="#pack" class="internal-link" title="nltk.app.chartparser_app.ChartMatrixView.pack">pack</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#remove_callback">remove_callback</a></code></td>
+    <td><code><a href="#remove_callback" class="internal-link" title="nltk.app.chartparser_app.ChartMatrixView.remove_callback">remove​_callback</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#select_cell">select_cell</a></code></td>
+    <td><code><a href="#select_cell" class="internal-link" title="nltk.app.chartparser_app.ChartMatrixView.select_cell">select​_cell</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#set_chart">set_chart</a></code></td>
+    <td><code><a href="#set_chart" class="internal-link" title="nltk.app.chartparser_app.ChartMatrixView.set_chart">set​_chart</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#unmark_edge">unmark_edge</a></code></td>
+    <td><code><a href="#unmark_edge" class="internal-link" title="nltk.app.chartparser_app.ChartMatrixView.unmark_edge">unmark​_edge</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#update">update</a></code></td>
+    <td><code><a href="#update" class="internal-link" title="nltk.app.chartparser_app.ChartMatrixView.update">update</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#view_edge">view_edge</a></code></td>
+    <td><code><a href="#view_edge" class="internal-link" title="nltk.app.chartparser_app.ChartMatrixView.view_edge">view​_edge</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method private">
     
     <td>Method</td>
-    <td><code><a href="#_click_cell">_click_cell</a></code></td>
+    <td><code><a href="#_click_cell" class="internal-link" title="nltk.app.chartparser_app.ChartMatrixView._click_cell">_click​_cell</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method private">
     
     <td>Method</td>
-    <td><code><a href="#_fire_callbacks">_fire_callbacks</a></code></td>
+    <td><code><a href="#_fire_callbacks" class="internal-link" title="nltk.app.chartparser_app.ChartMatrixView._fire_callbacks">_fire​_callbacks</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method private">
     
     <td>Method</td>
-    <td><code><a href="#_init_list">_init_list</a></code></td>
+    <td><code><a href="#_init_list" class="internal-link" title="nltk.app.chartparser_app.ChartMatrixView._init_list">_init​_list</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method private">
     
     <td>Method</td>
-    <td><code><a href="#_init_matrix">_init_matrix</a></code></td>
+    <td><code><a href="#_init_matrix" class="internal-link" title="nltk.app.chartparser_app.ChartMatrixView._init_matrix">_init​_matrix</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method private">
     
     <td>Method</td>
-    <td><code><a href="#_init_numedges">_init_numedges</a></code></td>
+    <td><code><a href="#_init_numedges" class="internal-link" title="nltk.app.chartparser_app.ChartMatrixView._init_numedges">_init​_numedges</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method private">
     
     <td>Method</td>
-    <td><code><a href="#_init_quit">_init_quit</a></code></td>
+    <td><code><a href="#_init_quit" class="internal-link" title="nltk.app.chartparser_app.ChartMatrixView._init_quit">_init​_quit</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="instancevariable private">
     
     <td>Instance Variable</td>
-    <td><code><a href="#_callbacks">_callbacks</a></code></td>
+    <td><code><a href="#_callbacks" class="internal-link" title="nltk.app.chartparser_app.ChartMatrixView._callbacks">_callbacks</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="instancevariable private">
     
     <td>Instance Variable</td>
-    <td><code><a href="#_canvas">_canvas</a></code></td>
+    <td><code><a href="#_canvas" class="internal-link" title="nltk.app.chartparser_app.ChartMatrixView._canvas">_canvas</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="instancevariable private">
     
     <td>Instance Variable</td>
-    <td><code><a href="#_cells">_cells</a></code></td>
+    <td><code><a href="#_cells" class="internal-link" title="nltk.app.chartparser_app.ChartMatrixView._cells">_cells</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="instancevariable private">
     
     <td>Instance Variable</td>
-    <td><code><a href="#_chart">_chart</a></code></td>
+    <td><code><a href="#_chart" class="internal-link" title="nltk.app.chartparser_app.ChartMatrixView._chart">_chart</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="instancevariable private">
     
     <td>Instance Variable</td>
-    <td><code><a href="#_list">_list</a></code></td>
+    <td><code><a href="#_list" class="internal-link" title="nltk.app.chartparser_app.ChartMatrixView._list">_list</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="instancevariable private">
     
     <td>Instance Variable</td>
-    <td><code><a href="#_marks">_marks</a></code></td>
+    <td><code><a href="#_marks" class="internal-link" title="nltk.app.chartparser_app.ChartMatrixView._marks">_marks</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="instancevariable private">
     
     <td>Instance Variable</td>
-    <td><code><a href="#_num_edges">_num_edges</a></code></td>
+    <td><code><a href="#_num_edges" class="internal-link" title="nltk.app.chartparser_app.ChartMatrixView._num_edges">_num​_edges</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="instancevariable private">
     
     <td>Instance Variable</td>
-    <td><code><a href="#_numedges_label">_numedges_label</a></code></td>
+    <td><code><a href="#_numedges_label" class="internal-link" title="nltk.app.chartparser_app.ChartMatrixView._numedges_label">_numedges​_label</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="instancevariable private">
     
     <td>Instance Variable</td>
-    <td><code><a href="#_root">_root</a></code></td>
+    <td><code><a href="#_root" class="internal-link" title="nltk.app.chartparser_app.ChartMatrixView._root">_root</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="instancevariable private">
     
     <td>Instance Variable</td>
-    <td><code><a href="#_selected_cell">_selected_cell</a></code></td>
+    <td><code><a href="#_selected_cell" class="internal-link" title="nltk.app.chartparser_app.ChartMatrixView._selected_cell">_selected​_cell</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr>
 </table>
@@ -318,7 +331,7 @@
   </a>
   <div class="functionHeader">
     
-    <span class="py-keyword">def</span> <span class="py-defname">__init__</span>(self, parent, chart, toplevel=True, title='Chart Matrix', show_numedges=False):
+    <span class="py-keyword">def</span> <span class="py-defname">__init__</span>(self, parent, chart, toplevel=True, title=<span class="rst-variable-quote">'</span><span class="rst-variable-string">Chart Matrix</span><span class="rst-variable-quote">'</span>, show_numedges=False):
     <a class="sourceLink" href="https://github.com/nltk/nltk/tree/3.6.2/nltk/app/chartparser_app.py#L129">
       
       (source)
@@ -812,6 +825,7 @@
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    
   </div>
 </div><div class="baseinstancevariable private">
   
@@ -834,6 +848,7 @@
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    
   </div>
 </div><div class="baseinstancevariable private">
   
@@ -856,6 +871,7 @@
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    
   </div>
 </div><div class="baseinstancevariable private">
   
@@ -878,6 +894,7 @@
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    
   </div>
 </div><div class="baseinstancevariable private">
   
@@ -900,6 +917,7 @@
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    
   </div>
 </div><div class="baseinstancevariable private">
   
@@ -922,6 +940,7 @@
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    
   </div>
 </div><div class="baseinstancevariable private">
   
@@ -944,6 +963,7 @@
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    
   </div>
 </div><div class="baseinstancevariable private">
   
@@ -957,7 +977,7 @@
   <div class="functionHeader">
     
     <span class="py-defname">_numedges_label</span> =
-    <a class="sourceLink" href="https://github.com/nltk/nltk/tree/3.6.2/nltk/app/chartparser_app.py#L151">
+    <a class="sourceLink" href="https://github.com/nltk/nltk/tree/3.6.2/nltk/app/chartparser_app.py#L170">
       
       (source)
     </a>
@@ -966,6 +986,7 @@
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    
   </div>
 </div><div class="baseinstancevariable private">
   
@@ -988,6 +1009,7 @@
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    
   </div>
 </div><div class="baseinstancevariable private">
   
@@ -1010,6 +1032,7 @@
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    
   </div>
 </div>
 
@@ -1021,7 +1044,7 @@
   <div class="container">
     <a href="index.html">API Documentation</a> for <a href="http://www.nltk.org/" class="projecthome">nltk-3.6.2</a>,
   generated by <a href="https://github.com/twisted/pydoctor/">pydoctor</a>
-    21.2.2 at 2022-01-06 17:36:51.
+    22.2.2.dev0 at 2022-03-04 05:57:24.
   </div>
 </footer>
 

@@ -7,7 +7,7 @@
   <head>
     
     <title>nltk.toolbox</title>
-    <meta name="generator" content="pydoctor 21.2.2"> 
+    <meta name="generator" content="pydoctor 22.2.2.dev0"> 
         
     </meta>
     <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
@@ -44,69 +44,82 @@
           Names
         </a>
 
-        <form action="search-results.html" id="search-box-container">
+        <div id="search-box-container">
           <div class="input-group">
-            <input id="search-box" name="search-query" placeholder="Search..." aria-label="Search" minlength="2" class="form-control" />
+            <input id="search-box" type="search" name="search-query" placeholder="Search..." aria-label="Search" minlength="2" class="form-control" autocomplete="off" />
+            
             <span class="input-group-btn">
-              <button class="btn btn-default" type="submit" title="Search"><img src="fonts/search.svg" alt="Search!" /></button>
-              <a class="btn btn-default" id="search-help-button" title="Help" onclick="toggleSearchHelpText()"><img src="fonts/info.svg" alt="Help!" /></a>
+              <a style="display: none;" class="btn btn-default" id="search-clear-button" title="Clear" onclick="clearSearch()"><img src="fonts/x-circle.svg" alt="Clear" /></a>
+              <a class="btn btn-default" id="search-help-button" title="Help" onclick="toggleSearchHelpText()"><img src="fonts/info.svg" alt="Help" /></a>
             </span>
           </div>
-        </form>
+        </div>
 
-        <div class="rst-admonition hint" id="search-help-box">
+      </div>
+
+      <div id="search-results-container" style="display: none;">
+        <div>
+          <span class="label label-default" id="search-docstrings-button">
+            <a title="Search in docstrings" onclick="toggleSearchInDocstrings()">search in docstrings</a></span>
+        </div>
+
+        <noscript>
+            <h1>Cannot search: JavaScript is not supported/enabled in your browser.</h1>
+        </noscript>
+
+        <div class="hint" id="search-help-box">
           <p class="rst-last">
       
             Search bar offers the following options:
             <ul>   
                 <li>
                   <strong>Term presence.</strong> The below example searches for documents that 
-                    must contain “foo”, might contain “bar” and must not contain “baz”:
-                  <br /> <code>'+foo bar -baz'</code>
+                    must contain “foo”, might contain “bar” and must not contain “baz”: <code>+foo bar -baz</code>
                 </li> 
 
                 <li>
-                  <strong>Wildcards.</strong> The below example searches for documents with words beginning with “foo”:
-                  <br /> <code>'foo*'</code>
+                  <strong>Wildcards.</strong> The below example searches for documents with words beginning with “foo”: <code>foo*</code>
                 </li> 
 
                 <li>
-                  <strong>Search in specific fields.</strong> The following search matches all documents 
-                  that contains "foo" in their full dotted name and with “bar” in any field:
-                  <br /> <code>'+fullName:*foo* +bar'</code>
+                  <strong>Search in specific fields.</strong> The following search matches all objects 
+                  in "twisted.mail" that matches “search”: <code>+qname:twisted.mail.* +search</code>
 
                   <p>
-                    Possible fields: 'name', 'docstring', 'fullName'.
+                    Possible fields: 'name', 'qname' (fully qualified name), 'docstring', and 'kind'.
+                    Last two fields are only applicable if "search in docstrings" is enabled.
                   </p>
                 </li>
 
                 <li>
                   <strong>Fuzzy matches.</strong> The following search matches all documents 
-                  that have a word within 1 edit distance of “foo”:
-                  <br /> <code>'foo~1'</code>
+                  that have a word within 1 edit distance of “foo”: <code>foo~1</code>
                 </li>
             </ul>
 
           </p>
         </div>
 
-      </div>
+        <div id="search-status"> </div>
+        
+        <div class="warning" id="search-warn-box" style="display: none;">
+          <p class="rst-last"><span id="search-warn"></span></p>
+        </div>
 
+        <table id="search-results">
+          <!-- Filled dynamically by JS -->
+        </table>
+        
+        <div style="margin-top: 8px;">
+          <p>Results provided by <a href="https://lunrjs.com">Lunr.js</a></p>
+        </div>
+      </div>
 
     </div>
   </div>
 
-  <script>
- 
-    function toggleSearchHelpText() {
-        document.body.classList.toggle("search-help-hidden");
-    }
-    // Init search and help text
-    document.getElementById('search-box-container').style.display = 'block';
-    document.getElementById('search-help-box').style.display = 'block';
-    document.body.classList.add("search-help-hidden");
-
-  </script>
+  <script src="ajax.js" type="text/javascript"></script>
+  <script src="search.js" type="text/javascript"></script>
 
 </nav>
 
@@ -115,7 +128,7 @@
     <div class="container">
 
       <div class="page-header">
-        <h1 class="module"><code><code><a href="nltk.html">nltk</a></code><wbr></wbr>.<code><a href="nltk.toolbox.html">toolbox</a></code></code></h1>
+        <h1 class="module"><code><code><a href="index.html" class="internal-link">nltk</a></code><wbr></wbr>.<code><a href="nltk.toolbox.html" class="internal-link" title="nltk.toolbox">toolbox</a></code></code></h1>
         <div id="showPrivate">
           <button class="btn btn-link" onclick="togglePrivate()">Toggle Private API</button>
         </div>
@@ -142,67 +155,67 @@ Toolbox databases and settings files.</div>
   <tr class="class">
     
     <td>Class</td>
-    <td><code><a href="nltk.toolbox.StandardFormat.html">StandardFormat</a></code></td>
-    <td><span>Class for reading and processing standard format marker files and strings.</span></td>
+    <td><code><a href="nltk.toolbox.StandardFormat.html" class="internal-link" title="nltk.toolbox.StandardFormat">​Standard​Format</a></code></td>
+    <td>Class for reading and processing standard format marker files and strings.</td>
   </tr><tr class="class">
     
     <td>Class</td>
-    <td><code><a href="nltk.toolbox.ToolboxData.html">ToolboxData</a></code></td>
+    <td><code><a href="nltk.toolbox.ToolboxData.html" class="internal-link" title="nltk.toolbox.ToolboxData">​Toolbox​Data</a></code></td>
     <td><span class="undocumented">No class docstring; 2/4 methods documented</span></td>
   </tr><tr class="class">
     
     <td>Class</td>
-    <td><code><a href="nltk.toolbox.ToolboxSettings.html">ToolboxSettings</a></code></td>
-    <td><span>This class is the base class for settings files.</span></td>
+    <td><code><a href="nltk.toolbox.ToolboxSettings.html" class="internal-link" title="nltk.toolbox.ToolboxSettings">​Toolbox​Settings</a></code></td>
+    <td>This class is the base class for settings files.</td>
   </tr><tr class="function">
     
     <td>Function</td>
-    <td><code><a href="#add_blank_lines">add_blank_lines</a></code></td>
-    <td><span>Add blank lines before all elements and subelements specified in blank_before.</span></td>
+    <td><code><a href="#add_blank_lines" class="internal-link" title="nltk.toolbox.add_blank_lines">add​_blank​_lines</a></code></td>
+    <td>Add blank lines before all elements and subelements specified in blank_before.</td>
   </tr><tr class="function">
     
     <td>Function</td>
-    <td><code><a href="#add_default_fields">add_default_fields</a></code></td>
-    <td><span>Add blank elements and subelements specified in default_fields.</span></td>
+    <td><code><a href="#add_default_fields" class="internal-link" title="nltk.toolbox.add_default_fields">add​_default​_fields</a></code></td>
+    <td>Add blank elements and subelements specified in default_fields.</td>
   </tr><tr class="function">
     
     <td>Function</td>
-    <td><code><a href="#demo">demo</a></code></td>
+    <td><code><a href="#demo" class="internal-link" title="nltk.toolbox.demo">demo</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="function">
     
     <td>Function</td>
-    <td><code><a href="#remove_blanks">remove_blanks</a></code></td>
-    <td><span>Remove all elements and subelements with no text and no child elements.</span></td>
+    <td><code><a href="#remove_blanks" class="internal-link" title="nltk.toolbox.remove_blanks">remove​_blanks</a></code></td>
+    <td>Remove all elements and subelements with no text and no child elements.</td>
   </tr><tr class="function">
     
     <td>Function</td>
-    <td><code><a href="#sort_fields">sort_fields</a></code></td>
-    <td><span>Sort the elements and subelements in order specified in field_orders.</span></td>
+    <td><code><a href="#sort_fields" class="internal-link" title="nltk.toolbox.sort_fields">sort​_fields</a></code></td>
+    <td>Sort the elements and subelements in order specified in field_orders.</td>
   </tr><tr class="function">
     
     <td>Function</td>
-    <td><code><a href="#to_settings_string">to_settings_string</a></code></td>
+    <td><code><a href="#to_settings_string" class="internal-link" title="nltk.toolbox.to_settings_string">to​_settings​_string</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="function">
     
     <td>Function</td>
-    <td><code><a href="#to_sfm_string">to_sfm_string</a></code></td>
-    <td><span>Return a string with a standard format representation of the toolbox data in tree (tree can be a toolbox database or a single record).</span></td>
+    <td><code><a href="#to_sfm_string" class="internal-link" title="nltk.toolbox.to_sfm_string">to​_sfm​_string</a></code></td>
+    <td>Return a string with a standard format representation of the toolbox data in tree (tree can be a toolbox database or a single record).</td>
   </tr><tr class="function private">
     
     <td>Function</td>
-    <td><code><a href="#_sort_fields">_sort_fields</a></code></td>
-    <td><span>sort the children of elem</span></td>
+    <td><code><a href="#_sort_fields" class="internal-link" title="nltk.toolbox._sort_fields">_sort​_fields</a></code></td>
+    <td>sort the children of elem</td>
   </tr><tr class="function private">
     
     <td>Function</td>
-    <td><code><a href="#_to_settings_string">_to_settings_string</a></code></td>
+    <td><code><a href="#_to_settings_string" class="internal-link" title="nltk.toolbox._to_settings_string">_to​_settings​_string</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="variable private">
     
     <td>Variable</td>
-    <td><code><a href="#_is_value">_is_value</a></code></td>
+    <td><code><a href="#_is_value" class="internal-link" title="nltk.toolbox._is_value">_is​_value</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr>
 </table>
@@ -233,7 +246,7 @@ Toolbox databases and settings files.</div>
   <div class="docstring functionBody">
     
     
-    <div>Add blank lines before all elements and subelements specified in blank_before.<table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">tree</span></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">blanks_before</span></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">blanks_between</span></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">elem:</span>ElementTree._ElementInterface</td><td class="fieldArgDesc">toolbox data in an elementtree structure</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">blank_before:</span>dict(tuple)</td><td class="fieldArgDesc">elements and subelements to add blank lines before</td></tr></table></div>
+    <div>Add blank lines before all elements and subelements specified in blank_before.<table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">tree</span></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">blanks​_before</span></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">blanks​_between</span></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">elem:</span>ElementTree._ElementInterface</td><td class="fieldArgDesc">toolbox data in an elementtree structure</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">blank​_before:</span>dict(tuple)</td><td class="fieldArgDesc">elements and subelements to add blank lines before</td></tr></table></div>
   </div>
 </div><div class="basefunction">
   
@@ -255,7 +268,7 @@ Toolbox databases and settings files.</div>
   <div class="docstring functionBody">
     
     
-    <div>Add blank elements and subelements specified in default_fields.<table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">elem:</span>ElementTree._ElementInterface</td><td class="fieldArgDesc">toolbox data in an elementtree structure</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">default_fields:</span>dict(tuple)</td><td class="fieldArgDesc">fields to add to each type of element and subelement</td></tr></table></div>
+    <div>Add blank elements and subelements specified in default_fields.<table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">elem:</span>ElementTree._ElementInterface</td><td class="fieldArgDesc">toolbox data in an elementtree structure</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">default​_fields:</span>dict(tuple)</td><td class="fieldArgDesc">fields to add to each type of element and subelement</td></tr></table></div>
   </div>
 </div><div class="basefunction">
   
@@ -321,7 +334,7 @@ Toolbox databases and settings files.</div>
   <div class="docstring functionBody">
     
     
-    <div>Sort the elements and subelements in order specified in field_orders.<table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">elem:</span>ElementTree._ElementInterface</td><td class="fieldArgDesc">toolbox data in an elementtree structure</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">field_orders:</span>dict(tuple)</td><td class="fieldArgDesc">order of fields for each type of element and subelement</td></tr></table></div>
+    <div>Sort the elements and subelements in order specified in field_orders.<table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">elem:</span>ElementTree._ElementInterface</td><td class="fieldArgDesc">toolbox data in an elementtree structure</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">field​_orders:</span>dict(tuple)</td><td class="fieldArgDesc">order of fields for each type of element and subelement</td></tr></table></div>
   </div>
 </div><div class="basefunction">
   
@@ -334,7 +347,7 @@ Toolbox databases and settings files.</div>
   </a>
   <div class="functionHeader">
     
-    <span class="py-keyword">def</span> <span class="py-defname">to_settings_string</span>(tree, encoding=None, errors='strict', unicode_fields=None):
+    <span class="py-keyword">def</span> <span class="py-defname">to_settings_string</span>(tree, encoding=None, errors=<span class="rst-variable-quote">'</span><span class="rst-variable-string">strict</span><span class="rst-variable-quote">'</span>, unicode_fields=None):
     <a class="sourceLink" href="https://github.com/nltk/nltk/tree/3.6.2/nltk/toolbox.py#L368">
       
       (source)
@@ -356,7 +369,7 @@ Toolbox databases and settings files.</div>
   </a>
   <div class="functionHeader">
     
-    <span class="py-keyword">def</span> <span class="py-defname">to_sfm_string</span>(tree, encoding=None, errors='strict', unicode_fields=None):
+    <span class="py-keyword">def</span> <span class="py-defname">to_sfm_string</span>(tree, encoding=None, errors=<span class="rst-variable-quote">'</span><span class="rst-variable-string">strict</span><span class="rst-variable-quote">'</span>, unicode_fields=None):
     <a class="sourceLink" href="https://github.com/nltk/nltk/tree/3.6.2/nltk/toolbox.py#L274">
       
       (source)
@@ -367,7 +380,7 @@ Toolbox databases and settings files.</div>
     
     <div>Return a string with a standard format representation of the toolbox
 data in tree (tree can be a toolbox database or a single record).<table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">tree:</span>ElementTree._ElementInterface</td><td class="fieldArgDesc">flat representation of toolbox data (whole database or single record)</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">encoding:</span>str</td><td class="fieldArgDesc">Name of an encoding to use.</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">errors:</span>str</td><td class="fieldArgDesc">Error handling scheme for codec. Same as the <tt class="rst-docutils literal">encode()</tt>
-builtin string method.</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">unicode_fields:</span>dict(str) or set(str)</td><td class="fieldArgDesc"></td></tr><tr class="fieldStart"><td class="fieldName" colspan="2">Returns</td></tr><tr><td class="fieldArgContainer">str</td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr></table></div>
+builtin string method.</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">unicode​_fields:</span>dict(str) or set(str)</td><td class="fieldArgDesc"></td></tr><tr class="fieldStart"><td class="fieldName" colspan="2">Returns</td></tr><tr><td class="fieldArgContainer">str</td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr></table></div>
   </div>
 </div><div class="basefunction private">
   
@@ -434,6 +447,7 @@ builtin string method.</td></tr><tr><td class="fieldArgContainer"><span class="f
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    
   </div>
 </div>
 
@@ -445,7 +459,7 @@ builtin string method.</td></tr><tr><td class="fieldArgContainer"><span class="f
   <div class="container">
     <a href="index.html">API Documentation</a> for <a href="http://www.nltk.org/" class="projecthome">nltk-3.6.2</a>,
   generated by <a href="https://github.com/twisted/pydoctor/">pydoctor</a>
-    21.2.2 at 2022-01-06 17:36:51.
+    22.2.2.dev0 at 2022-03-04 05:57:24.
   </div>
 </footer>
 

@@ -7,7 +7,7 @@
   <head>
     
     <title>nltk.translate.chrf_score</title>
-    <meta name="generator" content="pydoctor 21.2.2"> 
+    <meta name="generator" content="pydoctor 22.2.2.dev0"> 
         
     </meta>
     <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
@@ -44,69 +44,82 @@
           Names
         </a>
 
-        <form action="search-results.html" id="search-box-container">
+        <div id="search-box-container">
           <div class="input-group">
-            <input id="search-box" name="search-query" placeholder="Search..." aria-label="Search" minlength="2" class="form-control" />
+            <input id="search-box" type="search" name="search-query" placeholder="Search..." aria-label="Search" minlength="2" class="form-control" autocomplete="off" />
+            
             <span class="input-group-btn">
-              <button class="btn btn-default" type="submit" title="Search"><img src="fonts/search.svg" alt="Search!" /></button>
-              <a class="btn btn-default" id="search-help-button" title="Help" onclick="toggleSearchHelpText()"><img src="fonts/info.svg" alt="Help!" /></a>
+              <a style="display: none;" class="btn btn-default" id="search-clear-button" title="Clear" onclick="clearSearch()"><img src="fonts/x-circle.svg" alt="Clear" /></a>
+              <a class="btn btn-default" id="search-help-button" title="Help" onclick="toggleSearchHelpText()"><img src="fonts/info.svg" alt="Help" /></a>
             </span>
           </div>
-        </form>
+        </div>
 
-        <div class="rst-admonition hint" id="search-help-box">
+      </div>
+
+      <div id="search-results-container" style="display: none;">
+        <div>
+          <span class="label label-default" id="search-docstrings-button">
+            <a title="Search in docstrings" onclick="toggleSearchInDocstrings()">search in docstrings</a></span>
+        </div>
+
+        <noscript>
+            <h1>Cannot search: JavaScript is not supported/enabled in your browser.</h1>
+        </noscript>
+
+        <div class="hint" id="search-help-box">
           <p class="rst-last">
       
             Search bar offers the following options:
             <ul>   
                 <li>
                   <strong>Term presence.</strong> The below example searches for documents that 
-                    must contain “foo”, might contain “bar” and must not contain “baz”:
-                  <br /> <code>'+foo bar -baz'</code>
+                    must contain “foo”, might contain “bar” and must not contain “baz”: <code>+foo bar -baz</code>
                 </li> 
 
                 <li>
-                  <strong>Wildcards.</strong> The below example searches for documents with words beginning with “foo”:
-                  <br /> <code>'foo*'</code>
+                  <strong>Wildcards.</strong> The below example searches for documents with words beginning with “foo”: <code>foo*</code>
                 </li> 
 
                 <li>
-                  <strong>Search in specific fields.</strong> The following search matches all documents 
-                  that contains "foo" in their full dotted name and with “bar” in any field:
-                  <br /> <code>'+fullName:*foo* +bar'</code>
+                  <strong>Search in specific fields.</strong> The following search matches all objects 
+                  in "twisted.mail" that matches “search”: <code>+qname:twisted.mail.* +search</code>
 
                   <p>
-                    Possible fields: 'name', 'docstring', 'fullName'.
+                    Possible fields: 'name', 'qname' (fully qualified name), 'docstring', and 'kind'.
+                    Last two fields are only applicable if "search in docstrings" is enabled.
                   </p>
                 </li>
 
                 <li>
                   <strong>Fuzzy matches.</strong> The following search matches all documents 
-                  that have a word within 1 edit distance of “foo”:
-                  <br /> <code>'foo~1'</code>
+                  that have a word within 1 edit distance of “foo”: <code>foo~1</code>
                 </li>
             </ul>
 
           </p>
         </div>
 
-      </div>
+        <div id="search-status"> </div>
+        
+        <div class="warning" id="search-warn-box" style="display: none;">
+          <p class="rst-last"><span id="search-warn"></span></p>
+        </div>
 
+        <table id="search-results">
+          <!-- Filled dynamically by JS -->
+        </table>
+        
+        <div style="margin-top: 8px;">
+          <p>Results provided by <a href="https://lunrjs.com">Lunr.js</a></p>
+        </div>
+      </div>
 
     </div>
   </div>
 
-  <script>
- 
-    function toggleSearchHelpText() {
-        document.body.classList.toggle("search-help-hidden");
-    }
-    // Init search and help text
-    document.getElementById('search-box-container').style.display = 'block';
-    document.getElementById('search-help-box').style.display = 'block';
-    document.body.classList.add("search-help-hidden");
-
-  </script>
+  <script src="ajax.js" type="text/javascript"></script>
+  <script src="search.js" type="text/javascript"></script>
 
 </nav>
 
@@ -115,7 +128,7 @@
     <div class="container">
 
       <div class="page-header">
-        <h1 class="module"><code><code><a href="nltk.html">nltk</a></code><wbr></wbr>.<code><a href="nltk.translate.html">translate</a></code><wbr></wbr>.<code><a href="nltk.translate.chrf_score.html">chrf_score</a></code></code></h1>
+        <h1 class="module"><code><code><a href="index.html" class="internal-link">nltk</a></code><wbr></wbr>.<code><a href="nltk.translate.html" class="internal-link" title="nltk.translate">translate</a></code><wbr></wbr>.<code><a href="nltk.translate.chrf_score.html" class="internal-link" title="nltk.translate.chrf_score">chrf_score</a></code></code></h1>
         <div id="showPrivate">
           <button class="btn btn-link" onclick="togglePrivate()">Toggle Private API</button>
         </div>
@@ -141,22 +154,22 @@
   <tr class="function">
     
     <td>Function</td>
-    <td><code><a href="#chrf_precision_recall_fscore_support">chrf_precision_recall_fscore_support</a></code></td>
-    <td><span>This function computes the precision, recall and fscore from the ngram overlaps. It returns the <code>support</code> which is the true positive score.</span></td>
+    <td><code><a href="#chrf_precision_recall_fscore_support" class="internal-link" title="nltk.translate.chrf_score.chrf_precision_recall_fscore_support">chrf​_precision​_recall​_fscore​_support</a></code></td>
+    <td>This function computes the precision, recall and fscore from the ngram overlaps. It returns the <code>support</code> which is the true positive score.</td>
   </tr><tr class="function">
     
     <td>Function</td>
-    <td><code><a href="#corpus_chrf">corpus_chrf</a></code></td>
-    <td><span>Calculates the corpus level CHRF (Character n-gram F-score), it is the macro-averaged value of the sentence/segment level CHRF score.</span></td>
+    <td><code><a href="#corpus_chrf" class="internal-link" title="nltk.translate.chrf_score.corpus_chrf">corpus​_chrf</a></code></td>
+    <td>Calculates the corpus level CHRF (Character n-gram F-score), it is the macro-averaged value of the sentence/segment level CHRF score.</td>
   </tr><tr class="function">
     
     <td>Function</td>
-    <td><code><a href="#sentence_chrf">sentence_chrf</a></code></td>
+    <td><code><a href="#sentence_chrf" class="internal-link" title="nltk.translate.chrf_score.sentence_chrf">sentence​_chrf</a></code></td>
     <td><span class="undocumented">No summary</span></td>
   </tr><tr class="function private">
     
     <td>Function</td>
-    <td><code><a href="#_preprocess">_preprocess</a></code></td>
+    <td><code><a href="#_preprocess" class="internal-link" title="nltk.translate.chrf_score._preprocess">_preprocess</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr>
 </table>
@@ -231,7 +244,7 @@ macro-averaged value of the sentence/segment level CHRF score.</p>
 <span class="py-prompt">&gt;&gt;&gt; </span>corpus_chrf([ref1, ref2, ref1, ref2], [hyp1, hyp2, hyp2, hyp1]) <span class="py-comment"># doctest: +ELLIPSIS</span>
 <span class="py-output">0.3910...</span>
 </pre></blockquote>
-<table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">references:</span>list(list(str))</td><td class="fieldArgDesc">a corpus of list of reference sentences, w.r.t. hypotheses</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">hypotheses:</span>list(list(str))</td><td class="fieldArgDesc">a list of hypothesis sentences</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">min_len:</span>int</td><td class="fieldArgDesc">The minimum order of n-gram this function should extract.</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">max_len:</span>int</td><td class="fieldArgDesc">The maximum order of n-gram this function should extract.</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">beta:</span>float</td><td class="fieldArgDesc">the parameter to assign more importance to recall over precision</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">ignore_whitespace:</span>bool</td><td class="fieldArgDesc">ignore whitespace characters in scoring</td></tr><tr class="fieldStart"><td class="fieldName" colspan="2">Returns</td></tr><tr><td class="fieldArgContainer">float</td><td class="fieldArgDesc">the sentence level CHRF score.</td></tr></table></div>
+<table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">references:</span>list(list(str))</td><td class="fieldArgDesc">a corpus of list of reference sentences, w.r.t. hypotheses</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">hypotheses:</span>list(list(str))</td><td class="fieldArgDesc">a list of hypothesis sentences</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">min​_len:</span>int</td><td class="fieldArgDesc">The minimum order of n-gram this function should extract.</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">max​_len:</span>int</td><td class="fieldArgDesc">The maximum order of n-gram this function should extract.</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">beta:</span>float</td><td class="fieldArgDesc">the parameter to assign more importance to recall over precision</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">ignore​_whitespace:</span>bool</td><td class="fieldArgDesc">ignore whitespace characters in scoring</td></tr><tr class="fieldStart"><td class="fieldName" colspan="2">Returns</td></tr><tr><td class="fieldArgContainer">float</td><td class="fieldArgDesc">the sentence level CHRF score.</td></tr></table></div>
   </div>
 </div><div class="basefunction">
   
@@ -314,7 +327,7 @@ tokens, i.e. list(str) as inputs.</p>
 <span class="py-prompt">&gt;&gt;&gt; </span>sentence_chrf(ref1, hyp1, min_len=2, max_len=3) <span class="py-comment"># doctest: +ELLIPSIS</span>
 <span class="py-output">0.6617...</span>
 </pre></blockquote>
-<table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">reference</span></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">hypothesis:</span>list(str) / str</td><td class="fieldArgDesc">a hypothesis sentence</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">min_len:</span>int</td><td class="fieldArgDesc">The minimum order of n-gram this function should extract.</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">max_len:</span>int</td><td class="fieldArgDesc">The maximum order of n-gram this function should extract.</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">beta:</span>float</td><td class="fieldArgDesc">the parameter to assign more importance to recall over precision</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">ignore_whitespace:</span>bool</td><td class="fieldArgDesc">ignore whitespace characters in scoring</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">references:</span>list(str) / str</td><td class="fieldArgDesc">reference sentence</td></tr><tr class="fieldStart"><td class="fieldName" colspan="2">Returns</td></tr><tr><td class="fieldArgContainer">float</td><td class="fieldArgDesc">the sentence level CHRF score.</td></tr></table></div>
+<table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">reference</span></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">hypothesis:</span>list(str) / str</td><td class="fieldArgDesc">a hypothesis sentence</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">min​_len:</span>int</td><td class="fieldArgDesc">The minimum order of n-gram this function should extract.</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">max​_len:</span>int</td><td class="fieldArgDesc">The maximum order of n-gram this function should extract.</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">beta:</span>float</td><td class="fieldArgDesc">the parameter to assign more importance to recall over precision</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">ignore​_whitespace:</span>bool</td><td class="fieldArgDesc">ignore whitespace characters in scoring</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">references:</span>list(str) / str</td><td class="fieldArgDesc">reference sentence</td></tr><tr class="fieldStart"><td class="fieldName" colspan="2">Returns</td></tr><tr><td class="fieldArgContainer">float</td><td class="fieldArgDesc">the sentence level CHRF score.</td></tr></table></div>
   </div>
 </div><div class="basefunction private">
   
@@ -348,7 +361,7 @@ tokens, i.e. list(str) as inputs.</p>
   <div class="container">
     <a href="index.html">API Documentation</a> for <a href="http://www.nltk.org/" class="projecthome">nltk-3.6.2</a>,
   generated by <a href="https://github.com/twisted/pydoctor/">pydoctor</a>
-    21.2.2 at 2022-01-06 17:36:51.
+    22.2.2.dev0 at 2022-03-04 05:57:24.
   </div>
 </footer>
 

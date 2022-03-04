@@ -7,7 +7,7 @@
   <head>
     
     <title>nltk.sem.logic.Tokens</title>
-    <meta name="generator" content="pydoctor 21.2.2"> 
+    <meta name="generator" content="pydoctor 22.2.2.dev0"> 
         
     </meta>
     <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
@@ -44,69 +44,82 @@
           Names
         </a>
 
-        <form action="search-results.html" id="search-box-container">
+        <div id="search-box-container">
           <div class="input-group">
-            <input id="search-box" name="search-query" placeholder="Search..." aria-label="Search" minlength="2" class="form-control" />
+            <input id="search-box" type="search" name="search-query" placeholder="Search..." aria-label="Search" minlength="2" class="form-control" autocomplete="off" />
+            
             <span class="input-group-btn">
-              <button class="btn btn-default" type="submit" title="Search"><img src="fonts/search.svg" alt="Search!" /></button>
-              <a class="btn btn-default" id="search-help-button" title="Help" onclick="toggleSearchHelpText()"><img src="fonts/info.svg" alt="Help!" /></a>
+              <a style="display: none;" class="btn btn-default" id="search-clear-button" title="Clear" onclick="clearSearch()"><img src="fonts/x-circle.svg" alt="Clear" /></a>
+              <a class="btn btn-default" id="search-help-button" title="Help" onclick="toggleSearchHelpText()"><img src="fonts/info.svg" alt="Help" /></a>
             </span>
           </div>
-        </form>
+        </div>
 
-        <div class="rst-admonition hint" id="search-help-box">
+      </div>
+
+      <div id="search-results-container" style="display: none;">
+        <div>
+          <span class="label label-default" id="search-docstrings-button">
+            <a title="Search in docstrings" onclick="toggleSearchInDocstrings()">search in docstrings</a></span>
+        </div>
+
+        <noscript>
+            <h1>Cannot search: JavaScript is not supported/enabled in your browser.</h1>
+        </noscript>
+
+        <div class="hint" id="search-help-box">
           <p class="rst-last">
       
             Search bar offers the following options:
             <ul>   
                 <li>
                   <strong>Term presence.</strong> The below example searches for documents that 
-                    must contain “foo”, might contain “bar” and must not contain “baz”:
-                  <br /> <code>'+foo bar -baz'</code>
+                    must contain “foo”, might contain “bar” and must not contain “baz”: <code>+foo bar -baz</code>
                 </li> 
 
                 <li>
-                  <strong>Wildcards.</strong> The below example searches for documents with words beginning with “foo”:
-                  <br /> <code>'foo*'</code>
+                  <strong>Wildcards.</strong> The below example searches for documents with words beginning with “foo”: <code>foo*</code>
                 </li> 
 
                 <li>
-                  <strong>Search in specific fields.</strong> The following search matches all documents 
-                  that contains "foo" in their full dotted name and with “bar” in any field:
-                  <br /> <code>'+fullName:*foo* +bar'</code>
+                  <strong>Search in specific fields.</strong> The following search matches all objects 
+                  in "twisted.mail" that matches “search”: <code>+qname:twisted.mail.* +search</code>
 
                   <p>
-                    Possible fields: 'name', 'docstring', 'fullName'.
+                    Possible fields: 'name', 'qname' (fully qualified name), 'docstring', and 'kind'.
+                    Last two fields are only applicable if "search in docstrings" is enabled.
                   </p>
                 </li>
 
                 <li>
                   <strong>Fuzzy matches.</strong> The following search matches all documents 
-                  that have a word within 1 edit distance of “foo”:
-                  <br /> <code>'foo~1'</code>
+                  that have a word within 1 edit distance of “foo”: <code>foo~1</code>
                 </li>
             </ul>
 
           </p>
         </div>
 
-      </div>
+        <div id="search-status"> </div>
+        
+        <div class="warning" id="search-warn-box" style="display: none;">
+          <p class="rst-last"><span id="search-warn"></span></p>
+        </div>
 
+        <table id="search-results">
+          <!-- Filled dynamically by JS -->
+        </table>
+        
+        <div style="margin-top: 8px;">
+          <p>Results provided by <a href="https://lunrjs.com">Lunr.js</a></p>
+        </div>
+      </div>
 
     </div>
   </div>
 
-  <script>
- 
-    function toggleSearchHelpText() {
-        document.body.classList.toggle("search-help-hidden");
-    }
-    // Init search and help text
-    document.getElementById('search-box-container').style.display = 'block';
-    document.getElementById('search-help-box').style.display = 'block';
-    document.body.classList.add("search-help-hidden");
-
-  </script>
+  <script src="ajax.js" type="text/javascript"></script>
+  <script src="search.js" type="text/javascript"></script>
 
 </nav>
 
@@ -115,7 +128,7 @@
     <div class="container">
 
       <div class="page-header">
-        <h1 class="class"><code><code><a href="nltk.html">nltk</a></code><wbr></wbr>.<code><a href="nltk.sem.html">sem</a></code><wbr></wbr>.<code><a href="nltk.sem.logic.html">logic</a></code><wbr></wbr>.<code><a href="nltk.sem.logic.Tokens.html">Tokens</a></code></code></h1>
+        <h1 class="class"><code><code><a href="index.html" class="internal-link">nltk</a></code><wbr></wbr>.<code><a href="nltk.sem.html" class="internal-link" title="nltk.sem">sem</a></code><wbr></wbr>.<code><a href="nltk.sem.logic.html" class="internal-link" title="nltk.sem.logic">logic</a></code><wbr></wbr>.<code><a href="nltk.sem.logic.Tokens.html" class="internal-link" title="nltk.sem.logic.Tokens">Tokens</a></code></code></h1>
         <div id="showPrivate">
           <button class="btn btn-link" onclick="togglePrivate()">Toggle Private API</button>
         </div>
@@ -126,7 +139,7 @@
       </div>
 
       <div class="extrasDocstring">
-        <p><code><span class="py-keyword">class</span> <span class="py-defname">Tokens</span>(<span title="object">object</span>): <a href="https://github.com/nltk/nltk/tree/3.6.2/nltk/sem/logic.py#L27" class="sourceLink">(source)</a></code></p><p>Known subclasses: <code><a href="nltk.sem.drt.DrtTokens.html">nltk.sem.drt.DrtTokens</a></code></p>
+        <p><code><span class="py-keyword">class</span> <span class="py-defname">Tokens</span>(object): <a href="https://github.com/nltk/nltk/tree/3.6.2/nltk/sem/logic.py#L27" class="sourceLink">(source)</a></code></p><p>Known subclasses: <code><a href="nltk.sem.drt.DrtTokens.html" class="internal-link">nltk.sem.drt.DrtTokens</a></code></p>
         <p><a href="classIndex.html#nltk.sem.logic.Tokens">View In Hierarchy</a></p>
       </div>
 
@@ -138,150 +151,150 @@
         <table class="children sortable" id="id1364">
   
   
-  <tr class="classvariable">
+  <tr class="constant">
     
-    <td>Class Variable</td>
-    <td><code><a href="#ALL">ALL</a></code></td>
+    <td>Constant</td>
+    <td><code><a href="#ALL" class="internal-link" title="nltk.sem.logic.Tokens.ALL">ALL</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
-  </tr><tr class="classvariable">
+  </tr><tr class="constant">
     
-    <td>Class Variable</td>
-    <td><code><a href="#ALL_LIST">ALL_LIST</a></code></td>
+    <td>Constant</td>
+    <td><code><a href="#ALL_LIST" class="internal-link" title="nltk.sem.logic.Tokens.ALL_LIST">ALL​_LIST</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
-  </tr><tr class="classvariable">
+  </tr><tr class="constant">
     
-    <td>Class Variable</td>
-    <td><code><a href="#AND">AND</a></code></td>
+    <td>Constant</td>
+    <td><code><a href="#AND" class="internal-link" title="nltk.sem.logic.Tokens.AND">AND</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
-  </tr><tr class="classvariable">
+  </tr><tr class="constant">
     
-    <td>Class Variable</td>
-    <td><code><a href="#AND_LIST">AND_LIST</a></code></td>
+    <td>Constant</td>
+    <td><code><a href="#AND_LIST" class="internal-link" title="nltk.sem.logic.Tokens.AND_LIST">AND​_LIST</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
-  </tr><tr class="classvariable">
+  </tr><tr class="constant">
     
-    <td>Class Variable</td>
-    <td><code><a href="#BINOPS">BINOPS</a></code></td>
+    <td>Constant</td>
+    <td><code><a href="#BINOPS" class="internal-link" title="nltk.sem.logic.Tokens.BINOPS">BINOPS</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
-  </tr><tr class="classvariable">
+  </tr><tr class="constant">
     
-    <td>Class Variable</td>
-    <td><code><a href="#CLOSE">CLOSE</a></code></td>
+    <td>Constant</td>
+    <td><code><a href="#CLOSE" class="internal-link" title="nltk.sem.logic.Tokens.CLOSE">CLOSE</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
-  </tr><tr class="classvariable">
+  </tr><tr class="constant">
     
-    <td>Class Variable</td>
-    <td><code><a href="#COMMA">COMMA</a></code></td>
+    <td>Constant</td>
+    <td><code><a href="#COMMA" class="internal-link" title="nltk.sem.logic.Tokens.COMMA">COMMA</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
-  </tr><tr class="classvariable">
+  </tr><tr class="constant">
     
-    <td>Class Variable</td>
-    <td><code><a href="#DOT">DOT</a></code></td>
+    <td>Constant</td>
+    <td><code><a href="#DOT" class="internal-link" title="nltk.sem.logic.Tokens.DOT">DOT</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
-  </tr><tr class="classvariable">
+  </tr><tr class="constant">
     
-    <td>Class Variable</td>
-    <td><code><a href="#EQ">EQ</a></code></td>
+    <td>Constant</td>
+    <td><code><a href="#EQ" class="internal-link" title="nltk.sem.logic.Tokens.EQ">EQ</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
-  </tr><tr class="classvariable">
+  </tr><tr class="constant">
     
-    <td>Class Variable</td>
-    <td><code><a href="#EQ_LIST">EQ_LIST</a></code></td>
+    <td>Constant</td>
+    <td><code><a href="#EQ_LIST" class="internal-link" title="nltk.sem.logic.Tokens.EQ_LIST">EQ​_LIST</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
-  </tr><tr class="classvariable">
+  </tr><tr class="constant">
     
-    <td>Class Variable</td>
-    <td><code><a href="#EXISTS">EXISTS</a></code></td>
+    <td>Constant</td>
+    <td><code><a href="#EXISTS" class="internal-link" title="nltk.sem.logic.Tokens.EXISTS">EXISTS</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
-  </tr><tr class="classvariable">
+  </tr><tr class="constant">
     
-    <td>Class Variable</td>
-    <td><code><a href="#EXISTS_LIST">EXISTS_LIST</a></code></td>
+    <td>Constant</td>
+    <td><code><a href="#EXISTS_LIST" class="internal-link" title="nltk.sem.logic.Tokens.EXISTS_LIST">EXISTS​_LIST</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
-  </tr><tr class="classvariable">
+  </tr><tr class="constant">
     
-    <td>Class Variable</td>
-    <td><code><a href="#IFF">IFF</a></code></td>
+    <td>Constant</td>
+    <td><code><a href="#IFF" class="internal-link" title="nltk.sem.logic.Tokens.IFF">IFF</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
-  </tr><tr class="classvariable">
+  </tr><tr class="constant">
     
-    <td>Class Variable</td>
-    <td><code><a href="#IFF_LIST">IFF_LIST</a></code></td>
+    <td>Constant</td>
+    <td><code><a href="#IFF_LIST" class="internal-link" title="nltk.sem.logic.Tokens.IFF_LIST">IFF​_LIST</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
-  </tr><tr class="classvariable">
+  </tr><tr class="constant">
     
-    <td>Class Variable</td>
-    <td><code><a href="#IMP">IMP</a></code></td>
+    <td>Constant</td>
+    <td><code><a href="#IMP" class="internal-link" title="nltk.sem.logic.Tokens.IMP">IMP</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
-  </tr><tr class="classvariable">
+  </tr><tr class="constant">
     
-    <td>Class Variable</td>
-    <td><code><a href="#IMP_LIST">IMP_LIST</a></code></td>
+    <td>Constant</td>
+    <td><code><a href="#IMP_LIST" class="internal-link" title="nltk.sem.logic.Tokens.IMP_LIST">IMP​_LIST</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
-  </tr><tr class="classvariable">
+  </tr><tr class="constant">
     
-    <td>Class Variable</td>
-    <td><code><a href="#LAMBDA">LAMBDA</a></code></td>
+    <td>Constant</td>
+    <td><code><a href="#LAMBDA" class="internal-link" title="nltk.sem.logic.Tokens.LAMBDA">LAMBDA</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
-  </tr><tr class="classvariable">
+  </tr><tr class="constant">
     
-    <td>Class Variable</td>
-    <td><code><a href="#LAMBDA_LIST">LAMBDA_LIST</a></code></td>
+    <td>Constant</td>
+    <td><code><a href="#LAMBDA_LIST" class="internal-link" title="nltk.sem.logic.Tokens.LAMBDA_LIST">LAMBDA​_LIST</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
-  </tr><tr class="classvariable">
+  </tr><tr class="constant">
     
-    <td>Class Variable</td>
-    <td><code><a href="#NEQ">NEQ</a></code></td>
+    <td>Constant</td>
+    <td><code><a href="#NEQ" class="internal-link" title="nltk.sem.logic.Tokens.NEQ">NEQ</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
-  </tr><tr class="classvariable">
+  </tr><tr class="constant">
     
-    <td>Class Variable</td>
-    <td><code><a href="#NEQ_LIST">NEQ_LIST</a></code></td>
+    <td>Constant</td>
+    <td><code><a href="#NEQ_LIST" class="internal-link" title="nltk.sem.logic.Tokens.NEQ_LIST">NEQ​_LIST</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
-  </tr><tr class="classvariable">
+  </tr><tr class="constant">
     
-    <td>Class Variable</td>
-    <td><code><a href="#NOT">NOT</a></code></td>
+    <td>Constant</td>
+    <td><code><a href="#NOT" class="internal-link" title="nltk.sem.logic.Tokens.NOT">NOT</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
-  </tr><tr class="classvariable">
+  </tr><tr class="constant">
     
-    <td>Class Variable</td>
-    <td><code><a href="#NOT_LIST">NOT_LIST</a></code></td>
+    <td>Constant</td>
+    <td><code><a href="#NOT_LIST" class="internal-link" title="nltk.sem.logic.Tokens.NOT_LIST">NOT​_LIST</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
-  </tr><tr class="classvariable">
+  </tr><tr class="constant">
     
-    <td>Class Variable</td>
-    <td><code><a href="#OPEN">OPEN</a></code></td>
+    <td>Constant</td>
+    <td><code><a href="#OPEN" class="internal-link" title="nltk.sem.logic.Tokens.OPEN">OPEN</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
-  </tr><tr class="classvariable">
+  </tr><tr class="constant">
     
-    <td>Class Variable</td>
-    <td><code><a href="#OR">OR</a></code></td>
+    <td>Constant</td>
+    <td><code><a href="#OR" class="internal-link" title="nltk.sem.logic.Tokens.OR">OR</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
-  </tr><tr class="classvariable">
+  </tr><tr class="constant">
     
-    <td>Class Variable</td>
-    <td><code><a href="#OR_LIST">OR_LIST</a></code></td>
+    <td>Constant</td>
+    <td><code><a href="#OR_LIST" class="internal-link" title="nltk.sem.logic.Tokens.OR_LIST">OR​_LIST</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
-  </tr><tr class="classvariable">
+  </tr><tr class="constant">
     
-    <td>Class Variable</td>
-    <td><code><a href="#PUNCT">PUNCT</a></code></td>
+    <td>Constant</td>
+    <td><code><a href="#PUNCT" class="internal-link" title="nltk.sem.logic.Tokens.PUNCT">PUNCT</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
-  </tr><tr class="classvariable">
+  </tr><tr class="constant">
     
-    <td>Class Variable</td>
-    <td><code><a href="#QUANTS">QUANTS</a></code></td>
+    <td>Constant</td>
+    <td><code><a href="#QUANTS" class="internal-link" title="nltk.sem.logic.Tokens.QUANTS">QUANTS</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
-  </tr><tr class="classvariable">
+  </tr><tr class="constant">
     
-    <td>Class Variable</td>
-    <td><code><a href="#SYMBOLS">SYMBOLS</a></code></td>
+    <td>Constant</td>
+    <td><code><a href="#SYMBOLS" class="internal-link" title="nltk.sem.logic.Tokens.SYMBOLS">SYMBOLS</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
-  </tr><tr class="classvariable">
+  </tr><tr class="constant">
     
-    <td>Class Variable</td>
-    <td><code><a href="#TOKENS">TOKENS</a></code></td>
+    <td>Constant</td>
+    <td><code><a href="#TOKENS" class="internal-link" title="nltk.sem.logic.Tokens.TOKENS">TOKENS</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr>
 </table>
@@ -292,7 +305,7 @@
 
       <div id="childList">
 
-        <div class="baseclassvariable">
+        <div class="baseconstant">
   
   
   <a name="nltk.sem.logic.Tokens.ALL">
@@ -313,8 +326,9 @@
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    <table class="valueTable"><tr class="fieldStart"><td class="fieldName">Value</td></tr><tr><td><pre class="constant-value"><code><span class="rst-variable-quote">'</span><span class="rst-variable-string">all</span><span class="rst-variable-quote">'</span></code></pre></td></tr></table>
   </div>
-</div><div class="baseclassvariable">
+</div><div class="baseconstant">
   
   
   <a name="nltk.sem.logic.Tokens.ALL_LIST">
@@ -335,8 +349,9 @@
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    <table class="valueTable"><tr class="fieldStart"><td class="fieldName">Value</td></tr><tr><td><pre class="constant-value"><code>[<wbr></wbr><span class="rst-variable-quote">'</span><span class="rst-variable-string">all</span><span class="rst-variable-quote">'</span>, <wbr></wbr><span class="rst-variable-quote">'</span><span class="rst-variable-string">forall</span><span class="rst-variable-quote">'</span>]</code></pre></td></tr></table>
   </div>
-</div><div class="baseclassvariable">
+</div><div class="baseconstant">
   
   
   <a name="nltk.sem.logic.Tokens.AND">
@@ -357,8 +372,9 @@
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    <table class="valueTable"><tr class="fieldStart"><td class="fieldName">Value</td></tr><tr><td><pre class="constant-value"><code><span class="rst-variable-quote">'</span><span class="rst-variable-string">&amp;</span><span class="rst-variable-quote">'</span></code></pre></td></tr></table>
   </div>
-</div><div class="baseclassvariable">
+</div><div class="baseconstant">
   
   
   <a name="nltk.sem.logic.Tokens.AND_LIST">
@@ -379,8 +395,9 @@
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    <table class="valueTable"><tr class="fieldStart"><td class="fieldName">Value</td></tr><tr><td><pre class="constant-value"><code>[<wbr></wbr><span class="rst-variable-quote">'</span><span class="rst-variable-string">and</span><span class="rst-variable-quote">'</span>, <wbr></wbr><span class="rst-variable-quote">'</span><span class="rst-variable-string">&amp;</span><span class="rst-variable-quote">'</span>, <wbr></wbr><span class="rst-variable-quote">'</span><span class="rst-variable-string">^</span><span class="rst-variable-quote">'</span>]</code></pre></td></tr></table>
   </div>
-</div><div class="baseclassvariable">
+</div><div class="baseconstant">
   
   
   <a name="nltk.sem.logic.Tokens.BINOPS">
@@ -401,8 +418,9 @@
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    <table class="valueTable"><tr class="fieldStart"><td class="fieldName">Value</td></tr><tr><td><pre class="constant-value"><code>((<a href="#AND_LIST" class="internal-link" title="nltk.sem.logic.Tokens.AND_LIST">AND_LIST</a>+<a href="#OR_LIST" class="internal-link" title="nltk.sem.logic.Tokens.OR_LIST">OR_LIST</a>)+<a href="#IMP_LIST" class="internal-link" title="nltk.sem.logic.Tokens.IMP_LIST">IMP_LIST</a>)+<a href="#IFF_LIST" class="internal-link" title="nltk.sem.logic.Tokens.IFF_LIST">IFF_LIST</a></code></pre></td></tr></table>
   </div>
-</div><div class="baseclassvariable">
+</div><div class="baseconstant">
   
   
   <a name="nltk.sem.logic.Tokens.CLOSE">
@@ -423,8 +441,9 @@
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    <table class="valueTable"><tr class="fieldStart"><td class="fieldName">Value</td></tr><tr><td><pre class="constant-value"><code><span class="rst-variable-quote">'</span><span class="rst-variable-string">)</span><span class="rst-variable-quote">'</span></code></pre></td></tr></table>
   </div>
-</div><div class="baseclassvariable">
+</div><div class="baseconstant">
   
   
   <a name="nltk.sem.logic.Tokens.COMMA">
@@ -445,8 +464,9 @@
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    <table class="valueTable"><tr class="fieldStart"><td class="fieldName">Value</td></tr><tr><td><pre class="constant-value"><code><span class="rst-variable-quote">'</span><span class="rst-variable-string">,</span><span class="rst-variable-quote">'</span></code></pre></td></tr></table>
   </div>
-</div><div class="baseclassvariable">
+</div><div class="baseconstant">
   
   
   <a name="nltk.sem.logic.Tokens.DOT">
@@ -467,8 +487,9 @@
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    <table class="valueTable"><tr class="fieldStart"><td class="fieldName">Value</td></tr><tr><td><pre class="constant-value"><code><span class="rst-variable-quote">'</span><span class="rst-variable-string">.</span><span class="rst-variable-quote">'</span></code></pre></td></tr></table>
   </div>
-</div><div class="baseclassvariable">
+</div><div class="baseconstant">
   
   
   <a name="nltk.sem.logic.Tokens.EQ">
@@ -489,8 +510,9 @@
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    <table class="valueTable"><tr class="fieldStart"><td class="fieldName">Value</td></tr><tr><td><pre class="constant-value"><code><span class="rst-variable-quote">'</span><span class="rst-variable-string">=</span><span class="rst-variable-quote">'</span></code></pre></td></tr></table>
   </div>
-</div><div class="baseclassvariable">
+</div><div class="baseconstant">
   
   
   <a name="nltk.sem.logic.Tokens.EQ_LIST">
@@ -511,8 +533,9 @@
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    <table class="valueTable"><tr class="fieldStart"><td class="fieldName">Value</td></tr><tr><td><pre class="constant-value"><code>[<wbr></wbr><span class="rst-variable-quote">'</span><span class="rst-variable-string">=</span><span class="rst-variable-quote">'</span>, <wbr></wbr><span class="rst-variable-quote">'</span><span class="rst-variable-string">==</span><span class="rst-variable-quote">'</span>]</code></pre></td></tr></table>
   </div>
-</div><div class="baseclassvariable">
+</div><div class="baseconstant">
   
   
   <a name="nltk.sem.logic.Tokens.EXISTS">
@@ -533,8 +556,9 @@
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    <table class="valueTable"><tr class="fieldStart"><td class="fieldName">Value</td></tr><tr><td><pre class="constant-value"><code><span class="rst-variable-quote">'</span><span class="rst-variable-string">exists</span><span class="rst-variable-quote">'</span></code></pre></td></tr></table>
   </div>
-</div><div class="baseclassvariable">
+</div><div class="baseconstant">
   
   
   <a name="nltk.sem.logic.Tokens.EXISTS_LIST">
@@ -555,8 +579,9 @@
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    <table class="valueTable"><tr class="fieldStart"><td class="fieldName">Value</td></tr><tr><td><pre class="constant-value"><code>[<wbr></wbr><span class="rst-variable-quote">'</span><span class="rst-variable-string">some</span><span class="rst-variable-quote">'</span>, <wbr></wbr><span class="rst-variable-quote">'</span><span class="rst-variable-string">exists</span><span class="rst-variable-quote">'</span>, <wbr></wbr><span class="rst-variable-quote">'</span><span class="rst-variable-string">exist</span><span class="rst-variable-quote">'</span>]</code></pre></td></tr></table>
   </div>
-</div><div class="baseclassvariable">
+</div><div class="baseconstant">
   
   
   <a name="nltk.sem.logic.Tokens.IFF">
@@ -577,8 +602,9 @@
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    <table class="valueTable"><tr class="fieldStart"><td class="fieldName">Value</td></tr><tr><td><pre class="constant-value"><code><span class="rst-variable-quote">'</span><span class="rst-variable-string">&lt;-&gt;</span><span class="rst-variable-quote">'</span></code></pre></td></tr></table>
   </div>
-</div><div class="baseclassvariable">
+</div><div class="baseconstant">
   
   
   <a name="nltk.sem.logic.Tokens.IFF_LIST">
@@ -599,8 +625,9 @@
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    <table class="valueTable"><tr class="fieldStart"><td class="fieldName">Value</td></tr><tr><td><pre class="constant-value"><code>[<wbr></wbr><span class="rst-variable-quote">'</span><span class="rst-variable-string">iff</span><span class="rst-variable-quote">'</span>, <wbr></wbr><span class="rst-variable-quote">'</span><span class="rst-variable-string">&lt;-&gt;</span><span class="rst-variable-quote">'</span>, <wbr></wbr><span class="rst-variable-quote">'</span><span class="rst-variable-string">&lt;=&gt;</span><span class="rst-variable-quote">'</span>]</code></pre></td></tr></table>
   </div>
-</div><div class="baseclassvariable">
+</div><div class="baseconstant">
   
   
   <a name="nltk.sem.logic.Tokens.IMP">
@@ -621,8 +648,9 @@
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    <table class="valueTable"><tr class="fieldStart"><td class="fieldName">Value</td></tr><tr><td><pre class="constant-value"><code><span class="rst-variable-quote">'</span><span class="rst-variable-string">-&gt;</span><span class="rst-variable-quote">'</span></code></pre></td></tr></table>
   </div>
-</div><div class="baseclassvariable">
+</div><div class="baseconstant">
   
   
   <a name="nltk.sem.logic.Tokens.IMP_LIST">
@@ -643,8 +671,9 @@
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    <table class="valueTable"><tr class="fieldStart"><td class="fieldName">Value</td></tr><tr><td><pre class="constant-value"><code>[<wbr></wbr><span class="rst-variable-quote">'</span><span class="rst-variable-string">implies</span><span class="rst-variable-quote">'</span>, <wbr></wbr><span class="rst-variable-quote">'</span><span class="rst-variable-string">-&gt;</span><span class="rst-variable-quote">'</span>, <wbr></wbr><span class="rst-variable-quote">'</span><span class="rst-variable-string">=&gt;</span><span class="rst-variable-quote">'</span>]</code></pre></td></tr></table>
   </div>
-</div><div class="baseclassvariable">
+</div><div class="baseconstant">
   
   
   <a name="nltk.sem.logic.Tokens.LAMBDA">
@@ -665,8 +694,9 @@
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    <table class="valueTable"><tr class="fieldStart"><td class="fieldName">Value</td></tr><tr><td><pre class="constant-value"><code><span class="rst-variable-quote">'</span><span class="rst-variable-string">\\</span><span class="rst-variable-quote">'</span></code></pre></td></tr></table>
   </div>
-</div><div class="baseclassvariable">
+</div><div class="baseconstant">
   
   
   <a name="nltk.sem.logic.Tokens.LAMBDA_LIST">
@@ -687,8 +717,9 @@
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    <table class="valueTable"><tr class="fieldStart"><td class="fieldName">Value</td></tr><tr><td><pre class="constant-value"><code>[<wbr></wbr><span class="rst-variable-quote">'</span><span class="rst-variable-string">\\</span><span class="rst-variable-quote">'</span>]</code></pre></td></tr></table>
   </div>
-</div><div class="baseclassvariable">
+</div><div class="baseconstant">
   
   
   <a name="nltk.sem.logic.Tokens.NEQ">
@@ -709,8 +740,9 @@
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    <table class="valueTable"><tr class="fieldStart"><td class="fieldName">Value</td></tr><tr><td><pre class="constant-value"><code><span class="rst-variable-quote">'</span><span class="rst-variable-string">!=</span><span class="rst-variable-quote">'</span></code></pre></td></tr></table>
   </div>
-</div><div class="baseclassvariable">
+</div><div class="baseconstant">
   
   
   <a name="nltk.sem.logic.Tokens.NEQ_LIST">
@@ -731,8 +763,9 @@
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    <table class="valueTable"><tr class="fieldStart"><td class="fieldName">Value</td></tr><tr><td><pre class="constant-value"><code>[<wbr></wbr><span class="rst-variable-quote">'</span><span class="rst-variable-string">!=</span><span class="rst-variable-quote">'</span>]</code></pre></td></tr></table>
   </div>
-</div><div class="baseclassvariable">
+</div><div class="baseconstant">
   
   
   <a name="nltk.sem.logic.Tokens.NOT">
@@ -753,8 +786,9 @@
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    <table class="valueTable"><tr class="fieldStart"><td class="fieldName">Value</td></tr><tr><td><pre class="constant-value"><code><span class="rst-variable-quote">'</span><span class="rst-variable-string">-</span><span class="rst-variable-quote">'</span></code></pre></td></tr></table>
   </div>
-</div><div class="baseclassvariable">
+</div><div class="baseconstant">
   
   
   <a name="nltk.sem.logic.Tokens.NOT_LIST">
@@ -775,8 +809,9 @@
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    <table class="valueTable"><tr class="fieldStart"><td class="fieldName">Value</td></tr><tr><td><pre class="constant-value"><code>[<wbr></wbr><span class="rst-variable-quote">'</span><span class="rst-variable-string">not</span><span class="rst-variable-quote">'</span>, <wbr></wbr><span class="rst-variable-quote">'</span><span class="rst-variable-string">-</span><span class="rst-variable-quote">'</span>, <wbr></wbr><span class="rst-variable-quote">'</span><span class="rst-variable-string">!</span><span class="rst-variable-quote">'</span>]</code></pre></td></tr></table>
   </div>
-</div><div class="baseclassvariable">
+</div><div class="baseconstant">
   
   
   <a name="nltk.sem.logic.Tokens.OPEN">
@@ -797,8 +832,9 @@
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    <table class="valueTable"><tr class="fieldStart"><td class="fieldName">Value</td></tr><tr><td><pre class="constant-value"><code><span class="rst-variable-quote">'</span><span class="rst-variable-string">(</span><span class="rst-variable-quote">'</span></code></pre></td></tr></table>
   </div>
-</div><div class="baseclassvariable">
+</div><div class="baseconstant">
   
   
   <a name="nltk.sem.logic.Tokens.OR">
@@ -819,8 +855,9 @@
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    <table class="valueTable"><tr class="fieldStart"><td class="fieldName">Value</td></tr><tr><td><pre class="constant-value"><code><span class="rst-variable-quote">'</span><span class="rst-variable-string">|</span><span class="rst-variable-quote">'</span></code></pre></td></tr></table>
   </div>
-</div><div class="baseclassvariable">
+</div><div class="baseconstant">
   
   
   <a name="nltk.sem.logic.Tokens.OR_LIST">
@@ -841,8 +878,9 @@
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    <table class="valueTable"><tr class="fieldStart"><td class="fieldName">Value</td></tr><tr><td><pre class="constant-value"><code>[<wbr></wbr><span class="rst-variable-quote">'</span><span class="rst-variable-string">or</span><span class="rst-variable-quote">'</span>, <wbr></wbr><span class="rst-variable-quote">'</span><span class="rst-variable-string">|</span><span class="rst-variable-quote">'</span>]</code></pre></td></tr></table>
   </div>
-</div><div class="baseclassvariable">
+</div><div class="baseconstant">
   
   
   <a name="nltk.sem.logic.Tokens.PUNCT">
@@ -860,11 +898,12 @@
     </a>
   </div>
   <div class="functionBody">
-    <div class="interfaceinfo">overridden in <code><a href="nltk.sem.drt.DrtTokens.html">nltk.sem.drt.DrtTokens</a></code></div>
+    <div class="interfaceinfo">overridden in <code><a href="nltk.sem.drt.DrtTokens.html" class="internal-link">nltk.sem.drt.DrtTokens</a></code></div>
     
     <div><p class="undocumented">Undocumented</p></div>
+    <table class="valueTable"><tr class="fieldStart"><td class="fieldName">Value</td></tr><tr><td><pre class="constant-value"><code>[<wbr></wbr><a href="#DOT" class="internal-link" title="nltk.sem.logic.Tokens.DOT">DOT</a>, <wbr></wbr><a href="#OPEN" class="internal-link" title="nltk.sem.logic.Tokens.OPEN">OPEN</a>, <wbr></wbr><a href="#CLOSE" class="internal-link" title="nltk.sem.logic.Tokens.CLOSE">CLOSE</a>, <wbr></wbr><a href="#COMMA" class="internal-link" title="nltk.sem.logic.Tokens.COMMA">COMMA</a>]</code></pre></td></tr></table>
   </div>
-</div><div class="baseclassvariable">
+</div><div class="baseconstant">
   
   
   <a name="nltk.sem.logic.Tokens.QUANTS">
@@ -885,8 +924,9 @@
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    <table class="valueTable"><tr class="fieldStart"><td class="fieldName">Value</td></tr><tr><td><pre class="constant-value"><code><a href="#EXISTS_LIST" class="internal-link" title="nltk.sem.logic.Tokens.EXISTS_LIST">EXISTS_LIST</a>+<a href="#ALL_LIST" class="internal-link" title="nltk.sem.logic.Tokens.ALL_LIST">ALL_LIST</a></code></pre></td></tr></table>
   </div>
-</div><div class="baseclassvariable">
+</div><div class="baseconstant">
   
   
   <a name="nltk.sem.logic.Tokens.SYMBOLS">
@@ -904,11 +944,12 @@
     </a>
   </div>
   <div class="functionBody">
-    <div class="interfaceinfo">overridden in <code><a href="nltk.sem.drt.DrtTokens.html">nltk.sem.drt.DrtTokens</a></code></div>
+    <div class="interfaceinfo">overridden in <code><a href="nltk.sem.drt.DrtTokens.html" class="internal-link">nltk.sem.drt.DrtTokens</a></code></div>
     
     <div><p class="undocumented">Undocumented</p></div>
+    <table class="valueTable"><tr class="fieldStart"><td class="fieldName">Value</td></tr><tr><td><pre class="constant-value"><code>[x for x in TOKENS if re.match('^[-\\\\.(),!&amp;^|&gt;=&lt;]*$', x)]</code></pre></td></tr></table>
   </div>
-</div><div class="baseclassvariable">
+</div><div class="baseconstant">
   
   
   <a name="nltk.sem.logic.Tokens.TOKENS">
@@ -926,9 +967,10 @@
     </a>
   </div>
   <div class="functionBody">
-    <div class="interfaceinfo">overridden in <code><a href="nltk.sem.drt.DrtTokens.html">nltk.sem.drt.DrtTokens</a></code></div>
+    <div class="interfaceinfo">overridden in <code><a href="nltk.sem.drt.DrtTokens.html" class="internal-link">nltk.sem.drt.DrtTokens</a></code></div>
     
     <div><p class="undocumented">Undocumented</p></div>
+    <table class="valueTable"><tr class="fieldStart"><td class="fieldName">Value</td></tr><tr><td><pre class="constant-value"><code>(((((<a href="#BINOPS" class="internal-link" title="nltk.sem.logic.Tokens.BINOPS">BINOPS</a>+<a href="#EQ_LIST" class="internal-link" title="nltk.sem.logic.Tokens.EQ_LIST">EQ_LIST</a>)+<a href="#NEQ_LIST" class="internal-link" title="nltk.sem.logic.Tokens.NEQ_LIST">NEQ_LIST</a>)+<a href="#QUANTS" class="internal-link" title="nltk.sem.logic.Tokens.QUANTS">QUANTS</a>)+<a href="#LAMBDA_LIST" class="internal-link" title="nltk.sem.logic.Tokens.LAMBDA_LIST">LAMBDA_LIST</a>)+<a href="#PUNCT" class="internal-link" title="nltk.sem.logic.Tokens.PUNCT">PUNCT</a>)+<a href="#NOT_LIST" class="internal-link" title="nltk.sem.logic.Tokens.NOT_LIST">NOT_LIST</a></code></pre></td></tr></table>
   </div>
 </div>
 
@@ -940,7 +982,7 @@
   <div class="container">
     <a href="index.html">API Documentation</a> for <a href="http://www.nltk.org/" class="projecthome">nltk-3.6.2</a>,
   generated by <a href="https://github.com/twisted/pydoctor/">pydoctor</a>
-    21.2.2 at 2022-01-06 17:36:51.
+    22.2.2.dev0 at 2022-03-04 05:57:24.
   </div>
 </footer>
 

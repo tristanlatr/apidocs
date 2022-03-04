@@ -7,7 +7,7 @@
   <head>
     
     <title>nltk.downloader.Package</title>
-    <meta name="generator" content="pydoctor 21.2.2"> 
+    <meta name="generator" content="pydoctor 22.2.2.dev0"> 
         
     </meta>
     <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
@@ -44,69 +44,82 @@
           Names
         </a>
 
-        <form action="search-results.html" id="search-box-container">
+        <div id="search-box-container">
           <div class="input-group">
-            <input id="search-box" name="search-query" placeholder="Search..." aria-label="Search" minlength="2" class="form-control" />
+            <input id="search-box" type="search" name="search-query" placeholder="Search..." aria-label="Search" minlength="2" class="form-control" autocomplete="off" />
+            
             <span class="input-group-btn">
-              <button class="btn btn-default" type="submit" title="Search"><img src="fonts/search.svg" alt="Search!" /></button>
-              <a class="btn btn-default" id="search-help-button" title="Help" onclick="toggleSearchHelpText()"><img src="fonts/info.svg" alt="Help!" /></a>
+              <a style="display: none;" class="btn btn-default" id="search-clear-button" title="Clear" onclick="clearSearch()"><img src="fonts/x-circle.svg" alt="Clear" /></a>
+              <a class="btn btn-default" id="search-help-button" title="Help" onclick="toggleSearchHelpText()"><img src="fonts/info.svg" alt="Help" /></a>
             </span>
           </div>
-        </form>
+        </div>
 
-        <div class="rst-admonition hint" id="search-help-box">
+      </div>
+
+      <div id="search-results-container" style="display: none;">
+        <div>
+          <span class="label label-default" id="search-docstrings-button">
+            <a title="Search in docstrings" onclick="toggleSearchInDocstrings()">search in docstrings</a></span>
+        </div>
+
+        <noscript>
+            <h1>Cannot search: JavaScript is not supported/enabled in your browser.</h1>
+        </noscript>
+
+        <div class="hint" id="search-help-box">
           <p class="rst-last">
       
             Search bar offers the following options:
             <ul>   
                 <li>
                   <strong>Term presence.</strong> The below example searches for documents that 
-                    must contain “foo”, might contain “bar” and must not contain “baz”:
-                  <br /> <code>'+foo bar -baz'</code>
+                    must contain “foo”, might contain “bar” and must not contain “baz”: <code>+foo bar -baz</code>
                 </li> 
 
                 <li>
-                  <strong>Wildcards.</strong> The below example searches for documents with words beginning with “foo”:
-                  <br /> <code>'foo*'</code>
+                  <strong>Wildcards.</strong> The below example searches for documents with words beginning with “foo”: <code>foo*</code>
                 </li> 
 
                 <li>
-                  <strong>Search in specific fields.</strong> The following search matches all documents 
-                  that contains "foo" in their full dotted name and with “bar” in any field:
-                  <br /> <code>'+fullName:*foo* +bar'</code>
+                  <strong>Search in specific fields.</strong> The following search matches all objects 
+                  in "twisted.mail" that matches “search”: <code>+qname:twisted.mail.* +search</code>
 
                   <p>
-                    Possible fields: 'name', 'docstring', 'fullName'.
+                    Possible fields: 'name', 'qname' (fully qualified name), 'docstring', and 'kind'.
+                    Last two fields are only applicable if "search in docstrings" is enabled.
                   </p>
                 </li>
 
                 <li>
                   <strong>Fuzzy matches.</strong> The following search matches all documents 
-                  that have a word within 1 edit distance of “foo”:
-                  <br /> <code>'foo~1'</code>
+                  that have a word within 1 edit distance of “foo”: <code>foo~1</code>
                 </li>
             </ul>
 
           </p>
         </div>
 
-      </div>
+        <div id="search-status"> </div>
+        
+        <div class="warning" id="search-warn-box" style="display: none;">
+          <p class="rst-last"><span id="search-warn"></span></p>
+        </div>
 
+        <table id="search-results">
+          <!-- Filled dynamically by JS -->
+        </table>
+        
+        <div style="margin-top: 8px;">
+          <p>Results provided by <a href="https://lunrjs.com">Lunr.js</a></p>
+        </div>
+      </div>
 
     </div>
   </div>
 
-  <script>
- 
-    function toggleSearchHelpText() {
-        document.body.classList.toggle("search-help-hidden");
-    }
-    // Init search and help text
-    document.getElementById('search-box-container').style.display = 'block';
-    document.getElementById('search-help-box').style.display = 'block';
-    document.body.classList.add("search-help-hidden");
-
-  </script>
+  <script src="ajax.js" type="text/javascript"></script>
+  <script src="search.js" type="text/javascript"></script>
 
 </nav>
 
@@ -115,7 +128,7 @@
     <div class="container">
 
       <div class="page-header">
-        <h1 class="class"><code><code><a href="nltk.html">nltk</a></code><wbr></wbr>.<code><a href="nltk.downloader.html">downloader</a></code><wbr></wbr>.<code><a href="nltk.downloader.Package.html">Package</a></code></code></h1>
+        <h1 class="class"><code><code><a href="index.html" class="internal-link">nltk</a></code><wbr></wbr>.<code><a href="nltk.downloader.html" class="internal-link" title="nltk.downloader">downloader</a></code><wbr></wbr>.<code><a href="nltk.downloader.Package.html" class="internal-link" title="nltk.downloader.Package">Package</a></code></code></h1>
         <div id="showPrivate">
           <button class="btn btn-link" onclick="togglePrivate()">Toggle Private API</button>
         </div>
@@ -126,7 +139,7 @@
       </div>
 
       <div class="extrasDocstring">
-        <p><code><span class="py-keyword">class</span> <span class="py-defname">Package</span>(<span title="object">object</span>): <a href="https://github.com/nltk/nltk/tree/3.6.2/nltk/downloader.py#L198" class="sourceLink">(source)</a></code></p>
+        <p><code><span class="py-keyword">class</span> <span class="py-defname">Package</span>(object): <a href="https://github.com/nltk/nltk/tree/3.6.2/nltk/downloader.py#L198" class="sourceLink">(source)</a></code></p>
         <p><a href="classIndex.html#nltk.downloader.Package">View In Hierarchy</a></p>
       </div>
 
@@ -145,93 +158,93 @@ when the package is installed.</div>
   <tr class="staticmethod">
     
     <td>Static Method</td>
-    <td><code><a href="#fromxml">fromxml</a></code></td>
+    <td><code><a href="#fromxml" class="internal-link" title="nltk.downloader.Package.fromxml">fromxml</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#__init__">__init__</a></code></td>
+    <td><code><a href="#__init__" class="internal-link" title="nltk.downloader.Package.__init__">__init__</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#__lt__">__lt__</a></code></td>
+    <td><code><a href="#__lt__" class="internal-link" title="nltk.downloader.Package.__lt__">__lt__</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#__repr__">__repr__</a></code></td>
+    <td><code><a href="#__repr__" class="internal-link" title="nltk.downloader.Package.__repr__">__repr__</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="instancevariable">
     
     <td>Instance Variable</td>
-    <td><code><a href="#author">author</a></code></td>
-    <td><span>Author of this package.</span></td>
+    <td><code><a href="#author" class="internal-link" title="nltk.downloader.Package.author">author</a></code></td>
+    <td>Author of this package.</td>
   </tr><tr class="instancevariable">
     
     <td>Instance Variable</td>
-    <td><code><a href="#checksum">checksum</a></code></td>
-    <td><span>The MD-5 checksum of the package file.</span></td>
+    <td><code><a href="#checksum" class="internal-link" title="nltk.downloader.Package.checksum">checksum</a></code></td>
+    <td>The MD-5 checksum of the package file.</td>
   </tr><tr class="instancevariable">
     
     <td>Instance Variable</td>
-    <td><code><a href="#contact">contact</a></code></td>
-    <td><span>Name &amp; email of the person who should be contacted with questions about this package.</span></td>
+    <td><code><a href="#contact" class="internal-link" title="nltk.downloader.Package.contact">contact</a></code></td>
+    <td>Name &amp; email of the person who should be contacted with questions about this package.</td>
   </tr><tr class="instancevariable">
     
     <td>Instance Variable</td>
-    <td><code><a href="#copyright">copyright</a></code></td>
-    <td><span>Copyright holder for this package.</span></td>
+    <td><code><a href="#copyright" class="internal-link" title="nltk.downloader.Package.copyright">copyright</a></code></td>
+    <td>Copyright holder for this package.</td>
   </tr><tr class="instancevariable">
     
     <td>Instance Variable</td>
-    <td><code><a href="#filename">filename</a></code></td>
-    <td><span>The filename that should be used for this package's file.  It is formed by joining <tt class="rst-docutils literal">self.subdir</tt> with <tt class="rst-docutils literal">self.id</tt>, and using the same extension as <tt class="rst-docutils literal">url</tt>.</span></td>
+    <td><code><a href="#filename" class="internal-link" title="nltk.downloader.Package.filename">filename</a></code></td>
+    <td>The filename that should be used for this package's file.  It is formed by joining <tt class="rst-docutils literal">self.subdir</tt> with <tt class="rst-docutils literal">self.id</tt>, and using the same extension as <tt class="rst-docutils literal">url</tt>.</td>
   </tr><tr class="instancevariable">
     
     <td>Instance Variable</td>
-    <td><code><a href="#id">id</a></code></td>
-    <td><span>A unique identifier for this package.</span></td>
+    <td><code><a href="#id" class="internal-link" title="nltk.downloader.Package.id">id</a></code></td>
+    <td>A unique identifier for this package.</td>
   </tr><tr class="instancevariable">
     
     <td>Instance Variable</td>
-    <td><code><a href="#license">license</a></code></td>
-    <td><span>License information for this package.</span></td>
+    <td><code><a href="#license" class="internal-link" title="nltk.downloader.Package.license">license</a></code></td>
+    <td>License information for this package.</td>
   </tr><tr class="instancevariable">
     
     <td>Instance Variable</td>
-    <td><code><a href="#name">name</a></code></td>
-    <td><span>A string name for this package.</span></td>
+    <td><code><a href="#name" class="internal-link" title="nltk.downloader.Package.name">name</a></code></td>
+    <td>A string name for this package.</td>
   </tr><tr class="instancevariable">
     
     <td>Instance Variable</td>
-    <td><code><a href="#size">size</a></code></td>
-    <td><span>The filesize (in bytes) of the package file.</span></td>
+    <td><code><a href="#size" class="internal-link" title="nltk.downloader.Package.size">size</a></code></td>
+    <td>The filesize (in bytes) of the package file.</td>
   </tr><tr class="instancevariable">
     
     <td>Instance Variable</td>
-    <td><code><a href="#subdir">subdir</a></code></td>
-    <td><span>The subdirectory where this package should be installed. E.g., <tt class="rst-docutils literal">'corpora'</tt> or <tt class="rst-docutils literal">'taggers'</tt>.</span></td>
+    <td><code><a href="#subdir" class="internal-link" title="nltk.downloader.Package.subdir">subdir</a></code></td>
+    <td>The subdirectory where this package should be installed. E.g., <tt class="rst-docutils literal">'corpora'</tt> or <tt class="rst-docutils literal">'taggers'</tt>.</td>
   </tr><tr class="instancevariable">
     
     <td>Instance Variable</td>
-    <td><code><a href="#svn_revision">svn_revision</a></code></td>
-    <td><span>A subversion revision number for this package.</span></td>
+    <td><code><a href="#svn_revision" class="internal-link" title="nltk.downloader.Package.svn_revision">svn​_revision</a></code></td>
+    <td>A subversion revision number for this package.</td>
   </tr><tr class="instancevariable">
     
     <td>Instance Variable</td>
-    <td><code><a href="#unzip">unzip</a></code></td>
-    <td><span>A flag indicating whether this corpus should be unzipped by default.</span></td>
+    <td><code><a href="#unzip" class="internal-link" title="nltk.downloader.Package.unzip">unzip</a></code></td>
+    <td>A flag indicating whether this corpus should be unzipped by default.</td>
   </tr><tr class="instancevariable">
     
     <td>Instance Variable</td>
-    <td><code><a href="#unzipped_size">unzipped_size</a></code></td>
-    <td><span>The total filesize of the files contained in the package's zipfile.</span></td>
+    <td><code><a href="#unzipped_size" class="internal-link" title="nltk.downloader.Package.unzipped_size">unzipped​_size</a></code></td>
+    <td>The total filesize of the files contained in the package's zipfile.</td>
   </tr><tr class="instancevariable">
     
     <td>Instance Variable</td>
-    <td><code><a href="#url">url</a></code></td>
-    <td><span>A URL that can be used to download this package's file.</span></td>
+    <td><code><a href="#url" class="internal-link" title="nltk.downloader.Package.url">url</a></code></td>
+    <td>A URL that can be used to download this package's file.</td>
   </tr>
 </table>
         
@@ -274,7 +287,7 @@ when the package is installed.</div>
   </a>
   <div class="functionHeader">
     
-    <span class="py-keyword">def</span> <span class="py-defname">__init__</span>(self, id, url, name=None, subdir='', size=None, unzipped_size=None, checksum=None, svn_revision=None, copyright='Unknown', contact='Unknown', license='Unknown', author='Unknown', unzip=True, **kw):
+    <span class="py-keyword">def</span> <span class="py-defname">__init__</span>(self, id, url, name=None, subdir=<span class="rst-variable-quote">'</span><span class="rst-variable-string"></span><span class="rst-variable-quote">'</span>, size=None, unzipped_size=None, checksum=None, svn_revision=None, copyright=<span class="rst-variable-quote">'</span><span class="rst-variable-string">Unknown</span><span class="rst-variable-quote">'</span>, contact=<span class="rst-variable-quote">'</span><span class="rst-variable-string">Unknown</span><span class="rst-variable-quote">'</span>, license=<span class="rst-variable-quote">'</span><span class="rst-variable-string">Unknown</span><span class="rst-variable-quote">'</span>, author=<span class="rst-variable-quote">'</span><span class="rst-variable-string">Unknown</span><span class="rst-variable-quote">'</span>, unzip=True, **kw):
     <a class="sourceLink" href="https://github.com/nltk/nltk/tree/3.6.2/nltk/downloader.py#L207">
       
       (source)
@@ -350,6 +363,7 @@ when the package is installed.</div>
     
     
     <div>Author of this package.</div>
+    
   </div>
 </div><div class="baseinstancevariable">
   
@@ -372,6 +386,7 @@ when the package is installed.</div>
     
     
     <div>The MD-5 checksum of the package file.</div>
+    
   </div>
 </div><div class="baseinstancevariable">
   
@@ -395,6 +410,7 @@ when the package is installed.</div>
     
     <div>Name &amp; email of the person who should be contacted with
 questions about this package.</div>
+    
   </div>
 </div><div class="baseinstancevariable">
   
@@ -417,6 +433,7 @@ questions about this package.</div>
     
     
     <div>Copyright holder for this package.</div>
+    
   </div>
 </div><div class="baseinstancevariable">
   
@@ -441,6 +458,7 @@ questions about this package.</div>
     <div>The filename that should be used for this package's file.  It
 is formed by joining <tt class="rst-docutils literal">self.subdir</tt> with <tt class="rst-docutils literal">self.id</tt>, and
 using the same extension as <tt class="rst-docutils literal">url</tt>.</div>
+    
   </div>
 </div><div class="baseinstancevariable">
   
@@ -463,6 +481,7 @@ using the same extension as <tt class="rst-docutils literal">url</tt>.</div>
     
     
     <div>A unique identifier for this package.</div>
+    
   </div>
 </div><div class="baseinstancevariable">
   
@@ -485,6 +504,7 @@ using the same extension as <tt class="rst-docutils literal">url</tt>.</div>
     
     
     <div>License information for this package.</div>
+    
   </div>
 </div><div class="baseinstancevariable">
   
@@ -507,6 +527,7 @@ using the same extension as <tt class="rst-docutils literal">url</tt>.</div>
     
     
     <div>A string name for this package.</div>
+    
   </div>
 </div><div class="baseinstancevariable">
   
@@ -529,6 +550,7 @@ using the same extension as <tt class="rst-docutils literal">url</tt>.</div>
     
     
     <div>The filesize (in bytes) of the package file.</div>
+    
   </div>
 </div><div class="baseinstancevariable">
   
@@ -552,6 +574,7 @@ using the same extension as <tt class="rst-docutils literal">url</tt>.</div>
     
     <div>The subdirectory where this package should be installed.
 E.g., <tt class="rst-docutils literal">'corpora'</tt> or <tt class="rst-docutils literal">'taggers'</tt>.</div>
+    
   </div>
 </div><div class="baseinstancevariable">
   
@@ -574,6 +597,7 @@ E.g., <tt class="rst-docutils literal">'corpora'</tt> or <tt class="rst-docutils
     
     
     <div>A subversion revision number for this package.</div>
+    
   </div>
 </div><div class="baseinstancevariable">
   
@@ -597,6 +621,7 @@ E.g., <tt class="rst-docutils literal">'corpora'</tt> or <tt class="rst-docutils
     
     <div>A flag indicating whether this corpus should be unzipped by
 default.</div>
+    
   </div>
 </div><div class="baseinstancevariable">
   
@@ -620,6 +645,7 @@ default.</div>
     
     <div>The total filesize of the files contained in the package's
 zipfile.</div>
+    
   </div>
 </div><div class="baseinstancevariable">
   
@@ -642,6 +668,7 @@ zipfile.</div>
     
     
     <div>A URL that can be used to download this package's file.</div>
+    
   </div>
 </div>
 
@@ -653,7 +680,7 @@ zipfile.</div>
   <div class="container">
     <a href="index.html">API Documentation</a> for <a href="http://www.nltk.org/" class="projecthome">nltk-3.6.2</a>,
   generated by <a href="https://github.com/twisted/pydoctor/">pydoctor</a>
-    21.2.2 at 2022-01-06 17:36:51.
+    22.2.2.dev0 at 2022-03-04 05:57:24.
   </div>
 </footer>
 

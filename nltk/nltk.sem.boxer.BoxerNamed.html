@@ -7,7 +7,7 @@
   <head>
     
     <title>nltk.sem.boxer.BoxerNamed</title>
-    <meta name="generator" content="pydoctor 21.2.2"> 
+    <meta name="generator" content="pydoctor 22.2.2.dev0"> 
         
     </meta>
     <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
@@ -44,69 +44,82 @@
           Names
         </a>
 
-        <form action="search-results.html" id="search-box-container">
+        <div id="search-box-container">
           <div class="input-group">
-            <input id="search-box" name="search-query" placeholder="Search..." aria-label="Search" minlength="2" class="form-control" />
+            <input id="search-box" type="search" name="search-query" placeholder="Search..." aria-label="Search" minlength="2" class="form-control" autocomplete="off" />
+            
             <span class="input-group-btn">
-              <button class="btn btn-default" type="submit" title="Search"><img src="fonts/search.svg" alt="Search!" /></button>
-              <a class="btn btn-default" id="search-help-button" title="Help" onclick="toggleSearchHelpText()"><img src="fonts/info.svg" alt="Help!" /></a>
+              <a style="display: none;" class="btn btn-default" id="search-clear-button" title="Clear" onclick="clearSearch()"><img src="fonts/x-circle.svg" alt="Clear" /></a>
+              <a class="btn btn-default" id="search-help-button" title="Help" onclick="toggleSearchHelpText()"><img src="fonts/info.svg" alt="Help" /></a>
             </span>
           </div>
-        </form>
+        </div>
 
-        <div class="rst-admonition hint" id="search-help-box">
+      </div>
+
+      <div id="search-results-container" style="display: none;">
+        <div>
+          <span class="label label-default" id="search-docstrings-button">
+            <a title="Search in docstrings" onclick="toggleSearchInDocstrings()">search in docstrings</a></span>
+        </div>
+
+        <noscript>
+            <h1>Cannot search: JavaScript is not supported/enabled in your browser.</h1>
+        </noscript>
+
+        <div class="hint" id="search-help-box">
           <p class="rst-last">
       
             Search bar offers the following options:
             <ul>   
                 <li>
                   <strong>Term presence.</strong> The below example searches for documents that 
-                    must contain “foo”, might contain “bar” and must not contain “baz”:
-                  <br /> <code>'+foo bar -baz'</code>
+                    must contain “foo”, might contain “bar” and must not contain “baz”: <code>+foo bar -baz</code>
                 </li> 
 
                 <li>
-                  <strong>Wildcards.</strong> The below example searches for documents with words beginning with “foo”:
-                  <br /> <code>'foo*'</code>
+                  <strong>Wildcards.</strong> The below example searches for documents with words beginning with “foo”: <code>foo*</code>
                 </li> 
 
                 <li>
-                  <strong>Search in specific fields.</strong> The following search matches all documents 
-                  that contains "foo" in their full dotted name and with “bar” in any field:
-                  <br /> <code>'+fullName:*foo* +bar'</code>
+                  <strong>Search in specific fields.</strong> The following search matches all objects 
+                  in "twisted.mail" that matches “search”: <code>+qname:twisted.mail.* +search</code>
 
                   <p>
-                    Possible fields: 'name', 'docstring', 'fullName'.
+                    Possible fields: 'name', 'qname' (fully qualified name), 'docstring', and 'kind'.
+                    Last two fields are only applicable if "search in docstrings" is enabled.
                   </p>
                 </li>
 
                 <li>
                   <strong>Fuzzy matches.</strong> The following search matches all documents 
-                  that have a word within 1 edit distance of “foo”:
-                  <br /> <code>'foo~1'</code>
+                  that have a word within 1 edit distance of “foo”: <code>foo~1</code>
                 </li>
             </ul>
 
           </p>
         </div>
 
-      </div>
+        <div id="search-status"> </div>
+        
+        <div class="warning" id="search-warn-box" style="display: none;">
+          <p class="rst-last"><span id="search-warn"></span></p>
+        </div>
 
+        <table id="search-results">
+          <!-- Filled dynamically by JS -->
+        </table>
+        
+        <div style="margin-top: 8px;">
+          <p>Results provided by <a href="https://lunrjs.com">Lunr.js</a></p>
+        </div>
+      </div>
 
     </div>
   </div>
 
-  <script>
- 
-    function toggleSearchHelpText() {
-        document.body.classList.toggle("search-help-hidden");
-    }
-    // Init search and help text
-    document.getElementById('search-box-container').style.display = 'block';
-    document.getElementById('search-help-box').style.display = 'block';
-    document.body.classList.add("search-help-hidden");
-
-  </script>
+  <script src="ajax.js" type="text/javascript"></script>
+  <script src="search.js" type="text/javascript"></script>
 
 </nav>
 
@@ -115,7 +128,7 @@
     <div class="container">
 
       <div class="page-header">
-        <h1 class="class"><code><code><a href="nltk.html">nltk</a></code><wbr></wbr>.<code><a href="nltk.sem.html">sem</a></code><wbr></wbr>.<code><a href="nltk.sem.boxer.html">boxer</a></code><wbr></wbr>.<code><a href="nltk.sem.boxer.BoxerNamed.html">BoxerNamed</a></code></code></h1>
+        <h1 class="class"><code><code><a href="index.html" class="internal-link">nltk</a></code><wbr></wbr>.<code><a href="nltk.sem.html" class="internal-link" title="nltk.sem">sem</a></code><wbr></wbr>.<code><a href="nltk.sem.boxer.html" class="internal-link" title="nltk.sem.boxer">boxer</a></code><wbr></wbr>.<code><a href="nltk.sem.boxer.BoxerNamed.html" class="internal-link" title="nltk.sem.boxer.BoxerNamed">BoxerNamed</a></code></code></h1>
         <div id="showPrivate">
           <button class="btn btn-link" onclick="togglePrivate()">Toggle Private API</button>
         </div>
@@ -126,7 +139,7 @@
       </div>
 
       <div class="extrasDocstring">
-        <p><code><span class="py-keyword">class</span> <span class="py-defname">BoxerNamed</span>(<a href="nltk.sem.boxer.BoxerIndexed.html" title="nltk.sem.boxer.BoxerIndexed">BoxerIndexed</a>): <a href="https://github.com/nltk/nltk/tree/3.6.2/nltk/sem/boxer.py#L1212" class="sourceLink">(source)</a></code></p>
+        <p><code><span class="py-keyword">class</span> <span class="py-defname">BoxerNamed</span>(<a href="nltk.sem.boxer.BoxerIndexed.html" class="internal-link" title="nltk.sem.boxer.BoxerIndexed">BoxerIndexed</a>): <a href="https://github.com/nltk/nltk/tree/3.6.2/nltk/sem/boxer.py#L1212" class="sourceLink">(source)</a></code></p>
         <p><a href="classIndex.html#nltk.sem.boxer.BoxerNamed">View In Hierarchy</a></p>
       </div>
 
@@ -141,63 +154,63 @@
   <tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#__init__">__init__</a></code></td>
+    <td><code><a href="#__init__" class="internal-link" title="nltk.sem.boxer.BoxerNamed.__init__">__init__</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#__iter__">__iter__</a></code></td>
+    <td><code><a href="#__iter__" class="internal-link" title="nltk.sem.boxer.BoxerNamed.__iter__">__iter__</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#change_var">change_var</a></code></td>
+    <td><code><a href="#change_var" class="internal-link" title="nltk.sem.boxer.BoxerNamed.change_var">change​_var</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#clean">clean</a></code></td>
+    <td><code><a href="#clean" class="internal-link" title="nltk.sem.boxer.BoxerNamed.clean">clean</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#renumber_sentences">renumber_sentences</a></code></td>
+    <td><code><a href="#renumber_sentences" class="internal-link" title="nltk.sem.boxer.BoxerNamed.renumber_sentences">renumber​_sentences</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="instancevariable">
     
     <td>Instance Variable</td>
-    <td><code><a href="#name">name</a></code></td>
+    <td><code><a href="#name" class="internal-link" title="nltk.sem.boxer.BoxerNamed.name">name</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="instancevariable">
     
     <td>Instance Variable</td>
-    <td><code><a href="#sense">sense</a></code></td>
+    <td><code><a href="#sense" class="internal-link" title="nltk.sem.boxer.BoxerNamed.sense">sense</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="instancevariable">
     
     <td>Instance Variable</td>
-    <td><code><a href="#type">type</a></code></td>
+    <td><code><a href="#type" class="internal-link" title="nltk.sem.boxer.BoxerNamed.type">type</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="instancevariable">
     
     <td>Instance Variable</td>
-    <td><code><a href="#var">var</a></code></td>
+    <td><code><a href="#var" class="internal-link" title="nltk.sem.boxer.BoxerNamed.var">var</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method private">
     
     <td>Method</td>
-    <td><code><a href="#_pred">_pred</a></code></td>
+    <td><code><a href="#_pred" class="internal-link" title="nltk.sem.boxer.BoxerNamed._pred">_pred</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method private">
     
     <td>Method</td>
-    <td><code><a href="#_variables">_variables</a></code></td>
-    <td><span></span></td>
+    <td><code><a href="#_variables" class="internal-link" title="nltk.sem.boxer.BoxerNamed._variables">_variables</a></code></td>
+    <td></td>
   </tr>
 </table>
         
           <p class="inheritedFrom">
-            Inherited from <code><a href="nltk.sem.boxer.BoxerIndexed.html">BoxerIndexed</a></code>:
+            Inherited from <code><a href="nltk.sem.boxer.BoxerIndexed.html" class="internal-link" title="nltk.sem.boxer.BoxerIndexed">BoxerIndexed</a></code>:
           </p>
           <table class="children sortable" id="id1192">
   
@@ -205,43 +218,43 @@
   <tr class="basemethod">
     
     <td>Method</td>
-    <td><code><a href="nltk.sem.boxer.BoxerIndexed.html#__eq__">__eq__</a></code></td>
+    <td><code><a href="nltk.sem.boxer.BoxerIndexed.html#__eq__" class="internal-link" title="nltk.sem.boxer.BoxerIndexed.__eq__">__eq__</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="basemethod">
     
     <td>Method</td>
-    <td><code><a href="nltk.sem.boxer.BoxerIndexed.html#__ne__">__ne__</a></code></td>
+    <td><code><a href="nltk.sem.boxer.BoxerIndexed.html#__ne__" class="internal-link" title="nltk.sem.boxer.BoxerIndexed.__ne__">__ne__</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="basemethod">
     
     <td>Method</td>
-    <td><code><a href="nltk.sem.boxer.BoxerIndexed.html#__repr__">__repr__</a></code></td>
+    <td><code><a href="nltk.sem.boxer.BoxerIndexed.html#__repr__" class="internal-link" title="nltk.sem.boxer.BoxerIndexed.__repr__">__repr__</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="basemethod">
     
     <td>Method</td>
-    <td><code><a href="nltk.sem.boxer.BoxerIndexed.html#atoms">atoms</a></code></td>
+    <td><code><a href="nltk.sem.boxer.BoxerIndexed.html#atoms" class="internal-link" title="nltk.sem.boxer.BoxerIndexed.atoms">atoms</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="baseinstancevariable">
     
     <td>Instance Variable</td>
-    <td><code><a href="nltk.sem.boxer.BoxerIndexed.html#discourse_id">discourse_id</a></code></td>
+    <td><code><a href="nltk.sem.boxer.BoxerIndexed.html#discourse_id" class="internal-link" title="nltk.sem.boxer.BoxerIndexed.discourse_id">discourse​_id</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="baseinstancevariable">
     
     <td>Instance Variable</td>
-    <td><code><a href="nltk.sem.boxer.BoxerIndexed.html#sent_index">sent_index</a></code></td>
+    <td><code><a href="nltk.sem.boxer.BoxerIndexed.html#sent_index" class="internal-link" title="nltk.sem.boxer.BoxerIndexed.sent_index">sent​_index</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="baseinstancevariable">
     
     <td>Instance Variable</td>
-    <td><code><a href="nltk.sem.boxer.BoxerIndexed.html#word_indices">word_indices</a></code></td>
+    <td><code><a href="nltk.sem.boxer.BoxerIndexed.html#word_indices" class="internal-link" title="nltk.sem.boxer.BoxerIndexed.word_indices">word​_indices</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr>
 </table>
           
           <p class="inheritedFrom">
-            Inherited from <code><a href="nltk.sem.boxer.AbstractBoxerDrs.html">AbstractBoxerDrs</a></code> (via <code><a href="nltk.sem.boxer.BoxerIndexed.html">BoxerIndexed</a></code>):
+            Inherited from <code><a href="nltk.sem.boxer.AbstractBoxerDrs.html" class="internal-link" title="nltk.sem.boxer.AbstractBoxerDrs">AbstractBoxerDrs</a></code> (via <code><a href="nltk.sem.boxer.BoxerIndexed.html" class="internal-link" title="nltk.sem.boxer.BoxerIndexed">BoxerIndexed</a></code>):
           </p>
           <table class="children sortable" id="id1193">
   
@@ -249,22 +262,22 @@
   <tr class="basemethod">
     
     <td>Method</td>
-    <td><code><a href="nltk.sem.boxer.AbstractBoxerDrs.html#__hash__">__hash__</a></code></td>
+    <td><code><a href="nltk.sem.boxer.AbstractBoxerDrs.html#__hash__" class="internal-link" title="nltk.sem.boxer.AbstractBoxerDrs.__hash__">__hash__</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="basemethod">
     
     <td>Method</td>
-    <td><code><a href="nltk.sem.boxer.AbstractBoxerDrs.html#variable_types">variable_types</a></code></td>
+    <td><code><a href="nltk.sem.boxer.AbstractBoxerDrs.html#variable_types" class="internal-link" title="nltk.sem.boxer.AbstractBoxerDrs.variable_types">variable​_types</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="basemethod">
     
     <td>Method</td>
-    <td><code><a href="nltk.sem.boxer.AbstractBoxerDrs.html#variables">variables</a></code></td>
-    <td><span></span></td>
+    <td><code><a href="nltk.sem.boxer.AbstractBoxerDrs.html#variables" class="internal-link" title="nltk.sem.boxer.AbstractBoxerDrs.variables">variables</a></code></td>
+    <td></td>
   </tr><tr class="basemethod private">
     
     <td>Method</td>
-    <td><code><a href="nltk.sem.boxer.AbstractBoxerDrs.html#_clean_name">_clean_name</a></code></td>
+    <td><code><a href="nltk.sem.boxer.AbstractBoxerDrs.html#_clean_name" class="internal-link" title="nltk.sem.boxer.AbstractBoxerDrs._clean_name">_clean​_name</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr>
 </table>
@@ -293,7 +306,7 @@
     </a>
   </div>
   <div class="docstring functionBody">
-    <div class="interfaceinfo">overrides <code><a href="nltk.sem.boxer.BoxerIndexed.html#__init__">nltk.sem.boxer.BoxerIndexed.__init__</a></code></div>
+    <div class="interfaceinfo">overrides <code><a href="nltk.sem.boxer.BoxerIndexed.html#__init__" class="internal-link">nltk.sem.boxer.BoxerIndexed.__init__</a></code></div>
     
     <div><p class="undocumented">Undocumented</p></div>
   </div>
@@ -359,7 +372,7 @@
     </a>
   </div>
   <div class="docstring functionBody">
-    <div class="interfaceinfo">overrides <code><a href="nltk.sem.boxer.AbstractBoxerDrs.html#clean">nltk.sem.boxer.AbstractBoxerDrs.clean</a></code></div>
+    <div class="interfaceinfo">overrides <code><a href="nltk.sem.boxer.AbstractBoxerDrs.html#clean" class="internal-link">nltk.sem.boxer.AbstractBoxerDrs.clean</a></code></div>
     
     <div><p class="undocumented">Undocumented</p></div>
   </div>
@@ -381,7 +394,7 @@
     </a>
   </div>
   <div class="docstring functionBody">
-    <div class="interfaceinfo">overrides <code><a href="nltk.sem.boxer.AbstractBoxerDrs.html#renumber_sentences">nltk.sem.boxer.AbstractBoxerDrs.renumber_sentences</a></code></div>
+    <div class="interfaceinfo">overrides <code><a href="nltk.sem.boxer.AbstractBoxerDrs.html#renumber_sentences" class="internal-link">nltk.sem.boxer.AbstractBoxerDrs.renumber_sentences</a></code></div>
     
     <div><p class="undocumented">Undocumented</p></div>
   </div>
@@ -406,6 +419,7 @@
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    
   </div>
 </div><div class="baseinstancevariable">
   
@@ -428,6 +442,7 @@
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    
   </div>
 </div><div class="baseinstancevariable">
   
@@ -450,6 +465,7 @@
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    
   </div>
 </div><div class="baseinstancevariable">
   
@@ -472,6 +488,7 @@
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    
   </div>
 </div><div class="basemethod private">
   
@@ -513,7 +530,7 @@
     </a>
   </div>
   <div class="docstring functionBody">
-    <div class="interfaceinfo">overrides <code><a href="nltk.sem.boxer.AbstractBoxerDrs.html#_variables">nltk.sem.boxer.AbstractBoxerDrs._variables</a></code></div>
+    <div class="interfaceinfo">overrides <code><a href="nltk.sem.boxer.AbstractBoxerDrs.html#_variables" class="internal-link">nltk.sem.boxer.AbstractBoxerDrs._variables</a></code></div>
     
     <div><table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Returns</td></tr><tr><td colspan="2">(set&lt;variables&gt;, set&lt;events&gt;, set&lt;propositions&gt;)</td></tr></table></div>
   </div>
@@ -527,7 +544,7 @@
   <div class="container">
     <a href="index.html">API Documentation</a> for <a href="http://www.nltk.org/" class="projecthome">nltk-3.6.2</a>,
   generated by <a href="https://github.com/twisted/pydoctor/">pydoctor</a>
-    21.2.2 at 2022-01-06 17:36:51.
+    22.2.2.dev0 at 2022-03-04 05:57:24.
   </div>
 </footer>
 

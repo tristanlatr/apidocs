@@ -7,7 +7,7 @@
   <head>
     
     <title>nltk.metrics.paice.Paice</title>
-    <meta name="generator" content="pydoctor 21.2.2"> 
+    <meta name="generator" content="pydoctor 22.2.2.dev0"> 
         
     </meta>
     <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
@@ -44,69 +44,82 @@
           Names
         </a>
 
-        <form action="search-results.html" id="search-box-container">
+        <div id="search-box-container">
           <div class="input-group">
-            <input id="search-box" name="search-query" placeholder="Search..." aria-label="Search" minlength="2" class="form-control" />
+            <input id="search-box" type="search" name="search-query" placeholder="Search..." aria-label="Search" minlength="2" class="form-control" autocomplete="off" />
+            
             <span class="input-group-btn">
-              <button class="btn btn-default" type="submit" title="Search"><img src="fonts/search.svg" alt="Search!" /></button>
-              <a class="btn btn-default" id="search-help-button" title="Help" onclick="toggleSearchHelpText()"><img src="fonts/info.svg" alt="Help!" /></a>
+              <a style="display: none;" class="btn btn-default" id="search-clear-button" title="Clear" onclick="clearSearch()"><img src="fonts/x-circle.svg" alt="Clear" /></a>
+              <a class="btn btn-default" id="search-help-button" title="Help" onclick="toggleSearchHelpText()"><img src="fonts/info.svg" alt="Help" /></a>
             </span>
           </div>
-        </form>
+        </div>
 
-        <div class="rst-admonition hint" id="search-help-box">
+      </div>
+
+      <div id="search-results-container" style="display: none;">
+        <div>
+          <span class="label label-default" id="search-docstrings-button">
+            <a title="Search in docstrings" onclick="toggleSearchInDocstrings()">search in docstrings</a></span>
+        </div>
+
+        <noscript>
+            <h1>Cannot search: JavaScript is not supported/enabled in your browser.</h1>
+        </noscript>
+
+        <div class="hint" id="search-help-box">
           <p class="rst-last">
       
             Search bar offers the following options:
             <ul>   
                 <li>
                   <strong>Term presence.</strong> The below example searches for documents that 
-                    must contain “foo”, might contain “bar” and must not contain “baz”:
-                  <br /> <code>'+foo bar -baz'</code>
+                    must contain “foo”, might contain “bar” and must not contain “baz”: <code>+foo bar -baz</code>
                 </li> 
 
                 <li>
-                  <strong>Wildcards.</strong> The below example searches for documents with words beginning with “foo”:
-                  <br /> <code>'foo*'</code>
+                  <strong>Wildcards.</strong> The below example searches for documents with words beginning with “foo”: <code>foo*</code>
                 </li> 
 
                 <li>
-                  <strong>Search in specific fields.</strong> The following search matches all documents 
-                  that contains "foo" in their full dotted name and with “bar” in any field:
-                  <br /> <code>'+fullName:*foo* +bar'</code>
+                  <strong>Search in specific fields.</strong> The following search matches all objects 
+                  in "twisted.mail" that matches “search”: <code>+qname:twisted.mail.* +search</code>
 
                   <p>
-                    Possible fields: 'name', 'docstring', 'fullName'.
+                    Possible fields: 'name', 'qname' (fully qualified name), 'docstring', and 'kind'.
+                    Last two fields are only applicable if "search in docstrings" is enabled.
                   </p>
                 </li>
 
                 <li>
                   <strong>Fuzzy matches.</strong> The following search matches all documents 
-                  that have a word within 1 edit distance of “foo”:
-                  <br /> <code>'foo~1'</code>
+                  that have a word within 1 edit distance of “foo”: <code>foo~1</code>
                 </li>
             </ul>
 
           </p>
         </div>
 
-      </div>
+        <div id="search-status"> </div>
+        
+        <div class="warning" id="search-warn-box" style="display: none;">
+          <p class="rst-last"><span id="search-warn"></span></p>
+        </div>
 
+        <table id="search-results">
+          <!-- Filled dynamically by JS -->
+        </table>
+        
+        <div style="margin-top: 8px;">
+          <p>Results provided by <a href="https://lunrjs.com">Lunr.js</a></p>
+        </div>
+      </div>
 
     </div>
   </div>
 
-  <script>
- 
-    function toggleSearchHelpText() {
-        document.body.classList.toggle("search-help-hidden");
-    }
-    // Init search and help text
-    document.getElementById('search-box-container').style.display = 'block';
-    document.getElementById('search-help-box').style.display = 'block';
-    document.body.classList.add("search-help-hidden");
-
-  </script>
+  <script src="ajax.js" type="text/javascript"></script>
+  <script src="search.js" type="text/javascript"></script>
 
 </nav>
 
@@ -115,7 +128,7 @@
     <div class="container">
 
       <div class="page-header">
-        <h1 class="class"><code><code><a href="nltk.html">nltk</a></code><wbr></wbr>.<code><a href="nltk.metrics.html">metrics</a></code><wbr></wbr>.<code><a href="nltk.metrics.paice.html">paice</a></code><wbr></wbr>.<code><a href="nltk.metrics.paice.Paice.html">Paice</a></code></code></h1>
+        <h1 class="class"><code><code><a href="index.html" class="internal-link">nltk</a></code><wbr></wbr>.<code><a href="nltk.metrics.html" class="internal-link" title="nltk.metrics">metrics</a></code><wbr></wbr>.<code><a href="nltk.metrics.paice.html" class="internal-link" title="nltk.metrics.paice">paice</a></code><wbr></wbr>.<code><a href="nltk.metrics.paice.Paice.html" class="internal-link" title="nltk.metrics.paice.Paice">Paice</a></code></code></h1>
         <div id="showPrivate">
           <button class="btn btn-link" onclick="togglePrivate()">Toggle Private API</button>
         </div>
@@ -126,7 +139,7 @@
       </div>
 
       <div class="extrasDocstring">
-        <p><code><span class="py-keyword">class</span> <span class="py-defname">Paice</span>(<span title="object">object</span>): <a href="https://github.com/nltk/nltk/tree/3.6.2/nltk/metrics/paice.py#L216" class="sourceLink">(source)</a></code></p>
+        <p><code><span class="py-keyword">class</span> <span class="py-defname">Paice</span>(object): <a href="https://github.com/nltk/nltk/tree/3.6.2/nltk/metrics/paice.py#L216" class="sourceLink">(source)</a></code></p>
         <p><a href="classIndex.html#nltk.metrics.paice.Paice">View In Hierarchy</a></p>
       </div>
 
@@ -141,88 +154,88 @@
   <tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#__init__">__init__</a></code></td>
+    <td><code><a href="#__init__" class="internal-link" title="nltk.metrics.paice.Paice.__init__">__init__</a></code></td>
     <td><span class="undocumented">No summary</span></td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#__str__">__str__</a></code></td>
+    <td><code><a href="#__str__" class="internal-link" title="nltk.metrics.paice.Paice.__str__">__str__</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#update">update</a></code></td>
-    <td><span>Update statistics after lemmas and stems have been set.</span></td>
+    <td><code><a href="#update" class="internal-link" title="nltk.metrics.paice.Paice.update">update</a></code></td>
+    <td>Update statistics after lemmas and stems have been set.</td>
   </tr><tr class="instancevariable">
     
     <td>Instance Variable</td>
-    <td><code><a href="#coords">coords</a></code></td>
+    <td><code><a href="#coords" class="internal-link" title="nltk.metrics.paice.Paice.coords">coords</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="instancevariable">
     
     <td>Instance Variable</td>
-    <td><code><a href="#errt">errt</a></code></td>
+    <td><code><a href="#errt" class="internal-link" title="nltk.metrics.paice.Paice.errt">errt</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="instancevariable">
     
     <td>Instance Variable</td>
-    <td><code><a href="#gdmt">gdmt</a></code></td>
+    <td><code><a href="#gdmt" class="internal-link" title="nltk.metrics.paice.Paice.gdmt">gdmt</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="instancevariable">
     
     <td>Instance Variable</td>
-    <td><code><a href="#gdnt">gdnt</a></code></td>
+    <td><code><a href="#gdnt" class="internal-link" title="nltk.metrics.paice.Paice.gdnt">gdnt</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="instancevariable">
     
     <td>Instance Variable</td>
-    <td><code><a href="#gumt">gumt</a></code></td>
+    <td><code><a href="#gumt" class="internal-link" title="nltk.metrics.paice.Paice.gumt">gumt</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="instancevariable">
     
     <td>Instance Variable</td>
-    <td><code><a href="#gwmt">gwmt</a></code></td>
+    <td><code><a href="#gwmt" class="internal-link" title="nltk.metrics.paice.Paice.gwmt">gwmt</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="instancevariable">
     
     <td>Instance Variable</td>
-    <td><code><a href="#lemmas">lemmas</a></code></td>
+    <td><code><a href="#lemmas" class="internal-link" title="nltk.metrics.paice.Paice.lemmas">lemmas</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="instancevariable">
     
     <td>Instance Variable</td>
-    <td><code><a href="#oi">oi</a></code></td>
+    <td><code><a href="#oi" class="internal-link" title="nltk.metrics.paice.Paice.oi">oi</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="instancevariable">
     
     <td>Instance Variable</td>
-    <td><code><a href="#stems">stems</a></code></td>
+    <td><code><a href="#stems" class="internal-link" title="nltk.metrics.paice.Paice.stems">stems</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="instancevariable">
     
     <td>Instance Variable</td>
-    <td><code><a href="#sw">sw</a></code></td>
+    <td><code><a href="#sw" class="internal-link" title="nltk.metrics.paice.Paice.sw">sw</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="instancevariable">
     
     <td>Instance Variable</td>
-    <td><code><a href="#ui">ui</a></code></td>
+    <td><code><a href="#ui" class="internal-link" title="nltk.metrics.paice.Paice.ui">ui</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method private">
     
     <td>Method</td>
-    <td><code><a href="#_errt">_errt</a></code></td>
-    <td><span>Count Error-Rate Relative to Truncation (ERRT).</span></td>
+    <td><code><a href="#_errt" class="internal-link" title="nltk.metrics.paice.Paice._errt">_errt</a></code></td>
+    <td>Count Error-Rate Relative to Truncation (ERRT).</td>
   </tr><tr class="method private">
     
     <td>Method</td>
-    <td><code><a href="#_get_truncation_coordinates">_get_truncation_coordinates</a></code></td>
-    <td><span>Count (UI, OI) pairs for truncation points until we find the segment where (ui, oi) crosses the truncation line.</span></td>
+    <td><code><a href="#_get_truncation_coordinates" class="internal-link" title="nltk.metrics.paice.Paice._get_truncation_coordinates">_get​_truncation​_coordinates</a></code></td>
+    <td>Count (UI, OI) pairs for truncation points until we find the segment where (ui, oi) crosses the truncation line.</td>
   </tr><tr class="method private">
     
     <td>Method</td>
-    <td><code><a href="#_get_truncation_indexes">_get_truncation_indexes</a></code></td>
-    <td><span>Count (UI, OI) when stemming is done by truncating words at 'cutlength'.</span></td>
+    <td><code><a href="#_get_truncation_indexes" class="internal-link" title="nltk.metrics.paice.Paice._get_truncation_indexes">_get​_truncation​_indexes</a></code></td>
+    <td>Count (UI, OI) when stemming is done by truncating words at 'cutlength'.</td>
   </tr>
 </table>
         
@@ -323,6 +336,7 @@ or lists of words corresponding to that stem.
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    
   </div>
 </div><div class="baseinstancevariable">
   
@@ -345,6 +359,7 @@ or lists of words corresponding to that stem.
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    
   </div>
 </div><div class="baseinstancevariable">
   
@@ -367,6 +382,7 @@ or lists of words corresponding to that stem.
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    
   </div>
 </div><div class="baseinstancevariable">
   
@@ -389,6 +405,7 @@ or lists of words corresponding to that stem.
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    
   </div>
 </div><div class="baseinstancevariable">
   
@@ -411,6 +428,7 @@ or lists of words corresponding to that stem.
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    
   </div>
 </div><div class="baseinstancevariable">
   
@@ -433,6 +451,7 @@ or lists of words corresponding to that stem.
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    
   </div>
 </div><div class="baseinstancevariable">
   
@@ -455,6 +474,7 @@ or lists of words corresponding to that stem.
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    
   </div>
 </div><div class="baseinstancevariable">
   
@@ -477,6 +497,7 @@ or lists of words corresponding to that stem.
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    
   </div>
 </div><div class="baseinstancevariable">
   
@@ -499,6 +520,7 @@ or lists of words corresponding to that stem.
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    
   </div>
 </div><div class="baseinstancevariable">
   
@@ -521,6 +543,7 @@ or lists of words corresponding to that stem.
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    
   </div>
 </div><div class="baseinstancevariable">
   
@@ -543,6 +566,7 @@ or lists of words corresponding to that stem.
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    
   </div>
 </div><div class="basemethod private">
   
@@ -631,7 +655,7 @@ intersection.
   <div class="container">
     <a href="index.html">API Documentation</a> for <a href="http://www.nltk.org/" class="projecthome">nltk-3.6.2</a>,
   generated by <a href="https://github.com/twisted/pydoctor/">pydoctor</a>
-    21.2.2 at 2022-01-06 17:36:51.
+    22.2.2.dev0 at 2022-03-04 05:57:24.
   </div>
 </footer>
 

@@ -7,7 +7,7 @@
   <head>
     
     <title>nltk.data</title>
-    <meta name="generator" content="pydoctor 21.2.2"> 
+    <meta name="generator" content="pydoctor 22.2.2.dev0"> 
         
     </meta>
     <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
@@ -44,69 +44,82 @@
           Names
         </a>
 
-        <form action="search-results.html" id="search-box-container">
+        <div id="search-box-container">
           <div class="input-group">
-            <input id="search-box" name="search-query" placeholder="Search..." aria-label="Search" minlength="2" class="form-control" />
+            <input id="search-box" type="search" name="search-query" placeholder="Search..." aria-label="Search" minlength="2" class="form-control" autocomplete="off" />
+            
             <span class="input-group-btn">
-              <button class="btn btn-default" type="submit" title="Search"><img src="fonts/search.svg" alt="Search!" /></button>
-              <a class="btn btn-default" id="search-help-button" title="Help" onclick="toggleSearchHelpText()"><img src="fonts/info.svg" alt="Help!" /></a>
+              <a style="display: none;" class="btn btn-default" id="search-clear-button" title="Clear" onclick="clearSearch()"><img src="fonts/x-circle.svg" alt="Clear" /></a>
+              <a class="btn btn-default" id="search-help-button" title="Help" onclick="toggleSearchHelpText()"><img src="fonts/info.svg" alt="Help" /></a>
             </span>
           </div>
-        </form>
+        </div>
 
-        <div class="rst-admonition hint" id="search-help-box">
+      </div>
+
+      <div id="search-results-container" style="display: none;">
+        <div>
+          <span class="label label-default" id="search-docstrings-button">
+            <a title="Search in docstrings" onclick="toggleSearchInDocstrings()">search in docstrings</a></span>
+        </div>
+
+        <noscript>
+            <h1>Cannot search: JavaScript is not supported/enabled in your browser.</h1>
+        </noscript>
+
+        <div class="hint" id="search-help-box">
           <p class="rst-last">
       
             Search bar offers the following options:
             <ul>   
                 <li>
                   <strong>Term presence.</strong> The below example searches for documents that 
-                    must contain “foo”, might contain “bar” and must not contain “baz”:
-                  <br /> <code>'+foo bar -baz'</code>
+                    must contain “foo”, might contain “bar” and must not contain “baz”: <code>+foo bar -baz</code>
                 </li> 
 
                 <li>
-                  <strong>Wildcards.</strong> The below example searches for documents with words beginning with “foo”:
-                  <br /> <code>'foo*'</code>
+                  <strong>Wildcards.</strong> The below example searches for documents with words beginning with “foo”: <code>foo*</code>
                 </li> 
 
                 <li>
-                  <strong>Search in specific fields.</strong> The following search matches all documents 
-                  that contains "foo" in their full dotted name and with “bar” in any field:
-                  <br /> <code>'+fullName:*foo* +bar'</code>
+                  <strong>Search in specific fields.</strong> The following search matches all objects 
+                  in "twisted.mail" that matches “search”: <code>+qname:twisted.mail.* +search</code>
 
                   <p>
-                    Possible fields: 'name', 'docstring', 'fullName'.
+                    Possible fields: 'name', 'qname' (fully qualified name), 'docstring', and 'kind'.
+                    Last two fields are only applicable if "search in docstrings" is enabled.
                   </p>
                 </li>
 
                 <li>
                   <strong>Fuzzy matches.</strong> The following search matches all documents 
-                  that have a word within 1 edit distance of “foo”:
-                  <br /> <code>'foo~1'</code>
+                  that have a word within 1 edit distance of “foo”: <code>foo~1</code>
                 </li>
             </ul>
 
           </p>
         </div>
 
-      </div>
+        <div id="search-status"> </div>
+        
+        <div class="warning" id="search-warn-box" style="display: none;">
+          <p class="rst-last"><span id="search-warn"></span></p>
+        </div>
 
+        <table id="search-results">
+          <!-- Filled dynamically by JS -->
+        </table>
+        
+        <div style="margin-top: 8px;">
+          <p>Results provided by <a href="https://lunrjs.com">Lunr.js</a></p>
+        </div>
+      </div>
 
     </div>
   </div>
 
-  <script>
- 
-    function toggleSearchHelpText() {
-        document.body.classList.toggle("search-help-hidden");
-    }
-    // Init search and help text
-    document.getElementById('search-box-container').style.display = 'block';
-    document.getElementById('search-help-box').style.display = 'block';
-    document.body.classList.add("search-help-hidden");
-
-  </script>
+  <script src="ajax.js" type="text/javascript"></script>
+  <script src="search.js" type="text/javascript"></script>
 
 </nav>
 
@@ -115,7 +128,7 @@
     <div class="container">
 
       <div class="page-header">
-        <h1 class="module"><code><code><a href="nltk.html">nltk</a></code><wbr></wbr>.<code><a href="nltk.data.html">data</a></code></code></h1>
+        <h1 class="module"><code><code><a href="index.html" class="internal-link">nltk</a></code><wbr></wbr>.<code><a href="nltk.data.html" class="internal-link" title="nltk.data">data</a></code></code></h1>
         <div id="showPrivate">
           <button class="btn btn-link" onclick="togglePrivate()">Toggle Private API</button>
         </div>
@@ -163,123 +176,123 @@ to a local file.</p>
   <tr class="class">
     
     <td>Class</td>
-    <td><code><a href="nltk.data.BufferedGzipFile.html">BufferedGzipFile</a></code></td>
-    <td><span>A <tt class="rst-docutils literal">GzipFile</tt> subclass for compatibility with older nltk releases.</span></td>
+    <td><code><a href="nltk.data.BufferedGzipFile.html" class="internal-link" title="nltk.data.BufferedGzipFile">​Buffered​Gzip​File</a></code></td>
+    <td>A <tt class="rst-docutils literal">GzipFile</tt> subclass for compatibility with older nltk releases.</td>
   </tr><tr class="class">
     
     <td>Class</td>
-    <td><code><a href="nltk.data.FileSystemPathPointer.html">FileSystemPathPointer</a></code></td>
-    <td><span>A path pointer that identifies a file which can be accessed directly via a given absolute path.</span></td>
+    <td><code><a href="nltk.data.FileSystemPathPointer.html" class="internal-link" title="nltk.data.FileSystemPathPointer">​File​System​Path​Pointer</a></code></td>
+    <td>A path pointer that identifies a file which can be accessed directly via a given absolute path.</td>
   </tr><tr class="class">
     
     <td>Class</td>
-    <td><code><a href="nltk.data.GzipFileSystemPathPointer.html">GzipFileSystemPathPointer</a></code></td>
-    <td><span>A subclass of <tt class="rst-docutils literal">FileSystemPathPointer</tt> that identifies a gzip-compressed file located at a given absolute path.  <tt class="rst-docutils literal">GzipFileSystemPathPointer</tt> is appropriate for loading large gzip-compressed pickle objects efficiently.</span></td>
+    <td><code><a href="nltk.data.GzipFileSystemPathPointer.html" class="internal-link" title="nltk.data.GzipFileSystemPathPointer">​Gzip​File​System​Path​Pointer</a></code></td>
+    <td>A subclass of <tt class="rst-docutils literal">FileSystemPathPointer</tt> that identifies a gzip-compressed file located at a given absolute path.  <tt class="rst-docutils literal">GzipFileSystemPathPointer</tt> is appropriate for loading large gzip-compressed pickle objects efficiently.</td>
   </tr><tr class="class">
     
     <td>Class</td>
-    <td><code><a href="nltk.data.LazyLoader.html">LazyLoader</a></code></td>
+    <td><code><a href="nltk.data.LazyLoader.html" class="internal-link" title="nltk.data.LazyLoader">​Lazy​Loader</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="class">
     
     <td>Class</td>
-    <td><code><a href="nltk.data.OpenOnDemandZipFile.html">OpenOnDemandZipFile</a></code></td>
+    <td><code><a href="nltk.data.OpenOnDemandZipFile.html" class="internal-link" title="nltk.data.OpenOnDemandZipFile">​Open​On​Demand​Zip​File</a></code></td>
     <td><span class="undocumented">No summary</span></td>
   </tr><tr class="class">
     
     <td>Class</td>
-    <td><code><a href="nltk.data.PathPointer.html">PathPointer</a></code></td>
+    <td><code><a href="nltk.data.PathPointer.html" class="internal-link" title="nltk.data.PathPointer">​Path​Pointer</a></code></td>
     <td><span class="undocumented">No summary</span></td>
   </tr><tr class="class">
     
     <td>Class</td>
-    <td><code><a href="nltk.data.SeekableUnicodeStreamReader.html">SeekableUnicodeStreamReader</a></code></td>
+    <td><code><a href="nltk.data.SeekableUnicodeStreamReader.html" class="internal-link" title="nltk.data.SeekableUnicodeStreamReader">​Seekable​Unicode​Stream​Reader</a></code></td>
     <td><span class="undocumented">No summary</span></td>
   </tr><tr class="class">
     
     <td>Class</td>
-    <td><code><a href="nltk.data.ZipFilePathPointer.html">ZipFilePathPointer</a></code></td>
-    <td><span>A path pointer that identifies a file contained within a zipfile, which can be accessed by reading that zipfile.</span></td>
+    <td><code><a href="nltk.data.ZipFilePathPointer.html" class="internal-link" title="nltk.data.ZipFilePathPointer">​Zip​File​Path​Pointer</a></code></td>
+    <td>A path pointer that identifies a file contained within a zipfile, which can be accessed by reading that zipfile.</td>
   </tr><tr class="function">
     
     <td>Function</td>
-    <td><code><a href="#clear_cache">clear_cache</a></code></td>
-    <td><span>Remove all objects from the resource cache. :see: load()</span></td>
+    <td><code><a href="#clear_cache" class="internal-link" title="nltk.data.clear_cache">clear​_cache</a></code></td>
+    <td>Remove all objects from the resource cache. :see: load()</td>
   </tr><tr class="function">
     
     <td>Function</td>
-    <td><code><a href="#find">find</a></code></td>
+    <td><code><a href="#find" class="internal-link" title="nltk.data.find">find</a></code></td>
     <td><span class="undocumented">No summary</span></td>
   </tr><tr class="function">
     
     <td>Function</td>
-    <td><code><a href="#gzip_open_unicode">gzip_open_unicode</a></code></td>
+    <td><code><a href="#gzip_open_unicode" class="internal-link" title="nltk.data.gzip_open_unicode">gzip​_open​_unicode</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="function">
     
     <td>Function</td>
-    <td><code><a href="#load">load</a></code></td>
-    <td><span>Load a given resource from the NLTK data package.  The following resource formats are currently supported:</span></td>
+    <td><code><a href="#load" class="internal-link" title="nltk.data.load">load</a></code></td>
+    <td>Load a given resource from the NLTK data package.  The following resource formats are currently supported:</td>
   </tr><tr class="function">
     
     <td>Function</td>
-    <td><code><a href="#normalize_resource_name">normalize_resource_name</a></code></td>
+    <td><code><a href="#normalize_resource_name" class="internal-link" title="nltk.data.normalize_resource_name">normalize​_resource​_name</a></code></td>
     <td><span class="undocumented">No summary</span></td>
   </tr><tr class="function">
     
     <td>Function</td>
-    <td><code><a href="#normalize_resource_url">normalize_resource_url</a></code></td>
-    <td><span>Normalizes a resource url</span></td>
+    <td><code><a href="#normalize_resource_url" class="internal-link" title="nltk.data.normalize_resource_url">normalize​_resource​_url</a></code></td>
+    <td>Normalizes a resource url</td>
   </tr><tr class="function">
     
     <td>Function</td>
-    <td><code><a href="#retrieve">retrieve</a></code></td>
-    <td><span>Copy the given resource to a local file.  If no filename is specified, then use the URL's filename.  If there is already a file named <tt class="rst-docutils literal">filename</tt>, then raise a <tt class="rst-docutils literal">ValueError</tt>.</span></td>
+    <td><code><a href="#retrieve" class="internal-link" title="nltk.data.retrieve">retrieve</a></code></td>
+    <td>Copy the given resource to a local file.  If no filename is specified, then use the URL's filename.  If there is already a file named <tt class="rst-docutils literal">filename</tt>, then raise a <tt class="rst-docutils literal">ValueError</tt>.</td>
   </tr><tr class="function">
     
     <td>Function</td>
-    <td><code><a href="#show_cfg">show_cfg</a></code></td>
-    <td><span>Write out a grammar file, ignoring escaped and empty lines.</span></td>
+    <td><code><a href="#show_cfg" class="internal-link" title="nltk.data.show_cfg">show​_cfg</a></code></td>
+    <td>Write out a grammar file, ignoring escaped and empty lines.</td>
   </tr><tr class="function">
     
     <td>Function</td>
-    <td><code><a href="#split_resource_url">split_resource_url</a></code></td>
-    <td><span>Splits a resource url into "&lt;protocol&gt;:&lt;path&gt;".</span></td>
-  </tr><tr class="variable">
+    <td><code><a href="#split_resource_url" class="internal-link" title="nltk.data.split_resource_url">split​_resource​_url</a></code></td>
+    <td>Splits a resource url into "&lt;protocol&gt;:&lt;path&gt;".</td>
+  </tr><tr class="constant">
     
-    <td>Variable</td>
-    <td><code><a href="#AUTO_FORMATS">AUTO_FORMATS</a></code></td>
+    <td>Constant</td>
+    <td><code><a href="#AUTO_FORMATS" class="internal-link" title="nltk.data.AUTO_FORMATS">AUTO​_FORMATS</a></code></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="constant">
+    
+    <td>Constant</td>
+    <td><code><a href="#FORMATS" class="internal-link" title="nltk.data.FORMATS">FORMATS</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="variable">
     
     <td>Variable</td>
-    <td><code><a href="#FORMATS">FORMATS</a></code></td>
-    <td><span class="undocumented">Undocumented</span></td>
-  </tr><tr class="variable">
-    
-    <td>Variable</td>
-    <td><code><a href="#path">path</a></code></td>
+    <td><code><a href="#path" class="internal-link" title="nltk.data.path">path</a></code></td>
     <td><span class="undocumented">No summary</span></td>
   </tr><tr class="variable">
     
     <td>Variable</td>
-    <td><code><a href="#textwrap_indent">textwrap_indent</a></code></td>
+    <td><code><a href="#textwrap_indent" class="internal-link" title="nltk.data.textwrap_indent">textwrap​_indent</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="function private">
     
     <td>Function</td>
-    <td><code><a href="#_open">_open</a></code></td>
+    <td><code><a href="#_open" class="internal-link" title="nltk.data._open">_open</a></code></td>
     <td><span class="undocumented">No summary</span></td>
   </tr><tr class="variable private">
     
     <td>Variable</td>
-    <td><code><a href="#_paths_from_env">_paths_from_env</a></code></td>
+    <td><code><a href="#_paths_from_env" class="internal-link" title="nltk.data._paths_from_env">_paths​_from​_env</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="variable private">
     
     <td>Variable</td>
-    <td><code><a href="#_resource_cache">_resource_cache</a></code></td>
-    <td><span>A dictionary used to cache resources so that they won't need to be loaded more than once.</span></td>
+    <td><code><a href="#_resource_cache" class="internal-link" title="nltk.data._resource_cache">_resource​_cache</a></code></td>
+    <td>A dictionary used to cache resources so that they won't need to be loaded more than once.</td>
   </tr>
 </table>
         
@@ -358,7 +371,7 @@ character.  Otherwise, <tt class="rst-docutils literal">find()</tt> will not loc
 directory.</li>
 </ul>
 </blockquote>
-<table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">resource_name:</span>str or unicode</td><td class="fieldArgDesc">The name of the resource to search for.
+<table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">resource​_name:</span>str or unicode</td><td class="fieldArgDesc">The name of the resource to search for.
 Resource names are posix-style relative path names, such as
 <tt class="rst-docutils literal">corpora/brown</tt>.  Directory names will be
 automatically converted to a platform-appropriate path separator.</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">paths</span></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr class="fieldStart"><td class="fieldName" colspan="2">Returns</td></tr><tr><td class="fieldArgContainer">str</td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr></table></div>
@@ -374,7 +387,7 @@ automatically converted to a platform-appropriate path separator.</td></tr><tr><
   </a>
   <div class="functionHeader">
     
-    <span class="py-keyword">def</span> <span class="py-defname">gzip_open_unicode</span>(filename, mode='rb', compresslevel=9, encoding='utf-8', fileobj=None, errors=None, newline=None):
+    <span class="py-keyword">def</span> <span class="py-defname">gzip_open_unicode</span>(filename, mode=<span class="rst-variable-quote">'</span><span class="rst-variable-string">rb</span><span class="rst-variable-quote">'</span>, compresslevel=9, encoding=<span class="rst-variable-quote">'</span><span class="rst-variable-string">utf-8</span><span class="rst-variable-quote">'</span>, fileobj=None, errors=None, newline=None):
     <a class="sourceLink" href="https://github.com/nltk/nltk/tree/3.6.2/nltk/data.py#L106">
       
       (source)
@@ -396,7 +409,7 @@ automatically converted to a platform-appropriate path separator.</td></tr><tr><
   </a>
   <div class="functionHeader">
     
-    <span class="py-keyword">def</span> <span class="py-defname">load</span>(resource_url, format='auto', cache=True, verbose=False, logic_parser=None, fstruct_reader=None, encoding=None):
+    <span class="py-keyword">def</span> <span class="py-defname">load</span>(resource_url, format=<span class="rst-variable-quote">'</span><span class="rst-variable-string">auto</span><span class="rst-variable-quote">'</span>, cache=True, verbose=False, logic_parser=None, fstruct_reader=None, encoding=None):
     <a class="sourceLink" href="https://github.com/nltk/nltk/tree/3.6.2/nltk/data.py#L662">
       
       (source)
@@ -429,14 +442,14 @@ fails, <tt class="rst-docutils literal">load()</tt> will raise a <tt class="rst-
 it tries to decode the raw contents using UTF-8, and if that doesn't
 work, it tries with ISO-8859-1 (Latin-1), unless the <tt class="rst-docutils literal">encoding</tt>
 is specified.</p>
-<table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">resource_url:</span>str</td><td class="fieldArgDesc">A URL specifying where the resource should be
+<table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">resource​_url:</span>str</td><td class="fieldArgDesc">A URL specifying where the resource should be
 loaded from.  The default protocol is "nltk:", which searches
 for the file in the the NLTK data package.</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">format</span></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">cache:</span>bool</td><td class="fieldArgDesc">If true, add this resource to a cache.  If load()
 finds a resource in its cache, then it will return it from the
 cache rather than loading it.</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">verbose:</span>bool</td><td class="fieldArgDesc">If true, print a message when loading a resource.
 Messages are not displayed when a resource is retrieved from
-the cache.</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">logic_parser:</span>LogicParser</td><td class="fieldArgDesc">The parser that will be used to parse logical
-expressions.</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">fstruct_reader:</span>FeatStructReader</td><td class="fieldArgDesc">The parser that will be used to parse the
+the cache.</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">logic​_parser:</span>LogicParser</td><td class="fieldArgDesc">The parser that will be used to parse logical
+expressions.</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">fstruct​_reader:</span>FeatStructReader</td><td class="fieldArgDesc">The parser that will be used to parse the
 feature structure of an fcfg.</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">encoding:</span>str</td><td class="fieldArgDesc">the encoding of the input; only used for text formats.</td></tr></table></div>
   </div>
 </div><div class="basefunction">
@@ -477,11 +490,11 @@ feature structure of an fcfg.</td></tr><tr><td class="fieldArgContainer"><span c
 <span class="py-output">True</span>
 <span class="py-prompt">&gt;&gt;&gt; </span>windows <span class="py-keyword">or</span> normalize_resource_name(<span class="py-string">'/dir/file'</span>, <span class="py-builtin">True</span>, <span class="py-string">'/'</span>) == <span class="py-string">'/dir/file'</span>
 <span class="py-output">True</span>
-</pre><table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">resource_name:</span>str or unicode</td><td class="fieldArgDesc">The name of the resource to search for.
+</pre><table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">resource​_name:</span>str or unicode</td><td class="fieldArgDesc">The name of the resource to search for.
 Resource names are posix-style relative path names, such as
 <tt class="rst-docutils literal">corpora/brown</tt>.  Directory names will automatically
 be converted to a platform-appropriate path separator.
-Directory trailing slashes are preserved</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">allow_relative</span></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">relative_path</span></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr></table></div>
+Directory trailing slashes are preserved</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">allow​_relative</span></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">relative​_path</span></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr></table></div>
   </div>
 </div><div class="basefunction">
   
@@ -557,7 +570,7 @@ Directory trailing slashes are preserved</td></tr><tr><td class="fieldArgContain
     
     <div>Copy the given resource to a local file.  If no filename is
 specified, then use the URL's filename.  If there is already a
-file named <tt class="rst-docutils literal">filename</tt>, then raise a <tt class="rst-docutils literal">ValueError</tt>.<table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">resource_url:</span>str</td><td class="fieldArgDesc">A URL specifying where the resource should be
+file named <tt class="rst-docutils literal">filename</tt>, then raise a <tt class="rst-docutils literal">ValueError</tt>.<table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">resource​_url:</span>str</td><td class="fieldArgDesc">A URL specifying where the resource should be
 loaded from.  The default protocol is "nltk:", which searches
 for the file in the the NLTK data package.</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">filename</span></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">verbose</span></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr></table></div>
   </div>
@@ -572,7 +585,7 @@ for the file in the the NLTK data package.</td></tr><tr><td class="fieldArgConta
   </a>
   <div class="functionHeader">
     
-    <span class="py-keyword">def</span> <span class="py-defname">show_cfg</span>(resource_url, escape='##'):
+    <span class="py-keyword">def</span> <span class="py-defname">show_cfg</span>(resource_url, escape=<span class="rst-variable-quote">'</span><span class="rst-variable-string">##</span><span class="rst-variable-quote">'</span>):
     <a class="sourceLink" href="https://github.com/nltk/nltk/tree/3.6.2/nltk/data.py#L827">
       
       (source)
@@ -581,7 +594,7 @@ for the file in the the NLTK data package.</td></tr><tr><td class="fieldArgConta
   <div class="docstring functionBody">
     
     
-    <div>Write out a grammar file, ignoring escaped and empty lines.<table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">resource_url:</span>str</td><td class="fieldArgDesc">A URL specifying where the resource should be
+    <div>Write out a grammar file, ignoring escaped and empty lines.<table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">resource​_url:</span>str</td><td class="fieldArgDesc">A URL specifying where the resource should be
 loaded from.  The default protocol is "nltk:", which searches
 for the file in the the NLTK data package.</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">escape:</span>str</td><td class="fieldArgDesc">Prepended string that signals lines to be ignored</td></tr></table></div>
   </div>
@@ -620,7 +633,7 @@ for the file in the the NLTK data package.</td></tr><tr><td class="fieldArgConta
 <span class="py-output">('file', '/C:/home/nltk')</span>
 </pre></div>
   </div>
-</div><div class="basevariable">
+</div><div class="baseconstant">
   
   
   <a name="nltk.data.AUTO_FORMATS">
@@ -641,8 +654,16 @@ for the file in the the NLTK data package.</td></tr><tr><td class="fieldArgConta
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    <table class="valueTable"><tr class="fieldStart"><td class="fieldName">Value</td></tr><tr><td><pre class="constant-value"><code>{<wbr></wbr><span class="rst-variable-quote">'</span><span class="rst-variable-string">pickle</span><span class="rst-variable-quote">'</span>: <span class="rst-variable-quote">'</span><span class="rst-variable-string">pickle</span><span class="rst-variable-quote">'</span>,
+ <wbr></wbr><span class="rst-variable-quote">'</span><span class="rst-variable-string">json</span><span class="rst-variable-quote">'</span>: <span class="rst-variable-quote">'</span><span class="rst-variable-string">json</span><span class="rst-variable-quote">'</span>,
+ <wbr></wbr><span class="rst-variable-quote">'</span><span class="rst-variable-string">yaml</span><span class="rst-variable-quote">'</span>: <span class="rst-variable-quote">'</span><span class="rst-variable-string">yaml</span><span class="rst-variable-quote">'</span>,
+ <wbr></wbr><span class="rst-variable-quote">'</span><span class="rst-variable-string">cfg</span><span class="rst-variable-quote">'</span>: <span class="rst-variable-quote">'</span><span class="rst-variable-string">cfg</span><span class="rst-variable-quote">'</span>,
+ <wbr></wbr><span class="rst-variable-quote">'</span><span class="rst-variable-string">pcfg</span><span class="rst-variable-quote">'</span>: <span class="rst-variable-quote">'</span><span class="rst-variable-string">pcfg</span><span class="rst-variable-quote">'</span>,
+ <wbr></wbr><span class="rst-variable-quote">'</span><span class="rst-variable-string">fcfg</span><span class="rst-variable-quote">'</span>: <span class="rst-variable-quote">'</span><span class="rst-variable-string">fcfg</span><span class="rst-variable-quote">'</span>,
+ <wbr></wbr><span class="rst-variable-quote">'</span><span class="rst-variable-string">fol</span><span class="rst-variable-quote">'</span>: <span class="rst-variable-quote">'</span><span class="rst-variable-string">fol</span><span class="rst-variable-quote">'</span>,
+<span class="rst-variable-ellipsis">...</span></code></pre></td></tr></table>
   </div>
-</div><div class="basevariable">
+</div><div class="baseconstant">
   
   
   <a name="nltk.data.FORMATS">
@@ -663,6 +684,14 @@ for the file in the the NLTK data package.</td></tr><tr><td class="fieldArgConta
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    <table class="valueTable"><tr class="fieldStart"><td class="fieldName">Value</td></tr><tr><td><pre class="constant-value"><code>{<wbr></wbr><span class="rst-variable-quote">'</span><span class="rst-variable-string">pickle</span><span class="rst-variable-quote">'</span>: <span class="rst-variable-quote">'</span><span class="rst-variable-string">A serialized python object, stored using the pickle module.</span><span class="rst-variable-quote">'</span>,
+ <wbr></wbr><span class="rst-variable-quote">'</span><span class="rst-variable-string">json</span><span class="rst-variable-quote">'</span>: <span class="rst-variable-quote">'</span><span class="rst-variable-string">A serialized python object, stored using the json module.</span><span class="rst-variable-quote">'</span>,
+ <wbr></wbr><span class="rst-variable-quote">'</span><span class="rst-variable-string">yaml</span><span class="rst-variable-quote">'</span>: <span class="rst-variable-quote">'</span><span class="rst-variable-string">A serialized python object, stored using the yaml module.</span><span class="rst-variable-quote">'</span>,
+ <wbr></wbr><span class="rst-variable-quote">'</span><span class="rst-variable-string">cfg</span><span class="rst-variable-quote">'</span>: <span class="rst-variable-quote">'</span><span class="rst-variable-string">A context free grammar.</span><span class="rst-variable-quote">'</span>,
+ <wbr></wbr><span class="rst-variable-quote">'</span><span class="rst-variable-string">pcfg</span><span class="rst-variable-quote">'</span>: <span class="rst-variable-quote">'</span><span class="rst-variable-string">A probabilistic CFG.</span><span class="rst-variable-quote">'</span>,
+ <wbr></wbr><span class="rst-variable-quote">'</span><span class="rst-variable-string">fcfg</span><span class="rst-variable-quote">'</span>: <span class="rst-variable-quote">'</span><span class="rst-variable-string">A feature CFG.</span><span class="rst-variable-quote">'</span>,
+ <wbr></wbr><span class="rst-variable-quote">'</span><span class="rst-variable-string">fol</span><span class="rst-variable-quote">'</span>: <span class="rst-variable-quote">'</span><span class="rst-variable-string">A list of first order logic expressions, parsed with nltk.sem.logic.Exp</span><span class="rst-variable-linewrap">↵</span>
+<span class="rst-variable-ellipsis">...</span></code></pre></td></tr></table>
   </div>
 </div><div class="basevariable">
   
@@ -689,6 +718,7 @@ These directories will be checked in order when looking for a
 resource in the data package.  Note that this allows users to
 substitute in their own versions of resources, if they have them
 (e.g., in their home directory under ~/nltk_data).</div>
+    
   </div>
 </div><div class="basevariable">
   
@@ -711,6 +741,7 @@ substitute in their own versions of resources, if they have them
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    
   </div>
 </div><div class="basefunction private">
   
@@ -737,7 +768,7 @@ given its resource URL.  If the given resource URL uses the "nltk:"
 protocol, or uses no protocol, then use <tt class="rst-docutils literal">nltk.data.find</tt> to find
 its path, and open it with the given mode; if the resource URL
 uses the 'file' protocol, then open the file with the given mode;
-otherwise, delegate to <tt class="rst-docutils literal">urllib2.urlopen</tt>.<table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">resource_url:</span>str</td><td class="fieldArgDesc">A URL specifying where the resource should be
+otherwise, delegate to <tt class="rst-docutils literal">urllib2.urlopen</tt>.<table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">resource​_url:</span>str</td><td class="fieldArgDesc">A URL specifying where the resource should be
 loaded from.  The default protocol is "nltk:", which searches
 for the file in the the NLTK data package.</td></tr></table></div>
   </div>
@@ -762,6 +793,7 @@ for the file in the the NLTK data package.</td></tr></table></div>
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    
   </div>
 </div><div class="basevariable private">
   
@@ -785,6 +817,7 @@ for the file in the the NLTK data package.</td></tr></table></div>
     
     <div>A dictionary used to cache resources so that they won't
 need to be loaded more than once.</div>
+    
   </div>
 </div>
 
@@ -796,7 +829,7 @@ need to be loaded more than once.</div>
   <div class="container">
     <a href="index.html">API Documentation</a> for <a href="http://www.nltk.org/" class="projecthome">nltk-3.6.2</a>,
   generated by <a href="https://github.com/twisted/pydoctor/">pydoctor</a>
-    21.2.2 at 2022-01-06 17:36:51.
+    22.2.2.dev0 at 2022-03-04 05:57:24.
   </div>
 </footer>
 

@@ -7,7 +7,7 @@
   <head>
     
     <title>nltk.corpus.reader.bnc.BNCWordView</title>
-    <meta name="generator" content="pydoctor 21.2.2"> 
+    <meta name="generator" content="pydoctor 22.2.2.dev0"> 
         
     </meta>
     <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
@@ -44,69 +44,82 @@
           Names
         </a>
 
-        <form action="search-results.html" id="search-box-container">
+        <div id="search-box-container">
           <div class="input-group">
-            <input id="search-box" name="search-query" placeholder="Search..." aria-label="Search" minlength="2" class="form-control" />
+            <input id="search-box" type="search" name="search-query" placeholder="Search..." aria-label="Search" minlength="2" class="form-control" autocomplete="off" />
+            
             <span class="input-group-btn">
-              <button class="btn btn-default" type="submit" title="Search"><img src="fonts/search.svg" alt="Search!" /></button>
-              <a class="btn btn-default" id="search-help-button" title="Help" onclick="toggleSearchHelpText()"><img src="fonts/info.svg" alt="Help!" /></a>
+              <a style="display: none;" class="btn btn-default" id="search-clear-button" title="Clear" onclick="clearSearch()"><img src="fonts/x-circle.svg" alt="Clear" /></a>
+              <a class="btn btn-default" id="search-help-button" title="Help" onclick="toggleSearchHelpText()"><img src="fonts/info.svg" alt="Help" /></a>
             </span>
           </div>
-        </form>
+        </div>
 
-        <div class="rst-admonition hint" id="search-help-box">
+      </div>
+
+      <div id="search-results-container" style="display: none;">
+        <div>
+          <span class="label label-default" id="search-docstrings-button">
+            <a title="Search in docstrings" onclick="toggleSearchInDocstrings()">search in docstrings</a></span>
+        </div>
+
+        <noscript>
+            <h1>Cannot search: JavaScript is not supported/enabled in your browser.</h1>
+        </noscript>
+
+        <div class="hint" id="search-help-box">
           <p class="rst-last">
       
             Search bar offers the following options:
             <ul>   
                 <li>
                   <strong>Term presence.</strong> The below example searches for documents that 
-                    must contain “foo”, might contain “bar” and must not contain “baz”:
-                  <br /> <code>'+foo bar -baz'</code>
+                    must contain “foo”, might contain “bar” and must not contain “baz”: <code>+foo bar -baz</code>
                 </li> 
 
                 <li>
-                  <strong>Wildcards.</strong> The below example searches for documents with words beginning with “foo”:
-                  <br /> <code>'foo*'</code>
+                  <strong>Wildcards.</strong> The below example searches for documents with words beginning with “foo”: <code>foo*</code>
                 </li> 
 
                 <li>
-                  <strong>Search in specific fields.</strong> The following search matches all documents 
-                  that contains "foo" in their full dotted name and with “bar” in any field:
-                  <br /> <code>'+fullName:*foo* +bar'</code>
+                  <strong>Search in specific fields.</strong> The following search matches all objects 
+                  in "twisted.mail" that matches “search”: <code>+qname:twisted.mail.* +search</code>
 
                   <p>
-                    Possible fields: 'name', 'docstring', 'fullName'.
+                    Possible fields: 'name', 'qname' (fully qualified name), 'docstring', and 'kind'.
+                    Last two fields are only applicable if "search in docstrings" is enabled.
                   </p>
                 </li>
 
                 <li>
                   <strong>Fuzzy matches.</strong> The following search matches all documents 
-                  that have a word within 1 edit distance of “foo”:
-                  <br /> <code>'foo~1'</code>
+                  that have a word within 1 edit distance of “foo”: <code>foo~1</code>
                 </li>
             </ul>
 
           </p>
         </div>
 
-      </div>
+        <div id="search-status"> </div>
+        
+        <div class="warning" id="search-warn-box" style="display: none;">
+          <p class="rst-last"><span id="search-warn"></span></p>
+        </div>
 
+        <table id="search-results">
+          <!-- Filled dynamically by JS -->
+        </table>
+        
+        <div style="margin-top: 8px;">
+          <p>Results provided by <a href="https://lunrjs.com">Lunr.js</a></p>
+        </div>
+      </div>
 
     </div>
   </div>
 
-  <script>
- 
-    function toggleSearchHelpText() {
-        document.body.classList.toggle("search-help-hidden");
-    }
-    // Init search and help text
-    document.getElementById('search-box-container').style.display = 'block';
-    document.getElementById('search-help-box').style.display = 'block';
-    document.body.classList.add("search-help-hidden");
-
-  </script>
+  <script src="ajax.js" type="text/javascript"></script>
+  <script src="search.js" type="text/javascript"></script>
 
 </nav>
 
@@ -115,7 +128,7 @@
     <div class="container">
 
       <div class="page-header">
-        <h1 class="class"><code><code><a href="nltk.html">nltk</a></code><wbr></wbr>.<code><a href="nltk.corpus.html">corpus</a></code><wbr></wbr>.<code><a href="nltk.corpus.reader.html">reader</a></code><wbr></wbr>.<code><a href="nltk.corpus.reader.bnc.html">bnc</a></code><wbr></wbr>.<code><a href="nltk.corpus.reader.bnc.BNCWordView.html">BNCWordView</a></code></code></h1>
+        <h1 class="class"><code><code><a href="index.html" class="internal-link">nltk</a></code><wbr></wbr>.<code><a href="nltk.corpus.html" class="internal-link" title="nltk.corpus">corpus</a></code><wbr></wbr>.<code><a href="nltk.corpus.reader.html" class="internal-link" title="nltk.corpus.reader">reader</a></code><wbr></wbr>.<code><a href="nltk.corpus.reader.bnc.html" class="internal-link" title="nltk.corpus.reader.bnc">bnc</a></code><wbr></wbr>.<code><a href="nltk.corpus.reader.bnc.BNCWordView.html" class="internal-link" title="nltk.corpus.reader.bnc.BNCWordView">BNCWordView</a></code></code></h1>
         <div id="showPrivate">
           <button class="btn btn-link" onclick="togglePrivate()">Toggle Private API</button>
         </div>
@@ -126,7 +139,7 @@
       </div>
 
       <div class="extrasDocstring">
-        <p><code><span class="py-keyword">class</span> <span class="py-defname">BNCWordView</span>(<a href="nltk.corpus.reader.xmldocs.XMLCorpusView.html" title="nltk.corpus.reader.xmldocs.XMLCorpusView">XMLCorpusView</a>): <a href="https://github.com/nltk/nltk/tree/3.6.2/nltk/corpus/reader/bnc.py#L163" class="sourceLink">(source)</a></code></p>
+        <p><code><span class="py-keyword">class</span> <span class="py-defname">BNCWordView</span>(<a href="nltk.corpus.reader.xmldocs.XMLCorpusView.html" class="internal-link" title="nltk.corpus.reader.xmldocs.XMLCorpusView">XMLCorpusView</a>): <a href="https://github.com/nltk/nltk/tree/3.6.2/nltk/corpus/reader/bnc.py#L163" class="sourceLink">(source)</a></code></p>
         <p><a href="classIndex.html#nltk.corpus.reader.bnc.BNCWordView">View In Hierarchy</a></p>
       </div>
 
@@ -141,83 +154,86 @@
   <tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#__init__">__init__</a></code></td>
+    <td><code><a href="#__init__" class="internal-link" title="nltk.corpus.reader.bnc.BNCWordView.__init__">__init__</a></code></td>
     <td><span class="undocumented">No summary</span></td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#handle_elt">handle_elt</a></code></td>
+    <td><code><a href="#handle_elt" class="internal-link" title="nltk.corpus.reader.bnc.BNCWordView.handle_elt">handle​_elt</a></code></td>
     <td><span class="undocumented">No summary</span></td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#handle_header">handle_header</a></code></td>
+    <td><code><a href="#handle_header" class="internal-link" title="nltk.corpus.reader.bnc.BNCWordView.handle_header">handle​_header</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#handle_sent">handle_sent</a></code></td>
+    <td><code><a href="#handle_sent" class="internal-link" title="nltk.corpus.reader.bnc.BNCWordView.handle_sent">handle​_sent</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#handle_word">handle_word</a></code></td>
+    <td><code><a href="#handle_word" class="internal-link" title="nltk.corpus.reader.bnc.BNCWordView.handle_word">handle​_word</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="classvariable">
     
     <td>Class Variable</td>
-    <td><code><a href="#tags_to_ignore">tags_to_ignore</a></code></td>
-    <td><span>These tags are ignored. For their description refer to the technical documentation, for example, <a class="rst-reference external" href="http://www.natcorp.ox.ac.uk/docs/URG/ref-vocal.html" target="_top">http://www.natcorp.ox.ac.uk/docs/URG/ref-vocal.html</a></span></td>
+    <td><code><a href="#tags_to_ignore" class="internal-link" title="nltk.corpus.reader.bnc.BNCWordView.tags_to_ignore">tags​_to​_ignore</a></code></td>
+    <td>These tags are ignored. For their description refer to the technical documentation, for example, <a class="rst-reference external" href="http://www.natcorp.ox.ac.uk/docs/URG/ref-vocal.html" target="_top">http://www.natcorp.ox.ac.uk/docs/URG/ref-vocal.html</a></td>
   </tr><tr class="instancevariable">
     
     <td>Instance Variable</td>
-    <td><code><a href="#author">author</a></code></td>
-    <td><span class="undocumented">Undocumented</span></td>
-  </tr><tr class="instancevariable">
-    
-    <td>Instance Variable</td>
-    <td><code><a href="#editor">editor</a></code></td>
+    <td><code><a href="#author" class="internal-link" title="nltk.corpus.reader.bnc.BNCWordView.author">author</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="instancevariable">
     
     <td>Instance Variable</td>
-    <td><code><a href="#resps">resps</a></code></td>
+    <td><code><a href="#editor" class="internal-link" title="nltk.corpus.reader.bnc.BNCWordView.editor">editor</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="instancevariable">
     
     <td>Instance Variable</td>
-    <td><code><a href="#title">title</a></code></td>
+    <td><code><a href="#resps" class="internal-link" title="nltk.corpus.reader.bnc.BNCWordView.resps">resps</a></code></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="instancevariable">
+    
+    <td>Instance Variable</td>
+    <td><code><a href="#title" class="internal-link" title="nltk.corpus.reader.bnc.BNCWordView.title">title</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="instancevariable private">
     
     <td>Instance Variable</td>
-    <td><code><a href="#_sent">_sent</a></code></td>
+    <td><code><a href="#_sent" class="internal-link" title="nltk.corpus.reader.bnc.BNCWordView._sent">_sent</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="instancevariable private">
     
     <td>Instance Variable</td>
-    <td><code><a href="#_stem">_stem</a></code></td>
+    <td><code><a href="#_stem" class="internal-link" title="nltk.corpus.reader.bnc.BNCWordView._stem">_stem</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="instancevariable private">
     
     <td>Instance Variable</td>
-    <td><code><a href="#_strip_space">_strip_space</a></code></td>
+    <td><code><a href="#_strip_space" class="internal-link" title="nltk.corpus.reader.bnc.BNCWordView._strip_space">_strip​_space</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="instancevariable private">
     
     <td>Instance Variable</td>
-    <td><code><a href="#_tag">_tag</a></code></td>
+    <td><code><a href="#_tag" class="internal-link" title="nltk.corpus.reader.bnc.BNCWordView._tag">_tag</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="instancevariable private">
     
     <td>Instance Variable</td>
-    <td><code><a href="#_tag_context">_tag_context</a></code></td>
-    <td><span class="undocumented">No summary</span></td>
+    <td><code><a href="#_tag_context" class="internal-link" title="nltk.corpus.reader.bnc.BNCWordView._tag_context">_tag​_context</a></code></td>
+    <td>A dictionary mapping from file positions (as returned by
+<tt class="rst-docutils literal">stream.seek()</tt> to XML contexts.  An XML context is a
+tuple of XML tag names, indicating which tags have not yet
+been closed.</td>
   </tr>
 </table>
         
           <p class="inheritedFrom">
-            Inherited from <code><a href="nltk.corpus.reader.xmldocs.XMLCorpusView.html">XMLCorpusView</a></code>:
+            Inherited from <code><a href="nltk.corpus.reader.xmldocs.XMLCorpusView.html" class="internal-link" title="nltk.corpus.reader.xmldocs.XMLCorpusView">XMLCorpusView</a></code>:
           </p>
           <table class="children sortable" id="id251">
   
@@ -225,53 +241,53 @@
   <tr class="basemethod">
     
     <td>Method</td>
-    <td><code><a href="nltk.corpus.reader.xmldocs.XMLCorpusView.html#read_block">read_block</a></code></td>
-    <td><span>Read from <tt class="rst-docutils literal">stream</tt> until we find at least one element that matches <tt class="rst-docutils literal">tagspec</tt>, and return the result of applying <tt class="rst-docutils literal">elt_handler</tt> to each element found.</span></td>
+    <td><code><a href="nltk.corpus.reader.xmldocs.XMLCorpusView.html#read_block" class="internal-link" title="nltk.corpus.reader.xmldocs.XMLCorpusView.read_block">read​_block</a></code></td>
+    <td>Read from <tt class="rst-docutils literal">stream</tt> until we find at least one element that matches <tt class="rst-docutils literal">tagspec</tt>, and return the result of applying <tt class="rst-docutils literal">elt_handler</tt> to each element found.</td>
   </tr><tr class="basemethod private">
     
     <td>Method</td>
-    <td><code><a href="nltk.corpus.reader.xmldocs.XMLCorpusView.html#_detect_encoding">_detect_encoding</a></code></td>
+    <td><code><a href="nltk.corpus.reader.xmldocs.XMLCorpusView.html#_detect_encoding" class="internal-link" title="nltk.corpus.reader.xmldocs.XMLCorpusView._detect_encoding">_detect​_encoding</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="basemethod private">
     
     <td>Method</td>
-    <td><code><a href="nltk.corpus.reader.xmldocs.XMLCorpusView.html#_read_xml_fragment">_read_xml_fragment</a></code></td>
+    <td><code><a href="nltk.corpus.reader.xmldocs.XMLCorpusView.html#_read_xml_fragment" class="internal-link" title="nltk.corpus.reader.xmldocs.XMLCorpusView._read_xml_fragment">_read​_xml​_fragment</a></code></td>
     <td><span class="undocumented">No summary</span></td>
-  </tr><tr class="baseclassvariable private">
+  </tr><tr class="baseconstant private">
     
-    <td>Class Variable</td>
-    <td><code><a href="nltk.corpus.reader.xmldocs.XMLCorpusView.html#_BLOCK_SIZE">_BLOCK_SIZE</a></code></td>
+    <td>Constant</td>
+    <td><code><a href="nltk.corpus.reader.xmldocs.XMLCorpusView.html#_BLOCK_SIZE" class="internal-link" title="nltk.corpus.reader.xmldocs.XMLCorpusView._BLOCK_SIZE">_BLOCK​_SIZE</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
-  </tr><tr class="baseclassvariable private">
+  </tr><tr class="baseconstant private">
     
-    <td>Class Variable</td>
-    <td><code><a href="nltk.corpus.reader.xmldocs.XMLCorpusView.html#_DEBUG">_DEBUG</a></code></td>
+    <td>Constant</td>
+    <td><code><a href="nltk.corpus.reader.xmldocs.XMLCorpusView.html#_DEBUG" class="internal-link" title="nltk.corpus.reader.xmldocs.XMLCorpusView._DEBUG">_DEBUG</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
-  </tr><tr class="baseclassvariable private">
+  </tr><tr class="baseconstant private">
     
-    <td>Class Variable</td>
-    <td><code><a href="nltk.corpus.reader.xmldocs.XMLCorpusView.html#_VALID_XML_RE">_VALID_XML_RE</a></code></td>
+    <td>Constant</td>
+    <td><code><a href="nltk.corpus.reader.xmldocs.XMLCorpusView.html#_VALID_XML_RE" class="internal-link" title="nltk.corpus.reader.xmldocs.XMLCorpusView._VALID_XML_RE">_VALID​_XML​_RE</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
-  </tr><tr class="baseclassvariable private">
+  </tr><tr class="baseconstant private">
     
-    <td>Class Variable</td>
-    <td><code><a href="nltk.corpus.reader.xmldocs.XMLCorpusView.html#_XML_PIECE">_XML_PIECE</a></code></td>
+    <td>Constant</td>
+    <td><code><a href="nltk.corpus.reader.xmldocs.XMLCorpusView.html#_XML_PIECE" class="internal-link" title="nltk.corpus.reader.xmldocs.XMLCorpusView._XML_PIECE">_XML​_PIECE</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
-  </tr><tr class="baseclassvariable private">
+  </tr><tr class="baseconstant private">
     
-    <td>Class Variable</td>
-    <td><code><a href="nltk.corpus.reader.xmldocs.XMLCorpusView.html#_XML_TAG_NAME">_XML_TAG_NAME</a></code></td>
+    <td>Constant</td>
+    <td><code><a href="nltk.corpus.reader.xmldocs.XMLCorpusView.html#_XML_TAG_NAME" class="internal-link" title="nltk.corpus.reader.xmldocs.XMLCorpusView._XML_TAG_NAME">_XML​_TAG​_NAME</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="baseinstancevariable private">
     
     <td>Instance Variable</td>
-    <td><code><a href="nltk.corpus.reader.xmldocs.XMLCorpusView.html#_tagspec">_tagspec</a></code></td>
-    <td><span>The tag specification for this corpus view.</span></td>
+    <td><code><a href="nltk.corpus.reader.xmldocs.XMLCorpusView.html#_tagspec" class="internal-link" title="nltk.corpus.reader.xmldocs.XMLCorpusView._tagspec">_tagspec</a></code></td>
+    <td>The tag specification for this corpus view.</td>
   </tr>
 </table>
           
           <p class="inheritedFrom">
-            Inherited from <code><a href="nltk.corpus.reader.util.StreamBackedCorpusView.html">StreamBackedCorpusView</a></code> (via <code><a href="nltk.corpus.reader.xmldocs.XMLCorpusView.html">XMLCorpusView</a></code>):
+            Inherited from <code><a href="nltk.corpus.reader.util.StreamBackedCorpusView.html" class="internal-link" title="nltk.corpus.reader.util.StreamBackedCorpusView">StreamBackedCorpusView</a></code> (via <code><a href="nltk.corpus.reader.xmldocs.XMLCorpusView.html" class="internal-link" title="nltk.corpus.reader.xmldocs.XMLCorpusView">XMLCorpusView</a></code>):
           </p>
           <table class="children sortable" id="id252">
   
@@ -279,134 +295,134 @@
   <tr class="basemethod">
     
     <td>Method</td>
-    <td><code><a href="nltk.corpus.reader.util.StreamBackedCorpusView.html#__add__">__add__</a></code></td>
+    <td><code><a href="nltk.corpus.reader.util.StreamBackedCorpusView.html#__add__" class="internal-link" title="nltk.corpus.reader.util.StreamBackedCorpusView.__add__">__add__</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="basemethod">
     
     <td>Method</td>
-    <td><code><a href="nltk.corpus.reader.util.StreamBackedCorpusView.html#__enter__">__enter__</a></code></td>
+    <td><code><a href="nltk.corpus.reader.util.StreamBackedCorpusView.html#__enter__" class="internal-link" title="nltk.corpus.reader.util.StreamBackedCorpusView.__enter__">__enter__</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="basemethod">
     
     <td>Method</td>
-    <td><code><a href="nltk.corpus.reader.util.StreamBackedCorpusView.html#__exit__">__exit__</a></code></td>
+    <td><code><a href="nltk.corpus.reader.util.StreamBackedCorpusView.html#__exit__" class="internal-link" title="nltk.corpus.reader.util.StreamBackedCorpusView.__exit__">__exit__</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="basemethod">
     
     <td>Method</td>
-    <td><code><a href="nltk.corpus.reader.util.StreamBackedCorpusView.html#__getitem__">__getitem__</a></code></td>
+    <td><code><a href="nltk.corpus.reader.util.StreamBackedCorpusView.html#__getitem__" class="internal-link" title="nltk.corpus.reader.util.StreamBackedCorpusView.__getitem__">__getitem__</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="basemethod">
     
     <td>Method</td>
-    <td><code><a href="nltk.corpus.reader.util.StreamBackedCorpusView.html#__len__">__len__</a></code></td>
+    <td><code><a href="nltk.corpus.reader.util.StreamBackedCorpusView.html#__len__" class="internal-link" title="nltk.corpus.reader.util.StreamBackedCorpusView.__len__">__len__</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="basemethod">
     
     <td>Method</td>
-    <td><code><a href="nltk.corpus.reader.util.StreamBackedCorpusView.html#__mul__">__mul__</a></code></td>
+    <td><code><a href="nltk.corpus.reader.util.StreamBackedCorpusView.html#__mul__" class="internal-link" title="nltk.corpus.reader.util.StreamBackedCorpusView.__mul__">__mul__</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="basemethod">
     
     <td>Method</td>
-    <td><code><a href="nltk.corpus.reader.util.StreamBackedCorpusView.html#__radd__">__radd__</a></code></td>
+    <td><code><a href="nltk.corpus.reader.util.StreamBackedCorpusView.html#__radd__" class="internal-link" title="nltk.corpus.reader.util.StreamBackedCorpusView.__radd__">__radd__</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="basemethod">
     
     <td>Method</td>
-    <td><code><a href="nltk.corpus.reader.util.StreamBackedCorpusView.html#__rmul__">__rmul__</a></code></td>
+    <td><code><a href="nltk.corpus.reader.util.StreamBackedCorpusView.html#__rmul__" class="internal-link" title="nltk.corpus.reader.util.StreamBackedCorpusView.__rmul__">__rmul__</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="basemethod">
     
     <td>Method</td>
-    <td><code><a href="nltk.corpus.reader.util.StreamBackedCorpusView.html#close">close</a></code></td>
+    <td><code><a href="nltk.corpus.reader.util.StreamBackedCorpusView.html#close" class="internal-link" title="nltk.corpus.reader.util.StreamBackedCorpusView.close">close</a></code></td>
     <td><span class="undocumented">No summary</span></td>
   </tr><tr class="basemethod">
     
     <td>Method</td>
-    <td><code><a href="nltk.corpus.reader.util.StreamBackedCorpusView.html#iterate_from">iterate_from</a></code></td>
+    <td><code><a href="nltk.corpus.reader.util.StreamBackedCorpusView.html#iterate_from" class="internal-link" title="nltk.corpus.reader.util.StreamBackedCorpusView.iterate_from">iterate​_from</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="baseclassvariable">
     
     <td>Class Variable</td>
-    <td><code><a href="nltk.corpus.reader.util.StreamBackedCorpusView.html#fileid">fileid</a></code></td>
+    <td><code><a href="nltk.corpus.reader.util.StreamBackedCorpusView.html#fileid" class="internal-link" title="nltk.corpus.reader.util.StreamBackedCorpusView.fileid">fileid</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="basemethod private">
     
     <td>Method</td>
-    <td><code><a href="nltk.corpus.reader.util.StreamBackedCorpusView.html#_open">_open</a></code></td>
-    <td><span>Open the file stream associated with this corpus view.  This will be called performed if any value is read from the view while its file stream is closed.</span></td>
+    <td><code><a href="nltk.corpus.reader.util.StreamBackedCorpusView.html#_open" class="internal-link" title="nltk.corpus.reader.util.StreamBackedCorpusView._open">_open</a></code></td>
+    <td>Open the file stream associated with this corpus view.  This will be called performed if any value is read from the view while its file stream is closed.</td>
   </tr><tr class="baseinstancevariable private">
     
     <td>Instance Variable</td>
-    <td><code><a href="nltk.corpus.reader.util.StreamBackedCorpusView.html#_block_reader">_block_reader</a></code></td>
-    <td><span>The function used to read
-a single block from the underlying file stream.</span></td>
+    <td><code><a href="nltk.corpus.reader.util.StreamBackedCorpusView.html#_block_reader" class="internal-link" title="nltk.corpus.reader.util.StreamBackedCorpusView._block_reader">_block​_reader</a></code></td>
+    <td>The function used to read
+a single block from the underlying file stream.</td>
   </tr><tr class="baseinstancevariable private">
     
     <td>Instance Variable</td>
-    <td><code><a href="nltk.corpus.reader.util.StreamBackedCorpusView.html#_cache">_cache</a></code></td>
-    <td><span>A cache of the most recently read block.  It
+    <td><code><a href="nltk.corpus.reader.util.StreamBackedCorpusView.html#_cache" class="internal-link" title="nltk.corpus.reader.util.StreamBackedCorpusView._cache">_cache</a></code></td>
+    <td>A cache of the most recently read block.  It
 is encoded as a tuple (start_toknum, end_toknum, tokens), where
 start_toknum is the token index of the first token in the block;
 end_toknum is the token index of the first token not in the
-block; and tokens is a list of the tokens in the block.</span></td>
+block; and tokens is a list of the tokens in the block.</td>
   </tr><tr class="baseinstancevariable private">
     
     <td>Instance Variable</td>
-    <td><code><a href="nltk.corpus.reader.util.StreamBackedCorpusView.html#_current_blocknum">_current_blocknum</a></code></td>
+    <td><code><a href="nltk.corpus.reader.util.StreamBackedCorpusView.html#_current_blocknum" class="internal-link" title="nltk.corpus.reader.util.StreamBackedCorpusView._current_blocknum">_current​_blocknum</a></code></td>
     <td><span class="undocumented">No summary</span></td>
   </tr><tr class="baseinstancevariable private">
     
     <td>Instance Variable</td>
-    <td><code><a href="nltk.corpus.reader.util.StreamBackedCorpusView.html#_current_toknum">_current_toknum</a></code></td>
+    <td><code><a href="nltk.corpus.reader.util.StreamBackedCorpusView.html#_current_toknum" class="internal-link" title="nltk.corpus.reader.util.StreamBackedCorpusView._current_toknum">_current​_toknum</a></code></td>
     <td><span class="undocumented">No summary</span></td>
   </tr><tr class="baseinstancevariable private">
     
     <td>Instance Variable</td>
-    <td><code><a href="nltk.corpus.reader.util.StreamBackedCorpusView.html#_encoding">_encoding</a></code></td>
+    <td><code><a href="nltk.corpus.reader.util.StreamBackedCorpusView.html#_encoding" class="internal-link" title="nltk.corpus.reader.util.StreamBackedCorpusView._encoding">_encoding</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="baseinstancevariable private">
     
     <td>Instance Variable</td>
-    <td><code><a href="nltk.corpus.reader.util.StreamBackedCorpusView.html#_eofpos">_eofpos</a></code></td>
-    <td><span>The character position of the last character in the
+    <td><code><a href="nltk.corpus.reader.util.StreamBackedCorpusView.html#_eofpos" class="internal-link" title="nltk.corpus.reader.util.StreamBackedCorpusView._eofpos">_eofpos</a></code></td>
+    <td>The character position of the last character in the
 file.  This is calculated when the corpus view is initialized,
-and is used to decide when the end of file has been reached.</span></td>
+and is used to decide when the end of file has been reached.</td>
   </tr><tr class="baseinstancevariable private">
     
     <td>Instance Variable</td>
-    <td><code><a href="nltk.corpus.reader.util.StreamBackedCorpusView.html#_fileid">_fileid</a></code></td>
+    <td><code><a href="nltk.corpus.reader.util.StreamBackedCorpusView.html#_fileid" class="internal-link" title="nltk.corpus.reader.util.StreamBackedCorpusView._fileid">_fileid</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="baseinstancevariable private">
     
     <td>Instance Variable</td>
-    <td><code><a href="nltk.corpus.reader.util.StreamBackedCorpusView.html#_filepos">_filepos</a></code></td>
-    <td><span>A list containing the file position of each block
+    <td><code><a href="nltk.corpus.reader.util.StreamBackedCorpusView.html#_filepos" class="internal-link" title="nltk.corpus.reader.util.StreamBackedCorpusView._filepos">_filepos</a></code></td>
+    <td>A list containing the file position of each block
 that has been processed.  In particular, <tt class="rst-docutils literal">_toknum[i]</tt> is the
 file position of the first character in block <tt class="rst-docutils literal">i</tt>.  Together
 with <tt class="rst-docutils literal">_toknum</tt>, this forms a partial mapping between token
-indices and file positions.</span></td>
+indices and file positions.</td>
   </tr><tr class="baseinstancevariable private">
     
     <td>Instance Variable</td>
-    <td><code><a href="nltk.corpus.reader.util.StreamBackedCorpusView.html#_len">_len</a></code></td>
-    <td><span>The total number of tokens in the corpus, if known;
-or None, if the number of tokens is not yet known.</span></td>
+    <td><code><a href="nltk.corpus.reader.util.StreamBackedCorpusView.html#_len" class="internal-link" title="nltk.corpus.reader.util.StreamBackedCorpusView._len">_len</a></code></td>
+    <td>The total number of tokens in the corpus, if known;
+or None, if the number of tokens is not yet known.</td>
   </tr><tr class="baseinstancevariable private">
     
     <td>Instance Variable</td>
-    <td><code><a href="nltk.corpus.reader.util.StreamBackedCorpusView.html#_stream">_stream</a></code></td>
-    <td><span>The stream used to access the underlying corpus file.</span></td>
+    <td><code><a href="nltk.corpus.reader.util.StreamBackedCorpusView.html#_stream" class="internal-link" title="nltk.corpus.reader.util.StreamBackedCorpusView._stream">_stream</a></code></td>
+    <td>The stream used to access the underlying corpus file.</td>
   </tr><tr class="baseinstancevariable private">
     
     <td>Instance Variable</td>
-    <td><code><a href="nltk.corpus.reader.util.StreamBackedCorpusView.html#_toknum">_toknum</a></code></td>
-    <td><span>A list containing the token index of each block
+    <td><code><a href="nltk.corpus.reader.util.StreamBackedCorpusView.html#_toknum" class="internal-link" title="nltk.corpus.reader.util.StreamBackedCorpusView._toknum">_toknum</a></code></td>
+    <td>A list containing the token index of each block
 that has been processed.  In particular, <tt class="rst-docutils literal">_toknum[i]</tt> is the
 token index of the first token in block <tt class="rst-docutils literal">i</tt>.  Together
 with <tt class="rst-docutils literal">_filepos</tt>, this forms a partial mapping between token
-indices and file positions.</span></td>
+indices and file positions.</td>
   </tr>
 </table>
           
@@ -434,9 +450,9 @@ indices and file positions.</span></td>
     </a>
   </div>
   <div class="docstring functionBody">
-    <div class="interfaceinfo">overrides <code><a href="nltk.corpus.reader.xmldocs.XMLCorpusView.html#__init__">nltk.corpus.reader.xmldocs.XMLCorpusView.__init__</a></code></div>
+    <div class="interfaceinfo">overrides <code><a href="nltk.corpus.reader.xmldocs.XMLCorpusView.html#__init__" class="internal-link">nltk.corpus.reader.xmldocs.XMLCorpusView.__init__</a></code></div>
     
-    <div><table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">fileid</span></td><td class="fieldArgDesc">The name of the underlying file.</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">sent</span></td><td class="fieldArgDesc">If true, include sentence bracketing.</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">tag</span></td><td class="fieldArgDesc">The name of the tagset to use, or None for no tags.</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">strip_space</span></td><td class="fieldArgDesc">If true, strip spaces from word tokens.</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">stem</span></td><td class="fieldArgDesc">If true, then substitute stems for words.</td></tr></table></div>
+    <div><table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">fileid</span></td><td class="fieldArgDesc">The name of the underlying file.</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">sent</span></td><td class="fieldArgDesc">If true, include sentence bracketing.</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">tag</span></td><td class="fieldArgDesc">The name of the tagset to use, or None for no tags.</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">strip​_space</span></td><td class="fieldArgDesc">If true, strip spaces from word tokens.</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">stem</span></td><td class="fieldArgDesc">If true, then substitute stems for words.</td></tr></table></div>
   </div>
 </div><div class="basemethod">
   
@@ -456,7 +472,7 @@ indices and file positions.</span></td>
     </a>
   </div>
   <div class="docstring functionBody">
-    <div class="interfaceinfo">overrides <code><a href="nltk.corpus.reader.xmldocs.XMLCorpusView.html#handle_elt">nltk.corpus.reader.xmldocs.XMLCorpusView.handle_elt</a></code></div>
+    <div class="interfaceinfo">overrides <code><a href="nltk.corpus.reader.xmldocs.XMLCorpusView.html#handle_elt" class="internal-link">nltk.corpus.reader.xmldocs.XMLCorpusView.handle_elt</a></code></div>
     
     <div>Convert an element into an appropriate value for inclusion in
 the view.  Unless overridden by a subclass or by the
@@ -557,6 +573,7 @@ top-level <tt class="rst-docutils literal">foo</tt> element.</td></tr><tr class=
     <div>These tags are ignored. For their description refer to the
 technical documentation, for example,
 <a class="rst-reference external" href="http://www.natcorp.ox.ac.uk/docs/URG/ref-vocal.html" target="_top">http://www.natcorp.ox.ac.uk/docs/URG/ref-vocal.html</a></div>
+    
   </div>
 </div><div class="baseinstancevariable">
   
@@ -579,6 +596,7 @@ technical documentation, for example,
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    
   </div>
 </div><div class="baseinstancevariable">
   
@@ -601,6 +619,7 @@ technical documentation, for example,
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    
   </div>
 </div><div class="baseinstancevariable">
   
@@ -623,6 +642,7 @@ technical documentation, for example,
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    
   </div>
 </div><div class="baseinstancevariable">
   
@@ -645,6 +665,7 @@ technical documentation, for example,
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    
   </div>
 </div><div class="baseinstancevariable private">
   
@@ -667,6 +688,7 @@ technical documentation, for example,
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    
   </div>
 </div><div class="baseinstancevariable private">
   
@@ -689,6 +711,7 @@ technical documentation, for example,
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    
   </div>
 </div><div class="baseinstancevariable private">
   
@@ -711,6 +734,7 @@ technical documentation, for example,
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    
   </div>
 </div><div class="baseinstancevariable private">
   
@@ -733,6 +757,7 @@ technical documentation, for example,
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    
   </div>
 </div><div class="baseinstancevariable private">
   
@@ -752,12 +777,13 @@ technical documentation, for example,
     </a>
   </div>
   <div class="functionBody">
-    <div class="interfaceinfo">overrides <code><a href="nltk.corpus.reader.xmldocs.XMLCorpusView.html#_tag_context">nltk.corpus.reader.xmldocs.XMLCorpusView._tag_context</a></code></div>
+    <div class="interfaceinfo">overrides <code><a href="nltk.corpus.reader.xmldocs.XMLCorpusView.html#_tag_context" class="internal-link">nltk.corpus.reader.xmldocs.XMLCorpusView._tag_context</a></code></div>
     
     <div>A dictionary mapping from file positions (as returned by
 <tt class="rst-docutils literal">stream.seek()</tt> to XML contexts.  An XML context is a
 tuple of XML tag names, indicating which tags have not yet
 been closed.</div>
+    
   </div>
 </div>
 
@@ -769,7 +795,7 @@ been closed.</div>
   <div class="container">
     <a href="index.html">API Documentation</a> for <a href="http://www.nltk.org/" class="projecthome">nltk-3.6.2</a>,
   generated by <a href="https://github.com/twisted/pydoctor/">pydoctor</a>
-    21.2.2 at 2022-01-06 17:36:51.
+    22.2.2.dev0 at 2022-03-04 05:57:24.
   </div>
 </footer>
 

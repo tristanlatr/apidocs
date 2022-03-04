@@ -7,7 +7,7 @@
   <head>
     
     <title>nltk.corpus.reader.senseval.SensevalCorpusReader</title>
-    <meta name="generator" content="pydoctor 21.2.2"> 
+    <meta name="generator" content="pydoctor 22.2.2.dev0"> 
         
     </meta>
     <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
@@ -44,69 +44,82 @@
           Names
         </a>
 
-        <form action="search-results.html" id="search-box-container">
+        <div id="search-box-container">
           <div class="input-group">
-            <input id="search-box" name="search-query" placeholder="Search..." aria-label="Search" minlength="2" class="form-control" />
+            <input id="search-box" type="search" name="search-query" placeholder="Search..." aria-label="Search" minlength="2" class="form-control" autocomplete="off" />
+            
             <span class="input-group-btn">
-              <button class="btn btn-default" type="submit" title="Search"><img src="fonts/search.svg" alt="Search!" /></button>
-              <a class="btn btn-default" id="search-help-button" title="Help" onclick="toggleSearchHelpText()"><img src="fonts/info.svg" alt="Help!" /></a>
+              <a style="display: none;" class="btn btn-default" id="search-clear-button" title="Clear" onclick="clearSearch()"><img src="fonts/x-circle.svg" alt="Clear" /></a>
+              <a class="btn btn-default" id="search-help-button" title="Help" onclick="toggleSearchHelpText()"><img src="fonts/info.svg" alt="Help" /></a>
             </span>
           </div>
-        </form>
+        </div>
 
-        <div class="rst-admonition hint" id="search-help-box">
+      </div>
+
+      <div id="search-results-container" style="display: none;">
+        <div>
+          <span class="label label-default" id="search-docstrings-button">
+            <a title="Search in docstrings" onclick="toggleSearchInDocstrings()">search in docstrings</a></span>
+        </div>
+
+        <noscript>
+            <h1>Cannot search: JavaScript is not supported/enabled in your browser.</h1>
+        </noscript>
+
+        <div class="hint" id="search-help-box">
           <p class="rst-last">
       
             Search bar offers the following options:
             <ul>   
                 <li>
                   <strong>Term presence.</strong> The below example searches for documents that 
-                    must contain “foo”, might contain “bar” and must not contain “baz”:
-                  <br /> <code>'+foo bar -baz'</code>
+                    must contain “foo”, might contain “bar” and must not contain “baz”: <code>+foo bar -baz</code>
                 </li> 
 
                 <li>
-                  <strong>Wildcards.</strong> The below example searches for documents with words beginning with “foo”:
-                  <br /> <code>'foo*'</code>
+                  <strong>Wildcards.</strong> The below example searches for documents with words beginning with “foo”: <code>foo*</code>
                 </li> 
 
                 <li>
-                  <strong>Search in specific fields.</strong> The following search matches all documents 
-                  that contains "foo" in their full dotted name and with “bar” in any field:
-                  <br /> <code>'+fullName:*foo* +bar'</code>
+                  <strong>Search in specific fields.</strong> The following search matches all objects 
+                  in "twisted.mail" that matches “search”: <code>+qname:twisted.mail.* +search</code>
 
                   <p>
-                    Possible fields: 'name', 'docstring', 'fullName'.
+                    Possible fields: 'name', 'qname' (fully qualified name), 'docstring', and 'kind'.
+                    Last two fields are only applicable if "search in docstrings" is enabled.
                   </p>
                 </li>
 
                 <li>
                   <strong>Fuzzy matches.</strong> The following search matches all documents 
-                  that have a word within 1 edit distance of “foo”:
-                  <br /> <code>'foo~1'</code>
+                  that have a word within 1 edit distance of “foo”: <code>foo~1</code>
                 </li>
             </ul>
 
           </p>
         </div>
 
-      </div>
+        <div id="search-status"> </div>
+        
+        <div class="warning" id="search-warn-box" style="display: none;">
+          <p class="rst-last"><span id="search-warn"></span></p>
+        </div>
 
+        <table id="search-results">
+          <!-- Filled dynamically by JS -->
+        </table>
+        
+        <div style="margin-top: 8px;">
+          <p>Results provided by <a href="https://lunrjs.com">Lunr.js</a></p>
+        </div>
+      </div>
 
     </div>
   </div>
 
-  <script>
- 
-    function toggleSearchHelpText() {
-        document.body.classList.toggle("search-help-hidden");
-    }
-    // Init search and help text
-    document.getElementById('search-box-container').style.display = 'block';
-    document.getElementById('search-help-box').style.display = 'block';
-    document.body.classList.add("search-help-hidden");
-
-  </script>
+  <script src="ajax.js" type="text/javascript"></script>
+  <script src="search.js" type="text/javascript"></script>
 
 </nav>
 
@@ -115,7 +128,7 @@
     <div class="container">
 
       <div class="page-header">
-        <h1 class="class"><code><code><a href="nltk.html">nltk</a></code><wbr></wbr>.<code><a href="nltk.corpus.html">corpus</a></code><wbr></wbr>.<code><a href="nltk.corpus.reader.html">reader</a></code><wbr></wbr>.<code><a href="nltk.corpus.reader.senseval.html">senseval</a></code><wbr></wbr>.<code><a href="nltk.corpus.reader.senseval.SensevalCorpusReader.html">SensevalCorpusReader</a></code></code></h1>
+        <h1 class="class"><code><code><a href="index.html" class="internal-link">nltk</a></code><wbr></wbr>.<code><a href="nltk.corpus.html" class="internal-link" title="nltk.corpus">corpus</a></code><wbr></wbr>.<code><a href="nltk.corpus.reader.html" class="internal-link" title="nltk.corpus.reader">reader</a></code><wbr></wbr>.<code><a href="nltk.corpus.reader.senseval.html" class="internal-link" title="nltk.corpus.reader.senseval">senseval</a></code><wbr></wbr>.<code><a href="nltk.corpus.reader.senseval.SensevalCorpusReader.html" class="internal-link" title="nltk.corpus.reader.senseval.SensevalCorpusReader">SensevalCorpusReader</a></code></code></h1>
         <div id="showPrivate">
           <button class="btn btn-link" onclick="togglePrivate()">Toggle Private API</button>
         </div>
@@ -126,7 +139,7 @@
       </div>
 
       <div class="extrasDocstring">
-        <p><code><span class="py-keyword">class</span> <span class="py-defname">SensevalCorpusReader</span>(<a href="nltk.corpus.reader.api.CorpusReader.html" title="nltk.corpus.reader.api.CorpusReader">CorpusReader</a>): <a href="https://github.com/nltk/nltk/tree/3.6.2/nltk/corpus/reader/senseval.py#L50" class="sourceLink">(source)</a></code></p>
+        <p><code><span class="py-keyword">class</span> <span class="py-defname">SensevalCorpusReader</span>(<a href="nltk.corpus.reader.api.CorpusReader.html" class="internal-link" title="nltk.corpus.reader.api.CorpusReader">CorpusReader</a>): <a href="https://github.com/nltk/nltk/tree/3.6.2/nltk/corpus/reader/senseval.py#L50" class="sourceLink">(source)</a></code></p>
         <p><a href="classIndex.html#nltk.corpus.reader.senseval.SensevalCorpusReader">View In Hierarchy</a></p>
       </div>
 
@@ -141,23 +154,23 @@
   <tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#instances">instances</a></code></td>
+    <td><code><a href="#instances" class="internal-link" title="nltk.corpus.reader.senseval.SensevalCorpusReader.instances">instances</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#raw">raw</a></code></td>
-    <td><span></span></td>
+    <td><code><a href="#raw" class="internal-link" title="nltk.corpus.reader.senseval.SensevalCorpusReader.raw">raw</a></code></td>
+    <td></td>
   </tr><tr class="method private">
     
     <td>Method</td>
-    <td><code><a href="#_entry">_entry</a></code></td>
+    <td><code><a href="#_entry" class="internal-link" title="nltk.corpus.reader.senseval.SensevalCorpusReader._entry">_entry</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr>
 </table>
         
           <p class="inheritedFrom">
-            Inherited from <code><a href="nltk.corpus.reader.api.CorpusReader.html">CorpusReader</a></code>:
+            Inherited from <code><a href="nltk.corpus.reader.api.CorpusReader.html" class="internal-link" title="nltk.corpus.reader.api.CorpusReader">CorpusReader</a></code>:
           </p>
           <table class="children sortable" id="id446">
   
@@ -165,87 +178,87 @@
   <tr class="basemethod">
     
     <td>Method</td>
-    <td><code><a href="nltk.corpus.reader.api.CorpusReader.html#__init__">__init__</a></code></td>
+    <td><code><a href="nltk.corpus.reader.api.CorpusReader.html#__init__" class="internal-link" title="nltk.corpus.reader.api.CorpusReader.__init__">__init__</a></code></td>
     <td><span class="undocumented">No summary</span></td>
   </tr><tr class="basemethod">
     
     <td>Method</td>
-    <td><code><a href="nltk.corpus.reader.api.CorpusReader.html#__repr__">__repr__</a></code></td>
+    <td><code><a href="nltk.corpus.reader.api.CorpusReader.html#__repr__" class="internal-link" title="nltk.corpus.reader.api.CorpusReader.__repr__">__repr__</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="basemethod">
     
     <td>Method</td>
-    <td><code><a href="nltk.corpus.reader.api.CorpusReader.html#abspath">abspath</a></code></td>
-    <td><span>Return the absolute path for the given file.</span></td>
+    <td><code><a href="nltk.corpus.reader.api.CorpusReader.html#abspath" class="internal-link" title="nltk.corpus.reader.api.CorpusReader.abspath">abspath</a></code></td>
+    <td>Return the absolute path for the given file.</td>
   </tr><tr class="basemethod">
     
     <td>Method</td>
-    <td><code><a href="nltk.corpus.reader.api.CorpusReader.html#abspaths">abspaths</a></code></td>
-    <td><span>Return a list of the absolute paths for all fileids in this corpus; or for the given list of fileids, if specified.</span></td>
+    <td><code><a href="nltk.corpus.reader.api.CorpusReader.html#abspaths" class="internal-link" title="nltk.corpus.reader.api.CorpusReader.abspaths">abspaths</a></code></td>
+    <td>Return a list of the absolute paths for all fileids in this corpus; or for the given list of fileids, if specified.</td>
   </tr><tr class="basemethod">
     
     <td>Method</td>
-    <td><code><a href="nltk.corpus.reader.api.CorpusReader.html#citation">citation</a></code></td>
-    <td><span>Return the contents of the corpus citation.bib file, if it exists.</span></td>
+    <td><code><a href="nltk.corpus.reader.api.CorpusReader.html#citation" class="internal-link" title="nltk.corpus.reader.api.CorpusReader.citation">citation</a></code></td>
+    <td>Return the contents of the corpus citation.bib file, if it exists.</td>
   </tr><tr class="basemethod">
     
     <td>Method</td>
-    <td><code><a href="nltk.corpus.reader.api.CorpusReader.html#encoding">encoding</a></code></td>
-    <td><span>Return the unicode encoding for the given corpus file, if known. If the encoding is unknown, or if the given file should be processed using byte strings (str), then return None.</span></td>
+    <td><code><a href="nltk.corpus.reader.api.CorpusReader.html#encoding" class="internal-link" title="nltk.corpus.reader.api.CorpusReader.encoding">encoding</a></code></td>
+    <td>Return the unicode encoding for the given corpus file, if known. If the encoding is unknown, or if the given file should be processed using byte strings (str), then return None.</td>
   </tr><tr class="basemethod">
     
     <td>Method</td>
-    <td><code><a href="nltk.corpus.reader.api.CorpusReader.html#ensure_loaded">ensure_loaded</a></code></td>
+    <td><code><a href="nltk.corpus.reader.api.CorpusReader.html#ensure_loaded" class="internal-link" title="nltk.corpus.reader.api.CorpusReader.ensure_loaded">ensure​_loaded</a></code></td>
     <td><span class="undocumented">No summary</span></td>
   </tr><tr class="basemethod">
     
     <td>Method</td>
-    <td><code><a href="nltk.corpus.reader.api.CorpusReader.html#fileids">fileids</a></code></td>
-    <td><span>Return a list of file identifiers for the fileids that make up this corpus.</span></td>
+    <td><code><a href="nltk.corpus.reader.api.CorpusReader.html#fileids" class="internal-link" title="nltk.corpus.reader.api.CorpusReader.fileids">fileids</a></code></td>
+    <td>Return a list of file identifiers for the fileids that make up this corpus.</td>
   </tr><tr class="basemethod">
     
     <td>Method</td>
-    <td><code><a href="nltk.corpus.reader.api.CorpusReader.html#license">license</a></code></td>
-    <td><span>Return the contents of the corpus LICENSE file, if it exists.</span></td>
+    <td><code><a href="nltk.corpus.reader.api.CorpusReader.html#license" class="internal-link" title="nltk.corpus.reader.api.CorpusReader.license">license</a></code></td>
+    <td>Return the contents of the corpus LICENSE file, if it exists.</td>
   </tr><tr class="basemethod">
     
     <td>Method</td>
-    <td><code><a href="nltk.corpus.reader.api.CorpusReader.html#open">open</a></code></td>
-    <td><span>Return an open stream that can be used to read the given file. If the file's encoding is not None, then the stream will automatically decode the file's contents into unicode.</span></td>
+    <td><code><a href="nltk.corpus.reader.api.CorpusReader.html#open" class="internal-link" title="nltk.corpus.reader.api.CorpusReader.open">open</a></code></td>
+    <td>Return an open stream that can be used to read the given file. If the file's encoding is not None, then the stream will automatically decode the file's contents into unicode.</td>
   </tr><tr class="basemethod">
     
     <td>Method</td>
-    <td><code><a href="nltk.corpus.reader.api.CorpusReader.html#readme">readme</a></code></td>
-    <td><span>Return the contents of the corpus README file, if it exists.</span></td>
+    <td><code><a href="nltk.corpus.reader.api.CorpusReader.html#readme" class="internal-link" title="nltk.corpus.reader.api.CorpusReader.readme">readme</a></code></td>
+    <td>Return the contents of the corpus README file, if it exists.</td>
   </tr><tr class="baseclassvariable">
     
     <td>Class Variable</td>
-    <td><code><a href="nltk.corpus.reader.api.CorpusReader.html#root">root</a></code></td>
+    <td><code><a href="nltk.corpus.reader.api.CorpusReader.html#root" class="internal-link" title="nltk.corpus.reader.api.CorpusReader.root">root</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="basemethod private">
     
     <td>Method</td>
-    <td><code><a href="nltk.corpus.reader.api.CorpusReader.html#_get_root">_get_root</a></code></td>
+    <td><code><a href="nltk.corpus.reader.api.CorpusReader.html#_get_root" class="internal-link" title="nltk.corpus.reader.api.CorpusReader._get_root">_get​_root</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="baseinstancevariable private">
     
     <td>Instance Variable</td>
-    <td><code><a href="nltk.corpus.reader.api.CorpusReader.html#_encoding">_encoding</a></code></td>
-    <td><span>The default unicode encoding for the fileids that make up this corpus.  If <tt class="rst-docutils literal">encoding</tt> is None, then the file contents are processed using byte strings.</span></td>
+    <td><code><a href="nltk.corpus.reader.api.CorpusReader.html#_encoding" class="internal-link" title="nltk.corpus.reader.api.CorpusReader._encoding">_encoding</a></code></td>
+    <td>The default unicode encoding for the fileids that make up this corpus.  If <tt class="rst-docutils literal">encoding</tt> is None, then the file contents are processed using byte strings.</td>
   </tr><tr class="baseinstancevariable private">
     
     <td>Instance Variable</td>
-    <td><code><a href="nltk.corpus.reader.api.CorpusReader.html#_fileids">_fileids</a></code></td>
-    <td><span>A list of the relative paths for the fileids that make up this corpus.</span></td>
+    <td><code><a href="nltk.corpus.reader.api.CorpusReader.html#_fileids" class="internal-link" title="nltk.corpus.reader.api.CorpusReader._fileids">_fileids</a></code></td>
+    <td>A list of the relative paths for the fileids that make up this corpus.</td>
   </tr><tr class="baseinstancevariable private">
     
     <td>Instance Variable</td>
-    <td><code><a href="nltk.corpus.reader.api.CorpusReader.html#_root">_root</a></code></td>
-    <td><span>The root directory for this corpus.</span></td>
+    <td><code><a href="nltk.corpus.reader.api.CorpusReader.html#_root" class="internal-link" title="nltk.corpus.reader.api.CorpusReader._root">_root</a></code></td>
+    <td>The root directory for this corpus.</td>
   </tr><tr class="baseinstancevariable private">
     
     <td>Instance Variable</td>
-    <td><code><a href="nltk.corpus.reader.api.CorpusReader.html#_tagset">_tagset</a></code></td>
+    <td><code><a href="nltk.corpus.reader.api.CorpusReader.html#_tagset" class="internal-link" title="nltk.corpus.reader.api.CorpusReader._tagset">_tagset</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr>
 </table>
@@ -332,7 +345,7 @@
   <div class="container">
     <a href="index.html">API Documentation</a> for <a href="http://www.nltk.org/" class="projecthome">nltk-3.6.2</a>,
   generated by <a href="https://github.com/twisted/pydoctor/">pydoctor</a>
-    21.2.2 at 2022-01-06 17:36:51.
+    22.2.2.dev0 at 2022-03-04 05:57:24.
   </div>
 </footer>
 

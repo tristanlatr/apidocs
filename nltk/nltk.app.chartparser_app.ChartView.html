@@ -7,7 +7,7 @@
   <head>
     
     <title>nltk.app.chartparser_app.ChartView</title>
-    <meta name="generator" content="pydoctor 21.2.2"> 
+    <meta name="generator" content="pydoctor 22.2.2.dev0"> 
         
     </meta>
     <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
@@ -44,69 +44,82 @@
           Names
         </a>
 
-        <form action="search-results.html" id="search-box-container">
+        <div id="search-box-container">
           <div class="input-group">
-            <input id="search-box" name="search-query" placeholder="Search..." aria-label="Search" minlength="2" class="form-control" />
+            <input id="search-box" type="search" name="search-query" placeholder="Search..." aria-label="Search" minlength="2" class="form-control" autocomplete="off" />
+            
             <span class="input-group-btn">
-              <button class="btn btn-default" type="submit" title="Search"><img src="fonts/search.svg" alt="Search!" /></button>
-              <a class="btn btn-default" id="search-help-button" title="Help" onclick="toggleSearchHelpText()"><img src="fonts/info.svg" alt="Help!" /></a>
+              <a style="display: none;" class="btn btn-default" id="search-clear-button" title="Clear" onclick="clearSearch()"><img src="fonts/x-circle.svg" alt="Clear" /></a>
+              <a class="btn btn-default" id="search-help-button" title="Help" onclick="toggleSearchHelpText()"><img src="fonts/info.svg" alt="Help" /></a>
             </span>
           </div>
-        </form>
+        </div>
 
-        <div class="rst-admonition hint" id="search-help-box">
+      </div>
+
+      <div id="search-results-container" style="display: none;">
+        <div>
+          <span class="label label-default" id="search-docstrings-button">
+            <a title="Search in docstrings" onclick="toggleSearchInDocstrings()">search in docstrings</a></span>
+        </div>
+
+        <noscript>
+            <h1>Cannot search: JavaScript is not supported/enabled in your browser.</h1>
+        </noscript>
+
+        <div class="hint" id="search-help-box">
           <p class="rst-last">
       
             Search bar offers the following options:
             <ul>   
                 <li>
                   <strong>Term presence.</strong> The below example searches for documents that 
-                    must contain “foo”, might contain “bar” and must not contain “baz”:
-                  <br /> <code>'+foo bar -baz'</code>
+                    must contain “foo”, might contain “bar” and must not contain “baz”: <code>+foo bar -baz</code>
                 </li> 
 
                 <li>
-                  <strong>Wildcards.</strong> The below example searches for documents with words beginning with “foo”:
-                  <br /> <code>'foo*'</code>
+                  <strong>Wildcards.</strong> The below example searches for documents with words beginning with “foo”: <code>foo*</code>
                 </li> 
 
                 <li>
-                  <strong>Search in specific fields.</strong> The following search matches all documents 
-                  that contains "foo" in their full dotted name and with “bar” in any field:
-                  <br /> <code>'+fullName:*foo* +bar'</code>
+                  <strong>Search in specific fields.</strong> The following search matches all objects 
+                  in "twisted.mail" that matches “search”: <code>+qname:twisted.mail.* +search</code>
 
                   <p>
-                    Possible fields: 'name', 'docstring', 'fullName'.
+                    Possible fields: 'name', 'qname' (fully qualified name), 'docstring', and 'kind'.
+                    Last two fields are only applicable if "search in docstrings" is enabled.
                   </p>
                 </li>
 
                 <li>
                   <strong>Fuzzy matches.</strong> The following search matches all documents 
-                  that have a word within 1 edit distance of “foo”:
-                  <br /> <code>'foo~1'</code>
+                  that have a word within 1 edit distance of “foo”: <code>foo~1</code>
                 </li>
             </ul>
 
           </p>
         </div>
 
-      </div>
+        <div id="search-status"> </div>
+        
+        <div class="warning" id="search-warn-box" style="display: none;">
+          <p class="rst-last"><span id="search-warn"></span></p>
+        </div>
 
+        <table id="search-results">
+          <!-- Filled dynamically by JS -->
+        </table>
+        
+        <div style="margin-top: 8px;">
+          <p>Results provided by <a href="https://lunrjs.com">Lunr.js</a></p>
+        </div>
+      </div>
 
     </div>
   </div>
 
-  <script>
- 
-    function toggleSearchHelpText() {
-        document.body.classList.toggle("search-help-hidden");
-    }
-    // Init search and help text
-    document.getElementById('search-box-container').style.display = 'block';
-    document.getElementById('search-help-box').style.display = 'block';
-    document.body.classList.add("search-help-hidden");
-
-  </script>
+  <script src="ajax.js" type="text/javascript"></script>
+  <script src="search.js" type="text/javascript"></script>
 
 </nav>
 
@@ -115,7 +128,7 @@
     <div class="container">
 
       <div class="page-header">
-        <h1 class="class"><code><code><a href="nltk.html">nltk</a></code><wbr></wbr>.<code><a href="nltk.app.html">app</a></code><wbr></wbr>.<code><a href="nltk.app.chartparser_app.html">chartparser_app</a></code><wbr></wbr>.<code><a href="nltk.app.chartparser_app.ChartView.html">ChartView</a></code></code></h1>
+        <h1 class="class"><code><code><a href="index.html" class="internal-link">nltk</a></code><wbr></wbr>.<code><a href="nltk.app.html" class="internal-link" title="nltk.app">app</a></code><wbr></wbr>.<code><a href="nltk.app.chartparser_app.html" class="internal-link" title="nltk.app.chartparser_app">chartparser_app</a></code><wbr></wbr>.<code><a href="nltk.app.chartparser_app.ChartView.html" class="internal-link" title="nltk.app.chartparser_app.ChartView">ChartView</a></code></code></h1>
         <div id="showPrivate">
           <button class="btn btn-link" onclick="togglePrivate()">Toggle Private API</button>
         </div>
@@ -126,7 +139,7 @@
       </div>
 
       <div class="extrasDocstring">
-        <p><code><span class="py-keyword">class</span> <span class="py-defname">ChartView</span>(<span title="object">object</span>): <a href="https://github.com/nltk/nltk/tree/3.6.2/nltk/app/chartparser_app.py#L951" class="sourceLink">(source)</a></code></p>
+        <p><code><span class="py-keyword">class</span> <span class="py-defname">ChartView</span>(object): <a href="https://github.com/nltk/nltk/tree/3.6.2/nltk/app/chartparser_app.py#L951" class="sourceLink">(source)</a></code></p>
         <p><a href="classIndex.html#nltk.app.chartparser_app.ChartView">View In Hierarchy</a></p>
       </div>
 
@@ -143,355 +156,355 @@ parsing techniques.  It is also used by <tt class="rst-docutils literal">Chart.d
   <tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#__init__">__init__</a></code></td>
-    <td><span>Construct a new <tt class="rst-docutils literal">Chart</tt> display.</span></td>
+    <td><code><a href="#__init__" class="internal-link" title="nltk.app.chartparser_app.ChartView.__init__">__init__</a></code></td>
+    <td>Construct a new <tt class="rst-docutils literal">Chart</tt> display.</td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#add_callback">add_callback</a></code></td>
+    <td><code><a href="#add_callback" class="internal-link" title="nltk.app.chartparser_app.ChartView.add_callback">add​_callback</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#cycle_tree">cycle_tree</a></code></td>
+    <td><code><a href="#cycle_tree" class="internal-link" title="nltk.app.chartparser_app.ChartView.cycle_tree">cycle​_tree</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#draw">draw</a></code></td>
-    <td><span>Draw everything (from scratch).</span></td>
+    <td><code><a href="#draw" class="internal-link" title="nltk.app.chartparser_app.ChartView.draw">draw</a></code></td>
+    <td>Draw everything (from scratch).</td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#draw_tree">draw_tree</a></code></td>
+    <td><code><a href="#draw_tree" class="internal-link" title="nltk.app.chartparser_app.ChartView.draw_tree">draw​_tree</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#erase_tree">erase_tree</a></code></td>
+    <td><code><a href="#erase_tree" class="internal-link" title="nltk.app.chartparser_app.ChartView.erase_tree">erase​_tree</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#get_font_size">get_font_size</a></code></td>
+    <td><code><a href="#get_font_size" class="internal-link" title="nltk.app.chartparser_app.ChartView.get_font_size">get​_font​_size</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#mark_edge">mark_edge</a></code></td>
-    <td><span>Mark an edge</span></td>
+    <td><code><a href="#mark_edge" class="internal-link" title="nltk.app.chartparser_app.ChartView.mark_edge">mark​_edge</a></code></td>
+    <td>Mark an edge</td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#markonly_edge">markonly_edge</a></code></td>
+    <td><code><a href="#markonly_edge" class="internal-link" title="nltk.app.chartparser_app.ChartView.markonly_edge">markonly​_edge</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#page_down">page_down</a></code></td>
+    <td><code><a href="#page_down" class="internal-link" title="nltk.app.chartparser_app.ChartView.page_down">page​_down</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#page_up">page_up</a></code></td>
+    <td><code><a href="#page_up" class="internal-link" title="nltk.app.chartparser_app.ChartView.page_up">page​_up</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#remove_callback">remove_callback</a></code></td>
+    <td><code><a href="#remove_callback" class="internal-link" title="nltk.app.chartparser_app.ChartView.remove_callback">remove​_callback</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#scroll_down">scroll_down</a></code></td>
+    <td><code><a href="#scroll_down" class="internal-link" title="nltk.app.chartparser_app.ChartView.scroll_down">scroll​_down</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#scroll_up">scroll_up</a></code></td>
+    <td><code><a href="#scroll_up" class="internal-link" title="nltk.app.chartparser_app.ChartView.scroll_up">scroll​_up</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#set_font_size">set_font_size</a></code></td>
+    <td><code><a href="#set_font_size" class="internal-link" title="nltk.app.chartparser_app.ChartView.set_font_size">set​_font​_size</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#unmark_edge">unmark_edge</a></code></td>
-    <td><span>Unmark an edge (or all edges)</span></td>
+    <td><code><a href="#unmark_edge" class="internal-link" title="nltk.app.chartparser_app.ChartView.unmark_edge">unmark​_edge</a></code></td>
+    <td>Unmark an edge (or all edges)</td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#update">update</a></code></td>
+    <td><code><a href="#update" class="internal-link" title="nltk.app.chartparser_app.ChartView.update">update</a></code></td>
     <td><span class="undocumented">No summary</span></td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#view_edge">view_edge</a></code></td>
+    <td><code><a href="#view_edge" class="internal-link" title="nltk.app.chartparser_app.ChartView.view_edge">view​_edge</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method private">
     
     <td>Method</td>
-    <td><code><a href="#_add_edge">_add_edge</a></code></td>
-    <td><span>Add a single edge to the ChartView:</span></td>
+    <td><code><a href="#_add_edge" class="internal-link" title="nltk.app.chartparser_app.ChartView._add_edge">_add​_edge</a></code></td>
+    <td>Add a single edge to the ChartView:</td>
   </tr><tr class="method private">
     
     <td>Method</td>
-    <td><code><a href="#_analyze">_analyze</a></code></td>
-    <td><span>Analyze the sentence string, to figure out how big a unit needs to be, How big the tree should be, etc.</span></td>
+    <td><code><a href="#_analyze" class="internal-link" title="nltk.app.chartparser_app.ChartView._analyze">_analyze</a></code></td>
+    <td>Analyze the sentence string, to figure out how big a unit needs to be, How big the tree should be, etc.</td>
   </tr><tr class="method private">
     
     <td>Method</td>
-    <td><code><a href="#_analyze_edge">_analyze_edge</a></code></td>
-    <td><span>Given a new edge, recalculate:</span></td>
+    <td><code><a href="#_analyze_edge" class="internal-link" title="nltk.app.chartparser_app.ChartView._analyze_edge">_analyze​_edge</a></code></td>
+    <td>Given a new edge, recalculate:</td>
   </tr><tr class="method private">
     
     <td>Method</td>
-    <td><code><a href="#_color_edge">_color_edge</a></code></td>
-    <td><span>Color in an edge with the given colors. If no colors are specified, use intelligent defaults (dependent on selection, etc.)</span></td>
+    <td><code><a href="#_color_edge" class="internal-link" title="nltk.app.chartparser_app.ChartView._color_edge">_color​_edge</a></code></td>
+    <td>Color in an edge with the given colors. If no colors are specified, use intelligent defaults (dependent on selection, etc.)</td>
   </tr><tr class="method private">
     
     <td>Method</td>
-    <td><code><a href="#_configure">_configure</a></code></td>
+    <td><code><a href="#_configure" class="internal-link" title="nltk.app.chartparser_app.ChartView._configure">_configure</a></code></td>
     <td><span class="undocumented">No summary</span></td>
   </tr><tr class="method private">
     
     <td>Method</td>
-    <td><code><a href="#_draw_edge">_draw_edge</a></code></td>
-    <td><span>Draw a single edge on the ChartView.</span></td>
+    <td><code><a href="#_draw_edge" class="internal-link" title="nltk.app.chartparser_app.ChartView._draw_edge">_draw​_edge</a></code></td>
+    <td>Draw a single edge on the ChartView.</td>
   </tr><tr class="method private">
     
     <td>Method</td>
-    <td><code><a href="#_draw_loclines">_draw_loclines</a></code></td>
-    <td><span>Draw location lines.  These are vertical gridlines used to show where each location unit is.</span></td>
+    <td><code><a href="#_draw_loclines" class="internal-link" title="nltk.app.chartparser_app.ChartView._draw_loclines">_draw​_loclines</a></code></td>
+    <td>Draw location lines.  These are vertical gridlines used to show where each location unit is.</td>
   </tr><tr class="method private">
     
     <td>Method</td>
-    <td><code><a href="#_draw_sentence">_draw_sentence</a></code></td>
-    <td><span>Draw the sentence string.</span></td>
+    <td><code><a href="#_draw_sentence" class="internal-link" title="nltk.app.chartparser_app.ChartView._draw_sentence">_draw​_sentence</a></code></td>
+    <td>Draw the sentence string.</td>
   </tr><tr class="method private">
     
     <td>Method</td>
-    <td><code><a href="#_draw_treecycle">_draw_treecycle</a></code></td>
+    <td><code><a href="#_draw_treecycle" class="internal-link" title="nltk.app.chartparser_app.ChartView._draw_treecycle">_draw​_treecycle</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method private">
     
     <td>Method</td>
-    <td><code><a href="#_draw_treetok">_draw_treetok</a></code></td>
-    <td><span></span></td>
+    <td><code><a href="#_draw_treetok" class="internal-link" title="nltk.app.chartparser_app.ChartView._draw_treetok">_draw​_treetok</a></code></td>
+    <td></td>
   </tr><tr class="method private">
     
     <td>Method</td>
-    <td><code><a href="#_edge_conflict">_edge_conflict</a></code></td>
-    <td><span>Return True if the given edge overlaps with any edge on the given level.  This is used by _add_edge to figure out what level a new edge should be added to.</span></td>
+    <td><code><a href="#_edge_conflict" class="internal-link" title="nltk.app.chartparser_app.ChartView._edge_conflict">_edge​_conflict</a></code></td>
+    <td>Return True if the given edge overlaps with any edge on the given level.  This is used by _add_edge to figure out what level a new edge should be added to.</td>
   </tr><tr class="method private">
     
     <td>Method</td>
-    <td><code><a href="#_fire_callbacks">_fire_callbacks</a></code></td>
+    <td><code><a href="#_fire_callbacks" class="internal-link" title="nltk.app.chartparser_app.ChartView._fire_callbacks">_fire​_callbacks</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method private">
     
     <td>Method</td>
-    <td><code><a href="#_grow">_grow</a></code></td>
-    <td><span>Grow the window, if necessary</span></td>
+    <td><code><a href="#_grow" class="internal-link" title="nltk.app.chartparser_app.ChartView._grow">_grow</a></code></td>
+    <td>Grow the window, if necessary</td>
   </tr><tr class="method private">
     
     <td>Method</td>
-    <td><code><a href="#_init_fonts">_init_fonts</a></code></td>
+    <td><code><a href="#_init_fonts" class="internal-link" title="nltk.app.chartparser_app.ChartView._init_fonts">_init​_fonts</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method private">
     
     <td>Method</td>
-    <td><code><a href="#_resize">_resize</a></code></td>
+    <td><code><a href="#_resize" class="internal-link" title="nltk.app.chartparser_app.ChartView._resize">_resize</a></code></td>
     <td><span class="undocumented">No summary</span></td>
   </tr><tr class="method private">
     
     <td>Method</td>
-    <td><code><a href="#_sb_canvas">_sb_canvas</a></code></td>
-    <td><span>Helper for __init__: construct a canvas with a scrollbar.</span></td>
-  </tr><tr class="classvariable private">
+    <td><code><a href="#_sb_canvas" class="internal-link" title="nltk.app.chartparser_app.ChartView._sb_canvas">_sb​_canvas</a></code></td>
+    <td>Helper for __init__: construct a canvas with a scrollbar.</td>
+  </tr><tr class="constant private">
     
-    <td>Class Variable</td>
-    <td><code><a href="#_CHART_LEVEL_SIZE">_CHART_LEVEL_SIZE</a></code></td>
+    <td>Constant</td>
+    <td><code><a href="#_CHART_LEVEL_SIZE" class="internal-link" title="nltk.app.chartparser_app.ChartView._CHART_LEVEL_SIZE">_CHART​_LEVEL​_SIZE</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
-  </tr><tr class="classvariable private">
+  </tr><tr class="constant private">
     
-    <td>Class Variable</td>
-    <td><code><a href="#_LEAF_SPACING">_LEAF_SPACING</a></code></td>
+    <td>Constant</td>
+    <td><code><a href="#_LEAF_SPACING" class="internal-link" title="nltk.app.chartparser_app.ChartView._LEAF_SPACING">_LEAF​_SPACING</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
-  </tr><tr class="classvariable private">
+  </tr><tr class="constant private">
     
-    <td>Class Variable</td>
-    <td><code><a href="#_MARGIN">_MARGIN</a></code></td>
+    <td>Constant</td>
+    <td><code><a href="#_MARGIN" class="internal-link" title="nltk.app.chartparser_app.ChartView._MARGIN">_MARGIN</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
-  </tr><tr class="classvariable private">
+  </tr><tr class="constant private">
     
-    <td>Class Variable</td>
-    <td><code><a href="#_TREE_LEVEL_SIZE">_TREE_LEVEL_SIZE</a></code></td>
-    <td><span class="undocumented">Undocumented</span></td>
-  </tr><tr class="instancevariable private">
-    
-    <td>Instance Variable</td>
-    <td><code><a href="#_boldfont">_boldfont</a></code></td>
+    <td>Constant</td>
+    <td><code><a href="#_TREE_LEVEL_SIZE" class="internal-link" title="nltk.app.chartparser_app.ChartView._TREE_LEVEL_SIZE">_TREE​_LEVEL​_SIZE</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="instancevariable private">
     
     <td>Instance Variable</td>
-    <td><code><a href="#_callbacks">_callbacks</a></code></td>
+    <td><code><a href="#_boldfont" class="internal-link" title="nltk.app.chartparser_app.ChartView._boldfont">_boldfont</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="instancevariable private">
     
     <td>Instance Variable</td>
-    <td><code><a href="#_chart">_chart</a></code></td>
-    <td><span>The chart that we are giving a view of.  This chart
+    <td><code><a href="#_callbacks" class="internal-link" title="nltk.app.chartparser_app.ChartView._callbacks">_callbacks</a></code></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="instancevariable private">
+    
+    <td>Instance Variable</td>
+    <td><code><a href="#_chart" class="internal-link" title="nltk.app.chartparser_app.ChartView._chart">_chart</a></code></td>
+    <td>The chart that we are giving a view of.  This chart
 may be modified; after it is modified, you should call
-<tt class="rst-docutils literal">update</tt>.</span></td>
+<tt class="rst-docutils literal">update</tt>.</td>
   </tr><tr class="instancevariable private">
     
     <td>Instance Variable</td>
-    <td><code><a href="#_chart_canvas">_chart_canvas</a></code></td>
-    <td><span>The canvas we're using to display the chart
-itself.</span></td>
+    <td><code><a href="#_chart_canvas" class="internal-link" title="nltk.app.chartparser_app.ChartView._chart_canvas">_chart​_canvas</a></code></td>
+    <td>The canvas we're using to display the chart
+itself.</td>
   </tr><tr class="instancevariable private">
     
     <td>Instance Variable</td>
-    <td><code><a href="#_chart_height">_chart_height</a></code></td>
-    <td><span>The height of the chart canvas.</span></td>
+    <td><code><a href="#_chart_height" class="internal-link" title="nltk.app.chartparser_app.ChartView._chart_height">_chart​_height</a></code></td>
+    <td>The height of the chart canvas.</td>
   </tr><tr class="instancevariable private">
     
     <td>Instance Variable</td>
-    <td><code><a href="#_chart_level_size">_chart_level_size</a></code></td>
+    <td><code><a href="#_chart_level_size" class="internal-link" title="nltk.app.chartparser_app.ChartView._chart_level_size">_chart​_level​_size</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="instancevariable private">
     
     <td>Instance Variable</td>
-    <td><code><a href="#_chart_sb">_chart_sb</a></code></td>
+    <td><code><a href="#_chart_sb" class="internal-link" title="nltk.app.chartparser_app.ChartView._chart_sb">_chart​_sb</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="instancevariable private">
     
     <td>Instance Variable</td>
-    <td><code><a href="#_compact">_compact</a></code></td>
+    <td><code><a href="#_compact" class="internal-link" title="nltk.app.chartparser_app.ChartView._compact">_compact</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="instancevariable private">
     
     <td>Instance Variable</td>
-    <td><code><a href="#_edgelevels">_edgelevels</a></code></td>
-    <td><span>A list of edges at each level of the chart (the
+    <td><code><a href="#_edgelevels" class="internal-link" title="nltk.app.chartparser_app.ChartView._edgelevels">_edgelevels</a></code></td>
+    <td>A list of edges at each level of the chart (the
 top level is the 0th element).  This list is used to remember
 where edges should be drawn; and to make sure that no edges
-are overlapping on the chart view.</span></td>
+are overlapping on the chart view.</td>
   </tr><tr class="instancevariable private">
     
     <td>Instance Variable</td>
-    <td><code><a href="#_edgetags">_edgetags</a></code></td>
-    <td><span>A dictionary mapping from edges to the tags of
+    <td><code><a href="#_edgetags" class="internal-link" title="nltk.app.chartparser_app.ChartView._edgetags">_edgetags</a></code></td>
+    <td>A dictionary mapping from edges to the tags of
 the canvas elements (lines, etc) used to display that edge.
 The values of this dictionary have the form
-<tt class="rst-docutils literal">(linetag, rhstag1, dottag, rhstag2, lhstag)</tt>.</span></td>
+<tt class="rst-docutils literal">(linetag, rhstag1, dottag, rhstag2, lhstag)</tt>.</td>
   </tr><tr class="instancevariable private">
     
     <td>Instance Variable</td>
-    <td><code><a href="#_font">_font</a></code></td>
+    <td><code><a href="#_font" class="internal-link" title="nltk.app.chartparser_app.ChartView._font">_font</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="instancevariable private">
     
     <td>Instance Variable</td>
-    <td><code><a href="#_fontsize">_fontsize</a></code></td>
-    <td><span>The current font size</span></td>
+    <td><code><a href="#_fontsize" class="internal-link" title="nltk.app.chartparser_app.ChartView._fontsize">_fontsize</a></code></td>
+    <td>The current font size</td>
   </tr><tr class="instancevariable private">
     
     <td>Instance Variable</td>
-    <td><code><a href="#_loclines">_loclines</a></code></td>
+    <td><code><a href="#_loclines" class="internal-link" title="nltk.app.chartparser_app.ChartView._loclines">_loclines</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="instancevariable private">
     
     <td>Instance Variable</td>
-    <td><code><a href="#_marks">_marks</a></code></td>
-    <td><span>A dictionary from edges to marks.  Marks are
-strings, specifying colors (e.g. 'green').</span></td>
+    <td><code><a href="#_marks" class="internal-link" title="nltk.app.chartparser_app.ChartView._marks">_marks</a></code></td>
+    <td>A dictionary from edges to marks.  Marks are
+strings, specifying colors (e.g. 'green').</td>
   </tr><tr class="instancevariable private">
     
     <td>Instance Variable</td>
-    <td><code><a href="#_root">_root</a></code></td>
-    <td><span>The root window.</span></td>
+    <td><code><a href="#_root" class="internal-link" title="nltk.app.chartparser_app.ChartView._root">_root</a></code></td>
+    <td>The root window.</td>
   </tr><tr class="instancevariable private">
     
     <td>Instance Variable</td>
-    <td><code><a href="#_sentence">_sentence</a></code></td>
-    <td><span>The list of tokens that the chart spans.</span></td>
+    <td><code><a href="#_sentence" class="internal-link" title="nltk.app.chartparser_app.ChartView._sentence">_sentence</a></code></td>
+    <td>The list of tokens that the chart spans.</td>
   </tr><tr class="instancevariable private">
     
     <td>Instance Variable</td>
-    <td><code><a href="#_sentence_canvas">_sentence_canvas</a></code></td>
-    <td><span>The canvas we're using to display the sentence
-text.  May be None, if we're not displaying the sentence text.</span></td>
+    <td><code><a href="#_sentence_canvas" class="internal-link" title="nltk.app.chartparser_app.ChartView._sentence_canvas">_sentence​_canvas</a></code></td>
+    <td>The canvas we're using to display the sentence
+text.  May be None, if we're not displaying the sentence text.</td>
   </tr><tr class="instancevariable private">
     
     <td>Instance Variable</td>
-    <td><code><a href="#_sentence_height">_sentence_height</a></code></td>
-    <td><span>The height of the sentence canvas.</span></td>
+    <td><code><a href="#_sentence_height" class="internal-link" title="nltk.app.chartparser_app.ChartView._sentence_height">_sentence​_height</a></code></td>
+    <td>The height of the sentence canvas.</td>
   </tr><tr class="instancevariable private">
     
     <td>Instance Variable</td>
-    <td><code><a href="#_sysfont">_sysfont</a></code></td>
+    <td><code><a href="#_sysfont" class="internal-link" title="nltk.app.chartparser_app.ChartView._sysfont">_sysfont</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="instancevariable private">
     
     <td>Instance Variable</td>
-    <td><code><a href="#_text_height">_text_height</a></code></td>
-    <td><span>The height of a text string (in the normal
-font).</span></td>
+    <td><code><a href="#_text_height" class="internal-link" title="nltk.app.chartparser_app.ChartView._text_height">_text​_height</a></code></td>
+    <td>The height of a text string (in the normal
+font).</td>
   </tr><tr class="instancevariable private">
     
     <td>Instance Variable</td>
-    <td><code><a href="#_tree_canvas">_tree_canvas</a></code></td>
-    <td><span>The canvas we're using to display the tree
+    <td><code><a href="#_tree_canvas" class="internal-link" title="nltk.app.chartparser_app.ChartView._tree_canvas">_tree​_canvas</a></code></td>
+    <td>The canvas we're using to display the tree
 that each edge spans.  May be None, if we're not displaying
-trees.</span></td>
+trees.</td>
   </tr><tr class="instancevariable private">
     
     <td>Instance Variable</td>
-    <td><code><a href="#_tree_height">_tree_height</a></code></td>
-    <td><span>The height of the tree</span></td>
+    <td><code><a href="#_tree_height" class="internal-link" title="nltk.app.chartparser_app.ChartView._tree_height">_tree​_height</a></code></td>
+    <td>The height of the tree</td>
   </tr><tr class="instancevariable private">
     
     <td>Instance Variable</td>
-    <td><code><a href="#_tree_sb">_tree_sb</a></code></td>
+    <td><code><a href="#_tree_sb" class="internal-link" title="nltk.app.chartparser_app.ChartView._tree_sb">_tree​_sb</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="instancevariable private">
     
     <td>Instance Variable</td>
-    <td><code><a href="#_tree_tags">_tree_tags</a></code></td>
+    <td><code><a href="#_tree_tags" class="internal-link" title="nltk.app.chartparser_app.ChartView._tree_tags">_tree​_tags</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="instancevariable private">
     
     <td>Instance Variable</td>
-    <td><code><a href="#_treetags">_treetags</a></code></td>
-    <td><span>A list of all the tags that make up the tree;
-used to erase the tree (without erasing the loclines).</span></td>
+    <td><code><a href="#_treetags" class="internal-link" title="nltk.app.chartparser_app.ChartView._treetags">_treetags</a></code></td>
+    <td>A list of all the tags that make up the tree;
+used to erase the tree (without erasing the loclines).</td>
   </tr><tr class="instancevariable private">
     
     <td>Instance Variable</td>
-    <td><code><a href="#_treetoks">_treetoks</a></code></td>
+    <td><code><a href="#_treetoks" class="internal-link" title="nltk.app.chartparser_app.ChartView._treetoks">_treetoks</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="instancevariable private">
     
     <td>Instance Variable</td>
-    <td><code><a href="#_treetoks_edge">_treetoks_edge</a></code></td>
+    <td><code><a href="#_treetoks_edge" class="internal-link" title="nltk.app.chartparser_app.ChartView._treetoks_edge">_treetoks​_edge</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="instancevariable private">
     
     <td>Instance Variable</td>
-    <td><code><a href="#_treetoks_index">_treetoks_index</a></code></td>
+    <td><code><a href="#_treetoks_index" class="internal-link" title="nltk.app.chartparser_app.ChartView._treetoks_index">_treetoks​_index</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="instancevariable private">
     
     <td>Instance Variable</td>
-    <td><code><a href="#_unitsize">_unitsize</a></code></td>
-    <td><span>Pixel size of one unit (from the location).  This
+    <td><code><a href="#_unitsize" class="internal-link" title="nltk.app.chartparser_app.ChartView._unitsize">_unitsize</a></code></td>
+    <td>Pixel size of one unit (from the location).  This
 is determined by the span of the chart's location, and the
-width of the chart display canvas.</span></td>
+width of the chart display canvas.</td>
   </tr>
 </table>
         
@@ -666,7 +679,7 @@ width of the chart display canvas.</span></td>
   </a>
   <div class="functionHeader">
     
-    <span class="py-keyword">def</span> <span class="py-defname">mark_edge</span>(self, edge, mark='#0df'):
+    <span class="py-keyword">def</span> <span class="py-defname">mark_edge</span>(self, edge, mark=<span class="rst-variable-quote">'</span><span class="rst-variable-string">#0df</span><span class="rst-variable-quote">'</span>):
     <a class="sourceLink" href="https://github.com/nltk/nltk/tree/3.6.2/nltk/app/chartparser_app.py#L1387">
       
       (source)
@@ -688,7 +701,7 @@ width of the chart display canvas.</span></td>
   </a>
   <div class="functionHeader">
     
-    <span class="py-keyword">def</span> <span class="py-defname">markonly_edge</span>(self, edge, mark='#0df'):
+    <span class="py-keyword">def</span> <span class="py-defname">markonly_edge</span>(self, edge, mark=<span class="rst-variable-quote">'</span><span class="rst-variable-string">#0df</span><span class="rst-variable-quote">'</span>):
     <a class="sourceLink" href="https://github.com/nltk/nltk/tree/3.6.2/nltk/app/chartparser_app.py#L1407">
       
       (source)
@@ -1272,7 +1285,7 @@ resize the window.</div>
   </a>
   <div class="functionHeader">
     
-    <span class="py-keyword">def</span> <span class="py-defname">_sb_canvas</span>(self, root, expand='y', fill='both', side='bottom'):
+    <span class="py-keyword">def</span> <span class="py-defname">_sb_canvas</span>(self, root, expand=<span class="rst-variable-quote">'</span><span class="rst-variable-string">y</span><span class="rst-variable-quote">'</span>, fill=<span class="rst-variable-quote">'</span><span class="rst-variable-string">both</span><span class="rst-variable-quote">'</span>, side=<span class="rst-variable-quote">'</span><span class="rst-variable-string">bottom</span><span class="rst-variable-quote">'</span>):
     <a class="sourceLink" href="https://github.com/nltk/nltk/tree/3.6.2/nltk/app/chartparser_app.py#L1099">
       
       (source)
@@ -1283,7 +1296,7 @@ resize the window.</div>
     
     <div>Helper for __init__: construct a canvas with a scrollbar.</div>
   </div>
-</div><div class="baseclassvariable private">
+</div><div class="baseconstant private">
   
   
   <a name="nltk.app.chartparser_app.ChartView._CHART_LEVEL_SIZE">
@@ -1304,8 +1317,9 @@ resize the window.</div>
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    <table class="valueTable"><tr class="fieldStart"><td class="fieldName">Value</td></tr><tr><td><pre class="constant-value"><code>40</code></pre></td></tr></table>
   </div>
-</div><div class="baseclassvariable private">
+</div><div class="baseconstant private">
   
   
   <a name="nltk.app.chartparser_app.ChartView._LEAF_SPACING">
@@ -1326,8 +1340,9 @@ resize the window.</div>
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    <table class="valueTable"><tr class="fieldStart"><td class="fieldName">Value</td></tr><tr><td><pre class="constant-value"><code>10</code></pre></td></tr></table>
   </div>
-</div><div class="baseclassvariable private">
+</div><div class="baseconstant private">
   
   
   <a name="nltk.app.chartparser_app.ChartView._MARGIN">
@@ -1348,8 +1363,9 @@ resize the window.</div>
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    <table class="valueTable"><tr class="fieldStart"><td class="fieldName">Value</td></tr><tr><td><pre class="constant-value"><code>10</code></pre></td></tr></table>
   </div>
-</div><div class="baseclassvariable private">
+</div><div class="baseconstant private">
   
   
   <a name="nltk.app.chartparser_app.ChartView._TREE_LEVEL_SIZE">
@@ -1370,6 +1386,7 @@ resize the window.</div>
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    <table class="valueTable"><tr class="fieldStart"><td class="fieldName">Value</td></tr><tr><td><pre class="constant-value"><code>12</code></pre></td></tr></table>
   </div>
 </div><div class="baseinstancevariable private">
   
@@ -1392,6 +1409,7 @@ resize the window.</div>
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    
   </div>
 </div><div class="baseinstancevariable private">
   
@@ -1414,6 +1432,7 @@ resize the window.</div>
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    
   </div>
 </div><div class="baseinstancevariable private">
   
@@ -1438,6 +1457,7 @@ resize the window.</div>
     <div>The chart that we are giving a view of.  This chart
 may be modified; after it is modified, you should call
 <tt class="rst-docutils literal">update</tt>.</div>
+    
   </div>
 </div><div class="baseinstancevariable private">
   
@@ -1461,6 +1481,7 @@ may be modified; after it is modified, you should call
     
     <div>The canvas we're using to display the chart
 itself.</div>
+    
   </div>
 </div><div class="baseinstancevariable private">
   
@@ -1483,6 +1504,7 @@ itself.</div>
     
     
     <div>The height of the chart canvas.</div>
+    
   </div>
 </div><div class="baseinstancevariable private">
   
@@ -1505,6 +1527,7 @@ itself.</div>
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    
   </div>
 </div><div class="baseinstancevariable private">
   
@@ -1527,6 +1550,7 @@ itself.</div>
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    
   </div>
 </div><div class="baseinstancevariable private">
   
@@ -1549,6 +1573,7 @@ itself.</div>
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    
   </div>
 </div><div class="baseinstancevariable private">
   
@@ -1574,6 +1599,7 @@ itself.</div>
 top level is the 0th element).  This list is used to remember
 where edges should be drawn; and to make sure that no edges
 are overlapping on the chart view.</div>
+    
   </div>
 </div><div class="baseinstancevariable private">
   
@@ -1599,6 +1625,7 @@ are overlapping on the chart view.</div>
 the canvas elements (lines, etc) used to display that edge.
 The values of this dictionary have the form
 <tt class="rst-docutils literal">(linetag, rhstag1, dottag, rhstag2, lhstag)</tt>.</div>
+    
   </div>
 </div><div class="baseinstancevariable private">
   
@@ -1621,6 +1648,7 @@ The values of this dictionary have the form
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    
   </div>
 </div><div class="baseinstancevariable private">
   
@@ -1643,6 +1671,7 @@ The values of this dictionary have the form
     
     
     <div>The current font size</div>
+    
   </div>
 </div><div class="baseinstancevariable private">
   
@@ -1665,6 +1694,7 @@ The values of this dictionary have the form
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    
   </div>
 </div><div class="baseinstancevariable private">
   
@@ -1688,6 +1718,7 @@ The values of this dictionary have the form
     
     <div>A dictionary from edges to marks.  Marks are
 strings, specifying colors (e.g. 'green').</div>
+    
   </div>
 </div><div class="baseinstancevariable private">
   
@@ -1710,6 +1741,7 @@ strings, specifying colors (e.g. 'green').</div>
     
     
     <div>The root window.</div>
+    
   </div>
 </div><div class="baseinstancevariable private">
   
@@ -1732,6 +1764,7 @@ strings, specifying colors (e.g. 'green').</div>
     
     
     <div>The list of tokens that the chart spans.</div>
+    
   </div>
 </div><div class="baseinstancevariable private">
   
@@ -1755,6 +1788,7 @@ strings, specifying colors (e.g. 'green').</div>
     
     <div>The canvas we're using to display the sentence
 text.  May be None, if we're not displaying the sentence text.</div>
+    
   </div>
 </div><div class="baseinstancevariable private">
   
@@ -1777,6 +1811,7 @@ text.  May be None, if we're not displaying the sentence text.</div>
     
     
     <div>The height of the sentence canvas.</div>
+    
   </div>
 </div><div class="baseinstancevariable private">
   
@@ -1799,6 +1834,7 @@ text.  May be None, if we're not displaying the sentence text.</div>
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    
   </div>
 </div><div class="baseinstancevariable private">
   
@@ -1822,6 +1858,7 @@ text.  May be None, if we're not displaying the sentence text.</div>
     
     <div>The height of a text string (in the normal
 font).</div>
+    
   </div>
 </div><div class="baseinstancevariable private">
   
@@ -1846,6 +1883,7 @@ font).</div>
     <div>The canvas we're using to display the tree
 that each edge spans.  May be None, if we're not displaying
 trees.</div>
+    
   </div>
 </div><div class="baseinstancevariable private">
   
@@ -1868,6 +1906,7 @@ trees.</div>
     
     
     <div>The height of the tree</div>
+    
   </div>
 </div><div class="baseinstancevariable private">
   
@@ -1890,6 +1929,7 @@ trees.</div>
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    
   </div>
 </div><div class="baseinstancevariable private">
   
@@ -1912,6 +1952,7 @@ trees.</div>
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    
   </div>
 </div><div class="baseinstancevariable private">
   
@@ -1935,6 +1976,7 @@ trees.</div>
     
     <div>A list of all the tags that make up the tree;
 used to erase the tree (without erasing the loclines).</div>
+    
   </div>
 </div><div class="baseinstancevariable private">
   
@@ -1957,6 +1999,7 @@ used to erase the tree (without erasing the loclines).</div>
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    
   </div>
 </div><div class="baseinstancevariable private">
   
@@ -1979,6 +2022,7 @@ used to erase the tree (without erasing the loclines).</div>
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    
   </div>
 </div><div class="baseinstancevariable private">
   
@@ -2001,6 +2045,7 @@ used to erase the tree (without erasing the loclines).</div>
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    
   </div>
 </div><div class="baseinstancevariable private">
   
@@ -2025,6 +2070,7 @@ used to erase the tree (without erasing the loclines).</div>
     <div>Pixel size of one unit (from the location).  This
 is determined by the span of the chart's location, and the
 width of the chart display canvas.</div>
+    
   </div>
 </div>
 
@@ -2036,7 +2082,7 @@ width of the chart display canvas.</div>
   <div class="container">
     <a href="index.html">API Documentation</a> for <a href="http://www.nltk.org/" class="projecthome">nltk-3.6.2</a>,
   generated by <a href="https://github.com/twisted/pydoctor/">pydoctor</a>
-    21.2.2 at 2022-01-06 17:36:51.
+    22.2.2.dev0 at 2022-03-04 05:57:24.
   </div>
 </footer>
 

@@ -7,7 +7,7 @@
   <head>
     
     <title>nltk.draw.table.Table</title>
-    <meta name="generator" content="pydoctor 21.2.2"> 
+    <meta name="generator" content="pydoctor 22.2.2.dev0"> 
         
     </meta>
     <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
@@ -44,69 +44,82 @@
           Names
         </a>
 
-        <form action="search-results.html" id="search-box-container">
+        <div id="search-box-container">
           <div class="input-group">
-            <input id="search-box" name="search-query" placeholder="Search..." aria-label="Search" minlength="2" class="form-control" />
+            <input id="search-box" type="search" name="search-query" placeholder="Search..." aria-label="Search" minlength="2" class="form-control" autocomplete="off" />
+            
             <span class="input-group-btn">
-              <button class="btn btn-default" type="submit" title="Search"><img src="fonts/search.svg" alt="Search!" /></button>
-              <a class="btn btn-default" id="search-help-button" title="Help" onclick="toggleSearchHelpText()"><img src="fonts/info.svg" alt="Help!" /></a>
+              <a style="display: none;" class="btn btn-default" id="search-clear-button" title="Clear" onclick="clearSearch()"><img src="fonts/x-circle.svg" alt="Clear" /></a>
+              <a class="btn btn-default" id="search-help-button" title="Help" onclick="toggleSearchHelpText()"><img src="fonts/info.svg" alt="Help" /></a>
             </span>
           </div>
-        </form>
+        </div>
 
-        <div class="rst-admonition hint" id="search-help-box">
+      </div>
+
+      <div id="search-results-container" style="display: none;">
+        <div>
+          <span class="label label-default" id="search-docstrings-button">
+            <a title="Search in docstrings" onclick="toggleSearchInDocstrings()">search in docstrings</a></span>
+        </div>
+
+        <noscript>
+            <h1>Cannot search: JavaScript is not supported/enabled in your browser.</h1>
+        </noscript>
+
+        <div class="hint" id="search-help-box">
           <p class="rst-last">
       
             Search bar offers the following options:
             <ul>   
                 <li>
                   <strong>Term presence.</strong> The below example searches for documents that 
-                    must contain “foo”, might contain “bar” and must not contain “baz”:
-                  <br /> <code>'+foo bar -baz'</code>
+                    must contain “foo”, might contain “bar” and must not contain “baz”: <code>+foo bar -baz</code>
                 </li> 
 
                 <li>
-                  <strong>Wildcards.</strong> The below example searches for documents with words beginning with “foo”:
-                  <br /> <code>'foo*'</code>
+                  <strong>Wildcards.</strong> The below example searches for documents with words beginning with “foo”: <code>foo*</code>
                 </li> 
 
                 <li>
-                  <strong>Search in specific fields.</strong> The following search matches all documents 
-                  that contains "foo" in their full dotted name and with “bar” in any field:
-                  <br /> <code>'+fullName:*foo* +bar'</code>
+                  <strong>Search in specific fields.</strong> The following search matches all objects 
+                  in "twisted.mail" that matches “search”: <code>+qname:twisted.mail.* +search</code>
 
                   <p>
-                    Possible fields: 'name', 'docstring', 'fullName'.
+                    Possible fields: 'name', 'qname' (fully qualified name), 'docstring', and 'kind'.
+                    Last two fields are only applicable if "search in docstrings" is enabled.
                   </p>
                 </li>
 
                 <li>
                   <strong>Fuzzy matches.</strong> The following search matches all documents 
-                  that have a word within 1 edit distance of “foo”:
-                  <br /> <code>'foo~1'</code>
+                  that have a word within 1 edit distance of “foo”: <code>foo~1</code>
                 </li>
             </ul>
 
           </p>
         </div>
 
-      </div>
+        <div id="search-status"> </div>
+        
+        <div class="warning" id="search-warn-box" style="display: none;">
+          <p class="rst-last"><span id="search-warn"></span></p>
+        </div>
 
+        <table id="search-results">
+          <!-- Filled dynamically by JS -->
+        </table>
+        
+        <div style="margin-top: 8px;">
+          <p>Results provided by <a href="https://lunrjs.com">Lunr.js</a></p>
+        </div>
+      </div>
 
     </div>
   </div>
 
-  <script>
- 
-    function toggleSearchHelpText() {
-        document.body.classList.toggle("search-help-hidden");
-    }
-    // Init search and help text
-    document.getElementById('search-box-container').style.display = 'block';
-    document.getElementById('search-help-box').style.display = 'block';
-    document.body.classList.add("search-help-hidden");
-
-  </script>
+  <script src="ajax.js" type="text/javascript"></script>
+  <script src="search.js" type="text/javascript"></script>
 
 </nav>
 
@@ -115,7 +128,7 @@
     <div class="container">
 
       <div class="page-header">
-        <h1 class="class"><code><code><a href="nltk.html">nltk</a></code><wbr></wbr>.<code><a href="nltk.draw.html">draw</a></code><wbr></wbr>.<code><a href="nltk.draw.table.html">table</a></code><wbr></wbr>.<code><a href="nltk.draw.table.Table.html">Table</a></code></code></h1>
+        <h1 class="class"><code><code><a href="index.html" class="internal-link">nltk</a></code><wbr></wbr>.<code><a href="nltk.draw.html" class="internal-link" title="nltk.draw">draw</a></code><wbr></wbr>.<code><a href="nltk.draw.table.html" class="internal-link" title="nltk.draw.table">table</a></code><wbr></wbr>.<code><a href="nltk.draw.table.Table.html" class="internal-link" title="nltk.draw.table.Table">Table</a></code></code></h1>
         <div id="showPrivate">
           <button class="btn btn-link" onclick="togglePrivate()">Toggle Private API</button>
         </div>
@@ -126,7 +139,7 @@
       </div>
 
       <div class="extrasDocstring">
-        <p><code><span class="py-keyword">class</span> <span class="py-defname">Table</span>(<span title="object">object</span>): <a href="https://github.com/nltk/nltk/tree/3.6.2/nltk/draw/table.py#L582" class="sourceLink">(source)</a></code></p>
+        <p><code><span class="py-keyword">class</span> <span class="py-defname">Table</span>(object): <a href="https://github.com/nltk/nltk/tree/3.6.2/nltk/draw/table.py#L582" class="sourceLink">(source)</a></code></p>
         <p><a href="classIndex.html#nltk.draw.table.Table">View In Hierarchy</a></p>
       </div>
 
@@ -171,214 +184,214 @@ list-of-lists.</p>
   <tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#__delitem__">__delitem__</a></code></td>
-    <td><span>Delete the <a href="#system-message-1"><span class="rst-problematic" id="rst-problematic-1">``</span></a>row_index``th row from this table.</span></td>
+    <td><code><a href="#__delitem__" class="internal-link" title="nltk.draw.table.Table.__delitem__">__delitem__</a></code></td>
+    <td>Delete the <a href="#system-message-1"><span class="rst-problematic" id="rst-problematic-1">``</span></a>row_index``th row from this table.</td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#__getitem__">__getitem__</a></code></td>
+    <td><code><a href="#__getitem__" class="internal-link" title="nltk.draw.table.Table.__getitem__">__getitem__</a></code></td>
     <td><span class="undocumented">No summary</span></td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#__init__">__init__</a></code></td>
-    <td><span>Construct a new Table widget.</span></td>
+    <td><code><a href="#__init__" class="internal-link" title="nltk.draw.table.Table.__init__">__init__</a></code></td>
+    <td>Construct a new Table widget.</td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#__len__">__len__</a></code></td>
-    <td><span></span></td>
+    <td><code><a href="#__len__" class="internal-link" title="nltk.draw.table.Table.__len__">__len__</a></code></td>
+    <td></td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#__setitem__">__setitem__</a></code></td>
-    <td><span>Replace the value of a row or a cell in this table with <tt class="rst-docutils literal">val</tt>.</span></td>
+    <td><code><a href="#__setitem__" class="internal-link" title="nltk.draw.table.Table.__setitem__">__setitem__</a></code></td>
+    <td>Replace the value of a row or a cell in this table with <tt class="rst-docutils literal">val</tt>.</td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#append">append</a></code></td>
-    <td><span>Add a new row to the end of the table.</span></td>
+    <td><code><a href="#append" class="internal-link" title="nltk.draw.table.Table.append">append</a></code></td>
+    <td>Add a new row to the end of the table.</td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#bind">bind</a></code></td>
-    <td><span>Add a binding to this table's main frame that will call <tt class="rst-docutils literal">func</tt> in response to the event sequence.</span></td>
+    <td><code><a href="#bind" class="internal-link" title="nltk.draw.table.Table.bind">bind</a></code></td>
+    <td>Add a binding to this table's main frame that will call <tt class="rst-docutils literal">func</tt> in response to the event sequence.</td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#bind_to_columns">bind_to_columns</a></code></td>
-    <td><span></span></td>
+    <td><code><a href="#bind_to_columns" class="internal-link" title="nltk.draw.table.Table.bind_to_columns">bind​_to​_columns</a></code></td>
+    <td></td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#bind_to_labels">bind_to_labels</a></code></td>
-    <td><span></span></td>
+    <td><code><a href="#bind_to_labels" class="internal-link" title="nltk.draw.table.Table.bind_to_labels">bind​_to​_labels</a></code></td>
+    <td></td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#bind_to_listboxes">bind_to_listboxes</a></code></td>
-    <td><span></span></td>
+    <td><code><a href="#bind_to_listboxes" class="internal-link" title="nltk.draw.table.Table.bind_to_listboxes">bind​_to​_listboxes</a></code></td>
+    <td></td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#clear">clear</a></code></td>
-    <td><span>Delete all rows in this table.</span></td>
+    <td><code><a href="#clear" class="internal-link" title="nltk.draw.table.Table.clear">clear</a></code></td>
+    <td>Delete all rows in this table.</td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#column_index">column_index</a></code></td>
+    <td><code><a href="#column_index" class="internal-link" title="nltk.draw.table.Table.column_index">column​_index</a></code></td>
     <td><span class="undocumented">No summary</span></td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#columnconfigure">columnconfigure</a></code></td>
-    <td><span></span></td>
+    <td><code><a href="#columnconfigure" class="internal-link" title="nltk.draw.table.Table.columnconfigure">columnconfigure</a></code></td>
+    <td></td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#extend">extend</a></code></td>
-    <td><span>Add new rows at the end of the table.</span></td>
+    <td><code><a href="#extend" class="internal-link" title="nltk.draw.table.Table.extend">extend</a></code></td>
+    <td>Add new rows at the end of the table.</td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#focus">focus</a></code></td>
-    <td><span>Direct (keyboard) input foxus to this widget.</span></td>
+    <td><code><a href="#focus" class="internal-link" title="nltk.draw.table.Table.focus">focus</a></code></td>
+    <td>Direct (keyboard) input foxus to this widget.</td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#grid">grid</a></code></td>
-    <td><span>Position this table's main frame widget in its parent widget.  See <tt class="rst-docutils literal">Tkinter.Frame.grid()</tt> for more info.</span></td>
+    <td><code><a href="#grid" class="internal-link" title="nltk.draw.table.Table.grid">grid</a></code></td>
+    <td>Position this table's main frame widget in its parent widget.  See <tt class="rst-docutils literal">Tkinter.Frame.grid()</tt> for more info.</td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#hide_column">hide_column</a></code></td>
-    <td><span></span></td>
+    <td><code><a href="#hide_column" class="internal-link" title="nltk.draw.table.Table.hide_column">hide​_column</a></code></td>
+    <td></td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#insert">insert</a></code></td>
+    <td><code><a href="#insert" class="internal-link" title="nltk.draw.table.Table.insert">insert</a></code></td>
     <td><span class="undocumented">No summary</span></td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#itemconfigure">itemconfigure</a></code></td>
-    <td><span></span></td>
+    <td><code><a href="#itemconfigure" class="internal-link" title="nltk.draw.table.Table.itemconfigure">itemconfigure</a></code></td>
+    <td></td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#pack">pack</a></code></td>
-    <td><span>Position this table's main frame widget in its parent widget.  See <tt class="rst-docutils literal">Tkinter.Frame.pack()</tt> for more info.</span></td>
+    <td><code><a href="#pack" class="internal-link" title="nltk.draw.table.Table.pack">pack</a></code></td>
+    <td>Position this table's main frame widget in its parent widget.  See <tt class="rst-docutils literal">Tkinter.Frame.pack()</tt> for more info.</td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#rowconfigure">rowconfigure</a></code></td>
-    <td><span></span></td>
+    <td><code><a href="#rowconfigure" class="internal-link" title="nltk.draw.table.Table.rowconfigure">rowconfigure</a></code></td>
+    <td></td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#select">select</a></code></td>
-    <td><span></span></td>
+    <td><code><a href="#select" class="internal-link" title="nltk.draw.table.Table.select">select</a></code></td>
+    <td></td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#selected_row">selected_row</a></code></td>
-    <td><span>Return the index of the currently selected row, or None if no row is selected.  To get the row value itself, use <tt class="rst-docutils literal"><span class="pre">table[table.selected_row()]</span></tt>.</span></td>
+    <td><code><a href="#selected_row" class="internal-link" title="nltk.draw.table.Table.selected_row">selected​_row</a></code></td>
+    <td>Return the index of the currently selected row, or None if no row is selected.  To get the row value itself, use <tt class="rst-docutils literal"><span class="pre">table[table.selected_row()]</span></tt>.</td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#show_column">show_column</a></code></td>
-    <td><span></span></td>
+    <td><code><a href="#show_column" class="internal-link" title="nltk.draw.table.Table.show_column">show​_column</a></code></td>
+    <td></td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#sort_by">sort_by</a></code></td>
-    <td><span>Sort the rows in this table, using the specified column's values as a sort key.</span></td>
+    <td><code><a href="#sort_by" class="internal-link" title="nltk.draw.table.Table.sort_by">sort​_by</a></code></td>
+    <td>Sort the rows in this table, using the specified column's values as a sort key.</td>
   </tr><tr class="property">
     
     <td>Property</td>
-    <td><code><a href="#column_names">column_names</a></code></td>
-    <td><span>A list of the names of the columns in this table.</span></td>
+    <td><code><a href="#column_names" class="internal-link" title="nltk.draw.table.Table.column_names">column​_names</a></code></td>
+    <td>A list of the names of the columns in this table.</td>
   </tr><tr class="method private">
     
     <td>Method</td>
-    <td><code><a href="#_check_table_vs_mlb">_check_table_vs_mlb</a></code></td>
+    <td><code><a href="#_check_table_vs_mlb" class="internal-link" title="nltk.draw.table.Table._check_table_vs_mlb">_check​_table​_vs​_mlb</a></code></td>
     <td><span class="undocumented">No summary</span></td>
   </tr><tr class="method private">
     
     <td>Method</td>
-    <td><code><a href="#_checkrow">_checkrow</a></code></td>
-    <td><span>Helper function: check that a given row value has the correct number of elements; and if not, raise an exception.</span></td>
+    <td><code><a href="#_checkrow" class="internal-link" title="nltk.draw.table.Table._checkrow">_checkrow</a></code></td>
+    <td>Helper function: check that a given row value has the correct number of elements; and if not, raise an exception.</td>
   </tr><tr class="method private">
     
     <td>Method</td>
-    <td><code><a href="#_fill_table">_fill_table</a></code></td>
+    <td><code><a href="#_fill_table" class="internal-link" title="nltk.draw.table.Table._fill_table">_fill​_table</a></code></td>
     <td><span class="undocumented">No summary</span></td>
   </tr><tr class="method private">
     
     <td>Method</td>
-    <td><code><a href="#_get_itemconfig">_get_itemconfig</a></code></td>
+    <td><code><a href="#_get_itemconfig" class="internal-link" title="nltk.draw.table.Table._get_itemconfig">_get​_itemconfig</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method private">
     
     <td>Method</td>
-    <td><code><a href="#_restore_config_info">_restore_config_info</a></code></td>
-    <td><span>Restore selection &amp; color configuration information that was saved using <tt class="rst-docutils literal">_save_config_info</tt>.</span></td>
+    <td><code><a href="#_restore_config_info" class="internal-link" title="nltk.draw.table.Table._restore_config_info">_restore​_config​_info</a></code></td>
+    <td>Restore selection &amp; color configuration information that was saved using <tt class="rst-docutils literal">_save_config_info</tt>.</td>
   </tr><tr class="method private">
     
     <td>Method</td>
-    <td><code><a href="#_save_config_info">_save_config_info</a></code></td>
+    <td><code><a href="#_save_config_info" class="internal-link" title="nltk.draw.table.Table._save_config_info">_save​_config​_info</a></code></td>
     <td><span class="undocumented">No summary</span></td>
   </tr><tr class="method private">
     
     <td>Method</td>
-    <td><code><a href="#_sort">_sort</a></code></td>
-    <td><span>Event handler for clicking on a column label -- sort by that column.</span></td>
-  </tr><tr class="classvariable private">
+    <td><code><a href="#_sort" class="internal-link" title="nltk.draw.table.Table._sort">_sort</a></code></td>
+    <td>Event handler for clicking on a column label -- sort by that column.</td>
+  </tr><tr class="constant private">
     
-    <td>Class Variable</td>
-    <td><code><a href="#_DEBUG">_DEBUG</a></code></td>
-    <td><span>If true, then run <tt class="rst-docutils literal">_check_table_vs_mlb()</tt> after any operation that modifies the table.</span></td>
+    <td>Constant</td>
+    <td><code><a href="#_DEBUG" class="internal-link" title="nltk.draw.table.Table._DEBUG">_DEBUG</a></code></td>
+    <td>If true, then run <tt class="rst-docutils literal">_check_table_vs_mlb()</tt> after any operation that modifies the table.</td>
   </tr><tr class="instancevariable private">
     
     <td>Instance Variable</td>
-    <td><code><a href="#_column_name_to_index">_column_name_to_index</a></code></td>
+    <td><code><a href="#_column_name_to_index" class="internal-link" title="nltk.draw.table.Table._column_name_to_index">_column​_name​_to​_index</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="instancevariable private">
     
     <td>Instance Variable</td>
-    <td><code><a href="#_frame">_frame</a></code></td>
+    <td><code><a href="#_frame" class="internal-link" title="nltk.draw.table.Table._frame">_frame</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="instancevariable private">
     
     <td>Instance Variable</td>
-    <td><code><a href="#_mlb">_mlb</a></code></td>
-    <td><span>The multi-column listbox used to display this table's data.</span></td>
+    <td><code><a href="#_mlb" class="internal-link" title="nltk.draw.table.Table._mlb">_mlb</a></code></td>
+    <td>The multi-column listbox used to display this table's data.</td>
   </tr><tr class="instancevariable private">
     
     <td>Instance Variable</td>
-    <td><code><a href="#_num_columns">_num_columns</a></code></td>
+    <td><code><a href="#_num_columns" class="internal-link" title="nltk.draw.table.Table._num_columns">_num​_columns</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="instancevariable private">
     
     <td>Instance Variable</td>
-    <td><code><a href="#_reprfunc">_reprfunc</a></code></td>
+    <td><code><a href="#_reprfunc" class="internal-link" title="nltk.draw.table.Table._reprfunc">_reprfunc</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="instancevariable private">
     
     <td>Instance Variable</td>
-    <td><code><a href="#_rows">_rows</a></code></td>
-    <td><span>A list-of-lists used to hold the cell values of this
+    <td><code><a href="#_rows" class="internal-link" title="nltk.draw.table.Table._rows">_rows</a></code></td>
+    <td>A list-of-lists used to hold the cell values of this
 table.  Each element of _rows is a row value, i.e., a list of
-cell values, one for each column in the row.</span></td>
+cell values, one for each column in the row.</td>
   </tr><tr class="instancevariable private">
     
     <td>Instance Variable</td>
-    <td><code><a href="#_scrollbar">_scrollbar</a></code></td>
+    <td><code><a href="#_scrollbar" class="internal-link" title="nltk.draw.table.Table._scrollbar">_scrollbar</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="instancevariable private">
     
     <td>Instance Variable</td>
-    <td><code><a href="#_sortkey">_sortkey</a></code></td>
+    <td><code><a href="#_sortkey" class="internal-link" title="nltk.draw.table.Table._sortkey">_sortkey</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr>
 </table>
@@ -458,19 +471,19 @@ integers, ``(i,j)``, then return the value of the cell in the
   <div class="docstring functionBody">
     
     
-    <div>Construct a new Table widget.<table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">master:</span>Tkinter.Widget</td><td class="fieldArgDesc">The widget that should contain the new table.</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">column_names:</span>list(str)</td><td class="fieldArgDesc">A list of names for the columns; these
+    <div>Construct a new Table widget.<table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">master:</span>Tkinter.Widget</td><td class="fieldArgDesc">The widget that should contain the new table.</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">column​_names:</span>list(str)</td><td class="fieldArgDesc">A list of names for the columns; these
 names will be used to create labels for each column;
 and can be used as an index when reading or writing
 cell values from the table.</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">rows:</span>list(list)</td><td class="fieldArgDesc">A list of row values used to initialze the table.
 Each row value should be a tuple of cell values, one for
-each column in the row.</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">column_weights</span></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">scrollbar:</span>bool</td><td class="fieldArgDesc">If true, then create a scrollbar for the
-new table widget.</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">click_to_sort:</span>bool</td><td class="fieldArgDesc">If true, then create bindings that will
+each column in the row.</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">column​_weights</span></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">scrollbar:</span>bool</td><td class="fieldArgDesc">If true, then create a scrollbar for the
+new table widget.</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">click​_to​_sort:</span>bool</td><td class="fieldArgDesc">If true, then create bindings that will
 sort the table's rows by a given column's values if the
 user clicks on that colum's label.</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">reprfunc:</span>function</td><td class="fieldArgDesc">If specified, then use this function to
 convert each table cell value to a string suitable for
 display.  <tt class="rst-docutils literal">reprfunc</tt> has the following signature:
 reprfunc(row_index, col_index, cell_value) -&gt; str
-(Note that the column is specified by index, not by name.)</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">cnf</span></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">kw</span></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">cnf, kw</span></td><td class="fieldArgDesc">Configuration parameters for this widget's
+(Note that the column is specified by index, not by name.)</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">cnf</span></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">**kw</span></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">cnf, kw</span></td><td class="fieldArgDesc">Configuration parameters for this widget's
 contained <tt class="rst-docutils literal">MultiListbox</tt>.  See <tt class="rst-docutils literal">MultiListbox.__init__()</tt>
 for details.</td></tr></table></div>
   </div>
@@ -822,7 +835,7 @@ widget.  See <tt class="rst-docutils literal">Tkinter.Frame.grid()</tt> for more
     <div>Insert a new row into the table, so that its row index will be
 <tt class="rst-docutils literal">row_index</tt>.  If the table contains any rows whose row index
 is greater than or equal to <tt class="rst-docutils literal">row_index</tt>, then they will be
-shifted down.<table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">row_index</span></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">rowvalue</span></td><td class="fieldArgDesc">A tuple of cell values, one for each column
+shifted down.<table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">row​_index</span></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">rowvalue</span></td><td class="fieldArgDesc">A tuple of cell values, one for each column
 in the new row.</td></tr></table></div>
   </div>
 </div><div class="basemethod">
@@ -971,7 +984,7 @@ no row is selected.  To get the row value itself, use
   </a>
   <div class="functionHeader">
     
-    <span class="py-keyword">def</span> <span class="py-defname">sort_by</span>(self, column_index, order='toggle'):
+    <span class="py-keyword">def</span> <span class="py-defname">sort_by</span>(self, column_index, order=<span class="rst-variable-quote">'</span><span class="rst-variable-string">toggle</span><span class="rst-variable-quote">'</span>):
     <a class="sourceLink" href="https://github.com/nltk/nltk/tree/3.6.2/nltk/draw/table.py#L950">
       
       (source)
@@ -981,7 +994,7 @@ no row is selected.  To get the row value itself, use
     
     
     <div>Sort the rows in this table, using the specified column's
-values as a sort key.<table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">column_index</span></td><td class="fieldArgDesc">Specifies which column to sort, using
+values as a sort key.<table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">column​_index</span></td><td class="fieldArgDesc">Specifies which column to sort, using
 either a column index (int) or a column's label name
 (str).</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">order</span></td><td class="fieldArgDesc"><p>Specifies whether to sort the values in
 ascending or descending order:</p>
@@ -1018,6 +1031,7 @@ order.</li>
     
     
     <div>A list of the names of the columns in this table.</div>
+    
   </div>
 </div><div class="basemethod private">
   
@@ -1195,7 +1209,7 @@ in the same order when <tt class="rst-docutils literal">_restore_config_info()</
     <div>Event handler for clicking on a column label -- sort by
 that column.</div>
   </div>
-</div><div class="baseclassvariable private">
+</div><div class="baseconstant private">
   
   
   <a name="nltk.draw.table.Table._DEBUG">
@@ -1217,6 +1231,7 @@ that column.</div>
     
     <div>If true, then run <tt class="rst-docutils literal">_check_table_vs_mlb()</tt> after any operation
 that modifies the table.</div>
+    <table class="valueTable"><tr class="fieldStart"><td class="fieldName">Value</td></tr><tr><td><pre class="constant-value"><code>False</code></pre></td></tr></table>
   </div>
 </div><div class="baseinstancevariable private">
   
@@ -1239,6 +1254,7 @@ that modifies the table.</div>
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    
   </div>
 </div><div class="baseinstancevariable private">
   
@@ -1261,6 +1277,7 @@ that modifies the table.</div>
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    
   </div>
 </div><div class="baseinstancevariable private">
   
@@ -1283,6 +1300,7 @@ that modifies the table.</div>
     
     
     <div>The multi-column listbox used to display this table's data.</div>
+    
   </div>
 </div><div class="baseinstancevariable private">
   
@@ -1305,6 +1323,7 @@ that modifies the table.</div>
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    
   </div>
 </div><div class="baseinstancevariable private">
   
@@ -1327,6 +1346,7 @@ that modifies the table.</div>
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    
   </div>
 </div><div class="baseinstancevariable private">
   
@@ -1351,6 +1371,7 @@ that modifies the table.</div>
     <div>A list-of-lists used to hold the cell values of this
 table.  Each element of _rows is a row value, i.e., a list of
 cell values, one for each column in the row.</div>
+    
   </div>
 </div><div class="baseinstancevariable private">
   
@@ -1373,6 +1394,7 @@ cell values, one for each column in the row.</div>
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    
   </div>
 </div><div class="baseinstancevariable private">
   
@@ -1395,6 +1417,7 @@ cell values, one for each column in the row.</div>
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    
   </div>
 </div>
 
@@ -1406,7 +1429,7 @@ cell values, one for each column in the row.</div>
   <div class="container">
     <a href="index.html">API Documentation</a> for <a href="http://www.nltk.org/" class="projecthome">nltk-3.6.2</a>,
   generated by <a href="https://github.com/twisted/pydoctor/">pydoctor</a>
-    21.2.2 at 2022-01-06 17:36:51.
+    22.2.2.dev0 at 2022-03-04 05:57:24.
   </div>
 </footer>
 

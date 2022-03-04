@@ -7,7 +7,7 @@
   <head>
     
     <title>nltk.util</title>
-    <meta name="generator" content="pydoctor 21.2.2"> 
+    <meta name="generator" content="pydoctor 22.2.2.dev0"> 
         
     </meta>
     <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
@@ -44,69 +44,82 @@
           Names
         </a>
 
-        <form action="search-results.html" id="search-box-container">
+        <div id="search-box-container">
           <div class="input-group">
-            <input id="search-box" name="search-query" placeholder="Search..." aria-label="Search" minlength="2" class="form-control" />
+            <input id="search-box" type="search" name="search-query" placeholder="Search..." aria-label="Search" minlength="2" class="form-control" autocomplete="off" />
+            
             <span class="input-group-btn">
-              <button class="btn btn-default" type="submit" title="Search"><img src="fonts/search.svg" alt="Search!" /></button>
-              <a class="btn btn-default" id="search-help-button" title="Help" onclick="toggleSearchHelpText()"><img src="fonts/info.svg" alt="Help!" /></a>
+              <a style="display: none;" class="btn btn-default" id="search-clear-button" title="Clear" onclick="clearSearch()"><img src="fonts/x-circle.svg" alt="Clear" /></a>
+              <a class="btn btn-default" id="search-help-button" title="Help" onclick="toggleSearchHelpText()"><img src="fonts/info.svg" alt="Help" /></a>
             </span>
           </div>
-        </form>
+        </div>
 
-        <div class="rst-admonition hint" id="search-help-box">
+      </div>
+
+      <div id="search-results-container" style="display: none;">
+        <div>
+          <span class="label label-default" id="search-docstrings-button">
+            <a title="Search in docstrings" onclick="toggleSearchInDocstrings()">search in docstrings</a></span>
+        </div>
+
+        <noscript>
+            <h1>Cannot search: JavaScript is not supported/enabled in your browser.</h1>
+        </noscript>
+
+        <div class="hint" id="search-help-box">
           <p class="rst-last">
       
             Search bar offers the following options:
             <ul>   
                 <li>
                   <strong>Term presence.</strong> The below example searches for documents that 
-                    must contain “foo”, might contain “bar” and must not contain “baz”:
-                  <br /> <code>'+foo bar -baz'</code>
+                    must contain “foo”, might contain “bar” and must not contain “baz”: <code>+foo bar -baz</code>
                 </li> 
 
                 <li>
-                  <strong>Wildcards.</strong> The below example searches for documents with words beginning with “foo”:
-                  <br /> <code>'foo*'</code>
+                  <strong>Wildcards.</strong> The below example searches for documents with words beginning with “foo”: <code>foo*</code>
                 </li> 
 
                 <li>
-                  <strong>Search in specific fields.</strong> The following search matches all documents 
-                  that contains "foo" in their full dotted name and with “bar” in any field:
-                  <br /> <code>'+fullName:*foo* +bar'</code>
+                  <strong>Search in specific fields.</strong> The following search matches all objects 
+                  in "twisted.mail" that matches “search”: <code>+qname:twisted.mail.* +search</code>
 
                   <p>
-                    Possible fields: 'name', 'docstring', 'fullName'.
+                    Possible fields: 'name', 'qname' (fully qualified name), 'docstring', and 'kind'.
+                    Last two fields are only applicable if "search in docstrings" is enabled.
                   </p>
                 </li>
 
                 <li>
                   <strong>Fuzzy matches.</strong> The following search matches all documents 
-                  that have a word within 1 edit distance of “foo”:
-                  <br /> <code>'foo~1'</code>
+                  that have a word within 1 edit distance of “foo”: <code>foo~1</code>
                 </li>
             </ul>
 
           </p>
         </div>
 
-      </div>
+        <div id="search-status"> </div>
+        
+        <div class="warning" id="search-warn-box" style="display: none;">
+          <p class="rst-last"><span id="search-warn"></span></p>
+        </div>
 
+        <table id="search-results">
+          <!-- Filled dynamically by JS -->
+        </table>
+        
+        <div style="margin-top: 8px;">
+          <p>Results provided by <a href="https://lunrjs.com">Lunr.js</a></p>
+        </div>
+      </div>
 
     </div>
   </div>
 
-  <script>
- 
-    function toggleSearchHelpText() {
-        document.body.classList.toggle("search-help-hidden");
-    }
-    // Init search and help text
-    document.getElementById('search-box-container').style.display = 'block';
-    document.getElementById('search-help-box').style.display = 'block';
-    document.body.classList.add("search-help-hidden");
-
-  </script>
+  <script src="ajax.js" type="text/javascript"></script>
+  <script src="search.js" type="text/javascript"></script>
 
 </nav>
 
@@ -115,7 +128,7 @@
     <div class="container">
 
       <div class="page-header">
-        <h1 class="module"><code><code><a href="nltk.html">nltk</a></code><wbr></wbr>.<code><a href="nltk.util.html">util</a></code></code></h1>
+        <h1 class="module"><code><code><a href="index.html" class="internal-link">nltk</a></code><wbr></wbr>.<code><a href="nltk.util.html" class="internal-link" title="nltk.util">util</a></code></code></h1>
         <div id="showPrivate">
           <button class="btn btn-link" onclick="togglePrivate()">Toggle Private API</button>
         </div>
@@ -141,177 +154,177 @@
   <tr class="class">
     
     <td>Class</td>
-    <td><code><a href="nltk.util.Index.html">Index</a></code></td>
+    <td><code><a href="nltk.util.Index.html" class="internal-link" title="nltk.util.Index">​Index</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="function">
     
     <td>Function</td>
-    <td><code><a href="#acyclic_branches_depth_first">acyclic_branches_depth_first</a></code></td>
+    <td><code><a href="#acyclic_branches_depth_first" class="internal-link" title="nltk.util.acyclic_branches_depth_first">acyclic​_branches​_depth​_first</a></code></td>
     <td><span class="undocumented">No summary</span></td>
   </tr><tr class="function">
     
     <td>Function</td>
-    <td><code><a href="#acyclic_breadth_first">acyclic_breadth_first</a></code></td>
-    <td><span>Traverse the nodes of a tree in breadth-first order, discarding eventual cycles.</span></td>
+    <td><code><a href="#acyclic_breadth_first" class="internal-link" title="nltk.util.acyclic_breadth_first">acyclic​_breadth​_first</a></code></td>
+    <td>Traverse the nodes of a tree in breadth-first order, discarding eventual cycles.</td>
   </tr><tr class="function">
     
     <td>Function</td>
-    <td><code><a href="#acyclic_depth_first">acyclic_depth_first</a></code></td>
-    <td><span>Traverse the nodes of a tree in depth-first order, discarding eventual cycles within any branch, adding cut_mark (when specified) if cycles were truncated.</span></td>
+    <td><code><a href="#acyclic_depth_first" class="internal-link" title="nltk.util.acyclic_depth_first">acyclic​_depth​_first</a></code></td>
+    <td>Traverse the nodes of a tree in depth-first order, discarding eventual cycles within any branch, adding cut_mark (when specified) if cycles were truncated.</td>
   </tr><tr class="function">
     
     <td>Function</td>
-    <td><code><a href="#acyclic_dic2tree">acyclic_dic2tree</a></code></td>
-    <td><span>Convert acyclic dictionary 'dic', where the keys are nodes, and the values are lists of children, to output tree suitable for pprint(), starting at root 'node', with subtrees as nested lists.</span></td>
+    <td><code><a href="#acyclic_dic2tree" class="internal-link" title="nltk.util.acyclic_dic2tree">acyclic​_dic2tree</a></code></td>
+    <td>Convert acyclic dictionary 'dic', where the keys are nodes, and the values are lists of children, to output tree suitable for pprint(), starting at root 'node', with subtrees as nested lists.</td>
   </tr><tr class="function">
     
     <td>Function</td>
-    <td><code><a href="#bigrams">bigrams</a></code></td>
-    <td><span>Return the bigrams generated from a sequence of items, as an iterator. For example:</span></td>
+    <td><code><a href="#bigrams" class="internal-link" title="nltk.util.bigrams">bigrams</a></code></td>
+    <td>Return the bigrams generated from a sequence of items, as an iterator. For example:</td>
   </tr><tr class="function">
     
     <td>Function</td>
-    <td><code><a href="#binary_search_file">binary_search_file</a></code></td>
-    <td><span>Return the line from the file with first word key. Searches through a sorted file using the binary search algorithm.</span></td>
+    <td><code><a href="#binary_search_file" class="internal-link" title="nltk.util.binary_search_file">binary​_search​_file</a></code></td>
+    <td>Return the line from the file with first word key. Searches through a sorted file using the binary search algorithm.</td>
   </tr><tr class="function">
     
     <td>Function</td>
-    <td><code><a href="#breadth_first">breadth_first</a></code></td>
+    <td><code><a href="#breadth_first" class="internal-link" title="nltk.util.breadth_first">breadth​_first</a></code></td>
     <td><span class="undocumented">No summary</span></td>
   </tr><tr class="function">
     
     <td>Function</td>
-    <td><code><a href="#choose">choose</a></code></td>
-    <td><span>This function is a fast way to calculate binomial coefficients, commonly known as nCk, i.e. the number of combinations of n things taken k at a time. (<a class="rst-reference external" href="https://en.wikipedia.org/wiki/Binomial_coefficient" target="_top">https://en.wikipedia.org/wiki/Binomial_coefficient</a>).</span></td>
+    <td><code><a href="#choose" class="internal-link" title="nltk.util.choose">choose</a></code></td>
+    <td>This function is a fast way to calculate binomial coefficients, commonly known as nCk, i.e. the number of combinations of n things taken k at a time. (<a class="rst-reference external" href="https://en.wikipedia.org/wiki/Binomial_coefficient" target="_top">https://en.wikipedia.org/wiki/Binomial_coefficient</a>).</td>
   </tr><tr class="function">
     
     <td>Function</td>
-    <td><code><a href="#clean_html">clean_html</a></code></td>
+    <td><code><a href="#clean_html" class="internal-link" title="nltk.util.clean_html">clean​_html</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="function">
     
     <td>Function</td>
-    <td><code><a href="#clean_url">clean_url</a></code></td>
+    <td><code><a href="#clean_url" class="internal-link" title="nltk.util.clean_url">clean​_url</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="function">
     
     <td>Function</td>
-    <td><code><a href="#elementtree_indent">elementtree_indent</a></code></td>
-    <td><span>Recursive function to indent an ElementTree._ElementInterface used for pretty printing. Run indent on elem and then output in the normal way.</span></td>
+    <td><code><a href="#elementtree_indent" class="internal-link" title="nltk.util.elementtree_indent">elementtree​_indent</a></code></td>
+    <td>Recursive function to indent an ElementTree._ElementInterface used for pretty printing. Run indent on elem and then output in the normal way.</td>
   </tr><tr class="function">
     
     <td>Function</td>
-    <td><code><a href="#everygrams">everygrams</a></code></td>
-    <td><span>Returns all possible ngrams generated from a sequence of items, as an iterator.</span></td>
+    <td><code><a href="#everygrams" class="internal-link" title="nltk.util.everygrams">everygrams</a></code></td>
+    <td>Returns all possible ngrams generated from a sequence of items, as an iterator.</td>
   </tr><tr class="function">
     
     <td>Function</td>
-    <td><code><a href="#filestring">filestring</a></code></td>
+    <td><code><a href="#filestring" class="internal-link" title="nltk.util.filestring">filestring</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="function">
     
     <td>Function</td>
-    <td><code><a href="#flatten">flatten</a></code></td>
-    <td><span>Flatten a list.</span></td>
+    <td><code><a href="#flatten" class="internal-link" title="nltk.util.flatten">flatten</a></code></td>
+    <td>Flatten a list.</td>
   </tr><tr class="function">
     
     <td>Function</td>
-    <td><code><a href="#guess_encoding">guess_encoding</a></code></td>
-    <td><span>Given a byte string, attempt to decode it. Tries the standard 'UTF8' and 'latin-1' encodings, Plus several gathered from locale information.</span></td>
+    <td><code><a href="#guess_encoding" class="internal-link" title="nltk.util.guess_encoding">guess​_encoding</a></code></td>
+    <td>Given a byte string, attempt to decode it. Tries the standard 'UTF8' and 'latin-1' encodings, Plus several gathered from locale information.</td>
   </tr><tr class="function">
     
     <td>Function</td>
-    <td><code><a href="#in_idle">in_idle</a></code></td>
-    <td><span>Return True if this function is run within idle.  Tkinter programs that are run in idle should never call <tt class="rst-docutils literal">Tk.mainloop</tt>; so this function should be used to gate all calls to <tt class="rst-docutils literal">Tk.mainloop</tt>.</span></td>
+    <td><code><a href="#in_idle" class="internal-link" title="nltk.util.in_idle">in​_idle</a></code></td>
+    <td>Return True if this function is run within idle.  Tkinter programs that are run in idle should never call <tt class="rst-docutils literal">Tk.mainloop</tt>; so this function should be used to gate all calls to <tt class="rst-docutils literal">Tk.mainloop</tt>.</td>
   </tr><tr class="function">
     
     <td>Function</td>
-    <td><code><a href="#invert_dict">invert_dict</a></code></td>
+    <td><code><a href="#invert_dict" class="internal-link" title="nltk.util.invert_dict">invert​_dict</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="function">
     
     <td>Function</td>
-    <td><code><a href="#invert_graph">invert_graph</a></code></td>
-    <td><span>Inverts a directed graph.</span></td>
+    <td><code><a href="#invert_graph" class="internal-link" title="nltk.util.invert_graph">invert​_graph</a></code></td>
+    <td>Inverts a directed graph.</td>
   </tr><tr class="function">
     
     <td>Function</td>
-    <td><code><a href="#ngrams">ngrams</a></code></td>
-    <td><span>Return the ngrams generated from a sequence of items, as an iterator. For example:</span></td>
+    <td><code><a href="#ngrams" class="internal-link" title="nltk.util.ngrams">ngrams</a></code></td>
+    <td>Return the ngrams generated from a sequence of items, as an iterator. For example:</td>
   </tr><tr class="function">
     
     <td>Function</td>
-    <td><code><a href="#pad_sequence">pad_sequence</a></code></td>
-    <td><span>Returns a padded sequence of items before ngram extraction.</span></td>
+    <td><code><a href="#pad_sequence" class="internal-link" title="nltk.util.pad_sequence">pad​_sequence</a></code></td>
+    <td>Returns a padded sequence of items before ngram extraction.</td>
   </tr><tr class="function">
     
     <td>Function</td>
-    <td><code><a href="#pairwise">pairwise</a></code></td>
-    <td><span>s -&gt; (s0,s1), (s1,s2), (s2, s3), ...</span></td>
+    <td><code><a href="#pairwise" class="internal-link" title="nltk.util.pairwise">pairwise</a></code></td>
+    <td>s -&gt; (s0,s1), (s1,s2), (s2, s3), ...</td>
   </tr><tr class="function">
     
     <td>Function</td>
-    <td><code><a href="#parallelize_preprocess">parallelize_preprocess</a></code></td>
+    <td><code><a href="#parallelize_preprocess" class="internal-link" title="nltk.util.parallelize_preprocess">parallelize​_preprocess</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="function">
     
     <td>Function</td>
-    <td><code><a href="#pr">pr</a></code></td>
-    <td><span>Pretty print a sequence of data items</span></td>
+    <td><code><a href="#pr" class="internal-link" title="nltk.util.pr">pr</a></code></td>
+    <td>Pretty print a sequence of data items</td>
   </tr><tr class="function">
     
     <td>Function</td>
-    <td><code><a href="#print_string">print_string</a></code></td>
-    <td><span>Pretty print a string, breaking lines on whitespace</span></td>
+    <td><code><a href="#print_string" class="internal-link" title="nltk.util.print_string">print​_string</a></code></td>
+    <td>Pretty print a string, breaking lines on whitespace</td>
   </tr><tr class="function">
     
     <td>Function</td>
-    <td><code><a href="#py25">py25</a></code></td>
+    <td><code><a href="#py25" class="internal-link" title="nltk.util.py25">py25</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="function">
     
     <td>Function</td>
-    <td><code><a href="#re_show">re_show</a></code></td>
-    <td><span>Return a string with markers surrounding the matched substrings. Search str for substrings matching <tt class="rst-docutils literal">regexp</tt> and wrap the matches with braces.  This is convenient for learning about regular expressions.</span></td>
+    <td><code><a href="#re_show" class="internal-link" title="nltk.util.re_show">re​_show</a></code></td>
+    <td>Return a string with markers surrounding the matched substrings. Search str for substrings matching <tt class="rst-docutils literal">regexp</tt> and wrap the matches with braces.  This is convenient for learning about regular expressions.</td>
   </tr><tr class="function">
     
     <td>Function</td>
-    <td><code><a href="#set_proxy">set_proxy</a></code></td>
-    <td><span>Set the HTTP proxy for Python to download through.</span></td>
+    <td><code><a href="#set_proxy" class="internal-link" title="nltk.util.set_proxy">set​_proxy</a></code></td>
+    <td>Set the HTTP proxy for Python to download through.</td>
   </tr><tr class="function">
     
     <td>Function</td>
-    <td><code><a href="#skipgrams">skipgrams</a></code></td>
-    <td><span>Returns all possible skipgrams generated from a sequence of items, as an iterator. Skipgrams are ngrams that allows tokens to be skipped. Refer to <a class="rst-reference external" href="http://homepages.inf.ed.ac.uk/ballison/pdf/lrec_skipgrams.pdf" target="_top">http://homepages.inf.ed.ac.uk/ballison/pdf/lrec_skipgrams.pdf</a></span></td>
+    <td><code><a href="#skipgrams" class="internal-link" title="nltk.util.skipgrams">skipgrams</a></code></td>
+    <td>Returns all possible skipgrams generated from a sequence of items, as an iterator. Skipgrams are ngrams that allows tokens to be skipped. Refer to <a class="rst-reference external" href="http://homepages.inf.ed.ac.uk/ballison/pdf/lrec_skipgrams.pdf" target="_top">http://homepages.inf.ed.ac.uk/ballison/pdf/lrec_skipgrams.pdf</a></td>
   </tr><tr class="function">
     
     <td>Function</td>
-    <td><code><a href="#tokenwrap">tokenwrap</a></code></td>
-    <td><span>Pretty print a list of text tokens, breaking lines on whitespace</span></td>
+    <td><code><a href="#tokenwrap" class="internal-link" title="nltk.util.tokenwrap">tokenwrap</a></code></td>
+    <td>Pretty print a list of text tokens, breaking lines on whitespace</td>
   </tr><tr class="function">
     
     <td>Function</td>
-    <td><code><a href="#transitive_closure">transitive_closure</a></code></td>
-    <td><span>Calculate the transitive closure of a directed graph, optionally the reflexive transitive closure.</span></td>
+    <td><code><a href="#transitive_closure" class="internal-link" title="nltk.util.transitive_closure">transitive​_closure</a></code></td>
+    <td>Calculate the transitive closure of a directed graph, optionally the reflexive transitive closure.</td>
   </tr><tr class="function">
     
     <td>Function</td>
-    <td><code><a href="#trigrams">trigrams</a></code></td>
-    <td><span>Return the trigrams generated from a sequence of items, as an iterator. For example:</span></td>
+    <td><code><a href="#trigrams" class="internal-link" title="nltk.util.trigrams">trigrams</a></code></td>
+    <td>Return the trigrams generated from a sequence of items, as an iterator. For example:</td>
   </tr><tr class="function">
     
     <td>Function</td>
-    <td><code><a href="#unique_list">unique_list</a></code></td>
+    <td><code><a href="#unique_list" class="internal-link" title="nltk.util.unique_list">unique​_list</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="function">
     
     <td>Function</td>
-    <td><code><a href="#unweighted_minimum_spanning_tree">unweighted_minimum_spanning_tree</a></code></td>
-    <td><span>Output a Minimum Spanning Tree (MST) of an unweighted graph, by traversing the nodes of a tree in breadth-first order, discarding eventual cycles.</span></td>
+    <td><code><a href="#unweighted_minimum_spanning_tree" class="internal-link" title="nltk.util.unweighted_minimum_spanning_tree">unweighted​_minimum​_spanning​_tree</a></code></td>
+    <td>Output a Minimum Spanning Tree (MST) of an unweighted graph, by traversing the nodes of a tree in breadth-first order, discarding eventual cycles.</td>
   </tr><tr class="function">
     
     <td>Function</td>
-    <td><code><a href="#usage">usage</a></code></td>
+    <td><code><a href="#usage" class="internal-link" title="nltk.util.usage">usage</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr>
 </table>
@@ -508,7 +521,7 @@ For example:</p>
 <span class="py-output">[(1, 2), (2, 3), (3, 4), (4, 5)]</span>
 </pre></blockquote>
 <p>Use bigrams for a list version of this function.</p>
-<table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">sequence:</span>sequence or iter</td><td class="fieldArgDesc">the source data to be converted into bigrams</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">kwargs</span></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr class="fieldStart"><td class="fieldName" colspan="2">Returns</td></tr><tr><td class="fieldArgContainer">iter(tuple)</td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr></table></div>
+<table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">sequence:</span>sequence or iter</td><td class="fieldArgDesc">the source data to be converted into bigrams</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">**kwargs</span></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr class="fieldStart"><td class="fieldName" colspan="2">Returns</td></tr><tr><td class="fieldArgContainer">iter(tuple)</td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr></table></div>
   </div>
 </div><div class="basefunction">
   
@@ -531,7 +544,7 @@ For example:</p>
     
     
     <div>Return the line from the file with first word key.
-Searches through a sorted file using the binary search algorithm.<table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">file:</span>file</td><td class="fieldArgDesc">the file to be searched through.</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">key:</span>str</td><td class="fieldArgDesc">the identifier we are searching for.</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">cache</span></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">cacheDepth</span></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr></table></div>
+Searches through a sorted file using the binary search algorithm.<table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">file:</span>file</td><td class="fieldArgDesc">the file to be searched through.</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">key:</span>str</td><td class="fieldArgDesc">the identifier we are searching for.</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">cache</span></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">cache​Depth</span></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr></table></div>
   </div>
 </div><div class="basefunction">
   
@@ -701,7 +714,7 @@ in the normal way.<table class="fieldTable"><tr class="fieldStart"><td class="fi
 </pre></dd>
 </dl>
 <table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">sequence:</span>sequence or iter</td><td class="fieldArgDesc">the source data to be converted into ngrams. If max_len is
-not provided, this sequence will be loaded into memory</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">min_len:</span>int</td><td class="fieldArgDesc">minimum length of the ngrams, aka. n-gram order/degree of ngram</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">max_len:</span>int</td><td class="fieldArgDesc">maximum length of the ngrams (set to length of sequence by default)</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">pad_left:</span>bool</td><td class="fieldArgDesc">whether the ngrams should be left-padded</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">pad_right:</span>bool</td><td class="fieldArgDesc">whether the ngrams should be right-padded</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">kwargs</span></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr class="fieldStart"><td class="fieldName" colspan="2">Returns</td></tr><tr><td class="fieldArgContainer">iter(tuple)</td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr></table></div>
+not provided, this sequence will be loaded into memory</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">min​_len:</span>int</td><td class="fieldArgDesc">minimum length of the ngrams, aka. n-gram order/degree of ngram</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">max​_len:</span>int</td><td class="fieldArgDesc">maximum length of the ngrams (set to length of sequence by default)</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">pad​_left:</span>bool</td><td class="fieldArgDesc">whether the ngrams should be left-padded</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">pad​_right:</span>bool</td><td class="fieldArgDesc">whether the ngrams should be right-padded</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">**kwargs</span></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr class="fieldStart"><td class="fieldName" colspan="2">Returns</td></tr><tr><td class="fieldArgContainer">iter(tuple)</td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr></table></div>
   </div>
 </div><div class="basefunction">
   
@@ -752,7 +765,7 @@ not provided, this sequence will be loaded into memory</td></tr><tr><td class="f
 <span class="py-prompt">&gt;&gt;&gt; </span>flatten(1, 2, [<span class="py-string">'b'</span>, <span class="py-string">'a'</span> , [<span class="py-string">'c'</span>, <span class="py-string">'d'</span>]], 3)
 <span class="py-output">[1, 2, 'b', 'a', 'c', 'd', 3]</span>
 </pre></blockquote>
-<table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">args</span></td><td class="fieldArgDesc">items and lists to be combined into a single list</td></tr><tr class="fieldStart"><td class="fieldName" colspan="2">Returns</td></tr><tr><td class="fieldArgContainer">list</td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr></table></div>
+<table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">*args</span></td><td class="fieldArgDesc">items and lists to be combined into a single list</td></tr><tr class="fieldStart"><td class="fieldName" colspan="2">Returns</td></tr><tr><td class="fieldArgContainer">list</td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr></table></div>
   </div>
 </div><div class="basefunction">
   
@@ -896,7 +909,7 @@ or pad_right to true in order to get additional ngrams:</p>
 <span class="py-prompt">&gt;&gt;&gt; </span><span class="py-builtin">list</span>(ngrams([1,2,3,4,5], 2, pad_left=<span class="py-builtin">True</span>, pad_right=<span class="py-builtin">True</span>, left_pad_symbol=<span class="py-string">'&lt;s&gt;'</span>, right_pad_symbol=<span class="py-string">'&lt;/s&gt;'</span>))
 <span class="py-output">[('&lt;s&gt;', 1), (1, 2), (2, 3), (3, 4), (4, 5), (5, '&lt;/s&gt;')]</span>
 </pre></blockquote>
-<table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">sequence:</span>sequence or iter</td><td class="fieldArgDesc">the source data to be converted into ngrams</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">n:</span>int</td><td class="fieldArgDesc">the degree of the ngrams</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">kwargs</span></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">pad_left:</span>bool</td><td class="fieldArgDesc">whether the ngrams should be left-padded</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">pad_right:</span>bool</td><td class="fieldArgDesc">whether the ngrams should be right-padded</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">left_pad_symbol:</span>any</td><td class="fieldArgDesc">the symbol to use for left padding (default is None)</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">right_pad_symbol:</span>any</td><td class="fieldArgDesc">the symbol to use for right padding (default is None)</td></tr><tr class="fieldStart"><td class="fieldName" colspan="2">Returns</td></tr><tr><td class="fieldArgContainer">sequence or iter</td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr></table></div>
+<table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">sequence:</span>sequence or iter</td><td class="fieldArgDesc">the source data to be converted into ngrams</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">n:</span>int</td><td class="fieldArgDesc">the degree of the ngrams</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">**kwargs</span></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">pad​_left:</span>bool</td><td class="fieldArgDesc">whether the ngrams should be left-padded</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">pad​_right:</span>bool</td><td class="fieldArgDesc">whether the ngrams should be right-padded</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">left​_pad​_symbol:</span>any</td><td class="fieldArgDesc">the symbol to use for left padding (default is None)</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">right​_pad​_symbol:</span>any</td><td class="fieldArgDesc">the symbol to use for right padding (default is None)</td></tr><tr class="fieldStart"><td class="fieldName" colspan="2">Returns</td></tr><tr><td class="fieldArgContainer">sequence or iter</td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr></table></div>
   </div>
 </div><div class="basefunction">
   
@@ -928,7 +941,7 @@ or pad_right to true in order to get additional ngrams:</p>
 <span class="py-prompt">&gt;&gt;&gt; </span><span class="py-builtin">list</span>(pad_sequence([1,2,3,4,5], 2, pad_right=<span class="py-builtin">True</span>, right_pad_symbol=<span class="py-string">'&lt;/s&gt;'</span>))
 <span class="py-output">[1, 2, 3, 4, 5, '&lt;/s&gt;']</span>
 </pre></blockquote>
-<table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">sequence:</span>sequence or iter</td><td class="fieldArgDesc">the source data to be padded</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">n:</span>int</td><td class="fieldArgDesc">the degree of the ngrams</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">pad_left:</span>bool</td><td class="fieldArgDesc">whether the ngrams should be left-padded</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">pad_right:</span>bool</td><td class="fieldArgDesc">whether the ngrams should be right-padded</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">left_pad_symbol:</span>any</td><td class="fieldArgDesc">the symbol to use for left padding (default is None)</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">right_pad_symbol:</span>any</td><td class="fieldArgDesc">the symbol to use for right padding (default is None)</td></tr><tr class="fieldStart"><td class="fieldName" colspan="2">Returns</td></tr><tr><td class="fieldArgContainer">sequence or iter</td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr></table></div>
+<table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">sequence:</span>sequence or iter</td><td class="fieldArgDesc">the source data to be padded</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">n:</span>int</td><td class="fieldArgDesc">the degree of the ngrams</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">pad​_left:</span>bool</td><td class="fieldArgDesc">whether the ngrams should be left-padded</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">pad​_right:</span>bool</td><td class="fieldArgDesc">whether the ngrams should be right-padded</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">left​_pad​_symbol:</span>any</td><td class="fieldArgDesc">the symbol to use for left padding (default is None)</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">right​_pad​_symbol:</span>any</td><td class="fieldArgDesc">the symbol to use for right padding (default is None)</td></tr><tr class="fieldStart"><td class="fieldName" colspan="2">Returns</td></tr><tr><td class="fieldArgContainer">sequence or iter</td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr></table></div>
   </div>
 </div><div class="basefunction">
   
@@ -1051,7 +1064,7 @@ or pad_right to true in order to get additional ngrams:</p>
   </a>
   <div class="functionHeader">
     
-    <span class="py-keyword">def</span> <span class="py-defname">re_show</span>(regexp, string, left='{', right='}'):
+    <span class="py-keyword">def</span> <span class="py-defname">re_show</span>(regexp, string, left=<span class="rst-variable-quote">'</span><span class="rst-variable-string">{</span><span class="rst-variable-quote">'</span>, right=<span class="rst-variable-quote">'</span><span class="rst-variable-string">}</span><span class="rst-variable-quote">'</span>):
     <a class="sourceLink" href="https://github.com/nltk/nltk/tree/3.6.2/nltk/util.py#L166">
       
       (source)
@@ -1075,7 +1088,7 @@ with braces.  This is convenient for learning about regular expressions.<table c
   </a>
   <div class="functionHeader">
     
-    <span class="py-keyword">def</span> <span class="py-defname">set_proxy</span>(proxy, user=None, password=''):
+    <span class="py-keyword">def</span> <span class="py-defname">set_proxy</span>(proxy, user=None, password=<span class="rst-variable-quote">'</span><span class="rst-variable-string"></span><span class="rst-variable-quote">'</span>):
     <a class="sourceLink" href="https://github.com/nltk/nltk/tree/3.6.2/nltk/util.py#L918">
       
       (source)
@@ -1122,7 +1135,7 @@ Refer to <a class="rst-reference external" href="http://homepages.inf.ed.ac.uk/b
 <span class="py-prompt">&gt;&gt;&gt; </span><span class="py-builtin">list</span>(skipgrams(sent, 3, 2))
 <span class="py-output">[('Insurgents', 'killed', 'in'), ('Insurgents', 'killed', 'ongoing'), ('Insurgents', 'killed', 'fighting'), ('Insurgents', 'in', 'ongoing'), ('Insurgents', 'in', 'fighting'), ('Insurgents', 'ongoing', 'fighting'), ('killed', 'in', 'ongoing'), ('killed', 'in', 'fighting'), ('killed', 'ongoing', 'fighting'), ('in', 'ongoing', 'fighting')]</span>
 </pre></blockquote>
-<table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">sequence:</span>sequence or iter</td><td class="fieldArgDesc">the source data to be converted into trigrams</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">n:</span>int</td><td class="fieldArgDesc">the degree of the ngrams</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">k:</span>int</td><td class="fieldArgDesc">the skip distance</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">kwargs</span></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr class="fieldStart"><td class="fieldName" colspan="2">Returns</td></tr><tr><td class="fieldArgContainer">iter(tuple)</td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr></table></div>
+<table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">sequence:</span>sequence or iter</td><td class="fieldArgDesc">the source data to be converted into trigrams</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">n:</span>int</td><td class="fieldArgDesc">the degree of the ngrams</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">k:</span>int</td><td class="fieldArgDesc">the skip distance</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">**kwargs</span></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr class="fieldStart"><td class="fieldName" colspan="2">Returns</td></tr><tr><td class="fieldArgContainer">iter(tuple)</td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr></table></div>
   </div>
 </div><div class="basefunction">
   
@@ -1135,7 +1148,7 @@ Refer to <a class="rst-reference external" href="http://homepages.inf.ed.ac.uk/b
   </a>
   <div class="functionHeader">
     
-    <span class="py-keyword">def</span> <span class="py-defname">tokenwrap</span>(tokens, separator=' ', width=70):
+    <span class="py-keyword">def</span> <span class="py-defname">tokenwrap</span>(tokens, separator=<span class="rst-variable-quote">'</span><span class="rst-variable-string"> </span><span class="rst-variable-quote">'</span>, width=70):
     <a class="sourceLink" href="https://github.com/nltk/nltk/tree/3.6.2/nltk/util.py#L126">
       
       (source)
@@ -1201,7 +1214,7 @@ For example:</p>
 <span class="py-output">[(1, 2, 3), (2, 3, 4), (3, 4, 5)]</span>
 </pre></blockquote>
 <p>Use trigrams for a list version of this function.</p>
-<table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">sequence:</span>sequence or iter</td><td class="fieldArgDesc">the source data to be converted into trigrams</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">kwargs</span></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr class="fieldStart"><td class="fieldName" colspan="2">Returns</td></tr><tr><td class="fieldArgContainer">iter(tuple)</td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr></table></div>
+<table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">sequence:</span>sequence or iter</td><td class="fieldArgDesc">the source data to be converted into trigrams</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">**kwargs</span></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr class="fieldStart"><td class="fieldName" colspan="2">Returns</td></tr><tr><td class="fieldArgContainer">iter(tuple)</td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr></table></div>
   </div>
 </div><div class="basefunction">
   
@@ -1275,7 +1288,7 @@ and returning an iterator of the node's children.</p>
   </a>
   <div class="functionHeader">
     
-    <span class="py-keyword">def</span> <span class="py-defname">usage</span>(obj, selfname='self'):
+    <span class="py-keyword">def</span> <span class="py-defname">usage</span>(obj, selfname=<span class="rst-variable-quote">'</span><span class="rst-variable-string">self</span><span class="rst-variable-quote">'</span>):
     <a class="sourceLink" href="https://github.com/nltk/nltk/tree/3.6.2/nltk/util.py#L42">
       
       (source)
@@ -1296,7 +1309,7 @@ and returning an iterator of the node's children.</p>
   <div class="container">
     <a href="index.html">API Documentation</a> for <a href="http://www.nltk.org/" class="projecthome">nltk-3.6.2</a>,
   generated by <a href="https://github.com/twisted/pydoctor/">pydoctor</a>
-    21.2.2 at 2022-01-06 17:36:51.
+    22.2.2.dev0 at 2022-03-04 05:57:24.
   </div>
 </footer>
 

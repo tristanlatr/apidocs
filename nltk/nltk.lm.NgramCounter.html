@@ -7,7 +7,7 @@
   <head>
     
     <title>nltk.lm.NgramCounter</title>
-    <meta name="generator" content="pydoctor 21.2.2"> 
+    <meta name="generator" content="pydoctor 22.2.2.dev0"> 
         
     </meta>
     <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
@@ -44,69 +44,82 @@
           Names
         </a>
 
-        <form action="search-results.html" id="search-box-container">
+        <div id="search-box-container">
           <div class="input-group">
-            <input id="search-box" name="search-query" placeholder="Search..." aria-label="Search" minlength="2" class="form-control" />
+            <input id="search-box" type="search" name="search-query" placeholder="Search..." aria-label="Search" minlength="2" class="form-control" autocomplete="off" />
+            
             <span class="input-group-btn">
-              <button class="btn btn-default" type="submit" title="Search"><img src="fonts/search.svg" alt="Search!" /></button>
-              <a class="btn btn-default" id="search-help-button" title="Help" onclick="toggleSearchHelpText()"><img src="fonts/info.svg" alt="Help!" /></a>
+              <a style="display: none;" class="btn btn-default" id="search-clear-button" title="Clear" onclick="clearSearch()"><img src="fonts/x-circle.svg" alt="Clear" /></a>
+              <a class="btn btn-default" id="search-help-button" title="Help" onclick="toggleSearchHelpText()"><img src="fonts/info.svg" alt="Help" /></a>
             </span>
           </div>
-        </form>
+        </div>
 
-        <div class="rst-admonition hint" id="search-help-box">
+      </div>
+
+      <div id="search-results-container" style="display: none;">
+        <div>
+          <span class="label label-default" id="search-docstrings-button">
+            <a title="Search in docstrings" onclick="toggleSearchInDocstrings()">search in docstrings</a></span>
+        </div>
+
+        <noscript>
+            <h1>Cannot search: JavaScript is not supported/enabled in your browser.</h1>
+        </noscript>
+
+        <div class="hint" id="search-help-box">
           <p class="rst-last">
       
             Search bar offers the following options:
             <ul>   
                 <li>
                   <strong>Term presence.</strong> The below example searches for documents that 
-                    must contain “foo”, might contain “bar” and must not contain “baz”:
-                  <br /> <code>'+foo bar -baz'</code>
+                    must contain “foo”, might contain “bar” and must not contain “baz”: <code>+foo bar -baz</code>
                 </li> 
 
                 <li>
-                  <strong>Wildcards.</strong> The below example searches for documents with words beginning with “foo”:
-                  <br /> <code>'foo*'</code>
+                  <strong>Wildcards.</strong> The below example searches for documents with words beginning with “foo”: <code>foo*</code>
                 </li> 
 
                 <li>
-                  <strong>Search in specific fields.</strong> The following search matches all documents 
-                  that contains "foo" in their full dotted name and with “bar” in any field:
-                  <br /> <code>'+fullName:*foo* +bar'</code>
+                  <strong>Search in specific fields.</strong> The following search matches all objects 
+                  in "twisted.mail" that matches “search”: <code>+qname:twisted.mail.* +search</code>
 
                   <p>
-                    Possible fields: 'name', 'docstring', 'fullName'.
+                    Possible fields: 'name', 'qname' (fully qualified name), 'docstring', and 'kind'.
+                    Last two fields are only applicable if "search in docstrings" is enabled.
                   </p>
                 </li>
 
                 <li>
                   <strong>Fuzzy matches.</strong> The following search matches all documents 
-                  that have a word within 1 edit distance of “foo”:
-                  <br /> <code>'foo~1'</code>
+                  that have a word within 1 edit distance of “foo”: <code>foo~1</code>
                 </li>
             </ul>
 
           </p>
         </div>
 
-      </div>
+        <div id="search-status"> </div>
+        
+        <div class="warning" id="search-warn-box" style="display: none;">
+          <p class="rst-last"><span id="search-warn"></span></p>
+        </div>
 
+        <table id="search-results">
+          <!-- Filled dynamically by JS -->
+        </table>
+        
+        <div style="margin-top: 8px;">
+          <p>Results provided by <a href="https://lunrjs.com">Lunr.js</a></p>
+        </div>
+      </div>
 
     </div>
   </div>
 
-  <script>
- 
-    function toggleSearchHelpText() {
-        document.body.classList.toggle("search-help-hidden");
-    }
-    // Init search and help text
-    document.getElementById('search-box-container').style.display = 'block';
-    document.getElementById('search-help-box').style.display = 'block';
-    document.body.classList.add("search-help-hidden");
-
-  </script>
+  <script src="ajax.js" type="text/javascript"></script>
+  <script src="search.js" type="text/javascript"></script>
 
 </nav>
 
@@ -115,7 +128,7 @@
     <div class="container">
 
       <div class="page-header">
-        <h1 class="class"><code><code><a href="nltk.html">nltk</a></code><wbr></wbr>.<code><a href="nltk.lm.html">lm</a></code><wbr></wbr>.<code><a href="nltk.lm.NgramCounter.html">NgramCounter</a></code></code></h1>
+        <h1 class="class"><code><code><a href="index.html" class="internal-link">nltk</a></code><wbr></wbr>.<code><a href="nltk.lm.html" class="internal-link" title="nltk.lm">lm</a></code><wbr></wbr>.<code><a href="nltk.lm.NgramCounter.html" class="internal-link" title="nltk.lm.NgramCounter">NgramCounter</a></code></code></h1>
         <div id="showPrivate">
           <button class="btn btn-link" onclick="togglePrivate()">Toggle Private API</button>
         </div>
@@ -160,7 +173,7 @@ over all continuations after the given context.</p>
 2 for bigram) and indexing on the context.
 &gt;&gt;&gt; ngram_counts[2][('a',)] is ngram_counts[['a']]
 True</p>
-<p>Note that the keys in <code><a href="nltk.probability.ConditionalFreqDist.html">ConditionalFreqDist</a></code> cannot be lists, only tuples!
+<p>Note that the keys in <code><a href="nltk.probability.ConditionalFreqDist.html" class="internal-link" title="nltk.probability.ConditionalFreqDist">ConditionalFreqDist</a></code> cannot be lists, only tuples!
 It is generally advisable to use the less verbose and more flexible square
 bracket notation.</p>
 <p>To get the count of the full ngram "a b", do this:</p>
@@ -172,7 +185,7 @@ in that order.</p>
 <pre class="py-doctest">
 <span class="py-prompt">&gt;&gt;&gt; </span>ngram_counts[2]
 <span class="py-output">&lt;ConditionalFreqDist with 4 conditions&gt;</span>
-</pre><p>The keys of this <code><a href="nltk.probability.ConditionalFreqDist.html">ConditionalFreqDist</a></code> are the contexts we discussed earlier.
+</pre><p>The keys of this <code><a href="nltk.probability.ConditionalFreqDist.html" class="internal-link" title="nltk.probability.ConditionalFreqDist">ConditionalFreqDist</a></code> are the contexts we discussed earlier.
 Unigrams can also be accessed with a human-friendly alias.</p>
 <pre class="py-doctest">
 <span class="py-prompt">&gt;&gt;&gt; </span>ngram_counts.unigrams <span class="py-keyword">is</span> ngram_counts[1]
@@ -194,47 +207,47 @@ Unigrams can also be accessed with a human-friendly alias.</p>
   <tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#__contains__">__contains__</a></code></td>
+    <td><code><a href="#__contains__" class="internal-link" title="nltk.lm.NgramCounter.__contains__">__contains__</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#__getitem__">__getitem__</a></code></td>
-    <td><span>User-friendly access to ngram counts.</span></td>
+    <td><code><a href="#__getitem__" class="internal-link" title="nltk.lm.NgramCounter.__getitem__">__getitem__</a></code></td>
+    <td>User-friendly access to ngram counts.</td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#__init__">__init__</a></code></td>
-    <td><span>Creates a new NgramCounter.</span></td>
+    <td><code><a href="#__init__" class="internal-link" title="nltk.lm.NgramCounter.__init__">__init__</a></code></td>
+    <td>Creates a new NgramCounter.</td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#__len__">__len__</a></code></td>
+    <td><code><a href="#__len__" class="internal-link" title="nltk.lm.NgramCounter.__len__">__len__</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#__str__">__str__</a></code></td>
+    <td><code><a href="#__str__" class="internal-link" title="nltk.lm.NgramCounter.__str__">__str__</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#N">N</a></code></td>
-    <td><span>Returns grand total number of ngrams stored.</span></td>
+    <td><code><a href="#N" class="internal-link" title="nltk.lm.NgramCounter.N">N</a></code></td>
+    <td>Returns grand total number of ngrams stored.</td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#update">update</a></code></td>
-    <td><span>Updates ngram counts from <code>ngram_text</code>.</span></td>
+    <td><code><a href="#update" class="internal-link" title="nltk.lm.NgramCounter.update">update</a></code></td>
+    <td>Updates ngram counts from <code>ngram_text</code>.</td>
   </tr><tr class="instancevariable">
     
     <td>Instance Variable</td>
-    <td><code><a href="#unigrams">unigrams</a></code></td>
+    <td><code><a href="#unigrams" class="internal-link" title="nltk.lm.NgramCounter.unigrams">unigrams</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="instancevariable private">
     
     <td>Instance Variable</td>
-    <td><code><a href="#_counts">_counts</a></code></td>
+    <td><code><a href="#_counts" class="internal-link" title="nltk.lm.NgramCounter._counts">_counts</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr>
 </table>
@@ -311,8 +324,8 @@ Unigrams can also be accessed with a human-friendly alias.</p>
     
     <div><p>Creates a new NgramCounter.</p>
 <p>If <code>ngram_text</code> is specified, counts ngrams from it, otherwise waits for
-<code><a href="#update">update</a></code> method to be called explicitly.</p>
-<table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">ngram_text:</span>Iterable(Iterable(tuple(str))) or None</td><td class="fieldArgDesc">Optional text containing senteces of ngrams, as for <code><a href="#update">update</a></code> method.</td></tr></table></div>
+<code><a href="#update" class="internal-link" title="nltk.lm.NgramCounter.update">update</a></code> method to be called explicitly.</p>
+<table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">ngram​_text:</span>Iterable(Iterable(tuple(str))) or None</td><td class="fieldArgDesc">Optional text containing senteces of ngrams, as for <code><a href="#update" class="internal-link" title="nltk.lm.NgramCounter.update">update</a></code> method.</td></tr></table></div>
   </div>
 </div><div class="basemethod">
   
@@ -411,7 +424,7 @@ Unigrams can also be accessed with a human-friendly alias.</p>
     <div><p>Updates ngram counts from <code>ngram_text</code>.</p>
 <p>Expects <code>ngram_text</code> to be a sequence of sentences (sequences).
 Each sentence consists of ngrams as tuples of strings.</p>
-<table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">ngram_text</span></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">Iterable(Iterable(tuple(str))) ngram_text</span></td><td class="fieldArgDesc">Text containing senteces of ngrams.</td></tr><tr class="fieldStart"><td class="fieldName" colspan="2">Raises</td></tr><tr><td class="fieldArgContainer"><code>TypeError</code></td><td>if the ngrams are not tuples.</td></tr></table></div>
+<table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">ngram​_text</span></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">​Iterable(​Iterable(tuple(str))) ngram_text</span></td><td class="fieldArgDesc">Text containing senteces of ngrams.</td></tr><tr class="fieldStart"><td class="fieldName" colspan="2">Raises</td></tr><tr><td class="fieldArgContainer"><code>TypeError</code></td><td>if the ngrams are not tuples.</td></tr></table></div>
   </div>
 </div><div class="baseinstancevariable">
   
@@ -434,6 +447,7 @@ Each sentence consists of ngrams as tuples of strings.</p>
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    
   </div>
 </div><div class="baseinstancevariable private">
   
@@ -456,6 +470,7 @@ Each sentence consists of ngrams as tuples of strings.</p>
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    
   </div>
 </div>
 
@@ -467,7 +482,7 @@ Each sentence consists of ngrams as tuples of strings.</p>
   <div class="container">
     <a href="index.html">API Documentation</a> for <a href="http://www.nltk.org/" class="projecthome">nltk-3.6.2</a>,
   generated by <a href="https://github.com/twisted/pydoctor/">pydoctor</a>
-    21.2.2 at 2022-01-06 17:36:51.
+    22.2.2.dev0 at 2022-03-04 05:57:24.
   </div>
 </footer>
 

@@ -7,7 +7,7 @@
   <head>
     
     <title>nltk.inference.prover9.Prover9</title>
-    <meta name="generator" content="pydoctor 21.2.2"> 
+    <meta name="generator" content="pydoctor 22.2.2.dev0"> 
         
     </meta>
     <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
@@ -44,69 +44,82 @@
           Names
         </a>
 
-        <form action="search-results.html" id="search-box-container">
+        <div id="search-box-container">
           <div class="input-group">
-            <input id="search-box" name="search-query" placeholder="Search..." aria-label="Search" minlength="2" class="form-control" />
+            <input id="search-box" type="search" name="search-query" placeholder="Search..." aria-label="Search" minlength="2" class="form-control" autocomplete="off" />
+            
             <span class="input-group-btn">
-              <button class="btn btn-default" type="submit" title="Search"><img src="fonts/search.svg" alt="Search!" /></button>
-              <a class="btn btn-default" id="search-help-button" title="Help" onclick="toggleSearchHelpText()"><img src="fonts/info.svg" alt="Help!" /></a>
+              <a style="display: none;" class="btn btn-default" id="search-clear-button" title="Clear" onclick="clearSearch()"><img src="fonts/x-circle.svg" alt="Clear" /></a>
+              <a class="btn btn-default" id="search-help-button" title="Help" onclick="toggleSearchHelpText()"><img src="fonts/info.svg" alt="Help" /></a>
             </span>
           </div>
-        </form>
+        </div>
 
-        <div class="rst-admonition hint" id="search-help-box">
+      </div>
+
+      <div id="search-results-container" style="display: none;">
+        <div>
+          <span class="label label-default" id="search-docstrings-button">
+            <a title="Search in docstrings" onclick="toggleSearchInDocstrings()">search in docstrings</a></span>
+        </div>
+
+        <noscript>
+            <h1>Cannot search: JavaScript is not supported/enabled in your browser.</h1>
+        </noscript>
+
+        <div class="hint" id="search-help-box">
           <p class="rst-last">
       
             Search bar offers the following options:
             <ul>   
                 <li>
                   <strong>Term presence.</strong> The below example searches for documents that 
-                    must contain “foo”, might contain “bar” and must not contain “baz”:
-                  <br /> <code>'+foo bar -baz'</code>
+                    must contain “foo”, might contain “bar” and must not contain “baz”: <code>+foo bar -baz</code>
                 </li> 
 
                 <li>
-                  <strong>Wildcards.</strong> The below example searches for documents with words beginning with “foo”:
-                  <br /> <code>'foo*'</code>
+                  <strong>Wildcards.</strong> The below example searches for documents with words beginning with “foo”: <code>foo*</code>
                 </li> 
 
                 <li>
-                  <strong>Search in specific fields.</strong> The following search matches all documents 
-                  that contains "foo" in their full dotted name and with “bar” in any field:
-                  <br /> <code>'+fullName:*foo* +bar'</code>
+                  <strong>Search in specific fields.</strong> The following search matches all objects 
+                  in "twisted.mail" that matches “search”: <code>+qname:twisted.mail.* +search</code>
 
                   <p>
-                    Possible fields: 'name', 'docstring', 'fullName'.
+                    Possible fields: 'name', 'qname' (fully qualified name), 'docstring', and 'kind'.
+                    Last two fields are only applicable if "search in docstrings" is enabled.
                   </p>
                 </li>
 
                 <li>
                   <strong>Fuzzy matches.</strong> The following search matches all documents 
-                  that have a word within 1 edit distance of “foo”:
-                  <br /> <code>'foo~1'</code>
+                  that have a word within 1 edit distance of “foo”: <code>foo~1</code>
                 </li>
             </ul>
 
           </p>
         </div>
 
-      </div>
+        <div id="search-status"> </div>
+        
+        <div class="warning" id="search-warn-box" style="display: none;">
+          <p class="rst-last"><span id="search-warn"></span></p>
+        </div>
 
+        <table id="search-results">
+          <!-- Filled dynamically by JS -->
+        </table>
+        
+        <div style="margin-top: 8px;">
+          <p>Results provided by <a href="https://lunrjs.com">Lunr.js</a></p>
+        </div>
+      </div>
 
     </div>
   </div>
 
-  <script>
- 
-    function toggleSearchHelpText() {
-        document.body.classList.toggle("search-help-hidden");
-    }
-    // Init search and help text
-    document.getElementById('search-box-container').style.display = 'block';
-    document.getElementById('search-help-box').style.display = 'block';
-    document.body.classList.add("search-help-hidden");
-
-  </script>
+  <script src="ajax.js" type="text/javascript"></script>
+  <script src="search.js" type="text/javascript"></script>
 
 </nav>
 
@@ -115,7 +128,7 @@
     <div class="container">
 
       <div class="page-header">
-        <h1 class="class"><code><code><a href="nltk.html">nltk</a></code><wbr></wbr>.<code><a href="nltk.inference.html">inference</a></code><wbr></wbr>.<code><a href="nltk.inference.prover9.html">prover9</a></code><wbr></wbr>.<code><a href="nltk.inference.prover9.Prover9.html">Prover9</a></code></code></h1>
+        <h1 class="class"><code><code><a href="index.html" class="internal-link">nltk</a></code><wbr></wbr>.<code><a href="nltk.inference.html" class="internal-link" title="nltk.inference">inference</a></code><wbr></wbr>.<code><a href="nltk.inference.prover9.html" class="internal-link" title="nltk.inference.prover9">prover9</a></code><wbr></wbr>.<code><a href="nltk.inference.prover9.Prover9.html" class="internal-link" title="nltk.inference.prover9.Prover9">Prover9</a></code></code></h1>
         <div id="showPrivate">
           <button class="btn btn-link" onclick="togglePrivate()">Toggle Private API</button>
         </div>
@@ -126,7 +139,7 @@
       </div>
 
       <div class="extrasDocstring">
-        <p><code><span class="py-keyword">class</span> <span class="py-defname">Prover9</span>(<a href="nltk.inference.prover9.Prover9Parent.html" title="nltk.inference.prover9.Prover9Parent">Prover9Parent</a>, <a href="nltk.inference.api.Prover.html" title="nltk.inference.api.Prover">Prover</a>): <a href="https://github.com/nltk/nltk/tree/3.6.2/nltk/inference/prover9.py#L307" class="sourceLink">(source)</a></code></p>
+        <p><code><span class="py-keyword">class</span> <span class="py-defname">Prover9</span>(<a href="nltk.inference.prover9.Prover9Parent.html" class="internal-link" title="nltk.inference.prover9.Prover9Parent">Prover9Parent</a>, <a href="nltk.inference.api.Prover.html" class="internal-link" title="nltk.inference.api.Prover">Prover</a>): <a href="https://github.com/nltk/nltk/tree/3.6.2/nltk/inference/prover9.py#L307" class="sourceLink">(source)</a></code></p>
         <p><a href="classIndex.html#nltk.inference.prover9.Prover9">View In Hierarchy</a></p>
       </div>
 
@@ -141,48 +154,48 @@
   <tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#__init__">__init__</a></code></td>
+    <td><code><a href="#__init__" class="internal-link" title="nltk.inference.prover9.Prover9.__init__">__init__</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#prover9_input">prover9_input</a></code></td>
-    <td><span></span></td>
+    <td><code><a href="#prover9_input" class="internal-link" title="nltk.inference.prover9.Prover9.prover9_input">prover9​_input</a></code></td>
+    <td></td>
   </tr><tr class="method private">
     
     <td>Method</td>
-    <td><code><a href="#_call_prooftrans">_call_prooftrans</a></code></td>
-    <td><span>Call the <tt class="rst-docutils literal">prooftrans</tt> binary with the given input.</span></td>
+    <td><code><a href="#_call_prooftrans" class="internal-link" title="nltk.inference.prover9.Prover9._call_prooftrans">_call​_prooftrans</a></code></td>
+    <td>Call the <tt class="rst-docutils literal">prooftrans</tt> binary with the given input.</td>
   </tr><tr class="method private">
     
     <td>Method</td>
-    <td><code><a href="#_call_prover9">_call_prover9</a></code></td>
-    <td><span>Call the <tt class="rst-docutils literal">prover9</tt> binary with the given input.</span></td>
+    <td><code><a href="#_call_prover9" class="internal-link" title="nltk.inference.prover9.Prover9._call_prover9">_call​_prover9</a></code></td>
+    <td>Call the <tt class="rst-docutils literal">prover9</tt> binary with the given input.</td>
   </tr><tr class="method private">
     
     <td>Method</td>
-    <td><code><a href="#_prove">_prove</a></code></td>
+    <td><code><a href="#_prove" class="internal-link" title="nltk.inference.prover9.Prover9._prove">_prove</a></code></td>
     <td><span class="undocumented">No summary</span></td>
   </tr><tr class="instancevariable private">
     
     <td>Instance Variable</td>
-    <td><code><a href="#_prooftrans_bin">_prooftrans_bin</a></code></td>
+    <td><code><a href="#_prooftrans_bin" class="internal-link" title="nltk.inference.prover9.Prover9._prooftrans_bin">_prooftrans​_bin</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="instancevariable private">
     
     <td>Instance Variable</td>
-    <td><code><a href="#_prover9_bin">_prover9_bin</a></code></td>
+    <td><code><a href="#_prover9_bin" class="internal-link" title="nltk.inference.prover9.Prover9._prover9_bin">_prover9​_bin</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="instancevariable private">
     
     <td>Instance Variable</td>
-    <td><code><a href="#_timeout">_timeout</a></code></td>
-    <td><span>The timeout value for prover9.  If a proof can not be found in this amount of time, then prover9 will return false. (Use 0 for no timeout.)</span></td>
+    <td><code><a href="#_timeout" class="internal-link" title="nltk.inference.prover9.Prover9._timeout">_timeout</a></code></td>
+    <td>The timeout value for prover9.  If a proof can not be found in this amount of time, then prover9 will return false. (Use 0 for no timeout.)</td>
   </tr>
 </table>
         
           <p class="inheritedFrom">
-            Inherited from <code><a href="nltk.inference.prover9.Prover9Parent.html">Prover9Parent</a></code>:
+            Inherited from <code><a href="nltk.inference.prover9.Prover9Parent.html" class="internal-link" title="nltk.inference.prover9.Prover9Parent">Prover9Parent</a></code>:
           </p>
           <table class="children sortable" id="id740">
   
@@ -190,33 +203,33 @@
   <tr class="basemethod">
     
     <td>Method</td>
-    <td><code><a href="nltk.inference.prover9.Prover9Parent.html#binary_locations">binary_locations</a></code></td>
-    <td><span>A list of directories that should be searched for the prover9 executables.  This list is used by <tt class="rst-docutils literal">config_prover9</tt> when searching for the prover9 executables.</span></td>
+    <td><code><a href="nltk.inference.prover9.Prover9Parent.html#binary_locations" class="internal-link" title="nltk.inference.prover9.Prover9Parent.binary_locations">binary​_locations</a></code></td>
+    <td>A list of directories that should be searched for the prover9 executables.  This list is used by <tt class="rst-docutils literal">config_prover9</tt> when searching for the prover9 executables.</td>
   </tr><tr class="basemethod">
     
     <td>Method</td>
-    <td><code><a href="nltk.inference.prover9.Prover9Parent.html#config_prover9">config_prover9</a></code></td>
+    <td><code><a href="nltk.inference.prover9.Prover9Parent.html#config_prover9" class="internal-link" title="nltk.inference.prover9.Prover9Parent.config_prover9">config​_prover9</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="basemethod private">
     
     <td>Method</td>
-    <td><code><a href="nltk.inference.prover9.Prover9Parent.html#_call">_call</a></code></td>
-    <td><span>Call the binary with the given input.</span></td>
+    <td><code><a href="nltk.inference.prover9.Prover9Parent.html#_call" class="internal-link" title="nltk.inference.prover9.Prover9Parent._call">_call</a></code></td>
+    <td>Call the binary with the given input.</td>
   </tr><tr class="basemethod private">
     
     <td>Method</td>
-    <td><code><a href="nltk.inference.prover9.Prover9Parent.html#_find_binary">_find_binary</a></code></td>
+    <td><code><a href="nltk.inference.prover9.Prover9Parent.html#_find_binary" class="internal-link" title="nltk.inference.prover9.Prover9Parent._find_binary">_find​_binary</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="baseinstancevariable private">
     
     <td>Instance Variable</td>
-    <td><code><a href="nltk.inference.prover9.Prover9Parent.html#_binary_location">_binary_location</a></code></td>
+    <td><code><a href="nltk.inference.prover9.Prover9Parent.html#_binary_location" class="internal-link" title="nltk.inference.prover9.Prover9Parent._binary_location">_binary​_location</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr>
 </table>
           
           <p class="inheritedFrom">
-            Inherited from <code><a href="nltk.inference.api.Prover.html">Prover</a></code>:
+            Inherited from <code><a href="nltk.inference.api.Prover.html" class="internal-link" title="nltk.inference.api.Prover">Prover</a></code>:
           </p>
           <table class="children sortable" id="id741">
   
@@ -224,8 +237,8 @@
   <tr class="basemethod">
     
     <td>Method</td>
-    <td><code><a href="nltk.inference.api.Prover.html#prove">prove</a></code></td>
-    <td><span></span></td>
+    <td><code><a href="nltk.inference.api.Prover.html#prove" class="internal-link" title="nltk.inference.api.Prover.prove">prove</a></code></td>
+    <td></td>
   </tr>
 </table>
           
@@ -275,7 +288,7 @@
     </a>
   </div>
   <div class="docstring functionBody">
-    <div class="interfaceinfo">overrides <code><a href="nltk.inference.prover9.Prover9Parent.html#prover9_input">nltk.inference.prover9.Prover9Parent.prover9_input</a></code></div>
+    <div class="interfaceinfo">overrides <code><a href="nltk.inference.prover9.Prover9Parent.html#prover9_input" class="internal-link">nltk.inference.prover9.Prover9Parent.prover9_input</a></code></div>
     
     <div><table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">See Also</td></tr><tr><td colspan="2">Prover9Parent.prover9_input</td></tr></table></div>
   </div>
@@ -299,7 +312,7 @@
   <div class="docstring functionBody">
     
     
-    <div>Call the <tt class="rst-docutils literal">prooftrans</tt> binary with the given input.<table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">input_str</span></td><td class="fieldArgDesc">A string whose contents are used as stdin.</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">args</span></td><td class="fieldArgDesc">A list of command-line arguments.</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">verbose</span></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr class="fieldStart"><td class="fieldName" colspan="2">Returns</td></tr><tr><td colspan="2">A tuple (stdout, returncode)</td></tr><tr class="fieldStart"><td class="fieldName" colspan="2">See Also</td></tr><tr><td colspan="2"><tt class="rst-docutils literal">config_prover9</tt></td></tr></table></div>
+    <div>Call the <tt class="rst-docutils literal">prooftrans</tt> binary with the given input.<table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">input​_str</span></td><td class="fieldArgDesc">A string whose contents are used as stdin.</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">args</span></td><td class="fieldArgDesc">A list of command-line arguments.</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">verbose</span></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr class="fieldStart"><td class="fieldName" colspan="2">Returns</td></tr><tr><td colspan="2">A tuple (stdout, returncode)</td></tr><tr class="fieldStart"><td class="fieldName" colspan="2">See Also</td></tr><tr><td colspan="2"><tt class="rst-docutils literal">config_prover9</tt></td></tr></table></div>
   </div>
 </div><div class="basemethod private">
   
@@ -321,7 +334,7 @@
   <div class="docstring functionBody">
     
     
-    <div>Call the <tt class="rst-docutils literal">prover9</tt> binary with the given input.<table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">input_str</span></td><td class="fieldArgDesc">A string whose contents are used as stdin.</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">args</span></td><td class="fieldArgDesc">A list of command-line arguments.</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">verbose</span></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr class="fieldStart"><td class="fieldName" colspan="2">Returns</td></tr><tr><td colspan="2">A tuple (stdout, returncode)</td></tr><tr class="fieldStart"><td class="fieldName" colspan="2">See Also</td></tr><tr><td colspan="2"><tt class="rst-docutils literal">config_prover9</tt></td></tr></table></div>
+    <div>Call the <tt class="rst-docutils literal">prover9</tt> binary with the given input.<table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">input​_str</span></td><td class="fieldArgDesc">A string whose contents are used as stdin.</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">args</span></td><td class="fieldArgDesc">A list of command-line arguments.</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">verbose</span></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr class="fieldStart"><td class="fieldName" colspan="2">Returns</td></tr><tr><td colspan="2">A tuple (stdout, returncode)</td></tr><tr class="fieldStart"><td class="fieldName" colspan="2">See Also</td></tr><tr><td colspan="2"><tt class="rst-docutils literal">config_prover9</tt></td></tr></table></div>
   </div>
 </div><div class="basemethod private">
   
@@ -341,7 +354,7 @@
     </a>
   </div>
   <div class="docstring functionBody">
-    <div class="interfaceinfo">overrides <code><a href="nltk.inference.api.Prover.html#_prove">nltk.inference.api.Prover._prove</a></code></div>
+    <div class="interfaceinfo">overrides <code><a href="nltk.inference.api.Prover.html#_prove" class="internal-link">nltk.inference.api.Prover._prove</a></code></div>
     
     <div>Use Prover9 to prove a theorem.
 :return: A pair whose first element is a boolean indicating if the
@@ -369,6 +382,7 @@ is the output of the prover.</div>
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    
   </div>
 </div><div class="baseinstancevariable private">
   
@@ -388,9 +402,10 @@ is the output of the prover.</div>
     </a>
   </div>
   <div class="functionBody">
-    <div class="interfaceinfo">overrides <code><a href="nltk.inference.prover9.Prover9Parent.html#_prover9_bin">nltk.inference.prover9.Prover9Parent._prover9_bin</a></code></div>
+    <div class="interfaceinfo">overrides <code><a href="nltk.inference.prover9.Prover9Parent.html#_prover9_bin" class="internal-link">nltk.inference.prover9.Prover9Parent._prover9_bin</a></code></div>
     
     <div><p class="undocumented">Undocumented</p></div>
+    
   </div>
 </div><div class="baseinstancevariable private">
   
@@ -415,6 +430,7 @@ is the output of the prover.</div>
     <div>The timeout value for prover9.  If a proof can not be found
 in this amount of time, then prover9 will return false.
 (Use 0 for no timeout.)</div>
+    
   </div>
 </div>
 
@@ -426,7 +442,7 @@ in this amount of time, then prover9 will return false.
   <div class="container">
     <a href="index.html">API Documentation</a> for <a href="http://www.nltk.org/" class="projecthome">nltk-3.6.2</a>,
   generated by <a href="https://github.com/twisted/pydoctor/">pydoctor</a>
-    21.2.2 at 2022-01-06 17:36:51.
+    22.2.2.dev0 at 2022-03-04 05:57:24.
   </div>
 </footer>
 

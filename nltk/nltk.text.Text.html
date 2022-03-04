@@ -7,7 +7,7 @@
   <head>
     
     <title>nltk.text.Text</title>
-    <meta name="generator" content="pydoctor 21.2.2"> 
+    <meta name="generator" content="pydoctor 22.2.2.dev0"> 
         
     </meta>
     <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
@@ -44,69 +44,82 @@
           Names
         </a>
 
-        <form action="search-results.html" id="search-box-container">
+        <div id="search-box-container">
           <div class="input-group">
-            <input id="search-box" name="search-query" placeholder="Search..." aria-label="Search" minlength="2" class="form-control" />
+            <input id="search-box" type="search" name="search-query" placeholder="Search..." aria-label="Search" minlength="2" class="form-control" autocomplete="off" />
+            
             <span class="input-group-btn">
-              <button class="btn btn-default" type="submit" title="Search"><img src="fonts/search.svg" alt="Search!" /></button>
-              <a class="btn btn-default" id="search-help-button" title="Help" onclick="toggleSearchHelpText()"><img src="fonts/info.svg" alt="Help!" /></a>
+              <a style="display: none;" class="btn btn-default" id="search-clear-button" title="Clear" onclick="clearSearch()"><img src="fonts/x-circle.svg" alt="Clear" /></a>
+              <a class="btn btn-default" id="search-help-button" title="Help" onclick="toggleSearchHelpText()"><img src="fonts/info.svg" alt="Help" /></a>
             </span>
           </div>
-        </form>
+        </div>
 
-        <div class="rst-admonition hint" id="search-help-box">
+      </div>
+
+      <div id="search-results-container" style="display: none;">
+        <div>
+          <span class="label label-default" id="search-docstrings-button">
+            <a title="Search in docstrings" onclick="toggleSearchInDocstrings()">search in docstrings</a></span>
+        </div>
+
+        <noscript>
+            <h1>Cannot search: JavaScript is not supported/enabled in your browser.</h1>
+        </noscript>
+
+        <div class="hint" id="search-help-box">
           <p class="rst-last">
       
             Search bar offers the following options:
             <ul>   
                 <li>
                   <strong>Term presence.</strong> The below example searches for documents that 
-                    must contain “foo”, might contain “bar” and must not contain “baz”:
-                  <br /> <code>'+foo bar -baz'</code>
+                    must contain “foo”, might contain “bar” and must not contain “baz”: <code>+foo bar -baz</code>
                 </li> 
 
                 <li>
-                  <strong>Wildcards.</strong> The below example searches for documents with words beginning with “foo”:
-                  <br /> <code>'foo*'</code>
+                  <strong>Wildcards.</strong> The below example searches for documents with words beginning with “foo”: <code>foo*</code>
                 </li> 
 
                 <li>
-                  <strong>Search in specific fields.</strong> The following search matches all documents 
-                  that contains "foo" in their full dotted name and with “bar” in any field:
-                  <br /> <code>'+fullName:*foo* +bar'</code>
+                  <strong>Search in specific fields.</strong> The following search matches all objects 
+                  in "twisted.mail" that matches “search”: <code>+qname:twisted.mail.* +search</code>
 
                   <p>
-                    Possible fields: 'name', 'docstring', 'fullName'.
+                    Possible fields: 'name', 'qname' (fully qualified name), 'docstring', and 'kind'.
+                    Last two fields are only applicable if "search in docstrings" is enabled.
                   </p>
                 </li>
 
                 <li>
                   <strong>Fuzzy matches.</strong> The following search matches all documents 
-                  that have a word within 1 edit distance of “foo”:
-                  <br /> <code>'foo~1'</code>
+                  that have a word within 1 edit distance of “foo”: <code>foo~1</code>
                 </li>
             </ul>
 
           </p>
         </div>
 
-      </div>
+        <div id="search-status"> </div>
+        
+        <div class="warning" id="search-warn-box" style="display: none;">
+          <p class="rst-last"><span id="search-warn"></span></p>
+        </div>
 
+        <table id="search-results">
+          <!-- Filled dynamically by JS -->
+        </table>
+        
+        <div style="margin-top: 8px;">
+          <p>Results provided by <a href="https://lunrjs.com">Lunr.js</a></p>
+        </div>
+      </div>
 
     </div>
   </div>
 
-  <script>
- 
-    function toggleSearchHelpText() {
-        document.body.classList.toggle("search-help-hidden");
-    }
-    // Init search and help text
-    document.getElementById('search-box-container').style.display = 'block';
-    document.getElementById('search-help-box').style.display = 'block';
-    document.body.classList.add("search-help-hidden");
-
-  </script>
+  <script src="ajax.js" type="text/javascript"></script>
+  <script src="search.js" type="text/javascript"></script>
 
 </nav>
 
@@ -115,7 +128,7 @@
     <div class="container">
 
       <div class="page-header">
-        <h1 class="class"><code><code><a href="nltk.html">nltk</a></code><wbr></wbr>.<code><a href="nltk.text.html">text</a></code><wbr></wbr>.<code><a href="nltk.text.Text.html">Text</a></code></code></h1>
+        <h1 class="class"><code><code><a href="index.html" class="internal-link">nltk</a></code><wbr></wbr>.<code><a href="nltk.text.html" class="internal-link" title="nltk.text">text</a></code><wbr></wbr>.<code><a href="nltk.text.Text.html" class="internal-link" title="nltk.text.Text">Text</a></code></code></h1>
         <div id="showPrivate">
           <button class="btn btn-link" onclick="togglePrivate()">Toggle Private API</button>
         </div>
@@ -126,7 +139,7 @@
       </div>
 
       <div class="extrasDocstring">
-        <p><code><span class="py-keyword">class</span> <span class="py-defname">Text</span>(<span title="object">object</span>): <a href="https://github.com/nltk/nltk/tree/3.6.2/nltk/text.py#L311" class="sourceLink">(source)</a></code></p><p>Known subclasses: <code><a href="nltk.text.TextCollection.html">nltk.text.TextCollection</a></code></p>
+        <p><code><span class="py-keyword">class</span> <span class="py-defname">Text</span>(object): <a href="https://github.com/nltk/nltk/tree/3.6.2/nltk/text.py#L311" class="sourceLink">(source)</a></code></p><p>Known subclasses: <code><a href="nltk.text.TextCollection.html" class="internal-link">nltk.text.TextCollection</a></code></p>
         <p><a href="classIndex.html#nltk.text.Text">View In Hierarchy</a></p>
       </div>
 
@@ -154,172 +167,172 @@ corpus.  E.g.:</p>
   <tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#__getitem__">__getitem__</a></code></td>
+    <td><code><a href="#__getitem__" class="internal-link" title="nltk.text.Text.__getitem__">__getitem__</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#__init__">__init__</a></code></td>
-    <td><span>Create a Text object.</span></td>
+    <td><code><a href="#__init__" class="internal-link" title="nltk.text.Text.__init__">__init__</a></code></td>
+    <td>Create a Text object.</td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#__len__">__len__</a></code></td>
+    <td><code><a href="#__len__" class="internal-link" title="nltk.text.Text.__len__">__len__</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#__repr__">__repr__</a></code></td>
+    <td><code><a href="#__repr__" class="internal-link" title="nltk.text.Text.__repr__">__repr__</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#__str__">__str__</a></code></td>
+    <td><code><a href="#__str__" class="internal-link" title="nltk.text.Text.__str__">__str__</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#collocation_list">collocation_list</a></code></td>
-    <td><span>Return collocations derived from the text, ignoring stopwords.</span></td>
+    <td><code><a href="#collocation_list" class="internal-link" title="nltk.text.Text.collocation_list">collocation​_list</a></code></td>
+    <td>Return collocations derived from the text, ignoring stopwords.</td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#collocations">collocations</a></code></td>
-    <td><span>Print collocations derived from the text, ignoring stopwords.</span></td>
+    <td><code><a href="#collocations" class="internal-link" title="nltk.text.Text.collocations">collocations</a></code></td>
+    <td>Print collocations derived from the text, ignoring stopwords.</td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#common_contexts">common_contexts</a></code></td>
-    <td><span>Find contexts where the specified words appear; list most frequent common contexts first.</span></td>
+    <td><code><a href="#common_contexts" class="internal-link" title="nltk.text.Text.common_contexts">common​_contexts</a></code></td>
+    <td>Find contexts where the specified words appear; list most frequent common contexts first.</td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#concordance">concordance</a></code></td>
-    <td><span>Prints a concordance for <tt class="rst-docutils literal">word</tt> with the specified context window. Word matching is not case-sensitive.</span></td>
+    <td><code><a href="#concordance" class="internal-link" title="nltk.text.Text.concordance">concordance</a></code></td>
+    <td>Prints a concordance for <tt class="rst-docutils literal">word</tt> with the specified context window. Word matching is not case-sensitive.</td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#concordance_list">concordance_list</a></code></td>
-    <td><span>Generate a concordance for <tt class="rst-docutils literal">word</tt> with the specified context window. Word matching is not case-sensitive.</span></td>
+    <td><code><a href="#concordance_list" class="internal-link" title="nltk.text.Text.concordance_list">concordance​_list</a></code></td>
+    <td>Generate a concordance for <tt class="rst-docutils literal">word</tt> with the specified context window. Word matching is not case-sensitive.</td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#count">count</a></code></td>
-    <td><span>Count the number of times this word appears in the text.</span></td>
+    <td><code><a href="#count" class="internal-link" title="nltk.text.Text.count">count</a></code></td>
+    <td>Count the number of times this word appears in the text.</td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#dispersion_plot">dispersion_plot</a></code></td>
-    <td><span>Produce a plot showing the distribution of the words through the text. Requires pylab to be installed.</span></td>
+    <td><code><a href="#dispersion_plot" class="internal-link" title="nltk.text.Text.dispersion_plot">dispersion​_plot</a></code></td>
+    <td>Produce a plot showing the distribution of the words through the text. Requires pylab to be installed.</td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#findall">findall</a></code></td>
-    <td><span>Find instances of the regular expression in the text. The text is a list of tokens, and a regexp pattern to match a single token must be surrounded by angle brackets.  E.g.</span></td>
+    <td><code><a href="#findall" class="internal-link" title="nltk.text.Text.findall">findall</a></code></td>
+    <td>Find instances of the regular expression in the text. The text is a list of tokens, and a regexp pattern to match a single token must be surrounded by angle brackets.  E.g.</td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#generate">generate</a></code></td>
-    <td><span>Print random text, generated using a trigram language model. See also <code>help(nltk.lm)</code>.</span></td>
+    <td><code><a href="#generate" class="internal-link" title="nltk.text.Text.generate">generate</a></code></td>
+    <td>Print random text, generated using a trigram language model. See also <code>help(nltk.lm)</code>.</td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#index">index</a></code></td>
-    <td><span>Find the index of the first occurrence of the word in the text.</span></td>
+    <td><code><a href="#index" class="internal-link" title="nltk.text.Text.index">index</a></code></td>
+    <td>Find the index of the first occurrence of the word in the text.</td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#plot">plot</a></code></td>
-    <td><span>See documentation for FreqDist.plot() :seealso: nltk.prob.FreqDist.plot()</span></td>
+    <td><code><a href="#plot" class="internal-link" title="nltk.text.Text.plot">plot</a></code></td>
+    <td>See documentation for FreqDist.plot() :seealso: nltk.prob.FreqDist.plot()</td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#readability">readability</a></code></td>
+    <td><code><a href="#readability" class="internal-link" title="nltk.text.Text.readability">readability</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#similar">similar</a></code></td>
-    <td><span>Distributional similarity: find other words which appear in the same contexts as the specified word; list most similar words first.</span></td>
+    <td><code><a href="#similar" class="internal-link" title="nltk.text.Text.similar">similar</a></code></td>
+    <td>Distributional similarity: find other words which appear in the same contexts as the specified word; list most similar words first.</td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#vocab">vocab</a></code></td>
-    <td><span></span></td>
+    <td><code><a href="#vocab" class="internal-link" title="nltk.text.Text.vocab">vocab</a></code></td>
+    <td></td>
   </tr><tr class="instancevariable">
     
     <td>Instance Variable</td>
-    <td><code><a href="#name">name</a></code></td>
+    <td><code><a href="#name" class="internal-link" title="nltk.text.Text.name">name</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="instancevariable">
     
     <td>Instance Variable</td>
-    <td><code><a href="#tokens">tokens</a></code></td>
+    <td><code><a href="#tokens" class="internal-link" title="nltk.text.Text.tokens">tokens</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method private">
     
     <td>Method</td>
-    <td><code><a href="#_context">_context</a></code></td>
-    <td><span>One left &amp; one right token, both case-normalized.  Skip over non-sentence-final punctuation.  Used by the <tt class="rst-docutils literal">ContextIndex</tt> that is created for <tt class="rst-docutils literal">similar()</tt> and <tt class="rst-docutils literal">common_contexts()</tt>.</span></td>
+    <td><code><a href="#_context" class="internal-link" title="nltk.text.Text._context">_context</a></code></td>
+    <td>One left &amp; one right token, both case-normalized.  Skip over non-sentence-final punctuation.  Used by the <tt class="rst-docutils literal">ContextIndex</tt> that is created for <tt class="rst-docutils literal">similar()</tt> and <tt class="rst-docutils literal">common_contexts()</tt>.</td>
   </tr><tr class="method private">
     
     <td>Method</td>
-    <td><code><a href="#_train_default_ngram_lm">_train_default_ngram_lm</a></code></td>
+    <td><code><a href="#_train_default_ngram_lm" class="internal-link" title="nltk.text.Text._train_default_ngram_lm">_train​_default​_ngram​_lm</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
-  </tr><tr class="classvariable private">
+  </tr><tr class="constant private">
     
-    <td>Class Variable</td>
-    <td><code><a href="#_CONTEXT_RE">_CONTEXT_RE</a></code></td>
+    <td>Constant</td>
+    <td><code><a href="#_CONTEXT_RE" class="internal-link" title="nltk.text.Text._CONTEXT_RE">_CONTEXT​_RE</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
-  </tr><tr class="classvariable private">
+  </tr><tr class="constant private">
     
-    <td>Class Variable</td>
-    <td><code><a href="#_COPY_TOKENS">_COPY_TOKENS</a></code></td>
-    <td><span class="undocumented">Undocumented</span></td>
-  </tr><tr class="instancevariable private">
-    
-    <td>Instance Variable</td>
-    <td><code><a href="#_collocations">_collocations</a></code></td>
+    <td>Constant</td>
+    <td><code><a href="#_COPY_TOKENS" class="internal-link" title="nltk.text.Text._COPY_TOKENS">_COPY​_TOKENS</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="instancevariable private">
     
     <td>Instance Variable</td>
-    <td><code><a href="#_concordance_index">_concordance_index</a></code></td>
+    <td><code><a href="#_collocations" class="internal-link" title="nltk.text.Text._collocations">_collocations</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="instancevariable private">
     
     <td>Instance Variable</td>
-    <td><code><a href="#_num">_num</a></code></td>
+    <td><code><a href="#_concordance_index" class="internal-link" title="nltk.text.Text._concordance_index">_concordance​_index</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="instancevariable private">
     
     <td>Instance Variable</td>
-    <td><code><a href="#_token_searcher">_token_searcher</a></code></td>
+    <td><code><a href="#_num" class="internal-link" title="nltk.text.Text._num">_num</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="instancevariable private">
     
     <td>Instance Variable</td>
-    <td><code><a href="#_tokenized_sents">_tokenized_sents</a></code></td>
+    <td><code><a href="#_token_searcher" class="internal-link" title="nltk.text.Text._token_searcher">_token​_searcher</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="instancevariable private">
     
     <td>Instance Variable</td>
-    <td><code><a href="#_trigram_model">_trigram_model</a></code></td>
+    <td><code><a href="#_tokenized_sents" class="internal-link" title="nltk.text.Text._tokenized_sents">_tokenized​_sents</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="instancevariable private">
     
     <td>Instance Variable</td>
-    <td><code><a href="#_vocab">_vocab</a></code></td>
+    <td><code><a href="#_trigram_model" class="internal-link" title="nltk.text.Text._trigram_model">_trigram​_model</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="instancevariable private">
     
     <td>Instance Variable</td>
-    <td><code><a href="#_window_size">_window_size</a></code></td>
+    <td><code><a href="#_vocab" class="internal-link" title="nltk.text.Text._vocab">_vocab</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="instancevariable private">
     
     <td>Instance Variable</td>
-    <td><code><a href="#_word_context_index">_word_context_index</a></code></td>
+    <td><code><a href="#_window_size" class="internal-link" title="nltk.text.Text._window_size">_window​_size</a></code></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="instancevariable private">
+    
+    <td>Instance Variable</td>
+    <td><code><a href="#_word_context_index" class="internal-link" title="nltk.text.Text._word_context_index">_word​_context​_index</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr>
 </table>
@@ -370,7 +383,7 @@ corpus.  E.g.:</p>
     </a>
   </div>
   <div class="docstring functionBody">
-    <div class="interfaceinfo">overridden in <code><a href="nltk.text.TextCollection.html">nltk.text.TextCollection</a></code></div>
+    <div class="interfaceinfo">overridden in <code><a href="nltk.text.TextCollection.html" class="internal-link">nltk.text.TextCollection</a></code></div>
     
     <div>Create a Text object.<table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">tokens:</span>sequence of str</td><td class="fieldArgDesc">The source text.</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">name</span></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr></table></div>
   </div>
@@ -467,7 +480,7 @@ corpus.  E.g.:</p>
 <span class="py-prompt">&gt;&gt;&gt; </span>text4.collocation_list()[:2]
 <span class="py-output">[('United', 'States'), ('fellow', 'citizens')]</span>
 </pre></blockquote>
-<table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">num:</span>int</td><td class="fieldArgDesc">The maximum number of collocations to return.</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">window_size:</span>int</td><td class="fieldArgDesc">The number of tokens spanned by a collocation (default=2)</td></tr><tr class="fieldStart"><td class="fieldName" colspan="2">Returns</td></tr><tr><td class="fieldArgContainer">list(tuple(str, str))</td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr></table></div>
+<table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">num:</span>int</td><td class="fieldArgDesc">The maximum number of collocations to return.</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">window​_size:</span>int</td><td class="fieldArgDesc">The number of tokens spanned by a collocation (default=2)</td></tr><tr class="fieldStart"><td class="fieldName" colspan="2">Returns</td></tr><tr><td class="fieldArgContainer">list(tuple(str, str))</td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr></table></div>
   </div>
 </div><div class="basemethod">
   
@@ -496,7 +509,7 @@ corpus.  E.g.:</p>
 <span class="py-prompt">&gt;&gt;&gt; </span>text4.collocations() <span class="py-comment"># doctest: +ELLIPSIS</span>
 <span class="py-output">United States; fellow citizens; four years; ...</span>
 </pre></blockquote>
-<table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">num:</span>int</td><td class="fieldArgDesc">The maximum number of collocations to print.</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">window_size:</span>int</td><td class="fieldArgDesc">The number of tokens spanned by a collocation (default=2)</td></tr></table></div>
+<table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">num:</span>int</td><td class="fieldArgDesc">The maximum number of collocations to print.</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">window​_size:</span>int</td><td class="fieldArgDesc">The number of tokens spanned by a collocation (default=2)</td></tr></table></div>
   </div>
 </div><div class="basemethod">
   
@@ -675,7 +688,7 @@ a single token must be surrounded by angle brackets.  E.g.</p>
 See also <code>help(nltk.lm)</code>.</p>
 <p>makes the random sampling part of generation reproducible. (default=42)
 :type random_seed: int</p>
-<table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">length:</span>int</td><td class="fieldArgDesc">The length of text to generate (default=100)</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">text_seed:</span>list(str)</td><td class="fieldArgDesc">Generation can be conditioned on preceding context.</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">random_seed</span></td><td class="fieldArgDesc">A random seed or an instance of <code>random.Random</code>. If provided,</td></tr></table></div>
+<table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">length:</span>int</td><td class="fieldArgDesc">The length of text to generate (default=100)</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">text​_seed:</span>list(str)</td><td class="fieldArgDesc">Generation can be conditioned on preceding context.</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">random​_seed</span></td><td class="fieldArgDesc">A random seed or an instance of <code>random.Random</code>. If provided,</td></tr></table></div>
   </div>
 </div><div class="basemethod">
   
@@ -810,6 +823,7 @@ same contexts as the specified word; list most similar words first.<table class=
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    
   </div>
 </div><div class="baseinstancevariable">
   
@@ -832,6 +846,7 @@ same contexts as the specified word; list most similar words first.<table class=
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    
   </div>
 </div><div class="basemethod private">
   
@@ -879,7 +894,7 @@ that is created for <tt class="rst-docutils literal">similar()</tt> and <tt clas
     
     <div><p class="undocumented">Undocumented</p></div>
   </div>
-</div><div class="baseclassvariable private">
+</div><div class="baseconstant private">
   
   
   <a name="nltk.text.Text._CONTEXT_RE">
@@ -900,8 +915,9 @@ that is created for <tt class="rst-docutils literal">similar()</tt> and <tt clas
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    <table class="valueTable"><tr class="fieldStart"><td class="fieldName">Value</td></tr><tr><td><pre class="constant-value"><code>re.compile(r<span class="rst-variable-quote">'</span>\w<span class="rst-re-op">+</span><span class="rst-re-op">|</span><span class="rst-re-group">[</span>\.!\?<span class="rst-re-group">]</span><span class="rst-variable-quote">'</span>)</code></pre></td></tr></table>
   </div>
-</div><div class="baseclassvariable private">
+</div><div class="baseconstant private">
   
   
   <a name="nltk.text.Text._COPY_TOKENS">
@@ -922,6 +938,7 @@ that is created for <tt class="rst-docutils literal">similar()</tt> and <tt clas
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    <table class="valueTable"><tr class="fieldStart"><td class="fieldName">Value</td></tr><tr><td><pre class="constant-value"><code>True</code></pre></td></tr></table>
   </div>
 </div><div class="baseinstancevariable private">
   
@@ -944,6 +961,7 @@ that is created for <tt class="rst-docutils literal">similar()</tt> and <tt clas
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    
   </div>
 </div><div class="baseinstancevariable private">
   
@@ -966,6 +984,7 @@ that is created for <tt class="rst-docutils literal">similar()</tt> and <tt clas
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    
   </div>
 </div><div class="baseinstancevariable private">
   
@@ -988,6 +1007,7 @@ that is created for <tt class="rst-docutils literal">similar()</tt> and <tt clas
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    
   </div>
 </div><div class="baseinstancevariable private">
   
@@ -1010,6 +1030,7 @@ that is created for <tt class="rst-docutils literal">similar()</tt> and <tt clas
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    
   </div>
 </div><div class="baseinstancevariable private">
   
@@ -1032,6 +1053,7 @@ that is created for <tt class="rst-docutils literal">similar()</tt> and <tt clas
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    
   </div>
 </div><div class="baseinstancevariable private">
   
@@ -1054,6 +1076,7 @@ that is created for <tt class="rst-docutils literal">similar()</tt> and <tt clas
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    
   </div>
 </div><div class="baseinstancevariable private">
   
@@ -1076,6 +1099,7 @@ that is created for <tt class="rst-docutils literal">similar()</tt> and <tt clas
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    
   </div>
 </div><div class="baseinstancevariable private">
   
@@ -1098,6 +1122,7 @@ that is created for <tt class="rst-docutils literal">similar()</tt> and <tt clas
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    
   </div>
 </div><div class="baseinstancevariable private">
   
@@ -1120,6 +1145,7 @@ that is created for <tt class="rst-docutils literal">similar()</tt> and <tt clas
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    
   </div>
 </div>
 
@@ -1131,7 +1157,7 @@ that is created for <tt class="rst-docutils literal">similar()</tt> and <tt clas
   <div class="container">
     <a href="index.html">API Documentation</a> for <a href="http://www.nltk.org/" class="projecthome">nltk-3.6.2</a>,
   generated by <a href="https://github.com/twisted/pydoctor/">pydoctor</a>
-    21.2.2 at 2022-01-06 17:36:51.
+    22.2.2.dev0 at 2022-03-04 05:57:24.
   </div>
 </footer>
 

@@ -7,7 +7,7 @@
   <head>
     
     <title>nltk.featstruct</title>
-    <meta name="generator" content="pydoctor 21.2.2"> 
+    <meta name="generator" content="pydoctor 22.2.2.dev0"> 
         
     </meta>
     <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
@@ -44,69 +44,82 @@
           Names
         </a>
 
-        <form action="search-results.html" id="search-box-container">
+        <div id="search-box-container">
           <div class="input-group">
-            <input id="search-box" name="search-query" placeholder="Search..." aria-label="Search" minlength="2" class="form-control" />
+            <input id="search-box" type="search" name="search-query" placeholder="Search..." aria-label="Search" minlength="2" class="form-control" autocomplete="off" />
+            
             <span class="input-group-btn">
-              <button class="btn btn-default" type="submit" title="Search"><img src="fonts/search.svg" alt="Search!" /></button>
-              <a class="btn btn-default" id="search-help-button" title="Help" onclick="toggleSearchHelpText()"><img src="fonts/info.svg" alt="Help!" /></a>
+              <a style="display: none;" class="btn btn-default" id="search-clear-button" title="Clear" onclick="clearSearch()"><img src="fonts/x-circle.svg" alt="Clear" /></a>
+              <a class="btn btn-default" id="search-help-button" title="Help" onclick="toggleSearchHelpText()"><img src="fonts/info.svg" alt="Help" /></a>
             </span>
           </div>
-        </form>
+        </div>
 
-        <div class="rst-admonition hint" id="search-help-box">
+      </div>
+
+      <div id="search-results-container" style="display: none;">
+        <div>
+          <span class="label label-default" id="search-docstrings-button">
+            <a title="Search in docstrings" onclick="toggleSearchInDocstrings()">search in docstrings</a></span>
+        </div>
+
+        <noscript>
+            <h1>Cannot search: JavaScript is not supported/enabled in your browser.</h1>
+        </noscript>
+
+        <div class="hint" id="search-help-box">
           <p class="rst-last">
       
             Search bar offers the following options:
             <ul>   
                 <li>
                   <strong>Term presence.</strong> The below example searches for documents that 
-                    must contain “foo”, might contain “bar” and must not contain “baz”:
-                  <br /> <code>'+foo bar -baz'</code>
+                    must contain “foo”, might contain “bar” and must not contain “baz”: <code>+foo bar -baz</code>
                 </li> 
 
                 <li>
-                  <strong>Wildcards.</strong> The below example searches for documents with words beginning with “foo”:
-                  <br /> <code>'foo*'</code>
+                  <strong>Wildcards.</strong> The below example searches for documents with words beginning with “foo”: <code>foo*</code>
                 </li> 
 
                 <li>
-                  <strong>Search in specific fields.</strong> The following search matches all documents 
-                  that contains "foo" in their full dotted name and with “bar” in any field:
-                  <br /> <code>'+fullName:*foo* +bar'</code>
+                  <strong>Search in specific fields.</strong> The following search matches all objects 
+                  in "twisted.mail" that matches “search”: <code>+qname:twisted.mail.* +search</code>
 
                   <p>
-                    Possible fields: 'name', 'docstring', 'fullName'.
+                    Possible fields: 'name', 'qname' (fully qualified name), 'docstring', and 'kind'.
+                    Last two fields are only applicable if "search in docstrings" is enabled.
                   </p>
                 </li>
 
                 <li>
                   <strong>Fuzzy matches.</strong> The following search matches all documents 
-                  that have a word within 1 edit distance of “foo”:
-                  <br /> <code>'foo~1'</code>
+                  that have a word within 1 edit distance of “foo”: <code>foo~1</code>
                 </li>
             </ul>
 
           </p>
         </div>
 
-      </div>
+        <div id="search-status"> </div>
+        
+        <div class="warning" id="search-warn-box" style="display: none;">
+          <p class="rst-last"><span id="search-warn"></span></p>
+        </div>
 
+        <table id="search-results">
+          <!-- Filled dynamically by JS -->
+        </table>
+        
+        <div style="margin-top: 8px;">
+          <p>Results provided by <a href="https://lunrjs.com">Lunr.js</a></p>
+        </div>
+      </div>
 
     </div>
   </div>
 
-  <script>
- 
-    function toggleSearchHelpText() {
-        document.body.classList.toggle("search-help-hidden");
-    }
-    // Init search and help text
-    document.getElementById('search-box-container').style.display = 'block';
-    document.getElementById('search-help-box').style.display = 'block';
-    document.body.classList.add("search-help-hidden");
-
-  </script>
+  <script src="ajax.js" type="text/javascript"></script>
+  <script src="search.js" type="text/javascript"></script>
 
 </nav>
 
@@ -115,7 +128,7 @@
     <div class="container">
 
       <div class="page-header">
-        <h1 class="module"><code><code><a href="nltk.html">nltk</a></code><wbr></wbr>.<code><a href="nltk.featstruct.html">featstruct</a></code></code></h1>
+        <h1 class="module"><code><code><a href="index.html" class="internal-link">nltk</a></code><wbr></wbr>.<code><a href="nltk.featstruct.html" class="internal-link" title="nltk.featstruct">featstruct</a></code></code></h1>
         <div id="showPrivate">
           <button class="btn btn-link" onclick="togglePrivate()">Toggle Private API</button>
         </div>
@@ -175,7 +188,7 @@ choose to, by supplying your own initial bindings dictionary to the
 <p>When unbound variables are unified with one another, they become
 aliased.  This is encoded by binding one variable to the other.</p>
 <div class="rst-section" id="rst-lightweight-feature-structures">
-<h1 class="heading">Lightweight Feature Structures</h1>
+<h2 class="heading">Lightweight Feature Structures</h2>
 <p>Many of the functions defined by <tt class="rst-docutils literal">nltk.featstruct</tt> can be applied
 directly to simple Python dictionaries and lists, rather than to
 full-fledged <tt class="rst-docutils literal">FeatDict</tt> and <tt class="rst-docutils literal">FeatList</tt> objects.  In other words,
@@ -218,267 +231,267 @@ recommended that you use full-fledged <tt class="rst-docutils literal">FeatStruc
   <tr class="class">
     
     <td>Class</td>
-    <td><code><a href="nltk.featstruct.CustomFeatureValue.html">CustomFeatureValue</a></code></td>
-    <td><span>An abstract base class for base values that define a custom unification method.  The custom unification method of <tt class="rst-docutils literal">CustomFeatureValue</tt> will be used during unification if:</span></td>
+    <td><code><a href="nltk.featstruct.CustomFeatureValue.html" class="internal-link" title="nltk.featstruct.CustomFeatureValue">​Custom​Feature​Value</a></code></td>
+    <td>An abstract base class for base values that define a custom unification method.  The custom unification method of <tt class="rst-docutils literal">CustomFeatureValue</tt> will be used during unification if:</td>
   </tr><tr class="class">
     
     <td>Class</td>
-    <td><code><a href="nltk.featstruct.FeatDict.html">FeatDict</a></code></td>
+    <td><code><a href="nltk.featstruct.FeatDict.html" class="internal-link" title="nltk.featstruct.FeatDict">​Feat​Dict</a></code></td>
     <td><span class="undocumented">No summary</span></td>
   </tr><tr class="class">
     
     <td>Class</td>
-    <td><code><a href="nltk.featstruct.FeatList.html">FeatList</a></code></td>
-    <td><span>A list of feature values, where each feature value is either a basic value (such as a string or an integer), or a nested feature structure.</span></td>
+    <td><code><a href="nltk.featstruct.FeatList.html" class="internal-link" title="nltk.featstruct.FeatList">​Feat​List</a></code></td>
+    <td>A list of feature values, where each feature value is either a basic value (such as a string or an integer), or a nested feature structure.</td>
   </tr><tr class="class">
     
     <td>Class</td>
-    <td><code><a href="nltk.featstruct.FeatStruct.html">FeatStruct</a></code></td>
+    <td><code><a href="nltk.featstruct.FeatStruct.html" class="internal-link" title="nltk.featstruct.FeatStruct">​Feat​Struct</a></code></td>
     <td><span class="undocumented">No summary</span></td>
   </tr><tr class="class">
     
     <td>Class</td>
-    <td><code><a href="nltk.featstruct.FeatStructReader.html">FeatStructReader</a></code></td>
-    <td><span class="undocumented">No class docstring; 0/7 instance variable, 0/12 class variable, 5/20 methods documented</span></td>
+    <td><code><a href="nltk.featstruct.FeatStructReader.html" class="internal-link" title="nltk.featstruct.FeatStructReader">​Feat​Struct​Reader</a></code></td>
+    <td><span class="undocumented">No class docstring; 0/7 instance variable, 0/12 constant, 5/20 methods documented</span></td>
   </tr><tr class="class">
     
     <td>Class</td>
-    <td><code><a href="nltk.featstruct.Feature.html">Feature</a></code></td>
-    <td><span>A feature identifier that's specialized to put additional constraints, default values, etc.</span></td>
+    <td><code><a href="nltk.featstruct.Feature.html" class="internal-link" title="nltk.featstruct.Feature">​Feature</a></code></td>
+    <td>A feature identifier that's specialized to put additional constraints, default values, etc.</td>
   </tr><tr class="class">
     
     <td>Class</td>
-    <td><code><a href="nltk.featstruct.FeatureValueConcat.html">FeatureValueConcat</a></code></td>
-    <td><span>A base feature value that represents the concatenation of two or more <tt class="rst-docutils literal">FeatureValueTuple</tt> or <tt class="rst-docutils literal">Variable</tt>.</span></td>
+    <td><code><a href="nltk.featstruct.FeatureValueConcat.html" class="internal-link" title="nltk.featstruct.FeatureValueConcat">​Feature​Value​Concat</a></code></td>
+    <td>A base feature value that represents the concatenation of two or more <tt class="rst-docutils literal">FeatureValueTuple</tt> or <tt class="rst-docutils literal">Variable</tt>.</td>
   </tr><tr class="class">
     
     <td>Class</td>
-    <td><code><a href="nltk.featstruct.FeatureValueSet.html">FeatureValueSet</a></code></td>
+    <td><code><a href="nltk.featstruct.FeatureValueSet.html" class="internal-link" title="nltk.featstruct.FeatureValueSet">​Feature​Value​Set</a></code></td>
     <td><span class="undocumented">No summary</span></td>
   </tr><tr class="class">
     
     <td>Class</td>
-    <td><code><a href="nltk.featstruct.FeatureValueTuple.html">FeatureValueTuple</a></code></td>
+    <td><code><a href="nltk.featstruct.FeatureValueTuple.html" class="internal-link" title="nltk.featstruct.FeatureValueTuple">​Feature​Value​Tuple</a></code></td>
     <td><span class="undocumented">No summary</span></td>
   </tr><tr class="class">
     
     <td>Class</td>
-    <td><code><a href="nltk.featstruct.FeatureValueUnion.html">FeatureValueUnion</a></code></td>
-    <td><span>A base feature value that represents the union of two or more <tt class="rst-docutils literal">FeatureValueSet</tt> or <tt class="rst-docutils literal">Variable</tt>.</span></td>
+    <td><code><a href="nltk.featstruct.FeatureValueUnion.html" class="internal-link" title="nltk.featstruct.FeatureValueUnion">​Feature​Value​Union</a></code></td>
+    <td>A base feature value that represents the union of two or more <tt class="rst-docutils literal">FeatureValueSet</tt> or <tt class="rst-docutils literal">Variable</tt>.</td>
   </tr><tr class="class">
     
     <td>Class</td>
-    <td><code><a href="nltk.featstruct.RangeFeature.html">RangeFeature</a></code></td>
+    <td><code><a href="nltk.featstruct.RangeFeature.html" class="internal-link" title="nltk.featstruct.RangeFeature">​Range​Feature</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="class">
     
     <td>Class</td>
-    <td><code><a href="nltk.featstruct.SlashFeature.html">SlashFeature</a></code></td>
+    <td><code><a href="nltk.featstruct.SlashFeature.html" class="internal-link" title="nltk.featstruct.SlashFeature">​Slash​Feature</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="class">
     
     <td>Class</td>
-    <td><code><a href="nltk.featstruct.SubstituteBindingsSequence.html">SubstituteBindingsSequence</a></code></td>
-    <td><span>A mixin class for sequence clases that distributes variables() and substitute_bindings() over the object's elements.</span></td>
+    <td><code><a href="nltk.featstruct.SubstituteBindingsSequence.html" class="internal-link" title="nltk.featstruct.SubstituteBindingsSequence">​Substitute​Bindings​Sequence</a></code></td>
+    <td>A mixin class for sequence clases that distributes variables() and substitute_bindings() over the object's elements.</td>
   </tr><tr class="function">
     
     <td>Function</td>
-    <td><code><a href="#conflicts">conflicts</a></code></td>
-    <td><span>Return a list of the feature paths of all features which are assigned incompatible values by <tt class="rst-docutils literal">fstruct1</tt> and <tt class="rst-docutils literal">fstruct2</tt>.</span></td>
+    <td><code><a href="#conflicts" class="internal-link" title="nltk.featstruct.conflicts">conflicts</a></code></td>
+    <td>Return a list of the feature paths of all features which are assigned incompatible values by <tt class="rst-docutils literal">fstruct1</tt> and <tt class="rst-docutils literal">fstruct2</tt>.</td>
   </tr><tr class="function">
     
     <td>Function</td>
-    <td><code><a href="#demo">demo</a></code></td>
-    <td><span>Just for testing</span></td>
+    <td><code><a href="#demo" class="internal-link" title="nltk.featstruct.demo">demo</a></code></td>
+    <td>Just for testing</td>
   </tr><tr class="function">
     
     <td>Function</td>
-    <td><code><a href="#display_unification">display_unification</a></code></td>
+    <td><code><a href="#display_unification" class="internal-link" title="nltk.featstruct.display_unification">display​_unification</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="function">
     
     <td>Function</td>
-    <td><code><a href="#find_variables">find_variables</a></code></td>
-    <td><span></span></td>
+    <td><code><a href="#find_variables" class="internal-link" title="nltk.featstruct.find_variables">find​_variables</a></code></td>
+    <td></td>
   </tr><tr class="function">
     
     <td>Function</td>
-    <td><code><a href="#interactive_demo">interactive_demo</a></code></td>
+    <td><code><a href="#interactive_demo" class="internal-link" title="nltk.featstruct.interactive_demo">interactive​_demo</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="function">
     
     <td>Function</td>
-    <td><code><a href="#remove_variables">remove_variables</a></code></td>
-    <td><span></span></td>
+    <td><code><a href="#remove_variables" class="internal-link" title="nltk.featstruct.remove_variables">remove​_variables</a></code></td>
+    <td></td>
   </tr><tr class="function">
     
     <td>Function</td>
-    <td><code><a href="#rename_variables">rename_variables</a></code></td>
+    <td><code><a href="#rename_variables" class="internal-link" title="nltk.featstruct.rename_variables">rename​_variables</a></code></td>
     <td><span class="undocumented">No summary</span></td>
   </tr><tr class="function">
     
     <td>Function</td>
-    <td><code><a href="#retract_bindings">retract_bindings</a></code></td>
+    <td><code><a href="#retract_bindings" class="internal-link" title="nltk.featstruct.retract_bindings">retract​_bindings</a></code></td>
     <td><span class="undocumented">No summary</span></td>
   </tr><tr class="function">
     
     <td>Function</td>
-    <td><code><a href="#substitute_bindings">substitute_bindings</a></code></td>
+    <td><code><a href="#substitute_bindings" class="internal-link" title="nltk.featstruct.substitute_bindings">substitute​_bindings</a></code></td>
     <td><span class="undocumented">No summary</span></td>
   </tr><tr class="function">
     
     <td>Function</td>
-    <td><code><a href="#subsumes">subsumes</a></code></td>
-    <td><span>Return True if <tt class="rst-docutils literal">fstruct1</tt> subsumes <tt class="rst-docutils literal">fstruct2</tt>.  I.e., return true if unifying <tt class="rst-docutils literal">fstruct1</tt> with <tt class="rst-docutils literal">fstruct2</tt> would result in a feature structure equal to <tt class="rst-docutils literal">fstruct2.</tt></span></td>
+    <td><code><a href="#subsumes" class="internal-link" title="nltk.featstruct.subsumes">subsumes</a></code></td>
+    <td>Return True if <tt class="rst-docutils literal">fstruct1</tt> subsumes <tt class="rst-docutils literal">fstruct2</tt>.  I.e., return true if unifying <tt class="rst-docutils literal">fstruct1</tt> with <tt class="rst-docutils literal">fstruct2</tt> would result in a feature structure equal to <tt class="rst-docutils literal">fstruct2.</tt></td>
   </tr><tr class="function">
     
     <td>Function</td>
-    <td><code><a href="#unify">unify</a></code></td>
+    <td><code><a href="#unify" class="internal-link" title="nltk.featstruct.unify">unify</a></code></td>
     <td><span class="undocumented">No summary</span></td>
+  </tr><tr class="constant">
+    
+    <td>Constant</td>
+    <td><code><a href="#SLASH" class="internal-link" title="nltk.featstruct.SLASH">SLASH</a></code></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="constant">
+    
+    <td>Constant</td>
+    <td><code><a href="#TYPE" class="internal-link" title="nltk.featstruct.TYPE">TYPE</a></code></td>
+    <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="variable">
     
     <td>Variable</td>
-    <td><code><a href="#SLASH">SLASH</a></code></td>
-    <td><span class="undocumented">Undocumented</span></td>
-  </tr><tr class="variable">
-    
-    <td>Variable</td>
-    <td><code><a href="#TYPE">TYPE</a></code></td>
-    <td><span class="undocumented">Undocumented</span></td>
-  </tr><tr class="variable">
-    
-    <td>Variable</td>
-    <td><code><a href="#UnificationFailure">UnificationFailure</a></code></td>
-    <td><span>A unique value used to indicate unification failure.  It can be returned by <tt class="rst-docutils literal">Feature.unify_base_values()</tt> or by custom <tt class="rst-docutils literal">fail()</tt> functions to indicate that unificaiton should fail.</span></td>
+    <td><code><a href="#UnificationFailure" class="internal-link" title="nltk.featstruct.UnificationFailure">​Unification​Failure</a></code></td>
+    <td>A unique value used to indicate unification failure.  It can be returned by <tt class="rst-docutils literal">Feature.unify_base_values()</tt> or by custom <tt class="rst-docutils literal">fail()</tt> functions to indicate that unificaiton should fail.</td>
   </tr><tr class="class private">
     
     <td>Class</td>
-    <td><code><a href="nltk.featstruct._UnificationFailure.html">_UnificationFailure</a></code></td>
+    <td><code><a href="nltk.featstruct._UnificationFailure.html" class="internal-link" title="nltk.featstruct._UnificationFailure">_​Unification​Failure</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="class private">
     
     <td>Class</td>
-    <td><code><a href="nltk.featstruct._UnificationFailureError.html">_UnificationFailureError</a></code></td>
-    <td><span>An exception that is used by <tt class="rst-docutils literal">_destructively_unify</tt> to abort unification when a failure is encountered.</span></td>
+    <td><code><a href="nltk.featstruct._UnificationFailureError.html" class="internal-link" title="nltk.featstruct._UnificationFailureError">_​Unification​Failure​Error</a></code></td>
+    <td>An exception that is used by <tt class="rst-docutils literal">_destructively_unify</tt> to abort unification when a failure is encountered.</td>
   </tr><tr class="function private">
     
     <td>Function</td>
-    <td><code><a href="#_apply_forwards">_apply_forwards</a></code></td>
-    <td><span>Replace any feature structure that has a forward pointer with the target of its forward pointer (to preserve reentrancy).</span></td>
+    <td><code><a href="#_apply_forwards" class="internal-link" title="nltk.featstruct._apply_forwards">_apply​_forwards</a></code></td>
+    <td>Replace any feature structure that has a forward pointer with the target of its forward pointer (to preserve reentrancy).</td>
   </tr><tr class="function private">
     
     <td>Function</td>
-    <td><code><a href="#_apply_forwards_to_bindings">_apply_forwards_to_bindings</a></code></td>
-    <td><span>Replace any feature structure that has a forward pointer with the target of its forward pointer (to preserve reentrancy).</span></td>
+    <td><code><a href="#_apply_forwards_to_bindings" class="internal-link" title="nltk.featstruct._apply_forwards_to_bindings">_apply​_forwards​_to​_bindings</a></code></td>
+    <td>Replace any feature structure that has a forward pointer with the target of its forward pointer (to preserve reentrancy).</td>
   </tr><tr class="function private">
     
     <td>Function</td>
-    <td><code><a href="#_check_frozen">_check_frozen</a></code></td>
+    <td><code><a href="#_check_frozen" class="internal-link" title="nltk.featstruct._check_frozen">_check​_frozen</a></code></td>
     <td><span class="undocumented">No summary</span></td>
   </tr><tr class="function private">
     
     <td>Function</td>
-    <td><code><a href="#_default_fs_class">_default_fs_class</a></code></td>
+    <td><code><a href="#_default_fs_class" class="internal-link" title="nltk.featstruct._default_fs_class">_default​_fs​_class</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="function private">
     
     <td>Function</td>
-    <td><code><a href="#_destructively_unify">_destructively_unify</a></code></td>
+    <td><code><a href="#_destructively_unify" class="internal-link" title="nltk.featstruct._destructively_unify">_destructively​_unify</a></code></td>
     <td><span class="undocumented">No summary</span></td>
   </tr><tr class="function private">
     
     <td>Function</td>
-    <td><code><a href="#_flatten">_flatten</a></code></td>
-    <td><span>Helper function -- return a copy of list, with all elements of type <tt class="rst-docutils literal">cls</tt> spliced in rather than appended in.</span></td>
+    <td><code><a href="#_flatten" class="internal-link" title="nltk.featstruct._flatten">_flatten</a></code></td>
+    <td>Helper function -- return a copy of list, with all elements of type <tt class="rst-docutils literal">cls</tt> spliced in rather than appended in.</td>
   </tr><tr class="function private">
     
     <td>Function</td>
-    <td><code><a href="#_is_mapping">_is_mapping</a></code></td>
+    <td><code><a href="#_is_mapping" class="internal-link" title="nltk.featstruct._is_mapping">_is​_mapping</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="function private">
     
     <td>Function</td>
-    <td><code><a href="#_is_sequence">_is_sequence</a></code></td>
+    <td><code><a href="#_is_sequence" class="internal-link" title="nltk.featstruct._is_sequence">_is​_sequence</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="function private">
     
     <td>Function</td>
-    <td><code><a href="#_remove_variables">_remove_variables</a></code></td>
+    <td><code><a href="#_remove_variables" class="internal-link" title="nltk.featstruct._remove_variables">_remove​_variables</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="function private">
     
     <td>Function</td>
-    <td><code><a href="#_rename_variable">_rename_variable</a></code></td>
+    <td><code><a href="#_rename_variable" class="internal-link" title="nltk.featstruct._rename_variable">_rename​_variable</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="function private">
     
     <td>Function</td>
-    <td><code><a href="#_rename_variables">_rename_variables</a></code></td>
+    <td><code><a href="#_rename_variables" class="internal-link" title="nltk.featstruct._rename_variables">_rename​_variables</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="function private">
     
     <td>Function</td>
-    <td><code><a href="#_resolve_aliases">_resolve_aliases</a></code></td>
-    <td><span>Replace any bound aliased vars with their binding; and replace any unbound aliased vars with their representative var.</span></td>
+    <td><code><a href="#_resolve_aliases" class="internal-link" title="nltk.featstruct._resolve_aliases">_resolve​_aliases</a></code></td>
+    <td>Replace any bound aliased vars with their binding; and replace any unbound aliased vars with their representative var.</td>
   </tr><tr class="function private">
     
     <td>Function</td>
-    <td><code><a href="#_retract_bindings">_retract_bindings</a></code></td>
+    <td><code><a href="#_retract_bindings" class="internal-link" title="nltk.featstruct._retract_bindings">_retract​_bindings</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="function private">
     
     <td>Function</td>
-    <td><code><a href="#_substitute_bindings">_substitute_bindings</a></code></td>
+    <td><code><a href="#_substitute_bindings" class="internal-link" title="nltk.featstruct._substitute_bindings">_substitute​_bindings</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="function private">
     
     <td>Function</td>
-    <td><code><a href="#_trace_bindings">_trace_bindings</a></code></td>
+    <td><code><a href="#_trace_bindings" class="internal-link" title="nltk.featstruct._trace_bindings">_trace​_bindings</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="function private">
     
     <td>Function</td>
-    <td><code><a href="#_trace_unify_fail">_trace_unify_fail</a></code></td>
+    <td><code><a href="#_trace_unify_fail" class="internal-link" title="nltk.featstruct._trace_unify_fail">_trace​_unify​_fail</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="function private">
     
     <td>Function</td>
-    <td><code><a href="#_trace_unify_identity">_trace_unify_identity</a></code></td>
+    <td><code><a href="#_trace_unify_identity" class="internal-link" title="nltk.featstruct._trace_unify_identity">_trace​_unify​_identity</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="function private">
     
     <td>Function</td>
-    <td><code><a href="#_trace_unify_start">_trace_unify_start</a></code></td>
+    <td><code><a href="#_trace_unify_start" class="internal-link" title="nltk.featstruct._trace_unify_start">_trace​_unify​_start</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="function private">
     
     <td>Function</td>
-    <td><code><a href="#_trace_unify_succeed">_trace_unify_succeed</a></code></td>
+    <td><code><a href="#_trace_unify_succeed" class="internal-link" title="nltk.featstruct._trace_unify_succeed">_trace​_unify​_succeed</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="function private">
     
     <td>Function</td>
-    <td><code><a href="#_trace_valrepr">_trace_valrepr</a></code></td>
+    <td><code><a href="#_trace_valrepr" class="internal-link" title="nltk.featstruct._trace_valrepr">_trace​_valrepr</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="function private">
     
     <td>Function</td>
-    <td><code><a href="#_unify_feature_values">_unify_feature_values</a></code></td>
-    <td><span>Attempt to unify <tt class="rst-docutils literal">fval1</tt> and and <tt class="rst-docutils literal">fval2</tt>, and return the resulting unified value.  The method of unification will depend on the types of <tt class="rst-docutils literal">fval1</tt> and <tt class="rst-docutils literal">fval2</tt>:</span></td>
+    <td><code><a href="#_unify_feature_values" class="internal-link" title="nltk.featstruct._unify_feature_values">_unify​_feature​_values</a></code></td>
+    <td>Attempt to unify <tt class="rst-docutils literal">fval1</tt> and and <tt class="rst-docutils literal">fval2</tt>, and return the resulting unified value.  The method of unification will depend on the types of <tt class="rst-docutils literal">fval1</tt> and <tt class="rst-docutils literal">fval2</tt>:</td>
   </tr><tr class="function private">
     
     <td>Function</td>
-    <td><code><a href="#_variables">_variables</a></code></td>
+    <td><code><a href="#_variables" class="internal-link" title="nltk.featstruct._variables">_variables</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
-  </tr><tr class="variable private">
+  </tr><tr class="constant private">
     
-    <td>Variable</td>
-    <td><code><a href="#_FROZEN_ERROR">_FROZEN_ERROR</a></code></td>
+    <td>Constant</td>
+    <td><code><a href="#_FROZEN_ERROR" class="internal-link" title="nltk.featstruct._FROZEN_ERROR">_FROZEN​_ERROR</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
-  </tr><tr class="variable private">
+  </tr><tr class="constant private">
     
-    <td>Variable</td>
-    <td><code><a href="#_FROZEN_NOTICE">_FROZEN_NOTICE</a></code></td>
+    <td>Constant</td>
+    <td><code><a href="#_FROZEN_NOTICE" class="internal-link" title="nltk.featstruct._FROZEN_NOTICE">_FROZEN​_NOTICE</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr>
 </table>
@@ -545,7 +558,7 @@ assigned incompatible values by <tt class="rst-docutils literal">fstruct1</tt> a
   </a>
   <div class="functionHeader">
     
-    <span class="py-keyword">def</span> <span class="py-defname">display_unification</span>(fs1, fs2, indent='  '):
+    <span class="py-keyword">def</span> <span class="py-defname">display_unification</span>(fs1, fs2, indent=<span class="rst-variable-quote">'</span><span class="rst-variable-string">  </span><span class="rst-variable-quote">'</span>):
     <a class="sourceLink" href="https://github.com/nltk/nltk/tree/3.6.2/nltk/featstruct.py#L2585">
       
       (source)
@@ -567,7 +580,7 @@ assigned incompatible values by <tt class="rst-docutils literal">fstruct1</tt> a
   </a>
   <div class="functionHeader">
     
-    <span class="py-keyword">def</span> <span class="py-defname">find_variables</span>(fstruct, fs_class='default'):
+    <span class="py-keyword">def</span> <span class="py-defname">find_variables</span>(fstruct, fs_class=<span class="rst-variable-quote">'</span><span class="rst-variable-string">default</span><span class="rst-variable-quote">'</span>):
     <a class="sourceLink" href="https://github.com/nltk/nltk/tree/3.6.2/nltk/featstruct.py#L1162">
       
       (source)
@@ -611,7 +624,7 @@ assigned incompatible values by <tt class="rst-docutils literal">fstruct1</tt> a
   </a>
   <div class="functionHeader">
     
-    <span class="py-keyword">def</span> <span class="py-defname">remove_variables</span>(fstruct, fs_class='default'):
+    <span class="py-keyword">def</span> <span class="py-defname">remove_variables</span>(fstruct, fs_class=<span class="rst-variable-quote">'</span><span class="rst-variable-string">default</span><span class="rst-variable-quote">'</span>):
     <a class="sourceLink" href="https://github.com/nltk/nltk/tree/3.6.2/nltk/featstruct.py#L1299">
       
       (source)
@@ -634,7 +647,7 @@ all features whose values are <tt class="rst-docutils literal">Variables</tt>.</
   </a>
   <div class="functionHeader">
     
-    <span class="py-keyword">def</span> <span class="py-defname">rename_variables</span>(fstruct, vars=None, used_vars=(), new_vars=None, fs_class='default'):
+    <span class="py-keyword">def</span> <span class="py-defname">rename_variables</span>(fstruct, vars=None, used_vars=(), new_vars=None, fs_class=<span class="rst-variable-quote">'</span><span class="rst-variable-string">default</span><span class="rst-variable-quote">'</span>):
     <a class="sourceLink" href="https://github.com/nltk/nltk/tree/3.6.2/nltk/featstruct.py#L1193">
       
       (source)
@@ -665,8 +678,8 @@ the same dictionary:</p>
 <p>If new_vars is not specified, then an empty dictionary is used.</p>
 <table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">fstruct</span></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">vars:</span>set</td><td class="fieldArgDesc">The set of variables that should be renamed.
 If not specified, <tt class="rst-docutils literal">find_variables(fstruct)</tt> is used; i.e., all
-variables will be given new names.</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">used_vars:</span>set</td><td class="fieldArgDesc">A set of variables whose names should not be
-used by the new variables.</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">new_vars:</span>dict(Variable -&gt; Variable)</td><td class="fieldArgDesc"><p>A dictionary that is used to hold the mapping
+variables will be given new names.</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">used​_vars:</span>set</td><td class="fieldArgDesc">A set of variables whose names should not be
+used by the new variables.</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">new​_vars:</span>dict(Variable -&gt; Variable)</td><td class="fieldArgDesc"><p>A dictionary that is used to hold the mapping
 from old variables to new variables.  For each variable <em>v</em>
 in this feature structure:</p>
 <ul class="rst-simple">
@@ -677,7 +690,7 @@ does contain <em>v</em>, then a new entry will be added to
 <tt class="rst-docutils literal">new_vars</tt>, mapping <em>v</em> to the new variable that is used
 to replace it.</li>
 </ul>
-</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">fs_class</span></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr></table></div>
+</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">fs​_class</span></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr></table></div>
   </div>
 </div><div class="basefunction">
   
@@ -690,7 +703,7 @@ to replace it.</li>
   </a>
   <div class="functionHeader">
     
-    <span class="py-keyword">def</span> <span class="py-defname">retract_bindings</span>(fstruct, bindings, fs_class='default'):
+    <span class="py-keyword">def</span> <span class="py-defname">retract_bindings</span>(fstruct, bindings, fs_class=<span class="rst-variable-quote">'</span><span class="rst-variable-string">default</span><span class="rst-variable-quote">'</span>):
     <a class="sourceLink" href="https://github.com/nltk/nltk/tree/3.6.2/nltk/featstruct.py#L1122">
       
       (source)
@@ -720,7 +733,7 @@ values in <tt class="rst-docutils literal">bindings</tt> may be modified if they
   </a>
   <div class="functionHeader">
     
-    <span class="py-keyword">def</span> <span class="py-defname">substitute_bindings</span>(fstruct, bindings, fs_class='default'):
+    <span class="py-keyword">def</span> <span class="py-defname">substitute_bindings</span>(fstruct, bindings, fs_class=<span class="rst-variable-quote">'</span><span class="rst-variable-string">default</span><span class="rst-variable-quote">'</span>):
     <a class="sourceLink" href="https://github.com/nltk/nltk/tree/3.6.2/nltk/featstruct.py#L1083">
       
       (source)
@@ -733,7 +746,7 @@ values in <tt class="rst-docutils literal">bindings</tt> may be modified if they
 variable bound by <tt class="rst-docutils literal">bindings</tt> with its binding.  If a variable is
 aliased to a bound variable, then it will be replaced by that
 variable's value.  If a variable is aliased to an unbound
-variable, then it will be replaced by that variable.<table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">fstruct</span></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">bindings:</span>dict(Variable -&gt; any)</td><td class="fieldArgDesc">A dictionary mapping from variables to values.</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">fs_class</span></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr></table></div>
+variable, then it will be replaced by that variable.<table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">fstruct</span></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">bindings:</span>dict(Variable -&gt; any)</td><td class="fieldArgDesc">A dictionary mapping from variables to values.</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">fs​_class</span></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr></table></div>
   </div>
 </div><div class="basefunction">
   
@@ -770,7 +783,7 @@ feature structure equal to <tt class="rst-docutils literal">fstruct2.</tt><table
   </a>
   <div class="functionHeader">
     
-    <span class="py-keyword">def</span> <span class="py-defname">unify</span>(fstruct1, fstruct2, bindings=None, trace=False, fail=None, rename_vars=True, fs_class='default'):
+    <span class="py-keyword">def</span> <span class="py-defname">unify</span>(fstruct1, fstruct2, bindings=None, trace=False, fail=None, rename_vars=True, fs_class=<span class="rst-variable-quote">'</span><span class="rst-variable-string">default</span><span class="rst-variable-quote">'</span>):
     <a class="sourceLink" href="https://github.com/nltk/nltk/tree/3.6.2/nltk/featstruct.py#L1352">
       
       (source)
@@ -808,11 +821,11 @@ empty dict.</p>
 <span class="py-output">[a=?x, b=?x2]</span>
 </pre></blockquote>
 <table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">fstruct1</span></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">fstruct2</span></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">bindings:</span>dict(Variable -&gt; any)</td><td class="fieldArgDesc">A set of variable bindings to be used and
-updated during unification.</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">trace:</span>bool</td><td class="fieldArgDesc">If true, generate trace output.</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">fail</span></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">rename_vars:</span>bool</td><td class="fieldArgDesc">If True, then rename any variables in
+updated during unification.</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">trace:</span>bool</td><td class="fieldArgDesc">If true, generate trace output.</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">fail</span></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">rename​_vars:</span>bool</td><td class="fieldArgDesc">If True, then rename any variables in
 <tt class="rst-docutils literal">fstruct2</tt> that are also used in <tt class="rst-docutils literal">fstruct1</tt>, in order to
-avoid collisions on variable names.</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">fs_class</span></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr></table></div>
+avoid collisions on variable names.</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">fs​_class</span></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr></table></div>
   </div>
-</div><div class="basevariable">
+</div><div class="baseconstant">
   
   
   <a name="nltk.featstruct.SLASH">
@@ -833,8 +846,10 @@ avoid collisions on variable names.</td></tr><tr><td class="fieldArgContainer"><
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    <table class="valueTable"><tr class="fieldStart"><td class="fieldName">Value</td></tr><tr><td><pre class="constant-value"><code><a href="nltk.featstruct.SlashFeature.html" class="internal-link" title="nltk.featstruct.SlashFeature">SlashFeature</a>(<wbr></wbr><span class="rst-variable-quote">'</span><span class="rst-variable-string">slash</span><span class="rst-variable-quote">'</span>,
+             <wbr></wbr>default=False, <wbr></wbr>display=<span class="rst-variable-quote">'</span><span class="rst-variable-string">slash</span><span class="rst-variable-quote">'</span>)</code></pre></td></tr></table>
   </div>
-</div><div class="basevariable">
+</div><div class="baseconstant">
   
   
   <a name="nltk.featstruct.TYPE">
@@ -855,6 +870,8 @@ avoid collisions on variable names.</td></tr><tr><td class="fieldArgContainer"><
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    <table class="valueTable"><tr class="fieldStart"><td class="fieldName">Value</td></tr><tr><td><pre class="constant-value"><code><a href="nltk.featstruct.Feature.html" class="internal-link" title="nltk.featstruct.Feature">Feature</a>(<wbr></wbr><span class="rst-variable-quote">'</span><span class="rst-variable-string">type</span><span class="rst-variable-quote">'</span>,
+        <wbr></wbr>display=<span class="rst-variable-quote">'</span><span class="rst-variable-string">prefix</span><span class="rst-variable-quote">'</span>)</code></pre></td></tr></table>
   </div>
 </div><div class="basevariable">
   
@@ -879,6 +896,7 @@ avoid collisions on variable names.</td></tr><tr><td class="fieldArgContainer"><
     <div>A unique value used to indicate unification failure.  It can be
 returned by <tt class="rst-docutils literal">Feature.unify_base_values()</tt> or by custom <tt class="rst-docutils literal">fail()</tt>
 functions to indicate that unificaiton should fail.</div>
+    
   </div>
 </div><div class="basefunction private">
   
@@ -937,7 +955,7 @@ the target of its forward pointer (to preserve reentrancy).</div>
   </a>
   <div class="functionHeader">
     
-    <span class="py-keyword">def</span> <span class="py-defname">_check_frozen</span>(method, indent=''):
+    <span class="py-keyword">def</span> <span class="py-defname">_check_frozen</span>(method, indent=<span class="rst-variable-quote">'</span><span class="rst-variable-string"></span><span class="rst-variable-quote">'</span>):
     <a class="sourceLink" href="https://github.com/nltk/nltk/tree/3.6.2/nltk/featstruct.py#L574">
       
       (source)
@@ -1005,7 +1023,7 @@ to the forward dictionary; and changes will be made only
 to the target of the forward dictionary.
 <tt class="rst-docutils literal">_destructively_unify</tt> will always 'follow' any links
 in the forward dictionary for fstruct1 and fstruct2 before
-actually unifying them.</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">trace</span></td><td class="fieldArgDesc">If true, generate trace output</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">fail</span></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">fs_class</span></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">path</span></td><td class="fieldArgDesc">The feature path that led us to this unification
+actually unifying them.</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">trace</span></td><td class="fieldArgDesc">If true, generate trace output</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">fail</span></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">fs​_class</span></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">path</span></td><td class="fieldArgDesc">The feature path that led us to this unification
 step.  Used for trace output.</td></tr></table></div>
   </div>
 </div><div class="basefunction private">
@@ -1401,7 +1419,7 @@ this will succeed if they are equal, and fail otherwise.</li>
     
     <div><p class="undocumented">Undocumented</p></div>
   </div>
-</div><div class="basevariable private">
+</div><div class="baseconstant private">
   
   
   <a name="nltk.featstruct._FROZEN_ERROR">
@@ -1422,8 +1440,9 @@ this will succeed if they are equal, and fail otherwise.</li>
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    <table class="valueTable"><tr class="fieldStart"><td class="fieldName">Value</td></tr><tr><td><pre class="constant-value"><code><span class="rst-variable-quote">'</span><span class="rst-variable-string">Frozen FeatStructs may not be modified.</span><span class="rst-variable-quote">'</span></code></pre></td></tr></table>
   </div>
-</div><div class="basevariable private">
+</div><div class="baseconstant private">
   
   
   <a name="nltk.featstruct._FROZEN_NOTICE">
@@ -1444,6 +1463,8 @@ this will succeed if they are equal, and fail otherwise.</li>
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    <table class="valueTable"><tr class="fieldStart"><td class="fieldName">Value</td></tr><tr><td><pre class="constant-value"><code><span class="rst-variable-quote">'''</span><span class="rst-variable-string"></span>
+<span class="rst-variable-string">%sIf self is frozen, raise ValueError.</span><span class="rst-variable-quote">'''</span></code></pre></td></tr></table>
   </div>
 </div>
 
@@ -1455,7 +1476,7 @@ this will succeed if they are equal, and fail otherwise.</li>
   <div class="container">
     <a href="index.html">API Documentation</a> for <a href="http://www.nltk.org/" class="projecthome">nltk-3.6.2</a>,
   generated by <a href="https://github.com/twisted/pydoctor/">pydoctor</a>
-    21.2.2 at 2022-01-06 17:36:51.
+    22.2.2.dev0 at 2022-03-04 05:57:24.
   </div>
 </footer>
 

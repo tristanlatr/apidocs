@@ -7,7 +7,7 @@
   <head>
     
     <title>nltk.app.rdparser_app.RecursiveDescentApp</title>
-    <meta name="generator" content="pydoctor 21.2.2"> 
+    <meta name="generator" content="pydoctor 22.2.2.dev0"> 
         
     </meta>
     <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
@@ -44,69 +44,82 @@
           Names
         </a>
 
-        <form action="search-results.html" id="search-box-container">
+        <div id="search-box-container">
           <div class="input-group">
-            <input id="search-box" name="search-query" placeholder="Search..." aria-label="Search" minlength="2" class="form-control" />
+            <input id="search-box" type="search" name="search-query" placeholder="Search..." aria-label="Search" minlength="2" class="form-control" autocomplete="off" />
+            
             <span class="input-group-btn">
-              <button class="btn btn-default" type="submit" title="Search"><img src="fonts/search.svg" alt="Search!" /></button>
-              <a class="btn btn-default" id="search-help-button" title="Help" onclick="toggleSearchHelpText()"><img src="fonts/info.svg" alt="Help!" /></a>
+              <a style="display: none;" class="btn btn-default" id="search-clear-button" title="Clear" onclick="clearSearch()"><img src="fonts/x-circle.svg" alt="Clear" /></a>
+              <a class="btn btn-default" id="search-help-button" title="Help" onclick="toggleSearchHelpText()"><img src="fonts/info.svg" alt="Help" /></a>
             </span>
           </div>
-        </form>
+        </div>
 
-        <div class="rst-admonition hint" id="search-help-box">
+      </div>
+
+      <div id="search-results-container" style="display: none;">
+        <div>
+          <span class="label label-default" id="search-docstrings-button">
+            <a title="Search in docstrings" onclick="toggleSearchInDocstrings()">search in docstrings</a></span>
+        </div>
+
+        <noscript>
+            <h1>Cannot search: JavaScript is not supported/enabled in your browser.</h1>
+        </noscript>
+
+        <div class="hint" id="search-help-box">
           <p class="rst-last">
       
             Search bar offers the following options:
             <ul>   
                 <li>
                   <strong>Term presence.</strong> The below example searches for documents that 
-                    must contain “foo”, might contain “bar” and must not contain “baz”:
-                  <br /> <code>'+foo bar -baz'</code>
+                    must contain “foo”, might contain “bar” and must not contain “baz”: <code>+foo bar -baz</code>
                 </li> 
 
                 <li>
-                  <strong>Wildcards.</strong> The below example searches for documents with words beginning with “foo”:
-                  <br /> <code>'foo*'</code>
+                  <strong>Wildcards.</strong> The below example searches for documents with words beginning with “foo”: <code>foo*</code>
                 </li> 
 
                 <li>
-                  <strong>Search in specific fields.</strong> The following search matches all documents 
-                  that contains "foo" in their full dotted name and with “bar” in any field:
-                  <br /> <code>'+fullName:*foo* +bar'</code>
+                  <strong>Search in specific fields.</strong> The following search matches all objects 
+                  in "twisted.mail" that matches “search”: <code>+qname:twisted.mail.* +search</code>
 
                   <p>
-                    Possible fields: 'name', 'docstring', 'fullName'.
+                    Possible fields: 'name', 'qname' (fully qualified name), 'docstring', and 'kind'.
+                    Last two fields are only applicable if "search in docstrings" is enabled.
                   </p>
                 </li>
 
                 <li>
                   <strong>Fuzzy matches.</strong> The following search matches all documents 
-                  that have a word within 1 edit distance of “foo”:
-                  <br /> <code>'foo~1'</code>
+                  that have a word within 1 edit distance of “foo”: <code>foo~1</code>
                 </li>
             </ul>
 
           </p>
         </div>
 
-      </div>
+        <div id="search-status"> </div>
+        
+        <div class="warning" id="search-warn-box" style="display: none;">
+          <p class="rst-last"><span id="search-warn"></span></p>
+        </div>
 
+        <table id="search-results">
+          <!-- Filled dynamically by JS -->
+        </table>
+        
+        <div style="margin-top: 8px;">
+          <p>Results provided by <a href="https://lunrjs.com">Lunr.js</a></p>
+        </div>
+      </div>
 
     </div>
   </div>
 
-  <script>
- 
-    function toggleSearchHelpText() {
-        document.body.classList.toggle("search-help-hidden");
-    }
-    // Init search and help text
-    document.getElementById('search-box-container').style.display = 'block';
-    document.getElementById('search-help-box').style.display = 'block';
-    document.body.classList.add("search-help-hidden");
-
-  </script>
+  <script src="ajax.js" type="text/javascript"></script>
+  <script src="search.js" type="text/javascript"></script>
 
 </nav>
 
@@ -115,7 +128,7 @@
     <div class="container">
 
       <div class="page-header">
-        <h1 class="class"><code><code><a href="nltk.html">nltk</a></code><wbr></wbr>.<code><a href="nltk.app.html">app</a></code><wbr></wbr>.<code><a href="nltk.app.rdparser_app.html">rdparser_app</a></code><wbr></wbr>.<code><a href="nltk.app.rdparser_app.RecursiveDescentApp.html">RecursiveDescentApp</a></code></code></h1>
+        <h1 class="class"><code><code><a href="index.html" class="internal-link">nltk</a></code><wbr></wbr>.<code><a href="nltk.app.html" class="internal-link" title="nltk.app">app</a></code><wbr></wbr>.<code><a href="nltk.app.rdparser_app.html" class="internal-link" title="nltk.app.rdparser_app">rdparser_app</a></code><wbr></wbr>.<code><a href="nltk.app.rdparser_app.RecursiveDescentApp.html" class="internal-link" title="nltk.app.rdparser_app.RecursiveDescentApp">RecursiveDescentApp</a></code></code></h1>
         <div id="showPrivate">
           <button class="btn btn-link" onclick="togglePrivate()">Toggle Private API</button>
         </div>
@@ -126,7 +139,7 @@
       </div>
 
       <div class="extrasDocstring">
-        <p><code><span class="py-keyword">class</span> <span class="py-defname">RecursiveDescentApp</span>(<span title="object">object</span>): <a href="https://github.com/nltk/nltk/tree/3.6.2/nltk/app/rdparser_app.py#L77" class="sourceLink">(source)</a></code></p>
+        <p><code><span class="py-keyword">class</span> <span class="py-defname">RecursiveDescentApp</span>(object): <a href="https://github.com/nltk/nltk/tree/3.6.2/nltk/app/rdparser_app.py#L77" class="sourceLink">(source)</a></code></p>
         <p><a href="classIndex.html#nltk.app.rdparser_app.RecursiveDescentApp">View In Hierarchy</a></p>
       </div>
 
@@ -147,372 +160,372 @@ through the parsing process, performing the operations that
   <tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#__init__">__init__</a></code></td>
+    <td><code><a href="#__init__" class="internal-link" title="nltk.app.rdparser_app.RecursiveDescentApp.__init__">__init__</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#about">about</a></code></td>
+    <td><code><a href="#about" class="internal-link" title="nltk.app.rdparser_app.RecursiveDescentApp.about">about</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#autostep">autostep</a></code></td>
+    <td><code><a href="#autostep" class="internal-link" title="nltk.app.rdparser_app.RecursiveDescentApp.autostep">autostep</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#backtrack">backtrack</a></code></td>
+    <td><code><a href="#backtrack" class="internal-link" title="nltk.app.rdparser_app.RecursiveDescentApp.backtrack">backtrack</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#cancel_autostep">cancel_autostep</a></code></td>
+    <td><code><a href="#cancel_autostep" class="internal-link" title="nltk.app.rdparser_app.RecursiveDescentApp.cancel_autostep">cancel​_autostep</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#destroy">destroy</a></code></td>
+    <td><code><a href="#destroy" class="internal-link" title="nltk.app.rdparser_app.RecursiveDescentApp.destroy">destroy</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#edit_grammar">edit_grammar</a></code></td>
+    <td><code><a href="#edit_grammar" class="internal-link" title="nltk.app.rdparser_app.RecursiveDescentApp.edit_grammar">edit​_grammar</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#edit_sentence">edit_sentence</a></code></td>
+    <td><code><a href="#edit_sentence" class="internal-link" title="nltk.app.rdparser_app.RecursiveDescentApp.edit_sentence">edit​_sentence</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#expand">expand</a></code></td>
+    <td><code><a href="#expand" class="internal-link" title="nltk.app.rdparser_app.RecursiveDescentApp.expand">expand</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#help">help</a></code></td>
+    <td><code><a href="#help" class="internal-link" title="nltk.app.rdparser_app.RecursiveDescentApp.help">help</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#mainloop">mainloop</a></code></td>
+    <td><code><a href="#mainloop" class="internal-link" title="nltk.app.rdparser_app.RecursiveDescentApp.mainloop">mainloop</a></code></td>
     <td><span class="undocumented">No summary</span></td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#match">match</a></code></td>
+    <td><code><a href="#match" class="internal-link" title="nltk.app.rdparser_app.RecursiveDescentApp.match">match</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#postscript">postscript</a></code></td>
+    <td><code><a href="#postscript" class="internal-link" title="nltk.app.rdparser_app.RecursiveDescentApp.postscript">postscript</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#reset">reset</a></code></td>
+    <td><code><a href="#reset" class="internal-link" title="nltk.app.rdparser_app.RecursiveDescentApp.reset">reset</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#resize">resize</a></code></td>
+    <td><code><a href="#resize" class="internal-link" title="nltk.app.rdparser_app.RecursiveDescentApp.resize">resize</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#set_grammar">set_grammar</a></code></td>
+    <td><code><a href="#set_grammar" class="internal-link" title="nltk.app.rdparser_app.RecursiveDescentApp.set_grammar">set​_grammar</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#set_sentence">set_sentence</a></code></td>
+    <td><code><a href="#set_sentence" class="internal-link" title="nltk.app.rdparser_app.RecursiveDescentApp.set_sentence">set​_sentence</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#step">step</a></code></td>
+    <td><code><a href="#step" class="internal-link" title="nltk.app.rdparser_app.RecursiveDescentApp.step">step</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method private">
     
     <td>Method</td>
-    <td><code><a href="#_animate_backtrack">_animate_backtrack</a></code></td>
+    <td><code><a href="#_animate_backtrack" class="internal-link" title="nltk.app.rdparser_app.RecursiveDescentApp._animate_backtrack">_animate​_backtrack</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method private">
     
     <td>Method</td>
-    <td><code><a href="#_animate_backtrack_frame">_animate_backtrack_frame</a></code></td>
+    <td><code><a href="#_animate_backtrack_frame" class="internal-link" title="nltk.app.rdparser_app.RecursiveDescentApp._animate_backtrack_frame">_animate​_backtrack​_frame</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method private">
     
     <td>Method</td>
-    <td><code><a href="#_animate_expand">_animate_expand</a></code></td>
+    <td><code><a href="#_animate_expand" class="internal-link" title="nltk.app.rdparser_app.RecursiveDescentApp._animate_expand">_animate​_expand</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method private">
     
     <td>Method</td>
-    <td><code><a href="#_animate_expand_frame">_animate_expand_frame</a></code></td>
+    <td><code><a href="#_animate_expand_frame" class="internal-link" title="nltk.app.rdparser_app.RecursiveDescentApp._animate_expand_frame">_animate​_expand​_frame</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method private">
     
     <td>Method</td>
-    <td><code><a href="#_animate_match">_animate_match</a></code></td>
+    <td><code><a href="#_animate_match" class="internal-link" title="nltk.app.rdparser_app.RecursiveDescentApp._animate_match">_animate​_match</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method private">
     
     <td>Method</td>
-    <td><code><a href="#_animate_match_backtrack">_animate_match_backtrack</a></code></td>
+    <td><code><a href="#_animate_match_backtrack" class="internal-link" title="nltk.app.rdparser_app.RecursiveDescentApp._animate_match_backtrack">_animate​_match​_backtrack</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method private">
     
     <td>Method</td>
-    <td><code><a href="#_animate_match_backtrack_frame">_animate_match_backtrack_frame</a></code></td>
+    <td><code><a href="#_animate_match_backtrack_frame" class="internal-link" title="nltk.app.rdparser_app.RecursiveDescentApp._animate_match_backtrack_frame">_animate​_match​_backtrack​_frame</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method private">
     
     <td>Method</td>
-    <td><code><a href="#_animate_match_frame">_animate_match_frame</a></code></td>
+    <td><code><a href="#_animate_match_frame" class="internal-link" title="nltk.app.rdparser_app.RecursiveDescentApp._animate_match_frame">_animate​_match​_frame</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method private">
     
     <td>Method</td>
-    <td><code><a href="#_backtrack">_backtrack</a></code></td>
+    <td><code><a href="#_backtrack" class="internal-link" title="nltk.app.rdparser_app.RecursiveDescentApp._backtrack">_backtrack</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method private">
     
     <td>Method</td>
-    <td><code><a href="#_configure">_configure</a></code></td>
+    <td><code><a href="#_configure" class="internal-link" title="nltk.app.rdparser_app.RecursiveDescentApp._configure">_configure</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method private">
     
     <td>Method</td>
-    <td><code><a href="#_expand">_expand</a></code></td>
+    <td><code><a href="#_expand" class="internal-link" title="nltk.app.rdparser_app.RecursiveDescentApp._expand">_expand</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method private">
     
     <td>Method</td>
-    <td><code><a href="#_get">_get</a></code></td>
+    <td><code><a href="#_get" class="internal-link" title="nltk.app.rdparser_app.RecursiveDescentApp._get">_get</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method private">
     
     <td>Method</td>
-    <td><code><a href="#_highlight_nodes">_highlight_nodes</a></code></td>
+    <td><code><a href="#_highlight_nodes" class="internal-link" title="nltk.app.rdparser_app.RecursiveDescentApp._highlight_nodes">_highlight​_nodes</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method private">
     
     <td>Method</td>
-    <td><code><a href="#_highlight_prodlist">_highlight_prodlist</a></code></td>
+    <td><code><a href="#_highlight_prodlist" class="internal-link" title="nltk.app.rdparser_app.RecursiveDescentApp._highlight_prodlist">_highlight​_prodlist</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method private">
     
     <td>Method</td>
-    <td><code><a href="#_init_bindings">_init_bindings</a></code></td>
+    <td><code><a href="#_init_bindings" class="internal-link" title="nltk.app.rdparser_app.RecursiveDescentApp._init_bindings">_init​_bindings</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method private">
     
     <td>Method</td>
-    <td><code><a href="#_init_buttons">_init_buttons</a></code></td>
+    <td><code><a href="#_init_buttons" class="internal-link" title="nltk.app.rdparser_app.RecursiveDescentApp._init_buttons">_init​_buttons</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method private">
     
     <td>Method</td>
-    <td><code><a href="#_init_canvas">_init_canvas</a></code></td>
+    <td><code><a href="#_init_canvas" class="internal-link" title="nltk.app.rdparser_app.RecursiveDescentApp._init_canvas">_init​_canvas</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method private">
     
     <td>Method</td>
-    <td><code><a href="#_init_feedback">_init_feedback</a></code></td>
+    <td><code><a href="#_init_feedback" class="internal-link" title="nltk.app.rdparser_app.RecursiveDescentApp._init_feedback">_init​_feedback</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method private">
     
     <td>Method</td>
-    <td><code><a href="#_init_fonts">_init_fonts</a></code></td>
+    <td><code><a href="#_init_fonts" class="internal-link" title="nltk.app.rdparser_app.RecursiveDescentApp._init_fonts">_init​_fonts</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method private">
     
     <td>Method</td>
-    <td><code><a href="#_init_grammar">_init_grammar</a></code></td>
+    <td><code><a href="#_init_grammar" class="internal-link" title="nltk.app.rdparser_app.RecursiveDescentApp._init_grammar">_init​_grammar</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method private">
     
     <td>Method</td>
-    <td><code><a href="#_init_menubar">_init_menubar</a></code></td>
+    <td><code><a href="#_init_menubar" class="internal-link" title="nltk.app.rdparser_app.RecursiveDescentApp._init_menubar">_init​_menubar</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method private">
     
     <td>Method</td>
-    <td><code><a href="#_makeroom">_makeroom</a></code></td>
-    <td><span>Make sure that no sibling tree bbox's overlap.</span></td>
+    <td><code><a href="#_makeroom" class="internal-link" title="nltk.app.rdparser_app.RecursiveDescentApp._makeroom">_makeroom</a></code></td>
+    <td>Make sure that no sibling tree bbox's overlap.</td>
   </tr><tr class="method private">
     
     <td>Method</td>
-    <td><code><a href="#_match">_match</a></code></td>
+    <td><code><a href="#_match" class="internal-link" title="nltk.app.rdparser_app.RecursiveDescentApp._match">_match</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method private">
     
     <td>Method</td>
-    <td><code><a href="#_position_text">_position_text</a></code></td>
+    <td><code><a href="#_position_text" class="internal-link" title="nltk.app.rdparser_app.RecursiveDescentApp._position_text">_position​_text</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method private">
     
     <td>Method</td>
-    <td><code><a href="#_prodlist_select">_prodlist_select</a></code></td>
+    <td><code><a href="#_prodlist_select" class="internal-link" title="nltk.app.rdparser_app.RecursiveDescentApp._prodlist_select">_prodlist​_select</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method private">
     
     <td>Method</td>
-    <td><code><a href="#_redraw">_redraw</a></code></td>
+    <td><code><a href="#_redraw" class="internal-link" title="nltk.app.rdparser_app.RecursiveDescentApp._redraw">_redraw</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method private">
     
     <td>Method</td>
-    <td><code><a href="#_redraw_quick">_redraw_quick</a></code></td>
+    <td><code><a href="#_redraw_quick" class="internal-link" title="nltk.app.rdparser_app.RecursiveDescentApp._redraw_quick">_redraw​_quick</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method private">
     
     <td>Method</td>
-    <td><code><a href="#_step">_step</a></code></td>
+    <td><code><a href="#_step" class="internal-link" title="nltk.app.rdparser_app.RecursiveDescentApp._step">_step</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method private">
     
     <td>Method</td>
-    <td><code><a href="#_toggle_grammar">_toggle_grammar</a></code></td>
+    <td><code><a href="#_toggle_grammar" class="internal-link" title="nltk.app.rdparser_app.RecursiveDescentApp._toggle_grammar">_toggle​_grammar</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method private">
     
     <td>Method</td>
-    <td><code><a href="#_tree_leaves">_tree_leaves</a></code></td>
+    <td><code><a href="#_tree_leaves" class="internal-link" title="nltk.app.rdparser_app.RecursiveDescentApp._tree_leaves">_tree​_leaves</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="instancevariable private">
     
     <td>Instance Variable</td>
-    <td><code><a href="#_animating_lock">_animating_lock</a></code></td>
+    <td><code><a href="#_animating_lock" class="internal-link" title="nltk.app.rdparser_app.RecursiveDescentApp._animating_lock">_animating​_lock</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="instancevariable private">
     
     <td>Instance Variable</td>
-    <td><code><a href="#_animation_frames">_animation_frames</a></code></td>
+    <td><code><a href="#_animation_frames" class="internal-link" title="nltk.app.rdparser_app.RecursiveDescentApp._animation_frames">_animation​_frames</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="instancevariable private">
     
     <td>Instance Variable</td>
-    <td><code><a href="#_autostep">_autostep</a></code></td>
+    <td><code><a href="#_autostep" class="internal-link" title="nltk.app.rdparser_app.RecursiveDescentApp._autostep">_autostep</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="instancevariable private">
     
     <td>Instance Variable</td>
-    <td><code><a href="#_bigfont">_bigfont</a></code></td>
+    <td><code><a href="#_bigfont" class="internal-link" title="nltk.app.rdparser_app.RecursiveDescentApp._bigfont">_bigfont</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="instancevariable private">
     
     <td>Instance Variable</td>
-    <td><code><a href="#_boldfont">_boldfont</a></code></td>
+    <td><code><a href="#_boldfont" class="internal-link" title="nltk.app.rdparser_app.RecursiveDescentApp._boldfont">_boldfont</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="instancevariable private">
     
     <td>Instance Variable</td>
-    <td><code><a href="#_buttonframe">_buttonframe</a></code></td>
+    <td><code><a href="#_buttonframe" class="internal-link" title="nltk.app.rdparser_app.RecursiveDescentApp._buttonframe">_buttonframe</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="instancevariable private">
     
     <td>Instance Variable</td>
-    <td><code><a href="#_canvas">_canvas</a></code></td>
+    <td><code><a href="#_canvas" class="internal-link" title="nltk.app.rdparser_app.RecursiveDescentApp._canvas">_canvas</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="instancevariable private">
     
     <td>Instance Variable</td>
-    <td><code><a href="#_cframe">_cframe</a></code></td>
+    <td><code><a href="#_cframe" class="internal-link" title="nltk.app.rdparser_app.RecursiveDescentApp._cframe">_cframe</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="instancevariable private">
     
     <td>Instance Variable</td>
-    <td><code><a href="#_feedbackframe">_feedbackframe</a></code></td>
+    <td><code><a href="#_feedbackframe" class="internal-link" title="nltk.app.rdparser_app.RecursiveDescentApp._feedbackframe">_feedbackframe</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="instancevariable private">
     
     <td>Instance Variable</td>
-    <td><code><a href="#_font">_font</a></code></td>
+    <td><code><a href="#_font" class="internal-link" title="nltk.app.rdparser_app.RecursiveDescentApp._font">_font</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="instancevariable private">
     
     <td>Instance Variable</td>
-    <td><code><a href="#_lastoper1">_lastoper1</a></code></td>
+    <td><code><a href="#_lastoper1" class="internal-link" title="nltk.app.rdparser_app.RecursiveDescentApp._lastoper1">_lastoper1</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="instancevariable private">
     
     <td>Instance Variable</td>
-    <td><code><a href="#_lastoper2">_lastoper2</a></code></td>
+    <td><code><a href="#_lastoper2" class="internal-link" title="nltk.app.rdparser_app.RecursiveDescentApp._lastoper2">_lastoper2</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="instancevariable private">
     
     <td>Instance Variable</td>
-    <td><code><a href="#_lastoper_label">_lastoper_label</a></code></td>
+    <td><code><a href="#_lastoper_label" class="internal-link" title="nltk.app.rdparser_app.RecursiveDescentApp._lastoper_label">_lastoper​_label</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="instancevariable private">
     
     <td>Instance Variable</td>
-    <td><code><a href="#_parser">_parser</a></code></td>
+    <td><code><a href="#_parser" class="internal-link" title="nltk.app.rdparser_app.RecursiveDescentApp._parser">_parser</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="instancevariable private">
     
     <td>Instance Variable</td>
-    <td><code><a href="#_prodframe">_prodframe</a></code></td>
+    <td><code><a href="#_prodframe" class="internal-link" title="nltk.app.rdparser_app.RecursiveDescentApp._prodframe">_prodframe</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="instancevariable private">
     
     <td>Instance Variable</td>
-    <td><code><a href="#_prodlist">_prodlist</a></code></td>
+    <td><code><a href="#_prodlist" class="internal-link" title="nltk.app.rdparser_app.RecursiveDescentApp._prodlist">_prodlist</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="instancevariable private">
     
     <td>Instance Variable</td>
-    <td><code><a href="#_prodlist_label">_prodlist_label</a></code></td>
+    <td><code><a href="#_prodlist_label" class="internal-link" title="nltk.app.rdparser_app.RecursiveDescentApp._prodlist_label">_prodlist​_label</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="instancevariable private">
     
     <td>Instance Variable</td>
-    <td><code><a href="#_productions">_productions</a></code></td>
+    <td><code><a href="#_productions" class="internal-link" title="nltk.app.rdparser_app.RecursiveDescentApp._productions">_productions</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="instancevariable private">
     
     <td>Instance Variable</td>
-    <td><code><a href="#_sent">_sent</a></code></td>
+    <td><code><a href="#_sent" class="internal-link" title="nltk.app.rdparser_app.RecursiveDescentApp._sent">_sent</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="instancevariable private">
     
     <td>Instance Variable</td>
-    <td><code><a href="#_show_grammar">_show_grammar</a></code></td>
+    <td><code><a href="#_show_grammar" class="internal-link" title="nltk.app.rdparser_app.RecursiveDescentApp._show_grammar">_show​_grammar</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="instancevariable private">
     
     <td>Instance Variable</td>
-    <td><code><a href="#_size">_size</a></code></td>
+    <td><code><a href="#_size" class="internal-link" title="nltk.app.rdparser_app.RecursiveDescentApp._size">_size</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="instancevariable private">
     
     <td>Instance Variable</td>
-    <td><code><a href="#_sysfont">_sysfont</a></code></td>
+    <td><code><a href="#_sysfont" class="internal-link" title="nltk.app.rdparser_app.RecursiveDescentApp._sysfont">_sysfont</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="instancevariable private">
     
     <td>Instance Variable</td>
-    <td><code><a href="#_textline">_textline</a></code></td>
+    <td><code><a href="#_textline" class="internal-link" title="nltk.app.rdparser_app.RecursiveDescentApp._textline">_textline</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="instancevariable private">
     
     <td>Instance Variable</td>
-    <td><code><a href="#_textwidgets">_textwidgets</a></code></td>
+    <td><code><a href="#_textwidgets" class="internal-link" title="nltk.app.rdparser_app.RecursiveDescentApp._textwidgets">_textwidgets</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="instancevariable private">
     
     <td>Instance Variable</td>
-    <td><code><a href="#_top">_top</a></code></td>
+    <td><code><a href="#_top" class="internal-link" title="nltk.app.rdparser_app.RecursiveDescentApp._top">_top</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="instancevariable private">
     
     <td>Instance Variable</td>
-    <td><code><a href="#_tree">_tree</a></code></td>
+    <td><code><a href="#_tree" class="internal-link" title="nltk.app.rdparser_app.RecursiveDescentApp._tree">_tree</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr>
 </table>
@@ -1603,6 +1616,7 @@ the script completes.</div>
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    
   </div>
 </div><div class="baseinstancevariable private">
   
@@ -1625,6 +1639,7 @@ the script completes.</div>
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    
   </div>
 </div><div class="baseinstancevariable private">
   
@@ -1647,6 +1662,7 @@ the script completes.</div>
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    
   </div>
 </div><div class="baseinstancevariable private">
   
@@ -1669,6 +1685,7 @@ the script completes.</div>
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    
   </div>
 </div><div class="baseinstancevariable private">
   
@@ -1691,6 +1708,7 @@ the script completes.</div>
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    
   </div>
 </div><div class="baseinstancevariable private">
   
@@ -1713,6 +1731,7 @@ the script completes.</div>
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    
   </div>
 </div><div class="baseinstancevariable private">
   
@@ -1735,6 +1754,7 @@ the script completes.</div>
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    
   </div>
 </div><div class="baseinstancevariable private">
   
@@ -1757,6 +1777,7 @@ the script completes.</div>
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    
   </div>
 </div><div class="baseinstancevariable private">
   
@@ -1779,6 +1800,7 @@ the script completes.</div>
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    
   </div>
 </div><div class="baseinstancevariable private">
   
@@ -1801,6 +1823,7 @@ the script completes.</div>
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    
   </div>
 </div><div class="baseinstancevariable private">
   
@@ -1823,6 +1846,7 @@ the script completes.</div>
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    
   </div>
 </div><div class="baseinstancevariable private">
   
@@ -1845,6 +1869,7 @@ the script completes.</div>
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    
   </div>
 </div><div class="baseinstancevariable private">
   
@@ -1867,6 +1892,7 @@ the script completes.</div>
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    
   </div>
 </div><div class="baseinstancevariable private">
   
@@ -1889,6 +1915,7 @@ the script completes.</div>
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    
   </div>
 </div><div class="baseinstancevariable private">
   
@@ -1911,6 +1938,7 @@ the script completes.</div>
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    
   </div>
 </div><div class="baseinstancevariable private">
   
@@ -1933,6 +1961,7 @@ the script completes.</div>
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    
   </div>
 </div><div class="baseinstancevariable private">
   
@@ -1955,6 +1984,7 @@ the script completes.</div>
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    
   </div>
 </div><div class="baseinstancevariable private">
   
@@ -1977,6 +2007,7 @@ the script completes.</div>
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    
   </div>
 </div><div class="baseinstancevariable private">
   
@@ -1999,6 +2030,7 @@ the script completes.</div>
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    
   </div>
 </div><div class="baseinstancevariable private">
   
@@ -2021,6 +2053,7 @@ the script completes.</div>
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    
   </div>
 </div><div class="baseinstancevariable private">
   
@@ -2043,6 +2076,7 @@ the script completes.</div>
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    
   </div>
 </div><div class="baseinstancevariable private">
   
@@ -2065,6 +2099,7 @@ the script completes.</div>
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    
   </div>
 </div><div class="baseinstancevariable private">
   
@@ -2087,6 +2122,7 @@ the script completes.</div>
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    
   </div>
 </div><div class="baseinstancevariable private">
   
@@ -2109,6 +2145,7 @@ the script completes.</div>
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    
   </div>
 </div><div class="baseinstancevariable private">
   
@@ -2131,6 +2168,7 @@ the script completes.</div>
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    
   </div>
 </div><div class="baseinstancevariable private">
   
@@ -2153,6 +2191,7 @@ the script completes.</div>
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    
   </div>
 </div>
 
@@ -2164,7 +2203,7 @@ the script completes.</div>
   <div class="container">
     <a href="index.html">API Documentation</a> for <a href="http://www.nltk.org/" class="projecthome">nltk-3.6.2</a>,
   generated by <a href="https://github.com/twisted/pydoctor/">pydoctor</a>
-    21.2.2 at 2022-01-06 17:36:51.
+    22.2.2.dev0 at 2022-03-04 05:57:24.
   </div>
 </footer>
 

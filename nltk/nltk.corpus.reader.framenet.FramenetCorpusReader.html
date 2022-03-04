@@ -7,7 +7,7 @@
   <head>
     
     <title>nltk.corpus.reader.framenet.FramenetCorpusReader</title>
-    <meta name="generator" content="pydoctor 21.2.2"> 
+    <meta name="generator" content="pydoctor 22.2.2.dev0"> 
         
     </meta>
     <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
@@ -44,69 +44,82 @@
           Names
         </a>
 
-        <form action="search-results.html" id="search-box-container">
+        <div id="search-box-container">
           <div class="input-group">
-            <input id="search-box" name="search-query" placeholder="Search..." aria-label="Search" minlength="2" class="form-control" />
+            <input id="search-box" type="search" name="search-query" placeholder="Search..." aria-label="Search" minlength="2" class="form-control" autocomplete="off" />
+            
             <span class="input-group-btn">
-              <button class="btn btn-default" type="submit" title="Search"><img src="fonts/search.svg" alt="Search!" /></button>
-              <a class="btn btn-default" id="search-help-button" title="Help" onclick="toggleSearchHelpText()"><img src="fonts/info.svg" alt="Help!" /></a>
+              <a style="display: none;" class="btn btn-default" id="search-clear-button" title="Clear" onclick="clearSearch()"><img src="fonts/x-circle.svg" alt="Clear" /></a>
+              <a class="btn btn-default" id="search-help-button" title="Help" onclick="toggleSearchHelpText()"><img src="fonts/info.svg" alt="Help" /></a>
             </span>
           </div>
-        </form>
+        </div>
 
-        <div class="rst-admonition hint" id="search-help-box">
+      </div>
+
+      <div id="search-results-container" style="display: none;">
+        <div>
+          <span class="label label-default" id="search-docstrings-button">
+            <a title="Search in docstrings" onclick="toggleSearchInDocstrings()">search in docstrings</a></span>
+        </div>
+
+        <noscript>
+            <h1>Cannot search: JavaScript is not supported/enabled in your browser.</h1>
+        </noscript>
+
+        <div class="hint" id="search-help-box">
           <p class="rst-last">
       
             Search bar offers the following options:
             <ul>   
                 <li>
                   <strong>Term presence.</strong> The below example searches for documents that 
-                    must contain “foo”, might contain “bar” and must not contain “baz”:
-                  <br /> <code>'+foo bar -baz'</code>
+                    must contain “foo”, might contain “bar” and must not contain “baz”: <code>+foo bar -baz</code>
                 </li> 
 
                 <li>
-                  <strong>Wildcards.</strong> The below example searches for documents with words beginning with “foo”:
-                  <br /> <code>'foo*'</code>
+                  <strong>Wildcards.</strong> The below example searches for documents with words beginning with “foo”: <code>foo*</code>
                 </li> 
 
                 <li>
-                  <strong>Search in specific fields.</strong> The following search matches all documents 
-                  that contains "foo" in their full dotted name and with “bar” in any field:
-                  <br /> <code>'+fullName:*foo* +bar'</code>
+                  <strong>Search in specific fields.</strong> The following search matches all objects 
+                  in "twisted.mail" that matches “search”: <code>+qname:twisted.mail.* +search</code>
 
                   <p>
-                    Possible fields: 'name', 'docstring', 'fullName'.
+                    Possible fields: 'name', 'qname' (fully qualified name), 'docstring', and 'kind'.
+                    Last two fields are only applicable if "search in docstrings" is enabled.
                   </p>
                 </li>
 
                 <li>
                   <strong>Fuzzy matches.</strong> The following search matches all documents 
-                  that have a word within 1 edit distance of “foo”:
-                  <br /> <code>'foo~1'</code>
+                  that have a word within 1 edit distance of “foo”: <code>foo~1</code>
                 </li>
             </ul>
 
           </p>
         </div>
 
-      </div>
+        <div id="search-status"> </div>
+        
+        <div class="warning" id="search-warn-box" style="display: none;">
+          <p class="rst-last"><span id="search-warn"></span></p>
+        </div>
 
+        <table id="search-results">
+          <!-- Filled dynamically by JS -->
+        </table>
+        
+        <div style="margin-top: 8px;">
+          <p>Results provided by <a href="https://lunrjs.com">Lunr.js</a></p>
+        </div>
+      </div>
 
     </div>
   </div>
 
-  <script>
- 
-    function toggleSearchHelpText() {
-        document.body.classList.toggle("search-help-hidden");
-    }
-    // Init search and help text
-    document.getElementById('search-box-container').style.display = 'block';
-    document.getElementById('search-help-box').style.display = 'block';
-    document.body.classList.add("search-help-hidden");
-
-  </script>
+  <script src="ajax.js" type="text/javascript"></script>
+  <script src="search.js" type="text/javascript"></script>
 
 </nav>
 
@@ -115,7 +128,7 @@
     <div class="container">
 
       <div class="page-header">
-        <h1 class="class"><code><code><a href="nltk.html">nltk</a></code><wbr></wbr>.<code><a href="nltk.corpus.html">corpus</a></code><wbr></wbr>.<code><a href="nltk.corpus.reader.html">reader</a></code><wbr></wbr>.<code><a href="nltk.corpus.reader.framenet.html">framenet</a></code><wbr></wbr>.<code><a href="nltk.corpus.reader.framenet.FramenetCorpusReader.html">FramenetCorpusReader</a></code></code></h1>
+        <h1 class="class"><code><code><a href="index.html" class="internal-link">nltk</a></code><wbr></wbr>.<code><a href="nltk.corpus.html" class="internal-link" title="nltk.corpus">corpus</a></code><wbr></wbr>.<code><a href="nltk.corpus.reader.html" class="internal-link" title="nltk.corpus.reader">reader</a></code><wbr></wbr>.<code><a href="nltk.corpus.reader.framenet.html" class="internal-link" title="nltk.corpus.reader.framenet">framenet</a></code><wbr></wbr>.<code><a href="nltk.corpus.reader.framenet.FramenetCorpusReader.html" class="internal-link" title="nltk.corpus.reader.framenet.FramenetCorpusReader">FramenetCorpusReader</a></code></code></h1>
         <div id="showPrivate">
           <button class="btn btn-link" onclick="togglePrivate()">Toggle Private API</button>
         </div>
@@ -126,12 +139,13 @@
       </div>
 
       <div class="extrasDocstring">
-        <p><code><span class="py-keyword">class</span> <span class="py-defname">FramenetCorpusReader</span>(<span title="nltk.corpus.reader.XMLCorpusReader">XMLCorpusReader</span>): <a href="https://github.com/nltk/nltk/tree/3.6.2/nltk/corpus/reader/framenet.py#L1093" class="sourceLink">(source)</a></code></p>
+        <p><code><span class="py-keyword">class</span> <span class="py-defname">FramenetCorpusReader</span>(<a href="nltk.corpus.reader.xmldocs.XMLCorpusReader.html" class="internal-link" title="nltk.corpus.reader.XMLCorpusReader">XMLCorpusReader</a>): <a href="https://github.com/nltk/nltk/tree/3.6.2/nltk/corpus/reader/framenet.py#L1093" class="sourceLink">(source)</a></code></p>
         <p><a href="classIndex.html#nltk.corpus.reader.framenet.FramenetCorpusReader">View In Hierarchy</a></p>
       </div>
 
       <div class="moduleDocstring">
-        <div><p>A corpus reader for the Framenet Corpus.</p><pre class="py-doctest">
+        <div><p>A corpus reader for the Framenet Corpus.</p>
+<pre class="py-doctest">
 <span class="py-prompt">&gt;&gt;&gt; </span><span class="py-keyword">from</span> nltk.corpus <span class="py-keyword">import</span> framenet <span class="py-keyword">as</span> fn
 <span class="py-prompt">&gt;&gt;&gt; </span>fn.lu(3238).frame.lexUnit[<span class="py-string">'glint.v'</span>] <span class="py-keyword">is</span> fn.lu(3238)
 <span class="py-output">True</span>
@@ -149,367 +163,367 @@
   <tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#__init__">__init__</a></code></td>
+    <td><code><a href="#__init__" class="internal-link" title="nltk.corpus.reader.framenet.FramenetCorpusReader.__init__">__init__</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#annotations">annotations</a></code></td>
-    <td><span>Frame annotation sets matching the specified criteria.</span></td>
+    <td><code><a href="#annotations" class="internal-link" title="nltk.corpus.reader.framenet.FramenetCorpusReader.annotations">annotations</a></code></td>
+    <td>Frame annotation sets matching the specified criteria.</td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#buildindexes">buildindexes</a></code></td>
-    <td><span>Build the internal indexes to make look-ups faster.</span></td>
+    <td><code><a href="#buildindexes" class="internal-link" title="nltk.corpus.reader.framenet.FramenetCorpusReader.buildindexes">buildindexes</a></code></td>
+    <td>Build the internal indexes to make look-ups faster.</td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#doc">doc</a></code></td>
-    <td><span>Returns the annotated document whose id number is ``fn_docid``. This id number can be obtained by calling the Documents() function.</span></td>
+    <td><code><a href="#doc" class="internal-link" title="nltk.corpus.reader.framenet.FramenetCorpusReader.doc">doc</a></code></td>
+    <td>Returns the annotated document whose id number is ``fn_docid``. This id number can be obtained by calling the Documents() function.</td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#docs">docs</a></code></td>
-    <td><span>Return a list of the annotated full-text documents in FrameNet, optionally filtered by a regex to be matched against the document name.</span></td>
+    <td><code><a href="#docs" class="internal-link" title="nltk.corpus.reader.framenet.FramenetCorpusReader.docs">docs</a></code></td>
+    <td>Return a list of the annotated full-text documents in FrameNet, optionally filtered by a regex to be matched against the document name.</td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#docs_metadata">docs_metadata</a></code></td>
-    <td><span>Return an index of the annotated documents in Framenet.</span></td>
+    <td><code><a href="#docs_metadata" class="internal-link" title="nltk.corpus.reader.framenet.FramenetCorpusReader.docs_metadata">docs​_metadata</a></code></td>
+    <td>Return an index of the annotated documents in Framenet.</td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#exemplars">exemplars</a></code></td>
+    <td><code><a href="#exemplars" class="internal-link" title="nltk.corpus.reader.framenet.FramenetCorpusReader.exemplars">exemplars</a></code></td>
     <td><span class="undocumented">No summary</span></td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#fe_relations">fe_relations</a></code></td>
-    <td><span>Obtain a list of frame element relations.</span></td>
+    <td><code><a href="#fe_relations" class="internal-link" title="nltk.corpus.reader.framenet.FramenetCorpusReader.fe_relations">fe​_relations</a></code></td>
+    <td>Obtain a list of frame element relations.</td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#fes">fes</a></code></td>
+    <td><code><a href="#fes" class="internal-link" title="nltk.corpus.reader.framenet.FramenetCorpusReader.fes">fes</a></code></td>
     <td><span class="undocumented">No summary</span></td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#frame">frame</a></code></td>
-    <td><span>Get the details for the specified Frame using the frame's name or id number.</span></td>
+    <td><code><a href="#frame" class="internal-link" title="nltk.corpus.reader.framenet.FramenetCorpusReader.frame">frame</a></code></td>
+    <td>Get the details for the specified Frame using the frame's name or id number.</td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#frame_by_id">frame_by_id</a></code></td>
-    <td><span>Get the details for the specified Frame using the frame's id number.</span></td>
+    <td><code><a href="#frame_by_id" class="internal-link" title="nltk.corpus.reader.framenet.FramenetCorpusReader.frame_by_id">frame​_by​_id</a></code></td>
+    <td>Get the details for the specified Frame using the frame's id number.</td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#frame_by_name">frame_by_name</a></code></td>
-    <td><span>Get the details for the specified Frame using the frame's name.</span></td>
+    <td><code><a href="#frame_by_name" class="internal-link" title="nltk.corpus.reader.framenet.FramenetCorpusReader.frame_by_name">frame​_by​_name</a></code></td>
+    <td>Get the details for the specified Frame using the frame's name.</td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#frame_ids_and_names">frame_ids_and_names</a></code></td>
-    <td><span>Uses the frame index, which is much faster than looking up each frame definition if only the names and IDs are needed.</span></td>
+    <td><code><a href="#frame_ids_and_names" class="internal-link" title="nltk.corpus.reader.framenet.FramenetCorpusReader.frame_ids_and_names">frame​_ids​_and​_names</a></code></td>
+    <td>Uses the frame index, which is much faster than looking up each frame definition if only the names and IDs are needed.</td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#frame_relation_types">frame_relation_types</a></code></td>
-    <td><span>Obtain a list of frame relation types.</span></td>
+    <td><code><a href="#frame_relation_types" class="internal-link" title="nltk.corpus.reader.framenet.FramenetCorpusReader.frame_relation_types">frame​_relation​_types</a></code></td>
+    <td>Obtain a list of frame relation types.</td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#frame_relations">frame_relations</a></code></td>
+    <td><code><a href="#frame_relations" class="internal-link" title="nltk.corpus.reader.framenet.FramenetCorpusReader.frame_relations">frame​_relations</a></code></td>
     <td><span class="undocumented">No summary</span></td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#frames">frames</a></code></td>
-    <td><span>Obtain details for a specific frame.</span></td>
+    <td><code><a href="#frames" class="internal-link" title="nltk.corpus.reader.framenet.FramenetCorpusReader.frames">frames</a></code></td>
+    <td>Obtain details for a specific frame.</td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#frames_by_lemma">frames_by_lemma</a></code></td>
+    <td><code><a href="#frames_by_lemma" class="internal-link" title="nltk.corpus.reader.framenet.FramenetCorpusReader.frames_by_lemma">frames​_by​_lemma</a></code></td>
     <td><span class="undocumented">No summary</span></td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#ft_sents">ft_sents</a></code></td>
-    <td><span>Full-text annotation sentences, optionally filtered by document name.</span></td>
+    <td><code><a href="#ft_sents" class="internal-link" title="nltk.corpus.reader.framenet.FramenetCorpusReader.ft_sents">ft​_sents</a></code></td>
+    <td>Full-text annotation sentences, optionally filtered by document name.</td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#help">help</a></code></td>
-    <td><span>Display help information summarizing the main methods.</span></td>
+    <td><code><a href="#help" class="internal-link" title="nltk.corpus.reader.framenet.FramenetCorpusReader.help">help</a></code></td>
+    <td>Display help information summarizing the main methods.</td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#lu">lu</a></code></td>
+    <td><code><a href="#lu" class="internal-link" title="nltk.corpus.reader.framenet.FramenetCorpusReader.lu">lu</a></code></td>
     <td><span class="undocumented">No summary</span></td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#lu_basic">lu_basic</a></code></td>
-    <td><span>Returns basic information about the LU whose id is ``fn_luid``. This is basically just a wrapper around the ``lu()`` function with "subCorpus" info excluded.</span></td>
+    <td><code><a href="#lu_basic" class="internal-link" title="nltk.corpus.reader.framenet.FramenetCorpusReader.lu_basic">lu​_basic</a></code></td>
+    <td>Returns basic information about the LU whose id is ``fn_luid``. This is basically just a wrapper around the ``lu()`` function with "subCorpus" info excluded.</td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#lu_ids_and_names">lu_ids_and_names</a></code></td>
-    <td><span>Uses the LU index, which is much faster than looking up each LU definition if only the names and IDs are needed.</span></td>
+    <td><code><a href="#lu_ids_and_names" class="internal-link" title="nltk.corpus.reader.framenet.FramenetCorpusReader.lu_ids_and_names">lu​_ids​_and​_names</a></code></td>
+    <td>Uses the LU index, which is much faster than looking up each LU definition if only the names and IDs are needed.</td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#lus">lus</a></code></td>
-    <td><span>Obtain details for lexical units. Optionally restrict by lexical unit name pattern, and/or to a certain frame or frames whose name matches a pattern.</span></td>
+    <td><code><a href="#lus" class="internal-link" title="nltk.corpus.reader.framenet.FramenetCorpusReader.lus">lus</a></code></td>
+    <td>Obtain details for lexical units. Optionally restrict by lexical unit name pattern, and/or to a certain frame or frames whose name matches a pattern.</td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#propagate_semtypes">propagate_semtypes</a></code></td>
+    <td><code><a href="#propagate_semtypes" class="internal-link" title="nltk.corpus.reader.framenet.FramenetCorpusReader.propagate_semtypes">propagate​_semtypes</a></code></td>
     <td><span class="undocumented">No summary</span></td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#readme">readme</a></code></td>
-    <td><span>Return the contents of the corpus README.txt (or README) file.</span></td>
+    <td><code><a href="#readme" class="internal-link" title="nltk.corpus.reader.framenet.FramenetCorpusReader.readme">readme</a></code></td>
+    <td>Return the contents of the corpus README.txt (or README) file.</td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#semtype">semtype</a></code></td>
+    <td><code><a href="#semtype" class="internal-link" title="nltk.corpus.reader.framenet.FramenetCorpusReader.semtype">semtype</a></code></td>
     <td><span class="undocumented">No summary</span></td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#semtype_inherits">semtype_inherits</a></code></td>
+    <td><code><a href="#semtype_inherits" class="internal-link" title="nltk.corpus.reader.framenet.FramenetCorpusReader.semtype_inherits">semtype​_inherits</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#semtypes">semtypes</a></code></td>
-    <td><span>Obtain a list of semantic types.</span></td>
+    <td><code><a href="#semtypes" class="internal-link" title="nltk.corpus.reader.framenet.FramenetCorpusReader.semtypes">semtypes</a></code></td>
+    <td>Obtain a list of semantic types.</td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#sents">sents</a></code></td>
-    <td><span>Annotated sentences matching the specified criteria.</span></td>
+    <td><code><a href="#sents" class="internal-link" title="nltk.corpus.reader.framenet.FramenetCorpusReader.sents">sents</a></code></td>
+    <td>Annotated sentences matching the specified criteria.</td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#warnings">warnings</a></code></td>
-    <td><span>Enable or disable warnings of data integrity issues as they are encountered. If v is truthy, warnings will be enabled.</span></td>
+    <td><code><a href="#warnings" class="internal-link" title="nltk.corpus.reader.framenet.FramenetCorpusReader.warnings">warnings</a></code></td>
+    <td>Enable or disable warnings of data integrity issues as they are encountered. If v is truthy, warnings will be enabled.</td>
   </tr><tr class="method private">
     
     <td>Method</td>
-    <td><code><a href="#_buildcorpusindex">_buildcorpusindex</a></code></td>
+    <td><code><a href="#_buildcorpusindex" class="internal-link" title="nltk.corpus.reader.framenet.FramenetCorpusReader._buildcorpusindex">_buildcorpusindex</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method private">
     
     <td>Method</td>
-    <td><code><a href="#_buildframeindex">_buildframeindex</a></code></td>
+    <td><code><a href="#_buildframeindex" class="internal-link" title="nltk.corpus.reader.framenet.FramenetCorpusReader._buildframeindex">_buildframeindex</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method private">
     
     <td>Method</td>
-    <td><code><a href="#_buildluindex">_buildluindex</a></code></td>
+    <td><code><a href="#_buildluindex" class="internal-link" title="nltk.corpus.reader.framenet.FramenetCorpusReader._buildluindex">_buildluindex</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method private">
     
     <td>Method</td>
-    <td><code><a href="#_buildrelationindex">_buildrelationindex</a></code></td>
+    <td><code><a href="#_buildrelationindex" class="internal-link" title="nltk.corpus.reader.framenet.FramenetCorpusReader._buildrelationindex">_buildrelationindex</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method private">
     
     <td>Method</td>
-    <td><code><a href="#_exemplar_of_fes">_exemplar_of_fes</a></code></td>
-    <td><span>Given an exemplar sentence and a set of FE names, return the subset of FE names that are realized overtly in the sentence on the FE, FE2, or FE3 layer.</span></td>
+    <td><code><a href="#_exemplar_of_fes" class="internal-link" title="nltk.corpus.reader.framenet.FramenetCorpusReader._exemplar_of_fes">_exemplar​_of​_fes</a></code></td>
+    <td>Given an exemplar sentence and a set of FE names, return the subset of FE names that are realized overtly in the sentence on the FE, FE2, or FE3 layer.</td>
   </tr><tr class="method private">
     
     <td>Method</td>
-    <td><code><a href="#_handle_elt">_handle_elt</a></code></td>
-    <td><span>Extracts and returns the attributes of the given element</span></td>
+    <td><code><a href="#_handle_elt" class="internal-link" title="nltk.corpus.reader.framenet.FramenetCorpusReader._handle_elt">_handle​_elt</a></code></td>
+    <td>Extracts and returns the attributes of the given element</td>
   </tr><tr class="method private">
     
     <td>Method</td>
-    <td><code><a href="#_handle_fe_elt">_handle_fe_elt</a></code></td>
+    <td><code><a href="#_handle_fe_elt" class="internal-link" title="nltk.corpus.reader.framenet.FramenetCorpusReader._handle_fe_elt">_handle​_fe​_elt</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method private">
     
     <td>Method</td>
-    <td><code><a href="#_handle_fecoreset_elt">_handle_fecoreset_elt</a></code></td>
-    <td><span>Load fe coreset info from xml.</span></td>
+    <td><code><a href="#_handle_fecoreset_elt" class="internal-link" title="nltk.corpus.reader.framenet.FramenetCorpusReader._handle_fecoreset_elt">_handle​_fecoreset​_elt</a></code></td>
+    <td>Load fe coreset info from xml.</td>
   </tr><tr class="method private">
     
     <td>Method</td>
-    <td><code><a href="#_handle_frame_elt">_handle_frame_elt</a></code></td>
-    <td><span>Load the info for a Frame from a frame xml file</span></td>
+    <td><code><a href="#_handle_frame_elt" class="internal-link" title="nltk.corpus.reader.framenet.FramenetCorpusReader._handle_frame_elt">_handle​_frame​_elt</a></code></td>
+    <td>Load the info for a Frame from a frame xml file</td>
   </tr><tr class="method private">
     
     <td>Method</td>
-    <td><code><a href="#_handle_framelexunit_elt">_handle_framelexunit_elt</a></code></td>
-    <td><span>Load the lexical unit info from an xml element in a frame's xml file.</span></td>
+    <td><code><a href="#_handle_framelexunit_elt" class="internal-link" title="nltk.corpus.reader.framenet.FramenetCorpusReader._handle_framelexunit_elt">_handle​_framelexunit​_elt</a></code></td>
+    <td>Load the lexical unit info from an xml element in a frame's xml file.</td>
   </tr><tr class="method private">
     
     <td>Method</td>
-    <td><code><a href="#_handle_framerelation_elt">_handle_framerelation_elt</a></code></td>
-    <td><span>Load frame-relation element and its child fe-relation elements from frRelation.xml.</span></td>
+    <td><code><a href="#_handle_framerelation_elt" class="internal-link" title="nltk.corpus.reader.framenet.FramenetCorpusReader._handle_framerelation_elt">_handle​_framerelation​_elt</a></code></td>
+    <td>Load frame-relation element and its child fe-relation elements from frRelation.xml.</td>
   </tr><tr class="method private">
     
     <td>Method</td>
-    <td><code><a href="#_handle_framerelationtype_elt">_handle_framerelationtype_elt</a></code></td>
-    <td><span>Load frame-relation element and its child fe-relation elements from frRelation.xml.</span></td>
+    <td><code><a href="#_handle_framerelationtype_elt" class="internal-link" title="nltk.corpus.reader.framenet.FramenetCorpusReader._handle_framerelationtype_elt">_handle​_framerelationtype​_elt</a></code></td>
+    <td>Load frame-relation element and its child fe-relation elements from frRelation.xml.</td>
   </tr><tr class="method private">
     
     <td>Method</td>
-    <td><code><a href="#_handle_fulltext_sentence_elt">_handle_fulltext_sentence_elt</a></code></td>
-    <td><span>Load information from the given 'sentence' element. Each 'sentence' element contains a "text" and "annotationSet" sub elements.</span></td>
+    <td><code><a href="#_handle_fulltext_sentence_elt" class="internal-link" title="nltk.corpus.reader.framenet.FramenetCorpusReader._handle_fulltext_sentence_elt">_handle​_fulltext​_sentence​_elt</a></code></td>
+    <td>Load information from the given 'sentence' element. Each 'sentence' element contains a "text" and "annotationSet" sub elements.</td>
   </tr><tr class="method private">
     
     <td>Method</td>
-    <td><code><a href="#_handle_fulltextannotation_elt">_handle_fulltextannotation_elt</a></code></td>
+    <td><code><a href="#_handle_fulltextannotation_elt" class="internal-link" title="nltk.corpus.reader.framenet.FramenetCorpusReader._handle_fulltextannotation_elt">_handle​_fulltextannotation​_elt</a></code></td>
     <td><span class="undocumented">No summary</span></td>
   </tr><tr class="method private">
     
     <td>Method</td>
-    <td><code><a href="#_handle_fulltextannotationset_elt">_handle_fulltextannotationset_elt</a></code></td>
-    <td><span>Load information from the given 'annotationSet' element. Each 'annotationSet' contains several "layer" elements.</span></td>
+    <td><code><a href="#_handle_fulltextannotationset_elt" class="internal-link" title="nltk.corpus.reader.framenet.FramenetCorpusReader._handle_fulltextannotationset_elt">_handle​_fulltextannotationset​_elt</a></code></td>
+    <td>Load information from the given 'annotationSet' element. Each 'annotationSet' contains several "layer" elements.</td>
   </tr><tr class="method private">
     
     <td>Method</td>
-    <td><code><a href="#_handle_fulltextindex_elt">_handle_fulltextindex_elt</a></code></td>
-    <td><span>Extracts corpus/document info from the fulltextIndex.xml file.</span></td>
+    <td><code><a href="#_handle_fulltextindex_elt" class="internal-link" title="nltk.corpus.reader.framenet.FramenetCorpusReader._handle_fulltextindex_elt">_handle​_fulltextindex​_elt</a></code></td>
+    <td>Extracts corpus/document info from the fulltextIndex.xml file.</td>
   </tr><tr class="method private">
     
     <td>Method</td>
-    <td><code><a href="#_handle_fulltextlayer_elt">_handle_fulltextlayer_elt</a></code></td>
-    <td><span>Load information from the given 'layer' element. Each 'layer' contains several "label" elements.</span></td>
+    <td><code><a href="#_handle_fulltextlayer_elt" class="internal-link" title="nltk.corpus.reader.framenet.FramenetCorpusReader._handle_fulltextlayer_elt">_handle​_fulltextlayer​_elt</a></code></td>
+    <td>Load information from the given 'layer' element. Each 'layer' contains several "label" elements.</td>
   </tr><tr class="method private">
     
     <td>Method</td>
-    <td><code><a href="#_handle_lexunit_elt">_handle_lexunit_elt</a></code></td>
-    <td><span>Load full info for a lexical unit from its xml file. This should only be called when accessing corpus annotations (which are not included in frame files).</span></td>
+    <td><code><a href="#_handle_lexunit_elt" class="internal-link" title="nltk.corpus.reader.framenet.FramenetCorpusReader._handle_lexunit_elt">_handle​_lexunit​_elt</a></code></td>
+    <td>Load full info for a lexical unit from its xml file. This should only be called when accessing corpus annotations (which are not included in frame files).</td>
   </tr><tr class="method private">
     
     <td>Method</td>
-    <td><code><a href="#_handle_luannotationset_elt">_handle_luannotationset_elt</a></code></td>
-    <td><span>Load an annotation set from a sentence in an subcorpus of an LU</span></td>
+    <td><code><a href="#_handle_luannotationset_elt" class="internal-link" title="nltk.corpus.reader.framenet.FramenetCorpusReader._handle_luannotationset_elt">_handle​_luannotationset​_elt</a></code></td>
+    <td>Load an annotation set from a sentence in an subcorpus of an LU</td>
   </tr><tr class="method private">
     
     <td>Method</td>
-    <td><code><a href="#_handle_lulayer_elt">_handle_lulayer_elt</a></code></td>
-    <td><span>Load a layer from an annotation set</span></td>
+    <td><code><a href="#_handle_lulayer_elt" class="internal-link" title="nltk.corpus.reader.framenet.FramenetCorpusReader._handle_lulayer_elt">_handle​_lulayer​_elt</a></code></td>
+    <td>Load a layer from an annotation set</td>
   </tr><tr class="method private">
     
     <td>Method</td>
-    <td><code><a href="#_handle_lusentence_elt">_handle_lusentence_elt</a></code></td>
-    <td><span>Load a sentence from a subcorpus of an LU from xml.</span></td>
+    <td><code><a href="#_handle_lusentence_elt" class="internal-link" title="nltk.corpus.reader.framenet.FramenetCorpusReader._handle_lusentence_elt">_handle​_lusentence​_elt</a></code></td>
+    <td>Load a sentence from a subcorpus of an LU from xml.</td>
   </tr><tr class="method private">
     
     <td>Method</td>
-    <td><code><a href="#_handle_lusubcorpus_elt">_handle_lusubcorpus_elt</a></code></td>
-    <td><span>Load a subcorpus of a lexical unit from the given xml.</span></td>
+    <td><code><a href="#_handle_lusubcorpus_elt" class="internal-link" title="nltk.corpus.reader.framenet.FramenetCorpusReader._handle_lusubcorpus_elt">_handle​_lusubcorpus​_elt</a></code></td>
+    <td>Load a subcorpus of a lexical unit from the given xml.</td>
   </tr><tr class="method private">
     
     <td>Method</td>
-    <td><code><a href="#_handle_semtype_elt">_handle_semtype_elt</a></code></td>
+    <td><code><a href="#_handle_semtype_elt" class="internal-link" title="nltk.corpus.reader.framenet.FramenetCorpusReader._handle_semtype_elt">_handle​_semtype​_elt</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method private">
     
     <td>Method</td>
-    <td><code><a href="#_load_xml_attributes">_load_xml_attributes</a></code></td>
-    <td><span>Extracts a subset of the attributes from the given element and returns them in a dictionary.</span></td>
+    <td><code><a href="#_load_xml_attributes" class="internal-link" title="nltk.corpus.reader.framenet.FramenetCorpusReader._load_xml_attributes">_load​_xml​_attributes</a></code></td>
+    <td>Extracts a subset of the attributes from the given element and returns them in a dictionary.</td>
   </tr><tr class="method private">
     
     <td>Method</td>
-    <td><code><a href="#_loadsemtypes">_loadsemtypes</a></code></td>
-    <td><span>Create the semantic types index.</span></td>
+    <td><code><a href="#_loadsemtypes" class="internal-link" title="nltk.corpus.reader.framenet.FramenetCorpusReader._loadsemtypes">_loadsemtypes</a></code></td>
+    <td>Create the semantic types index.</td>
   </tr><tr class="method private">
     
     <td>Method</td>
-    <td><code><a href="#_lu_file">_lu_file</a></code></td>
-    <td><span>Augment the LU information that was loaded from the frame file with additional information from the LU file.</span></td>
+    <td><code><a href="#_lu_file" class="internal-link" title="nltk.corpus.reader.framenet.FramenetCorpusReader._lu_file">_lu​_file</a></code></td>
+    <td>Augment the LU information that was loaded from the frame file with additional information from the LU file.</td>
   </tr><tr class="method private">
     
     <td>Method</td>
-    <td><code><a href="#_strip_tags">_strip_tags</a></code></td>
-    <td><span>Gets rid of all tags and newline characters from the given input</span></td>
+    <td><code><a href="#_strip_tags" class="internal-link" title="nltk.corpus.reader.framenet.FramenetCorpusReader._strip_tags">_strip​_tags</a></code></td>
+    <td>Gets rid of all tags and newline characters from the given input</td>
   </tr><tr class="method private">
     
     <td>Method</td>
-    <td><code><a href="#_warn">_warn</a></code></td>
+    <td><code><a href="#_warn" class="internal-link" title="nltk.corpus.reader.framenet.FramenetCorpusReader._warn">_warn</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="classvariable private">
     
     <td>Class Variable</td>
-    <td><code><a href="#_bad_statuses">_bad_statuses</a></code></td>
+    <td><code><a href="#_bad_statuses" class="internal-link" title="nltk.corpus.reader.framenet.FramenetCorpusReader._bad_statuses">_bad​_statuses</a></code></td>
     <td><span class="undocumented">No summary</span></td>
   </tr><tr class="instancevariable private">
     
     <td>Instance Variable</td>
-    <td><code><a href="#_cached_frames">_cached_frames</a></code></td>
+    <td><code><a href="#_cached_frames" class="internal-link" title="nltk.corpus.reader.framenet.FramenetCorpusReader._cached_frames">_cached​_frames</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="instancevariable private">
     
     <td>Instance Variable</td>
-    <td><code><a href="#_ferel_idx">_ferel_idx</a></code></td>
+    <td><code><a href="#_ferel_idx" class="internal-link" title="nltk.corpus.reader.framenet.FramenetCorpusReader._ferel_idx">_ferel​_idx</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="instancevariable private">
     
     <td>Instance Variable</td>
-    <td><code><a href="#_fnweb_url">_fnweb_url</a></code></td>
+    <td><code><a href="#_fnweb_url" class="internal-link" title="nltk.corpus.reader.framenet.FramenetCorpusReader._fnweb_url">_fnweb​_url</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="instancevariable private">
     
     <td>Instance Variable</td>
-    <td><code><a href="#_frame_dir">_frame_dir</a></code></td>
+    <td><code><a href="#_frame_dir" class="internal-link" title="nltk.corpus.reader.framenet.FramenetCorpusReader._frame_dir">_frame​_dir</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="instancevariable private">
     
     <td>Instance Variable</td>
-    <td><code><a href="#_frame_idx">_frame_idx</a></code></td>
+    <td><code><a href="#_frame_idx" class="internal-link" title="nltk.corpus.reader.framenet.FramenetCorpusReader._frame_idx">_frame​_idx</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="instancevariable private">
     
     <td>Instance Variable</td>
-    <td><code><a href="#_frel_f_idx">_frel_f_idx</a></code></td>
+    <td><code><a href="#_frel_f_idx" class="internal-link" title="nltk.corpus.reader.framenet.FramenetCorpusReader._frel_f_idx">_frel​_f​_idx</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="instancevariable private">
     
     <td>Instance Variable</td>
-    <td><code><a href="#_frel_idx">_frel_idx</a></code></td>
+    <td><code><a href="#_frel_idx" class="internal-link" title="nltk.corpus.reader.framenet.FramenetCorpusReader._frel_idx">_frel​_idx</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="instancevariable private">
     
     <td>Instance Variable</td>
-    <td><code><a href="#_freltyp_idx">_freltyp_idx</a></code></td>
+    <td><code><a href="#_freltyp_idx" class="internal-link" title="nltk.corpus.reader.framenet.FramenetCorpusReader._freltyp_idx">_freltyp​_idx</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="instancevariable private">
     
     <td>Instance Variable</td>
-    <td><code><a href="#_fulltext_dir">_fulltext_dir</a></code></td>
+    <td><code><a href="#_fulltext_dir" class="internal-link" title="nltk.corpus.reader.framenet.FramenetCorpusReader._fulltext_dir">_fulltext​_dir</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="instancevariable private">
     
     <td>Instance Variable</td>
-    <td><code><a href="#_fulltext_idx">_fulltext_idx</a></code></td>
+    <td><code><a href="#_fulltext_idx" class="internal-link" title="nltk.corpus.reader.framenet.FramenetCorpusReader._fulltext_idx">_fulltext​_idx</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="instancevariable private">
     
     <td>Instance Variable</td>
-    <td><code><a href="#_lu_dir">_lu_dir</a></code></td>
+    <td><code><a href="#_lu_dir" class="internal-link" title="nltk.corpus.reader.framenet.FramenetCorpusReader._lu_dir">_lu​_dir</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="instancevariable private">
     
     <td>Instance Variable</td>
-    <td><code><a href="#_lu_idx">_lu_idx</a></code></td>
+    <td><code><a href="#_lu_idx" class="internal-link" title="nltk.corpus.reader.framenet.FramenetCorpusReader._lu_idx">_lu​_idx</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="instancevariable private">
     
     <td>Instance Variable</td>
-    <td><code><a href="#_semtypes">_semtypes</a></code></td>
+    <td><code><a href="#_semtypes" class="internal-link" title="nltk.corpus.reader.framenet.FramenetCorpusReader._semtypes">_semtypes</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="instancevariable private">
     
     <td>Instance Variable</td>
-    <td><code><a href="#_warnings">_warnings</a></code></td>
+    <td><code><a href="#_warnings" class="internal-link" title="nltk.corpus.reader.framenet.FramenetCorpusReader._warnings">_warnings</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr>
 </table>
@@ -562,7 +576,7 @@
   <div class="docstring functionBody">
     
     
-    <div><p>Frame annotation sets matching the specified criteria.</p></div>
+    <div>Frame annotation sets matching the specified criteria.</div>
   </div>
 </div><div class="basemethod">
   
@@ -584,7 +598,7 @@
   <div class="docstring functionBody">
     
     
-    <div><p>Build the internal indexes to make look-ups faster.</p></div>
+    <div>Build the internal indexes to make look-ups faster.</div>
   </div>
 </div><div class="basemethod">
   
@@ -628,7 +642,7 @@
   <div class="docstring functionBody">
     
     
-    <div><p>Return a list of the annotated full-text documents in FrameNet, optionally filtered by a regex to be matched against the document name.</p></div>
+    <div>Return a list of the annotated full-text documents in FrameNet, optionally filtered by a regex to be matched against the document name.</div>
   </div>
 </div><div class="basemethod">
   
@@ -672,7 +686,7 @@
   <div class="docstring functionBody">
     
     
-    <div><p>Lexicographic exemplar sentences, optionally filtered by LU name and/or 1-2 FEs that are realized overtly. 'frame' may be a name pattern, frame ID, or frame instance. 'fe' may be a name pattern or FE instance; if specified, 'fe2' may also be specified to retrieve sentences with both overt FEs (in either order).</p></div>
+    <div>Lexicographic exemplar sentences, optionally filtered by LU name and/or 1-2 FEs that are realized overtly. 'frame' may be a name pattern, frame ID, or frame instance. 'fe' may be a name pattern or FE instance; if specified, 'fe2' may also be specified to retrieve sentences with both overt FEs (in either order).</div>
   </div>
 </div><div class="basemethod">
   
@@ -694,7 +708,8 @@
   <div class="docstring functionBody">
     
     
-    <div><p>Obtain a list of frame element relations.</p><pre class="py-doctest">
+    <div><p>Obtain a list of frame element relations.</p>
+<pre class="py-doctest">
 <span class="py-prompt">&gt;&gt;&gt; </span><span class="py-keyword">from</span> nltk.corpus <span class="py-keyword">import</span> framenet <span class="py-keyword">as</span> fn
 <span class="py-prompt">&gt;&gt;&gt; </span>ferels = fn.fe_relations()
 <span class="py-prompt">&gt;&gt;&gt; </span><span class="py-builtin">isinstance</span>(ferels, <span class="py-builtin">list</span>)
@@ -714,7 +729,8 @@
 <span class="py-output">'superFEName': 'Degree',</span>
 <span class="py-output">'superFrame': &lt;frame ID=262 name=Abounding_with&gt;,</span>
 <span class="py-output">'type': &lt;framerelationtype ID=1 name=Inheritance&gt;}</span>
-</pre><p>:return: A list of all of the frame element relations in framenet :rtype: list(dict)</p></div>
+</pre><p>:return: A list of all of the frame element relations in framenet :rtype: list(dict)</p>
+</div>
   </div>
 </div><div class="basemethod">
   
@@ -824,7 +840,7 @@
   <div class="docstring functionBody">
     
     
-    <div><p>Uses the frame index, which is much faster than looking up each frame definition if only the names and IDs are needed.</p></div>
+    <div>Uses the frame index, which is much faster than looking up each frame definition if only the names and IDs are needed.</div>
   </div>
 </div><div class="basemethod">
   
@@ -846,7 +862,8 @@
   <div class="docstring functionBody">
     
     
-    <div><p>Obtain a list of frame relation types.</p><pre class="py-doctest">
+    <div><p>Obtain a list of frame relation types.</p>
+<pre class="py-doctest">
 <span class="py-prompt">&gt;&gt;&gt; </span><span class="py-keyword">from</span> nltk.corpus <span class="py-keyword">import</span> framenet <span class="py-keyword">as</span> fn
 <span class="py-prompt">&gt;&gt;&gt; </span>frts = <span class="py-builtin">sorted</span>(fn.frame_relation_types(), key=itemgetter(<span class="py-string">'ID'</span>))
 <span class="py-prompt">&gt;&gt;&gt; </span><span class="py-builtin">isinstance</span>(frts, <span class="py-builtin">list</span>)
@@ -860,7 +877,8 @@
 <span class="py-output"> 'name': 'Inheritance',</span>
 <span class="py-output"> 'subFrameName': 'Child',</span>
 <span class="py-output"> 'superFrameName': 'Parent'}</span>
-</pre><p>:return: A list of all of the frame relation types in framenet :rtype: list(dict)</p></div>
+</pre><p>:return: A list of all of the frame relation types in framenet :rtype: list(dict)</p>
+</div>
   </div>
 </div><div class="basemethod">
   
@@ -882,7 +900,8 @@
   <div class="docstring functionBody">
     
     
-    <div><p>:param frame: (optional) frame object, name, or ID; only relations involving this frame will be returned :param frame2: (optional; 'frame' must be a different frame) only show relations between the two specified frames, in either direction :param type: (optional) frame relation type (name or object); show only relations of this type :type frame: int or str or AttrDict :return: A list of all of the frame relations in framenet :rtype: list(dict)</p><pre class="py-doctest">
+    <div><p>:param frame: (optional) frame object, name, or ID; only relations involving this frame will be returned :param frame2: (optional; 'frame' must be a different frame) only show relations between the two specified frames, in either direction :param type: (optional) frame relation type (name or object); show only relations of this type :type frame: int or str or AttrDict :return: A list of all of the frame relations in framenet :rtype: list(dict)</p>
+<pre class="py-doctest">
 <span class="py-prompt">&gt;&gt;&gt; </span><span class="py-keyword">from</span> nltk.corpus <span class="py-keyword">import</span> framenet <span class="py-keyword">as</span> fn
 <span class="py-prompt">&gt;&gt;&gt; </span>frels = fn.frame_relations()
 <span class="py-prompt">&gt;&gt;&gt; </span><span class="py-builtin">isinstance</span>(frels, <span class="py-builtin">list</span>)
@@ -948,12 +967,15 @@
   <div class="docstring functionBody">
     
     
-    <div><p>Returns a list of all frames that contain LUs in which the ``name`` attribute of the LU matchs the given regular expression ``pat``. Note that LU names are composed of "lemma.POS", where the "lemma" part can be made up of either a single lexeme (e.g. 'run') or multiple lexemes (e.g. 'a little').</p><p>Note: if you are going to be doing a lot of this type of searching, you'd want to build an index that maps from lemmas to frames because each time frames_by_lemma() is called, it has to search through ALL of the frame XML files in the db.</p><pre class="py-doctest">
+    <div><p>Returns a list of all frames that contain LUs in which the ``name`` attribute of the LU matchs the given regular expression ``pat``. Note that LU names are composed of "lemma.POS", where the "lemma" part can be made up of either a single lexeme (e.g. 'run') or multiple lexemes (e.g. 'a little').</p>
+<p>Note: if you are going to be doing a lot of this type of searching, you'd want to build an index that maps from lemmas to frames because each time frames_by_lemma() is called, it has to search through ALL of the frame XML files in the db.</p>
+<pre class="py-doctest">
 <span class="py-prompt">&gt;&gt;&gt; </span><span class="py-keyword">from</span> nltk.corpus <span class="py-keyword">import</span> framenet <span class="py-keyword">as</span> fn
 <span class="py-prompt">&gt;&gt;&gt; </span><span class="py-keyword">from</span> nltk.corpus.reader.framenet <span class="py-keyword">import</span> PrettyList
 <span class="py-prompt">&gt;&gt;&gt; </span>PrettyList(<span class="py-builtin">sorted</span>(fn.frames_by_lemma(r<span class="py-string">'(?i)a little'</span>), key=itemgetter(<span class="py-string">'ID'</span>))) <span class="py-comment"># doctest: +ELLIPSIS</span>
 <span class="py-output">[&lt;frame ID=189 name=Quanti...&gt;, &lt;frame ID=2001 name=Degree&gt;]</span>
-</pre><p>:return: A list of frame objects. :rtype: list(AttrDict)</p></div>
+</pre><p>:return: A list of frame objects. :rtype: list(AttrDict)</p>
+</div>
   </div>
 </div><div class="basemethod">
   
@@ -975,7 +997,7 @@
   <div class="docstring functionBody">
     
     
-    <div><p>Full-text annotation sentences, optionally filtered by document name.</p></div>
+    <div>Full-text annotation sentences, optionally filtered by document name.</div>
   </div>
 </div><div class="basemethod">
   
@@ -997,7 +1019,7 @@
   <div class="docstring functionBody">
     
     
-    <div><p>Display help information summarizing the main methods.</p></div>
+    <div>Display help information summarizing the main methods.</div>
   </div>
 </div><div class="basemethod">
   
@@ -1041,7 +1063,8 @@
   <div class="docstring functionBody">
     
     
-    <div><p>Returns basic information about the LU whose id is ``fn_luid``. This is basically just a wrapper around the ``lu()`` function with "subCorpus" info excluded.</p><pre class="py-doctest">
+    <div><p>Returns basic information about the LU whose id is ``fn_luid``. This is basically just a wrapper around the ``lu()`` function with "subCorpus" info excluded.</p>
+<pre class="py-doctest">
 <span class="py-prompt">&gt;&gt;&gt; </span><span class="py-keyword">from</span> nltk.corpus <span class="py-keyword">import</span> framenet <span class="py-keyword">as</span> fn
 <span class="py-prompt">&gt;&gt;&gt; </span>lu = PrettyDict(fn.lu_basic(256), breakLines=<span class="py-builtin">True</span>)
 <span class="py-prompt">&gt;&gt;&gt; </span><span class="py-comment"># ellipses account for differences between FN 1.5 and 1.7</span>
@@ -1061,7 +1084,8 @@
 <span class="py-output"> 'semTypes': [],</span>
 <span class="py-output"> 'sentenceCount': {'annotated': ..., 'total': ...},</span>
 <span class="py-output"> 'status': 'FN1_Sent'}</span>
-</pre><p>:param fn_luid: The id number of the desired LU :type fn_luid: int :return: Basic information about the lexical unit :rtype: dict</p></div>
+</pre><p>:param fn_luid: The id number of the desired LU :type fn_luid: int :return: Basic information about the lexical unit :rtype: dict</p>
+</div>
   </div>
 </div><div class="basemethod">
   
@@ -1083,7 +1107,7 @@
   <div class="docstring functionBody">
     
     
-    <div><p>Uses the LU index, which is much faster than looking up each LU definition if only the names and IDs are needed.</p></div>
+    <div>Uses the LU index, which is much faster than looking up each LU definition if only the names and IDs are needed.</div>
   </div>
 </div><div class="basemethod">
   
@@ -1127,7 +1151,8 @@
   <div class="docstring functionBody">
     
     
-    <div><p>Apply inference rules to distribute semtypes over relations between FEs. For FrameNet 1.5, this results in 1011 semtypes being propagated. (Not done by default because it requires loading all frame files, which takes several seconds. If this needed to be fast, it could be rewritten to traverse the neighboring relations on demand for each FE semtype.)</p><pre class="py-doctest">
+    <div><p>Apply inference rules to distribute semtypes over relations between FEs. For FrameNet 1.5, this results in 1011 semtypes being propagated. (Not done by default because it requires loading all frame files, which takes several seconds. If this needed to be fast, it could be rewritten to traverse the neighboring relations on demand for each FE semtype.)</p>
+<pre class="py-doctest">
 <span class="py-prompt">&gt;&gt;&gt; </span><span class="py-keyword">from</span> nltk.corpus <span class="py-keyword">import</span> framenet <span class="py-keyword">as</span> fn
 <span class="py-prompt">&gt;&gt;&gt; </span>x = <span class="py-builtin">sum</span>(1 <span class="py-keyword">for</span> f <span class="py-keyword">in</span> fn.frames() <span class="py-keyword">for</span> fe <span class="py-keyword">in</span> f.FE.values() <span class="py-keyword">if</span> fe.semType)
 <span class="py-prompt">&gt;&gt;&gt; </span>fn.propagate_semtypes()
@@ -1156,7 +1181,7 @@
   <div class="docstring functionBody">
     
     
-    <div><p>Return the contents of the corpus README.txt (or README) file.</p></div>
+    <div>Return the contents of the corpus README.txt (or README) file.</div>
   </div>
 </div><div class="basemethod">
   
@@ -1186,7 +1211,8 @@
 <span class="py-output">'Temp'</span>
 <span class="py-prompt">&gt;&gt;&gt; </span>fn.semtype(<span class="py-string">'Temperature'</span>).ID
 <span class="py-output">233</span>
-</pre><p>:param key: The name, abbreviation, or id number of the semantic type :type key: string or int :return: Information about a semantic type :rtype: dict</p></div>
+</pre><p>:param key: The name, abbreviation, or id number of the semantic type :type key: string or int :return: Information about a semantic type :rtype: dict</p>
+</div>
   </div>
 </div><div class="basemethod">
   
@@ -1230,14 +1256,16 @@
   <div class="docstring functionBody">
     
     
-    <div><p>Obtain a list of semantic types.</p><pre class="py-doctest">
+    <div><p>Obtain a list of semantic types.</p>
+<pre class="py-doctest">
 <span class="py-prompt">&gt;&gt;&gt; </span><span class="py-keyword">from</span> nltk.corpus <span class="py-keyword">import</span> framenet <span class="py-keyword">as</span> fn
 <span class="py-prompt">&gt;&gt;&gt; </span>stypes = fn.semtypes()
 <span class="py-prompt">&gt;&gt;&gt; </span><span class="py-builtin">len</span>(stypes) <span class="py-keyword">in</span> (73, 109) <span class="py-comment"># FN 1.5 and 1.7, resp.</span>
 <span class="py-output">True</span>
 <span class="py-prompt">&gt;&gt;&gt; </span><span class="py-builtin">sorted</span>(stypes[0].keys())
 <span class="py-output">['ID', '_type', 'abbrev', 'definition', 'definitionMarkup', 'name', 'rootType', 'subTypes', 'superType']</span>
-</pre><p>:return: A list of all of the semantic types in framenet :rtype: list(dict)</p></div>
+</pre><p>:return: A list of all of the semantic types in framenet :rtype: list(dict)</p>
+</div>
   </div>
 </div><div class="basemethod">
   
@@ -1259,7 +1287,7 @@
   <div class="docstring functionBody">
     
     
-    <div><p>Annotated sentences matching the specified criteria.</p></div>
+    <div>Annotated sentences matching the specified criteria.</div>
   </div>
 </div><div class="basemethod">
   
@@ -1281,7 +1309,9 @@
   <div class="docstring functionBody">
     
     
-    <div><p>Enable or disable warnings of data integrity issues as they are encountered. If v is truthy, warnings will be enabled.</p><p>(This is a function rather than just an attribute/property to ensure that if enabling warnings is the first action taken, the corpus reader is instantiated first.)</p></div>
+    <div><p>Enable or disable warnings of data integrity issues as they are encountered. If v is truthy, warnings will be enabled.</p>
+<p>(This is a function rather than just an attribute/property to ensure that if enabling warnings is the first action taken, the corpus reader is instantiated first.)</p>
+</div>
   </div>
 </div><div class="basemethod private">
   
@@ -1391,7 +1421,9 @@
   <div class="docstring functionBody">
     
     
-    <div><p>Given an exemplar sentence and a set of FE names, return the subset of FE names that are realized overtly in the sentence on the FE, FE2, or FE3 layer.</p><p>If 'fes' is None, returns all overt FE names.</p></div>
+    <div><p>Given an exemplar sentence and a set of FE names, return the subset of FE names that are realized overtly in the sentence on the FE, FE2, or FE3 layer.</p>
+<p>If 'fes' is None, returns all overt FE names.</p>
+</div>
   </div>
 </div><div class="basemethod private">
   
@@ -1413,7 +1445,7 @@
   <div class="docstring functionBody">
     
     
-    <div><p>Extracts and returns the attributes of the given element</p></div>
+    <div>Extracts and returns the attributes of the given element</div>
   </div>
 </div><div class="basemethod private">
   
@@ -1457,7 +1489,7 @@
   <div class="docstring functionBody">
     
     
-    <div><p>Load fe coreset info from xml.</p></div>
+    <div>Load fe coreset info from xml.</div>
   </div>
 </div><div class="basemethod private">
   
@@ -1479,7 +1511,7 @@
   <div class="docstring functionBody">
     
     
-    <div><p>Load the info for a Frame from a frame xml file</p></div>
+    <div>Load the info for a Frame from a frame xml file</div>
   </div>
 </div><div class="basemethod private">
   
@@ -1501,7 +1533,7 @@
   <div class="docstring functionBody">
     
     
-    <div><p>Load the lexical unit info from an xml element in a frame's xml file.</p></div>
+    <div>Load the lexical unit info from an xml element in a frame's xml file.</div>
   </div>
 </div><div class="basemethod private">
   
@@ -1523,7 +1555,7 @@
   <div class="docstring functionBody">
     
     
-    <div><p>Load frame-relation element and its child fe-relation elements from frRelation.xml.</p></div>
+    <div>Load frame-relation element and its child fe-relation elements from frRelation.xml.</div>
   </div>
 </div><div class="basemethod private">
   
@@ -1545,7 +1577,7 @@
   <div class="docstring functionBody">
     
     
-    <div><p>Load frame-relation element and its child fe-relation elements from frRelation.xml.</p></div>
+    <div>Load frame-relation element and its child fe-relation elements from frRelation.xml.</div>
   </div>
 </div><div class="basemethod private">
   
@@ -1567,7 +1599,7 @@
   <div class="docstring functionBody">
     
     
-    <div><p>Load information from the given 'sentence' element. Each 'sentence' element contains a "text" and "annotationSet" sub elements.</p></div>
+    <div>Load information from the given 'sentence' element. Each 'sentence' element contains a "text" and "annotationSet" sub elements.</div>
   </div>
 </div><div class="basemethod private">
   
@@ -1589,7 +1621,7 @@
   <div class="docstring functionBody">
     
     
-    <div><p>Load full annotation info for a document from its xml file. The main element (fullTextAnnotation) contains a 'header' element (which we ignore here) and a bunch of 'sentence' elements.</p></div>
+    <div>Load full annotation info for a document from its xml file. The main element (fullTextAnnotation) contains a 'header' element (which we ignore here) and a bunch of 'sentence' elements.</div>
   </div>
 </div><div class="basemethod private">
   
@@ -1611,7 +1643,7 @@
   <div class="docstring functionBody">
     
     
-    <div><p>Load information from the given 'annotationSet' element. Each 'annotationSet' contains several "layer" elements.</p></div>
+    <div>Load information from the given 'annotationSet' element. Each 'annotationSet' contains several "layer" elements.</div>
   </div>
 </div><div class="basemethod private">
   
@@ -1633,7 +1665,9 @@
   <div class="docstring functionBody">
     
     
-    <div><p>Extracts corpus/document info from the fulltextIndex.xml file.</p><p>Note that this function "flattens" the information contained in each of the "corpus" elements, so that each "document" element will contain attributes for the corpus and corpusid. Also, each of the "document" items will contain a new attribute called "filename" that is the base file name of the xml file for the document in the "fulltext" subdir of the Framenet corpus.</p></div>
+    <div><p>Extracts corpus/document info from the fulltextIndex.xml file.</p>
+<p>Note that this function "flattens" the information contained in each of the "corpus" elements, so that each "document" element will contain attributes for the corpus and corpusid. Also, each of the "document" items will contain a new attribute called "filename" that is the base file name of the xml file for the document in the "fulltext" subdir of the Framenet corpus.</p>
+</div>
   </div>
 </div><div class="basemethod private">
   
@@ -1655,7 +1689,7 @@
   <div class="docstring functionBody">
     
     
-    <div><p>Load information from the given 'layer' element. Each 'layer' contains several "label" elements.</p></div>
+    <div>Load information from the given 'layer' element. Each 'layer' contains several "label" elements.</div>
   </div>
 </div><div class="basemethod private">
   
@@ -1677,7 +1711,7 @@
   <div class="docstring functionBody">
     
     
-    <div><p>Load full info for a lexical unit from its xml file. This should only be called when accessing corpus annotations (which are not included in frame files).</p></div>
+    <div>Load full info for a lexical unit from its xml file. This should only be called when accessing corpus annotations (which are not included in frame files).</div>
   </div>
 </div><div class="basemethod private">
   
@@ -1699,7 +1733,7 @@
   <div class="docstring functionBody">
     
     
-    <div><p>Load an annotation set from a sentence in an subcorpus of an LU</p></div>
+    <div>Load an annotation set from a sentence in an subcorpus of an LU</div>
   </div>
 </div><div class="basemethod private">
   
@@ -1721,7 +1755,7 @@
   <div class="docstring functionBody">
     
     
-    <div><p>Load a layer from an annotation set</p></div>
+    <div>Load a layer from an annotation set</div>
   </div>
 </div><div class="basemethod private">
   
@@ -1743,7 +1777,7 @@
   <div class="docstring functionBody">
     
     
-    <div><p>Load a sentence from a subcorpus of an LU from xml.</p></div>
+    <div>Load a sentence from a subcorpus of an LU from xml.</div>
   </div>
 </div><div class="basemethod private">
   
@@ -1765,7 +1799,7 @@
   <div class="docstring functionBody">
     
     
-    <div><p>Load a subcorpus of a lexical unit from the given xml.</p></div>
+    <div>Load a subcorpus of a lexical unit from the given xml.</div>
   </div>
 </div><div class="basemethod private">
   
@@ -1809,7 +1843,9 @@
   <div class="docstring functionBody">
     
     
-    <div><p>Extracts a subset of the attributes from the given element and returns them in a dictionary.</p><p>:param d: A dictionary in which to store the attributes. :type d: dict :param elt: An ElementTree Element :type elt: Element :return: Returns the input dict ``d`` possibly including attributes from ``elt`` :rtype: dict</p></div>
+    <div><p>Extracts a subset of the attributes from the given element and returns them in a dictionary.</p>
+<p>:param d: A dictionary in which to store the attributes. :type d: dict :param elt: An ElementTree Element :type elt: Element :return: Returns the input dict ``d`` possibly including attributes from ``elt`` :rtype: dict</p>
+</div>
   </div>
 </div><div class="basemethod private">
   
@@ -1831,7 +1867,7 @@
   <div class="docstring functionBody">
     
     
-    <div><p>Create the semantic types index.</p></div>
+    <div>Create the semantic types index.</div>
   </div>
 </div><div class="basemethod private">
   
@@ -1853,7 +1889,7 @@
   <div class="docstring functionBody">
     
     
-    <div><p>Augment the LU information that was loaded from the frame file with additional information from the LU file.</p></div>
+    <div>Augment the LU information that was loaded from the frame file with additional information from the LU file.</div>
   </div>
 </div><div class="basemethod private">
   
@@ -1875,7 +1911,9 @@
   <div class="docstring functionBody">
     
     
-    <div><p>Gets rid of all tags and newline characters from the given input</p><p>:return: A cleaned-up version of the input string :rtype: str</p></div>
+    <div><p>Gets rid of all tags and newline characters from the given input</p>
+<p>:return: A cleaned-up version of the input string :rtype: str</p>
+</div>
   </div>
 </div><div class="basemethod private">
   
@@ -1919,7 +1957,8 @@
   <div class="functionBody">
     
     
-    <div><p>When loading LUs for a frame, those whose status is in this list will be ignored. Due to caching, if user code modifies this, it should do so before loading any data. 'Problem' should always be listed for FrameNet 1.5, as these LUs are not included in the XML index.</p></div>
+    <div>When loading LUs for a frame, those whose status is in this list will be ignored. Due to caching, if user code modifies this, it should do so before loading any data. 'Problem' should always be listed for FrameNet 1.5, as these LUs are not included in the XML index.</div>
+    
   </div>
 </div><div class="baseinstancevariable private">
   
@@ -1942,6 +1981,7 @@
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    
   </div>
 </div><div class="baseinstancevariable private">
   
@@ -1964,6 +2004,7 @@
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    
   </div>
 </div><div class="baseinstancevariable private">
   
@@ -1986,6 +2027,7 @@
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    
   </div>
 </div><div class="baseinstancevariable private">
   
@@ -2008,6 +2050,7 @@
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    
   </div>
 </div><div class="baseinstancevariable private">
   
@@ -2030,6 +2073,7 @@
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    
   </div>
 </div><div class="baseinstancevariable private">
   
@@ -2052,6 +2096,7 @@
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    
   </div>
 </div><div class="baseinstancevariable private">
   
@@ -2074,6 +2119,7 @@
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    
   </div>
 </div><div class="baseinstancevariable private">
   
@@ -2096,6 +2142,7 @@
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    
   </div>
 </div><div class="baseinstancevariable private">
   
@@ -2118,6 +2165,7 @@
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    
   </div>
 </div><div class="baseinstancevariable private">
   
@@ -2140,6 +2188,7 @@
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    
   </div>
 </div><div class="baseinstancevariable private">
   
@@ -2162,6 +2211,7 @@
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    
   </div>
 </div><div class="baseinstancevariable private">
   
@@ -2184,6 +2234,7 @@
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    
   </div>
 </div><div class="baseinstancevariable private">
   
@@ -2206,6 +2257,7 @@
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    
   </div>
 </div><div class="baseinstancevariable private">
   
@@ -2228,6 +2280,7 @@
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    
   </div>
 </div>
 
@@ -2239,7 +2292,7 @@
   <div class="container">
     <a href="index.html">API Documentation</a> for <a href="http://www.nltk.org/" class="projecthome">nltk-3.6.2</a>,
   generated by <a href="https://github.com/twisted/pydoctor/">pydoctor</a>
-    21.2.2 at 2022-01-06 17:36:51.
+    22.2.2.dev0 at 2022-03-04 05:57:24.
   </div>
 </footer>
 

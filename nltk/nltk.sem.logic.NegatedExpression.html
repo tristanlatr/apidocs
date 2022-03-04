@@ -7,7 +7,7 @@
   <head>
     
     <title>nltk.sem.logic.NegatedExpression</title>
-    <meta name="generator" content="pydoctor 21.2.2"> 
+    <meta name="generator" content="pydoctor 22.2.2.dev0"> 
         
     </meta>
     <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
@@ -44,69 +44,82 @@
           Names
         </a>
 
-        <form action="search-results.html" id="search-box-container">
+        <div id="search-box-container">
           <div class="input-group">
-            <input id="search-box" name="search-query" placeholder="Search..." aria-label="Search" minlength="2" class="form-control" />
+            <input id="search-box" type="search" name="search-query" placeholder="Search..." aria-label="Search" minlength="2" class="form-control" autocomplete="off" />
+            
             <span class="input-group-btn">
-              <button class="btn btn-default" type="submit" title="Search"><img src="fonts/search.svg" alt="Search!" /></button>
-              <a class="btn btn-default" id="search-help-button" title="Help" onclick="toggleSearchHelpText()"><img src="fonts/info.svg" alt="Help!" /></a>
+              <a style="display: none;" class="btn btn-default" id="search-clear-button" title="Clear" onclick="clearSearch()"><img src="fonts/x-circle.svg" alt="Clear" /></a>
+              <a class="btn btn-default" id="search-help-button" title="Help" onclick="toggleSearchHelpText()"><img src="fonts/info.svg" alt="Help" /></a>
             </span>
           </div>
-        </form>
+        </div>
 
-        <div class="rst-admonition hint" id="search-help-box">
+      </div>
+
+      <div id="search-results-container" style="display: none;">
+        <div>
+          <span class="label label-default" id="search-docstrings-button">
+            <a title="Search in docstrings" onclick="toggleSearchInDocstrings()">search in docstrings</a></span>
+        </div>
+
+        <noscript>
+            <h1>Cannot search: JavaScript is not supported/enabled in your browser.</h1>
+        </noscript>
+
+        <div class="hint" id="search-help-box">
           <p class="rst-last">
       
             Search bar offers the following options:
             <ul>   
                 <li>
                   <strong>Term presence.</strong> The below example searches for documents that 
-                    must contain “foo”, might contain “bar” and must not contain “baz”:
-                  <br /> <code>'+foo bar -baz'</code>
+                    must contain “foo”, might contain “bar” and must not contain “baz”: <code>+foo bar -baz</code>
                 </li> 
 
                 <li>
-                  <strong>Wildcards.</strong> The below example searches for documents with words beginning with “foo”:
-                  <br /> <code>'foo*'</code>
+                  <strong>Wildcards.</strong> The below example searches for documents with words beginning with “foo”: <code>foo*</code>
                 </li> 
 
                 <li>
-                  <strong>Search in specific fields.</strong> The following search matches all documents 
-                  that contains "foo" in their full dotted name and with “bar” in any field:
-                  <br /> <code>'+fullName:*foo* +bar'</code>
+                  <strong>Search in specific fields.</strong> The following search matches all objects 
+                  in "twisted.mail" that matches “search”: <code>+qname:twisted.mail.* +search</code>
 
                   <p>
-                    Possible fields: 'name', 'docstring', 'fullName'.
+                    Possible fields: 'name', 'qname' (fully qualified name), 'docstring', and 'kind'.
+                    Last two fields are only applicable if "search in docstrings" is enabled.
                   </p>
                 </li>
 
                 <li>
                   <strong>Fuzzy matches.</strong> The following search matches all documents 
-                  that have a word within 1 edit distance of “foo”:
-                  <br /> <code>'foo~1'</code>
+                  that have a word within 1 edit distance of “foo”: <code>foo~1</code>
                 </li>
             </ul>
 
           </p>
         </div>
 
-      </div>
+        <div id="search-status"> </div>
+        
+        <div class="warning" id="search-warn-box" style="display: none;">
+          <p class="rst-last"><span id="search-warn"></span></p>
+        </div>
 
+        <table id="search-results">
+          <!-- Filled dynamically by JS -->
+        </table>
+        
+        <div style="margin-top: 8px;">
+          <p>Results provided by <a href="https://lunrjs.com">Lunr.js</a></p>
+        </div>
+      </div>
 
     </div>
   </div>
 
-  <script>
- 
-    function toggleSearchHelpText() {
-        document.body.classList.toggle("search-help-hidden");
-    }
-    // Init search and help text
-    document.getElementById('search-box-container').style.display = 'block';
-    document.getElementById('search-help-box').style.display = 'block';
-    document.body.classList.add("search-help-hidden");
-
-  </script>
+  <script src="ajax.js" type="text/javascript"></script>
+  <script src="search.js" type="text/javascript"></script>
 
 </nav>
 
@@ -115,7 +128,7 @@
     <div class="container">
 
       <div class="page-header">
-        <h1 class="class"><code><code><a href="nltk.html">nltk</a></code><wbr></wbr>.<code><a href="nltk.sem.html">sem</a></code><wbr></wbr>.<code><a href="nltk.sem.logic.html">logic</a></code><wbr></wbr>.<code><a href="nltk.sem.logic.NegatedExpression.html">NegatedExpression</a></code></code></h1>
+        <h1 class="class"><code><code><a href="index.html" class="internal-link">nltk</a></code><wbr></wbr>.<code><a href="nltk.sem.html" class="internal-link" title="nltk.sem">sem</a></code><wbr></wbr>.<code><a href="nltk.sem.logic.html" class="internal-link" title="nltk.sem.logic">logic</a></code><wbr></wbr>.<code><a href="nltk.sem.logic.NegatedExpression.html" class="internal-link" title="nltk.sem.logic.NegatedExpression">NegatedExpression</a></code></code></h1>
         <div id="showPrivate">
           <button class="btn btn-link" onclick="togglePrivate()">Toggle Private API</button>
         </div>
@@ -126,7 +139,7 @@
       </div>
 
       <div class="extrasDocstring">
-        <p><code><span class="py-keyword">class</span> <span class="py-defname">NegatedExpression</span>(<a href="nltk.sem.logic.Expression.html" title="nltk.sem.logic.Expression">Expression</a>): <a href="https://github.com/nltk/nltk/tree/3.6.2/nltk/sem/logic.py#L1757" class="sourceLink">(source)</a></code></p><p>Known subclasses: <code><a href="nltk.sem.drt.DrtNegatedExpression.html">nltk.sem.drt.DrtNegatedExpression</a></code></p>
+        <p><code><span class="py-keyword">class</span> <span class="py-defname">NegatedExpression</span>(<a href="nltk.sem.logic.Expression.html" class="internal-link" title="nltk.sem.logic.Expression">Expression</a>): <a href="https://github.com/nltk/nltk/tree/3.6.2/nltk/sem/logic.py#L1757" class="sourceLink">(source)</a></code></p><p>Known subclasses: <code><a href="nltk.sem.drt.DrtNegatedExpression.html" class="internal-link">nltk.sem.drt.DrtNegatedExpression</a></code></p>
         <p><a href="classIndex.html#nltk.sem.logic.NegatedExpression">View In Hierarchy</a></p>
       </div>
 
@@ -141,58 +154,58 @@
   <tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#__eq__">__eq__</a></code></td>
+    <td><code><a href="#__eq__" class="internal-link" title="nltk.sem.logic.NegatedExpression.__eq__">__eq__</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#__init__">__init__</a></code></td>
+    <td><code><a href="#__init__" class="internal-link" title="nltk.sem.logic.NegatedExpression.__init__">__init__</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#__ne__">__ne__</a></code></td>
+    <td><code><a href="#__ne__" class="internal-link" title="nltk.sem.logic.NegatedExpression.__ne__">__ne__</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#__str__">__str__</a></code></td>
+    <td><code><a href="#__str__" class="internal-link" title="nltk.sem.logic.NegatedExpression.__str__">__str__</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#findtype">findtype</a></code></td>
-    <td><span>Find the type of the given variable as it is used in this expression. For example, finding the type of "P" in "P(x) &amp; Q(x,y)" yields "&lt;e,t&gt;"</span></td>
+    <td><code><a href="#findtype" class="internal-link" title="nltk.sem.logic.NegatedExpression.findtype">findtype</a></code></td>
+    <td>Find the type of the given variable as it is used in this expression. For example, finding the type of "P" in "P(x) &amp; Q(x,y)" yields "&lt;e,t&gt;"</td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#negate">negate</a></code></td>
-    <td><span></span></td>
+    <td><code><a href="#negate" class="internal-link" title="nltk.sem.logic.NegatedExpression.negate">negate</a></code></td>
+    <td></td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#visit">visit</a></code></td>
-    <td><span></span></td>
+    <td><code><a href="#visit" class="internal-link" title="nltk.sem.logic.NegatedExpression.visit">visit</a></code></td>
+    <td></td>
   </tr><tr class="instancevariable">
     
     <td>Instance Variable</td>
-    <td><code><a href="#term">term</a></code></td>
+    <td><code><a href="#term" class="internal-link" title="nltk.sem.logic.NegatedExpression.term">term</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="property">
     
     <td>Property</td>
-    <td><code><a href="#type">type</a></code></td>
+    <td><code><a href="#type" class="internal-link" title="nltk.sem.logic.NegatedExpression.type">type</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method private">
     
     <td>Method</td>
-    <td><code><a href="#_set_type">_set_type</a></code></td>
-    <td><span>:see Expression._set_type()</span></td>
+    <td><code><a href="#_set_type" class="internal-link" title="nltk.sem.logic.NegatedExpression._set_type">_set​_type</a></code></td>
+    <td>:see Expression._set_type()</td>
   </tr>
 </table>
         
           <p class="inheritedFrom">
-            Inherited from <code><a href="nltk.sem.logic.Expression.html">Expression</a></code>:
+            Inherited from <code><a href="nltk.sem.logic.Expression.html" class="internal-link" title="nltk.sem.logic.Expression">Expression</a></code>:
           </p>
           <table class="children sortable" id="id1423">
   
@@ -200,122 +213,122 @@
   <tr class="baseclassmethod">
     
     <td>Class Method</td>
-    <td><code><a href="nltk.sem.logic.Expression.html#fromstring">fromstring</a></code></td>
+    <td><code><a href="nltk.sem.logic.Expression.html#fromstring" class="internal-link" title="nltk.sem.logic.Expression.fromstring">fromstring</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="basemethod">
     
     <td>Method</td>
-    <td><code><a href="nltk.sem.logic.Expression.html#__and__">__and__</a></code></td>
+    <td><code><a href="nltk.sem.logic.Expression.html#__and__" class="internal-link" title="nltk.sem.logic.Expression.__and__">__and__</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="basemethod">
     
     <td>Method</td>
-    <td><code><a href="nltk.sem.logic.Expression.html#__call__">__call__</a></code></td>
+    <td><code><a href="nltk.sem.logic.Expression.html#__call__" class="internal-link" title="nltk.sem.logic.Expression.__call__">__call__</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="basemethod">
     
     <td>Method</td>
-    <td><code><a href="nltk.sem.logic.Expression.html#__gt__">__gt__</a></code></td>
+    <td><code><a href="nltk.sem.logic.Expression.html#__gt__" class="internal-link" title="nltk.sem.logic.Expression.__gt__">__gt__</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="basemethod">
     
     <td>Method</td>
-    <td><code><a href="nltk.sem.logic.Expression.html#__hash__">__hash__</a></code></td>
+    <td><code><a href="nltk.sem.logic.Expression.html#__hash__" class="internal-link" title="nltk.sem.logic.Expression.__hash__">__hash__</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="basemethod">
     
     <td>Method</td>
-    <td><code><a href="nltk.sem.logic.Expression.html#__lt__">__lt__</a></code></td>
+    <td><code><a href="nltk.sem.logic.Expression.html#__lt__" class="internal-link" title="nltk.sem.logic.Expression.__lt__">__lt__</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="basemethod">
     
     <td>Method</td>
-    <td><code><a href="nltk.sem.logic.Expression.html#__neg__">__neg__</a></code></td>
+    <td><code><a href="nltk.sem.logic.Expression.html#__neg__" class="internal-link" title="nltk.sem.logic.Expression.__neg__">__neg__</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="basemethod">
     
     <td>Method</td>
-    <td><code><a href="nltk.sem.logic.Expression.html#__or__">__or__</a></code></td>
+    <td><code><a href="nltk.sem.logic.Expression.html#__or__" class="internal-link" title="nltk.sem.logic.Expression.__or__">__or__</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="basemethod">
     
     <td>Method</td>
-    <td><code><a href="nltk.sem.logic.Expression.html#__repr__">__repr__</a></code></td>
+    <td><code><a href="nltk.sem.logic.Expression.html#__repr__" class="internal-link" title="nltk.sem.logic.Expression.__repr__">__repr__</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="basemethod">
     
     <td>Method</td>
-    <td><code><a href="nltk.sem.logic.Expression.html#applyto">applyto</a></code></td>
+    <td><code><a href="nltk.sem.logic.Expression.html#applyto" class="internal-link" title="nltk.sem.logic.Expression.applyto">applyto</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="basemethod">
     
     <td>Method</td>
-    <td><code><a href="nltk.sem.logic.Expression.html#constants">constants</a></code></td>
-    <td><span>Return a set of individual constants (non-predicates). :return: set of <tt class="rst-docutils literal">Variable</tt> objects</span></td>
+    <td><code><a href="nltk.sem.logic.Expression.html#constants" class="internal-link" title="nltk.sem.logic.Expression.constants">constants</a></code></td>
+    <td>Return a set of individual constants (non-predicates). :return: set of <tt class="rst-docutils literal">Variable</tt> objects</td>
   </tr><tr class="basemethod">
     
     <td>Method</td>
-    <td><code><a href="nltk.sem.logic.Expression.html#equiv">equiv</a></code></td>
-    <td><span>Check for logical equivalence. Pass the expression (self &lt;-&gt; other) to the theorem prover. If the prover says it is valid, then the self and other are equal.</span></td>
+    <td><code><a href="nltk.sem.logic.Expression.html#equiv" class="internal-link" title="nltk.sem.logic.Expression.equiv">equiv</a></code></td>
+    <td>Check for logical equivalence. Pass the expression (self &lt;-&gt; other) to the theorem prover. If the prover says it is valid, then the self and other are equal.</td>
   </tr><tr class="basemethod">
     
     <td>Method</td>
-    <td><code><a href="nltk.sem.logic.Expression.html#free">free</a></code></td>
-    <td><span>Return a set of all the free (non-bound) variables.  This includes both individual and predicate variables, but not constants. :return: set of <tt class="rst-docutils literal">Variable</tt> objects</span></td>
+    <td><code><a href="nltk.sem.logic.Expression.html#free" class="internal-link" title="nltk.sem.logic.Expression.free">free</a></code></td>
+    <td>Return a set of all the free (non-bound) variables.  This includes both individual and predicate variables, but not constants. :return: set of <tt class="rst-docutils literal">Variable</tt> objects</td>
   </tr><tr class="basemethod">
     
     <td>Method</td>
-    <td><code><a href="nltk.sem.logic.Expression.html#make_VariableExpression">make_VariableExpression</a></code></td>
+    <td><code><a href="nltk.sem.logic.Expression.html#make_VariableExpression" class="internal-link" title="nltk.sem.logic.Expression.make_VariableExpression">make_​Variable​Expression</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="basemethod">
     
     <td>Method</td>
-    <td><code><a href="nltk.sem.logic.Expression.html#normalize">normalize</a></code></td>
-    <td><span>Rename auto-generated unique variables</span></td>
+    <td><code><a href="nltk.sem.logic.Expression.html#normalize" class="internal-link" title="nltk.sem.logic.Expression.normalize">normalize</a></code></td>
+    <td>Rename auto-generated unique variables</td>
   </tr><tr class="basemethod">
     
     <td>Method</td>
-    <td><code><a href="nltk.sem.logic.Expression.html#predicates">predicates</a></code></td>
-    <td><span>Return a set of predicates (constants, not variables). :return: set of <tt class="rst-docutils literal">Variable</tt> objects</span></td>
+    <td><code><a href="nltk.sem.logic.Expression.html#predicates" class="internal-link" title="nltk.sem.logic.Expression.predicates">predicates</a></code></td>
+    <td>Return a set of predicates (constants, not variables). :return: set of <tt class="rst-docutils literal">Variable</tt> objects</td>
   </tr><tr class="basemethod">
     
     <td>Method</td>
-    <td><code><a href="nltk.sem.logic.Expression.html#replace">replace</a></code></td>
+    <td><code><a href="nltk.sem.logic.Expression.html#replace" class="internal-link" title="nltk.sem.logic.Expression.replace">replace</a></code></td>
     <td><span class="undocumented">No summary</span></td>
   </tr><tr class="basemethod">
     
     <td>Method</td>
-    <td><code><a href="nltk.sem.logic.Expression.html#simplify">simplify</a></code></td>
-    <td><span></span></td>
+    <td><code><a href="nltk.sem.logic.Expression.html#simplify" class="internal-link" title="nltk.sem.logic.Expression.simplify">simplify</a></code></td>
+    <td></td>
   </tr><tr class="basemethod">
     
     <td>Method</td>
-    <td><code><a href="nltk.sem.logic.Expression.html#substitute_bindings">substitute_bindings</a></code></td>
+    <td><code><a href="nltk.sem.logic.Expression.html#substitute_bindings" class="internal-link" title="nltk.sem.logic.Expression.substitute_bindings">substitute​_bindings</a></code></td>
     <td><span class="undocumented">No summary</span></td>
   </tr><tr class="basemethod">
     
     <td>Method</td>
-    <td><code><a href="nltk.sem.logic.Expression.html#typecheck">typecheck</a></code></td>
-    <td><span>Infer and check types.  Raise exceptions if necessary.</span></td>
+    <td><code><a href="nltk.sem.logic.Expression.html#typecheck" class="internal-link" title="nltk.sem.logic.Expression.typecheck">typecheck</a></code></td>
+    <td>Infer and check types.  Raise exceptions if necessary.</td>
   </tr><tr class="basemethod">
     
     <td>Method</td>
-    <td><code><a href="nltk.sem.logic.Expression.html#variables">variables</a></code></td>
+    <td><code><a href="nltk.sem.logic.Expression.html#variables" class="internal-link" title="nltk.sem.logic.Expression.variables">variables</a></code></td>
     <td><span class="undocumented">No summary</span></td>
   </tr><tr class="basemethod">
     
     <td>Method</td>
-    <td><code><a href="nltk.sem.logic.Expression.html#visit_structured">visit_structured</a></code></td>
+    <td><code><a href="nltk.sem.logic.Expression.html#visit_structured" class="internal-link" title="nltk.sem.logic.Expression.visit_structured">visit​_structured</a></code></td>
     <td><span class="undocumented">No summary</span></td>
   </tr><tr class="baseclassvariable private">
     
     <td>Class Variable</td>
-    <td><code><a href="nltk.sem.logic.Expression.html#_logic_parser">_logic_parser</a></code></td>
+    <td><code><a href="nltk.sem.logic.Expression.html#_logic_parser" class="internal-link" title="nltk.sem.logic.Expression._logic_parser">_logic​_parser</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="baseclassvariable private">
     
     <td>Class Variable</td>
-    <td><code><a href="nltk.sem.logic.Expression.html#_type_checking_logic_parser">_type_checking_logic_parser</a></code></td>
+    <td><code><a href="nltk.sem.logic.Expression.html#_type_checking_logic_parser" class="internal-link" title="nltk.sem.logic.Expression._type_checking_logic_parser">_type​_checking​_logic​_parser</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr>
 </table>
@@ -344,7 +357,7 @@
     </a>
   </div>
   <div class="docstring functionBody">
-    <div class="interfaceinfo">overrides <code><a href="nltk.sem.logic.Expression.html#__eq__">nltk.sem.logic.Expression.__eq__</a></code></div>
+    <div class="interfaceinfo">overrides <code><a href="nltk.sem.logic.Expression.html#__eq__" class="internal-link">nltk.sem.logic.Expression.__eq__</a></code></div>
     
     <div><p class="undocumented">Undocumented</p></div>
   </div>
@@ -388,7 +401,7 @@
     </a>
   </div>
   <div class="docstring functionBody">
-    <div class="interfaceinfo">overrides <code><a href="nltk.sem.logic.Expression.html#__ne__">nltk.sem.logic.Expression.__ne__</a></code></div>
+    <div class="interfaceinfo">overrides <code><a href="nltk.sem.logic.Expression.html#__ne__" class="internal-link">nltk.sem.logic.Expression.__ne__</a></code></div>
     
     <div><p class="undocumented">Undocumented</p></div>
   </div>
@@ -410,7 +423,7 @@
     </a>
   </div>
   <div class="docstring functionBody">
-    <div class="interfaceinfo">overrides <code><a href="nltk.sem.logic.Expression.html#__str__">nltk.sem.logic.Expression.__str__</a></code></div>
+    <div class="interfaceinfo">overrides <code><a href="nltk.sem.logic.Expression.html#__str__" class="internal-link">nltk.sem.logic.Expression.__str__</a></code></div>
     
     <div><p class="undocumented">Undocumented</p></div>
   </div>
@@ -432,7 +445,7 @@
     </a>
   </div>
   <div class="docstring functionBody">
-    <div class="interfaceinfo">overrides <code><a href="nltk.sem.logic.Expression.html#findtype">nltk.sem.logic.Expression.findtype</a></code></div>
+    <div class="interfaceinfo">overrides <code><a href="nltk.sem.logic.Expression.html#findtype" class="internal-link">nltk.sem.logic.Expression.findtype</a></code></div>
     
     <div>Find the type of the given variable as it is used in this expression.
 For example, finding the type of "P" in "P(x) &amp; Q(x,y)" yields "&lt;e,t&gt;"<table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">variable</span></td><td class="fieldArgDesc">Variable</td></tr></table></div>
@@ -455,7 +468,7 @@ For example, finding the type of "P" in "P(x) &amp; Q(x,y)" yields "&lt;e,t&gt;"
     </a>
   </div>
   <div class="docstring functionBody">
-    <div class="interfaceinfo">overrides <code><a href="nltk.sem.logic.Expression.html#negate">nltk.sem.logic.Expression.negate</a></code></div>
+    <div class="interfaceinfo">overrides <code><a href="nltk.sem.logic.Expression.html#negate" class="internal-link">nltk.sem.logic.Expression.negate</a></code></div>
     
     <div><table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">See Also</td></tr><tr><td colspan="2">Expression.negate()</td></tr></table></div>
   </div>
@@ -477,7 +490,7 @@ For example, finding the type of "P" in "P(x) &amp; Q(x,y)" yields "&lt;e,t&gt;"
     </a>
   </div>
   <div class="docstring functionBody">
-    <div class="interfaceinfo">overrides <code><a href="nltk.sem.logic.Expression.html#visit">nltk.sem.logic.Expression.visit</a></code></div>
+    <div class="interfaceinfo">overrides <code><a href="nltk.sem.logic.Expression.html#visit" class="internal-link">nltk.sem.logic.Expression.visit</a></code></div>
     
     <div><table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">See Also</td></tr><tr><td colspan="2">Expression.visit()</td></tr></table></div>
   </div>
@@ -502,6 +515,7 @@ For example, finding the type of "P" in "P(x) &amp; Q(x,y)" yields "&lt;e,t&gt;"
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    
   </div>
 </div><div class="baseproperty">
   
@@ -524,6 +538,7 @@ For example, finding the type of "P" in "P(x) &amp; Q(x,y)" yields "&lt;e,t&gt;"
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    
   </div>
 </div><div class="basemethod private">
   
@@ -536,14 +551,14 @@ For example, finding the type of "P" in "P(x) &amp; Q(x,y)" yields "&lt;e,t&gt;"
   </a>
   <div class="functionHeader">
     
-    <span class="py-keyword">def</span> <span class="py-defname">_set_type</span>(self, other_type=ANY_TYPE, signature=None):
+    <span class="py-keyword">def</span> <span class="py-defname">_set_type</span>(self, other_type=<a href="nltk.sem.logic.html#ANY_TYPE" class="internal-link" title="nltk.sem.logic.ANY_TYPE">ANY_TYPE</a>, signature=None):
     <a class="sourceLink" href="https://github.com/nltk/nltk/tree/3.6.2/nltk/sem/logic.py#L1766">
       
       (source)
     </a>
   </div>
   <div class="docstring functionBody">
-    <div class="interfaceinfo">overrides <code><a href="nltk.sem.logic.Expression.html#_set_type">nltk.sem.logic.Expression._set_type</a></code></div>
+    <div class="interfaceinfo">overrides <code><a href="nltk.sem.logic.Expression.html#_set_type" class="internal-link">nltk.sem.logic.Expression._set_type</a></code></div>
     
     <div>:see Expression._set_type()</div>
   </div>
@@ -557,7 +572,7 @@ For example, finding the type of "P" in "P(x) &amp; Q(x,y)" yields "&lt;e,t&gt;"
   <div class="container">
     <a href="index.html">API Documentation</a> for <a href="http://www.nltk.org/" class="projecthome">nltk-3.6.2</a>,
   generated by <a href="https://github.com/twisted/pydoctor/">pydoctor</a>
-    21.2.2 at 2022-01-06 17:36:51.
+    22.2.2.dev0 at 2022-03-04 05:57:24.
   </div>
 </footer>
 

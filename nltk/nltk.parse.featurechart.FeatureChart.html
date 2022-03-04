@@ -7,7 +7,7 @@
   <head>
     
     <title>nltk.parse.featurechart.FeatureChart</title>
-    <meta name="generator" content="pydoctor 21.2.2"> 
+    <meta name="generator" content="pydoctor 22.2.2.dev0"> 
         
     </meta>
     <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
@@ -44,69 +44,82 @@
           Names
         </a>
 
-        <form action="search-results.html" id="search-box-container">
+        <div id="search-box-container">
           <div class="input-group">
-            <input id="search-box" name="search-query" placeholder="Search..." aria-label="Search" minlength="2" class="form-control" />
+            <input id="search-box" type="search" name="search-query" placeholder="Search..." aria-label="Search" minlength="2" class="form-control" autocomplete="off" />
+            
             <span class="input-group-btn">
-              <button class="btn btn-default" type="submit" title="Search"><img src="fonts/search.svg" alt="Search!" /></button>
-              <a class="btn btn-default" id="search-help-button" title="Help" onclick="toggleSearchHelpText()"><img src="fonts/info.svg" alt="Help!" /></a>
+              <a style="display: none;" class="btn btn-default" id="search-clear-button" title="Clear" onclick="clearSearch()"><img src="fonts/x-circle.svg" alt="Clear" /></a>
+              <a class="btn btn-default" id="search-help-button" title="Help" onclick="toggleSearchHelpText()"><img src="fonts/info.svg" alt="Help" /></a>
             </span>
           </div>
-        </form>
+        </div>
 
-        <div class="rst-admonition hint" id="search-help-box">
+      </div>
+
+      <div id="search-results-container" style="display: none;">
+        <div>
+          <span class="label label-default" id="search-docstrings-button">
+            <a title="Search in docstrings" onclick="toggleSearchInDocstrings()">search in docstrings</a></span>
+        </div>
+
+        <noscript>
+            <h1>Cannot search: JavaScript is not supported/enabled in your browser.</h1>
+        </noscript>
+
+        <div class="hint" id="search-help-box">
           <p class="rst-last">
       
             Search bar offers the following options:
             <ul>   
                 <li>
                   <strong>Term presence.</strong> The below example searches for documents that 
-                    must contain “foo”, might contain “bar” and must not contain “baz”:
-                  <br /> <code>'+foo bar -baz'</code>
+                    must contain “foo”, might contain “bar” and must not contain “baz”: <code>+foo bar -baz</code>
                 </li> 
 
                 <li>
-                  <strong>Wildcards.</strong> The below example searches for documents with words beginning with “foo”:
-                  <br /> <code>'foo*'</code>
+                  <strong>Wildcards.</strong> The below example searches for documents with words beginning with “foo”: <code>foo*</code>
                 </li> 
 
                 <li>
-                  <strong>Search in specific fields.</strong> The following search matches all documents 
-                  that contains "foo" in their full dotted name and with “bar” in any field:
-                  <br /> <code>'+fullName:*foo* +bar'</code>
+                  <strong>Search in specific fields.</strong> The following search matches all objects 
+                  in "twisted.mail" that matches “search”: <code>+qname:twisted.mail.* +search</code>
 
                   <p>
-                    Possible fields: 'name', 'docstring', 'fullName'.
+                    Possible fields: 'name', 'qname' (fully qualified name), 'docstring', and 'kind'.
+                    Last two fields are only applicable if "search in docstrings" is enabled.
                   </p>
                 </li>
 
                 <li>
                   <strong>Fuzzy matches.</strong> The following search matches all documents 
-                  that have a word within 1 edit distance of “foo”:
-                  <br /> <code>'foo~1'</code>
+                  that have a word within 1 edit distance of “foo”: <code>foo~1</code>
                 </li>
             </ul>
 
           </p>
         </div>
 
-      </div>
+        <div id="search-status"> </div>
+        
+        <div class="warning" id="search-warn-box" style="display: none;">
+          <p class="rst-last"><span id="search-warn"></span></p>
+        </div>
 
+        <table id="search-results">
+          <!-- Filled dynamically by JS -->
+        </table>
+        
+        <div style="margin-top: 8px;">
+          <p>Results provided by <a href="https://lunrjs.com">Lunr.js</a></p>
+        </div>
+      </div>
 
     </div>
   </div>
 
-  <script>
- 
-    function toggleSearchHelpText() {
-        document.body.classList.toggle("search-help-hidden");
-    }
-    // Init search and help text
-    document.getElementById('search-box-container').style.display = 'block';
-    document.getElementById('search-help-box').style.display = 'block';
-    document.body.classList.add("search-help-hidden");
-
-  </script>
+  <script src="ajax.js" type="text/javascript"></script>
+  <script src="search.js" type="text/javascript"></script>
 
 </nav>
 
@@ -115,7 +128,7 @@
     <div class="container">
 
       <div class="page-header">
-        <h1 class="class"><code><code><a href="nltk.html">nltk</a></code><wbr></wbr>.<code><a href="nltk.parse.html">parse</a></code><wbr></wbr>.<code><a href="nltk.parse.featurechart.html">featurechart</a></code><wbr></wbr>.<code><a href="nltk.parse.featurechart.FeatureChart.html">FeatureChart</a></code></code></h1>
+        <h1 class="class"><code><code><a href="index.html" class="internal-link">nltk</a></code><wbr></wbr>.<code><a href="nltk.parse.html" class="internal-link" title="nltk.parse">parse</a></code><wbr></wbr>.<code><a href="nltk.parse.featurechart.html" class="internal-link" title="nltk.parse.featurechart">featurechart</a></code><wbr></wbr>.<code><a href="nltk.parse.featurechart.FeatureChart.html" class="internal-link" title="nltk.parse.featurechart.FeatureChart">FeatureChart</a></code></code></h1>
         <div id="showPrivate">
           <button class="btn btn-link" onclick="togglePrivate()">Toggle Private API</button>
         </div>
@@ -126,7 +139,7 @@
       </div>
 
       <div class="extrasDocstring">
-        <p><code><span class="py-keyword">class</span> <span class="py-defname">FeatureChart</span>(<a href="nltk.parse.chart.Chart.html" title="nltk.parse.chart.Chart">Chart</a>): <a href="https://github.com/nltk/nltk/tree/3.6.2/nltk/parse/featurechart.py#L163" class="sourceLink">(source)</a></code></p><p>Known subclasses: <code><a href="nltk.parse.earleychart.FeatureIncrementalChart.html">nltk.parse.earleychart.FeatureIncrementalChart</a></code>, <code><a href="nltk.parse.featurechart.InstantiateVarsChart.html">nltk.parse.featurechart.InstantiateVarsChart</a></code></p>
+        <p><code><span class="py-keyword">class</span> <span class="py-defname">FeatureChart</span>(<a href="nltk.parse.chart.Chart.html" class="internal-link" title="nltk.parse.chart.Chart">Chart</a>): <a href="https://github.com/nltk/nltk/tree/3.6.2/nltk/parse/featurechart.py#L163" class="sourceLink">(source)</a></code></p><p>Known subclasses: <code><a href="nltk.parse.earleychart.FeatureIncrementalChart.html" class="internal-link">nltk.parse.earleychart.FeatureIncrementalChart</a></code>, <code><a href="nltk.parse.featurechart.InstantiateVarsChart.html" class="internal-link">nltk.parse.featurechart.InstantiateVarsChart</a></code></p>
         <p><a href="classIndex.html#nltk.parse.featurechart.FeatureChart">View In Hierarchy</a></p>
       </div>
 
@@ -142,33 +155,33 @@
   <tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#parses">parses</a></code></td>
-    <td><span>Return an iterator of the complete tree structures that span the entire chart, and whose root node is <tt class="rst-docutils literal">root</tt>.</span></td>
+    <td><code><a href="#parses" class="internal-link" title="nltk.parse.featurechart.FeatureChart.parses">parses</a></code></td>
+    <td>Return an iterator of the complete tree structures that span the entire chart, and whose root node is <tt class="rst-docutils literal">root</tt>.</td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#select">select</a></code></td>
-    <td><span>Returns an iterator over the edges in this chart. See <tt class="rst-docutils literal">Chart.select</tt> for more information about the <tt class="rst-docutils literal">restrictions</tt> on the edges.</span></td>
+    <td><code><a href="#select" class="internal-link" title="nltk.parse.featurechart.FeatureChart.select">select</a></code></td>
+    <td>Returns an iterator over the edges in this chart. See <tt class="rst-docutils literal">Chart.select</tt> for more information about the <tt class="rst-docutils literal">restrictions</tt> on the edges.</td>
   </tr><tr class="method private">
     
     <td>Method</td>
-    <td><code><a href="#_add_index">_add_index</a></code></td>
-    <td><span>A helper function for <tt class="rst-docutils literal">select</tt>, which creates a new index for a given set of attributes (aka restriction keys).</span></td>
+    <td><code><a href="#_add_index" class="internal-link" title="nltk.parse.featurechart.FeatureChart._add_index">_add​_index</a></code></td>
+    <td>A helper function for <tt class="rst-docutils literal">select</tt>, which creates a new index for a given set of attributes (aka restriction keys).</td>
   </tr><tr class="method private">
     
     <td>Method</td>
-    <td><code><a href="#_get_type_if_possible">_get_type_if_possible</a></code></td>
-    <td><span>Helper function which returns the <tt class="rst-docutils literal">TYPE</tt> feature of the <tt class="rst-docutils literal">item</tt>, if it exists, otherwise it returns the <tt class="rst-docutils literal">item</tt> itself</span></td>
+    <td><code><a href="#_get_type_if_possible" class="internal-link" title="nltk.parse.featurechart.FeatureChart._get_type_if_possible">_get​_type​_if​_possible</a></code></td>
+    <td>Helper function which returns the <tt class="rst-docutils literal">TYPE</tt> feature of the <tt class="rst-docutils literal">item</tt>, if it exists, otherwise it returns the <tt class="rst-docutils literal">item</tt> itself</td>
   </tr><tr class="method private">
     
     <td>Method</td>
-    <td><code><a href="#_register_with_indexes">_register_with_indexes</a></code></td>
-    <td><span>A helper function for <tt class="rst-docutils literal">insert</tt>, which registers the new edge with all existing indexes.</span></td>
+    <td><code><a href="#_register_with_indexes" class="internal-link" title="nltk.parse.featurechart.FeatureChart._register_with_indexes">_register​_with​_indexes</a></code></td>
+    <td>A helper function for <tt class="rst-docutils literal">insert</tt>, which registers the new edge with all existing indexes.</td>
   </tr>
 </table>
         
           <p class="inheritedFrom">
-            Inherited from <code><a href="nltk.parse.chart.Chart.html">Chart</a></code>:
+            Inherited from <code><a href="nltk.parse.chart.Chart.html" class="internal-link" title="nltk.parse.chart.Chart">Chart</a></code>:
           </p>
           <table class="children sortable" id="id1016">
   
@@ -176,121 +189,121 @@
   <tr class="basemethod">
     
     <td>Method</td>
-    <td><code><a href="nltk.parse.chart.Chart.html#__init__">__init__</a></code></td>
-    <td><span>Construct a new chart. The chart is initialized with the leaf edges corresponding to the terminal leaves.</span></td>
+    <td><code><a href="nltk.parse.chart.Chart.html#__init__" class="internal-link" title="nltk.parse.chart.Chart.__init__">__init__</a></code></td>
+    <td>Construct a new chart. The chart is initialized with the leaf edges corresponding to the terminal leaves.</td>
   </tr><tr class="basemethod">
     
     <td>Method</td>
-    <td><code><a href="nltk.parse.chart.Chart.html#child_pointer_lists">child_pointer_lists</a></code></td>
-    <td><span>Return the set of child pointer lists for the given edge. Each child pointer list is a list of edges that have been used to form this edge.</span></td>
+    <td><code><a href="nltk.parse.chart.Chart.html#child_pointer_lists" class="internal-link" title="nltk.parse.chart.Chart.child_pointer_lists">child​_pointer​_lists</a></code></td>
+    <td>Return the set of child pointer lists for the given edge. Each child pointer list is a list of edges that have been used to form this edge.</td>
   </tr><tr class="basemethod">
     
     <td>Method</td>
-    <td><code><a href="nltk.parse.chart.Chart.html#dot_digraph">dot_digraph</a></code></td>
+    <td><code><a href="nltk.parse.chart.Chart.html#dot_digraph" class="internal-link" title="nltk.parse.chart.Chart.dot_digraph">dot​_digraph</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="basemethod">
     
     <td>Method</td>
-    <td><code><a href="nltk.parse.chart.Chart.html#edges">edges</a></code></td>
-    <td><span>Return a list of all edges in this chart.  New edges that are added to the chart after the call to edges() will <em>not</em> be contained in this list.</span></td>
+    <td><code><a href="nltk.parse.chart.Chart.html#edges" class="internal-link" title="nltk.parse.chart.Chart.edges">edges</a></code></td>
+    <td>Return a list of all edges in this chart.  New edges that are added to the chart after the call to edges() will <em>not</em> be contained in this list.</td>
   </tr><tr class="basemethod">
     
     <td>Method</td>
-    <td><code><a href="nltk.parse.chart.Chart.html#initialize">initialize</a></code></td>
-    <td><span>Clear the chart.</span></td>
+    <td><code><a href="nltk.parse.chart.Chart.html#initialize" class="internal-link" title="nltk.parse.chart.Chart.initialize">initialize</a></code></td>
+    <td>Clear the chart.</td>
   </tr><tr class="basemethod">
     
     <td>Method</td>
-    <td><code><a href="nltk.parse.chart.Chart.html#insert">insert</a></code></td>
+    <td><code><a href="nltk.parse.chart.Chart.html#insert" class="internal-link" title="nltk.parse.chart.Chart.insert">insert</a></code></td>
     <td><span class="undocumented">No summary</span></td>
   </tr><tr class="basemethod">
     
     <td>Method</td>
-    <td><code><a href="nltk.parse.chart.Chart.html#insert_with_backpointer">insert_with_backpointer</a></code></td>
-    <td><span>Add a new edge to the chart, using a pointer to the previous edge.</span></td>
+    <td><code><a href="nltk.parse.chart.Chart.html#insert_with_backpointer" class="internal-link" title="nltk.parse.chart.Chart.insert_with_backpointer">insert​_with​_backpointer</a></code></td>
+    <td>Add a new edge to the chart, using a pointer to the previous edge.</td>
   </tr><tr class="basemethod">
     
     <td>Method</td>
-    <td><code><a href="nltk.parse.chart.Chart.html#iteredges">iteredges</a></code></td>
-    <td><span>Return an iterator over the edges in this chart.  It is not guaranteed that new edges which are added to the chart before the iterator is exhausted will also be generated.</span></td>
+    <td><code><a href="nltk.parse.chart.Chart.html#iteredges" class="internal-link" title="nltk.parse.chart.Chart.iteredges">iteredges</a></code></td>
+    <td>Return an iterator over the edges in this chart.  It is not guaranteed that new edges which are added to the chart before the iterator is exhausted will also be generated.</td>
   </tr><tr class="basemethod">
     
     <td>Method</td>
-    <td><code><a href="nltk.parse.chart.Chart.html#leaf">leaf</a></code></td>
-    <td><span>Return the leaf value of the word at the given index.</span></td>
+    <td><code><a href="nltk.parse.chart.Chart.html#leaf" class="internal-link" title="nltk.parse.chart.Chart.leaf">leaf</a></code></td>
+    <td>Return the leaf value of the word at the given index.</td>
   </tr><tr class="basemethod">
     
     <td>Method</td>
-    <td><code><a href="nltk.parse.chart.Chart.html#leaves">leaves</a></code></td>
-    <td><span>Return a list of the leaf values of each word in the chart's sentence.</span></td>
+    <td><code><a href="nltk.parse.chart.Chart.html#leaves" class="internal-link" title="nltk.parse.chart.Chart.leaves">leaves</a></code></td>
+    <td>Return a list of the leaf values of each word in the chart's sentence.</td>
   </tr><tr class="basemethod">
     
     <td>Method</td>
-    <td><code><a href="nltk.parse.chart.Chart.html#num_edges">num_edges</a></code></td>
-    <td><span>Return the number of edges contained in this chart.</span></td>
+    <td><code><a href="nltk.parse.chart.Chart.html#num_edges" class="internal-link" title="nltk.parse.chart.Chart.num_edges">num​_edges</a></code></td>
+    <td>Return the number of edges contained in this chart.</td>
   </tr><tr class="basemethod">
     
     <td>Method</td>
-    <td><code><a href="nltk.parse.chart.Chart.html#num_leaves">num_leaves</a></code></td>
-    <td><span>Return the number of words in this chart's sentence.</span></td>
+    <td><code><a href="nltk.parse.chart.Chart.html#num_leaves" class="internal-link" title="nltk.parse.chart.Chart.num_leaves">num​_leaves</a></code></td>
+    <td>Return the number of words in this chart's sentence.</td>
   </tr><tr class="basemethod">
     
     <td>Method</td>
-    <td><code><a href="nltk.parse.chart.Chart.html#pretty_format">pretty_format</a></code></td>
-    <td><span>Return a pretty-printed string representation of this chart.</span></td>
+    <td><code><a href="nltk.parse.chart.Chart.html#pretty_format" class="internal-link" title="nltk.parse.chart.Chart.pretty_format">pretty​_format</a></code></td>
+    <td>Return a pretty-printed string representation of this chart.</td>
   </tr><tr class="basemethod">
     
     <td>Method</td>
-    <td><code><a href="nltk.parse.chart.Chart.html#pretty_format_edge">pretty_format_edge</a></code></td>
-    <td><span>Return a pretty-printed string representation of a given edge in this chart.</span></td>
+    <td><code><a href="nltk.parse.chart.Chart.html#pretty_format_edge" class="internal-link" title="nltk.parse.chart.Chart.pretty_format_edge">pretty​_format​_edge</a></code></td>
+    <td>Return a pretty-printed string representation of a given edge in this chart.</td>
   </tr><tr class="basemethod">
     
     <td>Method</td>
-    <td><code><a href="nltk.parse.chart.Chart.html#pretty_format_leaves">pretty_format_leaves</a></code></td>
-    <td><span>Return a pretty-printed string representation of this chart's leaves.  This string can be used as a header for calls to <tt class="rst-docutils literal">pretty_format_edge</tt>.</span></td>
+    <td><code><a href="nltk.parse.chart.Chart.html#pretty_format_leaves" class="internal-link" title="nltk.parse.chart.Chart.pretty_format_leaves">pretty​_format​_leaves</a></code></td>
+    <td>Return a pretty-printed string representation of this chart's leaves.  This string can be used as a header for calls to <tt class="rst-docutils literal">pretty_format_edge</tt>.</td>
   </tr><tr class="basemethod">
     
     <td>Method</td>
-    <td><code><a href="nltk.parse.chart.Chart.html#trees">trees</a></code></td>
-    <td><span>Return an iterator of the tree structures that are associated with <tt class="rst-docutils literal">edge</tt>.</span></td>
+    <td><code><a href="nltk.parse.chart.Chart.html#trees" class="internal-link" title="nltk.parse.chart.Chart.trees">trees</a></code></td>
+    <td>Return an iterator of the tree structures that are associated with <tt class="rst-docutils literal">edge</tt>.</td>
   </tr><tr class="basemethod private">
     
     <td>Method</td>
-    <td><code><a href="nltk.parse.chart.Chart.html#_append_edge">_append_edge</a></code></td>
+    <td><code><a href="nltk.parse.chart.Chart.html#_append_edge" class="internal-link" title="nltk.parse.chart.Chart._append_edge">_append​_edge</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="basemethod private">
     
     <td>Method</td>
-    <td><code><a href="nltk.parse.chart.Chart.html#_trees">_trees</a></code></td>
-    <td><span>A helper function for <tt class="rst-docutils literal">trees</tt>.</span></td>
+    <td><code><a href="nltk.parse.chart.Chart.html#_trees" class="internal-link" title="nltk.parse.chart.Chart._trees">_trees</a></code></td>
+    <td>A helper function for <tt class="rst-docutils literal">trees</tt>.</td>
   </tr><tr class="baseinstancevariable private">
     
     <td>Instance Variable</td>
-    <td><code><a href="nltk.parse.chart.Chart.html#_edge_to_cpls">_edge_to_cpls</a></code></td>
-    <td><span>A dictionary mapping each edge to a set
-of child pointer lists that are associated with that edge.</span></td>
+    <td><code><a href="nltk.parse.chart.Chart.html#_edge_to_cpls" class="internal-link" title="nltk.parse.chart.Chart._edge_to_cpls">_edge​_to​_cpls</a></code></td>
+    <td>A dictionary mapping each edge to a set
+of child pointer lists that are associated with that edge.</td>
   </tr><tr class="baseinstancevariable private">
     
     <td>Instance Variable</td>
-    <td><code><a href="nltk.parse.chart.Chart.html#_edges">_edges</a></code></td>
-    <td><span>A list of the edges in the chart</span></td>
+    <td><code><a href="nltk.parse.chart.Chart.html#_edges" class="internal-link" title="nltk.parse.chart.Chart._edges">_edges</a></code></td>
+    <td>A list of the edges in the chart</td>
   </tr><tr class="baseinstancevariable private">
     
     <td>Instance Variable</td>
-    <td><code><a href="nltk.parse.chart.Chart.html#_indexes">_indexes</a></code></td>
-    <td><span>A dictionary mapping tuples of edge attributes
+    <td><code><a href="nltk.parse.chart.Chart.html#_indexes" class="internal-link" title="nltk.parse.chart.Chart._indexes">_indexes</a></code></td>
+    <td>A dictionary mapping tuples of edge attributes
 to indices, where each index maps the corresponding edge
-attribute values to lists of edges.</span></td>
+attribute values to lists of edges.</td>
   </tr><tr class="baseinstancevariable private">
     
     <td>Instance Variable</td>
-    <td><code><a href="nltk.parse.chart.Chart.html#_num_leaves">_num_leaves</a></code></td>
-    <td><span>The number of tokens.</span></td>
+    <td><code><a href="nltk.parse.chart.Chart.html#_num_leaves" class="internal-link" title="nltk.parse.chart.Chart._num_leaves">_num​_leaves</a></code></td>
+    <td>The number of tokens.</td>
   </tr><tr class="baseinstancevariable private">
     
     <td>Instance Variable</td>
-    <td><code><a href="nltk.parse.chart.Chart.html#_tokens">_tokens</a></code></td>
-    <td><span>The sentence that the chart covers.</span></td>
+    <td><code><a href="nltk.parse.chart.Chart.html#_tokens" class="internal-link" title="nltk.parse.chart.Chart._tokens">_tokens</a></code></td>
+    <td>The sentence that the chart covers.</td>
   </tr>
 </table>
           
@@ -311,14 +324,14 @@ attribute values to lists of edges.</span></td>
   </a>
   <div class="functionHeader">
     
-    <span class="py-keyword">def</span> <span class="py-defname">parses</span>(self, start, tree_class=Tree):
+    <span class="py-keyword">def</span> <span class="py-defname">parses</span>(self, start, tree_class=<a href="nltk.tree.Tree.html" class="internal-link" title="nltk.tree.Tree">Tree</a>):
     <a class="sourceLink" href="https://github.com/nltk/nltk/tree/3.6.2/nltk/parse/featurechart.py#L233">
       
       (source)
     </a>
   </div>
   <div class="docstring functionBody">
-    <div class="interfaceinfo">overrides <code><a href="nltk.parse.chart.Chart.html#parses">nltk.parse.chart.Chart.parses</a></code></div>
+    <div class="interfaceinfo">overrides <code><a href="nltk.parse.chart.Chart.html#parses" class="internal-link">nltk.parse.chart.Chart.parses</a></code></div>
     
     <div>Return an iterator of the complete tree structures that span
 the entire chart, and whose root node is <tt class="rst-docutils literal">root</tt>.</div>
@@ -341,7 +354,7 @@ the entire chart, and whose root node is <tt class="rst-docutils literal">root</
     </a>
   </div>
   <div class="docstring functionBody">
-    <div class="interfaceinfo">overrides <code><a href="nltk.parse.chart.Chart.html#select">nltk.parse.chart.Chart.select</a></code></div><div class="interfaceinfo">overridden in <code><a href="nltk.parse.earleychart.FeatureIncrementalChart.html">nltk.parse.earleychart.FeatureIncrementalChart</a></code></div>
+    <div class="interfaceinfo">overrides <code><a href="nltk.parse.chart.Chart.html#select" class="internal-link">nltk.parse.chart.Chart.select</a></code></div><div class="interfaceinfo">overridden in <code><a href="nltk.parse.earleychart.FeatureIncrementalChart.html" class="internal-link">nltk.parse.earleychart.FeatureIncrementalChart</a></code></div>
     
     <div>Returns an iterator over the edges in this chart.
 See <tt class="rst-docutils literal">Chart.select</tt> for more information about the
@@ -365,7 +378,7 @@ See <tt class="rst-docutils literal">Chart.select</tt> for more information abou
     </a>
   </div>
   <div class="docstring functionBody">
-    <div class="interfaceinfo">overrides <code><a href="nltk.parse.chart.Chart.html#_add_index">nltk.parse.chart.Chart._add_index</a></code></div><div class="interfaceinfo">overridden in <code><a href="nltk.parse.earleychart.FeatureIncrementalChart.html">nltk.parse.earleychart.FeatureIncrementalChart</a></code></div>
+    <div class="interfaceinfo">overrides <code><a href="nltk.parse.chart.Chart.html#_add_index" class="internal-link">nltk.parse.chart.Chart._add_index</a></code></div><div class="interfaceinfo">overridden in <code><a href="nltk.parse.earleychart.FeatureIncrementalChart.html" class="internal-link">nltk.parse.earleychart.FeatureIncrementalChart</a></code></div>
     
     <div>A helper function for <tt class="rst-docutils literal">select</tt>, which creates a new index for
 a given set of attributes (aka restriction keys).</div>
@@ -411,7 +424,7 @@ if it exists, otherwise it returns the <tt class="rst-docutils literal">item</tt
     </a>
   </div>
   <div class="docstring functionBody">
-    <div class="interfaceinfo">overrides <code><a href="nltk.parse.chart.Chart.html#_register_with_indexes">nltk.parse.chart.Chart._register_with_indexes</a></code></div><div class="interfaceinfo">overridden in <code><a href="nltk.parse.earleychart.FeatureIncrementalChart.html">nltk.parse.earleychart.FeatureIncrementalChart</a></code></div>
+    <div class="interfaceinfo">overrides <code><a href="nltk.parse.chart.Chart.html#_register_with_indexes" class="internal-link">nltk.parse.chart.Chart._register_with_indexes</a></code></div><div class="interfaceinfo">overridden in <code><a href="nltk.parse.earleychart.FeatureIncrementalChart.html" class="internal-link">nltk.parse.earleychart.FeatureIncrementalChart</a></code></div>
     
     <div>A helper function for <tt class="rst-docutils literal">insert</tt>, which registers the new
 edge with all existing indexes.</div>
@@ -426,7 +439,7 @@ edge with all existing indexes.</div>
   <div class="container">
     <a href="index.html">API Documentation</a> for <a href="http://www.nltk.org/" class="projecthome">nltk-3.6.2</a>,
   generated by <a href="https://github.com/twisted/pydoctor/">pydoctor</a>
-    21.2.2 at 2022-01-06 17:36:51.
+    22.2.2.dev0 at 2022-03-04 05:57:24.
   </div>
 </footer>
 

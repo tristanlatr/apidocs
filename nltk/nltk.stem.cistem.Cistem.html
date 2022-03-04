@@ -7,7 +7,7 @@
   <head>
     
     <title>nltk.stem.cistem.Cistem</title>
-    <meta name="generator" content="pydoctor 21.2.2"> 
+    <meta name="generator" content="pydoctor 22.2.2.dev0"> 
         
     </meta>
     <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
@@ -44,69 +44,82 @@
           Names
         </a>
 
-        <form action="search-results.html" id="search-box-container">
+        <div id="search-box-container">
           <div class="input-group">
-            <input id="search-box" name="search-query" placeholder="Search..." aria-label="Search" minlength="2" class="form-control" />
+            <input id="search-box" type="search" name="search-query" placeholder="Search..." aria-label="Search" minlength="2" class="form-control" autocomplete="off" />
+            
             <span class="input-group-btn">
-              <button class="btn btn-default" type="submit" title="Search"><img src="fonts/search.svg" alt="Search!" /></button>
-              <a class="btn btn-default" id="search-help-button" title="Help" onclick="toggleSearchHelpText()"><img src="fonts/info.svg" alt="Help!" /></a>
+              <a style="display: none;" class="btn btn-default" id="search-clear-button" title="Clear" onclick="clearSearch()"><img src="fonts/x-circle.svg" alt="Clear" /></a>
+              <a class="btn btn-default" id="search-help-button" title="Help" onclick="toggleSearchHelpText()"><img src="fonts/info.svg" alt="Help" /></a>
             </span>
           </div>
-        </form>
+        </div>
 
-        <div class="rst-admonition hint" id="search-help-box">
+      </div>
+
+      <div id="search-results-container" style="display: none;">
+        <div>
+          <span class="label label-default" id="search-docstrings-button">
+            <a title="Search in docstrings" onclick="toggleSearchInDocstrings()">search in docstrings</a></span>
+        </div>
+
+        <noscript>
+            <h1>Cannot search: JavaScript is not supported/enabled in your browser.</h1>
+        </noscript>
+
+        <div class="hint" id="search-help-box">
           <p class="rst-last">
       
             Search bar offers the following options:
             <ul>   
                 <li>
                   <strong>Term presence.</strong> The below example searches for documents that 
-                    must contain “foo”, might contain “bar” and must not contain “baz”:
-                  <br /> <code>'+foo bar -baz'</code>
+                    must contain “foo”, might contain “bar” and must not contain “baz”: <code>+foo bar -baz</code>
                 </li> 
 
                 <li>
-                  <strong>Wildcards.</strong> The below example searches for documents with words beginning with “foo”:
-                  <br /> <code>'foo*'</code>
+                  <strong>Wildcards.</strong> The below example searches for documents with words beginning with “foo”: <code>foo*</code>
                 </li> 
 
                 <li>
-                  <strong>Search in specific fields.</strong> The following search matches all documents 
-                  that contains "foo" in their full dotted name and with “bar” in any field:
-                  <br /> <code>'+fullName:*foo* +bar'</code>
+                  <strong>Search in specific fields.</strong> The following search matches all objects 
+                  in "twisted.mail" that matches “search”: <code>+qname:twisted.mail.* +search</code>
 
                   <p>
-                    Possible fields: 'name', 'docstring', 'fullName'.
+                    Possible fields: 'name', 'qname' (fully qualified name), 'docstring', and 'kind'.
+                    Last two fields are only applicable if "search in docstrings" is enabled.
                   </p>
                 </li>
 
                 <li>
                   <strong>Fuzzy matches.</strong> The following search matches all documents 
-                  that have a word within 1 edit distance of “foo”:
-                  <br /> <code>'foo~1'</code>
+                  that have a word within 1 edit distance of “foo”: <code>foo~1</code>
                 </li>
             </ul>
 
           </p>
         </div>
 
-      </div>
+        <div id="search-status"> </div>
+        
+        <div class="warning" id="search-warn-box" style="display: none;">
+          <p class="rst-last"><span id="search-warn"></span></p>
+        </div>
 
+        <table id="search-results">
+          <!-- Filled dynamically by JS -->
+        </table>
+        
+        <div style="margin-top: 8px;">
+          <p>Results provided by <a href="https://lunrjs.com">Lunr.js</a></p>
+        </div>
+      </div>
 
     </div>
   </div>
 
-  <script>
- 
-    function toggleSearchHelpText() {
-        document.body.classList.toggle("search-help-hidden");
-    }
-    // Init search and help text
-    document.getElementById('search-box-container').style.display = 'block';
-    document.getElementById('search-help-box').style.display = 'block';
-    document.body.classList.add("search-help-hidden");
-
-  </script>
+  <script src="ajax.js" type="text/javascript"></script>
+  <script src="search.js" type="text/javascript"></script>
 
 </nav>
 
@@ -115,7 +128,7 @@
     <div class="container">
 
       <div class="page-header">
-        <h1 class="class"><code><code><a href="nltk.html">nltk</a></code><wbr></wbr>.<code><a href="nltk.stem.html">stem</a></code><wbr></wbr>.<code><a href="nltk.stem.cistem.html">cistem</a></code><wbr></wbr>.<code><a href="nltk.stem.cistem.Cistem.html">Cistem</a></code></code></h1>
+        <h1 class="class"><code><code><a href="index.html" class="internal-link">nltk</a></code><wbr></wbr>.<code><a href="nltk.stem.html" class="internal-link" title="nltk.stem">stem</a></code><wbr></wbr>.<code><a href="nltk.stem.cistem.html" class="internal-link" title="nltk.stem.cistem">cistem</a></code><wbr></wbr>.<code><a href="nltk.stem.cistem.Cistem.html" class="internal-link" title="nltk.stem.cistem.Cistem">Cistem</a></code></code></h1>
         <div id="showPrivate">
           <button class="btn btn-link" onclick="togglePrivate()">Toggle Private API</button>
         </div>
@@ -126,7 +139,7 @@
       </div>
 
       <div class="extrasDocstring">
-        <p><code><span class="py-keyword">class</span> <span class="py-defname">Cistem</span>(<a href="nltk.stem.api.StemmerI.html" title="nltk.stem.api.StemmerI">StemmerI</a>): <a href="https://github.com/nltk/nltk/tree/3.6.2/nltk/stem/cistem.py#L14" class="sourceLink">(source)</a></code></p>
+        <p><code><span class="py-keyword">class</span> <span class="py-defname">Cistem</span>(<a href="nltk.stem.api.StemmerI.html" class="internal-link" title="nltk.stem.api.StemmerI">StemmerI</a>): <a href="https://github.com/nltk/nltk/tree/3.6.2/nltk/stem/cistem.py#L14" class="sourceLink">(source)</a></code></p>
         <p><a href="classIndex.html#nltk.stem.cistem.Cistem">View In Hierarchy</a></p>
       </div>
 
@@ -150,7 +163,7 @@ as most other stemmers.</p>
 should be used. Case insensitivity improves performance only if words in the
 text may be incorrectly upper case. For all-lowercase and correctly cased
 text, best performance is achieved by setting case_insensitive for false.</p>
-<table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">case_insensitive</span></td><td class="fieldArgDesc">if True, the stemming is case insensitive. False by default.</td></tr></table></div>
+<table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">case​_insensitive</span></td><td class="fieldArgDesc">if True, the stemming is case insensitive. False by default.</td></tr></table></div>
       </div>
 
       <div id="splitTables">
@@ -160,67 +173,67 @@ text, best performance is achieved by setting case_insensitive for false.</p>
   <tr class="staticmethod">
     
     <td>Static Method</td>
-    <td><code><a href="#replace_back">replace_back</a></code></td>
+    <td><code><a href="#replace_back" class="internal-link" title="nltk.stem.cistem.Cistem.replace_back">replace​_back</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="staticmethod">
     
     <td>Static Method</td>
-    <td><code><a href="#replace_to">replace_to</a></code></td>
+    <td><code><a href="#replace_to" class="internal-link" title="nltk.stem.cistem.Cistem.replace_to">replace​_to</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#__init__">__init__</a></code></td>
+    <td><code><a href="#__init__" class="internal-link" title="nltk.stem.cistem.Cistem.__init__">__init__</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#segment">segment</a></code></td>
+    <td><code><a href="#segment" class="internal-link" title="nltk.stem.cistem.Cistem.segment">segment</a></code></td>
     <td><span class="undocumented">No summary</span></td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#stem">stem</a></code></td>
-    <td><span>This method takes the word to be stemmed and returns the stemmed word.</span></td>
+    <td><code><a href="#stem" class="internal-link" title="nltk.stem.cistem.Cistem.stem">stem</a></code></td>
+    <td>This method takes the word to be stemmed and returns the stemmed word.</td>
   </tr><tr class="classvariable">
     
     <td>Class Variable</td>
-    <td><code><a href="#repl_xx">repl_xx</a></code></td>
+    <td><code><a href="#repl_xx" class="internal-link" title="nltk.stem.cistem.Cistem.repl_xx">repl​_xx</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="classvariable">
     
     <td>Class Variable</td>
-    <td><code><a href="#repl_xx_back">repl_xx_back</a></code></td>
+    <td><code><a href="#repl_xx_back" class="internal-link" title="nltk.stem.cistem.Cistem.repl_xx_back">repl​_xx​_back</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="classvariable">
     
     <td>Class Variable</td>
-    <td><code><a href="#strip_emr">strip_emr</a></code></td>
+    <td><code><a href="#strip_emr" class="internal-link" title="nltk.stem.cistem.Cistem.strip_emr">strip​_emr</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="classvariable">
     
     <td>Class Variable</td>
-    <td><code><a href="#strip_esn">strip_esn</a></code></td>
+    <td><code><a href="#strip_esn" class="internal-link" title="nltk.stem.cistem.Cistem.strip_esn">strip​_esn</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="classvariable">
     
     <td>Class Variable</td>
-    <td><code><a href="#strip_ge">strip_ge</a></code></td>
+    <td><code><a href="#strip_ge" class="internal-link" title="nltk.stem.cistem.Cistem.strip_ge">strip​_ge</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="classvariable">
     
     <td>Class Variable</td>
-    <td><code><a href="#strip_nd">strip_nd</a></code></td>
+    <td><code><a href="#strip_nd" class="internal-link" title="nltk.stem.cistem.Cistem.strip_nd">strip​_nd</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="classvariable">
     
     <td>Class Variable</td>
-    <td><code><a href="#strip_t">strip_t</a></code></td>
+    <td><code><a href="#strip_t" class="internal-link" title="nltk.stem.cistem.Cistem.strip_t">strip​_t</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="instancevariable private">
     
     <td>Instance Variable</td>
-    <td><code><a href="#_case_insensitive">_case_insensitive</a></code></td>
+    <td><code><a href="#_case_insensitive" class="internal-link" title="nltk.stem.cistem.Cistem._case_insensitive">_case​_insensitive</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr>
 </table>
@@ -317,7 +330,7 @@ text, best performance is achieved by setting case_insensitive for false.</p>
   <div class="docstring functionBody">
     
     
-    <div><p>This method works very similarly to stem (:func:'cistem.stem'). The difference is that in
+    <div><p>This method works very similarly to stem ('cistem.stem'). The difference is that in
 addition to returning the stem, it also returns the rest that was removed at
 the end. To be able to return the stem unchanged so the stem and the rest
 can be concatenated to form the original word, all subsitutions that altered
@@ -361,7 +374,7 @@ the stem in any other way than by removing letters at the end were left out.</p>
     </a>
   </div>
   <div class="docstring functionBody">
-    <div class="interfaceinfo">overrides <code><a href="nltk.stem.api.StemmerI.html#stem">nltk.stem.api.StemmerI.stem</a></code></div>
+    <div class="interfaceinfo">overrides <code><a href="nltk.stem.api.StemmerI.html#stem" class="internal-link">nltk.stem.api.StemmerI.stem</a></code></div>
     
     <div><p>This method takes the word to be stemmed and returns the stemmed word.</p>
 <pre class="py-doctest">
@@ -406,6 +419,7 @@ the stem in any other way than by removing letters at the end were left out.</p>
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    
   </div>
 </div><div class="baseclassvariable">
   
@@ -428,6 +442,7 @@ the stem in any other way than by removing letters at the end were left out.</p>
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    
   </div>
 </div><div class="baseclassvariable">
   
@@ -450,6 +465,7 @@ the stem in any other way than by removing letters at the end were left out.</p>
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    
   </div>
 </div><div class="baseclassvariable">
   
@@ -472,6 +488,7 @@ the stem in any other way than by removing letters at the end were left out.</p>
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    
   </div>
 </div><div class="baseclassvariable">
   
@@ -494,6 +511,7 @@ the stem in any other way than by removing letters at the end were left out.</p>
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    
   </div>
 </div><div class="baseclassvariable">
   
@@ -516,6 +534,7 @@ the stem in any other way than by removing letters at the end were left out.</p>
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    
   </div>
 </div><div class="baseclassvariable">
   
@@ -538,6 +557,7 @@ the stem in any other way than by removing letters at the end were left out.</p>
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    
   </div>
 </div><div class="baseinstancevariable private">
   
@@ -560,6 +580,7 @@ the stem in any other way than by removing letters at the end were left out.</p>
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    
   </div>
 </div>
 
@@ -571,7 +592,7 @@ the stem in any other way than by removing letters at the end were left out.</p>
   <div class="container">
     <a href="index.html">API Documentation</a> for <a href="http://www.nltk.org/" class="projecthome">nltk-3.6.2</a>,
   generated by <a href="https://github.com/twisted/pydoctor/">pydoctor</a>
-    21.2.2 at 2022-01-06 17:36:51.
+    22.2.2.dev0 at 2022-03-04 05:57:24.
   </div>
 </footer>
 

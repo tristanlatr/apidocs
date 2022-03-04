@@ -7,7 +7,7 @@
   <head>
     
     <title>nltk.inference.api.ParallelProverBuilderCommand</title>
-    <meta name="generator" content="pydoctor 21.2.2"> 
+    <meta name="generator" content="pydoctor 22.2.2.dev0"> 
         
     </meta>
     <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
@@ -44,69 +44,82 @@
           Names
         </a>
 
-        <form action="search-results.html" id="search-box-container">
+        <div id="search-box-container">
           <div class="input-group">
-            <input id="search-box" name="search-query" placeholder="Search..." aria-label="Search" minlength="2" class="form-control" />
+            <input id="search-box" type="search" name="search-query" placeholder="Search..." aria-label="Search" minlength="2" class="form-control" autocomplete="off" />
+            
             <span class="input-group-btn">
-              <button class="btn btn-default" type="submit" title="Search"><img src="fonts/search.svg" alt="Search!" /></button>
-              <a class="btn btn-default" id="search-help-button" title="Help" onclick="toggleSearchHelpText()"><img src="fonts/info.svg" alt="Help!" /></a>
+              <a style="display: none;" class="btn btn-default" id="search-clear-button" title="Clear" onclick="clearSearch()"><img src="fonts/x-circle.svg" alt="Clear" /></a>
+              <a class="btn btn-default" id="search-help-button" title="Help" onclick="toggleSearchHelpText()"><img src="fonts/info.svg" alt="Help" /></a>
             </span>
           </div>
-        </form>
+        </div>
 
-        <div class="rst-admonition hint" id="search-help-box">
+      </div>
+
+      <div id="search-results-container" style="display: none;">
+        <div>
+          <span class="label label-default" id="search-docstrings-button">
+            <a title="Search in docstrings" onclick="toggleSearchInDocstrings()">search in docstrings</a></span>
+        </div>
+
+        <noscript>
+            <h1>Cannot search: JavaScript is not supported/enabled in your browser.</h1>
+        </noscript>
+
+        <div class="hint" id="search-help-box">
           <p class="rst-last">
       
             Search bar offers the following options:
             <ul>   
                 <li>
                   <strong>Term presence.</strong> The below example searches for documents that 
-                    must contain “foo”, might contain “bar” and must not contain “baz”:
-                  <br /> <code>'+foo bar -baz'</code>
+                    must contain “foo”, might contain “bar” and must not contain “baz”: <code>+foo bar -baz</code>
                 </li> 
 
                 <li>
-                  <strong>Wildcards.</strong> The below example searches for documents with words beginning with “foo”:
-                  <br /> <code>'foo*'</code>
+                  <strong>Wildcards.</strong> The below example searches for documents with words beginning with “foo”: <code>foo*</code>
                 </li> 
 
                 <li>
-                  <strong>Search in specific fields.</strong> The following search matches all documents 
-                  that contains "foo" in their full dotted name and with “bar” in any field:
-                  <br /> <code>'+fullName:*foo* +bar'</code>
+                  <strong>Search in specific fields.</strong> The following search matches all objects 
+                  in "twisted.mail" that matches “search”: <code>+qname:twisted.mail.* +search</code>
 
                   <p>
-                    Possible fields: 'name', 'docstring', 'fullName'.
+                    Possible fields: 'name', 'qname' (fully qualified name), 'docstring', and 'kind'.
+                    Last two fields are only applicable if "search in docstrings" is enabled.
                   </p>
                 </li>
 
                 <li>
                   <strong>Fuzzy matches.</strong> The following search matches all documents 
-                  that have a word within 1 edit distance of “foo”:
-                  <br /> <code>'foo~1'</code>
+                  that have a word within 1 edit distance of “foo”: <code>foo~1</code>
                 </li>
             </ul>
 
           </p>
         </div>
 
-      </div>
+        <div id="search-status"> </div>
+        
+        <div class="warning" id="search-warn-box" style="display: none;">
+          <p class="rst-last"><span id="search-warn"></span></p>
+        </div>
 
+        <table id="search-results">
+          <!-- Filled dynamically by JS -->
+        </table>
+        
+        <div style="margin-top: 8px;">
+          <p>Results provided by <a href="https://lunrjs.com">Lunr.js</a></p>
+        </div>
+      </div>
 
     </div>
   </div>
 
-  <script>
- 
-    function toggleSearchHelpText() {
-        document.body.classList.toggle("search-help-hidden");
-    }
-    // Init search and help text
-    document.getElementById('search-box-container').style.display = 'block';
-    document.getElementById('search-help-box').style.display = 'block';
-    document.body.classList.add("search-help-hidden");
-
-  </script>
+  <script src="ajax.js" type="text/javascript"></script>
+  <script src="search.js" type="text/javascript"></script>
 
 </nav>
 
@@ -115,7 +128,7 @@
     <div class="container">
 
       <div class="page-header">
-        <h1 class="class"><code><code><a href="nltk.html">nltk</a></code><wbr></wbr>.<code><a href="nltk.inference.html">inference</a></code><wbr></wbr>.<code><a href="nltk.inference.api.html">api</a></code><wbr></wbr>.<code><a href="nltk.inference.api.ParallelProverBuilderCommand.html">ParallelProverBuilderCommand</a></code></code></h1>
+        <h1 class="class"><code><code><a href="index.html" class="internal-link">nltk</a></code><wbr></wbr>.<code><a href="nltk.inference.html" class="internal-link" title="nltk.inference">inference</a></code><wbr></wbr>.<code><a href="nltk.inference.api.html" class="internal-link" title="nltk.inference.api">api</a></code><wbr></wbr>.<code><a href="nltk.inference.api.ParallelProverBuilderCommand.html" class="internal-link" title="nltk.inference.api.ParallelProverBuilderCommand">ParallelProverBuilderCommand</a></code></code></h1>
         <div id="showPrivate">
           <button class="btn btn-link" onclick="togglePrivate()">Toggle Private API</button>
         </div>
@@ -126,7 +139,7 @@
       </div>
 
       <div class="extrasDocstring">
-        <p><code><span class="py-keyword">class</span> <span class="py-defname">ParallelProverBuilderCommand</span>(<a href="nltk.inference.api.BaseProverCommand.html" title="nltk.inference.api.BaseProverCommand">BaseProverCommand</a>, <a href="nltk.inference.api.BaseModelBuilderCommand.html" title="nltk.inference.api.BaseModelBuilderCommand">BaseModelBuilderCommand</a>): <a href="https://github.com/nltk/nltk/tree/3.6.2/nltk/inference/api.py#L548" class="sourceLink">(source)</a></code></p>
+        <p><code><span class="py-keyword">class</span> <span class="py-defname">ParallelProverBuilderCommand</span>(<a href="nltk.inference.api.BaseProverCommand.html" class="internal-link" title="nltk.inference.api.BaseProverCommand">BaseProverCommand</a>, <a href="nltk.inference.api.BaseModelBuilderCommand.html" class="internal-link" title="nltk.inference.api.BaseModelBuilderCommand">BaseModelBuilderCommand</a>): <a href="https://github.com/nltk/nltk/tree/3.6.2/nltk/inference/api.py#L548" class="sourceLink">(source)</a></code></p>
         <p><a href="classIndex.html#nltk.inference.api.ParallelProverBuilderCommand">View In Hierarchy</a></p>
       </div>
 
@@ -147,33 +160,33 @@ result, we will treat self._result as meaning "proof found/no model found".</p>
   <tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#__init__">__init__</a></code></td>
-    <td><span></span></td>
+    <td><code><a href="#__init__" class="internal-link" title="nltk.inference.api.ParallelProverBuilderCommand.__init__">__init__</a></code></td>
+    <td></td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#build_model">build_model</a></code></td>
-    <td><span>Attempt to build a model.  Store the result to prevent unnecessary re-building.</span></td>
+    <td><code><a href="#build_model" class="internal-link" title="nltk.inference.api.ParallelProverBuilderCommand.build_model">build​_model</a></code></td>
+    <td>Attempt to build a model.  Store the result to prevent unnecessary re-building.</td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#prove">prove</a></code></td>
-    <td><span>Perform the actual proof.  Store the result to prevent unnecessary re-proving.</span></td>
+    <td><code><a href="#prove" class="internal-link" title="nltk.inference.api.ParallelProverBuilderCommand.prove">prove</a></code></td>
+    <td>Perform the actual proof.  Store the result to prevent unnecessary re-proving.</td>
   </tr><tr class="method private">
     
     <td>Method</td>
-    <td><code><a href="#_run">_run</a></code></td>
+    <td><code><a href="#_run" class="internal-link" title="nltk.inference.api.ParallelProverBuilderCommand._run">_run</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="instancevariable private">
     
     <td>Instance Variable</td>
-    <td><code><a href="#_result">_result</a></code></td>
-    <td><span>A holder for the result, to prevent unnecessary re-proving</span></td>
+    <td><code><a href="#_result" class="internal-link" title="nltk.inference.api.ParallelProverBuilderCommand._result">_result</a></code></td>
+    <td>A holder for the result, to prevent unnecessary re-proving</td>
   </tr>
 </table>
         
           <p class="inheritedFrom">
-            Inherited from <code><a href="nltk.inference.api.BaseProverCommand.html">BaseProverCommand</a></code>:
+            Inherited from <code><a href="nltk.inference.api.BaseProverCommand.html" class="internal-link" title="nltk.inference.api.BaseProverCommand">BaseProverCommand</a></code>:
           </p>
           <table class="children sortable" id="id694">
   
@@ -181,33 +194,33 @@ result, we will treat self._result as meaning "proof found/no model found".</p>
   <tr class="basemethod">
     
     <td>Method</td>
-    <td><code><a href="nltk.inference.api.BaseProverCommand.html#decorate_proof">decorate_proof</a></code></td>
+    <td><code><a href="nltk.inference.api.BaseProverCommand.html#decorate_proof" class="internal-link" title="nltk.inference.api.BaseProverCommand.decorate_proof">decorate​_proof</a></code></td>
     <td><span class="undocumented">No summary</span></td>
   </tr><tr class="basemethod">
     
     <td>Method</td>
-    <td><code><a href="nltk.inference.api.BaseProverCommand.html#get_prover">get_prover</a></code></td>
-    <td><span>Return the prover object :return: <tt class="rst-docutils literal">Prover</tt></span></td>
+    <td><code><a href="nltk.inference.api.BaseProverCommand.html#get_prover" class="internal-link" title="nltk.inference.api.BaseProverCommand.get_prover">get​_prover</a></code></td>
+    <td>Return the prover object :return: <tt class="rst-docutils literal">Prover</tt></td>
   </tr><tr class="basemethod">
     
     <td>Method</td>
-    <td><code><a href="nltk.inference.api.BaseProverCommand.html#proof">proof</a></code></td>
-    <td><span>Return the proof string :param simplify: bool simplify the proof? :return: str</span></td>
+    <td><code><a href="nltk.inference.api.BaseProverCommand.html#proof" class="internal-link" title="nltk.inference.api.BaseProverCommand.proof">proof</a></code></td>
+    <td>Return the proof string :param simplify: bool simplify the proof? :return: str</td>
   </tr><tr class="baseinstancevariable private">
     
     <td>Instance Variable</td>
-    <td><code><a href="nltk.inference.api.BaseProverCommand.html#_proof">_proof</a></code></td>
+    <td><code><a href="nltk.inference.api.BaseProverCommand.html#_proof" class="internal-link" title="nltk.inference.api.BaseProverCommand._proof">_proof</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="baseinstancevariable private">
     
     <td>Instance Variable</td>
-    <td><code><a href="nltk.inference.api.BaseProverCommand.html#_prover">_prover</a></code></td>
-    <td><span>The theorem tool to execute with the assumptions</span></td>
+    <td><code><a href="nltk.inference.api.BaseProverCommand.html#_prover" class="internal-link" title="nltk.inference.api.BaseProverCommand._prover">_prover</a></code></td>
+    <td>The theorem tool to execute with the assumptions</td>
   </tr>
 </table>
           
           <p class="inheritedFrom">
-            Inherited from <code><a href="nltk.inference.api.BaseTheoremToolCommand.html">BaseTheoremToolCommand</a></code> (via <code><a href="nltk.inference.api.BaseProverCommand.html">BaseProverCommand</a></code>):
+            Inherited from <code><a href="nltk.inference.api.BaseTheoremToolCommand.html" class="internal-link" title="nltk.inference.api.BaseTheoremToolCommand">BaseTheoremToolCommand</a></code> (via <code><a href="nltk.inference.api.BaseProverCommand.html" class="internal-link" title="nltk.inference.api.BaseProverCommand">BaseProverCommand</a></code>):
           </p>
           <table class="children sortable" id="id695">
   
@@ -215,43 +228,43 @@ result, we will treat self._result as meaning "proof found/no model found".</p>
   <tr class="basemethod">
     
     <td>Method</td>
-    <td><code><a href="nltk.inference.api.BaseTheoremToolCommand.html#add_assumptions">add_assumptions</a></code></td>
-    <td><span>Add new assumptions to the assumption list.</span></td>
+    <td><code><a href="nltk.inference.api.BaseTheoremToolCommand.html#add_assumptions" class="internal-link" title="nltk.inference.api.BaseTheoremToolCommand.add_assumptions">add​_assumptions</a></code></td>
+    <td>Add new assumptions to the assumption list.</td>
   </tr><tr class="basemethod">
     
     <td>Method</td>
-    <td><code><a href="nltk.inference.api.BaseTheoremToolCommand.html#assumptions">assumptions</a></code></td>
-    <td><span>List the current assumptions.</span></td>
+    <td><code><a href="nltk.inference.api.BaseTheoremToolCommand.html#assumptions" class="internal-link" title="nltk.inference.api.BaseTheoremToolCommand.assumptions">assumptions</a></code></td>
+    <td>List the current assumptions.</td>
   </tr><tr class="basemethod">
     
     <td>Method</td>
-    <td><code><a href="nltk.inference.api.BaseTheoremToolCommand.html#goal">goal</a></code></td>
-    <td><span>Return the goal</span></td>
+    <td><code><a href="nltk.inference.api.BaseTheoremToolCommand.html#goal" class="internal-link" title="nltk.inference.api.BaseTheoremToolCommand.goal">goal</a></code></td>
+    <td>Return the goal</td>
   </tr><tr class="basemethod">
     
     <td>Method</td>
-    <td><code><a href="nltk.inference.api.BaseTheoremToolCommand.html#print_assumptions">print_assumptions</a></code></td>
-    <td><span>Print the list of the current assumptions.</span></td>
+    <td><code><a href="nltk.inference.api.BaseTheoremToolCommand.html#print_assumptions" class="internal-link" title="nltk.inference.api.BaseTheoremToolCommand.print_assumptions">print​_assumptions</a></code></td>
+    <td>Print the list of the current assumptions.</td>
   </tr><tr class="basemethod">
     
     <td>Method</td>
-    <td><code><a href="nltk.inference.api.BaseTheoremToolCommand.html#retract_assumptions">retract_assumptions</a></code></td>
-    <td><span>Retract assumptions from the assumption list.</span></td>
+    <td><code><a href="nltk.inference.api.BaseTheoremToolCommand.html#retract_assumptions" class="internal-link" title="nltk.inference.api.BaseTheoremToolCommand.retract_assumptions">retract​_assumptions</a></code></td>
+    <td>Retract assumptions from the assumption list.</td>
   </tr><tr class="baseinstancevariable private">
     
     <td>Instance Variable</td>
-    <td><code><a href="nltk.inference.api.BaseTheoremToolCommand.html#_assumptions">_assumptions</a></code></td>
+    <td><code><a href="nltk.inference.api.BaseTheoremToolCommand.html#_assumptions" class="internal-link" title="nltk.inference.api.BaseTheoremToolCommand._assumptions">_assumptions</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="baseinstancevariable private">
     
     <td>Instance Variable</td>
-    <td><code><a href="nltk.inference.api.BaseTheoremToolCommand.html#_goal">_goal</a></code></td>
+    <td><code><a href="nltk.inference.api.BaseTheoremToolCommand.html#_goal" class="internal-link" title="nltk.inference.api.BaseTheoremToolCommand._goal">_goal</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr>
 </table>
           
           <p class="inheritedFrom">
-            Inherited from <code><a href="nltk.inference.api.TheoremToolCommand.html">TheoremToolCommand</a></code> (via <code><a href="nltk.inference.api.BaseProverCommand.html">BaseProverCommand</a></code>, <code><a href="nltk.inference.api.ProverCommand.html">ProverCommand</a></code>):
+            Inherited from <code><a href="nltk.inference.api.TheoremToolCommand.html" class="internal-link" title="nltk.inference.api.TheoremToolCommand">TheoremToolCommand</a></code> (via <code><a href="nltk.inference.api.BaseProverCommand.html" class="internal-link" title="nltk.inference.api.BaseProverCommand">BaseProverCommand</a></code>, <code><a href="nltk.inference.api.ProverCommand.html" class="internal-link" title="nltk.inference.api.ProverCommand">ProverCommand</a></code>):
           </p>
           <table class="children sortable" id="id696">
   
@@ -259,33 +272,33 @@ result, we will treat self._result as meaning "proof found/no model found".</p>
   <tr class="basemethod">
     
     <td>Method</td>
-    <td><code><a href="nltk.inference.api.TheoremToolCommand.html#add_assumptions">add_assumptions</a></code></td>
-    <td><span>Add new assumptions to the assumption list.</span></td>
+    <td><code><a href="nltk.inference.api.TheoremToolCommand.html#add_assumptions" class="internal-link" title="nltk.inference.api.TheoremToolCommand.add_assumptions">add​_assumptions</a></code></td>
+    <td>Add new assumptions to the assumption list.</td>
   </tr><tr class="basemethod">
     
     <td>Method</td>
-    <td><code><a href="nltk.inference.api.TheoremToolCommand.html#assumptions">assumptions</a></code></td>
-    <td><span>List the current assumptions.</span></td>
+    <td><code><a href="nltk.inference.api.TheoremToolCommand.html#assumptions" class="internal-link" title="nltk.inference.api.TheoremToolCommand.assumptions">assumptions</a></code></td>
+    <td>List the current assumptions.</td>
   </tr><tr class="basemethod">
     
     <td>Method</td>
-    <td><code><a href="nltk.inference.api.TheoremToolCommand.html#goal">goal</a></code></td>
-    <td><span>Return the goal</span></td>
+    <td><code><a href="nltk.inference.api.TheoremToolCommand.html#goal" class="internal-link" title="nltk.inference.api.TheoremToolCommand.goal">goal</a></code></td>
+    <td>Return the goal</td>
   </tr><tr class="basemethod">
     
     <td>Method</td>
-    <td><code><a href="nltk.inference.api.TheoremToolCommand.html#print_assumptions">print_assumptions</a></code></td>
-    <td><span>Print the list of the current assumptions.</span></td>
+    <td><code><a href="nltk.inference.api.TheoremToolCommand.html#print_assumptions" class="internal-link" title="nltk.inference.api.TheoremToolCommand.print_assumptions">print​_assumptions</a></code></td>
+    <td>Print the list of the current assumptions.</td>
   </tr><tr class="basemethod">
     
     <td>Method</td>
-    <td><code><a href="nltk.inference.api.TheoremToolCommand.html#retract_assumptions">retract_assumptions</a></code></td>
-    <td><span>Retract assumptions from the assumption list.</span></td>
+    <td><code><a href="nltk.inference.api.TheoremToolCommand.html#retract_assumptions" class="internal-link" title="nltk.inference.api.TheoremToolCommand.retract_assumptions">retract​_assumptions</a></code></td>
+    <td>Retract assumptions from the assumption list.</td>
   </tr>
 </table>
           
           <p class="inheritedFrom">
-            Inherited from <code><a href="nltk.inference.api.BaseModelBuilderCommand.html">BaseModelBuilderCommand</a></code>:
+            Inherited from <code><a href="nltk.inference.api.BaseModelBuilderCommand.html" class="internal-link" title="nltk.inference.api.BaseModelBuilderCommand">BaseModelBuilderCommand</a></code>:
           </p>
           <table class="children sortable" id="id697">
   
@@ -293,33 +306,33 @@ result, we will treat self._result as meaning "proof found/no model found".</p>
   <tr class="basemethod">
     
     <td>Method</td>
-    <td><code><a href="nltk.inference.api.BaseModelBuilderCommand.html#get_model_builder">get_model_builder</a></code></td>
-    <td><span>Return the model builder object :return: <tt class="rst-docutils literal">ModelBuilder</tt></span></td>
+    <td><code><a href="nltk.inference.api.BaseModelBuilderCommand.html#get_model_builder" class="internal-link" title="nltk.inference.api.BaseModelBuilderCommand.get_model_builder">get​_model​_builder</a></code></td>
+    <td>Return the model builder object :return: <tt class="rst-docutils literal">ModelBuilder</tt></td>
   </tr><tr class="basemethod">
     
     <td>Method</td>
-    <td><code><a href="nltk.inference.api.BaseModelBuilderCommand.html#model">model</a></code></td>
-    <td><span>Return a string representation of the model</span></td>
+    <td><code><a href="nltk.inference.api.BaseModelBuilderCommand.html#model" class="internal-link" title="nltk.inference.api.BaseModelBuilderCommand.model">model</a></code></td>
+    <td>Return a string representation of the model</td>
   </tr><tr class="basemethod private">
     
     <td>Method</td>
-    <td><code><a href="nltk.inference.api.BaseModelBuilderCommand.html#_decorate_model">_decorate_model</a></code></td>
-    <td><span></span></td>
+    <td><code><a href="nltk.inference.api.BaseModelBuilderCommand.html#_decorate_model" class="internal-link" title="nltk.inference.api.BaseModelBuilderCommand._decorate_model">_decorate​_model</a></code></td>
+    <td></td>
   </tr><tr class="baseinstancevariable private">
     
     <td>Instance Variable</td>
-    <td><code><a href="nltk.inference.api.BaseModelBuilderCommand.html#_model">_model</a></code></td>
+    <td><code><a href="nltk.inference.api.BaseModelBuilderCommand.html#_model" class="internal-link" title="nltk.inference.api.BaseModelBuilderCommand._model">_model</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="baseinstancevariable private">
     
     <td>Instance Variable</td>
-    <td><code><a href="nltk.inference.api.BaseModelBuilderCommand.html#_modelbuilder">_modelbuilder</a></code></td>
-    <td><span>The theorem tool to execute with the assumptions</span></td>
+    <td><code><a href="nltk.inference.api.BaseModelBuilderCommand.html#_modelbuilder" class="internal-link" title="nltk.inference.api.BaseModelBuilderCommand._modelbuilder">_modelbuilder</a></code></td>
+    <td>The theorem tool to execute with the assumptions</td>
   </tr>
 </table>
           
           <p class="inheritedFrom">
-            Inherited from <code><a href="nltk.inference.api.BaseTheoremToolCommand.html">BaseTheoremToolCommand</a></code> (via <code><a href="nltk.inference.api.BaseModelBuilderCommand.html">BaseModelBuilderCommand</a></code>):
+            Inherited from <code><a href="nltk.inference.api.BaseTheoremToolCommand.html" class="internal-link" title="nltk.inference.api.BaseTheoremToolCommand">BaseTheoremToolCommand</a></code> (via <code><a href="nltk.inference.api.BaseModelBuilderCommand.html" class="internal-link" title="nltk.inference.api.BaseModelBuilderCommand">BaseModelBuilderCommand</a></code>):
           </p>
           <table class="children sortable" id="id698">
   
@@ -327,43 +340,43 @@ result, we will treat self._result as meaning "proof found/no model found".</p>
   <tr class="basemethod">
     
     <td>Method</td>
-    <td><code><a href="nltk.inference.api.BaseTheoremToolCommand.html#add_assumptions">add_assumptions</a></code></td>
-    <td><span>Add new assumptions to the assumption list.</span></td>
+    <td><code><a href="nltk.inference.api.BaseTheoremToolCommand.html#add_assumptions" class="internal-link" title="nltk.inference.api.BaseTheoremToolCommand.add_assumptions">add​_assumptions</a></code></td>
+    <td>Add new assumptions to the assumption list.</td>
   </tr><tr class="basemethod">
     
     <td>Method</td>
-    <td><code><a href="nltk.inference.api.BaseTheoremToolCommand.html#assumptions">assumptions</a></code></td>
-    <td><span>List the current assumptions.</span></td>
+    <td><code><a href="nltk.inference.api.BaseTheoremToolCommand.html#assumptions" class="internal-link" title="nltk.inference.api.BaseTheoremToolCommand.assumptions">assumptions</a></code></td>
+    <td>List the current assumptions.</td>
   </tr><tr class="basemethod">
     
     <td>Method</td>
-    <td><code><a href="nltk.inference.api.BaseTheoremToolCommand.html#goal">goal</a></code></td>
-    <td><span>Return the goal</span></td>
+    <td><code><a href="nltk.inference.api.BaseTheoremToolCommand.html#goal" class="internal-link" title="nltk.inference.api.BaseTheoremToolCommand.goal">goal</a></code></td>
+    <td>Return the goal</td>
   </tr><tr class="basemethod">
     
     <td>Method</td>
-    <td><code><a href="nltk.inference.api.BaseTheoremToolCommand.html#print_assumptions">print_assumptions</a></code></td>
-    <td><span>Print the list of the current assumptions.</span></td>
+    <td><code><a href="nltk.inference.api.BaseTheoremToolCommand.html#print_assumptions" class="internal-link" title="nltk.inference.api.BaseTheoremToolCommand.print_assumptions">print​_assumptions</a></code></td>
+    <td>Print the list of the current assumptions.</td>
   </tr><tr class="basemethod">
     
     <td>Method</td>
-    <td><code><a href="nltk.inference.api.BaseTheoremToolCommand.html#retract_assumptions">retract_assumptions</a></code></td>
-    <td><span>Retract assumptions from the assumption list.</span></td>
+    <td><code><a href="nltk.inference.api.BaseTheoremToolCommand.html#retract_assumptions" class="internal-link" title="nltk.inference.api.BaseTheoremToolCommand.retract_assumptions">retract​_assumptions</a></code></td>
+    <td>Retract assumptions from the assumption list.</td>
   </tr><tr class="baseinstancevariable private">
     
     <td>Instance Variable</td>
-    <td><code><a href="nltk.inference.api.BaseTheoremToolCommand.html#_assumptions">_assumptions</a></code></td>
+    <td><code><a href="nltk.inference.api.BaseTheoremToolCommand.html#_assumptions" class="internal-link" title="nltk.inference.api.BaseTheoremToolCommand._assumptions">_assumptions</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="baseinstancevariable private">
     
     <td>Instance Variable</td>
-    <td><code><a href="nltk.inference.api.BaseTheoremToolCommand.html#_goal">_goal</a></code></td>
+    <td><code><a href="nltk.inference.api.BaseTheoremToolCommand.html#_goal" class="internal-link" title="nltk.inference.api.BaseTheoremToolCommand._goal">_goal</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr>
 </table>
           
           <p class="inheritedFrom">
-            Inherited from <code><a href="nltk.inference.api.TheoremToolCommand.html">TheoremToolCommand</a></code> (via <code><a href="nltk.inference.api.BaseModelBuilderCommand.html">BaseModelBuilderCommand</a></code>, <code><a href="nltk.inference.api.ModelBuilderCommand.html">ModelBuilderCommand</a></code>):
+            Inherited from <code><a href="nltk.inference.api.TheoremToolCommand.html" class="internal-link" title="nltk.inference.api.TheoremToolCommand">TheoremToolCommand</a></code> (via <code><a href="nltk.inference.api.BaseModelBuilderCommand.html" class="internal-link" title="nltk.inference.api.BaseModelBuilderCommand">BaseModelBuilderCommand</a></code>, <code><a href="nltk.inference.api.ModelBuilderCommand.html" class="internal-link" title="nltk.inference.api.ModelBuilderCommand">ModelBuilderCommand</a></code>):
           </p>
           <table class="children sortable" id="id699">
   
@@ -371,28 +384,28 @@ result, we will treat self._result as meaning "proof found/no model found".</p>
   <tr class="basemethod">
     
     <td>Method</td>
-    <td><code><a href="nltk.inference.api.TheoremToolCommand.html#add_assumptions">add_assumptions</a></code></td>
-    <td><span>Add new assumptions to the assumption list.</span></td>
+    <td><code><a href="nltk.inference.api.TheoremToolCommand.html#add_assumptions" class="internal-link" title="nltk.inference.api.TheoremToolCommand.add_assumptions">add​_assumptions</a></code></td>
+    <td>Add new assumptions to the assumption list.</td>
   </tr><tr class="basemethod">
     
     <td>Method</td>
-    <td><code><a href="nltk.inference.api.TheoremToolCommand.html#assumptions">assumptions</a></code></td>
-    <td><span>List the current assumptions.</span></td>
+    <td><code><a href="nltk.inference.api.TheoremToolCommand.html#assumptions" class="internal-link" title="nltk.inference.api.TheoremToolCommand.assumptions">assumptions</a></code></td>
+    <td>List the current assumptions.</td>
   </tr><tr class="basemethod">
     
     <td>Method</td>
-    <td><code><a href="nltk.inference.api.TheoremToolCommand.html#goal">goal</a></code></td>
-    <td><span>Return the goal</span></td>
+    <td><code><a href="nltk.inference.api.TheoremToolCommand.html#goal" class="internal-link" title="nltk.inference.api.TheoremToolCommand.goal">goal</a></code></td>
+    <td>Return the goal</td>
   </tr><tr class="basemethod">
     
     <td>Method</td>
-    <td><code><a href="nltk.inference.api.TheoremToolCommand.html#print_assumptions">print_assumptions</a></code></td>
-    <td><span>Print the list of the current assumptions.</span></td>
+    <td><code><a href="nltk.inference.api.TheoremToolCommand.html#print_assumptions" class="internal-link" title="nltk.inference.api.TheoremToolCommand.print_assumptions">print​_assumptions</a></code></td>
+    <td>Print the list of the current assumptions.</td>
   </tr><tr class="basemethod">
     
     <td>Method</td>
-    <td><code><a href="nltk.inference.api.TheoremToolCommand.html#retract_assumptions">retract_assumptions</a></code></td>
-    <td><span>Retract assumptions from the assumption list.</span></td>
+    <td><code><a href="nltk.inference.api.TheoremToolCommand.html#retract_assumptions" class="internal-link" title="nltk.inference.api.TheoremToolCommand.retract_assumptions">retract​_assumptions</a></code></td>
+    <td>Retract assumptions from the assumption list.</td>
   </tr>
 </table>
           
@@ -420,7 +433,7 @@ result, we will treat self._result as meaning "proof found/no model found".</p>
     </a>
   </div>
   <div class="docstring functionBody">
-    <div class="interfaceinfo">overrides <code><a href="nltk.inference.api.BaseProverCommand.html#__init__">nltk.inference.api.BaseProverCommand.__init__</a></code></div>
+    <div class="interfaceinfo">overrides <code><a href="nltk.inference.api.BaseProverCommand.html#__init__" class="internal-link">nltk.inference.api.BaseProverCommand.__init__</a></code></div>
     
     <div><table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">prover:</span>Prover</td><td class="fieldArgDesc">The theorem tool to execute with the assumptions</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">modelbuilder</span></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">goal</span></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">assumptions</span></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr class="fieldStart"><td class="fieldName" colspan="2">See Also</td></tr><tr><td colspan="2"><tt class="rst-docutils literal">BaseTheoremToolCommand</tt></td></tr></table></div>
   </div>
@@ -442,7 +455,7 @@ result, we will treat self._result as meaning "proof found/no model found".</p>
     </a>
   </div>
   <div class="docstring functionBody">
-    <div class="interfaceinfo">overrides <code><a href="nltk.inference.api.BaseModelBuilderCommand.html#build_model">nltk.inference.api.BaseModelBuilderCommand.build_model</a></code></div>
+    <div class="interfaceinfo">overrides <code><a href="nltk.inference.api.BaseModelBuilderCommand.html#build_model" class="internal-link">nltk.inference.api.BaseModelBuilderCommand.build_model</a></code></div>
     
     <div>Attempt to build a model.  Store the result to prevent unnecessary
 re-building.</div>
@@ -465,7 +478,7 @@ re-building.</div>
     </a>
   </div>
   <div class="docstring functionBody">
-    <div class="interfaceinfo">overrides <code><a href="nltk.inference.api.BaseProverCommand.html#prove">nltk.inference.api.BaseProverCommand.prove</a></code></div>
+    <div class="interfaceinfo">overrides <code><a href="nltk.inference.api.BaseProverCommand.html#prove" class="internal-link">nltk.inference.api.BaseProverCommand.prove</a></code></div>
     
     <div>Perform the actual proof.  Store the result to prevent unnecessary
 re-proving.</div>
@@ -510,9 +523,10 @@ re-proving.</div>
     </a>
   </div>
   <div class="functionBody">
-    <div class="interfaceinfo">overrides <code><a href="nltk.inference.api.BaseProverCommand.html#_result">nltk.inference.api.BaseProverCommand._result</a></code></div>
+    <div class="interfaceinfo">overrides <code><a href="nltk.inference.api.BaseProverCommand.html#_result" class="internal-link">nltk.inference.api.BaseProverCommand._result</a></code></div>
     
     <div>A holder for the result, to prevent unnecessary re-proving</div>
+    
   </div>
 </div>
 
@@ -524,7 +538,7 @@ re-proving.</div>
   <div class="container">
     <a href="index.html">API Documentation</a> for <a href="http://www.nltk.org/" class="projecthome">nltk-3.6.2</a>,
   generated by <a href="https://github.com/twisted/pydoctor/">pydoctor</a>
-    21.2.2 at 2022-01-06 17:36:51.
+    22.2.2.dev0 at 2022-03-04 05:57:24.
   </div>
 </footer>
 

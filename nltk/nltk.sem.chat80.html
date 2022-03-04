@@ -7,7 +7,7 @@
   <head>
     
     <title>nltk.sem.chat80</title>
-    <meta name="generator" content="pydoctor 21.2.2"> 
+    <meta name="generator" content="pydoctor 22.2.2.dev0"> 
         
     </meta>
     <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
@@ -44,69 +44,82 @@
           Names
         </a>
 
-        <form action="search-results.html" id="search-box-container">
+        <div id="search-box-container">
           <div class="input-group">
-            <input id="search-box" name="search-query" placeholder="Search..." aria-label="Search" minlength="2" class="form-control" />
+            <input id="search-box" type="search" name="search-query" placeholder="Search..." aria-label="Search" minlength="2" class="form-control" autocomplete="off" />
+            
             <span class="input-group-btn">
-              <button class="btn btn-default" type="submit" title="Search"><img src="fonts/search.svg" alt="Search!" /></button>
-              <a class="btn btn-default" id="search-help-button" title="Help" onclick="toggleSearchHelpText()"><img src="fonts/info.svg" alt="Help!" /></a>
+              <a style="display: none;" class="btn btn-default" id="search-clear-button" title="Clear" onclick="clearSearch()"><img src="fonts/x-circle.svg" alt="Clear" /></a>
+              <a class="btn btn-default" id="search-help-button" title="Help" onclick="toggleSearchHelpText()"><img src="fonts/info.svg" alt="Help" /></a>
             </span>
           </div>
-        </form>
+        </div>
 
-        <div class="rst-admonition hint" id="search-help-box">
+      </div>
+
+      <div id="search-results-container" style="display: none;">
+        <div>
+          <span class="label label-default" id="search-docstrings-button">
+            <a title="Search in docstrings" onclick="toggleSearchInDocstrings()">search in docstrings</a></span>
+        </div>
+
+        <noscript>
+            <h1>Cannot search: JavaScript is not supported/enabled in your browser.</h1>
+        </noscript>
+
+        <div class="hint" id="search-help-box">
           <p class="rst-last">
       
             Search bar offers the following options:
             <ul>   
                 <li>
                   <strong>Term presence.</strong> The below example searches for documents that 
-                    must contain “foo”, might contain “bar” and must not contain “baz”:
-                  <br /> <code>'+foo bar -baz'</code>
+                    must contain “foo”, might contain “bar” and must not contain “baz”: <code>+foo bar -baz</code>
                 </li> 
 
                 <li>
-                  <strong>Wildcards.</strong> The below example searches for documents with words beginning with “foo”:
-                  <br /> <code>'foo*'</code>
+                  <strong>Wildcards.</strong> The below example searches for documents with words beginning with “foo”: <code>foo*</code>
                 </li> 
 
                 <li>
-                  <strong>Search in specific fields.</strong> The following search matches all documents 
-                  that contains "foo" in their full dotted name and with “bar” in any field:
-                  <br /> <code>'+fullName:*foo* +bar'</code>
+                  <strong>Search in specific fields.</strong> The following search matches all objects 
+                  in "twisted.mail" that matches “search”: <code>+qname:twisted.mail.* +search</code>
 
                   <p>
-                    Possible fields: 'name', 'docstring', 'fullName'.
+                    Possible fields: 'name', 'qname' (fully qualified name), 'docstring', and 'kind'.
+                    Last two fields are only applicable if "search in docstrings" is enabled.
                   </p>
                 </li>
 
                 <li>
                   <strong>Fuzzy matches.</strong> The following search matches all documents 
-                  that have a word within 1 edit distance of “foo”:
-                  <br /> <code>'foo~1'</code>
+                  that have a word within 1 edit distance of “foo”: <code>foo~1</code>
                 </li>
             </ul>
 
           </p>
         </div>
 
-      </div>
+        <div id="search-status"> </div>
+        
+        <div class="warning" id="search-warn-box" style="display: none;">
+          <p class="rst-last"><span id="search-warn"></span></p>
+        </div>
 
+        <table id="search-results">
+          <!-- Filled dynamically by JS -->
+        </table>
+        
+        <div style="margin-top: 8px;">
+          <p>Results provided by <a href="https://lunrjs.com">Lunr.js</a></p>
+        </div>
+      </div>
 
     </div>
   </div>
 
-  <script>
- 
-    function toggleSearchHelpText() {
-        document.body.classList.toggle("search-help-hidden");
-    }
-    // Init search and help text
-    document.getElementById('search-box-container').style.display = 'block';
-    document.getElementById('search-help-box').style.display = 'block';
-    document.body.classList.add("search-help-hidden");
-
-  </script>
+  <script src="ajax.js" type="text/javascript"></script>
+  <script src="search.js" type="text/javascript"></script>
 
 </nav>
 
@@ -115,7 +128,7 @@
     <div class="container">
 
       <div class="page-header">
-        <h1 class="module"><code><code><a href="nltk.html">nltk</a></code><wbr></wbr>.<code><a href="nltk.sem.html">sem</a></code><wbr></wbr>.<code><a href="nltk.sem.chat80.html">chat80</a></code></code></h1>
+        <h1 class="module"><code><code><a href="index.html" class="internal-link">nltk</a></code><wbr></wbr>.<code><a href="nltk.sem.html" class="internal-link" title="nltk.sem">sem</a></code><wbr></wbr>.<code><a href="nltk.sem.chat80.html" class="internal-link" title="nltk.sem.chat80">chat80</a></code></code></h1>
         <div id="showPrivate">
           <button class="btn btn-link" onclick="togglePrivate()">Toggle Private API</button>
         </div>
@@ -132,7 +145,7 @@
 
       <div class="moduleDocstring">
         <div><div class="rst-section" id="rst-overview">
-<h1 class="heading">Overview</h1>
+<h2 class="heading">Overview</h2>
 <p>Chat-80 was a natural language system which allowed the user to
 interrogate a Prolog knowledge base in the domain of world
 geography. It was developed in the early '80s by Warren and Pereira; see
@@ -159,7 +172,7 @@ a set of Prolog rules have been omitted. The modified file is named
 it uses a list rather than a string in the second field.</p>
 </div>
 <div class="rst-section" id="rst-reading-chat-80-files">
-<h1 class="heading">Reading Chat-80 Files</h1>
+<h2 class="heading">Reading Chat-80 Files</h2>
 <p>Chat-80 relations are like tables in a relational database. The
 relation acts as the name of the table; the first argument acts as the
 'primary key'; and subsequent arguments are further fields in the
@@ -203,7 +216,7 @@ relational schema is <tt class="rst-docutils literal"><span class="pre">city['sc
 discussed in the next section.</p>
 </div>
 <div class="rst-section" id="rst-concepts">
-<h1 class="heading">Concepts</h1>
+<h2 class="heading">Concepts</h2>
 <p>In order to encapsulate the results of the extraction, a class of
 <tt class="rst-docutils literal">Concept</tt> objects is introduced.  A <tt class="rst-docutils literal">Concept</tt> object has a number of
 attributes, in particular a <tt class="rst-docutils literal">prefLabel</tt> and <tt class="rst-docutils literal">extension</tt>, which make
@@ -217,13 +230,13 @@ indicated in the relation metadata, as indicated earlier.</p>
 <tt class="rst-docutils literal">Valuation</tt> object.</p>
 </div>
 <div class="rst-section" id="rst-persistence">
-<h1 class="heading">Persistence</h1>
+<h2 class="heading">Persistence</h2>
 <p>The functions <tt class="rst-docutils literal">val_dump</tt> and <tt class="rst-docutils literal">val_load</tt> are provided to allow a
 valuation to be stored in a persistent database and re-loaded, rather
 than having to be re-computed each time.</p>
 </div>
 <div class="rst-section" id="rst-individuals-and-lexical-items">
-<h1 class="heading">Individuals and Lexical Items</h1>
+<h2 class="heading">Individuals and Lexical Items</h2>
 <p>As well as deriving relations from the Chat-80 data, we also create a
 set of individual constants, one for each entity in the domain. The
 individual constants are string-identical to the entities. For
@@ -247,153 +260,153 @@ current directory.</p>
   <tr class="class">
     
     <td>Class</td>
-    <td><code><a href="nltk.sem.chat80.Concept.html">Concept</a></code></td>
-    <td><span>A Concept class, loosely based on SKOS (<a class="rst-reference external" href="http://www.w3.org/TR/swbp-skos-core-guide/" target="_top">http://www.w3.org/TR/swbp-skos-core-guide/</a>).</span></td>
+    <td><code><a href="nltk.sem.chat80.Concept.html" class="internal-link" title="nltk.sem.chat80.Concept">​Concept</a></code></td>
+    <td>A Concept class, loosely based on SKOS (<a class="rst-reference external" href="http://www.w3.org/TR/swbp-skos-core-guide/" target="_top">http://www.w3.org/TR/swbp-skos-core-guide/</a>).</td>
   </tr><tr class="function">
     
     <td>Function</td>
-    <td><code><a href="#binary_concept">binary_concept</a></code></td>
-    <td><span>Make a binary concept out of the primary key and another field in a record.</span></td>
+    <td><code><a href="#binary_concept" class="internal-link" title="nltk.sem.chat80.binary_concept">binary​_concept</a></code></td>
+    <td>Make a binary concept out of the primary key and another field in a record.</td>
   </tr><tr class="function">
     
     <td>Function</td>
-    <td><code><a href="#cities2table">cities2table</a></code></td>
-    <td><span>Convert a file of Prolog clauses into a database table.</span></td>
+    <td><code><a href="#cities2table" class="internal-link" title="nltk.sem.chat80.cities2table">cities2table</a></code></td>
+    <td>Convert a file of Prolog clauses into a database table.</td>
   </tr><tr class="function">
     
     <td>Function</td>
-    <td><code><a href="#clause2concepts">clause2concepts</a></code></td>
-    <td><span>Convert a file of Prolog clauses into a list of <tt class="rst-docutils literal">Concept</tt> objects.</span></td>
+    <td><code><a href="#clause2concepts" class="internal-link" title="nltk.sem.chat80.clause2concepts">clause2concepts</a></code></td>
+    <td>Convert a file of Prolog clauses into a list of <tt class="rst-docutils literal">Concept</tt> objects.</td>
   </tr><tr class="function">
     
     <td>Function</td>
-    <td><code><a href="#concepts">concepts</a></code></td>
-    <td><span>Build a list of concepts corresponding to the relation names in <tt class="rst-docutils literal">items</tt>.</span></td>
+    <td><code><a href="#concepts" class="internal-link" title="nltk.sem.chat80.concepts">concepts</a></code></td>
+    <td>Build a list of concepts corresponding to the relation names in <tt class="rst-docutils literal">items</tt>.</td>
   </tr><tr class="function">
     
     <td>Function</td>
-    <td><code><a href="#label_indivs">label_indivs</a></code></td>
-    <td><span>Assign individual constants to the individuals in the domain of a <tt class="rst-docutils literal">Valuation</tt>.</span></td>
+    <td><code><a href="#label_indivs" class="internal-link" title="nltk.sem.chat80.label_indivs">label​_indivs</a></code></td>
+    <td>Assign individual constants to the individuals in the domain of a <tt class="rst-docutils literal">Valuation</tt>.</td>
   </tr><tr class="function">
     
     <td>Function</td>
-    <td><code><a href="#main">main</a></code></td>
+    <td><code><a href="#main" class="internal-link" title="nltk.sem.chat80.main">main</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="function">
     
     <td>Function</td>
-    <td><code><a href="#make_lex">make_lex</a></code></td>
-    <td><span>Create lexical CFG rules for each individual symbol.</span></td>
+    <td><code><a href="#make_lex" class="internal-link" title="nltk.sem.chat80.make_lex">make​_lex</a></code></td>
+    <td>Create lexical CFG rules for each individual symbol.</td>
   </tr><tr class="function">
     
     <td>Function</td>
-    <td><code><a href="#make_valuation">make_valuation</a></code></td>
-    <td><span>Convert a list of <tt class="rst-docutils literal">Concept</tt> objects into a list of (label, extension) pairs; optionally create a <tt class="rst-docutils literal">Valuation</tt> object.</span></td>
+    <td><code><a href="#make_valuation" class="internal-link" title="nltk.sem.chat80.make_valuation">make​_valuation</a></code></td>
+    <td>Convert a list of <tt class="rst-docutils literal">Concept</tt> objects into a list of (label, extension) pairs; optionally create a <tt class="rst-docutils literal">Valuation</tt> object.</td>
   </tr><tr class="function">
     
     <td>Function</td>
-    <td><code><a href="#process_bundle">process_bundle</a></code></td>
-    <td><span>Given a list of relation metadata bundles, make a corresponding dictionary of concepts, indexed by the relation name.</span></td>
+    <td><code><a href="#process_bundle" class="internal-link" title="nltk.sem.chat80.process_bundle">process​_bundle</a></code></td>
+    <td>Given a list of relation metadata bundles, make a corresponding dictionary of concepts, indexed by the relation name.</td>
   </tr><tr class="function">
     
     <td>Function</td>
-    <td><code><a href="#sql_demo">sql_demo</a></code></td>
-    <td><span>Print out every row from the 'city.db' database.</span></td>
+    <td><code><a href="#sql_demo" class="internal-link" title="nltk.sem.chat80.sql_demo">sql​_demo</a></code></td>
+    <td>Print out every row from the 'city.db' database.</td>
   </tr><tr class="function">
     
     <td>Function</td>
-    <td><code><a href="#sql_query">sql_query</a></code></td>
+    <td><code><a href="#sql_query" class="internal-link" title="nltk.sem.chat80.sql_query">sql​_query</a></code></td>
     <td><span class="undocumented">No summary</span></td>
   </tr><tr class="function">
     
     <td>Function</td>
-    <td><code><a href="#unary_concept">unary_concept</a></code></td>
-    <td><span>Make a unary concept out of the primary key in a record.</span></td>
+    <td><code><a href="#unary_concept" class="internal-link" title="nltk.sem.chat80.unary_concept">unary​_concept</a></code></td>
+    <td>Make a unary concept out of the primary key in a record.</td>
   </tr><tr class="function">
     
     <td>Function</td>
-    <td><code><a href="#val_dump">val_dump</a></code></td>
-    <td><span>Make a <tt class="rst-docutils literal">Valuation</tt> from a list of relation metadata bundles and dump to persistent database.</span></td>
+    <td><code><a href="#val_dump" class="internal-link" title="nltk.sem.chat80.val_dump">val​_dump</a></code></td>
+    <td>Make a <tt class="rst-docutils literal">Valuation</tt> from a list of relation metadata bundles and dump to persistent database.</td>
   </tr><tr class="function">
     
     <td>Function</td>
-    <td><code><a href="#val_load">val_load</a></code></td>
-    <td><span>Load a <tt class="rst-docutils literal">Valuation</tt> from a persistent database.</span></td>
+    <td><code><a href="#val_load" class="internal-link" title="nltk.sem.chat80.val_load">val​_load</a></code></td>
+    <td>Load a <tt class="rst-docutils literal">Valuation</tt> from a persistent database.</td>
   </tr><tr class="variable">
     
     <td>Variable</td>
-    <td><code><a href="#borders">borders</a></code></td>
+    <td><code><a href="#borders" class="internal-link" title="nltk.sem.chat80.borders">borders</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="variable">
     
     <td>Variable</td>
-    <td><code><a href="#circle_of_lat">circle_of_lat</a></code></td>
+    <td><code><a href="#circle_of_lat" class="internal-link" title="nltk.sem.chat80.circle_of_lat">circle​_of​_lat</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="variable">
     
     <td>Variable</td>
-    <td><code><a href="#circle_of_long">circle_of_long</a></code></td>
+    <td><code><a href="#circle_of_long" class="internal-link" title="nltk.sem.chat80.circle_of_long">circle​_of​_long</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="variable">
     
     <td>Variable</td>
-    <td><code><a href="#city">city</a></code></td>
+    <td><code><a href="#city" class="internal-link" title="nltk.sem.chat80.city">city</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="variable">
     
     <td>Variable</td>
-    <td><code><a href="#contains">contains</a></code></td>
+    <td><code><a href="#contains" class="internal-link" title="nltk.sem.chat80.contains">contains</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="variable">
     
     <td>Variable</td>
-    <td><code><a href="#continent">continent</a></code></td>
+    <td><code><a href="#continent" class="internal-link" title="nltk.sem.chat80.continent">continent</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="variable">
     
     <td>Variable</td>
-    <td><code><a href="#country">country</a></code></td>
+    <td><code><a href="#country" class="internal-link" title="nltk.sem.chat80.country">country</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="variable">
     
     <td>Variable</td>
-    <td><code><a href="#item_metadata">item_metadata</a></code></td>
+    <td><code><a href="#item_metadata" class="internal-link" title="nltk.sem.chat80.item_metadata">item​_metadata</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="variable">
     
     <td>Variable</td>
-    <td><code><a href="#items">items</a></code></td>
+    <td><code><a href="#items" class="internal-link" title="nltk.sem.chat80.items">items</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="variable">
     
     <td>Variable</td>
-    <td><code><a href="#not_unary">not_unary</a></code></td>
+    <td><code><a href="#not_unary" class="internal-link" title="nltk.sem.chat80.not_unary">not​_unary</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="variable">
     
     <td>Variable</td>
-    <td><code><a href="#ocean">ocean</a></code></td>
+    <td><code><a href="#ocean" class="internal-link" title="nltk.sem.chat80.ocean">ocean</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="variable">
     
     <td>Variable</td>
-    <td><code><a href="#region">region</a></code></td>
+    <td><code><a href="#region" class="internal-link" title="nltk.sem.chat80.region">region</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="variable">
     
     <td>Variable</td>
-    <td><code><a href="#rels">rels</a></code></td>
+    <td><code><a href="#rels" class="internal-link" title="nltk.sem.chat80.rels">rels</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="variable">
     
     <td>Variable</td>
-    <td><code><a href="#sea">sea</a></code></td>
+    <td><code><a href="#sea" class="internal-link" title="nltk.sem.chat80.sea">sea</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="function private">
     
     <td>Function</td>
-    <td><code><a href="#_str2records">_str2records</a></code></td>
-    <td><span>Read a file into memory and convert each relation clause into a list.</span></td>
+    <td><code><a href="#_str2records" class="internal-link" title="nltk.sem.chat80._str2records">_str2records</a></code></td>
+    <td>Read a file into memory and convert each relation clause into a list.</td>
   </tr>
 </table>
         
@@ -461,7 +474,7 @@ schemas to be set as a parameter.</p>
 <pre class="rst-literal-block">
 cities2table('cities.pl', 'city', 'city.db', verbose=True, setup=True)
 </pre>
-<table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">filename:</span>str</td><td class="fieldArgDesc">filename containing the relations</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">rel_name:</span>str</td><td class="fieldArgDesc">name of the relation</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">dbname</span></td><td class="fieldArgDesc">filename of persistent store</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">verbose</span></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">setup</span></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">schema:</span>str</td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr></table></div>
+<table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">filename:</span>str</td><td class="fieldArgDesc">filename containing the relations</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">rel​_name:</span>str</td><td class="fieldArgDesc">name of the relation</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">dbname</span></td><td class="fieldArgDesc">filename of persistent store</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">verbose</span></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">setup</span></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">schema:</span>str</td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr></table></div>
   </div>
 </div><div class="basefunction">
   
@@ -483,7 +496,7 @@ cities2table('cities.pl', 'city', 'city.db', verbose=True, setup=True)
   <div class="docstring functionBody">
     
     
-    <div>Convert a file of Prolog clauses into a list of <tt class="rst-docutils literal">Concept</tt> objects.<table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">filename:</span>str</td><td class="fieldArgDesc">filename containing the relations</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">rel_name:</span>str</td><td class="fieldArgDesc">name of the relation</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">schema:</span>list</td><td class="fieldArgDesc">the schema used in a set of relational tuples</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">closures:</span>list</td><td class="fieldArgDesc">closure properties for the extension of the concept</td></tr><tr class="fieldStart"><td class="fieldName" colspan="2">Returns</td></tr><tr><td class="fieldArgContainer">list</td><td class="fieldArgDesc">a list of <tt class="rst-docutils literal">Concept</tt> objects</td></tr></table></div>
+    <div>Convert a file of Prolog clauses into a list of <tt class="rst-docutils literal">Concept</tt> objects.<table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">filename:</span>str</td><td class="fieldArgDesc">filename containing the relations</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">rel​_name:</span>str</td><td class="fieldArgDesc">name of the relation</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">schema:</span>list</td><td class="fieldArgDesc">the schema used in a set of relational tuples</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">closures:</span>list</td><td class="fieldArgDesc">closure properties for the extension of the concept</td></tr><tr class="fieldStart"><td class="fieldName" colspan="2">Returns</td></tr><tr><td class="fieldArgContainer">list</td><td class="fieldArgDesc">a list of <tt class="rst-docutils literal">Concept</tt> objects</td></tr></table></div>
   </div>
 </div><div class="basefunction">
   
@@ -496,7 +509,7 @@ cities2table('cities.pl', 'city', 'city.db', verbose=True, setup=True)
   </a>
   <div class="functionHeader">
     
-    <span class="py-keyword">def</span> <span class="py-defname">concepts</span>(items=items):
+    <span class="py-keyword">def</span> <span class="py-defname">concepts</span>(items=<a href="#items" class="internal-link" title="nltk.sem.chat80.items">items</a>):
     <a class="sourceLink" href="https://github.com/nltk/nltk/tree/3.6.2/nltk/sem/chat80.py#L719">
       
       (source)
@@ -767,6 +780,7 @@ The suffix '.db' should be omitted from the name.</td></tr></table></div>
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    
   </div>
 </div><div class="basevariable">
   
@@ -789,6 +803,7 @@ The suffix '.db' should be omitted from the name.</td></tr></table></div>
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    
   </div>
 </div><div class="basevariable">
   
@@ -811,6 +826,7 @@ The suffix '.db' should be omitted from the name.</td></tr></table></div>
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    
   </div>
 </div><div class="basevariable">
   
@@ -833,6 +849,7 @@ The suffix '.db' should be omitted from the name.</td></tr></table></div>
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    
   </div>
 </div><div class="basevariable">
   
@@ -855,6 +872,7 @@ The suffix '.db' should be omitted from the name.</td></tr></table></div>
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    
   </div>
 </div><div class="basevariable">
   
@@ -877,6 +895,7 @@ The suffix '.db' should be omitted from the name.</td></tr></table></div>
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    
   </div>
 </div><div class="basevariable">
   
@@ -899,6 +918,7 @@ The suffix '.db' should be omitted from the name.</td></tr></table></div>
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    
   </div>
 </div><div class="basevariable">
   
@@ -921,6 +941,7 @@ The suffix '.db' should be omitted from the name.</td></tr></table></div>
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    
   </div>
 </div><div class="basevariable">
   
@@ -943,6 +964,7 @@ The suffix '.db' should be omitted from the name.</td></tr></table></div>
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    
   </div>
 </div><div class="basevariable">
   
@@ -965,6 +987,7 @@ The suffix '.db' should be omitted from the name.</td></tr></table></div>
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    
   </div>
 </div><div class="basevariable">
   
@@ -987,6 +1010,7 @@ The suffix '.db' should be omitted from the name.</td></tr></table></div>
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    
   </div>
 </div><div class="basevariable">
   
@@ -1009,6 +1033,7 @@ The suffix '.db' should be omitted from the name.</td></tr></table></div>
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    
   </div>
 </div><div class="basevariable">
   
@@ -1031,6 +1056,7 @@ The suffix '.db' should be omitted from the name.</td></tr></table></div>
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    
   </div>
 </div><div class="basevariable">
   
@@ -1053,6 +1079,7 @@ The suffix '.db' should be omitted from the name.</td></tr></table></div>
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    
   </div>
 </div><div class="basefunction private">
   
@@ -1086,7 +1113,7 @@ The suffix '.db' should be omitted from the name.</td></tr></table></div>
   <div class="container">
     <a href="index.html">API Documentation</a> for <a href="http://www.nltk.org/" class="projecthome">nltk-3.6.2</a>,
   generated by <a href="https://github.com/twisted/pydoctor/">pydoctor</a>
-    21.2.2 at 2022-01-06 17:36:51.
+    22.2.2.dev0 at 2022-03-04 05:57:24.
   </div>
 </footer>
 

@@ -7,7 +7,7 @@
   <head>
     
     <title>nltk.corpus.reader.childes.CHILDESCorpusReader</title>
-    <meta name="generator" content="pydoctor 21.2.2"> 
+    <meta name="generator" content="pydoctor 22.2.2.dev0"> 
         
     </meta>
     <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
@@ -44,69 +44,82 @@
           Names
         </a>
 
-        <form action="search-results.html" id="search-box-container">
+        <div id="search-box-container">
           <div class="input-group">
-            <input id="search-box" name="search-query" placeholder="Search..." aria-label="Search" minlength="2" class="form-control" />
+            <input id="search-box" type="search" name="search-query" placeholder="Search..." aria-label="Search" minlength="2" class="form-control" autocomplete="off" />
+            
             <span class="input-group-btn">
-              <button class="btn btn-default" type="submit" title="Search"><img src="fonts/search.svg" alt="Search!" /></button>
-              <a class="btn btn-default" id="search-help-button" title="Help" onclick="toggleSearchHelpText()"><img src="fonts/info.svg" alt="Help!" /></a>
+              <a style="display: none;" class="btn btn-default" id="search-clear-button" title="Clear" onclick="clearSearch()"><img src="fonts/x-circle.svg" alt="Clear" /></a>
+              <a class="btn btn-default" id="search-help-button" title="Help" onclick="toggleSearchHelpText()"><img src="fonts/info.svg" alt="Help" /></a>
             </span>
           </div>
-        </form>
+        </div>
 
-        <div class="rst-admonition hint" id="search-help-box">
+      </div>
+
+      <div id="search-results-container" style="display: none;">
+        <div>
+          <span class="label label-default" id="search-docstrings-button">
+            <a title="Search in docstrings" onclick="toggleSearchInDocstrings()">search in docstrings</a></span>
+        </div>
+
+        <noscript>
+            <h1>Cannot search: JavaScript is not supported/enabled in your browser.</h1>
+        </noscript>
+
+        <div class="hint" id="search-help-box">
           <p class="rst-last">
       
             Search bar offers the following options:
             <ul>   
                 <li>
                   <strong>Term presence.</strong> The below example searches for documents that 
-                    must contain “foo”, might contain “bar” and must not contain “baz”:
-                  <br /> <code>'+foo bar -baz'</code>
+                    must contain “foo”, might contain “bar” and must not contain “baz”: <code>+foo bar -baz</code>
                 </li> 
 
                 <li>
-                  <strong>Wildcards.</strong> The below example searches for documents with words beginning with “foo”:
-                  <br /> <code>'foo*'</code>
+                  <strong>Wildcards.</strong> The below example searches for documents with words beginning with “foo”: <code>foo*</code>
                 </li> 
 
                 <li>
-                  <strong>Search in specific fields.</strong> The following search matches all documents 
-                  that contains "foo" in their full dotted name and with “bar” in any field:
-                  <br /> <code>'+fullName:*foo* +bar'</code>
+                  <strong>Search in specific fields.</strong> The following search matches all objects 
+                  in "twisted.mail" that matches “search”: <code>+qname:twisted.mail.* +search</code>
 
                   <p>
-                    Possible fields: 'name', 'docstring', 'fullName'.
+                    Possible fields: 'name', 'qname' (fully qualified name), 'docstring', and 'kind'.
+                    Last two fields are only applicable if "search in docstrings" is enabled.
                   </p>
                 </li>
 
                 <li>
                   <strong>Fuzzy matches.</strong> The following search matches all documents 
-                  that have a word within 1 edit distance of “foo”:
-                  <br /> <code>'foo~1'</code>
+                  that have a word within 1 edit distance of “foo”: <code>foo~1</code>
                 </li>
             </ul>
 
           </p>
         </div>
 
-      </div>
+        <div id="search-status"> </div>
+        
+        <div class="warning" id="search-warn-box" style="display: none;">
+          <p class="rst-last"><span id="search-warn"></span></p>
+        </div>
 
+        <table id="search-results">
+          <!-- Filled dynamically by JS -->
+        </table>
+        
+        <div style="margin-top: 8px;">
+          <p>Results provided by <a href="https://lunrjs.com">Lunr.js</a></p>
+        </div>
+      </div>
 
     </div>
   </div>
 
-  <script>
- 
-    function toggleSearchHelpText() {
-        document.body.classList.toggle("search-help-hidden");
-    }
-    // Init search and help text
-    document.getElementById('search-box-container').style.display = 'block';
-    document.getElementById('search-help-box').style.display = 'block';
-    document.body.classList.add("search-help-hidden");
-
-  </script>
+  <script src="ajax.js" type="text/javascript"></script>
+  <script src="search.js" type="text/javascript"></script>
 
 </nav>
 
@@ -115,7 +128,7 @@
     <div class="container">
 
       <div class="page-header">
-        <h1 class="class"><code><code><a href="nltk.html">nltk</a></code><wbr></wbr>.<code><a href="nltk.corpus.html">corpus</a></code><wbr></wbr>.<code><a href="nltk.corpus.reader.html">reader</a></code><wbr></wbr>.<code><a href="nltk.corpus.reader.childes.html">childes</a></code><wbr></wbr>.<code><a href="nltk.corpus.reader.childes.CHILDESCorpusReader.html">CHILDESCorpusReader</a></code></code></h1>
+        <h1 class="class"><code><code><a href="index.html" class="internal-link">nltk</a></code><wbr></wbr>.<code><a href="nltk.corpus.html" class="internal-link" title="nltk.corpus">corpus</a></code><wbr></wbr>.<code><a href="nltk.corpus.reader.html" class="internal-link" title="nltk.corpus.reader">reader</a></code><wbr></wbr>.<code><a href="nltk.corpus.reader.childes.html" class="internal-link" title="nltk.corpus.reader.childes">childes</a></code><wbr></wbr>.<code><a href="nltk.corpus.reader.childes.CHILDESCorpusReader.html" class="internal-link" title="nltk.corpus.reader.childes.CHILDESCorpusReader">CHILDESCorpusReader</a></code></code></h1>
         <div id="showPrivate">
           <button class="btn btn-link" onclick="togglePrivate()">Toggle Private API</button>
         </div>
@@ -126,12 +139,14 @@
       </div>
 
       <div class="extrasDocstring">
-        <p><code><span class="py-keyword">class</span> <span class="py-defname">CHILDESCorpusReader</span>(<a href="nltk.corpus.reader.xmldocs.XMLCorpusReader.html" title="nltk.corpus.reader.xmldocs.XMLCorpusReader">XMLCorpusReader</a>): <a href="https://github.com/nltk/nltk/tree/3.6.2/nltk/corpus/reader/childes.py#L27" class="sourceLink">(source)</a></code></p>
+        <p><code><span class="py-keyword">class</span> <span class="py-defname">CHILDESCorpusReader</span>(<a href="nltk.corpus.reader.xmldocs.XMLCorpusReader.html" class="internal-link" title="nltk.corpus.reader.xmldocs.XMLCorpusReader">XMLCorpusReader</a>): <a href="https://github.com/nltk/nltk/tree/3.6.2/nltk/corpus/reader/childes.py#L27" class="sourceLink">(source)</a></code></p>
         <p><a href="classIndex.html#nltk.corpus.reader.childes.CHILDESCorpusReader">View In Hierarchy</a></p>
       </div>
 
       <div class="moduleDocstring">
-        <div><p>Corpus reader for the XML version of the CHILDES corpus. The CHILDES corpus is available at ``https://childes.talkbank.org/``. The XML version of CHILDES is located at ``https://childes.talkbank.org/data-xml/``. Copy the needed parts of the CHILDES XML corpus into the NLTK data directory (``nltk_data/corpora/CHILDES/``).</p><p>For access to the file text use the usual nltk functions, ``words()``, ``sents()``, ``tagged_words()`` and ``tagged_sents()``.</p></div>
+        <div><p>Corpus reader for the XML version of the CHILDES corpus. The CHILDES corpus is available at ``https://childes.talkbank.org/``. The XML version of CHILDES is located at ``https://childes.talkbank.org/data-xml/``. Copy the needed parts of the CHILDES XML corpus into the NLTK data directory (``nltk_data/corpora/CHILDES/``).</p>
+<p>For access to the file text use the usual nltk functions, ``words()``, ``sents()``, ``tagged_words()`` and ``tagged_sents()``.</p>
+</div>
       </div>
 
       <div id="splitTables">
@@ -141,98 +156,98 @@
   <tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#__init__">__init__</a></code></td>
+    <td><code><a href="#__init__" class="internal-link" title="nltk.corpus.reader.childes.CHILDESCorpusReader.__init__">__init__</a></code></td>
     <td><span class="undocumented">No summary</span></td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#age">age</a></code></td>
-    <td><span>:return: the given file(s) as string or int :rtype: list or int</span></td>
+    <td><code><a href="#age" class="internal-link" title="nltk.corpus.reader.childes.CHILDESCorpusReader.age">age</a></code></td>
+    <td>:return: the given file(s) as string or int :rtype: list or int</td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#convert_age">convert_age</a></code></td>
-    <td><span>Caclculate age in months from a string in CHILDES format</span></td>
+    <td><code><a href="#convert_age" class="internal-link" title="nltk.corpus.reader.childes.CHILDESCorpusReader.convert_age">convert​_age</a></code></td>
+    <td>Caclculate age in months from a string in CHILDES format</td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#corpus">corpus</a></code></td>
-    <td><span>:return: the given file(s) as a dict of ``(corpus_property_key, value)`` :rtype: list(dict)</span></td>
+    <td><code><a href="#corpus" class="internal-link" title="nltk.corpus.reader.childes.CHILDESCorpusReader.corpus">corpus</a></code></td>
+    <td>:return: the given file(s) as a dict of ``(corpus_property_key, value)`` :rtype: list(dict)</td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#MLU">MLU</a></code></td>
-    <td><span>:return: the given file(s) as a floating number :rtype: list(float)</span></td>
+    <td><code><a href="#MLU" class="internal-link" title="nltk.corpus.reader.childes.CHILDESCorpusReader.MLU">MLU</a></code></td>
+    <td>:return: the given file(s) as a floating number :rtype: list(float)</td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#participants">participants</a></code></td>
-    <td><span>:return: the given file(s) as a dict of ``(participant_property_key, value)`` :rtype: list(dict)</span></td>
+    <td><code><a href="#participants" class="internal-link" title="nltk.corpus.reader.childes.CHILDESCorpusReader.participants">participants</a></code></td>
+    <td>:return: the given file(s) as a dict of ``(participant_property_key, value)`` :rtype: list(dict)</td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#sents">sents</a></code></td>
-    <td><span>:return: the given file(s) as a list of sentences or utterances, each encoded as a list of word strings. :rtype: list(list(str))</span></td>
+    <td><code><a href="#sents" class="internal-link" title="nltk.corpus.reader.childes.CHILDESCorpusReader.sents">sents</a></code></td>
+    <td>:return: the given file(s) as a list of sentences or utterances, each encoded as a list of word strings. :rtype: list(list(str))</td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#tagged_sents">tagged_sents</a></code></td>
-    <td><span>:return: the given file(s) as a list of sentences, each encoded as a list of ``(word,tag)`` tuples. :rtype: list(list(tuple(str,str)))</span></td>
+    <td><code><a href="#tagged_sents" class="internal-link" title="nltk.corpus.reader.childes.CHILDESCorpusReader.tagged_sents">tagged​_sents</a></code></td>
+    <td>:return: the given file(s) as a list of sentences, each encoded as a list of ``(word,tag)`` tuples. :rtype: list(list(tuple(str,str)))</td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#tagged_words">tagged_words</a></code></td>
+    <td><code><a href="#tagged_words" class="internal-link" title="nltk.corpus.reader.childes.CHILDESCorpusReader.tagged_words">tagged​_words</a></code></td>
     <td><span class="undocumented">No summary</span></td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#webview_file">webview_file</a></code></td>
-    <td><span>Map a corpus file to its web version on the CHILDES website, and open it in a web browser.</span></td>
+    <td><code><a href="#webview_file" class="internal-link" title="nltk.corpus.reader.childes.CHILDESCorpusReader.webview_file">webview​_file</a></code></td>
+    <td>Map a corpus file to its web version on the CHILDES website, and open it in a web browser.</td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#words">words</a></code></td>
-    <td><span>:return: the given file(s) as a list of words :rtype: list(str)</span></td>
+    <td><code><a href="#words" class="internal-link" title="nltk.corpus.reader.childes.CHILDESCorpusReader.words">words</a></code></td>
+    <td>:return: the given file(s) as a list of words :rtype: list(str)</td>
   </tr><tr class="classvariable">
     
     <td>Class Variable</td>
-    <td><code><a href="#childes_url_base">childes_url_base</a></code></td>
+    <td><code><a href="#childes_url_base" class="internal-link" title="nltk.corpus.reader.childes.CHILDESCorpusReader.childes_url_base">childes​_url​_base</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method private">
     
     <td>Method</td>
-    <td><code><a href="#_get_age">_get_age</a></code></td>
+    <td><code><a href="#_get_age" class="internal-link" title="nltk.corpus.reader.childes.CHILDESCorpusReader._get_age">_get​_age</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method private">
     
     <td>Method</td>
-    <td><code><a href="#_get_corpus">_get_corpus</a></code></td>
+    <td><code><a href="#_get_corpus" class="internal-link" title="nltk.corpus.reader.childes.CHILDESCorpusReader._get_corpus">_get​_corpus</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method private">
     
     <td>Method</td>
-    <td><code><a href="#_get_participants">_get_participants</a></code></td>
+    <td><code><a href="#_get_participants" class="internal-link" title="nltk.corpus.reader.childes.CHILDESCorpusReader._get_participants">_get​_participants</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method private">
     
     <td>Method</td>
-    <td><code><a href="#_get_words">_get_words</a></code></td>
+    <td><code><a href="#_get_words" class="internal-link" title="nltk.corpus.reader.childes.CHILDESCorpusReader._get_words">_get​_words</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method private">
     
     <td>Method</td>
-    <td><code><a href="#_getMLU">_getMLU</a></code></td>
+    <td><code><a href="#_getMLU" class="internal-link" title="nltk.corpus.reader.childes.CHILDESCorpusReader._getMLU">_get​MLU</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="instancevariable private">
     
     <td>Instance Variable</td>
-    <td><code><a href="#_lazy">_lazy</a></code></td>
+    <td><code><a href="#_lazy" class="internal-link" title="nltk.corpus.reader.childes.CHILDESCorpusReader._lazy">_lazy</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr>
 </table>
         
           <p class="inheritedFrom">
-            Inherited from <code><a href="nltk.corpus.reader.xmldocs.XMLCorpusReader.html">XMLCorpusReader</a></code>:
+            Inherited from <code><a href="nltk.corpus.reader.xmldocs.XMLCorpusReader.html" class="internal-link" title="nltk.corpus.reader.xmldocs.XMLCorpusReader">XMLCorpusReader</a></code>:
           </p>
           <table class="children sortable" id="id277">
   
@@ -240,23 +255,23 @@
   <tr class="basemethod">
     
     <td>Method</td>
-    <td><code><a href="nltk.corpus.reader.xmldocs.XMLCorpusReader.html#raw">raw</a></code></td>
+    <td><code><a href="nltk.corpus.reader.xmldocs.XMLCorpusReader.html#raw" class="internal-link" title="nltk.corpus.reader.xmldocs.XMLCorpusReader.raw">raw</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="basemethod">
     
     <td>Method</td>
-    <td><code><a href="nltk.corpus.reader.xmldocs.XMLCorpusReader.html#xml">xml</a></code></td>
+    <td><code><a href="nltk.corpus.reader.xmldocs.XMLCorpusReader.html#xml" class="internal-link" title="nltk.corpus.reader.xmldocs.XMLCorpusReader.xml">xml</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="baseinstancevariable private">
     
     <td>Instance Variable</td>
-    <td><code><a href="nltk.corpus.reader.xmldocs.XMLCorpusReader.html#_wrap_etree">_wrap_etree</a></code></td>
+    <td><code><a href="nltk.corpus.reader.xmldocs.XMLCorpusReader.html#_wrap_etree" class="internal-link" title="nltk.corpus.reader.xmldocs.XMLCorpusReader._wrap_etree">_wrap​_etree</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr>
 </table>
           
           <p class="inheritedFrom">
-            Inherited from <code><a href="nltk.corpus.reader.api.CorpusReader.html">CorpusReader</a></code> (via <code><a href="nltk.corpus.reader.xmldocs.XMLCorpusReader.html">XMLCorpusReader</a></code>):
+            Inherited from <code><a href="nltk.corpus.reader.api.CorpusReader.html" class="internal-link" title="nltk.corpus.reader.api.CorpusReader">CorpusReader</a></code> (via <code><a href="nltk.corpus.reader.xmldocs.XMLCorpusReader.html" class="internal-link" title="nltk.corpus.reader.xmldocs.XMLCorpusReader">XMLCorpusReader</a></code>):
           </p>
           <table class="children sortable" id="id278">
   
@@ -264,82 +279,82 @@
   <tr class="basemethod">
     
     <td>Method</td>
-    <td><code><a href="nltk.corpus.reader.api.CorpusReader.html#__repr__">__repr__</a></code></td>
+    <td><code><a href="nltk.corpus.reader.api.CorpusReader.html#__repr__" class="internal-link" title="nltk.corpus.reader.api.CorpusReader.__repr__">__repr__</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="basemethod">
     
     <td>Method</td>
-    <td><code><a href="nltk.corpus.reader.api.CorpusReader.html#abspath">abspath</a></code></td>
-    <td><span>Return the absolute path for the given file.</span></td>
+    <td><code><a href="nltk.corpus.reader.api.CorpusReader.html#abspath" class="internal-link" title="nltk.corpus.reader.api.CorpusReader.abspath">abspath</a></code></td>
+    <td>Return the absolute path for the given file.</td>
   </tr><tr class="basemethod">
     
     <td>Method</td>
-    <td><code><a href="nltk.corpus.reader.api.CorpusReader.html#abspaths">abspaths</a></code></td>
-    <td><span>Return a list of the absolute paths for all fileids in this corpus; or for the given list of fileids, if specified.</span></td>
+    <td><code><a href="nltk.corpus.reader.api.CorpusReader.html#abspaths" class="internal-link" title="nltk.corpus.reader.api.CorpusReader.abspaths">abspaths</a></code></td>
+    <td>Return a list of the absolute paths for all fileids in this corpus; or for the given list of fileids, if specified.</td>
   </tr><tr class="basemethod">
     
     <td>Method</td>
-    <td><code><a href="nltk.corpus.reader.api.CorpusReader.html#citation">citation</a></code></td>
-    <td><span>Return the contents of the corpus citation.bib file, if it exists.</span></td>
+    <td><code><a href="nltk.corpus.reader.api.CorpusReader.html#citation" class="internal-link" title="nltk.corpus.reader.api.CorpusReader.citation">citation</a></code></td>
+    <td>Return the contents of the corpus citation.bib file, if it exists.</td>
   </tr><tr class="basemethod">
     
     <td>Method</td>
-    <td><code><a href="nltk.corpus.reader.api.CorpusReader.html#encoding">encoding</a></code></td>
-    <td><span>Return the unicode encoding for the given corpus file, if known. If the encoding is unknown, or if the given file should be processed using byte strings (str), then return None.</span></td>
+    <td><code><a href="nltk.corpus.reader.api.CorpusReader.html#encoding" class="internal-link" title="nltk.corpus.reader.api.CorpusReader.encoding">encoding</a></code></td>
+    <td>Return the unicode encoding for the given corpus file, if known. If the encoding is unknown, or if the given file should be processed using byte strings (str), then return None.</td>
   </tr><tr class="basemethod">
     
     <td>Method</td>
-    <td><code><a href="nltk.corpus.reader.api.CorpusReader.html#ensure_loaded">ensure_loaded</a></code></td>
+    <td><code><a href="nltk.corpus.reader.api.CorpusReader.html#ensure_loaded" class="internal-link" title="nltk.corpus.reader.api.CorpusReader.ensure_loaded">ensure​_loaded</a></code></td>
     <td><span class="undocumented">No summary</span></td>
   </tr><tr class="basemethod">
     
     <td>Method</td>
-    <td><code><a href="nltk.corpus.reader.api.CorpusReader.html#fileids">fileids</a></code></td>
-    <td><span>Return a list of file identifiers for the fileids that make up this corpus.</span></td>
+    <td><code><a href="nltk.corpus.reader.api.CorpusReader.html#fileids" class="internal-link" title="nltk.corpus.reader.api.CorpusReader.fileids">fileids</a></code></td>
+    <td>Return a list of file identifiers for the fileids that make up this corpus.</td>
   </tr><tr class="basemethod">
     
     <td>Method</td>
-    <td><code><a href="nltk.corpus.reader.api.CorpusReader.html#license">license</a></code></td>
-    <td><span>Return the contents of the corpus LICENSE file, if it exists.</span></td>
+    <td><code><a href="nltk.corpus.reader.api.CorpusReader.html#license" class="internal-link" title="nltk.corpus.reader.api.CorpusReader.license">license</a></code></td>
+    <td>Return the contents of the corpus LICENSE file, if it exists.</td>
   </tr><tr class="basemethod">
     
     <td>Method</td>
-    <td><code><a href="nltk.corpus.reader.api.CorpusReader.html#open">open</a></code></td>
-    <td><span>Return an open stream that can be used to read the given file. If the file's encoding is not None, then the stream will automatically decode the file's contents into unicode.</span></td>
+    <td><code><a href="nltk.corpus.reader.api.CorpusReader.html#open" class="internal-link" title="nltk.corpus.reader.api.CorpusReader.open">open</a></code></td>
+    <td>Return an open stream that can be used to read the given file. If the file's encoding is not None, then the stream will automatically decode the file's contents into unicode.</td>
   </tr><tr class="basemethod">
     
     <td>Method</td>
-    <td><code><a href="nltk.corpus.reader.api.CorpusReader.html#readme">readme</a></code></td>
-    <td><span>Return the contents of the corpus README file, if it exists.</span></td>
+    <td><code><a href="nltk.corpus.reader.api.CorpusReader.html#readme" class="internal-link" title="nltk.corpus.reader.api.CorpusReader.readme">readme</a></code></td>
+    <td>Return the contents of the corpus README file, if it exists.</td>
   </tr><tr class="baseclassvariable">
     
     <td>Class Variable</td>
-    <td><code><a href="nltk.corpus.reader.api.CorpusReader.html#root">root</a></code></td>
+    <td><code><a href="nltk.corpus.reader.api.CorpusReader.html#root" class="internal-link" title="nltk.corpus.reader.api.CorpusReader.root">root</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="basemethod private">
     
     <td>Method</td>
-    <td><code><a href="nltk.corpus.reader.api.CorpusReader.html#_get_root">_get_root</a></code></td>
+    <td><code><a href="nltk.corpus.reader.api.CorpusReader.html#_get_root" class="internal-link" title="nltk.corpus.reader.api.CorpusReader._get_root">_get​_root</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="baseinstancevariable private">
     
     <td>Instance Variable</td>
-    <td><code><a href="nltk.corpus.reader.api.CorpusReader.html#_encoding">_encoding</a></code></td>
-    <td><span>The default unicode encoding for the fileids that make up this corpus.  If <tt class="rst-docutils literal">encoding</tt> is None, then the file contents are processed using byte strings.</span></td>
+    <td><code><a href="nltk.corpus.reader.api.CorpusReader.html#_encoding" class="internal-link" title="nltk.corpus.reader.api.CorpusReader._encoding">_encoding</a></code></td>
+    <td>The default unicode encoding for the fileids that make up this corpus.  If <tt class="rst-docutils literal">encoding</tt> is None, then the file contents are processed using byte strings.</td>
   </tr><tr class="baseinstancevariable private">
     
     <td>Instance Variable</td>
-    <td><code><a href="nltk.corpus.reader.api.CorpusReader.html#_fileids">_fileids</a></code></td>
-    <td><span>A list of the relative paths for the fileids that make up this corpus.</span></td>
+    <td><code><a href="nltk.corpus.reader.api.CorpusReader.html#_fileids" class="internal-link" title="nltk.corpus.reader.api.CorpusReader._fileids">_fileids</a></code></td>
+    <td>A list of the relative paths for the fileids that make up this corpus.</td>
   </tr><tr class="baseinstancevariable private">
     
     <td>Instance Variable</td>
-    <td><code><a href="nltk.corpus.reader.api.CorpusReader.html#_root">_root</a></code></td>
-    <td><span>The root directory for this corpus.</span></td>
+    <td><code><a href="nltk.corpus.reader.api.CorpusReader.html#_root" class="internal-link" title="nltk.corpus.reader.api.CorpusReader._root">_root</a></code></td>
+    <td>The root directory for this corpus.</td>
   </tr><tr class="baseinstancevariable private">
     
     <td>Instance Variable</td>
-    <td><code><a href="nltk.corpus.reader.api.CorpusReader.html#_tagset">_tagset</a></code></td>
+    <td><code><a href="nltk.corpus.reader.api.CorpusReader.html#_tagset" class="internal-link" title="nltk.corpus.reader.api.CorpusReader._tagset">_tagset</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr>
 </table>
@@ -368,7 +383,7 @@
     </a>
   </div>
   <div class="docstring functionBody">
-    <div class="interfaceinfo">overrides <code><a href="nltk.corpus.reader.xmldocs.XMLCorpusReader.html#__init__">nltk.corpus.reader.xmldocs.XMLCorpusReader.__init__</a></code></div>
+    <div class="interfaceinfo">overrides <code><a href="nltk.corpus.reader.xmldocs.XMLCorpusReader.html#__init__" class="internal-link">nltk.corpus.reader.xmldocs.XMLCorpusReader.__init__</a></code></div>
     
     <div><table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">root:</span>PathPointer or str</td><td class="fieldArgDesc">A path pointer identifying the root directory for
 this corpus.  If a string is specified, then it will be
@@ -410,7 +425,7 @@ for normalizing or converting the POS tags returned by the
   </a>
   <div class="functionHeader">
     
-    <span class="py-keyword">def</span> <span class="py-defname">age</span>(self, fileids=None, speaker='CHI', month=False):
+    <span class="py-keyword">def</span> <span class="py-defname">age</span>(self, fileids=None, speaker=<span class="rst-variable-quote">'</span><span class="rst-variable-string">CHI</span><span class="rst-variable-quote">'</span>, month=False):
     <a class="sourceLink" href="https://github.com/nltk/nltk/tree/3.6.2/nltk/corpus/reader/childes.py#L250">
       
       (source)
@@ -419,7 +434,9 @@ for normalizing or converting the POS tags returned by the
   <div class="docstring functionBody">
     
     
-    <div><p>:return: the given file(s) as string or int :rtype: list or int</p><p>:param month: If true, return months instead of year-month-date</p></div>
+    <div><p>:return: the given file(s) as string or int :rtype: list or int</p>
+<p>:param month: If true, return months instead of year-month-date</p>
+</div>
   </div>
 </div><div class="basemethod">
   
@@ -441,7 +458,7 @@ for normalizing or converting the POS tags returned by the
   <div class="docstring functionBody">
     
     
-    <div><p>Caclculate age in months from a string in CHILDES format</p></div>
+    <div>Caclculate age in months from a string in CHILDES format</div>
   </div>
 </div><div class="basemethod">
   
@@ -463,7 +480,7 @@ for normalizing or converting the POS tags returned by the
   <div class="docstring functionBody">
     
     
-    <div><p>:return: the given file(s) as a dict of ``(corpus_property_key, value)`` :rtype: list(dict)</p></div>
+    <div>:return: the given file(s) as a dict of ``(corpus_property_key, value)`` :rtype: list(dict)</div>
   </div>
 </div><div class="basemethod">
   
@@ -476,7 +493,7 @@ for normalizing or converting the POS tags returned by the
   </a>
   <div class="functionHeader">
     
-    <span class="py-keyword">def</span> <span class="py-defname">MLU</span>(self, fileids=None, speaker='CHI'):
+    <span class="py-keyword">def</span> <span class="py-defname">MLU</span>(self, fileids=None, speaker=<span class="rst-variable-quote">'</span><span class="rst-variable-string">CHI</span><span class="rst-variable-quote">'</span>):
     <a class="sourceLink" href="https://github.com/nltk/nltk/tree/3.6.2/nltk/corpus/reader/childes.py#L290">
       
       (source)
@@ -485,7 +502,7 @@ for normalizing or converting the POS tags returned by the
   <div class="docstring functionBody">
     
     
-    <div><p>:return: the given file(s) as a floating number :rtype: list(float)</p></div>
+    <div>:return: the given file(s) as a floating number :rtype: list(float)</div>
   </div>
 </div><div class="basemethod">
   
@@ -520,7 +537,7 @@ for normalizing or converting the POS tags returned by the
   </a>
   <div class="functionHeader">
     
-    <span class="py-keyword">def</span> <span class="py-defname">sents</span>(self, fileids=None, speaker='ALL', stem=False, relation=None, strip_space=True, replace=False):
+    <span class="py-keyword">def</span> <span class="py-defname">sents</span>(self, fileids=None, speaker=<span class="rst-variable-quote">'</span><span class="rst-variable-string">ALL</span><span class="rst-variable-quote">'</span>, stem=False, relation=None, strip_space=True, replace=False):
     <a class="sourceLink" href="https://github.com/nltk/nltk/tree/3.6.2/nltk/corpus/reader/childes.py#L125">
       
       (source)
@@ -542,7 +559,7 @@ for normalizing or converting the POS tags returned by the
   </a>
   <div class="functionHeader">
     
-    <span class="py-keyword">def</span> <span class="py-defname">tagged_sents</span>(self, fileids=None, speaker='ALL', stem=False, relation=None, strip_space=True, replace=False):
+    <span class="py-keyword">def</span> <span class="py-defname">tagged_sents</span>(self, fileids=None, speaker=<span class="rst-variable-quote">'</span><span class="rst-variable-string">ALL</span><span class="rst-variable-quote">'</span>, stem=False, relation=None, strip_space=True, replace=False):
     <a class="sourceLink" href="https://github.com/nltk/nltk/tree/3.6.2/nltk/corpus/reader/childes.py#L167">
       
       (source)
@@ -564,7 +581,7 @@ for normalizing or converting the POS tags returned by the
   </a>
   <div class="functionHeader">
     
-    <span class="py-keyword">def</span> <span class="py-defname">tagged_words</span>(self, fileids=None, speaker='ALL', stem=False, relation=False, strip_space=True, replace=False):
+    <span class="py-keyword">def</span> <span class="py-defname">tagged_words</span>(self, fileids=None, speaker=<span class="rst-variable-quote">'</span><span class="rst-variable-string">ALL</span><span class="rst-variable-quote">'</span>, stem=False, relation=False, strip_space=True, replace=False):
     <a class="sourceLink" href="https://github.com/nltk/nltk/tree/3.6.2/nltk/corpus/reader/childes.py#L83">
       
       (source)
@@ -608,14 +625,14 @@ for normalizing or converting the POS tags returned by the
   </a>
   <div class="functionHeader">
     
-    <span class="py-keyword">def</span> <span class="py-defname">words</span>(self, fileids=None, speaker='ALL', stem=False, relation=False, strip_space=True, replace=False):
+    <span class="py-keyword">def</span> <span class="py-defname">words</span>(self, fileids=None, speaker=<span class="rst-variable-quote">'</span><span class="rst-variable-string">ALL</span><span class="rst-variable-quote">'</span>, stem=False, relation=False, strip_space=True, replace=False):
     <a class="sourceLink" href="https://github.com/nltk/nltk/tree/3.6.2/nltk/corpus/reader/childes.py#L43">
       
       (source)
     </a>
   </div>
   <div class="docstring functionBody">
-    <div class="interfaceinfo">overrides <code><a href="nltk.corpus.reader.xmldocs.XMLCorpusReader.html#words">nltk.corpus.reader.xmldocs.XMLCorpusReader.words</a></code></div>
+    <div class="interfaceinfo">overrides <code><a href="nltk.corpus.reader.xmldocs.XMLCorpusReader.html#words" class="internal-link">nltk.corpus.reader.xmldocs.XMLCorpusReader.words</a></code></div>
     
     <div></div>
   </div>
@@ -640,6 +657,7 @@ for normalizing or converting the POS tags returned by the
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    
   </div>
 </div><div class="basemethod private">
   
@@ -772,6 +790,7 @@ for normalizing or converting the POS tags returned by the
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    
   </div>
 </div>
 
@@ -783,7 +802,7 @@ for normalizing or converting the POS tags returned by the
   <div class="container">
     <a href="index.html">API Documentation</a> for <a href="http://www.nltk.org/" class="projecthome">nltk-3.6.2</a>,
   generated by <a href="https://github.com/twisted/pydoctor/">pydoctor</a>
-    21.2.2 at 2022-01-06 17:36:51.
+    22.2.2.dev0 at 2022-03-04 05:57:24.
   </div>
 </footer>
 

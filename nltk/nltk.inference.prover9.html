@@ -7,7 +7,7 @@
   <head>
     
     <title>nltk.inference.prover9</title>
-    <meta name="generator" content="pydoctor 21.2.2"> 
+    <meta name="generator" content="pydoctor 22.2.2.dev0"> 
         
     </meta>
     <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
@@ -44,69 +44,82 @@
           Names
         </a>
 
-        <form action="search-results.html" id="search-box-container">
+        <div id="search-box-container">
           <div class="input-group">
-            <input id="search-box" name="search-query" placeholder="Search..." aria-label="Search" minlength="2" class="form-control" />
+            <input id="search-box" type="search" name="search-query" placeholder="Search..." aria-label="Search" minlength="2" class="form-control" autocomplete="off" />
+            
             <span class="input-group-btn">
-              <button class="btn btn-default" type="submit" title="Search"><img src="fonts/search.svg" alt="Search!" /></button>
-              <a class="btn btn-default" id="search-help-button" title="Help" onclick="toggleSearchHelpText()"><img src="fonts/info.svg" alt="Help!" /></a>
+              <a style="display: none;" class="btn btn-default" id="search-clear-button" title="Clear" onclick="clearSearch()"><img src="fonts/x-circle.svg" alt="Clear" /></a>
+              <a class="btn btn-default" id="search-help-button" title="Help" onclick="toggleSearchHelpText()"><img src="fonts/info.svg" alt="Help" /></a>
             </span>
           </div>
-        </form>
+        </div>
 
-        <div class="rst-admonition hint" id="search-help-box">
+      </div>
+
+      <div id="search-results-container" style="display: none;">
+        <div>
+          <span class="label label-default" id="search-docstrings-button">
+            <a title="Search in docstrings" onclick="toggleSearchInDocstrings()">search in docstrings</a></span>
+        </div>
+
+        <noscript>
+            <h1>Cannot search: JavaScript is not supported/enabled in your browser.</h1>
+        </noscript>
+
+        <div class="hint" id="search-help-box">
           <p class="rst-last">
       
             Search bar offers the following options:
             <ul>   
                 <li>
                   <strong>Term presence.</strong> The below example searches for documents that 
-                    must contain “foo”, might contain “bar” and must not contain “baz”:
-                  <br /> <code>'+foo bar -baz'</code>
+                    must contain “foo”, might contain “bar” and must not contain “baz”: <code>+foo bar -baz</code>
                 </li> 
 
                 <li>
-                  <strong>Wildcards.</strong> The below example searches for documents with words beginning with “foo”:
-                  <br /> <code>'foo*'</code>
+                  <strong>Wildcards.</strong> The below example searches for documents with words beginning with “foo”: <code>foo*</code>
                 </li> 
 
                 <li>
-                  <strong>Search in specific fields.</strong> The following search matches all documents 
-                  that contains "foo" in their full dotted name and with “bar” in any field:
-                  <br /> <code>'+fullName:*foo* +bar'</code>
+                  <strong>Search in specific fields.</strong> The following search matches all objects 
+                  in "twisted.mail" that matches “search”: <code>+qname:twisted.mail.* +search</code>
 
                   <p>
-                    Possible fields: 'name', 'docstring', 'fullName'.
+                    Possible fields: 'name', 'qname' (fully qualified name), 'docstring', and 'kind'.
+                    Last two fields are only applicable if "search in docstrings" is enabled.
                   </p>
                 </li>
 
                 <li>
                   <strong>Fuzzy matches.</strong> The following search matches all documents 
-                  that have a word within 1 edit distance of “foo”:
-                  <br /> <code>'foo~1'</code>
+                  that have a word within 1 edit distance of “foo”: <code>foo~1</code>
                 </li>
             </ul>
 
           </p>
         </div>
 
-      </div>
+        <div id="search-status"> </div>
+        
+        <div class="warning" id="search-warn-box" style="display: none;">
+          <p class="rst-last"><span id="search-warn"></span></p>
+        </div>
 
+        <table id="search-results">
+          <!-- Filled dynamically by JS -->
+        </table>
+        
+        <div style="margin-top: 8px;">
+          <p>Results provided by <a href="https://lunrjs.com">Lunr.js</a></p>
+        </div>
+      </div>
 
     </div>
   </div>
 
-  <script>
- 
-    function toggleSearchHelpText() {
-        document.body.classList.toggle("search-help-hidden");
-    }
-    // Init search and help text
-    document.getElementById('search-box-container').style.display = 'block';
-    document.getElementById('search-help-box').style.display = 'block';
-    document.body.classList.add("search-help-hidden");
-
-  </script>
+  <script src="ajax.js" type="text/javascript"></script>
+  <script src="search.js" type="text/javascript"></script>
 
 </nav>
 
@@ -115,7 +128,7 @@
     <div class="container">
 
       <div class="page-header">
-        <h1 class="module"><code><code><a href="nltk.html">nltk</a></code><wbr></wbr>.<code><a href="nltk.inference.html">inference</a></code><wbr></wbr>.<code><a href="nltk.inference.prover9.html">prover9</a></code></code></h1>
+        <h1 class="module"><code><code><a href="index.html" class="internal-link">nltk</a></code><wbr></wbr>.<code><a href="nltk.inference.html" class="internal-link" title="nltk.inference">inference</a></code><wbr></wbr>.<code><a href="nltk.inference.prover9.html" class="internal-link" title="nltk.inference.prover9">prover9</a></code></code></h1>
         <div id="showPrivate">
           <button class="btn btn-link" onclick="togglePrivate()">Toggle Private API</button>
         </div>
@@ -141,88 +154,88 @@
   <tr class="class">
     
     <td>Class</td>
-    <td><code><a href="nltk.inference.prover9.Prover9.html">Prover9</a></code></td>
+    <td><code><a href="nltk.inference.prover9.Prover9.html" class="internal-link" title="nltk.inference.prover9.Prover9">​Prover9</a></code></td>
     <td><span class="undocumented">No class docstring; 1/3 instance variable, 4/5 methods documented</span></td>
   </tr><tr class="class">
     
     <td>Class</td>
-    <td><code><a href="nltk.inference.prover9.Prover9Command.html">Prover9Command</a></code></td>
-    <td><span>A <tt class="rst-docutils literal">ProverCommand</tt> specific to the <tt class="rst-docutils literal">Prover9</tt> prover.  It contains the a print_assumptions() method that is used to print the list of assumptions in multiple formats.</span></td>
+    <td><code><a href="nltk.inference.prover9.Prover9Command.html" class="internal-link" title="nltk.inference.prover9.Prover9Command">​Prover9​Command</a></code></td>
+    <td>A <tt class="rst-docutils literal">ProverCommand</tt> specific to the <tt class="rst-docutils literal">Prover9</tt> prover.  It contains the a print_assumptions() method that is used to print the list of assumptions in multiple formats.</td>
   </tr><tr class="class">
     
     <td>Class</td>
-    <td><code><a href="nltk.inference.prover9.Prover9CommandParent.html">Prover9CommandParent</a></code></td>
-    <td><span>A common base class used by both <tt class="rst-docutils literal">Prover9Command</tt> and <tt class="rst-docutils literal">MaceCommand</tt>, which is responsible for maintaining a goal and a set of assumptions, and generating prover9-style input files from them.</span></td>
+    <td><code><a href="nltk.inference.prover9.Prover9CommandParent.html" class="internal-link" title="nltk.inference.prover9.Prover9CommandParent">​Prover9​Command​Parent</a></code></td>
+    <td>A common base class used by both <tt class="rst-docutils literal">Prover9Command</tt> and <tt class="rst-docutils literal">MaceCommand</tt>, which is responsible for maintaining a goal and a set of assumptions, and generating prover9-style input files from them.</td>
   </tr><tr class="class">
     
     <td>Class</td>
-    <td><code><a href="nltk.inference.prover9.Prover9Exception.html">Prover9Exception</a></code></td>
-    <td><span class="undocumented">Undocumented</span></td>
-  </tr><tr class="class">
-    
-    <td>Class</td>
-    <td><code><a href="nltk.inference.prover9.Prover9FatalException.html">Prover9FatalException</a></code></td>
+    <td><code><a href="nltk.inference.prover9.Prover9Exception.html" class="internal-link" title="nltk.inference.prover9.Prover9Exception">​Prover9​Exception</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="class">
     
     <td>Class</td>
-    <td><code><a href="nltk.inference.prover9.Prover9LimitExceededException.html">Prover9LimitExceededException</a></code></td>
+    <td><code><a href="nltk.inference.prover9.Prover9FatalException.html" class="internal-link" title="nltk.inference.prover9.Prover9FatalException">​Prover9​Fatal​Exception</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="class">
     
     <td>Class</td>
-    <td><code><a href="nltk.inference.prover9.Prover9Parent.html">Prover9Parent</a></code></td>
-    <td><span>A common class extended by both <tt class="rst-docutils literal">Prover9</tt> and <tt class="rst-docutils literal">Mace &lt;mace.Mace&gt;</tt>. It contains the functionality required to convert NLTK-style expressions into Prover9-style expressions.</span></td>
+    <td><code><a href="nltk.inference.prover9.Prover9LimitExceededException.html" class="internal-link" title="nltk.inference.prover9.Prover9LimitExceededException">​Prover9​Limit​Exceeded​Exception</a></code></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="class">
+    
+    <td>Class</td>
+    <td><code><a href="nltk.inference.prover9.Prover9Parent.html" class="internal-link" title="nltk.inference.prover9.Prover9Parent">​Prover9​Parent</a></code></td>
+    <td>A common class extended by both <tt class="rst-docutils literal">Prover9</tt> and <tt class="rst-docutils literal">Mace &lt;mace.Mace&gt;</tt>. It contains the functionality required to convert NLTK-style expressions into Prover9-style expressions.</td>
   </tr><tr class="function">
     
     <td>Function</td>
-    <td><code><a href="#convert_to_prover9">convert_to_prover9</a></code></td>
-    <td><span>Convert a <tt class="rst-docutils literal">logic.Expression</tt> to Prover9 format.</span></td>
+    <td><code><a href="#convert_to_prover9" class="internal-link" title="nltk.inference.prover9.convert_to_prover9">convert​_to​_prover9</a></code></td>
+    <td>Convert a <tt class="rst-docutils literal">logic.Expression</tt> to Prover9 format.</td>
   </tr><tr class="function">
     
     <td>Function</td>
-    <td><code><a href="#demo">demo</a></code></td>
+    <td><code><a href="#demo" class="internal-link" title="nltk.inference.prover9.demo">demo</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="function">
     
     <td>Function</td>
-    <td><code><a href="#spacer">spacer</a></code></td>
+    <td><code><a href="#spacer" class="internal-link" title="nltk.inference.prover9.spacer">spacer</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="function">
     
     <td>Function</td>
-    <td><code><a href="#test_config">test_config</a></code></td>
+    <td><code><a href="#test_config" class="internal-link" title="nltk.inference.prover9.test_config">test​_config</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="function">
     
     <td>Function</td>
-    <td><code><a href="#test_convert_to_prover9">test_convert_to_prover9</a></code></td>
-    <td><span>Test that parsing works OK.</span></td>
+    <td><code><a href="#test_convert_to_prover9" class="internal-link" title="nltk.inference.prover9.test_convert_to_prover9">test​_convert​_to​_prover9</a></code></td>
+    <td>Test that parsing works OK.</td>
   </tr><tr class="function">
     
     <td>Function</td>
-    <td><code><a href="#test_prove">test_prove</a></code></td>
-    <td><span>Try some proofs and exhibit the results.</span></td>
+    <td><code><a href="#test_prove" class="internal-link" title="nltk.inference.prover9.test_prove">test​_prove</a></code></td>
+    <td>Try some proofs and exhibit the results.</td>
   </tr><tr class="variable">
     
     <td>Variable</td>
-    <td><code><a href="#arguments">arguments</a></code></td>
-    <td><span class="undocumented">Undocumented</span></td>
-  </tr><tr class="variable">
-    
-    <td>Variable</td>
-    <td><code><a href="#expressions">expressions</a></code></td>
+    <td><code><a href="#arguments" class="internal-link" title="nltk.inference.prover9.arguments">arguments</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="variable">
     
     <td>Variable</td>
-    <td><code><a href="#p9_return_codes">p9_return_codes</a></code></td>
+    <td><code><a href="#expressions" class="internal-link" title="nltk.inference.prover9.expressions">expressions</a></code></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="variable">
+    
+    <td>Variable</td>
+    <td><code><a href="#p9_return_codes" class="internal-link" title="nltk.inference.prover9.p9_return_codes">p9​_return​_codes</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="function private">
     
     <td>Function</td>
-    <td><code><a href="#_convert_to_prover9">_convert_to_prover9</a></code></td>
-    <td><span>Convert <tt class="rst-docutils literal">logic.Expression</tt> to Prover9 formatted string.</span></td>
+    <td><code><a href="#_convert_to_prover9" class="internal-link" title="nltk.inference.prover9._convert_to_prover9">_convert​_to​_prover9</a></code></td>
+    <td>Convert <tt class="rst-docutils literal">logic.Expression</tt> to Prover9 formatted string.</td>
   </tr>
 </table>
         
@@ -385,6 +398,7 @@
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    
   </div>
 </div><div class="basevariable">
   
@@ -407,6 +421,7 @@
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    
   </div>
 </div><div class="basevariable">
   
@@ -429,6 +444,7 @@
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    
   </div>
 </div><div class="basefunction private">
   
@@ -462,7 +478,7 @@
   <div class="container">
     <a href="index.html">API Documentation</a> for <a href="http://www.nltk.org/" class="projecthome">nltk-3.6.2</a>,
   generated by <a href="https://github.com/twisted/pydoctor/">pydoctor</a>
-    21.2.2 at 2022-01-06 17:36:51.
+    22.2.2.dev0 at 2022-03-04 05:57:24.
   </div>
 </footer>
 

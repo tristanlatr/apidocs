@@ -7,7 +7,7 @@
   <head>
     
     <title>nltk.grammar.FeatureGrammar</title>
-    <meta name="generator" content="pydoctor 21.2.2"> 
+    <meta name="generator" content="pydoctor 22.2.2.dev0"> 
         
     </meta>
     <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
@@ -44,69 +44,82 @@
           Names
         </a>
 
-        <form action="search-results.html" id="search-box-container">
+        <div id="search-box-container">
           <div class="input-group">
-            <input id="search-box" name="search-query" placeholder="Search..." aria-label="Search" minlength="2" class="form-control" />
+            <input id="search-box" type="search" name="search-query" placeholder="Search..." aria-label="Search" minlength="2" class="form-control" autocomplete="off" />
+            
             <span class="input-group-btn">
-              <button class="btn btn-default" type="submit" title="Search"><img src="fonts/search.svg" alt="Search!" /></button>
-              <a class="btn btn-default" id="search-help-button" title="Help" onclick="toggleSearchHelpText()"><img src="fonts/info.svg" alt="Help!" /></a>
+              <a style="display: none;" class="btn btn-default" id="search-clear-button" title="Clear" onclick="clearSearch()"><img src="fonts/x-circle.svg" alt="Clear" /></a>
+              <a class="btn btn-default" id="search-help-button" title="Help" onclick="toggleSearchHelpText()"><img src="fonts/info.svg" alt="Help" /></a>
             </span>
           </div>
-        </form>
+        </div>
 
-        <div class="rst-admonition hint" id="search-help-box">
+      </div>
+
+      <div id="search-results-container" style="display: none;">
+        <div>
+          <span class="label label-default" id="search-docstrings-button">
+            <a title="Search in docstrings" onclick="toggleSearchInDocstrings()">search in docstrings</a></span>
+        </div>
+
+        <noscript>
+            <h1>Cannot search: JavaScript is not supported/enabled in your browser.</h1>
+        </noscript>
+
+        <div class="hint" id="search-help-box">
           <p class="rst-last">
       
             Search bar offers the following options:
             <ul>   
                 <li>
                   <strong>Term presence.</strong> The below example searches for documents that 
-                    must contain “foo”, might contain “bar” and must not contain “baz”:
-                  <br /> <code>'+foo bar -baz'</code>
+                    must contain “foo”, might contain “bar” and must not contain “baz”: <code>+foo bar -baz</code>
                 </li> 
 
                 <li>
-                  <strong>Wildcards.</strong> The below example searches for documents with words beginning with “foo”:
-                  <br /> <code>'foo*'</code>
+                  <strong>Wildcards.</strong> The below example searches for documents with words beginning with “foo”: <code>foo*</code>
                 </li> 
 
                 <li>
-                  <strong>Search in specific fields.</strong> The following search matches all documents 
-                  that contains "foo" in their full dotted name and with “bar” in any field:
-                  <br /> <code>'+fullName:*foo* +bar'</code>
+                  <strong>Search in specific fields.</strong> The following search matches all objects 
+                  in "twisted.mail" that matches “search”: <code>+qname:twisted.mail.* +search</code>
 
                   <p>
-                    Possible fields: 'name', 'docstring', 'fullName'.
+                    Possible fields: 'name', 'qname' (fully qualified name), 'docstring', and 'kind'.
+                    Last two fields are only applicable if "search in docstrings" is enabled.
                   </p>
                 </li>
 
                 <li>
                   <strong>Fuzzy matches.</strong> The following search matches all documents 
-                  that have a word within 1 edit distance of “foo”:
-                  <br /> <code>'foo~1'</code>
+                  that have a word within 1 edit distance of “foo”: <code>foo~1</code>
                 </li>
             </ul>
 
           </p>
         </div>
 
-      </div>
+        <div id="search-status"> </div>
+        
+        <div class="warning" id="search-warn-box" style="display: none;">
+          <p class="rst-last"><span id="search-warn"></span></p>
+        </div>
 
+        <table id="search-results">
+          <!-- Filled dynamically by JS -->
+        </table>
+        
+        <div style="margin-top: 8px;">
+          <p>Results provided by <a href="https://lunrjs.com">Lunr.js</a></p>
+        </div>
+      </div>
 
     </div>
   </div>
 
-  <script>
- 
-    function toggleSearchHelpText() {
-        document.body.classList.toggle("search-help-hidden");
-    }
-    // Init search and help text
-    document.getElementById('search-box-container').style.display = 'block';
-    document.getElementById('search-help-box').style.display = 'block';
-    document.body.classList.add("search-help-hidden");
-
-  </script>
+  <script src="ajax.js" type="text/javascript"></script>
+  <script src="search.js" type="text/javascript"></script>
 
 </nav>
 
@@ -115,7 +128,7 @@
     <div class="container">
 
       <div class="page-header">
-        <h1 class="class"><code><code><a href="nltk.html">nltk</a></code><wbr></wbr>.<code><a href="nltk.grammar.html">grammar</a></code><wbr></wbr>.<code><a href="nltk.grammar.FeatureGrammar.html">FeatureGrammar</a></code></code></h1>
+        <h1 class="class"><code><code><a href="index.html" class="internal-link">nltk</a></code><wbr></wbr>.<code><a href="nltk.grammar.html" class="internal-link" title="nltk.grammar">grammar</a></code><wbr></wbr>.<code><a href="nltk.grammar.FeatureGrammar.html" class="internal-link" title="nltk.grammar.FeatureGrammar">FeatureGrammar</a></code></code></h1>
         <div id="showPrivate">
           <button class="btn btn-link" onclick="togglePrivate()">Toggle Private API</button>
         </div>
@@ -126,7 +139,7 @@
       </div>
 
       <div class="extrasDocstring">
-        <p><code><span class="py-keyword">class</span> <span class="py-defname">FeatureGrammar</span>(<a href="nltk.grammar.CFG.html" title="nltk.grammar.CFG">CFG</a>): <a href="https://github.com/nltk/nltk/tree/3.6.2/nltk/grammar.py#L866" class="sourceLink">(source)</a></code></p>
+        <p><code><span class="py-keyword">class</span> <span class="py-defname">FeatureGrammar</span>(<a href="nltk.grammar.CFG.html" class="internal-link" title="nltk.grammar.CFG">CFG</a>): <a href="https://github.com/nltk/nltk/tree/3.6.2/nltk/grammar.py#L866" class="sourceLink">(source)</a></code></p>
         <p><a href="classIndex.html#nltk.grammar.FeatureGrammar">View In Hierarchy</a></p>
       </div>
 
@@ -147,68 +160,68 @@ is implicitly specified by the productions.</p>
   <tr class="classmethod">
     
     <td>Class Method</td>
-    <td><code><a href="#fromstring">fromstring</a></code></td>
-    <td><span>Return a feature structure based grammar.</span></td>
+    <td><code><a href="#fromstring" class="internal-link" title="nltk.grammar.FeatureGrammar.fromstring">fromstring</a></code></td>
+    <td>Return a feature structure based grammar.</td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#__init__">__init__</a></code></td>
-    <td><span>Create a new feature-based grammar, from the given start state and set of <tt class="rst-docutils literal">Productions</tt>.</span></td>
+    <td><code><a href="#__init__" class="internal-link" title="nltk.grammar.FeatureGrammar.__init__">__init__</a></code></td>
+    <td>Create a new feature-based grammar, from the given start state and set of <tt class="rst-docutils literal">Productions</tt>.</td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#leftcorner_parents">leftcorner_parents</a></code></td>
-    <td><span>Return the set of all categories for which the given category is a left corner.</span></td>
+    <td><code><a href="#leftcorner_parents" class="internal-link" title="nltk.grammar.FeatureGrammar.leftcorner_parents">leftcorner​_parents</a></code></td>
+    <td>Return the set of all categories for which the given category is a left corner.</td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#leftcorners">leftcorners</a></code></td>
-    <td><span>Return the set of all words that the given category can start with. Also called the "first set" in compiler construction.</span></td>
+    <td><code><a href="#leftcorners" class="internal-link" title="nltk.grammar.FeatureGrammar.leftcorners">leftcorners</a></code></td>
+    <td>Return the set of all words that the given category can start with. Also called the "first set" in compiler construction.</td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#productions">productions</a></code></td>
-    <td><span>Return the grammar productions, filtered by the left-hand side or the first item in the right-hand side.</span></td>
+    <td><code><a href="#productions" class="internal-link" title="nltk.grammar.FeatureGrammar.productions">productions</a></code></td>
+    <td>Return the grammar productions, filtered by the left-hand side or the first item in the right-hand side.</td>
   </tr><tr class="method private">
     
     <td>Method</td>
-    <td><code><a href="#_calculate_indexes">_calculate_indexes</a></code></td>
+    <td><code><a href="#_calculate_indexes" class="internal-link" title="nltk.grammar.FeatureGrammar._calculate_indexes">_calculate​_indexes</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method private">
     
     <td>Method</td>
-    <td><code><a href="#_get_type_if_possible">_get_type_if_possible</a></code></td>
-    <td><span>Helper function which returns the <tt class="rst-docutils literal">TYPE</tt> feature of the <tt class="rst-docutils literal">item</tt>, if it exists, otherwise it returns the <tt class="rst-docutils literal">item</tt> itself</span></td>
+    <td><code><a href="#_get_type_if_possible" class="internal-link" title="nltk.grammar.FeatureGrammar._get_type_if_possible">_get​_type​_if​_possible</a></code></td>
+    <td>Helper function which returns the <tt class="rst-docutils literal">TYPE</tt> feature of the <tt class="rst-docutils literal">item</tt>, if it exists, otherwise it returns the <tt class="rst-docutils literal">item</tt> itself</td>
   </tr><tr class="instancevariable private">
     
     <td>Instance Variable</td>
-    <td><code><a href="#_empty_index">_empty_index</a></code></td>
+    <td><code><a href="#_empty_index" class="internal-link" title="nltk.grammar.FeatureGrammar._empty_index">_empty​_index</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="instancevariable private">
     
     <td>Instance Variable</td>
-    <td><code><a href="#_empty_productions">_empty_productions</a></code></td>
+    <td><code><a href="#_empty_productions" class="internal-link" title="nltk.grammar.FeatureGrammar._empty_productions">_empty​_productions</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="instancevariable private">
     
     <td>Instance Variable</td>
-    <td><code><a href="#_lexical_index">_lexical_index</a></code></td>
+    <td><code><a href="#_lexical_index" class="internal-link" title="nltk.grammar.FeatureGrammar._lexical_index">_lexical​_index</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="instancevariable private">
     
     <td>Instance Variable</td>
-    <td><code><a href="#_lhs_index">_lhs_index</a></code></td>
+    <td><code><a href="#_lhs_index" class="internal-link" title="nltk.grammar.FeatureGrammar._lhs_index">_lhs​_index</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="instancevariable private">
     
     <td>Instance Variable</td>
-    <td><code><a href="#_rhs_index">_rhs_index</a></code></td>
+    <td><code><a href="#_rhs_index" class="internal-link" title="nltk.grammar.FeatureGrammar._rhs_index">_rhs​_index</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr>
 </table>
         
           <p class="inheritedFrom">
-            Inherited from <code><a href="nltk.grammar.CFG.html">CFG</a></code>:
+            Inherited from <code><a href="nltk.grammar.CFG.html" class="internal-link" title="nltk.grammar.CFG">CFG</a></code>:
           </p>
           <table class="children sortable" id="id660">
   
@@ -216,162 +229,162 @@ is implicitly specified by the productions.</p>
   <tr class="baseclassmethod">
     
     <td>Class Method</td>
-    <td><code><a href="nltk.grammar.CFG.html#binarize">binarize</a></code></td>
+    <td><code><a href="nltk.grammar.CFG.html#binarize" class="internal-link" title="nltk.grammar.CFG.binarize">binarize</a></code></td>
     <td><span class="undocumented">No summary</span></td>
   </tr><tr class="baseclassmethod">
     
     <td>Class Method</td>
-    <td><code><a href="nltk.grammar.CFG.html#eliminate_start">eliminate_start</a></code></td>
-    <td><span>Eliminate start rule in case it appears on RHS Example: S -&gt; S0 S1 and S0 -&gt; S1 S Then another rule S0_Sigma -&gt; S is added</span></td>
+    <td><code><a href="nltk.grammar.CFG.html#eliminate_start" class="internal-link" title="nltk.grammar.CFG.eliminate_start">eliminate​_start</a></code></td>
+    <td>Eliminate start rule in case it appears on RHS Example: S -&gt; S0 S1 and S0 -&gt; S1 S Then another rule S0_Sigma -&gt; S is added</td>
   </tr><tr class="baseclassmethod">
     
     <td>Class Method</td>
-    <td><code><a href="nltk.grammar.CFG.html#remove_unitary_rules">remove_unitary_rules</a></code></td>
-    <td><span>Remove nonlexical unitary rules and convert them to lexical</span></td>
+    <td><code><a href="nltk.grammar.CFG.html#remove_unitary_rules" class="internal-link" title="nltk.grammar.CFG.remove_unitary_rules">remove​_unitary​_rules</a></code></td>
+    <td>Remove nonlexical unitary rules and convert them to lexical</td>
   </tr><tr class="basemethod">
     
     <td>Method</td>
-    <td><code><a href="nltk.grammar.CFG.html#__repr__">__repr__</a></code></td>
+    <td><code><a href="nltk.grammar.CFG.html#__repr__" class="internal-link" title="nltk.grammar.CFG.__repr__">__repr__</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="basemethod">
     
     <td>Method</td>
-    <td><code><a href="nltk.grammar.CFG.html#__str__">__str__</a></code></td>
+    <td><code><a href="nltk.grammar.CFG.html#__str__" class="internal-link" title="nltk.grammar.CFG.__str__">__str__</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="basemethod">
     
     <td>Method</td>
-    <td><code><a href="nltk.grammar.CFG.html#check_coverage">check_coverage</a></code></td>
-    <td><span>Check whether the grammar rules cover the given list of tokens. If not, then raise an exception.</span></td>
+    <td><code><a href="nltk.grammar.CFG.html#check_coverage" class="internal-link" title="nltk.grammar.CFG.check_coverage">check​_coverage</a></code></td>
+    <td>Check whether the grammar rules cover the given list of tokens. If not, then raise an exception.</td>
   </tr><tr class="basemethod">
     
     <td>Method</td>
-    <td><code><a href="nltk.grammar.CFG.html#chomsky_normal_form">chomsky_normal_form</a></code></td>
-    <td><span>Returns a new Grammer that is in chomsky normal :param: new_token_padding Customise new rule formation during binarisation</span></td>
+    <td><code><a href="nltk.grammar.CFG.html#chomsky_normal_form" class="internal-link" title="nltk.grammar.CFG.chomsky_normal_form">chomsky​_normal​_form</a></code></td>
+    <td>Returns a new Grammer that is in chomsky normal :param: new_token_padding Customise new rule formation during binarisation</td>
   </tr><tr class="basemethod">
     
     <td>Method</td>
-    <td><code><a href="nltk.grammar.CFG.html#is_binarised">is_binarised</a></code></td>
-    <td><span>Return True if all productions are at most binary. Note that there can still be empty and unary productions.</span></td>
+    <td><code><a href="nltk.grammar.CFG.html#is_binarised" class="internal-link" title="nltk.grammar.CFG.is_binarised">is​_binarised</a></code></td>
+    <td>Return True if all productions are at most binary. Note that there can still be empty and unary productions.</td>
   </tr><tr class="basemethod">
     
     <td>Method</td>
-    <td><code><a href="nltk.grammar.CFG.html#is_chomsky_normal_form">is_chomsky_normal_form</a></code></td>
-    <td><span>Return True if the grammar is of Chomsky Normal Form, i.e. all productions are of the form A -&gt; B C, or A -&gt; "s".</span></td>
+    <td><code><a href="nltk.grammar.CFG.html#is_chomsky_normal_form" class="internal-link" title="nltk.grammar.CFG.is_chomsky_normal_form">is​_chomsky​_normal​_form</a></code></td>
+    <td>Return True if the grammar is of Chomsky Normal Form, i.e. all productions are of the form A -&gt; B C, or A -&gt; "s".</td>
   </tr><tr class="basemethod">
     
     <td>Method</td>
-    <td><code><a href="nltk.grammar.CFG.html#is_flexible_chomsky_normal_form">is_flexible_chomsky_normal_form</a></code></td>
-    <td><span>Return True if all productions are of the forms A -&gt; B C, A -&gt; B, or A -&gt; "s".</span></td>
+    <td><code><a href="nltk.grammar.CFG.html#is_flexible_chomsky_normal_form" class="internal-link" title="nltk.grammar.CFG.is_flexible_chomsky_normal_form">is​_flexible​_chomsky​_normal​_form</a></code></td>
+    <td>Return True if all productions are of the forms A -&gt; B C, A -&gt; B, or A -&gt; "s".</td>
   </tr><tr class="basemethod">
     
     <td>Method</td>
-    <td><code><a href="nltk.grammar.CFG.html#is_leftcorner">is_leftcorner</a></code></td>
-    <td><span>True if left is a leftcorner of cat, where left can be a terminal or a nonterminal.</span></td>
+    <td><code><a href="nltk.grammar.CFG.html#is_leftcorner" class="internal-link" title="nltk.grammar.CFG.is_leftcorner">is​_leftcorner</a></code></td>
+    <td>True if left is a leftcorner of cat, where left can be a terminal or a nonterminal.</td>
   </tr><tr class="basemethod">
     
     <td>Method</td>
-    <td><code><a href="nltk.grammar.CFG.html#is_lexical">is_lexical</a></code></td>
-    <td><span>Return True if all productions are lexicalised.</span></td>
+    <td><code><a href="nltk.grammar.CFG.html#is_lexical" class="internal-link" title="nltk.grammar.CFG.is_lexical">is​_lexical</a></code></td>
+    <td>Return True if all productions are lexicalised.</td>
   </tr><tr class="basemethod">
     
     <td>Method</td>
-    <td><code><a href="nltk.grammar.CFG.html#is_nonempty">is_nonempty</a></code></td>
-    <td><span>Return True if there are no empty productions.</span></td>
+    <td><code><a href="nltk.grammar.CFG.html#is_nonempty" class="internal-link" title="nltk.grammar.CFG.is_nonempty">is​_nonempty</a></code></td>
+    <td>Return True if there are no empty productions.</td>
   </tr><tr class="basemethod">
     
     <td>Method</td>
-    <td><code><a href="nltk.grammar.CFG.html#is_nonlexical">is_nonlexical</a></code></td>
-    <td><span>Return True if all lexical rules are "preterminals", that is, unary rules which can be separated in a preprocessing step.</span></td>
+    <td><code><a href="nltk.grammar.CFG.html#is_nonlexical" class="internal-link" title="nltk.grammar.CFG.is_nonlexical">is​_nonlexical</a></code></td>
+    <td>Return True if all lexical rules are "preterminals", that is, unary rules which can be separated in a preprocessing step.</td>
   </tr><tr class="basemethod">
     
     <td>Method</td>
-    <td><code><a href="nltk.grammar.CFG.html#max_len">max_len</a></code></td>
-    <td><span>Return the right-hand side length of the longest grammar production.</span></td>
+    <td><code><a href="nltk.grammar.CFG.html#max_len" class="internal-link" title="nltk.grammar.CFG.max_len">max​_len</a></code></td>
+    <td>Return the right-hand side length of the longest grammar production.</td>
   </tr><tr class="basemethod">
     
     <td>Method</td>
-    <td><code><a href="nltk.grammar.CFG.html#min_len">min_len</a></code></td>
-    <td><span>Return the right-hand side length of the shortest grammar production.</span></td>
+    <td><code><a href="nltk.grammar.CFG.html#min_len" class="internal-link" title="nltk.grammar.CFG.min_len">min​_len</a></code></td>
+    <td>Return the right-hand side length of the shortest grammar production.</td>
   </tr><tr class="basemethod">
     
     <td>Method</td>
-    <td><code><a href="nltk.grammar.CFG.html#start">start</a></code></td>
-    <td><span>Return the start symbol of the grammar</span></td>
+    <td><code><a href="nltk.grammar.CFG.html#start" class="internal-link" title="nltk.grammar.CFG.start">start</a></code></td>
+    <td>Return the start symbol of the grammar</td>
   </tr><tr class="basemethod private">
     
     <td>Method</td>
-    <td><code><a href="nltk.grammar.CFG.html#_calculate_grammar_forms">_calculate_grammar_forms</a></code></td>
-    <td><span>Pre-calculate of which form(s) the grammar is.</span></td>
+    <td><code><a href="nltk.grammar.CFG.html#_calculate_grammar_forms" class="internal-link" title="nltk.grammar.CFG._calculate_grammar_forms">_calculate​_grammar​_forms</a></code></td>
+    <td>Pre-calculate of which form(s) the grammar is.</td>
   </tr><tr class="basemethod private">
     
     <td>Method</td>
-    <td><code><a href="nltk.grammar.CFG.html#_calculate_leftcorners">_calculate_leftcorners</a></code></td>
+    <td><code><a href="nltk.grammar.CFG.html#_calculate_leftcorners" class="internal-link" title="nltk.grammar.CFG._calculate_leftcorners">_calculate​_leftcorners</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="baseinstancevariable private">
     
     <td>Instance Variable</td>
-    <td><code><a href="nltk.grammar.CFG.html#_all_unary_are_lexical">_all_unary_are_lexical</a></code></td>
+    <td><code><a href="nltk.grammar.CFG.html#_all_unary_are_lexical" class="internal-link" title="nltk.grammar.CFG._all_unary_are_lexical">_all​_unary​_are​_lexical</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="baseinstancevariable private">
     
     <td>Instance Variable</td>
-    <td><code><a href="nltk.grammar.CFG.html#_categories">_categories</a></code></td>
+    <td><code><a href="nltk.grammar.CFG.html#_categories" class="internal-link" title="nltk.grammar.CFG._categories">_categories</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="baseinstancevariable private">
     
     <td>Instance Variable</td>
-    <td><code><a href="nltk.grammar.CFG.html#_immediate_leftcorner_categories">_immediate_leftcorner_categories</a></code></td>
+    <td><code><a href="nltk.grammar.CFG.html#_immediate_leftcorner_categories" class="internal-link" title="nltk.grammar.CFG._immediate_leftcorner_categories">_immediate​_leftcorner​_categories</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="baseinstancevariable private">
     
     <td>Instance Variable</td>
-    <td><code><a href="nltk.grammar.CFG.html#_immediate_leftcorner_words">_immediate_leftcorner_words</a></code></td>
+    <td><code><a href="nltk.grammar.CFG.html#_immediate_leftcorner_words" class="internal-link" title="nltk.grammar.CFG._immediate_leftcorner_words">_immediate​_leftcorner​_words</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="baseinstancevariable private">
     
     <td>Instance Variable</td>
-    <td><code><a href="nltk.grammar.CFG.html#_is_lexical">_is_lexical</a></code></td>
+    <td><code><a href="nltk.grammar.CFG.html#_is_lexical" class="internal-link" title="nltk.grammar.CFG._is_lexical">_is​_lexical</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="baseinstancevariable private">
     
     <td>Instance Variable</td>
-    <td><code><a href="nltk.grammar.CFG.html#_is_nonlexical">_is_nonlexical</a></code></td>
+    <td><code><a href="nltk.grammar.CFG.html#_is_nonlexical" class="internal-link" title="nltk.grammar.CFG._is_nonlexical">_is​_nonlexical</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="baseinstancevariable private">
     
     <td>Instance Variable</td>
-    <td><code><a href="nltk.grammar.CFG.html#_leftcorner_parents">_leftcorner_parents</a></code></td>
+    <td><code><a href="nltk.grammar.CFG.html#_leftcorner_parents" class="internal-link" title="nltk.grammar.CFG._leftcorner_parents">_leftcorner​_parents</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="baseinstancevariable private">
     
     <td>Instance Variable</td>
-    <td><code><a href="nltk.grammar.CFG.html#_leftcorner_words">_leftcorner_words</a></code></td>
+    <td><code><a href="nltk.grammar.CFG.html#_leftcorner_words" class="internal-link" title="nltk.grammar.CFG._leftcorner_words">_leftcorner​_words</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="baseinstancevariable private">
     
     <td>Instance Variable</td>
-    <td><code><a href="nltk.grammar.CFG.html#_leftcorners">_leftcorners</a></code></td>
+    <td><code><a href="nltk.grammar.CFG.html#_leftcorners" class="internal-link" title="nltk.grammar.CFG._leftcorners">_leftcorners</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="baseinstancevariable private">
     
     <td>Instance Variable</td>
-    <td><code><a href="nltk.grammar.CFG.html#_max_len">_max_len</a></code></td>
+    <td><code><a href="nltk.grammar.CFG.html#_max_len" class="internal-link" title="nltk.grammar.CFG._max_len">_max​_len</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="baseinstancevariable private">
     
     <td>Instance Variable</td>
-    <td><code><a href="nltk.grammar.CFG.html#_min_len">_min_len</a></code></td>
+    <td><code><a href="nltk.grammar.CFG.html#_min_len" class="internal-link" title="nltk.grammar.CFG._min_len">_min​_len</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="baseinstancevariable private">
     
     <td>Instance Variable</td>
-    <td><code><a href="nltk.grammar.CFG.html#_productions">_productions</a></code></td>
+    <td><code><a href="nltk.grammar.CFG.html#_productions" class="internal-link" title="nltk.grammar.CFG._productions">_productions</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="baseinstancevariable private">
     
     <td>Instance Variable</td>
-    <td><code><a href="nltk.grammar.CFG.html#_start">_start</a></code></td>
+    <td><code><a href="nltk.grammar.CFG.html#_start" class="internal-link" title="nltk.grammar.CFG._start">_start</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr>
 </table>
@@ -400,7 +413,7 @@ is implicitly specified by the productions.</p>
     </a>
   </div>
   <div class="docstring functionBody">
-    <div class="interfaceinfo">overrides <code><a href="nltk.grammar.CFG.html#fromstring">nltk.grammar.CFG.fromstring</a></code></div>
+    <div class="interfaceinfo">overrides <code><a href="nltk.grammar.CFG.html#fromstring" class="internal-link">nltk.grammar.CFG.fromstring</a></code></div>
     
     <div><p>Return a feature structure based grammar.</p>
 <p>as a list of strings.
@@ -409,7 +422,7 @@ is implicitly specified by the productions.</p>
 by default, <tt class="rst-docutils literal">LogicParser()</tt>
 :param fstruct_reader: a feature structure parser
 (only if features and logic_parser is None)</p>
-<table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">input</span></td><td class="fieldArgDesc">a grammar, either in the form of a string or else</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">features</span></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">logic_parser</span></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">fstruct_reader</span></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">encoding</span></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr></table></div>
+<table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">input</span></td><td class="fieldArgDesc">a grammar, either in the form of a string or else</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">features</span></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">logic​_parser</span></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">fstruct​_reader</span></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">encoding</span></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr></table></div>
   </div>
 </div><div class="basemethod">
   
@@ -429,7 +442,7 @@ by default, <tt class="rst-docutils literal">LogicParser()</tt>
     </a>
   </div>
   <div class="docstring functionBody">
-    <div class="interfaceinfo">overrides <code><a href="nltk.grammar.CFG.html#__init__">nltk.grammar.CFG.__init__</a></code></div>
+    <div class="interfaceinfo">overrides <code><a href="nltk.grammar.CFG.html#__init__" class="internal-link">nltk.grammar.CFG.__init__</a></code></div>
     
     <div>Create a new feature-based grammar, from the given start
 state and set of <tt class="rst-docutils literal">Productions</tt>.<table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">start:</span>FeatStructNonterminal</td><td class="fieldArgDesc">The start symbol</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">productions:</span>list(Production)</td><td class="fieldArgDesc">The list of productions that defines the grammar</td></tr></table></div>
@@ -452,7 +465,7 @@ state and set of <tt class="rst-docutils literal">Productions</tt>.<table class=
     </a>
   </div>
   <div class="docstring functionBody">
-    <div class="interfaceinfo">overrides <code><a href="nltk.grammar.CFG.html#leftcorner_parents">nltk.grammar.CFG.leftcorner_parents</a></code></div>
+    <div class="interfaceinfo">overrides <code><a href="nltk.grammar.CFG.html#leftcorner_parents" class="internal-link">nltk.grammar.CFG.leftcorner_parents</a></code></div>
     
     <div>Return the set of all categories for which the given category
 is a left corner.</div>
@@ -475,7 +488,7 @@ is a left corner.</div>
     </a>
   </div>
   <div class="docstring functionBody">
-    <div class="interfaceinfo">overrides <code><a href="nltk.grammar.CFG.html#leftcorners">nltk.grammar.CFG.leftcorners</a></code></div>
+    <div class="interfaceinfo">overrides <code><a href="nltk.grammar.CFG.html#leftcorners" class="internal-link">nltk.grammar.CFG.leftcorners</a></code></div>
     
     <div>Return the set of all words that the given category can start with.
 Also called the "first set" in compiler construction.</div>
@@ -498,7 +511,7 @@ Also called the "first set" in compiler construction.</div>
     </a>
   </div>
   <div class="docstring functionBody">
-    <div class="interfaceinfo">overrides <code><a href="nltk.grammar.CFG.html#productions">nltk.grammar.CFG.productions</a></code></div>
+    <div class="interfaceinfo">overrides <code><a href="nltk.grammar.CFG.html#productions" class="internal-link">nltk.grammar.CFG.productions</a></code></div>
     
     <div>Return the grammar productions, filtered by the left-hand side
 or the first item in the right-hand side.<table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">lhs</span></td><td class="fieldArgDesc">Only return productions with the given left-hand side.</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">rhs</span></td><td class="fieldArgDesc">Only return productions with the given first item
@@ -522,7 +535,7 @@ in the right-hand side.</td></tr><tr><td class="fieldArgContainer"><span class="
     </a>
   </div>
   <div class="docstring functionBody">
-    <div class="interfaceinfo">overrides <code><a href="nltk.grammar.CFG.html#_calculate_indexes">nltk.grammar.CFG._calculate_indexes</a></code></div>
+    <div class="interfaceinfo">overrides <code><a href="nltk.grammar.CFG.html#_calculate_indexes" class="internal-link">nltk.grammar.CFG._calculate_indexes</a></code></div>
     
     <div><p class="undocumented">Undocumented</p></div>
   </div>
@@ -567,9 +580,10 @@ if it exists, otherwise it returns the <tt class="rst-docutils literal">item</tt
     </a>
   </div>
   <div class="functionBody">
-    <div class="interfaceinfo">overrides <code><a href="nltk.grammar.CFG.html#_empty_index">nltk.grammar.CFG._empty_index</a></code></div>
+    <div class="interfaceinfo">overrides <code><a href="nltk.grammar.CFG.html#_empty_index" class="internal-link">nltk.grammar.CFG._empty_index</a></code></div>
     
     <div><p class="undocumented">Undocumented</p></div>
+    
   </div>
 </div><div class="baseinstancevariable private">
   
@@ -592,6 +606,7 @@ if it exists, otherwise it returns the <tt class="rst-docutils literal">item</tt
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    
   </div>
 </div><div class="baseinstancevariable private">
   
@@ -611,9 +626,10 @@ if it exists, otherwise it returns the <tt class="rst-docutils literal">item</tt
     </a>
   </div>
   <div class="functionBody">
-    <div class="interfaceinfo">overrides <code><a href="nltk.grammar.CFG.html#_lexical_index">nltk.grammar.CFG._lexical_index</a></code></div>
+    <div class="interfaceinfo">overrides <code><a href="nltk.grammar.CFG.html#_lexical_index" class="internal-link">nltk.grammar.CFG._lexical_index</a></code></div>
     
     <div><p class="undocumented">Undocumented</p></div>
+    
   </div>
 </div><div class="baseinstancevariable private">
   
@@ -633,9 +649,10 @@ if it exists, otherwise it returns the <tt class="rst-docutils literal">item</tt
     </a>
   </div>
   <div class="functionBody">
-    <div class="interfaceinfo">overrides <code><a href="nltk.grammar.CFG.html#_lhs_index">nltk.grammar.CFG._lhs_index</a></code></div>
+    <div class="interfaceinfo">overrides <code><a href="nltk.grammar.CFG.html#_lhs_index" class="internal-link">nltk.grammar.CFG._lhs_index</a></code></div>
     
     <div><p class="undocumented">Undocumented</p></div>
+    
   </div>
 </div><div class="baseinstancevariable private">
   
@@ -655,9 +672,10 @@ if it exists, otherwise it returns the <tt class="rst-docutils literal">item</tt
     </a>
   </div>
   <div class="functionBody">
-    <div class="interfaceinfo">overrides <code><a href="nltk.grammar.CFG.html#_rhs_index">nltk.grammar.CFG._rhs_index</a></code></div>
+    <div class="interfaceinfo">overrides <code><a href="nltk.grammar.CFG.html#_rhs_index" class="internal-link">nltk.grammar.CFG._rhs_index</a></code></div>
     
     <div><p class="undocumented">Undocumented</p></div>
+    
   </div>
 </div>
 
@@ -669,7 +687,7 @@ if it exists, otherwise it returns the <tt class="rst-docutils literal">item</tt
   <div class="container">
     <a href="index.html">API Documentation</a> for <a href="http://www.nltk.org/" class="projecthome">nltk-3.6.2</a>,
   generated by <a href="https://github.com/twisted/pydoctor/">pydoctor</a>
-    21.2.2 at 2022-01-06 17:36:51.
+    22.2.2.dev0 at 2022-03-04 05:57:24.
   </div>
 </footer>
 

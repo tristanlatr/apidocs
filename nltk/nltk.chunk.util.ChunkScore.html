@@ -7,7 +7,7 @@
   <head>
     
     <title>nltk.chunk.util.ChunkScore</title>
-    <meta name="generator" content="pydoctor 21.2.2"> 
+    <meta name="generator" content="pydoctor 22.2.2.dev0"> 
         
     </meta>
     <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
@@ -44,69 +44,82 @@
           Names
         </a>
 
-        <form action="search-results.html" id="search-box-container">
+        <div id="search-box-container">
           <div class="input-group">
-            <input id="search-box" name="search-query" placeholder="Search..." aria-label="Search" minlength="2" class="form-control" />
+            <input id="search-box" type="search" name="search-query" placeholder="Search..." aria-label="Search" minlength="2" class="form-control" autocomplete="off" />
+            
             <span class="input-group-btn">
-              <button class="btn btn-default" type="submit" title="Search"><img src="fonts/search.svg" alt="Search!" /></button>
-              <a class="btn btn-default" id="search-help-button" title="Help" onclick="toggleSearchHelpText()"><img src="fonts/info.svg" alt="Help!" /></a>
+              <a style="display: none;" class="btn btn-default" id="search-clear-button" title="Clear" onclick="clearSearch()"><img src="fonts/x-circle.svg" alt="Clear" /></a>
+              <a class="btn btn-default" id="search-help-button" title="Help" onclick="toggleSearchHelpText()"><img src="fonts/info.svg" alt="Help" /></a>
             </span>
           </div>
-        </form>
+        </div>
 
-        <div class="rst-admonition hint" id="search-help-box">
+      </div>
+
+      <div id="search-results-container" style="display: none;">
+        <div>
+          <span class="label label-default" id="search-docstrings-button">
+            <a title="Search in docstrings" onclick="toggleSearchInDocstrings()">search in docstrings</a></span>
+        </div>
+
+        <noscript>
+            <h1>Cannot search: JavaScript is not supported/enabled in your browser.</h1>
+        </noscript>
+
+        <div class="hint" id="search-help-box">
           <p class="rst-last">
       
             Search bar offers the following options:
             <ul>   
                 <li>
                   <strong>Term presence.</strong> The below example searches for documents that 
-                    must contain “foo”, might contain “bar” and must not contain “baz”:
-                  <br /> <code>'+foo bar -baz'</code>
+                    must contain “foo”, might contain “bar” and must not contain “baz”: <code>+foo bar -baz</code>
                 </li> 
 
                 <li>
-                  <strong>Wildcards.</strong> The below example searches for documents with words beginning with “foo”:
-                  <br /> <code>'foo*'</code>
+                  <strong>Wildcards.</strong> The below example searches for documents with words beginning with “foo”: <code>foo*</code>
                 </li> 
 
                 <li>
-                  <strong>Search in specific fields.</strong> The following search matches all documents 
-                  that contains "foo" in their full dotted name and with “bar” in any field:
-                  <br /> <code>'+fullName:*foo* +bar'</code>
+                  <strong>Search in specific fields.</strong> The following search matches all objects 
+                  in "twisted.mail" that matches “search”: <code>+qname:twisted.mail.* +search</code>
 
                   <p>
-                    Possible fields: 'name', 'docstring', 'fullName'.
+                    Possible fields: 'name', 'qname' (fully qualified name), 'docstring', and 'kind'.
+                    Last two fields are only applicable if "search in docstrings" is enabled.
                   </p>
                 </li>
 
                 <li>
                   <strong>Fuzzy matches.</strong> The following search matches all documents 
-                  that have a word within 1 edit distance of “foo”:
-                  <br /> <code>'foo~1'</code>
+                  that have a word within 1 edit distance of “foo”: <code>foo~1</code>
                 </li>
             </ul>
 
           </p>
         </div>
 
-      </div>
+        <div id="search-status"> </div>
+        
+        <div class="warning" id="search-warn-box" style="display: none;">
+          <p class="rst-last"><span id="search-warn"></span></p>
+        </div>
 
+        <table id="search-results">
+          <!-- Filled dynamically by JS -->
+        </table>
+        
+        <div style="margin-top: 8px;">
+          <p>Results provided by <a href="https://lunrjs.com">Lunr.js</a></p>
+        </div>
+      </div>
 
     </div>
   </div>
 
-  <script>
- 
-    function toggleSearchHelpText() {
-        document.body.classList.toggle("search-help-hidden");
-    }
-    // Init search and help text
-    document.getElementById('search-box-container').style.display = 'block';
-    document.getElementById('search-help-box').style.display = 'block';
-    document.body.classList.add("search-help-hidden");
-
-  </script>
+  <script src="ajax.js" type="text/javascript"></script>
+  <script src="search.js" type="text/javascript"></script>
 
 </nav>
 
@@ -115,7 +128,7 @@
     <div class="container">
 
       <div class="page-header">
-        <h1 class="class"><code><code><a href="nltk.html">nltk</a></code><wbr></wbr>.<code><a href="nltk.chunk.html">chunk</a></code><wbr></wbr>.<code><a href="nltk.chunk.util.html">util</a></code><wbr></wbr>.<code><a href="nltk.chunk.util.ChunkScore.html">ChunkScore</a></code></code></h1>
+        <h1 class="class"><code><code><a href="index.html" class="internal-link">nltk</a></code><wbr></wbr>.<code><a href="nltk.chunk.html" class="internal-link" title="nltk.chunk">chunk</a></code><wbr></wbr>.<code><a href="nltk.chunk.util.html" class="internal-link" title="nltk.chunk.util">util</a></code><wbr></wbr>.<code><a href="nltk.chunk.util.ChunkScore.html" class="internal-link" title="nltk.chunk.util.ChunkScore">ChunkScore</a></code></code></h1>
         <div id="showPrivate">
           <button class="btn btn-link" onclick="togglePrivate()">Toggle Private API</button>
         </div>
@@ -126,7 +139,7 @@
       </div>
 
       <div class="extrasDocstring">
-        <p><code><span class="py-keyword">class</span> <span class="py-defname">ChunkScore</span>(<span title="object">object</span>): <a href="https://github.com/nltk/nltk/tree/3.6.2/nltk/chunk/util.py#L52" class="sourceLink">(source)</a></code></p>
+        <p><code><span class="py-keyword">class</span> <span class="py-defname">ChunkScore</span>(object): <a href="https://github.com/nltk/nltk/tree/3.6.2/nltk/chunk/util.py#L52" class="sourceLink">(source)</a></code></p>
         <p><a href="classIndex.html#nltk.chunk.util.ChunkScore">View In Hierarchy</a></p>
       </div>
 
@@ -159,158 +172,158 @@ F Measure: 0.823
   <tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#__init__">__init__</a></code></td>
+    <td><code><a href="#__init__" class="internal-link" title="nltk.chunk.util.ChunkScore.__init__">__init__</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#__len__">__len__</a></code></td>
+    <td><code><a href="#__len__" class="internal-link" title="nltk.chunk.util.ChunkScore.__len__">__len__</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#__repr__">__repr__</a></code></td>
-    <td><span>Return a concise representation of this <tt class="rst-docutils literal">ChunkScoring</tt>.</span></td>
+    <td><code><a href="#__repr__" class="internal-link" title="nltk.chunk.util.ChunkScore.__repr__">__repr__</a></code></td>
+    <td>Return a concise representation of this <tt class="rst-docutils literal">ChunkScoring</tt>.</td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#__str__">__str__</a></code></td>
+    <td><code><a href="#__str__" class="internal-link" title="nltk.chunk.util.ChunkScore.__str__">__str__</a></code></td>
     <td><span class="undocumented">No summary</span></td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#accuracy">accuracy</a></code></td>
-    <td><span>Return the overall tag-based accuracy for all text that have been scored by this <tt class="rst-docutils literal">ChunkScore</tt>, using the IOB (conll2000) tag encoding.</span></td>
+    <td><code><a href="#accuracy" class="internal-link" title="nltk.chunk.util.ChunkScore.accuracy">accuracy</a></code></td>
+    <td>Return the overall tag-based accuracy for all text that have been scored by this <tt class="rst-docutils literal">ChunkScore</tt>, using the IOB (conll2000) tag encoding.</td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#correct">correct</a></code></td>
-    <td><span>Return the chunks which were included in the correct chunk structures, listed in input order.</span></td>
+    <td><code><a href="#correct" class="internal-link" title="nltk.chunk.util.ChunkScore.correct">correct</a></code></td>
+    <td>Return the chunks which were included in the correct chunk structures, listed in input order.</td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#f_measure">f_measure</a></code></td>
-    <td><span>Return the overall F measure for all texts that have been scored by this <tt class="rst-docutils literal">ChunkScore</tt>.</span></td>
+    <td><code><a href="#f_measure" class="internal-link" title="nltk.chunk.util.ChunkScore.f_measure">f​_measure</a></code></td>
+    <td>Return the overall F measure for all texts that have been scored by this <tt class="rst-docutils literal">ChunkScore</tt>.</td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#guessed">guessed</a></code></td>
-    <td><span>Return the chunks which were included in the guessed chunk structures, listed in input order.</span></td>
+    <td><code><a href="#guessed" class="internal-link" title="nltk.chunk.util.ChunkScore.guessed">guessed</a></code></td>
+    <td>Return the chunks which were included in the guessed chunk structures, listed in input order.</td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#incorrect">incorrect</a></code></td>
-    <td><span>Return the chunks which were included in the guessed chunk structures, but not in the correct chunk structures, listed in input order.</span></td>
+    <td><code><a href="#incorrect" class="internal-link" title="nltk.chunk.util.ChunkScore.incorrect">incorrect</a></code></td>
+    <td>Return the chunks which were included in the guessed chunk structures, but not in the correct chunk structures, listed in input order.</td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#missed">missed</a></code></td>
-    <td><span>Return the chunks which were included in the correct chunk structures, but not in the guessed chunk structures, listed in input order.</span></td>
+    <td><code><a href="#missed" class="internal-link" title="nltk.chunk.util.ChunkScore.missed">missed</a></code></td>
+    <td>Return the chunks which were included in the correct chunk structures, but not in the guessed chunk structures, listed in input order.</td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#precision">precision</a></code></td>
-    <td><span>Return the overall precision for all texts that have been scored by this <tt class="rst-docutils literal">ChunkScore</tt>.</span></td>
+    <td><code><a href="#precision" class="internal-link" title="nltk.chunk.util.ChunkScore.precision">precision</a></code></td>
+    <td>Return the overall precision for all texts that have been scored by this <tt class="rst-docutils literal">ChunkScore</tt>.</td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#recall">recall</a></code></td>
-    <td><span>Return the overall recall for all texts that have been scored by this <tt class="rst-docutils literal">ChunkScore</tt>.</span></td>
+    <td><code><a href="#recall" class="internal-link" title="nltk.chunk.util.ChunkScore.recall">recall</a></code></td>
+    <td>Return the overall recall for all texts that have been scored by this <tt class="rst-docutils literal">ChunkScore</tt>.</td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#score">score</a></code></td>
-    <td><span>Given a correctly chunked sentence, score another chunked version of the same sentence.</span></td>
+    <td><code><a href="#score" class="internal-link" title="nltk.chunk.util.ChunkScore.score">score</a></code></td>
+    <td>Given a correctly chunked sentence, score another chunked version of the same sentence.</td>
   </tr><tr class="instancevariable">
     
     <td>Instance Variable</td>
-    <td><code><a href="#kwargs">kwargs</a></code></td>
-    <td><span>Keyword arguments:</span></td>
+    <td><code><a href="#kwargs" class="internal-link" title="nltk.chunk.util.ChunkScore.kwargs">kwargs</a></code></td>
+    <td>Keyword arguments:</td>
   </tr><tr class="method private">
     
     <td>Method</td>
-    <td><code><a href="#_updateMeasures">_updateMeasures</a></code></td>
+    <td><code><a href="#_updateMeasures" class="internal-link" title="nltk.chunk.util.ChunkScore._updateMeasures">_update​Measures</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="instancevariable private">
     
     <td>Instance Variable</td>
-    <td><code><a href="#_chunk_label">_chunk_label</a></code></td>
+    <td><code><a href="#_chunk_label" class="internal-link" title="nltk.chunk.util.ChunkScore._chunk_label">_chunk​_label</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="instancevariable private">
     
     <td>Instance Variable</td>
-    <td><code><a href="#_correct">_correct</a></code></td>
+    <td><code><a href="#_correct" class="internal-link" title="nltk.chunk.util.ChunkScore._correct">_correct</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="instancevariable private">
     
     <td>Instance Variable</td>
-    <td><code><a href="#_count">_count</a></code></td>
+    <td><code><a href="#_count" class="internal-link" title="nltk.chunk.util.ChunkScore._count">_count</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="instancevariable private">
     
     <td>Instance Variable</td>
-    <td><code><a href="#_fn">_fn</a></code></td>
-    <td><span>List of false negatives</span></td>
+    <td><code><a href="#_fn" class="internal-link" title="nltk.chunk.util.ChunkScore._fn">_fn</a></code></td>
+    <td>List of false negatives</td>
   </tr><tr class="instancevariable private">
     
     <td>Instance Variable</td>
-    <td><code><a href="#_fn_num">_fn_num</a></code></td>
-    <td><span>Number of false negatives.</span></td>
+    <td><code><a href="#_fn_num" class="internal-link" title="nltk.chunk.util.ChunkScore._fn_num">_fn​_num</a></code></td>
+    <td>Number of false negatives.</td>
   </tr><tr class="instancevariable private">
     
     <td>Instance Variable</td>
-    <td><code><a href="#_fp">_fp</a></code></td>
-    <td><span>List of false positives</span></td>
+    <td><code><a href="#_fp" class="internal-link" title="nltk.chunk.util.ChunkScore._fp">_fp</a></code></td>
+    <td>List of false positives</td>
   </tr><tr class="instancevariable private">
     
     <td>Instance Variable</td>
-    <td><code><a href="#_fp_num">_fp_num</a></code></td>
-    <td><span>Number of false positives</span></td>
+    <td><code><a href="#_fp_num" class="internal-link" title="nltk.chunk.util.ChunkScore._fp_num">_fp​_num</a></code></td>
+    <td>Number of false positives</td>
   </tr><tr class="instancevariable private">
     
     <td>Instance Variable</td>
-    <td><code><a href="#_guessed">_guessed</a></code></td>
+    <td><code><a href="#_guessed" class="internal-link" title="nltk.chunk.util.ChunkScore._guessed">_guessed</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="instancevariable private">
     
     <td>Instance Variable</td>
-    <td><code><a href="#_max_fn">_max_fn</a></code></td>
+    <td><code><a href="#_max_fn" class="internal-link" title="nltk.chunk.util.ChunkScore._max_fn">_max​_fn</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="instancevariable private">
     
     <td>Instance Variable</td>
-    <td><code><a href="#_max_fp">_max_fp</a></code></td>
+    <td><code><a href="#_max_fp" class="internal-link" title="nltk.chunk.util.ChunkScore._max_fp">_max​_fp</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="instancevariable private">
     
     <td>Instance Variable</td>
-    <td><code><a href="#_max_tp">_max_tp</a></code></td>
+    <td><code><a href="#_max_tp" class="internal-link" title="nltk.chunk.util.ChunkScore._max_tp">_max​_tp</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="instancevariable private">
     
     <td>Instance Variable</td>
-    <td><code><a href="#_measuresNeedUpdate">_measuresNeedUpdate</a></code></td>
+    <td><code><a href="#_measuresNeedUpdate" class="internal-link" title="nltk.chunk.util.ChunkScore._measuresNeedUpdate">_measures​Need​Update</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="instancevariable private">
     
     <td>Instance Variable</td>
-    <td><code><a href="#_tags_correct">_tags_correct</a></code></td>
+    <td><code><a href="#_tags_correct" class="internal-link" title="nltk.chunk.util.ChunkScore._tags_correct">_tags​_correct</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="instancevariable private">
     
     <td>Instance Variable</td>
-    <td><code><a href="#_tags_total">_tags_total</a></code></td>
+    <td><code><a href="#_tags_total" class="internal-link" title="nltk.chunk.util.ChunkScore._tags_total">_tags​_total</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="instancevariable private">
     
     <td>Instance Variable</td>
-    <td><code><a href="#_tp">_tp</a></code></td>
-    <td><span>List of true positives</span></td>
+    <td><code><a href="#_tp" class="internal-link" title="nltk.chunk.util.ChunkScore._tp">_tp</a></code></td>
+    <td>List of true positives</td>
   </tr><tr class="instancevariable private">
     
     <td>Instance Variable</td>
-    <td><code><a href="#_tp_num">_tp_num</a></code></td>
-    <td><span>Number of true positives</span></td>
+    <td><code><a href="#_tp_num" class="internal-link" title="nltk.chunk.util.ChunkScore._tp_num">_tp​_num</a></code></td>
+    <td>Number of true positives</td>
   </tr>
 </table>
         
@@ -646,33 +659,30 @@ sentence.</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">gues
     
     <div><p>Keyword arguments:</p>
 <ul class="rst-simple">
-<li><p class="rst-rst-first rst-first">max_tp_examples: The maximum number actual examples of true
+<li>max_tp_examples: The maximum number actual examples of true
 positives to record.  This affects the <tt class="rst-docutils literal">correct</tt> member
 function: <tt class="rst-docutils literal">correct</tt> will not return more than this number
 of true positive examples.  This does <em>not</em> affect any of
-the numerical metrics (precision, recall, or f-measure)</p>
-</li>
-<li><p class="rst-rst-first rst-first">max_fp_examples: The maximum number actual examples of false
+the numerical metrics (precision, recall, or f-measure)</li>
+<li>max_fp_examples: The maximum number actual examples of false
 positives to record.  This affects the <tt class="rst-docutils literal">incorrect</tt> member
 function and the <tt class="rst-docutils literal">guessed</tt> member function: <tt class="rst-docutils literal">incorrect</tt>
 will not return more than this number of examples, and
 <tt class="rst-docutils literal">guessed</tt> will not return more than this number of true
 positive examples.  This does <em>not</em> affect any of the
-numerical metrics (precision, recall, or f-measure)</p>
-</li>
-<li><p class="rst-rst-first rst-first">max_fn_examples: The maximum number actual examples of false
+numerical metrics (precision, recall, or f-measure)</li>
+<li>max_fn_examples: The maximum number actual examples of false
 negatives to record.  This affects the <tt class="rst-docutils literal">missed</tt> member
 function and the <tt class="rst-docutils literal">correct</tt> member function: <tt class="rst-docutils literal">missed</tt>
 will not return more than this number of examples, and
 <tt class="rst-docutils literal">correct</tt> will not return more than this number of true
 negative examples.  This does <em>not</em> affect any of the
-numerical metrics (precision, recall, or f-measure)</p>
-</li>
-<li><p class="rst-rst-first rst-first">chunk_label: A regular expression indicating which chunks
-should be compared.  Defaults to <tt class="rst-docutils literal"><span class="pre">'.*'</span></tt> (i.e., all chunks).</p>
-</li>
+numerical metrics (precision, recall, or f-measure)</li>
+<li>chunk_label: A regular expression indicating which chunks
+should be compared.  Defaults to <tt class="rst-docutils literal"><span class="pre">'.*'</span></tt> (i.e., all chunks).</li>
 </ul>
 </div>
+    
   </div>
 </div><div class="basemethod private">
   
@@ -717,6 +727,7 @@ should be compared.  Defaults to <tt class="rst-docutils literal"><span class="p
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    
   </div>
 </div><div class="baseinstancevariable private">
   
@@ -739,6 +750,7 @@ should be compared.  Defaults to <tt class="rst-docutils literal"><span class="p
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    
   </div>
 </div><div class="baseinstancevariable private">
   
@@ -761,6 +773,7 @@ should be compared.  Defaults to <tt class="rst-docutils literal"><span class="p
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    
   </div>
 </div><div class="baseinstancevariable private">
   
@@ -783,6 +796,7 @@ should be compared.  Defaults to <tt class="rst-docutils literal"><span class="p
     
     
     <div>List of false negatives</div>
+    
   </div>
 </div><div class="baseinstancevariable private">
   
@@ -805,6 +819,7 @@ should be compared.  Defaults to <tt class="rst-docutils literal"><span class="p
     
     
     <div>Number of false negatives.</div>
+    
   </div>
 </div><div class="baseinstancevariable private">
   
@@ -827,6 +842,7 @@ should be compared.  Defaults to <tt class="rst-docutils literal"><span class="p
     
     
     <div>List of false positives</div>
+    
   </div>
 </div><div class="baseinstancevariable private">
   
@@ -849,6 +865,7 @@ should be compared.  Defaults to <tt class="rst-docutils literal"><span class="p
     
     
     <div>Number of false positives</div>
+    
   </div>
 </div><div class="baseinstancevariable private">
   
@@ -871,6 +888,7 @@ should be compared.  Defaults to <tt class="rst-docutils literal"><span class="p
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    
   </div>
 </div><div class="baseinstancevariable private">
   
@@ -893,6 +911,7 @@ should be compared.  Defaults to <tt class="rst-docutils literal"><span class="p
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    
   </div>
 </div><div class="baseinstancevariable private">
   
@@ -915,6 +934,7 @@ should be compared.  Defaults to <tt class="rst-docutils literal"><span class="p
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    
   </div>
 </div><div class="baseinstancevariable private">
   
@@ -937,6 +957,7 @@ should be compared.  Defaults to <tt class="rst-docutils literal"><span class="p
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    
   </div>
 </div><div class="baseinstancevariable private">
   
@@ -959,6 +980,7 @@ should be compared.  Defaults to <tt class="rst-docutils literal"><span class="p
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    
   </div>
 </div><div class="baseinstancevariable private">
   
@@ -981,6 +1003,7 @@ should be compared.  Defaults to <tt class="rst-docutils literal"><span class="p
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    
   </div>
 </div><div class="baseinstancevariable private">
   
@@ -1003,6 +1026,7 @@ should be compared.  Defaults to <tt class="rst-docutils literal"><span class="p
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    
   </div>
 </div><div class="baseinstancevariable private">
   
@@ -1025,6 +1049,7 @@ should be compared.  Defaults to <tt class="rst-docutils literal"><span class="p
     
     
     <div>List of true positives</div>
+    
   </div>
 </div><div class="baseinstancevariable private">
   
@@ -1047,6 +1072,7 @@ should be compared.  Defaults to <tt class="rst-docutils literal"><span class="p
     
     
     <div>Number of true positives</div>
+    
   </div>
 </div>
 
@@ -1058,7 +1084,7 @@ should be compared.  Defaults to <tt class="rst-docutils literal"><span class="p
   <div class="container">
     <a href="index.html">API Documentation</a> for <a href="http://www.nltk.org/" class="projecthome">nltk-3.6.2</a>,
   generated by <a href="https://github.com/twisted/pydoctor/">pydoctor</a>
-    21.2.2 at 2022-01-06 17:36:51.
+    22.2.2.dev0 at 2022-03-04 05:57:24.
   </div>
 </footer>
 

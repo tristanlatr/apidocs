@@ -7,7 +7,7 @@
   <head>
     
     <title>nltk.corpus.reader.timit.TimitCorpusReader</title>
-    <meta name="generator" content="pydoctor 21.2.2"> 
+    <meta name="generator" content="pydoctor 22.2.2.dev0"> 
         
     </meta>
     <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
@@ -44,69 +44,82 @@
           Names
         </a>
 
-        <form action="search-results.html" id="search-box-container">
+        <div id="search-box-container">
           <div class="input-group">
-            <input id="search-box" name="search-query" placeholder="Search..." aria-label="Search" minlength="2" class="form-control" />
+            <input id="search-box" type="search" name="search-query" placeholder="Search..." aria-label="Search" minlength="2" class="form-control" autocomplete="off" />
+            
             <span class="input-group-btn">
-              <button class="btn btn-default" type="submit" title="Search"><img src="fonts/search.svg" alt="Search!" /></button>
-              <a class="btn btn-default" id="search-help-button" title="Help" onclick="toggleSearchHelpText()"><img src="fonts/info.svg" alt="Help!" /></a>
+              <a style="display: none;" class="btn btn-default" id="search-clear-button" title="Clear" onclick="clearSearch()"><img src="fonts/x-circle.svg" alt="Clear" /></a>
+              <a class="btn btn-default" id="search-help-button" title="Help" onclick="toggleSearchHelpText()"><img src="fonts/info.svg" alt="Help" /></a>
             </span>
           </div>
-        </form>
+        </div>
 
-        <div class="rst-admonition hint" id="search-help-box">
+      </div>
+
+      <div id="search-results-container" style="display: none;">
+        <div>
+          <span class="label label-default" id="search-docstrings-button">
+            <a title="Search in docstrings" onclick="toggleSearchInDocstrings()">search in docstrings</a></span>
+        </div>
+
+        <noscript>
+            <h1>Cannot search: JavaScript is not supported/enabled in your browser.</h1>
+        </noscript>
+
+        <div class="hint" id="search-help-box">
           <p class="rst-last">
       
             Search bar offers the following options:
             <ul>   
                 <li>
                   <strong>Term presence.</strong> The below example searches for documents that 
-                    must contain “foo”, might contain “bar” and must not contain “baz”:
-                  <br /> <code>'+foo bar -baz'</code>
+                    must contain “foo”, might contain “bar” and must not contain “baz”: <code>+foo bar -baz</code>
                 </li> 
 
                 <li>
-                  <strong>Wildcards.</strong> The below example searches for documents with words beginning with “foo”:
-                  <br /> <code>'foo*'</code>
+                  <strong>Wildcards.</strong> The below example searches for documents with words beginning with “foo”: <code>foo*</code>
                 </li> 
 
                 <li>
-                  <strong>Search in specific fields.</strong> The following search matches all documents 
-                  that contains "foo" in their full dotted name and with “bar” in any field:
-                  <br /> <code>'+fullName:*foo* +bar'</code>
+                  <strong>Search in specific fields.</strong> The following search matches all objects 
+                  in "twisted.mail" that matches “search”: <code>+qname:twisted.mail.* +search</code>
 
                   <p>
-                    Possible fields: 'name', 'docstring', 'fullName'.
+                    Possible fields: 'name', 'qname' (fully qualified name), 'docstring', and 'kind'.
+                    Last two fields are only applicable if "search in docstrings" is enabled.
                   </p>
                 </li>
 
                 <li>
                   <strong>Fuzzy matches.</strong> The following search matches all documents 
-                  that have a word within 1 edit distance of “foo”:
-                  <br /> <code>'foo~1'</code>
+                  that have a word within 1 edit distance of “foo”: <code>foo~1</code>
                 </li>
             </ul>
 
           </p>
         </div>
 
-      </div>
+        <div id="search-status"> </div>
+        
+        <div class="warning" id="search-warn-box" style="display: none;">
+          <p class="rst-last"><span id="search-warn"></span></p>
+        </div>
 
+        <table id="search-results">
+          <!-- Filled dynamically by JS -->
+        </table>
+        
+        <div style="margin-top: 8px;">
+          <p>Results provided by <a href="https://lunrjs.com">Lunr.js</a></p>
+        </div>
+      </div>
 
     </div>
   </div>
 
-  <script>
- 
-    function toggleSearchHelpText() {
-        document.body.classList.toggle("search-help-hidden");
-    }
-    // Init search and help text
-    document.getElementById('search-box-container').style.display = 'block';
-    document.getElementById('search-help-box').style.display = 'block';
-    document.body.classList.add("search-help-hidden");
-
-  </script>
+  <script src="ajax.js" type="text/javascript"></script>
+  <script src="search.js" type="text/javascript"></script>
 
 </nav>
 
@@ -115,7 +128,7 @@
     <div class="container">
 
       <div class="page-header">
-        <h1 class="class"><code><code><a href="nltk.html">nltk</a></code><wbr></wbr>.<code><a href="nltk.corpus.html">corpus</a></code><wbr></wbr>.<code><a href="nltk.corpus.reader.html">reader</a></code><wbr></wbr>.<code><a href="nltk.corpus.reader.timit.html">timit</a></code><wbr></wbr>.<code><a href="nltk.corpus.reader.timit.TimitCorpusReader.html">TimitCorpusReader</a></code></code></h1>
+        <h1 class="class"><code><code><a href="index.html" class="internal-link">nltk</a></code><wbr></wbr>.<code><a href="nltk.corpus.html" class="internal-link" title="nltk.corpus">corpus</a></code><wbr></wbr>.<code><a href="nltk.corpus.reader.html" class="internal-link" title="nltk.corpus.reader">reader</a></code><wbr></wbr>.<code><a href="nltk.corpus.reader.timit.html" class="internal-link" title="nltk.corpus.reader.timit">timit</a></code><wbr></wbr>.<code><a href="nltk.corpus.reader.timit.TimitCorpusReader.html" class="internal-link" title="nltk.corpus.reader.timit.TimitCorpusReader">TimitCorpusReader</a></code></code></h1>
         <div id="showPrivate">
           <button class="btn btn-link" onclick="togglePrivate()">Toggle Private API</button>
         </div>
@@ -126,7 +139,7 @@
       </div>
 
       <div class="extrasDocstring">
-        <p><code><span class="py-keyword">class</span> <span class="py-defname">TimitCorpusReader</span>(<a href="nltk.corpus.reader.api.CorpusReader.html" title="nltk.corpus.reader.api.CorpusReader">CorpusReader</a>): <a href="https://github.com/nltk/nltk/tree/3.6.2/nltk/corpus/reader/timit.py#L129" class="sourceLink">(source)</a></code></p>
+        <p><code><span class="py-keyword">class</span> <span class="py-defname">TimitCorpusReader</span>(<a href="nltk.corpus.reader.api.CorpusReader.html" class="internal-link" title="nltk.corpus.reader.api.CorpusReader">CorpusReader</a>): <a href="https://github.com/nltk/nltk/tree/3.6.2/nltk/corpus/reader/timit.py#L129" class="sourceLink">(source)</a></code></p>
         <p><a href="classIndex.html#nltk.corpus.reader.timit.TimitCorpusReader">View In Hierarchy</a></p>
       </div>
 
@@ -160,138 +173,138 @@ for each speaker, containing three files for each utterance:</p>
   <tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#__init__">__init__</a></code></td>
-    <td><span>Construct a new TIMIT corpus reader in the given directory. :param root: The root directory for this corpus.</span></td>
+    <td><code><a href="#__init__" class="internal-link" title="nltk.corpus.reader.timit.TimitCorpusReader.__init__">__init__</a></code></td>
+    <td>Construct a new TIMIT corpus reader in the given directory. :param root: The root directory for this corpus.</td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#audiodata">audiodata</a></code></td>
+    <td><code><a href="#audiodata" class="internal-link" title="nltk.corpus.reader.timit.TimitCorpusReader.audiodata">audiodata</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#fileids">fileids</a></code></td>
-    <td><span>Return a list of file identifiers for the files that make up this corpus.</span></td>
+    <td><code><a href="#fileids" class="internal-link" title="nltk.corpus.reader.timit.TimitCorpusReader.fileids">fileids</a></code></td>
+    <td>Return a list of file identifiers for the files that make up this corpus.</td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#phone_times">phone_times</a></code></td>
-    <td><span>offset is represented as a number of 16kHz samples!</span></td>
+    <td><code><a href="#phone_times" class="internal-link" title="nltk.corpus.reader.timit.TimitCorpusReader.phone_times">phone​_times</a></code></td>
+    <td>offset is represented as a number of 16kHz samples!</td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#phone_trees">phone_trees</a></code></td>
+    <td><code><a href="#phone_trees" class="internal-link" title="nltk.corpus.reader.timit.TimitCorpusReader.phone_trees">phone​_trees</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#phones">phones</a></code></td>
+    <td><code><a href="#phones" class="internal-link" title="nltk.corpus.reader.timit.TimitCorpusReader.phones">phones</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#play">play</a></code></td>
-    <td><span>Play the given audio sample.</span></td>
+    <td><code><a href="#play" class="internal-link" title="nltk.corpus.reader.timit.TimitCorpusReader.play">play</a></code></td>
+    <td>Play the given audio sample.</td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#sent_times">sent_times</a></code></td>
+    <td><code><a href="#sent_times" class="internal-link" title="nltk.corpus.reader.timit.TimitCorpusReader.sent_times">sent​_times</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#sentid">sentid</a></code></td>
+    <td><code><a href="#sentid" class="internal-link" title="nltk.corpus.reader.timit.TimitCorpusReader.sentid">sentid</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#sents">sents</a></code></td>
+    <td><code><a href="#sents" class="internal-link" title="nltk.corpus.reader.timit.TimitCorpusReader.sents">sents</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#spkrid">spkrid</a></code></td>
+    <td><code><a href="#spkrid" class="internal-link" title="nltk.corpus.reader.timit.TimitCorpusReader.spkrid">spkrid</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#spkrinfo">spkrinfo</a></code></td>
-    <td><span></span></td>
+    <td><code><a href="#spkrinfo" class="internal-link" title="nltk.corpus.reader.timit.TimitCorpusReader.spkrinfo">spkrinfo</a></code></td>
+    <td></td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#spkrutteranceids">spkrutteranceids</a></code></td>
-    <td><span></span></td>
+    <td><code><a href="#spkrutteranceids" class="internal-link" title="nltk.corpus.reader.timit.TimitCorpusReader.spkrutteranceids">spkrutteranceids</a></code></td>
+    <td></td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#transcription_dict">transcription_dict</a></code></td>
-    <td><span></span></td>
+    <td><code><a href="#transcription_dict" class="internal-link" title="nltk.corpus.reader.timit.TimitCorpusReader.transcription_dict">transcription​_dict</a></code></td>
+    <td></td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#utterance">utterance</a></code></td>
+    <td><code><a href="#utterance" class="internal-link" title="nltk.corpus.reader.timit.TimitCorpusReader.utterance">utterance</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#utteranceids">utteranceids</a></code></td>
+    <td><code><a href="#utteranceids" class="internal-link" title="nltk.corpus.reader.timit.TimitCorpusReader.utteranceids">utteranceids</a></code></td>
     <td><span class="undocumented">No summary</span></td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#wav">wav</a></code></td>
+    <td><code><a href="#wav" class="internal-link" title="nltk.corpus.reader.timit.TimitCorpusReader.wav">wav</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#word_times">word_times</a></code></td>
+    <td><code><a href="#word_times" class="internal-link" title="nltk.corpus.reader.timit.TimitCorpusReader.word_times">word​_times</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#words">words</a></code></td>
+    <td><code><a href="#words" class="internal-link" title="nltk.corpus.reader.timit.TimitCorpusReader.words">words</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="instancevariable">
     
     <td>Instance Variable</td>
-    <td><code><a href="#speakers">speakers</a></code></td>
+    <td><code><a href="#speakers" class="internal-link" title="nltk.corpus.reader.timit.TimitCorpusReader.speakers">speakers</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method private">
     
     <td>Method</td>
-    <td><code><a href="#_utterance_fileids">_utterance_fileids</a></code></td>
+    <td><code><a href="#_utterance_fileids" class="internal-link" title="nltk.corpus.reader.timit.TimitCorpusReader._utterance_fileids">_utterance​_fileids</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
-  </tr><tr class="classvariable private">
+  </tr><tr class="constant private">
     
-    <td>Class Variable</td>
-    <td><code><a href="#_FILE_RE">_FILE_RE</a></code></td>
-    <td><span>A regexp matching fileids that are used by this corpus reader.</span></td>
-  </tr><tr class="classvariable private">
+    <td>Constant</td>
+    <td><code><a href="#_FILE_RE" class="internal-link" title="nltk.corpus.reader.timit.TimitCorpusReader._FILE_RE">_FILE​_RE</a></code></td>
+    <td>A regexp matching fileids that are used by this corpus reader.</td>
+  </tr><tr class="constant private">
     
-    <td>Class Variable</td>
-    <td><code><a href="#_UTTERANCE_RE">_UTTERANCE_RE</a></code></td>
-    <td><span class="undocumented">Undocumented</span></td>
-  </tr><tr class="instancevariable private">
-    
-    <td>Instance Variable</td>
-    <td><code><a href="#_root">_root</a></code></td>
-    <td><span>The root directory for this corpus.</span></td>
-  </tr><tr class="instancevariable private">
-    
-    <td>Instance Variable</td>
-    <td><code><a href="#_speakerinfo">_speakerinfo</a></code></td>
+    <td>Constant</td>
+    <td><code><a href="#_UTTERANCE_RE" class="internal-link" title="nltk.corpus.reader.timit.TimitCorpusReader._UTTERANCE_RE">_UTTERANCE​_RE</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="instancevariable private">
     
     <td>Instance Variable</td>
-    <td><code><a href="#_utterances">_utterances</a></code></td>
-    <td><span>A list of the utterance identifiers for all utterances in this corpus.</span></td>
+    <td><code><a href="#_root" class="internal-link" title="nltk.corpus.reader.timit.TimitCorpusReader._root">_root</a></code></td>
+    <td>The root directory for this corpus.</td>
+  </tr><tr class="instancevariable private">
+    
+    <td>Instance Variable</td>
+    <td><code><a href="#_speakerinfo" class="internal-link" title="nltk.corpus.reader.timit.TimitCorpusReader._speakerinfo">_speakerinfo</a></code></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="instancevariable private">
+    
+    <td>Instance Variable</td>
+    <td><code><a href="#_utterances" class="internal-link" title="nltk.corpus.reader.timit.TimitCorpusReader._utterances">_utterances</a></code></td>
+    <td>A list of the utterance identifiers for all utterances in this corpus.</td>
   </tr>
 </table>
         
           <p class="inheritedFrom">
-            Inherited from <code><a href="nltk.corpus.reader.api.CorpusReader.html">CorpusReader</a></code>:
+            Inherited from <code><a href="nltk.corpus.reader.api.CorpusReader.html" class="internal-link" title="nltk.corpus.reader.api.CorpusReader">CorpusReader</a></code>:
           </p>
           <table class="children sortable" id="id480">
   
@@ -299,72 +312,72 @@ for each speaker, containing three files for each utterance:</p>
   <tr class="basemethod">
     
     <td>Method</td>
-    <td><code><a href="nltk.corpus.reader.api.CorpusReader.html#__repr__">__repr__</a></code></td>
+    <td><code><a href="nltk.corpus.reader.api.CorpusReader.html#__repr__" class="internal-link" title="nltk.corpus.reader.api.CorpusReader.__repr__">__repr__</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="basemethod">
     
     <td>Method</td>
-    <td><code><a href="nltk.corpus.reader.api.CorpusReader.html#abspath">abspath</a></code></td>
-    <td><span>Return the absolute path for the given file.</span></td>
+    <td><code><a href="nltk.corpus.reader.api.CorpusReader.html#abspath" class="internal-link" title="nltk.corpus.reader.api.CorpusReader.abspath">abspath</a></code></td>
+    <td>Return the absolute path for the given file.</td>
   </tr><tr class="basemethod">
     
     <td>Method</td>
-    <td><code><a href="nltk.corpus.reader.api.CorpusReader.html#abspaths">abspaths</a></code></td>
-    <td><span>Return a list of the absolute paths for all fileids in this corpus; or for the given list of fileids, if specified.</span></td>
+    <td><code><a href="nltk.corpus.reader.api.CorpusReader.html#abspaths" class="internal-link" title="nltk.corpus.reader.api.CorpusReader.abspaths">abspaths</a></code></td>
+    <td>Return a list of the absolute paths for all fileids in this corpus; or for the given list of fileids, if specified.</td>
   </tr><tr class="basemethod">
     
     <td>Method</td>
-    <td><code><a href="nltk.corpus.reader.api.CorpusReader.html#citation">citation</a></code></td>
-    <td><span>Return the contents of the corpus citation.bib file, if it exists.</span></td>
+    <td><code><a href="nltk.corpus.reader.api.CorpusReader.html#citation" class="internal-link" title="nltk.corpus.reader.api.CorpusReader.citation">citation</a></code></td>
+    <td>Return the contents of the corpus citation.bib file, if it exists.</td>
   </tr><tr class="basemethod">
     
     <td>Method</td>
-    <td><code><a href="nltk.corpus.reader.api.CorpusReader.html#encoding">encoding</a></code></td>
-    <td><span>Return the unicode encoding for the given corpus file, if known. If the encoding is unknown, or if the given file should be processed using byte strings (str), then return None.</span></td>
+    <td><code><a href="nltk.corpus.reader.api.CorpusReader.html#encoding" class="internal-link" title="nltk.corpus.reader.api.CorpusReader.encoding">encoding</a></code></td>
+    <td>Return the unicode encoding for the given corpus file, if known. If the encoding is unknown, or if the given file should be processed using byte strings (str), then return None.</td>
   </tr><tr class="basemethod">
     
     <td>Method</td>
-    <td><code><a href="nltk.corpus.reader.api.CorpusReader.html#ensure_loaded">ensure_loaded</a></code></td>
+    <td><code><a href="nltk.corpus.reader.api.CorpusReader.html#ensure_loaded" class="internal-link" title="nltk.corpus.reader.api.CorpusReader.ensure_loaded">ensure​_loaded</a></code></td>
     <td><span class="undocumented">No summary</span></td>
   </tr><tr class="basemethod">
     
     <td>Method</td>
-    <td><code><a href="nltk.corpus.reader.api.CorpusReader.html#license">license</a></code></td>
-    <td><span>Return the contents of the corpus LICENSE file, if it exists.</span></td>
+    <td><code><a href="nltk.corpus.reader.api.CorpusReader.html#license" class="internal-link" title="nltk.corpus.reader.api.CorpusReader.license">license</a></code></td>
+    <td>Return the contents of the corpus LICENSE file, if it exists.</td>
   </tr><tr class="basemethod">
     
     <td>Method</td>
-    <td><code><a href="nltk.corpus.reader.api.CorpusReader.html#open">open</a></code></td>
-    <td><span>Return an open stream that can be used to read the given file. If the file's encoding is not None, then the stream will automatically decode the file's contents into unicode.</span></td>
+    <td><code><a href="nltk.corpus.reader.api.CorpusReader.html#open" class="internal-link" title="nltk.corpus.reader.api.CorpusReader.open">open</a></code></td>
+    <td>Return an open stream that can be used to read the given file. If the file's encoding is not None, then the stream will automatically decode the file's contents into unicode.</td>
   </tr><tr class="basemethod">
     
     <td>Method</td>
-    <td><code><a href="nltk.corpus.reader.api.CorpusReader.html#readme">readme</a></code></td>
-    <td><span>Return the contents of the corpus README file, if it exists.</span></td>
+    <td><code><a href="nltk.corpus.reader.api.CorpusReader.html#readme" class="internal-link" title="nltk.corpus.reader.api.CorpusReader.readme">readme</a></code></td>
+    <td>Return the contents of the corpus README file, if it exists.</td>
   </tr><tr class="baseclassvariable">
     
     <td>Class Variable</td>
-    <td><code><a href="nltk.corpus.reader.api.CorpusReader.html#root">root</a></code></td>
+    <td><code><a href="nltk.corpus.reader.api.CorpusReader.html#root" class="internal-link" title="nltk.corpus.reader.api.CorpusReader.root">root</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="basemethod private">
     
     <td>Method</td>
-    <td><code><a href="nltk.corpus.reader.api.CorpusReader.html#_get_root">_get_root</a></code></td>
+    <td><code><a href="nltk.corpus.reader.api.CorpusReader.html#_get_root" class="internal-link" title="nltk.corpus.reader.api.CorpusReader._get_root">_get​_root</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="baseinstancevariable private">
     
     <td>Instance Variable</td>
-    <td><code><a href="nltk.corpus.reader.api.CorpusReader.html#_encoding">_encoding</a></code></td>
-    <td><span>The default unicode encoding for the fileids that make up this corpus.  If <tt class="rst-docutils literal">encoding</tt> is None, then the file contents are processed using byte strings.</span></td>
+    <td><code><a href="nltk.corpus.reader.api.CorpusReader.html#_encoding" class="internal-link" title="nltk.corpus.reader.api.CorpusReader._encoding">_encoding</a></code></td>
+    <td>The default unicode encoding for the fileids that make up this corpus.  If <tt class="rst-docutils literal">encoding</tt> is None, then the file contents are processed using byte strings.</td>
   </tr><tr class="baseinstancevariable private">
     
     <td>Instance Variable</td>
-    <td><code><a href="nltk.corpus.reader.api.CorpusReader.html#_fileids">_fileids</a></code></td>
-    <td><span>A list of the relative paths for the fileids that make up this corpus.</span></td>
+    <td><code><a href="nltk.corpus.reader.api.CorpusReader.html#_fileids" class="internal-link" title="nltk.corpus.reader.api.CorpusReader._fileids">_fileids</a></code></td>
+    <td>A list of the relative paths for the fileids that make up this corpus.</td>
   </tr><tr class="baseinstancevariable private">
     
     <td>Instance Variable</td>
-    <td><code><a href="nltk.corpus.reader.api.CorpusReader.html#_tagset">_tagset</a></code></td>
+    <td><code><a href="nltk.corpus.reader.api.CorpusReader.html#_tagset" class="internal-link" title="nltk.corpus.reader.api.CorpusReader._tagset">_tagset</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr>
 </table>
@@ -386,14 +399,14 @@ for each speaker, containing three files for each utterance:</p>
   </a>
   <div class="functionHeader">
     
-    <span class="py-keyword">def</span> <span class="py-defname">__init__</span>(self, root, encoding='utf8'):
+    <span class="py-keyword">def</span> <span class="py-defname">__init__</span>(self, root, encoding=<span class="rst-variable-quote">'</span><span class="rst-variable-string">utf8</span><span class="rst-variable-quote">'</span>):
     <a class="sourceLink" href="https://github.com/nltk/nltk/tree/3.6.2/nltk/corpus/reader/timit.py#L151">
       
       (source)
     </a>
   </div>
   <div class="docstring functionBody">
-    <div class="interfaceinfo">overrides <code><a href="nltk.corpus.reader.api.CorpusReader.html#__init__">nltk.corpus.reader.api.CorpusReader.__init__</a></code></div>
+    <div class="interfaceinfo">overrides <code><a href="nltk.corpus.reader.api.CorpusReader.html#__init__" class="internal-link">nltk.corpus.reader.api.CorpusReader.__init__</a></code></div>
     
     <div>Construct a new TIMIT corpus reader in the given directory.
 :param root: The root directory for this corpus.</div>
@@ -438,7 +451,7 @@ for each speaker, containing three files for each utterance:</p>
     </a>
   </div>
   <div class="docstring functionBody">
-    <div class="interfaceinfo">overrides <code><a href="nltk.corpus.reader.api.CorpusReader.html#fileids">nltk.corpus.reader.api.CorpusReader.fileids</a></code></div>
+    <div class="interfaceinfo">overrides <code><a href="nltk.corpus.reader.api.CorpusReader.html#fileids" class="internal-link">nltk.corpus.reader.api.CorpusReader.fileids</a></code></div>
     
     <div>Return a list of file identifiers for the files that make up
 this corpus.<table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">filetype</span></td><td class="fieldArgDesc">If specified, then <tt class="rst-docutils literal">filetype</tt> indicates that
@@ -821,6 +834,7 @@ specified.<table class="fieldTable"><tr class="fieldStart"><td class="fieldName"
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    
   </div>
 </div><div class="basemethod private">
   
@@ -844,7 +858,7 @@ specified.<table class="fieldTable"><tr class="fieldStart"><td class="fieldName"
     
     <div><p class="undocumented">Undocumented</p></div>
   </div>
-</div><div class="baseclassvariable private">
+</div><div class="baseconstant private">
   
   
   <a name="nltk.corpus.reader.timit.TimitCorpusReader._FILE_RE">
@@ -865,8 +879,9 @@ specified.<table class="fieldTable"><tr class="fieldStart"><td class="fieldName"
     
     
     <div>A regexp matching fileids that are used by this corpus reader.</div>
+    <table class="valueTable"><tr class="fieldStart"><td class="fieldName">Value</td></tr><tr><td><pre class="constant-value"><code><span class="rst-variable-quote">'</span><span class="rst-variable-string">(\\w+-\\w+/\\w+\\.(phn|txt|wav|wrd))|</span><span class="rst-variable-quote">'</span>+<span class="rst-variable-quote">'</span><span class="rst-variable-string">timitdic\\.txt|spkrinfo\\.txt</span><span class="rst-variable-quote">'</span></code></pre></td></tr></table>
   </div>
-</div><div class="baseclassvariable private">
+</div><div class="baseconstant private">
   
   
   <a name="nltk.corpus.reader.timit.TimitCorpusReader._UTTERANCE_RE">
@@ -887,6 +902,7 @@ specified.<table class="fieldTable"><tr class="fieldStart"><td class="fieldName"
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    <table class="valueTable"><tr class="fieldStart"><td class="fieldName">Value</td></tr><tr><td><pre class="constant-value"><code><span class="rst-variable-quote">'</span><span class="rst-variable-string">\\w+-\\w+/\\w+\\.txt</span><span class="rst-variable-quote">'</span></code></pre></td></tr></table>
   </div>
 </div><div class="baseinstancevariable private">
   
@@ -906,9 +922,10 @@ specified.<table class="fieldTable"><tr class="fieldStart"><td class="fieldName"
     </a>
   </div>
   <div class="functionBody">
-    <div class="interfaceinfo">overrides <code><a href="nltk.corpus.reader.api.CorpusReader.html#_root">nltk.corpus.reader.api.CorpusReader._root</a></code></div>
+    <div class="interfaceinfo">overrides <code><a href="nltk.corpus.reader.api.CorpusReader.html#_root" class="internal-link">nltk.corpus.reader.api.CorpusReader._root</a></code></div>
     
     <div>The root directory for this corpus.</div>
+    
   </div>
 </div><div class="baseinstancevariable private">
   
@@ -931,6 +948,7 @@ specified.<table class="fieldTable"><tr class="fieldStart"><td class="fieldName"
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    
   </div>
 </div><div class="baseinstancevariable private">
   
@@ -954,6 +972,7 @@ specified.<table class="fieldTable"><tr class="fieldStart"><td class="fieldName"
     
     <div>A list of the utterance identifiers for all utterances in
 this corpus.</div>
+    
   </div>
 </div>
 
@@ -965,7 +984,7 @@ this corpus.</div>
   <div class="container">
     <a href="index.html">API Documentation</a> for <a href="http://www.nltk.org/" class="projecthome">nltk-3.6.2</a>,
   generated by <a href="https://github.com/twisted/pydoctor/">pydoctor</a>
-    21.2.2 at 2022-01-06 17:36:51.
+    22.2.2.dev0 at 2022-03-04 05:57:24.
   </div>
 </footer>
 

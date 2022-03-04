@@ -7,7 +7,7 @@
   <head>
     
     <title>nltk.stem.snowball.ArabicStemmer</title>
-    <meta name="generator" content="pydoctor 21.2.2"> 
+    <meta name="generator" content="pydoctor 22.2.2.dev0"> 
         
     </meta>
     <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
@@ -44,69 +44,82 @@
           Names
         </a>
 
-        <form action="search-results.html" id="search-box-container">
+        <div id="search-box-container">
           <div class="input-group">
-            <input id="search-box" name="search-query" placeholder="Search..." aria-label="Search" minlength="2" class="form-control" />
+            <input id="search-box" type="search" name="search-query" placeholder="Search..." aria-label="Search" minlength="2" class="form-control" autocomplete="off" />
+            
             <span class="input-group-btn">
-              <button class="btn btn-default" type="submit" title="Search"><img src="fonts/search.svg" alt="Search!" /></button>
-              <a class="btn btn-default" id="search-help-button" title="Help" onclick="toggleSearchHelpText()"><img src="fonts/info.svg" alt="Help!" /></a>
+              <a style="display: none;" class="btn btn-default" id="search-clear-button" title="Clear" onclick="clearSearch()"><img src="fonts/x-circle.svg" alt="Clear" /></a>
+              <a class="btn btn-default" id="search-help-button" title="Help" onclick="toggleSearchHelpText()"><img src="fonts/info.svg" alt="Help" /></a>
             </span>
           </div>
-        </form>
+        </div>
 
-        <div class="rst-admonition hint" id="search-help-box">
+      </div>
+
+      <div id="search-results-container" style="display: none;">
+        <div>
+          <span class="label label-default" id="search-docstrings-button">
+            <a title="Search in docstrings" onclick="toggleSearchInDocstrings()">search in docstrings</a></span>
+        </div>
+
+        <noscript>
+            <h1>Cannot search: JavaScript is not supported/enabled in your browser.</h1>
+        </noscript>
+
+        <div class="hint" id="search-help-box">
           <p class="rst-last">
       
             Search bar offers the following options:
             <ul>   
                 <li>
                   <strong>Term presence.</strong> The below example searches for documents that 
-                    must contain “foo”, might contain “bar” and must not contain “baz”:
-                  <br /> <code>'+foo bar -baz'</code>
+                    must contain “foo”, might contain “bar” and must not contain “baz”: <code>+foo bar -baz</code>
                 </li> 
 
                 <li>
-                  <strong>Wildcards.</strong> The below example searches for documents with words beginning with “foo”:
-                  <br /> <code>'foo*'</code>
+                  <strong>Wildcards.</strong> The below example searches for documents with words beginning with “foo”: <code>foo*</code>
                 </li> 
 
                 <li>
-                  <strong>Search in specific fields.</strong> The following search matches all documents 
-                  that contains "foo" in their full dotted name and with “bar” in any field:
-                  <br /> <code>'+fullName:*foo* +bar'</code>
+                  <strong>Search in specific fields.</strong> The following search matches all objects 
+                  in "twisted.mail" that matches “search”: <code>+qname:twisted.mail.* +search</code>
 
                   <p>
-                    Possible fields: 'name', 'docstring', 'fullName'.
+                    Possible fields: 'name', 'qname' (fully qualified name), 'docstring', and 'kind'.
+                    Last two fields are only applicable if "search in docstrings" is enabled.
                   </p>
                 </li>
 
                 <li>
                   <strong>Fuzzy matches.</strong> The following search matches all documents 
-                  that have a word within 1 edit distance of “foo”:
-                  <br /> <code>'foo~1'</code>
+                  that have a word within 1 edit distance of “foo”: <code>foo~1</code>
                 </li>
             </ul>
 
           </p>
         </div>
 
-      </div>
+        <div id="search-status"> </div>
+        
+        <div class="warning" id="search-warn-box" style="display: none;">
+          <p class="rst-last"><span id="search-warn"></span></p>
+        </div>
 
+        <table id="search-results">
+          <!-- Filled dynamically by JS -->
+        </table>
+        
+        <div style="margin-top: 8px;">
+          <p>Results provided by <a href="https://lunrjs.com">Lunr.js</a></p>
+        </div>
+      </div>
 
     </div>
   </div>
 
-  <script>
- 
-    function toggleSearchHelpText() {
-        document.body.classList.toggle("search-help-hidden");
-    }
-    // Init search and help text
-    document.getElementById('search-box-container').style.display = 'block';
-    document.getElementById('search-help-box').style.display = 'block';
-    document.body.classList.add("search-help-hidden");
-
-  </script>
+  <script src="ajax.js" type="text/javascript"></script>
+  <script src="search.js" type="text/javascript"></script>
 
 </nav>
 
@@ -115,7 +128,7 @@
     <div class="container">
 
       <div class="page-header">
-        <h1 class="class"><code><code><a href="nltk.html">nltk</a></code><wbr></wbr>.<code><a href="nltk.stem.html">stem</a></code><wbr></wbr>.<code><a href="nltk.stem.snowball.html">snowball</a></code><wbr></wbr>.<code><a href="nltk.stem.snowball.ArabicStemmer.html">ArabicStemmer</a></code></code></h1>
+        <h1 class="class"><code><code><a href="index.html" class="internal-link">nltk</a></code><wbr></wbr>.<code><a href="nltk.stem.html" class="internal-link" title="nltk.stem">stem</a></code><wbr></wbr>.<code><a href="nltk.stem.snowball.html" class="internal-link" title="nltk.stem.snowball">snowball</a></code><wbr></wbr>.<code><a href="nltk.stem.snowball.ArabicStemmer.html" class="internal-link" title="nltk.stem.snowball.ArabicStemmer">ArabicStemmer</a></code></code></h1>
         <div id="showPrivate">
           <button class="btn btn-link" onclick="togglePrivate()">Toggle Private API</button>
         </div>
@@ -126,7 +139,7 @@
       </div>
 
       <div class="extrasDocstring">
-        <p><code><span class="py-keyword">class</span> <span class="py-defname">ArabicStemmer</span>(<a href="nltk.stem.snowball._StandardStemmer.html" title="nltk.stem.snowball._StandardStemmer">_StandardStemmer</a>): <a href="https://github.com/nltk/nltk/tree/3.6.2/nltk/stem/snowball.py#L310" class="sourceLink">(source)</a></code></p>
+        <p><code><span class="py-keyword">class</span> <span class="py-defname">ArabicStemmer</span>(<a href="nltk.stem.snowball._StandardStemmer.html" class="internal-link" title="nltk.stem.snowball._StandardStemmer">_StandardStemmer</a>): <a href="https://github.com/nltk/nltk/tree/3.6.2/nltk/stem/snowball.py#L310" class="sourceLink">(source)</a></code></p>
         <p><a href="classIndex.html#nltk.stem.snowball.ArabicStemmer">View In Hierarchy</a></p>
       </div>
 
@@ -148,413 +161,413 @@ Lakhdar Benzahia</blockquote>
   <tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#stem">stem</a></code></td>
-    <td><span>Stem an Arabic word and return the stemmed form. :param word: string :return: string</span></td>
+    <td><code><a href="#stem" class="internal-link" title="nltk.stem.snowball.ArabicStemmer.stem">stem</a></code></td>
+    <td>Stem an Arabic word and return the stemmed form. :param word: string :return: string</td>
   </tr><tr class="instancevariable">
     
     <td>Instance Variable</td>
-    <td><code><a href="#is_defined">is_defined</a></code></td>
-    <td><span class="undocumented">Undocumented</span></td>
-  </tr><tr class="instancevariable">
-    
-    <td>Instance Variable</td>
-    <td><code><a href="#is_noun">is_noun</a></code></td>
+    <td><code><a href="#is_defined" class="internal-link" title="nltk.stem.snowball.ArabicStemmer.is_defined">is​_defined</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="instancevariable">
     
     <td>Instance Variable</td>
-    <td><code><a href="#is_verb">is_verb</a></code></td>
+    <td><code><a href="#is_noun" class="internal-link" title="nltk.stem.snowball.ArabicStemmer.is_noun">is​_noun</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="instancevariable">
     
     <td>Instance Variable</td>
-    <td><code><a href="#prefix_step2a_success">prefix_step2a_success</a></code></td>
+    <td><code><a href="#is_verb" class="internal-link" title="nltk.stem.snowball.ArabicStemmer.is_verb">is​_verb</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="instancevariable">
     
     <td>Instance Variable</td>
-    <td><code><a href="#prefix_step3a_noun_success">prefix_step3a_noun_success</a></code></td>
+    <td><code><a href="#prefix_step2a_success" class="internal-link" title="nltk.stem.snowball.ArabicStemmer.prefix_step2a_success">prefix​_step2a​_success</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="instancevariable">
     
     <td>Instance Variable</td>
-    <td><code><a href="#prefix_step3b_noun_success">prefix_step3b_noun_success</a></code></td>
+    <td><code><a href="#prefix_step3a_noun_success" class="internal-link" title="nltk.stem.snowball.ArabicStemmer.prefix_step3a_noun_success">prefix​_step3a​_noun​_success</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="instancevariable">
     
     <td>Instance Variable</td>
-    <td><code><a href="#suffix_noun_step1a_success">suffix_noun_step1a_success</a></code></td>
+    <td><code><a href="#prefix_step3b_noun_success" class="internal-link" title="nltk.stem.snowball.ArabicStemmer.prefix_step3b_noun_success">prefix​_step3b​_noun​_success</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="instancevariable">
     
     <td>Instance Variable</td>
-    <td><code><a href="#suffix_noun_step2a_success">suffix_noun_step2a_success</a></code></td>
+    <td><code><a href="#suffix_noun_step1a_success" class="internal-link" title="nltk.stem.snowball.ArabicStemmer.suffix_noun_step1a_success">suffix​_noun​_step1a​_success</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="instancevariable">
     
     <td>Instance Variable</td>
-    <td><code><a href="#suffix_noun_step2b_success">suffix_noun_step2b_success</a></code></td>
+    <td><code><a href="#suffix_noun_step2a_success" class="internal-link" title="nltk.stem.snowball.ArabicStemmer.suffix_noun_step2a_success">suffix​_noun​_step2a​_success</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="instancevariable">
     
     <td>Instance Variable</td>
-    <td><code><a href="#suffix_noun_step2c2_success">suffix_noun_step2c2_success</a></code></td>
+    <td><code><a href="#suffix_noun_step2b_success" class="internal-link" title="nltk.stem.snowball.ArabicStemmer.suffix_noun_step2b_success">suffix​_noun​_step2b​_success</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="instancevariable">
     
     <td>Instance Variable</td>
-    <td><code><a href="#suffix_verb_step2a_success">suffix_verb_step2a_success</a></code></td>
+    <td><code><a href="#suffix_noun_step2c2_success" class="internal-link" title="nltk.stem.snowball.ArabicStemmer.suffix_noun_step2c2_success">suffix​_noun​_step2c2​_success</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="instancevariable">
     
     <td>Instance Variable</td>
-    <td><code><a href="#suffix_verb_step2b_success">suffix_verb_step2b_success</a></code></td>
+    <td><code><a href="#suffix_verb_step2a_success" class="internal-link" title="nltk.stem.snowball.ArabicStemmer.suffix_verb_step2a_success">suffix​_verb​_step2a​_success</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="instancevariable">
     
     <td>Instance Variable</td>
-    <td><code><a href="#suffixe_noun_step1b_success">suffixe_noun_step1b_success</a></code></td>
+    <td><code><a href="#suffix_verb_step2b_success" class="internal-link" title="nltk.stem.snowball.ArabicStemmer.suffix_verb_step2b_success">suffix​_verb​_step2b​_success</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="instancevariable">
     
     <td>Instance Variable</td>
-    <td><code><a href="#suffixes_verb_step1_success">suffixes_verb_step1_success</a></code></td>
+    <td><code><a href="#suffixe_noun_step1b_success" class="internal-link" title="nltk.stem.snowball.ArabicStemmer.suffixe_noun_step1b_success">suffixe​_noun​_step1b​_success</a></code></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="instancevariable">
+    
+    <td>Instance Variable</td>
+    <td><code><a href="#suffixes_verb_step1_success" class="internal-link" title="nltk.stem.snowball.ArabicStemmer.suffixes_verb_step1_success">suffixes​_verb​_step1​_success</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method private">
     
     <td>Method</td>
-    <td><code><a href="#__checks_1">__checks_1</a></code></td>
+    <td><code><a href="#__checks_1" class="internal-link" title="nltk.stem.snowball.ArabicStemmer.__checks_1">__checks​_1</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method private">
     
     <td>Method</td>
-    <td><code><a href="#__checks_2">__checks_2</a></code></td>
+    <td><code><a href="#__checks_2" class="internal-link" title="nltk.stem.snowball.ArabicStemmer.__checks_2">__checks​_2</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method private">
     
     <td>Method</td>
-    <td><code><a href="#__normalize_post">__normalize_post</a></code></td>
+    <td><code><a href="#__normalize_post" class="internal-link" title="nltk.stem.snowball.ArabicStemmer.__normalize_post">__normalize​_post</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method private">
     
     <td>Method</td>
-    <td><code><a href="#__normalize_pre">__normalize_pre</a></code></td>
-    <td><span></span></td>
+    <td><code><a href="#__normalize_pre" class="internal-link" title="nltk.stem.snowball.ArabicStemmer.__normalize_pre">__normalize​_pre</a></code></td>
+    <td></td>
   </tr><tr class="method private">
     
     <td>Method</td>
-    <td><code><a href="#__Prefix_Step1">__Prefix_Step1</a></code></td>
-    <td><span class="undocumented">Undocumented</span></td>
-  </tr><tr class="method private">
-    
-    <td>Method</td>
-    <td><code><a href="#__Prefix_Step2a">__Prefix_Step2a</a></code></td>
+    <td><code><a href="#__Prefix_Step1" class="internal-link" title="nltk.stem.snowball.ArabicStemmer.__Prefix_Step1">__​Prefix_​Step1</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method private">
     
     <td>Method</td>
-    <td><code><a href="#__Prefix_Step2b">__Prefix_Step2b</a></code></td>
+    <td><code><a href="#__Prefix_Step2a" class="internal-link" title="nltk.stem.snowball.ArabicStemmer.__Prefix_Step2a">__​Prefix_​Step2a</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method private">
     
     <td>Method</td>
-    <td><code><a href="#__Prefix_Step3_Verb">__Prefix_Step3_Verb</a></code></td>
+    <td><code><a href="#__Prefix_Step2b" class="internal-link" title="nltk.stem.snowball.ArabicStemmer.__Prefix_Step2b">__​Prefix_​Step2b</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method private">
     
     <td>Method</td>
-    <td><code><a href="#__Prefix_Step3a_Noun">__Prefix_Step3a_Noun</a></code></td>
+    <td><code><a href="#__Prefix_Step3_Verb" class="internal-link" title="nltk.stem.snowball.ArabicStemmer.__Prefix_Step3_Verb">__​Prefix_​Step3_​Verb</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method private">
     
     <td>Method</td>
-    <td><code><a href="#__Prefix_Step3b_Noun">__Prefix_Step3b_Noun</a></code></td>
+    <td><code><a href="#__Prefix_Step3a_Noun" class="internal-link" title="nltk.stem.snowball.ArabicStemmer.__Prefix_Step3a_Noun">__​Prefix_​Step3a_​Noun</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method private">
     
     <td>Method</td>
-    <td><code><a href="#__Prefix_Step4_Verb">__Prefix_Step4_Verb</a></code></td>
+    <td><code><a href="#__Prefix_Step3b_Noun" class="internal-link" title="nltk.stem.snowball.ArabicStemmer.__Prefix_Step3b_Noun">__​Prefix_​Step3b_​Noun</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method private">
     
     <td>Method</td>
-    <td><code><a href="#__Suffix_All_alef_maqsura">__Suffix_All_alef_maqsura</a></code></td>
+    <td><code><a href="#__Prefix_Step4_Verb" class="internal-link" title="nltk.stem.snowball.ArabicStemmer.__Prefix_Step4_Verb">__​Prefix_​Step4_​Verb</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method private">
     
     <td>Method</td>
-    <td><code><a href="#__Suffix_Noun_Step1a">__Suffix_Noun_Step1a</a></code></td>
+    <td><code><a href="#__Suffix_All_alef_maqsura" class="internal-link" title="nltk.stem.snowball.ArabicStemmer.__Suffix_All_alef_maqsura">__​Suffix_​All_alef_maqsura</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method private">
     
     <td>Method</td>
-    <td><code><a href="#__Suffix_Noun_Step1b">__Suffix_Noun_Step1b</a></code></td>
+    <td><code><a href="#__Suffix_Noun_Step1a" class="internal-link" title="nltk.stem.snowball.ArabicStemmer.__Suffix_Noun_Step1a">__​Suffix_​Noun_​Step1a</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method private">
     
     <td>Method</td>
-    <td><code><a href="#__Suffix_Noun_Step2a">__Suffix_Noun_Step2a</a></code></td>
+    <td><code><a href="#__Suffix_Noun_Step1b" class="internal-link" title="nltk.stem.snowball.ArabicStemmer.__Suffix_Noun_Step1b">__​Suffix_​Noun_​Step1b</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method private">
     
     <td>Method</td>
-    <td><code><a href="#__Suffix_Noun_Step2b">__Suffix_Noun_Step2b</a></code></td>
+    <td><code><a href="#__Suffix_Noun_Step2a" class="internal-link" title="nltk.stem.snowball.ArabicStemmer.__Suffix_Noun_Step2a">__​Suffix_​Noun_​Step2a</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method private">
     
     <td>Method</td>
-    <td><code><a href="#__Suffix_Noun_Step2c1">__Suffix_Noun_Step2c1</a></code></td>
+    <td><code><a href="#__Suffix_Noun_Step2b" class="internal-link" title="nltk.stem.snowball.ArabicStemmer.__Suffix_Noun_Step2b">__​Suffix_​Noun_​Step2b</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method private">
     
     <td>Method</td>
-    <td><code><a href="#__Suffix_Noun_Step2c2">__Suffix_Noun_Step2c2</a></code></td>
+    <td><code><a href="#__Suffix_Noun_Step2c1" class="internal-link" title="nltk.stem.snowball.ArabicStemmer.__Suffix_Noun_Step2c1">__​Suffix_​Noun_​Step2c1</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method private">
     
     <td>Method</td>
-    <td><code><a href="#__Suffix_Noun_Step3">__Suffix_Noun_Step3</a></code></td>
+    <td><code><a href="#__Suffix_Noun_Step2c2" class="internal-link" title="nltk.stem.snowball.ArabicStemmer.__Suffix_Noun_Step2c2">__​Suffix_​Noun_​Step2c2</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method private">
     
     <td>Method</td>
-    <td><code><a href="#__Suffix_Verb_Step1">__Suffix_Verb_Step1</a></code></td>
+    <td><code><a href="#__Suffix_Noun_Step3" class="internal-link" title="nltk.stem.snowball.ArabicStemmer.__Suffix_Noun_Step3">__​Suffix_​Noun_​Step3</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method private">
     
     <td>Method</td>
-    <td><code><a href="#__Suffix_Verb_Step2a">__Suffix_Verb_Step2a</a></code></td>
+    <td><code><a href="#__Suffix_Verb_Step1" class="internal-link" title="nltk.stem.snowball.ArabicStemmer.__Suffix_Verb_Step1">__​Suffix_​Verb_​Step1</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method private">
     
     <td>Method</td>
-    <td><code><a href="#__Suffix_Verb_Step2b">__Suffix_Verb_Step2b</a></code></td>
+    <td><code><a href="#__Suffix_Verb_Step2a" class="internal-link" title="nltk.stem.snowball.ArabicStemmer.__Suffix_Verb_Step2a">__​Suffix_​Verb_​Step2a</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method private">
     
     <td>Method</td>
-    <td><code><a href="#__Suffix_Verb_Step2c">__Suffix_Verb_Step2c</a></code></td>
+    <td><code><a href="#__Suffix_Verb_Step2b" class="internal-link" title="nltk.stem.snowball.ArabicStemmer.__Suffix_Verb_Step2b">__​Suffix_​Verb_​Step2b</a></code></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="method private">
+    
+    <td>Method</td>
+    <td><code><a href="#__Suffix_Verb_Step2c" class="internal-link" title="nltk.stem.snowball.ArabicStemmer.__Suffix_Verb_Step2c">__​Suffix_​Verb_​Step2c</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="classvariable private">
     
     <td>Class Variable</td>
-    <td><code><a href="#__alefat">__alefat</a></code></td>
+    <td><code><a href="#__alefat" class="internal-link" title="nltk.stem.snowball.ArabicStemmer.__alefat">__alefat</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="classvariable private">
     
     <td>Class Variable</td>
-    <td><code><a href="#__arabic_punctuation_marks">__arabic_punctuation_marks</a></code></td>
+    <td><code><a href="#__arabic_punctuation_marks" class="internal-link" title="nltk.stem.snowball.ArabicStemmer.__arabic_punctuation_marks">__arabic​_punctuation​_marks</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="classvariable private">
     
     <td>Class Variable</td>
-    <td><code><a href="#__articles_2len">__articles_2len</a></code></td>
+    <td><code><a href="#__articles_2len" class="internal-link" title="nltk.stem.snowball.ArabicStemmer.__articles_2len">__articles​_2len</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="classvariable private">
     
     <td>Class Variable</td>
-    <td><code><a href="#__articles_3len">__articles_3len</a></code></td>
+    <td><code><a href="#__articles_3len" class="internal-link" title="nltk.stem.snowball.ArabicStemmer.__articles_3len">__articles​_3len</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="classvariable private">
     
     <td>Class Variable</td>
-    <td><code><a href="#__checks1">__checks1</a></code></td>
+    <td><code><a href="#__checks1" class="internal-link" title="nltk.stem.snowball.ArabicStemmer.__checks1">__checks1</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="classvariable private">
     
     <td>Class Variable</td>
-    <td><code><a href="#__checks2">__checks2</a></code></td>
+    <td><code><a href="#__checks2" class="internal-link" title="nltk.stem.snowball.ArabicStemmer.__checks2">__checks2</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="classvariable private">
     
     <td>Class Variable</td>
-    <td><code><a href="#__conjugation_suffix_noun_1">__conjugation_suffix_noun_1</a></code></td>
+    <td><code><a href="#__conjugation_suffix_noun_1" class="internal-link" title="nltk.stem.snowball.ArabicStemmer.__conjugation_suffix_noun_1">__conjugation​_suffix​_noun​_1</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="classvariable private">
     
     <td>Class Variable</td>
-    <td><code><a href="#__conjugation_suffix_noun_2">__conjugation_suffix_noun_2</a></code></td>
+    <td><code><a href="#__conjugation_suffix_noun_2" class="internal-link" title="nltk.stem.snowball.ArabicStemmer.__conjugation_suffix_noun_2">__conjugation​_suffix​_noun​_2</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="classvariable private">
     
     <td>Class Variable</td>
-    <td><code><a href="#__conjugation_suffix_noun_3">__conjugation_suffix_noun_3</a></code></td>
+    <td><code><a href="#__conjugation_suffix_noun_3" class="internal-link" title="nltk.stem.snowball.ArabicStemmer.__conjugation_suffix_noun_3">__conjugation​_suffix​_noun​_3</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="classvariable private">
     
     <td>Class Variable</td>
-    <td><code><a href="#__conjugation_suffix_verb_1">__conjugation_suffix_verb_1</a></code></td>
+    <td><code><a href="#__conjugation_suffix_verb_1" class="internal-link" title="nltk.stem.snowball.ArabicStemmer.__conjugation_suffix_verb_1">__conjugation​_suffix​_verb​_1</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="classvariable private">
     
     <td>Class Variable</td>
-    <td><code><a href="#__conjugation_suffix_verb_2">__conjugation_suffix_verb_2</a></code></td>
+    <td><code><a href="#__conjugation_suffix_verb_2" class="internal-link" title="nltk.stem.snowball.ArabicStemmer.__conjugation_suffix_verb_2">__conjugation​_suffix​_verb​_2</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="classvariable private">
     
     <td>Class Variable</td>
-    <td><code><a href="#__conjugation_suffix_verb_3">__conjugation_suffix_verb_3</a></code></td>
+    <td><code><a href="#__conjugation_suffix_verb_3" class="internal-link" title="nltk.stem.snowball.ArabicStemmer.__conjugation_suffix_verb_3">__conjugation​_suffix​_verb​_3</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="classvariable private">
     
     <td>Class Variable</td>
-    <td><code><a href="#__conjugation_suffix_verb_4">__conjugation_suffix_verb_4</a></code></td>
+    <td><code><a href="#__conjugation_suffix_verb_4" class="internal-link" title="nltk.stem.snowball.ArabicStemmer.__conjugation_suffix_verb_4">__conjugation​_suffix​_verb​_4</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="classvariable private">
     
     <td>Class Variable</td>
-    <td><code><a href="#__conjugation_suffix_verb_past">__conjugation_suffix_verb_past</a></code></td>
+    <td><code><a href="#__conjugation_suffix_verb_past" class="internal-link" title="nltk.stem.snowball.ArabicStemmer.__conjugation_suffix_verb_past">__conjugation​_suffix​_verb​_past</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="classvariable private">
     
     <td>Class Variable</td>
-    <td><code><a href="#__conjugation_suffix_verb_present">__conjugation_suffix_verb_present</a></code></td>
+    <td><code><a href="#__conjugation_suffix_verb_present" class="internal-link" title="nltk.stem.snowball.ArabicStemmer.__conjugation_suffix_verb_present">__conjugation​_suffix​_verb​_present</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="classvariable private">
     
     <td>Class Variable</td>
-    <td><code><a href="#__initial_hamzat">__initial_hamzat</a></code></td>
+    <td><code><a href="#__initial_hamzat" class="internal-link" title="nltk.stem.snowball.ArabicStemmer.__initial_hamzat">__initial​_hamzat</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="classvariable private">
     
     <td>Class Variable</td>
-    <td><code><a href="#__kasheeda">__kasheeda</a></code></td>
+    <td><code><a href="#__kasheeda" class="internal-link" title="nltk.stem.snowball.ArabicStemmer.__kasheeda">__kasheeda</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="classvariable private">
     
     <td>Class Variable</td>
-    <td><code><a href="#__last_hamzat">__last_hamzat</a></code></td>
+    <td><code><a href="#__last_hamzat" class="internal-link" title="nltk.stem.snowball.ArabicStemmer.__last_hamzat">__last​_hamzat</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="classvariable private">
     
     <td>Class Variable</td>
-    <td><code><a href="#__prefix_step1">__prefix_step1</a></code></td>
+    <td><code><a href="#__prefix_step1" class="internal-link" title="nltk.stem.snowball.ArabicStemmer.__prefix_step1">__prefix​_step1</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="classvariable private">
     
     <td>Class Variable</td>
-    <td><code><a href="#__prefix_step2a">__prefix_step2a</a></code></td>
+    <td><code><a href="#__prefix_step2a" class="internal-link" title="nltk.stem.snowball.ArabicStemmer.__prefix_step2a">__prefix​_step2a</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="classvariable private">
     
     <td>Class Variable</td>
-    <td><code><a href="#__prefix_step2b">__prefix_step2b</a></code></td>
+    <td><code><a href="#__prefix_step2b" class="internal-link" title="nltk.stem.snowball.ArabicStemmer.__prefix_step2b">__prefix​_step2b</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="classvariable private">
     
     <td>Class Variable</td>
-    <td><code><a href="#__prefix_step3_verb">__prefix_step3_verb</a></code></td>
+    <td><code><a href="#__prefix_step3_verb" class="internal-link" title="nltk.stem.snowball.ArabicStemmer.__prefix_step3_verb">__prefix​_step3​_verb</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="classvariable private">
     
     <td>Class Variable</td>
-    <td><code><a href="#__prefix_step3a_noun">__prefix_step3a_noun</a></code></td>
+    <td><code><a href="#__prefix_step3a_noun" class="internal-link" title="nltk.stem.snowball.ArabicStemmer.__prefix_step3a_noun">__prefix​_step3a​_noun</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="classvariable private">
     
     <td>Class Variable</td>
-    <td><code><a href="#__prefix_step3b_noun">__prefix_step3b_noun</a></code></td>
+    <td><code><a href="#__prefix_step3b_noun" class="internal-link" title="nltk.stem.snowball.ArabicStemmer.__prefix_step3b_noun">__prefix​_step3b​_noun</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="classvariable private">
     
     <td>Class Variable</td>
-    <td><code><a href="#__prefix_step4_verb">__prefix_step4_verb</a></code></td>
+    <td><code><a href="#__prefix_step4_verb" class="internal-link" title="nltk.stem.snowball.ArabicStemmer.__prefix_step4_verb">__prefix​_step4​_verb</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="classvariable private">
     
     <td>Class Variable</td>
-    <td><code><a href="#__prefixes1">__prefixes1</a></code></td>
+    <td><code><a href="#__prefixes1" class="internal-link" title="nltk.stem.snowball.ArabicStemmer.__prefixes1">__prefixes1</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="classvariable private">
     
     <td>Class Variable</td>
-    <td><code><a href="#__prepositions1">__prepositions1</a></code></td>
+    <td><code><a href="#__prepositions1" class="internal-link" title="nltk.stem.snowball.ArabicStemmer.__prepositions1">__prepositions1</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="classvariable private">
     
     <td>Class Variable</td>
-    <td><code><a href="#__prepositions2">__prepositions2</a></code></td>
+    <td><code><a href="#__prepositions2" class="internal-link" title="nltk.stem.snowball.ArabicStemmer.__prepositions2">__prepositions2</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="classvariable private">
     
     <td>Class Variable</td>
-    <td><code><a href="#__suffix_all_alef_maqsura">__suffix_all_alef_maqsura</a></code></td>
+    <td><code><a href="#__suffix_all_alef_maqsura" class="internal-link" title="nltk.stem.snowball.ArabicStemmer.__suffix_all_alef_maqsura">__suffix​_all​_alef​_maqsura</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="classvariable private">
     
     <td>Class Variable</td>
-    <td><code><a href="#__suffix_noun_step1a">__suffix_noun_step1a</a></code></td>
+    <td><code><a href="#__suffix_noun_step1a" class="internal-link" title="nltk.stem.snowball.ArabicStemmer.__suffix_noun_step1a">__suffix​_noun​_step1a</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="classvariable private">
     
     <td>Class Variable</td>
-    <td><code><a href="#__suffix_noun_step1b">__suffix_noun_step1b</a></code></td>
+    <td><code><a href="#__suffix_noun_step1b" class="internal-link" title="nltk.stem.snowball.ArabicStemmer.__suffix_noun_step1b">__suffix​_noun​_step1b</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="classvariable private">
     
     <td>Class Variable</td>
-    <td><code><a href="#__suffix_noun_step2a">__suffix_noun_step2a</a></code></td>
+    <td><code><a href="#__suffix_noun_step2a" class="internal-link" title="nltk.stem.snowball.ArabicStemmer.__suffix_noun_step2a">__suffix​_noun​_step2a</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="classvariable private">
     
     <td>Class Variable</td>
-    <td><code><a href="#__suffix_noun_step2b">__suffix_noun_step2b</a></code></td>
+    <td><code><a href="#__suffix_noun_step2b" class="internal-link" title="nltk.stem.snowball.ArabicStemmer.__suffix_noun_step2b">__suffix​_noun​_step2b</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="classvariable private">
     
     <td>Class Variable</td>
-    <td><code><a href="#__suffix_noun_step2c1">__suffix_noun_step2c1</a></code></td>
+    <td><code><a href="#__suffix_noun_step2c1" class="internal-link" title="nltk.stem.snowball.ArabicStemmer.__suffix_noun_step2c1">__suffix​_noun​_step2c1</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="classvariable private">
     
     <td>Class Variable</td>
-    <td><code><a href="#__suffix_noun_step2c2">__suffix_noun_step2c2</a></code></td>
+    <td><code><a href="#__suffix_noun_step2c2" class="internal-link" title="nltk.stem.snowball.ArabicStemmer.__suffix_noun_step2c2">__suffix​_noun​_step2c2</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="classvariable private">
     
     <td>Class Variable</td>
-    <td><code><a href="#__suffix_noun_step3">__suffix_noun_step3</a></code></td>
+    <td><code><a href="#__suffix_noun_step3" class="internal-link" title="nltk.stem.snowball.ArabicStemmer.__suffix_noun_step3">__suffix​_noun​_step3</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="classvariable private">
     
     <td>Class Variable</td>
-    <td><code><a href="#__suffix_verb_step1">__suffix_verb_step1</a></code></td>
+    <td><code><a href="#__suffix_verb_step1" class="internal-link" title="nltk.stem.snowball.ArabicStemmer.__suffix_verb_step1">__suffix​_verb​_step1</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="classvariable private">
     
     <td>Class Variable</td>
-    <td><code><a href="#__suffix_verb_step2a">__suffix_verb_step2a</a></code></td>
+    <td><code><a href="#__suffix_verb_step2a" class="internal-link" title="nltk.stem.snowball.ArabicStemmer.__suffix_verb_step2a">__suffix​_verb​_step2a</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="classvariable private">
     
     <td>Class Variable</td>
-    <td><code><a href="#__suffix_verb_step2b">__suffix_verb_step2b</a></code></td>
+    <td><code><a href="#__suffix_verb_step2b" class="internal-link" title="nltk.stem.snowball.ArabicStemmer.__suffix_verb_step2b">__suffix​_verb​_step2b</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="classvariable private">
     
     <td>Class Variable</td>
-    <td><code><a href="#__suffix_verb_step2c">__suffix_verb_step2c</a></code></td>
+    <td><code><a href="#__suffix_verb_step2c" class="internal-link" title="nltk.stem.snowball.ArabicStemmer.__suffix_verb_step2c">__suffix​_verb​_step2c</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="classvariable private">
     
     <td>Class Variable</td>
-    <td><code><a href="#__vocalization">__vocalization</a></code></td>
+    <td><code><a href="#__vocalization" class="internal-link" title="nltk.stem.snowball.ArabicStemmer.__vocalization">__vocalization</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="classvariable private">
     
     <td>Class Variable</td>
-    <td><code><a href="#__waw_hamza">__waw_hamza</a></code></td>
+    <td><code><a href="#__waw_hamza" class="internal-link" title="nltk.stem.snowball.ArabicStemmer.__waw_hamza">__waw​_hamza</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="classvariable private">
     
     <td>Class Variable</td>
-    <td><code><a href="#__yeh_hamza">__yeh_hamza</a></code></td>
+    <td><code><a href="#__yeh_hamza" class="internal-link" title="nltk.stem.snowball.ArabicStemmer.__yeh_hamza">__yeh​_hamza</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr>
 </table>
         
           <p class="inheritedFrom">
-            Inherited from <code><a href="nltk.stem.snowball._StandardStemmer.html">_StandardStemmer</a></code>:
+            Inherited from <code><a href="nltk.stem.snowball._StandardStemmer.html" class="internal-link" title="nltk.stem.snowball._StandardStemmer">_StandardStemmer</a></code>:
           </p>
           <table class="children sortable" id="id1498">
   
@@ -562,18 +575,18 @@ Lakhdar Benzahia</blockquote>
   <tr class="basemethod private">
     
     <td>Method</td>
-    <td><code><a href="nltk.stem.snowball._StandardStemmer.html#_r1r2_standard">_r1r2_standard</a></code></td>
-    <td><span>Return the standard interpretations of the string regions R1 and R2.</span></td>
+    <td><code><a href="nltk.stem.snowball._StandardStemmer.html#_r1r2_standard" class="internal-link" title="nltk.stem.snowball._StandardStemmer._r1r2_standard">_r1r2​_standard</a></code></td>
+    <td>Return the standard interpretations of the string regions R1 and R2.</td>
   </tr><tr class="basemethod private">
     
     <td>Method</td>
-    <td><code><a href="nltk.stem.snowball._StandardStemmer.html#_rv_standard">_rv_standard</a></code></td>
-    <td><span>Return the standard interpretation of the string region RV.</span></td>
+    <td><code><a href="nltk.stem.snowball._StandardStemmer.html#_rv_standard" class="internal-link" title="nltk.stem.snowball._StandardStemmer._rv_standard">_rv​_standard</a></code></td>
+    <td>Return the standard interpretation of the string region RV.</td>
   </tr>
 </table>
           
           <p class="inheritedFrom">
-            Inherited from <code><a href="nltk.stem.snowball._LanguageSpecificStemmer.html">_LanguageSpecificStemmer</a></code> (via <code><a href="nltk.stem.snowball._StandardStemmer.html">_StandardStemmer</a></code>):
+            Inherited from <code><a href="nltk.stem.snowball._LanguageSpecificStemmer.html" class="internal-link" title="nltk.stem.snowball._LanguageSpecificStemmer">_LanguageSpecificStemmer</a></code> (via <code><a href="nltk.stem.snowball._StandardStemmer.html" class="internal-link" title="nltk.stem.snowball._StandardStemmer">_StandardStemmer</a></code>):
           </p>
           <table class="children sortable" id="id1499">
   
@@ -581,17 +594,17 @@ Lakhdar Benzahia</blockquote>
   <tr class="basemethod">
     
     <td>Method</td>
-    <td><code><a href="nltk.stem.snowball._LanguageSpecificStemmer.html#__init__">__init__</a></code></td>
+    <td><code><a href="nltk.stem.snowball._LanguageSpecificStemmer.html#__init__" class="internal-link" title="nltk.stem.snowball._LanguageSpecificStemmer.__init__">__init__</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="basemethod">
     
     <td>Method</td>
-    <td><code><a href="nltk.stem.snowball._LanguageSpecificStemmer.html#__repr__">__repr__</a></code></td>
-    <td><span>Print out the string representation of the respective class.</span></td>
+    <td><code><a href="nltk.stem.snowball._LanguageSpecificStemmer.html#__repr__" class="internal-link" title="nltk.stem.snowball._LanguageSpecificStemmer.__repr__">__repr__</a></code></td>
+    <td>Print out the string representation of the respective class.</td>
   </tr><tr class="baseinstancevariable">
     
     <td>Instance Variable</td>
-    <td><code><a href="nltk.stem.snowball._LanguageSpecificStemmer.html#stopwords">stopwords</a></code></td>
+    <td><code><a href="nltk.stem.snowball._LanguageSpecificStemmer.html#stopwords" class="internal-link" title="nltk.stem.snowball._LanguageSpecificStemmer.stopwords">stopwords</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr>
 </table>
@@ -620,7 +633,7 @@ Lakhdar Benzahia</blockquote>
     </a>
   </div>
   <div class="docstring functionBody">
-    <div class="interfaceinfo">overrides <code><a href="nltk.stem.api.StemmerI.html#stem">nltk.stem.api.StemmerI.stem</a></code></div>
+    <div class="interfaceinfo">overrides <code><a href="nltk.stem.api.StemmerI.html#stem" class="internal-link">nltk.stem.api.StemmerI.stem</a></code></div>
     
     <div><blockquote>
 Stem an Arabic word and return the stemmed form.</blockquote>
@@ -647,6 +660,7 @@ Stem an Arabic word and return the stemmed form.</blockquote>
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    
   </div>
 </div><div class="baseinstancevariable">
   
@@ -669,6 +683,7 @@ Stem an Arabic word and return the stemmed form.</blockquote>
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    
   </div>
 </div><div class="baseinstancevariable">
   
@@ -691,6 +706,7 @@ Stem an Arabic word and return the stemmed form.</blockquote>
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    
   </div>
 </div><div class="baseinstancevariable">
   
@@ -713,6 +729,7 @@ Stem an Arabic word and return the stemmed form.</blockquote>
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    
   </div>
 </div><div class="baseinstancevariable">
   
@@ -735,6 +752,7 @@ Stem an Arabic word and return the stemmed form.</blockquote>
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    
   </div>
 </div><div class="baseinstancevariable">
   
@@ -757,6 +775,7 @@ Stem an Arabic word and return the stemmed form.</blockquote>
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    
   </div>
 </div><div class="baseinstancevariable">
   
@@ -779,6 +798,7 @@ Stem an Arabic word and return the stemmed form.</blockquote>
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    
   </div>
 </div><div class="baseinstancevariable">
   
@@ -801,6 +821,7 @@ Stem an Arabic word and return the stemmed form.</blockquote>
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    
   </div>
 </div><div class="baseinstancevariable">
   
@@ -823,6 +844,7 @@ Stem an Arabic word and return the stemmed form.</blockquote>
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    
   </div>
 </div><div class="baseinstancevariable">
   
@@ -845,6 +867,7 @@ Stem an Arabic word and return the stemmed form.</blockquote>
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    
   </div>
 </div><div class="baseinstancevariable">
   
@@ -867,6 +890,7 @@ Stem an Arabic word and return the stemmed form.</blockquote>
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    
   </div>
 </div><div class="baseinstancevariable">
   
@@ -889,6 +913,7 @@ Stem an Arabic word and return the stemmed form.</blockquote>
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    
   </div>
 </div><div class="baseinstancevariable">
   
@@ -911,6 +936,7 @@ Stem an Arabic word and return the stemmed form.</blockquote>
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    
   </div>
 </div><div class="baseinstancevariable">
   
@@ -933,6 +959,7 @@ Stem an Arabic word and return the stemmed form.</blockquote>
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    
   </div>
 </div><div class="basemethod private">
   
@@ -1461,6 +1488,7 @@ Stem an Arabic word and return the stemmed form.</blockquote>
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    
   </div>
 </div><div class="baseclassvariable private">
   
@@ -1483,6 +1511,7 @@ Stem an Arabic word and return the stemmed form.</blockquote>
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    
   </div>
 </div><div class="baseclassvariable private">
   
@@ -1495,7 +1524,7 @@ Stem an Arabic word and return the stemmed form.</blockquote>
   </a>
   <div class="functionHeader">
     
-    <span class="py-defname">__articles_2len</span>: <code>tuple[<wbr></wbr>str, <wbr></wbr>...]</code> =
+    <span class="py-defname">__articles_2len</span>: <code>tuple[<wbr></wbr>str, <wbr></wbr><span class="rst-variable-ellipsis">...</span>]</code> =
     <a class="sourceLink" href="https://github.com/nltk/nltk/tree/3.6.2/nltk/stem/snowball.py#L507">
       
       (source)
@@ -1505,6 +1534,7 @@ Stem an Arabic word and return the stemmed form.</blockquote>
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    
   </div>
 </div><div class="baseclassvariable private">
   
@@ -1517,7 +1547,7 @@ Stem an Arabic word and return the stemmed form.</blockquote>
   </a>
   <div class="functionHeader">
     
-    <span class="py-defname">__articles_3len</span>: <code>tuple[<wbr></wbr>str, <wbr></wbr>...]</code> =
+    <span class="py-defname">__articles_3len</span>: <code>tuple[<wbr></wbr>str, <wbr></wbr><span class="rst-variable-ellipsis">...</span>]</code> =
     <a class="sourceLink" href="https://github.com/nltk/nltk/tree/3.6.2/nltk/stem/snowball.py#L505">
       
       (source)
@@ -1527,6 +1557,7 @@ Stem an Arabic word and return the stemmed form.</blockquote>
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    
   </div>
 </div><div class="baseclassvariable private">
   
@@ -1539,7 +1570,7 @@ Stem an Arabic word and return the stemmed form.</blockquote>
   </a>
   <div class="functionHeader">
     
-    <span class="py-defname">__checks1</span>: <code>tuple[<wbr></wbr>str, <wbr></wbr>...]</code> =
+    <span class="py-defname">__checks1</span>: <code>tuple[<wbr></wbr>str, <wbr></wbr><span class="rst-variable-ellipsis">...</span>]</code> =
     <a class="sourceLink" href="https://github.com/nltk/nltk/tree/3.6.2/nltk/stem/snowball.py#L342">
       
       (source)
@@ -1549,6 +1580,7 @@ Stem an Arabic word and return the stemmed form.</blockquote>
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    
   </div>
 </div><div class="baseclassvariable private">
   
@@ -1561,7 +1593,7 @@ Stem an Arabic word and return the stemmed form.</blockquote>
   </a>
   <div class="functionHeader">
     
-    <span class="py-defname">__checks2</span>: <code>tuple[<wbr></wbr>str, <wbr></wbr>...]</code> =
+    <span class="py-defname">__checks2</span>: <code>tuple[<wbr></wbr>str, <wbr></wbr><span class="rst-variable-ellipsis">...</span>]</code> =
     <a class="sourceLink" href="https://github.com/nltk/nltk/tree/3.6.2/nltk/stem/snowball.py#L349">
       
       (source)
@@ -1571,6 +1603,7 @@ Stem an Arabic word and return the stemmed form.</blockquote>
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    
   </div>
 </div><div class="baseclassvariable private">
   
@@ -1583,7 +1616,7 @@ Stem an Arabic word and return the stemmed form.</blockquote>
   </a>
   <div class="functionHeader">
     
-    <span class="py-defname">__conjugation_suffix_noun_1</span>: <code>tuple[<wbr></wbr>str, <wbr></wbr>...]</code> =
+    <span class="py-defname">__conjugation_suffix_noun_1</span>: <code>tuple[<wbr></wbr>str, <wbr></wbr><span class="rst-variable-ellipsis">...</span>]</code> =
     <a class="sourceLink" href="https://github.com/nltk/nltk/tree/3.6.2/nltk/stem/snowball.py#L487">
       
       (source)
@@ -1593,6 +1626,7 @@ Stem an Arabic word and return the stemmed form.</blockquote>
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    
   </div>
 </div><div class="baseclassvariable private">
   
@@ -1605,7 +1639,7 @@ Stem an Arabic word and return the stemmed form.</blockquote>
   </a>
   <div class="functionHeader">
     
-    <span class="py-defname">__conjugation_suffix_noun_2</span>: <code>tuple[<wbr></wbr>str, <wbr></wbr>...]</code> =
+    <span class="py-defname">__conjugation_suffix_noun_2</span>: <code>tuple[<wbr></wbr>str, <wbr></wbr><span class="rst-variable-ellipsis">...</span>]</code> =
     <a class="sourceLink" href="https://github.com/nltk/nltk/tree/3.6.2/nltk/stem/snowball.py#L489">
       
       (source)
@@ -1615,6 +1649,7 @@ Stem an Arabic word and return the stemmed form.</blockquote>
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    
   </div>
 </div><div class="baseclassvariable private">
   
@@ -1627,7 +1662,7 @@ Stem an Arabic word and return the stemmed form.</blockquote>
   </a>
   <div class="functionHeader">
     
-    <span class="py-defname">__conjugation_suffix_noun_3</span>: <code>tuple[<wbr></wbr>str, <wbr></wbr>...]</code> =
+    <span class="py-defname">__conjugation_suffix_noun_3</span>: <code>tuple[<wbr></wbr>str, <wbr></wbr><span class="rst-variable-ellipsis">...</span>]</code> =
     <a class="sourceLink" href="https://github.com/nltk/nltk/tree/3.6.2/nltk/stem/snowball.py#L497">
       
       (source)
@@ -1637,6 +1672,7 @@ Stem an Arabic word and return the stemmed form.</blockquote>
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    
   </div>
 </div><div class="baseclassvariable private">
   
@@ -1649,7 +1685,7 @@ Stem an Arabic word and return the stemmed form.</blockquote>
   </a>
   <div class="functionHeader">
     
-    <span class="py-defname">__conjugation_suffix_verb_1</span>: <code>tuple[<wbr></wbr>str, <wbr></wbr>...]</code> =
+    <span class="py-defname">__conjugation_suffix_verb_1</span>: <code>tuple[<wbr></wbr>str, <wbr></wbr><span class="rst-variable-ellipsis">...</span>]</code> =
     <a class="sourceLink" href="https://github.com/nltk/nltk/tree/3.6.2/nltk/stem/snowball.py#L455">
       
       (source)
@@ -1659,6 +1695,7 @@ Stem an Arabic word and return the stemmed form.</blockquote>
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    
   </div>
 </div><div class="baseclassvariable private">
   
@@ -1671,7 +1708,7 @@ Stem an Arabic word and return the stemmed form.</blockquote>
   </a>
   <div class="functionHeader">
     
-    <span class="py-defname">__conjugation_suffix_verb_2</span>: <code>tuple[<wbr></wbr>str, <wbr></wbr>...]</code> =
+    <span class="py-defname">__conjugation_suffix_verb_2</span>: <code>tuple[<wbr></wbr>str, <wbr></wbr><span class="rst-variable-ellipsis">...</span>]</code> =
     <a class="sourceLink" href="https://github.com/nltk/nltk/tree/3.6.2/nltk/stem/snowball.py#L457">
       
       (source)
@@ -1681,6 +1718,7 @@ Stem an Arabic word and return the stemmed form.</blockquote>
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    
   </div>
 </div><div class="baseclassvariable private">
   
@@ -1693,7 +1731,7 @@ Stem an Arabic word and return the stemmed form.</blockquote>
   </a>
   <div class="functionHeader">
     
-    <span class="py-defname">__conjugation_suffix_verb_3</span>: <code>tuple[<wbr></wbr>str, <wbr></wbr>...]</code> =
+    <span class="py-defname">__conjugation_suffix_verb_3</span>: <code>tuple[<wbr></wbr>str, <wbr></wbr><span class="rst-variable-ellipsis">...</span>]</code> =
     <a class="sourceLink" href="https://github.com/nltk/nltk/tree/3.6.2/nltk/stem/snowball.py#L466">
       
       (source)
@@ -1703,6 +1741,7 @@ Stem an Arabic word and return the stemmed form.</blockquote>
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    
   </div>
 </div><div class="baseclassvariable private">
   
@@ -1715,7 +1754,7 @@ Stem an Arabic word and return the stemmed form.</blockquote>
   </a>
   <div class="functionHeader">
     
-    <span class="py-defname">__conjugation_suffix_verb_4</span>: <code>tuple[<wbr></wbr>str, <wbr></wbr>...]</code> =
+    <span class="py-defname">__conjugation_suffix_verb_4</span>: <code>tuple[<wbr></wbr>str, <wbr></wbr><span class="rst-variable-ellipsis">...</span>]</code> =
     <a class="sourceLink" href="https://github.com/nltk/nltk/tree/3.6.2/nltk/stem/snowball.py#L472">
       
       (source)
@@ -1725,6 +1764,7 @@ Stem an Arabic word and return the stemmed form.</blockquote>
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    
   </div>
 </div><div class="baseclassvariable private">
   
@@ -1737,7 +1777,7 @@ Stem an Arabic word and return the stemmed form.</blockquote>
   </a>
   <div class="functionHeader">
     
-    <span class="py-defname">__conjugation_suffix_verb_past</span>: <code>tuple[<wbr></wbr>str, <wbr></wbr>...]</code> =
+    <span class="py-defname">__conjugation_suffix_verb_past</span>: <code>tuple[<wbr></wbr>str, <wbr></wbr><span class="rst-variable-ellipsis">...</span>]</code> =
     <a class="sourceLink" href="https://github.com/nltk/nltk/tree/3.6.2/nltk/stem/snowball.py#L474">
       
       (source)
@@ -1747,6 +1787,7 @@ Stem an Arabic word and return the stemmed form.</blockquote>
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    
   </div>
 </div><div class="baseclassvariable private">
   
@@ -1759,7 +1800,7 @@ Stem an Arabic word and return the stemmed form.</blockquote>
   </a>
   <div class="functionHeader">
     
-    <span class="py-defname">__conjugation_suffix_verb_present</span>: <code>tuple[<wbr></wbr>str, <wbr></wbr>...]</code> =
+    <span class="py-defname">__conjugation_suffix_verb_present</span>: <code>tuple[<wbr></wbr>str, <wbr></wbr><span class="rst-variable-ellipsis">...</span>]</code> =
     <a class="sourceLink" href="https://github.com/nltk/nltk/tree/3.6.2/nltk/stem/snowball.py#L480">
       
       (source)
@@ -1769,6 +1810,7 @@ Stem an Arabic word and return the stemmed form.</blockquote>
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    
   </div>
 </div><div class="baseclassvariable private">
   
@@ -1791,6 +1833,7 @@ Stem an Arabic word and return the stemmed form.</blockquote>
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    
   </div>
 </div><div class="baseclassvariable private">
   
@@ -1813,6 +1856,7 @@ Stem an Arabic word and return the stemmed form.</blockquote>
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    
   </div>
 </div><div class="baseclassvariable private">
   
@@ -1825,7 +1869,7 @@ Stem an Arabic word and return the stemmed form.</blockquote>
   </a>
   <div class="functionHeader">
     
-    <span class="py-defname">__last_hamzat</span>: <code>tuple[<wbr></wbr>str, <wbr></wbr>...]</code> =
+    <span class="py-defname">__last_hamzat</span>: <code>tuple[<wbr></wbr>str, <wbr></wbr><span class="rst-variable-ellipsis">...</span>]</code> =
     <a class="sourceLink" href="https://github.com/nltk/nltk/tree/3.6.2/nltk/stem/snowball.py#L330">
       
       (source)
@@ -1835,6 +1879,7 @@ Stem an Arabic word and return the stemmed form.</blockquote>
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    
   </div>
 </div><div class="baseclassvariable private">
   
@@ -1847,7 +1892,7 @@ Stem an Arabic word and return the stemmed form.</blockquote>
   </a>
   <div class="functionHeader">
     
-    <span class="py-defname">__prefix_step1</span>: <code>tuple[<wbr></wbr>str, <wbr></wbr>...]</code> =
+    <span class="py-defname">__prefix_step1</span>: <code>tuple[<wbr></wbr>str, <wbr></wbr><span class="rst-variable-ellipsis">...</span>]</code> =
     <a class="sourceLink" href="https://github.com/nltk/nltk/tree/3.6.2/nltk/stem/snowball.py#L413">
       
       (source)
@@ -1857,6 +1902,7 @@ Stem an Arabic word and return the stemmed form.</blockquote>
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    
   </div>
 </div><div class="baseclassvariable private">
   
@@ -1869,7 +1915,7 @@ Stem an Arabic word and return the stemmed form.</blockquote>
   </a>
   <div class="functionHeader">
     
-    <span class="py-defname">__prefix_step2a</span>: <code>tuple[<wbr></wbr>str, <wbr></wbr>...]</code> =
+    <span class="py-defname">__prefix_step2a</span>: <code>tuple[<wbr></wbr>str, <wbr></wbr><span class="rst-variable-ellipsis">...</span>]</code> =
     <a class="sourceLink" href="https://github.com/nltk/nltk/tree/3.6.2/nltk/stem/snowball.py#L422">
       
       (source)
@@ -1879,6 +1925,7 @@ Stem an Arabic word and return the stemmed form.</blockquote>
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    
   </div>
 </div><div class="baseclassvariable private">
   
@@ -1891,7 +1938,7 @@ Stem an Arabic word and return the stemmed form.</blockquote>
   </a>
   <div class="functionHeader">
     
-    <span class="py-defname">__prefix_step2b</span>: <code>tuple[<wbr></wbr>str, <wbr></wbr>...]</code> =
+    <span class="py-defname">__prefix_step2b</span>: <code>tuple[<wbr></wbr>str, <wbr></wbr><span class="rst-variable-ellipsis">...</span>]</code> =
     <a class="sourceLink" href="https://github.com/nltk/nltk/tree/3.6.2/nltk/stem/snowball.py#L424">
       
       (source)
@@ -1901,6 +1948,7 @@ Stem an Arabic word and return the stemmed form.</blockquote>
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    
   </div>
 </div><div class="baseclassvariable private">
   
@@ -1913,7 +1961,7 @@ Stem an Arabic word and return the stemmed form.</blockquote>
   </a>
   <div class="functionHeader">
     
-    <span class="py-defname">__prefix_step3_verb</span>: <code>tuple[<wbr></wbr>str, <wbr></wbr>...]</code> =
+    <span class="py-defname">__prefix_step3_verb</span>: <code>tuple[<wbr></wbr>str, <wbr></wbr><span class="rst-variable-ellipsis">...</span>]</code> =
     <a class="sourceLink" href="https://github.com/nltk/nltk/tree/3.6.2/nltk/stem/snowball.py#L441">
       
       (source)
@@ -1923,6 +1971,7 @@ Stem an Arabic word and return the stemmed form.</blockquote>
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    
   </div>
 </div><div class="baseclassvariable private">
   
@@ -1935,7 +1984,7 @@ Stem an Arabic word and return the stemmed form.</blockquote>
   </a>
   <div class="functionHeader">
     
-    <span class="py-defname">__prefix_step3a_noun</span>: <code>tuple[<wbr></wbr>str, <wbr></wbr>...]</code> =
+    <span class="py-defname">__prefix_step3a_noun</span>: <code>tuple[<wbr></wbr>str, <wbr></wbr><span class="rst-variable-ellipsis">...</span>]</code> =
     <a class="sourceLink" href="https://github.com/nltk/nltk/tree/3.6.2/nltk/stem/snowball.py#L426">
       
       (source)
@@ -1945,6 +1994,7 @@ Stem an Arabic word and return the stemmed form.</blockquote>
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    
   </div>
 </div><div class="baseclassvariable private">
   
@@ -1957,7 +2007,7 @@ Stem an Arabic word and return the stemmed form.</blockquote>
   </a>
   <div class="functionHeader">
     
-    <span class="py-defname">__prefix_step3b_noun</span>: <code>tuple[<wbr></wbr>str, <wbr></wbr>...]</code> =
+    <span class="py-defname">__prefix_step3b_noun</span>: <code>tuple[<wbr></wbr>str, <wbr></wbr><span class="rst-variable-ellipsis">...</span>]</code> =
     <a class="sourceLink" href="https://github.com/nltk/nltk/tree/3.6.2/nltk/stem/snowball.py#L433">
       
       (source)
@@ -1967,6 +2017,7 @@ Stem an Arabic word and return the stemmed form.</blockquote>
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    
   </div>
 </div><div class="baseclassvariable private">
   
@@ -1979,7 +2030,7 @@ Stem an Arabic word and return the stemmed form.</blockquote>
   </a>
   <div class="functionHeader">
     
-    <span class="py-defname">__prefix_step4_verb</span>: <code>tuple[<wbr></wbr>str, <wbr></wbr>...]</code> =
+    <span class="py-defname">__prefix_step4_verb</span>: <code>tuple[<wbr></wbr>str, <wbr></wbr><span class="rst-variable-ellipsis">...</span>]</code> =
     <a class="sourceLink" href="https://github.com/nltk/nltk/tree/3.6.2/nltk/stem/snowball.py#L448">
       
       (source)
@@ -1989,6 +2040,7 @@ Stem an Arabic word and return the stemmed form.</blockquote>
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    
   </div>
 </div><div class="baseclassvariable private">
   
@@ -2001,7 +2053,7 @@ Stem an Arabic word and return the stemmed form.</blockquote>
   </a>
   <div class="functionHeader">
     
-    <span class="py-defname">__prefixes1</span>: <code>tuple[<wbr></wbr>str, <wbr></wbr>...]</code> =
+    <span class="py-defname">__prefixes1</span>: <code>tuple[<wbr></wbr>str, <wbr></wbr><span class="rst-variable-ellipsis">...</span>]</code> =
     <a class="sourceLink" href="https://github.com/nltk/nltk/tree/3.6.2/nltk/stem/snowball.py#L503">
       
       (source)
@@ -2011,6 +2063,7 @@ Stem an Arabic word and return the stemmed form.</blockquote>
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    
   </div>
 </div><div class="baseclassvariable private">
   
@@ -2023,7 +2076,7 @@ Stem an Arabic word and return the stemmed form.</blockquote>
   </a>
   <div class="functionHeader">
     
-    <span class="py-defname">__prepositions1</span>: <code>tuple[<wbr></wbr>str, <wbr></wbr>...]</code> =
+    <span class="py-defname">__prepositions1</span>: <code>tuple[<wbr></wbr>str, <wbr></wbr><span class="rst-variable-ellipsis">...</span>]</code> =
     <a class="sourceLink" href="https://github.com/nltk/nltk/tree/3.6.2/nltk/stem/snowball.py#L510">
       
       (source)
@@ -2033,6 +2086,7 @@ Stem an Arabic word and return the stemmed form.</blockquote>
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    
   </div>
 </div><div class="baseclassvariable private">
   
@@ -2045,7 +2099,7 @@ Stem an Arabic word and return the stemmed form.</blockquote>
   </a>
   <div class="functionHeader">
     
-    <span class="py-defname">__prepositions2</span>: <code>tuple[<wbr></wbr>str, <wbr></wbr>...]</code> =
+    <span class="py-defname">__prepositions2</span>: <code>tuple[<wbr></wbr>str, <wbr></wbr><span class="rst-variable-ellipsis">...</span>]</code> =
     <a class="sourceLink" href="https://github.com/nltk/nltk/tree/3.6.2/nltk/stem/snowball.py#L511">
       
       (source)
@@ -2055,6 +2109,7 @@ Stem an Arabic word and return the stemmed form.</blockquote>
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    
   </div>
 </div><div class="baseclassvariable private">
   
@@ -2077,6 +2132,7 @@ Stem an Arabic word and return the stemmed form.</blockquote>
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    
   </div>
 </div><div class="baseclassvariable private">
   
@@ -2089,7 +2145,7 @@ Stem an Arabic word and return the stemmed form.</blockquote>
   </a>
   <div class="functionHeader">
     
-    <span class="py-defname">__suffix_noun_step1a</span>: <code>tuple[<wbr></wbr>str, <wbr></wbr>...]</code> =
+    <span class="py-defname">__suffix_noun_step1a</span>: <code>tuple[<wbr></wbr>str, <wbr></wbr><span class="rst-variable-ellipsis">...</span>]</code> =
     <a class="sourceLink" href="https://github.com/nltk/nltk/tree/3.6.2/nltk/stem/snowball.py#L352">
       
       (source)
@@ -2099,6 +2155,7 @@ Stem an Arabic word and return the stemmed form.</blockquote>
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    
   </div>
 </div><div class="baseclassvariable private">
   
@@ -2121,6 +2178,7 @@ Stem an Arabic word and return the stemmed form.</blockquote>
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    
   </div>
 </div><div class="baseclassvariable private">
   
@@ -2133,7 +2191,7 @@ Stem an Arabic word and return the stemmed form.</blockquote>
   </a>
   <div class="functionHeader">
     
-    <span class="py-defname">__suffix_noun_step2a</span>: <code>tuple[<wbr></wbr>str, <wbr></wbr>...]</code> =
+    <span class="py-defname">__suffix_noun_step2a</span>: <code>tuple[<wbr></wbr>str, <wbr></wbr><span class="rst-variable-ellipsis">...</span>]</code> =
     <a class="sourceLink" href="https://github.com/nltk/nltk/tree/3.6.2/nltk/stem/snowball.py#L367">
       
       (source)
@@ -2143,6 +2201,7 @@ Stem an Arabic word and return the stemmed form.</blockquote>
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    
   </div>
 </div><div class="baseclassvariable private">
   
@@ -2165,6 +2224,7 @@ Stem an Arabic word and return the stemmed form.</blockquote>
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    
   </div>
 </div><div class="baseclassvariable private">
   
@@ -2187,6 +2247,7 @@ Stem an Arabic word and return the stemmed form.</blockquote>
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    
   </div>
 </div><div class="baseclassvariable private">
   
@@ -2209,6 +2270,7 @@ Stem an Arabic word and return the stemmed form.</blockquote>
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    
   </div>
 </div><div class="baseclassvariable private">
   
@@ -2231,6 +2293,7 @@ Stem an Arabic word and return the stemmed form.</blockquote>
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    
   </div>
 </div><div class="baseclassvariable private">
   
@@ -2243,7 +2306,7 @@ Stem an Arabic word and return the stemmed form.</blockquote>
   </a>
   <div class="functionHeader">
     
-    <span class="py-defname">__suffix_verb_step1</span>: <code>tuple[<wbr></wbr>str, <wbr></wbr>...]</code> =
+    <span class="py-defname">__suffix_verb_step1</span>: <code>tuple[<wbr></wbr>str, <wbr></wbr><span class="rst-variable-ellipsis">...</span>]</code> =
     <a class="sourceLink" href="https://github.com/nltk/nltk/tree/3.6.2/nltk/stem/snowball.py#L377">
       
       (source)
@@ -2253,6 +2316,7 @@ Stem an Arabic word and return the stemmed form.</blockquote>
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    
   </div>
 </div><div class="baseclassvariable private">
   
@@ -2265,7 +2329,7 @@ Stem an Arabic word and return the stemmed form.</blockquote>
   </a>
   <div class="functionHeader">
     
-    <span class="py-defname">__suffix_verb_step2a</span>: <code>tuple[<wbr></wbr>str, <wbr></wbr>...]</code> =
+    <span class="py-defname">__suffix_verb_step2a</span>: <code>tuple[<wbr></wbr>str, <wbr></wbr><span class="rst-variable-ellipsis">...</span>]</code> =
     <a class="sourceLink" href="https://github.com/nltk/nltk/tree/3.6.2/nltk/stem/snowball.py#L392">
       
       (source)
@@ -2275,6 +2339,7 @@ Stem an Arabic word and return the stemmed form.</blockquote>
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    
   </div>
 </div><div class="baseclassvariable private">
   
@@ -2287,7 +2352,7 @@ Stem an Arabic word and return the stemmed form.</blockquote>
   </a>
   <div class="functionHeader">
     
-    <span class="py-defname">__suffix_verb_step2b</span>: <code>tuple[<wbr></wbr>str, <wbr></wbr>...]</code> =
+    <span class="py-defname">__suffix_verb_step2b</span>: <code>tuple[<wbr></wbr>str, <wbr></wbr><span class="rst-variable-ellipsis">...</span>]</code> =
     <a class="sourceLink" href="https://github.com/nltk/nltk/tree/3.6.2/nltk/stem/snowball.py#L406">
       
       (source)
@@ -2297,6 +2362,7 @@ Stem an Arabic word and return the stemmed form.</blockquote>
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    
   </div>
 </div><div class="baseclassvariable private">
   
@@ -2309,7 +2375,7 @@ Stem an Arabic word and return the stemmed form.</blockquote>
   </a>
   <div class="functionHeader">
     
-    <span class="py-defname">__suffix_verb_step2c</span>: <code>tuple[<wbr></wbr>str, <wbr></wbr>...]</code> =
+    <span class="py-defname">__suffix_verb_step2c</span>: <code>tuple[<wbr></wbr>str, <wbr></wbr><span class="rst-variable-ellipsis">...</span>]</code> =
     <a class="sourceLink" href="https://github.com/nltk/nltk/tree/3.6.2/nltk/stem/snowball.py#L408">
       
       (source)
@@ -2319,6 +2385,7 @@ Stem an Arabic word and return the stemmed form.</blockquote>
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    
   </div>
 </div><div class="baseclassvariable private">
   
@@ -2341,6 +2408,7 @@ Stem an Arabic word and return the stemmed form.</blockquote>
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    
   </div>
 </div><div class="baseclassvariable private">
   
@@ -2363,6 +2431,7 @@ Stem an Arabic word and return the stemmed form.</blockquote>
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    
   </div>
 </div><div class="baseclassvariable private">
   
@@ -2385,6 +2454,7 @@ Stem an Arabic word and return the stemmed form.</blockquote>
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    
   </div>
 </div>
 
@@ -2396,7 +2466,7 @@ Stem an Arabic word and return the stemmed form.</blockquote>
   <div class="container">
     <a href="index.html">API Documentation</a> for <a href="http://www.nltk.org/" class="projecthome">nltk-3.6.2</a>,
   generated by <a href="https://github.com/twisted/pydoctor/">pydoctor</a>
-    21.2.2 at 2022-01-06 17:36:51.
+    22.2.2.dev0 at 2022-03-04 05:57:24.
   </div>
 </footer>
 

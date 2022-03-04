@@ -7,7 +7,7 @@
   <head>
     
     <title>nltk.twitter.common</title>
-    <meta name="generator" content="pydoctor 21.2.2"> 
+    <meta name="generator" content="pydoctor 22.2.2.dev0"> 
         
     </meta>
     <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
@@ -44,69 +44,82 @@
           Names
         </a>
 
-        <form action="search-results.html" id="search-box-container">
+        <div id="search-box-container">
           <div class="input-group">
-            <input id="search-box" name="search-query" placeholder="Search..." aria-label="Search" minlength="2" class="form-control" />
+            <input id="search-box" type="search" name="search-query" placeholder="Search..." aria-label="Search" minlength="2" class="form-control" autocomplete="off" />
+            
             <span class="input-group-btn">
-              <button class="btn btn-default" type="submit" title="Search"><img src="fonts/search.svg" alt="Search!" /></button>
-              <a class="btn btn-default" id="search-help-button" title="Help" onclick="toggleSearchHelpText()"><img src="fonts/info.svg" alt="Help!" /></a>
+              <a style="display: none;" class="btn btn-default" id="search-clear-button" title="Clear" onclick="clearSearch()"><img src="fonts/x-circle.svg" alt="Clear" /></a>
+              <a class="btn btn-default" id="search-help-button" title="Help" onclick="toggleSearchHelpText()"><img src="fonts/info.svg" alt="Help" /></a>
             </span>
           </div>
-        </form>
+        </div>
 
-        <div class="rst-admonition hint" id="search-help-box">
+      </div>
+
+      <div id="search-results-container" style="display: none;">
+        <div>
+          <span class="label label-default" id="search-docstrings-button">
+            <a title="Search in docstrings" onclick="toggleSearchInDocstrings()">search in docstrings</a></span>
+        </div>
+
+        <noscript>
+            <h1>Cannot search: JavaScript is not supported/enabled in your browser.</h1>
+        </noscript>
+
+        <div class="hint" id="search-help-box">
           <p class="rst-last">
       
             Search bar offers the following options:
             <ul>   
                 <li>
                   <strong>Term presence.</strong> The below example searches for documents that 
-                    must contain “foo”, might contain “bar” and must not contain “baz”:
-                  <br /> <code>'+foo bar -baz'</code>
+                    must contain “foo”, might contain “bar” and must not contain “baz”: <code>+foo bar -baz</code>
                 </li> 
 
                 <li>
-                  <strong>Wildcards.</strong> The below example searches for documents with words beginning with “foo”:
-                  <br /> <code>'foo*'</code>
+                  <strong>Wildcards.</strong> The below example searches for documents with words beginning with “foo”: <code>foo*</code>
                 </li> 
 
                 <li>
-                  <strong>Search in specific fields.</strong> The following search matches all documents 
-                  that contains "foo" in their full dotted name and with “bar” in any field:
-                  <br /> <code>'+fullName:*foo* +bar'</code>
+                  <strong>Search in specific fields.</strong> The following search matches all objects 
+                  in "twisted.mail" that matches “search”: <code>+qname:twisted.mail.* +search</code>
 
                   <p>
-                    Possible fields: 'name', 'docstring', 'fullName'.
+                    Possible fields: 'name', 'qname' (fully qualified name), 'docstring', and 'kind'.
+                    Last two fields are only applicable if "search in docstrings" is enabled.
                   </p>
                 </li>
 
                 <li>
                   <strong>Fuzzy matches.</strong> The following search matches all documents 
-                  that have a word within 1 edit distance of “foo”:
-                  <br /> <code>'foo~1'</code>
+                  that have a word within 1 edit distance of “foo”: <code>foo~1</code>
                 </li>
             </ul>
 
           </p>
         </div>
 
-      </div>
+        <div id="search-status"> </div>
+        
+        <div class="warning" id="search-warn-box" style="display: none;">
+          <p class="rst-last"><span id="search-warn"></span></p>
+        </div>
 
+        <table id="search-results">
+          <!-- Filled dynamically by JS -->
+        </table>
+        
+        <div style="margin-top: 8px;">
+          <p>Results provided by <a href="https://lunrjs.com">Lunr.js</a></p>
+        </div>
+      </div>
 
     </div>
   </div>
 
-  <script>
- 
-    function toggleSearchHelpText() {
-        document.body.classList.toggle("search-help-hidden");
-    }
-    // Init search and help text
-    document.getElementById('search-box-container').style.display = 'block';
-    document.getElementById('search-help-box').style.display = 'block';
-    document.body.classList.add("search-help-hidden");
-
-  </script>
+  <script src="ajax.js" type="text/javascript"></script>
+  <script src="search.js" type="text/javascript"></script>
 
 </nav>
 
@@ -115,7 +128,7 @@
     <div class="container">
 
       <div class="page-header">
-        <h1 class="module"><code><code><a href="nltk.html">nltk</a></code><wbr></wbr>.<code><a href="nltk.twitter.html">twitter</a></code><wbr></wbr>.<code><a href="nltk.twitter.common.html">common</a></code></code></h1>
+        <h1 class="module"><code><code><a href="index.html" class="internal-link">nltk</a></code><wbr></wbr>.<code><a href="nltk.twitter.html" class="internal-link" title="nltk.twitter">twitter</a></code><wbr></wbr>.<code><a href="nltk.twitter.common.html" class="internal-link" title="nltk.twitter.common">common</a></code></code></h1>
         <div id="showPrivate">
           <button class="btn btn-link" onclick="togglePrivate()">Toggle Private API</button>
         </div>
@@ -142,62 +155,62 @@ the <code>twython</code> library to have been installed.</div>
   <tr class="function">
     
     <td>Function</td>
-    <td><code><a href="#extract_fields">extract_fields</a></code></td>
-    <td><span>Extract field values from a full tweet and return them as a list</span></td>
+    <td><code><a href="#extract_fields" class="internal-link" title="nltk.twitter.common.extract_fields">extract​_fields</a></code></td>
+    <td>Extract field values from a full tweet and return them as a list</td>
   </tr><tr class="function">
     
     <td>Function</td>
-    <td><code><a href="#get_header_field_list">get_header_field_list</a></code></td>
+    <td><code><a href="#get_header_field_list" class="internal-link" title="nltk.twitter.common.get_header_field_list">get​_header​_field​_list</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="function">
     
     <td>Function</td>
-    <td><code><a href="#json2csv">json2csv</a></code></td>
-    <td><span>Extract selected fields from a file of line-separated JSON tweets and write to a file in CSV format.</span></td>
+    <td><code><a href="#json2csv" class="internal-link" title="nltk.twitter.common.json2csv">json2csv</a></code></td>
+    <td>Extract selected fields from a file of line-separated JSON tweets and write to a file in CSV format.</td>
   </tr><tr class="function">
     
     <td>Function</td>
-    <td><code><a href="#json2csv_entities">json2csv_entities</a></code></td>
-    <td><span>Extract selected fields from a file of line-separated JSON tweets and write to a file in CSV format.</span></td>
+    <td><code><a href="#json2csv_entities" class="internal-link" title="nltk.twitter.common.json2csv_entities">json2csv​_entities</a></code></td>
+    <td>Extract selected fields from a file of line-separated JSON tweets and write to a file in CSV format.</td>
   </tr><tr class="function">
     
     <td>Function</td>
-    <td><code><a href="#outf_writer_compat">outf_writer_compat</a></code></td>
-    <td><span>Get a CSV writer with optional compression.</span></td>
-  </tr><tr class="variable">
+    <td><code><a href="#outf_writer_compat" class="internal-link" title="nltk.twitter.common.outf_writer_compat">outf​_writer​_compat</a></code></td>
+    <td>Get a CSV writer with optional compression.</td>
+  </tr><tr class="constant">
     
-    <td>Variable</td>
-    <td><code><a href="#HIER_SEPARATOR">HIER_SEPARATOR</a></code></td>
+    <td>Constant</td>
+    <td><code><a href="#HIER_SEPARATOR" class="internal-link" title="nltk.twitter.common.HIER_SEPARATOR">HIER​_SEPARATOR</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="function private">
     
     <td>Function</td>
-    <td><code><a href="#_add_field_to_out">_add_field_to_out</a></code></td>
+    <td><code><a href="#_add_field_to_out" class="internal-link" title="nltk.twitter.common._add_field_to_out">_add​_field​_to​_out</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="function private">
     
     <td>Function</td>
-    <td><code><a href="#_get_entity_recursive">_get_entity_recursive</a></code></td>
+    <td><code><a href="#_get_entity_recursive" class="internal-link" title="nltk.twitter.common._get_entity_recursive">_get​_entity​_recursive</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="function private">
     
     <td>Function</td>
-    <td><code><a href="#_get_key_value_composed">_get_key_value_composed</a></code></td>
+    <td><code><a href="#_get_key_value_composed" class="internal-link" title="nltk.twitter.common._get_key_value_composed">_get​_key​_value​_composed</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="function private">
     
     <td>Function</td>
-    <td><code><a href="#_is_composed_key">_is_composed_key</a></code></td>
+    <td><code><a href="#_is_composed_key" class="internal-link" title="nltk.twitter.common._is_composed_key">_is​_composed​_key</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="function private">
     
     <td>Function</td>
-    <td><code><a href="#_outf_writer">_outf_writer</a></code></td>
+    <td><code><a href="#_outf_writer" class="internal-link" title="nltk.twitter.common._outf_writer">_outf​_writer</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="function private">
     
     <td>Function</td>
-    <td><code><a href="#_write_to_file">_write_to_file</a></code></td>
+    <td><code><a href="#_write_to_file" class="internal-link" title="nltk.twitter.common._write_to_file">_write​_to​_file</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr>
 </table>
@@ -263,7 +276,7 @@ the <code>twython</code> library to have been installed.</div>
   </a>
   <div class="functionHeader">
     
-    <span class="py-keyword">def</span> <span class="py-defname">json2csv</span>(fp, outfile, fields, encoding='utf8', errors='replace', gzip_compress=False):
+    <span class="py-keyword">def</span> <span class="py-defname">json2csv</span>(fp, outfile, fields, encoding=<span class="rst-variable-quote">'</span><span class="rst-variable-string">utf8</span><span class="rst-variable-quote">'</span>, errors=<span class="rst-variable-quote">'</span><span class="rst-variable-string">replace</span><span class="rst-variable-quote">'</span>, gzip_compress=False):
     <a class="sourceLink" href="https://github.com/nltk/nltk/tree/3.6.2/nltk/twitter/common.py#L90">
       
       (source)
@@ -280,8 +293,8 @@ just the text content of the Tweets can be extracted.</p>
 <p>Additionally, the function allows combinations of fields of other Twitter
 objects (mainly the users, see below).</p>
 <p>For Twitter entities (e.g. hashtags of a Tweet), and for geolocation, see
-<code><a href="#json2csv_entities">json2csv_entities</a></code></p>
-<table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">fp</span></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">outfile</span></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">fields</span></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">encoding</span></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">errors</span></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">gzip_compress</span></td><td class="fieldArgDesc">if <code>True</code>, output files are compressed with gzip</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">str infile</span></td><td class="fieldArgDesc">The name of the file containing full tweets</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">str outfile</span></td><td class="fieldArgDesc">The name of the text file where results should be    written</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">list fields</span></td><td class="fieldArgDesc">The list of fields to be extracted. Useful examples    are 'id_str' for the tweetID and 'text' for the text of the tweet. See    &lt;<a class="rst-reference external" href="https://dev.twitter.com/overview/api/tweets" target="_top">https://dev.twitter.com/overview/api/tweets</a>&gt; for a full list of fields.    e. g.: ['id_str'], ['id', 'text', 'favorite_count', 'retweet_count']    Additionally, it allows IDs from other Twitter objects, e. g.,    ['id', 'text', 'user.id', 'user.followers_count', 'user.friends_count']</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">error</span></td><td class="fieldArgDesc">Behaviour for encoding errors, see    <a class="rst-reference external" href="https://docs.python.org/3/library/codecs.html#codec-base-classes" target="_top">https://docs.python.org/3/library/codecs.html#codec-base-classes</a></td></tr></table></div>
+<code><a href="#json2csv_entities" class="internal-link" title="nltk.twitter.common.json2csv_entities">json2csv_entities</a></code></p>
+<table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">fp</span></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">outfile</span></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">fields</span></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">encoding</span></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">errors</span></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">gzip​_compress</span></td><td class="fieldArgDesc">if <code>True</code>, output files are compressed with gzip</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">str infile</span></td><td class="fieldArgDesc">The name of the file containing full tweets</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">str outfile</span></td><td class="fieldArgDesc">The name of the text file where results should be    written</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">list fields</span></td><td class="fieldArgDesc">The list of fields to be extracted. Useful examples    are 'id_str' for the tweetID and 'text' for the text of the tweet. See    &lt;<a class="rst-reference external" href="https://dev.twitter.com/overview/api/tweets" target="_top">https://dev.twitter.com/overview/api/tweets</a>&gt; for a full list of fields.    e. g.: ['id_str'], ['id', 'text', 'favorite_count', 'retweet_count']    Additionally, it allows IDs from other Twitter objects, e. g.,    ['id', 'text', 'user.id', 'user.followers_count', 'user.friends_count']</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">error</span></td><td class="fieldArgDesc">Behaviour for encoding errors, see    <a class="rst-reference external" href="https://docs.python.org/3/library/codecs.html#codec-base-classes" target="_top">https://docs.python.org/3/library/codecs.html#codec-base-classes</a></td></tr></table></div>
   </div>
 </div><div class="basefunction">
   
@@ -294,7 +307,7 @@ objects (mainly the users, see below).</p>
   </a>
   <div class="functionHeader">
     
-    <span class="py-keyword">def</span> <span class="py-defname">json2csv_entities</span>(tweets_file, outfile, main_fields, entity_type, entity_fields, encoding='utf8', errors='replace', gzip_compress=False):
+    <span class="py-keyword">def</span> <span class="py-defname">json2csv_entities</span>(tweets_file, outfile, main_fields, entity_type, entity_fields, encoding=<span class="rst-variable-quote">'</span><span class="rst-variable-string">utf8</span><span class="rst-variable-quote">'</span>, errors=<span class="rst-variable-quote">'</span><span class="rst-variable-string">replace</span><span class="rst-variable-quote">'</span>, gzip_compress=False):
     <a class="sourceLink" href="https://github.com/nltk/nltk/tree/3.6.2/nltk/twitter/common.py#L150">
       
       (source)
@@ -312,7 +325,7 @@ hashtags or media elements of a tweet can be extracted.</p>
 there will be two lines in the output file, one per hashtag</p>
 <p>e. g.: ['id_str'], ['id', 'text', 'favorite_count', 'retweet_count']
 If <code>entity_type</code> is expressed with hierarchy, then it is the list of    fields of the object that corresponds to the key of the entity_type,    (e.g., for entity_type='user.urls', the fields in the main_fields list    belong to the user object; for entity_type='place.bounding_box', the    files in the main_field list belong to the place object of the tweet).</p>
-<table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">tweets_file</span></td><td class="fieldArgDesc">the file-like object containing full Tweets</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">outfile</span></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">main_fields</span></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">entity_type</span></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">entity_fields</span></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">encoding</span></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">errors</span></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">gzip_compress</span></td><td class="fieldArgDesc">if <code>True</code>, ouput files are compressed with gzip</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">str outfile</span></td><td class="fieldArgDesc">The path of the text file where results should be    written</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">list main_fields</span></td><td class="fieldArgDesc">The list of fields to be extracted from the main    object, usually the tweet. Useful examples: 'id_str' for the tweetID. See    &lt;<a class="rst-reference external" href="https://dev.twitter.com/overview/api/tweets" target="_top">https://dev.twitter.com/overview/api/tweets</a>&gt; for a full list of fields.</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">list entity_type</span></td><td class="fieldArgDesc">The name of the entity: 'hashtags', 'media',    'urls' and 'user_mentions' for the tweet object. For a user object,    this needs to be expressed with a hierarchy: <code>'user.urls'</code>. For the    bounding box of the Tweet location, use <code>'place.bounding_box'</code>.</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">list entity_fields</span></td><td class="fieldArgDesc">The list of fields to be extracted from the    entity. E.g. <code>['text']</code> (of the Tweet)</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">error</span></td><td class="fieldArgDesc">Behaviour for encoding errors, see    <a class="rst-reference external" href="https://docs.python.org/3/library/codecs.html#codec-base-classes" target="_top">https://docs.python.org/3/library/codecs.html#codec-base-classes</a></td></tr></table></div>
+<table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">tweets​_file</span></td><td class="fieldArgDesc">the file-like object containing full Tweets</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">outfile</span></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">main​_fields</span></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">entity​_type</span></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">entity​_fields</span></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">encoding</span></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">errors</span></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">gzip​_compress</span></td><td class="fieldArgDesc">if <code>True</code>, ouput files are compressed with gzip</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">str outfile</span></td><td class="fieldArgDesc">The path of the text file where results should be    written</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">list main​_fields</span></td><td class="fieldArgDesc">The list of fields to be extracted from the main    object, usually the tweet. Useful examples: 'id_str' for the tweetID. See    &lt;<a class="rst-reference external" href="https://dev.twitter.com/overview/api/tweets" target="_top">https://dev.twitter.com/overview/api/tweets</a>&gt; for a full list of fields.</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">list entity​_type</span></td><td class="fieldArgDesc">The name of the entity: 'hashtags', 'media',    'urls' and 'user_mentions' for the tweet object. For a user object,    this needs to be expressed with a hierarchy: <code>'user.urls'</code>. For the    bounding box of the Tweet location, use <code>'place.bounding_box'</code>.</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">list entity​_fields</span></td><td class="fieldArgDesc">The list of fields to be extracted from the    entity. E.g. <code>['text']</code> (of the Tweet)</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">error</span></td><td class="fieldArgDesc">Behaviour for encoding errors, see    <a class="rst-reference external" href="https://docs.python.org/3/library/codecs.html#codec-base-classes" target="_top">https://docs.python.org/3/library/codecs.html#codec-base-classes</a></td></tr></table></div>
   </div>
 </div><div class="basefunction">
   
@@ -324,7 +337,7 @@ If <code>entity_type</code> is expressed with hierarchy, then it is the list of 
     
   </a>
   <div class="functionHeader">
-    @deprecated('Use open() and csv.writer() directly instead.')<br />
+    @<a href="nltk.internals.html#deprecated" class="internal-link" title="nltk.internals.deprecated">deprecated</a>(<wbr></wbr><span class="rst-variable-quote">'</span><span class="rst-variable-string">Use open() and csv.writer() directly instead.</span><span class="rst-variable-quote">'</span>)<br />
     <span class="py-keyword">def</span> <span class="py-defname">outf_writer_compat</span>(outfile, encoding, errors, gzip_compress=False):
     <a class="sourceLink" href="https://github.com/nltk/nltk/tree/3.6.2/nltk/twitter/common.py#L135">
       
@@ -336,7 +349,7 @@ If <code>entity_type</code> is expressed with hierarchy, then it is the list of 
     
     <div>Get a CSV writer with optional compression.</div>
   </div>
-</div><div class="basevariable">
+</div><div class="baseconstant">
   
   
   <a name="nltk.twitter.common.HIER_SEPARATOR">
@@ -357,6 +370,7 @@ If <code>entity_type</code> is expressed with hierarchy, then it is the list of 
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    <table class="valueTable"><tr class="fieldStart"><td class="fieldName">Value</td></tr><tr><td><pre class="constant-value"><code><span class="rst-variable-quote">'</span><span class="rst-variable-string">.</span><span class="rst-variable-quote">'</span></code></pre></td></tr></table>
   </div>
 </div><div class="basefunction private">
   
@@ -500,7 +514,7 @@ If <code>entity_type</code> is expressed with hierarchy, then it is the list of 
   <div class="container">
     <a href="index.html">API Documentation</a> for <a href="http://www.nltk.org/" class="projecthome">nltk-3.6.2</a>,
   generated by <a href="https://github.com/twisted/pydoctor/">pydoctor</a>
-    21.2.2 at 2022-01-06 17:36:51.
+    22.2.2.dev0 at 2022-03-04 05:57:24.
   </div>
 </footer>
 

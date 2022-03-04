@@ -7,7 +7,7 @@
   <head>
     
     <title>nltk.twitter.twitterclient.Query</title>
-    <meta name="generator" content="pydoctor 21.2.2"> 
+    <meta name="generator" content="pydoctor 22.2.2.dev0"> 
         
     </meta>
     <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
@@ -44,69 +44,82 @@
           Names
         </a>
 
-        <form action="search-results.html" id="search-box-container">
+        <div id="search-box-container">
           <div class="input-group">
-            <input id="search-box" name="search-query" placeholder="Search..." aria-label="Search" minlength="2" class="form-control" />
+            <input id="search-box" type="search" name="search-query" placeholder="Search..." aria-label="Search" minlength="2" class="form-control" autocomplete="off" />
+            
             <span class="input-group-btn">
-              <button class="btn btn-default" type="submit" title="Search"><img src="fonts/search.svg" alt="Search!" /></button>
-              <a class="btn btn-default" id="search-help-button" title="Help" onclick="toggleSearchHelpText()"><img src="fonts/info.svg" alt="Help!" /></a>
+              <a style="display: none;" class="btn btn-default" id="search-clear-button" title="Clear" onclick="clearSearch()"><img src="fonts/x-circle.svg" alt="Clear" /></a>
+              <a class="btn btn-default" id="search-help-button" title="Help" onclick="toggleSearchHelpText()"><img src="fonts/info.svg" alt="Help" /></a>
             </span>
           </div>
-        </form>
+        </div>
 
-        <div class="rst-admonition hint" id="search-help-box">
+      </div>
+
+      <div id="search-results-container" style="display: none;">
+        <div>
+          <span class="label label-default" id="search-docstrings-button">
+            <a title="Search in docstrings" onclick="toggleSearchInDocstrings()">search in docstrings</a></span>
+        </div>
+
+        <noscript>
+            <h1>Cannot search: JavaScript is not supported/enabled in your browser.</h1>
+        </noscript>
+
+        <div class="hint" id="search-help-box">
           <p class="rst-last">
       
             Search bar offers the following options:
             <ul>   
                 <li>
                   <strong>Term presence.</strong> The below example searches for documents that 
-                    must contain “foo”, might contain “bar” and must not contain “baz”:
-                  <br /> <code>'+foo bar -baz'</code>
+                    must contain “foo”, might contain “bar” and must not contain “baz”: <code>+foo bar -baz</code>
                 </li> 
 
                 <li>
-                  <strong>Wildcards.</strong> The below example searches for documents with words beginning with “foo”:
-                  <br /> <code>'foo*'</code>
+                  <strong>Wildcards.</strong> The below example searches for documents with words beginning with “foo”: <code>foo*</code>
                 </li> 
 
                 <li>
-                  <strong>Search in specific fields.</strong> The following search matches all documents 
-                  that contains "foo" in their full dotted name and with “bar” in any field:
-                  <br /> <code>'+fullName:*foo* +bar'</code>
+                  <strong>Search in specific fields.</strong> The following search matches all objects 
+                  in "twisted.mail" that matches “search”: <code>+qname:twisted.mail.* +search</code>
 
                   <p>
-                    Possible fields: 'name', 'docstring', 'fullName'.
+                    Possible fields: 'name', 'qname' (fully qualified name), 'docstring', and 'kind'.
+                    Last two fields are only applicable if "search in docstrings" is enabled.
                   </p>
                 </li>
 
                 <li>
                   <strong>Fuzzy matches.</strong> The following search matches all documents 
-                  that have a word within 1 edit distance of “foo”:
-                  <br /> <code>'foo~1'</code>
+                  that have a word within 1 edit distance of “foo”: <code>foo~1</code>
                 </li>
             </ul>
 
           </p>
         </div>
 
-      </div>
+        <div id="search-status"> </div>
+        
+        <div class="warning" id="search-warn-box" style="display: none;">
+          <p class="rst-last"><span id="search-warn"></span></p>
+        </div>
 
+        <table id="search-results">
+          <!-- Filled dynamically by JS -->
+        </table>
+        
+        <div style="margin-top: 8px;">
+          <p>Results provided by <a href="https://lunrjs.com">Lunr.js</a></p>
+        </div>
+      </div>
 
     </div>
   </div>
 
-  <script>
- 
-    function toggleSearchHelpText() {
-        document.body.classList.toggle("search-help-hidden");
-    }
-    // Init search and help text
-    document.getElementById('search-box-container').style.display = 'block';
-    document.getElementById('search-help-box').style.display = 'block';
-    document.body.classList.add("search-help-hidden");
-
-  </script>
+  <script src="ajax.js" type="text/javascript"></script>
+  <script src="search.js" type="text/javascript"></script>
 
 </nav>
 
@@ -115,7 +128,7 @@
     <div class="container">
 
       <div class="page-header">
-        <h1 class="class"><code><code><a href="nltk.html">nltk</a></code><wbr></wbr>.<code><a href="nltk.twitter.html">twitter</a></code><wbr></wbr>.<code><a href="nltk.twitter.twitterclient.html">twitterclient</a></code><wbr></wbr>.<code><a href="nltk.twitter.twitterclient.Query.html">Query</a></code></code></h1>
+        <h1 class="class"><code><code><a href="index.html" class="internal-link">nltk</a></code><wbr></wbr>.<code><a href="nltk.twitter.html" class="internal-link" title="nltk.twitter">twitter</a></code><wbr></wbr>.<code><a href="nltk.twitter.twitterclient.html" class="internal-link" title="nltk.twitter.twitterclient">twitterclient</a></code><wbr></wbr>.<code><a href="nltk.twitter.twitterclient.Query.html" class="internal-link" title="nltk.twitter.twitterclient.Query">Query</a></code></code></h1>
         <div id="showPrivate">
           <button class="btn btn-link" onclick="togglePrivate()">Toggle Private API</button>
         </div>
@@ -126,7 +139,7 @@
       </div>
 
       <div class="extrasDocstring">
-        <p><code><span class="py-keyword">class</span> <span class="py-defname">Query</span>(<span title="twython.Twython">Twython</span>): <a href="https://github.com/nltk/nltk/tree/3.6.2/nltk/twitter/twitterclient.py#L125" class="sourceLink">(source)</a></code></p>
+        <p><code><span class="py-keyword">class</span> <span class="py-defname">Query</span>(Twython): <a href="https://github.com/nltk/nltk/tree/3.6.2/nltk/twitter/twitterclient.py#L125" class="sourceLink">(source)</a></code></p>
         <p><a href="classIndex.html#nltk.twitter.twitterclient.Query">View In Hierarchy</a></p>
       </div>
 
@@ -141,48 +154,48 @@
   <tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#__init__">__init__</a></code></td>
+    <td><code><a href="#__init__" class="internal-link" title="nltk.twitter.twitterclient.Query.__init__">__init__</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#expand_tweetids">expand_tweetids</a></code></td>
-    <td><span>Given a file object containing a list of Tweet IDs, fetch the corresponding full Tweets from the Twitter API.</span></td>
+    <td><code><a href="#expand_tweetids" class="internal-link" title="nltk.twitter.twitterclient.Query.expand_tweetids">expand​_tweetids</a></code></td>
+    <td>Given a file object containing a list of Tweet IDs, fetch the corresponding full Tweets from the Twitter API.</td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#register">register</a></code></td>
-    <td><span>Register a method for handling Tweets.</span></td>
+    <td><code><a href="#register" class="internal-link" title="nltk.twitter.twitterclient.Query.register">register</a></code></td>
+    <td>Register a method for handling Tweets.</td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#search_tweets">search_tweets</a></code></td>
+    <td><code><a href="#search_tweets" class="internal-link" title="nltk.twitter.twitterclient.Query.search_tweets">search​_tweets</a></code></td>
     <td><span class="undocumented">No summary</span></td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#user_info_from_id">user_info_from_id</a></code></td>
-    <td><span>Convert a list of userIDs into a variety of information about the users.</span></td>
+    <td><code><a href="#user_info_from_id" class="internal-link" title="nltk.twitter.twitterclient.Query.user_info_from_id">user​_info​_from​_id</a></code></td>
+    <td>Convert a list of userIDs into a variety of information about the users.</td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#user_tweets">user_tweets</a></code></td>
-    <td><span>Return a collection of the most recent Tweets posted by the user</span></td>
+    <td><code><a href="#user_tweets" class="internal-link" title="nltk.twitter.twitterclient.Query.user_tweets">user​_tweets</a></code></td>
+    <td>Return a collection of the most recent Tweets posted by the user</td>
   </tr><tr class="instancevariable">
     
     <td>Instance Variable</td>
-    <td><code><a href="#do_continue">do_continue</a></code></td>
+    <td><code><a href="#do_continue" class="internal-link" title="nltk.twitter.twitterclient.Query.do_continue">do​_continue</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="instancevariable">
     
     <td>Instance Variable</td>
-    <td><code><a href="#handler">handler</a></code></td>
+    <td><code><a href="#handler" class="internal-link" title="nltk.twitter.twitterclient.Query.handler">handler</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method private">
     
     <td>Method</td>
-    <td><code><a href="#_search_tweets">_search_tweets</a></code></td>
-    <td><span>Assumes that the handler has been informed. Fetches Tweets from search_tweets generator output and passses them to handler</span></td>
+    <td><code><a href="#_search_tweets" class="internal-link" title="nltk.twitter.twitterclient.Query._search_tweets">_search​_tweets</a></code></td>
+    <td>Assumes that the handler has been informed. Fetches Tweets from search_tweets generator output and passses them to handler</td>
   </tr>
 </table>
         
@@ -240,7 +253,7 @@ corresponding full Tweets from the Twitter API.</p>
 user has deleted it.</p>
 <p>This call to the Twitter API is rate-limited. See
 &lt;<a class="rst-reference external" href="https://dev.twitter.com/rest/reference/get/statuses/lookup" target="_top">https://dev.twitter.com/rest/reference/get/statuses/lookup</a>&gt; for details.</p>
-<table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">ids_f</span></td><td class="fieldArgDesc">input file object consisting of Tweet IDs, one to a line</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">verbose</span></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr class="fieldStart"><td class="fieldName" colspan="2">Returns</td></tr><tr><td colspan="2">iterable of Tweet objects in JSON format</td></tr></table></div>
+<table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">ids​_f</span></td><td class="fieldArgDesc">input file object consisting of Tweet IDs, one to a line</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">verbose</span></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr class="fieldStart"><td class="fieldName" colspan="2">Returns</td></tr><tr><td colspan="2">iterable of Tweet objects in JSON format</td></tr></table></div>
   </div>
 </div><div class="basemethod">
   
@@ -262,7 +275,7 @@ user has deleted it.</p>
   <div class="docstring functionBody">
     
     
-    <div>Register a method for handling Tweets.<table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">handler</span></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">TweetHandlerI handler</span></td><td class="fieldArgDesc">method for viewing or writing Tweets to a file.</td></tr></table></div>
+    <div>Register a method for handling Tweets.<table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">handler</span></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">​Tweet​Handler​I handler</span></td><td class="fieldArgDesc">method for viewing or writing Tweets to a file.</td></tr></table></div>
   </div>
 </div><div class="basemethod">
   
@@ -275,7 +288,7 @@ user has deleted it.</p>
   </a>
   <div class="functionHeader">
     
-    <span class="py-keyword">def</span> <span class="py-defname">search_tweets</span>(self, keywords, limit=100, lang='en', max_id=None, retries_after_twython_exception=0):
+    <span class="py-keyword">def</span> <span class="py-defname">search_tweets</span>(self, keywords, limit=100, lang=<span class="rst-variable-quote">'</span><span class="rst-variable-string">en</span><span class="rst-variable-quote">'</span>, max_id=None, retries_after_twython_exception=0):
     <a class="sourceLink" href="https://github.com/nltk/nltk/tree/3.6.2/nltk/twitter/twitterclient.py#L190">
       
       (source)
@@ -286,7 +299,7 @@ user has deleted it.</p>
     
     <div>Call the REST API <tt class="rst-docutils literal">'search/tweets'</tt> endpoint with some plausible
 defaults. See <a class="rst-reference external" href="https://dev.twitter.com/rest/public/search" target="_top">the Twitter search documentation</a> for more information
-about admissible search parameters.<table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">keywords</span></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">limit</span></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">lang</span></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">max_id</span></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">retries_after_twython_exception</span></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">str keywords</span></td><td class="fieldArgDesc">A list of query terms to search for, written as        a comma-separated string</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">int limit</span></td><td class="fieldArgDesc">Number of Tweets to process</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">str lang</span></td><td class="fieldArgDesc">language</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">int max_id</span></td><td class="fieldArgDesc">id of the last tweet fetched</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">int retries_after_twython_exception</span></td><td class="fieldArgDesc">number of retries when        searching Tweets before raising an exception</td></tr><tr class="fieldStart"><td class="fieldName" colspan="2">Returns</td></tr><tr><td class="fieldArgContainer">python generator</td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr></table></div>
+about admissible search parameters.<table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">keywords</span></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">limit</span></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">lang</span></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">max​_id</span></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">retries​_after​_twython​_exception</span></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">str keywords</span></td><td class="fieldArgDesc">A list of query terms to search for, written as        a comma-separated string</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">int limit</span></td><td class="fieldArgDesc">Number of Tweets to process</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">str lang</span></td><td class="fieldArgDesc">language</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">int max​_id</span></td><td class="fieldArgDesc">id of the last tweet fetched</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">int retries​_after​_twython​_exception</span></td><td class="fieldArgDesc">number of retries when        searching Tweets before raising an exception</td></tr><tr class="fieldStart"><td class="fieldName" colspan="2">Returns</td></tr><tr><td class="fieldArgContainer">python generator</td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr></table></div>
   </div>
 </div><div class="basemethod">
   
@@ -323,7 +336,7 @@ about admissible search parameters.<table class="fieldTable"><tr class="fieldSta
   </a>
   <div class="functionHeader">
     
-    <span class="py-keyword">def</span> <span class="py-defname">user_tweets</span>(self, screen_name, limit, include_rts='false'):
+    <span class="py-keyword">def</span> <span class="py-defname">user_tweets</span>(self, screen_name, limit, include_rts=<span class="rst-variable-quote">'</span><span class="rst-variable-string">false</span><span class="rst-variable-quote">'</span>):
     <a class="sourceLink" href="https://github.com/nltk/nltk/tree/3.6.2/nltk/twitter/twitterclient.py#L289">
       
       (source)
@@ -332,7 +345,7 @@ about admissible search parameters.<table class="fieldTable"><tr class="fieldSta
   <div class="docstring functionBody">
     
     
-    <div>Return a collection of the most recent Tweets posted by the user<table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">screen_name</span></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">limit</span></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">include_rts</span></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">str user</span></td><td class="fieldArgDesc">The user's screen name; the initial '@' symbol        should be omitted</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">int limit</span></td><td class="fieldArgDesc">The number of Tweets to recover; 200 is the maximum allowed</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">str include_rts</span></td><td class="fieldArgDesc">Whether to include statuses which have been        retweeted by the user; possible values are 'true' and 'false'</td></tr></table></div>
+    <div>Return a collection of the most recent Tweets posted by the user<table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">screen​_name</span></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">limit</span></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">include​_rts</span></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">str user</span></td><td class="fieldArgDesc">The user's screen name; the initial '@' symbol        should be omitted</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">int limit</span></td><td class="fieldArgDesc">The number of Tweets to recover; 200 is the maximum allowed</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">str include​_rts</span></td><td class="fieldArgDesc">Whether to include statuses which have been        retweeted by the user; possible values are 'true' and 'false'</td></tr></table></div>
   </div>
 </div><div class="baseinstancevariable">
   
@@ -355,6 +368,7 @@ about admissible search parameters.<table class="fieldTable"><tr class="fieldSta
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    
   </div>
 </div><div class="baseinstancevariable">
   
@@ -377,6 +391,7 @@ about admissible search parameters.<table class="fieldTable"><tr class="fieldSta
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    
   </div>
 </div><div class="basemethod private">
   
@@ -389,7 +404,7 @@ about admissible search parameters.<table class="fieldTable"><tr class="fieldSta
   </a>
   <div class="functionHeader">
     
-    <span class="py-keyword">def</span> <span class="py-defname">_search_tweets</span>(self, keywords, limit=100, lang='en'):
+    <span class="py-keyword">def</span> <span class="py-defname">_search_tweets</span>(self, keywords, limit=100, lang=<span class="rst-variable-quote">'</span><span class="rst-variable-string">en</span><span class="rst-variable-quote">'</span>):
     <a class="sourceLink" href="https://github.com/nltk/nltk/tree/3.6.2/nltk/twitter/twitterclient.py#L170">
       
       (source)
@@ -411,7 +426,7 @@ search_tweets generator output and passses them to handler<table class="fieldTab
   <div class="container">
     <a href="index.html">API Documentation</a> for <a href="http://www.nltk.org/" class="projecthome">nltk-3.6.2</a>,
   generated by <a href="https://github.com/twisted/pydoctor/">pydoctor</a>
-    21.2.2 at 2022-01-06 17:36:51.
+    22.2.2.dev0 at 2022-03-04 05:57:24.
   </div>
 </footer>
 

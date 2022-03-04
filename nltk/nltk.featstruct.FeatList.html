@@ -7,7 +7,7 @@
   <head>
     
     <title>nltk.featstruct.FeatList</title>
-    <meta name="generator" content="pydoctor 21.2.2"> 
+    <meta name="generator" content="pydoctor 22.2.2.dev0"> 
         
     </meta>
     <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
@@ -44,69 +44,82 @@
           Names
         </a>
 
-        <form action="search-results.html" id="search-box-container">
+        <div id="search-box-container">
           <div class="input-group">
-            <input id="search-box" name="search-query" placeholder="Search..." aria-label="Search" minlength="2" class="form-control" />
+            <input id="search-box" type="search" name="search-query" placeholder="Search..." aria-label="Search" minlength="2" class="form-control" autocomplete="off" />
+            
             <span class="input-group-btn">
-              <button class="btn btn-default" type="submit" title="Search"><img src="fonts/search.svg" alt="Search!" /></button>
-              <a class="btn btn-default" id="search-help-button" title="Help" onclick="toggleSearchHelpText()"><img src="fonts/info.svg" alt="Help!" /></a>
+              <a style="display: none;" class="btn btn-default" id="search-clear-button" title="Clear" onclick="clearSearch()"><img src="fonts/x-circle.svg" alt="Clear" /></a>
+              <a class="btn btn-default" id="search-help-button" title="Help" onclick="toggleSearchHelpText()"><img src="fonts/info.svg" alt="Help" /></a>
             </span>
           </div>
-        </form>
+        </div>
 
-        <div class="rst-admonition hint" id="search-help-box">
+      </div>
+
+      <div id="search-results-container" style="display: none;">
+        <div>
+          <span class="label label-default" id="search-docstrings-button">
+            <a title="Search in docstrings" onclick="toggleSearchInDocstrings()">search in docstrings</a></span>
+        </div>
+
+        <noscript>
+            <h1>Cannot search: JavaScript is not supported/enabled in your browser.</h1>
+        </noscript>
+
+        <div class="hint" id="search-help-box">
           <p class="rst-last">
       
             Search bar offers the following options:
             <ul>   
                 <li>
                   <strong>Term presence.</strong> The below example searches for documents that 
-                    must contain “foo”, might contain “bar” and must not contain “baz”:
-                  <br /> <code>'+foo bar -baz'</code>
+                    must contain “foo”, might contain “bar” and must not contain “baz”: <code>+foo bar -baz</code>
                 </li> 
 
                 <li>
-                  <strong>Wildcards.</strong> The below example searches for documents with words beginning with “foo”:
-                  <br /> <code>'foo*'</code>
+                  <strong>Wildcards.</strong> The below example searches for documents with words beginning with “foo”: <code>foo*</code>
                 </li> 
 
                 <li>
-                  <strong>Search in specific fields.</strong> The following search matches all documents 
-                  that contains "foo" in their full dotted name and with “bar” in any field:
-                  <br /> <code>'+fullName:*foo* +bar'</code>
+                  <strong>Search in specific fields.</strong> The following search matches all objects 
+                  in "twisted.mail" that matches “search”: <code>+qname:twisted.mail.* +search</code>
 
                   <p>
-                    Possible fields: 'name', 'docstring', 'fullName'.
+                    Possible fields: 'name', 'qname' (fully qualified name), 'docstring', and 'kind'.
+                    Last two fields are only applicable if "search in docstrings" is enabled.
                   </p>
                 </li>
 
                 <li>
                   <strong>Fuzzy matches.</strong> The following search matches all documents 
-                  that have a word within 1 edit distance of “foo”:
-                  <br /> <code>'foo~1'</code>
+                  that have a word within 1 edit distance of “foo”: <code>foo~1</code>
                 </li>
             </ul>
 
           </p>
         </div>
 
-      </div>
+        <div id="search-status"> </div>
+        
+        <div class="warning" id="search-warn-box" style="display: none;">
+          <p class="rst-last"><span id="search-warn"></span></p>
+        </div>
 
+        <table id="search-results">
+          <!-- Filled dynamically by JS -->
+        </table>
+        
+        <div style="margin-top: 8px;">
+          <p>Results provided by <a href="https://lunrjs.com">Lunr.js</a></p>
+        </div>
+      </div>
 
     </div>
   </div>
 
-  <script>
- 
-    function toggleSearchHelpText() {
-        document.body.classList.toggle("search-help-hidden");
-    }
-    // Init search and help text
-    document.getElementById('search-box-container').style.display = 'block';
-    document.getElementById('search-help-box').style.display = 'block';
-    document.body.classList.add("search-help-hidden");
-
-  </script>
+  <script src="ajax.js" type="text/javascript"></script>
+  <script src="search.js" type="text/javascript"></script>
 
 </nav>
 
@@ -115,7 +128,7 @@
     <div class="container">
 
       <div class="page-header">
-        <h1 class="class"><code><code><a href="nltk.html">nltk</a></code><wbr></wbr>.<code><a href="nltk.featstruct.html">featstruct</a></code><wbr></wbr>.<code><a href="nltk.featstruct.FeatList.html">FeatList</a></code></code></h1>
+        <h1 class="class"><code><code><a href="index.html" class="internal-link">nltk</a></code><wbr></wbr>.<code><a href="nltk.featstruct.html" class="internal-link" title="nltk.featstruct">featstruct</a></code><wbr></wbr>.<code><a href="nltk.featstruct.FeatList.html" class="internal-link" title="nltk.featstruct.FeatList">FeatList</a></code></code></h1>
         <div id="showPrivate">
           <button class="btn btn-link" onclick="togglePrivate()">Toggle Private API</button>
         </div>
@@ -126,7 +139,7 @@
       </div>
 
       <div class="extrasDocstring">
-        <p><code><span class="py-keyword">class</span> <span class="py-defname">FeatList</span>(<a href="nltk.featstruct.FeatStruct.html" title="nltk.featstruct.FeatStruct">FeatStruct</a>, <span title="list">list</span>): <a href="https://github.com/nltk/nltk/tree/3.6.2/nltk/featstruct.py#L924" class="sourceLink">(source)</a></code></p>
+        <p><code><span class="py-keyword">class</span> <span class="py-defname">FeatList</span>(<a href="nltk.featstruct.FeatStruct.html" class="internal-link" title="nltk.featstruct.FeatStruct">FeatStruct</a>, list): <a href="https://github.com/nltk/nltk/tree/3.6.2/nltk/featstruct.py#L924" class="sourceLink">(source)</a></code></p>
         <p><a href="classIndex.html#nltk.featstruct.FeatList">View In Hierarchy</a></p>
       </div>
 
@@ -150,103 +163,103 @@ cyclic feature structures, mutability, freezing, and hashing.</td></tr></table><
   <tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#__deepcopy__">__deepcopy__</a></code></td>
+    <td><code><a href="#__deepcopy__" class="internal-link" title="nltk.featstruct.FeatList.__deepcopy__">__deepcopy__</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#__delitem__">__delitem__</a></code></td>
-    <td><span>If the feature with the given name or path exists, delete its value; otherwise, raise <tt class="rst-docutils literal">KeyError</tt>.</span></td>
+    <td><code><a href="#__delitem__" class="internal-link" title="nltk.featstruct.FeatList.__delitem__">__delitem__</a></code></td>
+    <td>If the feature with the given name or path exists, delete its value; otherwise, raise <tt class="rst-docutils literal">KeyError</tt>.</td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#__getitem__">__getitem__</a></code></td>
+    <td><code><a href="#__getitem__" class="internal-link" title="nltk.featstruct.FeatList.__getitem__">__getitem__</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#__init__">__init__</a></code></td>
-    <td><span>Create a new feature list, with the specified features.</span></td>
+    <td><code><a href="#__init__" class="internal-link" title="nltk.featstruct.FeatList.__init__">__init__</a></code></td>
+    <td>Create a new feature list, with the specified features.</td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#__setitem__">__setitem__</a></code></td>
-    <td><span>Set the value for the feature with the given name or path to <tt class="rst-docutils literal">value</tt>.  If <tt class="rst-docutils literal">name_or_path</tt> is an invalid path, raise <tt class="rst-docutils literal">KeyError</tt>.</span></td>
+    <td><code><a href="#__setitem__" class="internal-link" title="nltk.featstruct.FeatList.__setitem__">__setitem__</a></code></td>
+    <td>Set the value for the feature with the given name or path to <tt class="rst-docutils literal">value</tt>.  If <tt class="rst-docutils literal">name_or_path</tt> is an invalid path, raise <tt class="rst-docutils literal">KeyError</tt>.</td>
   </tr><tr class="classvariable">
     
     <td>Class Variable</td>
-    <td><code><a href="#__iadd__">__iadd__</a></code></td>
+    <td><code><a href="#__iadd__" class="internal-link" title="nltk.featstruct.FeatList.__iadd__">__iadd__</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="classvariable">
     
     <td>Class Variable</td>
-    <td><code><a href="#__imul__">__imul__</a></code></td>
+    <td><code><a href="#__imul__" class="internal-link" title="nltk.featstruct.FeatList.__imul__">__imul__</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="classvariable">
     
     <td>Class Variable</td>
-    <td><code><a href="#append">append</a></code></td>
+    <td><code><a href="#append" class="internal-link" title="nltk.featstruct.FeatList.append">append</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="classvariable">
     
     <td>Class Variable</td>
-    <td><code><a href="#extend">extend</a></code></td>
+    <td><code><a href="#extend" class="internal-link" title="nltk.featstruct.FeatList.extend">extend</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="classvariable">
     
     <td>Class Variable</td>
-    <td><code><a href="#insert">insert</a></code></td>
+    <td><code><a href="#insert" class="internal-link" title="nltk.featstruct.FeatList.insert">insert</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="classvariable">
     
     <td>Class Variable</td>
-    <td><code><a href="#pop">pop</a></code></td>
+    <td><code><a href="#pop" class="internal-link" title="nltk.featstruct.FeatList.pop">pop</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="classvariable">
     
     <td>Class Variable</td>
-    <td><code><a href="#remove">remove</a></code></td>
+    <td><code><a href="#remove" class="internal-link" title="nltk.featstruct.FeatList.remove">remove</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="classvariable">
     
     <td>Class Variable</td>
-    <td><code><a href="#reverse">reverse</a></code></td>
+    <td><code><a href="#reverse" class="internal-link" title="nltk.featstruct.FeatList.reverse">reverse</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="classvariable">
     
     <td>Class Variable</td>
-    <td><code><a href="#sort">sort</a></code></td>
+    <td><code><a href="#sort" class="internal-link" title="nltk.featstruct.FeatList.sort">sort</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method private">
     
     <td>Method</td>
-    <td><code><a href="#_items">_items</a></code></td>
-    <td><span>Return an iterable of (fid,fval) pairs, where fid is a feature identifier and fval is the corresponding feature value, for all features defined by this FeatStruct.</span></td>
+    <td><code><a href="#_items" class="internal-link" title="nltk.featstruct.FeatList._items">_items</a></code></td>
+    <td>Return an iterable of (fid,fval) pairs, where fid is a feature identifier and fval is the corresponding feature value, for all features defined by this FeatStruct.</td>
   </tr><tr class="method private">
     
     <td>Method</td>
-    <td><code><a href="#_keys">_keys</a></code></td>
-    <td><span>Return an iterable of the feature identifiers used by this FeatStruct.</span></td>
+    <td><code><a href="#_keys" class="internal-link" title="nltk.featstruct.FeatList._keys">_keys</a></code></td>
+    <td>Return an iterable of the feature identifiers used by this FeatStruct.</td>
   </tr><tr class="method private">
     
     <td>Method</td>
-    <td><code><a href="#_repr">_repr</a></code></td>
-    <td><span>Return a string representation of this feature structure.</span></td>
+    <td><code><a href="#_repr" class="internal-link" title="nltk.featstruct.FeatList._repr">_repr</a></code></td>
+    <td>Return a string representation of this feature structure.</td>
   </tr><tr class="method private">
     
     <td>Method</td>
-    <td><code><a href="#_values">_values</a></code></td>
-    <td><span>Return an iterable of the feature values directly defined by this FeatStruct.</span></td>
-  </tr><tr class="classvariable private">
+    <td><code><a href="#_values" class="internal-link" title="nltk.featstruct.FeatList._values">_values</a></code></td>
+    <td>Return an iterable of the feature values directly defined by this FeatStruct.</td>
+  </tr><tr class="constant private">
     
-    <td>Class Variable</td>
-    <td><code><a href="#_INDEX_ERROR">_INDEX_ERROR</a></code></td>
+    <td>Constant</td>
+    <td><code><a href="#_INDEX_ERROR" class="internal-link" title="nltk.featstruct.FeatList._INDEX_ERROR">_INDEX​_ERROR</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr>
 </table>
         
           <p class="inheritedFrom">
-            Inherited from <code><a href="nltk.featstruct.FeatStruct.html">FeatStruct</a></code>:
+            Inherited from <code><a href="nltk.featstruct.FeatStruct.html" class="internal-link" title="nltk.featstruct.FeatStruct">FeatStruct</a></code>:
           </p>
           <table class="children sortable" id="id627">
   
@@ -254,137 +267,137 @@ cyclic feature structures, mutability, freezing, and hashing.</td></tr></table><
   <tr class="basemethod">
     
     <td>Method</td>
-    <td><code><a href="nltk.featstruct.FeatStruct.html#__eq__">__eq__</a></code></td>
+    <td><code><a href="nltk.featstruct.FeatStruct.html#__eq__" class="internal-link" title="nltk.featstruct.FeatStruct.__eq__">__eq__</a></code></td>
     <td><span class="undocumented">No summary</span></td>
   </tr><tr class="basemethod">
     
     <td>Method</td>
-    <td><code><a href="nltk.featstruct.FeatStruct.html#__hash__">__hash__</a></code></td>
-    <td><span>If this feature structure is frozen, return its hash value; otherwise, raise <tt class="rst-docutils literal">TypeError</tt>.</span></td>
+    <td><code><a href="nltk.featstruct.FeatStruct.html#__hash__" class="internal-link" title="nltk.featstruct.FeatStruct.__hash__">__hash__</a></code></td>
+    <td>If this feature structure is frozen, return its hash value; otherwise, raise <tt class="rst-docutils literal">TypeError</tt>.</td>
   </tr><tr class="basemethod">
     
     <td>Method</td>
-    <td><code><a href="nltk.featstruct.FeatStruct.html#__lt__">__lt__</a></code></td>
+    <td><code><a href="nltk.featstruct.FeatStruct.html#__lt__" class="internal-link" title="nltk.featstruct.FeatStruct.__lt__">__lt__</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="basemethod">
     
     <td>Method</td>
-    <td><code><a href="nltk.featstruct.FeatStruct.html#__ne__">__ne__</a></code></td>
+    <td><code><a href="nltk.featstruct.FeatStruct.html#__ne__" class="internal-link" title="nltk.featstruct.FeatStruct.__ne__">__ne__</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="basemethod">
     
     <td>Method</td>
-    <td><code><a href="nltk.featstruct.FeatStruct.html#__new__">__new__</a></code></td>
+    <td><code><a href="nltk.featstruct.FeatStruct.html#__new__" class="internal-link" title="nltk.featstruct.FeatStruct.__new__">__new__</a></code></td>
     <td><span class="undocumented">No summary</span></td>
   </tr><tr class="basemethod">
     
     <td>Method</td>
-    <td><code><a href="nltk.featstruct.FeatStruct.html#__repr__">__repr__</a></code></td>
-    <td><span>Display a single-line representation of this feature structure, suitable for embedding in other representations.</span></td>
+    <td><code><a href="nltk.featstruct.FeatStruct.html#__repr__" class="internal-link" title="nltk.featstruct.FeatStruct.__repr__">__repr__</a></code></td>
+    <td>Display a single-line representation of this feature structure, suitable for embedding in other representations.</td>
   </tr><tr class="basemethod">
     
     <td>Method</td>
-    <td><code><a href="nltk.featstruct.FeatStruct.html#copy">copy</a></code></td>
-    <td><span>Return a new copy of <tt class="rst-docutils literal">self</tt>.  The new copy will not be frozen.</span></td>
+    <td><code><a href="nltk.featstruct.FeatStruct.html#copy" class="internal-link" title="nltk.featstruct.FeatStruct.copy">copy</a></code></td>
+    <td>Return a new copy of <tt class="rst-docutils literal">self</tt>.  The new copy will not be frozen.</td>
   </tr><tr class="basemethod">
     
     <td>Method</td>
-    <td><code><a href="nltk.featstruct.FeatStruct.html#cyclic">cyclic</a></code></td>
-    <td><span>Return True if this feature structure contains itself.</span></td>
+    <td><code><a href="nltk.featstruct.FeatStruct.html#cyclic" class="internal-link" title="nltk.featstruct.FeatStruct.cyclic">cyclic</a></code></td>
+    <td>Return True if this feature structure contains itself.</td>
   </tr><tr class="basemethod">
     
     <td>Method</td>
-    <td><code><a href="nltk.featstruct.FeatStruct.html#equal_values">equal_values</a></code></td>
+    <td><code><a href="nltk.featstruct.FeatStruct.html#equal_values" class="internal-link" title="nltk.featstruct.FeatStruct.equal_values">equal​_values</a></code></td>
     <td><span class="undocumented">No summary</span></td>
   </tr><tr class="basemethod">
     
     <td>Method</td>
-    <td><code><a href="nltk.featstruct.FeatStruct.html#freeze">freeze</a></code></td>
+    <td><code><a href="nltk.featstruct.FeatStruct.html#freeze" class="internal-link" title="nltk.featstruct.FeatStruct.freeze">freeze</a></code></td>
     <td><span class="undocumented">No summary</span></td>
   </tr><tr class="basemethod">
     
     <td>Method</td>
-    <td><code><a href="nltk.featstruct.FeatStruct.html#frozen">frozen</a></code></td>
+    <td><code><a href="nltk.featstruct.FeatStruct.html#frozen" class="internal-link" title="nltk.featstruct.FeatStruct.frozen">frozen</a></code></td>
     <td><span class="undocumented">No summary</span></td>
   </tr><tr class="basemethod">
     
     <td>Method</td>
-    <td><code><a href="nltk.featstruct.FeatStruct.html#remove_variables">remove_variables</a></code></td>
-    <td><span>Return the feature structure that is obtained by deleting any feature whose value is a <tt class="rst-docutils literal">Variable</tt>.</span></td>
+    <td><code><a href="nltk.featstruct.FeatStruct.html#remove_variables" class="internal-link" title="nltk.featstruct.FeatStruct.remove_variables">remove​_variables</a></code></td>
+    <td>Return the feature structure that is obtained by deleting any feature whose value is a <tt class="rst-docutils literal">Variable</tt>.</td>
   </tr><tr class="basemethod">
     
     <td>Method</td>
-    <td><code><a href="nltk.featstruct.FeatStruct.html#rename_variables">rename_variables</a></code></td>
-    <td><span></span></td>
+    <td><code><a href="nltk.featstruct.FeatStruct.html#rename_variables" class="internal-link" title="nltk.featstruct.FeatStruct.rename_variables">rename​_variables</a></code></td>
+    <td></td>
   </tr><tr class="basemethod">
     
     <td>Method</td>
-    <td><code><a href="nltk.featstruct.FeatStruct.html#retract_bindings">retract_bindings</a></code></td>
-    <td><span></span></td>
+    <td><code><a href="nltk.featstruct.FeatStruct.html#retract_bindings" class="internal-link" title="nltk.featstruct.FeatStruct.retract_bindings">retract​_bindings</a></code></td>
+    <td></td>
   </tr><tr class="basemethod">
     
     <td>Method</td>
-    <td><code><a href="nltk.featstruct.FeatStruct.html#substitute_bindings">substitute_bindings</a></code></td>
-    <td><span></span></td>
+    <td><code><a href="nltk.featstruct.FeatStruct.html#substitute_bindings" class="internal-link" title="nltk.featstruct.FeatStruct.substitute_bindings">substitute​_bindings</a></code></td>
+    <td></td>
   </tr><tr class="basemethod">
     
     <td>Method</td>
-    <td><code><a href="nltk.featstruct.FeatStruct.html#subsumes">subsumes</a></code></td>
-    <td><span>Return True if <tt class="rst-docutils literal">self</tt> subsumes <tt class="rst-docutils literal">other</tt>.  I.e., return true If unifying <tt class="rst-docutils literal">self</tt> with <tt class="rst-docutils literal">other</tt> would result in a feature structure equal to <tt class="rst-docutils literal">other</tt>.</span></td>
+    <td><code><a href="nltk.featstruct.FeatStruct.html#subsumes" class="internal-link" title="nltk.featstruct.FeatStruct.subsumes">subsumes</a></code></td>
+    <td>Return True if <tt class="rst-docutils literal">self</tt> subsumes <tt class="rst-docutils literal">other</tt>.  I.e., return true If unifying <tt class="rst-docutils literal">self</tt> with <tt class="rst-docutils literal">other</tt> would result in a feature structure equal to <tt class="rst-docutils literal">other</tt>.</td>
   </tr><tr class="basemethod">
     
     <td>Method</td>
-    <td><code><a href="nltk.featstruct.FeatStruct.html#unify">unify</a></code></td>
+    <td><code><a href="nltk.featstruct.FeatStruct.html#unify" class="internal-link" title="nltk.featstruct.FeatStruct.unify">unify</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="basemethod">
     
     <td>Method</td>
-    <td><code><a href="nltk.featstruct.FeatStruct.html#variables">variables</a></code></td>
-    <td><span></span></td>
+    <td><code><a href="nltk.featstruct.FeatStruct.html#variables" class="internal-link" title="nltk.featstruct.FeatStruct.variables">variables</a></code></td>
+    <td></td>
   </tr><tr class="basemethod">
     
     <td>Method</td>
-    <td><code><a href="nltk.featstruct.FeatStruct.html#walk">walk</a></code></td>
-    <td><span>Return an iterator that generates this feature structure, and each feature structure it contains.  Each feature structure will be generated exactly once.</span></td>
+    <td><code><a href="nltk.featstruct.FeatStruct.html#walk" class="internal-link" title="nltk.featstruct.FeatStruct.walk">walk</a></code></td>
+    <td>Return an iterator that generates this feature structure, and each feature structure it contains.  Each feature structure will be generated exactly once.</td>
   </tr><tr class="basemethod private">
     
     <td>Method</td>
-    <td><code><a href="nltk.featstruct.FeatStruct.html#_calculate_hashvalue">_calculate_hashvalue</a></code></td>
-    <td><span>Return a hash value for this feature structure.</span></td>
+    <td><code><a href="nltk.featstruct.FeatStruct.html#_calculate_hashvalue" class="internal-link" title="nltk.featstruct.FeatStruct._calculate_hashvalue">_calculate​_hashvalue</a></code></td>
+    <td>Return a hash value for this feature structure.</td>
   </tr><tr class="basemethod private">
     
     <td>Method</td>
-    <td><code><a href="nltk.featstruct.FeatStruct.html#_equal">_equal</a></code></td>
-    <td><span>Return True iff self and other have equal values.</span></td>
+    <td><code><a href="nltk.featstruct.FeatStruct.html#_equal" class="internal-link" title="nltk.featstruct.FeatStruct._equal">_equal</a></code></td>
+    <td>Return True iff self and other have equal values.</td>
   </tr><tr class="basemethod private">
     
     <td>Method</td>
-    <td><code><a href="nltk.featstruct.FeatStruct.html#_find_reentrances">_find_reentrances</a></code></td>
-    <td><span>Return a dictionary that maps from the <tt class="rst-docutils literal">id</tt> of each feature structure contained in <tt class="rst-docutils literal">self</tt> (including <tt class="rst-docutils literal">self</tt>) to a boolean value, indicating whether it is reentrant or not.</span></td>
+    <td><code><a href="nltk.featstruct.FeatStruct.html#_find_reentrances" class="internal-link" title="nltk.featstruct.FeatStruct._find_reentrances">_find​_reentrances</a></code></td>
+    <td>Return a dictionary that maps from the <tt class="rst-docutils literal">id</tt> of each feature structure contained in <tt class="rst-docutils literal">self</tt> (including <tt class="rst-docutils literal">self</tt>) to a boolean value, indicating whether it is reentrant or not.</td>
   </tr><tr class="basemethod private">
     
     <td>Method</td>
-    <td><code><a href="nltk.featstruct.FeatStruct.html#_freeze">_freeze</a></code></td>
-    <td><span>Make this feature structure, and any feature structure it contains, immutable.</span></td>
+    <td><code><a href="nltk.featstruct.FeatStruct.html#_freeze" class="internal-link" title="nltk.featstruct.FeatStruct._freeze">_freeze</a></code></td>
+    <td>Make this feature structure, and any feature structure it contains, immutable.</td>
   </tr><tr class="basemethod private">
     
     <td>Method</td>
-    <td><code><a href="nltk.featstruct.FeatStruct.html#_walk">_walk</a></code></td>
+    <td><code><a href="nltk.featstruct.FeatStruct.html#_walk" class="internal-link" title="nltk.featstruct.FeatStruct._walk">_walk</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
-  </tr><tr class="baseclassvariable private">
+  </tr><tr class="baseconstant private">
     
-    <td>Class Variable</td>
-    <td><code><a href="nltk.featstruct.FeatStruct.html#_FROZEN_ERROR">_FROZEN_ERROR</a></code></td>
+    <td>Constant</td>
+    <td><code><a href="nltk.featstruct.FeatStruct.html#_FROZEN_ERROR" class="internal-link" title="nltk.featstruct.FeatStruct._FROZEN_ERROR">_FROZEN​_ERROR</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="baseinstancevariable private">
     
     <td>Instance Variable</td>
-    <td><code><a href="nltk.featstruct.FeatStruct.html#_frozen">_frozen</a></code></td>
+    <td><code><a href="nltk.featstruct.FeatStruct.html#_frozen" class="internal-link" title="nltk.featstruct.FeatStruct._frozen">_frozen</a></code></td>
     <td><span class="undocumented">No summary</span></td>
   </tr><tr class="baseinstancevariable private">
     
     <td>Instance Variable</td>
-    <td><code><a href="nltk.featstruct.FeatStruct.html#_hash">_hash</a></code></td>
+    <td><code><a href="nltk.featstruct.FeatStruct.html#_hash" class="internal-link" title="nltk.featstruct.FeatStruct._hash">_hash</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr>
 </table>
@@ -413,7 +426,7 @@ cyclic feature structures, mutability, freezing, and hashing.</td></tr></table><
     </a>
   </div>
   <div class="docstring functionBody">
-    <div class="interfaceinfo">overrides <code><a href="nltk.featstruct.FeatStruct.html#__deepcopy__">nltk.featstruct.FeatStruct.__deepcopy__</a></code></div>
+    <div class="interfaceinfo">overrides <code><a href="nltk.featstruct.FeatStruct.html#__deepcopy__" class="internal-link">nltk.featstruct.FeatStruct.__deepcopy__</a></code></div>
     
     <div><p class="undocumented">Undocumented</p></div>
   </div>
@@ -532,6 +545,7 @@ to <tt class="rst-docutils literal">value</tt>.  If <tt class="rst-docutils lite
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    
   </div>
 </div><div class="baseclassvariable">
   
@@ -554,6 +568,7 @@ to <tt class="rst-docutils literal">value</tt>.  If <tt class="rst-docutils lite
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    
   </div>
 </div><div class="baseclassvariable">
   
@@ -576,6 +591,7 @@ to <tt class="rst-docutils literal">value</tt>.  If <tt class="rst-docutils lite
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    
   </div>
 </div><div class="baseclassvariable">
   
@@ -598,6 +614,7 @@ to <tt class="rst-docutils literal">value</tt>.  If <tt class="rst-docutils lite
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    
   </div>
 </div><div class="baseclassvariable">
   
@@ -620,6 +637,7 @@ to <tt class="rst-docutils literal">value</tt>.  If <tt class="rst-docutils lite
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    
   </div>
 </div><div class="baseclassvariable">
   
@@ -642,6 +660,7 @@ to <tt class="rst-docutils literal">value</tt>.  If <tt class="rst-docutils lite
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    
   </div>
 </div><div class="baseclassvariable">
   
@@ -664,6 +683,7 @@ to <tt class="rst-docutils literal">value</tt>.  If <tt class="rst-docutils lite
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    
   </div>
 </div><div class="baseclassvariable">
   
@@ -686,6 +706,7 @@ to <tt class="rst-docutils literal">value</tt>.  If <tt class="rst-docutils lite
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    
   </div>
 </div><div class="baseclassvariable">
   
@@ -708,6 +729,7 @@ to <tt class="rst-docutils literal">value</tt>.  If <tt class="rst-docutils lite
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    
   </div>
 </div><div class="basemethod private">
   
@@ -727,7 +749,7 @@ to <tt class="rst-docutils literal">value</tt>.  If <tt class="rst-docutils lite
     </a>
   </div>
   <div class="docstring functionBody">
-    <div class="interfaceinfo">overrides <code><a href="nltk.featstruct.FeatStruct.html#_items">nltk.featstruct.FeatStruct._items</a></code></div>
+    <div class="interfaceinfo">overrides <code><a href="nltk.featstruct.FeatStruct.html#_items" class="internal-link">nltk.featstruct.FeatStruct._items</a></code></div>
     
     <div>Return an iterable of (fid,fval) pairs, where fid is a
 feature identifier and fval is the corresponding feature
@@ -751,7 +773,7 @@ value, for all features defined by this FeatStruct.</div>
     </a>
   </div>
   <div class="docstring functionBody">
-    <div class="interfaceinfo">overrides <code><a href="nltk.featstruct.FeatStruct.html#_keys">nltk.featstruct.FeatStruct._keys</a></code></div>
+    <div class="interfaceinfo">overrides <code><a href="nltk.featstruct.FeatStruct.html#_keys" class="internal-link">nltk.featstruct.FeatStruct._keys</a></code></div>
     
     <div>Return an iterable of the feature identifiers used by this
 FeatStruct.</div>
@@ -774,11 +796,11 @@ FeatStruct.</div>
     </a>
   </div>
   <div class="docstring functionBody">
-    <div class="interfaceinfo">overrides <code><a href="nltk.featstruct.FeatStruct.html#_repr">nltk.featstruct.FeatStruct._repr</a></code></div>
+    <div class="interfaceinfo">overrides <code><a href="nltk.featstruct.FeatStruct.html#_repr" class="internal-link">nltk.featstruct.FeatStruct._repr</a></code></div>
     
     <div>Return a string representation of this feature structure.<table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">reentrances</span></td><td class="fieldArgDesc">A dictionary that maps from the <tt class="rst-docutils literal">id</tt> of
 each feature value in self, indicating whether that value
-is reentrant or not.</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">reentrance_ids</span></td><td class="fieldArgDesc">A dictionary mapping from each <tt class="rst-docutils literal">id</tt>
+is reentrant or not.</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">reentrance​_ids</span></td><td class="fieldArgDesc">A dictionary mapping from each <tt class="rst-docutils literal">id</tt>
 of a feature value to a unique identifier.  This is modified
 by <tt class="rst-docutils literal">repr</tt>: the first time a reentrant feature value is
 displayed, an identifier is added to <tt class="rst-docutils literal">reentrance_ids</tt> for it.</td></tr></table></div>
@@ -801,12 +823,12 @@ displayed, an identifier is added to <tt class="rst-docutils literal">reentrance
     </a>
   </div>
   <div class="docstring functionBody">
-    <div class="interfaceinfo">overrides <code><a href="nltk.featstruct.FeatStruct.html#_values">nltk.featstruct.FeatStruct._values</a></code></div>
+    <div class="interfaceinfo">overrides <code><a href="nltk.featstruct.FeatStruct.html#_values" class="internal-link">nltk.featstruct.FeatStruct._values</a></code></div>
     
     <div>Return an iterable of the feature values directly defined
 by this FeatStruct.</div>
   </div>
-</div><div class="baseclassvariable private">
+</div><div class="baseconstant private">
   
   
   <a name="nltk.featstruct.FeatList._INDEX_ERROR">
@@ -827,6 +849,7 @@ by this FeatStruct.</div>
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    <table class="valueTable"><tr class="fieldStart"><td class="fieldName">Value</td></tr><tr><td><pre class="constant-value"><code><span class="rst-variable-quote">'</span><span class="rst-variable-string">Expected int or feature path.  Got %r.</span><span class="rst-variable-quote">'</span></code></pre></td></tr></table>
   </div>
 </div>
 
@@ -838,7 +861,7 @@ by this FeatStruct.</div>
   <div class="container">
     <a href="index.html">API Documentation</a> for <a href="http://www.nltk.org/" class="projecthome">nltk-3.6.2</a>,
   generated by <a href="https://github.com/twisted/pydoctor/">pydoctor</a>
-    21.2.2 at 2022-01-06 17:36:51.
+    22.2.2.dev0 at 2022-03-04 05:57:24.
   </div>
 </footer>
 

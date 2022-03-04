@@ -7,7 +7,7 @@
   <head>
     
     <title>nltk.parse.corenlp.CoreNLPParser</title>
-    <meta name="generator" content="pydoctor 21.2.2"> 
+    <meta name="generator" content="pydoctor 22.2.2.dev0"> 
         
     </meta>
     <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
@@ -44,69 +44,82 @@
           Names
         </a>
 
-        <form action="search-results.html" id="search-box-container">
+        <div id="search-box-container">
           <div class="input-group">
-            <input id="search-box" name="search-query" placeholder="Search..." aria-label="Search" minlength="2" class="form-control" />
+            <input id="search-box" type="search" name="search-query" placeholder="Search..." aria-label="Search" minlength="2" class="form-control" autocomplete="off" />
+            
             <span class="input-group-btn">
-              <button class="btn btn-default" type="submit" title="Search"><img src="fonts/search.svg" alt="Search!" /></button>
-              <a class="btn btn-default" id="search-help-button" title="Help" onclick="toggleSearchHelpText()"><img src="fonts/info.svg" alt="Help!" /></a>
+              <a style="display: none;" class="btn btn-default" id="search-clear-button" title="Clear" onclick="clearSearch()"><img src="fonts/x-circle.svg" alt="Clear" /></a>
+              <a class="btn btn-default" id="search-help-button" title="Help" onclick="toggleSearchHelpText()"><img src="fonts/info.svg" alt="Help" /></a>
             </span>
           </div>
-        </form>
+        </div>
 
-        <div class="rst-admonition hint" id="search-help-box">
+      </div>
+
+      <div id="search-results-container" style="display: none;">
+        <div>
+          <span class="label label-default" id="search-docstrings-button">
+            <a title="Search in docstrings" onclick="toggleSearchInDocstrings()">search in docstrings</a></span>
+        </div>
+
+        <noscript>
+            <h1>Cannot search: JavaScript is not supported/enabled in your browser.</h1>
+        </noscript>
+
+        <div class="hint" id="search-help-box">
           <p class="rst-last">
       
             Search bar offers the following options:
             <ul>   
                 <li>
                   <strong>Term presence.</strong> The below example searches for documents that 
-                    must contain “foo”, might contain “bar” and must not contain “baz”:
-                  <br /> <code>'+foo bar -baz'</code>
+                    must contain “foo”, might contain “bar” and must not contain “baz”: <code>+foo bar -baz</code>
                 </li> 
 
                 <li>
-                  <strong>Wildcards.</strong> The below example searches for documents with words beginning with “foo”:
-                  <br /> <code>'foo*'</code>
+                  <strong>Wildcards.</strong> The below example searches for documents with words beginning with “foo”: <code>foo*</code>
                 </li> 
 
                 <li>
-                  <strong>Search in specific fields.</strong> The following search matches all documents 
-                  that contains "foo" in their full dotted name and with “bar” in any field:
-                  <br /> <code>'+fullName:*foo* +bar'</code>
+                  <strong>Search in specific fields.</strong> The following search matches all objects 
+                  in "twisted.mail" that matches “search”: <code>+qname:twisted.mail.* +search</code>
 
                   <p>
-                    Possible fields: 'name', 'docstring', 'fullName'.
+                    Possible fields: 'name', 'qname' (fully qualified name), 'docstring', and 'kind'.
+                    Last two fields are only applicable if "search in docstrings" is enabled.
                   </p>
                 </li>
 
                 <li>
                   <strong>Fuzzy matches.</strong> The following search matches all documents 
-                  that have a word within 1 edit distance of “foo”:
-                  <br /> <code>'foo~1'</code>
+                  that have a word within 1 edit distance of “foo”: <code>foo~1</code>
                 </li>
             </ul>
 
           </p>
         </div>
 
-      </div>
+        <div id="search-status"> </div>
+        
+        <div class="warning" id="search-warn-box" style="display: none;">
+          <p class="rst-last"><span id="search-warn"></span></p>
+        </div>
 
+        <table id="search-results">
+          <!-- Filled dynamically by JS -->
+        </table>
+        
+        <div style="margin-top: 8px;">
+          <p>Results provided by <a href="https://lunrjs.com">Lunr.js</a></p>
+        </div>
+      </div>
 
     </div>
   </div>
 
-  <script>
- 
-    function toggleSearchHelpText() {
-        document.body.classList.toggle("search-help-hidden");
-    }
-    // Init search and help text
-    document.getElementById('search-box-container').style.display = 'block';
-    document.getElementById('search-help-box').style.display = 'block';
-    document.body.classList.add("search-help-hidden");
-
-  </script>
+  <script src="ajax.js" type="text/javascript"></script>
+  <script src="search.js" type="text/javascript"></script>
 
 </nav>
 
@@ -115,7 +128,7 @@
     <div class="container">
 
       <div class="page-header">
-        <h1 class="class"><code><code><a href="nltk.html">nltk</a></code><wbr></wbr>.<code><a href="nltk.parse.html">parse</a></code><wbr></wbr>.<code><a href="nltk.parse.corenlp.html">corenlp</a></code><wbr></wbr>.<code><a href="nltk.parse.corenlp.CoreNLPParser.html">CoreNLPParser</a></code></code></h1>
+        <h1 class="class"><code><code><a href="index.html" class="internal-link">nltk</a></code><wbr></wbr>.<code><a href="nltk.parse.html" class="internal-link" title="nltk.parse">parse</a></code><wbr></wbr>.<code><a href="nltk.parse.corenlp.html" class="internal-link" title="nltk.parse.corenlp">corenlp</a></code><wbr></wbr>.<code><a href="nltk.parse.corenlp.CoreNLPParser.html" class="internal-link" title="nltk.parse.corenlp.CoreNLPParser">CoreNLPParser</a></code></code></h1>
         <div id="showPrivate">
           <button class="btn btn-link" onclick="togglePrivate()">Toggle Private API</button>
         </div>
@@ -126,7 +139,7 @@
       </div>
 
       <div class="extrasDocstring">
-        <p><code><span class="py-keyword">class</span> <span class="py-defname">CoreNLPParser</span>(<a href="nltk.parse.corenlp.GenericCoreNLPParser.html" title="nltk.parse.corenlp.GenericCoreNLPParser">GenericCoreNLPParser</a>): <a href="https://github.com/nltk/nltk/tree/3.6.2/nltk/parse/corenlp.py#L396" class="sourceLink">(source)</a></code></p>
+        <p><code><span class="py-keyword">class</span> <span class="py-defname">CoreNLPParser</span>(<a href="nltk.parse.corenlp.GenericCoreNLPParser.html" class="internal-link" title="nltk.parse.corenlp.GenericCoreNLPParser">GenericCoreNLPParser</a>): <a href="https://github.com/nltk/nltk/tree/3.6.2/nltk/parse/corenlp.py#L396" class="sourceLink">(source)</a></code></p>
         <p><a href="classIndex.html#nltk.parse.corenlp.CoreNLPParser">View In Hierarchy</a></p>
       </div>
 
@@ -249,7 +262,7 @@
 <span class="py-output"> |     |    |</span>
 <span class="py-output">Mary walks  .</span>
 </pre><div class="rst-section" id="rst-special-cases">
-<h1 class="heading">Special cases</h1>
+<h2 class="heading">Special cases</h2>
 <pre class="py-doctest">
 <span class="py-prompt">&gt;&gt;&gt; </span><span class="py-builtin">next</span>(
 <span class="py-more">... </span>    parser.raw_parse(
@@ -278,23 +291,23 @@
   <tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#make_tree">make_tree</a></code></td>
+    <td><code><a href="#make_tree" class="internal-link" title="nltk.parse.corenlp.CoreNLPParser.make_tree">make​_tree</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="classvariable">
     
     <td>Class Variable</td>
-    <td><code><a href="#parser_annotator">parser_annotator</a></code></td>
+    <td><code><a href="#parser_annotator" class="internal-link" title="nltk.parse.corenlp.CoreNLPParser.parser_annotator">parser​_annotator</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
-  </tr><tr class="classvariable private">
+  </tr><tr class="constant private">
     
-    <td>Class Variable</td>
-    <td><code><a href="#_OUTPUT_FORMAT">_OUTPUT_FORMAT</a></code></td>
+    <td>Constant</td>
+    <td><code><a href="#_OUTPUT_FORMAT" class="internal-link" title="nltk.parse.corenlp.CoreNLPParser._OUTPUT_FORMAT">_OUTPUT​_FORMAT</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr>
 </table>
         
           <p class="inheritedFrom">
-            Inherited from <code><a href="nltk.parse.corenlp.GenericCoreNLPParser.html">GenericCoreNLPParser</a></code>:
+            Inherited from <code><a href="nltk.parse.corenlp.GenericCoreNLPParser.html" class="internal-link" title="nltk.parse.corenlp.GenericCoreNLPParser">GenericCoreNLPParser</a></code>:
           </p>
           <table class="children sortable" id="id901">
   
@@ -302,78 +315,78 @@
   <tr class="basemethod">
     
     <td>Method</td>
-    <td><code><a href="nltk.parse.corenlp.GenericCoreNLPParser.html#__init__">__init__</a></code></td>
+    <td><code><a href="nltk.parse.corenlp.GenericCoreNLPParser.html#__init__" class="internal-link" title="nltk.parse.corenlp.GenericCoreNLPParser.__init__">__init__</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="basemethod">
     
     <td>Method</td>
-    <td><code><a href="nltk.parse.corenlp.GenericCoreNLPParser.html#api_call">api_call</a></code></td>
+    <td><code><a href="nltk.parse.corenlp.GenericCoreNLPParser.html#api_call" class="internal-link" title="nltk.parse.corenlp.GenericCoreNLPParser.api_call">api​_call</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="basemethod">
     
     <td>Method</td>
-    <td><code><a href="nltk.parse.corenlp.GenericCoreNLPParser.html#parse_sents">parse_sents</a></code></td>
-    <td><span>Parse multiple sentences.</span></td>
+    <td><code><a href="nltk.parse.corenlp.GenericCoreNLPParser.html#parse_sents" class="internal-link" title="nltk.parse.corenlp.GenericCoreNLPParser.parse_sents">parse​_sents</a></code></td>
+    <td>Parse multiple sentences.</td>
   </tr><tr class="basemethod">
     
     <td>Method</td>
-    <td><code><a href="nltk.parse.corenlp.GenericCoreNLPParser.html#parse_text">parse_text</a></code></td>
-    <td><span>Parse a piece of text.</span></td>
+    <td><code><a href="nltk.parse.corenlp.GenericCoreNLPParser.html#parse_text" class="internal-link" title="nltk.parse.corenlp.GenericCoreNLPParser.parse_text">parse​_text</a></code></td>
+    <td>Parse a piece of text.</td>
   </tr><tr class="basemethod">
     
     <td>Method</td>
-    <td><code><a href="nltk.parse.corenlp.GenericCoreNLPParser.html#raw_parse">raw_parse</a></code></td>
-    <td><span>Parse a sentence.</span></td>
+    <td><code><a href="nltk.parse.corenlp.GenericCoreNLPParser.html#raw_parse" class="internal-link" title="nltk.parse.corenlp.GenericCoreNLPParser.raw_parse">raw​_parse</a></code></td>
+    <td>Parse a sentence.</td>
   </tr><tr class="basemethod">
     
     <td>Method</td>
-    <td><code><a href="nltk.parse.corenlp.GenericCoreNLPParser.html#raw_parse_sents">raw_parse_sents</a></code></td>
-    <td><span>Parse multiple sentences.</span></td>
+    <td><code><a href="nltk.parse.corenlp.GenericCoreNLPParser.html#raw_parse_sents" class="internal-link" title="nltk.parse.corenlp.GenericCoreNLPParser.raw_parse_sents">raw​_parse​_sents</a></code></td>
+    <td>Parse multiple sentences.</td>
   </tr><tr class="basemethod">
     
     <td>Method</td>
-    <td><code><a href="nltk.parse.corenlp.GenericCoreNLPParser.html#raw_tag_sents">raw_tag_sents</a></code></td>
-    <td><span>Tag multiple sentences.</span></td>
+    <td><code><a href="nltk.parse.corenlp.GenericCoreNLPParser.html#raw_tag_sents" class="internal-link" title="nltk.parse.corenlp.GenericCoreNLPParser.raw_tag_sents">raw​_tag​_sents</a></code></td>
+    <td>Tag multiple sentences.</td>
   </tr><tr class="basemethod">
     
     <td>Method</td>
-    <td><code><a href="nltk.parse.corenlp.GenericCoreNLPParser.html#tag">tag</a></code></td>
-    <td><span>Tag a list of tokens.</span></td>
+    <td><code><a href="nltk.parse.corenlp.GenericCoreNLPParser.html#tag" class="internal-link" title="nltk.parse.corenlp.GenericCoreNLPParser.tag">tag</a></code></td>
+    <td>Tag a list of tokens.</td>
   </tr><tr class="basemethod">
     
     <td>Method</td>
-    <td><code><a href="nltk.parse.corenlp.GenericCoreNLPParser.html#tag_sents">tag_sents</a></code></td>
-    <td><span>Tag multiple sentences.</span></td>
+    <td><code><a href="nltk.parse.corenlp.GenericCoreNLPParser.html#tag_sents" class="internal-link" title="nltk.parse.corenlp.GenericCoreNLPParser.tag_sents">tag​_sents</a></code></td>
+    <td>Tag multiple sentences.</td>
   </tr><tr class="basemethod">
     
     <td>Method</td>
-    <td><code><a href="nltk.parse.corenlp.GenericCoreNLPParser.html#tokenize">tokenize</a></code></td>
-    <td><span>Tokenize a string of text.</span></td>
+    <td><code><a href="nltk.parse.corenlp.GenericCoreNLPParser.html#tokenize" class="internal-link" title="nltk.parse.corenlp.GenericCoreNLPParser.tokenize">tokenize</a></code></td>
+    <td>Tokenize a string of text.</td>
   </tr><tr class="baseinstancevariable">
     
     <td>Instance Variable</td>
-    <td><code><a href="nltk.parse.corenlp.GenericCoreNLPParser.html#encoding">encoding</a></code></td>
-    <td><span class="undocumented">Undocumented</span></td>
-  </tr><tr class="baseinstancevariable">
-    
-    <td>Instance Variable</td>
-    <td><code><a href="nltk.parse.corenlp.GenericCoreNLPParser.html#session">session</a></code></td>
+    <td><code><a href="nltk.parse.corenlp.GenericCoreNLPParser.html#encoding" class="internal-link" title="nltk.parse.corenlp.GenericCoreNLPParser.encoding">encoding</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="baseinstancevariable">
     
     <td>Instance Variable</td>
-    <td><code><a href="nltk.parse.corenlp.GenericCoreNLPParser.html#tagtype">tagtype</a></code></td>
+    <td><code><a href="nltk.parse.corenlp.GenericCoreNLPParser.html#session" class="internal-link" title="nltk.parse.corenlp.GenericCoreNLPParser.session">session</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="baseinstancevariable">
     
     <td>Instance Variable</td>
-    <td><code><a href="nltk.parse.corenlp.GenericCoreNLPParser.html#url">url</a></code></td>
+    <td><code><a href="nltk.parse.corenlp.GenericCoreNLPParser.html#tagtype" class="internal-link" title="nltk.parse.corenlp.GenericCoreNLPParser.tagtype">tagtype</a></code></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="baseinstancevariable">
+    
+    <td>Instance Variable</td>
+    <td><code><a href="nltk.parse.corenlp.GenericCoreNLPParser.html#url" class="internal-link" title="nltk.parse.corenlp.GenericCoreNLPParser.url">url</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr>
 </table>
           
           <p class="inheritedFrom">
-            Inherited from <code><a href="nltk.parse.api.ParserI.html">ParserI</a></code> (via <code><a href="nltk.parse.corenlp.GenericCoreNLPParser.html">GenericCoreNLPParser</a></code>):
+            Inherited from <code><a href="nltk.parse.api.ParserI.html" class="internal-link" title="nltk.parse.api.ParserI">ParserI</a></code> (via <code><a href="nltk.parse.corenlp.GenericCoreNLPParser.html" class="internal-link" title="nltk.parse.corenlp.GenericCoreNLPParser">GenericCoreNLPParser</a></code>):
           </p>
           <table class="children sortable" id="id902">
   
@@ -381,28 +394,28 @@
   <tr class="basemethod">
     
     <td>Method</td>
-    <td><code><a href="nltk.parse.api.ParserI.html#grammar">grammar</a></code></td>
-    <td><span></span></td>
+    <td><code><a href="nltk.parse.api.ParserI.html#grammar" class="internal-link" title="nltk.parse.api.ParserI.grammar">grammar</a></code></td>
+    <td></td>
   </tr><tr class="basemethod">
     
     <td>Method</td>
-    <td><code><a href="nltk.parse.api.ParserI.html#parse">parse</a></code></td>
-    <td><span></span></td>
+    <td><code><a href="nltk.parse.api.ParserI.html#parse" class="internal-link" title="nltk.parse.api.ParserI.parse">parse</a></code></td>
+    <td></td>
   </tr><tr class="basemethod">
     
     <td>Method</td>
-    <td><code><a href="nltk.parse.api.ParserI.html#parse_all">parse_all</a></code></td>
-    <td><span></span></td>
+    <td><code><a href="nltk.parse.api.ParserI.html#parse_all" class="internal-link" title="nltk.parse.api.ParserI.parse_all">parse​_all</a></code></td>
+    <td></td>
   </tr><tr class="basemethod">
     
     <td>Method</td>
-    <td><code><a href="nltk.parse.api.ParserI.html#parse_one">parse_one</a></code></td>
-    <td><span></span></td>
+    <td><code><a href="nltk.parse.api.ParserI.html#parse_one" class="internal-link" title="nltk.parse.api.ParserI.parse_one">parse​_one</a></code></td>
+    <td></td>
   </tr>
 </table>
           
           <p class="inheritedFrom">
-            Inherited from <code><a href="nltk.tokenize.api.TokenizerI.html">TokenizerI</a></code> (via <code><a href="nltk.parse.corenlp.GenericCoreNLPParser.html">GenericCoreNLPParser</a></code>):
+            Inherited from <code><a href="nltk.tokenize.api.TokenizerI.html" class="internal-link" title="nltk.tokenize.api.TokenizerI">TokenizerI</a></code> (via <code><a href="nltk.parse.corenlp.GenericCoreNLPParser.html" class="internal-link" title="nltk.parse.corenlp.GenericCoreNLPParser">GenericCoreNLPParser</a></code>):
           </p>
           <table class="children sortable" id="id903">
   
@@ -410,23 +423,23 @@
   <tr class="basemethod">
     
     <td>Method</td>
-    <td><code><a href="nltk.tokenize.api.TokenizerI.html#span_tokenize">span_tokenize</a></code></td>
-    <td><span>Identify the tokens using integer offsets <tt class="rst-docutils literal">(start_i, end_i)</tt>, where <tt class="rst-docutils literal">s[start_i:end_i]</tt> is the corresponding token.</span></td>
+    <td><code><a href="nltk.tokenize.api.TokenizerI.html#span_tokenize" class="internal-link" title="nltk.tokenize.api.TokenizerI.span_tokenize">span​_tokenize</a></code></td>
+    <td>Identify the tokens using integer offsets <tt class="rst-docutils literal">(start_i, end_i)</tt>, where <tt class="rst-docutils literal">s[start_i:end_i]</tt> is the corresponding token.</td>
   </tr><tr class="basemethod">
     
     <td>Method</td>
-    <td><code><a href="nltk.tokenize.api.TokenizerI.html#span_tokenize_sents">span_tokenize_sents</a></code></td>
-    <td><span>Apply <tt class="rst-docutils literal">self.span_tokenize()</tt> to each element of <tt class="rst-docutils literal">strings</tt>.  I.e.:</span></td>
+    <td><code><a href="nltk.tokenize.api.TokenizerI.html#span_tokenize_sents" class="internal-link" title="nltk.tokenize.api.TokenizerI.span_tokenize_sents">span​_tokenize​_sents</a></code></td>
+    <td>Apply <tt class="rst-docutils literal">self.span_tokenize()</tt> to each element of <tt class="rst-docutils literal">strings</tt>.  I.e.:</td>
   </tr><tr class="basemethod">
     
     <td>Method</td>
-    <td><code><a href="nltk.tokenize.api.TokenizerI.html#tokenize_sents">tokenize_sents</a></code></td>
-    <td><span>Apply <tt class="rst-docutils literal">self.tokenize()</tt> to each element of <tt class="rst-docutils literal">strings</tt>.  I.e.:</span></td>
+    <td><code><a href="nltk.tokenize.api.TokenizerI.html#tokenize_sents" class="internal-link" title="nltk.tokenize.api.TokenizerI.tokenize_sents">tokenize​_sents</a></code></td>
+    <td>Apply <tt class="rst-docutils literal">self.tokenize()</tt> to each element of <tt class="rst-docutils literal">strings</tt>.  I.e.:</td>
   </tr>
 </table>
           
           <p class="inheritedFrom">
-            Inherited from <code><a href="nltk.tag.api.TaggerI.html">TaggerI</a></code> (via <code><a href="nltk.parse.corenlp.GenericCoreNLPParser.html">GenericCoreNLPParser</a></code>):
+            Inherited from <code><a href="nltk.tag.api.TaggerI.html" class="internal-link" title="nltk.tag.api.TaggerI">TaggerI</a></code> (via <code><a href="nltk.parse.corenlp.GenericCoreNLPParser.html" class="internal-link" title="nltk.parse.corenlp.GenericCoreNLPParser">GenericCoreNLPParser</a></code>):
           </p>
           <table class="children sortable" id="id904">
   
@@ -434,12 +447,12 @@
   <tr class="basemethod">
     
     <td>Method</td>
-    <td><code><a href="nltk.tag.api.TaggerI.html#evaluate">evaluate</a></code></td>
-    <td><span>Score the accuracy of the tagger against the gold standard. Strip the tags from the gold standard text, retag it using the tagger, then compute the accuracy score.</span></td>
+    <td><code><a href="nltk.tag.api.TaggerI.html#evaluate" class="internal-link" title="nltk.tag.api.TaggerI.evaluate">evaluate</a></code></td>
+    <td>Score the accuracy of the tagger against the gold standard. Strip the tags from the gold standard text, retag it using the tagger, then compute the accuracy score.</td>
   </tr><tr class="basemethod private">
     
     <td>Method</td>
-    <td><code><a href="nltk.tag.api.TaggerI.html#_check_params">_check_params</a></code></td>
+    <td><code><a href="nltk.tag.api.TaggerI.html#_check_params" class="internal-link" title="nltk.tag.api.TaggerI._check_params">_check​_params</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr>
 </table>
@@ -493,8 +506,9 @@
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    
   </div>
-</div><div class="baseclassvariable private">
+</div><div class="baseconstant private">
   
   
   <a name="nltk.parse.corenlp.CoreNLPParser._OUTPUT_FORMAT">
@@ -515,6 +529,7 @@
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    <table class="valueTable"><tr class="fieldStart"><td class="fieldName">Value</td></tr><tr><td><pre class="constant-value"><code><span class="rst-variable-quote">'</span><span class="rst-variable-string">penn</span><span class="rst-variable-quote">'</span></code></pre></td></tr></table>
   </div>
 </div>
 
@@ -526,7 +541,7 @@
   <div class="container">
     <a href="index.html">API Documentation</a> for <a href="http://www.nltk.org/" class="projecthome">nltk-3.6.2</a>,
   generated by <a href="https://github.com/twisted/pydoctor/">pydoctor</a>
-    21.2.2 at 2022-01-06 17:36:51.
+    22.2.2.dev0 at 2022-03-04 05:57:24.
   </div>
 </footer>
 

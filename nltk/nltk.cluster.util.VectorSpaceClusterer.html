@@ -7,7 +7,7 @@
   <head>
     
     <title>nltk.cluster.util.VectorSpaceClusterer</title>
-    <meta name="generator" content="pydoctor 21.2.2"> 
+    <meta name="generator" content="pydoctor 22.2.2.dev0"> 
         
     </meta>
     <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
@@ -44,69 +44,82 @@
           Names
         </a>
 
-        <form action="search-results.html" id="search-box-container">
+        <div id="search-box-container">
           <div class="input-group">
-            <input id="search-box" name="search-query" placeholder="Search..." aria-label="Search" minlength="2" class="form-control" />
+            <input id="search-box" type="search" name="search-query" placeholder="Search..." aria-label="Search" minlength="2" class="form-control" autocomplete="off" />
+            
             <span class="input-group-btn">
-              <button class="btn btn-default" type="submit" title="Search"><img src="fonts/search.svg" alt="Search!" /></button>
-              <a class="btn btn-default" id="search-help-button" title="Help" onclick="toggleSearchHelpText()"><img src="fonts/info.svg" alt="Help!" /></a>
+              <a style="display: none;" class="btn btn-default" id="search-clear-button" title="Clear" onclick="clearSearch()"><img src="fonts/x-circle.svg" alt="Clear" /></a>
+              <a class="btn btn-default" id="search-help-button" title="Help" onclick="toggleSearchHelpText()"><img src="fonts/info.svg" alt="Help" /></a>
             </span>
           </div>
-        </form>
+        </div>
 
-        <div class="rst-admonition hint" id="search-help-box">
+      </div>
+
+      <div id="search-results-container" style="display: none;">
+        <div>
+          <span class="label label-default" id="search-docstrings-button">
+            <a title="Search in docstrings" onclick="toggleSearchInDocstrings()">search in docstrings</a></span>
+        </div>
+
+        <noscript>
+            <h1>Cannot search: JavaScript is not supported/enabled in your browser.</h1>
+        </noscript>
+
+        <div class="hint" id="search-help-box">
           <p class="rst-last">
       
             Search bar offers the following options:
             <ul>   
                 <li>
                   <strong>Term presence.</strong> The below example searches for documents that 
-                    must contain “foo”, might contain “bar” and must not contain “baz”:
-                  <br /> <code>'+foo bar -baz'</code>
+                    must contain “foo”, might contain “bar” and must not contain “baz”: <code>+foo bar -baz</code>
                 </li> 
 
                 <li>
-                  <strong>Wildcards.</strong> The below example searches for documents with words beginning with “foo”:
-                  <br /> <code>'foo*'</code>
+                  <strong>Wildcards.</strong> The below example searches for documents with words beginning with “foo”: <code>foo*</code>
                 </li> 
 
                 <li>
-                  <strong>Search in specific fields.</strong> The following search matches all documents 
-                  that contains "foo" in their full dotted name and with “bar” in any field:
-                  <br /> <code>'+fullName:*foo* +bar'</code>
+                  <strong>Search in specific fields.</strong> The following search matches all objects 
+                  in "twisted.mail" that matches “search”: <code>+qname:twisted.mail.* +search</code>
 
                   <p>
-                    Possible fields: 'name', 'docstring', 'fullName'.
+                    Possible fields: 'name', 'qname' (fully qualified name), 'docstring', and 'kind'.
+                    Last two fields are only applicable if "search in docstrings" is enabled.
                   </p>
                 </li>
 
                 <li>
                   <strong>Fuzzy matches.</strong> The following search matches all documents 
-                  that have a word within 1 edit distance of “foo”:
-                  <br /> <code>'foo~1'</code>
+                  that have a word within 1 edit distance of “foo”: <code>foo~1</code>
                 </li>
             </ul>
 
           </p>
         </div>
 
-      </div>
+        <div id="search-status"> </div>
+        
+        <div class="warning" id="search-warn-box" style="display: none;">
+          <p class="rst-last"><span id="search-warn"></span></p>
+        </div>
 
+        <table id="search-results">
+          <!-- Filled dynamically by JS -->
+        </table>
+        
+        <div style="margin-top: 8px;">
+          <p>Results provided by <a href="https://lunrjs.com">Lunr.js</a></p>
+        </div>
+      </div>
 
     </div>
   </div>
 
-  <script>
- 
-    function toggleSearchHelpText() {
-        document.body.classList.toggle("search-help-hidden");
-    }
-    // Init search and help text
-    document.getElementById('search-box-container').style.display = 'block';
-    document.getElementById('search-help-box').style.display = 'block';
-    document.body.classList.add("search-help-hidden");
-
-  </script>
+  <script src="ajax.js" type="text/javascript"></script>
+  <script src="search.js" type="text/javascript"></script>
 
 </nav>
 
@@ -115,7 +128,7 @@
     <div class="container">
 
       <div class="page-header">
-        <h1 class="class"><code><code><a href="nltk.html">nltk</a></code><wbr></wbr>.<code><a href="nltk.cluster.html">cluster</a></code><wbr></wbr>.<code><a href="nltk.cluster.util.html">util</a></code><wbr></wbr>.<code><a href="nltk.cluster.util.VectorSpaceClusterer.html">VectorSpaceClusterer</a></code></code></h1>
+        <h1 class="class"><code><code><a href="index.html" class="internal-link">nltk</a></code><wbr></wbr>.<code><a href="nltk.cluster.html" class="internal-link" title="nltk.cluster">cluster</a></code><wbr></wbr>.<code><a href="nltk.cluster.util.html" class="internal-link" title="nltk.cluster.util">util</a></code><wbr></wbr>.<code><a href="nltk.cluster.util.VectorSpaceClusterer.html" class="internal-link" title="nltk.cluster.util.VectorSpaceClusterer">VectorSpaceClusterer</a></code></code></h1>
         <div id="showPrivate">
           <button class="btn btn-link" onclick="togglePrivate()">Toggle Private API</button>
         </div>
@@ -126,7 +139,7 @@
       </div>
 
       <div class="extrasDocstring">
-        <p><code><span class="py-keyword">class</span> <span class="py-defname">VectorSpaceClusterer</span>(<a href="nltk.cluster.api.ClusterI.html" title="nltk.cluster.api.ClusterI">ClusterI</a>): <a href="https://github.com/nltk/nltk/tree/3.6.2/nltk/cluster/util.py#L22" class="sourceLink">(source)</a></code></p><p>Known subclasses: <code><a href="nltk.cluster.em.EMClusterer.html">nltk.cluster.em.EMClusterer</a></code>, <code><a href="nltk.cluster.gaac.GAAClusterer.html">nltk.cluster.gaac.GAAClusterer</a></code>, <code><a href="nltk.cluster.kmeans.KMeansClusterer.html">nltk.cluster.kmeans.KMeansClusterer</a></code></p>
+        <p><code><span class="py-keyword">class</span> <span class="py-defname">VectorSpaceClusterer</span>(<a href="nltk.cluster.api.ClusterI.html" class="internal-link" title="nltk.cluster.api.ClusterI">ClusterI</a>): <a href="https://github.com/nltk/nltk/tree/3.6.2/nltk/cluster/util.py#L22" class="sourceLink">(source)</a></code></p><p>Known subclasses: <code><a href="nltk.cluster.em.EMClusterer.html" class="internal-link">nltk.cluster.em.EMClusterer</a></code>, <code><a href="nltk.cluster.gaac.GAAClusterer.html" class="internal-link">nltk.cluster.gaac.GAAClusterer</a></code>, <code><a href="nltk.cluster.kmeans.KMeansClusterer.html" class="internal-link">nltk.cluster.kmeans.KMeansClusterer</a></code></p>
         <p><a href="classIndex.html#nltk.cluster.util.VectorSpaceClusterer">View In Hierarchy</a></p>
       </div>
 
@@ -143,68 +156,68 @@ dimensionality.</div>
   <tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#__init__">__init__</a></code></td>
+    <td><code><a href="#__init__" class="internal-link" title="nltk.cluster.util.VectorSpaceClusterer.__init__">__init__</a></code></td>
     <td><span class="undocumented">No summary</span></td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#classify">classify</a></code></td>
-    <td><span>Classifies the token into a cluster, setting the token's CLUSTER parameter to that cluster identifier.</span></td>
+    <td><code><a href="#classify" class="internal-link" title="nltk.cluster.util.VectorSpaceClusterer.classify">classify</a></code></td>
+    <td>Classifies the token into a cluster, setting the token's CLUSTER parameter to that cluster identifier.</td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#classify_vectorspace">classify_vectorspace</a></code></td>
-    <td><span>Returns the index of the appropriate cluster for the vector.</span></td>
+    <td><code><a href="#classify_vectorspace" class="internal-link" title="nltk.cluster.util.VectorSpaceClusterer.classify_vectorspace">classify​_vectorspace</a></code></td>
+    <td>Returns the index of the appropriate cluster for the vector.</td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#cluster">cluster</a></code></td>
-    <td><span>Assigns the vectors to clusters, learning the clustering parameters from the data. Returns a cluster identifier for each vector.</span></td>
+    <td><code><a href="#cluster" class="internal-link" title="nltk.cluster.util.VectorSpaceClusterer.cluster">cluster</a></code></td>
+    <td>Assigns the vectors to clusters, learning the clustering parameters from the data. Returns a cluster identifier for each vector.</td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#cluster_vectorspace">cluster_vectorspace</a></code></td>
-    <td><span>Finds the clusters using the given set of vectors.</span></td>
+    <td><code><a href="#cluster_vectorspace" class="internal-link" title="nltk.cluster.util.VectorSpaceClusterer.cluster_vectorspace">cluster​_vectorspace</a></code></td>
+    <td>Finds the clusters using the given set of vectors.</td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#likelihood">likelihood</a></code></td>
-    <td><span>Returns the likelihood (a float) of the token having the corresponding cluster.</span></td>
+    <td><code><a href="#likelihood" class="internal-link" title="nltk.cluster.util.VectorSpaceClusterer.likelihood">likelihood</a></code></td>
+    <td>Returns the likelihood (a float) of the token having the corresponding cluster.</td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#likelihood_vectorspace">likelihood_vectorspace</a></code></td>
-    <td><span>Returns the likelihood of the vector belonging to the cluster.</span></td>
+    <td><code><a href="#likelihood_vectorspace" class="internal-link" title="nltk.cluster.util.VectorSpaceClusterer.likelihood_vectorspace">likelihood​_vectorspace</a></code></td>
+    <td>Returns the likelihood of the vector belonging to the cluster.</td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#vector">vector</a></code></td>
-    <td><span>Returns the vector after normalisation and dimensionality reduction</span></td>
+    <td><code><a href="#vector" class="internal-link" title="nltk.cluster.util.VectorSpaceClusterer.vector">vector</a></code></td>
+    <td>Returns the vector after normalisation and dimensionality reduction</td>
   </tr><tr class="method private">
     
     <td>Method</td>
-    <td><code><a href="#_normalise">_normalise</a></code></td>
-    <td><span>Normalises the vector to unit length.</span></td>
+    <td><code><a href="#_normalise" class="internal-link" title="nltk.cluster.util.VectorSpaceClusterer._normalise">_normalise</a></code></td>
+    <td>Normalises the vector to unit length.</td>
   </tr><tr class="instancevariable private">
     
     <td>Instance Variable</td>
-    <td><code><a href="#_should_normalise">_should_normalise</a></code></td>
+    <td><code><a href="#_should_normalise" class="internal-link" title="nltk.cluster.util.VectorSpaceClusterer._should_normalise">_should​_normalise</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="instancevariable private">
     
     <td>Instance Variable</td>
-    <td><code><a href="#_svd_dimensions">_svd_dimensions</a></code></td>
+    <td><code><a href="#_svd_dimensions" class="internal-link" title="nltk.cluster.util.VectorSpaceClusterer._svd_dimensions">_svd​_dimensions</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="instancevariable private">
     
     <td>Instance Variable</td>
-    <td><code><a href="#_Tt">_Tt</a></code></td>
+    <td><code><a href="#_Tt" class="internal-link" title="nltk.cluster.util.VectorSpaceClusterer._Tt">_​Tt</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr>
 </table>
         
           <p class="inheritedFrom">
-            Inherited from <code><a href="nltk.cluster.api.ClusterI.html">ClusterI</a></code>:
+            Inherited from <code><a href="nltk.cluster.api.ClusterI.html" class="internal-link" title="nltk.cluster.api.ClusterI">ClusterI</a></code>:
           </p>
           <table class="children sortable" id="id200">
   
@@ -212,23 +225,23 @@ dimensionality.</div>
   <tr class="basemethod">
     
     <td>Method</td>
-    <td><code><a href="nltk.cluster.api.ClusterI.html#classification_probdist">classification_probdist</a></code></td>
-    <td><span>Classifies the token into a cluster, returning a probability distribution over the cluster identifiers.</span></td>
+    <td><code><a href="nltk.cluster.api.ClusterI.html#classification_probdist" class="internal-link" title="nltk.cluster.api.ClusterI.classification_probdist">classification​_probdist</a></code></td>
+    <td>Classifies the token into a cluster, returning a probability distribution over the cluster identifiers.</td>
   </tr><tr class="basemethod">
     
     <td>Method</td>
-    <td><code><a href="nltk.cluster.api.ClusterI.html#cluster_name">cluster_name</a></code></td>
-    <td><span>Returns the names of the cluster at index.</span></td>
+    <td><code><a href="nltk.cluster.api.ClusterI.html#cluster_name" class="internal-link" title="nltk.cluster.api.ClusterI.cluster_name">cluster​_name</a></code></td>
+    <td>Returns the names of the cluster at index.</td>
   </tr><tr class="basemethod">
     
     <td>Method</td>
-    <td><code><a href="nltk.cluster.api.ClusterI.html#cluster_names">cluster_names</a></code></td>
-    <td><span>Returns the names of the clusters. :rtype: list</span></td>
+    <td><code><a href="nltk.cluster.api.ClusterI.html#cluster_names" class="internal-link" title="nltk.cluster.api.ClusterI.cluster_names">cluster​_names</a></code></td>
+    <td>Returns the names of the clusters. :rtype: list</td>
   </tr><tr class="basemethod">
     
     <td>Method</td>
-    <td><code><a href="nltk.cluster.api.ClusterI.html#num_clusters">num_clusters</a></code></td>
-    <td><span>Returns the number of clusters.</span></td>
+    <td><code><a href="nltk.cluster.api.ClusterI.html#num_clusters" class="internal-link" title="nltk.cluster.api.ClusterI.num_clusters">num​_clusters</a></code></td>
+    <td>Returns the number of clusters.</td>
   </tr>
 </table>
           
@@ -256,9 +269,9 @@ dimensionality.</div>
     </a>
   </div>
   <div class="docstring functionBody">
-    <div class="interfaceinfo">overridden in <code><a href="nltk.cluster.em.EMClusterer.html">nltk.cluster.em.EMClusterer</a></code>, <code><a href="nltk.cluster.gaac.GAAClusterer.html">nltk.cluster.gaac.GAAClusterer</a></code>, <code><a href="nltk.cluster.kmeans.KMeansClusterer.html">nltk.cluster.kmeans.KMeansClusterer</a></code></div>
+    <div class="interfaceinfo">overridden in <code><a href="nltk.cluster.em.EMClusterer.html" class="internal-link">nltk.cluster.em.EMClusterer</a></code>, <code><a href="nltk.cluster.gaac.GAAClusterer.html" class="internal-link">nltk.cluster.gaac.GAAClusterer</a></code>, <code><a href="nltk.cluster.kmeans.KMeansClusterer.html" class="internal-link">nltk.cluster.kmeans.KMeansClusterer</a></code></div>
     
-    <div><table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">normalise:</span>boolean</td><td class="fieldArgDesc">should vectors be normalised to length 1</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">svd_dimensions:</span>int</td><td class="fieldArgDesc">number of dimensions to use in reducing vector
+    <div><table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">normalise:</span>boolean</td><td class="fieldArgDesc">should vectors be normalised to length 1</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">svd​_dimensions:</span>int</td><td class="fieldArgDesc">number of dimensions to use in reducing vector
 dimensionsionality with SVD</td></tr></table></div>
   </div>
 </div><div class="basemethod">
@@ -279,7 +292,7 @@ dimensionsionality with SVD</td></tr></table></div>
     </a>
   </div>
   <div class="docstring functionBody">
-    <div class="interfaceinfo">overrides <code><a href="nltk.cluster.api.ClusterI.html#classify">nltk.cluster.api.ClusterI.classify</a></code></div>
+    <div class="interfaceinfo">overrides <code><a href="nltk.cluster.api.ClusterI.html#classify" class="internal-link">nltk.cluster.api.ClusterI.classify</a></code></div>
     
     <div>Classifies the token into a cluster, setting the token's CLUSTER
 parameter to that cluster identifier.</div>
@@ -302,7 +315,7 @@ parameter to that cluster identifier.</div>
     </a>
   </div>
   <div class="docstring functionBody">
-    <div class="interfaceinfo">overridden in <code><a href="nltk.cluster.em.EMClusterer.html">nltk.cluster.em.EMClusterer</a></code>, <code><a href="nltk.cluster.gaac.GAAClusterer.html">nltk.cluster.gaac.GAAClusterer</a></code>, <code><a href="nltk.cluster.kmeans.KMeansClusterer.html">nltk.cluster.kmeans.KMeansClusterer</a></code></div>
+    <div class="interfaceinfo">overridden in <code><a href="nltk.cluster.em.EMClusterer.html" class="internal-link">nltk.cluster.em.EMClusterer</a></code>, <code><a href="nltk.cluster.gaac.GAAClusterer.html" class="internal-link">nltk.cluster.gaac.GAAClusterer</a></code>, <code><a href="nltk.cluster.kmeans.KMeansClusterer.html" class="internal-link">nltk.cluster.kmeans.KMeansClusterer</a></code></div>
     
     <div>Returns the index of the appropriate cluster for the vector.</div>
   </div>
@@ -324,7 +337,7 @@ parameter to that cluster identifier.</div>
     </a>
   </div>
   <div class="docstring functionBody">
-    <div class="interfaceinfo">overrides <code><a href="nltk.cluster.api.ClusterI.html#cluster">nltk.cluster.api.ClusterI.cluster</a></code></div><div class="interfaceinfo">overridden in <code><a href="nltk.cluster.gaac.GAAClusterer.html">nltk.cluster.gaac.GAAClusterer</a></code></div>
+    <div class="interfaceinfo">overrides <code><a href="nltk.cluster.api.ClusterI.html#cluster" class="internal-link">nltk.cluster.api.ClusterI.cluster</a></code></div><div class="interfaceinfo">overridden in <code><a href="nltk.cluster.gaac.GAAClusterer.html" class="internal-link">nltk.cluster.gaac.GAAClusterer</a></code></div>
     
     <div>Assigns the vectors to clusters, learning the clustering parameters
 from the data. Returns a cluster identifier for each vector.</div>
@@ -347,7 +360,7 @@ from the data. Returns a cluster identifier for each vector.</div>
     </a>
   </div>
   <div class="docstring functionBody">
-    <div class="interfaceinfo">overridden in <code><a href="nltk.cluster.em.EMClusterer.html">nltk.cluster.em.EMClusterer</a></code>, <code><a href="nltk.cluster.gaac.GAAClusterer.html">nltk.cluster.gaac.GAAClusterer</a></code>, <code><a href="nltk.cluster.kmeans.KMeansClusterer.html">nltk.cluster.kmeans.KMeansClusterer</a></code></div>
+    <div class="interfaceinfo">overridden in <code><a href="nltk.cluster.em.EMClusterer.html" class="internal-link">nltk.cluster.em.EMClusterer</a></code>, <code><a href="nltk.cluster.gaac.GAAClusterer.html" class="internal-link">nltk.cluster.gaac.GAAClusterer</a></code>, <code><a href="nltk.cluster.kmeans.KMeansClusterer.html" class="internal-link">nltk.cluster.kmeans.KMeansClusterer</a></code></div>
     
     <div>Finds the clusters using the given set of vectors.</div>
   </div>
@@ -369,7 +382,7 @@ from the data. Returns a cluster identifier for each vector.</div>
     </a>
   </div>
   <div class="docstring functionBody">
-    <div class="interfaceinfo">overrides <code><a href="nltk.cluster.api.ClusterI.html#likelihood">nltk.cluster.api.ClusterI.likelihood</a></code></div>
+    <div class="interfaceinfo">overrides <code><a href="nltk.cluster.api.ClusterI.html#likelihood" class="internal-link">nltk.cluster.api.ClusterI.likelihood</a></code></div>
     
     <div>Returns the likelihood (a float) of the token having the
 corresponding cluster.</div>
@@ -392,7 +405,7 @@ corresponding cluster.</div>
     </a>
   </div>
   <div class="docstring functionBody">
-    <div class="interfaceinfo">overridden in <code><a href="nltk.cluster.em.EMClusterer.html">nltk.cluster.em.EMClusterer</a></code></div>
+    <div class="interfaceinfo">overridden in <code><a href="nltk.cluster.em.EMClusterer.html" class="internal-link">nltk.cluster.em.EMClusterer</a></code></div>
     
     <div>Returns the likelihood of the vector belonging to the cluster.</div>
   </div>
@@ -461,6 +474,7 @@ corresponding cluster.</div>
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    
   </div>
 </div><div class="baseinstancevariable private">
   
@@ -483,6 +497,7 @@ corresponding cluster.</div>
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    
   </div>
 </div><div class="baseinstancevariable private">
   
@@ -505,6 +520,7 @@ corresponding cluster.</div>
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    
   </div>
 </div>
 
@@ -516,7 +532,7 @@ corresponding cluster.</div>
   <div class="container">
     <a href="index.html">API Documentation</a> for <a href="http://www.nltk.org/" class="projecthome">nltk-3.6.2</a>,
   generated by <a href="https://github.com/twisted/pydoctor/">pydoctor</a>
-    21.2.2 at 2022-01-06 17:36:51.
+    22.2.2.dev0 at 2022-03-04 05:57:24.
   </div>
 </footer>
 

@@ -7,7 +7,7 @@
   <head>
     
     <title>nltk.tag.hmm.HiddenMarkovModelTagger</title>
-    <meta name="generator" content="pydoctor 21.2.2"> 
+    <meta name="generator" content="pydoctor 22.2.2.dev0"> 
         
     </meta>
     <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
@@ -44,69 +44,82 @@
           Names
         </a>
 
-        <form action="search-results.html" id="search-box-container">
+        <div id="search-box-container">
           <div class="input-group">
-            <input id="search-box" name="search-query" placeholder="Search..." aria-label="Search" minlength="2" class="form-control" />
+            <input id="search-box" type="search" name="search-query" placeholder="Search..." aria-label="Search" minlength="2" class="form-control" autocomplete="off" />
+            
             <span class="input-group-btn">
-              <button class="btn btn-default" type="submit" title="Search"><img src="fonts/search.svg" alt="Search!" /></button>
-              <a class="btn btn-default" id="search-help-button" title="Help" onclick="toggleSearchHelpText()"><img src="fonts/info.svg" alt="Help!" /></a>
+              <a style="display: none;" class="btn btn-default" id="search-clear-button" title="Clear" onclick="clearSearch()"><img src="fonts/x-circle.svg" alt="Clear" /></a>
+              <a class="btn btn-default" id="search-help-button" title="Help" onclick="toggleSearchHelpText()"><img src="fonts/info.svg" alt="Help" /></a>
             </span>
           </div>
-        </form>
+        </div>
 
-        <div class="rst-admonition hint" id="search-help-box">
+      </div>
+
+      <div id="search-results-container" style="display: none;">
+        <div>
+          <span class="label label-default" id="search-docstrings-button">
+            <a title="Search in docstrings" onclick="toggleSearchInDocstrings()">search in docstrings</a></span>
+        </div>
+
+        <noscript>
+            <h1>Cannot search: JavaScript is not supported/enabled in your browser.</h1>
+        </noscript>
+
+        <div class="hint" id="search-help-box">
           <p class="rst-last">
       
             Search bar offers the following options:
             <ul>   
                 <li>
                   <strong>Term presence.</strong> The below example searches for documents that 
-                    must contain “foo”, might contain “bar” and must not contain “baz”:
-                  <br /> <code>'+foo bar -baz'</code>
+                    must contain “foo”, might contain “bar” and must not contain “baz”: <code>+foo bar -baz</code>
                 </li> 
 
                 <li>
-                  <strong>Wildcards.</strong> The below example searches for documents with words beginning with “foo”:
-                  <br /> <code>'foo*'</code>
+                  <strong>Wildcards.</strong> The below example searches for documents with words beginning with “foo”: <code>foo*</code>
                 </li> 
 
                 <li>
-                  <strong>Search in specific fields.</strong> The following search matches all documents 
-                  that contains "foo" in their full dotted name and with “bar” in any field:
-                  <br /> <code>'+fullName:*foo* +bar'</code>
+                  <strong>Search in specific fields.</strong> The following search matches all objects 
+                  in "twisted.mail" that matches “search”: <code>+qname:twisted.mail.* +search</code>
 
                   <p>
-                    Possible fields: 'name', 'docstring', 'fullName'.
+                    Possible fields: 'name', 'qname' (fully qualified name), 'docstring', and 'kind'.
+                    Last two fields are only applicable if "search in docstrings" is enabled.
                   </p>
                 </li>
 
                 <li>
                   <strong>Fuzzy matches.</strong> The following search matches all documents 
-                  that have a word within 1 edit distance of “foo”:
-                  <br /> <code>'foo~1'</code>
+                  that have a word within 1 edit distance of “foo”: <code>foo~1</code>
                 </li>
             </ul>
 
           </p>
         </div>
 
-      </div>
+        <div id="search-status"> </div>
+        
+        <div class="warning" id="search-warn-box" style="display: none;">
+          <p class="rst-last"><span id="search-warn"></span></p>
+        </div>
 
+        <table id="search-results">
+          <!-- Filled dynamically by JS -->
+        </table>
+        
+        <div style="margin-top: 8px;">
+          <p>Results provided by <a href="https://lunrjs.com">Lunr.js</a></p>
+        </div>
+      </div>
 
     </div>
   </div>
 
-  <script>
- 
-    function toggleSearchHelpText() {
-        document.body.classList.toggle("search-help-hidden");
-    }
-    // Init search and help text
-    document.getElementById('search-box-container').style.display = 'block';
-    document.getElementById('search-help-box').style.display = 'block';
-    document.body.classList.add("search-help-hidden");
-
-  </script>
+  <script src="ajax.js" type="text/javascript"></script>
+  <script src="search.js" type="text/javascript"></script>
 
 </nav>
 
@@ -115,7 +128,7 @@
     <div class="container">
 
       <div class="page-header">
-        <h1 class="class"><code><code><a href="nltk.html">nltk</a></code><wbr></wbr>.<code><a href="nltk.tag.html">tag</a></code><wbr></wbr>.<code><a href="nltk.tag.hmm.html">hmm</a></code><wbr></wbr>.<code><a href="nltk.tag.hmm.HiddenMarkovModelTagger.html">HiddenMarkovModelTagger</a></code></code></h1>
+        <h1 class="class"><code><code><a href="index.html" class="internal-link">nltk</a></code><wbr></wbr>.<code><a href="nltk.tag.html" class="internal-link" title="nltk.tag">tag</a></code><wbr></wbr>.<code><a href="nltk.tag.hmm.html" class="internal-link" title="nltk.tag.hmm">hmm</a></code><wbr></wbr>.<code><a href="nltk.tag.hmm.HiddenMarkovModelTagger.html" class="internal-link" title="nltk.tag.hmm.HiddenMarkovModelTagger">HiddenMarkovModelTagger</a></code></code></h1>
         <div id="showPrivate">
           <button class="btn btn-link" onclick="togglePrivate()">Toggle Private API</button>
         </div>
@@ -126,7 +139,7 @@
       </div>
 
       <div class="extrasDocstring">
-        <p><code><span class="py-keyword">class</span> <span class="py-defname">HiddenMarkovModelTagger</span>(<a href="nltk.tag.api.TaggerI.html" title="nltk.tag.api.TaggerI">TaggerI</a>): <a href="https://github.com/nltk/nltk/tree/3.6.2/nltk/tag/hmm.py#L104" class="sourceLink">(source)</a></code></p>
+        <p><code><span class="py-keyword">class</span> <span class="py-defname">HiddenMarkovModelTagger</span>(<a href="nltk.tag.api.TaggerI.html" class="internal-link" title="nltk.tag.api.TaggerI">TaggerI</a>): <a href="https://github.com/nltk/nltk/tree/3.6.2/nltk/tag/hmm.py#L104" class="sourceLink">(source)</a></code></p>
         <p><a href="classIndex.html#nltk.tag.hmm.HiddenMarkovModelTagger">View In Hierarchy</a></p>
       </div>
 
@@ -159,178 +172,178 @@ instances, defaults to the identity function.</td></tr></table></div>
   <tr class="classmethod">
     
     <td>Class Method</td>
-    <td><code><a href="#train">train</a></code></td>
-    <td><span>Train a new HiddenMarkovModelTagger using the given labeled and unlabeled training instances. Testing will be performed if test instances are provided.</span></td>
+    <td><code><a href="#train" class="internal-link" title="nltk.tag.hmm.HiddenMarkovModelTagger.train">train</a></code></td>
+    <td>Train a new HiddenMarkovModelTagger using the given labeled and unlabeled training instances. Testing will be performed if test instances are provided.</td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#__init__">__init__</a></code></td>
+    <td><code><a href="#__init__" class="internal-link" title="nltk.tag.hmm.HiddenMarkovModelTagger.__init__">__init__</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#__repr__">__repr__</a></code></td>
+    <td><code><a href="#__repr__" class="internal-link" title="nltk.tag.hmm.HiddenMarkovModelTagger.__repr__">__repr__</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#best_path">best_path</a></code></td>
-    <td><span>Returns the state sequence of the optimal (most probable) path through the HMM. Uses the Viterbi algorithm to calculate this part by dynamic programming.</span></td>
+    <td><code><a href="#best_path" class="internal-link" title="nltk.tag.hmm.HiddenMarkovModelTagger.best_path">best​_path</a></code></td>
+    <td>Returns the state sequence of the optimal (most probable) path through the HMM. Uses the Viterbi algorithm to calculate this part by dynamic programming.</td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#best_path_simple">best_path_simple</a></code></td>
+    <td><code><a href="#best_path_simple" class="internal-link" title="nltk.tag.hmm.HiddenMarkovModelTagger.best_path_simple">best​_path​_simple</a></code></td>
     <td><span class="undocumented">No summary</span></td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#entropy">entropy</a></code></td>
-    <td><span>Returns the entropy over labellings of the given sequence. This is given by:</span></td>
+    <td><code><a href="#entropy" class="internal-link" title="nltk.tag.hmm.HiddenMarkovModelTagger.entropy">entropy</a></code></td>
+    <td>Returns the entropy over labellings of the given sequence. This is given by:</td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#log_probability">log_probability</a></code></td>
+    <td><code><a href="#log_probability" class="internal-link" title="nltk.tag.hmm.HiddenMarkovModelTagger.log_probability">log​_probability</a></code></td>
     <td><span class="undocumented">No summary</span></td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#point_entropy">point_entropy</a></code></td>
-    <td><span>Returns the pointwise entropy over the possible states at each position in the chain, given the observation sequence.</span></td>
+    <td><code><a href="#point_entropy" class="internal-link" title="nltk.tag.hmm.HiddenMarkovModelTagger.point_entropy">point​_entropy</a></code></td>
+    <td>Returns the pointwise entropy over the possible states at each position in the chain, given the observation sequence.</td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#probability">probability</a></code></td>
+    <td><code><a href="#probability" class="internal-link" title="nltk.tag.hmm.HiddenMarkovModelTagger.probability">probability</a></code></td>
     <td><span class="undocumented">No summary</span></td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#random_sample">random_sample</a></code></td>
+    <td><code><a href="#random_sample" class="internal-link" title="nltk.tag.hmm.HiddenMarkovModelTagger.random_sample">random​_sample</a></code></td>
     <td><span class="undocumented">No summary</span></td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#reset_cache">reset_cache</a></code></td>
+    <td><code><a href="#reset_cache" class="internal-link" title="nltk.tag.hmm.HiddenMarkovModelTagger.reset_cache">reset​_cache</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#tag">tag</a></code></td>
-    <td><span>Tags the sequence with the highest probability state sequence. This uses the best_path method to find the Viterbi path.</span></td>
+    <td><code><a href="#tag" class="internal-link" title="nltk.tag.hmm.HiddenMarkovModelTagger.tag">tag</a></code></td>
+    <td>Tags the sequence with the highest probability state sequence. This uses the best_path method to find the Viterbi path.</td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#test">test</a></code></td>
-    <td><span>Tests the HiddenMarkovModelTagger instance.</span></td>
+    <td><code><a href="#test" class="internal-link" title="nltk.tag.hmm.HiddenMarkovModelTagger.test">test</a></code></td>
+    <td>Tests the HiddenMarkovModelTagger instance.</td>
   </tr><tr class="classmethod private">
     
     <td>Class Method</td>
-    <td><code><a href="#_train">_train</a></code></td>
+    <td><code><a href="#_train" class="internal-link" title="nltk.tag.hmm.HiddenMarkovModelTagger._train">_train</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method private">
     
     <td>Method</td>
-    <td><code><a href="#_backward_probability">_backward_probability</a></code></td>
+    <td><code><a href="#_backward_probability" class="internal-link" title="nltk.tag.hmm.HiddenMarkovModelTagger._backward_probability">_backward​_probability</a></code></td>
     <td><span class="undocumented">No summary</span></td>
   </tr><tr class="method private">
     
     <td>Method</td>
-    <td><code><a href="#_best_path">_best_path</a></code></td>
+    <td><code><a href="#_best_path" class="internal-link" title="nltk.tag.hmm.HiddenMarkovModelTagger._best_path">_best​_path</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method private">
     
     <td>Method</td>
-    <td><code><a href="#_best_path_simple">_best_path_simple</a></code></td>
+    <td><code><a href="#_best_path_simple" class="internal-link" title="nltk.tag.hmm.HiddenMarkovModelTagger._best_path_simple">_best​_path​_simple</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method private">
     
     <td>Method</td>
-    <td><code><a href="#_create_cache">_create_cache</a></code></td>
-    <td><span>The cache is a tuple (P, O, X, S) where:</span></td>
+    <td><code><a href="#_create_cache" class="internal-link" title="nltk.tag.hmm.HiddenMarkovModelTagger._create_cache">_create​_cache</a></code></td>
+    <td>The cache is a tuple (P, O, X, S) where:</td>
   </tr><tr class="method private">
     
     <td>Method</td>
-    <td><code><a href="#_exhaustive_entropy">_exhaustive_entropy</a></code></td>
+    <td><code><a href="#_exhaustive_entropy" class="internal-link" title="nltk.tag.hmm.HiddenMarkovModelTagger._exhaustive_entropy">_exhaustive​_entropy</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method private">
     
     <td>Method</td>
-    <td><code><a href="#_exhaustive_point_entropy">_exhaustive_point_entropy</a></code></td>
+    <td><code><a href="#_exhaustive_point_entropy" class="internal-link" title="nltk.tag.hmm.HiddenMarkovModelTagger._exhaustive_point_entropy">_exhaustive​_point​_entropy</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method private">
     
     <td>Method</td>
-    <td><code><a href="#_forward_probability">_forward_probability</a></code></td>
+    <td><code><a href="#_forward_probability" class="internal-link" title="nltk.tag.hmm.HiddenMarkovModelTagger._forward_probability">_forward​_probability</a></code></td>
     <td><span class="undocumented">No summary</span></td>
   </tr><tr class="method private">
     
     <td>Method</td>
-    <td><code><a href="#_output_logprob">_output_logprob</a></code></td>
-    <td><span></span></td>
+    <td><code><a href="#_output_logprob" class="internal-link" title="nltk.tag.hmm.HiddenMarkovModelTagger._output_logprob">_output​_logprob</a></code></td>
+    <td></td>
   </tr><tr class="method private">
     
     <td>Method</td>
-    <td><code><a href="#_outputs_vector">_outputs_vector</a></code></td>
-    <td><span>Return a vector with log probabilities of emitting a symbol when entering states.</span></td>
+    <td><code><a href="#_outputs_vector" class="internal-link" title="nltk.tag.hmm.HiddenMarkovModelTagger._outputs_vector">_outputs​_vector</a></code></td>
+    <td>Return a vector with log probabilities of emitting a symbol when entering states.</td>
   </tr><tr class="method private">
     
     <td>Method</td>
-    <td><code><a href="#_sample_probdist">_sample_probdist</a></code></td>
-    <td><span class="undocumented">Undocumented</span></td>
-  </tr><tr class="method private">
-    
-    <td>Method</td>
-    <td><code><a href="#_tag">_tag</a></code></td>
+    <td><code><a href="#_sample_probdist" class="internal-link" title="nltk.tag.hmm.HiddenMarkovModelTagger._sample_probdist">_sample​_probdist</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method private">
     
     <td>Method</td>
-    <td><code><a href="#_transitions_matrix">_transitions_matrix</a></code></td>
-    <td><span>Return a matrix of transition log probabilities.</span></td>
+    <td><code><a href="#_tag" class="internal-link" title="nltk.tag.hmm.HiddenMarkovModelTagger._tag">_tag</a></code></td>
+    <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method private">
     
     <td>Method</td>
-    <td><code><a href="#_update_cache">_update_cache</a></code></td>
+    <td><code><a href="#_transitions_matrix" class="internal-link" title="nltk.tag.hmm.HiddenMarkovModelTagger._transitions_matrix">_transitions​_matrix</a></code></td>
+    <td>Return a matrix of transition log probabilities.</td>
+  </tr><tr class="method private">
+    
+    <td>Method</td>
+    <td><code><a href="#_update_cache" class="internal-link" title="nltk.tag.hmm.HiddenMarkovModelTagger._update_cache">_update​_cache</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="instancevariable private">
     
     <td>Instance Variable</td>
-    <td><code><a href="#_cache">_cache</a></code></td>
+    <td><code><a href="#_cache" class="internal-link" title="nltk.tag.hmm.HiddenMarkovModelTagger._cache">_cache</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="instancevariable private">
     
     <td>Instance Variable</td>
-    <td><code><a href="#_outputs">_outputs</a></code></td>
+    <td><code><a href="#_outputs" class="internal-link" title="nltk.tag.hmm.HiddenMarkovModelTagger._outputs">_outputs</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="instancevariable private">
     
     <td>Instance Variable</td>
-    <td><code><a href="#_priors">_priors</a></code></td>
+    <td><code><a href="#_priors" class="internal-link" title="nltk.tag.hmm.HiddenMarkovModelTagger._priors">_priors</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="instancevariable private">
     
     <td>Instance Variable</td>
-    <td><code><a href="#_states">_states</a></code></td>
+    <td><code><a href="#_states" class="internal-link" title="nltk.tag.hmm.HiddenMarkovModelTagger._states">_states</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="instancevariable private">
     
     <td>Instance Variable</td>
-    <td><code><a href="#_symbols">_symbols</a></code></td>
+    <td><code><a href="#_symbols" class="internal-link" title="nltk.tag.hmm.HiddenMarkovModelTagger._symbols">_symbols</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="instancevariable private">
     
     <td>Instance Variable</td>
-    <td><code><a href="#_transform">_transform</a></code></td>
+    <td><code><a href="#_transform" class="internal-link" title="nltk.tag.hmm.HiddenMarkovModelTagger._transform">_transform</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="instancevariable private">
     
     <td>Instance Variable</td>
-    <td><code><a href="#_transitions">_transitions</a></code></td>
+    <td><code><a href="#_transitions" class="internal-link" title="nltk.tag.hmm.HiddenMarkovModelTagger._transitions">_transitions</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr>
 </table>
         
           <p class="inheritedFrom">
-            Inherited from <code><a href="nltk.tag.api.TaggerI.html">TaggerI</a></code>:
+            Inherited from <code><a href="nltk.tag.api.TaggerI.html" class="internal-link" title="nltk.tag.api.TaggerI">TaggerI</a></code>:
           </p>
           <table class="children sortable" id="id1559">
   
@@ -338,17 +351,17 @@ instances, defaults to the identity function.</td></tr></table></div>
   <tr class="basemethod">
     
     <td>Method</td>
-    <td><code><a href="nltk.tag.api.TaggerI.html#evaluate">evaluate</a></code></td>
-    <td><span>Score the accuracy of the tagger against the gold standard. Strip the tags from the gold standard text, retag it using the tagger, then compute the accuracy score.</span></td>
+    <td><code><a href="nltk.tag.api.TaggerI.html#evaluate" class="internal-link" title="nltk.tag.api.TaggerI.evaluate">evaluate</a></code></td>
+    <td>Score the accuracy of the tagger against the gold standard. Strip the tags from the gold standard text, retag it using the tagger, then compute the accuracy score.</td>
   </tr><tr class="basemethod">
     
     <td>Method</td>
-    <td><code><a href="nltk.tag.api.TaggerI.html#tag_sents">tag_sents</a></code></td>
-    <td><span>Apply <tt class="rst-docutils literal">self.tag()</tt> to each element of <em>sentences</em>.  I.e.:</span></td>
+    <td><code><a href="nltk.tag.api.TaggerI.html#tag_sents" class="internal-link" title="nltk.tag.api.TaggerI.tag_sents">tag​_sents</a></code></td>
+    <td>Apply <tt class="rst-docutils literal">self.tag()</tt> to each element of <em>sentences</em>.  I.e.:</td>
   </tr><tr class="basemethod private">
     
     <td>Method</td>
-    <td><code><a href="nltk.tag.api.TaggerI.html#_check_params">_check_params</a></code></td>
+    <td><code><a href="nltk.tag.api.TaggerI.html#_check_params" class="internal-link" title="nltk.tag.api.TaggerI._check_params">_check​_params</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr>
 </table>
@@ -381,13 +394,13 @@ instances, defaults to the identity function.</td></tr></table></div>
     
     <div>Train a new HiddenMarkovModelTagger using the given labeled and
 unlabeled training instances. Testing will be performed if test
-instances are provided.<table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">labeled_sequence:</span>list(list)</td><td class="fieldArgDesc">a sequence of labeled training instances,
-i.e. a list of sentences represented as tuples</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">test_sequence:</span>list(list)</td><td class="fieldArgDesc">a sequence of labeled test instances</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">unlabeled_sequence:</span>list(list)</td><td class="fieldArgDesc">a sequence of unlabeled training instances,
-i.e. a list of sentences represented as words</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">kwargs</span></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">transform:</span>function</td><td class="fieldArgDesc">an optional function for transforming training
+instances are provided.<table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">labeled​_sequence:</span>list(list)</td><td class="fieldArgDesc">a sequence of labeled training instances,
+i.e. a list of sentences represented as tuples</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">test​_sequence:</span>list(list)</td><td class="fieldArgDesc">a sequence of labeled test instances</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">unlabeled​_sequence:</span>list(list)</td><td class="fieldArgDesc">a sequence of unlabeled training instances,
+i.e. a list of sentences represented as words</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">**kwargs</span></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">transform:</span>function</td><td class="fieldArgDesc">an optional function for transforming training
 instances, defaults to the identity function, see <tt class="rst-docutils literal">transform()</tt></td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">estimator:</span>class or function</td><td class="fieldArgDesc">an optional function or class that maps a
 condition's frequency distribution to its probability
 distribution, defaults to a Lidstone distribution with gamma = 0.1</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">verbose:</span>bool</td><td class="fieldArgDesc">boolean flag indicating whether training should be
-verbose or include printed output</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">max_iterations:</span>int</td><td class="fieldArgDesc">number of Baum-Welch interations to perform</td></tr><tr class="fieldStart"><td class="fieldName" colspan="2">Returns</td></tr><tr><td class="fieldArgContainer">HiddenMarkovModelTagger</td><td class="fieldArgDesc">a hidden markov model tagger</td></tr></table></div>
+verbose or include printed output</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">max​_iterations:</span>int</td><td class="fieldArgDesc">number of Baum-Welch interations to perform</td></tr><tr class="fieldStart"><td class="fieldName" colspan="2">Returns</td></tr><tr><td class="fieldArgContainer">HiddenMarkovModelTagger</td><td class="fieldArgDesc">a hidden markov model tagger</td></tr></table></div>
   </div>
 </div><div class="basemethod">
   
@@ -400,7 +413,7 @@ verbose or include printed output</td></tr><tr><td class="fieldArgContainer"><sp
   </a>
   <div class="functionHeader">
     
-    <span class="py-keyword">def</span> <span class="py-defname">__init__</span>(self, symbols, states, transitions, outputs, priors, transform=_identity):
+    <span class="py-keyword">def</span> <span class="py-defname">__init__</span>(self, symbols, states, transitions, outputs, priors, transform=<a href="nltk.tag.hmm.html#_identity" class="internal-link" title="nltk.tag.hmm._identity">_identity</a>):
     <a class="sourceLink" href="https://github.com/nltk/nltk/tree/3.6.2/nltk/tag/hmm.py#L140">
       
       (source)
@@ -455,7 +468,7 @@ verbose or include printed output</td></tr><tr><td class="fieldArgContainer"><sp
     
     <div>Returns the state sequence of the optimal (most probable) path through
 the HMM. Uses the Viterbi algorithm to calculate this part by dynamic
-programming.<table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">unlabeled_sequence:</span>list</td><td class="fieldArgDesc">the sequence of unlabeled symbols</td></tr><tr class="fieldStart"><td class="fieldName" colspan="2">Returns</td></tr><tr><td class="fieldArgContainer">sequence of any</td><td class="fieldArgDesc">the state sequence</td></tr></table></div>
+programming.<table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">unlabeled​_sequence:</span>list</td><td class="fieldArgDesc">the sequence of unlabeled symbols</td></tr><tr class="fieldStart"><td class="fieldName" colspan="2">Returns</td></tr><tr><td class="fieldArgContainer">sequence of any</td><td class="fieldArgDesc">the state sequence</td></tr></table></div>
   </div>
 </div><div class="basemethod">
   
@@ -480,7 +493,7 @@ programming.<table class="fieldTable"><tr class="fieldStart"><td class="fieldNam
     <div>Returns the state sequence of the optimal (most probable) path through
 the HMM. Uses the Viterbi algorithm to calculate this part by dynamic
 programming.  This uses a simple, direct method, and is included for
-teaching purposes.<table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">unlabeled_sequence:</span>list</td><td class="fieldArgDesc">the sequence of unlabeled symbols</td></tr><tr class="fieldStart"><td class="fieldName" colspan="2">Returns</td></tr><tr><td class="fieldArgContainer">sequence of any</td><td class="fieldArgDesc">the state sequence</td></tr></table></div>
+teaching purposes.<table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">unlabeled​_sequence:</span>list</td><td class="fieldArgDesc">the sequence of unlabeled symbols</td></tr><tr class="fieldStart"><td class="fieldName" colspan="2">Returns</td></tr><tr><td class="fieldArgContainer">sequence of any</td><td class="fieldArgDesc">the state sequence</td></tr></table></div>
   </div>
 </div><div class="basemethod">
   
@@ -674,10 +687,10 @@ respectively.</td></tr></table></div>
     </a>
   </div>
   <div class="docstring functionBody">
-    <div class="interfaceinfo">overrides <code><a href="nltk.tag.api.TaggerI.html#tag">nltk.tag.api.TaggerI.tag</a></code></div>
+    <div class="interfaceinfo">overrides <code><a href="nltk.tag.api.TaggerI.html#tag" class="internal-link">nltk.tag.api.TaggerI.tag</a></code></div>
     
     <div>Tags the sequence with the highest probability state sequence. This
-uses the best_path method to find the Viterbi path.<table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">unlabeled_sequence:</span>list</td><td class="fieldArgDesc">the sequence of unlabeled symbols</td></tr><tr class="fieldStart"><td class="fieldName" colspan="2">Returns</td></tr><tr><td class="fieldArgContainer">list</td><td class="fieldArgDesc">a labelled sequence of symbols</td></tr></table></div>
+uses the best_path method to find the Viterbi path.<table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">unlabeled​_sequence:</span>list</td><td class="fieldArgDesc">the sequence of unlabeled symbols</td></tr><tr class="fieldStart"><td class="fieldName" colspan="2">Returns</td></tr><tr><td class="fieldArgContainer">list</td><td class="fieldArgDesc">a labelled sequence of symbols</td></tr></table></div>
   </div>
 </div><div class="basemethod">
   
@@ -699,8 +712,8 @@ uses the best_path method to find the Viterbi path.<table class="fieldTable"><tr
   <div class="docstring functionBody">
     
     
-    <div>Tests the HiddenMarkovModelTagger instance.<table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">test_sequence:</span>list(list)</td><td class="fieldArgDesc">a sequence of labeled test instances</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">verbose:</span>bool</td><td class="fieldArgDesc">boolean flag indicating whether training should be
-verbose or include printed output</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">kwargs</span></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr></table></div>
+    <div>Tests the HiddenMarkovModelTagger instance.<table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">test​_sequence:</span>list(list)</td><td class="fieldArgDesc">a sequence of labeled test instances</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">verbose:</span>bool</td><td class="fieldArgDesc">boolean flag indicating whether training should be
+verbose or include printed output</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">**kwargs</span></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr></table></div>
   </div>
 </div><div class="baseclassmethod private">
   
@@ -713,7 +726,7 @@ verbose or include printed output</td></tr><tr><td class="fieldArgContainer"><sp
   </a>
   <div class="functionHeader">
     @classmethod<br />
-    <span class="py-keyword">def</span> <span class="py-defname">_train</span>(cls, labeled_sequence, test_sequence=None, unlabeled_sequence=None, transform=_identity, estimator=None, **kwargs):
+    <span class="py-keyword">def</span> <span class="py-defname">_train</span>(cls, labeled_sequence, test_sequence=None, unlabeled_sequence=None, transform=<a href="nltk.tag.hmm.html#_identity" class="internal-link" title="nltk.tag.hmm._identity">_identity</a>, estimator=None, **kwargs):
     <a class="sourceLink" href="https://github.com/nltk/nltk/tree/3.6.2/nltk/tag/hmm.py#L151">
       
       (source)
@@ -748,7 +761,7 @@ verbose or include printed output</td></tr><tr><td class="fieldArgContainer"><sp
 log-probabilities, where T is the length of the sequence and N is the
 number of states. Each entry (t, s) gives the probability of being in
 state s at time t after observing the partial symbol sequence from t
-.. T.<table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">unlabeled_sequence:</span>list</td><td class="fieldArgDesc">the sequence of unlabeled symbols</td></tr><tr class="fieldStart"><td class="fieldName" colspan="2">Returns</td></tr><tr><td class="fieldArgContainer">array</td><td class="fieldArgDesc">the backward log probability matrix</td></tr></table></div>
+.. T.<table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">unlabeled​_sequence:</span>list</td><td class="fieldArgDesc">the sequence of unlabeled symbols</td></tr><tr class="fieldStart"><td class="fieldName" colspan="2">Returns</td></tr><tr><td class="fieldArgContainer">array</td><td class="fieldArgDesc">the backward log probability matrix</td></tr></table></div>
   </div>
 </div><div class="basemethod private">
   
@@ -911,7 +924,7 @@ P[i] = log( P(tag[0]=state[i]) )
 log-probabilities, where T is the length of the sequence and N is the
 number of states. Each entry (t, s) gives the probability of being in
 state s at time t after observing the partial symbol sequence up to
-and including t.<table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">unlabeled_sequence:</span>list</td><td class="fieldArgDesc">the sequence of unlabeled symbols</td></tr><tr class="fieldStart"><td class="fieldName" colspan="2">Returns</td></tr><tr><td class="fieldArgContainer">array</td><td class="fieldArgDesc">the forward log probability matrix</td></tr></table></div>
+and including t.<table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">unlabeled​_sequence:</span>list</td><td class="fieldArgDesc">the sequence of unlabeled symbols</td></tr><tr class="fieldStart"><td class="fieldName" colspan="2">Returns</td></tr><tr><td class="fieldArgContainer">array</td><td class="fieldArgDesc">the forward log probability matrix</td></tr></table></div>
   </div>
 </div><div class="basemethod private">
   
@@ -1068,6 +1081,7 @@ when entering states.</div>
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    
   </div>
 </div><div class="baseinstancevariable private">
   
@@ -1090,6 +1104,7 @@ when entering states.</div>
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    
   </div>
 </div><div class="baseinstancevariable private">
   
@@ -1112,6 +1127,7 @@ when entering states.</div>
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    
   </div>
 </div><div class="baseinstancevariable private">
   
@@ -1134,6 +1150,7 @@ when entering states.</div>
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    
   </div>
 </div><div class="baseinstancevariable private">
   
@@ -1156,6 +1173,7 @@ when entering states.</div>
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    
   </div>
 </div><div class="baseinstancevariable private">
   
@@ -1178,6 +1196,7 @@ when entering states.</div>
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    
   </div>
 </div><div class="baseinstancevariable private">
   
@@ -1200,6 +1219,7 @@ when entering states.</div>
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    
   </div>
 </div>
 
@@ -1211,7 +1231,7 @@ when entering states.</div>
   <div class="container">
     <a href="index.html">API Documentation</a> for <a href="http://www.nltk.org/" class="projecthome">nltk-3.6.2</a>,
   generated by <a href="https://github.com/twisted/pydoctor/">pydoctor</a>
-    21.2.2 at 2022-01-06 17:36:51.
+    22.2.2.dev0 at 2022-03-04 05:57:24.
   </div>
 </footer>
 

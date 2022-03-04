@@ -7,7 +7,7 @@
   <head>
     
     <title>nltk.parse.stanford.GenericStanfordParser</title>
-    <meta name="generator" content="pydoctor 21.2.2"> 
+    <meta name="generator" content="pydoctor 22.2.2.dev0"> 
         
     </meta>
     <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
@@ -44,69 +44,82 @@
           Names
         </a>
 
-        <form action="search-results.html" id="search-box-container">
+        <div id="search-box-container">
           <div class="input-group">
-            <input id="search-box" name="search-query" placeholder="Search..." aria-label="Search" minlength="2" class="form-control" />
+            <input id="search-box" type="search" name="search-query" placeholder="Search..." aria-label="Search" minlength="2" class="form-control" autocomplete="off" />
+            
             <span class="input-group-btn">
-              <button class="btn btn-default" type="submit" title="Search"><img src="fonts/search.svg" alt="Search!" /></button>
-              <a class="btn btn-default" id="search-help-button" title="Help" onclick="toggleSearchHelpText()"><img src="fonts/info.svg" alt="Help!" /></a>
+              <a style="display: none;" class="btn btn-default" id="search-clear-button" title="Clear" onclick="clearSearch()"><img src="fonts/x-circle.svg" alt="Clear" /></a>
+              <a class="btn btn-default" id="search-help-button" title="Help" onclick="toggleSearchHelpText()"><img src="fonts/info.svg" alt="Help" /></a>
             </span>
           </div>
-        </form>
+        </div>
 
-        <div class="rst-admonition hint" id="search-help-box">
+      </div>
+
+      <div id="search-results-container" style="display: none;">
+        <div>
+          <span class="label label-default" id="search-docstrings-button">
+            <a title="Search in docstrings" onclick="toggleSearchInDocstrings()">search in docstrings</a></span>
+        </div>
+
+        <noscript>
+            <h1>Cannot search: JavaScript is not supported/enabled in your browser.</h1>
+        </noscript>
+
+        <div class="hint" id="search-help-box">
           <p class="rst-last">
       
             Search bar offers the following options:
             <ul>   
                 <li>
                   <strong>Term presence.</strong> The below example searches for documents that 
-                    must contain “foo”, might contain “bar” and must not contain “baz”:
-                  <br /> <code>'+foo bar -baz'</code>
+                    must contain “foo”, might contain “bar” and must not contain “baz”: <code>+foo bar -baz</code>
                 </li> 
 
                 <li>
-                  <strong>Wildcards.</strong> The below example searches for documents with words beginning with “foo”:
-                  <br /> <code>'foo*'</code>
+                  <strong>Wildcards.</strong> The below example searches for documents with words beginning with “foo”: <code>foo*</code>
                 </li> 
 
                 <li>
-                  <strong>Search in specific fields.</strong> The following search matches all documents 
-                  that contains "foo" in their full dotted name and with “bar” in any field:
-                  <br /> <code>'+fullName:*foo* +bar'</code>
+                  <strong>Search in specific fields.</strong> The following search matches all objects 
+                  in "twisted.mail" that matches “search”: <code>+qname:twisted.mail.* +search</code>
 
                   <p>
-                    Possible fields: 'name', 'docstring', 'fullName'.
+                    Possible fields: 'name', 'qname' (fully qualified name), 'docstring', and 'kind'.
+                    Last two fields are only applicable if "search in docstrings" is enabled.
                   </p>
                 </li>
 
                 <li>
                   <strong>Fuzzy matches.</strong> The following search matches all documents 
-                  that have a word within 1 edit distance of “foo”:
-                  <br /> <code>'foo~1'</code>
+                  that have a word within 1 edit distance of “foo”: <code>foo~1</code>
                 </li>
             </ul>
 
           </p>
         </div>
 
-      </div>
+        <div id="search-status"> </div>
+        
+        <div class="warning" id="search-warn-box" style="display: none;">
+          <p class="rst-last"><span id="search-warn"></span></p>
+        </div>
 
+        <table id="search-results">
+          <!-- Filled dynamically by JS -->
+        </table>
+        
+        <div style="margin-top: 8px;">
+          <p>Results provided by <a href="https://lunrjs.com">Lunr.js</a></p>
+        </div>
+      </div>
 
     </div>
   </div>
 
-  <script>
- 
-    function toggleSearchHelpText() {
-        document.body.classList.toggle("search-help-hidden");
-    }
-    // Init search and help text
-    document.getElementById('search-box-container').style.display = 'block';
-    document.getElementById('search-help-box').style.display = 'block';
-    document.body.classList.add("search-help-hidden");
-
-  </script>
+  <script src="ajax.js" type="text/javascript"></script>
+  <script src="search.js" type="text/javascript"></script>
 
 </nav>
 
@@ -115,7 +128,7 @@
     <div class="container">
 
       <div class="page-header">
-        <h1 class="class"><code><code><a href="nltk.html">nltk</a></code><wbr></wbr>.<code><a href="nltk.parse.html">parse</a></code><wbr></wbr>.<code><a href="nltk.parse.stanford.html">stanford</a></code><wbr></wbr>.<code><a href="nltk.parse.stanford.GenericStanfordParser.html">GenericStanfordParser</a></code></code></h1>
+        <h1 class="class"><code><code><a href="index.html" class="internal-link">nltk</a></code><wbr></wbr>.<code><a href="nltk.parse.html" class="internal-link" title="nltk.parse">parse</a></code><wbr></wbr>.<code><a href="nltk.parse.stanford.html" class="internal-link" title="nltk.parse.stanford">stanford</a></code><wbr></wbr>.<code><a href="nltk.parse.stanford.GenericStanfordParser.html" class="internal-link" title="nltk.parse.stanford.GenericStanfordParser">GenericStanfordParser</a></code></code></h1>
         <div id="showPrivate">
           <button class="btn btn-link" onclick="togglePrivate()">Toggle Private API</button>
         </div>
@@ -126,7 +139,7 @@
       </div>
 
       <div class="extrasDocstring">
-        <p><code><span class="py-keyword">class</span> <span class="py-defname">GenericStanfordParser</span>(<a href="nltk.parse.api.ParserI.html" title="nltk.parse.api.ParserI">ParserI</a>): <a href="https://github.com/nltk/nltk/tree/3.6.2/nltk/parse/stanford.py#L30" class="sourceLink">(source)</a></code></p><p>Known subclasses: <code><a href="nltk.parse.stanford.StanfordDependencyParser.html">nltk.parse.stanford.StanfordDependencyParser</a></code>, <code><a href="nltk.parse.stanford.StanfordNeuralDependencyParser.html">nltk.parse.stanford.StanfordNeuralDependencyParser</a></code>, <code><a href="nltk.parse.stanford.StanfordParser.html">nltk.parse.stanford.StanfordParser</a></code></p>
+        <p><code><span class="py-keyword">class</span> <span class="py-defname">GenericStanfordParser</span>(<a href="nltk.parse.api.ParserI.html" class="internal-link" title="nltk.parse.api.ParserI">ParserI</a>): <a href="https://github.com/nltk/nltk/tree/3.6.2/nltk/parse/stanford.py#L30" class="sourceLink">(source)</a></code></p><p>Known subclasses: <code><a href="nltk.parse.stanford.StanfordDependencyParser.html" class="internal-link">nltk.parse.stanford.StanfordDependencyParser</a></code>, <code><a href="nltk.parse.stanford.StanfordNeuralDependencyParser.html" class="internal-link">nltk.parse.stanford.StanfordNeuralDependencyParser</a></code>, <code><a href="nltk.parse.stanford.StanfordParser.html" class="internal-link">nltk.parse.stanford.StanfordParser</a></code></p>
         <p><a href="classIndex.html#nltk.parse.stanford.GenericStanfordParser">View In Hierarchy</a></p>
       </div>
 
@@ -141,98 +154,98 @@
   <tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#__init__">__init__</a></code></td>
+    <td><code><a href="#__init__" class="internal-link" title="nltk.parse.stanford.GenericStanfordParser.__init__">__init__</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#parse_sents">parse_sents</a></code></td>
+    <td><code><a href="#parse_sents" class="internal-link" title="nltk.parse.stanford.GenericStanfordParser.parse_sents">parse​_sents</a></code></td>
     <td><span class="undocumented">No summary</span></td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#raw_parse">raw_parse</a></code></td>
-    <td><span>Use StanfordParser to parse a sentence. Takes a sentence as a string; before parsing, it will be automatically tokenized and tagged by the Stanford Parser.</span></td>
+    <td><code><a href="#raw_parse" class="internal-link" title="nltk.parse.stanford.GenericStanfordParser.raw_parse">raw​_parse</a></code></td>
+    <td>Use StanfordParser to parse a sentence. Takes a sentence as a string; before parsing, it will be automatically tokenized and tagged by the Stanford Parser.</td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#raw_parse_sents">raw_parse_sents</a></code></td>
-    <td><span>Use StanfordParser to parse multiple sentences. Takes multiple sentences as a list of strings. Each sentence will be automatically tokenized and tagged by the Stanford Parser.</span></td>
+    <td><code><a href="#raw_parse_sents" class="internal-link" title="nltk.parse.stanford.GenericStanfordParser.raw_parse_sents">raw​_parse​_sents</a></code></td>
+    <td>Use StanfordParser to parse multiple sentences. Takes multiple sentences as a list of strings. Each sentence will be automatically tokenized and tagged by the Stanford Parser.</td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#tagged_parse">tagged_parse</a></code></td>
-    <td><span>Use StanfordParser to parse a sentence. Takes a sentence as a list of (word, tag) tuples; the sentence must have already been tokenized and tagged.</span></td>
+    <td><code><a href="#tagged_parse" class="internal-link" title="nltk.parse.stanford.GenericStanfordParser.tagged_parse">tagged​_parse</a></code></td>
+    <td>Use StanfordParser to parse a sentence. Takes a sentence as a list of (word, tag) tuples; the sentence must have already been tokenized and tagged.</td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#tagged_parse_sents">tagged_parse_sents</a></code></td>
-    <td><span>Use StanfordParser to parse multiple sentences. Takes multiple sentences where each sentence is a list of (word, tag) tuples. The sentences must have already been tokenized and tagged.</span></td>
+    <td><code><a href="#tagged_parse_sents" class="internal-link" title="nltk.parse.stanford.GenericStanfordParser.tagged_parse_sents">tagged​_parse​_sents</a></code></td>
+    <td>Use StanfordParser to parse multiple sentences. Takes multiple sentences where each sentence is a list of (word, tag) tuples. The sentences must have already been tokenized and tagged.</td>
   </tr><tr class="instancevariable">
     
     <td>Instance Variable</td>
-    <td><code><a href="#corenlp_options">corenlp_options</a></code></td>
+    <td><code><a href="#corenlp_options" class="internal-link" title="nltk.parse.stanford.GenericStanfordParser.corenlp_options">corenlp​_options</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="instancevariable">
     
     <td>Instance Variable</td>
-    <td><code><a href="#java_options">java_options</a></code></td>
+    <td><code><a href="#java_options" class="internal-link" title="nltk.parse.stanford.GenericStanfordParser.java_options">java​_options</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="instancevariable">
     
     <td>Instance Variable</td>
-    <td><code><a href="#model_path">model_path</a></code></td>
+    <td><code><a href="#model_path" class="internal-link" title="nltk.parse.stanford.GenericStanfordParser.model_path">model​_path</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method private">
     
     <td>Method</td>
-    <td><code><a href="#_execute">_execute</a></code></td>
+    <td><code><a href="#_execute" class="internal-link" title="nltk.parse.stanford.GenericStanfordParser._execute">_execute</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method private">
     
     <td>Method</td>
-    <td><code><a href="#_parse_trees_output">_parse_trees_output</a></code></td>
+    <td><code><a href="#_parse_trees_output" class="internal-link" title="nltk.parse.stanford.GenericStanfordParser._parse_trees_output">_parse​_trees​_output</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
-  </tr><tr class="classvariable private">
+  </tr><tr class="constant private">
     
-    <td>Class Variable</td>
-    <td><code><a href="#_DOUBLE_SPACED_OUTPUT">_DOUBLE_SPACED_OUTPUT</a></code></td>
+    <td>Constant</td>
+    <td><code><a href="#_DOUBLE_SPACED_OUTPUT" class="internal-link" title="nltk.parse.stanford.GenericStanfordParser._DOUBLE_SPACED_OUTPUT">_DOUBLE​_SPACED​_OUTPUT</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
-  </tr><tr class="classvariable private">
+  </tr><tr class="constant private">
     
-    <td>Class Variable</td>
-    <td><code><a href="#_JAR">_JAR</a></code></td>
+    <td>Constant</td>
+    <td><code><a href="#_JAR" class="internal-link" title="nltk.parse.stanford.GenericStanfordParser._JAR">_JAR</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
-  </tr><tr class="classvariable private">
+  </tr><tr class="constant private">
     
-    <td>Class Variable</td>
-    <td><code><a href="#_MAIN_CLASS">_MAIN_CLASS</a></code></td>
+    <td>Constant</td>
+    <td><code><a href="#_MAIN_CLASS" class="internal-link" title="nltk.parse.stanford.GenericStanfordParser._MAIN_CLASS">_MAIN​_CLASS</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
-  </tr><tr class="classvariable private">
+  </tr><tr class="constant private">
     
-    <td>Class Variable</td>
-    <td><code><a href="#_MODEL_JAR_PATTERN">_MODEL_JAR_PATTERN</a></code></td>
+    <td>Constant</td>
+    <td><code><a href="#_MODEL_JAR_PATTERN" class="internal-link" title="nltk.parse.stanford.GenericStanfordParser._MODEL_JAR_PATTERN">_MODEL​_JAR​_PATTERN</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
-  </tr><tr class="classvariable private">
+  </tr><tr class="constant private">
     
-    <td>Class Variable</td>
-    <td><code><a href="#_USE_STDIN">_USE_STDIN</a></code></td>
-    <td><span class="undocumented">Undocumented</span></td>
-  </tr><tr class="instancevariable private">
-    
-    <td>Instance Variable</td>
-    <td><code><a href="#_classpath">_classpath</a></code></td>
+    <td>Constant</td>
+    <td><code><a href="#_USE_STDIN" class="internal-link" title="nltk.parse.stanford.GenericStanfordParser._USE_STDIN">_USE​_STDIN</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="instancevariable private">
     
     <td>Instance Variable</td>
-    <td><code><a href="#_encoding">_encoding</a></code></td>
+    <td><code><a href="#_classpath" class="internal-link" title="nltk.parse.stanford.GenericStanfordParser._classpath">_classpath</a></code></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="instancevariable private">
+    
+    <td>Instance Variable</td>
+    <td><code><a href="#_encoding" class="internal-link" title="nltk.parse.stanford.GenericStanfordParser._encoding">_encoding</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr>
 </table>
         
           <p class="inheritedFrom">
-            Inherited from <code><a href="nltk.parse.api.ParserI.html">ParserI</a></code>:
+            Inherited from <code><a href="nltk.parse.api.ParserI.html" class="internal-link" title="nltk.parse.api.ParserI">ParserI</a></code>:
           </p>
           <table class="children sortable" id="id1113">
   
@@ -240,23 +253,23 @@
   <tr class="basemethod">
     
     <td>Method</td>
-    <td><code><a href="nltk.parse.api.ParserI.html#grammar">grammar</a></code></td>
-    <td><span></span></td>
+    <td><code><a href="nltk.parse.api.ParserI.html#grammar" class="internal-link" title="nltk.parse.api.ParserI.grammar">grammar</a></code></td>
+    <td></td>
   </tr><tr class="basemethod">
     
     <td>Method</td>
-    <td><code><a href="nltk.parse.api.ParserI.html#parse">parse</a></code></td>
-    <td><span></span></td>
+    <td><code><a href="nltk.parse.api.ParserI.html#parse" class="internal-link" title="nltk.parse.api.ParserI.parse">parse</a></code></td>
+    <td></td>
   </tr><tr class="basemethod">
     
     <td>Method</td>
-    <td><code><a href="nltk.parse.api.ParserI.html#parse_all">parse_all</a></code></td>
-    <td><span></span></td>
+    <td><code><a href="nltk.parse.api.ParserI.html#parse_all" class="internal-link" title="nltk.parse.api.ParserI.parse_all">parse​_all</a></code></td>
+    <td></td>
   </tr><tr class="basemethod">
     
     <td>Method</td>
-    <td><code><a href="nltk.parse.api.ParserI.html#parse_one">parse_one</a></code></td>
-    <td><span></span></td>
+    <td><code><a href="nltk.parse.api.ParserI.html#parse_one" class="internal-link" title="nltk.parse.api.ParserI.parse_one">parse​_one</a></code></td>
+    <td></td>
   </tr>
 </table>
           
@@ -277,14 +290,14 @@
   </a>
   <div class="functionHeader">
     
-    <span class="py-keyword">def</span> <span class="py-defname">__init__</span>(self, path_to_jar=None, path_to_models_jar=None, model_path='edu/stanford/nlp/models/lexparser/englishPCFG.ser.gz', encoding='utf8', verbose=False, java_options='-mx4g', corenlp_options=''):
+    <span class="py-keyword">def</span> <span class="py-defname">__init__</span>(self, path_to_jar=None, path_to_models_jar=None, model_path=<span class="rst-variable-quote">'</span><span class="rst-variable-string">edu/stanford/nlp/models/lexparser/englishPCFG.ser.gz</span><span class="rst-variable-quote">'</span>, encoding=<span class="rst-variable-quote">'</span><span class="rst-variable-string">utf8</span><span class="rst-variable-quote">'</span>, verbose=False, java_options=<span class="rst-variable-quote">'</span><span class="rst-variable-string">-mx4g</span><span class="rst-variable-quote">'</span>, corenlp_options=<span class="rst-variable-quote">'</span><span class="rst-variable-string"></span><span class="rst-variable-quote">'</span>):
     <a class="sourceLink" href="https://github.com/nltk/nltk/tree/3.6.2/nltk/parse/stanford.py#L40">
       
       (source)
     </a>
   </div>
   <div class="docstring functionBody">
-    <div class="interfaceinfo">overridden in <code><a href="nltk.parse.stanford.StanfordDependencyParser.html">nltk.parse.stanford.StanfordDependencyParser</a></code>, <code><a href="nltk.parse.stanford.StanfordNeuralDependencyParser.html">nltk.parse.stanford.StanfordNeuralDependencyParser</a></code>, <code><a href="nltk.parse.stanford.StanfordParser.html">nltk.parse.stanford.StanfordParser</a></code></div>
+    <div class="interfaceinfo">overridden in <code><a href="nltk.parse.stanford.StanfordDependencyParser.html" class="internal-link">nltk.parse.stanford.StanfordDependencyParser</a></code>, <code><a href="nltk.parse.stanford.StanfordNeuralDependencyParser.html" class="internal-link">nltk.parse.stanford.StanfordNeuralDependencyParser</a></code>, <code><a href="nltk.parse.stanford.StanfordParser.html" class="internal-link">nltk.parse.stanford.StanfordParser</a></code></div>
     
     <div><p class="undocumented">Undocumented</p></div>
   </div>
@@ -306,7 +319,7 @@
     </a>
   </div>
   <div class="docstring functionBody">
-    <div class="interfaceinfo">overrides <code><a href="nltk.parse.api.ParserI.html#parse_sents">nltk.parse.api.ParserI.parse_sents</a></code></div>
+    <div class="interfaceinfo">overrides <code><a href="nltk.parse.api.ParserI.html#parse_sents" class="internal-link">nltk.parse.api.ParserI.parse_sents</a></code></div>
     
     <div>Use StanfordParser to parse multiple sentences. Takes multiple sentences as a
 list where each sentence is a list of words.
@@ -405,7 +418,7 @@ tagged.<table class="fieldTable"><tr class="fieldStart"><td class="fieldName" co
     </a>
   </div>
   <div class="docstring functionBody">
-    <div class="interfaceinfo">overridden in <code><a href="nltk.parse.stanford.StanfordNeuralDependencyParser.html">nltk.parse.stanford.StanfordNeuralDependencyParser</a></code></div>
+    <div class="interfaceinfo">overridden in <code><a href="nltk.parse.stanford.StanfordNeuralDependencyParser.html" class="internal-link">nltk.parse.stanford.StanfordNeuralDependencyParser</a></code></div>
     
     <div>Use StanfordParser to parse multiple sentences. Takes multiple sentences
 where each sentence is a list of (word, tag) tuples.
@@ -432,6 +445,7 @@ The sentences must have already been tokenized and tagged.<table class="fieldTab
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    
   </div>
 </div><div class="baseinstancevariable">
   
@@ -454,6 +468,7 @@ The sentences must have already been tokenized and tagged.<table class="fieldTab
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    
   </div>
 </div><div class="baseinstancevariable">
   
@@ -476,6 +491,7 @@ The sentences must have already been tokenized and tagged.<table class="fieldTab
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    
   </div>
 </div><div class="basemethod private">
   
@@ -521,7 +537,7 @@ The sentences must have already been tokenized and tagged.<table class="fieldTab
     
     <div><p class="undocumented">Undocumented</p></div>
   </div>
-</div><div class="baseclassvariable private">
+</div><div class="baseconstant private">
   
   
   <a name="nltk.parse.stanford.GenericStanfordParser._DOUBLE_SPACED_OUTPUT">
@@ -539,11 +555,12 @@ The sentences must have already been tokenized and tagged.<table class="fieldTab
     </a>
   </div>
   <div class="functionBody">
-    <div class="interfaceinfo">overridden in <code><a href="nltk.parse.stanford.StanfordNeuralDependencyParser.html">nltk.parse.stanford.StanfordNeuralDependencyParser</a></code></div>
+    <div class="interfaceinfo">overridden in <code><a href="nltk.parse.stanford.StanfordNeuralDependencyParser.html" class="internal-link">nltk.parse.stanford.StanfordNeuralDependencyParser</a></code></div>
     
     <div><p class="undocumented">Undocumented</p></div>
+    <table class="valueTable"><tr class="fieldStart"><td class="fieldName">Value</td></tr><tr><td><pre class="constant-value"><code>False</code></pre></td></tr></table>
   </div>
-</div><div class="baseclassvariable private">
+</div><div class="baseconstant private">
   
   
   <a name="nltk.parse.stanford.GenericStanfordParser._JAR">
@@ -561,11 +578,12 @@ The sentences must have already been tokenized and tagged.<table class="fieldTab
     </a>
   </div>
   <div class="functionBody">
-    <div class="interfaceinfo">overridden in <code><a href="nltk.parse.stanford.StanfordNeuralDependencyParser.html">nltk.parse.stanford.StanfordNeuralDependencyParser</a></code></div>
+    <div class="interfaceinfo">overridden in <code><a href="nltk.parse.stanford.StanfordNeuralDependencyParser.html" class="internal-link">nltk.parse.stanford.StanfordNeuralDependencyParser</a></code></div>
     
     <div><p class="undocumented">Undocumented</p></div>
+    <table class="valueTable"><tr class="fieldStart"><td class="fieldName">Value</td></tr><tr><td><pre class="constant-value"><code><span class="rst-variable-quote">'</span><span class="rst-variable-string">stanford-parser\\.jar</span><span class="rst-variable-quote">'</span></code></pre></td></tr></table>
   </div>
-</div><div class="baseclassvariable private">
+</div><div class="baseconstant private">
   
   
   <a name="nltk.parse.stanford.GenericStanfordParser._MAIN_CLASS">
@@ -583,11 +601,12 @@ The sentences must have already been tokenized and tagged.<table class="fieldTab
     </a>
   </div>
   <div class="functionBody">
-    <div class="interfaceinfo">overridden in <code><a href="nltk.parse.stanford.StanfordNeuralDependencyParser.html">nltk.parse.stanford.StanfordNeuralDependencyParser</a></code></div>
+    <div class="interfaceinfo">overridden in <code><a href="nltk.parse.stanford.StanfordNeuralDependencyParser.html" class="internal-link">nltk.parse.stanford.StanfordNeuralDependencyParser</a></code></div>
     
     <div><p class="undocumented">Undocumented</p></div>
+    <table class="valueTable"><tr class="fieldStart"><td class="fieldName">Value</td></tr><tr><td><pre class="constant-value"><code><span class="rst-variable-quote">'</span><span class="rst-variable-string">edu.stanford.nlp.parser.lexparser.LexicalizedParser</span><span class="rst-variable-quote">'</span></code></pre></td></tr></table>
   </div>
-</div><div class="baseclassvariable private">
+</div><div class="baseconstant private">
   
   
   <a name="nltk.parse.stanford.GenericStanfordParser._MODEL_JAR_PATTERN">
@@ -605,11 +624,12 @@ The sentences must have already been tokenized and tagged.<table class="fieldTab
     </a>
   </div>
   <div class="functionBody">
-    <div class="interfaceinfo">overridden in <code><a href="nltk.parse.stanford.StanfordNeuralDependencyParser.html">nltk.parse.stanford.StanfordNeuralDependencyParser</a></code></div>
+    <div class="interfaceinfo">overridden in <code><a href="nltk.parse.stanford.StanfordNeuralDependencyParser.html" class="internal-link">nltk.parse.stanford.StanfordNeuralDependencyParser</a></code></div>
     
     <div><p class="undocumented">Undocumented</p></div>
+    <table class="valueTable"><tr class="fieldStart"><td class="fieldName">Value</td></tr><tr><td><pre class="constant-value"><code><span class="rst-variable-quote">'</span><span class="rst-variable-string">stanford-parser-(\\d+)(\\.(\\d+))+-models\\.jar</span><span class="rst-variable-quote">'</span></code></pre></td></tr></table>
   </div>
-</div><div class="baseclassvariable private">
+</div><div class="baseconstant private">
   
   
   <a name="nltk.parse.stanford.GenericStanfordParser._USE_STDIN">
@@ -627,9 +647,10 @@ The sentences must have already been tokenized and tagged.<table class="fieldTab
     </a>
   </div>
   <div class="functionBody">
-    <div class="interfaceinfo">overridden in <code><a href="nltk.parse.stanford.StanfordNeuralDependencyParser.html">nltk.parse.stanford.StanfordNeuralDependencyParser</a></code></div>
+    <div class="interfaceinfo">overridden in <code><a href="nltk.parse.stanford.StanfordNeuralDependencyParser.html" class="internal-link">nltk.parse.stanford.StanfordNeuralDependencyParser</a></code></div>
     
     <div><p class="undocumented">Undocumented</p></div>
+    <table class="valueTable"><tr class="fieldStart"><td class="fieldName">Value</td></tr><tr><td><pre class="constant-value"><code>False</code></pre></td></tr></table>
   </div>
 </div><div class="baseinstancevariable private">
   
@@ -652,6 +673,7 @@ The sentences must have already been tokenized and tagged.<table class="fieldTab
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    
   </div>
 </div><div class="baseinstancevariable private">
   
@@ -674,6 +696,7 @@ The sentences must have already been tokenized and tagged.<table class="fieldTab
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    
   </div>
 </div>
 
@@ -685,7 +708,7 @@ The sentences must have already been tokenized and tagged.<table class="fieldTab
   <div class="container">
     <a href="index.html">API Documentation</a> for <a href="http://www.nltk.org/" class="projecthome">nltk-3.6.2</a>,
   generated by <a href="https://github.com/twisted/pydoctor/">pydoctor</a>
-    21.2.2 at 2022-01-06 17:36:51.
+    22.2.2.dev0 at 2022-03-04 05:57:24.
   </div>
 </footer>
 
