@@ -7,7 +7,7 @@
   <head>
     
     <title>twisted.words.xish.domish.Element</title>
-    <meta name="generator" content="pydoctor 21.2.2"> 
+    <meta name="generator" content="pydoctor 22.2.2.dev0"> 
         
     </meta>
     <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
@@ -19,7 +19,13 @@
 
   <body>
 
-    
+    <div style="display: none" id="current-docs-container" class="container">
+  <div class="col-sm-12">
+    <a id="current-docs-link">
+      Go to the latest version of this document.
+    </a>
+  </div>
+</div>
 
     <nav class="navbar navbar-default">
   
@@ -44,69 +50,82 @@
           Names
         </a>
 
-        <form action="search-results.html" id="search-box-container">
+        <div id="search-box-container">
           <div class="input-group">
-            <input id="search-box" name="search-query" placeholder="Search..." aria-label="Search" minlength="2" class="form-control" />
+            <input id="search-box" type="search" name="search-query" placeholder="Search..." aria-label="Search" minlength="2" class="form-control" autocomplete="off" />
+            
             <span class="input-group-btn">
-              <button class="btn btn-default" type="submit" title="Search"><img src="fonts/search.svg" alt="Search!" /></button>
-              <a class="btn btn-default" id="search-help-button" title="Help" onclick="toggleSearchHelpText()"><img src="fonts/info.svg" alt="Help!" /></a>
+              <a style="display: none;" class="btn btn-default" id="search-clear-button" title="Clear" onclick="clearSearch()"><img src="fonts/x-circle.svg" alt="Clear" /></a>
+              <a class="btn btn-default" id="search-help-button" title="Help" onclick="toggleSearchHelpText()"><img src="fonts/info.svg" alt="Help" /></a>
             </span>
           </div>
-        </form>
+        </div>
 
-        <div class="rst-admonition hint" id="search-help-box">
+      </div>
+
+      <div id="search-results-container" style="display: none;">
+        <div>
+          <span class="label label-default" id="search-docstrings-button">
+            <a title="Search in docstrings" onclick="toggleSearchInDocstrings()">search in docstrings</a></span>
+        </div>
+
+        <noscript>
+            <h1>Cannot search: JavaScript is not supported/enabled in your browser.</h1>
+        </noscript>
+
+        <div class="hint" id="search-help-box">
           <p class="rst-last">
       
             Search bar offers the following options:
             <ul>   
                 <li>
                   <strong>Term presence.</strong> The below example searches for documents that 
-                    must contain “foo”, might contain “bar” and must not contain “baz”:
-                  <br /> <code>'+foo bar -baz'</code>
+                    must contain “foo”, might contain “bar” and must not contain “baz”: <code>+foo bar -baz</code>
                 </li> 
 
                 <li>
-                  <strong>Wildcards.</strong> The below example searches for documents with words beginning with “foo”:
-                  <br /> <code>'foo*'</code>
+                  <strong>Wildcards.</strong> The below example searches for documents with words beginning with “foo”: <code>foo*</code>
                 </li> 
 
                 <li>
-                  <strong>Search in specific fields.</strong> The following search matches all documents 
-                  that contains "foo" in their full dotted name and with “bar” in any field:
-                  <br /> <code>'+fullName:*foo* +bar'</code>
+                  <strong>Search in specific fields.</strong> The following search matches all objects 
+                  in "twisted.mail" that matches “search”: <code>+qname:twisted.mail.* +search</code>
 
                   <p>
-                    Possible fields: 'name', 'docstring', 'fullName'.
+                    Possible fields: 'name', 'qname' (fully qualified name), 'docstring', and 'kind'.
+                    Last two fields are only applicable if "search in docstrings" is enabled.
                   </p>
                 </li>
 
                 <li>
                   <strong>Fuzzy matches.</strong> The following search matches all documents 
-                  that have a word within 1 edit distance of “foo”:
-                  <br /> <code>'foo~1'</code>
+                  that have a word within 1 edit distance of “foo”: <code>foo~1</code>
                 </li>
             </ul>
 
           </p>
         </div>
 
-      </div>
+        <div id="search-status"> </div>
+        
+        <div class="warning" id="search-warn-box" style="display: none;">
+          <p class="rst-last"><span id="search-warn"></span></p>
+        </div>
 
+        <table id="search-results">
+          <!-- Filled dynamically by JS -->
+        </table>
+        
+        <div style="margin-top: 8px;">
+          <p>Results provided by <a href="https://lunrjs.com">Lunr.js</a></p>
+        </div>
+      </div>
 
     </div>
   </div>
 
-  <script>
- 
-    function toggleSearchHelpText() {
-        document.body.classList.toggle("search-help-hidden");
-    }
-    // Init search and help text
-    document.getElementById('search-box-container').style.display = 'block';
-    document.getElementById('search-help-box').style.display = 'block';
-    document.body.classList.add("search-help-hidden");
-
-  </script>
+  <script src="ajax.js" type="text/javascript"></script>
+  <script src="search.js" type="text/javascript"></script>
 
 </nav>
 
@@ -115,7 +134,7 @@
     <div class="container">
 
       <div class="page-header">
-        <h1 class="class"><code><code><a href="twisted.html">twisted</a></code><wbr></wbr>.<code><a href="twisted.words.html">words</a></code><wbr></wbr>.<code><a href="twisted.words.xish.html">xish</a></code><wbr></wbr>.<code><a href="twisted.words.xish.domish.html">domish</a></code><wbr></wbr>.<code><a href="twisted.words.xish.domish.Element.html">Element</a></code></code></h1>
+        <h1 class="class"><code><code><a href="index.html" class="internal-link">twisted</a></code><wbr></wbr>.<code><a href="twisted.words.html" class="internal-link" title="twisted.words">words</a></code><wbr></wbr>.<code><a href="twisted.words.xish.html" class="internal-link" title="twisted.words.xish">xish</a></code><wbr></wbr>.<code><a href="twisted.words.xish.domish.html" class="internal-link" title="twisted.words.xish.domish">domish</a></code><wbr></wbr>.<code><a href="twisted.words.xish.domish.Element.html" class="internal-link" title="twisted.words.xish.domish.Element">Element</a></code></code></h1>
         <div id="showPrivate">
           <button class="btn btn-link" onclick="togglePrivate()">Toggle Private API</button>
         </div>
@@ -126,185 +145,200 @@
       </div>
 
       <div class="extrasDocstring">
-        <p><code><span class="py-keyword">class</span> <span class="py-defname">Element</span>: <a href="https://github.com/twisted/twisted/tree/twisted-21.2.0/src/twisted/words/xish/domish.py#L322" class="sourceLink">(source)</a></code></p><p>Known subclasses: <code><a href="twisted.words.protocols.jabber.client.IQ.html">twisted.words.protocols.jabber.client.IQ</a></code>, <code><a href="twisted.words.protocols.jabber.xmlstream.IQ.html">twisted.words.protocols.jabber.xmlstream.IQ</a></code></p><p>Implements interfaces: <code><a href="twisted.words.xish.domish.IElement.html">twisted.words.xish.domish.IElement</a></code></p>
+        <p><code><span class="py-keyword">class</span> <span class="py-defname">Element</span>: <a href="https://github.com/twisted/twisted/tree/twisted-21.2.0/src/twisted/words/xish/domish.py#L322" class="sourceLink">(source)</a></code></p><p>Known subclasses: <code><a href="twisted.words.protocols.jabber.client.IQ.html" class="internal-link">twisted.words.protocols.jabber.client.IQ</a></code>, <code><a href="twisted.words.protocols.jabber.xmlstream.IQ.html" class="internal-link">twisted.words.protocols.jabber.xmlstream.IQ</a></code></p><p>Implements interfaces: <code><a href="twisted.words.xish.domish.IElement.html" class="internal-link">twisted.words.xish.domish.IElement</a></code></p>
         <p><a href="classIndex.html#twisted.words.xish.domish.Element">View In Hierarchy</a></p>
       </div>
 
+      
+
       <div class="moduleDocstring">
-        <div><p>Represents an XML element node.</p><p>An Element contains a series of attributes (name/value pairs), content (character data), and other child Element objects. When building a document with markup (such as HTML or XML), use this object as the starting point.</p><p>Element objects fully support XML Namespaces. The fully qualified name of the XML Element it represents is stored in the <code>uri</code> and <code>name</code> attributes, where <code>uri</code> holds the namespace URI. There is also a default namespace, for child elements. This is stored in the <code>defaultUri</code> attribute. Note that <code>''</code> means the empty namespace.</p><p>Serialization of Elements through <code>toXml()</code> will use these attributes for generating proper serialized XML. When both <code>uri</code> and <code>defaultUri</code> are not None in the Element and all of its descendents, serialization proceeds as expected:</p><pre class="py-doctest">
+        <div><p>Represents an XML element node.</p>
+<p>An Element contains a series of attributes (name/value pairs), content (character data), and other child Element objects. When building a document with markup (such as HTML or XML), use this object as the starting point.</p>
+<p>Element objects fully support XML Namespaces. The fully qualified name of the XML Element it represents is stored in the <tt class="rst-docutils literal">uri</tt> and <tt class="rst-docutils literal">name</tt> attributes, where <tt class="rst-docutils literal">uri</tt> holds the namespace URI. There is also a default namespace, for child elements. This is stored in the <tt class="rst-docutils literal">defaultUri</tt> attribute. Note that <tt class="rst-docutils literal">''</tt> means the empty namespace.</p>
+<p>Serialization of Elements through <tt class="rst-docutils literal">toXml()</tt> will use these attributes for generating proper serialized XML. When both <tt class="rst-docutils literal">uri</tt> and <tt class="rst-docutils literal">defaultUri</tt> are not None in the Element and all of its descendents, serialization proceeds as expected:</p>
+<pre class="py-doctest">
 <span class="py-prompt">&gt;&gt;&gt; </span><span class="py-keyword">from</span> twisted.words.xish <span class="py-keyword">import</span> domish
 <span class="py-prompt">&gt;&gt;&gt; </span>root = domish.Element((<span class="py-string">'myns'</span>, <span class="py-string">'root'</span>))
 <span class="py-prompt">&gt;&gt;&gt; </span>root.addElement(<span class="py-string">'child'</span>, content=<span class="py-string">'test'</span>)
 <span class="py-output">&lt;twisted.words.xish.domish.Element object at 0x83002ac&gt;</span>
 <span class="py-prompt">&gt;&gt;&gt; </span>root.toXml()
 <span class="py-output">u"&lt;root xmlns='myns'&gt;&lt;child&gt;test&lt;/child&gt;&lt;/root&gt;"</span>
-</pre><p>For partial serialization, needed for streaming XML, a special value for namespace URIs can be used: <code><a href="https://docs.python.org/3/library/constants.html#None">None</a></code>.</p><p>Using <code><a href="https://docs.python.org/3/library/constants.html#None">None</a></code> as the value for <code>uri</code> means: this element is in whatever namespace inherited by the closest logical ancestor when the complete XML document has been serialized. The serialized start tag will have a non-prefixed name, and no xmlns declaration will be generated.</p><p>Similarly, <code><a href="https://docs.python.org/3/library/constants.html#None">None</a></code> for <code>defaultUri</code> means: the default namespace for my child elements is inherited from the logical ancestors of this element, when the complete XML document has been serialized.</p><p>To illustrate, an example from a Jabber stream. Assume the start tag of the root element of the stream has already been serialized, along with several complete child elements, and sent off, looking like this:</p><pre class="literalblock">
+</pre><p>For partial serialization, needed for streaming XML, a special value for namespace URIs can be used: <code><a href="https://docs.python.org/3/library/constants.html#None" class="intersphinx-link">None</a></code>.</p>
+<p>Using <code><a href="https://docs.python.org/3/library/constants.html#None" class="intersphinx-link">None</a></code> as the value for <tt class="rst-docutils literal">uri</tt> means: this element is in whatever namespace inherited by the closest logical ancestor when the complete XML document has been serialized. The serialized start tag will have a non-prefixed name, and no xmlns declaration will be generated.</p>
+<p>Similarly, <code><a href="https://docs.python.org/3/library/constants.html#None" class="intersphinx-link">None</a></code> for <tt class="rst-docutils literal">defaultUri</tt> means: the default namespace for my child elements is inherited from the logical ancestors of this element, when the complete XML document has been serialized.</p>
+<p>To illustrate, an example from a Jabber stream. Assume the start tag of the root element of the stream has already been serialized, along with several complete child elements, and sent off, looking like this:</p>
+<pre class="rst-literal-block">
   &lt;stream:stream xmlns:stream='http://etherx.jabber.org/streams'
                  xmlns='jabber:client' to='example.com'&gt;
     ...
-</pre><p>Now suppose we want to send a complete element represented by an object <code>message</code> created like:</p><pre class="py-doctest">
+</pre>
+<p>Now suppose we want to send a complete element represented by an object <tt class="rst-docutils literal">message</tt> created like:</p>
+<pre class="py-doctest">
 <span class="py-prompt">&gt;&gt;&gt; </span>message = domish.Element((<span class="py-builtin">None</span>, <span class="py-string">'message'</span>))
 <span class="py-prompt">&gt;&gt;&gt; </span>message[<span class="py-string">'to'</span>] = <span class="py-string">'user@example.com'</span>
 <span class="py-prompt">&gt;&gt;&gt; </span>message.addElement(<span class="py-string">'body'</span>, content=<span class="py-string">'Hi!'</span>)
 <span class="py-output">&lt;twisted.words.xish.domish.Element object at 0x8276e8c&gt;</span>
 <span class="py-prompt">&gt;&gt;&gt; </span>message.toXml()
 <span class="py-output">u"&lt;message to='user@example.com'&gt;&lt;body&gt;Hi!&lt;/body&gt;&lt;/message&gt;"</span>
-</pre><p>As, you can see, this XML snippet has no xmlns declaration. When sent off, it inherits the <code>jabber:client</code> namespace from the root element. Note that this renders the same as using <code>''</code> instead of <code><a href="https://docs.python.org/3/library/constants.html#None">None</a></code>:</p><pre class="py-doctest">
+</pre><p>As, you can see, this XML snippet has no xmlns declaration. When sent off, it inherits the <tt class="rst-docutils literal">jabber:client</tt> namespace from the root element. Note that this renders the same as using <tt class="rst-docutils literal">''</tt> instead of <code><a href="https://docs.python.org/3/library/constants.html#None" class="intersphinx-link">None</a></code>:</p>
+<pre class="py-doctest">
 <span class="py-prompt">&gt;&gt;&gt; </span>presence = domish.Element((<span class="py-string">''</span>, <span class="py-string">'presence'</span>))
 <span class="py-prompt">&gt;&gt;&gt; </span>presence.toXml()
 <span class="py-output">u"&lt;presence/&gt;"</span>
-</pre><p>However, if this object has a parent defined, the difference becomes clear:</p><pre class="py-doctest">
+</pre><p>However, if this object has a parent defined, the difference becomes clear:</p>
+<pre class="py-doctest">
 <span class="py-prompt">&gt;&gt;&gt; </span>child = message.addElement((<span class="py-string">'http://example.com/'</span>, <span class="py-string">'envelope'</span>))
 <span class="py-prompt">&gt;&gt;&gt; </span>child.addChild(presence)
 <span class="py-output">&lt;twisted.words.xish.domish.Element object at 0x8276fac&gt;</span>
 <span class="py-prompt">&gt;&gt;&gt; </span>message.toXml()
 <span class="py-output">u"&lt;message to='user@example.com'&gt;&lt;body&gt;Hi!&lt;/body&gt;&lt;envelope xmlns='http://example.com/'&gt;&lt;presence xmlns=''/&gt;&lt;/envelope&gt;&lt;/message&gt;"</span>
-</pre><p>As, you can see, the &lt;presence/&gt; element is now in the empty namespace, not in the default namespace of the parent or the streams'.</p></div>
+</pre><p>As, you can see, the &lt;presence/&gt; element is now in the empty namespace, not in the default namespace of the parent or the streams'.</p>
+</div>
       </div>
 
       <div id="splitTables">
-        <table class="children sortable" id="id3760">
+        <table class="children sortable" id="id3746">
   
   
   <tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#__bytes__">__bytes__</a></code></td>
-    <td><span>Retrieve the first character data node as UTF-8 bytes.</span></td>
+    <td><code><a href="#__bytes__" class="internal-link" title="twisted.words.xish.domish.Element.__bytes__">__bytes__</a></code></td>
+    <td>Retrieve the first character data node as UTF-8 bytes.</td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#__delitem__">__delitem__</a></code></td>
+    <td><code><a href="#__delitem__" class="internal-link" title="twisted.words.xish.domish.Element.__delitem__">__delitem__</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#__getattr__">__getattr__</a></code></td>
+    <td><code><a href="#__getattr__" class="internal-link" title="twisted.words.xish.domish.Element.__getattr__">__getattr__</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#__getitem__">__getitem__</a></code></td>
+    <td><code><a href="#__getitem__" class="internal-link" title="twisted.words.xish.domish.Element.__getitem__">__getitem__</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#__init__">__init__</a></code></td>
+    <td><code><a href="#__init__" class="internal-link" title="twisted.words.xish.domish.Element.__init__">__init__</a></code></td>
     <td><span class="undocumented">No summary</span></td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#__setitem__">__setitem__</a></code></td>
+    <td><code><a href="#__setitem__" class="internal-link" title="twisted.words.xish.domish.Element.__setitem__">__setitem__</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#__unicode__">__unicode__</a></code></td>
-    <td><span>Retrieve the first CData (content) node</span></td>
+    <td><code><a href="#__unicode__" class="internal-link" title="twisted.words.xish.domish.Element.__unicode__">__unicode__</a></code></td>
+    <td>Retrieve the first CData (content) node</td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#addChild">addChild</a></code></td>
-    <td><span>Add a child to this Element.</span></td>
+    <td><code><a href="#addChild" class="internal-link" title="twisted.words.xish.domish.Element.addChild">add​Child</a></code></td>
+    <td>Add a child to this Element.</td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#addContent">addContent</a></code></td>
-    <td><span>Add some text data to this Element.</span></td>
+    <td><code><a href="#addContent" class="internal-link" title="twisted.words.xish.domish.Element.addContent">add​Content</a></code></td>
+    <td>Add some text data to this Element.</td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#addElement">addElement</a></code></td>
-    <td><span>Create an element and add as child.</span></td>
+    <td><code><a href="#addElement" class="internal-link" title="twisted.words.xish.domish.Element.addElement">add​Element</a></code></td>
+    <td>Create an element and add as child.</td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#addRawXml">addRawXml</a></code></td>
-    <td><span>Add a pre-serialized chunk o' XML as a child of this Element.</span></td>
+    <td><code><a href="#addRawXml" class="internal-link" title="twisted.words.xish.domish.Element.addRawXml">add​Raw​Xml</a></code></td>
+    <td>Add a pre-serialized chunk o' XML as a child of this Element.</td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#addUniqueId">addUniqueId</a></code></td>
-    <td><span>Add a unique (across a given Python session) id attribute to this Element.</span></td>
+    <td><code><a href="#addUniqueId" class="internal-link" title="twisted.words.xish.domish.Element.addUniqueId">add​Unique​Id</a></code></td>
+    <td>Add a unique (across a given Python session) id attribute to this Element.</td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#compareAttribute">compareAttribute</a></code></td>
-    <td><span>Safely compare the value of an attribute against a provided value.</span></td>
+    <td><code><a href="#compareAttribute" class="internal-link" title="twisted.words.xish.domish.Element.compareAttribute">compare​Attribute</a></code></td>
+    <td>Safely compare the value of an attribute against a provided value.</td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#elements">elements</a></code></td>
-    <td><span>Iterate across all children of this Element that are Elements.</span></td>
+    <td><code><a href="#elements" class="internal-link" title="twisted.words.xish.domish.Element.elements">elements</a></code></td>
+    <td>Iterate across all children of this Element that are Elements.</td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#firstChildElement">firstChildElement</a></code></td>
+    <td><code><a href="#firstChildElement" class="internal-link" title="twisted.words.xish.domish.Element.firstChildElement">first​Child​Element</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#getAttribute">getAttribute</a></code></td>
-    <td><span>Retrieve the value of attribname, if it exists</span></td>
+    <td><code><a href="#getAttribute" class="internal-link" title="twisted.words.xish.domish.Element.getAttribute">get​Attribute</a></code></td>
+    <td>Retrieve the value of attribname, if it exists</td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#hasAttribute">hasAttribute</a></code></td>
-    <td><span>Determine if the specified attribute exists</span></td>
+    <td><code><a href="#hasAttribute" class="internal-link" title="twisted.words.xish.domish.Element.hasAttribute">has​Attribute</a></code></td>
+    <td>Determine if the specified attribute exists</td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#swapAttributeValues">swapAttributeValues</a></code></td>
-    <td><span>Swap the values of two attribute.</span></td>
+    <td><code><a href="#swapAttributeValues" class="internal-link" title="twisted.words.xish.domish.Element.swapAttributeValues">swap​Attribute​Values</a></code></td>
+    <td>Swap the values of two attribute.</td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#toXml">toXml</a></code></td>
-    <td><span>Serialize this Element and all children to a string.</span></td>
+    <td><code><a href="#toXml" class="internal-link" title="twisted.words.xish.domish.Element.toXml">to​Xml</a></code></td>
+    <td>Serialize this Element and all children to a string.</td>
   </tr><tr class="instancevariable">
     
     <td>Instance Variable</td>
-    <td><code><a href="#attributes">attributes</a></code></td>
-    <td><span>Dictionary of attributes associated with this Element.</span></td>
+    <td><code><a href="#attributes" class="internal-link" title="twisted.words.xish.domish.Element.attributes">attributes</a></code></td>
+    <td>Dictionary of attributes associated with this Element.</td>
   </tr><tr class="instancevariable">
     
     <td>Instance Variable</td>
-    <td><code><a href="#children">children</a></code></td>
-    <td><span>List of child Elements and content</span></td>
+    <td><code><a href="#children" class="internal-link" title="twisted.words.xish.domish.Element.children">children</a></code></td>
+    <td>List of child Elements and content</td>
   </tr><tr class="instancevariable">
     
     <td>Instance Variable</td>
-    <td><code><a href="#defaultUri">defaultUri</a></code></td>
-    <td><span>URI this Element exists within</span></td>
+    <td><code><a href="#defaultUri" class="internal-link" title="twisted.words.xish.domish.Element.defaultUri">default​Uri</a></code></td>
+    <td>URI this Element exists within</td>
   </tr><tr class="instancevariable">
     
     <td>Instance Variable</td>
-    <td><code><a href="#localPrefixes">localPrefixes</a></code></td>
-    <td><span>Dictionary of namespace declarations on this element. The key is the prefix to bind the namespace uri to.</span></td>
+    <td><code><a href="#localPrefixes" class="internal-link" title="twisted.words.xish.domish.Element.localPrefixes">local​Prefixes</a></code></td>
+    <td>Dictionary of namespace declarations on this element. The key is the prefix to bind the namespace uri to.</td>
   </tr><tr class="instancevariable">
     
     <td>Instance Variable</td>
-    <td><code><a href="#name">name</a></code></td>
-    <td><span>Name of this Element</span></td>
+    <td><code><a href="#name" class="internal-link" title="twisted.words.xish.domish.Element.name">name</a></code></td>
+    <td>Name of this Element</td>
   </tr><tr class="instancevariable">
     
     <td>Instance Variable</td>
-    <td><code><a href="#parent">parent</a></code></td>
-    <td><span>Reference to the parent Element, if any.</span></td>
+    <td><code><a href="#parent" class="internal-link" title="twisted.words.xish.domish.Element.parent">parent</a></code></td>
+    <td>Reference to the parent Element, if any.</td>
   </tr><tr class="instancevariable">
     
     <td>Instance Variable</td>
-    <td><code><a href="#uri">uri</a></code></td>
-    <td><span>URI of this Element's name</span></td>
+    <td><code><a href="#uri" class="internal-link" title="twisted.words.xish.domish.Element.uri">uri</a></code></td>
+    <td>URI of this Element's name</td>
   </tr><tr class="method private">
     
     <td>Method</td>
-    <td><code><a href="#_dqa">_dqa</a></code></td>
-    <td><span>Dequalify an attribute key as needed</span></td>
+    <td><code><a href="#_dqa" class="internal-link" title="twisted.words.xish.domish.Element._dqa">_dqa</a></code></td>
+    <td>Dequalify an attribute key as needed</td>
   </tr><tr class="classvariable private">
     
     <td>Class Variable</td>
-    <td><code><a href="#_idCounter">_idCounter</a></code></td>
+    <td><code><a href="#_idCounter" class="internal-link" title="twisted.words.xish.domish.Element._idCounter">_id​Counter</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr>
 </table>
@@ -335,7 +369,7 @@
   <div class="docstring functionBody">
     
     
-    <div><p>Retrieve the first character data node as UTF-8 bytes.</p></div>
+    <div>Retrieve the first character data node as UTF-8 bytes.</div>
   </div>
 </div><div class="basemethod">
   
@@ -414,16 +448,16 @@
   </a>
   <div class="functionHeader">
     
-    <span class="py-keyword">def</span> <span class="py-defname">__init__</span>(self, qname, defaultUri=None, attribs=None, localPrefixes=None):
+    <span class="py-keyword">def</span> <span class="py-defname">__init__</span>(self, qname, defaultUri=<a href="https://docs.python.org/3/library/constants.html#None" class="intersphinx-link">None</a>, attribs=<a href="https://docs.python.org/3/library/constants.html#None" class="intersphinx-link">None</a>, localPrefixes=<a href="https://docs.python.org/3/library/constants.html#None" class="intersphinx-link">None</a>):
     <a class="sourceLink" href="https://github.com/twisted/twisted/tree/twisted-21.2.0/src/twisted/words/xish/domish.py#L424">
       
       (source)
     </a>
   </div>
   <div class="docstring functionBody">
-    <div class="interfaceinfo">overridden in <code><a href="twisted.words.protocols.jabber.client.IQ.html">twisted.words.protocols.jabber.client.IQ</a></code>, <code><a href="twisted.words.protocols.jabber.xmlstream.IQ.html">twisted.words.protocols.jabber.xmlstream.IQ</a></code></div>
+    <div class="interfaceinfo">overridden in <code><a href="twisted.words.protocols.jabber.client.IQ.html" class="internal-link">twisted.words.protocols.jabber.client.IQ</a></code>, <code><a href="twisted.words.protocols.jabber.xmlstream.IQ.html" class="internal-link">twisted.words.protocols.jabber.xmlstream.IQ</a></code></div>
     
-    <div><table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">qname</span></td><td class="fieldArgDesc">Tuple of (uri, name)</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">defaultUri</span></td><td class="fieldArgDesc">The default URI of the element; defaults to the URI specified in <code>qname</code></td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">attribs</span></td><td class="fieldArgDesc">Dictionary of attributes</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">localPrefixes</span></td><td class="fieldArgDesc">Dictionary of namespace declarations on this element. The key is the prefix to bind the namespace uri to.</td></tr></table></div>
+    <div><table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">qname</span></td><td class="fieldArgDesc">Tuple of (uri, name)</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">default​Uri</span></td><td class="fieldArgDesc">The default URI of the element; defaults to the URI specified in <tt class="rst-docutils literal">qname</tt></td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">attribs</span></td><td class="fieldArgDesc">Dictionary of attributes</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">local​Prefixes</span></td><td class="fieldArgDesc">Dictionary of namespace declarations on this element. The key is the prefix to bind the namespace uri to.</td></tr></table></div>
   </div>
 </div><div class="basemethod">
   
@@ -467,7 +501,7 @@
   <div class="docstring functionBody">
     
     
-    <div><p>Retrieve the first CData (content) node</p></div>
+    <div>Retrieve the first CData (content) node</div>
   </div>
 </div><div class="basemethod">
   
@@ -487,9 +521,9 @@
     </a>
   </div>
   <div class="docstring functionBody">
-    <div class="interfaceinfo">from <code><a href="twisted.words.xish.domish.IElement.html#addChild">twisted.words.xish.domish.IElement</a></code></div>
+    <div class="interfaceinfo">from <code><a href="twisted.words.xish.domish.IElement.html#addChild" class="internal-link" title="twisted.words.xish.domish.IElement.addChild">twisted.words.xish.domish.IElement</a></code></div>
     
-    <div><p>Add a child to this Element.</p></div>
+    <div>Add a child to this Element.</div>
   </div>
 </div><div class="basemethod">
   
@@ -509,9 +543,9 @@
     </a>
   </div>
   <div class="docstring functionBody">
-    <div class="interfaceinfo">from <code><a href="twisted.words.xish.domish.IElement.html#addContent">twisted.words.xish.domish.IElement</a></code></div>
+    <div class="interfaceinfo">from <code><a href="twisted.words.xish.domish.IElement.html#addContent" class="internal-link" title="twisted.words.xish.domish.IElement.addContent">twisted.words.xish.domish.IElement</a></code></div>
     
-    <div><p>Add some text data to this Element.</p><table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">text:</span><code><a href="https://docs.python.org/3/library/stdtypes.html#str">str</a></code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr class="fieldStart"><td class="fieldName" colspan="2">Returns</td></tr><tr><td class="fieldArgContainer"><code><a href="https://docs.python.org/3/library/stdtypes.html#str">str</a></code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr></table></div>
+    <div>Add some text data to this Element.<table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">text:</span><code><a href="https://docs.python.org/3/library/stdtypes.html#str" class="intersphinx-link">str</a></code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr class="fieldStart"><td class="fieldName" colspan="2">Returns</td></tr><tr><td class="fieldArgContainer"><code><a href="https://docs.python.org/3/library/stdtypes.html#str" class="intersphinx-link">str</a></code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr></table></div>
   </div>
 </div><div class="basemethod">
   
@@ -524,16 +558,18 @@
   </a>
   <div class="functionHeader">
     
-    <span class="py-keyword">def</span> <span class="py-defname">addElement</span>(self, name, defaultUri=None, content=None):
+    <span class="py-keyword">def</span> <span class="py-defname">addElement</span>(self, name, defaultUri=<a href="https://docs.python.org/3/library/constants.html#None" class="intersphinx-link">None</a>, content=<a href="https://docs.python.org/3/library/constants.html#None" class="intersphinx-link">None</a>):
     <a class="sourceLink" href="https://github.com/twisted/twisted/tree/twisted-21.2.0/src/twisted/words/xish/domish.py#L532">
       
       (source)
     </a>
   </div>
   <div class="docstring functionBody">
-    <div class="interfaceinfo">from <code><a href="twisted.words.xish.domish.IElement.html#addElement">twisted.words.xish.domish.IElement</a></code></div>
+    <div class="interfaceinfo">from <code><a href="twisted.words.xish.domish.IElement.html#addElement" class="internal-link" title="twisted.words.xish.domish.IElement.addElement">twisted.words.xish.domish.IElement</a></code></div>
     
-    <div><p>Create an element and add as child.</p><p>The new element is added to this element as a child, and will have this element as its parent.</p><table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">name:</span><code><a href="https://docs.python.org/3/library/stdtypes.html#str">str</a></code> or <code><a href="https://docs.python.org/3/library/stdtypes.html#tuple">tuple</a></code> of (<code><a href="https://docs.python.org/3/library/stdtypes.html#str">str</a></code>, <code><a href="https://docs.python.org/3/library/stdtypes.html#str">str</a></code>)</td><td class="fieldArgDesc">element name. This can be either a <code><a href="https://docs.python.org/3/library/stdtypes.html#str">str</a></code> object that contains the local name, or a tuple of (uri, local_name) for a fully qualified name. In the former case, the namespace URI is inherited from this element.</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">defaultUri:</span><code><a href="https://docs.python.org/3/library/stdtypes.html#str">str</a></code></td><td class="fieldArgDesc">default namespace URI for child elements. If <code><a href="https://docs.python.org/3/library/constants.html#None">None</a></code>, this is inherited from this element.</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">content:</span><code><a href="https://docs.python.org/3/library/stdtypes.html#str">str</a></code></td><td class="fieldArgDesc">text contained by the new element.</td></tr><tr class="fieldStart"><td class="fieldName" colspan="2">Returns</td></tr><tr><td class="fieldArgContainer">object providing <code><a href="twisted.words.xish.domish.IElement.html">IElement</a></code></td><td class="fieldArgDesc">the created element</td></tr></table></div>
+    <div><p>Create an element and add as child.</p>
+<p>The new element is added to this element as a child, and will have this element as its parent.</p>
+<table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">name:</span><code><a href="https://docs.python.org/3/library/stdtypes.html#str" class="intersphinx-link">str</a></code> or <code><a href="https://docs.python.org/3/library/stdtypes.html#tuple" class="intersphinx-link">tuple</a></code> of (<code><a href="https://docs.python.org/3/library/stdtypes.html#str" class="intersphinx-link">str</a></code>, <code><a href="https://docs.python.org/3/library/stdtypes.html#str" class="intersphinx-link">str</a></code>)</td><td class="fieldArgDesc">element name. This can be either a <code><a href="https://docs.python.org/3/library/stdtypes.html#str" class="intersphinx-link">str</a></code> object that contains the local name, or a tuple of (uri, local_name) for a fully qualified name. In the former case, the namespace URI is inherited from this element.</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">default​Uri:</span><code><a href="https://docs.python.org/3/library/stdtypes.html#str" class="intersphinx-link">str</a></code></td><td class="fieldArgDesc">default namespace URI for child elements. If <code><a href="https://docs.python.org/3/library/constants.html#None" class="intersphinx-link">None</a></code>, this is inherited from this element.</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">content:</span><code><a href="https://docs.python.org/3/library/stdtypes.html#str" class="intersphinx-link">str</a></code></td><td class="fieldArgDesc">text contained by the new element.</td></tr><tr class="fieldStart"><td class="fieldName" colspan="2">Returns</td></tr><tr><td class="fieldArgContainer">object providing <code><a href="twisted.words.xish.domish.IElement.html" class="internal-link" title="twisted.words.xish.domish.IElement">IElement</a></code></td><td class="fieldArgDesc">the created element</td></tr></table></div>
   </div>
 </div><div class="basemethod">
   
@@ -555,7 +591,7 @@
   <div class="docstring functionBody">
     
     
-    <div><p>Add a pre-serialized chunk o' XML as a child of this Element.</p></div>
+    <div>Add a pre-serialized chunk o' XML as a child of this Element.</div>
   </div>
 </div><div class="basemethod">
   
@@ -577,7 +613,7 @@
   <div class="docstring functionBody">
     
     
-    <div><p>Add a unique (across a given Python session) id attribute to this Element.</p></div>
+    <div>Add a unique (across a given Python session) id attribute to this Element.</div>
   </div>
 </div><div class="basemethod">
   
@@ -599,7 +635,9 @@
   <div class="docstring functionBody">
     
     
-    <div><p>Safely compare the value of an attribute against a provided value.</p><p><code><a href="https://docs.python.org/3/library/constants.html#None">None</a></code>-safe.</p></div>
+    <div><p>Safely compare the value of an attribute against a provided value.</p>
+<p><code><a href="https://docs.python.org/3/library/constants.html#None" class="intersphinx-link">None</a></code>-safe.</p>
+</div>
   </div>
 </div><div class="basemethod">
   
@@ -612,7 +650,7 @@
   </a>
   <div class="functionHeader">
     
-    <span class="py-keyword">def</span> <span class="py-defname">elements</span>(self, uri=None, name=None):
+    <span class="py-keyword">def</span> <span class="py-defname">elements</span>(self, uri=<a href="https://docs.python.org/3/library/constants.html#None" class="intersphinx-link">None</a>, name=<a href="https://docs.python.org/3/library/constants.html#None" class="intersphinx-link">None</a>):
     <a class="sourceLink" href="https://github.com/twisted/twisted/tree/twisted-21.2.0/src/twisted/words/xish/domish.py#L560">
       
       (source)
@@ -621,7 +659,9 @@
   <div class="docstring functionBody">
     
     
-    <div><p>Iterate across all children of this Element that are Elements.</p><p>Returns a generator over the child elements. If both the <code>uri</code> and <code>name</code> parameters are set, the returned generator will only yield on elements matching the qualified name.</p><table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">uri:</span><code><a href="https://docs.python.org/3/library/stdtypes.html#str">str</a></code></td><td class="fieldArgDesc">Optional element URI.</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">name:</span><code><a href="https://docs.python.org/3/library/stdtypes.html#str">str</a></code></td><td class="fieldArgDesc">Optional element name.</td></tr><tr class="fieldStart"><td class="fieldName" colspan="2">Returns</td></tr><tr><td colspan="2">Iterator that yields objects implementing <code><a href="twisted.words.xish.domish.IElement.html">IElement</a></code>.</td></tr></table></div>
+    <div><p>Iterate across all children of this Element that are Elements.</p>
+<p>Returns a generator over the child elements. If both the <tt class="rst-docutils literal">uri</tt> and <tt class="rst-docutils literal">name</tt> parameters are set, the returned generator will only yield on elements matching the qualified name.</p>
+<table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">uri:</span><code><a href="https://docs.python.org/3/library/stdtypes.html#str" class="intersphinx-link">str</a></code></td><td class="fieldArgDesc">Optional element URI.</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">name:</span><code><a href="https://docs.python.org/3/library/stdtypes.html#str" class="intersphinx-link">str</a></code></td><td class="fieldArgDesc">Optional element name.</td></tr><tr class="fieldStart"><td class="fieldName" colspan="2">Returns</td></tr><tr><td colspan="2">Iterator that yields objects implementing <code><a href="twisted.words.xish.domish.IElement.html" class="internal-link" title="twisted.words.xish.domish.IElement">IElement</a></code>.</td></tr></table></div>
   </div>
 </div><div class="basemethod">
   
@@ -656,7 +696,7 @@
   </a>
   <div class="functionHeader">
     
-    <span class="py-keyword">def</span> <span class="py-defname">getAttribute</span>(self, attribname, default=None):
+    <span class="py-keyword">def</span> <span class="py-defname">getAttribute</span>(self, attribname, default=<a href="https://docs.python.org/3/library/constants.html#None" class="intersphinx-link">None</a>):
     <a class="sourceLink" href="https://github.com/twisted/twisted/tree/twisted-21.2.0/src/twisted/words/xish/domish.py#L490">
       
       (source)
@@ -665,7 +705,7 @@
   <div class="docstring functionBody">
     
     
-    <div><p>Retrieve the value of attribname, if it exists</p></div>
+    <div>Retrieve the value of attribname, if it exists</div>
   </div>
 </div><div class="basemethod">
   
@@ -687,7 +727,7 @@
   <div class="docstring functionBody">
     
     
-    <div><p>Determine if the specified attribute exists</p></div>
+    <div>Determine if the specified attribute exists</div>
   </div>
 </div><div class="basemethod">
   
@@ -709,7 +749,7 @@
   <div class="docstring functionBody">
     
     
-    <div><p>Swap the values of two attribute.</p></div>
+    <div>Swap the values of two attribute.</div>
   </div>
 </div><div class="basemethod">
   
@@ -722,16 +762,16 @@
   </a>
   <div class="functionHeader">
     
-    <span class="py-keyword">def</span> <span class="py-defname">toXml</span>(self, prefixes=None, closeElement=1, defaultUri='', prefixesInScope=None):
+    <span class="py-keyword">def</span> <span class="py-defname">toXml</span>(self, prefixes=<a href="https://docs.python.org/3/library/constants.html#None" class="intersphinx-link">None</a>, closeElement=1, defaultUri=<span class="rst-variable-quote">'</span><span class="rst-variable-string"></span><span class="rst-variable-quote">'</span>, prefixesInScope=<a href="https://docs.python.org/3/library/constants.html#None" class="intersphinx-link">None</a>):
     <a class="sourceLink" href="https://github.com/twisted/twisted/tree/twisted-21.2.0/src/twisted/words/xish/domish.py#L579">
       
       (source)
     </a>
   </div>
   <div class="docstring functionBody">
-    <div class="interfaceinfo">from <code><a href="twisted.words.xish.domish.IElement.html#toXml">twisted.words.xish.domish.IElement</a></code></div>
+    <div class="interfaceinfo">from <code><a href="twisted.words.xish.domish.IElement.html#toXml" class="internal-link" title="twisted.words.xish.domish.IElement.toXml">twisted.words.xish.domish.IElement</a></code></div>
     
-    <div><p>Serialize this Element and all children to a string.</p></div>
+    <div>Serialize this Element and all children to a string.</div>
   </div>
 </div><div class="baseinstancevariable">
   
@@ -744,16 +784,17 @@
   </a>
   <div class="functionHeader">
     
-    <span class="py-defname">attributes</span>: <code><a href="https://docs.python.org/3/library/stdtypes.html#dict">dict</a></code> =
+    <span class="py-defname">attributes</span>: <code><a href="https://docs.python.org/3/library/stdtypes.html#dict" class="intersphinx-link">dict</a></code> =
     <a class="sourceLink" href="https://github.com/twisted/twisted/tree/twisted-21.2.0/src/twisted/words/xish/domish.py#L413">
       
       (source)
     </a>
   </div>
   <div class="functionBody">
-    <div class="interfaceinfo">from <code><a href="twisted.words.xish.domish.IElement.html#attributes">twisted.words.xish.domish.IElement</a></code></div>
+    <div class="interfaceinfo">from <code><a href="twisted.words.xish.domish.IElement.html#attributes" class="internal-link" title="twisted.words.xish.domish.IElement.attributes">twisted.words.xish.domish.IElement</a></code></div>
     
     <div>Dictionary of attributes associated with this Element.</div>
+    
   </div>
 </div><div class="baseinstancevariable">
   
@@ -766,16 +807,17 @@
   </a>
   <div class="functionHeader">
     
-    <span class="py-defname">children</span>: <code><a href="https://docs.python.org/3/library/stdtypes.html#list">list</a></code> =
+    <span class="py-defname">children</span>: <code><a href="https://docs.python.org/3/library/stdtypes.html#list" class="intersphinx-link">list</a></code> =
     <a class="sourceLink" href="https://github.com/twisted/twisted/tree/twisted-21.2.0/src/twisted/words/xish/domish.py#L407">
       
       (source)
     </a>
   </div>
   <div class="functionBody">
-    <div class="interfaceinfo">from <code><a href="twisted.words.xish.domish.IElement.html#children">twisted.words.xish.domish.IElement</a></code></div>
+    <div class="interfaceinfo">from <code><a href="twisted.words.xish.domish.IElement.html#children" class="internal-link" title="twisted.words.xish.domish.IElement.children">twisted.words.xish.domish.IElement</a></code></div>
     
     <div>List of child Elements and content</div>
+    
   </div>
 </div><div class="baseinstancevariable">
   
@@ -788,16 +830,17 @@
   </a>
   <div class="functionHeader">
     
-    <span class="py-defname">defaultUri</span>: <code><a href="https://docs.python.org/3/library/stdtypes.html#str">str</a></code> or None =
+    <span class="py-defname">defaultUri</span>: <code><a href="https://docs.python.org/3/library/stdtypes.html#str" class="intersphinx-link">str</a></code> or None =
     <a class="sourceLink" href="https://github.com/twisted/twisted/tree/twisted-21.2.0/src/twisted/words/xish/domish.py#L404">
       
       (source)
     </a>
   </div>
   <div class="functionBody">
-    <div class="interfaceinfo">from <code><a href="twisted.words.xish.domish.IElement.html#defaultUri">twisted.words.xish.domish.IElement</a></code></div>
+    <div class="interfaceinfo">from <code><a href="twisted.words.xish.domish.IElement.html#defaultUri" class="internal-link" title="twisted.words.xish.domish.IElement.defaultUri">twisted.words.xish.domish.IElement</a></code></div>
     
     <div>URI this Element exists within</div>
+    
   </div>
 </div><div class="baseinstancevariable">
   
@@ -810,16 +853,17 @@
   </a>
   <div class="functionHeader">
     
-    <span class="py-defname">localPrefixes</span>: <code><a href="https://docs.python.org/3/library/stdtypes.html#dict">dict</a></code> =
+    <span class="py-defname">localPrefixes</span>: <code><a href="https://docs.python.org/3/library/stdtypes.html#dict" class="intersphinx-link">dict</a></code> =
     <a class="sourceLink" href="https://github.com/twisted/twisted/tree/twisted-21.2.0/src/twisted/words/xish/domish.py#L416">
       
       (source)
     </a>
   </div>
   <div class="functionBody">
-    <div class="interfaceinfo">from <code><a href="twisted.words.xish.domish.IElement.html#localPrefixes">twisted.words.xish.domish.IElement</a></code></div>
+    <div class="interfaceinfo">from <code><a href="twisted.words.xish.domish.IElement.html#localPrefixes" class="internal-link" title="twisted.words.xish.domish.IElement.localPrefixes">twisted.words.xish.domish.IElement</a></code></div>
     
     <div>Dictionary of namespace declarations on this element. The key is the prefix to bind the namespace uri to.</div>
+    
   </div>
 </div><div class="baseinstancevariable">
   
@@ -832,16 +876,17 @@
   </a>
   <div class="functionHeader">
     
-    <span class="py-defname">name</span>: <code><a href="https://docs.python.org/3/library/stdtypes.html#str">str</a></code> =
+    <span class="py-defname">name</span>: <code><a href="https://docs.python.org/3/library/stdtypes.html#str" class="intersphinx-link">str</a></code> =
     <a class="sourceLink" href="https://github.com/twisted/twisted/tree/twisted-21.2.0/src/twisted/words/xish/domish.py#L401">
       
       (source)
     </a>
   </div>
   <div class="functionBody">
-    <div class="interfaceinfo">from <code><a href="twisted.words.xish.domish.IElement.html#name">twisted.words.xish.domish.IElement</a></code></div>
+    <div class="interfaceinfo">from <code><a href="twisted.words.xish.domish.IElement.html#name" class="internal-link" title="twisted.words.xish.domish.IElement.name">twisted.words.xish.domish.IElement</a></code></div>
     
     <div>Name of this Element</div>
+    
   </div>
 </div><div class="baseinstancevariable">
   
@@ -854,16 +899,17 @@
   </a>
   <div class="functionHeader">
     
-    <span class="py-defname">parent</span>: <code><a href="twisted.words.xish.domish.Element.html">Element</a></code> =
+    <span class="py-defname">parent</span>: <code><a href="twisted.words.xish.domish.Element.html" class="internal-link" title="twisted.words.xish.domish.Element">Element</a></code> =
     <a class="sourceLink" href="https://github.com/twisted/twisted/tree/twisted-21.2.0/src/twisted/words/xish/domish.py#L410">
       
       (source)
     </a>
   </div>
   <div class="functionBody">
-    <div class="interfaceinfo">from <code><a href="twisted.words.xish.domish.IElement.html#parent">twisted.words.xish.domish.IElement</a></code></div>
+    <div class="interfaceinfo">from <code><a href="twisted.words.xish.domish.IElement.html#parent" class="internal-link" title="twisted.words.xish.domish.IElement.parent">twisted.words.xish.domish.IElement</a></code></div>
     
     <div>Reference to the parent Element, if any.</div>
+    
   </div>
 </div><div class="baseinstancevariable">
   
@@ -876,16 +922,17 @@
   </a>
   <div class="functionHeader">
     
-    <span class="py-defname">uri</span>: <code><a href="https://docs.python.org/3/library/stdtypes.html#str">str</a></code> or None =
+    <span class="py-defname">uri</span>: <code><a href="https://docs.python.org/3/library/stdtypes.html#str" class="intersphinx-link">str</a></code> or None =
     <a class="sourceLink" href="https://github.com/twisted/twisted/tree/twisted-21.2.0/src/twisted/words/xish/domish.py#L398">
       
       (source)
     </a>
   </div>
   <div class="functionBody">
-    <div class="interfaceinfo">from <code><a href="twisted.words.xish.domish.IElement.html#uri">twisted.words.xish.domish.IElement</a></code></div>
+    <div class="interfaceinfo">from <code><a href="twisted.words.xish.domish.IElement.html#uri" class="internal-link" title="twisted.words.xish.domish.IElement.uri">twisted.words.xish.domish.IElement</a></code></div>
     
     <div>URI of this Element's name</div>
+    
   </div>
 </div><div class="basemethod private">
   
@@ -907,7 +954,7 @@
   <div class="docstring functionBody">
     
     
-    <div><p>Dequalify an attribute key as needed</p></div>
+    <div>Dequalify an attribute key as needed</div>
   </div>
 </div><div class="baseclassvariable private">
   
@@ -920,7 +967,7 @@
   </a>
   <div class="functionHeader">
     
-    <span class="py-defname">_idCounter</span>: <code><a href="https://docs.python.org/3/library/functions.html#int">int</a></code> =
+    <span class="py-defname">_idCounter</span>: <code><a href="https://docs.python.org/3/library/functions.html#int" class="intersphinx-link">int</a></code> =
     <a class="sourceLink" href="https://github.com/twisted/twisted/tree/twisted-21.2.0/src/twisted/words/xish/domish.py#L422">
       
       (source)
@@ -930,6 +977,7 @@
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    
   </div>
 </div>
 
@@ -938,11 +986,33 @@
 
     <footer class="navbar navbar-default">
   
+
   <div class="container">
     <a href="index.html">API Documentation</a> for <a href="https://twistedmatrix.com/" class="projecthome">Twisted</a>,
   generated by <a href="https://github.com/twisted/pydoctor/">pydoctor</a>
-    21.2.2 at 2022-01-12 04:22:24.
+    22.2.2.dev0 at 2022-03-04 05:57:20.
   </div>
+
+  <!-- Google analytics, obviously. -->
+  <script src="//www.google-analytics.com/urchin.js" type="text/javascript"></script>
+  <script type="text/javascript">
+    _uacct = "UA-99018-6";
+    urchinTracker();
+  </script>
+
+  <!-- If the documentation isn't current, insert a current link. -->
+  <script type="text/javascript">
+    if (window.location.pathname.indexOf('/current/') == -1) {
+      <!-- Give the user a link to this page, but in the current version of the docs. -->
+      var link = document.getElementById('current-docs-link');
+      link.href = window.location.pathname.replace(/\/\d+\.\d+\.\d+\/api\//, '/current/api/');
+      <!-- And make it visible -->
+      var container = document.getElementById('current-docs-container');
+      container.style.display = "";
+      delete link;
+      delete container;
+    }
+  </script>
 </footer>
 
     <script src="pydoctor.js" type="text/javascript"></script>

@@ -7,7 +7,7 @@
   <head>
     
     <title>twisted.internet.process.ProcessWriter</title>
-    <meta name="generator" content="pydoctor 21.2.2"> 
+    <meta name="generator" content="pydoctor 22.2.2.dev0"> 
         
     </meta>
     <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
@@ -19,7 +19,13 @@
 
   <body>
 
-    
+    <div style="display: none" id="current-docs-container" class="container">
+  <div class="col-sm-12">
+    <a id="current-docs-link">
+      Go to the latest version of this document.
+    </a>
+  </div>
+</div>
 
     <nav class="navbar navbar-default">
   
@@ -44,69 +50,82 @@
           Names
         </a>
 
-        <form action="search-results.html" id="search-box-container">
+        <div id="search-box-container">
           <div class="input-group">
-            <input id="search-box" name="search-query" placeholder="Search..." aria-label="Search" minlength="2" class="form-control" />
+            <input id="search-box" type="search" name="search-query" placeholder="Search..." aria-label="Search" minlength="2" class="form-control" autocomplete="off" />
+            
             <span class="input-group-btn">
-              <button class="btn btn-default" type="submit" title="Search"><img src="fonts/search.svg" alt="Search!" /></button>
-              <a class="btn btn-default" id="search-help-button" title="Help" onclick="toggleSearchHelpText()"><img src="fonts/info.svg" alt="Help!" /></a>
+              <a style="display: none;" class="btn btn-default" id="search-clear-button" title="Clear" onclick="clearSearch()"><img src="fonts/x-circle.svg" alt="Clear" /></a>
+              <a class="btn btn-default" id="search-help-button" title="Help" onclick="toggleSearchHelpText()"><img src="fonts/info.svg" alt="Help" /></a>
             </span>
           </div>
-        </form>
+        </div>
 
-        <div class="rst-admonition hint" id="search-help-box">
+      </div>
+
+      <div id="search-results-container" style="display: none;">
+        <div>
+          <span class="label label-default" id="search-docstrings-button">
+            <a title="Search in docstrings" onclick="toggleSearchInDocstrings()">search in docstrings</a></span>
+        </div>
+
+        <noscript>
+            <h1>Cannot search: JavaScript is not supported/enabled in your browser.</h1>
+        </noscript>
+
+        <div class="hint" id="search-help-box">
           <p class="rst-last">
       
             Search bar offers the following options:
             <ul>   
                 <li>
                   <strong>Term presence.</strong> The below example searches for documents that 
-                    must contain “foo”, might contain “bar” and must not contain “baz”:
-                  <br /> <code>'+foo bar -baz'</code>
+                    must contain “foo”, might contain “bar” and must not contain “baz”: <code>+foo bar -baz</code>
                 </li> 
 
                 <li>
-                  <strong>Wildcards.</strong> The below example searches for documents with words beginning with “foo”:
-                  <br /> <code>'foo*'</code>
+                  <strong>Wildcards.</strong> The below example searches for documents with words beginning with “foo”: <code>foo*</code>
                 </li> 
 
                 <li>
-                  <strong>Search in specific fields.</strong> The following search matches all documents 
-                  that contains "foo" in their full dotted name and with “bar” in any field:
-                  <br /> <code>'+fullName:*foo* +bar'</code>
+                  <strong>Search in specific fields.</strong> The following search matches all objects 
+                  in "twisted.mail" that matches “search”: <code>+qname:twisted.mail.* +search</code>
 
                   <p>
-                    Possible fields: 'name', 'docstring', 'fullName'.
+                    Possible fields: 'name', 'qname' (fully qualified name), 'docstring', and 'kind'.
+                    Last two fields are only applicable if "search in docstrings" is enabled.
                   </p>
                 </li>
 
                 <li>
                   <strong>Fuzzy matches.</strong> The following search matches all documents 
-                  that have a word within 1 edit distance of “foo”:
-                  <br /> <code>'foo~1'</code>
+                  that have a word within 1 edit distance of “foo”: <code>foo~1</code>
                 </li>
             </ul>
 
           </p>
         </div>
 
-      </div>
+        <div id="search-status"> </div>
+        
+        <div class="warning" id="search-warn-box" style="display: none;">
+          <p class="rst-last"><span id="search-warn"></span></p>
+        </div>
 
+        <table id="search-results">
+          <!-- Filled dynamically by JS -->
+        </table>
+        
+        <div style="margin-top: 8px;">
+          <p>Results provided by <a href="https://lunrjs.com">Lunr.js</a></p>
+        </div>
+      </div>
 
     </div>
   </div>
 
-  <script>
- 
-    function toggleSearchHelpText() {
-        document.body.classList.toggle("search-help-hidden");
-    }
-    // Init search and help text
-    document.getElementById('search-box-container').style.display = 'block';
-    document.getElementById('search-help-box').style.display = 'block';
-    document.body.classList.add("search-help-hidden");
-
-  </script>
+  <script src="ajax.js" type="text/javascript"></script>
+  <script src="search.js" type="text/javascript"></script>
 
 </nav>
 
@@ -115,7 +134,7 @@
     <div class="container">
 
       <div class="page-header">
-        <h1 class="class"><code><code><a href="twisted.html">twisted</a></code><wbr></wbr>.<code><a href="twisted.internet.html">internet</a></code><wbr></wbr>.<code><a href="twisted.internet.process.html">process</a></code><wbr></wbr>.<code><a href="twisted.internet.process.ProcessWriter.html">ProcessWriter</a></code></code></h1>
+        <h1 class="class"><code><code><a href="index.html" class="internal-link">twisted</a></code><wbr></wbr>.<code><a href="twisted.internet.html" class="internal-link" title="twisted.internet">internet</a></code><wbr></wbr>.<code><a href="twisted.internet.process.html" class="internal-link" title="twisted.internet.process">process</a></code><wbr></wbr>.<code><a href="twisted.internet.process.ProcessWriter.html" class="internal-link" title="twisted.internet.process.ProcessWriter">ProcessWriter</a></code></code></h1>
         <div id="showPrivate">
           <button class="btn btn-link" onclick="togglePrivate()">Toggle Private API</button>
         </div>
@@ -126,295 +145,299 @@
       </div>
 
       <div class="extrasDocstring">
-        <p><code><span class="py-keyword">class</span> <span class="py-defname">ProcessWriter</span>(<a href="twisted.internet.abstract.FileDescriptor.html" title="twisted.internet.abstract.FileDescriptor">abstract.FileDescriptor</a>): <a href="https://github.com/twisted/twisted/tree/twisted-21.2.0/src/twisted/internet/process.py#L109" class="sourceLink">(source)</a></code></p>
+        <p><code><span class="py-keyword">class</span> <span class="py-defname">ProcessWriter</span>(<a href="twisted.internet.abstract.FileDescriptor.html" class="internal-link" title="twisted.internet.abstract.FileDescriptor">abstract.FileDescriptor</a>): <a href="https://github.com/twisted/twisted/tree/twisted-21.2.0/src/twisted/internet/process.py#L109" class="sourceLink">(source)</a></code></p>
         <p><a href="classIndex.html#twisted.internet.process.ProcessWriter">View In Hierarchy</a></p>
       </div>
 
+      
+
       <div class="moduleDocstring">
-        <div><p>(Internal) Helper class to write into a Process's input pipe.</p><p>I am a helper which describes a selectable asynchronous writer to a process's input pipe, including stdin.</p></div>
+        <div><p>(Internal) Helper class to write into a Process's input pipe.</p>
+<p>I am a helper which describes a selectable asynchronous writer to a process's input pipe, including stdin.</p>
+</div>
       </div>
 
       <div id="splitTables">
-        <table class="children sortable" id="id1089">
+        <table class="children sortable" id="id1096">
   
   
   <tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#__init__">__init__</a></code></td>
-    <td><span>Initialize, specifying a Process instance to connect to.</span></td>
+    <td><code><a href="#__init__" class="internal-link" title="twisted.internet.process.ProcessWriter.__init__">__init__</a></code></td>
+    <td>Initialize, specifying a Process instance to connect to.</td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#connectionLost">connectionLost</a></code></td>
-    <td><span>See abstract.FileDescriptor.connectionLost.</span></td>
+    <td><code><a href="#connectionLost" class="internal-link" title="twisted.internet.process.ProcessWriter.connectionLost">connection​Lost</a></code></td>
+    <td>See abstract.FileDescriptor.connectionLost.</td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#doRead">doRead</a></code></td>
-    <td><span>The only way a write pipe can become "readable" is at EOF, because the child has closed it, and we're using a reactor which doesn't distinguish between readable and closed (such as the select reactor).</span></td>
+    <td><code><a href="#doRead" class="internal-link" title="twisted.internet.process.ProcessWriter.doRead">do​Read</a></code></td>
+    <td>The only way a write pipe can become "readable" is at EOF, because the child has closed it, and we're using a reactor which doesn't distinguish between readable and closed (such as the select reactor).</td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#fileno">fileno</a></code></td>
-    <td><span>Return the fileno() of my process's stdin.</span></td>
+    <td><code><a href="#fileno" class="internal-link" title="twisted.internet.process.ProcessWriter.fileno">fileno</a></code></td>
+    <td>Return the fileno() of my process's stdin.</td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#write">write</a></code></td>
-    <td><span>Reliably write some data.</span></td>
+    <td><code><a href="#write" class="internal-link" title="twisted.internet.process.ProcessWriter.write">write</a></code></td>
+    <td>Reliably write some data.</td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#writeSomeData">writeSomeData</a></code></td>
-    <td><span>Write some data to the open process.</span></td>
+    <td><code><a href="#writeSomeData" class="internal-link" title="twisted.internet.process.ProcessWriter.writeSomeData">write​Some​Data</a></code></td>
+    <td>Write some data to the open process.</td>
   </tr><tr class="classvariable">
     
     <td>Class Variable</td>
-    <td><code><a href="#connected">connected</a></code></td>
+    <td><code><a href="#connected" class="internal-link" title="twisted.internet.process.ProcessWriter.connected">connected</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="classvariable">
     
     <td>Class Variable</td>
-    <td><code><a href="#ic">ic</a></code></td>
+    <td><code><a href="#ic" class="internal-link" title="twisted.internet.process.ProcessWriter.ic">ic</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="instancevariable">
     
     <td>Instance Variable</td>
-    <td><code><a href="#enableReadHack">enableReadHack</a></code></td>
-    <td><span>A flag which determines how readability on this write descriptor will be handled.  If <code>True</code>, then readability may indicate the reader for this write descriptor has been closed (ie, the connection has been lost).  If <code>False</code>, then readability events are ignored.</span></td>
+    <td><code><a href="#enableReadHack" class="internal-link" title="twisted.internet.process.ProcessWriter.enableReadHack">enable​Read​Hack</a></code></td>
+    <td>A flag which determines how readability on this write descriptor will be handled.  If <tt class="rst-docutils literal">True</tt>, then readability may indicate the reader for this write descriptor has been closed (ie, the connection has been lost).  If <tt class="rst-docutils literal">False</tt>, then readability events are ignored.</td>
   </tr><tr class="instancevariable">
     
     <td>Instance Variable</td>
-    <td><code><a href="#fd">fd</a></code></td>
+    <td><code><a href="#fd" class="internal-link" title="twisted.internet.process.ProcessWriter.fd">fd</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="instancevariable">
     
     <td>Instance Variable</td>
-    <td><code><a href="#name">name</a></code></td>
+    <td><code><a href="#name" class="internal-link" title="twisted.internet.process.ProcessWriter.name">name</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="instancevariable">
     
     <td>Instance Variable</td>
-    <td><code><a href="#proc">proc</a></code></td>
+    <td><code><a href="#proc" class="internal-link" title="twisted.internet.process.ProcessWriter.proc">proc</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr>
 </table>
         
           <p class="inheritedFrom">
-            Inherited from <code><a href="twisted.internet.abstract.FileDescriptor.html">FileDescriptor</a></code>:
+            Inherited from <code><a href="twisted.internet.abstract.FileDescriptor.html" class="internal-link" title="twisted.internet.abstract.FileDescriptor">FileDescriptor</a></code>:
           </p>
-          <table class="children sortable" id="id1090">
+          <table class="children sortable" id="id1097">
   
   
   <tr class="basemethod">
     
     <td>Method</td>
-    <td><code><a href="twisted.internet.abstract.FileDescriptor.html#doWrite">doWrite</a></code></td>
-    <td><span>Called when data can be written.</span></td>
+    <td><code><a href="twisted.internet.abstract.FileDescriptor.html#doWrite" class="internal-link" title="twisted.internet.abstract.FileDescriptor.doWrite">do​Write</a></code></td>
+    <td>Called when data can be written.</td>
   </tr><tr class="basemethod">
     
     <td>Method</td>
-    <td><code><a href="twisted.internet.abstract.FileDescriptor.html#getHost">getHost</a></code></td>
-    <td><span>Similar to getPeer, but returns an address describing this side of the connection.</span></td>
+    <td><code><a href="twisted.internet.abstract.FileDescriptor.html#getHost" class="internal-link" title="twisted.internet.abstract.FileDescriptor.getHost">get​Host</a></code></td>
+    <td>Similar to getPeer, but returns an address describing this side of the connection.</td>
   </tr><tr class="basemethod">
     
     <td>Method</td>
-    <td><code><a href="twisted.internet.abstract.FileDescriptor.html#getPeer">getPeer</a></code></td>
-    <td><span>Get the remote address of this connection.</span></td>
+    <td><code><a href="twisted.internet.abstract.FileDescriptor.html#getPeer" class="internal-link" title="twisted.internet.abstract.FileDescriptor.getPeer">get​Peer</a></code></td>
+    <td>Get the remote address of this connection.</td>
   </tr><tr class="basemethod">
     
     <td>Method</td>
-    <td><code><a href="twisted.internet.abstract.FileDescriptor.html#loseConnection">loseConnection</a></code></td>
-    <td><span>Close the connection at the next available opportunity.</span></td>
+    <td><code><a href="twisted.internet.abstract.FileDescriptor.html#loseConnection" class="internal-link" title="twisted.internet.abstract.FileDescriptor.loseConnection">lose​Connection</a></code></td>
+    <td>Close the connection at the next available opportunity.</td>
   </tr><tr class="basemethod">
     
     <td>Method</td>
-    <td><code><a href="twisted.internet.abstract.FileDescriptor.html#loseWriteConnection">loseWriteConnection</a></code></td>
+    <td><code><a href="twisted.internet.abstract.FileDescriptor.html#loseWriteConnection" class="internal-link" title="twisted.internet.abstract.FileDescriptor.loseWriteConnection">lose​Write​Connection</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="basemethod">
     
     <td>Method</td>
-    <td><code><a href="twisted.internet.abstract.FileDescriptor.html#pauseProducing">pauseProducing</a></code></td>
-    <td><span>Pause producing data.</span></td>
+    <td><code><a href="twisted.internet.abstract.FileDescriptor.html#pauseProducing" class="internal-link" title="twisted.internet.abstract.FileDescriptor.pauseProducing">pause​Producing</a></code></td>
+    <td>Pause producing data.</td>
   </tr><tr class="basemethod">
     
     <td>Method</td>
-    <td><code><a href="twisted.internet.abstract.FileDescriptor.html#readConnectionLost">readConnectionLost</a></code></td>
-    <td><span>Indicates read connection was lost.</span></td>
+    <td><code><a href="twisted.internet.abstract.FileDescriptor.html#readConnectionLost" class="internal-link" title="twisted.internet.abstract.FileDescriptor.readConnectionLost">read​Connection​Lost</a></code></td>
+    <td>Indicates read connection was lost.</td>
   </tr><tr class="basemethod">
     
     <td>Method</td>
-    <td><code><a href="twisted.internet.abstract.FileDescriptor.html#resumeProducing">resumeProducing</a></code></td>
-    <td><span>Resume producing data.</span></td>
+    <td><code><a href="twisted.internet.abstract.FileDescriptor.html#resumeProducing" class="internal-link" title="twisted.internet.abstract.FileDescriptor.resumeProducing">resume​Producing</a></code></td>
+    <td>Resume producing data.</td>
   </tr><tr class="basemethod">
     
     <td>Method</td>
-    <td><code><a href="twisted.internet.abstract.FileDescriptor.html#startReading">startReading</a></code></td>
-    <td><span>Start waiting for read availability.</span></td>
+    <td><code><a href="twisted.internet.abstract.FileDescriptor.html#startReading" class="internal-link" title="twisted.internet.abstract.FileDescriptor.startReading">start​Reading</a></code></td>
+    <td>Start waiting for read availability.</td>
   </tr><tr class="basemethod">
     
     <td>Method</td>
-    <td><code><a href="twisted.internet.abstract.FileDescriptor.html#startWriting">startWriting</a></code></td>
-    <td><span>Start waiting for write availability.</span></td>
+    <td><code><a href="twisted.internet.abstract.FileDescriptor.html#startWriting" class="internal-link" title="twisted.internet.abstract.FileDescriptor.startWriting">start​Writing</a></code></td>
+    <td>Start waiting for write availability.</td>
   </tr><tr class="basemethod">
     
     <td>Method</td>
-    <td><code><a href="twisted.internet.abstract.FileDescriptor.html#stopConsuming">stopConsuming</a></code></td>
-    <td><span>Stop consuming data.</span></td>
+    <td><code><a href="twisted.internet.abstract.FileDescriptor.html#stopConsuming" class="internal-link" title="twisted.internet.abstract.FileDescriptor.stopConsuming">stop​Consuming</a></code></td>
+    <td>Stop consuming data.</td>
   </tr><tr class="basemethod">
     
     <td>Method</td>
-    <td><code><a href="twisted.internet.abstract.FileDescriptor.html#stopProducing">stopProducing</a></code></td>
-    <td><span>Stop producing data.</span></td>
+    <td><code><a href="twisted.internet.abstract.FileDescriptor.html#stopProducing" class="internal-link" title="twisted.internet.abstract.FileDescriptor.stopProducing">stop​Producing</a></code></td>
+    <td>Stop producing data.</td>
   </tr><tr class="basemethod">
     
     <td>Method</td>
-    <td><code><a href="twisted.internet.abstract.FileDescriptor.html#stopReading">stopReading</a></code></td>
-    <td><span>Stop waiting for read availability.</span></td>
+    <td><code><a href="twisted.internet.abstract.FileDescriptor.html#stopReading" class="internal-link" title="twisted.internet.abstract.FileDescriptor.stopReading">stop​Reading</a></code></td>
+    <td>Stop waiting for read availability.</td>
   </tr><tr class="basemethod">
     
     <td>Method</td>
-    <td><code><a href="twisted.internet.abstract.FileDescriptor.html#stopWriting">stopWriting</a></code></td>
-    <td><span>Stop waiting for write availability.</span></td>
+    <td><code><a href="twisted.internet.abstract.FileDescriptor.html#stopWriting" class="internal-link" title="twisted.internet.abstract.FileDescriptor.stopWriting">stop​Writing</a></code></td>
+    <td>Stop waiting for write availability.</td>
   </tr><tr class="basemethod">
     
     <td>Method</td>
-    <td><code><a href="twisted.internet.abstract.FileDescriptor.html#writeConnectionLost">writeConnectionLost</a></code></td>
-    <td><span>Indicates write connection was lost.</span></td>
+    <td><code><a href="twisted.internet.abstract.FileDescriptor.html#writeConnectionLost" class="internal-link" title="twisted.internet.abstract.FileDescriptor.writeConnectionLost">write​Connection​Lost</a></code></td>
+    <td>Indicates write connection was lost.</td>
   </tr><tr class="basemethod">
     
     <td>Method</td>
-    <td><code><a href="twisted.internet.abstract.FileDescriptor.html#writeSequence">writeSequence</a></code></td>
-    <td><span>Reliably write a sequence of data.</span></td>
+    <td><code><a href="twisted.internet.abstract.FileDescriptor.html#writeSequence" class="internal-link" title="twisted.internet.abstract.FileDescriptor.writeSequence">write​Sequence</a></code></td>
+    <td>Reliably write a sequence of data.</td>
+  </tr><tr class="baseconstant">
+    
+    <td>Constant</td>
+    <td><code><a href="twisted.internet.abstract.FileDescriptor.html#SEND_LIMIT" class="internal-link" title="twisted.internet.abstract.FileDescriptor.SEND_LIMIT">SEND​_LIMIT</a></code></td>
+    <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="baseclassvariable">
     
     <td>Class Variable</td>
-    <td><code><a href="twisted.internet.abstract.FileDescriptor.html#bufferSize">bufferSize</a></code></td>
+    <td><code><a href="twisted.internet.abstract.FileDescriptor.html#bufferSize" class="internal-link" title="twisted.internet.abstract.FileDescriptor.bufferSize">buffer​Size</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="baseclassvariable">
     
     <td>Class Variable</td>
-    <td><code><a href="twisted.internet.abstract.FileDescriptor.html#SEND_LIMIT">SEND_LIMIT</a></code></td>
+    <td><code><a href="twisted.internet.abstract.FileDescriptor.html#disconnecting" class="internal-link" title="twisted.internet.abstract.FileDescriptor.disconnecting">disconnecting</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="baseinstancevariable">
     
     <td>Instance Variable</td>
-    <td><code><a href="twisted.internet.abstract.FileDescriptor.html#dataBuffer">dataBuffer</a></code></td>
+    <td><code><a href="twisted.internet.abstract.FileDescriptor.html#dataBuffer" class="internal-link" title="twisted.internet.abstract.FileDescriptor.dataBuffer">data​Buffer</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="baseinstancevariable">
     
     <td>Instance Variable</td>
-    <td><code><a href="twisted.internet.abstract.FileDescriptor.html#disconnected">disconnected</a></code></td>
+    <td><code><a href="twisted.internet.abstract.FileDescriptor.html#disconnected" class="internal-link" title="twisted.internet.abstract.FileDescriptor.disconnected">disconnected</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="baseinstancevariable">
     
     <td>Instance Variable</td>
-    <td><code><a href="twisted.internet.abstract.FileDescriptor.html#disconnecting">disconnecting</a></code></td>
+    <td><code><a href="twisted.internet.abstract.FileDescriptor.html#offset" class="internal-link" title="twisted.internet.abstract.FileDescriptor.offset">offset</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="baseinstancevariable">
     
     <td>Instance Variable</td>
-    <td><code><a href="twisted.internet.abstract.FileDescriptor.html#offset">offset</a></code></td>
+    <td><code><a href="twisted.internet.abstract.FileDescriptor.html#producer" class="internal-link" title="twisted.internet.abstract.FileDescriptor.producer">producer</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="baseinstancevariable">
     
     <td>Instance Variable</td>
-    <td><code><a href="twisted.internet.abstract.FileDescriptor.html#producer">producer</a></code></td>
+    <td><code><a href="twisted.internet.abstract.FileDescriptor.html#producerPaused" class="internal-link" title="twisted.internet.abstract.FileDescriptor.producerPaused">producer​Paused</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="baseinstancevariable">
     
     <td>Instance Variable</td>
-    <td><code><a href="twisted.internet.abstract.FileDescriptor.html#producerPaused">producerPaused</a></code></td>
-    <td><span class="undocumented">Undocumented</span></td>
-  </tr><tr class="baseinstancevariable">
-    
-    <td>Instance Variable</td>
-    <td><code><a href="twisted.internet.abstract.FileDescriptor.html#reactor">reactor</a></code></td>
+    <td><code><a href="twisted.internet.abstract.FileDescriptor.html#reactor" class="internal-link" title="twisted.internet.abstract.FileDescriptor.reactor">reactor</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="basemethod private">
     
     <td>Method</td>
-    <td><code><a href="twisted.internet.abstract.FileDescriptor.html#_closeWriteConnection">_closeWriteConnection</a></code></td>
+    <td><code><a href="twisted.internet.abstract.FileDescriptor.html#_closeWriteConnection" class="internal-link" title="twisted.internet.abstract.FileDescriptor._closeWriteConnection">_close​Write​Connection</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="basemethod private">
     
     <td>Method</td>
-    <td><code><a href="twisted.internet.abstract.FileDescriptor.html#_isSendBufferFull">_isSendBufferFull</a></code></td>
-    <td><span>Determine whether the user-space send buffer for this transport is full or not.</span></td>
+    <td><code><a href="twisted.internet.abstract.FileDescriptor.html#_isSendBufferFull" class="internal-link" title="twisted.internet.abstract.FileDescriptor._isSendBufferFull">_is​Send​Buffer​Full</a></code></td>
+    <td>Determine whether the user-space send buffer for this transport is full or not.</td>
   </tr><tr class="basemethod private">
     
     <td>Method</td>
-    <td><code><a href="twisted.internet.abstract.FileDescriptor.html#_maybePauseProducer">_maybePauseProducer</a></code></td>
-    <td><span>Possibly pause a producer, if there is one and the send buffer is full.</span></td>
+    <td><code><a href="twisted.internet.abstract.FileDescriptor.html#_maybePauseProducer" class="internal-link" title="twisted.internet.abstract.FileDescriptor._maybePauseProducer">_maybe​Pause​Producer</a></code></td>
+    <td>Possibly pause a producer, if there is one and the send buffer is full.</td>
   </tr><tr class="basemethod private">
     
     <td>Method</td>
-    <td><code><a href="twisted.internet.abstract.FileDescriptor.html#_postLoseConnection">_postLoseConnection</a></code></td>
-    <td><span>Called after a loseConnection(), when all data has been written.</span></td>
-  </tr><tr class="baseinstancevariable private">
+    <td><code><a href="twisted.internet.abstract.FileDescriptor.html#_postLoseConnection" class="internal-link" title="twisted.internet.abstract.FileDescriptor._postLoseConnection">_post​Lose​Connection</a></code></td>
+    <td>Called after a loseConnection(), when all data has been written.</td>
+  </tr><tr class="baseclassvariable private">
     
-    <td>Instance Variable</td>
-    <td><code><a href="twisted.internet.abstract.FileDescriptor.html#_tempDataBuffer">_tempDataBuffer</a></code></td>
+    <td>Class Variable</td>
+    <td><code><a href="twisted.internet.abstract.FileDescriptor.html#_writeDisconnected" class="internal-link" title="twisted.internet.abstract.FileDescriptor._writeDisconnected">_write​Disconnected</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="baseinstancevariable private">
     
     <td>Instance Variable</td>
-    <td><code><a href="twisted.internet.abstract.FileDescriptor.html#_tempDataLen">_tempDataLen</a></code></td>
+    <td><code><a href="twisted.internet.abstract.FileDescriptor.html#_tempDataBuffer" class="internal-link" title="twisted.internet.abstract.FileDescriptor._tempDataBuffer">_temp​Data​Buffer</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="baseinstancevariable private">
     
     <td>Instance Variable</td>
-    <td><code><a href="twisted.internet.abstract.FileDescriptor.html#_writeDisconnected">_writeDisconnected</a></code></td>
+    <td><code><a href="twisted.internet.abstract.FileDescriptor.html#_tempDataLen" class="internal-link" title="twisted.internet.abstract.FileDescriptor._tempDataLen">_temp​Data​Len</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="baseinstancevariable private">
     
     <td>Instance Variable</td>
-    <td><code><a href="twisted.internet.abstract.FileDescriptor.html#_writeDisconnecting">_writeDisconnecting</a></code></td>
+    <td><code><a href="twisted.internet.abstract.FileDescriptor.html#_writeDisconnecting" class="internal-link" title="twisted.internet.abstract.FileDescriptor._writeDisconnecting">_write​Disconnecting</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr>
 </table>
           
           <p class="inheritedFrom">
-            Inherited from <code><a href="twisted.internet.abstract._ConsumerMixin.html">_ConsumerMixin</a></code> (via <code><a href="twisted.internet.abstract.FileDescriptor.html">FileDescriptor</a></code>):
+            Inherited from <code><a href="twisted.internet.abstract._ConsumerMixin.html" class="internal-link" title="twisted.internet.abstract._ConsumerMixin">_ConsumerMixin</a></code> (via <code><a href="twisted.internet.abstract.FileDescriptor.html" class="internal-link" title="twisted.internet.abstract.FileDescriptor">FileDescriptor</a></code>):
           </p>
-          <table class="children sortable" id="id1091">
+          <table class="children sortable" id="id1098">
   
   
   <tr class="basemethod">
     
     <td>Method</td>
-    <td><code><a href="twisted.internet.abstract._ConsumerMixin.html#registerProducer">registerProducer</a></code></td>
-    <td><span>Register to receive data from a producer.</span></td>
+    <td><code><a href="twisted.internet.abstract._ConsumerMixin.html#registerProducer" class="internal-link" title="twisted.internet.abstract._ConsumerMixin.registerProducer">register​Producer</a></code></td>
+    <td>Register to receive data from a producer.</td>
   </tr><tr class="basemethod">
     
     <td>Method</td>
-    <td><code><a href="twisted.internet.abstract._ConsumerMixin.html#unregisterProducer">unregisterProducer</a></code></td>
-    <td><span>Stop consuming data from a producer, without disconnecting.</span></td>
+    <td><code><a href="twisted.internet.abstract._ConsumerMixin.html#unregisterProducer" class="internal-link" title="twisted.internet.abstract._ConsumerMixin.unregisterProducer">unregister​Producer</a></code></td>
+    <td>Stop consuming data from a producer, without disconnecting.</td>
   </tr><tr class="baseinstancevariable">
     
     <td>Instance Variable</td>
-    <td><code><a href="twisted.internet.abstract._ConsumerMixin.html#streamingProducer">streamingProducer</a></code></td>
-    <td><span><code>bool</code> or <code>int</code></span></td>
+    <td><code><a href="twisted.internet.abstract._ConsumerMixin.html#streamingProducer" class="internal-link" title="twisted.internet.abstract._ConsumerMixin.streamingProducer">streaming​Producer</a></code></td>
+    <td><tt class="rst-docutils literal">bool</tt> or <tt class="rst-docutils literal">int</tt></td>
   </tr>
 </table>
           
           <p class="inheritedFrom">
-            Inherited from <code><a href="twisted.internet.abstract._LogOwner.html">_LogOwner</a></code> (via <code><a href="twisted.internet.abstract.FileDescriptor.html">FileDescriptor</a></code>):
+            Inherited from <code><a href="twisted.internet.abstract._LogOwner.html" class="internal-link" title="twisted.internet.abstract._LogOwner">_LogOwner</a></code> (via <code><a href="twisted.internet.abstract.FileDescriptor.html" class="internal-link" title="twisted.internet.abstract.FileDescriptor">FileDescriptor</a></code>):
           </p>
-          <table class="children sortable" id="id1092">
+          <table class="children sortable" id="id1099">
   
   
   <tr class="basemethod">
     
     <td>Method</td>
-    <td><code><a href="twisted.internet.abstract._LogOwner.html#logPrefix">logPrefix</a></code></td>
-    <td><span>Override this method to insert custom logging behavior.  Its return value will be inserted in front of every line.  It may be called more times than the number of output lines.</span></td>
+    <td><code><a href="twisted.internet.abstract._LogOwner.html#logPrefix" class="internal-link" title="twisted.internet.abstract._LogOwner.logPrefix">log​Prefix</a></code></td>
+    <td>Override this method to insert custom logging behavior.  Its return value will be inserted in front of every line.  It may be called more times than the number of output lines.</td>
   </tr><tr class="basemethod private">
     
     <td>Method</td>
-    <td><code><a href="twisted.internet.abstract._LogOwner.html#_getLogPrefix">_getLogPrefix</a></code></td>
-    <td><span>Determine the log prefix to use for messages related to <code>applicationObject</code>, which may or may not be an <code><a href="twisted.internet.interfaces.ILoggingContext.html">interfaces.ILoggingContext</a></code> provider.</span></td>
+    <td><code><a href="twisted.internet.abstract._LogOwner.html#_getLogPrefix" class="internal-link" title="twisted.internet.abstract._LogOwner._getLogPrefix">_get​Log​Prefix</a></code></td>
+    <td>Determine the log prefix to use for messages related to <tt class="rst-docutils literal">applicationObject</tt>, which may or may not be an <code><a href="twisted.internet.interfaces.ILoggingContext.html" class="internal-link" title="twisted.internet.interfaces.ILoggingContext">interfaces.ILoggingContext</a></code> provider.</td>
   </tr>
 </table>
           
@@ -435,16 +458,16 @@
   </a>
   <div class="functionHeader">
     
-    <span class="py-keyword">def</span> <span class="py-defname">__init__</span>(self, reactor, proc, name, fileno, forceReadHack=False):
+    <span class="py-keyword">def</span> <span class="py-defname">__init__</span>(self, reactor, proc, name, fileno, forceReadHack=<a href="https://docs.python.org/3/library/constants.html#False" class="intersphinx-link">False</a>):
     <a class="sourceLink" href="https://github.com/twisted/twisted/tree/twisted-21.2.0/src/twisted/internet/process.py#L127">
       
       (source)
     </a>
   </div>
   <div class="docstring functionBody">
-    <div class="interfaceinfo">overrides <code><a href="twisted.internet.abstract.FileDescriptor.html#__init__">twisted.internet.abstract.FileDescriptor.__init__</a></code></div>
+    <div class="interfaceinfo">overrides <code><a href="twisted.internet.abstract.FileDescriptor.html#__init__" class="internal-link">twisted.internet.abstract.FileDescriptor.__init__</a></code></div>
     
-    <div><p>Initialize, specifying a Process instance to connect to.</p></div>
+    <div>Initialize, specifying a Process instance to connect to.</div>
   </div>
 </div><div class="basemethod">
   
@@ -464,9 +487,9 @@
     </a>
   </div>
   <div class="docstring functionBody">
-    <div class="interfaceinfo">from <code><a href="twisted.internet.interfaces.IFileDescriptor.html#connectionLost">twisted.internet.interfaces.IFileDescriptor</a></code></div><div class="interfaceinfo">overrides <code><a href="twisted.internet.abstract.FileDescriptor.html#connectionLost">twisted.internet.abstract.FileDescriptor.connectionLost</a></code></div>
+    <div class="interfaceinfo">from <code><a href="twisted.internet.interfaces.IFileDescriptor.html#connectionLost" class="internal-link" title="twisted.internet.interfaces.IFileDescriptor.connectionLost">twisted.internet.interfaces.IFileDescriptor</a></code></div><div class="interfaceinfo">overrides <code><a href="twisted.internet.abstract.FileDescriptor.html#connectionLost" class="internal-link">twisted.internet.abstract.FileDescriptor.connectionLost</a></code></div>
     
-    <div><p>See abstract.FileDescriptor.connectionLost.</p></div>
+    <div>See abstract.FileDescriptor.connectionLost.</div>
   </div>
 </div><div class="basemethod">
   
@@ -486,9 +509,12 @@
     </a>
   </div>
   <div class="docstring functionBody">
-    <div class="interfaceinfo">from <code><a href="twisted.internet.interfaces.IReadDescriptor.html#doRead">twisted.internet.interfaces.IReadDescriptor</a></code></div><div class="interfaceinfo">overrides <code><a href="twisted.internet.abstract.FileDescriptor.html#doRead">twisted.internet.abstract.FileDescriptor.doRead</a></code></div>
+    <div class="interfaceinfo">from <code><a href="twisted.internet.interfaces.IReadDescriptor.html#doRead" class="internal-link" title="twisted.internet.interfaces.IReadDescriptor.doRead">twisted.internet.interfaces.IReadDescriptor</a></code></div><div class="interfaceinfo">overrides <code><a href="twisted.internet.abstract.FileDescriptor.html#doRead" class="internal-link">twisted.internet.abstract.FileDescriptor.doRead</a></code></div>
     
-    <div><p>The only way a write pipe can become "readable" is at EOF, because the child has closed it, and we're using a reactor which doesn't distinguish between readable and closed (such as the select reactor).</p><p>Except that's not true on linux &lt; 2.6.11. It has the following characteristics: write pipe is completely empty =&gt; POLLOUT (writable in select), write pipe is not completely empty =&gt; POLLIN (readable in select), write pipe's reader closed =&gt; POLLIN|POLLERR (readable and writable in select)</p><p>That's what this funky code is for. If linux was not broken, this function could be simply "return CONNECTION_LOST".</p></div>
+    <div><p>The only way a write pipe can become "readable" is at EOF, because the child has closed it, and we're using a reactor which doesn't distinguish between readable and closed (such as the select reactor).</p>
+<p>Except that's not true on linux &lt; 2.6.11. It has the following characteristics: write pipe is completely empty =&gt; POLLOUT (writable in select), write pipe is not completely empty =&gt; POLLIN (readable in select), write pipe's reader closed =&gt; POLLIN|POLLERR (readable and writable in select)</p>
+<p>That's what this funky code is for. If linux was not broken, this function could be simply "return CONNECTION_LOST".</p>
+</div>
   </div>
 </div><div class="basemethod">
   
@@ -508,9 +534,9 @@
     </a>
   </div>
   <div class="docstring functionBody">
-    <div class="interfaceinfo">from <code><a href="twisted.internet.interfaces.IFileDescriptor.html#fileno">twisted.internet.interfaces.IFileDescriptor</a></code></div><div class="interfaceinfo">overrides <code><a href="twisted.internet.abstract.FileDescriptor.html#fileno">twisted.internet.abstract.FileDescriptor.fileno</a></code></div>
+    <div class="interfaceinfo">from <code><a href="twisted.internet.interfaces.IFileDescriptor.html#fileno" class="internal-link" title="twisted.internet.interfaces.IFileDescriptor.fileno">twisted.internet.interfaces.IFileDescriptor</a></code></div><div class="interfaceinfo">overrides <code><a href="twisted.internet.abstract.FileDescriptor.html#fileno" class="internal-link">twisted.internet.abstract.FileDescriptor.fileno</a></code></div>
     
-    <div><p>Return the fileno() of my process's stdin.</p></div>
+    <div>Return the fileno() of my process's stdin.</div>
   </div>
 </div><div class="basemethod">
   
@@ -530,9 +556,11 @@
     </a>
   </div>
   <div class="docstring functionBody">
-    <div class="interfaceinfo">from <code><a href="twisted.internet.interfaces.IConsumer.html#write">twisted.internet.interfaces.IConsumer</a></code></div><div class="interfaceinfo">overrides <code><a href="twisted.internet.abstract.FileDescriptor.html#write">twisted.internet.abstract.FileDescriptor.write</a></code></div>
+    <div class="interfaceinfo">from <code><a href="twisted.internet.interfaces.IConsumer.html#write" class="internal-link" title="twisted.internet.interfaces.IConsumer.write">twisted.internet.interfaces.IConsumer</a></code></div><div class="interfaceinfo">overrides <code><a href="twisted.internet.abstract.FileDescriptor.html#write" class="internal-link">twisted.internet.abstract.FileDescriptor.write</a></code></div>
     
-    <div><p>Reliably write some data.</p><p>The data is buffered until the underlying file descriptor is ready for writing. If there is more than <code>self.bufferSize</code> data in the buffer and this descriptor has a registered streaming producer, its <code>pauseProducing()</code> method will be called.</p></div>
+    <div><p>Reliably write some data.</p>
+<p>The data is buffered until the underlying file descriptor is ready for writing. If there is more than <tt class="rst-docutils literal">self.bufferSize</tt> data in the buffer and this descriptor has a registered streaming producer, its <tt class="rst-docutils literal">pauseProducing()</tt> method will be called.</p>
+</div>
   </div>
 </div><div class="basemethod">
   
@@ -552,9 +580,9 @@
     </a>
   </div>
   <div class="docstring functionBody">
-    <div class="interfaceinfo">overrides <code><a href="twisted.internet.abstract.FileDescriptor.html#writeSomeData">twisted.internet.abstract.FileDescriptor.writeSomeData</a></code></div>
+    <div class="interfaceinfo">overrides <code><a href="twisted.internet.abstract.FileDescriptor.html#writeSomeData" class="internal-link">twisted.internet.abstract.FileDescriptor.writeSomeData</a></code></div>
     
-    <div><p>Write some data to the open process.</p></div>
+    <div>Write some data to the open process.</div>
   </div>
 </div><div class="baseclassvariable">
   
@@ -567,16 +595,17 @@
   </a>
   <div class="functionHeader">
     
-    <span class="py-defname">connected</span>: <code><a href="https://docs.python.org/3/library/functions.html#int">int</a></code> =
+    <span class="py-defname">connected</span>: <code><a href="https://docs.python.org/3/library/functions.html#int" class="intersphinx-link">int</a></code> =
     <a class="sourceLink" href="https://github.com/twisted/twisted/tree/twisted-21.2.0/src/twisted/internet/process.py#L123">
       
       (source)
     </a>
   </div>
   <div class="functionBody">
-    <div class="interfaceinfo">overrides <code><a href="twisted.internet.abstract.FileDescriptor.html#connected">twisted.internet.abstract.FileDescriptor.connected</a></code></div>
+    <div class="interfaceinfo">overrides <code><a href="twisted.internet.abstract.FileDescriptor.html#connected" class="internal-link">twisted.internet.abstract.FileDescriptor.connected</a></code></div>
     
     <div><p class="undocumented">Undocumented</p></div>
+    
   </div>
 </div><div class="baseclassvariable">
   
@@ -589,7 +618,7 @@
   </a>
   <div class="functionHeader">
     
-    <span class="py-defname">ic</span>: <code><a href="https://docs.python.org/3/library/functions.html#int">int</a></code> =
+    <span class="py-defname">ic</span>: <code><a href="https://docs.python.org/3/library/functions.html#int" class="intersphinx-link">int</a></code> =
     <a class="sourceLink" href="https://github.com/twisted/twisted/tree/twisted-21.2.0/src/twisted/internet/process.py#L124">
       
       (source)
@@ -599,6 +628,7 @@
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    
   </div>
 </div><div class="baseinstancevariable">
   
@@ -611,7 +641,7 @@
   </a>
   <div class="functionHeader">
     
-    <span class="py-defname">enableReadHack</span>: <code><a href="https://docs.python.org/3/library/functions.html#bool">bool</a></code> =
+    <span class="py-defname">enableReadHack</span>: <code><a href="https://docs.python.org/3/library/functions.html#bool" class="intersphinx-link">bool</a></code> =
     <a class="sourceLink" href="https://github.com/twisted/twisted/tree/twisted-21.2.0/src/twisted/internet/process.py#L116">
       
       (source)
@@ -620,7 +650,8 @@
   <div class="functionBody">
     
     
-    <div>A flag which determines how readability on this write descriptor will be handled.  If <code>True</code>, then readability may indicate the reader for this write descriptor has been closed (ie, the connection has been lost).  If <code>False</code>, then readability events are ignored.</div>
+    <div>A flag which determines how readability on this write descriptor will be handled.  If <tt class="rst-docutils literal">True</tt>, then readability may indicate the reader for this write descriptor has been closed (ie, the connection has been lost).  If <tt class="rst-docutils literal">False</tt>, then readability events are ignored.</div>
+    
   </div>
 </div><div class="baseinstancevariable">
   
@@ -643,6 +674,7 @@
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    
   </div>
 </div><div class="baseinstancevariable">
   
@@ -665,6 +697,7 @@
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    
   </div>
 </div><div class="baseinstancevariable">
   
@@ -687,6 +720,7 @@
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    
   </div>
 </div>
 
@@ -695,11 +729,33 @@
 
     <footer class="navbar navbar-default">
   
+
   <div class="container">
     <a href="index.html">API Documentation</a> for <a href="https://twistedmatrix.com/" class="projecthome">Twisted</a>,
   generated by <a href="https://github.com/twisted/pydoctor/">pydoctor</a>
-    21.2.2 at 2022-01-12 04:22:24.
+    22.2.2.dev0 at 2022-03-04 05:57:20.
   </div>
+
+  <!-- Google analytics, obviously. -->
+  <script src="//www.google-analytics.com/urchin.js" type="text/javascript"></script>
+  <script type="text/javascript">
+    _uacct = "UA-99018-6";
+    urchinTracker();
+  </script>
+
+  <!-- If the documentation isn't current, insert a current link. -->
+  <script type="text/javascript">
+    if (window.location.pathname.indexOf('/current/') == -1) {
+      <!-- Give the user a link to this page, but in the current version of the docs. -->
+      var link = document.getElementById('current-docs-link');
+      link.href = window.location.pathname.replace(/\/\d+\.\d+\.\d+\/api\//, '/current/api/');
+      <!-- And make it visible -->
+      var container = document.getElementById('current-docs-container');
+      container.style.display = "";
+      delete link;
+      delete container;
+    }
+  </script>
 </footer>
 
     <script src="pydoctor.js" type="text/javascript"></script>

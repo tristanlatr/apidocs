@@ -7,7 +7,7 @@
   <head>
     
     <title>twisted.internet.interfaces.IDelayedCall</title>
-    <meta name="generator" content="pydoctor 21.2.2"> 
+    <meta name="generator" content="pydoctor 22.2.2.dev0"> 
         
     </meta>
     <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
@@ -19,7 +19,13 @@
 
   <body>
 
-    
+    <div style="display: none" id="current-docs-container" class="container">
+  <div class="col-sm-12">
+    <a id="current-docs-link">
+      Go to the latest version of this document.
+    </a>
+  </div>
+</div>
 
     <nav class="navbar navbar-default">
   
@@ -44,69 +50,82 @@
           Names
         </a>
 
-        <form action="search-results.html" id="search-box-container">
+        <div id="search-box-container">
           <div class="input-group">
-            <input id="search-box" name="search-query" placeholder="Search..." aria-label="Search" minlength="2" class="form-control" />
+            <input id="search-box" type="search" name="search-query" placeholder="Search..." aria-label="Search" minlength="2" class="form-control" autocomplete="off" />
+            
             <span class="input-group-btn">
-              <button class="btn btn-default" type="submit" title="Search"><img src="fonts/search.svg" alt="Search!" /></button>
-              <a class="btn btn-default" id="search-help-button" title="Help" onclick="toggleSearchHelpText()"><img src="fonts/info.svg" alt="Help!" /></a>
+              <a style="display: none;" class="btn btn-default" id="search-clear-button" title="Clear" onclick="clearSearch()"><img src="fonts/x-circle.svg" alt="Clear" /></a>
+              <a class="btn btn-default" id="search-help-button" title="Help" onclick="toggleSearchHelpText()"><img src="fonts/info.svg" alt="Help" /></a>
             </span>
           </div>
-        </form>
+        </div>
 
-        <div class="rst-admonition hint" id="search-help-box">
+      </div>
+
+      <div id="search-results-container" style="display: none;">
+        <div>
+          <span class="label label-default" id="search-docstrings-button">
+            <a title="Search in docstrings" onclick="toggleSearchInDocstrings()">search in docstrings</a></span>
+        </div>
+
+        <noscript>
+            <h1>Cannot search: JavaScript is not supported/enabled in your browser.</h1>
+        </noscript>
+
+        <div class="hint" id="search-help-box">
           <p class="rst-last">
       
             Search bar offers the following options:
             <ul>   
                 <li>
                   <strong>Term presence.</strong> The below example searches for documents that 
-                    must contain “foo”, might contain “bar” and must not contain “baz”:
-                  <br /> <code>'+foo bar -baz'</code>
+                    must contain “foo”, might contain “bar” and must not contain “baz”: <code>+foo bar -baz</code>
                 </li> 
 
                 <li>
-                  <strong>Wildcards.</strong> The below example searches for documents with words beginning with “foo”:
-                  <br /> <code>'foo*'</code>
+                  <strong>Wildcards.</strong> The below example searches for documents with words beginning with “foo”: <code>foo*</code>
                 </li> 
 
                 <li>
-                  <strong>Search in specific fields.</strong> The following search matches all documents 
-                  that contains "foo" in their full dotted name and with “bar” in any field:
-                  <br /> <code>'+fullName:*foo* +bar'</code>
+                  <strong>Search in specific fields.</strong> The following search matches all objects 
+                  in "twisted.mail" that matches “search”: <code>+qname:twisted.mail.* +search</code>
 
                   <p>
-                    Possible fields: 'name', 'docstring', 'fullName'.
+                    Possible fields: 'name', 'qname' (fully qualified name), 'docstring', and 'kind'.
+                    Last two fields are only applicable if "search in docstrings" is enabled.
                   </p>
                 </li>
 
                 <li>
                   <strong>Fuzzy matches.</strong> The following search matches all documents 
-                  that have a word within 1 edit distance of “foo”:
-                  <br /> <code>'foo~1'</code>
+                  that have a word within 1 edit distance of “foo”: <code>foo~1</code>
                 </li>
             </ul>
 
           </p>
         </div>
 
-      </div>
+        <div id="search-status"> </div>
+        
+        <div class="warning" id="search-warn-box" style="display: none;">
+          <p class="rst-last"><span id="search-warn"></span></p>
+        </div>
 
+        <table id="search-results">
+          <!-- Filled dynamically by JS -->
+        </table>
+        
+        <div style="margin-top: 8px;">
+          <p>Results provided by <a href="https://lunrjs.com">Lunr.js</a></p>
+        </div>
+      </div>
 
     </div>
   </div>
 
-  <script>
- 
-    function toggleSearchHelpText() {
-        document.body.classList.toggle("search-help-hidden");
-    }
-    // Init search and help text
-    document.getElementById('search-box-container').style.display = 'block';
-    document.getElementById('search-help-box').style.display = 'block';
-    document.body.classList.add("search-help-hidden");
-
-  </script>
+  <script src="ajax.js" type="text/javascript"></script>
+  <script src="search.js" type="text/javascript"></script>
 
 </nav>
 
@@ -115,7 +134,7 @@
     <div class="container">
 
       <div class="page-header">
-        <h1 class="interface"><code><code><a href="twisted.html">twisted</a></code><wbr></wbr>.<code><a href="twisted.internet.html">internet</a></code><wbr></wbr>.<code><a href="twisted.internet.interfaces.html">interfaces</a></code><wbr></wbr>.<code><a href="twisted.internet.interfaces.IDelayedCall.html">IDelayedCall</a></code></code></h1>
+        <h1 class="interface"><code><code><a href="index.html" class="internal-link">twisted</a></code><wbr></wbr>.<code><a href="twisted.internet.html" class="internal-link" title="twisted.internet">internet</a></code><wbr></wbr>.<code><a href="twisted.internet.interfaces.html" class="internal-link" title="twisted.internet.interfaces">interfaces</a></code><wbr></wbr>.<code><a href="twisted.internet.interfaces.IDelayedCall.html" class="internal-link" title="twisted.internet.interfaces.IDelayedCall">IDelayedCall</a></code></code></h1>
         <div id="showPrivate">
           <button class="btn btn-link" onclick="togglePrivate()">Toggle Private API</button>
         </div>
@@ -126,43 +145,47 @@
       </div>
 
       <div class="extrasDocstring">
-        <p><code><span class="py-keyword">class</span> <span class="py-defname">IDelayedCall</span>(<a href="https://zopeinterface.readthedocs.io/en/latest/api/specifications.html#zope.interface.Interface" title="zope.interface.Interface">Interface</a>): <a href="https://github.com/twisted/twisted/tree/twisted-21.2.0/src/twisted/internet/interfaces.py#L1159" class="sourceLink">(source)</a></code></p><p>Known implementations: <code><a href="twisted.internet.base.DelayedCall.html">twisted.internet.base.DelayedCall</a></code></p>
+        <p><code><span class="py-keyword">class</span> <span class="py-defname">IDelayedCall</span>(<a href="https://zopeinterface.readthedocs.io/en/latest/api/specifications.html#zope.interface.Interface" class="intersphinx-link" title="zope.interface.Interface">Interface</a>): <a href="https://github.com/twisted/twisted/tree/twisted-21.2.0/src/twisted/internet/interfaces.py#L1159" class="sourceLink">(source)</a></code></p><p>Known implementations: <code><a href="twisted.internet.base.DelayedCall.html" class="internal-link">twisted.internet.base.DelayedCall</a></code></p>
         <p><a href="classIndex.html#twisted.internet.interfaces.IDelayedCall">View In Hierarchy</a></p>
       </div>
 
+      
+
       <div class="moduleDocstring">
-        <div><p>A scheduled call.</p><p>There are probably other useful methods we can add to this interface; suggestions are welcome.</p></div>
+        <div><p>A scheduled call.</p>
+<p>There are probably other useful methods we can add to this interface; suggestions are welcome.</p>
+</div>
       </div>
 
       <div id="splitTables">
-        <table class="children sortable" id="id917">
+        <table class="children sortable" id="id924">
   
   
   <tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#active">active</a></code></td>
-    <td><span></span></td>
+    <td><code><a href="#active" class="internal-link" title="twisted.internet.interfaces.IDelayedCall.active">active</a></code></td>
+    <td></td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#cancel">cancel</a></code></td>
-    <td><span>Cancel the scheduled call.</span></td>
+    <td><code><a href="#cancel" class="internal-link" title="twisted.internet.interfaces.IDelayedCall.cancel">cancel</a></code></td>
+    <td>Cancel the scheduled call.</td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#delay">delay</a></code></td>
-    <td><span>Delay the scheduled call.</span></td>
+    <td><code><a href="#delay" class="internal-link" title="twisted.internet.interfaces.IDelayedCall.delay">delay</a></code></td>
+    <td>Delay the scheduled call.</td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#getTime">getTime</a></code></td>
-    <td><span>Get time when delayed call will happen.</span></td>
+    <td><code><a href="#getTime" class="internal-link" title="twisted.internet.interfaces.IDelayedCall.getTime">get​Time</a></code></td>
+    <td>Get time when delayed call will happen.</td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#reset">reset</a></code></td>
-    <td><span>Reset the scheduled call's timer.</span></td>
+    <td><code><a href="#reset" class="internal-link" title="twisted.internet.interfaces.IDelayedCall.reset">reset</a></code></td>
+    <td>Reset the scheduled call's timer.</td>
   </tr>
 </table>
         
@@ -192,7 +215,7 @@
   <div class="docstring functionBody">
     
     
-    <div><table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Returns</td></tr><tr><td class="fieldArgContainer"><code><a href="https://docs.python.org/3/library/functions.html#bool">bool</a></code></td><td class="fieldArgDesc">True if this call is still active, False if it has been called or cancelled.</td></tr></table></div>
+    <div><table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Returns</td></tr><tr><td class="fieldArgContainer"><code><a href="https://docs.python.org/3/library/functions.html#bool" class="intersphinx-link">bool</a></code></td><td class="fieldArgDesc">True if this call is still active, False if it has been called or cancelled.</td></tr></table></div>
   </div>
 </div><div class="basemethod">
   
@@ -214,7 +237,7 @@
   <div class="docstring functionBody">
     
     
-    <div><p>Cancel the scheduled call.</p><table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Raises</td></tr><tr><td class="fieldArgContainer"><code><a href="twisted.internet.error.AlreadyCalled.html">twisted.internet.error.AlreadyCalled</a></code></td><td>if the call has already happened.</td></tr><tr><td class="fieldArgContainer"><code><a href="twisted.internet.error.AlreadyCancelled.html">twisted.internet.error.AlreadyCancelled</a></code></td><td>if the call has already been cancelled.</td></tr></table></div>
+    <div>Cancel the scheduled call.<table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Raises</td></tr><tr><td class="fieldArgContainer"><code><a href="twisted.internet.error.AlreadyCalled.html" class="internal-link">twisted.internet.error.AlreadyCalled</a></code></td><td>if the call has already happened.</td></tr><tr><td class="fieldArgContainer"><code><a href="twisted.internet.error.AlreadyCancelled.html" class="internal-link">twisted.internet.error.AlreadyCancelled</a></code></td><td>if the call has already been cancelled.</td></tr></table></div>
   </div>
 </div><div class="basemethod">
   
@@ -236,7 +259,7 @@
   <div class="docstring functionBody">
     
     
-    <div><p>Delay the scheduled call.</p><table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">secondsLater:</span><code><a href="https://docs.python.org/3/library/functions.html#float">float</a></code></td><td class="fieldArgDesc">how many seconds from its current firing time to delay</td></tr><tr class="fieldStart"><td class="fieldName" colspan="2">Raises</td></tr><tr><td class="fieldArgContainer"><code><a href="twisted.internet.error.AlreadyCalled.html">twisted.internet.error.AlreadyCalled</a></code></td><td>if the call has already happened.</td></tr><tr><td class="fieldArgContainer"><code><a href="twisted.internet.error.AlreadyCancelled.html">twisted.internet.error.AlreadyCancelled</a></code></td><td>if the call has already been cancelled.</td></tr></table></div>
+    <div>Delay the scheduled call.<table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">seconds​Later:</span><code><a href="https://docs.python.org/3/library/functions.html#float" class="intersphinx-link">float</a></code></td><td class="fieldArgDesc">how many seconds from its current firing time to delay</td></tr><tr class="fieldStart"><td class="fieldName" colspan="2">Raises</td></tr><tr><td class="fieldArgContainer"><code><a href="twisted.internet.error.AlreadyCalled.html" class="internal-link">twisted.internet.error.AlreadyCalled</a></code></td><td>if the call has already happened.</td></tr><tr><td class="fieldArgContainer"><code><a href="twisted.internet.error.AlreadyCancelled.html" class="internal-link">twisted.internet.error.AlreadyCancelled</a></code></td><td>if the call has already been cancelled.</td></tr></table></div>
   </div>
 </div><div class="basemethod">
   
@@ -258,7 +281,7 @@
   <div class="docstring functionBody">
     
     
-    <div><p>Get time when delayed call will happen.</p><table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Returns</td></tr><tr><td class="fieldArgContainer"><code><a href="https://docs.python.org/3/library/functions.html#float">float</a></code></td><td class="fieldArgDesc">time in seconds since epoch (a float).</td></tr></table></div>
+    <div>Get time when delayed call will happen.<table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Returns</td></tr><tr><td class="fieldArgContainer"><code><a href="https://docs.python.org/3/library/functions.html#float" class="intersphinx-link">float</a></code></td><td class="fieldArgDesc">time in seconds since epoch (a float).</td></tr></table></div>
   </div>
 </div><div class="basemethod">
   
@@ -280,7 +303,7 @@
   <div class="docstring functionBody">
     
     
-    <div><p>Reset the scheduled call's timer.</p><table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">secondsFromNow:</span><code><a href="https://docs.python.org/3/library/functions.html#float">float</a></code></td><td class="fieldArgDesc">how many seconds from now it should fire, equivalent to <code>.cancel()</code> and then doing another <code>reactor.callLater(secondsLater, ...)</code></td></tr><tr class="fieldStart"><td class="fieldName" colspan="2">Raises</td></tr><tr><td class="fieldArgContainer"><code><a href="twisted.internet.error.AlreadyCalled.html">twisted.internet.error.AlreadyCalled</a></code></td><td>if the call has already happened.</td></tr><tr><td class="fieldArgContainer"><code><a href="twisted.internet.error.AlreadyCancelled.html">twisted.internet.error.AlreadyCancelled</a></code></td><td>if the call has already been cancelled.</td></tr></table></div>
+    <div>Reset the scheduled call's timer.<table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">seconds​From​Now:</span><code><a href="https://docs.python.org/3/library/functions.html#float" class="intersphinx-link">float</a></code></td><td class="fieldArgDesc">how many seconds from now it should fire, equivalent to <tt class="rst-docutils literal">.cancel()</tt> and then doing another <tt class="rst-docutils literal">reactor.callLater(secondsLater, <span class="pre">...)</span></tt></td></tr><tr class="fieldStart"><td class="fieldName" colspan="2">Raises</td></tr><tr><td class="fieldArgContainer"><code><a href="twisted.internet.error.AlreadyCalled.html" class="internal-link">twisted.internet.error.AlreadyCalled</a></code></td><td>if the call has already happened.</td></tr><tr><td class="fieldArgContainer"><code><a href="twisted.internet.error.AlreadyCancelled.html" class="internal-link">twisted.internet.error.AlreadyCancelled</a></code></td><td>if the call has already been cancelled.</td></tr></table></div>
   </div>
 </div>
 
@@ -289,11 +312,33 @@
 
     <footer class="navbar navbar-default">
   
+
   <div class="container">
     <a href="index.html">API Documentation</a> for <a href="https://twistedmatrix.com/" class="projecthome">Twisted</a>,
   generated by <a href="https://github.com/twisted/pydoctor/">pydoctor</a>
-    21.2.2 at 2022-01-12 04:22:24.
+    22.2.2.dev0 at 2022-03-04 05:57:20.
   </div>
+
+  <!-- Google analytics, obviously. -->
+  <script src="//www.google-analytics.com/urchin.js" type="text/javascript"></script>
+  <script type="text/javascript">
+    _uacct = "UA-99018-6";
+    urchinTracker();
+  </script>
+
+  <!-- If the documentation isn't current, insert a current link. -->
+  <script type="text/javascript">
+    if (window.location.pathname.indexOf('/current/') == -1) {
+      <!-- Give the user a link to this page, but in the current version of the docs. -->
+      var link = document.getElementById('current-docs-link');
+      link.href = window.location.pathname.replace(/\/\d+\.\d+\.\d+\/api\//, '/current/api/');
+      <!-- And make it visible -->
+      var container = document.getElementById('current-docs-container');
+      container.style.display = "";
+      delete link;
+      delete container;
+    }
+  </script>
 </footer>
 
     <script src="pydoctor.js" type="text/javascript"></script>

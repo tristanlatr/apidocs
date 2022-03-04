@@ -7,7 +7,7 @@
   <head>
     
     <title>twisted.words.service.WordsRealm</title>
-    <meta name="generator" content="pydoctor 21.2.2"> 
+    <meta name="generator" content="pydoctor 22.2.2.dev0"> 
         
     </meta>
     <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
@@ -19,7 +19,13 @@
 
   <body>
 
-    
+    <div style="display: none" id="current-docs-container" class="container">
+  <div class="col-sm-12">
+    <a id="current-docs-link">
+      Go to the latest version of this document.
+    </a>
+  </div>
+</div>
 
     <nav class="navbar navbar-default">
   
@@ -44,69 +50,82 @@
           Names
         </a>
 
-        <form action="search-results.html" id="search-box-container">
+        <div id="search-box-container">
           <div class="input-group">
-            <input id="search-box" name="search-query" placeholder="Search..." aria-label="Search" minlength="2" class="form-control" />
+            <input id="search-box" type="search" name="search-query" placeholder="Search..." aria-label="Search" minlength="2" class="form-control" autocomplete="off" />
+            
             <span class="input-group-btn">
-              <button class="btn btn-default" type="submit" title="Search"><img src="fonts/search.svg" alt="Search!" /></button>
-              <a class="btn btn-default" id="search-help-button" title="Help" onclick="toggleSearchHelpText()"><img src="fonts/info.svg" alt="Help!" /></a>
+              <a style="display: none;" class="btn btn-default" id="search-clear-button" title="Clear" onclick="clearSearch()"><img src="fonts/x-circle.svg" alt="Clear" /></a>
+              <a class="btn btn-default" id="search-help-button" title="Help" onclick="toggleSearchHelpText()"><img src="fonts/info.svg" alt="Help" /></a>
             </span>
           </div>
-        </form>
+        </div>
 
-        <div class="rst-admonition hint" id="search-help-box">
+      </div>
+
+      <div id="search-results-container" style="display: none;">
+        <div>
+          <span class="label label-default" id="search-docstrings-button">
+            <a title="Search in docstrings" onclick="toggleSearchInDocstrings()">search in docstrings</a></span>
+        </div>
+
+        <noscript>
+            <h1>Cannot search: JavaScript is not supported/enabled in your browser.</h1>
+        </noscript>
+
+        <div class="hint" id="search-help-box">
           <p class="rst-last">
       
             Search bar offers the following options:
             <ul>   
                 <li>
                   <strong>Term presence.</strong> The below example searches for documents that 
-                    must contain “foo”, might contain “bar” and must not contain “baz”:
-                  <br /> <code>'+foo bar -baz'</code>
+                    must contain “foo”, might contain “bar” and must not contain “baz”: <code>+foo bar -baz</code>
                 </li> 
 
                 <li>
-                  <strong>Wildcards.</strong> The below example searches for documents with words beginning with “foo”:
-                  <br /> <code>'foo*'</code>
+                  <strong>Wildcards.</strong> The below example searches for documents with words beginning with “foo”: <code>foo*</code>
                 </li> 
 
                 <li>
-                  <strong>Search in specific fields.</strong> The following search matches all documents 
-                  that contains "foo" in their full dotted name and with “bar” in any field:
-                  <br /> <code>'+fullName:*foo* +bar'</code>
+                  <strong>Search in specific fields.</strong> The following search matches all objects 
+                  in "twisted.mail" that matches “search”: <code>+qname:twisted.mail.* +search</code>
 
                   <p>
-                    Possible fields: 'name', 'docstring', 'fullName'.
+                    Possible fields: 'name', 'qname' (fully qualified name), 'docstring', and 'kind'.
+                    Last two fields are only applicable if "search in docstrings" is enabled.
                   </p>
                 </li>
 
                 <li>
                   <strong>Fuzzy matches.</strong> The following search matches all documents 
-                  that have a word within 1 edit distance of “foo”:
-                  <br /> <code>'foo~1'</code>
+                  that have a word within 1 edit distance of “foo”: <code>foo~1</code>
                 </li>
             </ul>
 
           </p>
         </div>
 
-      </div>
+        <div id="search-status"> </div>
+        
+        <div class="warning" id="search-warn-box" style="display: none;">
+          <p class="rst-last"><span id="search-warn"></span></p>
+        </div>
 
+        <table id="search-results">
+          <!-- Filled dynamically by JS -->
+        </table>
+        
+        <div style="margin-top: 8px;">
+          <p>Results provided by <a href="https://lunrjs.com">Lunr.js</a></p>
+        </div>
+      </div>
 
     </div>
   </div>
 
-  <script>
- 
-    function toggleSearchHelpText() {
-        document.body.classList.toggle("search-help-hidden");
-    }
-    // Init search and help text
-    document.getElementById('search-box-container').style.display = 'block';
-    document.getElementById('search-help-box').style.display = 'block';
-    document.body.classList.add("search-help-hidden");
-
-  </script>
+  <script src="ajax.js" type="text/javascript"></script>
+  <script src="search.js" type="text/javascript"></script>
 
 </nav>
 
@@ -115,7 +134,7 @@
     <div class="container">
 
       <div class="page-header">
-        <h1 class="class"><code><code><a href="twisted.html">twisted</a></code><wbr></wbr>.<code><a href="twisted.words.html">words</a></code><wbr></wbr>.<code><a href="twisted.words.service.html">service</a></code><wbr></wbr>.<code><a href="twisted.words.service.WordsRealm.html">WordsRealm</a></code></code></h1>
+        <h1 class="class"><code><code><a href="index.html" class="internal-link">twisted</a></code><wbr></wbr>.<code><a href="twisted.words.html" class="internal-link" title="twisted.words">words</a></code><wbr></wbr>.<code><a href="twisted.words.service.html" class="internal-link" title="twisted.words.service">service</a></code><wbr></wbr>.<code><a href="twisted.words.service.WordsRealm.html" class="internal-link" title="twisted.words.service.WordsRealm">WordsRealm</a></code></code></h1>
         <div id="showPrivate">
           <button class="btn btn-link" onclick="togglePrivate()">Toggle Private API</button>
         </div>
@@ -126,107 +145,109 @@
       </div>
 
       <div class="extrasDocstring">
-        <p><code><span class="py-keyword">class</span> <span class="py-defname">WordsRealm</span>: <a href="https://github.com/twisted/twisted/tree/twisted-21.2.0/src/twisted/words/service.py#L1102" class="sourceLink">(source)</a></code></p><p>Known subclasses: <code><a href="twisted.words.service.InMemoryWordsRealm.html">twisted.words.service.InMemoryWordsRealm</a></code></p><p>Implements interfaces: <code><a href="twisted.cred.portal.IRealm.html">twisted.cred.portal.IRealm</a></code>, <code><a href="twisted.words.iwords.IChatService.html">twisted.words.iwords.IChatService</a></code></p>
+        <p><code><span class="py-keyword">class</span> <span class="py-defname">WordsRealm</span>: <a href="https://github.com/twisted/twisted/tree/twisted-21.2.0/src/twisted/words/service.py#L1102" class="sourceLink">(source)</a></code></p><p>Known subclasses: <code><a href="twisted.words.service.InMemoryWordsRealm.html" class="internal-link">twisted.words.service.InMemoryWordsRealm</a></code></p><p>Implements interfaces: <code><a href="twisted.cred.portal.IRealm.html" class="internal-link">twisted.cred.portal.IRealm</a></code>, <code><a href="twisted.words.iwords.IChatService.html" class="internal-link">twisted.words.iwords.IChatService</a></code></p>
         <p><a href="classIndex.html#twisted.words.service.WordsRealm">View In Hierarchy</a></p>
       </div>
+
+      
 
       <div class="moduleDocstring">
         <div><p class="undocumented">Undocumented</p></div>
       </div>
 
       <div id="splitTables">
-        <table class="children sortable" id="id3748">
+        <table class="children sortable" id="id3734">
   
   
   <tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#__init__">__init__</a></code></td>
+    <td><code><a href="#__init__" class="internal-link" title="twisted.words.service.WordsRealm.__init__">__init__</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#addGroup">addGroup</a></code></td>
-    <td><span>Add the given group to this service.</span></td>
+    <td><code><a href="#addGroup" class="internal-link" title="twisted.words.service.WordsRealm.addGroup">add​Group</a></code></td>
+    <td>Add the given group to this service.</td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#addUser">addUser</a></code></td>
-    <td><span>Add the given user to this service.</span></td>
+    <td><code><a href="#addUser" class="internal-link" title="twisted.words.service.WordsRealm.addUser">add​User</a></code></td>
+    <td>Add the given user to this service.</td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#createGroup">createGroup</a></code></td>
-    <td><span>Create a new group with the given name.</span></td>
+    <td><code><a href="#createGroup" class="internal-link" title="twisted.words.service.WordsRealm.createGroup">create​Group</a></code></td>
+    <td>Create a new group with the given name.</td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#createUser">createUser</a></code></td>
-    <td><span>Create a new user with the given name.</span></td>
+    <td><code><a href="#createUser" class="internal-link" title="twisted.words.service.WordsRealm.createUser">create​User</a></code></td>
+    <td>Create a new user with the given name.</td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#getGroup">getGroup</a></code></td>
-    <td><span>Retrieve the group by the given name.</span></td>
+    <td><code><a href="#getGroup" class="internal-link" title="twisted.words.service.WordsRealm.getGroup">get​Group</a></code></td>
+    <td>Retrieve the group by the given name.</td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#getUser">getUser</a></code></td>
-    <td><span>Retrieve the user by the given name.</span></td>
+    <td><code><a href="#getUser" class="internal-link" title="twisted.words.service.WordsRealm.getUser">get​User</a></code></td>
+    <td>Retrieve the user by the given name.</td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#groupFactory">groupFactory</a></code></td>
+    <td><code><a href="#groupFactory" class="internal-link" title="twisted.words.service.WordsRealm.groupFactory">group​Factory</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#itergroups">itergroups</a></code></td>
-    <td><span>Return all groups available on this service.</span></td>
+    <td><code><a href="#itergroups" class="internal-link" title="twisted.words.service.WordsRealm.itergroups">itergroups</a></code></td>
+    <td>Return all groups available on this service.</td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#logoutFactory">logoutFactory</a></code></td>
+    <td><code><a href="#logoutFactory" class="internal-link" title="twisted.words.service.WordsRealm.logoutFactory">logout​Factory</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#lookupGroup">lookupGroup</a></code></td>
-    <td><span>Retrieve a group by name.</span></td>
+    <td><code><a href="#lookupGroup" class="internal-link" title="twisted.words.service.WordsRealm.lookupGroup">lookup​Group</a></code></td>
+    <td>Retrieve a group by name.</td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#lookupUser">lookupUser</a></code></td>
+    <td><code><a href="#lookupUser" class="internal-link" title="twisted.words.service.WordsRealm.lookupUser">lookup​User</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#requestAvatar">requestAvatar</a></code></td>
-    <td><span>Return avatar which provides one of the given interfaces.</span></td>
+    <td><code><a href="#requestAvatar" class="internal-link" title="twisted.words.service.WordsRealm.requestAvatar">request​Avatar</a></code></td>
+    <td>Return avatar which provides one of the given interfaces.</td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#userFactory">userFactory</a></code></td>
+    <td><code><a href="#userFactory" class="internal-link" title="twisted.words.service.WordsRealm.userFactory">user​Factory</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="classvariable">
     
     <td>Class Variable</td>
-    <td><code><a href="#createGroupOnRequest">createGroupOnRequest</a></code></td>
-    <td><span>A boolean indicating whether <code><a href="#getGroup">getGroup</a></code> should implicitly create groups which are requested but which do not yet exist.</span></td>
+    <td><code><a href="#createGroupOnRequest" class="internal-link" title="twisted.words.service.WordsRealm.createGroupOnRequest">create​Group​On​Request</a></code></td>
+    <td>A boolean indicating whether <code><a href="#getGroup" class="internal-link" title="twisted.words.service.WordsRealm.getGroup">getGroup</a></code> should implicitly create groups which are requested but which do not yet exist.</td>
   </tr><tr class="classvariable">
     
     <td>Class Variable</td>
-    <td><code><a href="#createUserOnRequest">createUserOnRequest</a></code></td>
-    <td><span>A boolean indicating whether <code><a href="#getUser">getUser</a></code> should implicitly create users which are requested but which do not yet exist.</span></td>
+    <td><code><a href="#createUserOnRequest" class="internal-link" title="twisted.words.service.WordsRealm.createUserOnRequest">create​User​On​Request</a></code></td>
+    <td>A boolean indicating whether <code><a href="#getUser" class="internal-link" title="twisted.words.service.WordsRealm.getUser">getUser</a></code> should implicitly create users which are requested but which do not yet exist.</td>
   </tr><tr class="instancevariable">
     
     <td>Instance Variable</td>
-    <td><code><a href="#name">name</a></code></td>
-    <td><span>A short string identifying this chat service (eg, a hostname)</span></td>
+    <td><code><a href="#name" class="internal-link" title="twisted.words.service.WordsRealm.name">name</a></code></td>
+    <td>A short string identifying this chat service (eg, a hostname)</td>
   </tr><tr class="classvariable private">
     
     <td>Class Variable</td>
-    <td><code><a href="#_encoding">_encoding</a></code></td>
+    <td><code><a href="#_encoding" class="internal-link" title="twisted.words.service.WordsRealm._encoding">_encoding</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr>
 </table>
@@ -255,7 +276,7 @@
     </a>
   </div>
   <div class="docstring functionBody">
-    <div class="interfaceinfo">overridden in <code><a href="twisted.words.service.InMemoryWordsRealm.html">twisted.words.service.InMemoryWordsRealm</a></code></div>
+    <div class="interfaceinfo">overridden in <code><a href="twisted.words.service.InMemoryWordsRealm.html" class="internal-link">twisted.words.service.InMemoryWordsRealm</a></code></div>
     
     <div><p class="undocumented">Undocumented</p></div>
   </div>
@@ -277,9 +298,9 @@
     </a>
   </div>
   <div class="docstring functionBody">
-    <div class="interfaceinfo">overridden in <code><a href="twisted.words.service.InMemoryWordsRealm.html">twisted.words.service.InMemoryWordsRealm</a></code></div>
+    <div class="interfaceinfo">overridden in <code><a href="twisted.words.service.InMemoryWordsRealm.html" class="internal-link">twisted.words.service.InMemoryWordsRealm</a></code></div>
     
-    <div><p>Add the given group to this service.</p><table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">group:</span><code><a href="twisted.words.iwords.IGroup.html">IGroup</a></code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr class="fieldStart"><td class="fieldName" colspan="2">Returns</td></tr><tr><td class="fieldArgContainer"><code><a href="twisted.internet.defer.Deferred.html">twisted.internet.defer.Deferred</a></code></td><td class="fieldArgDesc">A Deferred which fires with <code><a href="https://docs.python.org/3/library/constants.html#None">None</a></code> when the group is added, or which fails with <code><a href="twisted.words.ewords.DuplicateGroup.html">twisted.words.ewords.DuplicateGroup</a></code> if a group with the same name exists already.</td></tr></table></div>
+    <div>Add the given group to this service.<table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">group:</span><code><a href="twisted.words.iwords.IGroup.html" class="internal-link" title="twisted.words.iwords.IGroup">IGroup</a></code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr class="fieldStart"><td class="fieldName" colspan="2">Returns</td></tr><tr><td class="fieldArgContainer"><code><a href="twisted.internet.defer.Deferred.html" class="internal-link" title="twisted.internet.defer.Deferred">twisted.internet.defer.Deferred</a></code></td><td class="fieldArgDesc">A Deferred which fires with <code><a href="https://docs.python.org/3/library/constants.html#None" class="intersphinx-link">None</a></code> when the group is added, or which fails with <code><a href="twisted.words.ewords.DuplicateGroup.html" class="internal-link" title="twisted.words.ewords.DuplicateGroup">twisted.words.ewords.DuplicateGroup</a></code> if a group with the same name exists already.</td></tr></table></div>
   </div>
 </div><div class="basemethod">
   
@@ -299,9 +320,11 @@
     </a>
   </div>
   <div class="docstring functionBody">
-    <div class="interfaceinfo">overridden in <code><a href="twisted.words.service.InMemoryWordsRealm.html">twisted.words.service.InMemoryWordsRealm</a></code></div>
+    <div class="interfaceinfo">overridden in <code><a href="twisted.words.service.InMemoryWordsRealm.html" class="internal-link">twisted.words.service.InMemoryWordsRealm</a></code></div>
     
-    <div><p>Add the given user to this service.</p><p>This is an internal method intended to be overridden by <code><a href="twisted.words.service.WordsRealm.html">WordsRealm</a></code> subclasses, not called by external code.</p><table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">user:</span><code><a href="twisted.words.iwords.IUser.html">IUser</a></code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr class="fieldStart"><td class="fieldName" colspan="2">Returns</td></tr><tr><td class="fieldArgContainer"><code><a href="twisted.internet.defer.Deferred.html">twisted.internet.defer.Deferred</a></code></td><td class="fieldArgDesc">A Deferred which fires with <code><a href="https://docs.python.org/3/library/constants.html#None">None</a></code> when the user is added, or which fails with <code><a href="twisted.words.ewords.DuplicateUser.html">twisted.words.ewords.DuplicateUser</a></code> if a user with the same name exists already.</td></tr></table></div>
+    <div><p>Add the given user to this service.</p>
+<p>This is an internal method intended to be overridden by <code><a href="twisted.words.service.WordsRealm.html" class="internal-link" title="twisted.words.service.WordsRealm">WordsRealm</a></code> subclasses, not called by external code.</p>
+<table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">user:</span><code><a href="twisted.words.iwords.IUser.html" class="internal-link" title="twisted.words.iwords.IUser">IUser</a></code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr class="fieldStart"><td class="fieldName" colspan="2">Returns</td></tr><tr><td class="fieldArgContainer"><code><a href="twisted.internet.defer.Deferred.html" class="internal-link" title="twisted.internet.defer.Deferred">twisted.internet.defer.Deferred</a></code></td><td class="fieldArgDesc">A Deferred which fires with <code><a href="https://docs.python.org/3/library/constants.html#None" class="intersphinx-link">None</a></code> when the user is added, or which fails with <code><a href="twisted.words.ewords.DuplicateUser.html" class="internal-link" title="twisted.words.ewords.DuplicateUser">twisted.words.ewords.DuplicateUser</a></code> if a user with the same name exists already.</td></tr></table></div>
   </div>
 </div><div class="basemethod">
   
@@ -321,9 +344,9 @@
     </a>
   </div>
   <div class="docstring functionBody">
-    <div class="interfaceinfo">from <code><a href="twisted.words.iwords.IChatService.html#createGroup">twisted.words.iwords.IChatService</a></code></div>
+    <div class="interfaceinfo">from <code><a href="twisted.words.iwords.IChatService.html#createGroup" class="internal-link" title="twisted.words.iwords.IChatService.createGroup">twisted.words.iwords.IChatService</a></code></div>
     
-    <div><p>Create a new group with the given name.</p><table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">name:</span><code>str</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr class="fieldStart"><td class="fieldName" colspan="2">Returns</td></tr><tr><td class="fieldArgContainer"><code><a href="twisted.internet.defer.Deferred.html">twisted.internet.defer.Deferred</a></code></td><td class="fieldArgDesc">A Deferred which fires with the created group, or with fails with <code><a href="twisted.words.ewords.DuplicateGroup.html">twisted.words.ewords.DuplicateGroup</a></code> if a group by that name exists already.</td></tr></table></div>
+    <div>Create a new group with the given name.<table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">name:</span><tt class="rst-docutils literal">str</tt></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr class="fieldStart"><td class="fieldName" colspan="2">Returns</td></tr><tr><td class="fieldArgContainer"><code><a href="twisted.internet.defer.Deferred.html" class="internal-link" title="twisted.internet.defer.Deferred">twisted.internet.defer.Deferred</a></code></td><td class="fieldArgDesc">A Deferred which fires with the created group, or with fails with <code><a href="twisted.words.ewords.DuplicateGroup.html" class="internal-link" title="twisted.words.ewords.DuplicateGroup">twisted.words.ewords.DuplicateGroup</a></code> if a group by that name exists already.</td></tr></table></div>
   </div>
 </div><div class="basemethod">
   
@@ -343,9 +366,9 @@
     </a>
   </div>
   <div class="docstring functionBody">
-    <div class="interfaceinfo">from <code><a href="twisted.words.iwords.IChatService.html#createUser">twisted.words.iwords.IChatService</a></code></div>
+    <div class="interfaceinfo">from <code><a href="twisted.words.iwords.IChatService.html#createUser" class="internal-link" title="twisted.words.iwords.IChatService.createUser">twisted.words.iwords.IChatService</a></code></div>
     
-    <div><p>Create a new user with the given name.</p><table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">name:</span><code>str</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr class="fieldStart"><td class="fieldName" colspan="2">Returns</td></tr><tr><td class="fieldArgContainer"><code><a href="twisted.internet.defer.Deferred.html">twisted.internet.defer.Deferred</a></code></td><td class="fieldArgDesc">A Deferred which fires with the created user, or with fails with <code><a href="twisted.words.ewords.DuplicateUser.html">twisted.words.ewords.DuplicateUser</a></code> if a user by that name exists already.</td></tr></table></div>
+    <div>Create a new user with the given name.<table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">name:</span><tt class="rst-docutils literal">str</tt></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr class="fieldStart"><td class="fieldName" colspan="2">Returns</td></tr><tr><td class="fieldArgContainer"><code><a href="twisted.internet.defer.Deferred.html" class="internal-link" title="twisted.internet.defer.Deferred">twisted.internet.defer.Deferred</a></code></td><td class="fieldArgDesc">A Deferred which fires with the created user, or with fails with <code><a href="twisted.words.ewords.DuplicateUser.html" class="internal-link" title="twisted.words.ewords.DuplicateUser">twisted.words.ewords.DuplicateUser</a></code> if a user by that name exists already.</td></tr></table></div>
   </div>
 </div><div class="basemethod">
   
@@ -365,9 +388,9 @@
     </a>
   </div>
   <div class="docstring functionBody">
-    <div class="interfaceinfo">from <code><a href="twisted.words.iwords.IChatService.html#getGroup">twisted.words.iwords.IChatService</a></code></div>
+    <div class="interfaceinfo">from <code><a href="twisted.words.iwords.IChatService.html#getGroup" class="internal-link" title="twisted.words.iwords.IChatService.getGroup">twisted.words.iwords.IChatService</a></code></div>
     
-    <div><p>Retrieve the group by the given name.</p><table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">name:</span><code>str</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr class="fieldStart"><td class="fieldName" colspan="2">Returns</td></tr><tr><td class="fieldArgContainer"><code><a href="twisted.internet.defer.Deferred.html">twisted.internet.defer.Deferred</a></code></td><td class="fieldArgDesc">A Deferred which fires with the group with the given name if one exists (or if one is created due to the setting of <code><a href="#createGroupOnRequest">IChatService.createGroupOnRequest</a></code>, or which fails with <code><a href="twisted.words.ewords.NoSuchGroup.html">twisted.words.ewords.NoSuchGroup</a></code> if no such group exists.</td></tr></table></div>
+    <div>Retrieve the group by the given name.<table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">name:</span><tt class="rst-docutils literal">str</tt></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr class="fieldStart"><td class="fieldName" colspan="2">Returns</td></tr><tr><td class="fieldArgContainer"><code><a href="twisted.internet.defer.Deferred.html" class="internal-link" title="twisted.internet.defer.Deferred">twisted.internet.defer.Deferred</a></code></td><td class="fieldArgDesc">A Deferred which fires with the group with the given name if one exists (or if one is created due to the setting of <code><a href="#createGroupOnRequest" class="internal-link" title="twisted.words.iwords.IChatService.createGroupOnRequest">IChatService.createGroupOnRequest</a></code>, or which fails with <code><a href="twisted.words.ewords.NoSuchGroup.html" class="internal-link" title="twisted.words.ewords.NoSuchGroup">twisted.words.ewords.NoSuchGroup</a></code> if no such group exists.</td></tr></table></div>
   </div>
 </div><div class="basemethod">
   
@@ -387,9 +410,9 @@
     </a>
   </div>
   <div class="docstring functionBody">
-    <div class="interfaceinfo">from <code><a href="twisted.words.iwords.IChatService.html#getUser">twisted.words.iwords.IChatService</a></code></div>
+    <div class="interfaceinfo">from <code><a href="twisted.words.iwords.IChatService.html#getUser" class="internal-link" title="twisted.words.iwords.IChatService.getUser">twisted.words.iwords.IChatService</a></code></div>
     
-    <div><p>Retrieve the user by the given name.</p><table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">name:</span><code>str</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr class="fieldStart"><td class="fieldName" colspan="2">Returns</td></tr><tr><td class="fieldArgContainer"><code><a href="twisted.internet.defer.Deferred.html">twisted.internet.defer.Deferred</a></code></td><td class="fieldArgDesc">A Deferred which fires with the user with the given name if one exists (or if one is created due to the setting of <code><a href="#createUserOnRequest">IChatService.createUserOnRequest</a></code>, or which fails with <code><a href="twisted.words.ewords.NoSuchUser.html">twisted.words.ewords.NoSuchUser</a></code> if no such user exists.</td></tr></table></div>
+    <div>Retrieve the user by the given name.<table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">name:</span><tt class="rst-docutils literal">str</tt></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr class="fieldStart"><td class="fieldName" colspan="2">Returns</td></tr><tr><td class="fieldArgContainer"><code><a href="twisted.internet.defer.Deferred.html" class="internal-link" title="twisted.internet.defer.Deferred">twisted.internet.defer.Deferred</a></code></td><td class="fieldArgDesc">A Deferred which fires with the user with the given name if one exists (or if one is created due to the setting of <code><a href="#createUserOnRequest" class="internal-link" title="twisted.words.iwords.IChatService.createUserOnRequest">IChatService.createUserOnRequest</a></code>, or which fails with <code><a href="twisted.words.ewords.NoSuchUser.html" class="internal-link" title="twisted.words.ewords.NoSuchUser">twisted.words.ewords.NoSuchUser</a></code> if no such user exists.</td></tr></table></div>
   </div>
 </div><div class="basemethod">
   
@@ -431,9 +454,9 @@
     </a>
   </div>
   <div class="docstring functionBody">
-    <div class="interfaceinfo">from <code><a href="twisted.words.iwords.IChatService.html#itergroups">twisted.words.iwords.IChatService</a></code></div><div class="interfaceinfo">overridden in <code><a href="twisted.words.service.InMemoryWordsRealm.html">twisted.words.service.InMemoryWordsRealm</a></code></div>
+    <div class="interfaceinfo">from <code><a href="twisted.words.iwords.IChatService.html#itergroups" class="internal-link" title="twisted.words.iwords.IChatService.itergroups">twisted.words.iwords.IChatService</a></code></div><div class="interfaceinfo">overridden in <code><a href="twisted.words.service.InMemoryWordsRealm.html" class="internal-link">twisted.words.service.InMemoryWordsRealm</a></code></div>
     
-    <div><p>Return all groups available on this service.</p><table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Returns</td></tr><tr><td class="fieldArgContainer"><code>twisted.internet.defer.Deferred</code></td><td class="fieldArgDesc">A Deferred which fires with a list of <code>IGroup</code> providers.</td></tr></table></div>
+    <div>Return all groups available on this service.<table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Returns</td></tr><tr><td class="fieldArgContainer"><tt class="rst-docutils literal">twisted.internet.defer.Deferred</tt></td><td class="fieldArgDesc">A Deferred which fires with a list of <tt class="rst-docutils literal">IGroup</tt> providers.</td></tr></table></div>
   </div>
 </div><div class="basemethod">
   
@@ -475,9 +498,11 @@
     </a>
   </div>
   <div class="docstring functionBody">
-    <div class="interfaceinfo">from <code><a href="twisted.words.iwords.IChatService.html#lookupGroup">twisted.words.iwords.IChatService</a></code></div><div class="interfaceinfo">overridden in <code><a href="twisted.words.service.InMemoryWordsRealm.html">twisted.words.service.InMemoryWordsRealm</a></code></div>
+    <div class="interfaceinfo">from <code><a href="twisted.words.iwords.IChatService.html#lookupGroup" class="internal-link" title="twisted.words.iwords.IChatService.lookupGroup">twisted.words.iwords.IChatService</a></code></div><div class="interfaceinfo">overridden in <code><a href="twisted.words.service.InMemoryWordsRealm.html" class="internal-link">twisted.words.service.InMemoryWordsRealm</a></code></div>
     
-    <div><p>Retrieve a group by name.</p><p>Unlike <code>getGroup</code>, this will never implicitly create a group.</p><table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">group</span></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">name:</span><code>str</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr class="fieldStart"><td class="fieldName" colspan="2">Returns</td></tr><tr><td class="fieldArgContainer"><code><a href="twisted.internet.defer.Deferred.html">twisted.internet.defer.Deferred</a></code></td><td class="fieldArgDesc">A Deferred which fires with the group by the given name, or which fails with <code><a href="twisted.words.ewords.NoSuchGroup.html">twisted.words.ewords.NoSuchGroup</a></code>.</td></tr></table></div>
+    <div><p>Retrieve a group by name.</p>
+<p>Unlike <tt class="rst-docutils literal">getGroup</tt>, this will never implicitly create a group.</p>
+<table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">group</span></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">name:</span><tt class="rst-docutils literal">str</tt></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr class="fieldStart"><td class="fieldName" colspan="2">Returns</td></tr><tr><td class="fieldArgContainer"><code><a href="twisted.internet.defer.Deferred.html" class="internal-link" title="twisted.internet.defer.Deferred">twisted.internet.defer.Deferred</a></code></td><td class="fieldArgDesc">A Deferred which fires with the group by the given name, or which fails with <code><a href="twisted.words.ewords.NoSuchGroup.html" class="internal-link" title="twisted.words.ewords.NoSuchGroup">twisted.words.ewords.NoSuchGroup</a></code>.</td></tr></table></div>
   </div>
 </div><div class="basemethod">
   
@@ -497,7 +522,7 @@
     </a>
   </div>
   <div class="docstring functionBody">
-    <div class="interfaceinfo">overridden in <code><a href="twisted.words.service.InMemoryWordsRealm.html">twisted.words.service.InMemoryWordsRealm</a></code></div>
+    <div class="interfaceinfo">overridden in <code><a href="twisted.words.service.InMemoryWordsRealm.html" class="internal-link">twisted.words.service.InMemoryWordsRealm</a></code></div>
     
     <div><p class="undocumented">Undocumented</p></div>
   </div>
@@ -519,9 +544,9 @@
     </a>
   </div>
   <div class="docstring functionBody">
-    <div class="interfaceinfo">from <code><a href="twisted.cred.portal.IRealm.html#requestAvatar">twisted.cred.portal.IRealm</a></code></div>
+    <div class="interfaceinfo">from <code><a href="twisted.cred.portal.IRealm.html#requestAvatar" class="internal-link" title="twisted.cred.portal.IRealm.requestAvatar">twisted.cred.portal.IRealm</a></code></div>
     
-    <div><p>Return avatar which provides one of the given interfaces.</p><table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">avatarId</span></td><td class="fieldArgDesc">a string that identifies an avatar, as returned by <code><a href="twisted.cred.checkers.ICredentialsChecker.html#requestAvatarId">ICredentialsChecker.requestAvatarId</a></code> (via a Deferred).  Alternatively, it may be <code>twisted.cred.checkers.ANONYMOUS</code>.</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">mind</span></td><td class="fieldArgDesc">usually None.  See the description of mind in <code><a href="twisted.cred.portal.Portal.html#login">Portal.login</a></code>.</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">interfaces</span></td><td class="fieldArgDesc">the interface(s) the returned avatar should implement, e.g.  <code>IMailAccount</code>.  See the description of <code><a href="twisted.cred.portal.Portal.html#login">Portal.login</a></code>.</td></tr><tr class="fieldStart"><td class="fieldName" colspan="2">Returns</td></tr><tr><td colspan="2">a deferred which will fire a tuple of (interface, avatarAspect, logout), or the tuple itself.  The interface will be one of the interfaces passed in the 'interfaces' argument.  The 'avatarAspect' will implement that interface.  The 'logout' object is a callable which will detach the mind from the avatar.</td></tr></table></div>
+    <div>Return avatar which provides one of the given interfaces.<table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">avatar​Id</span></td><td class="fieldArgDesc">a string that identifies an avatar, as returned by <code><a href="twisted.cred.checkers.ICredentialsChecker.html#requestAvatarId" class="internal-link" title="twisted.cred.checkers.ICredentialsChecker.requestAvatarId">ICredentialsChecker.requestAvatarId</a></code> (via a Deferred).  Alternatively, it may be <tt class="rst-docutils literal">twisted.cred.checkers.ANONYMOUS</tt>.</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">mind</span></td><td class="fieldArgDesc">usually None.  See the description of mind in <code><a href="twisted.cred.portal.Portal.html#login" class="internal-link" title="twisted.cred.portal.Portal.login">Portal.login</a></code>.</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">*interfaces</span></td><td class="fieldArgDesc">the interface(s) the returned avatar should implement, e.g.  <tt class="rst-docutils literal">IMailAccount</tt>.  See the description of <code><a href="twisted.cred.portal.Portal.html#login" class="internal-link" title="twisted.cred.portal.Portal.login">Portal.login</a></code>.</td></tr><tr class="fieldStart"><td class="fieldName" colspan="2">Returns</td></tr><tr><td colspan="2">a deferred which will fire a tuple of (interface, avatarAspect, logout), or the tuple itself.  The interface will be one of the interfaces passed in the 'interfaces' argument.  The 'avatarAspect' will implement that interface.  The 'logout' object is a callable which will detach the mind from the avatar.</td></tr></table></div>
   </div>
 </div><div class="basemethod">
   
@@ -556,16 +581,17 @@
   </a>
   <div class="functionHeader">
     
-    <span class="py-defname">createGroupOnRequest</span>: <code><a href="https://docs.python.org/3/library/functions.html#bool">bool</a></code> =
+    <span class="py-defname">createGroupOnRequest</span>: <code><a href="https://docs.python.org/3/library/functions.html#bool" class="intersphinx-link">bool</a></code> =
     <a class="sourceLink" href="https://github.com/twisted/twisted/tree/twisted-21.2.0/src/twisted/words/service.py#L1147">
       
       (source)
     </a>
   </div>
   <div class="functionBody">
-    <div class="interfaceinfo">from <code><a href="twisted.words.iwords.IChatService.html#createGroupOnRequest">twisted.words.iwords.IChatService</a></code></div>
+    <div class="interfaceinfo">from <code><a href="twisted.words.iwords.IChatService.html#createGroupOnRequest" class="internal-link" title="twisted.words.iwords.IChatService.createGroupOnRequest">twisted.words.iwords.IChatService</a></code></div>
     
-    <div><p>A boolean indicating whether <code><a href="#getGroup">getGroup</a></code> should implicitly create groups which are requested but which do not yet exist.</p></div>
+    <div>A boolean indicating whether <code><a href="#getGroup" class="internal-link" title="twisted.words.service.WordsRealm.getGroup">getGroup</a></code> should implicitly create groups which are requested but which do not yet exist.</div>
+    
   </div>
 </div><div class="baseclassvariable">
   
@@ -578,16 +604,17 @@
   </a>
   <div class="functionHeader">
     
-    <span class="py-defname">createUserOnRequest</span>: <code><a href="https://docs.python.org/3/library/functions.html#bool">bool</a></code> =
+    <span class="py-defname">createUserOnRequest</span>: <code><a href="https://docs.python.org/3/library/functions.html#bool" class="intersphinx-link">bool</a></code> =
     <a class="sourceLink" href="https://github.com/twisted/twisted/tree/twisted-21.2.0/src/twisted/words/service.py#L1148">
       
       (source)
     </a>
   </div>
   <div class="functionBody">
-    <div class="interfaceinfo">from <code><a href="twisted.words.iwords.IChatService.html#createUserOnRequest">twisted.words.iwords.IChatService</a></code></div>
+    <div class="interfaceinfo">from <code><a href="twisted.words.iwords.IChatService.html#createUserOnRequest" class="internal-link" title="twisted.words.iwords.IChatService.createUserOnRequest">twisted.words.iwords.IChatService</a></code></div>
     
-    <div><p>A boolean indicating whether <code><a href="#getUser">getUser</a></code> should implicitly create users which are requested but which do not yet exist.</p></div>
+    <div>A boolean indicating whether <code><a href="#getUser" class="internal-link" title="twisted.words.service.WordsRealm.getUser">getUser</a></code> should implicitly create users which are requested but which do not yet exist.</div>
+    
   </div>
 </div><div class="baseinstancevariable">
   
@@ -607,9 +634,10 @@
     </a>
   </div>
   <div class="functionBody">
-    <div class="interfaceinfo">from <code><a href="twisted.words.iwords.IChatService.html#name">twisted.words.iwords.IChatService</a></code></div>
+    <div class="interfaceinfo">from <code><a href="twisted.words.iwords.IChatService.html#name" class="internal-link" title="twisted.words.iwords.IChatService.name">twisted.words.iwords.IChatService</a></code></div>
     
-    <div><p>A short string identifying this chat service (eg, a hostname)</p></div>
+    <div>A short string identifying this chat service (eg, a hostname)</div>
+    
   </div>
 </div><div class="baseclassvariable private">
   
@@ -622,7 +650,7 @@
   </a>
   <div class="functionHeader">
     
-    <span class="py-defname">_encoding</span>: <code><a href="https://docs.python.org/3/library/stdtypes.html#str">str</a></code> =
+    <span class="py-defname">_encoding</span>: <code><a href="https://docs.python.org/3/library/stdtypes.html#str" class="intersphinx-link">str</a></code> =
     <a class="sourceLink" href="https://github.com/twisted/twisted/tree/twisted-21.2.0/src/twisted/words/service.py#L1104">
       
       (source)
@@ -632,6 +660,7 @@
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    
   </div>
 </div>
 
@@ -640,11 +669,33 @@
 
     <footer class="navbar navbar-default">
   
+
   <div class="container">
     <a href="index.html">API Documentation</a> for <a href="https://twistedmatrix.com/" class="projecthome">Twisted</a>,
   generated by <a href="https://github.com/twisted/pydoctor/">pydoctor</a>
-    21.2.2 at 2022-01-12 04:22:24.
+    22.2.2.dev0 at 2022-03-04 05:57:20.
   </div>
+
+  <!-- Google analytics, obviously. -->
+  <script src="//www.google-analytics.com/urchin.js" type="text/javascript"></script>
+  <script type="text/javascript">
+    _uacct = "UA-99018-6";
+    urchinTracker();
+  </script>
+
+  <!-- If the documentation isn't current, insert a current link. -->
+  <script type="text/javascript">
+    if (window.location.pathname.indexOf('/current/') == -1) {
+      <!-- Give the user a link to this page, but in the current version of the docs. -->
+      var link = document.getElementById('current-docs-link');
+      link.href = window.location.pathname.replace(/\/\d+\.\d+\.\d+\/api\//, '/current/api/');
+      <!-- And make it visible -->
+      var container = document.getElementById('current-docs-container');
+      container.style.display = "";
+      delete link;
+      delete container;
+    }
+  </script>
 </footer>
 
     <script src="pydoctor.js" type="text/javascript"></script>

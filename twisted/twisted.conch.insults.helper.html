@@ -7,7 +7,7 @@
   <head>
     
     <title>twisted.conch.insults.helper</title>
-    <meta name="generator" content="pydoctor 21.2.2"> 
+    <meta name="generator" content="pydoctor 22.2.2.dev0"> 
         
     </meta>
     <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
@@ -19,7 +19,13 @@
 
   <body>
 
-    
+    <div style="display: none" id="current-docs-container" class="container">
+  <div class="col-sm-12">
+    <a id="current-docs-link">
+      Go to the latest version of this document.
+    </a>
+  </div>
+</div>
 
     <nav class="navbar navbar-default">
   
@@ -44,69 +50,82 @@
           Names
         </a>
 
-        <form action="search-results.html" id="search-box-container">
+        <div id="search-box-container">
           <div class="input-group">
-            <input id="search-box" name="search-query" placeholder="Search..." aria-label="Search" minlength="2" class="form-control" />
+            <input id="search-box" type="search" name="search-query" placeholder="Search..." aria-label="Search" minlength="2" class="form-control" autocomplete="off" />
+            
             <span class="input-group-btn">
-              <button class="btn btn-default" type="submit" title="Search"><img src="fonts/search.svg" alt="Search!" /></button>
-              <a class="btn btn-default" id="search-help-button" title="Help" onclick="toggleSearchHelpText()"><img src="fonts/info.svg" alt="Help!" /></a>
+              <a style="display: none;" class="btn btn-default" id="search-clear-button" title="Clear" onclick="clearSearch()"><img src="fonts/x-circle.svg" alt="Clear" /></a>
+              <a class="btn btn-default" id="search-help-button" title="Help" onclick="toggleSearchHelpText()"><img src="fonts/info.svg" alt="Help" /></a>
             </span>
           </div>
-        </form>
+        </div>
 
-        <div class="rst-admonition hint" id="search-help-box">
+      </div>
+
+      <div id="search-results-container" style="display: none;">
+        <div>
+          <span class="label label-default" id="search-docstrings-button">
+            <a title="Search in docstrings" onclick="toggleSearchInDocstrings()">search in docstrings</a></span>
+        </div>
+
+        <noscript>
+            <h1>Cannot search: JavaScript is not supported/enabled in your browser.</h1>
+        </noscript>
+
+        <div class="hint" id="search-help-box">
           <p class="rst-last">
       
             Search bar offers the following options:
             <ul>   
                 <li>
                   <strong>Term presence.</strong> The below example searches for documents that 
-                    must contain “foo”, might contain “bar” and must not contain “baz”:
-                  <br /> <code>'+foo bar -baz'</code>
+                    must contain “foo”, might contain “bar” and must not contain “baz”: <code>+foo bar -baz</code>
                 </li> 
 
                 <li>
-                  <strong>Wildcards.</strong> The below example searches for documents with words beginning with “foo”:
-                  <br /> <code>'foo*'</code>
+                  <strong>Wildcards.</strong> The below example searches for documents with words beginning with “foo”: <code>foo*</code>
                 </li> 
 
                 <li>
-                  <strong>Search in specific fields.</strong> The following search matches all documents 
-                  that contains "foo" in their full dotted name and with “bar” in any field:
-                  <br /> <code>'+fullName:*foo* +bar'</code>
+                  <strong>Search in specific fields.</strong> The following search matches all objects 
+                  in "twisted.mail" that matches “search”: <code>+qname:twisted.mail.* +search</code>
 
                   <p>
-                    Possible fields: 'name', 'docstring', 'fullName'.
+                    Possible fields: 'name', 'qname' (fully qualified name), 'docstring', and 'kind'.
+                    Last two fields are only applicable if "search in docstrings" is enabled.
                   </p>
                 </li>
 
                 <li>
                   <strong>Fuzzy matches.</strong> The following search matches all documents 
-                  that have a word within 1 edit distance of “foo”:
-                  <br /> <code>'foo~1'</code>
+                  that have a word within 1 edit distance of “foo”: <code>foo~1</code>
                 </li>
             </ul>
 
           </p>
         </div>
 
-      </div>
+        <div id="search-status"> </div>
+        
+        <div class="warning" id="search-warn-box" style="display: none;">
+          <p class="rst-last"><span id="search-warn"></span></p>
+        </div>
 
+        <table id="search-results">
+          <!-- Filled dynamically by JS -->
+        </table>
+        
+        <div style="margin-top: 8px;">
+          <p>Results provided by <a href="https://lunrjs.com">Lunr.js</a></p>
+        </div>
+      </div>
 
     </div>
   </div>
 
-  <script>
- 
-    function toggleSearchHelpText() {
-        document.body.classList.toggle("search-help-hidden");
-    }
-    // Init search and help text
-    document.getElementById('search-box-container').style.display = 'block';
-    document.getElementById('search-help-box').style.display = 'block';
-    document.body.classList.add("search-help-hidden");
-
-  </script>
+  <script src="ajax.js" type="text/javascript"></script>
+  <script src="search.js" type="text/javascript"></script>
 
 </nav>
 
@@ -115,7 +134,7 @@
     <div class="container">
 
       <div class="page-header">
-        <h1 class="module"><code><code><a href="twisted.html">twisted</a></code><wbr></wbr>.<code><a href="twisted.conch.html">conch</a></code><wbr></wbr>.<code><a href="twisted.conch.insults.html">insults</a></code><wbr></wbr>.<code><a href="twisted.conch.insults.helper.html">helper</a></code></code></h1>
+        <h1 class="module"><code><code><a href="index.html" class="internal-link">twisted</a></code><wbr></wbr>.<code><a href="twisted.conch.html" class="internal-link" title="twisted.conch">conch</a></code><wbr></wbr>.<code><a href="twisted.conch.insults.html" class="internal-link" title="twisted.conch.insults">insults</a></code><wbr></wbr>.<code><a href="twisted.conch.insults.helper.html" class="internal-link" title="twisted.conch.insults.helper">helper</a></code></code></h1>
         <div id="showPrivate">
           <button class="btn btn-link" onclick="togglePrivate()">Toggle Private API</button>
         </div>
@@ -130,89 +149,91 @@
         <p></p>
       </div>
 
+      
+
       <div class="moduleDocstring">
-        <div><p>Partial in-memory terminal emulator</p><table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Author</td></tr><tr><td colspan="2">Jp Calderone</td></tr></table></div>
+        <div>Partial in-memory terminal emulator<table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Author</td></tr><tr><td colspan="2">Jp Calderone</td></tr></table></div>
       </div>
 
       <div id="splitTables">
-        <table class="children sortable" id="id195">
+        <table class="children sortable" id="id194">
   
   
   <tr class="class">
     
     <td>Class</td>
-    <td><code><a href="twisted.conch.insults.helper.ExpectableBuffer.html">ExpectableBuffer</a></code></td>
+    <td><code><a href="twisted.conch.insults.helper.ExpectableBuffer.html" class="internal-link" title="twisted.conch.insults.helper.ExpectableBuffer">​Expectable​Buffer</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="class">
     
     <td>Class</td>
-    <td><code><a href="twisted.conch.insults.helper.ExpectationTimeout.html">ExpectationTimeout</a></code></td>
+    <td><code><a href="twisted.conch.insults.helper.ExpectationTimeout.html" class="internal-link" title="twisted.conch.insults.helper.ExpectationTimeout">​Expectation​Timeout</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="class">
     
     <td>Class</td>
-    <td><code><a href="twisted.conch.insults.helper.TerminalBuffer.html">TerminalBuffer</a></code></td>
-    <td><span>An in-memory terminal emulator.</span></td>
-  </tr><tr class="variable">
+    <td><code><a href="twisted.conch.insults.helper.TerminalBuffer.html" class="internal-link" title="twisted.conch.insults.helper.TerminalBuffer">​Terminal​Buffer</a></code></td>
+    <td>An in-memory terminal emulator.</td>
+  </tr><tr class="constant">
     
-    <td>Variable</td>
-    <td><code><a href="#BACKGROUND">BACKGROUND</a></code></td>
+    <td>Constant</td>
+    <td><code><a href="#BACKGROUND" class="internal-link" title="twisted.conch.insults.helper.BACKGROUND">BACKGROUND</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
-  </tr><tr class="variable">
+  </tr><tr class="constant">
     
-    <td>Variable</td>
-    <td><code><a href="#BLACK">BLACK</a></code></td>
+    <td>Constant</td>
+    <td><code><a href="#BLACK" class="internal-link" title="twisted.conch.insults.helper.BLACK">BLACK</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
-  </tr><tr class="variable">
+  </tr><tr class="constant">
     
-    <td>Variable</td>
-    <td><code><a href="#BLUE">BLUE</a></code></td>
+    <td>Constant</td>
+    <td><code><a href="#BLUE" class="internal-link" title="twisted.conch.insults.helper.BLUE">BLUE</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
-  </tr><tr class="variable">
+  </tr><tr class="constant">
     
-    <td>Variable</td>
-    <td><code><a href="#CYAN">CYAN</a></code></td>
+    <td>Constant</td>
+    <td><code><a href="#CYAN" class="internal-link" title="twisted.conch.insults.helper.CYAN">CYAN</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
-  </tr><tr class="variable">
+  </tr><tr class="constant">
     
-    <td>Variable</td>
-    <td><code><a href="#FOREGROUND">FOREGROUND</a></code></td>
+    <td>Constant</td>
+    <td><code><a href="#FOREGROUND" class="internal-link" title="twisted.conch.insults.helper.FOREGROUND">FOREGROUND</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
-  </tr><tr class="variable">
+  </tr><tr class="constant">
     
-    <td>Variable</td>
-    <td><code><a href="#GREEN">GREEN</a></code></td>
+    <td>Constant</td>
+    <td><code><a href="#GREEN" class="internal-link" title="twisted.conch.insults.helper.GREEN">GREEN</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
-  </tr><tr class="variable">
+  </tr><tr class="constant">
     
-    <td>Variable</td>
-    <td><code><a href="#MAGENTA">MAGENTA</a></code></td>
+    <td>Constant</td>
+    <td><code><a href="#MAGENTA" class="internal-link" title="twisted.conch.insults.helper.MAGENTA">MAGENTA</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
-  </tr><tr class="variable">
+  </tr><tr class="constant">
     
-    <td>Variable</td>
-    <td><code><a href="#N_COLORS">N_COLORS</a></code></td>
+    <td>Constant</td>
+    <td><code><a href="#N_COLORS" class="internal-link" title="twisted.conch.insults.helper.N_COLORS">N​_COLORS</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
-  </tr><tr class="variable">
+  </tr><tr class="constant">
     
-    <td>Variable</td>
-    <td><code><a href="#RED">RED</a></code></td>
+    <td>Constant</td>
+    <td><code><a href="#RED" class="internal-link" title="twisted.conch.insults.helper.RED">RED</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
-  </tr><tr class="variable">
+  </tr><tr class="constant">
     
-    <td>Variable</td>
-    <td><code><a href="#WHITE">WHITE</a></code></td>
+    <td>Constant</td>
+    <td><code><a href="#WHITE" class="internal-link" title="twisted.conch.insults.helper.WHITE">WHITE</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
-  </tr><tr class="variable">
+  </tr><tr class="constant">
     
-    <td>Variable</td>
-    <td><code><a href="#YELLOW">YELLOW</a></code></td>
+    <td>Constant</td>
+    <td><code><a href="#YELLOW" class="internal-link" title="twisted.conch.insults.helper.YELLOW">YELLOW</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="class private">
     
     <td>Class</td>
-    <td><code><a href="twisted.conch.insults.helper._FormattingState.html">_FormattingState</a></code></td>
-    <td><span>Represents the formatting state/attributes of a single character.</span></td>
+    <td><code><a href="twisted.conch.insults.helper._FormattingState.html" class="internal-link" title="twisted.conch.insults.helper._FormattingState">_​Formatting​State</a></code></td>
+    <td>Represents the formatting state/attributes of a single character.</td>
   </tr>
 </table>
         
@@ -222,7 +243,7 @@
 
       <div id="childList">
 
-        <div class="basevariable">
+        <div class="baseconstant">
   
   
   <a name="twisted.conch.insults.helper.BACKGROUND">
@@ -233,7 +254,7 @@
   </a>
   <div class="functionHeader">
     
-    <span class="py-defname">BACKGROUND</span>: <code><a href="https://docs.python.org/3/library/functions.html#int">int</a></code> =
+    <span class="py-defname">BACKGROUND</span>: <code><a href="https://docs.python.org/3/library/functions.html#int" class="intersphinx-link">int</a></code> =
     <a class="sourceLink" href="https://github.com/twisted/twisted/tree/twisted-21.2.0/src/twisted/conch/insults/helper.py#L27">
       
       (source)
@@ -243,8 +264,9 @@
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    <table class="valueTable"><tr class="fieldStart"><td class="fieldName">Value</td></tr><tr><td><pre class="constant-value"><code>40</code></pre></td></tr></table>
   </div>
-</div><div class="basevariable">
+</div><div class="baseconstant">
   
   
   <a name="twisted.conch.insults.helper.BLACK">
@@ -265,8 +287,9 @@
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    
   </div>
-</div><div class="basevariable">
+</div><div class="baseconstant">
   
   
   <a name="twisted.conch.insults.helper.BLUE">
@@ -287,8 +310,9 @@
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    
   </div>
-</div><div class="basevariable">
+</div><div class="baseconstant">
   
   
   <a name="twisted.conch.insults.helper.CYAN">
@@ -309,8 +333,9 @@
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    
   </div>
-</div><div class="basevariable">
+</div><div class="baseconstant">
   
   
   <a name="twisted.conch.insults.helper.FOREGROUND">
@@ -321,7 +346,7 @@
   </a>
   <div class="functionHeader">
     
-    <span class="py-defname">FOREGROUND</span>: <code><a href="https://docs.python.org/3/library/functions.html#int">int</a></code> =
+    <span class="py-defname">FOREGROUND</span>: <code><a href="https://docs.python.org/3/library/functions.html#int" class="intersphinx-link">int</a></code> =
     <a class="sourceLink" href="https://github.com/twisted/twisted/tree/twisted-21.2.0/src/twisted/conch/insults/helper.py#L26">
       
       (source)
@@ -331,8 +356,9 @@
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    <table class="valueTable"><tr class="fieldStart"><td class="fieldName">Value</td></tr><tr><td><pre class="constant-value"><code>30</code></pre></td></tr></table>
   </div>
-</div><div class="basevariable">
+</div><div class="baseconstant">
   
   
   <a name="twisted.conch.insults.helper.GREEN">
@@ -353,8 +379,9 @@
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    
   </div>
-</div><div class="basevariable">
+</div><div class="baseconstant">
   
   
   <a name="twisted.conch.insults.helper.MAGENTA">
@@ -375,8 +402,9 @@
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    
   </div>
-</div><div class="basevariable">
+</div><div class="baseconstant">
   
   
   <a name="twisted.conch.insults.helper.N_COLORS">
@@ -397,8 +425,9 @@
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    
   </div>
-</div><div class="basevariable">
+</div><div class="baseconstant">
   
   
   <a name="twisted.conch.insults.helper.RED">
@@ -419,8 +448,9 @@
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    
   </div>
-</div><div class="basevariable">
+</div><div class="baseconstant">
   
   
   <a name="twisted.conch.insults.helper.WHITE">
@@ -441,8 +471,9 @@
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    
   </div>
-</div><div class="basevariable">
+</div><div class="baseconstant">
   
   
   <a name="twisted.conch.insults.helper.YELLOW">
@@ -463,6 +494,7 @@
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    
   </div>
 </div>
 
@@ -471,11 +503,33 @@
 
     <footer class="navbar navbar-default">
   
+
   <div class="container">
     <a href="index.html">API Documentation</a> for <a href="https://twistedmatrix.com/" class="projecthome">Twisted</a>,
   generated by <a href="https://github.com/twisted/pydoctor/">pydoctor</a>
-    21.2.2 at 2022-01-12 04:22:24.
+    22.2.2.dev0 at 2022-03-04 05:57:20.
   </div>
+
+  <!-- Google analytics, obviously. -->
+  <script src="//www.google-analytics.com/urchin.js" type="text/javascript"></script>
+  <script type="text/javascript">
+    _uacct = "UA-99018-6";
+    urchinTracker();
+  </script>
+
+  <!-- If the documentation isn't current, insert a current link. -->
+  <script type="text/javascript">
+    if (window.location.pathname.indexOf('/current/') == -1) {
+      <!-- Give the user a link to this page, but in the current version of the docs. -->
+      var link = document.getElementById('current-docs-link');
+      link.href = window.location.pathname.replace(/\/\d+\.\d+\.\d+\/api\//, '/current/api/');
+      <!-- And make it visible -->
+      var container = document.getElementById('current-docs-container');
+      container.style.display = "";
+      delete link;
+      delete container;
+    }
+  </script>
 </footer>
 
     <script src="pydoctor.js" type="text/javascript"></script>

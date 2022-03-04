@@ -7,7 +7,7 @@
   <head>
     
     <title>twisted.conch.ssh.agent</title>
-    <meta name="generator" content="pydoctor 21.2.2"> 
+    <meta name="generator" content="pydoctor 22.2.2.dev0"> 
         
     </meta>
     <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
@@ -19,7 +19,13 @@
 
   <body>
 
-    
+    <div style="display: none" id="current-docs-container" class="container">
+  <div class="col-sm-12">
+    <a id="current-docs-link">
+      Go to the latest version of this document.
+    </a>
+  </div>
+</div>
 
     <nav class="navbar navbar-default">
   
@@ -44,69 +50,82 @@
           Names
         </a>
 
-        <form action="search-results.html" id="search-box-container">
+        <div id="search-box-container">
           <div class="input-group">
-            <input id="search-box" name="search-query" placeholder="Search..." aria-label="Search" minlength="2" class="form-control" />
+            <input id="search-box" type="search" name="search-query" placeholder="Search..." aria-label="Search" minlength="2" class="form-control" autocomplete="off" />
+            
             <span class="input-group-btn">
-              <button class="btn btn-default" type="submit" title="Search"><img src="fonts/search.svg" alt="Search!" /></button>
-              <a class="btn btn-default" id="search-help-button" title="Help" onclick="toggleSearchHelpText()"><img src="fonts/info.svg" alt="Help!" /></a>
+              <a style="display: none;" class="btn btn-default" id="search-clear-button" title="Clear" onclick="clearSearch()"><img src="fonts/x-circle.svg" alt="Clear" /></a>
+              <a class="btn btn-default" id="search-help-button" title="Help" onclick="toggleSearchHelpText()"><img src="fonts/info.svg" alt="Help" /></a>
             </span>
           </div>
-        </form>
+        </div>
 
-        <div class="rst-admonition hint" id="search-help-box">
+      </div>
+
+      <div id="search-results-container" style="display: none;">
+        <div>
+          <span class="label label-default" id="search-docstrings-button">
+            <a title="Search in docstrings" onclick="toggleSearchInDocstrings()">search in docstrings</a></span>
+        </div>
+
+        <noscript>
+            <h1>Cannot search: JavaScript is not supported/enabled in your browser.</h1>
+        </noscript>
+
+        <div class="hint" id="search-help-box">
           <p class="rst-last">
       
             Search bar offers the following options:
             <ul>   
                 <li>
                   <strong>Term presence.</strong> The below example searches for documents that 
-                    must contain “foo”, might contain “bar” and must not contain “baz”:
-                  <br /> <code>'+foo bar -baz'</code>
+                    must contain “foo”, might contain “bar” and must not contain “baz”: <code>+foo bar -baz</code>
                 </li> 
 
                 <li>
-                  <strong>Wildcards.</strong> The below example searches for documents with words beginning with “foo”:
-                  <br /> <code>'foo*'</code>
+                  <strong>Wildcards.</strong> The below example searches for documents with words beginning with “foo”: <code>foo*</code>
                 </li> 
 
                 <li>
-                  <strong>Search in specific fields.</strong> The following search matches all documents 
-                  that contains "foo" in their full dotted name and with “bar” in any field:
-                  <br /> <code>'+fullName:*foo* +bar'</code>
+                  <strong>Search in specific fields.</strong> The following search matches all objects 
+                  in "twisted.mail" that matches “search”: <code>+qname:twisted.mail.* +search</code>
 
                   <p>
-                    Possible fields: 'name', 'docstring', 'fullName'.
+                    Possible fields: 'name', 'qname' (fully qualified name), 'docstring', and 'kind'.
+                    Last two fields are only applicable if "search in docstrings" is enabled.
                   </p>
                 </li>
 
                 <li>
                   <strong>Fuzzy matches.</strong> The following search matches all documents 
-                  that have a word within 1 edit distance of “foo”:
-                  <br /> <code>'foo~1'</code>
+                  that have a word within 1 edit distance of “foo”: <code>foo~1</code>
                 </li>
             </ul>
 
           </p>
         </div>
 
-      </div>
+        <div id="search-status"> </div>
+        
+        <div class="warning" id="search-warn-box" style="display: none;">
+          <p class="rst-last"><span id="search-warn"></span></p>
+        </div>
 
+        <table id="search-results">
+          <!-- Filled dynamically by JS -->
+        </table>
+        
+        <div style="margin-top: 8px;">
+          <p>Results provided by <a href="https://lunrjs.com">Lunr.js</a></p>
+        </div>
+      </div>
 
     </div>
   </div>
 
-  <script>
- 
-    function toggleSearchHelpText() {
-        document.body.classList.toggle("search-help-hidden");
-    }
-    // Init search and help text
-    document.getElementById('search-box-container').style.display = 'block';
-    document.getElementById('search-help-box').style.display = 'block';
-    document.body.classList.add("search-help-hidden");
-
-  </script>
+  <script src="ajax.js" type="text/javascript"></script>
+  <script src="search.js" type="text/javascript"></script>
 
 </nav>
 
@@ -115,7 +134,7 @@
     <div class="container">
 
       <div class="page-header">
-        <h1 class="module"><code><code><a href="twisted.html">twisted</a></code><wbr></wbr>.<code><a href="twisted.conch.html">conch</a></code><wbr></wbr>.<code><a href="twisted.conch.ssh.html">ssh</a></code><wbr></wbr>.<code><a href="twisted.conch.ssh.agent.html">agent</a></code></code></h1>
+        <h1 class="module"><code><code><a href="index.html" class="internal-link">twisted</a></code><wbr></wbr>.<code><a href="twisted.conch.html" class="internal-link" title="twisted.conch">conch</a></code><wbr></wbr>.<code><a href="twisted.conch.ssh.html" class="internal-link" title="twisted.conch.ssh">ssh</a></code><wbr></wbr>.<code><a href="twisted.conch.ssh.agent.html" class="internal-link" title="twisted.conch.ssh.agent">agent</a></code></code></h1>
         <div id="showPrivate">
           <button class="btn btn-link" onclick="togglePrivate()">Toggle Private API</button>
         </div>
@@ -130,93 +149,97 @@
         <p></p>
       </div>
 
+      
+
       <div class="moduleDocstring">
-        <div><p>Implements the SSH v2 key agent protocol.  This protocol is documented in the SSH source code, in the file <a href="http://www.openbsd.org/cgi-bin/cvsweb/src/usr.bin/ssh/PROTOCOL.agent" target="_top">PROTOCOL.agent</a>.</p><p>Maintainer: Paul Swartz</p></div>
+        <div><p>Implements the SSH v2 key agent protocol.  This protocol is documented in the SSH source code, in the file <a class="rst-reference external" href="http://www.openbsd.org/cgi-bin/cvsweb/src/usr.bin/ssh/PROTOCOL.agent" target="_top">PROTOCOL.agent</a>.</p>
+<p>Maintainer: Paul Swartz</p>
+</div>
       </div>
 
       <div id="splitTables">
-        <table class="children sortable" id="id410">
+        <table class="children sortable" id="id409">
   
   
   <tr class="class">
     
     <td>Class</td>
-    <td><code><a href="twisted.conch.ssh.agent.SSHAgentClient.html">SSHAgentClient</a></code></td>
-    <td><span>The client side of the SSH agent protocol.  This is equivalent to ssh-add(1) and can be used with either ssh-agent(1) or the SSHAgentServer protocol, also in this package.</span></td>
+    <td><code><a href="twisted.conch.ssh.agent.SSHAgentClient.html" class="internal-link" title="twisted.conch.ssh.agent.SSHAgentClient">​SSHAgent​Client</a></code></td>
+    <td>The client side of the SSH agent protocol.  This is equivalent to ssh-add(1) and can be used with either ssh-agent(1) or the SSHAgentServer protocol, also in this package.</td>
   </tr><tr class="class">
     
     <td>Class</td>
-    <td><code><a href="twisted.conch.ssh.agent.SSHAgentServer.html">SSHAgentServer</a></code></td>
-    <td><span>The server side of the SSH agent protocol.  This is equivalent to ssh-agent(1) and can be used with either ssh-add(1) or the SSHAgentClient protocol, also in this package.</span></td>
-  </tr><tr class="variable">
+    <td><code><a href="twisted.conch.ssh.agent.SSHAgentServer.html" class="internal-link" title="twisted.conch.ssh.agent.SSHAgentServer">​SSHAgent​Server</a></code></td>
+    <td>The server side of the SSH agent protocol.  This is equivalent to ssh-agent(1) and can be used with either ssh-add(1) or the SSHAgentClient protocol, also in this package.</td>
+  </tr><tr class="constant">
     
-    <td>Variable</td>
-    <td><code><a href="#AGENT_FAILURE">AGENT_FAILURE</a></code></td>
+    <td>Constant</td>
+    <td><code><a href="#AGENT_FAILURE" class="internal-link" title="twisted.conch.ssh.agent.AGENT_FAILURE">AGENT​_FAILURE</a></code></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="constant">
+    
+    <td>Constant</td>
+    <td><code><a href="#AGENT_IDENTITIES_ANSWER" class="internal-link" title="twisted.conch.ssh.agent.AGENT_IDENTITIES_ANSWER">AGENT​_IDENTITIES​_ANSWER</a></code></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="constant">
+    
+    <td>Constant</td>
+    <td><code><a href="#AGENT_RSA_IDENTITIES_ANSWER" class="internal-link" title="twisted.conch.ssh.agent.AGENT_RSA_IDENTITIES_ANSWER">AGENT​_RSA​_IDENTITIES​_ANSWER</a></code></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="constant">
+    
+    <td>Constant</td>
+    <td><code><a href="#AGENT_SIGN_RESPONSE" class="internal-link" title="twisted.conch.ssh.agent.AGENT_SIGN_RESPONSE">AGENT​_SIGN​_RESPONSE</a></code></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="constant">
+    
+    <td>Constant</td>
+    <td><code><a href="#AGENT_SUCCESS" class="internal-link" title="twisted.conch.ssh.agent.AGENT_SUCCESS">AGENT​_SUCCESS</a></code></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="constant">
+    
+    <td>Constant</td>
+    <td><code><a href="#AGENTC_ADD_IDENTITY" class="internal-link" title="twisted.conch.ssh.agent.AGENTC_ADD_IDENTITY">AGENTC​_ADD​_IDENTITY</a></code></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="constant">
+    
+    <td>Constant</td>
+    <td><code><a href="#AGENTC_REMOVE_ALL_IDENTITIES" class="internal-link" title="twisted.conch.ssh.agent.AGENTC_REMOVE_ALL_IDENTITIES">AGENTC​_REMOVE​_ALL​_IDENTITIES</a></code></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="constant">
+    
+    <td>Constant</td>
+    <td><code><a href="#AGENTC_REMOVE_ALL_RSA_IDENTITIES" class="internal-link" title="twisted.conch.ssh.agent.AGENTC_REMOVE_ALL_RSA_IDENTITIES">AGENTC​_REMOVE​_ALL​_RSA​_IDENTITIES</a></code></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="constant">
+    
+    <td>Constant</td>
+    <td><code><a href="#AGENTC_REMOVE_IDENTITY" class="internal-link" title="twisted.conch.ssh.agent.AGENTC_REMOVE_IDENTITY">AGENTC​_REMOVE​_IDENTITY</a></code></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="constant">
+    
+    <td>Constant</td>
+    <td><code><a href="#AGENTC_REMOVE_RSA_IDENTITY" class="internal-link" title="twisted.conch.ssh.agent.AGENTC_REMOVE_RSA_IDENTITY">AGENTC​_REMOVE​_RSA​_IDENTITY</a></code></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="constant">
+    
+    <td>Constant</td>
+    <td><code><a href="#AGENTC_REQUEST_IDENTITIES" class="internal-link" title="twisted.conch.ssh.agent.AGENTC_REQUEST_IDENTITIES">AGENTC​_REQUEST​_IDENTITIES</a></code></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="constant">
+    
+    <td>Constant</td>
+    <td><code><a href="#AGENTC_REQUEST_RSA_IDENTITIES" class="internal-link" title="twisted.conch.ssh.agent.AGENTC_REQUEST_RSA_IDENTITIES">AGENTC​_REQUEST​_RSA​_IDENTITIES</a></code></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="constant">
+    
+    <td>Constant</td>
+    <td><code><a href="#AGENTC_SIGN_REQUEST" class="internal-link" title="twisted.conch.ssh.agent.AGENTC_SIGN_REQUEST">AGENTC​_SIGN​_REQUEST</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="variable">
     
     <td>Variable</td>
-    <td><code><a href="#AGENT_IDENTITIES_ANSWER">AGENT_IDENTITIES_ANSWER</a></code></td>
-    <td><span class="undocumented">Undocumented</span></td>
-  </tr><tr class="variable">
-    
-    <td>Variable</td>
-    <td><code><a href="#AGENT_RSA_IDENTITIES_ANSWER">AGENT_RSA_IDENTITIES_ANSWER</a></code></td>
-    <td><span class="undocumented">Undocumented</span></td>
-  </tr><tr class="variable">
-    
-    <td>Variable</td>
-    <td><code><a href="#AGENT_SIGN_RESPONSE">AGENT_SIGN_RESPONSE</a></code></td>
-    <td><span class="undocumented">Undocumented</span></td>
-  </tr><tr class="variable">
-    
-    <td>Variable</td>
-    <td><code><a href="#AGENT_SUCCESS">AGENT_SUCCESS</a></code></td>
-    <td><span class="undocumented">Undocumented</span></td>
-  </tr><tr class="variable">
-    
-    <td>Variable</td>
-    <td><code><a href="#AGENTC_ADD_IDENTITY">AGENTC_ADD_IDENTITY</a></code></td>
-    <td><span class="undocumented">Undocumented</span></td>
-  </tr><tr class="variable">
-    
-    <td>Variable</td>
-    <td><code><a href="#AGENTC_REMOVE_ALL_IDENTITIES">AGENTC_REMOVE_ALL_IDENTITIES</a></code></td>
-    <td><span class="undocumented">Undocumented</span></td>
-  </tr><tr class="variable">
-    
-    <td>Variable</td>
-    <td><code><a href="#AGENTC_REMOVE_ALL_RSA_IDENTITIES">AGENTC_REMOVE_ALL_RSA_IDENTITIES</a></code></td>
-    <td><span class="undocumented">Undocumented</span></td>
-  </tr><tr class="variable">
-    
-    <td>Variable</td>
-    <td><code><a href="#AGENTC_REMOVE_IDENTITY">AGENTC_REMOVE_IDENTITY</a></code></td>
-    <td><span class="undocumented">Undocumented</span></td>
-  </tr><tr class="variable">
-    
-    <td>Variable</td>
-    <td><code><a href="#AGENTC_REMOVE_RSA_IDENTITY">AGENTC_REMOVE_RSA_IDENTITY</a></code></td>
-    <td><span class="undocumented">Undocumented</span></td>
-  </tr><tr class="variable">
-    
-    <td>Variable</td>
-    <td><code><a href="#AGENTC_REQUEST_IDENTITIES">AGENTC_REQUEST_IDENTITIES</a></code></td>
-    <td><span class="undocumented">Undocumented</span></td>
-  </tr><tr class="variable">
-    
-    <td>Variable</td>
-    <td><code><a href="#AGENTC_REQUEST_RSA_IDENTITIES">AGENTC_REQUEST_RSA_IDENTITIES</a></code></td>
-    <td><span class="undocumented">Undocumented</span></td>
-  </tr><tr class="variable">
-    
-    <td>Variable</td>
-    <td><code><a href="#AGENTC_SIGN_REQUEST">AGENTC_SIGN_REQUEST</a></code></td>
-    <td><span class="undocumented">Undocumented</span></td>
-  </tr><tr class="variable">
-    
-    <td>Variable</td>
-    <td><code><a href="#messages">messages</a></code></td>
+    <td><code><a href="#messages" class="internal-link" title="twisted.conch.ssh.agent.messages">messages</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr>
 </table>
@@ -227,7 +250,7 @@
 
       <div id="childList">
 
-        <div class="basevariable">
+        <div class="baseconstant">
   
   
   <a name="twisted.conch.ssh.agent.AGENT_FAILURE">
@@ -238,7 +261,7 @@
   </a>
   <div class="functionHeader">
     
-    <span class="py-defname">AGENT_FAILURE</span>: <code><a href="https://docs.python.org/3/library/functions.html#int">int</a></code> =
+    <span class="py-defname">AGENT_FAILURE</span>: <code><a href="https://docs.python.org/3/library/functions.html#int" class="intersphinx-link">int</a></code> =
     <a class="sourceLink" href="https://github.com/twisted/twisted/tree/twisted-21.2.0/src/twisted/conch/ssh/agent.py#L261">
       
       (source)
@@ -248,8 +271,9 @@
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    <table class="valueTable"><tr class="fieldStart"><td class="fieldName">Value</td></tr><tr><td><pre class="constant-value"><code>5</code></pre></td></tr></table>
   </div>
-</div><div class="basevariable">
+</div><div class="baseconstant">
   
   
   <a name="twisted.conch.ssh.agent.AGENT_IDENTITIES_ANSWER">
@@ -260,7 +284,7 @@
   </a>
   <div class="functionHeader">
     
-    <span class="py-defname">AGENT_IDENTITIES_ANSWER</span>: <code><a href="https://docs.python.org/3/library/functions.html#int">int</a></code> =
+    <span class="py-defname">AGENT_IDENTITIES_ANSWER</span>: <code><a href="https://docs.python.org/3/library/functions.html#int" class="intersphinx-link">int</a></code> =
     <a class="sourceLink" href="https://github.com/twisted/twisted/tree/twisted-21.2.0/src/twisted/conch/ssh/agent.py#L268">
       
       (source)
@@ -270,8 +294,9 @@
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    <table class="valueTable"><tr class="fieldStart"><td class="fieldName">Value</td></tr><tr><td><pre class="constant-value"><code>12</code></pre></td></tr></table>
   </div>
-</div><div class="basevariable">
+</div><div class="baseconstant">
   
   
   <a name="twisted.conch.ssh.agent.AGENT_RSA_IDENTITIES_ANSWER">
@@ -282,7 +307,7 @@
   </a>
   <div class="functionHeader">
     
-    <span class="py-defname">AGENT_RSA_IDENTITIES_ANSWER</span>: <code><a href="https://docs.python.org/3/library/functions.html#int">int</a></code> =
+    <span class="py-defname">AGENT_RSA_IDENTITIES_ANSWER</span>: <code><a href="https://docs.python.org/3/library/functions.html#int" class="intersphinx-link">int</a></code> =
     <a class="sourceLink" href="https://github.com/twisted/twisted/tree/twisted-21.2.0/src/twisted/conch/ssh/agent.py#L260">
       
       (source)
@@ -292,8 +317,9 @@
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    <table class="valueTable"><tr class="fieldStart"><td class="fieldName">Value</td></tr><tr><td><pre class="constant-value"><code>2</code></pre></td></tr></table>
   </div>
-</div><div class="basevariable">
+</div><div class="baseconstant">
   
   
   <a name="twisted.conch.ssh.agent.AGENT_SIGN_RESPONSE">
@@ -304,7 +330,7 @@
   </a>
   <div class="functionHeader">
     
-    <span class="py-defname">AGENT_SIGN_RESPONSE</span>: <code><a href="https://docs.python.org/3/library/functions.html#int">int</a></code> =
+    <span class="py-defname">AGENT_SIGN_RESPONSE</span>: <code><a href="https://docs.python.org/3/library/functions.html#int" class="intersphinx-link">int</a></code> =
     <a class="sourceLink" href="https://github.com/twisted/twisted/tree/twisted-21.2.0/src/twisted/conch/ssh/agent.py#L270">
       
       (source)
@@ -314,8 +340,9 @@
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    <table class="valueTable"><tr class="fieldStart"><td class="fieldName">Value</td></tr><tr><td><pre class="constant-value"><code>14</code></pre></td></tr></table>
   </div>
-</div><div class="basevariable">
+</div><div class="baseconstant">
   
   
   <a name="twisted.conch.ssh.agent.AGENT_SUCCESS">
@@ -326,7 +353,7 @@
   </a>
   <div class="functionHeader">
     
-    <span class="py-defname">AGENT_SUCCESS</span>: <code><a href="https://docs.python.org/3/library/functions.html#int">int</a></code> =
+    <span class="py-defname">AGENT_SUCCESS</span>: <code><a href="https://docs.python.org/3/library/functions.html#int" class="intersphinx-link">int</a></code> =
     <a class="sourceLink" href="https://github.com/twisted/twisted/tree/twisted-21.2.0/src/twisted/conch/ssh/agent.py#L262">
       
       (source)
@@ -336,8 +363,9 @@
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    <table class="valueTable"><tr class="fieldStart"><td class="fieldName">Value</td></tr><tr><td><pre class="constant-value"><code>6</code></pre></td></tr></table>
   </div>
-</div><div class="basevariable">
+</div><div class="baseconstant">
   
   
   <a name="twisted.conch.ssh.agent.AGENTC_ADD_IDENTITY">
@@ -348,7 +376,7 @@
   </a>
   <div class="functionHeader">
     
-    <span class="py-defname">AGENTC_ADD_IDENTITY</span>: <code><a href="https://docs.python.org/3/library/functions.html#int">int</a></code> =
+    <span class="py-defname">AGENTC_ADD_IDENTITY</span>: <code><a href="https://docs.python.org/3/library/functions.html#int" class="intersphinx-link">int</a></code> =
     <a class="sourceLink" href="https://github.com/twisted/twisted/tree/twisted-21.2.0/src/twisted/conch/ssh/agent.py#L271">
       
       (source)
@@ -358,8 +386,9 @@
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    <table class="valueTable"><tr class="fieldStart"><td class="fieldName">Value</td></tr><tr><td><pre class="constant-value"><code>17</code></pre></td></tr></table>
   </div>
-</div><div class="basevariable">
+</div><div class="baseconstant">
   
   
   <a name="twisted.conch.ssh.agent.AGENTC_REMOVE_ALL_IDENTITIES">
@@ -370,7 +399,7 @@
   </a>
   <div class="functionHeader">
     
-    <span class="py-defname">AGENTC_REMOVE_ALL_IDENTITIES</span>: <code><a href="https://docs.python.org/3/library/functions.html#int">int</a></code> =
+    <span class="py-defname">AGENTC_REMOVE_ALL_IDENTITIES</span>: <code><a href="https://docs.python.org/3/library/functions.html#int" class="intersphinx-link">int</a></code> =
     <a class="sourceLink" href="https://github.com/twisted/twisted/tree/twisted-21.2.0/src/twisted/conch/ssh/agent.py#L273">
       
       (source)
@@ -380,8 +409,9 @@
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    <table class="valueTable"><tr class="fieldStart"><td class="fieldName">Value</td></tr><tr><td><pre class="constant-value"><code>19</code></pre></td></tr></table>
   </div>
-</div><div class="basevariable">
+</div><div class="baseconstant">
   
   
   <a name="twisted.conch.ssh.agent.AGENTC_REMOVE_ALL_RSA_IDENTITIES">
@@ -392,7 +422,7 @@
   </a>
   <div class="functionHeader">
     
-    <span class="py-defname">AGENTC_REMOVE_ALL_RSA_IDENTITIES</span>: <code><a href="https://docs.python.org/3/library/functions.html#int">int</a></code> =
+    <span class="py-defname">AGENTC_REMOVE_ALL_RSA_IDENTITIES</span>: <code><a href="https://docs.python.org/3/library/functions.html#int" class="intersphinx-link">int</a></code> =
     <a class="sourceLink" href="https://github.com/twisted/twisted/tree/twisted-21.2.0/src/twisted/conch/ssh/agent.py#L265">
       
       (source)
@@ -402,8 +432,9 @@
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    <table class="valueTable"><tr class="fieldStart"><td class="fieldName">Value</td></tr><tr><td><pre class="constant-value"><code>9</code></pre></td></tr></table>
   </div>
-</div><div class="basevariable">
+</div><div class="baseconstant">
   
   
   <a name="twisted.conch.ssh.agent.AGENTC_REMOVE_IDENTITY">
@@ -414,7 +445,7 @@
   </a>
   <div class="functionHeader">
     
-    <span class="py-defname">AGENTC_REMOVE_IDENTITY</span>: <code><a href="https://docs.python.org/3/library/functions.html#int">int</a></code> =
+    <span class="py-defname">AGENTC_REMOVE_IDENTITY</span>: <code><a href="https://docs.python.org/3/library/functions.html#int" class="intersphinx-link">int</a></code> =
     <a class="sourceLink" href="https://github.com/twisted/twisted/tree/twisted-21.2.0/src/twisted/conch/ssh/agent.py#L272">
       
       (source)
@@ -424,8 +455,9 @@
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    <table class="valueTable"><tr class="fieldStart"><td class="fieldName">Value</td></tr><tr><td><pre class="constant-value"><code>18</code></pre></td></tr></table>
   </div>
-</div><div class="basevariable">
+</div><div class="baseconstant">
   
   
   <a name="twisted.conch.ssh.agent.AGENTC_REMOVE_RSA_IDENTITY">
@@ -436,7 +468,7 @@
   </a>
   <div class="functionHeader">
     
-    <span class="py-defname">AGENTC_REMOVE_RSA_IDENTITY</span>: <code><a href="https://docs.python.org/3/library/functions.html#int">int</a></code> =
+    <span class="py-defname">AGENTC_REMOVE_RSA_IDENTITY</span>: <code><a href="https://docs.python.org/3/library/functions.html#int" class="intersphinx-link">int</a></code> =
     <a class="sourceLink" href="https://github.com/twisted/twisted/tree/twisted-21.2.0/src/twisted/conch/ssh/agent.py#L264">
       
       (source)
@@ -446,8 +478,9 @@
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    <table class="valueTable"><tr class="fieldStart"><td class="fieldName">Value</td></tr><tr><td><pre class="constant-value"><code>8</code></pre></td></tr></table>
   </div>
-</div><div class="basevariable">
+</div><div class="baseconstant">
   
   
   <a name="twisted.conch.ssh.agent.AGENTC_REQUEST_IDENTITIES">
@@ -458,7 +491,7 @@
   </a>
   <div class="functionHeader">
     
-    <span class="py-defname">AGENTC_REQUEST_IDENTITIES</span>: <code><a href="https://docs.python.org/3/library/functions.html#int">int</a></code> =
+    <span class="py-defname">AGENTC_REQUEST_IDENTITIES</span>: <code><a href="https://docs.python.org/3/library/functions.html#int" class="intersphinx-link">int</a></code> =
     <a class="sourceLink" href="https://github.com/twisted/twisted/tree/twisted-21.2.0/src/twisted/conch/ssh/agent.py#L267">
       
       (source)
@@ -468,8 +501,9 @@
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    <table class="valueTable"><tr class="fieldStart"><td class="fieldName">Value</td></tr><tr><td><pre class="constant-value"><code>11</code></pre></td></tr></table>
   </div>
-</div><div class="basevariable">
+</div><div class="baseconstant">
   
   
   <a name="twisted.conch.ssh.agent.AGENTC_REQUEST_RSA_IDENTITIES">
@@ -480,7 +514,7 @@
   </a>
   <div class="functionHeader">
     
-    <span class="py-defname">AGENTC_REQUEST_RSA_IDENTITIES</span>: <code><a href="https://docs.python.org/3/library/functions.html#int">int</a></code> =
+    <span class="py-defname">AGENTC_REQUEST_RSA_IDENTITIES</span>: <code><a href="https://docs.python.org/3/library/functions.html#int" class="intersphinx-link">int</a></code> =
     <a class="sourceLink" href="https://github.com/twisted/twisted/tree/twisted-21.2.0/src/twisted/conch/ssh/agent.py#L259">
       
       (source)
@@ -490,8 +524,9 @@
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    <table class="valueTable"><tr class="fieldStart"><td class="fieldName">Value</td></tr><tr><td><pre class="constant-value"><code>1</code></pre></td></tr></table>
   </div>
-</div><div class="basevariable">
+</div><div class="baseconstant">
   
   
   <a name="twisted.conch.ssh.agent.AGENTC_SIGN_REQUEST">
@@ -502,7 +537,7 @@
   </a>
   <div class="functionHeader">
     
-    <span class="py-defname">AGENTC_SIGN_REQUEST</span>: <code><a href="https://docs.python.org/3/library/functions.html#int">int</a></code> =
+    <span class="py-defname">AGENTC_SIGN_REQUEST</span>: <code><a href="https://docs.python.org/3/library/functions.html#int" class="intersphinx-link">int</a></code> =
     <a class="sourceLink" href="https://github.com/twisted/twisted/tree/twisted-21.2.0/src/twisted/conch/ssh/agent.py#L269">
       
       (source)
@@ -512,6 +547,7 @@
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    <table class="valueTable"><tr class="fieldStart"><td class="fieldName">Value</td></tr><tr><td><pre class="constant-value"><code>13</code></pre></td></tr></table>
   </div>
 </div><div class="basevariable">
   
@@ -524,7 +560,7 @@
   </a>
   <div class="functionHeader">
     
-    <span class="py-defname">messages</span>: <code><a href="https://docs.python.org/3/library/stdtypes.html#dict">dict</a></code> =
+    <span class="py-defname">messages</span>: <code><a href="https://docs.python.org/3/library/stdtypes.html#dict" class="intersphinx-link">dict</a></code> =
     <a class="sourceLink" href="https://github.com/twisted/twisted/tree/twisted-21.2.0/src/twisted/conch/ssh/agent.py#L275">
       
       (source)
@@ -534,6 +570,7 @@
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    
   </div>
 </div>
 
@@ -542,11 +579,33 @@
 
     <footer class="navbar navbar-default">
   
+
   <div class="container">
     <a href="index.html">API Documentation</a> for <a href="https://twistedmatrix.com/" class="projecthome">Twisted</a>,
   generated by <a href="https://github.com/twisted/pydoctor/">pydoctor</a>
-    21.2.2 at 2022-01-12 04:22:24.
+    22.2.2.dev0 at 2022-03-04 05:57:20.
   </div>
+
+  <!-- Google analytics, obviously. -->
+  <script src="//www.google-analytics.com/urchin.js" type="text/javascript"></script>
+  <script type="text/javascript">
+    _uacct = "UA-99018-6";
+    urchinTracker();
+  </script>
+
+  <!-- If the documentation isn't current, insert a current link. -->
+  <script type="text/javascript">
+    if (window.location.pathname.indexOf('/current/') == -1) {
+      <!-- Give the user a link to this page, but in the current version of the docs. -->
+      var link = document.getElementById('current-docs-link');
+      link.href = window.location.pathname.replace(/\/\d+\.\d+\.\d+\/api\//, '/current/api/');
+      <!-- And make it visible -->
+      var container = document.getElementById('current-docs-container');
+      container.style.display = "";
+      delete link;
+      delete container;
+    }
+  </script>
 </footer>
 
     <script src="pydoctor.js" type="text/javascript"></script>

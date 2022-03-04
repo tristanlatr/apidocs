@@ -7,7 +7,7 @@
   <head>
     
     <title>twisted.internet._producer_helpers._PullToPush</title>
-    <meta name="generator" content="pydoctor 21.2.2"> 
+    <meta name="generator" content="pydoctor 22.2.2.dev0"> 
         
     </meta>
     <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
@@ -19,7 +19,13 @@
 
   <body>
 
-    
+    <div style="display: none" id="current-docs-container" class="container">
+  <div class="col-sm-12">
+    <a id="current-docs-link">
+      Go to the latest version of this document.
+    </a>
+  </div>
+</div>
 
     <nav class="navbar navbar-default">
   
@@ -44,69 +50,82 @@
           Names
         </a>
 
-        <form action="search-results.html" id="search-box-container">
+        <div id="search-box-container">
           <div class="input-group">
-            <input id="search-box" name="search-query" placeholder="Search..." aria-label="Search" minlength="2" class="form-control" />
+            <input id="search-box" type="search" name="search-query" placeholder="Search..." aria-label="Search" minlength="2" class="form-control" autocomplete="off" />
+            
             <span class="input-group-btn">
-              <button class="btn btn-default" type="submit" title="Search"><img src="fonts/search.svg" alt="Search!" /></button>
-              <a class="btn btn-default" id="search-help-button" title="Help" onclick="toggleSearchHelpText()"><img src="fonts/info.svg" alt="Help!" /></a>
+              <a style="display: none;" class="btn btn-default" id="search-clear-button" title="Clear" onclick="clearSearch()"><img src="fonts/x-circle.svg" alt="Clear" /></a>
+              <a class="btn btn-default" id="search-help-button" title="Help" onclick="toggleSearchHelpText()"><img src="fonts/info.svg" alt="Help" /></a>
             </span>
           </div>
-        </form>
+        </div>
 
-        <div class="rst-admonition hint" id="search-help-box">
+      </div>
+
+      <div id="search-results-container" style="display: none;">
+        <div>
+          <span class="label label-default" id="search-docstrings-button">
+            <a title="Search in docstrings" onclick="toggleSearchInDocstrings()">search in docstrings</a></span>
+        </div>
+
+        <noscript>
+            <h1>Cannot search: JavaScript is not supported/enabled in your browser.</h1>
+        </noscript>
+
+        <div class="hint" id="search-help-box">
           <p class="rst-last">
       
             Search bar offers the following options:
             <ul>   
                 <li>
                   <strong>Term presence.</strong> The below example searches for documents that 
-                    must contain “foo”, might contain “bar” and must not contain “baz”:
-                  <br /> <code>'+foo bar -baz'</code>
+                    must contain “foo”, might contain “bar” and must not contain “baz”: <code>+foo bar -baz</code>
                 </li> 
 
                 <li>
-                  <strong>Wildcards.</strong> The below example searches for documents with words beginning with “foo”:
-                  <br /> <code>'foo*'</code>
+                  <strong>Wildcards.</strong> The below example searches for documents with words beginning with “foo”: <code>foo*</code>
                 </li> 
 
                 <li>
-                  <strong>Search in specific fields.</strong> The following search matches all documents 
-                  that contains "foo" in their full dotted name and with “bar” in any field:
-                  <br /> <code>'+fullName:*foo* +bar'</code>
+                  <strong>Search in specific fields.</strong> The following search matches all objects 
+                  in "twisted.mail" that matches “search”: <code>+qname:twisted.mail.* +search</code>
 
                   <p>
-                    Possible fields: 'name', 'docstring', 'fullName'.
+                    Possible fields: 'name', 'qname' (fully qualified name), 'docstring', and 'kind'.
+                    Last two fields are only applicable if "search in docstrings" is enabled.
                   </p>
                 </li>
 
                 <li>
                   <strong>Fuzzy matches.</strong> The following search matches all documents 
-                  that have a word within 1 edit distance of “foo”:
-                  <br /> <code>'foo~1'</code>
+                  that have a word within 1 edit distance of “foo”: <code>foo~1</code>
                 </li>
             </ul>
 
           </p>
         </div>
 
-      </div>
+        <div id="search-status"> </div>
+        
+        <div class="warning" id="search-warn-box" style="display: none;">
+          <p class="rst-last"><span id="search-warn"></span></p>
+        </div>
 
+        <table id="search-results">
+          <!-- Filled dynamically by JS -->
+        </table>
+        
+        <div style="margin-top: 8px;">
+          <p>Results provided by <a href="https://lunrjs.com">Lunr.js</a></p>
+        </div>
+      </div>
 
     </div>
   </div>
 
-  <script>
- 
-    function toggleSearchHelpText() {
-        document.body.classList.toggle("search-help-hidden");
-    }
-    // Init search and help text
-    document.getElementById('search-box-container').style.display = 'block';
-    document.getElementById('search-help-box').style.display = 'block';
-    document.body.classList.add("search-help-hidden");
-
-  </script>
+  <script src="ajax.js" type="text/javascript"></script>
+  <script src="search.js" type="text/javascript"></script>
 
 </nav>
 
@@ -115,7 +134,7 @@
     <div class="container">
 
       <div class="page-header">
-        <h1 class="class private"><code><code><a href="twisted.html">twisted</a></code><wbr></wbr>.<code><a href="twisted.internet.html">internet</a></code><wbr></wbr>.<code><a href="twisted.internet._producer_helpers.html">_producer_helpers</a></code><wbr></wbr>.<code><a href="twisted.internet._producer_helpers._PullToPush.html">_PullToPush</a></code></code></h1>
+        <h1 class="class private"><code><code><a href="index.html" class="internal-link">twisted</a></code><wbr></wbr>.<code><a href="twisted.internet.html" class="internal-link" title="twisted.internet">internet</a></code><wbr></wbr>.<code><a href="twisted.internet._producer_helpers.html" class="internal-link" title="twisted.internet._producer_helpers">_producer_helpers</a></code><wbr></wbr>.<code><a href="twisted.internet._producer_helpers._PullToPush.html" class="internal-link" title="twisted.internet._producer_helpers._PullToPush">_PullToPush</a></code></code></h1>
         <div id="showPrivate">
           <button class="btn btn-link" onclick="togglePrivate()">Toggle Private API</button>
         </div>
@@ -126,73 +145,78 @@
       </div>
 
       <div class="extrasDocstring">
-        <p><code><span class="py-keyword">class</span> <span class="py-defname">_PullToPush</span>: <a href="https://github.com/twisted/twisted/tree/twisted-21.2.0/src/twisted/internet/_producer_helpers.py#L22" class="sourceLink">(source)</a></code></p><p>Implements interfaces: <code><a href="twisted.internet.interfaces.IPushProducer.html">twisted.internet.interfaces.IPushProducer</a></code></p>
+        <p><code><span class="py-keyword">class</span> <span class="py-defname">_PullToPush</span>: <a href="https://github.com/twisted/twisted/tree/twisted-21.2.0/src/twisted/internet/_producer_helpers.py#L22" class="sourceLink">(source)</a></code></p><p>Implements interfaces: <code><a href="twisted.internet.interfaces.IPushProducer.html" class="internal-link">twisted.internet.interfaces.IPushProducer</a></code></p>
         <p><a href="classIndex.html#twisted.internet._producer_helpers._PullToPush">View In Hierarchy</a></p>
       </div>
 
+      
+
       <div class="moduleDocstring">
-        <div><p>An adapter that converts a non-streaming to a streaming producer.</p><p>Because of limitations of the producer API, this adapter requires the cooperation of the consumer. When the consumer's <code>registerProducer</code> is called with a non-streaming producer, it must wrap it with <code><a href="twisted.internet._producer_helpers._PullToPush.html">_PullToPush</a></code> and then call <code>startStreaming</code> on the resulting object. When the consumer's <code>unregisterProducer</code> is called, it must call <code>stopStreaming</code> on the <code><a href="twisted.internet._producer_helpers._PullToPush.html">_PullToPush</a></code> instance.</p><p>If the underlying producer throws an exception from <code>resumeProducing</code>, the producer will be unregistered from the consumer.</p></div>
+        <div><p>An adapter that converts a non-streaming to a streaming producer.</p>
+<p>Because of limitations of the producer API, this adapter requires the cooperation of the consumer. When the consumer's <tt class="rst-docutils literal">registerProducer</tt> is called with a non-streaming producer, it must wrap it with <code><a href="twisted.internet._producer_helpers._PullToPush.html" class="internal-link" title="twisted.internet._producer_helpers._PullToPush">_PullToPush</a></code> and then call <tt class="rst-docutils literal">startStreaming</tt> on the resulting object. When the consumer's <tt class="rst-docutils literal">unregisterProducer</tt> is called, it must call <tt class="rst-docutils literal">stopStreaming</tt> on the <code><a href="twisted.internet._producer_helpers._PullToPush.html" class="internal-link" title="twisted.internet._producer_helpers._PullToPush">_PullToPush</a></code> instance.</p>
+<p>If the underlying producer throws an exception from <tt class="rst-docutils literal">resumeProducing</tt>, the producer will be unregistered from the consumer.</p>
+</div>
       </div>
 
       <div id="splitTables">
-        <table class="children sortable" id="id646">
+        <table class="children sortable" id="id653">
   
   
   <tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#__init__">__init__</a></code></td>
+    <td><code><a href="#__init__" class="internal-link" title="twisted.internet._producer_helpers._PullToPush.__init__">__init__</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#pauseProducing">pauseProducing</a></code></td>
-    <td><span></span></td>
+    <td><code><a href="#pauseProducing" class="internal-link" title="twisted.internet._producer_helpers._PullToPush.pauseProducing">pause​Producing</a></code></td>
+    <td></td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#resumeProducing">resumeProducing</a></code></td>
-    <td><span></span></td>
+    <td><code><a href="#resumeProducing" class="internal-link" title="twisted.internet._producer_helpers._PullToPush.resumeProducing">resume​Producing</a></code></td>
+    <td></td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#startStreaming">startStreaming</a></code></td>
-    <td><span>This should be called by the consumer when the producer is registered.</span></td>
+    <td><code><a href="#startStreaming" class="internal-link" title="twisted.internet._producer_helpers._PullToPush.startStreaming">start​Streaming</a></code></td>
+    <td>This should be called by the consumer when the producer is registered.</td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#stopProducing">stopProducing</a></code></td>
-    <td><span></span></td>
+    <td><code><a href="#stopProducing" class="internal-link" title="twisted.internet._producer_helpers._PullToPush.stopProducing">stop​Producing</a></code></td>
+    <td></td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#stopStreaming">stopStreaming</a></code></td>
-    <td><span>This should be called by the consumer when the producer is unregistered.</span></td>
+    <td><code><a href="#stopStreaming" class="internal-link" title="twisted.internet._producer_helpers._PullToPush.stopStreaming">stop​Streaming</a></code></td>
+    <td>This should be called by the consumer when the producer is unregistered.</td>
   </tr><tr class="method private">
     
     <td>Method</td>
-    <td><code><a href="#_pull">_pull</a></code></td>
-    <td><span>A generator that calls <code>resumeProducing</code> on the underlying producer forever.</span></td>
+    <td><code><a href="#_pull" class="internal-link" title="twisted.internet._producer_helpers._PullToPush._pull">_pull</a></code></td>
+    <td>A generator that calls <tt class="rst-docutils literal">resumeProducing</tt> on the underlying producer forever.</td>
   </tr><tr class="instancevariable private">
     
     <td>Instance Variable</td>
-    <td><code><a href="#_consumer">_consumer</a></code></td>
-    <td><span>the consumer with which the underlying producer was registered.</span></td>
+    <td><code><a href="#_consumer" class="internal-link" title="twisted.internet._producer_helpers._PullToPush._consumer">_consumer</a></code></td>
+    <td>the consumer with which the underlying producer was registered.</td>
   </tr><tr class="instancevariable private">
     
     <td>Instance Variable</td>
-    <td><code><a href="#_coopTask">_coopTask</a></code></td>
-    <td><span>the result of calling <code><a href="twisted.internet.task.html#cooperate">cooperate</a></code>, the task driving the streaming producer.</span></td>
+    <td><code><a href="#_coopTask" class="internal-link" title="twisted.internet._producer_helpers._PullToPush._coopTask">_coop​Task</a></code></td>
+    <td>the result of calling <code><a href="twisted.internet.task.html#cooperate" class="internal-link" title="twisted.internet.task.cooperate">cooperate</a></code>, the task driving the streaming producer.</td>
   </tr><tr class="instancevariable private">
     
     <td>Instance Variable</td>
-    <td><code><a href="#_finished">_finished</a></code></td>
-    <td><span><code>bool</code> indicating whether the producer has finished.</span></td>
+    <td><code><a href="#_finished" class="internal-link" title="twisted.internet._producer_helpers._PullToPush._finished">_finished</a></code></td>
+    <td><tt class="rst-docutils literal">bool</tt> indicating whether the producer has finished.</td>
   </tr><tr class="instancevariable private">
     
     <td>Instance Variable</td>
-    <td><code><a href="#_producer">_producer</a></code></td>
-    <td><span>the underling non-streaming producer.</span></td>
+    <td><code><a href="#_producer" class="internal-link" title="twisted.internet._producer_helpers._PullToPush._producer">_producer</a></code></td>
+    <td>the underling non-streaming producer.</td>
   </tr>
 </table>
         
@@ -242,9 +266,9 @@
     </a>
   </div>
   <div class="docstring functionBody">
-    <div class="interfaceinfo">from <code><a href="twisted.internet.interfaces.IPushProducer.html#pauseProducing">twisted.internet.interfaces.IPushProducer</a></code></div>
+    <div class="interfaceinfo">from <code><a href="twisted.internet.interfaces.IPushProducer.html#pauseProducing" class="internal-link" title="twisted.internet.interfaces.IPushProducer.pauseProducing">twisted.internet.interfaces.IPushProducer</a></code></div>
     
-    <div><table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">See Also</td></tr><tr><td colspan="2"><code>IPushProducer.pauseProducing</code></td></tr></table></div>
+    <div><table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">See Also</td></tr><tr><td colspan="2"><tt class="rst-docutils literal">IPushProducer.pauseProducing</tt></td></tr></table></div>
   </div>
 </div><div class="basemethod">
   
@@ -264,9 +288,9 @@
     </a>
   </div>
   <div class="docstring functionBody">
-    <div class="interfaceinfo">from <code><a href="twisted.internet.interfaces.IPushProducer.html#resumeProducing">twisted.internet.interfaces.IPushProducer</a></code></div>
+    <div class="interfaceinfo">from <code><a href="twisted.internet.interfaces.IPushProducer.html#resumeProducing" class="internal-link" title="twisted.internet.interfaces.IPushProducer.resumeProducing">twisted.internet.interfaces.IPushProducer</a></code></div>
     
-    <div><table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">See Also</td></tr><tr><td colspan="2"><code>IPushProducer.resumeProducing</code></td></tr></table></div>
+    <div><table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">See Also</td></tr><tr><td colspan="2"><tt class="rst-docutils literal">IPushProducer.resumeProducing</tt></td></tr></table></div>
   </div>
 </div><div class="basemethod">
   
@@ -288,7 +312,9 @@
   <div class="docstring functionBody">
     
     
-    <div><p>This should be called by the consumer when the producer is registered.</p><p>Start streaming data to the consumer.</p></div>
+    <div><p>This should be called by the consumer when the producer is registered.</p>
+<p>Start streaming data to the consumer.</p>
+</div>
   </div>
 </div><div class="basemethod">
   
@@ -308,9 +334,9 @@
     </a>
   </div>
   <div class="docstring functionBody">
-    <div class="interfaceinfo">from <code><a href="twisted.internet.interfaces.IProducer.html#stopProducing">twisted.internet.interfaces.IProducer</a></code></div>
+    <div class="interfaceinfo">from <code><a href="twisted.internet.interfaces.IProducer.html#stopProducing" class="internal-link" title="twisted.internet.interfaces.IProducer.stopProducing">twisted.internet.interfaces.IProducer</a></code></div>
     
-    <div><table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">See Also</td></tr><tr><td colspan="2"><code>IPushProducer.stopProducing</code></td></tr></table></div>
+    <div><table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">See Also</td></tr><tr><td colspan="2"><tt class="rst-docutils literal">IPushProducer.stopProducing</tt></td></tr></table></div>
   </div>
 </div><div class="basemethod">
   
@@ -332,7 +358,9 @@
   <div class="docstring functionBody">
     
     
-    <div><p>This should be called by the consumer when the producer is unregistered.</p><p>Stop streaming data to the consumer.</p></div>
+    <div><p>This should be called by the consumer when the producer is unregistered.</p>
+<p>Stop streaming data to the consumer.</p>
+</div>
   </div>
 </div><div class="basemethod private">
   
@@ -354,7 +382,9 @@
   <div class="docstring functionBody">
     
     
-    <div><p>A generator that calls <code>resumeProducing</code> on the underlying producer forever.</p><p>If <code>resumeProducing</code> throws an exception, the producer is unregistered, which should result in streaming stopping.</p></div>
+    <div><p>A generator that calls <tt class="rst-docutils literal">resumeProducing</tt> on the underlying producer forever.</p>
+<p>If <tt class="rst-docutils literal">resumeProducing</tt> throws an exception, the producer is unregistered, which should result in streaming stopping.</p>
+</div>
   </div>
 </div><div class="baseinstancevariable private">
   
@@ -377,6 +407,7 @@
     
     
     <div>the consumer with which the underlying producer was registered.</div>
+    
   </div>
 </div><div class="baseinstancevariable private">
   
@@ -398,7 +429,8 @@
   <div class="functionBody">
     
     
-    <div>the result of calling <code><a href="twisted.internet.task.html#cooperate">cooperate</a></code>, the task driving the streaming producer.</div>
+    <div>the result of calling <code><a href="twisted.internet.task.html#cooperate" class="internal-link" title="twisted.internet.task.cooperate">cooperate</a></code>, the task driving the streaming producer.</div>
+    
   </div>
 </div><div class="baseinstancevariable private">
   
@@ -411,7 +443,7 @@
   </a>
   <div class="functionHeader">
     
-    <span class="py-defname">_finished</span>: <code><a href="https://docs.python.org/3/library/functions.html#bool">bool</a></code> =
+    <span class="py-defname">_finished</span>: <code><a href="https://docs.python.org/3/library/functions.html#bool" class="intersphinx-link">bool</a></code> =
     <a class="sourceLink" href="https://github.com/twisted/twisted/tree/twisted-21.2.0/src/twisted/internet/_producer_helpers.py#L42">
       
       (source)
@@ -420,7 +452,8 @@
   <div class="functionBody">
     
     
-    <div><code>bool</code> indicating whether the producer has finished.</div>
+    <div><tt class="rst-docutils literal">bool</tt> indicating whether the producer has finished.</div>
+    
   </div>
 </div><div class="baseinstancevariable private">
   
@@ -443,6 +476,7 @@
     
     
     <div>the underling non-streaming producer.</div>
+    
   </div>
 </div>
 
@@ -451,11 +485,33 @@
 
     <footer class="navbar navbar-default">
   
+
   <div class="container">
     <a href="index.html">API Documentation</a> for <a href="https://twistedmatrix.com/" class="projecthome">Twisted</a>,
   generated by <a href="https://github.com/twisted/pydoctor/">pydoctor</a>
-    21.2.2 at 2022-01-12 04:22:24.
+    22.2.2.dev0 at 2022-03-04 05:57:20.
   </div>
+
+  <!-- Google analytics, obviously. -->
+  <script src="//www.google-analytics.com/urchin.js" type="text/javascript"></script>
+  <script type="text/javascript">
+    _uacct = "UA-99018-6";
+    urchinTracker();
+  </script>
+
+  <!-- If the documentation isn't current, insert a current link. -->
+  <script type="text/javascript">
+    if (window.location.pathname.indexOf('/current/') == -1) {
+      <!-- Give the user a link to this page, but in the current version of the docs. -->
+      var link = document.getElementById('current-docs-link');
+      link.href = window.location.pathname.replace(/\/\d+\.\d+\.\d+\/api\//, '/current/api/');
+      <!-- And make it visible -->
+      var container = document.getElementById('current-docs-container');
+      container.style.display = "";
+      delete link;
+      delete container;
+    }
+  </script>
 </footer>
 
     <script src="pydoctor.js" type="text/javascript"></script>

@@ -7,7 +7,7 @@
   <head>
     
     <title>twisted.python.failure.Failure</title>
-    <meta name="generator" content="pydoctor 21.2.2"> 
+    <meta name="generator" content="pydoctor 22.2.2.dev0"> 
         
     </meta>
     <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
@@ -19,7 +19,13 @@
 
   <body>
 
-    
+    <div style="display: none" id="current-docs-container" class="container">
+  <div class="col-sm-12">
+    <a id="current-docs-link">
+      Go to the latest version of this document.
+    </a>
+  </div>
+</div>
 
     <nav class="navbar navbar-default">
   
@@ -44,69 +50,82 @@
           Names
         </a>
 
-        <form action="search-results.html" id="search-box-container">
+        <div id="search-box-container">
           <div class="input-group">
-            <input id="search-box" name="search-query" placeholder="Search..." aria-label="Search" minlength="2" class="form-control" />
+            <input id="search-box" type="search" name="search-query" placeholder="Search..." aria-label="Search" minlength="2" class="form-control" autocomplete="off" />
+            
             <span class="input-group-btn">
-              <button class="btn btn-default" type="submit" title="Search"><img src="fonts/search.svg" alt="Search!" /></button>
-              <a class="btn btn-default" id="search-help-button" title="Help" onclick="toggleSearchHelpText()"><img src="fonts/info.svg" alt="Help!" /></a>
+              <a style="display: none;" class="btn btn-default" id="search-clear-button" title="Clear" onclick="clearSearch()"><img src="fonts/x-circle.svg" alt="Clear" /></a>
+              <a class="btn btn-default" id="search-help-button" title="Help" onclick="toggleSearchHelpText()"><img src="fonts/info.svg" alt="Help" /></a>
             </span>
           </div>
-        </form>
+        </div>
 
-        <div class="rst-admonition hint" id="search-help-box">
+      </div>
+
+      <div id="search-results-container" style="display: none;">
+        <div>
+          <span class="label label-default" id="search-docstrings-button">
+            <a title="Search in docstrings" onclick="toggleSearchInDocstrings()">search in docstrings</a></span>
+        </div>
+
+        <noscript>
+            <h1>Cannot search: JavaScript is not supported/enabled in your browser.</h1>
+        </noscript>
+
+        <div class="hint" id="search-help-box">
           <p class="rst-last">
       
             Search bar offers the following options:
             <ul>   
                 <li>
                   <strong>Term presence.</strong> The below example searches for documents that 
-                    must contain “foo”, might contain “bar” and must not contain “baz”:
-                  <br /> <code>'+foo bar -baz'</code>
+                    must contain “foo”, might contain “bar” and must not contain “baz”: <code>+foo bar -baz</code>
                 </li> 
 
                 <li>
-                  <strong>Wildcards.</strong> The below example searches for documents with words beginning with “foo”:
-                  <br /> <code>'foo*'</code>
+                  <strong>Wildcards.</strong> The below example searches for documents with words beginning with “foo”: <code>foo*</code>
                 </li> 
 
                 <li>
-                  <strong>Search in specific fields.</strong> The following search matches all documents 
-                  that contains "foo" in their full dotted name and with “bar” in any field:
-                  <br /> <code>'+fullName:*foo* +bar'</code>
+                  <strong>Search in specific fields.</strong> The following search matches all objects 
+                  in "twisted.mail" that matches “search”: <code>+qname:twisted.mail.* +search</code>
 
                   <p>
-                    Possible fields: 'name', 'docstring', 'fullName'.
+                    Possible fields: 'name', 'qname' (fully qualified name), 'docstring', and 'kind'.
+                    Last two fields are only applicable if "search in docstrings" is enabled.
                   </p>
                 </li>
 
                 <li>
                   <strong>Fuzzy matches.</strong> The following search matches all documents 
-                  that have a word within 1 edit distance of “foo”:
-                  <br /> <code>'foo~1'</code>
+                  that have a word within 1 edit distance of “foo”: <code>foo~1</code>
                 </li>
             </ul>
 
           </p>
         </div>
 
-      </div>
+        <div id="search-status"> </div>
+        
+        <div class="warning" id="search-warn-box" style="display: none;">
+          <p class="rst-last"><span id="search-warn"></span></p>
+        </div>
 
+        <table id="search-results">
+          <!-- Filled dynamically by JS -->
+        </table>
+        
+        <div style="margin-top: 8px;">
+          <p>Results provided by <a href="https://lunrjs.com">Lunr.js</a></p>
+        </div>
+      </div>
 
     </div>
   </div>
 
-  <script>
- 
-    function toggleSearchHelpText() {
-        document.body.classList.toggle("search-help-hidden");
-    }
-    // Init search and help text
-    document.getElementById('search-box-container').style.display = 'block';
-    document.getElementById('search-help-box').style.display = 'block';
-    document.body.classList.add("search-help-hidden");
-
-  </script>
+  <script src="ajax.js" type="text/javascript"></script>
+  <script src="search.js" type="text/javascript"></script>
 
 </nav>
 
@@ -115,7 +134,7 @@
     <div class="container">
 
       <div class="page-header">
-        <h1 class="class"><code><code><a href="twisted.html">twisted</a></code><wbr></wbr>.<code><a href="twisted.python.html">python</a></code><wbr></wbr>.<code><a href="twisted.python.failure.html">failure</a></code><wbr></wbr>.<code><a href="twisted.python.failure.Failure.html">Failure</a></code></code></h1>
+        <h1 class="class"><code><code><a href="index.html" class="internal-link">twisted</a></code><wbr></wbr>.<code><a href="twisted.python.html" class="internal-link" title="twisted.python">python</a></code><wbr></wbr>.<code><a href="twisted.python.failure.html" class="internal-link" title="twisted.python.failure">failure</a></code><wbr></wbr>.<code><a href="twisted.python.failure.Failure.html" class="internal-link" title="twisted.python.failure.Failure">Failure</a></code></code></h1>
         <div id="showPrivate">
           <button class="btn btn-link" onclick="togglePrivate()">Toggle Private API</button>
         </div>
@@ -126,162 +145,167 @@
       </div>
 
       <div class="extrasDocstring">
-        <p><code><span class="py-keyword">class</span> <span class="py-defname">Failure</span>(<a href="https://docs.python.org/3/library/exceptions.html#BaseException" title="BaseException">BaseException</a>): <a href="https://github.com/twisted/twisted/tree/twisted-21.2.0/src/twisted/python/failure.py#L199" class="sourceLink">(source)</a></code></p><p>Known subclasses: <code><a href="twisted.spread.pb.CopiedFailure.html">twisted.spread.pb.CopiedFailure</a></code>, <code><a href="twisted.spread.pb.CopyableFailure.html">twisted.spread.pb.CopyableFailure</a></code></p>
+        <p><code><span class="py-keyword">class</span> <span class="py-defname">Failure</span>(<a href="https://docs.python.org/3/library/exceptions.html#BaseException" class="intersphinx-link" title="BaseException">BaseException</a>): <a href="https://github.com/twisted/twisted/tree/twisted-21.2.0/src/twisted/python/failure.py#L199" class="sourceLink">(source)</a></code></p><p>Known subclasses: <code><a href="twisted.spread.pb.CopiedFailure.html" class="internal-link">twisted.spread.pb.CopiedFailure</a></code>, <code><a href="twisted.spread.pb.CopyableFailure.html" class="internal-link">twisted.spread.pb.CopyableFailure</a></code></p>
         <p><a href="classIndex.html#twisted.python.failure.Failure">View In Hierarchy</a></p>
       </div>
 
+      
+
       <div class="moduleDocstring">
-        <div><p>A basic abstraction for an error that has occurred.</p><p>This is necessary because Python's built-in error mechanisms are inconvenient for asynchronous communication.</p><p>The <code>stack</code> and <code>frame</code> attributes contain frames.  Each frame is a tuple of (funcName, fileName, lineNumber, localsItems, globalsItems), where localsItems and globalsItems are the contents of <code>locals().items()</code>/<code>globals().items()</code> for that frame, or an empty tuple if those details were not captured.</p></div>
+        <div><p>A basic abstraction for an error that has occurred.</p>
+<p>This is necessary because Python's built-in error mechanisms are inconvenient for asynchronous communication.</p>
+<p>The <tt class="rst-docutils literal">stack</tt> and <tt class="rst-docutils literal">frame</tt> attributes contain frames.  Each frame is a tuple of (funcName, fileName, lineNumber, localsItems, globalsItems), where localsItems and globalsItems are the contents of <tt class="rst-docutils literal"><span class="pre">locals().items()</span></tt>/<tt class="rst-docutils literal"><span class="pre">globals().items()</span></tt> for that frame, or an empty tuple if those details were not captured.</p>
+</div>
       </div>
 
       <div id="splitTables">
-        <table class="children sortable" id="id2594">
+        <table class="children sortable" id="id2580">
   
   
   <tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#__getstate__">__getstate__</a></code></td>
-    <td><span>Avoid pickling objects in the traceback.</span></td>
+    <td><code><a href="#__getstate__" class="internal-link" title="twisted.python.failure.Failure.__getstate__">__getstate__</a></code></td>
+    <td>Avoid pickling objects in the traceback.</td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#__init__">__init__</a></code></td>
-    <td><span>Initialize me with an explanation of the error.</span></td>
+    <td><code><a href="#__init__" class="internal-link" title="twisted.python.failure.Failure.__init__">__init__</a></code></td>
+    <td>Initialize me with an explanation of the error.</td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#__repr__">__repr__</a></code></td>
+    <td><code><a href="#__repr__" class="internal-link" title="twisted.python.failure.Failure.__repr__">__repr__</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#__str__">__str__</a></code></td>
+    <td><code><a href="#__str__" class="internal-link" title="twisted.python.failure.Failure.__str__">__str__</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#check">check</a></code></td>
-    <td><span>Check if this failure's type is in a predetermined list.</span></td>
+    <td><code><a href="#check" class="internal-link" title="twisted.python.failure.Failure.check">check</a></code></td>
+    <td>Check if this failure's type is in a predetermined list.</td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#cleanFailure">cleanFailure</a></code></td>
-    <td><span>Remove references to other objects, replacing them with strings.</span></td>
+    <td><code><a href="#cleanFailure" class="internal-link" title="twisted.python.failure.Failure.cleanFailure">clean​Failure</a></code></td>
+    <td>Remove references to other objects, replacing them with strings.</td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#getBriefTraceback">getBriefTraceback</a></code></td>
+    <td><code><a href="#getBriefTraceback" class="internal-link" title="twisted.python.failure.Failure.getBriefTraceback">get​Brief​Traceback</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#getErrorMessage">getErrorMessage</a></code></td>
-    <td><span>Get a string of the exception which caused this Failure.</span></td>
+    <td><code><a href="#getErrorMessage" class="internal-link" title="twisted.python.failure.Failure.getErrorMessage">get​Error​Message</a></code></td>
+    <td>Get a string of the exception which caused this Failure.</td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#getTraceback">getTraceback</a></code></td>
+    <td><code><a href="#getTraceback" class="internal-link" title="twisted.python.failure.Failure.getTraceback">get​Traceback</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#getTracebackObject">getTracebackObject</a></code></td>
-    <td><span>Get an object that represents this Failure's stack that can be passed to traceback.extract_tb.</span></td>
+    <td><code><a href="#getTracebackObject" class="internal-link" title="twisted.python.failure.Failure.getTracebackObject">get​Traceback​Object</a></code></td>
+    <td>Get an object that represents this Failure's stack that can be passed to traceback.extract_tb.</td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#printBriefTraceback">printBriefTraceback</a></code></td>
-    <td><span>Print a traceback as densely as possible.</span></td>
+    <td><code><a href="#printBriefTraceback" class="internal-link" title="twisted.python.failure.Failure.printBriefTraceback">print​Brief​Traceback</a></code></td>
+    <td>Print a traceback as densely as possible.</td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#printDetailedTraceback">printDetailedTraceback</a></code></td>
-    <td><span>Print a traceback with detailed locals and globals information.</span></td>
+    <td><code><a href="#printDetailedTraceback" class="internal-link" title="twisted.python.failure.Failure.printDetailedTraceback">print​Detailed​Traceback</a></code></td>
+    <td>Print a traceback with detailed locals and globals information.</td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#printTraceback">printTraceback</a></code></td>
-    <td><span>Emulate Python's standard error reporting mechanism.</span></td>
+    <td><code><a href="#printTraceback" class="internal-link" title="twisted.python.failure.Failure.printTraceback">print​Traceback</a></code></td>
+    <td>Emulate Python's standard error reporting mechanism.</td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#raiseException">raiseException</a></code></td>
-    <td><span>raise the original exception, preserving traceback information if available.</span></td>
+    <td><code><a href="#raiseException" class="internal-link" title="twisted.python.failure.Failure.raiseException">raise​Exception</a></code></td>
+    <td>raise the original exception, preserving traceback information if available.</td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#throwExceptionIntoGenerator">throwExceptionIntoGenerator</a></code></td>
-    <td><span>Throw the original exception into the given generator, preserving traceback information if available.</span></td>
+    <td><code><a href="#throwExceptionIntoGenerator" class="internal-link" title="twisted.python.failure.Failure.throwExceptionIntoGenerator">throw​Exception​Into​Generator</a></code></td>
+    <td>Throw the original exception into the given generator, preserving traceback information if available.</td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#trap">trap</a></code></td>
-    <td><span>Trap this failure if its type is in a predetermined list.</span></td>
+    <td><code><a href="#trap" class="internal-link" title="twisted.python.failure.Failure.trap">trap</a></code></td>
+    <td>Trap this failure if its type is in a predetermined list.</td>
   </tr><tr class="classvariable">
     
     <td>Class Variable</td>
-    <td><code><a href="#pickled">pickled</a></code></td>
+    <td><code><a href="#pickled" class="internal-link" title="twisted.python.failure.Failure.pickled">pickled</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="instancevariable">
     
     <td>Instance Variable</td>
-    <td><code><a href="#__dict__">__dict__</a></code></td>
+    <td><code><a href="#__dict__" class="internal-link" title="twisted.python.failure.Failure.__dict__">__dict__</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="instancevariable">
     
     <td>Instance Variable</td>
-    <td><code><a href="#captureVars">captureVars</a></code></td>
+    <td><code><a href="#captureVars" class="internal-link" title="twisted.python.failure.Failure.captureVars">capture​Vars</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="instancevariable">
     
     <td>Instance Variable</td>
-    <td><code><a href="#count">count</a></code></td>
+    <td><code><a href="#count" class="internal-link" title="twisted.python.failure.Failure.count">count</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="instancevariable">
     
     <td>Instance Variable</td>
-    <td><code><a href="#frames">frames</a></code></td>
-    <td><span>list of frames, innermost first.</span></td>
+    <td><code><a href="#frames" class="internal-link" title="twisted.python.failure.Failure.frames">frames</a></code></td>
+    <td>list of frames, innermost first.</td>
   </tr><tr class="instancevariable">
     
     <td>Instance Variable</td>
-    <td><code><a href="#parents">parents</a></code></td>
+    <td><code><a href="#parents" class="internal-link" title="twisted.python.failure.Failure.parents">parents</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="instancevariable">
     
     <td>Instance Variable</td>
-    <td><code><a href="#stack">stack</a></code></td>
-    <td><span>list of frames, innermost last, excluding <code>Failure.__init__</code>.</span></td>
+    <td><code><a href="#stack" class="internal-link" title="twisted.python.failure.Failure.stack">stack</a></code></td>
+    <td>list of frames, innermost last, excluding <tt class="rst-docutils literal">Failure.__init__</tt>.</td>
   </tr><tr class="instancevariable">
     
     <td>Instance Variable</td>
-    <td><code><a href="#tb">tb</a></code></td>
+    <td><code><a href="#tb" class="internal-link" title="twisted.python.failure.Failure.tb">tb</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="instancevariable">
     
     <td>Instance Variable</td>
-    <td><code><a href="#type">type</a></code></td>
-    <td><span>The exception's class.</span></td>
+    <td><code><a href="#type" class="internal-link" title="twisted.python.failure.Failure.type">type</a></code></td>
+    <td>The exception's class.</td>
   </tr><tr class="instancevariable">
     
     <td>Instance Variable</td>
-    <td><code><a href="#value">value</a></code></td>
-    <td><span>The exception instance responsible for this failure.</span></td>
+    <td><code><a href="#value" class="internal-link" title="twisted.python.failure.Failure.value">value</a></code></td>
+    <td>The exception instance responsible for this failure.</td>
   </tr><tr class="classmethod private">
     
     <td>Class Method</td>
-    <td><code><a href="#_findFailure">_findFailure</a></code></td>
-    <td><span>Find the failure that represents the exception currently in context.</span></td>
+    <td><code><a href="#_findFailure" class="internal-link" title="twisted.python.failure.Failure._findFailure">_find​Failure</a></code></td>
+    <td>Find the failure that represents the exception currently in context.</td>
   </tr><tr class="method private">
     
     <td>Method</td>
-    <td><code><a href="#_extrapolate">_extrapolate</a></code></td>
-    <td><span>Extrapolate from one failure into another, copying its stack frames.</span></td>
+    <td><code><a href="#_extrapolate" class="internal-link" title="twisted.python.failure.Failure._extrapolate">_extrapolate</a></code></td>
+    <td>Extrapolate from one failure into another, copying its stack frames.</td>
   </tr><tr class="classvariable private">
     
     <td>Class Variable</td>
-    <td><code><a href="#_yieldOpcode">_yieldOpcode</a></code></td>
+    <td><code><a href="#_yieldOpcode" class="internal-link" title="twisted.python.failure.Failure._yieldOpcode">_yield​Opcode</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr>
 </table>
@@ -312,7 +336,7 @@
   <div class="docstring functionBody">
     
     
-    <div><p>Avoid pickling objects in the traceback.</p></div>
+    <div>Avoid pickling objects in the traceback.</div>
   </div>
 </div><div class="basemethod">
   
@@ -325,7 +349,7 @@
   </a>
   <div class="functionHeader">
     
-    <span class="py-keyword">def</span> <span class="py-defname">__init__</span>(self, exc_value=None, exc_type=None, exc_tb=None, captureVars=False):
+    <span class="py-keyword">def</span> <span class="py-defname">__init__</span>(self, exc_value=<a href="https://docs.python.org/3/library/constants.html#None" class="intersphinx-link">None</a>, exc_type=<a href="https://docs.python.org/3/library/constants.html#None" class="intersphinx-link">None</a>, exc_tb=<a href="https://docs.python.org/3/library/constants.html#None" class="intersphinx-link">None</a>, captureVars=<a href="https://docs.python.org/3/library/constants.html#False" class="intersphinx-link">False</a>):
     <a class="sourceLink" href="https://github.com/twisted/twisted/tree/twisted-21.2.0/src/twisted/python/failure.py#L229">
       
       (source)
@@ -334,7 +358,11 @@
   <div class="docstring functionBody">
     
     
-    <div><p>Initialize me with an explanation of the error.</p><p>By default, this will use the current <code>exception</code> (<code><a href="https://docs.python.org/3/library/sys.html#sys.exc_info">sys.exc_info</a></code>()).  However, if you want to specify a particular kind of failure, you can pass an exception as an argument.</p><p>If no <code>exc_value</code> is passed, then an "original" <code>Failure</code> will be searched for. If the current exception handler that this <code>Failure</code> is being constructed in is handling an exception raised by <code><a href="#raiseException">raiseException</a></code>, then this <code>Failure</code> will act like the original <code>Failure</code>.</p><p>For <code>exc_tb</code> only <code><a href="https://docs.python.org/3/library/traceback.html#module-traceback">traceback</a></code> instances or <code><a href="https://docs.python.org/3/library/constants.html#None">None</a></code> are allowed. If <code><a href="https://docs.python.org/3/library/constants.html#None">None</a></code> is supplied for <code>exc_value</code>, the value of <code>exc_tb</code> is ignored, otherwise if <code>exc_tb</code> is <code><a href="https://docs.python.org/3/library/constants.html#None">None</a></code>, it will be found from execution context (ie, <code><a href="https://docs.python.org/3/library/sys.html#sys.exc_info">sys.exc_info</a></code>).</p><table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">exc_value</span></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">exc_type</span></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">exc_tb</span></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">captureVars</span></td><td class="fieldArgDesc">if set, capture locals and globals of stack frames.  This is pretty slow, and makes no difference unless you are going to use <code><a href="#printDetailedTraceback">printDetailedTraceback</a></code>.</td></tr></table></div>
+    <div><p>Initialize me with an explanation of the error.</p>
+<p>By default, this will use the current <tt class="rst-docutils literal">exception</tt> (<code><a href="https://docs.python.org/3/library/sys.html#sys.exc_info" class="intersphinx-link">sys.exc_info</a></code>()).  However, if you want to specify a particular kind of failure, you can pass an exception as an argument.</p>
+<p>If no <tt class="rst-docutils literal">exc_value</tt> is passed, then an "original" <tt class="rst-docutils literal">Failure</tt> will be searched for. If the current exception handler that this <tt class="rst-docutils literal">Failure</tt> is being constructed in is handling an exception raised by <code><a href="#raiseException" class="internal-link" title="twisted.python.failure.Failure.raiseException">raiseException</a></code>, then this <tt class="rst-docutils literal">Failure</tt> will act like the original <tt class="rst-docutils literal">Failure</tt>.</p>
+<p>For <tt class="rst-docutils literal">exc_tb</tt> only <code><a href="https://docs.python.org/3/library/traceback.html#module-traceback" class="intersphinx-link">traceback</a></code> instances or <code><a href="https://docs.python.org/3/library/constants.html#None" class="intersphinx-link">None</a></code> are allowed. If <code><a href="https://docs.python.org/3/library/constants.html#None" class="intersphinx-link">None</a></code> is supplied for <tt class="rst-docutils literal">exc_value</tt>, the value of <tt class="rst-docutils literal">exc_tb</tt> is ignored, otherwise if <tt class="rst-docutils literal">exc_tb</tt> is <code><a href="https://docs.python.org/3/library/constants.html#None" class="intersphinx-link">None</a></code>, it will be found from execution context (ie, <code><a href="https://docs.python.org/3/library/sys.html#sys.exc_info" class="intersphinx-link">sys.exc_info</a></code>).</p>
+<table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">exc​_value</span></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">exc​_type</span></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">exc​_tb</span></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">capture​Vars</span></td><td class="fieldArgDesc">if set, capture locals and globals of stack frames.  This is pretty slow, and makes no difference unless you are going to use <code><a href="#printDetailedTraceback" class="internal-link" title="twisted.python.failure.Failure.printDetailedTraceback">printDetailedTraceback</a></code>.</td></tr></table></div>
   </div>
 </div><div class="basemethod">
   
@@ -356,7 +384,7 @@
   <div class="docstring functionBody">
     
     
-    <div><p class="undocumented">Undocumented</p><table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Returns</td></tr><tr><td class="fieldArgContainer"><code><a href="https://docs.python.org/3/library/stdtypes.html#str">str</a></code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr></table></div>
+    <div><p class="undocumented">Undocumented</p><table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Returns</td></tr><tr><td class="fieldArgContainer"><code><a href="https://docs.python.org/3/library/stdtypes.html#str" class="intersphinx-link">str</a></code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr></table></div>
   </div>
 </div><div class="basemethod">
   
@@ -378,7 +406,7 @@
   <div class="docstring functionBody">
     
     
-    <div><p class="undocumented">Undocumented</p><table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Returns</td></tr><tr><td class="fieldArgContainer"><code><a href="https://docs.python.org/3/library/stdtypes.html#str">str</a></code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr></table></div>
+    <div><p class="undocumented">Undocumented</p><table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Returns</td></tr><tr><td class="fieldArgContainer"><code><a href="https://docs.python.org/3/library/stdtypes.html#str" class="intersphinx-link">str</a></code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr></table></div>
   </div>
 </div><div class="basemethod">
   
@@ -400,7 +428,7 @@
   <div class="docstring functionBody">
     
     
-    <div><p>Check if this failure's type is in a predetermined list.</p><table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">errorTypes:</span>list of <code><a href="https://docs.python.org/3/library/exceptions.html#Exception">Exception</a></code> classes or fully-qualified class names.</td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr class="fieldStart"><td class="fieldName" colspan="2">Returns</td></tr><tr><td colspan="2">the matching <code><a href="https://docs.python.org/3/library/exceptions.html#Exception">Exception</a></code> type, or None if no match.</td></tr></table></div>
+    <div>Check if this failure's type is in a predetermined list.<table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">*error​Types:</span>list of <code><a href="https://docs.python.org/3/library/exceptions.html#Exception" class="intersphinx-link">Exception</a></code> classes or fully-qualified class names.</td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr class="fieldStart"><td class="fieldName" colspan="2">Returns</td></tr><tr><td colspan="2">the matching <code><a href="https://docs.python.org/3/library/exceptions.html#Exception" class="intersphinx-link">Exception</a></code> type, or None if no match.</td></tr></table></div>
   </div>
 </div><div class="basemethod">
   
@@ -422,7 +450,9 @@
   <div class="docstring functionBody">
     
     
-    <div><p>Remove references to other objects, replacing them with strings.</p><p>On Python 3, this will also set the <code>__traceback__</code> attribute of the exception instance to <code><a href="https://docs.python.org/3/library/constants.html#None">None</a></code>.</p></div>
+    <div><p>Remove references to other objects, replacing them with strings.</p>
+<p>On Python 3, this will also set the <tt class="rst-docutils literal">__traceback__</tt> attribute of the exception instance to <code><a href="https://docs.python.org/3/library/constants.html#None" class="intersphinx-link">None</a></code>.</p>
+</div>
   </div>
 </div><div class="basemethod">
   
@@ -444,7 +474,7 @@
   <div class="docstring functionBody">
     
     
-    <div><p class="undocumented">Undocumented</p><table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Returns</td></tr><tr><td class="fieldArgContainer"><code><a href="https://docs.python.org/3/library/stdtypes.html#str">str</a></code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr></table></div>
+    <div><p class="undocumented">Undocumented</p><table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Returns</td></tr><tr><td class="fieldArgContainer"><code><a href="https://docs.python.org/3/library/stdtypes.html#str" class="intersphinx-link">str</a></code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr></table></div>
   </div>
 </div><div class="basemethod">
   
@@ -466,7 +496,7 @@
   <div class="docstring functionBody">
     
     
-    <div><p>Get a string of the exception which caused this Failure.</p><table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Returns</td></tr><tr><td class="fieldArgContainer"><code><a href="https://docs.python.org/3/library/stdtypes.html#str">str</a></code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr></table></div>
+    <div>Get a string of the exception which caused this Failure.<table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Returns</td></tr><tr><td class="fieldArgContainer"><code><a href="https://docs.python.org/3/library/stdtypes.html#str" class="intersphinx-link">str</a></code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr></table></div>
   </div>
 </div><div class="basemethod">
   
@@ -479,7 +509,7 @@
   </a>
   <div class="functionHeader">
     
-    <span class="py-keyword">def</span> <span class="py-defname">getTraceback</span>(self, elideFrameworkCode=0, detail='default'):
+    <span class="py-keyword">def</span> <span class="py-defname">getTraceback</span>(self, elideFrameworkCode=0, detail=<span class="rst-variable-quote">'</span><span class="rst-variable-string">default</span><span class="rst-variable-quote">'</span>):
     <a class="sourceLink" href="https://github.com/twisted/twisted/tree/twisted-21.2.0/src/twisted/python/failure.py#L650">
       
       (source)
@@ -488,7 +518,7 @@
   <div class="docstring functionBody">
     
     
-    <div><p class="undocumented">Undocumented</p><table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">elideFrameworkCode:</span><code><a href="https://docs.python.org/3/library/functions.html#int">int</a></code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">detail:</span><code><a href="https://docs.python.org/3/library/stdtypes.html#str">str</a></code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr class="fieldStart"><td class="fieldName" colspan="2">Returns</td></tr><tr><td class="fieldArgContainer"><code><a href="https://docs.python.org/3/library/stdtypes.html#str">str</a></code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr></table></div>
+    <div><p class="undocumented">Undocumented</p><table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">elide​Framework​Code:</span><code><a href="https://docs.python.org/3/library/functions.html#int" class="intersphinx-link">int</a></code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">detail:</span><code><a href="https://docs.python.org/3/library/stdtypes.html#str" class="intersphinx-link">str</a></code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr class="fieldStart"><td class="fieldName" colspan="2">Returns</td></tr><tr><td class="fieldArgContainer"><code><a href="https://docs.python.org/3/library/stdtypes.html#str" class="intersphinx-link">str</a></code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr></table></div>
   </div>
 </div><div class="basemethod">
   
@@ -510,7 +540,9 @@
   <div class="docstring functionBody">
     
     
-    <div><p>Get an object that represents this Failure's stack that can be passed to traceback.extract_tb.</p><p>If the original traceback object is still present, return that. If this traceback object has been lost but we still have the information, return a fake traceback object (see <code><a href="twisted.python.failure.html#_Traceback">_Traceback</a></code>). If there is no traceback information at all, return None.</p></div>
+    <div><p>Get an object that represents this Failure's stack that can be passed to traceback.extract_tb.</p>
+<p>If the original traceback object is still present, return that. If this traceback object has been lost but we still have the information, return a fake traceback object (see <code><a href="twisted.python.failure.html#_Traceback" class="internal-link" title="twisted.python.failure._Traceback">_Traceback</a></code>). If there is no traceback information at all, return None.</p>
+</div>
   </div>
 </div><div class="basemethod">
   
@@ -523,7 +555,7 @@
   </a>
   <div class="functionHeader">
     
-    <span class="py-keyword">def</span> <span class="py-defname">printBriefTraceback</span>(self, file=None, elideFrameworkCode=0):
+    <span class="py-keyword">def</span> <span class="py-defname">printBriefTraceback</span>(self, file=<a href="https://docs.python.org/3/library/constants.html#None" class="intersphinx-link">None</a>, elideFrameworkCode=0):
     <a class="sourceLink" href="https://github.com/twisted/twisted/tree/twisted-21.2.0/src/twisted/python/failure.py#L726">
       
       (source)
@@ -532,7 +564,7 @@
   <div class="docstring functionBody">
     
     
-    <div><p>Print a traceback as densely as possible.</p></div>
+    <div>Print a traceback as densely as possible.</div>
   </div>
 </div><div class="basemethod">
   
@@ -545,7 +577,7 @@
   </a>
   <div class="functionHeader">
     
-    <span class="py-keyword">def</span> <span class="py-defname">printDetailedTraceback</span>(self, file=None, elideFrameworkCode=0):
+    <span class="py-keyword">def</span> <span class="py-defname">printDetailedTraceback</span>(self, file=<a href="https://docs.python.org/3/library/constants.html#None" class="intersphinx-link">None</a>, elideFrameworkCode=0):
     <a class="sourceLink" href="https://github.com/twisted/twisted/tree/twisted-21.2.0/src/twisted/python/failure.py#L732">
       
       (source)
@@ -554,7 +586,7 @@
   <div class="docstring functionBody">
     
     
-    <div><p>Print a traceback with detailed locals and globals information.</p></div>
+    <div>Print a traceback with detailed locals and globals information.</div>
   </div>
 </div><div class="basemethod">
   
@@ -567,16 +599,16 @@
   </a>
   <div class="functionHeader">
     
-    <span class="py-keyword">def</span> <span class="py-defname">printTraceback</span>(self, file=None, elideFrameworkCode=False, detail='default'):
+    <span class="py-keyword">def</span> <span class="py-defname">printTraceback</span>(self, file=<a href="https://docs.python.org/3/library/constants.html#None" class="intersphinx-link">None</a>, elideFrameworkCode=<a href="https://docs.python.org/3/library/constants.html#False" class="intersphinx-link">False</a>, detail=<span class="rst-variable-quote">'</span><span class="rst-variable-string">default</span><span class="rst-variable-quote">'</span>):
     <a class="sourceLink" href="https://github.com/twisted/twisted/tree/twisted-21.2.0/src/twisted/python/failure.py#L657">
       
       (source)
     </a>
   </div>
   <div class="docstring functionBody">
-    <div class="interfaceinfo">overridden in <code><a href="twisted.spread.pb.CopiedFailure.html">twisted.spread.pb.CopiedFailure</a></code></div>
+    <div class="interfaceinfo">overridden in <code><a href="twisted.spread.pb.CopiedFailure.html" class="internal-link">twisted.spread.pb.CopiedFailure</a></code></div>
     
-    <div><p>Emulate Python's standard error reporting mechanism.</p><table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">file</span></td><td class="fieldArgDesc">If specified, a file-like object to which to write the traceback.</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">elideFrameworkCode</span></td><td class="fieldArgDesc">A flag indicating whether to attempt to remove uninteresting frames from within Twisted itself from the output.</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">detail</span></td><td class="fieldArgDesc">A string indicating how much information to include in the traceback.  Must be one of <code>'brief'</code>, <code>'default'</code>, or <code>'verbose'</code>.</td></tr></table></div>
+    <div>Emulate Python's standard error reporting mechanism.<table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">file</span></td><td class="fieldArgDesc">If specified, a file-like object to which to write the traceback.</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">elide​Framework​Code</span></td><td class="fieldArgDesc">A flag indicating whether to attempt to remove uninteresting frames from within Twisted itself from the output.</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">detail</span></td><td class="fieldArgDesc">A string indicating how much information to include in the traceback.  Must be one of <tt class="rst-docutils literal">'brief'</tt>, <tt class="rst-docutils literal">'default'</tt>, or <tt class="rst-docutils literal">'verbose'</tt>.</td></tr></table></div>
   </div>
 </div><div class="basemethod">
   
@@ -598,7 +630,7 @@
   <div class="docstring functionBody">
     
     
-    <div><p>raise the original exception, preserving traceback information if available.</p></div>
+    <div>raise the original exception, preserving traceback information if available.</div>
   </div>
 </div><div class="basemethod">
   
@@ -610,7 +642,7 @@
     
   </a>
   <div class="functionHeader">
-    @_extraneous<br />
+    @<a href="twisted.python.failure.html#_extraneous" class="internal-link" title="twisted.python.failure._extraneous">_extraneous</a><br />
     <span class="py-keyword">def</span> <span class="py-defname">throwExceptionIntoGenerator</span>(self, g):
     <a class="sourceLink" href="https://github.com/twisted/twisted/tree/twisted-21.2.0/src/twisted/python/failure.py#L488">
       
@@ -618,9 +650,9 @@
     </a>
   </div>
   <div class="docstring functionBody">
-    <div class="interfaceinfo">overridden in <code><a href="twisted.spread.pb.CopiedFailure.html">twisted.spread.pb.CopiedFailure</a></code></div>
+    <div class="interfaceinfo">overridden in <code><a href="twisted.spread.pb.CopiedFailure.html" class="internal-link">twisted.spread.pb.CopiedFailure</a></code></div>
     
-    <div><p>Throw the original exception into the given generator, preserving traceback information if available.</p><table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Returns</td></tr><tr><td colspan="2">The next value yielded from the generator.</td></tr><tr class="fieldStart"><td class="fieldName" colspan="2">Raises</td></tr><tr><td class="fieldArgContainer"><code><a href="https://docs.python.org/3/library/exceptions.html#StopIteration">StopIteration</a></code></td><td>If there are no more values in the generator.</td></tr><tr><td class="fieldArgContainer"><code>anything else</code></td><td>Anything that the generator raises.</td></tr></table></div>
+    <div>Throw the original exception into the given generator, preserving traceback information if available.<table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Returns</td></tr><tr><td colspan="2">The next value yielded from the generator.</td></tr><tr class="fieldStart"><td class="fieldName" colspan="2">Raises</td></tr><tr><td class="fieldArgContainer"><code><a href="https://docs.python.org/3/library/exceptions.html#StopIteration" class="intersphinx-link">StopIteration</a></code></td><td>If there are no more values in the generator.</td></tr><tr><td class="fieldArgContainer"><code>anything else</code></td><td>Anything that the generator raises.</td></tr></table></div>
   </div>
 </div><div class="basemethod">
   
@@ -642,7 +674,10 @@
   <div class="docstring functionBody">
     
     
-    <div><p>Trap this failure if its type is in a predetermined list.</p><p>This allows you to trap a Failure in an error callback.  It will be automatically re-raised if it is not a type that you expect.</p><p>The reason for having this particular API is because it's very useful in Deferred errback chains:</p><pre class="literalblock">
+    <div><p>Trap this failure if its type is in a predetermined list.</p>
+<p>This allows you to trap a Failure in an error callback.  It will be automatically re-raised if it is not a type that you expect.</p>
+<p>The reason for having this particular API is because it's very useful in Deferred errback chains:</p>
+<pre class="rst-literal-block">
     def _ebFoo(self, failure):
         r = failure.trap(Spam, Eggs)
         print('The Failure is due to either Spam or Eggs!')
@@ -650,7 +685,9 @@
             print('Spam did it!')
         elif r == Eggs:
             print('Eggs did it!')
-</pre><p>If the failure is not a Spam or an Eggs, then the Failure will be 'passed on' to the next errback. In Python 2 the Failure will be raised; in Python 3 the underlying exception will be re-raised.</p><table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">errorTypes:</span><code><a href="https://docs.python.org/3/library/exceptions.html#Exception">Exception</a></code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr></table></div>
+</pre>
+<p>If the failure is not a Spam or an Eggs, then the Failure will be 'passed on' to the next errback. In Python 2 the Failure will be raised; in Python 3 the underlying exception will be re-raised.</p>
+<table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">*error​Types:</span><code><a href="https://docs.python.org/3/library/exceptions.html#Exception" class="intersphinx-link">Exception</a></code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr></table></div>
   </div>
 </div><div class="baseclassvariable">
   
@@ -663,7 +700,7 @@
   </a>
   <div class="functionHeader">
     
-    <span class="py-defname">pickled</span>: <code><a href="https://docs.python.org/3/library/functions.html#int">int</a></code> =
+    <span class="py-defname">pickled</span>: <code><a href="https://docs.python.org/3/library/functions.html#int" class="intersphinx-link">int</a></code> =
     <a class="sourceLink" href="https://github.com/twisted/twisted/tree/twisted-21.2.0/src/twisted/python/failure.py#L218">
       
       (source)
@@ -673,6 +710,7 @@
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    
   </div>
 </div><div class="baseinstancevariable">
   
@@ -695,6 +733,7 @@
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    
   </div>
 </div><div class="baseinstancevariable">
   
@@ -717,6 +756,7 @@
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    
   </div>
 </div><div class="baseinstancevariable">
   
@@ -739,6 +779,7 @@
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    
   </div>
 </div><div class="baseinstancevariable">
   
@@ -761,6 +802,7 @@
     
     
     <div>list of frames, innermost first.</div>
+    
   </div>
 </div><div class="baseinstancevariable">
   
@@ -783,6 +825,7 @@
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    
   </div>
 </div><div class="baseinstancevariable">
   
@@ -795,7 +838,7 @@
   </a>
   <div class="functionHeader">
     
-    <span class="py-defname">stack</span>: <code><a href="https://docs.python.org/3/library/stdtypes.html#list">list</a></code> =
+    <span class="py-defname">stack</span>: <code><a href="https://docs.python.org/3/library/stdtypes.html#list" class="intersphinx-link">list</a></code> =
     <a class="sourceLink" href="https://github.com/twisted/twisted/tree/twisted-21.2.0/src/twisted/python/failure.py#L214">
       
       (source)
@@ -804,7 +847,8 @@
   <div class="functionBody">
     
     
-    <div>list of frames, innermost last, excluding <code>Failure.__init__</code>.</div>
+    <div>list of frames, innermost last, excluding <tt class="rst-docutils literal">Failure.__init__</tt>.</div>
+    
   </div>
 </div><div class="baseinstancevariable">
   
@@ -827,6 +871,7 @@
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    
   </div>
 </div><div class="baseinstancevariable">
   
@@ -846,9 +891,10 @@
     </a>
   </div>
   <div class="functionBody">
-    <div class="interfaceinfo">overridden in <code><a href="twisted.spread.pb.CopiedFailure.html">twisted.spread.pb.CopiedFailure</a></code></div>
+    <div class="interfaceinfo">overridden in <code><a href="twisted.spread.pb.CopiedFailure.html" class="internal-link">twisted.spread.pb.CopiedFailure</a></code></div>
     
     <div>The exception's class.</div>
+    
   </div>
 </div><div class="baseinstancevariable">
   
@@ -868,9 +914,10 @@
     </a>
   </div>
   <div class="functionBody">
-    <div class="interfaceinfo">overridden in <code><a href="twisted.spread.pb.CopiedFailure.html">twisted.spread.pb.CopiedFailure</a></code></div>
+    <div class="interfaceinfo">overridden in <code><a href="twisted.spread.pb.CopiedFailure.html" class="internal-link">twisted.spread.pb.CopiedFailure</a></code></div>
     
     <div>The exception instance responsible for this failure.</div>
+    
   </div>
 </div><div class="baseclassmethod private">
   
@@ -882,7 +929,7 @@
     
   </a>
   <div class="functionHeader">
-    @classmethod<br />
+    @<a href="https://docs.python.org/3/library/functions.html#classmethod" class="intersphinx-link">classmethod</a><br />
     <span class="py-keyword">def</span> <span class="py-defname">_findFailure</span>(cls):
     <a class="sourceLink" href="https://github.com/twisted/twisted/tree/twisted-21.2.0/src/twisted/python/failure.py#L502">
       
@@ -892,7 +939,7 @@
   <div class="docstring functionBody">
     
     
-    <div><p>Find the failure that represents the exception currently in context.</p></div>
+    <div>Find the failure that represents the exception currently in context.</div>
   </div>
 </div><div class="basemethod private">
   
@@ -914,7 +961,7 @@
   <div class="docstring functionBody">
     
     
-    <div><p>Extrapolate from one failure into another, copying its stack frames.</p><table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">otherFailure:</span><code><a href="twisted.python.failure.Failure.html">Failure</a></code></td><td class="fieldArgDesc">Another <code><a href="twisted.python.failure.Failure.html">Failure</a></code>, whose traceback information, if any, should be preserved as part of the stack presented by this one.</td></tr></table></div>
+    <div>Extrapolate from one failure into another, copying its stack frames.<table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">other​Failure:</span><code><a href="twisted.python.failure.Failure.html" class="internal-link" title="twisted.python.failure.Failure">Failure</a></code></td><td class="fieldArgDesc">Another <code><a href="twisted.python.failure.Failure.html" class="internal-link" title="twisted.python.failure.Failure">Failure</a></code>, whose traceback information, if any, should be preserved as part of the stack presented by this one.</td></tr></table></div>
   </div>
 </div><div class="baseclassvariable private">
   
@@ -937,6 +984,7 @@
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    
   </div>
 </div>
 
@@ -945,11 +993,33 @@
 
     <footer class="navbar navbar-default">
   
+
   <div class="container">
     <a href="index.html">API Documentation</a> for <a href="https://twistedmatrix.com/" class="projecthome">Twisted</a>,
   generated by <a href="https://github.com/twisted/pydoctor/">pydoctor</a>
-    21.2.2 at 2022-01-12 04:22:24.
+    22.2.2.dev0 at 2022-03-04 05:57:20.
   </div>
+
+  <!-- Google analytics, obviously. -->
+  <script src="//www.google-analytics.com/urchin.js" type="text/javascript"></script>
+  <script type="text/javascript">
+    _uacct = "UA-99018-6";
+    urchinTracker();
+  </script>
+
+  <!-- If the documentation isn't current, insert a current link. -->
+  <script type="text/javascript">
+    if (window.location.pathname.indexOf('/current/') == -1) {
+      <!-- Give the user a link to this page, but in the current version of the docs. -->
+      var link = document.getElementById('current-docs-link');
+      link.href = window.location.pathname.replace(/\/\d+\.\d+\.\d+\/api\//, '/current/api/');
+      <!-- And make it visible -->
+      var container = document.getElementById('current-docs-container');
+      container.style.display = "";
+      delete link;
+      delete container;
+    }
+  </script>
 </footer>
 
     <script src="pydoctor.js" type="text/javascript"></script>

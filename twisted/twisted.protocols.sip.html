@@ -7,7 +7,7 @@
   <head>
     
     <title>twisted.protocols.sip</title>
-    <meta name="generator" content="pydoctor 21.2.2"> 
+    <meta name="generator" content="pydoctor 22.2.2.dev0"> 
         
     </meta>
     <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
@@ -19,7 +19,13 @@
 
   <body>
 
-    
+    <div style="display: none" id="current-docs-container" class="container">
+  <div class="col-sm-12">
+    <a id="current-docs-link">
+      Go to the latest version of this document.
+    </a>
+  </div>
+</div>
 
     <nav class="navbar navbar-default">
   
@@ -44,69 +50,82 @@
           Names
         </a>
 
-        <form action="search-results.html" id="search-box-container">
+        <div id="search-box-container">
           <div class="input-group">
-            <input id="search-box" name="search-query" placeholder="Search..." aria-label="Search" minlength="2" class="form-control" />
+            <input id="search-box" type="search" name="search-query" placeholder="Search..." aria-label="Search" minlength="2" class="form-control" autocomplete="off" />
+            
             <span class="input-group-btn">
-              <button class="btn btn-default" type="submit" title="Search"><img src="fonts/search.svg" alt="Search!" /></button>
-              <a class="btn btn-default" id="search-help-button" title="Help" onclick="toggleSearchHelpText()"><img src="fonts/info.svg" alt="Help!" /></a>
+              <a style="display: none;" class="btn btn-default" id="search-clear-button" title="Clear" onclick="clearSearch()"><img src="fonts/x-circle.svg" alt="Clear" /></a>
+              <a class="btn btn-default" id="search-help-button" title="Help" onclick="toggleSearchHelpText()"><img src="fonts/info.svg" alt="Help" /></a>
             </span>
           </div>
-        </form>
+        </div>
 
-        <div class="rst-admonition hint" id="search-help-box">
+      </div>
+
+      <div id="search-results-container" style="display: none;">
+        <div>
+          <span class="label label-default" id="search-docstrings-button">
+            <a title="Search in docstrings" onclick="toggleSearchInDocstrings()">search in docstrings</a></span>
+        </div>
+
+        <noscript>
+            <h1>Cannot search: JavaScript is not supported/enabled in your browser.</h1>
+        </noscript>
+
+        <div class="hint" id="search-help-box">
           <p class="rst-last">
       
             Search bar offers the following options:
             <ul>   
                 <li>
                   <strong>Term presence.</strong> The below example searches for documents that 
-                    must contain “foo”, might contain “bar” and must not contain “baz”:
-                  <br /> <code>'+foo bar -baz'</code>
+                    must contain “foo”, might contain “bar” and must not contain “baz”: <code>+foo bar -baz</code>
                 </li> 
 
                 <li>
-                  <strong>Wildcards.</strong> The below example searches for documents with words beginning with “foo”:
-                  <br /> <code>'foo*'</code>
+                  <strong>Wildcards.</strong> The below example searches for documents with words beginning with “foo”: <code>foo*</code>
                 </li> 
 
                 <li>
-                  <strong>Search in specific fields.</strong> The following search matches all documents 
-                  that contains "foo" in their full dotted name and with “bar” in any field:
-                  <br /> <code>'+fullName:*foo* +bar'</code>
+                  <strong>Search in specific fields.</strong> The following search matches all objects 
+                  in "twisted.mail" that matches “search”: <code>+qname:twisted.mail.* +search</code>
 
                   <p>
-                    Possible fields: 'name', 'docstring', 'fullName'.
+                    Possible fields: 'name', 'qname' (fully qualified name), 'docstring', and 'kind'.
+                    Last two fields are only applicable if "search in docstrings" is enabled.
                   </p>
                 </li>
 
                 <li>
                   <strong>Fuzzy matches.</strong> The following search matches all documents 
-                  that have a word within 1 edit distance of “foo”:
-                  <br /> <code>'foo~1'</code>
+                  that have a word within 1 edit distance of “foo”: <code>foo~1</code>
                 </li>
             </ul>
 
           </p>
         </div>
 
-      </div>
+        <div id="search-status"> </div>
+        
+        <div class="warning" id="search-warn-box" style="display: none;">
+          <p class="rst-last"><span id="search-warn"></span></p>
+        </div>
 
+        <table id="search-results">
+          <!-- Filled dynamically by JS -->
+        </table>
+        
+        <div style="margin-top: 8px;">
+          <p>Results provided by <a href="https://lunrjs.com">Lunr.js</a></p>
+        </div>
+      </div>
 
     </div>
   </div>
 
-  <script>
- 
-    function toggleSearchHelpText() {
-        document.body.classList.toggle("search-help-hidden");
-    }
-    // Init search and help text
-    document.getElementById('search-box-container').style.display = 'block';
-    document.getElementById('search-help-box').style.display = 'block';
-    document.body.classList.add("search-help-hidden");
-
-  </script>
+  <script src="ajax.js" type="text/javascript"></script>
+  <script src="search.js" type="text/javascript"></script>
 
 </nav>
 
@@ -115,7 +134,7 @@
     <div class="container">
 
       <div class="page-header">
-        <h1 class="module"><code><code><a href="twisted.html">twisted</a></code><wbr></wbr>.<code><a href="twisted.protocols.html">protocols</a></code><wbr></wbr>.<code><a href="twisted.protocols.sip.html">sip</a></code></code></h1>
+        <h1 class="module"><code><code><a href="index.html" class="internal-link">twisted</a></code><wbr></wbr>.<code><a href="twisted.protocols.html" class="internal-link" title="twisted.protocols">protocols</a></code><wbr></wbr>.<code><a href="twisted.protocols.sip.html" class="internal-link" title="twisted.protocols.sip">sip</a></code></code></h1>
         <div id="showPrivate">
           <button class="btn btn-link" onclick="togglePrivate()">Toggle Private API</button>
         </div>
@@ -130,158 +149,162 @@
         <p></p>
       </div>
 
+      
+
       <div class="moduleDocstring">
-        <div><p>Session Initialization Protocol.</p><p>Documented in RFC 2543. [Superseded by 3261]</p></div>
+        <div><p>Session Initialization Protocol.</p>
+<p>Documented in RFC 2543. [Superseded by 3261]</p>
+</div>
       </div>
 
       <div id="splitTables">
-        <table class="children sortable" id="id2443">
+        <table class="children sortable" id="id2431">
   
   
   <tr class="interface">
     
     <td>Interface</td>
-    <td><code><a href="twisted.protocols.sip.IAuthorizer.html">IAuthorizer</a></code></td>
+    <td><code><a href="twisted.protocols.sip.IAuthorizer.html" class="internal-link" title="twisted.protocols.sip.IAuthorizer">​IAuthorizer</a></code></td>
     <td><span class="undocumented">No interface docstring; 2/2 methods documented</span></td>
   </tr><tr class="interface">
     
     <td>Interface</td>
-    <td><code><a href="twisted.protocols.sip.IContact.html">IContact</a></code></td>
-    <td><span>A user of a registrar or proxy</span></td>
+    <td><code><a href="twisted.protocols.sip.IContact.html" class="internal-link" title="twisted.protocols.sip.IContact">​IContact</a></code></td>
+    <td>A user of a registrar or proxy</td>
   </tr><tr class="interface">
     
     <td>Interface</td>
-    <td><code><a href="twisted.protocols.sip.ILocator.html">ILocator</a></code></td>
-    <td><span>Allow looking up physical address for logical URL.</span></td>
+    <td><code><a href="twisted.protocols.sip.ILocator.html" class="internal-link" title="twisted.protocols.sip.ILocator">​ILocator</a></code></td>
+    <td>Allow looking up physical address for logical URL.</td>
   </tr><tr class="interface">
     
     <td>Interface</td>
-    <td><code><a href="twisted.protocols.sip.IRegistry.html">IRegistry</a></code></td>
-    <td><span>Allows registration of logical-&gt;physical URL mapping.</span></td>
+    <td><code><a href="twisted.protocols.sip.IRegistry.html" class="internal-link" title="twisted.protocols.sip.IRegistry">​IRegistry</a></code></td>
+    <td>Allows registration of logical-&gt;physical URL mapping.</td>
   </tr><tr class="class">
     
     <td>Class</td>
-    <td><code><a href="twisted.protocols.sip.Base.html">Base</a></code></td>
-    <td><span>Base class for SIP clients and servers.</span></td>
+    <td><code><a href="twisted.protocols.sip.Base.html" class="internal-link" title="twisted.protocols.sip.Base">​Base</a></code></td>
+    <td>Base class for SIP clients and servers.</td>
   </tr><tr class="class">
     
     <td>Class</td>
-    <td><code><a href="twisted.protocols.sip.InMemoryRegistry.html">InMemoryRegistry</a></code></td>
-    <td><span>A simplistic registry for a specific domain.</span></td>
+    <td><code><a href="twisted.protocols.sip.InMemoryRegistry.html" class="internal-link" title="twisted.protocols.sip.InMemoryRegistry">​In​Memory​Registry</a></code></td>
+    <td>A simplistic registry for a specific domain.</td>
   </tr><tr class="class">
     
     <td>Class</td>
-    <td><code><a href="twisted.protocols.sip.Message.html">Message</a></code></td>
-    <td><span>A SIP message.</span></td>
+    <td><code><a href="twisted.protocols.sip.Message.html" class="internal-link" title="twisted.protocols.sip.Message">​Message</a></code></td>
+    <td>A SIP message.</td>
   </tr><tr class="class">
     
     <td>Class</td>
-    <td><code><a href="twisted.protocols.sip.MessagesParser.html">MessagesParser</a></code></td>
-    <td><span>A SIP messages parser.</span></td>
+    <td><code><a href="twisted.protocols.sip.MessagesParser.html" class="internal-link" title="twisted.protocols.sip.MessagesParser">​Messages​Parser</a></code></td>
+    <td>A SIP messages parser.</td>
   </tr><tr class="class">
     
     <td>Class</td>
-    <td><code><a href="twisted.protocols.sip.Proxy.html">Proxy</a></code></td>
-    <td><span>SIP proxy.</span></td>
+    <td><code><a href="twisted.protocols.sip.Proxy.html" class="internal-link" title="twisted.protocols.sip.Proxy">​Proxy</a></code></td>
+    <td>SIP proxy.</td>
   </tr><tr class="class">
     
     <td>Class</td>
-    <td><code><a href="twisted.protocols.sip.RegisterProxy.html">RegisterProxy</a></code></td>
-    <td><span>A proxy that allows registration for a specific domain.</span></td>
+    <td><code><a href="twisted.protocols.sip.RegisterProxy.html" class="internal-link" title="twisted.protocols.sip.RegisterProxy">​Register​Proxy</a></code></td>
+    <td>A proxy that allows registration for a specific domain.</td>
   </tr><tr class="class">
     
     <td>Class</td>
-    <td><code><a href="twisted.protocols.sip.Registration.html">Registration</a></code></td>
+    <td><code><a href="twisted.protocols.sip.Registration.html" class="internal-link" title="twisted.protocols.sip.Registration">​Registration</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="class">
     
     <td>Class</td>
-    <td><code><a href="twisted.protocols.sip.RegistrationError.html">RegistrationError</a></code></td>
-    <td><span>Registration was not possible.</span></td>
+    <td><code><a href="twisted.protocols.sip.RegistrationError.html" class="internal-link" title="twisted.protocols.sip.RegistrationError">​Registration​Error</a></code></td>
+    <td>Registration was not possible.</td>
   </tr><tr class="class">
     
     <td>Class</td>
-    <td><code><a href="twisted.protocols.sip.Request.html">Request</a></code></td>
-    <td><span>A Request for a URI</span></td>
+    <td><code><a href="twisted.protocols.sip.Request.html" class="internal-link" title="twisted.protocols.sip.Request">​Request</a></code></td>
+    <td>A Request for a URI</td>
   </tr><tr class="class">
     
     <td>Class</td>
-    <td><code><a href="twisted.protocols.sip.Response.html">Response</a></code></td>
-    <td><span>A Response to a URI Request</span></td>
+    <td><code><a href="twisted.protocols.sip.Response.html" class="internal-link" title="twisted.protocols.sip.Response">​Response</a></code></td>
+    <td>A Response to a URI Request</td>
   </tr><tr class="class">
     
     <td>Class</td>
-    <td><code><a href="twisted.protocols.sip.SIPError.html">SIPError</a></code></td>
+    <td><code><a href="twisted.protocols.sip.SIPError.html" class="internal-link" title="twisted.protocols.sip.SIPError">​SIPError</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="class">
     
     <td>Class</td>
-    <td><code><a href="twisted.protocols.sip.URL.html">URL</a></code></td>
-    <td><span>A SIP URL.</span></td>
+    <td><code><a href="twisted.protocols.sip.URL.html" class="internal-link" title="twisted.protocols.sip.URL">URL</a></code></td>
+    <td>A SIP URL.</td>
   </tr><tr class="class">
     
     <td>Class</td>
-    <td><code><a href="twisted.protocols.sip.Via.html">Via</a></code></td>
-    <td><span>A <code><a href="twisted.protocols.sip.Via.html">Via</a></code> is a SIP Via header, representing a segment of the path taken by the request.</span></td>
+    <td><code><a href="twisted.protocols.sip.Via.html" class="internal-link" title="twisted.protocols.sip.Via">​Via</a></code></td>
+    <td>A <code><a href="twisted.protocols.sip.Via.html" class="internal-link" title="twisted.protocols.sip.Via">Via</a></code> is a SIP Via header, representing a segment of the path taken by the request.</td>
   </tr><tr class="function">
     
     <td>Function</td>
-    <td><code><a href="#cleanRequestURL">cleanRequestURL</a></code></td>
-    <td><span>Clean a URL from a Request line.</span></td>
+    <td><code><a href="#cleanRequestURL" class="internal-link" title="twisted.protocols.sip.cleanRequestURL">clean​Request​URL</a></code></td>
+    <td>Clean a URL from a Request line.</td>
   </tr><tr class="function">
     
     <td>Function</td>
-    <td><code><a href="#dashCapitalize">dashCapitalize</a></code></td>
-    <td><span>Capitalize a string, making sure to treat '-' as a word separator</span></td>
+    <td><code><a href="#dashCapitalize" class="internal-link" title="twisted.protocols.sip.dashCapitalize">dash​Capitalize</a></code></td>
+    <td>Capitalize a string, making sure to treat '-' as a word separator</td>
   </tr><tr class="function">
     
     <td>Function</td>
-    <td><code><a href="#parseAddress">parseAddress</a></code></td>
-    <td><span>Return (name, uri, params) for From/To/Contact header.</span></td>
+    <td><code><a href="#parseAddress" class="internal-link" title="twisted.protocols.sip.parseAddress">parse​Address</a></code></td>
+    <td>Return (name, uri, params) for From/To/Contact header.</td>
   </tr><tr class="function">
     
     <td>Function</td>
-    <td><code><a href="#parseURL">parseURL</a></code></td>
-    <td><span>Return string into URL object.</span></td>
+    <td><code><a href="#parseURL" class="internal-link" title="twisted.protocols.sip.parseURL">parse​URL</a></code></td>
+    <td>Return string into URL object.</td>
   </tr><tr class="function">
     
     <td>Function</td>
-    <td><code><a href="#parseViaHeader">parseViaHeader</a></code></td>
-    <td><span>Parse a Via header.</span></td>
+    <td><code><a href="#parseViaHeader" class="internal-link" title="twisted.protocols.sip.parseViaHeader">parse​Via​Header</a></code></td>
+    <td>Parse a Via header.</td>
   </tr><tr class="function">
     
     <td>Function</td>
-    <td><code><a href="#unq">unq</a></code></td>
+    <td><code><a href="#unq" class="internal-link" title="twisted.protocols.sip.unq">unq</a></code></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="constant">
+    
+    <td>Constant</td>
+    <td><code><a href="#PORT" class="internal-link" title="twisted.protocols.sip.PORT">PORT</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="variable">
     
     <td>Variable</td>
-    <td><code><a href="#longHeaders">longHeaders</a></code></td>
+    <td><code><a href="#longHeaders" class="internal-link" title="twisted.protocols.sip.longHeaders">long​Headers</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="variable">
     
     <td>Variable</td>
-    <td><code><a href="#PORT">PORT</a></code></td>
+    <td><code><a href="#shortHeaders" class="internal-link" title="twisted.protocols.sip.shortHeaders">short​Headers</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="variable">
     
     <td>Variable</td>
-    <td><code><a href="#shortHeaders">shortHeaders</a></code></td>
+    <td><code><a href="#specialCases" class="internal-link" title="twisted.protocols.sip.specialCases">special​Cases</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="variable">
     
     <td>Variable</td>
-    <td><code><a href="#specialCases">specialCases</a></code></td>
-    <td><span class="undocumented">Undocumented</span></td>
-  </tr><tr class="variable">
-    
-    <td>Variable</td>
-    <td><code><a href="#statusCodes">statusCodes</a></code></td>
+    <td><code><a href="#statusCodes" class="internal-link" title="twisted.protocols.sip.statusCodes">status​Codes</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="variable private">
     
     <td>Variable</td>
-    <td><code><a href="#_absent">_absent</a></code></td>
+    <td><code><a href="#_absent" class="internal-link" title="twisted.protocols.sip._absent">_absent</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr>
 </table>
@@ -312,7 +335,7 @@
   <div class="docstring functionBody">
     
     
-    <div><p>Clean a URL from a Request line.</p></div>
+    <div>Clean a URL from a Request line.</div>
   </div>
 </div><div class="basefunction">
   
@@ -334,7 +357,7 @@
   <div class="docstring functionBody">
     
     
-    <div><p>Capitalize a string, making sure to treat '-' as a word separator</p></div>
+    <div>Capitalize a string, making sure to treat '-' as a word separator</div>
   </div>
 </div><div class="basefunction">
   
@@ -347,7 +370,7 @@
   </a>
   <div class="functionHeader">
     
-    <span class="py-keyword">def</span> <span class="py-defname">parseAddress</span>(address, host=None, port=None, clean=0):
+    <span class="py-keyword">def</span> <span class="py-defname">parseAddress</span>(address, host=<a href="https://docs.python.org/3/library/constants.html#None" class="intersphinx-link">None</a>, port=<a href="https://docs.python.org/3/library/constants.html#None" class="intersphinx-link">None</a>, clean=0):
     <a class="sourceLink" href="https://github.com/twisted/twisted/tree/twisted-21.2.0/src/twisted/protocols/sip.py#L452">
       
       (source)
@@ -356,7 +379,7 @@
   <div class="docstring functionBody">
     
     
-    <div><p>Return (name, uri, params) for From/To/Contact header.</p><table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">address</span></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">host</span></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">port</span></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">clean</span></td><td class="fieldArgDesc">remove unnecessary info, usually for From and To headers.</td></tr></table></div>
+    <div>Return (name, uri, params) for From/To/Contact header.<table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">address</span></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">host</span></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">port</span></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">clean</span></td><td class="fieldArgDesc">remove unnecessary info, usually for From and To headers.</td></tr></table></div>
   </div>
 </div><div class="basefunction">
   
@@ -369,7 +392,7 @@
   </a>
   <div class="functionHeader">
     
-    <span class="py-keyword">def</span> <span class="py-defname">parseURL</span>(url, host=None, port=None):
+    <span class="py-keyword">def</span> <span class="py-defname">parseURL</span>(url, host=<a href="https://docs.python.org/3/library/constants.html#None" class="intersphinx-link">None</a>, port=<a href="https://docs.python.org/3/library/constants.html#None" class="intersphinx-link">None</a>):
     <a class="sourceLink" href="https://github.com/twisted/twisted/tree/twisted-21.2.0/src/twisted/protocols/sip.py#L387">
       
       (source)
@@ -378,7 +401,9 @@
   <div class="docstring functionBody">
     
     
-    <div><p>Return string into URL object.</p><p>URIs are of form 'sip:user@example.com'.</p></div>
+    <div><p>Return string into URL object.</p>
+<p>URIs are of form 'sip:user@example.com'.</p>
+</div>
   </div>
 </div><div class="basefunction">
   
@@ -400,7 +425,7 @@
   <div class="docstring functionBody">
     
     
-    <div><p>Parse a Via header.</p><table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Returns</td></tr><tr><td class="fieldArgContainer"><code><a href="twisted.protocols.sip.Via.html">Via</a></code></td><td class="fieldArgDesc">The parsed version of this header.</td></tr></table></div>
+    <div>Parse a Via header.<table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Returns</td></tr><tr><td class="fieldArgContainer"><code><a href="twisted.protocols.sip.Via.html" class="internal-link" title="twisted.protocols.sip.Via">Via</a></code></td><td class="fieldArgDesc">The parsed version of this header.</td></tr></table></div>
   </div>
 </div><div class="basefunction">
   
@@ -424,6 +449,29 @@
     
     <div><p class="undocumented">Undocumented</p></div>
   </div>
+</div><div class="baseconstant">
+  
+  
+  <a name="twisted.protocols.sip.PORT">
+    
+  </a>
+  <a name="PORT">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-defname">PORT</span>: <code><a href="https://docs.python.org/3/library/functions.html#int" class="intersphinx-link">int</a></code> =
+    <a class="sourceLink" href="https://github.com/twisted/twisted/tree/twisted-21.2.0/src/twisted/protocols/sip.py#L25">
+      
+      (source)
+    </a>
+  </div>
+  <div class="functionBody">
+    
+    
+    <div><p class="undocumented">Undocumented</p></div>
+    <table class="valueTable"><tr class="fieldStart"><td class="fieldName">Value</td></tr><tr><td><pre class="constant-value"><code>5060</code></pre></td></tr></table>
+  </div>
 </div><div class="basevariable">
   
   
@@ -435,7 +483,7 @@
   </a>
   <div class="functionHeader">
     
-    <span class="py-defname">longHeaders</span>: <code><a href="https://docs.python.org/3/library/stdtypes.html#dict">dict</a></code> =
+    <span class="py-defname">longHeaders</span>: <code><a href="https://docs.python.org/3/library/stdtypes.html#dict" class="intersphinx-link">dict</a></code> =
     <a class="sourceLink" href="https://github.com/twisted/twisted/tree/twisted-21.2.0/src/twisted/protocols/sip.py#L40">
       
       (source)
@@ -445,28 +493,7 @@
     
     
     <div><p class="undocumented">Undocumented</p></div>
-  </div>
-</div><div class="basevariable">
-  
-  
-  <a name="twisted.protocols.sip.PORT">
     
-  </a>
-  <a name="PORT">
-    
-  </a>
-  <div class="functionHeader">
-    
-    <span class="py-defname">PORT</span>: <code><a href="https://docs.python.org/3/library/functions.html#int">int</a></code> =
-    <a class="sourceLink" href="https://github.com/twisted/twisted/tree/twisted-21.2.0/src/twisted/protocols/sip.py#L25">
-      
-      (source)
-    </a>
-  </div>
-  <div class="functionBody">
-    
-    
-    <div><p class="undocumented">Undocumented</p></div>
   </div>
 </div><div class="basevariable">
   
@@ -479,7 +506,7 @@
   </a>
   <div class="functionHeader">
     
-    <span class="py-defname">shortHeaders</span>: <code><a href="https://docs.python.org/3/library/stdtypes.html#dict">dict</a>[<wbr></wbr><a href="https://docs.python.org/3/library/stdtypes.html#str">str</a>, <wbr></wbr><a href="https://docs.python.org/3/library/stdtypes.html#str">str</a>]</code> =
+    <span class="py-defname">shortHeaders</span>: <code><a href="https://docs.python.org/3/library/stdtypes.html#dict" class="intersphinx-link">dict</a>[<wbr></wbr><a href="https://docs.python.org/3/library/stdtypes.html#str" class="intersphinx-link">str</a>, <wbr></wbr><a href="https://docs.python.org/3/library/stdtypes.html#str" class="intersphinx-link">str</a>]</code> =
     <a class="sourceLink" href="https://github.com/twisted/twisted/tree/twisted-21.2.0/src/twisted/protocols/sip.py#L28">
       
       (source)
@@ -489,6 +516,7 @@
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    
   </div>
 </div><div class="basevariable">
   
@@ -501,7 +529,7 @@
   </a>
   <div class="functionHeader">
     
-    <span class="py-defname">specialCases</span>: <code><a href="https://docs.python.org/3/library/stdtypes.html#dict">dict</a>[<wbr></wbr><a href="https://docs.python.org/3/library/stdtypes.html#str">str</a>, <wbr></wbr><a href="https://docs.python.org/3/library/stdtypes.html#str">str</a>]</code> =
+    <span class="py-defname">specialCases</span>: <code><a href="https://docs.python.org/3/library/stdtypes.html#dict" class="intersphinx-link">dict</a>[<wbr></wbr><a href="https://docs.python.org/3/library/stdtypes.html#str" class="intersphinx-link">str</a>, <wbr></wbr><a href="https://docs.python.org/3/library/stdtypes.html#str" class="intersphinx-link">str</a>]</code> =
     <a class="sourceLink" href="https://github.com/twisted/twisted/tree/twisted-21.2.0/src/twisted/protocols/sip.py#L101">
       
       (source)
@@ -511,6 +539,7 @@
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    
   </div>
 </div><div class="basevariable">
   
@@ -523,7 +552,7 @@
   </a>
   <div class="functionHeader">
     
-    <span class="py-defname">statusCodes</span>: <code><a href="https://docs.python.org/3/library/stdtypes.html#dict">dict</a>[<wbr></wbr><a href="https://docs.python.org/3/library/functions.html#int">int</a>, <wbr></wbr><a href="https://docs.python.org/3/library/stdtypes.html#str">str</a>]</code> =
+    <span class="py-defname">statusCodes</span>: <code><a href="https://docs.python.org/3/library/stdtypes.html#dict" class="intersphinx-link">dict</a>[<wbr></wbr><a href="https://docs.python.org/3/library/functions.html#int" class="intersphinx-link">int</a>, <wbr></wbr><a href="https://docs.python.org/3/library/stdtypes.html#str" class="intersphinx-link">str</a>]</code> =
     <a class="sourceLink" href="https://github.com/twisted/twisted/tree/twisted-21.2.0/src/twisted/protocols/sip.py#L45">
       
       (source)
@@ -533,6 +562,7 @@
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    
   </div>
 </div><div class="basevariable private">
   
@@ -555,6 +585,7 @@
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    
   </div>
 </div>
 
@@ -563,11 +594,33 @@
 
     <footer class="navbar navbar-default">
   
+
   <div class="container">
     <a href="index.html">API Documentation</a> for <a href="https://twistedmatrix.com/" class="projecthome">Twisted</a>,
   generated by <a href="https://github.com/twisted/pydoctor/">pydoctor</a>
-    21.2.2 at 2022-01-12 04:22:24.
+    22.2.2.dev0 at 2022-03-04 05:57:20.
   </div>
+
+  <!-- Google analytics, obviously. -->
+  <script src="//www.google-analytics.com/urchin.js" type="text/javascript"></script>
+  <script type="text/javascript">
+    _uacct = "UA-99018-6";
+    urchinTracker();
+  </script>
+
+  <!-- If the documentation isn't current, insert a current link. -->
+  <script type="text/javascript">
+    if (window.location.pathname.indexOf('/current/') == -1) {
+      <!-- Give the user a link to this page, but in the current version of the docs. -->
+      var link = document.getElementById('current-docs-link');
+      link.href = window.location.pathname.replace(/\/\d+\.\d+\.\d+\/api\//, '/current/api/');
+      <!-- And make it visible -->
+      var container = document.getElementById('current-docs-container');
+      container.style.display = "";
+      delete link;
+      delete container;
+    }
+  </script>
 </footer>
 
     <script src="pydoctor.js" type="text/javascript"></script>

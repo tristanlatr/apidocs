@@ -7,7 +7,7 @@
   <head>
     
     <title>twisted.names.root.Resolver</title>
-    <meta name="generator" content="pydoctor 21.2.2"> 
+    <meta name="generator" content="pydoctor 22.2.2.dev0"> 
         
     </meta>
     <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
@@ -19,7 +19,13 @@
 
   <body>
 
-    
+    <div style="display: none" id="current-docs-container" class="container">
+  <div class="col-sm-12">
+    <a id="current-docs-link">
+      Go to the latest version of this document.
+    </a>
+  </div>
+</div>
 
     <nav class="navbar navbar-default">
   
@@ -44,69 +50,82 @@
           Names
         </a>
 
-        <form action="search-results.html" id="search-box-container">
+        <div id="search-box-container">
           <div class="input-group">
-            <input id="search-box" name="search-query" placeholder="Search..." aria-label="Search" minlength="2" class="form-control" />
+            <input id="search-box" type="search" name="search-query" placeholder="Search..." aria-label="Search" minlength="2" class="form-control" autocomplete="off" />
+            
             <span class="input-group-btn">
-              <button class="btn btn-default" type="submit" title="Search"><img src="fonts/search.svg" alt="Search!" /></button>
-              <a class="btn btn-default" id="search-help-button" title="Help" onclick="toggleSearchHelpText()"><img src="fonts/info.svg" alt="Help!" /></a>
+              <a style="display: none;" class="btn btn-default" id="search-clear-button" title="Clear" onclick="clearSearch()"><img src="fonts/x-circle.svg" alt="Clear" /></a>
+              <a class="btn btn-default" id="search-help-button" title="Help" onclick="toggleSearchHelpText()"><img src="fonts/info.svg" alt="Help" /></a>
             </span>
           </div>
-        </form>
+        </div>
 
-        <div class="rst-admonition hint" id="search-help-box">
+      </div>
+
+      <div id="search-results-container" style="display: none;">
+        <div>
+          <span class="label label-default" id="search-docstrings-button">
+            <a title="Search in docstrings" onclick="toggleSearchInDocstrings()">search in docstrings</a></span>
+        </div>
+
+        <noscript>
+            <h1>Cannot search: JavaScript is not supported/enabled in your browser.</h1>
+        </noscript>
+
+        <div class="hint" id="search-help-box">
           <p class="rst-last">
       
             Search bar offers the following options:
             <ul>   
                 <li>
                   <strong>Term presence.</strong> The below example searches for documents that 
-                    must contain “foo”, might contain “bar” and must not contain “baz”:
-                  <br /> <code>'+foo bar -baz'</code>
+                    must contain “foo”, might contain “bar” and must not contain “baz”: <code>+foo bar -baz</code>
                 </li> 
 
                 <li>
-                  <strong>Wildcards.</strong> The below example searches for documents with words beginning with “foo”:
-                  <br /> <code>'foo*'</code>
+                  <strong>Wildcards.</strong> The below example searches for documents with words beginning with “foo”: <code>foo*</code>
                 </li> 
 
                 <li>
-                  <strong>Search in specific fields.</strong> The following search matches all documents 
-                  that contains "foo" in their full dotted name and with “bar” in any field:
-                  <br /> <code>'+fullName:*foo* +bar'</code>
+                  <strong>Search in specific fields.</strong> The following search matches all objects 
+                  in "twisted.mail" that matches “search”: <code>+qname:twisted.mail.* +search</code>
 
                   <p>
-                    Possible fields: 'name', 'docstring', 'fullName'.
+                    Possible fields: 'name', 'qname' (fully qualified name), 'docstring', and 'kind'.
+                    Last two fields are only applicable if "search in docstrings" is enabled.
                   </p>
                 </li>
 
                 <li>
                   <strong>Fuzzy matches.</strong> The following search matches all documents 
-                  that have a word within 1 edit distance of “foo”:
-                  <br /> <code>'foo~1'</code>
+                  that have a word within 1 edit distance of “foo”: <code>foo~1</code>
                 </li>
             </ul>
 
           </p>
         </div>
 
-      </div>
+        <div id="search-status"> </div>
+        
+        <div class="warning" id="search-warn-box" style="display: none;">
+          <p class="rst-last"><span id="search-warn"></span></p>
+        </div>
 
+        <table id="search-results">
+          <!-- Filled dynamically by JS -->
+        </table>
+        
+        <div style="margin-top: 8px;">
+          <p>Results provided by <a href="https://lunrjs.com">Lunr.js</a></p>
+        </div>
+      </div>
 
     </div>
   </div>
 
-  <script>
- 
-    function toggleSearchHelpText() {
-        document.body.classList.toggle("search-help-hidden");
-    }
-    // Init search and help text
-    document.getElementById('search-box-container').style.display = 'block';
-    document.getElementById('search-help-box').style.display = 'block';
-    document.body.classList.add("search-help-hidden");
-
-  </script>
+  <script src="ajax.js" type="text/javascript"></script>
+  <script src="search.js" type="text/javascript"></script>
 
 </nav>
 
@@ -115,7 +134,7 @@
     <div class="container">
 
       <div class="page-header">
-        <h1 class="class"><code><code><a href="twisted.html">twisted</a></code><wbr></wbr>.<code><a href="twisted.names.html">names</a></code><wbr></wbr>.<code><a href="twisted.names.root.html">root</a></code><wbr></wbr>.<code><a href="twisted.names.root.Resolver.html">Resolver</a></code></code></h1>
+        <h1 class="class"><code><code><a href="index.html" class="internal-link">twisted</a></code><wbr></wbr>.<code><a href="twisted.names.html" class="internal-link" title="twisted.names">names</a></code><wbr></wbr>.<code><a href="twisted.names.root.html" class="internal-link" title="twisted.names.root">root</a></code><wbr></wbr>.<code><a href="twisted.names.root.Resolver.html" class="internal-link" title="twisted.names.root.Resolver">Resolver</a></code></code></h1>
         <div id="showPrivate">
           <button class="btn btn-link" onclick="togglePrivate()">Toggle Private API</button>
         </div>
@@ -126,226 +145,228 @@
       </div>
 
       <div class="extrasDocstring">
-        <p><code><span class="py-keyword">class</span> <span class="py-defname">Resolver</span>(<a href="twisted.names.common.ResolverBase.html" title="twisted.names.common.ResolverBase">common.ResolverBase</a>): <a href="https://github.com/twisted/twisted/tree/twisted-21.2.0/src/twisted/names/root.py#L32" class="sourceLink">(source)</a></code></p>
+        <p><code><span class="py-keyword">class</span> <span class="py-defname">Resolver</span>(<a href="twisted.names.common.ResolverBase.html" class="internal-link" title="twisted.names.common.ResolverBase">common.ResolverBase</a>): <a href="https://github.com/twisted/twisted/tree/twisted-21.2.0/src/twisted/names/root.py#L32" class="sourceLink">(source)</a></code></p>
         <p><a href="classIndex.html#twisted.names.root.Resolver">View In Hierarchy</a></p>
       </div>
 
+      
+
       <div class="moduleDocstring">
-        <div><p><code><a href="twisted.names.root.Resolver.html">Resolver</a></code> implements recursive lookup starting from a specified list of root servers.</p></div>
+        <div><code><a href="twisted.names.root.Resolver.html" class="internal-link" title="twisted.names.root.Resolver">Resolver</a></code> implements recursive lookup starting from a specified list of root servers.</div>
       </div>
 
       <div id="splitTables">
-        <table class="children sortable" id="id1910">
+        <table class="children sortable" id="id1914">
   
   
   <tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#__init__">__init__</a></code></td>
+    <td><code><a href="#__init__" class="internal-link" title="twisted.names.root.Resolver.__init__">__init__</a></code></td>
     <td><span class="undocumented">No summary</span></td>
   </tr><tr class="instancevariable">
     
     <td>Instance Variable</td>
-    <td><code><a href="#hints">hints</a></code></td>
-    <td><span>See <code>hints</code> parameter of <code><a href="#__init__">__init__</a></code></span></td>
+    <td><code><a href="#hints" class="internal-link" title="twisted.names.root.Resolver.hints">hints</a></code></td>
+    <td>See <tt class="rst-docutils literal">hints</tt> parameter of <code><a href="#__init__" class="internal-link" title="twisted.names.root.Resolver.__init__">__init__</a></code></td>
   </tr><tr class="method private">
     
     <td>Method</td>
-    <td><code><a href="#_discoverAuthority">_discoverAuthority</a></code></td>
-    <td><span>Issue a query to a server and follow a delegation if necessary.</span></td>
+    <td><code><a href="#_discoverAuthority" class="internal-link" title="twisted.names.root.Resolver._discoverAuthority">_discover​Authority</a></code></td>
+    <td>Issue a query to a server and follow a delegation if necessary.</td>
   </tr><tr class="method private">
     
     <td>Method</td>
-    <td><code><a href="#_discoveredAuthority">_discoveredAuthority</a></code></td>
-    <td><span>Interpret the response to a query, checking for error codes and following delegations if necessary.</span></td>
+    <td><code><a href="#_discoveredAuthority" class="internal-link" title="twisted.names.root.Resolver._discoveredAuthority">_discovered​Authority</a></code></td>
+    <td>Interpret the response to a query, checking for error codes and following delegations if necessary.</td>
   </tr><tr class="method private">
     
     <td>Method</td>
-    <td><code><a href="#_lookup">_lookup</a></code></td>
-    <td><span>Implement name lookup by recursively discovering the authoritative server for the name and then asking it, starting at one of the servers in <code>self.hints</code>.</span></td>
+    <td><code><a href="#_lookup" class="internal-link" title="twisted.names.root.Resolver._lookup">_lookup</a></code></td>
+    <td>Implement name lookup by recursively discovering the authoritative server for the name and then asking it, starting at one of the servers in <tt class="rst-docutils literal">self.hints</tt>.</td>
   </tr><tr class="method private">
     
     <td>Method</td>
-    <td><code><a href="#_query">_query</a></code></td>
-    <td><span>Issue one query and return a <code><a href="twisted.internet.defer.Deferred.html">Deferred</a></code> which fires with its response.</span></td>
+    <td><code><a href="#_query" class="internal-link" title="twisted.names.root.Resolver._query">_query</a></code></td>
+    <td>Issue one query and return a <code><a href="twisted.internet.defer.Deferred.html" class="internal-link" title="twisted.internet.defer.Deferred">Deferred</a></code> which fires with its response.</td>
   </tr><tr class="method private">
     
     <td>Method</td>
-    <td><code><a href="#_roots">_roots</a></code></td>
-    <td><span>Return a list of two-tuples representing the addresses of the root servers, as defined by <code>self.hints</code>.</span></td>
+    <td><code><a href="#_roots" class="internal-link" title="twisted.names.root.Resolver._roots">_roots</a></code></td>
+    <td>Return a list of two-tuples representing the addresses of the root servers, as defined by <tt class="rst-docutils literal">self.hints</tt>.</td>
   </tr><tr class="instancevariable private">
     
     <td>Instance Variable</td>
-    <td><code><a href="#_maximumQueries">_maximumQueries</a></code></td>
-    <td><span>See <code>maximumQueries</code> parameter of <code><a href="#__init__">__init__</a></code></span></td>
+    <td><code><a href="#_maximumQueries" class="internal-link" title="twisted.names.root.Resolver._maximumQueries">_maximum​Queries</a></code></td>
+    <td>See <tt class="rst-docutils literal">maximumQueries</tt> parameter of <code><a href="#__init__" class="internal-link" title="twisted.names.root.Resolver.__init__">__init__</a></code></td>
   </tr><tr class="instancevariable private">
     
     <td>Instance Variable</td>
-    <td><code><a href="#_reactor">_reactor</a></code></td>
-    <td><span>See <code>reactor</code> parameter of <code><a href="#__init__">__init__</a></code></span></td>
+    <td><code><a href="#_reactor" class="internal-link" title="twisted.names.root.Resolver._reactor">_reactor</a></code></td>
+    <td>See <tt class="rst-docutils literal">reactor</tt> parameter of <code><a href="#__init__" class="internal-link" title="twisted.names.root.Resolver.__init__">__init__</a></code></td>
   </tr><tr class="instancevariable private">
     
     <td>Instance Variable</td>
-    <td><code><a href="#_resolverFactory">_resolverFactory</a></code></td>
-    <td><span>See <code>resolverFactory</code> parameter of <code><a href="#__init__">__init__</a></code></span></td>
+    <td><code><a href="#_resolverFactory" class="internal-link" title="twisted.names.root.Resolver._resolverFactory">_resolver​Factory</a></code></td>
+    <td>See <tt class="rst-docutils literal">resolverFactory</tt> parameter of <code><a href="#__init__" class="internal-link" title="twisted.names.root.Resolver.__init__">__init__</a></code></td>
   </tr>
 </table>
         
           <p class="inheritedFrom">
-            Inherited from <code><a href="twisted.names.common.ResolverBase.html">ResolverBase</a></code>:
+            Inherited from <code><a href="twisted.names.common.ResolverBase.html" class="internal-link" title="twisted.names.common.ResolverBase">ResolverBase</a></code>:
           </p>
-          <table class="children sortable" id="id1911">
+          <table class="children sortable" id="id1915">
   
   
   <tr class="basemethod">
     
     <td>Method</td>
-    <td><code><a href="twisted.names.common.ResolverBase.html#exceptionForCode">exceptionForCode</a></code></td>
-    <td><span>Convert a response code (one of the possible values of <code><a href="twisted.names.dns.Message.html#rCode">dns.Message.rCode</a></code> to an exception instance representing it.</span></td>
+    <td><code><a href="twisted.names.common.ResolverBase.html#exceptionForCode" class="internal-link" title="twisted.names.common.ResolverBase.exceptionForCode">exception​For​Code</a></code></td>
+    <td>Convert a response code (one of the possible values of <code><a href="twisted.names.dns.Message.html#rCode" class="internal-link" title="twisted.names.dns.Message.rCode">dns.Message.rCode</a></code> to an exception instance representing it.</td>
   </tr><tr class="basemethod">
     
     <td>Method</td>
-    <td><code><a href="twisted.names.common.ResolverBase.html#getHostByName">getHostByName</a></code></td>
-    <td><span>Resolve the domain name <code>name</code> into an IP address.</span></td>
+    <td><code><a href="twisted.names.common.ResolverBase.html#getHostByName" class="internal-link" title="twisted.names.common.ResolverBase.getHostByName">get​Host​By​Name</a></code></td>
+    <td>Resolve the domain name <tt class="rst-docutils literal">name</tt> into an IP address.</td>
   </tr><tr class="basemethod">
     
     <td>Method</td>
-    <td><code><a href="twisted.names.common.ResolverBase.html#lookupAddress">lookupAddress</a></code></td>
-    <td><span>Perform an A record lookup.</span></td>
+    <td><code><a href="twisted.names.common.ResolverBase.html#lookupAddress" class="internal-link" title="twisted.names.common.ResolverBase.lookupAddress">lookup​Address</a></code></td>
+    <td>Perform an A record lookup.</td>
   </tr><tr class="basemethod">
     
     <td>Method</td>
-    <td><code><a href="twisted.names.common.ResolverBase.html#lookupAddress6">lookupAddress6</a></code></td>
-    <td><span>Perform an A6 record lookup.</span></td>
+    <td><code><a href="twisted.names.common.ResolverBase.html#lookupAddress6" class="internal-link" title="twisted.names.common.ResolverBase.lookupAddress6">lookup​Address6</a></code></td>
+    <td>Perform an A6 record lookup.</td>
   </tr><tr class="basemethod">
     
     <td>Method</td>
-    <td><code><a href="twisted.names.common.ResolverBase.html#lookupAFSDatabase">lookupAFSDatabase</a></code></td>
-    <td><span>Perform an AFSDB record lookup.</span></td>
+    <td><code><a href="twisted.names.common.ResolverBase.html#lookupAFSDatabase" class="internal-link" title="twisted.names.common.ResolverBase.lookupAFSDatabase">lookup​AFSDatabase</a></code></td>
+    <td>Perform an AFSDB record lookup.</td>
   </tr><tr class="basemethod">
     
     <td>Method</td>
-    <td><code><a href="twisted.names.common.ResolverBase.html#lookupAllRecords">lookupAllRecords</a></code></td>
-    <td><span>Perform an ALL_RECORD lookup.</span></td>
+    <td><code><a href="twisted.names.common.ResolverBase.html#lookupAllRecords" class="internal-link" title="twisted.names.common.ResolverBase.lookupAllRecords">lookup​All​Records</a></code></td>
+    <td>Perform an ALL_RECORD lookup.</td>
   </tr><tr class="basemethod">
     
     <td>Method</td>
-    <td><code><a href="twisted.names.common.ResolverBase.html#lookupAuthority">lookupAuthority</a></code></td>
-    <td><span>Perform an SOA record lookup.</span></td>
+    <td><code><a href="twisted.names.common.ResolverBase.html#lookupAuthority" class="internal-link" title="twisted.names.common.ResolverBase.lookupAuthority">lookup​Authority</a></code></td>
+    <td>Perform an SOA record lookup.</td>
   </tr><tr class="basemethod">
     
     <td>Method</td>
-    <td><code><a href="twisted.names.common.ResolverBase.html#lookupCanonicalName">lookupCanonicalName</a></code></td>
-    <td><span>Perform a CNAME record lookup.</span></td>
+    <td><code><a href="twisted.names.common.ResolverBase.html#lookupCanonicalName" class="internal-link" title="twisted.names.common.ResolverBase.lookupCanonicalName">lookup​Canonical​Name</a></code></td>
+    <td>Perform a CNAME record lookup.</td>
   </tr><tr class="basemethod">
     
     <td>Method</td>
-    <td><code><a href="twisted.names.common.ResolverBase.html#lookupHostInfo">lookupHostInfo</a></code></td>
-    <td><span>Perform a HINFO record lookup.</span></td>
+    <td><code><a href="twisted.names.common.ResolverBase.html#lookupHostInfo" class="internal-link" title="twisted.names.common.ResolverBase.lookupHostInfo">lookup​Host​Info</a></code></td>
+    <td>Perform a HINFO record lookup.</td>
   </tr><tr class="basemethod">
     
     <td>Method</td>
-    <td><code><a href="twisted.names.common.ResolverBase.html#lookupIPV6Address">lookupIPV6Address</a></code></td>
-    <td><span>Perform an AAAA record lookup.</span></td>
+    <td><code><a href="twisted.names.common.ResolverBase.html#lookupIPV6Address" class="internal-link" title="twisted.names.common.ResolverBase.lookupIPV6Address">lookup​IPV6​Address</a></code></td>
+    <td>Perform an AAAA record lookup.</td>
   </tr><tr class="basemethod">
     
     <td>Method</td>
-    <td><code><a href="twisted.names.common.ResolverBase.html#lookupMailBox">lookupMailBox</a></code></td>
-    <td><span>Perform an MB record lookup.</span></td>
+    <td><code><a href="twisted.names.common.ResolverBase.html#lookupMailBox" class="internal-link" title="twisted.names.common.ResolverBase.lookupMailBox">lookup​Mail​Box</a></code></td>
+    <td>Perform an MB record lookup.</td>
   </tr><tr class="basemethod">
     
     <td>Method</td>
-    <td><code><a href="twisted.names.common.ResolverBase.html#lookupMailboxInfo">lookupMailboxInfo</a></code></td>
-    <td><span>Perform an MINFO record lookup.</span></td>
+    <td><code><a href="twisted.names.common.ResolverBase.html#lookupMailboxInfo" class="internal-link" title="twisted.names.common.ResolverBase.lookupMailboxInfo">lookup​Mailbox​Info</a></code></td>
+    <td>Perform an MINFO record lookup.</td>
   </tr><tr class="basemethod">
     
     <td>Method</td>
-    <td><code><a href="twisted.names.common.ResolverBase.html#lookupMailExchange">lookupMailExchange</a></code></td>
-    <td><span>Perform an MX record lookup.</span></td>
+    <td><code><a href="twisted.names.common.ResolverBase.html#lookupMailExchange" class="internal-link" title="twisted.names.common.ResolverBase.lookupMailExchange">lookup​Mail​Exchange</a></code></td>
+    <td>Perform an MX record lookup.</td>
   </tr><tr class="basemethod">
     
     <td>Method</td>
-    <td><code><a href="twisted.names.common.ResolverBase.html#lookupMailGroup">lookupMailGroup</a></code></td>
-    <td><span>Perform an MG record lookup.</span></td>
+    <td><code><a href="twisted.names.common.ResolverBase.html#lookupMailGroup" class="internal-link" title="twisted.names.common.ResolverBase.lookupMailGroup">lookup​Mail​Group</a></code></td>
+    <td>Perform an MG record lookup.</td>
   </tr><tr class="basemethod">
     
     <td>Method</td>
-    <td><code><a href="twisted.names.common.ResolverBase.html#lookupMailRename">lookupMailRename</a></code></td>
-    <td><span>Perform an MR record lookup.</span></td>
+    <td><code><a href="twisted.names.common.ResolverBase.html#lookupMailRename" class="internal-link" title="twisted.names.common.ResolverBase.lookupMailRename">lookup​Mail​Rename</a></code></td>
+    <td>Perform an MR record lookup.</td>
   </tr><tr class="basemethod">
     
     <td>Method</td>
-    <td><code><a href="twisted.names.common.ResolverBase.html#lookupNameservers">lookupNameservers</a></code></td>
-    <td><span>Perform an NS record lookup.</span></td>
+    <td><code><a href="twisted.names.common.ResolverBase.html#lookupNameservers" class="internal-link" title="twisted.names.common.ResolverBase.lookupNameservers">lookup​Nameservers</a></code></td>
+    <td>Perform an NS record lookup.</td>
   </tr><tr class="basemethod">
     
     <td>Method</td>
-    <td><code><a href="twisted.names.common.ResolverBase.html#lookupNamingAuthorityPointer">lookupNamingAuthorityPointer</a></code></td>
-    <td><span>Perform a NAPTR record lookup.</span></td>
+    <td><code><a href="twisted.names.common.ResolverBase.html#lookupNamingAuthorityPointer" class="internal-link" title="twisted.names.common.ResolverBase.lookupNamingAuthorityPointer">lookup​Naming​Authority​Pointer</a></code></td>
+    <td>Perform a NAPTR record lookup.</td>
   </tr><tr class="basemethod">
     
     <td>Method</td>
-    <td><code><a href="twisted.names.common.ResolverBase.html#lookupNull">lookupNull</a></code></td>
-    <td><span>Perform a NULL record lookup.</span></td>
+    <td><code><a href="twisted.names.common.ResolverBase.html#lookupNull" class="internal-link" title="twisted.names.common.ResolverBase.lookupNull">lookup​Null</a></code></td>
+    <td>Perform a NULL record lookup.</td>
   </tr><tr class="basemethod">
     
     <td>Method</td>
-    <td><code><a href="twisted.names.common.ResolverBase.html#lookupPointer">lookupPointer</a></code></td>
-    <td><span>Perform a PTR record lookup.</span></td>
+    <td><code><a href="twisted.names.common.ResolverBase.html#lookupPointer" class="internal-link" title="twisted.names.common.ResolverBase.lookupPointer">lookup​Pointer</a></code></td>
+    <td>Perform a PTR record lookup.</td>
   </tr><tr class="basemethod">
     
     <td>Method</td>
-    <td><code><a href="twisted.names.common.ResolverBase.html#lookupResponsibility">lookupResponsibility</a></code></td>
-    <td><span>Perform an RP record lookup.</span></td>
+    <td><code><a href="twisted.names.common.ResolverBase.html#lookupResponsibility" class="internal-link" title="twisted.names.common.ResolverBase.lookupResponsibility">lookup​Responsibility</a></code></td>
+    <td>Perform an RP record lookup.</td>
   </tr><tr class="basemethod">
     
     <td>Method</td>
-    <td><code><a href="twisted.names.common.ResolverBase.html#lookupSenderPolicy">lookupSenderPolicy</a></code></td>
-    <td><span>Perform a SPF record lookup.</span></td>
+    <td><code><a href="twisted.names.common.ResolverBase.html#lookupSenderPolicy" class="internal-link" title="twisted.names.common.ResolverBase.lookupSenderPolicy">lookup​Sender​Policy</a></code></td>
+    <td>Perform a SPF record lookup.</td>
   </tr><tr class="basemethod">
     
     <td>Method</td>
-    <td><code><a href="twisted.names.common.ResolverBase.html#lookupService">lookupService</a></code></td>
-    <td><span>Perform an SRV record lookup.</span></td>
+    <td><code><a href="twisted.names.common.ResolverBase.html#lookupService" class="internal-link" title="twisted.names.common.ResolverBase.lookupService">lookup​Service</a></code></td>
+    <td>Perform an SRV record lookup.</td>
   </tr><tr class="basemethod">
     
     <td>Method</td>
-    <td><code><a href="twisted.names.common.ResolverBase.html#lookupText">lookupText</a></code></td>
-    <td><span>Perform a TXT record lookup.</span></td>
+    <td><code><a href="twisted.names.common.ResolverBase.html#lookupText" class="internal-link" title="twisted.names.common.ResolverBase.lookupText">lookup​Text</a></code></td>
+    <td>Perform a TXT record lookup.</td>
   </tr><tr class="basemethod">
     
     <td>Method</td>
-    <td><code><a href="twisted.names.common.ResolverBase.html#lookupWellKnownServices">lookupWellKnownServices</a></code></td>
-    <td><span>Perform a WKS record lookup.</span></td>
+    <td><code><a href="twisted.names.common.ResolverBase.html#lookupWellKnownServices" class="internal-link" title="twisted.names.common.ResolverBase.lookupWellKnownServices">lookup​Well​Known​Services</a></code></td>
+    <td>Perform a WKS record lookup.</td>
   </tr><tr class="basemethod">
     
     <td>Method</td>
-    <td><code><a href="twisted.names.common.ResolverBase.html#lookupZone">lookupZone</a></code></td>
-    <td><span>Perform an AXFR record lookup.</span></td>
+    <td><code><a href="twisted.names.common.ResolverBase.html#lookupZone" class="internal-link" title="twisted.names.common.ResolverBase.lookupZone">lookup​Zone</a></code></td>
+    <td>Perform an AXFR record lookup.</td>
   </tr><tr class="basemethod">
     
     <td>Method</td>
-    <td><code><a href="twisted.names.common.ResolverBase.html#query">query</a></code></td>
-    <td><span>Dispatch <code>query</code> to the method which can handle its type.</span></td>
+    <td><code><a href="twisted.names.common.ResolverBase.html#query" class="internal-link" title="twisted.names.common.ResolverBase.query">query</a></code></td>
+    <td>Dispatch <tt class="rst-docutils literal">query</tt> to the method which can handle its type.</td>
   </tr><tr class="baseinstancevariable">
     
     <td>Instance Variable</td>
-    <td><code><a href="twisted.names.common.ResolverBase.html#typeToMethod">typeToMethod</a></code></td>
+    <td><code><a href="twisted.names.common.ResolverBase.html#typeToMethod" class="internal-link" title="twisted.names.common.ResolverBase.typeToMethod">type​To​Method</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="basemethod private">
     
     <td>Method</td>
-    <td><code><a href="twisted.names.common.ResolverBase.html#_cbRecords">_cbRecords</a></code></td>
+    <td><code><a href="twisted.names.common.ResolverBase.html#_cbRecords" class="internal-link" title="twisted.names.common.ResolverBase._cbRecords">_cb​Records</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="baseclassvariable private">
     
     <td>Class Variable</td>
-    <td><code><a href="twisted.names.common.ResolverBase.html#_errormap">_errormap</a></code></td>
-    <td><span>A <code>dict</code> mapping DNS protocol failure response codes to exception classes which will be used to represent those failures.</span></td>
+    <td><code><a href="twisted.names.common.ResolverBase.html#_errormap" class="internal-link" title="twisted.names.common.ResolverBase._errormap">_errormap</a></code></td>
+    <td>A <tt class="rst-docutils literal">dict</tt> mapping DNS protocol failure response codes to exception classes which will be used to represent those failures.</td>
   </tr><tr class="baseclassvariable private">
     
     <td>Class Variable</td>
-    <td><code><a href="twisted.names.common.ResolverBase.html#_log">_log</a></code></td>
+    <td><code><a href="twisted.names.common.ResolverBase.html#_log" class="internal-link" title="twisted.names.common.ResolverBase._log">_log</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr>
 </table>
@@ -367,16 +388,16 @@
   </a>
   <div class="functionHeader">
     
-    <span class="py-keyword">def</span> <span class="py-defname">__init__</span>(self, hints, maximumQueries=10, reactor=None, resolverFactory=None):
+    <span class="py-keyword">def</span> <span class="py-defname">__init__</span>(self, hints, maximumQueries=10, reactor=<a href="https://docs.python.org/3/library/constants.html#None" class="intersphinx-link">None</a>, resolverFactory=<a href="https://docs.python.org/3/library/constants.html#None" class="intersphinx-link">None</a>):
     <a class="sourceLink" href="https://github.com/twisted/twisted/tree/twisted-21.2.0/src/twisted/names/root.py#L43">
       
       (source)
     </a>
   </div>
   <div class="docstring functionBody">
-    <div class="interfaceinfo">overrides <code><a href="twisted.names.common.ResolverBase.html#__init__">twisted.names.common.ResolverBase.__init__</a></code></div>
+    <div class="interfaceinfo">overrides <code><a href="twisted.names.common.ResolverBase.html#__init__" class="internal-link">twisted.names.common.ResolverBase.__init__</a></code></div>
     
-    <div><table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">hints:</span><code><a href="https://docs.python.org/3/library/stdtypes.html#list">list</a></code> of <code><a href="https://docs.python.org/3/library/stdtypes.html#str">str</a></code></td><td class="fieldArgDesc">A <code><a href="https://docs.python.org/3/library/stdtypes.html#list">list</a></code> of <code><a href="https://docs.python.org/3/library/stdtypes.html#str">str</a></code> giving the dotted quad representation of IP addresses of root servers at which to begin resolving names.</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">maximumQueries:</span><code><a href="https://docs.python.org/3/library/functions.html#int">int</a></code></td><td class="fieldArgDesc">An optional <code><a href="https://docs.python.org/3/library/functions.html#int">int</a></code> giving the maximum number of queries which will be attempted to resolve a single name.</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">reactor:</span><code><a href="twisted.internet.interfaces.IReactorTime.html">IReactorTime</a></code> and <code><a href="twisted.internet.interfaces.IReactorUDP.html">IReactorUDP</a></code> provider</td><td class="fieldArgDesc">An optional <code><a href="twisted.internet.interfaces.IReactorTime.html">IReactorTime</a></code> and <code><a href="twisted.internet.interfaces.IReactorUDP.html">IReactorUDP</a></code> provider to use to bind UDP ports and manage timeouts.</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">resolverFactory:</span>callable</td><td class="fieldArgDesc">An optional callable which accepts <code>reactor</code> and <code>servers</code> arguments and returns an instance that provides a <code>queryUDP</code> method. Defaults to <code><a href="twisted.names.client.Resolver.html">twisted.names.client.Resolver</a></code>.</td></tr></table></div>
+    <div><table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">hints:</span><code><a href="https://docs.python.org/3/library/stdtypes.html#list" class="intersphinx-link">list</a></code> of <code><a href="https://docs.python.org/3/library/stdtypes.html#str" class="intersphinx-link">str</a></code></td><td class="fieldArgDesc">A <code><a href="https://docs.python.org/3/library/stdtypes.html#list" class="intersphinx-link">list</a></code> of <code><a href="https://docs.python.org/3/library/stdtypes.html#str" class="intersphinx-link">str</a></code> giving the dotted quad representation of IP addresses of root servers at which to begin resolving names.</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">maximum​Queries:</span><code><a href="https://docs.python.org/3/library/functions.html#int" class="intersphinx-link">int</a></code></td><td class="fieldArgDesc">An optional <code><a href="https://docs.python.org/3/library/functions.html#int" class="intersphinx-link">int</a></code> giving the maximum number of queries which will be attempted to resolve a single name.</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">reactor:</span><code><a href="twisted.internet.interfaces.IReactorTime.html" class="internal-link" title="twisted.internet.interfaces.IReactorTime">IReactorTime</a></code> and <code><a href="twisted.internet.interfaces.IReactorUDP.html" class="internal-link" title="twisted.internet.interfaces.IReactorUDP">IReactorUDP</a></code> provider</td><td class="fieldArgDesc">An optional <code><a href="twisted.internet.interfaces.IReactorTime.html" class="internal-link" title="twisted.internet.interfaces.IReactorTime">IReactorTime</a></code> and <code><a href="twisted.internet.interfaces.IReactorUDP.html" class="internal-link" title="twisted.internet.interfaces.IReactorUDP">IReactorUDP</a></code> provider to use to bind UDP ports and manage timeouts.</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">resolver​Factory:</span>callable</td><td class="fieldArgDesc">An optional callable which accepts <tt class="rst-docutils literal">reactor</tt> and <tt class="rst-docutils literal">servers</tt> arguments and returns an instance that provides a <tt class="rst-docutils literal">queryUDP</tt> method. Defaults to <code><a href="twisted.names.client.Resolver.html" class="internal-link" title="twisted.names.client.Resolver">twisted.names.client.Resolver</a></code>.</td></tr></table></div>
   </div>
 </div><div class="baseinstancevariable">
   
@@ -398,7 +419,8 @@
   <div class="functionBody">
     
     
-    <div>See <code>hints</code> parameter of <code><a href="#__init__">__init__</a></code></div>
+    <div>See <tt class="rst-docutils literal">hints</tt> parameter of <code><a href="#__init__" class="internal-link" title="twisted.names.root.Resolver.__init__">__init__</a></code></div>
+    
   </div>
 </div><div class="basemethod private">
   
@@ -420,7 +442,7 @@
   <div class="docstring functionBody">
     
     
-    <div><p>Issue a query to a server and follow a delegation if necessary.</p><table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">query:</span><code><a href="twisted.names.dns.Query.html">dns.Query</a></code></td><td class="fieldArgDesc">The query to issue.</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">servers:</span><code><a href="https://docs.python.org/3/library/stdtypes.html#list">list</a></code> of <code><a href="https://docs.python.org/3/library/stdtypes.html#tuple">tuple</a></code> of <code><a href="https://docs.python.org/3/library/stdtypes.html#str">str</a></code> and <code><a href="https://docs.python.org/3/library/functions.html#int">int</a></code></td><td class="fieldArgDesc">The servers which might have an answer for this query.</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">timeout</span></td><td class="fieldArgDesc">A <code>tuple</code> of <code>int</code> giving the timeout to use for this query.</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">queriesLeft</span></td><td class="fieldArgDesc">A <code>int</code> giving the number of queries which may yet be attempted to answer this query before the attempt will be abandoned.</td></tr><tr class="fieldStart"><td class="fieldName" colspan="2">Returns</td></tr><tr><td colspan="2">A <code><a href="twisted.internet.defer.Deferred.html">Deferred</a></code> which fires with a three-tuple of lists of <code><a href="twisted.names.dns.RRHeader.html">twisted.names.dns.RRHeader</a></code> giving the response, or with a <code><a href="twisted.python.failure.Failure.html">Failure</a></code> if there is a timeout or response error.</td></tr></table></div>
+    <div>Issue a query to a server and follow a delegation if necessary.<table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">query:</span><code><a href="twisted.names.dns.Query.html" class="internal-link" title="twisted.names.dns.Query">dns.Query</a></code></td><td class="fieldArgDesc">The query to issue.</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">servers:</span><code><a href="https://docs.python.org/3/library/stdtypes.html#list" class="intersphinx-link">list</a></code> of <code><a href="https://docs.python.org/3/library/stdtypes.html#tuple" class="intersphinx-link">tuple</a></code> of <code><a href="https://docs.python.org/3/library/stdtypes.html#str" class="intersphinx-link">str</a></code> and <code><a href="https://docs.python.org/3/library/functions.html#int" class="intersphinx-link">int</a></code></td><td class="fieldArgDesc">The servers which might have an answer for this query.</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">timeout</span></td><td class="fieldArgDesc">A <tt class="rst-docutils literal">tuple</tt> of <tt class="rst-docutils literal">int</tt> giving the timeout to use for this query.</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">queries​Left</span></td><td class="fieldArgDesc">A <tt class="rst-docutils literal">int</tt> giving the number of queries which may yet be attempted to answer this query before the attempt will be abandoned.</td></tr><tr class="fieldStart"><td class="fieldName" colspan="2">Returns</td></tr><tr><td colspan="2">A <code><a href="twisted.internet.defer.Deferred.html" class="internal-link" title="twisted.internet.defer.Deferred">Deferred</a></code> which fires with a three-tuple of lists of <code><a href="twisted.names.dns.RRHeader.html" class="internal-link" title="twisted.names.dns.RRHeader">twisted.names.dns.RRHeader</a></code> giving the response, or with a <code><a href="twisted.python.failure.Failure.html" class="internal-link" title="twisted.python.failure.Failure">Failure</a></code> if there is a timeout or response error.</td></tr></table></div>
   </div>
 </div><div class="basemethod private">
   
@@ -442,7 +464,7 @@
   <div class="docstring functionBody">
     
     
-    <div><p>Interpret the response to a query, checking for error codes and following delegations if necessary.</p><table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">response:</span><code><a href="twisted.names.dns.Message.html">Message</a></code></td><td class="fieldArgDesc">The <code><a href="twisted.names.dns.Message.html">Message</a></code> received in response to issuing <code>query</code>.</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">query:</span><code><a href="twisted.names.dns.Query.html">dns.Query</a></code>.</td><td class="fieldArgDesc">The <code><a href="twisted.names.dns.Query.html">dns.Query</a></code> which was issued.</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">timeout:</span><code><a href="https://docs.python.org/3/library/stdtypes.html#tuple">tuple</a></code> of <code><a href="https://docs.python.org/3/library/functions.html#int">int</a></code></td><td class="fieldArgDesc">The timeout to use if another query is indicated by this response.</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">queriesLeft</span></td><td class="fieldArgDesc">A <code>int</code> giving the number of queries which may yet be attempted to answer this query before the attempt will be abandoned.</td></tr><tr class="fieldStart"><td class="fieldName" colspan="2">Returns</td></tr><tr><td colspan="2">A <code><a href="twisted.python.failure.Failure.html">Failure</a></code> indicating a response error, a three-tuple of lists of <code><a href="twisted.names.dns.RRHeader.html">twisted.names.dns.RRHeader</a></code> giving the response to <code>query</code> or a <code><a href="twisted.internet.defer.Deferred.html">Deferred</a></code> which will fire with one of those.</td></tr></table></div>
+    <div>Interpret the response to a query, checking for error codes and following delegations if necessary.<table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">response:</span><code><a href="twisted.names.dns.Message.html" class="internal-link" title="twisted.names.dns.Message">Message</a></code></td><td class="fieldArgDesc">The <code><a href="twisted.names.dns.Message.html" class="internal-link" title="twisted.names.dns.Message">Message</a></code> received in response to issuing <tt class="rst-docutils literal">query</tt>.</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">query:</span><code><a href="twisted.names.dns.Query.html" class="internal-link" title="twisted.names.dns.Query">dns.Query</a></code>.</td><td class="fieldArgDesc">The <code><a href="twisted.names.dns.Query.html" class="internal-link" title="twisted.names.dns.Query">dns.Query</a></code> which was issued.</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">timeout:</span><code><a href="https://docs.python.org/3/library/stdtypes.html#tuple" class="intersphinx-link">tuple</a></code> of <code><a href="https://docs.python.org/3/library/functions.html#int" class="intersphinx-link">int</a></code></td><td class="fieldArgDesc">The timeout to use if another query is indicated by this response.</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">queries​Left</span></td><td class="fieldArgDesc">A <tt class="rst-docutils literal">int</tt> giving the number of queries which may yet be attempted to answer this query before the attempt will be abandoned.</td></tr><tr class="fieldStart"><td class="fieldName" colspan="2">Returns</td></tr><tr><td colspan="2">A <code><a href="twisted.python.failure.Failure.html" class="internal-link" title="twisted.python.failure.Failure">Failure</a></code> indicating a response error, a three-tuple of lists of <code><a href="twisted.names.dns.RRHeader.html" class="internal-link" title="twisted.names.dns.RRHeader">twisted.names.dns.RRHeader</a></code> giving the response to <tt class="rst-docutils literal">query</tt> or a <code><a href="twisted.internet.defer.Deferred.html" class="internal-link" title="twisted.internet.defer.Deferred">Deferred</a></code> which will fire with one of those.</td></tr></table></div>
   </div>
 </div><div class="basemethod private">
   
@@ -462,9 +484,9 @@
     </a>
   </div>
   <div class="docstring functionBody">
-    <div class="interfaceinfo">overrides <code><a href="twisted.names.common.ResolverBase.html#_lookup">twisted.names.common.ResolverBase._lookup</a></code></div>
+    <div class="interfaceinfo">overrides <code><a href="twisted.names.common.ResolverBase.html#_lookup" class="internal-link">twisted.names.common.ResolverBase._lookup</a></code></div>
     
-    <div><p>Implement name lookup by recursively discovering the authoritative server for the name and then asking it, starting at one of the servers in <code>self.hints</code>.</p></div>
+    <div>Implement name lookup by recursively discovering the authoritative server for the name and then asking it, starting at one of the servers in <tt class="rst-docutils literal">self.hints</tt>.</div>
   </div>
 </div><div class="basemethod private">
   
@@ -486,7 +508,7 @@
   <div class="docstring functionBody">
     
     
-    <div><p>Issue one query and return a <code><a href="twisted.internet.defer.Deferred.html">Deferred</a></code> which fires with its response.</p><table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">query:</span><code><a href="twisted.names.dns.Query.html">dns.Query</a></code></td><td class="fieldArgDesc">The query to issue.</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">servers:</span><code><a href="https://docs.python.org/3/library/stdtypes.html#list">list</a></code> of <code><a href="https://docs.python.org/3/library/stdtypes.html#tuple">tuple</a></code> of <code><a href="https://docs.python.org/3/library/stdtypes.html#str">str</a></code> and <code><a href="https://docs.python.org/3/library/functions.html#int">int</a></code></td><td class="fieldArgDesc">The servers which might have an answer for this query.</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">timeout:</span><code><a href="https://docs.python.org/3/library/stdtypes.html#tuple">tuple</a></code> of <code><a href="https://docs.python.org/3/library/functions.html#int">int</a></code></td><td class="fieldArgDesc">A timeout on how long to wait for the response.</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">filter:</span><code><a href="https://docs.python.org/3/library/functions.html#bool">bool</a></code></td><td class="fieldArgDesc">A flag indicating whether to filter the results.  If <code>True</code>, the returned <code><a href="twisted.internet.defer.Deferred.html">Deferred</a></code> will fire with a three-tuple of lists of <code><a href="twisted.names.dns.RRHeader.html">twisted.names.dns.RRHeader</a></code> (like the return value of the <i>lookup*</i> methods of <code><a href="twisted.internet.interfaces.IResolver.html">IResolver</a></code>.  IF <code>False</code>, the result will be a <code><a href="twisted.names.dns.Message.html">Message</a></code> instance.</td></tr><tr class="fieldStart"><td class="fieldName" colspan="2">Returns</td></tr><tr><td class="fieldArgContainer"><code><a href="twisted.internet.defer.Deferred.html">Deferred</a></code></td><td class="fieldArgDesc">A <code><a href="twisted.internet.defer.Deferred.html">Deferred</a></code> which fires with the response or a timeout error.</td></tr></table></div>
+    <div>Issue one query and return a <code><a href="twisted.internet.defer.Deferred.html" class="internal-link" title="twisted.internet.defer.Deferred">Deferred</a></code> which fires with its response.<table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">query:</span><code><a href="twisted.names.dns.Query.html" class="internal-link" title="twisted.names.dns.Query">dns.Query</a></code></td><td class="fieldArgDesc">The query to issue.</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">servers:</span><code><a href="https://docs.python.org/3/library/stdtypes.html#list" class="intersphinx-link">list</a></code> of <code><a href="https://docs.python.org/3/library/stdtypes.html#tuple" class="intersphinx-link">tuple</a></code> of <code><a href="https://docs.python.org/3/library/stdtypes.html#str" class="intersphinx-link">str</a></code> and <code><a href="https://docs.python.org/3/library/functions.html#int" class="intersphinx-link">int</a></code></td><td class="fieldArgDesc">The servers which might have an answer for this query.</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">timeout:</span><code><a href="https://docs.python.org/3/library/stdtypes.html#tuple" class="intersphinx-link">tuple</a></code> of <code><a href="https://docs.python.org/3/library/functions.html#int" class="intersphinx-link">int</a></code></td><td class="fieldArgDesc">A timeout on how long to wait for the response.</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">filter:</span><code><a href="https://docs.python.org/3/library/functions.html#bool" class="intersphinx-link">bool</a></code></td><td class="fieldArgDesc">A flag indicating whether to filter the results.  If <tt class="rst-docutils literal">True</tt>, the returned <code><a href="twisted.internet.defer.Deferred.html" class="internal-link" title="twisted.internet.defer.Deferred">Deferred</a></code> will fire with a three-tuple of lists of <code><a href="twisted.names.dns.RRHeader.html" class="internal-link" title="twisted.names.dns.RRHeader">twisted.names.dns.RRHeader</a></code> (like the return value of the <em>lookup*</em> methods of <code><a href="twisted.internet.interfaces.IResolver.html" class="internal-link" title="twisted.internet.interfaces.IResolver">IResolver</a></code>.  IF <tt class="rst-docutils literal">False</tt>, the result will be a <code><a href="twisted.names.dns.Message.html" class="internal-link" title="twisted.names.dns.Message">Message</a></code> instance.</td></tr><tr class="fieldStart"><td class="fieldName" colspan="2">Returns</td></tr><tr><td class="fieldArgContainer"><code><a href="twisted.internet.defer.Deferred.html" class="internal-link" title="twisted.internet.defer.Deferred">Deferred</a></code></td><td class="fieldArgDesc">A <code><a href="twisted.internet.defer.Deferred.html" class="internal-link" title="twisted.internet.defer.Deferred">Deferred</a></code> which fires with the response or a timeout error.</td></tr></table></div>
   </div>
 </div><div class="basemethod private">
   
@@ -508,7 +530,7 @@
   <div class="docstring functionBody">
     
     
-    <div><p>Return a list of two-tuples representing the addresses of the root servers, as defined by <code>self.hints</code>.</p></div>
+    <div>Return a list of two-tuples representing the addresses of the root servers, as defined by <tt class="rst-docutils literal">self.hints</tt>.</div>
   </div>
 </div><div class="baseinstancevariable private">
   
@@ -530,7 +552,8 @@
   <div class="functionBody">
     
     
-    <div>See <code>maximumQueries</code> parameter of <code><a href="#__init__">__init__</a></code></div>
+    <div>See <tt class="rst-docutils literal">maximumQueries</tt> parameter of <code><a href="#__init__" class="internal-link" title="twisted.names.root.Resolver.__init__">__init__</a></code></div>
+    
   </div>
 </div><div class="baseinstancevariable private">
   
@@ -552,7 +575,8 @@
   <div class="functionBody">
     
     
-    <div>See <code>reactor</code> parameter of <code><a href="#__init__">__init__</a></code></div>
+    <div>See <tt class="rst-docutils literal">reactor</tt> parameter of <code><a href="#__init__" class="internal-link" title="twisted.names.root.Resolver.__init__">__init__</a></code></div>
+    
   </div>
 </div><div class="baseinstancevariable private">
   
@@ -574,7 +598,8 @@
   <div class="functionBody">
     
     
-    <div>See <code>resolverFactory</code> parameter of <code><a href="#__init__">__init__</a></code></div>
+    <div>See <tt class="rst-docutils literal">resolverFactory</tt> parameter of <code><a href="#__init__" class="internal-link" title="twisted.names.root.Resolver.__init__">__init__</a></code></div>
+    
   </div>
 </div>
 
@@ -583,11 +608,33 @@
 
     <footer class="navbar navbar-default">
   
+
   <div class="container">
     <a href="index.html">API Documentation</a> for <a href="https://twistedmatrix.com/" class="projecthome">Twisted</a>,
   generated by <a href="https://github.com/twisted/pydoctor/">pydoctor</a>
-    21.2.2 at 2022-01-12 04:22:24.
+    22.2.2.dev0 at 2022-03-04 05:57:20.
   </div>
+
+  <!-- Google analytics, obviously. -->
+  <script src="//www.google-analytics.com/urchin.js" type="text/javascript"></script>
+  <script type="text/javascript">
+    _uacct = "UA-99018-6";
+    urchinTracker();
+  </script>
+
+  <!-- If the documentation isn't current, insert a current link. -->
+  <script type="text/javascript">
+    if (window.location.pathname.indexOf('/current/') == -1) {
+      <!-- Give the user a link to this page, but in the current version of the docs. -->
+      var link = document.getElementById('current-docs-link');
+      link.href = window.location.pathname.replace(/\/\d+\.\d+\.\d+\/api\//, '/current/api/');
+      <!-- And make it visible -->
+      var container = document.getElementById('current-docs-container');
+      container.style.display = "";
+      delete link;
+      delete container;
+    }
+  </script>
 </footer>
 
     <script src="pydoctor.js" type="text/javascript"></script>

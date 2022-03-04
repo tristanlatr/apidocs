@@ -7,7 +7,7 @@
   <head>
     
     <title>twisted.conch.insults.insults</title>
-    <meta name="generator" content="pydoctor 21.2.2"> 
+    <meta name="generator" content="pydoctor 22.2.2.dev0"> 
         
     </meta>
     <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
@@ -19,7 +19,13 @@
 
   <body>
 
-    
+    <div style="display: none" id="current-docs-container" class="container">
+  <div class="col-sm-12">
+    <a id="current-docs-link">
+      Go to the latest version of this document.
+    </a>
+  </div>
+</div>
 
     <nav class="navbar navbar-default">
   
@@ -44,69 +50,82 @@
           Names
         </a>
 
-        <form action="search-results.html" id="search-box-container">
+        <div id="search-box-container">
           <div class="input-group">
-            <input id="search-box" name="search-query" placeholder="Search..." aria-label="Search" minlength="2" class="form-control" />
+            <input id="search-box" type="search" name="search-query" placeholder="Search..." aria-label="Search" minlength="2" class="form-control" autocomplete="off" />
+            
             <span class="input-group-btn">
-              <button class="btn btn-default" type="submit" title="Search"><img src="fonts/search.svg" alt="Search!" /></button>
-              <a class="btn btn-default" id="search-help-button" title="Help" onclick="toggleSearchHelpText()"><img src="fonts/info.svg" alt="Help!" /></a>
+              <a style="display: none;" class="btn btn-default" id="search-clear-button" title="Clear" onclick="clearSearch()"><img src="fonts/x-circle.svg" alt="Clear" /></a>
+              <a class="btn btn-default" id="search-help-button" title="Help" onclick="toggleSearchHelpText()"><img src="fonts/info.svg" alt="Help" /></a>
             </span>
           </div>
-        </form>
+        </div>
 
-        <div class="rst-admonition hint" id="search-help-box">
+      </div>
+
+      <div id="search-results-container" style="display: none;">
+        <div>
+          <span class="label label-default" id="search-docstrings-button">
+            <a title="Search in docstrings" onclick="toggleSearchInDocstrings()">search in docstrings</a></span>
+        </div>
+
+        <noscript>
+            <h1>Cannot search: JavaScript is not supported/enabled in your browser.</h1>
+        </noscript>
+
+        <div class="hint" id="search-help-box">
           <p class="rst-last">
       
             Search bar offers the following options:
             <ul>   
                 <li>
                   <strong>Term presence.</strong> The below example searches for documents that 
-                    must contain “foo”, might contain “bar” and must not contain “baz”:
-                  <br /> <code>'+foo bar -baz'</code>
+                    must contain “foo”, might contain “bar” and must not contain “baz”: <code>+foo bar -baz</code>
                 </li> 
 
                 <li>
-                  <strong>Wildcards.</strong> The below example searches for documents with words beginning with “foo”:
-                  <br /> <code>'foo*'</code>
+                  <strong>Wildcards.</strong> The below example searches for documents with words beginning with “foo”: <code>foo*</code>
                 </li> 
 
                 <li>
-                  <strong>Search in specific fields.</strong> The following search matches all documents 
-                  that contains "foo" in their full dotted name and with “bar” in any field:
-                  <br /> <code>'+fullName:*foo* +bar'</code>
+                  <strong>Search in specific fields.</strong> The following search matches all objects 
+                  in "twisted.mail" that matches “search”: <code>+qname:twisted.mail.* +search</code>
 
                   <p>
-                    Possible fields: 'name', 'docstring', 'fullName'.
+                    Possible fields: 'name', 'qname' (fully qualified name), 'docstring', and 'kind'.
+                    Last two fields are only applicable if "search in docstrings" is enabled.
                   </p>
                 </li>
 
                 <li>
                   <strong>Fuzzy matches.</strong> The following search matches all documents 
-                  that have a word within 1 edit distance of “foo”:
-                  <br /> <code>'foo~1'</code>
+                  that have a word within 1 edit distance of “foo”: <code>foo~1</code>
                 </li>
             </ul>
 
           </p>
         </div>
 
-      </div>
+        <div id="search-status"> </div>
+        
+        <div class="warning" id="search-warn-box" style="display: none;">
+          <p class="rst-last"><span id="search-warn"></span></p>
+        </div>
 
+        <table id="search-results">
+          <!-- Filled dynamically by JS -->
+        </table>
+        
+        <div style="margin-top: 8px;">
+          <p>Results provided by <a href="https://lunrjs.com">Lunr.js</a></p>
+        </div>
+      </div>
 
     </div>
   </div>
 
-  <script>
- 
-    function toggleSearchHelpText() {
-        document.body.classList.toggle("search-help-hidden");
-    }
-    // Init search and help text
-    document.getElementById('search-box-container').style.display = 'block';
-    document.getElementById('search-help-box').style.display = 'block';
-    document.body.classList.add("search-help-hidden");
-
-  </script>
+  <script src="ajax.js" type="text/javascript"></script>
+  <script src="search.js" type="text/javascript"></script>
 
 </nav>
 
@@ -115,7 +134,7 @@
     <div class="container">
 
       <div class="page-header">
-        <h1 class="module"><code><code><a href="twisted.html">twisted</a></code><wbr></wbr>.<code><a href="twisted.conch.html">conch</a></code><wbr></wbr>.<code><a href="twisted.conch.insults.html">insults</a></code><wbr></wbr>.<code><a href="twisted.conch.insults.insults.html">insults</a></code></code></h1>
+        <h1 class="module"><code><code><a href="index.html" class="internal-link">twisted</a></code><wbr></wbr>.<code><a href="twisted.conch.html" class="internal-link" title="twisted.conch">conch</a></code><wbr></wbr>.<code><a href="twisted.conch.insults.html" class="internal-link" title="twisted.conch.insults">insults</a></code><wbr></wbr>.<code><a href="twisted.conch.insults.insults.html" class="internal-link" title="twisted.conch.insults.insults">insults</a></code></code></h1>
         <div id="showPrivate">
           <button class="btn btn-link" onclick="togglePrivate()">Toggle Private API</button>
         </div>
@@ -130,153 +149,155 @@
         <p></p>
       </div>
 
+      
+
       <div class="moduleDocstring">
-        <div><p>VT102 and VT220 terminal manipulation.</p><table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Author</td></tr><tr><td colspan="2">Jp Calderone</td></tr></table></div>
+        <div>VT102 and VT220 terminal manipulation.<table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Author</td></tr><tr><td colspan="2">Jp Calderone</td></tr></table></div>
       </div>
 
       <div id="splitTables">
-        <table class="children sortable" id="id207">
+        <table class="children sortable" id="id206">
   
   
   <tr class="interface">
     
     <td>Interface</td>
-    <td><code><a href="twisted.conch.insults.insults.ITerminalProtocol.html">ITerminalProtocol</a></code></td>
+    <td><code><a href="twisted.conch.insults.insults.ITerminalProtocol.html" class="internal-link" title="twisted.conch.insults.insults.ITerminalProtocol">​ITerminal​Protocol</a></code></td>
     <td><span class="undocumented">No interface docstring; 5/5 methods documented</span></td>
   </tr><tr class="interface">
     
     <td>Interface</td>
-    <td><code><a href="twisted.conch.insults.insults.ITerminalTransport.html">ITerminalTransport</a></code></td>
+    <td><code><a href="twisted.conch.insults.insults.ITerminalTransport.html" class="internal-link" title="twisted.conch.insults.insults.ITerminalTransport">​ITerminal​Transport</a></code></td>
     <td><span class="undocumented">No interface docstring; 41/41 methods documented</span></td>
   </tr><tr class="class">
     
     <td>Class</td>
-    <td><code><a href="twisted.conch.insults.insults.ClientProtocol.html">ClientProtocol</a></code></td>
-    <td><span class="undocumented">No class docstring; 0/6 instance variable, 0/5 class variable, 2/6 methods, 0/1 class documented</span></td>
+    <td><code><a href="twisted.conch.insults.insults.ClientProtocol.html" class="internal-link" title="twisted.conch.insults.insults.ClientProtocol">​Client​Protocol</a></code></td>
+    <td><span class="undocumented">No class docstring; 0/5 instance variable, 0/6 class variable, 2/6 methods, 0/1 class documented</span></td>
   </tr><tr class="class">
     
     <td>Class</td>
-    <td><code><a href="twisted.conch.insults.insults.modes.html">modes</a></code></td>
-    <td><span>ECMA 48 standardized modes</span></td>
+    <td><code><a href="twisted.conch.insults.insults.modes.html" class="internal-link" title="twisted.conch.insults.insults.modes">modes</a></code></td>
+    <td>ECMA 48 standardized modes</td>
   </tr><tr class="class">
     
     <td>Class</td>
-    <td><code><a href="twisted.conch.insults.insults.privateModes.html">privateModes</a></code></td>
-    <td><span>ANSI-Compatible Private Modes</span></td>
+    <td><code><a href="twisted.conch.insults.insults.privateModes.html" class="internal-link" title="twisted.conch.insults.insults.privateModes">private​Modes</a></code></td>
+    <td>ANSI-Compatible Private Modes</td>
   </tr><tr class="class">
     
     <td>Class</td>
-    <td><code><a href="twisted.conch.insults.insults.ServerProtocol.html">ServerProtocol</a></code></td>
-    <td><span class="undocumented">No class docstring; 0/10 instance variable, 0/6 class variable, 1/55 method, 0/1 class documented</span></td>
+    <td><code><a href="twisted.conch.insults.insults.ServerProtocol.html" class="internal-link" title="twisted.conch.insults.insults.ServerProtocol">​Server​Protocol</a></code></td>
+    <td><span class="undocumented">No class docstring; 0/9 instance variable, 0/4 class variable, 0/2 constant, 1/55 method, 0/1 class documented</span></td>
   </tr><tr class="class">
     
     <td>Class</td>
-    <td><code><a href="twisted.conch.insults.insults.TerminalProtocol.html">TerminalProtocol</a></code></td>
+    <td><code><a href="twisted.conch.insults.insults.TerminalProtocol.html" class="internal-link" title="twisted.conch.insults.insults.TerminalProtocol">​Terminal​Protocol</a></code></td>
     <td><span class="undocumented">No class docstring; 0/1 instance variable, 1/6 method documented</span></td>
   </tr><tr class="class">
     
     <td>Class</td>
-    <td><code><a href="twisted.conch.insults.insults.Vector.html">Vector</a></code></td>
+    <td><code><a href="twisted.conch.insults.insults.Vector.html" class="internal-link" title="twisted.conch.insults.insults.Vector">​Vector</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="function">
     
     <td>Function</td>
-    <td><code><a href="#log">log</a></code></td>
+    <td><code><a href="#log" class="internal-link" title="twisted.conch.insults.insults.log">log</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
-  </tr><tr class="variable">
+  </tr><tr class="constant">
     
-    <td>Variable</td>
-    <td><code><a href="#BLINK">BLINK</a></code></td>
+    <td>Constant</td>
+    <td><code><a href="#BLINK" class="internal-link" title="twisted.conch.insults.insults.BLINK">BLINK</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
-  </tr><tr class="variable">
+  </tr><tr class="constant">
     
-    <td>Variable</td>
-    <td><code><a href="#BOLD">BOLD</a></code></td>
+    <td>Constant</td>
+    <td><code><a href="#BOLD" class="internal-link" title="twisted.conch.insults.insults.BOLD">BOLD</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
-  </tr><tr class="variable">
+  </tr><tr class="constant">
     
-    <td>Variable</td>
-    <td><code><a href="#CS_ALTERNATE">CS_ALTERNATE</a></code></td>
+    <td>Constant</td>
+    <td><code><a href="#CS_ALTERNATE" class="internal-link" title="twisted.conch.insults.insults.CS_ALTERNATE">CS​_ALTERNATE</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
-  </tr><tr class="variable">
+  </tr><tr class="constant">
     
-    <td>Variable</td>
-    <td><code><a href="#CS_ALTERNATE_SPECIAL">CS_ALTERNATE_SPECIAL</a></code></td>
+    <td>Constant</td>
+    <td><code><a href="#CS_ALTERNATE_SPECIAL" class="internal-link" title="twisted.conch.insults.insults.CS_ALTERNATE_SPECIAL">CS​_ALTERNATE​_SPECIAL</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
-  </tr><tr class="variable">
+  </tr><tr class="constant">
     
-    <td>Variable</td>
-    <td><code><a href="#CS_DRAWING">CS_DRAWING</a></code></td>
+    <td>Constant</td>
+    <td><code><a href="#CS_DRAWING" class="internal-link" title="twisted.conch.insults.insults.CS_DRAWING">CS​_DRAWING</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
-  </tr><tr class="variable">
+  </tr><tr class="constant">
     
-    <td>Variable</td>
-    <td><code><a href="#CS_UK">CS_UK</a></code></td>
+    <td>Constant</td>
+    <td><code><a href="#CS_UK" class="internal-link" title="twisted.conch.insults.insults.CS_UK">CS​_UK</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
-  </tr><tr class="variable">
+  </tr><tr class="constant">
     
-    <td>Variable</td>
-    <td><code><a href="#CS_US">CS_US</a></code></td>
+    <td>Constant</td>
+    <td><code><a href="#CS_US" class="internal-link" title="twisted.conch.insults.insults.CS_US">CS​_US</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
-  </tr><tr class="variable">
+  </tr><tr class="constant">
     
-    <td>Variable</td>
-    <td><code><a href="#CSI">CSI</a></code></td>
+    <td>Constant</td>
+    <td><code><a href="#CSI" class="internal-link" title="twisted.conch.insults.insults.CSI">CSI</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
-  </tr><tr class="variable">
+  </tr><tr class="constant">
     
-    <td>Variable</td>
-    <td><code><a href="#CST">CST</a></code></td>
+    <td>Constant</td>
+    <td><code><a href="#CST" class="internal-link" title="twisted.conch.insults.insults.CST">CST</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
-  </tr><tr class="variable">
+  </tr><tr class="constant">
     
-    <td>Variable</td>
-    <td><code><a href="#FUNCTION_KEYS">FUNCTION_KEYS</a></code></td>
+    <td>Constant</td>
+    <td><code><a href="#FUNCTION_KEYS" class="internal-link" title="twisted.conch.insults.insults.FUNCTION_KEYS">FUNCTION​_KEYS</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
-  </tr><tr class="variable">
+  </tr><tr class="constant">
     
-    <td>Variable</td>
-    <td><code><a href="#G0">G0</a></code></td>
+    <td>Constant</td>
+    <td><code><a href="#G0" class="internal-link" title="twisted.conch.insults.insults.G0">G0</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
-  </tr><tr class="variable">
+  </tr><tr class="constant">
     
-    <td>Variable</td>
-    <td><code><a href="#G1">G1</a></code></td>
+    <td>Constant</td>
+    <td><code><a href="#G1" class="internal-link" title="twisted.conch.insults.insults.G1">G1</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
-  </tr><tr class="variable">
+  </tr><tr class="constant">
     
-    <td>Variable</td>
-    <td><code><a href="#G2">G2</a></code></td>
+    <td>Constant</td>
+    <td><code><a href="#G2" class="internal-link" title="twisted.conch.insults.insults.G2">G2</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
-  </tr><tr class="variable">
+  </tr><tr class="constant">
     
-    <td>Variable</td>
-    <td><code><a href="#G3">G3</a></code></td>
+    <td>Constant</td>
+    <td><code><a href="#G3" class="internal-link" title="twisted.conch.insults.insults.G3">G3</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
-  </tr><tr class="variable">
+  </tr><tr class="constant">
     
-    <td>Variable</td>
-    <td><code><a href="#NORMAL">NORMAL</a></code></td>
+    <td>Constant</td>
+    <td><code><a href="#NORMAL" class="internal-link" title="twisted.conch.insults.insults.NORMAL">NORMAL</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
-  </tr><tr class="variable">
+  </tr><tr class="constant">
     
-    <td>Variable</td>
-    <td><code><a href="#REVERSE_VIDEO">REVERSE_VIDEO</a></code></td>
+    <td>Constant</td>
+    <td><code><a href="#REVERSE_VIDEO" class="internal-link" title="twisted.conch.insults.insults.REVERSE_VIDEO">REVERSE​_VIDEO</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
-  </tr><tr class="variable">
+  </tr><tr class="constant">
     
-    <td>Variable</td>
-    <td><code><a href="#UNDERLINE">UNDERLINE</a></code></td>
+    <td>Constant</td>
+    <td><code><a href="#UNDERLINE" class="internal-link" title="twisted.conch.insults.insults.UNDERLINE">UNDERLINE</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="class private">
     
     <td>Class</td>
-    <td><code><a href="twisted.conch.insults.insults._const.html">_const</a></code></td>
-    <td><span></span></td>
-  </tr><tr class="variable private">
+    <td><code><a href="twisted.conch.insults.insults._const.html" class="internal-link" title="twisted.conch.insults.insults._const">_const</a></code></td>
+    <td></td>
+  </tr><tr class="constant private">
     
-    <td>Variable</td>
-    <td><code><a href="#_KEY_NAMES">_KEY_NAMES</a></code></td>
+    <td>Constant</td>
+    <td><code><a href="#_KEY_NAMES" class="internal-link" title="twisted.conch.insults.insults._KEY_NAMES">_KEY​_NAMES</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr>
 </table>
@@ -309,7 +330,7 @@
     
     <div><p class="undocumented">Undocumented</p></div>
   </div>
-</div><div class="basevariable">
+</div><div class="baseconstant">
   
   
   <a name="twisted.conch.insults.insults.BLINK">
@@ -320,7 +341,7 @@
   </a>
   <div class="functionHeader">
     
-    <span class="py-defname">BLINK</span>: <code><a href="https://docs.python.org/3/library/functions.html#int">int</a></code> =
+    <span class="py-defname">BLINK</span>: <code><a href="https://docs.python.org/3/library/functions.html#int" class="intersphinx-link">int</a></code> =
     <a class="sourceLink" href="https://github.com/twisted/twisted/tree/twisted-21.2.0/src/twisted/conch/insults/insults.py#L388">
       
       (source)
@@ -330,8 +351,9 @@
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    <table class="valueTable"><tr class="fieldStart"><td class="fieldName">Value</td></tr><tr><td><pre class="constant-value"><code>5</code></pre></td></tr></table>
   </div>
-</div><div class="basevariable">
+</div><div class="baseconstant">
   
   
   <a name="twisted.conch.insults.insults.BOLD">
@@ -342,7 +364,7 @@
   </a>
   <div class="functionHeader">
     
-    <span class="py-defname">BOLD</span>: <code><a href="https://docs.python.org/3/library/functions.html#int">int</a></code> =
+    <span class="py-defname">BOLD</span>: <code><a href="https://docs.python.org/3/library/functions.html#int" class="intersphinx-link">int</a></code> =
     <a class="sourceLink" href="https://github.com/twisted/twisted/tree/twisted-21.2.0/src/twisted/conch/insults/insults.py#L386">
       
       (source)
@@ -352,8 +374,9 @@
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    <table class="valueTable"><tr class="fieldStart"><td class="fieldName">Value</td></tr><tr><td><pre class="constant-value"><code>1</code></pre></td></tr></table>
   </div>
-</div><div class="basevariable">
+</div><div class="baseconstant">
   
   
   <a name="twisted.conch.insults.insults.CS_ALTERNATE">
@@ -364,7 +387,7 @@
   </a>
   <div class="functionHeader">
     
-    <span class="py-defname">CS_ALTERNATE</span>: <code><a href="https://docs.python.org/3/library/stdtypes.html#bytes">bytes</a></code> =
+    <span class="py-defname">CS_ALTERNATE</span>: <code><a href="https://docs.python.org/3/library/stdtypes.html#bytes" class="intersphinx-link">bytes</a></code> =
     <a class="sourceLink" href="https://github.com/twisted/twisted/tree/twisted-21.2.0/src/twisted/conch/insults/insults.py#L372">
       
       (source)
@@ -374,8 +397,9 @@
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    <table class="valueTable"><tr class="fieldStart"><td class="fieldName">Value</td></tr><tr><td><pre class="constant-value"><code>b<span class="rst-variable-quote">'</span><span class="rst-variable-string">CS_ALTERNATE</span><span class="rst-variable-quote">'</span></code></pre></td></tr></table>
   </div>
-</div><div class="basevariable">
+</div><div class="baseconstant">
   
   
   <a name="twisted.conch.insults.insults.CS_ALTERNATE_SPECIAL">
@@ -386,7 +410,7 @@
   </a>
   <div class="functionHeader">
     
-    <span class="py-defname">CS_ALTERNATE_SPECIAL</span>: <code><a href="https://docs.python.org/3/library/stdtypes.html#bytes">bytes</a></code> =
+    <span class="py-defname">CS_ALTERNATE_SPECIAL</span>: <code><a href="https://docs.python.org/3/library/stdtypes.html#bytes" class="intersphinx-link">bytes</a></code> =
     <a class="sourceLink" href="https://github.com/twisted/twisted/tree/twisted-21.2.0/src/twisted/conch/insults/insults.py#L373">
       
       (source)
@@ -396,8 +420,9 @@
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    <table class="valueTable"><tr class="fieldStart"><td class="fieldName">Value</td></tr><tr><td><pre class="constant-value"><code>b<span class="rst-variable-quote">'</span><span class="rst-variable-string">CS_ALTERNATE_SPECIAL</span><span class="rst-variable-quote">'</span></code></pre></td></tr></table>
   </div>
-</div><div class="basevariable">
+</div><div class="baseconstant">
   
   
   <a name="twisted.conch.insults.insults.CS_DRAWING">
@@ -408,7 +433,7 @@
   </a>
   <div class="functionHeader">
     
-    <span class="py-defname">CS_DRAWING</span>: <code><a href="https://docs.python.org/3/library/stdtypes.html#bytes">bytes</a></code> =
+    <span class="py-defname">CS_DRAWING</span>: <code><a href="https://docs.python.org/3/library/stdtypes.html#bytes" class="intersphinx-link">bytes</a></code> =
     <a class="sourceLink" href="https://github.com/twisted/twisted/tree/twisted-21.2.0/src/twisted/conch/insults/insults.py#L371">
       
       (source)
@@ -418,8 +443,9 @@
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    <table class="valueTable"><tr class="fieldStart"><td class="fieldName">Value</td></tr><tr><td><pre class="constant-value"><code>b<span class="rst-variable-quote">'</span><span class="rst-variable-string">CS_DRAWING</span><span class="rst-variable-quote">'</span></code></pre></td></tr></table>
   </div>
-</div><div class="basevariable">
+</div><div class="baseconstant">
   
   
   <a name="twisted.conch.insults.insults.CS_UK">
@@ -430,7 +456,7 @@
   </a>
   <div class="functionHeader">
     
-    <span class="py-defname">CS_UK</span>: <code><a href="https://docs.python.org/3/library/stdtypes.html#bytes">bytes</a></code> =
+    <span class="py-defname">CS_UK</span>: <code><a href="https://docs.python.org/3/library/stdtypes.html#bytes" class="intersphinx-link">bytes</a></code> =
     <a class="sourceLink" href="https://github.com/twisted/twisted/tree/twisted-21.2.0/src/twisted/conch/insults/insults.py#L370">
       
       (source)
@@ -440,8 +466,9 @@
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    <table class="valueTable"><tr class="fieldStart"><td class="fieldName">Value</td></tr><tr><td><pre class="constant-value"><code>b<span class="rst-variable-quote">'</span><span class="rst-variable-string">CS_UK</span><span class="rst-variable-quote">'</span></code></pre></td></tr></table>
   </div>
-</div><div class="basevariable">
+</div><div class="baseconstant">
   
   
   <a name="twisted.conch.insults.insults.CS_US">
@@ -452,7 +479,7 @@
   </a>
   <div class="functionHeader">
     
-    <span class="py-defname">CS_US</span>: <code><a href="https://docs.python.org/3/library/stdtypes.html#bytes">bytes</a></code> =
+    <span class="py-defname">CS_US</span>: <code><a href="https://docs.python.org/3/library/stdtypes.html#bytes" class="intersphinx-link">bytes</a></code> =
     <a class="sourceLink" href="https://github.com/twisted/twisted/tree/twisted-21.2.0/src/twisted/conch/insults/insults.py#L369">
       
       (source)
@@ -462,8 +489,9 @@
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    <table class="valueTable"><tr class="fieldStart"><td class="fieldName">Value</td></tr><tr><td><pre class="constant-value"><code>b<span class="rst-variable-quote">'</span><span class="rst-variable-string">CS_US</span><span class="rst-variable-quote">'</span></code></pre></td></tr></table>
   </div>
-</div><div class="basevariable">
+</div><div class="baseconstant">
   
   
   <a name="twisted.conch.insults.insults.CSI">
@@ -474,7 +502,7 @@
   </a>
   <div class="functionHeader">
     
-    <span class="py-defname">CSI</span>: <code><a href="https://docs.python.org/3/library/stdtypes.html#bytes">bytes</a></code> =
+    <span class="py-defname">CSI</span>: <code><a href="https://docs.python.org/3/library/stdtypes.html#bytes" class="intersphinx-link">bytes</a></code> =
     <a class="sourceLink" href="https://github.com/twisted/twisted/tree/twisted-21.2.0/src/twisted/conch/insults/insults.py#L315">
       
       (source)
@@ -484,8 +512,9 @@
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    <table class="valueTable"><tr class="fieldStart"><td class="fieldName">Value</td></tr><tr><td><pre class="constant-value"><code>b<span class="rst-variable-quote">'</span><span class="rst-variable-string">\x1b</span><span class="rst-variable-quote">'</span></code></pre></td></tr></table>
   </div>
-</div><div class="basevariable">
+</div><div class="baseconstant">
   
   
   <a name="twisted.conch.insults.insults.CST">
@@ -496,7 +525,7 @@
   </a>
   <div class="functionHeader">
     
-    <span class="py-defname">CST</span>: <code><a href="https://docs.python.org/3/library/stdtypes.html#dict">dict</a>[<wbr></wbr><a href="https://docs.python.org/3/library/stdtypes.html#bytes">bytes</a>, <wbr></wbr><a href="https://docs.python.org/3/library/stdtypes.html#bytes">bytes</a>]</code> =
+    <span class="py-defname">CST</span>: <code><a href="https://docs.python.org/3/library/stdtypes.html#dict" class="intersphinx-link">dict</a>[<wbr></wbr><a href="https://docs.python.org/3/library/stdtypes.html#bytes" class="intersphinx-link">bytes</a>, <wbr></wbr><a href="https://docs.python.org/3/library/stdtypes.html#bytes" class="intersphinx-link">bytes</a>]</code> =
     <a class="sourceLink" href="https://github.com/twisted/twisted/tree/twisted-21.2.0/src/twisted/conch/insults/insults.py#L316">
       
       (source)
@@ -506,8 +535,9 @@
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    <table class="valueTable"><tr class="fieldStart"><td class="fieldName">Value</td></tr><tr><td><pre class="constant-value"><code>{<wbr></wbr>b<span class="rst-variable-quote">'</span><span class="rst-variable-string">~</span><span class="rst-variable-quote">'</span>: b<span class="rst-variable-quote">'</span><span class="rst-variable-string">tilde</span><span class="rst-variable-quote">'</span>}</code></pre></td></tr></table>
   </div>
-</div><div class="basevariable">
+</div><div class="baseconstant">
   
   
   <a name="twisted.conch.insults.insults.FUNCTION_KEYS">
@@ -528,8 +558,9 @@
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    <table class="valueTable"><tr class="fieldStart"><td class="fieldName">Value</td></tr><tr><td><pre class="constant-value"><code>[_const(_name).__bytes__() for _name in _KEY_NAMES]</code></pre></td></tr></table>
   </div>
-</div><div class="basevariable">
+</div><div class="baseconstant">
   
   
   <a name="twisted.conch.insults.insults.G0">
@@ -540,7 +571,7 @@
   </a>
   <div class="functionHeader">
     
-    <span class="py-defname">G0</span>: <code><a href="https://docs.python.org/3/library/stdtypes.html#bytes">bytes</a></code> =
+    <span class="py-defname">G0</span>: <code><a href="https://docs.python.org/3/library/stdtypes.html#bytes" class="intersphinx-link">bytes</a></code> =
     <a class="sourceLink" href="https://github.com/twisted/twisted/tree/twisted-21.2.0/src/twisted/conch/insults/insults.py#L376">
       
       (source)
@@ -550,8 +581,9 @@
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    <table class="valueTable"><tr class="fieldStart"><td class="fieldName">Value</td></tr><tr><td><pre class="constant-value"><code>b<span class="rst-variable-quote">'</span><span class="rst-variable-string">G0</span><span class="rst-variable-quote">'</span></code></pre></td></tr></table>
   </div>
-</div><div class="basevariable">
+</div><div class="baseconstant">
   
   
   <a name="twisted.conch.insults.insults.G1">
@@ -562,7 +594,7 @@
   </a>
   <div class="functionHeader">
     
-    <span class="py-defname">G1</span>: <code><a href="https://docs.python.org/3/library/stdtypes.html#bytes">bytes</a></code> =
+    <span class="py-defname">G1</span>: <code><a href="https://docs.python.org/3/library/stdtypes.html#bytes" class="intersphinx-link">bytes</a></code> =
     <a class="sourceLink" href="https://github.com/twisted/twisted/tree/twisted-21.2.0/src/twisted/conch/insults/insults.py#L377">
       
       (source)
@@ -572,8 +604,9 @@
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    <table class="valueTable"><tr class="fieldStart"><td class="fieldName">Value</td></tr><tr><td><pre class="constant-value"><code>b<span class="rst-variable-quote">'</span><span class="rst-variable-string">G1</span><span class="rst-variable-quote">'</span></code></pre></td></tr></table>
   </div>
-</div><div class="basevariable">
+</div><div class="baseconstant">
   
   
   <a name="twisted.conch.insults.insults.G2">
@@ -584,7 +617,7 @@
   </a>
   <div class="functionHeader">
     
-    <span class="py-defname">G2</span>: <code><a href="https://docs.python.org/3/library/stdtypes.html#bytes">bytes</a></code> =
+    <span class="py-defname">G2</span>: <code><a href="https://docs.python.org/3/library/stdtypes.html#bytes" class="intersphinx-link">bytes</a></code> =
     <a class="sourceLink" href="https://github.com/twisted/twisted/tree/twisted-21.2.0/src/twisted/conch/insults/insults.py#L380">
       
       (source)
@@ -594,8 +627,9 @@
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    <table class="valueTable"><tr class="fieldStart"><td class="fieldName">Value</td></tr><tr><td><pre class="constant-value"><code>b<span class="rst-variable-quote">'</span><span class="rst-variable-string">G2</span><span class="rst-variable-quote">'</span></code></pre></td></tr></table>
   </div>
-</div><div class="basevariable">
+</div><div class="baseconstant">
   
   
   <a name="twisted.conch.insults.insults.G3">
@@ -606,7 +640,7 @@
   </a>
   <div class="functionHeader">
     
-    <span class="py-defname">G3</span>: <code><a href="https://docs.python.org/3/library/stdtypes.html#bytes">bytes</a></code> =
+    <span class="py-defname">G3</span>: <code><a href="https://docs.python.org/3/library/stdtypes.html#bytes" class="intersphinx-link">bytes</a></code> =
     <a class="sourceLink" href="https://github.com/twisted/twisted/tree/twisted-21.2.0/src/twisted/conch/insults/insults.py#L381">
       
       (source)
@@ -616,8 +650,9 @@
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    <table class="valueTable"><tr class="fieldStart"><td class="fieldName">Value</td></tr><tr><td><pre class="constant-value"><code>b<span class="rst-variable-quote">'</span><span class="rst-variable-string">G3</span><span class="rst-variable-quote">'</span></code></pre></td></tr></table>
   </div>
-</div><div class="basevariable">
+</div><div class="baseconstant">
   
   
   <a name="twisted.conch.insults.insults.NORMAL">
@@ -628,7 +663,7 @@
   </a>
   <div class="functionHeader">
     
-    <span class="py-defname">NORMAL</span>: <code><a href="https://docs.python.org/3/library/functions.html#int">int</a></code> =
+    <span class="py-defname">NORMAL</span>: <code><a href="https://docs.python.org/3/library/functions.html#int" class="intersphinx-link">int</a></code> =
     <a class="sourceLink" href="https://github.com/twisted/twisted/tree/twisted-21.2.0/src/twisted/conch/insults/insults.py#L385">
       
       (source)
@@ -638,8 +673,9 @@
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    <table class="valueTable"><tr class="fieldStart"><td class="fieldName">Value</td></tr><tr><td><pre class="constant-value"><code>0</code></pre></td></tr></table>
   </div>
-</div><div class="basevariable">
+</div><div class="baseconstant">
   
   
   <a name="twisted.conch.insults.insults.REVERSE_VIDEO">
@@ -650,7 +686,7 @@
   </a>
   <div class="functionHeader">
     
-    <span class="py-defname">REVERSE_VIDEO</span>: <code><a href="https://docs.python.org/3/library/functions.html#int">int</a></code> =
+    <span class="py-defname">REVERSE_VIDEO</span>: <code><a href="https://docs.python.org/3/library/functions.html#int" class="intersphinx-link">int</a></code> =
     <a class="sourceLink" href="https://github.com/twisted/twisted/tree/twisted-21.2.0/src/twisted/conch/insults/insults.py#L389">
       
       (source)
@@ -660,8 +696,9 @@
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    <table class="valueTable"><tr class="fieldStart"><td class="fieldName">Value</td></tr><tr><td><pre class="constant-value"><code>7</code></pre></td></tr></table>
   </div>
-</div><div class="basevariable">
+</div><div class="baseconstant">
   
   
   <a name="twisted.conch.insults.insults.UNDERLINE">
@@ -672,7 +709,7 @@
   </a>
   <div class="functionHeader">
     
-    <span class="py-defname">UNDERLINE</span>: <code><a href="https://docs.python.org/3/library/functions.html#int">int</a></code> =
+    <span class="py-defname">UNDERLINE</span>: <code><a href="https://docs.python.org/3/library/functions.html#int" class="intersphinx-link">int</a></code> =
     <a class="sourceLink" href="https://github.com/twisted/twisted/tree/twisted-21.2.0/src/twisted/conch/insults/insults.py#L387">
       
       (source)
@@ -682,8 +719,9 @@
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    <table class="valueTable"><tr class="fieldStart"><td class="fieldName">Value</td></tr><tr><td><pre class="constant-value"><code>4</code></pre></td></tr></table>
   </div>
-</div><div class="basevariable private">
+</div><div class="baseconstant private">
   
   
   <a name="twisted.conch.insults.insults._KEY_NAMES">
@@ -694,7 +732,7 @@
   </a>
   <div class="functionHeader">
     
-    <span class="py-defname">_KEY_NAMES</span>: <code><a href="https://docs.python.org/3/library/stdtypes.html#tuple">tuple</a>[<wbr></wbr><a href="https://docs.python.org/3/library/stdtypes.html#str">str</a>, <wbr></wbr>...]</code> =
+    <span class="py-defname">_KEY_NAMES</span>: <code><a href="https://docs.python.org/3/library/stdtypes.html#tuple" class="intersphinx-link">tuple</a>[<wbr></wbr><a href="https://docs.python.org/3/library/stdtypes.html#str" class="intersphinx-link">str</a>, <wbr></wbr><span class="rst-variable-ellipsis">...</span>]</code> =
     <a class="sourceLink" href="https://github.com/twisted/twisted/tree/twisted-21.2.0/src/twisted/conch/insults/insults.py#L405">
       
       (source)
@@ -704,6 +742,14 @@
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    <table class="valueTable"><tr class="fieldStart"><td class="fieldName">Value</td></tr><tr><td><pre class="constant-value"><code>(<wbr></wbr><span class="rst-variable-quote">'</span><span class="rst-variable-string">UP_ARROW</span><span class="rst-variable-quote">'</span>,
+ <wbr></wbr><span class="rst-variable-quote">'</span><span class="rst-variable-string">DOWN_ARROW</span><span class="rst-variable-quote">'</span>,
+ <wbr></wbr><span class="rst-variable-quote">'</span><span class="rst-variable-string">RIGHT_ARROW</span><span class="rst-variable-quote">'</span>,
+ <wbr></wbr><span class="rst-variable-quote">'</span><span class="rst-variable-string">LEFT_ARROW</span><span class="rst-variable-quote">'</span>,
+ <wbr></wbr><span class="rst-variable-quote">'</span><span class="rst-variable-string">HOME</span><span class="rst-variable-quote">'</span>,
+ <wbr></wbr><span class="rst-variable-quote">'</span><span class="rst-variable-string">INSERT</span><span class="rst-variable-quote">'</span>,
+ <wbr></wbr><span class="rst-variable-quote">'</span><span class="rst-variable-string">DELETE</span><span class="rst-variable-quote">'</span>,
+<span class="rst-variable-ellipsis">...</span></code></pre></td></tr></table>
   </div>
 </div>
 
@@ -712,11 +758,33 @@
 
     <footer class="navbar navbar-default">
   
+
   <div class="container">
     <a href="index.html">API Documentation</a> for <a href="https://twistedmatrix.com/" class="projecthome">Twisted</a>,
   generated by <a href="https://github.com/twisted/pydoctor/">pydoctor</a>
-    21.2.2 at 2022-01-12 04:22:24.
+    22.2.2.dev0 at 2022-03-04 05:57:20.
   </div>
+
+  <!-- Google analytics, obviously. -->
+  <script src="//www.google-analytics.com/urchin.js" type="text/javascript"></script>
+  <script type="text/javascript">
+    _uacct = "UA-99018-6";
+    urchinTracker();
+  </script>
+
+  <!-- If the documentation isn't current, insert a current link. -->
+  <script type="text/javascript">
+    if (window.location.pathname.indexOf('/current/') == -1) {
+      <!-- Give the user a link to this page, but in the current version of the docs. -->
+      var link = document.getElementById('current-docs-link');
+      link.href = window.location.pathname.replace(/\/\d+\.\d+\.\d+\/api\//, '/current/api/');
+      <!-- And make it visible -->
+      var container = document.getElementById('current-docs-container');
+      container.style.display = "";
+      delete link;
+      delete container;
+    }
+  </script>
 </footer>
 
     <script src="pydoctor.js" type="text/javascript"></script>

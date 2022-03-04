@@ -7,7 +7,7 @@
   <head>
     
     <title>twisted.cred.strcred.ICheckerFactory</title>
-    <meta name="generator" content="pydoctor 21.2.2"> 
+    <meta name="generator" content="pydoctor 22.2.2.dev0"> 
         
     </meta>
     <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
@@ -19,7 +19,13 @@
 
   <body>
 
-    
+    <div style="display: none" id="current-docs-container" class="container">
+  <div class="col-sm-12">
+    <a id="current-docs-link">
+      Go to the latest version of this document.
+    </a>
+  </div>
+</div>
 
     <nav class="navbar navbar-default">
   
@@ -44,69 +50,82 @@
           Names
         </a>
 
-        <form action="search-results.html" id="search-box-container">
+        <div id="search-box-container">
           <div class="input-group">
-            <input id="search-box" name="search-query" placeholder="Search..." aria-label="Search" minlength="2" class="form-control" />
+            <input id="search-box" type="search" name="search-query" placeholder="Search..." aria-label="Search" minlength="2" class="form-control" autocomplete="off" />
+            
             <span class="input-group-btn">
-              <button class="btn btn-default" type="submit" title="Search"><img src="fonts/search.svg" alt="Search!" /></button>
-              <a class="btn btn-default" id="search-help-button" title="Help" onclick="toggleSearchHelpText()"><img src="fonts/info.svg" alt="Help!" /></a>
+              <a style="display: none;" class="btn btn-default" id="search-clear-button" title="Clear" onclick="clearSearch()"><img src="fonts/x-circle.svg" alt="Clear" /></a>
+              <a class="btn btn-default" id="search-help-button" title="Help" onclick="toggleSearchHelpText()"><img src="fonts/info.svg" alt="Help" /></a>
             </span>
           </div>
-        </form>
+        </div>
 
-        <div class="rst-admonition hint" id="search-help-box">
+      </div>
+
+      <div id="search-results-container" style="display: none;">
+        <div>
+          <span class="label label-default" id="search-docstrings-button">
+            <a title="Search in docstrings" onclick="toggleSearchInDocstrings()">search in docstrings</a></span>
+        </div>
+
+        <noscript>
+            <h1>Cannot search: JavaScript is not supported/enabled in your browser.</h1>
+        </noscript>
+
+        <div class="hint" id="search-help-box">
           <p class="rst-last">
       
             Search bar offers the following options:
             <ul>   
                 <li>
                   <strong>Term presence.</strong> The below example searches for documents that 
-                    must contain “foo”, might contain “bar” and must not contain “baz”:
-                  <br /> <code>'+foo bar -baz'</code>
+                    must contain “foo”, might contain “bar” and must not contain “baz”: <code>+foo bar -baz</code>
                 </li> 
 
                 <li>
-                  <strong>Wildcards.</strong> The below example searches for documents with words beginning with “foo”:
-                  <br /> <code>'foo*'</code>
+                  <strong>Wildcards.</strong> The below example searches for documents with words beginning with “foo”: <code>foo*</code>
                 </li> 
 
                 <li>
-                  <strong>Search in specific fields.</strong> The following search matches all documents 
-                  that contains "foo" in their full dotted name and with “bar” in any field:
-                  <br /> <code>'+fullName:*foo* +bar'</code>
+                  <strong>Search in specific fields.</strong> The following search matches all objects 
+                  in "twisted.mail" that matches “search”: <code>+qname:twisted.mail.* +search</code>
 
                   <p>
-                    Possible fields: 'name', 'docstring', 'fullName'.
+                    Possible fields: 'name', 'qname' (fully qualified name), 'docstring', and 'kind'.
+                    Last two fields are only applicable if "search in docstrings" is enabled.
                   </p>
                 </li>
 
                 <li>
                   <strong>Fuzzy matches.</strong> The following search matches all documents 
-                  that have a word within 1 edit distance of “foo”:
-                  <br /> <code>'foo~1'</code>
+                  that have a word within 1 edit distance of “foo”: <code>foo~1</code>
                 </li>
             </ul>
 
           </p>
         </div>
 
-      </div>
+        <div id="search-status"> </div>
+        
+        <div class="warning" id="search-warn-box" style="display: none;">
+          <p class="rst-last"><span id="search-warn"></span></p>
+        </div>
 
+        <table id="search-results">
+          <!-- Filled dynamically by JS -->
+        </table>
+        
+        <div style="margin-top: 8px;">
+          <p>Results provided by <a href="https://lunrjs.com">Lunr.js</a></p>
+        </div>
+      </div>
 
     </div>
   </div>
 
-  <script>
- 
-    function toggleSearchHelpText() {
-        document.body.classList.toggle("search-help-hidden");
-    }
-    // Init search and help text
-    document.getElementById('search-box-container').style.display = 'block';
-    document.getElementById('search-help-box').style.display = 'block';
-    document.body.classList.add("search-help-hidden");
-
-  </script>
+  <script src="ajax.js" type="text/javascript"></script>
+  <script src="search.js" type="text/javascript"></script>
 
 </nav>
 
@@ -115,7 +134,7 @@
     <div class="container">
 
       <div class="page-header">
-        <h1 class="interface"><code><code><a href="twisted.html">twisted</a></code><wbr></wbr>.<code><a href="twisted.cred.html">cred</a></code><wbr></wbr>.<code><a href="twisted.cred.strcred.html">strcred</a></code><wbr></wbr>.<code><a href="twisted.cred.strcred.ICheckerFactory.html">ICheckerFactory</a></code></code></h1>
+        <h1 class="interface"><code><code><a href="index.html" class="internal-link">twisted</a></code><wbr></wbr>.<code><a href="twisted.cred.html" class="internal-link" title="twisted.cred">cred</a></code><wbr></wbr>.<code><a href="twisted.cred.strcred.html" class="internal-link" title="twisted.cred.strcred">strcred</a></code><wbr></wbr>.<code><a href="twisted.cred.strcred.ICheckerFactory.html" class="internal-link" title="twisted.cred.strcred.ICheckerFactory">ICheckerFactory</a></code></code></h1>
         <div id="showPrivate">
           <button class="btn btn-link" onclick="togglePrivate()">Toggle Private API</button>
         </div>
@@ -126,43 +145,47 @@
       </div>
 
       <div class="extrasDocstring">
-        <p><code><span class="py-keyword">class</span> <span class="py-defname">ICheckerFactory</span>(<a href="https://zopeinterface.readthedocs.io/en/latest/api/specifications.html#zope.interface.Interface" title="zope.interface.Interface">Interface</a>): <a href="https://github.com/twisted/twisted/tree/twisted-21.2.0/src/twisted/cred/strcred.py#L27" class="sourceLink">(source)</a></code></p><p>Known implementations: <code><a href="twisted.plugins.cred_anonymous.AnonymousCheckerFactory.html">twisted.plugins.cred_anonymous.AnonymousCheckerFactory</a></code>, <code><a href="twisted.plugins.cred_file.FileCheckerFactory.html">twisted.plugins.cred_file.FileCheckerFactory</a></code>, <code><a href="twisted.plugins.cred_memory.InMemoryCheckerFactory.html">twisted.plugins.cred_memory.InMemoryCheckerFactory</a></code>, <code><a href="twisted.plugins.cred_sshkeys.SSHKeyCheckerFactory.html">twisted.plugins.cred_sshkeys.SSHKeyCheckerFactory</a></code>, <code><a href="twisted.plugins.cred_unix.UNIXCheckerFactory.html">twisted.plugins.cred_unix.UNIXCheckerFactory</a></code></p>
+        <p><code><span class="py-keyword">class</span> <span class="py-defname">ICheckerFactory</span>(<a href="https://zopeinterface.readthedocs.io/en/latest/api/specifications.html#zope.interface.Interface" class="intersphinx-link" title="zope.interface.Interface">Interface</a>): <a href="https://github.com/twisted/twisted/tree/twisted-21.2.0/src/twisted/cred/strcred.py#L27" class="sourceLink">(source)</a></code></p><p>Known implementations: <code><a href="twisted.plugins.cred_anonymous.AnonymousCheckerFactory.html" class="internal-link">twisted.plugins.cred_anonymous.AnonymousCheckerFactory</a></code>, <code><a href="twisted.plugins.cred_file.FileCheckerFactory.html" class="internal-link">twisted.plugins.cred_file.FileCheckerFactory</a></code>, <code><a href="twisted.plugins.cred_memory.InMemoryCheckerFactory.html" class="internal-link">twisted.plugins.cred_memory.InMemoryCheckerFactory</a></code>, <code><a href="twisted.plugins.cred_sshkeys.SSHKeyCheckerFactory.html" class="internal-link">twisted.plugins.cred_sshkeys.SSHKeyCheckerFactory</a></code>, <code><a href="twisted.plugins.cred_unix.UNIXCheckerFactory.html" class="internal-link">twisted.plugins.cred_unix.UNIXCheckerFactory</a></code></p>
         <p><a href="classIndex.html#twisted.cred.strcred.ICheckerFactory">View In Hierarchy</a></p>
       </div>
 
+      
+
       <div class="moduleDocstring">
-        <div><p>A factory for objects which provide <code><a href="twisted.cred.checkers.ICredentialsChecker.html">twisted.cred.checkers.ICredentialsChecker</a></code>.</p><p>It's implemented by twistd plugins creating checkers.</p></div>
+        <div><p>A factory for objects which provide <code><a href="twisted.cred.checkers.ICredentialsChecker.html" class="internal-link" title="twisted.cred.checkers.ICredentialsChecker">twisted.cred.checkers.ICredentialsChecker</a></code>.</p>
+<p>It's implemented by twistd plugins creating checkers.</p>
+</div>
       </div>
 
       <div id="splitTables">
-        <table class="children sortable" id="id596">
+        <table class="children sortable" id="id595">
   
   
   <tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#generateChecker">generateChecker</a></code></td>
-    <td><span>Return an <code><a href="twisted.cred.checkers.ICredentialsChecker.html">twisted.cred.checkers.ICredentialsChecker</a></code> provider using the supplied argument string.</span></td>
+    <td><code><a href="#generateChecker" class="internal-link" title="twisted.cred.strcred.ICheckerFactory.generateChecker">generate​Checker</a></code></td>
+    <td>Return an <code><a href="twisted.cred.checkers.ICredentialsChecker.html" class="internal-link" title="twisted.cred.checkers.ICredentialsChecker">twisted.cred.checkers.ICredentialsChecker</a></code> provider using the supplied argument string.</td>
   </tr><tr class="attribute">
     
     <td>Attribute</td>
-    <td><code><a href="#argStringFormat">argStringFormat</a></code></td>
-    <td><span>A short (one-line) description of the argument string format.</span></td>
+    <td><code><a href="#argStringFormat" class="internal-link" title="twisted.cred.strcred.ICheckerFactory.argStringFormat">arg​String​Format</a></code></td>
+    <td>A short (one-line) description of the argument string format.</td>
   </tr><tr class="attribute">
     
     <td>Attribute</td>
-    <td><code><a href="#authHelp">authHelp</a></code></td>
-    <td><span>A detailed (potentially multi-line) description of precisely what functionality this CheckerFactory provides.</span></td>
+    <td><code><a href="#authHelp" class="internal-link" title="twisted.cred.strcred.ICheckerFactory.authHelp">auth​Help</a></code></td>
+    <td>A detailed (potentially multi-line) description of precisely what functionality this CheckerFactory provides.</td>
   </tr><tr class="attribute">
     
     <td>Attribute</td>
-    <td><code><a href="#authType">authType</a></code></td>
-    <td><span>A tag that identifies the authentication method.</span></td>
+    <td><code><a href="#authType" class="internal-link" title="twisted.cred.strcred.ICheckerFactory.authType">auth​Type</a></code></td>
+    <td>A tag that identifies the authentication method.</td>
   </tr><tr class="attribute">
     
     <td>Attribute</td>
-    <td><code><a href="#credentialInterfaces">credentialInterfaces</a></code></td>
-    <td><span>A list of credentials interfaces that this factory will support.</span></td>
+    <td><code><a href="#credentialInterfaces" class="internal-link" title="twisted.cred.strcred.ICheckerFactory.credentialInterfaces">credential​Interfaces</a></code></td>
+    <td>A list of credentials interfaces that this factory will support.</td>
   </tr>
 </table>
         
@@ -192,7 +215,7 @@
   <div class="docstring functionBody">
     
     
-    <div><p>Return an <code><a href="twisted.cred.checkers.ICredentialsChecker.html">twisted.cred.checkers.ICredentialsChecker</a></code> provider using the supplied argument string.</p></div>
+    <div>Return an <code><a href="twisted.cred.checkers.ICredentialsChecker.html" class="internal-link" title="twisted.cred.checkers.ICredentialsChecker">twisted.cred.checkers.ICredentialsChecker</a></code> provider using the supplied argument string.</div>
   </div>
 </div><div class="baseattribute">
   
@@ -214,7 +237,8 @@
   <div class="functionBody">
     
     
-    <div><p>A short (one-line) description of the argument string format.</p></div>
+    <div>A short (one-line) description of the argument string format.</div>
+    
   </div>
 </div><div class="baseattribute">
   
@@ -236,7 +260,8 @@
   <div class="functionBody">
     
     
-    <div><p>A detailed (potentially multi-line) description of precisely what functionality this CheckerFactory provides.</p></div>
+    <div>A detailed (potentially multi-line) description of precisely what functionality this CheckerFactory provides.</div>
+    
   </div>
 </div><div class="baseattribute">
   
@@ -258,7 +283,8 @@
   <div class="functionBody">
     
     
-    <div><p>A tag that identifies the authentication method.</p></div>
+    <div>A tag that identifies the authentication method.</div>
+    
   </div>
 </div><div class="baseattribute">
   
@@ -280,7 +306,8 @@
   <div class="functionBody">
     
     
-    <div><p>A list of credentials interfaces that this factory will support.</p></div>
+    <div>A list of credentials interfaces that this factory will support.</div>
+    
   </div>
 </div>
 
@@ -289,11 +316,33 @@
 
     <footer class="navbar navbar-default">
   
+
   <div class="container">
     <a href="index.html">API Documentation</a> for <a href="https://twistedmatrix.com/" class="projecthome">Twisted</a>,
   generated by <a href="https://github.com/twisted/pydoctor/">pydoctor</a>
-    21.2.2 at 2022-01-12 04:22:24.
+    22.2.2.dev0 at 2022-03-04 05:57:20.
   </div>
+
+  <!-- Google analytics, obviously. -->
+  <script src="//www.google-analytics.com/urchin.js" type="text/javascript"></script>
+  <script type="text/javascript">
+    _uacct = "UA-99018-6";
+    urchinTracker();
+  </script>
+
+  <!-- If the documentation isn't current, insert a current link. -->
+  <script type="text/javascript">
+    if (window.location.pathname.indexOf('/current/') == -1) {
+      <!-- Give the user a link to this page, but in the current version of the docs. -->
+      var link = document.getElementById('current-docs-link');
+      link.href = window.location.pathname.replace(/\/\d+\.\d+\.\d+\/api\//, '/current/api/');
+      <!-- And make it visible -->
+      var container = document.getElementById('current-docs-container');
+      container.style.display = "";
+      delete link;
+      delete container;
+    }
+  </script>
 </footer>
 
     <script src="pydoctor.js" type="text/javascript"></script>

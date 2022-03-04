@@ -7,7 +7,7 @@
   <head>
     
     <title>twisted.web.http._IDeprecatedHTTPChannelToRequestInterface</title>
-    <meta name="generator" content="pydoctor 21.2.2"> 
+    <meta name="generator" content="pydoctor 22.2.2.dev0"> 
         
     </meta>
     <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
@@ -19,7 +19,13 @@
 
   <body>
 
-    
+    <div style="display: none" id="current-docs-container" class="container">
+  <div class="col-sm-12">
+    <a id="current-docs-link">
+      Go to the latest version of this document.
+    </a>
+  </div>
+</div>
 
     <nav class="navbar navbar-default">
   
@@ -44,69 +50,82 @@
           Names
         </a>
 
-        <form action="search-results.html" id="search-box-container">
+        <div id="search-box-container">
           <div class="input-group">
-            <input id="search-box" name="search-query" placeholder="Search..." aria-label="Search" minlength="2" class="form-control" />
+            <input id="search-box" type="search" name="search-query" placeholder="Search..." aria-label="Search" minlength="2" class="form-control" autocomplete="off" />
+            
             <span class="input-group-btn">
-              <button class="btn btn-default" type="submit" title="Search"><img src="fonts/search.svg" alt="Search!" /></button>
-              <a class="btn btn-default" id="search-help-button" title="Help" onclick="toggleSearchHelpText()"><img src="fonts/info.svg" alt="Help!" /></a>
+              <a style="display: none;" class="btn btn-default" id="search-clear-button" title="Clear" onclick="clearSearch()"><img src="fonts/x-circle.svg" alt="Clear" /></a>
+              <a class="btn btn-default" id="search-help-button" title="Help" onclick="toggleSearchHelpText()"><img src="fonts/info.svg" alt="Help" /></a>
             </span>
           </div>
-        </form>
+        </div>
 
-        <div class="rst-admonition hint" id="search-help-box">
+      </div>
+
+      <div id="search-results-container" style="display: none;">
+        <div>
+          <span class="label label-default" id="search-docstrings-button">
+            <a title="Search in docstrings" onclick="toggleSearchInDocstrings()">search in docstrings</a></span>
+        </div>
+
+        <noscript>
+            <h1>Cannot search: JavaScript is not supported/enabled in your browser.</h1>
+        </noscript>
+
+        <div class="hint" id="search-help-box">
           <p class="rst-last">
       
             Search bar offers the following options:
             <ul>   
                 <li>
                   <strong>Term presence.</strong> The below example searches for documents that 
-                    must contain “foo”, might contain “bar” and must not contain “baz”:
-                  <br /> <code>'+foo bar -baz'</code>
+                    must contain “foo”, might contain “bar” and must not contain “baz”: <code>+foo bar -baz</code>
                 </li> 
 
                 <li>
-                  <strong>Wildcards.</strong> The below example searches for documents with words beginning with “foo”:
-                  <br /> <code>'foo*'</code>
+                  <strong>Wildcards.</strong> The below example searches for documents with words beginning with “foo”: <code>foo*</code>
                 </li> 
 
                 <li>
-                  <strong>Search in specific fields.</strong> The following search matches all documents 
-                  that contains "foo" in their full dotted name and with “bar” in any field:
-                  <br /> <code>'+fullName:*foo* +bar'</code>
+                  <strong>Search in specific fields.</strong> The following search matches all objects 
+                  in "twisted.mail" that matches “search”: <code>+qname:twisted.mail.* +search</code>
 
                   <p>
-                    Possible fields: 'name', 'docstring', 'fullName'.
+                    Possible fields: 'name', 'qname' (fully qualified name), 'docstring', and 'kind'.
+                    Last two fields are only applicable if "search in docstrings" is enabled.
                   </p>
                 </li>
 
                 <li>
                   <strong>Fuzzy matches.</strong> The following search matches all documents 
-                  that have a word within 1 edit distance of “foo”:
-                  <br /> <code>'foo~1'</code>
+                  that have a word within 1 edit distance of “foo”: <code>foo~1</code>
                 </li>
             </ul>
 
           </p>
         </div>
 
-      </div>
+        <div id="search-status"> </div>
+        
+        <div class="warning" id="search-warn-box" style="display: none;">
+          <p class="rst-last"><span id="search-warn"></span></p>
+        </div>
 
+        <table id="search-results">
+          <!-- Filled dynamically by JS -->
+        </table>
+        
+        <div style="margin-top: 8px;">
+          <p>Results provided by <a href="https://lunrjs.com">Lunr.js</a></p>
+        </div>
+      </div>
 
     </div>
   </div>
 
-  <script>
- 
-    function toggleSearchHelpText() {
-        document.body.classList.toggle("search-help-hidden");
-    }
-    // Init search and help text
-    document.getElementById('search-box-container').style.display = 'block';
-    document.getElementById('search-help-box').style.display = 'block';
-    document.body.classList.add("search-help-hidden");
-
-  </script>
+  <script src="ajax.js" type="text/javascript"></script>
+  <script src="search.js" type="text/javascript"></script>
 
 </nav>
 
@@ -115,7 +134,7 @@
     <div class="container">
 
       <div class="page-header">
-        <h1 class="interface private"><code><code><a href="twisted.html">twisted</a></code><wbr></wbr>.<code><a href="twisted.web.html">web</a></code><wbr></wbr>.<code><a href="twisted.web.http.html">http</a></code><wbr></wbr>.<code><a href="twisted.web.http._IDeprecatedHTTPChannelToRequestInterface.html">_IDeprecatedHTTPChannelToRequestInterface</a></code></code></h1>
+        <h1 class="interface private"><code><code><a href="index.html" class="internal-link">twisted</a></code><wbr></wbr>.<code><a href="twisted.web.html" class="internal-link" title="twisted.web">web</a></code><wbr></wbr>.<code><a href="twisted.web.http.html" class="internal-link" title="twisted.web.http">http</a></code><wbr></wbr>.<code><a href="twisted.web.http._IDeprecatedHTTPChannelToRequestInterface.html" class="internal-link" title="twisted.web.http._IDeprecatedHTTPChannelToRequestInterface">_IDeprecatedHTTPChannelToRequestInterface</a></code></code></h1>
         <div id="showPrivate">
           <button class="btn btn-link" onclick="togglePrivate()">Toggle Private API</button>
         </div>
@@ -126,68 +145,70 @@
       </div>
 
       <div class="extrasDocstring">
-        <p><code><span class="py-keyword">class</span> <span class="py-defname">_IDeprecatedHTTPChannelToRequestInterface</span>(<a href="https://zopeinterface.readthedocs.io/en/latest/api/specifications.html#zope.interface.Interface" title="zope.interface.Interface">Interface</a>): <a href="https://github.com/twisted/twisted/tree/twisted-21.2.0/src/twisted/web/http.py#L449" class="sourceLink">(source)</a></code></p><p>Known implementations: <code><a href="twisted.web.http.Request.html">twisted.web.http.Request</a></code></p>
+        <p><code><span class="py-keyword">class</span> <span class="py-defname">_IDeprecatedHTTPChannelToRequestInterface</span>(<a href="https://zopeinterface.readthedocs.io/en/latest/api/specifications.html#zope.interface.Interface" class="intersphinx-link" title="zope.interface.Interface">Interface</a>): <a href="https://github.com/twisted/twisted/tree/twisted-21.2.0/src/twisted/web/http.py#L449" class="sourceLink">(source)</a></code></p><p>Known implementations: <code><a href="twisted.web.http.Request.html" class="internal-link">twisted.web.http.Request</a></code></p>
         <p><a href="classIndex.html#twisted.web.http._IDeprecatedHTTPChannelToRequestInterface">View In Hierarchy</a></p>
       </div>
 
+      
+
       <div class="moduleDocstring">
-        <div><p>The interface <code><a href="twisted.web.http.HTTPChannel.html">HTTPChannel</a></code> expects of <code><a href="twisted.web.http.Request.html">Request</a></code>.</p></div>
+        <div>The interface <code><a href="twisted.web.http.HTTPChannel.html" class="internal-link" title="twisted.web.http.HTTPChannel">HTTPChannel</a></code> expects of <code><a href="twisted.web.http.Request.html" class="internal-link" title="twisted.web.http.Request">Request</a></code>.</div>
       </div>
 
       <div id="splitTables">
-        <table class="children sortable" id="id3247">
+        <table class="children sortable" id="id3233">
   
   
   <tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#__eq__">__eq__</a></code></td>
-    <td><span>Determines if two requests are the same object.</span></td>
+    <td><code><a href="#__eq__" class="internal-link" title="twisted.web.http._IDeprecatedHTTPChannelToRequestInterface.__eq__">__eq__</a></code></td>
+    <td>Determines if two requests are the same object.</td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#__hash__">__hash__</a></code></td>
-    <td><span>Generate a hash value for the request.</span></td>
+    <td><code><a href="#__hash__" class="internal-link" title="twisted.web.http._IDeprecatedHTTPChannelToRequestInterface.__hash__">__hash__</a></code></td>
+    <td>Generate a hash value for the request.</td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#__ne__">__ne__</a></code></td>
-    <td><span>Determines if two requests are not the same object.</span></td>
+    <td><code><a href="#__ne__" class="internal-link" title="twisted.web.http._IDeprecatedHTTPChannelToRequestInterface.__ne__">__ne__</a></code></td>
+    <td>Determines if two requests are not the same object.</td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#connectionLost">connectionLost</a></code></td>
-    <td><span>The underlying connection has been lost.</span></td>
+    <td><code><a href="#connectionLost" class="internal-link" title="twisted.web.http._IDeprecatedHTTPChannelToRequestInterface.connectionLost">connection​Lost</a></code></td>
+    <td>The underlying connection has been lost.</td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#gotLength">gotLength</a></code></td>
-    <td><span>Called when <code><a href="twisted.web.http.HTTPChannel.html">HTTPChannel</a></code> has determined the length, if any, of the incoming request's body.</span></td>
+    <td><code><a href="#gotLength" class="internal-link" title="twisted.web.http._IDeprecatedHTTPChannelToRequestInterface.gotLength">got​Length</a></code></td>
+    <td>Called when <code><a href="twisted.web.http.HTTPChannel.html" class="internal-link" title="twisted.web.http.HTTPChannel">HTTPChannel</a></code> has determined the length, if any, of the incoming request's body.</td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#handleContentChunk">handleContentChunk</a></code></td>
-    <td><span>Deliver a received chunk of body data to the request.  Note this does not imply chunked transfer encoding.</span></td>
+    <td><code><a href="#handleContentChunk" class="internal-link" title="twisted.web.http._IDeprecatedHTTPChannelToRequestInterface.handleContentChunk">handle​Content​Chunk</a></code></td>
+    <td>Deliver a received chunk of body data to the request.  Note this does not imply chunked transfer encoding.</td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#parseCookies">parseCookies</a></code></td>
-    <td><span>Parse the request's cookies out of received headers.</span></td>
+    <td><code><a href="#parseCookies" class="internal-link" title="twisted.web.http._IDeprecatedHTTPChannelToRequestInterface.parseCookies">parse​Cookies</a></code></td>
+    <td>Parse the request's cookies out of received headers.</td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#requestReceived">requestReceived</a></code></td>
-    <td><span>Called when the entire request, including its body, has been received.</span></td>
+    <td><code><a href="#requestReceived" class="internal-link" title="twisted.web.http._IDeprecatedHTTPChannelToRequestInterface.requestReceived">request​Received</a></code></td>
+    <td>Called when the entire request, including its body, has been received.</td>
   </tr><tr class="attribute">
     
     <td>Attribute</td>
-    <td><code><a href="#requestHeaders">requestHeaders</a></code></td>
-    <td><span>A <code><a href="twisted.web.http_headers.Headers.html">http_headers.Headers</a></code> instance giving all received HTTP request headers.</span></td>
+    <td><code><a href="#requestHeaders" class="internal-link" title="twisted.web.http._IDeprecatedHTTPChannelToRequestInterface.requestHeaders">request​Headers</a></code></td>
+    <td>A <code><a href="twisted.web.http_headers.Headers.html" class="internal-link" title="twisted.web.http_headers.Headers">http_headers.Headers</a></code> instance giving all received HTTP request headers.</td>
   </tr><tr class="attribute">
     
     <td>Attribute</td>
-    <td><code><a href="#responseHeaders">responseHeaders</a></code></td>
-    <td><span>A <code><a href="twisted.web.http_headers.Headers.html">http_headers.Headers</a></code> instance holding all HTTP response headers to be sent.</span></td>
+    <td><code><a href="#responseHeaders" class="internal-link" title="twisted.web.http._IDeprecatedHTTPChannelToRequestInterface.responseHeaders">response​Headers</a></code></td>
+    <td>A <code><a href="twisted.web.http_headers.Headers.html" class="internal-link" title="twisted.web.http_headers.Headers">http_headers.Headers</a></code> instance holding all HTTP response headers to be sent.</td>
   </tr>
 </table>
         
@@ -217,7 +238,7 @@
   <div class="docstring functionBody">
     
     
-    <div><p>Determines if two requests are the same object.</p><table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">other:</span><code><a href="https://docs.python.org/3/library/functions.html#object">object</a></code></td><td class="fieldArgDesc">Another object whose identity will be compared to this instance's.</td></tr><tr class="fieldStart"><td class="fieldName" colspan="2">Returns</td></tr><tr><td class="fieldArgContainer"><code><a href="https://docs.python.org/3/library/functions.html#bool">bool</a></code></td><td class="fieldArgDesc"><code><a href="https://docs.python.org/3/library/constants.html#True">True</a></code> when the two are the same object and <code><a href="https://docs.python.org/3/library/constants.html#False">False</a></code> when not.</td></tr></table></div>
+    <div>Determines if two requests are the same object.<table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">other:</span><code><a href="https://docs.python.org/3/library/functions.html#object" class="intersphinx-link">object</a></code></td><td class="fieldArgDesc">Another object whose identity will be compared to this instance's.</td></tr><tr class="fieldStart"><td class="fieldName" colspan="2">Returns</td></tr><tr><td class="fieldArgContainer"><code><a href="https://docs.python.org/3/library/functions.html#bool" class="intersphinx-link">bool</a></code></td><td class="fieldArgDesc"><code><a href="https://docs.python.org/3/library/constants.html#True" class="intersphinx-link">True</a></code> when the two are the same object and <code><a href="https://docs.python.org/3/library/constants.html#False" class="intersphinx-link">False</a></code> when not.</td></tr></table></div>
   </div>
 </div><div class="basemethod">
   
@@ -239,7 +260,7 @@
   <div class="docstring functionBody">
     
     
-    <div><p>Generate a hash value for the request.</p><table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Returns</td></tr><tr><td class="fieldArgContainer"><code><a href="https://docs.python.org/3/library/functions.html#int">int</a></code></td><td class="fieldArgDesc">The request's hash value.</td></tr></table></div>
+    <div>Generate a hash value for the request.<table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Returns</td></tr><tr><td class="fieldArgContainer"><code><a href="https://docs.python.org/3/library/functions.html#int" class="intersphinx-link">int</a></code></td><td class="fieldArgDesc">The request's hash value.</td></tr></table></div>
   </div>
 </div><div class="basemethod">
   
@@ -261,7 +282,7 @@
   <div class="docstring functionBody">
     
     
-    <div><p>Determines if two requests are not the same object.</p><table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">other:</span><code><a href="https://docs.python.org/3/library/functions.html#object">object</a></code></td><td class="fieldArgDesc">Another object whose identity will be compared to this instance's.</td></tr><tr class="fieldStart"><td class="fieldName" colspan="2">Returns</td></tr><tr><td class="fieldArgContainer"><code><a href="https://docs.python.org/3/library/functions.html#bool">bool</a></code></td><td class="fieldArgDesc"><code><a href="https://docs.python.org/3/library/constants.html#True">True</a></code> when the two are not the same object and <code><a href="https://docs.python.org/3/library/constants.html#False">False</a></code> when they are.</td></tr></table></div>
+    <div>Determines if two requests are not the same object.<table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">other:</span><code><a href="https://docs.python.org/3/library/functions.html#object" class="intersphinx-link">object</a></code></td><td class="fieldArgDesc">Another object whose identity will be compared to this instance's.</td></tr><tr class="fieldStart"><td class="fieldName" colspan="2">Returns</td></tr><tr><td class="fieldArgContainer"><code><a href="https://docs.python.org/3/library/functions.html#bool" class="intersphinx-link">bool</a></code></td><td class="fieldArgDesc"><code><a href="https://docs.python.org/3/library/constants.html#True" class="intersphinx-link">True</a></code> when the two are not the same object and <code><a href="https://docs.python.org/3/library/constants.html#False" class="intersphinx-link">False</a></code> when they are.</td></tr></table></div>
   </div>
 </div><div class="basemethod">
   
@@ -283,7 +304,7 @@
   <div class="docstring functionBody">
     
     
-    <div><p>The underlying connection has been lost.</p><table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">reason:</span><code><a href="twisted.python.failure.Failure.html">twisted.python.failure.Failure</a></code></td><td class="fieldArgDesc">A failure instance indicating the reason why the connection was lost.</td></tr></table></div>
+    <div>The underlying connection has been lost.<table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">reason:</span><code><a href="twisted.python.failure.Failure.html" class="internal-link" title="twisted.python.failure.Failure">twisted.python.failure.Failure</a></code></td><td class="fieldArgDesc">A failure instance indicating the reason why the connection was lost.</td></tr></table></div>
   </div>
 </div><div class="basemethod">
   
@@ -305,7 +326,7 @@
   <div class="docstring functionBody">
     
     
-    <div><p>Called when <code><a href="twisted.web.http.HTTPChannel.html">HTTPChannel</a></code> has determined the length, if any, of the incoming request's body.</p><table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">length:</span><code><a href="https://docs.python.org/3/library/functions.html#int">int</a></code> if the request declares its body's length and <code><a href="https://docs.python.org/3/library/constants.html#None">None</a></code> if it does not.</td><td class="fieldArgDesc">The length of the request's body.</td></tr></table></div>
+    <div>Called when <code><a href="twisted.web.http.HTTPChannel.html" class="internal-link" title="twisted.web.http.HTTPChannel">HTTPChannel</a></code> has determined the length, if any, of the incoming request's body.<table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">length:</span><code><a href="https://docs.python.org/3/library/functions.html#int" class="intersphinx-link">int</a></code> if the request declares its body's length and <code><a href="https://docs.python.org/3/library/constants.html#None" class="intersphinx-link">None</a></code> if it does not.</td><td class="fieldArgDesc">The length of the request's body.</td></tr></table></div>
   </div>
 </div><div class="basemethod">
   
@@ -327,7 +348,7 @@
   <div class="docstring functionBody">
     
     
-    <div><p>Deliver a received chunk of body data to the request.  Note this does not imply chunked transfer encoding.</p><table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">data:</span><code><a href="https://docs.python.org/3/library/stdtypes.html#bytes">bytes</a></code></td><td class="fieldArgDesc">The received chunk.</td></tr></table></div>
+    <div>Deliver a received chunk of body data to the request.  Note this does not imply chunked transfer encoding.<table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">data:</span><code><a href="https://docs.python.org/3/library/stdtypes.html#bytes" class="intersphinx-link">bytes</a></code></td><td class="fieldArgDesc">The received chunk.</td></tr></table></div>
   </div>
 </div><div class="basemethod">
   
@@ -349,7 +370,7 @@
   <div class="docstring functionBody">
     
     
-    <div><p>Parse the request's cookies out of received headers.</p></div>
+    <div>Parse the request's cookies out of received headers.</div>
   </div>
 </div><div class="basemethod">
   
@@ -371,7 +392,7 @@
   <div class="docstring functionBody">
     
     
-    <div><p>Called when the entire request, including its body, has been received.</p><table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">command:</span><code><a href="https://docs.python.org/3/library/stdtypes.html#bytes">bytes</a></code></td><td class="fieldArgDesc">The request's HTTP command.</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">path:</span><code><a href="https://docs.python.org/3/library/stdtypes.html#bytes">bytes</a></code></td><td class="fieldArgDesc">The request's path.  Note: this is actually what RFC7320 calls the URI.</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">version:</span><code><a href="https://docs.python.org/3/library/stdtypes.html#bytes">bytes</a></code></td><td class="fieldArgDesc">The request's HTTP version.</td></tr></table></div>
+    <div>Called when the entire request, including its body, has been received.<table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">command:</span><code><a href="https://docs.python.org/3/library/stdtypes.html#bytes" class="intersphinx-link">bytes</a></code></td><td class="fieldArgDesc">The request's HTTP command.</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">path:</span><code><a href="https://docs.python.org/3/library/stdtypes.html#bytes" class="intersphinx-link">bytes</a></code></td><td class="fieldArgDesc">The request's path.  Note: this is actually what RFC7320 calls the URI.</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">version:</span><code><a href="https://docs.python.org/3/library/stdtypes.html#bytes" class="intersphinx-link">bytes</a></code></td><td class="fieldArgDesc">The request's HTTP version.</td></tr></table></div>
   </div>
 </div><div class="baseattribute">
   
@@ -393,7 +414,8 @@
   <div class="functionBody">
     
     
-    <div><p>A <code><a href="twisted.web.http_headers.Headers.html">http_headers.Headers</a></code> instance giving all received HTTP request headers.</p></div>
+    <div>A <code><a href="twisted.web.http_headers.Headers.html" class="internal-link" title="twisted.web.http_headers.Headers">http_headers.Headers</a></code> instance giving all received HTTP request headers.</div>
+    
   </div>
 </div><div class="baseattribute">
   
@@ -415,7 +437,8 @@
   <div class="functionBody">
     
     
-    <div><p>A <code><a href="twisted.web.http_headers.Headers.html">http_headers.Headers</a></code> instance holding all HTTP response headers to be sent.</p></div>
+    <div>A <code><a href="twisted.web.http_headers.Headers.html" class="internal-link" title="twisted.web.http_headers.Headers">http_headers.Headers</a></code> instance holding all HTTP response headers to be sent.</div>
+    
   </div>
 </div>
 
@@ -424,11 +447,33 @@
 
     <footer class="navbar navbar-default">
   
+
   <div class="container">
     <a href="index.html">API Documentation</a> for <a href="https://twistedmatrix.com/" class="projecthome">Twisted</a>,
   generated by <a href="https://github.com/twisted/pydoctor/">pydoctor</a>
-    21.2.2 at 2022-01-12 04:22:24.
+    22.2.2.dev0 at 2022-03-04 05:57:20.
   </div>
+
+  <!-- Google analytics, obviously. -->
+  <script src="//www.google-analytics.com/urchin.js" type="text/javascript"></script>
+  <script type="text/javascript">
+    _uacct = "UA-99018-6";
+    urchinTracker();
+  </script>
+
+  <!-- If the documentation isn't current, insert a current link. -->
+  <script type="text/javascript">
+    if (window.location.pathname.indexOf('/current/') == -1) {
+      <!-- Give the user a link to this page, but in the current version of the docs. -->
+      var link = document.getElementById('current-docs-link');
+      link.href = window.location.pathname.replace(/\/\d+\.\d+\.\d+\/api\//, '/current/api/');
+      <!-- And make it visible -->
+      var container = document.getElementById('current-docs-container');
+      container.style.display = "";
+      delete link;
+      delete container;
+    }
+  </script>
 </footer>
 
     <script src="pydoctor.js" type="text/javascript"></script>

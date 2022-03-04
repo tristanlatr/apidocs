@@ -7,7 +7,7 @@
   <head>
     
     <title>twisted.mail.mail.FileMonitoringService</title>
-    <meta name="generator" content="pydoctor 21.2.2"> 
+    <meta name="generator" content="pydoctor 22.2.2.dev0"> 
         
     </meta>
     <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
@@ -19,7 +19,13 @@
 
   <body>
 
-    
+    <div style="display: none" id="current-docs-container" class="container">
+  <div class="col-sm-12">
+    <a id="current-docs-link">
+      Go to the latest version of this document.
+    </a>
+  </div>
+</div>
 
     <nav class="navbar navbar-default">
   
@@ -44,69 +50,82 @@
           Names
         </a>
 
-        <form action="search-results.html" id="search-box-container">
+        <div id="search-box-container">
           <div class="input-group">
-            <input id="search-box" name="search-query" placeholder="Search..." aria-label="Search" minlength="2" class="form-control" />
+            <input id="search-box" type="search" name="search-query" placeholder="Search..." aria-label="Search" minlength="2" class="form-control" autocomplete="off" />
+            
             <span class="input-group-btn">
-              <button class="btn btn-default" type="submit" title="Search"><img src="fonts/search.svg" alt="Search!" /></button>
-              <a class="btn btn-default" id="search-help-button" title="Help" onclick="toggleSearchHelpText()"><img src="fonts/info.svg" alt="Help!" /></a>
+              <a style="display: none;" class="btn btn-default" id="search-clear-button" title="Clear" onclick="clearSearch()"><img src="fonts/x-circle.svg" alt="Clear" /></a>
+              <a class="btn btn-default" id="search-help-button" title="Help" onclick="toggleSearchHelpText()"><img src="fonts/info.svg" alt="Help" /></a>
             </span>
           </div>
-        </form>
+        </div>
 
-        <div class="rst-admonition hint" id="search-help-box">
+      </div>
+
+      <div id="search-results-container" style="display: none;">
+        <div>
+          <span class="label label-default" id="search-docstrings-button">
+            <a title="Search in docstrings" onclick="toggleSearchInDocstrings()">search in docstrings</a></span>
+        </div>
+
+        <noscript>
+            <h1>Cannot search: JavaScript is not supported/enabled in your browser.</h1>
+        </noscript>
+
+        <div class="hint" id="search-help-box">
           <p class="rst-last">
       
             Search bar offers the following options:
             <ul>   
                 <li>
                   <strong>Term presence.</strong> The below example searches for documents that 
-                    must contain “foo”, might contain “bar” and must not contain “baz”:
-                  <br /> <code>'+foo bar -baz'</code>
+                    must contain “foo”, might contain “bar” and must not contain “baz”: <code>+foo bar -baz</code>
                 </li> 
 
                 <li>
-                  <strong>Wildcards.</strong> The below example searches for documents with words beginning with “foo”:
-                  <br /> <code>'foo*'</code>
+                  <strong>Wildcards.</strong> The below example searches for documents with words beginning with “foo”: <code>foo*</code>
                 </li> 
 
                 <li>
-                  <strong>Search in specific fields.</strong> The following search matches all documents 
-                  that contains "foo" in their full dotted name and with “bar” in any field:
-                  <br /> <code>'+fullName:*foo* +bar'</code>
+                  <strong>Search in specific fields.</strong> The following search matches all objects 
+                  in "twisted.mail" that matches “search”: <code>+qname:twisted.mail.* +search</code>
 
                   <p>
-                    Possible fields: 'name', 'docstring', 'fullName'.
+                    Possible fields: 'name', 'qname' (fully qualified name), 'docstring', and 'kind'.
+                    Last two fields are only applicable if "search in docstrings" is enabled.
                   </p>
                 </li>
 
                 <li>
                   <strong>Fuzzy matches.</strong> The following search matches all documents 
-                  that have a word within 1 edit distance of “foo”:
-                  <br /> <code>'foo~1'</code>
+                  that have a word within 1 edit distance of “foo”: <code>foo~1</code>
                 </li>
             </ul>
 
           </p>
         </div>
 
-      </div>
+        <div id="search-status"> </div>
+        
+        <div class="warning" id="search-warn-box" style="display: none;">
+          <p class="rst-last"><span id="search-warn"></span></p>
+        </div>
 
+        <table id="search-results">
+          <!-- Filled dynamically by JS -->
+        </table>
+        
+        <div style="margin-top: 8px;">
+          <p>Results provided by <a href="https://lunrjs.com">Lunr.js</a></p>
+        </div>
+      </div>
 
     </div>
   </div>
 
-  <script>
- 
-    function toggleSearchHelpText() {
-        document.body.classList.toggle("search-help-hidden");
-    }
-    // Init search and help text
-    document.getElementById('search-box-container').style.display = 'block';
-    document.getElementById('search-help-box').style.display = 'block';
-    document.body.classList.add("search-help-hidden");
-
-  </script>
+  <script src="ajax.js" type="text/javascript"></script>
+  <script src="search.js" type="text/javascript"></script>
 
 </nav>
 
@@ -115,7 +134,7 @@
     <div class="container">
 
       <div class="page-header">
-        <h1 class="class"><code><code><a href="twisted.html">twisted</a></code><wbr></wbr>.<code><a href="twisted.mail.html">mail</a></code><wbr></wbr>.<code><a href="twisted.mail.mail.html">mail</a></code><wbr></wbr>.<code><a href="twisted.mail.mail.FileMonitoringService.html">FileMonitoringService</a></code></code></h1>
+        <h1 class="class"><code><code><a href="index.html" class="internal-link">twisted</a></code><wbr></wbr>.<code><a href="twisted.mail.html" class="internal-link" title="twisted.mail">mail</a></code><wbr></wbr>.<code><a href="twisted.mail.mail.html" class="internal-link" title="twisted.mail.mail">mail</a></code><wbr></wbr>.<code><a href="twisted.mail.mail.FileMonitoringService.html" class="internal-link" title="twisted.mail.mail.FileMonitoringService">FileMonitoringService</a></code></code></h1>
         <div id="showPrivate">
           <button class="btn btn-link" onclick="togglePrivate()">Toggle Private API</button>
         </div>
@@ -126,175 +145,177 @@
       </div>
 
       <div class="extrasDocstring">
-        <p><code><span class="py-keyword">class</span> <span class="py-defname">FileMonitoringService</span>(<a href="twisted.application.internet.TimerService.html" title="twisted.application.internet.TimerService">internet.TimerService</a>): <a href="https://github.com/twisted/twisted/tree/twisted-21.2.0/src/twisted/mail/mail.py#L603" class="sourceLink">(source)</a></code></p>
+        <p><code><span class="py-keyword">class</span> <span class="py-defname">FileMonitoringService</span>(<a href="twisted.application.internet.TimerService.html" class="internal-link" title="twisted.application.internet.TimerService">internet.TimerService</a>): <a href="https://github.com/twisted/twisted/tree/twisted-21.2.0/src/twisted/mail/mail.py#L603" class="sourceLink">(source)</a></code></p>
         <p><a href="classIndex.html#twisted.mail.mail.FileMonitoringService">View In Hierarchy</a></p>
       </div>
 
+      
+
       <div class="moduleDocstring">
-        <div><p>A service for monitoring changes to files.</p></div>
+        <div>A service for monitoring changes to files.</div>
       </div>
 
       <div id="splitTables">
-        <table class="children sortable" id="id1528">
+        <table class="children sortable" id="id1536">
   
   
   <tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#__init__">__init__</a></code></td>
-    <td><span>Initialize the file monitoring service.</span></td>
+    <td><code><a href="#__init__" class="internal-link" title="twisted.mail.mail.FileMonitoringService.__init__">__init__</a></code></td>
+    <td>Initialize the file monitoring service.</td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#monitorFile">monitorFile</a></code></td>
-    <td><span>Start monitoring a file for changes.</span></td>
+    <td><code><a href="#monitorFile" class="internal-link" title="twisted.mail.mail.FileMonitoringService.monitorFile">monitor​File</a></code></td>
+    <td>Start monitoring a file for changes.</td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#startService">startService</a></code></td>
-    <td><span>Start the file monitoring service.</span></td>
+    <td><code><a href="#startService" class="internal-link" title="twisted.mail.mail.FileMonitoringService.startService">start​Service</a></code></td>
+    <td>Start the file monitoring service.</td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#stopService">stopService</a></code></td>
-    <td><span>Stop the file monitoring service.</span></td>
+    <td><code><a href="#stopService" class="internal-link" title="twisted.mail.mail.FileMonitoringService.stopService">stop​Service</a></code></td>
+    <td>Stop the file monitoring service.</td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#unmonitorFile">unmonitorFile</a></code></td>
-    <td><span>Stop monitoring a file.</span></td>
+    <td><code><a href="#unmonitorFile" class="internal-link" title="twisted.mail.mail.FileMonitoringService.unmonitorFile">unmonitor​File</a></code></td>
+    <td>Stop monitoring a file.</td>
   </tr><tr class="instancevariable">
     
     <td>Instance Variable</td>
-    <td><code><a href="#files">files</a></code></td>
-    <td><span>Information about files to be monitored.  Each list entry provides the following information for a file: interval in seconds between checks, filename, callback function, time of last modification to the file.</span></td>
+    <td><code><a href="#files" class="internal-link" title="twisted.mail.mail.FileMonitoringService.files">files</a></code></td>
+    <td>Information about files to be monitored.  Each list entry provides the following information for a file: interval in seconds between checks, filename, callback function, time of last modification to the file.</td>
   </tr><tr class="instancevariable">
     
     <td>Instance Variable</td>
-    <td><code><a href="#index">index</a></code></td>
-    <td><span>The index of the next file to be checked.</span></td>
+    <td><code><a href="#index" class="internal-link" title="twisted.mail.mail.FileMonitoringService.index">index</a></code></td>
+    <td>The index of the next file to be checked.</td>
   </tr><tr class="instancevariable">
     
     <td>Instance Variable</td>
-    <td><code><a href="#intervals">intervals</a></code></td>
-    <td><span>Intervals between successive file checks.</span></td>
+    <td><code><a href="#intervals" class="internal-link" title="twisted.mail.mail.FileMonitoringService.intervals">intervals</a></code></td>
+    <td>Intervals between successive file checks.</td>
   </tr><tr class="method private">
     
     <td>Method</td>
-    <td><code><a href="#_monitor">_monitor</a></code></td>
-    <td><span>Monitor a file and make a callback if it has changed.</span></td>
+    <td><code><a href="#_monitor" class="internal-link" title="twisted.mail.mail.FileMonitoringService._monitor">_monitor</a></code></td>
+    <td>Monitor a file and make a callback if it has changed.</td>
   </tr><tr class="method private">
     
     <td>Method</td>
-    <td><code><a href="#_setupMonitor">_setupMonitor</a></code></td>
-    <td><span>Schedule the next monitoring call.</span></td>
+    <td><code><a href="#_setupMonitor" class="internal-link" title="twisted.mail.mail.FileMonitoringService._setupMonitor">_setup​Monitor</a></code></td>
+    <td>Schedule the next monitoring call.</td>
   </tr><tr class="instancevariable private">
     
     <td>Instance Variable</td>
-    <td><code><a href="#_call">_call</a></code></td>
-    <td><span>The next scheduled call to check a file.</span></td>
+    <td><code><a href="#_call" class="internal-link" title="twisted.mail.mail.FileMonitoringService._call">_call</a></code></td>
+    <td>The next scheduled call to check a file.</td>
   </tr>
 </table>
         
           <p class="inheritedFrom">
-            Inherited from <code><a href="twisted.application.internet.TimerService.html">TimerService</a></code>:
+            Inherited from <code><a href="twisted.application.internet.TimerService.html" class="internal-link" title="twisted.application.internet.TimerService">TimerService</a></code>:
           </p>
-          <table class="children sortable" id="id1529">
+          <table class="children sortable" id="id1537">
   
   
   <tr class="baseclassvariable">
     
     <td>Class Variable</td>
-    <td><code><a href="twisted.application.internet.TimerService.html#volatile">volatile</a></code></td>
+    <td><code><a href="twisted.application.internet.TimerService.html#volatile" class="internal-link" title="twisted.application.internet.TimerService.volatile">volatile</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="baseinstancevariable">
     
     <td>Instance Variable</td>
-    <td><code><a href="twisted.application.internet.TimerService.html#call">call</a></code></td>
-    <td><span>Function and arguments to call periodically.</span></td>
+    <td><code><a href="twisted.application.internet.TimerService.html#call" class="internal-link" title="twisted.application.internet.TimerService.call">call</a></code></td>
+    <td>Function and arguments to call periodically.</td>
   </tr><tr class="baseinstancevariable">
     
     <td>Instance Variable</td>
-    <td><code><a href="twisted.application.internet.TimerService.html#clock">clock</a></code></td>
-    <td><span>Source of time. This defaults to <code><a href="https://docs.python.org/3/library/constants.html#None">None</a></code> which is causes <code><a href="twisted.internet.reactor.html">twisted.internet.reactor</a></code> to be used. Feel free to set this to something else, but it probably ought to be set *before* calling <code><a href="#startService">startService</a></code>.</span></td>
+    <td><code><a href="twisted.application.internet.TimerService.html#clock" class="internal-link" title="twisted.application.internet.TimerService.clock">clock</a></code></td>
+    <td>Source of time. This defaults to <code><a href="https://docs.python.org/3/library/constants.html#None" class="intersphinx-link">None</a></code> which is causes <code><a href="twisted.internet.reactor.html" class="internal-link" title="twisted.internet.reactor">twisted.internet.reactor</a></code> to be used. Feel free to set this to something else, but it probably ought to be set *before* calling <code><a href="#startService" class="internal-link" title="twisted.application.internet.TimerService.startService">startService</a></code>.</td>
   </tr><tr class="baseinstancevariable">
     
     <td>Instance Variable</td>
-    <td><code><a href="twisted.application.internet.TimerService.html#step">step</a></code></td>
+    <td><code><a href="twisted.application.internet.TimerService.html#step" class="internal-link" title="twisted.application.internet.TimerService.step">step</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="basemethod private">
     
     <td>Method</td>
-    <td><code><a href="twisted.application.internet.TimerService.html#_failed">_failed</a></code></td>
+    <td><code><a href="twisted.application.internet.TimerService.html#_failed" class="internal-link" title="twisted.application.internet.TimerService._failed">_failed</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="baseinstancevariable private">
     
     <td>Instance Variable</td>
-    <td><code><a href="twisted.application.internet.TimerService.html#_loop">_loop</a></code></td>
+    <td><code><a href="twisted.application.internet.TimerService.html#_loop" class="internal-link" title="twisted.application.internet.TimerService._loop">_loop</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="baseinstancevariable private">
     
     <td>Instance Variable</td>
-    <td><code><a href="twisted.application.internet.TimerService.html#_loopFinished">_loopFinished</a></code></td>
+    <td><code><a href="twisted.application.internet.TimerService.html#_loopFinished" class="internal-link" title="twisted.application.internet.TimerService._loopFinished">_loop​Finished</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr>
 </table>
           
           <p class="inheritedFrom">
-            Inherited from <code><a href="twisted.application.internet._VolatileDataService.html">_VolatileDataService</a></code> (via <code><a href="twisted.application.internet.TimerService.html">TimerService</a></code>):
+            Inherited from <code><a href="twisted.application.internet._VolatileDataService.html" class="internal-link" title="twisted.application.internet._VolatileDataService">_VolatileDataService</a></code> (via <code><a href="twisted.application.internet.TimerService.html" class="internal-link" title="twisted.application.internet.TimerService">TimerService</a></code>):
           </p>
-          <table class="children sortable" id="id1530">
+          <table class="children sortable" id="id1538">
   
   
   <tr class="basemethod">
     
     <td>Method</td>
-    <td><code><a href="twisted.application.internet._VolatileDataService.html#__getstate__">__getstate__</a></code></td>
+    <td><code><a href="twisted.application.internet._VolatileDataService.html#__getstate__" class="internal-link" title="twisted.application.internet._VolatileDataService.__getstate__">__getstate__</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr>
 </table>
           
           <p class="inheritedFrom">
-            Inherited from <code><a href="twisted.application.service.Service.html">Service</a></code> (via <code><a href="twisted.application.internet.TimerService.html">TimerService</a></code>, <code><a href="twisted.application.internet._VolatileDataService.html">_VolatileDataService</a></code>):
+            Inherited from <code><a href="twisted.application.service.Service.html" class="internal-link" title="twisted.application.service.Service">Service</a></code> (via <code><a href="twisted.application.internet.TimerService.html" class="internal-link" title="twisted.application.internet.TimerService">TimerService</a></code>, <code><a href="twisted.application.internet._VolatileDataService.html" class="internal-link" title="twisted.application.internet._VolatileDataService">_VolatileDataService</a></code>):
           </p>
-          <table class="children sortable" id="id1531">
+          <table class="children sortable" id="id1539">
   
   
   <tr class="basemethod">
     
     <td>Method</td>
-    <td><code><a href="twisted.application.service.Service.html#disownServiceParent">disownServiceParent</a></code></td>
-    <td><span>Use this API to remove an <code><a href="twisted.application.service.IService.html">IService</a></code> from an <code><a href="twisted.application.service.IServiceCollection.html">IServiceCollection</a></code>.</span></td>
+    <td><code><a href="twisted.application.service.Service.html#disownServiceParent" class="internal-link" title="twisted.application.service.Service.disownServiceParent">disown​Service​Parent</a></code></td>
+    <td>Use this API to remove an <code><a href="twisted.application.service.IService.html" class="internal-link" title="twisted.application.service.IService">IService</a></code> from an <code><a href="twisted.application.service.IServiceCollection.html" class="internal-link" title="twisted.application.service.IServiceCollection">IServiceCollection</a></code>.</td>
   </tr><tr class="basemethod">
     
     <td>Method</td>
-    <td><code><a href="twisted.application.service.Service.html#privilegedStartService">privilegedStartService</a></code></td>
-    <td><span>Do preparation work for starting the service.</span></td>
+    <td><code><a href="twisted.application.service.Service.html#privilegedStartService" class="internal-link" title="twisted.application.service.Service.privilegedStartService">privileged​Start​Service</a></code></td>
+    <td>Do preparation work for starting the service.</td>
   </tr><tr class="basemethod">
     
     <td>Method</td>
-    <td><code><a href="twisted.application.service.Service.html#setName">setName</a></code></td>
-    <td><span>Set the name of the service.</span></td>
+    <td><code><a href="twisted.application.service.Service.html#setName" class="internal-link" title="twisted.application.service.Service.setName">set​Name</a></code></td>
+    <td>Set the name of the service.</td>
   </tr><tr class="basemethod">
     
     <td>Method</td>
-    <td><code><a href="twisted.application.service.Service.html#setServiceParent">setServiceParent</a></code></td>
-    <td><span>Set the parent of the service.  This method is responsible for setting the <code>parent</code> attribute on this service (the child service).</span></td>
+    <td><code><a href="twisted.application.service.Service.html#setServiceParent" class="internal-link" title="twisted.application.service.Service.setServiceParent">set​Service​Parent</a></code></td>
+    <td>Set the parent of the service.  This method is responsible for setting the <tt class="rst-docutils literal">parent</tt> attribute on this service (the child service).</td>
   </tr><tr class="baseinstancevariable">
     
     <td>Instance Variable</td>
-    <td><code><a href="twisted.application.service.Service.html#name">name</a></code></td>
-    <td><span>A <code>str</code> which is the name of the service or <code>None</code>.</span></td>
+    <td><code><a href="twisted.application.service.Service.html#name" class="internal-link" title="twisted.application.service.Service.name">name</a></code></td>
+    <td>A <tt class="rst-docutils literal">str</tt> which is the name of the service or <tt class="rst-docutils literal">None</tt>.</td>
   </tr><tr class="baseinstancevariable">
     
     <td>Instance Variable</td>
-    <td><code><a href="twisted.application.service.Service.html#parent">parent</a></code></td>
-    <td><span>An <code>IServiceCollection</code> which is the parent or <code>None</code>.</span></td>
+    <td><code><a href="twisted.application.service.Service.html#parent" class="internal-link" title="twisted.application.service.Service.parent">parent</a></code></td>
+    <td>An <tt class="rst-docutils literal">IServiceCollection</tt> which is the parent or <tt class="rst-docutils literal">None</tt>.</td>
   </tr><tr class="baseinstancevariable">
     
     <td>Instance Variable</td>
-    <td><code><a href="twisted.application.service.Service.html#running">running</a></code></td>
-    <td><span>A <code>boolean</code> which indicates whether the service is running.</span></td>
+    <td><code><a href="twisted.application.service.Service.html#running" class="internal-link" title="twisted.application.service.Service.running">running</a></code></td>
+    <td>A <tt class="rst-docutils literal">boolean</tt> which indicates whether the service is running.</td>
   </tr>
 </table>
           
@@ -322,9 +343,9 @@
     </a>
   </div>
   <div class="docstring functionBody">
-    <div class="interfaceinfo">overrides <code><a href="twisted.application.internet.TimerService.html#__init__">twisted.application.internet.TimerService.__init__</a></code></div>
+    <div class="interfaceinfo">overrides <code><a href="twisted.application.internet.TimerService.html#__init__" class="internal-link">twisted.application.internet.TimerService.__init__</a></code></div>
     
-    <div><p>Initialize the file monitoring service.</p></div>
+    <div>Initialize the file monitoring service.</div>
   </div>
 </div><div class="basemethod">
   
@@ -346,7 +367,7 @@
   <div class="docstring functionBody">
     
     
-    <div><p>Start monitoring a file for changes.</p><table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">name:</span><code><a href="https://docs.python.org/3/library/stdtypes.html#bytes">bytes</a></code></td><td class="fieldArgDesc">The name of a file to monitor.</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">callback:</span>callable which takes a <code><a href="https://docs.python.org/3/library/stdtypes.html#bytes">bytes</a></code> argument</td><td class="fieldArgDesc">The function to call when the file has changed.</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">interval:</span><code><a href="https://docs.python.org/3/library/functions.html#float">float</a></code></td><td class="fieldArgDesc">The interval in seconds between checks.</td></tr></table></div>
+    <div>Start monitoring a file for changes.<table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">name:</span><code><a href="https://docs.python.org/3/library/stdtypes.html#bytes" class="intersphinx-link">bytes</a></code></td><td class="fieldArgDesc">The name of a file to monitor.</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">callback:</span>callable which takes a <code><a href="https://docs.python.org/3/library/stdtypes.html#bytes" class="intersphinx-link">bytes</a></code> argument</td><td class="fieldArgDesc">The function to call when the file has changed.</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">interval:</span><code><a href="https://docs.python.org/3/library/functions.html#float" class="intersphinx-link">float</a></code></td><td class="fieldArgDesc">The interval in seconds between checks.</td></tr></table></div>
   </div>
 </div><div class="basemethod">
   
@@ -366,9 +387,9 @@
     </a>
   </div>
   <div class="docstring functionBody">
-    <div class="interfaceinfo">from <code><a href="twisted.application.service.IService.html#startService">twisted.application.service.IService</a></code></div><div class="interfaceinfo">overrides <code><a href="twisted.application.internet.TimerService.html#startService">twisted.application.internet.TimerService.startService</a></code></div>
+    <div class="interfaceinfo">from <code><a href="twisted.application.service.IService.html#startService" class="internal-link" title="twisted.application.service.IService.startService">twisted.application.service.IService</a></code></div><div class="interfaceinfo">overrides <code><a href="twisted.application.internet.TimerService.html#startService" class="internal-link">twisted.application.internet.TimerService.startService</a></code></div>
     
-    <div><p>Start the file monitoring service.</p></div>
+    <div>Start the file monitoring service.</div>
   </div>
 </div><div class="basemethod">
   
@@ -388,9 +409,9 @@
     </a>
   </div>
   <div class="docstring functionBody">
-    <div class="interfaceinfo">from <code><a href="twisted.application.service.IService.html#stopService">twisted.application.service.IService</a></code></div><div class="interfaceinfo">overrides <code><a href="twisted.application.internet.TimerService.html#stopService">twisted.application.internet.TimerService.stopService</a></code></div>
+    <div class="interfaceinfo">from <code><a href="twisted.application.service.IService.html#stopService" class="internal-link" title="twisted.application.service.IService.stopService">twisted.application.service.IService</a></code></div><div class="interfaceinfo">overrides <code><a href="twisted.application.internet.TimerService.html#stopService" class="internal-link">twisted.application.internet.TimerService.stopService</a></code></div>
     
-    <div><p>Stop the file monitoring service.</p></div>
+    <div>Stop the file monitoring service.</div>
   </div>
 </div><div class="basemethod">
   
@@ -412,7 +433,7 @@
   <div class="docstring functionBody">
     
     
-    <div><p>Stop monitoring a file.</p><table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">name:</span><code><a href="https://docs.python.org/3/library/stdtypes.html#bytes">bytes</a></code></td><td class="fieldArgDesc">A file name.</td></tr></table></div>
+    <div>Stop monitoring a file.<table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">name:</span><code><a href="https://docs.python.org/3/library/stdtypes.html#bytes" class="intersphinx-link">bytes</a></code></td><td class="fieldArgDesc">A file name.</td></tr></table></div>
   </div>
 </div><div class="baseinstancevariable">
   
@@ -425,7 +446,7 @@
   </a>
   <div class="functionHeader">
     
-    <span class="py-defname">files</span>: <code><a href="https://docs.python.org/3/library/stdtypes.html#list">list</a></code> of <code><a href="https://docs.python.org/3/library/stdtypes.html#list">list</a></code> of (1) <code><a href="https://docs.python.org/3/library/functions.html#float">float</a></code>, (2) <code><a href="https://docs.python.org/3/library/stdtypes.html#bytes">bytes</a></code>, (3) callable which takes a <code><a href="https://docs.python.org/3/library/stdtypes.html#bytes">bytes</a></code> argument, (4) <code><a href="https://docs.python.org/3/library/functions.html#float">float</a></code> =
+    <span class="py-defname">files</span>: <code><a href="https://docs.python.org/3/library/stdtypes.html#list" class="intersphinx-link">list</a></code> of <code><a href="https://docs.python.org/3/library/stdtypes.html#list" class="intersphinx-link">list</a></code> of (1) <code><a href="https://docs.python.org/3/library/functions.html#float" class="intersphinx-link">float</a></code>, (2) <code><a href="https://docs.python.org/3/library/stdtypes.html#bytes" class="intersphinx-link">bytes</a></code>, (3) callable which takes a <code><a href="https://docs.python.org/3/library/stdtypes.html#bytes" class="intersphinx-link">bytes</a></code> argument, (4) <code><a href="https://docs.python.org/3/library/functions.html#float" class="intersphinx-link">float</a></code> =
     <a class="sourceLink" href="https://github.com/twisted/twisted/tree/twisted-21.2.0/src/twisted/mail/mail.py#L607">
       
       (source)
@@ -435,6 +456,7 @@
     
     
     <div>Information about files to be monitored.  Each list entry provides the following information for a file: interval in seconds between checks, filename, callback function, time of last modification to the file.</div>
+    
   </div>
 </div><div class="baseinstancevariable">
   
@@ -447,7 +469,7 @@
   </a>
   <div class="functionHeader">
     
-    <span class="py-defname">index</span>: <code><a href="https://docs.python.org/3/library/functions.html#int">int</a></code> =
+    <span class="py-defname">index</span>: <code><a href="https://docs.python.org/3/library/functions.html#int" class="intersphinx-link">int</a></code> =
     <a class="sourceLink" href="https://github.com/twisted/twisted/tree/twisted-21.2.0/src/twisted/mail/mail.py#L622">
       
       (source)
@@ -457,6 +479,7 @@
     
     
     <div>The index of the next file to be checked.</div>
+    
   </div>
 </div><div class="baseinstancevariable">
   
@@ -469,7 +492,7 @@
   </a>
   <div class="functionHeader">
     
-    <span class="py-defname">intervals</span>: <code><a href="twisted.python.util._IntervalDifferentialIterator.html">_IntervalDifferentialIterator</a></code> =
+    <span class="py-defname">intervals</span>: <code><a href="twisted.python.util._IntervalDifferentialIterator.html" class="internal-link" title="twisted.python.util._IntervalDifferentialIterator">_IntervalDifferentialIterator</a></code> =
     <a class="sourceLink" href="https://github.com/twisted/twisted/tree/twisted-21.2.0/src/twisted/mail/mail.py#L614">
       
       (source)
@@ -479,6 +502,7 @@
     
     
     <div>Intervals between successive file checks.</div>
+    
   </div>
 </div><div class="basemethod private">
   
@@ -500,7 +524,7 @@
   <div class="docstring functionBody">
     
     
-    <div><p>Monitor a file and make a callback if it has changed.</p></div>
+    <div>Monitor a file and make a callback if it has changed.</div>
   </div>
 </div><div class="basemethod private">
   
@@ -522,7 +546,7 @@
   <div class="docstring functionBody">
     
     
-    <div><p>Schedule the next monitoring call.</p></div>
+    <div>Schedule the next monitoring call.</div>
   </div>
 </div><div class="baseinstancevariable private">
   
@@ -535,7 +559,7 @@
   </a>
   <div class="functionHeader">
     
-    <span class="py-defname">_call</span>: <code><a href="twisted.internet.interfaces.IDelayedCall.html">IDelayedCall</a></code> provider =
+    <span class="py-defname">_call</span>: <code><a href="twisted.internet.interfaces.IDelayedCall.html" class="internal-link" title="twisted.internet.interfaces.IDelayedCall">IDelayedCall</a></code> provider =
     <a class="sourceLink" href="https://github.com/twisted/twisted/tree/twisted-21.2.0/src/twisted/mail/mail.py#L618">
       
       (source)
@@ -545,6 +569,7 @@
     
     
     <div>The next scheduled call to check a file.</div>
+    
   </div>
 </div>
 
@@ -553,11 +578,33 @@
 
     <footer class="navbar navbar-default">
   
+
   <div class="container">
     <a href="index.html">API Documentation</a> for <a href="https://twistedmatrix.com/" class="projecthome">Twisted</a>,
   generated by <a href="https://github.com/twisted/pydoctor/">pydoctor</a>
-    21.2.2 at 2022-01-12 04:22:24.
+    22.2.2.dev0 at 2022-03-04 05:57:20.
   </div>
+
+  <!-- Google analytics, obviously. -->
+  <script src="//www.google-analytics.com/urchin.js" type="text/javascript"></script>
+  <script type="text/javascript">
+    _uacct = "UA-99018-6";
+    urchinTracker();
+  </script>
+
+  <!-- If the documentation isn't current, insert a current link. -->
+  <script type="text/javascript">
+    if (window.location.pathname.indexOf('/current/') == -1) {
+      <!-- Give the user a link to this page, but in the current version of the docs. -->
+      var link = document.getElementById('current-docs-link');
+      link.href = window.location.pathname.replace(/\/\d+\.\d+\.\d+\/api\//, '/current/api/');
+      <!-- And make it visible -->
+      var container = document.getElementById('current-docs-container');
+      container.style.display = "";
+      delete link;
+      delete container;
+    }
+  </script>
 </footer>
 
     <script src="pydoctor.js" type="text/javascript"></script>

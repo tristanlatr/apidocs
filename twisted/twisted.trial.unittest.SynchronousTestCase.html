@@ -7,7 +7,7 @@
   <head>
     
     <title>twisted.trial.unittest.SynchronousTestCase</title>
-    <meta name="generator" content="pydoctor 21.2.2"> 
+    <meta name="generator" content="pydoctor 22.2.2.dev0"> 
         
     </meta>
     <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
@@ -19,7 +19,13 @@
 
   <body>
 
-    
+    <div style="display: none" id="current-docs-container" class="container">
+  <div class="col-sm-12">
+    <a id="current-docs-link">
+      Go to the latest version of this document.
+    </a>
+  </div>
+</div>
 
     <nav class="navbar navbar-default">
   
@@ -44,69 +50,82 @@
           Names
         </a>
 
-        <form action="search-results.html" id="search-box-container">
+        <div id="search-box-container">
           <div class="input-group">
-            <input id="search-box" name="search-query" placeholder="Search..." aria-label="Search" minlength="2" class="form-control" />
+            <input id="search-box" type="search" name="search-query" placeholder="Search..." aria-label="Search" minlength="2" class="form-control" autocomplete="off" />
+            
             <span class="input-group-btn">
-              <button class="btn btn-default" type="submit" title="Search"><img src="fonts/search.svg" alt="Search!" /></button>
-              <a class="btn btn-default" id="search-help-button" title="Help" onclick="toggleSearchHelpText()"><img src="fonts/info.svg" alt="Help!" /></a>
+              <a style="display: none;" class="btn btn-default" id="search-clear-button" title="Clear" onclick="clearSearch()"><img src="fonts/x-circle.svg" alt="Clear" /></a>
+              <a class="btn btn-default" id="search-help-button" title="Help" onclick="toggleSearchHelpText()"><img src="fonts/info.svg" alt="Help" /></a>
             </span>
           </div>
-        </form>
+        </div>
 
-        <div class="rst-admonition hint" id="search-help-box">
+      </div>
+
+      <div id="search-results-container" style="display: none;">
+        <div>
+          <span class="label label-default" id="search-docstrings-button">
+            <a title="Search in docstrings" onclick="toggleSearchInDocstrings()">search in docstrings</a></span>
+        </div>
+
+        <noscript>
+            <h1>Cannot search: JavaScript is not supported/enabled in your browser.</h1>
+        </noscript>
+
+        <div class="hint" id="search-help-box">
           <p class="rst-last">
       
             Search bar offers the following options:
             <ul>   
                 <li>
                   <strong>Term presence.</strong> The below example searches for documents that 
-                    must contain “foo”, might contain “bar” and must not contain “baz”:
-                  <br /> <code>'+foo bar -baz'</code>
+                    must contain “foo”, might contain “bar” and must not contain “baz”: <code>+foo bar -baz</code>
                 </li> 
 
                 <li>
-                  <strong>Wildcards.</strong> The below example searches for documents with words beginning with “foo”:
-                  <br /> <code>'foo*'</code>
+                  <strong>Wildcards.</strong> The below example searches for documents with words beginning with “foo”: <code>foo*</code>
                 </li> 
 
                 <li>
-                  <strong>Search in specific fields.</strong> The following search matches all documents 
-                  that contains "foo" in their full dotted name and with “bar” in any field:
-                  <br /> <code>'+fullName:*foo* +bar'</code>
+                  <strong>Search in specific fields.</strong> The following search matches all objects 
+                  in "twisted.mail" that matches “search”: <code>+qname:twisted.mail.* +search</code>
 
                   <p>
-                    Possible fields: 'name', 'docstring', 'fullName'.
+                    Possible fields: 'name', 'qname' (fully qualified name), 'docstring', and 'kind'.
+                    Last two fields are only applicable if "search in docstrings" is enabled.
                   </p>
                 </li>
 
                 <li>
                   <strong>Fuzzy matches.</strong> The following search matches all documents 
-                  that have a word within 1 edit distance of “foo”:
-                  <br /> <code>'foo~1'</code>
+                  that have a word within 1 edit distance of “foo”: <code>foo~1</code>
                 </li>
             </ul>
 
           </p>
         </div>
 
-      </div>
+        <div id="search-status"> </div>
+        
+        <div class="warning" id="search-warn-box" style="display: none;">
+          <p class="rst-last"><span id="search-warn"></span></p>
+        </div>
 
+        <table id="search-results">
+          <!-- Filled dynamically by JS -->
+        </table>
+        
+        <div style="margin-top: 8px;">
+          <p>Results provided by <a href="https://lunrjs.com">Lunr.js</a></p>
+        </div>
+      </div>
 
     </div>
   </div>
 
-  <script>
- 
-    function toggleSearchHelpText() {
-        document.body.classList.toggle("search-help-hidden");
-    }
-    // Init search and help text
-    document.getElementById('search-box-container').style.display = 'block';
-    document.getElementById('search-help-box').style.display = 'block';
-    document.body.classList.add("search-help-hidden");
-
-  </script>
+  <script src="ajax.js" type="text/javascript"></script>
+  <script src="search.js" type="text/javascript"></script>
 
 </nav>
 
@@ -115,7 +134,7 @@
     <div class="container">
 
       <div class="page-header">
-        <h1 class="class"><code><code><a href="twisted.html">twisted</a></code><wbr></wbr>.<code><a href="twisted.trial.html">trial</a></code><wbr></wbr>.<code><a href="twisted.trial.unittest.html">unittest</a></code><wbr></wbr>.<code><a href="twisted.trial.unittest.SynchronousTestCase.html">SynchronousTestCase</a></code></code></h1>
+        <h1 class="class"><code><code><a href="index.html" class="internal-link">twisted</a></code><wbr></wbr>.<code><a href="twisted.trial.html" class="internal-link" title="twisted.trial">trial</a></code><wbr></wbr>.<code><a href="twisted.trial.unittest.html" class="internal-link" title="twisted.trial.unittest">unittest</a></code><wbr></wbr>.<code><a href="twisted.trial.unittest.SynchronousTestCase.html" class="internal-link" title="twisted.trial.unittest.SynchronousTestCase">SynchronousTestCase</a></code></code></h1>
         <div id="showPrivate">
           <button class="btn btn-link" onclick="togglePrivate()">Toggle Private API</button>
         </div>
@@ -126,292 +145,299 @@
       </div>
 
       <div class="extrasDocstring">
-        <p><code><span class="py-keyword">class</span> <span class="py-defname">SynchronousTestCase</span>(<a href="twisted.trial._synctest._Assertions.html" title="twisted.trial._synctest._Assertions">_Assertions</a>): <a href="https://github.com/twisted/twisted/tree/twisted-21.2.0/src/twisted/trial/_synctest.py#L896" class="sourceLink">(source)</a></code></p>
+        <p><code><span class="py-keyword">class</span> <span class="py-defname">SynchronousTestCase</span>(<a href="twisted.trial._synctest._Assertions.html" class="internal-link" title="twisted.trial._synctest._Assertions">_Assertions</a>): <a href="https://github.com/twisted/twisted/tree/twisted-21.2.0/src/twisted/trial/_synctest.py#L896" class="sourceLink">(source)</a></code></p>
         <p><a href="classIndex.html#twisted.trial.unittest.SynchronousTestCase">View In Hierarchy</a></p>
       </div>
 
+      
+
       <div class="moduleDocstring">
-        <div><p>A unit test. The atom of the unit testing universe.</p><p>This class extends <code>unittest.TestCase</code> from the standard library.  A number of convenient testing helpers are added, including logging and warning integration, monkey-patching support, and more.</p><p>To write a unit test, subclass <code>SynchronousTestCase</code> and define a method (say, 'test_foo') on the subclass. To run the test, instantiate your subclass with the name of the method, and call <code><a href="#run">run</a></code> on the instance, passing a <code><a href="twisted.trial.reporter.TestResult.html">TestResult</a></code> object.</p><p>The <code>trial</code> script will automatically find any <code>SynchronousTestCase</code> subclasses defined in modules beginning with 'test_' and construct test cases for all methods beginning with 'test'.</p><p>If an error is logged during the test run, the test will fail with an error. See <code><a href="twisted.python.log.html#err">log.err</a></code>.</p></div>
+        <div><p>A unit test. The atom of the unit testing universe.</p>
+<p>This class extends <tt class="rst-docutils literal">unittest.TestCase</tt> from the standard library.  A number of convenient testing helpers are added, including logging and warning integration, monkey-patching support, and more.</p>
+<p>To write a unit test, subclass <tt class="rst-docutils literal">SynchronousTestCase</tt> and define a method (say, 'test_foo') on the subclass. To run the test, instantiate your subclass with the name of the method, and call <code><a href="#run" class="internal-link" title="twisted.trial.unittest.SynchronousTestCase.run">run</a></code> on the instance, passing a <code><a href="twisted.trial.reporter.TestResult.html" class="internal-link" title="twisted.trial.reporter.TestResult">TestResult</a></code> object.</p>
+<p>The <tt class="rst-docutils literal">trial</tt> script will automatically find any <tt class="rst-docutils literal">SynchronousTestCase</tt> subclasses defined in modules beginning with 'test_' and construct test cases for all methods beginning with 'test'.</p>
+<p>If an error is logged during the test run, the test will fail with an error. See <code><a href="twisted.python.log.html#err" class="internal-link" title="twisted.python.log.err">log.err</a></code>.</p>
+</div>
       </div>
 
       <div id="splitTables">
-        <table class="children sortable" id="id3089">
+        <table class="children sortable" id="id3075">
   
   
   <tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#__eq__">__eq__</a></code></td>
+    <td><code><a href="#__eq__" class="internal-link" title="twisted.trial.unittest.SynchronousTestCase.__eq__">__eq__</a></code></td>
     <td><span class="undocumented">No summary</span></td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#__hash__">__hash__</a></code></td>
+    <td><code><a href="#__hash__" class="internal-link" title="twisted.trial.unittest.SynchronousTestCase.__hash__">__hash__</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#__init__">__init__</a></code></td>
+    <td><code><a href="#__init__" class="internal-link" title="twisted.trial.unittest.SynchronousTestCase.__init__">__init__</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#addCleanup">addCleanup</a></code></td>
-    <td><span>Add the given function to a list of functions to be called after the test has run, but before <code>tearDown</code>.</span></td>
+    <td><code><a href="#addCleanup" class="internal-link" title="twisted.trial.unittest.SynchronousTestCase.addCleanup">add​Cleanup</a></code></td>
+    <td>Add the given function to a list of functions to be called after the test has run, but before <tt class="rst-docutils literal">tearDown</tt>.</td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#callDeprecated">callDeprecated</a></code></td>
-    <td><span>Call a function that should have been deprecated at a specific version and in favor of a specific alternative, and assert that it was thusly deprecated.</span></td>
+    <td><code><a href="#callDeprecated" class="internal-link" title="twisted.trial.unittest.SynchronousTestCase.callDeprecated">call​Deprecated</a></code></td>
+    <td>Call a function that should have been deprecated at a specific version and in favor of a specific alternative, and assert that it was thusly deprecated.</td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#flushLoggedErrors">flushLoggedErrors</a></code></td>
-    <td><span>Remove stored errors received from the log.</span></td>
+    <td><code><a href="#flushLoggedErrors" class="internal-link" title="twisted.trial.unittest.SynchronousTestCase.flushLoggedErrors">flush​Logged​Errors</a></code></td>
+    <td>Remove stored errors received from the log.</td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#flushWarnings">flushWarnings</a></code></td>
-    <td><span>Remove stored warnings from the list of captured warnings and return them.</span></td>
+    <td><code><a href="#flushWarnings" class="internal-link" title="twisted.trial.unittest.SynchronousTestCase.flushWarnings">flush​Warnings</a></code></td>
+    <td>Remove stored warnings from the list of captured warnings and return them.</td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#getDeprecatedModuleAttribute">getDeprecatedModuleAttribute</a></code></td>
-    <td><span>Retrieve a module attribute which should have been deprecated, and assert that we saw the appropriate deprecation warning.</span></td>
+    <td><code><a href="#getDeprecatedModuleAttribute" class="internal-link" title="twisted.trial.unittest.SynchronousTestCase.getDeprecatedModuleAttribute">get​Deprecated​Module​Attribute</a></code></td>
+    <td>Retrieve a module attribute which should have been deprecated, and assert that we saw the appropriate deprecation warning.</td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#getSkip">getSkip</a></code></td>
+    <td><code><a href="#getSkip" class="internal-link" title="twisted.trial.unittest.SynchronousTestCase.getSkip">get​Skip</a></code></td>
     <td><span class="undocumented">No summary</span></td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#getTodo">getTodo</a></code></td>
+    <td><code><a href="#getTodo" class="internal-link" title="twisted.trial.unittest.SynchronousTestCase.getTodo">get​Todo</a></code></td>
     <td><span class="undocumented">No summary</span></td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#mktemp">mktemp</a></code></td>
-    <td><span>Create a new path name which can be used for a new file or directory.</span></td>
+    <td><code><a href="#mktemp" class="internal-link" title="twisted.trial.unittest.SynchronousTestCase.mktemp">mktemp</a></code></td>
+    <td>Create a new path name which can be used for a new file or directory.</td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#patch">patch</a></code></td>
-    <td><span>Monkey patch an object for the duration of the test.</span></td>
+    <td><code><a href="#patch" class="internal-link" title="twisted.trial.unittest.SynchronousTestCase.patch">patch</a></code></td>
+    <td>Monkey patch an object for the duration of the test.</td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#run">run</a></code></td>
-    <td><span>Run the test case, storing the results in <code>result</code>.</span></td>
+    <td><code><a href="#run" class="internal-link" title="twisted.trial.unittest.SynchronousTestCase.run">run</a></code></td>
+    <td>Run the test case, storing the results in <tt class="rst-docutils literal">result</tt>.</td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#runTest">runTest</a></code></td>
-    <td><span>If no <code>methodName</code> argument is passed to the constructor, <code><a href="#run">run</a></code> will treat this method as the thing with the actual test inside.</span></td>
+    <td><code><a href="#runTest" class="internal-link" title="twisted.trial.unittest.SynchronousTestCase.runTest">run​Test</a></code></td>
+    <td>If no <tt class="rst-docutils literal">methodName</tt> argument is passed to the constructor, <code><a href="#run" class="internal-link" title="twisted.trial.unittest.SynchronousTestCase.run">run</a></code> will treat this method as the thing with the actual test inside.</td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#shortDescription">shortDescription</a></code></td>
+    <td><code><a href="#shortDescription" class="internal-link" title="twisted.trial.unittest.SynchronousTestCase.shortDescription">short​Description</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="instancevariable">
     
     <td>Instance Variable</td>
-    <td><code><a href="#failureException">failureException</a></code></td>
-    <td><span>An exception class, defaulting to <code>FailTest</code>. If the test method raises this exception, it will be reported as a failure, rather than an exception. All of the assertion methods raise this if the assertion fails.</span></td>
+    <td><code><a href="#failureException" class="internal-link" title="twisted.trial.unittest.SynchronousTestCase.failureException">failure​Exception</a></code></td>
+    <td>An exception class, defaulting to <tt class="rst-docutils literal">FailTest</tt>. If the test method raises this exception, it will be reported as a failure, rather than an exception. All of the assertion methods raise this if the assertion fails.</td>
   </tr><tr class="instancevariable">
     
     <td>Instance Variable</td>
-    <td><code><a href="#skip">skip</a></code></td>
-    <td><span><code><a href="https://docs.python.org/3/library/constants.html#None">None</a></code> or a string explaining why this test is to be skipped. If defined, the test will not be run. Instead, it will be reported to the result object as 'skipped' (if the <code>TestResult</code> supports skipping).</span></td>
+    <td><code><a href="#skip" class="internal-link" title="twisted.trial.unittest.SynchronousTestCase.skip">skip</a></code></td>
+    <td><code><a href="https://docs.python.org/3/library/constants.html#None" class="intersphinx-link">None</a></code> or a string explaining why this test is to be skipped. If defined, the test will not be run. Instead, it will be reported to the result object as 'skipped' (if the <tt class="rst-docutils literal">TestResult</tt> supports skipping).</td>
   </tr><tr class="instancevariable">
     
     <td>Instance Variable</td>
-    <td><code><a href="#suppress">suppress</a></code></td>
-    <td><span><code><a href="https://docs.python.org/3/library/constants.html#None">None</a></code> or a list of tuples of <code>(args, kwargs)</code> to be passed to <code>warnings.filterwarnings</code>. Use these to suppress warnings raised in a test. Useful for testing deprecated code. See also <code><a href="twisted.trial.util.html#suppress">util.suppress</a></code>.</span></td>
+    <td><code><a href="#suppress" class="internal-link" title="twisted.trial.unittest.SynchronousTestCase.suppress">suppress</a></code></td>
+    <td><code><a href="https://docs.python.org/3/library/constants.html#None" class="intersphinx-link">None</a></code> or a list of tuples of <tt class="rst-docutils literal">(args, kwargs)</tt> to be passed to <tt class="rst-docutils literal">warnings.filterwarnings</tt>. Use these to suppress warnings raised in a test. Useful for testing deprecated code. See also <code><a href="twisted.trial.util.html#suppress" class="internal-link" title="twisted.trial.util.suppress">util.suppress</a></code>.</td>
   </tr><tr class="instancevariable">
     
     <td>Instance Variable</td>
-    <td><code><a href="#todo">todo</a></code></td>
-    <td><span><code><a href="https://docs.python.org/3/library/constants.html#None">None</a></code>, a string or a tuple of <code>(errors, reason)</code> where <code>errors</code> is either an exception class or an iterable of exception classes, and <code>reason</code> is a string. See <code><a href="twisted.trial.unittest.Todo.html">Todo</a></code> or <code><a href="twisted.trial.unittest.html#makeTodo">makeTodo</a></code> for more information.</span></td>
+    <td><code><a href="#todo" class="internal-link" title="twisted.trial.unittest.SynchronousTestCase.todo">todo</a></code></td>
+    <td><code><a href="https://docs.python.org/3/library/constants.html#None" class="intersphinx-link">None</a></code>, a string or a tuple of <tt class="rst-docutils literal">(errors, reason)</tt> where <tt class="rst-docutils literal">errors</tt> is either an exception class or an iterable of exception classes, and <tt class="rst-docutils literal">reason</tt> is a string. See <code><a href="twisted.trial.unittest.Todo.html" class="internal-link" title="twisted.trial.unittest.Todo">Todo</a></code> or <code><a href="twisted.trial.unittest.html#makeTodo" class="internal-link" title="twisted.trial.unittest.makeTodo">makeTodo</a></code> for more information.</td>
   </tr><tr class="method private">
     
     <td>Method</td>
-    <td><code><a href="#_getSkipReason">_getSkipReason</a></code></td>
-    <td><span>Return the reason to use for skipping a test method.</span></td>
+    <td><code><a href="#_getSkipReason" class="internal-link" title="twisted.trial.unittest.SynchronousTestCase._getSkipReason">_get​Skip​Reason</a></code></td>
+    <td>Return the reason to use for skipping a test method.</td>
   </tr><tr class="method private">
     
     <td>Method</td>
-    <td><code><a href="#_getSuppress">_getSuppress</a></code></td>
+    <td><code><a href="#_getSuppress" class="internal-link" title="twisted.trial.unittest.SynchronousTestCase._getSuppress">_get​Suppress</a></code></td>
     <td><span class="undocumented">No summary</span></td>
   </tr><tr class="method private">
     
     <td>Method</td>
-    <td><code><a href="#_installObserver">_installObserver</a></code></td>
+    <td><code><a href="#_installObserver" class="internal-link" title="twisted.trial.unittest.SynchronousTestCase._installObserver">_install​Observer</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method private">
     
     <td>Method</td>
-    <td><code><a href="#_removeObserver">_removeObserver</a></code></td>
+    <td><code><a href="#_removeObserver" class="internal-link" title="twisted.trial.unittest.SynchronousTestCase._removeObserver">_remove​Observer</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method private">
     
     <td>Method</td>
-    <td><code><a href="#_run">_run</a></code></td>
-    <td><span>Run a single method, either a test method or fixture.</span></td>
+    <td><code><a href="#_run" class="internal-link" title="twisted.trial.unittest.SynchronousTestCase._run">_run</a></code></td>
+    <td>Run a single method, either a test method or fixture.</td>
   </tr><tr class="method private">
     
     <td>Method</td>
-    <td><code><a href="#_runCleanups">_runCleanups</a></code></td>
-    <td><span>Synchronously run any cleanups which have been added.</span></td>
+    <td><code><a href="#_runCleanups" class="internal-link" title="twisted.trial.unittest.SynchronousTestCase._runCleanups">_run​Cleanups</a></code></td>
+    <td>Synchronously run any cleanups which have been added.</td>
   </tr><tr class="method private">
     
     <td>Method</td>
-    <td><code><a href="#_runFixturesAndTest">_runFixturesAndTest</a></code></td>
-    <td><span>Run <code>setUp</code>, a test method, test cleanups, and <code>tearDown</code>.</span></td>
+    <td><code><a href="#_runFixturesAndTest" class="internal-link" title="twisted.trial.unittest.SynchronousTestCase._runFixturesAndTest">_run​Fixtures​And​Test</a></code></td>
+    <td>Run <tt class="rst-docutils literal">setUp</tt>, a test method, test cleanups, and <tt class="rst-docutils literal">tearDown</tt>.</td>
   </tr><tr class="instancevariable private">
     
     <td>Instance Variable</td>
-    <td><code><a href="#_cleanups">_cleanups</a></code></td>
+    <td><code><a href="#_cleanups" class="internal-link" title="twisted.trial.unittest.SynchronousTestCase._cleanups">_cleanups</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="instancevariable private">
     
     <td>Instance Variable</td>
-    <td><code><a href="#_observer">_observer</a></code></td>
+    <td><code><a href="#_observer" class="internal-link" title="twisted.trial.unittest.SynchronousTestCase._observer">_observer</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="instancevariable private">
     
     <td>Instance Variable</td>
-    <td><code><a href="#_parents">_parents</a></code></td>
+    <td><code><a href="#_parents" class="internal-link" title="twisted.trial.unittest.SynchronousTestCase._parents">_parents</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="instancevariable private">
     
     <td>Instance Variable</td>
-    <td><code><a href="#_passed">_passed</a></code></td>
+    <td><code><a href="#_passed" class="internal-link" title="twisted.trial.unittest.SynchronousTestCase._passed">_passed</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="instancevariable private">
     
     <td>Instance Variable</td>
-    <td><code><a href="#_testMethodName">_testMethodName</a></code></td>
+    <td><code><a href="#_testMethodName" class="internal-link" title="twisted.trial.unittest.SynchronousTestCase._testMethodName">_test​Method​Name</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="instancevariable private">
     
     <td>Instance Variable</td>
-    <td><code><a href="#_warnings">_warnings</a></code></td>
+    <td><code><a href="#_warnings" class="internal-link" title="twisted.trial.unittest.SynchronousTestCase._warnings">_warnings</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr>
 </table>
         
           <p class="inheritedFrom">
-            Inherited from <code><a href="twisted.trial._synctest._Assertions.html">_Assertions</a></code>:
+            Inherited from <code><a href="twisted.trial._synctest._Assertions.html" class="internal-link" title="twisted.trial._synctest._Assertions">_Assertions</a></code>:
           </p>
-          <table class="children sortable" id="id3090">
+          <table class="children sortable" id="id3076">
   
   
   <tr class="basemethod">
     
     <td>Method</td>
-    <td><code><a href="twisted.trial._synctest._Assertions.html#assertAlmostEqual">assertAlmostEqual</a></code></td>
-    <td><span>Fail if the two objects are unequal as determined by their difference rounded to the given number of decimal places (default 7) and comparing to zero.</span></td>
+    <td><code><a href="twisted.trial._synctest._Assertions.html#assertAlmostEqual" class="internal-link" title="twisted.trial._synctest._Assertions.assertAlmostEqual">assert​Almost​Equal</a></code></td>
+    <td>Fail if the two objects are unequal as determined by their difference rounded to the given number of decimal places (default 7) and comparing to zero.</td>
   </tr><tr class="basemethod">
     
     <td>Method</td>
-    <td><code><a href="twisted.trial._synctest._Assertions.html#assertApproximates">assertApproximates</a></code></td>
-    <td><span>Fail if <code>first</code> - <code>second</code> &gt; <code>tolerance</code></span></td>
+    <td><code><a href="twisted.trial._synctest._Assertions.html#assertApproximates" class="internal-link" title="twisted.trial._synctest._Assertions.assertApproximates">assert​Approximates</a></code></td>
+    <td>Fail if <tt class="rst-docutils literal">first</tt> - <tt class="rst-docutils literal">second</tt> &gt; <tt class="rst-docutils literal">tolerance</tt></td>
   </tr><tr class="basemethod">
     
     <td>Method</td>
-    <td><code><a href="twisted.trial._synctest._Assertions.html#assertEqual">assertEqual</a></code></td>
-    <td><span>Fail the test if <code>first</code> and <code>second</code> are not equal.</span></td>
+    <td><code><a href="twisted.trial._synctest._Assertions.html#assertEqual" class="internal-link" title="twisted.trial._synctest._Assertions.assertEqual">assert​Equal</a></code></td>
+    <td>Fail the test if <tt class="rst-docutils literal">first</tt> and <tt class="rst-docutils literal">second</tt> are not equal.</td>
   </tr><tr class="basemethod">
     
     <td>Method</td>
-    <td><code><a href="twisted.trial._synctest._Assertions.html#assertFalse">assertFalse</a></code></td>
-    <td><span>Fail the test if <code>condition</code> evaluates to True.</span></td>
+    <td><code><a href="twisted.trial._synctest._Assertions.html#assertFalse" class="internal-link" title="twisted.trial._synctest._Assertions.assertFalse">assert​False</a></code></td>
+    <td>Fail the test if <tt class="rst-docutils literal">condition</tt> evaluates to True.</td>
   </tr><tr class="basemethod">
     
     <td>Method</td>
-    <td><code><a href="twisted.trial._synctest._Assertions.html#assertIn">assertIn</a></code></td>
-    <td><span>Fail the test if <code>containee</code> is not found in <code>container</code>.</span></td>
+    <td><code><a href="twisted.trial._synctest._Assertions.html#assertIn" class="internal-link" title="twisted.trial._synctest._Assertions.assertIn">assert​In</a></code></td>
+    <td>Fail the test if <tt class="rst-docutils literal">containee</tt> is not found in <tt class="rst-docutils literal">container</tt>.</td>
   </tr><tr class="basemethod">
     
     <td>Method</td>
-    <td><code><a href="twisted.trial._synctest._Assertions.html#assertIs">assertIs</a></code></td>
-    <td><span>Fail the test if <code>first</code> is not <code>second</code>.  This is an obect-identity-equality test, not an object equality (i.e. <code>__eq__</code>) test.</span></td>
+    <td><code><a href="twisted.trial._synctest._Assertions.html#assertIs" class="internal-link" title="twisted.trial._synctest._Assertions.assertIs">assert​Is</a></code></td>
+    <td>Fail the test if <tt class="rst-docutils literal">first</tt> is not <tt class="rst-docutils literal">second</tt>.  This is an obect-identity-equality test, not an object equality (i.e. <tt class="rst-docutils literal">__eq__</tt>) test.</td>
   </tr><tr class="basemethod">
     
     <td>Method</td>
-    <td><code><a href="twisted.trial._synctest._Assertions.html#assertIsInstance">assertIsInstance</a></code></td>
-    <td><span>Fail if <code>instance</code> is not an instance of the given class or of one of the given classes.</span></td>
+    <td><code><a href="twisted.trial._synctest._Assertions.html#assertIsInstance" class="internal-link" title="twisted.trial._synctest._Assertions.assertIsInstance">assert​Is​Instance</a></code></td>
+    <td>Fail if <tt class="rst-docutils literal">instance</tt> is not an instance of the given class or of one of the given classes.</td>
   </tr><tr class="basemethod">
     
     <td>Method</td>
-    <td><code><a href="twisted.trial._synctest._Assertions.html#assertIsNot">assertIsNot</a></code></td>
-    <td><span>Fail the test if <code>first</code> is <code>second</code>.  This is an obect-identity-equality test, not an object equality (i.e. <code>__eq__</code>) test.</span></td>
+    <td><code><a href="twisted.trial._synctest._Assertions.html#assertIsNot" class="internal-link" title="twisted.trial._synctest._Assertions.assertIsNot">assert​Is​Not</a></code></td>
+    <td>Fail the test if <tt class="rst-docutils literal">first</tt> is <tt class="rst-docutils literal">second</tt>.  This is an obect-identity-equality test, not an object equality (i.e. <tt class="rst-docutils literal">__eq__</tt>) test.</td>
   </tr><tr class="basemethod">
     
     <td>Method</td>
-    <td><code><a href="twisted.trial._synctest._Assertions.html#assertNoResult">assertNoResult</a></code></td>
-    <td><span>Assert that <code>deferred</code> does not have a result at this point.</span></td>
+    <td><code><a href="twisted.trial._synctest._Assertions.html#assertNoResult" class="internal-link" title="twisted.trial._synctest._Assertions.assertNoResult">assert​No​Result</a></code></td>
+    <td>Assert that <tt class="rst-docutils literal">deferred</tt> does not have a result at this point.</td>
   </tr><tr class="basemethod">
     
     <td>Method</td>
-    <td><code><a href="twisted.trial._synctest._Assertions.html#assertNotAlmostEqual">assertNotAlmostEqual</a></code></td>
-    <td><span>Fail if the two objects are equal as determined by their difference rounded to the given number of decimal places (default 7) and comparing to zero.</span></td>
+    <td><code><a href="twisted.trial._synctest._Assertions.html#assertNotAlmostEqual" class="internal-link" title="twisted.trial._synctest._Assertions.assertNotAlmostEqual">assert​Not​Almost​Equal</a></code></td>
+    <td>Fail if the two objects are equal as determined by their difference rounded to the given number of decimal places (default 7) and comparing to zero.</td>
   </tr><tr class="basemethod">
     
     <td>Method</td>
-    <td><code><a href="twisted.trial._synctest._Assertions.html#assertNotEqual">assertNotEqual</a></code></td>
-    <td><span>Fail the test if <code>first</code> == <code>second</code>.</span></td>
+    <td><code><a href="twisted.trial._synctest._Assertions.html#assertNotEqual" class="internal-link" title="twisted.trial._synctest._Assertions.assertNotEqual">assert​Not​Equal</a></code></td>
+    <td>Fail the test if <tt class="rst-docutils literal">first</tt> == <tt class="rst-docutils literal">second</tt>.</td>
   </tr><tr class="basemethod">
     
     <td>Method</td>
-    <td><code><a href="twisted.trial._synctest._Assertions.html#assertNotIn">assertNotIn</a></code></td>
-    <td><span>Fail the test if <code>containee</code> is found in <code>container</code>.</span></td>
+    <td><code><a href="twisted.trial._synctest._Assertions.html#assertNotIn" class="internal-link" title="twisted.trial._synctest._Assertions.assertNotIn">assert​Not​In</a></code></td>
+    <td>Fail the test if <tt class="rst-docutils literal">containee</tt> is found in <tt class="rst-docutils literal">container</tt>.</td>
   </tr><tr class="basemethod">
     
     <td>Method</td>
-    <td><code><a href="twisted.trial._synctest._Assertions.html#assertNotIsInstance">assertNotIsInstance</a></code></td>
-    <td><span>Fail if <code>instance</code> is an instance of the given class or of one of the given classes.</span></td>
+    <td><code><a href="twisted.trial._synctest._Assertions.html#assertNotIsInstance" class="internal-link" title="twisted.trial._synctest._Assertions.assertNotIsInstance">assert​Not​Is​Instance</a></code></td>
+    <td>Fail if <tt class="rst-docutils literal">instance</tt> is an instance of the given class or of one of the given classes.</td>
   </tr><tr class="basemethod">
     
     <td>Method</td>
-    <td><code><a href="twisted.trial._synctest._Assertions.html#assertNotSubstring">assertNotSubstring</a></code></td>
-    <td><span>Fail if <code>astring</code> contains <code>substring</code>.</span></td>
+    <td><code><a href="twisted.trial._synctest._Assertions.html#assertNotSubstring" class="internal-link" title="twisted.trial._synctest._Assertions.assertNotSubstring">assert​Not​Substring</a></code></td>
+    <td>Fail if <tt class="rst-docutils literal">astring</tt> contains <tt class="rst-docutils literal">substring</tt>.</td>
   </tr><tr class="basemethod">
     
     <td>Method</td>
-    <td><code><a href="twisted.trial._synctest._Assertions.html#assertRaises">assertRaises</a></code></td>
-    <td><span>Fail the test unless calling the function <code>f</code> with the given <code>args</code> and <code>kwargs</code> raises <code>exception</code>. The failure will report the traceback and call stack of the unexpected exception.</span></td>
+    <td><code><a href="twisted.trial._synctest._Assertions.html#assertRaises" class="internal-link" title="twisted.trial._synctest._Assertions.assertRaises">assert​Raises</a></code></td>
+    <td>Fail the test unless calling the function <tt class="rst-docutils literal">f</tt> with the given <tt class="rst-docutils literal">args</tt> and <tt class="rst-docutils literal">kwargs</tt> raises <tt class="rst-docutils literal">exception</tt>. The failure will report the traceback and call stack of the unexpected exception.</td>
   </tr><tr class="basemethod">
     
     <td>Method</td>
-    <td><code><a href="twisted.trial._synctest._Assertions.html#assertSubstring">assertSubstring</a></code></td>
-    <td><span>Fail if <code>substring</code> does not exist within <code>astring</code>.</span></td>
+    <td><code><a href="twisted.trial._synctest._Assertions.html#assertSubstring" class="internal-link" title="twisted.trial._synctest._Assertions.assertSubstring">assert​Substring</a></code></td>
+    <td>Fail if <tt class="rst-docutils literal">substring</tt> does not exist within <tt class="rst-docutils literal">astring</tt>.</td>
   </tr><tr class="basemethod">
     
     <td>Method</td>
-    <td><code><a href="twisted.trial._synctest._Assertions.html#assertTrue">assertTrue</a></code></td>
-    <td><span>Fail the test if <code>condition</code> evaluates to False.</span></td>
+    <td><code><a href="twisted.trial._synctest._Assertions.html#assertTrue" class="internal-link" title="twisted.trial._synctest._Assertions.assertTrue">assert​True</a></code></td>
+    <td>Fail the test if <tt class="rst-docutils literal">condition</tt> evaluates to False.</td>
   </tr><tr class="basemethod">
     
     <td>Method</td>
-    <td><code><a href="twisted.trial._synctest._Assertions.html#assertWarns">assertWarns</a></code></td>
-    <td><span>Fail if the given function doesn't generate the specified warning when called. It calls the function, checks the warning, and forwards the result of the function if everything is fine.</span></td>
+    <td><code><a href="twisted.trial._synctest._Assertions.html#assertWarns" class="internal-link" title="twisted.trial._synctest._Assertions.assertWarns">assert​Warns</a></code></td>
+    <td>Fail if the given function doesn't generate the specified warning when called. It calls the function, checks the warning, and forwards the result of the function if everything is fine.</td>
   </tr><tr class="basemethod">
     
     <td>Method</td>
-    <td><code><a href="twisted.trial._synctest._Assertions.html#fail">fail</a></code></td>
-    <td><span>Absolutely fail the test.  Do not pass go, do not collect $200.</span></td>
+    <td><code><a href="twisted.trial._synctest._Assertions.html#fail" class="internal-link" title="twisted.trial._synctest._Assertions.fail">fail</a></code></td>
+    <td>Absolutely fail the test.  Do not pass go, do not collect $200.</td>
   </tr><tr class="basemethod">
     
     <td>Method</td>
-    <td><code><a href="twisted.trial._synctest._Assertions.html#failureResultOf">failureResultOf</a></code></td>
-    <td><span>Return the current failure result of <code>deferred</code> or raise <code>self.failureException</code>.</span></td>
+    <td><code><a href="twisted.trial._synctest._Assertions.html#failureResultOf" class="internal-link" title="twisted.trial._synctest._Assertions.failureResultOf">failure​Result​Of</a></code></td>
+    <td>Return the current failure result of <tt class="rst-docutils literal">deferred</tt> or raise <tt class="rst-docutils literal">self.failureException</tt>.</td>
   </tr><tr class="basemethod">
     
     <td>Method</td>
-    <td><code><a href="twisted.trial._synctest._Assertions.html#successResultOf">successResultOf</a></code></td>
-    <td><span>Return the current success result of <code>deferred</code> or raise <code>self.failureException</code>.</span></td>
+    <td><code><a href="twisted.trial._synctest._Assertions.html#successResultOf" class="internal-link" title="twisted.trial._synctest._Assertions.successResultOf">success​Result​Of</a></code></td>
+    <td>Return the current success result of <tt class="rst-docutils literal">deferred</tt> or raise <tt class="rst-docutils literal">self.failureException</tt>.</td>
   </tr>
 </table>
           
@@ -441,7 +467,7 @@
   <div class="docstring functionBody">
     
     
-    <div><p>Override the comparison defined by the base TestCase which considers instances of the same class with the same _testMethodName to be equal.  Since trial puts TestCase instances into a set, that definition of comparison makes it impossible to run the same test method twice.  Most likely, trial should stop using a set to hold tests, but until it does, this is necessary on Python 2.6. -exarkun</p><table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">other:</span><code><a href="https://docs.python.org/3/library/functions.html#object">object</a></code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr class="fieldStart"><td class="fieldName" colspan="2">Returns</td></tr><tr><td class="fieldArgContainer"><code><a href="https://docs.python.org/3/library/functions.html#bool">bool</a></code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr></table></div>
+    <div>Override the comparison defined by the base TestCase which considers instances of the same class with the same _testMethodName to be equal.  Since trial puts TestCase instances into a set, that definition of comparison makes it impossible to run the same test method twice.  Most likely, trial should stop using a set to hold tests, but until it does, this is necessary on Python 2.6. -exarkun<table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">other:</span><code><a href="https://docs.python.org/3/library/functions.html#object" class="intersphinx-link">object</a></code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr class="fieldStart"><td class="fieldName" colspan="2">Returns</td></tr><tr><td class="fieldArgContainer"><code><a href="https://docs.python.org/3/library/functions.html#bool" class="intersphinx-link">bool</a></code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr></table></div>
   </div>
 </div><div class="basemethod">
   
@@ -476,7 +502,7 @@
   </a>
   <div class="functionHeader">
     
-    <span class="py-keyword">def</span> <span class="py-defname">__init__</span>(self, methodName='runTest'):
+    <span class="py-keyword">def</span> <span class="py-defname">__init__</span>(self, methodName=<span class="rst-variable-quote">'</span><span class="rst-variable-string">runTest</span><span class="rst-variable-quote">'</span>):
     <a class="sourceLink" href="https://github.com/twisted/twisted/tree/twisted-21.2.0/src/twisted/trial/_synctest.py#L939">
       
       (source)
@@ -507,7 +533,10 @@
   <div class="docstring functionBody">
     
     
-    <div><p>Add the given function to a list of functions to be called after the test has run, but before <code>tearDown</code>.</p><p>Functions will be run in reverse order of being added. This helps ensure that tear down complements set up.</p><p>As with all aspects of <code><a href="twisted.trial.unittest.SynchronousTestCase.html">SynchronousTestCase</a></code>, Deferreds are not supported in cleanup functions.</p></div>
+    <div><p>Add the given function to a list of functions to be called after the test has run, but before <tt class="rst-docutils literal">tearDown</tt>.</p>
+<p>Functions will be run in reverse order of being added. This helps ensure that tear down complements set up.</p>
+<p>As with all aspects of <code><a href="twisted.trial.unittest.SynchronousTestCase.html" class="internal-link" title="twisted.trial.unittest.SynchronousTestCase">SynchronousTestCase</a></code>, Deferreds are not supported in cleanup functions.</p>
+</div>
   </div>
 </div><div class="basemethod">
   
@@ -529,7 +558,7 @@
   <div class="docstring functionBody">
     
     
-    <div><p>Call a function that should have been deprecated at a specific version and in favor of a specific alternative, and assert that it was thusly deprecated.</p><table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">version</span></td><td class="fieldArgDesc">A 2-sequence of (since, replacement), where <code>since</code> is a the first <code><a href="https://twisted.github.io/incremental/docs/incremental.Version.html">version</a></code> that <code>f</code> should have been deprecated since, and <code>replacement</code> is a suggested replacement for the deprecated functionality, as described by <code><a href="twisted.python.deprecate.html#deprecated">twisted.python.deprecate.deprecated</a></code>.  If there is no suggested replacement, this parameter may also be simply a <code><a href="https://twisted.github.io/incremental/docs/incremental.Version.html">version</a></code> by itself.</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">f</span></td><td class="fieldArgDesc">The deprecated function to call.</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">args</span></td><td class="fieldArgDesc">The arguments to pass to <code>f</code>.</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">kwargs</span></td><td class="fieldArgDesc">The keyword arguments to pass to <code>f</code>.</td></tr><tr class="fieldStart"><td class="fieldName" colspan="2">Returns</td></tr><tr><td colspan="2">Whatever <code>f</code> returns.</td></tr><tr class="fieldStart"><td class="fieldName" colspan="2">Raises</td></tr><tr><td class="fieldArgContainer"><code><a href="https://docs.python.org/3/library/exceptions.html#Exception">Exception</a></code></td><td>Whatever <code>f</code> raises.  If any exception is raised by <code>f</code>, though, no assertions will be made about emitted deprecations.</td></tr><tr><td class="fieldArgContainer"><code><a href="twisted.trial.unittest.FailTest.html">FailTest</a></code></td><td>if no warnings were emitted by <code>f</code>, or if the <code><a href="https://docs.python.org/3/library/exceptions.html#DeprecationWarning">DeprecationWarning</a></code> emitted did not produce the canonical please-use-something-else message that is standard for Twisted deprecations according to the given version and replacement.</td></tr></table></div>
+    <div>Call a function that should have been deprecated at a specific version and in favor of a specific alternative, and assert that it was thusly deprecated.<table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">version</span></td><td class="fieldArgDesc">A 2-sequence of (since, replacement), where <tt class="rst-docutils literal">since</tt> is a the first <code><a href="https://twisted.org/incremental/docs/incremental.Version.html" class="intersphinx-link">version</a></code> that <tt class="rst-docutils literal">f</tt> should have been deprecated since, and <tt class="rst-docutils literal">replacement</tt> is a suggested replacement for the deprecated functionality, as described by <code><a href="twisted.python.deprecate.html#deprecated" class="internal-link" title="twisted.python.deprecate.deprecated">twisted.python.deprecate.deprecated</a></code>.  If there is no suggested replacement, this parameter may also be simply a <code><a href="https://twisted.org/incremental/docs/incremental.Version.html" class="intersphinx-link">version</a></code> by itself.</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">f</span></td><td class="fieldArgDesc">The deprecated function to call.</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">*args</span></td><td class="fieldArgDesc">The arguments to pass to <tt class="rst-docutils literal">f</tt>.</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">**kwargs</span></td><td class="fieldArgDesc">The keyword arguments to pass to <tt class="rst-docutils literal">f</tt>.</td></tr><tr class="fieldStart"><td class="fieldName" colspan="2">Returns</td></tr><tr><td colspan="2">Whatever <tt class="rst-docutils literal">f</tt> returns.</td></tr><tr class="fieldStart"><td class="fieldName" colspan="2">Raises</td></tr><tr><td class="fieldArgContainer"><code><a href="https://docs.python.org/3/library/exceptions.html#Exception" class="intersphinx-link">Exception</a></code></td><td>Whatever <tt class="rst-docutils literal">f</tt> raises.  If any exception is raised by <tt class="rst-docutils literal">f</tt>, though, no assertions will be made about emitted deprecations.</td></tr><tr><td class="fieldArgContainer"><code><a href="twisted.trial.unittest.FailTest.html" class="internal-link" title="twisted.trial.unittest.FailTest">FailTest</a></code></td><td>if no warnings were emitted by <tt class="rst-docutils literal">f</tt>, or if the <code><a href="https://docs.python.org/3/library/exceptions.html#DeprecationWarning" class="intersphinx-link">DeprecationWarning</a></code> emitted did not produce the canonical please-use-something-else message that is standard for Twisted deprecations according to the given version and replacement.</td></tr></table></div>
   </div>
 </div><div class="basemethod">
   
@@ -551,7 +580,9 @@
   <div class="docstring functionBody">
     
     
-    <div><p>Remove stored errors received from the log.</p><p><code>TestCase</code> stores each error logged during the run of the test and reports them as errors during the cleanup phase (after <code>tearDown</code>).</p><table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">errorTypes</span></td><td class="fieldArgDesc">If unspecified, flush all errors. Otherwise, only flush errors that match the given types.</td></tr><tr class="fieldStart"><td class="fieldName" colspan="2">Returns</td></tr><tr><td colspan="2">A list of failures that have been removed.</td></tr></table></div>
+    <div><p>Remove stored errors received from the log.</p>
+<p><tt class="rst-docutils literal">TestCase</tt> stores each error logged during the run of the test and reports them as errors during the cleanup phase (after <tt class="rst-docutils literal">tearDown</tt>).</p>
+<table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">*error​Types</span></td><td class="fieldArgDesc">If unspecified, flush all errors. Otherwise, only flush errors that match the given types.</td></tr><tr class="fieldStart"><td class="fieldName" colspan="2">Returns</td></tr><tr><td colspan="2">A list of failures that have been removed.</td></tr></table></div>
   </div>
 </div><div class="basemethod">
   
@@ -564,7 +595,7 @@
   </a>
   <div class="functionHeader">
     
-    <span class="py-keyword">def</span> <span class="py-defname">flushWarnings</span>(self, offendingFunctions=None):
+    <span class="py-keyword">def</span> <span class="py-defname">flushWarnings</span>(self, offendingFunctions=<a href="https://docs.python.org/3/library/constants.html#None" class="intersphinx-link">None</a>):
     <a class="sourceLink" href="https://github.com/twisted/twisted/tree/twisted-21.2.0/src/twisted/trial/_synctest.py#L1099">
       
       (source)
@@ -573,7 +604,14 @@
   <div class="docstring functionBody">
     
     
-    <div><p>Remove stored warnings from the list of captured warnings and return them.</p><table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">offendingFunctions:</span><code><a href="https://docs.python.org/3/library/constants.html#None">None</a></code> or <code><a href="https://docs.python.org/3/library/stdtypes.html#list">list</a></code> of functions or methods.</td><td class="fieldArgDesc">If <code><a href="https://docs.python.org/3/library/constants.html#None">None</a></code>, all warnings issued during the currently running test will be flushed.  Otherwise, only warnings which <i>point</i> to a function included in this list will be flushed. All warnings include a filename and source line number; if these parts of a warning point to a source line which is part of a function, then the warning <i>points</i> to that function.</td></tr><tr class="fieldStart"><td class="fieldName" colspan="2">Returns</td></tr><tr><td colspan="2">A <code>list</code>, each element of which is a <code>dict</code> giving information about one warning which was flushed by this call.  The keys of each <code>dict</code> are:<ul><li><code>'message'</code>: The string which was passed as the <i>message</i> parameter to <code><a href="https://docs.python.org/3/library/warnings.html#warnings.warn">warnings.warn</a></code>.</li><li><code>'category'</code>: The warning subclass which was passed as the <i>category</i> parameter to <code><a href="https://docs.python.org/3/library/warnings.html#warnings.warn">warnings.warn</a></code>.</li><li><code>'filename'</code>: The name of the file containing the definition of the code object which was <code>stacklevel</code> frames above the call to <code><a href="https://docs.python.org/3/library/warnings.html#warnings.warn">warnings.warn</a></code>, where <code>stacklevel</code> is the value of the <code>stacklevel</code> parameter passed to <code><a href="https://docs.python.org/3/library/warnings.html#warnings.warn">warnings.warn</a></code>.</li><li><code>'lineno'</code>: The source line associated with the active instruction of the code object object which was <code>stacklevel</code> frames above the call to <code><a href="https://docs.python.org/3/library/warnings.html#warnings.warn">warnings.warn</a></code>, where <code>stacklevel</code> is the value of the <code>stacklevel</code> parameter passed to <code><a href="https://docs.python.org/3/library/warnings.html#warnings.warn">warnings.warn</a></code>.</li></ul></td></tr><tr class="fieldStart"><td class="fieldName" colspan="2">Raises</td></tr><tr><td class="fieldArgContainer"><code><a href="https://docs.python.org/3/library/exceptions.html#ValueError">ValueError</a></code></td><td>If <code>offendingFunctions</code> is not <code><a href="https://docs.python.org/3/library/constants.html#None">None</a></code> and includes an object which is not a <code><a href="https://docs.python.org/3/library/types.html#types.FunctionType">types.FunctionType</a></code> or <code><a href="https://docs.python.org/3/library/types.html#types.MethodType">types.MethodType</a></code> instance.</td></tr></table></div>
+    <div>Remove stored warnings from the list of captured warnings and return them.<table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">offending​Functions:</span><code><a href="https://docs.python.org/3/library/constants.html#None" class="intersphinx-link">None</a></code> or <code><a href="https://docs.python.org/3/library/stdtypes.html#list" class="intersphinx-link">list</a></code> of functions or methods.</td><td class="fieldArgDesc">If <code><a href="https://docs.python.org/3/library/constants.html#None" class="intersphinx-link">None</a></code>, all warnings issued during the currently running test will be flushed.  Otherwise, only warnings which <em>point</em> to a function included in this list will be flushed. All warnings include a filename and source line number; if these parts of a warning point to a source line which is part of a function, then the warning <em>points</em> to that function.</td></tr><tr class="fieldStart"><td class="fieldName" colspan="2">Returns</td></tr><tr><td colspan="2"><p>A <tt class="rst-docutils literal">list</tt>, each element of which is a <tt class="rst-docutils literal">dict</tt> giving information about one warning which was flushed by this call.  The keys of each <tt class="rst-docutils literal">dict</tt> are:</p>
+<ul class="rst-simple">
+<li><tt class="rst-docutils literal">'message'</tt>: The string which was passed as the <em>message</em> parameter to <code><a href="https://docs.python.org/3/library/warnings.html#warnings.warn" class="intersphinx-link">warnings.warn</a></code>.</li>
+<li><tt class="rst-docutils literal">'category'</tt>: The warning subclass which was passed as the <em>category</em> parameter to <code><a href="https://docs.python.org/3/library/warnings.html#warnings.warn" class="intersphinx-link">warnings.warn</a></code>.</li>
+<li><tt class="rst-docutils literal">'filename'</tt>: The name of the file containing the definition of the code object which was <tt class="rst-docutils literal">stacklevel</tt> frames above the call to <code><a href="https://docs.python.org/3/library/warnings.html#warnings.warn" class="intersphinx-link">warnings.warn</a></code>, where <tt class="rst-docutils literal">stacklevel</tt> is the value of the <tt class="rst-docutils literal">stacklevel</tt> parameter passed to <code><a href="https://docs.python.org/3/library/warnings.html#warnings.warn" class="intersphinx-link">warnings.warn</a></code>.</li>
+<li><tt class="rst-docutils literal">'lineno'</tt>: The source line associated with the active instruction of the code object object which was <tt class="rst-docutils literal">stacklevel</tt> frames above the call to <code><a href="https://docs.python.org/3/library/warnings.html#warnings.warn" class="intersphinx-link">warnings.warn</a></code>, where <tt class="rst-docutils literal">stacklevel</tt> is the value of the <tt class="rst-docutils literal">stacklevel</tt> parameter passed to <code><a href="https://docs.python.org/3/library/warnings.html#warnings.warn" class="intersphinx-link">warnings.warn</a></code>.</li>
+</ul>
+</td></tr><tr class="fieldStart"><td class="fieldName" colspan="2">Raises</td></tr><tr><td class="fieldArgContainer"><code><a href="https://docs.python.org/3/library/exceptions.html#ValueError" class="intersphinx-link">ValueError</a></code></td><td>If <tt class="rst-docutils literal">offendingFunctions</tt> is not <code><a href="https://docs.python.org/3/library/constants.html#None" class="intersphinx-link">None</a></code> and includes an object which is not a <code><a href="https://docs.python.org/3/library/types.html#types.FunctionType" class="intersphinx-link">types.FunctionType</a></code> or <code><a href="https://docs.python.org/3/library/types.html#types.MethodType" class="intersphinx-link">types.MethodType</a></code> instance.</td></tr></table></div>
   </div>
 </div><div class="basemethod">
   
@@ -586,7 +624,7 @@
   </a>
   <div class="functionHeader">
     
-    <span class="py-keyword">def</span> <span class="py-defname">getDeprecatedModuleAttribute</span>(self, moduleName, name, version, message=None):
+    <span class="py-keyword">def</span> <span class="py-defname">getDeprecatedModuleAttribute</span>(self, moduleName, name, version, message=<a href="https://docs.python.org/3/library/constants.html#None" class="intersphinx-link">None</a>):
     <a class="sourceLink" href="https://github.com/twisted/twisted/tree/twisted-21.2.0/src/twisted/trial/_synctest.py#L1187">
       
       (source)
@@ -595,7 +633,7 @@
   <div class="docstring functionBody">
     
     
-    <div><p>Retrieve a module attribute which should have been deprecated, and assert that we saw the appropriate deprecation warning.</p><table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">moduleName:</span><code>str</code></td><td class="fieldArgDesc">Fully-qualified Python name of the module containing the deprecated attribute; if called from the same module as the attributes are being deprecated in, using the <code>__name__</code> global can be helpful</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">name:</span><code>str</code></td><td class="fieldArgDesc">Attribute name which we expect to be deprecated</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">version</span></td><td class="fieldArgDesc">The first <code><a href="https://twisted.github.io/incremental/docs/incremental.Version.html">version</a></code> that the module attribute was deprecated.</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">message:</span><code>str</code></td><td class="fieldArgDesc">(optional) The expected deprecation message for the module attribute</td></tr><tr class="fieldStart"><td class="fieldName" colspan="2">Returns</td></tr><tr><td colspan="2">The given attribute from the named module</td></tr><tr class="fieldStart"><td class="fieldName" colspan="2">Raises</td></tr><tr><td class="fieldArgContainer"><code><a href="twisted.trial.unittest.FailTest.html">FailTest</a></code></td><td>if no warnings were emitted on getattr, or if the <code><a href="https://docs.python.org/3/library/exceptions.html#DeprecationWarning">DeprecationWarning</a></code> emitted did not produce the canonical please-use-something-else message that is standard for Twisted deprecations according to the given version and replacement.</td></tr><tr class="fieldStart"><td class="fieldName" colspan="2">Present Since</td></tr><tr><td colspan="2">Twisted 21.2.0</td></tr></table></div>
+    <div>Retrieve a module attribute which should have been deprecated, and assert that we saw the appropriate deprecation warning.<table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">module​Name:</span><tt class="rst-docutils literal">str</tt></td><td class="fieldArgDesc">Fully-qualified Python name of the module containing the deprecated attribute; if called from the same module as the attributes are being deprecated in, using the <tt class="rst-docutils literal">__name__</tt> global can be helpful</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">name:</span><tt class="rst-docutils literal">str</tt></td><td class="fieldArgDesc">Attribute name which we expect to be deprecated</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">version</span></td><td class="fieldArgDesc">The first <code><a href="https://twisted.org/incremental/docs/incremental.Version.html" class="intersphinx-link">version</a></code> that the module attribute was deprecated.</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">message:</span><tt class="rst-docutils literal">str</tt></td><td class="fieldArgDesc">(optional) The expected deprecation message for the module attribute</td></tr><tr class="fieldStart"><td class="fieldName" colspan="2">Returns</td></tr><tr><td colspan="2">The given attribute from the named module</td></tr><tr class="fieldStart"><td class="fieldName" colspan="2">Raises</td></tr><tr><td class="fieldArgContainer"><code><a href="twisted.trial.unittest.FailTest.html" class="internal-link" title="twisted.trial.unittest.FailTest">FailTest</a></code></td><td>if no warnings were emitted on getattr, or if the <code><a href="https://docs.python.org/3/library/exceptions.html#DeprecationWarning" class="intersphinx-link">DeprecationWarning</a></code> emitted did not produce the canonical please-use-something-else message that is standard for Twisted deprecations according to the given version and replacement.</td></tr><tr class="fieldStart"><td class="fieldName" colspan="2">Present Since</td></tr><tr><td colspan="2">Twisted 21.2.0</td></tr></table></div>
   </div>
 </div><div class="basemethod">
   
@@ -617,7 +655,7 @@
   <div class="docstring functionBody">
     
     
-    <div><p>Return the skip reason set on this test, if any is set. Checks on the instance first, then the class, then the module, then packages. As soon as it finds something with a <code>skip</code> attribute, returns that in a tuple (<code><a href="https://docs.python.org/3/library/constants.html#True">True</a></code>, <code><a href="https://docs.python.org/3/library/stdtypes.html#str">str</a></code>). If the <code>skip</code> attribute does not exist, look for <code>__unittest_skip__</code> and <code>__unittest_skip_why__</code> attributes which are set by the standard library <code><a href="https://docs.python.org/3/library/unittest.html#unittest.skip">unittest.skip</a></code> function. Returns (<code><a href="https://docs.python.org/3/library/constants.html#False">False</a></code>, <code><a href="https://docs.python.org/3/library/constants.html#None">None</a></code>) if it cannot find anything. See <code><a href="twisted.trial.unittest.TestCase.html">TestCase</a></code> docstring for more details.</p><table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Returns</td></tr><tr><td class="fieldArgContainer"><code>Tuple[<wbr></wbr><a href="https://docs.python.org/3/library/functions.html#bool">bool</a>, <wbr></wbr>Optional[<wbr></wbr><a href="https://docs.python.org/3/library/stdtypes.html#str">str</a>]]</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr></table></div>
+    <div>Return the skip reason set on this test, if any is set. Checks on the instance first, then the class, then the module, then packages. As soon as it finds something with a <tt class="rst-docutils literal">skip</tt> attribute, returns that in a tuple (<code><a href="https://docs.python.org/3/library/constants.html#True" class="intersphinx-link">True</a></code>, <code><a href="https://docs.python.org/3/library/stdtypes.html#str" class="intersphinx-link">str</a></code>). If the <tt class="rst-docutils literal">skip</tt> attribute does not exist, look for <tt class="rst-docutils literal">__unittest_skip__</tt> and <tt class="rst-docutils literal">__unittest_skip_why__</tt> attributes which are set by the standard library <code><a href="https://docs.python.org/3/library/unittest.html#unittest.skip" class="intersphinx-link">unittest.skip</a></code> function. Returns (<code><a href="https://docs.python.org/3/library/constants.html#False" class="intersphinx-link">False</a></code>, <code><a href="https://docs.python.org/3/library/constants.html#None" class="intersphinx-link">None</a></code>) if it cannot find anything. See <code><a href="twisted.trial.unittest.TestCase.html" class="internal-link" title="twisted.trial.unittest.TestCase">TestCase</a></code> docstring for more details.<table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Returns</td></tr><tr><td class="fieldArgContainer"><code>Tuple[<wbr></wbr><a href="https://docs.python.org/3/library/functions.html#bool" class="intersphinx-link">bool</a>, <wbr></wbr>Optional[<wbr></wbr><a href="https://docs.python.org/3/library/stdtypes.html#str" class="intersphinx-link">str</a>]]</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr></table></div>
   </div>
 </div><div class="basemethod">
   
@@ -639,7 +677,7 @@
   <div class="docstring functionBody">
     
     
-    <div><p>Return a <code><a href="twisted.trial.unittest.Todo.html">Todo</a></code> object if the test is marked todo. Checks on the instance first, then the class, then the module, then packages. As soon as it finds something with a <code>todo</code> attribute, returns that. Returns <code><a href="https://docs.python.org/3/library/constants.html#None">None</a></code> if it cannot find anything. See <code><a href="twisted.trial.unittest.TestCase.html">TestCase</a></code> docstring for more details.</p></div>
+    <div>Return a <code><a href="twisted.trial.unittest.Todo.html" class="internal-link" title="twisted.trial.unittest.Todo">Todo</a></code> object if the test is marked todo. Checks on the instance first, then the class, then the module, then packages. As soon as it finds something with a <tt class="rst-docutils literal">todo</tt> attribute, returns that. Returns <code><a href="https://docs.python.org/3/library/constants.html#None" class="intersphinx-link">None</a></code> if it cannot find anything. See <code><a href="twisted.trial.unittest.TestCase.html" class="internal-link" title="twisted.trial.unittest.TestCase">TestCase</a></code> docstring for more details.</div>
   </div>
 </div><div class="basemethod">
   
@@ -661,7 +699,10 @@
   <div class="docstring functionBody">
     
     
-    <div><p>Create a new path name which can be used for a new file or directory.</p><p>The result is a relative path that is guaranteed to be unique within the current working directory.  The parent of the path will exist, but the path will not.</p><p>For a temporary directory call os.mkdir on the path.  For a temporary file just create the file (e.g. by opening the path for writing and then closing it).</p><table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Returns</td></tr><tr><td class="fieldArgContainer"><code>str</code></td><td class="fieldArgDesc">The newly created path</td></tr></table></div>
+    <div><p>Create a new path name which can be used for a new file or directory.</p>
+<p>The result is a relative path that is guaranteed to be unique within the current working directory.  The parent of the path will exist, but the path will not.</p>
+<p>For a temporary directory call os.mkdir on the path.  For a temporary file just create the file (e.g. by opening the path for writing and then closing it).</p>
+<table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Returns</td></tr><tr><td class="fieldArgContainer"><tt class="rst-docutils literal">str</tt></td><td class="fieldArgDesc">The newly created path</td></tr></table></div>
   </div>
 </div><div class="basemethod">
   
@@ -683,7 +724,10 @@
   <div class="docstring functionBody">
     
     
-    <div><p>Monkey patch an object for the duration of the test.</p><p>The monkey patch will be reverted at the end of the test using the <code><a href="#addCleanup">addCleanup</a></code> mechanism.</p><p>The <code><a href="twisted.python.monkey.MonkeyPatcher.html">monkey.MonkeyPatcher</a></code> is returned so that users can restore and re-apply the monkey patch within their tests.</p><table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">obj</span></td><td class="fieldArgDesc">The object to monkey patch.</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">attribute</span></td><td class="fieldArgDesc">The name of the attribute to change.</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">value</span></td><td class="fieldArgDesc">The value to set the attribute to.</td></tr><tr class="fieldStart"><td class="fieldName" colspan="2">Returns</td></tr><tr><td colspan="2">A <code><a href="twisted.python.monkey.MonkeyPatcher.html">monkey.MonkeyPatcher</a></code> object.</td></tr></table></div>
+    <div><p>Monkey patch an object for the duration of the test.</p>
+<p>The monkey patch will be reverted at the end of the test using the <code><a href="#addCleanup" class="internal-link" title="twisted.trial.unittest.SynchronousTestCase.addCleanup">addCleanup</a></code> mechanism.</p>
+<p>The <code><a href="twisted.python.monkey.MonkeyPatcher.html" class="internal-link" title="twisted.python.monkey.MonkeyPatcher">monkey.MonkeyPatcher</a></code> is returned so that users can restore and re-apply the monkey patch within their tests.</p>
+<table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">obj</span></td><td class="fieldArgDesc">The object to monkey patch.</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">attribute</span></td><td class="fieldArgDesc">The name of the attribute to change.</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">value</span></td><td class="fieldArgDesc">The value to set the attribute to.</td></tr><tr class="fieldStart"><td class="fieldName" colspan="2">Returns</td></tr><tr><td colspan="2">A <code><a href="twisted.python.monkey.MonkeyPatcher.html" class="internal-link" title="twisted.python.monkey.MonkeyPatcher">monkey.MonkeyPatcher</a></code> object.</td></tr></table></div>
   </div>
 </div><div class="basemethod">
   
@@ -705,7 +749,9 @@
   <div class="docstring functionBody">
     
     
-    <div><p>Run the test case, storing the results in <code>result</code>.</p><p>First runs <code>setUp</code> on self, then runs the test method (defined in the constructor), then runs <code>tearDown</code>.  As with the standard library <code><a href="https://docs.python.org/3/library/unittest.html#unittest.TestCase">unittest.TestCase</a></code>, the return value of these methods is disregarded. In particular, returning a <code><a href="twisted.internet.defer.Deferred.html">Deferred</a></code> has no special additional consequences.</p><table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">result</span></td><td class="fieldArgDesc">A <code><a href="twisted.trial.reporter.TestResult.html">TestResult</a></code> object.</td></tr></table></div>
+    <div><p>Run the test case, storing the results in <tt class="rst-docutils literal">result</tt>.</p>
+<p>First runs <tt class="rst-docutils literal">setUp</tt> on self, then runs the test method (defined in the constructor), then runs <tt class="rst-docutils literal">tearDown</tt>.  As with the standard library <code><a href="https://docs.python.org/3/library/unittest.html#unittest.TestCase" class="intersphinx-link">unittest.TestCase</a></code>, the return value of these methods is disregarded. In particular, returning a <code><a href="twisted.internet.defer.Deferred.html" class="internal-link" title="twisted.internet.defer.Deferred">Deferred</a></code> has no special additional consequences.</p>
+<table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">result</span></td><td class="fieldArgDesc">A <code><a href="twisted.trial.reporter.TestResult.html" class="internal-link" title="twisted.trial.reporter.TestResult">TestResult</a></code> object.</td></tr></table></div>
   </div>
 </div><div class="basemethod">
   
@@ -727,7 +773,7 @@
   <div class="docstring functionBody">
     
     
-    <div><p>If no <code>methodName</code> argument is passed to the constructor, <code><a href="#run">run</a></code> will treat this method as the thing with the actual test inside.</p></div>
+    <div>If no <tt class="rst-docutils literal">methodName</tt> argument is passed to the constructor, <code><a href="#run" class="internal-link" title="twisted.trial.unittest.SynchronousTestCase.run">run</a></code> will treat this method as the thing with the actual test inside.</div>
   </div>
 </div><div class="basemethod">
   
@@ -771,7 +817,8 @@
   <div class="functionBody">
     
     
-    <div>An exception class, defaulting to <code>FailTest</code>. If the test method raises this exception, it will be reported as a failure, rather than an exception. All of the assertion methods raise this if the assertion fails.</div>
+    <div>An exception class, defaulting to <tt class="rst-docutils literal">FailTest</tt>. If the test method raises this exception, it will be reported as a failure, rather than an exception. All of the assertion methods raise this if the assertion fails.</div>
+    
   </div>
 </div><div class="baseinstancevariable">
   
@@ -793,7 +840,8 @@
   <div class="functionBody">
     
     
-    <div><code><a href="https://docs.python.org/3/library/constants.html#None">None</a></code> or a string explaining why this test is to be skipped. If defined, the test will not be run. Instead, it will be reported to the result object as 'skipped' (if the <code>TestResult</code> supports skipping).</div>
+    <div><code><a href="https://docs.python.org/3/library/constants.html#None" class="intersphinx-link">None</a></code> or a string explaining why this test is to be skipped. If defined, the test will not be run. Instead, it will be reported to the result object as 'skipped' (if the <tt class="rst-docutils literal">TestResult</tt> supports skipping).</div>
+    
   </div>
 </div><div class="baseinstancevariable">
   
@@ -815,7 +863,8 @@
   <div class="functionBody">
     
     
-    <div><code><a href="https://docs.python.org/3/library/constants.html#None">None</a></code> or a list of tuples of <code>(args, kwargs)</code> to be passed to <code>warnings.filterwarnings</code>. Use these to suppress warnings raised in a test. Useful for testing deprecated code. See also <code><a href="twisted.trial.util.html#suppress">util.suppress</a></code>.</div>
+    <div><code><a href="https://docs.python.org/3/library/constants.html#None" class="intersphinx-link">None</a></code> or a list of tuples of <tt class="rst-docutils literal">(args, kwargs)</tt> to be passed to <tt class="rst-docutils literal">warnings.filterwarnings</tt>. Use these to suppress warnings raised in a test. Useful for testing deprecated code. See also <code><a href="twisted.trial.util.html#suppress" class="internal-link" title="twisted.trial.util.suppress">util.suppress</a></code>.</div>
+    
   </div>
 </div><div class="baseinstancevariable">
   
@@ -837,7 +886,8 @@
   <div class="functionBody">
     
     
-    <div><code><a href="https://docs.python.org/3/library/constants.html#None">None</a></code>, a string or a tuple of <code>(errors, reason)</code> where <code>errors</code> is either an exception class or an iterable of exception classes, and <code>reason</code> is a string. See <code><a href="twisted.trial.unittest.Todo.html">Todo</a></code> or <code><a href="twisted.trial.unittest.html#makeTodo">makeTodo</a></code> for more information.</div>
+    <div><code><a href="https://docs.python.org/3/library/constants.html#None" class="intersphinx-link">None</a></code>, a string or a tuple of <tt class="rst-docutils literal">(errors, reason)</tt> where <tt class="rst-docutils literal">errors</tt> is either an exception class or an iterable of exception classes, and <tt class="rst-docutils literal">reason</tt> is a string. See <code><a href="twisted.trial.unittest.Todo.html" class="internal-link" title="twisted.trial.unittest.Todo">Todo</a></code> or <code><a href="twisted.trial.unittest.html#makeTodo" class="internal-link" title="twisted.trial.unittest.makeTodo">makeTodo</a></code> for more information.</div>
+    
   </div>
 </div><div class="basemethod private">
   
@@ -859,7 +909,7 @@
   <div class="docstring functionBody">
     
     
-    <div><p>Return the reason to use for skipping a test method.</p><table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">method</span></td><td class="fieldArgDesc">The method which produced the skip.</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">skip</span></td><td class="fieldArgDesc">A <code><a href="https://docs.python.org/3/library/unittest.html#unittest.SkipTest">unittest.SkipTest</a></code> instance raised by <code>method</code>.</td></tr></table></div>
+    <div>Return the reason to use for skipping a test method.<table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">method</span></td><td class="fieldArgDesc">The method which produced the skip.</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">skip</span></td><td class="fieldArgDesc">A <code><a href="https://docs.python.org/3/library/unittest.html#unittest.SkipTest" class="intersphinx-link">unittest.SkipTest</a></code> instance raised by <tt class="rst-docutils literal">method</tt>.</td></tr></table></div>
   </div>
 </div><div class="basemethod private">
   
@@ -881,7 +931,7 @@
   <div class="docstring functionBody">
     
     
-    <div><p>Returns any warning suppressions set for this test. Checks on the instance first, then the class, then the module, then packages. As soon as it finds something with a <code>suppress</code> attribute, returns that. Returns any empty list (i.e. suppress no warnings) if it cannot find anything. See <code><a href="twisted.trial.unittest.TestCase.html">TestCase</a></code> docstring for more details.</p></div>
+    <div>Returns any warning suppressions set for this test. Checks on the instance first, then the class, then the module, then packages. As soon as it finds something with a <tt class="rst-docutils literal">suppress</tt> attribute, returns that. Returns any empty list (i.e. suppress no warnings) if it cannot find anything. See <code><a href="twisted.trial.unittest.TestCase.html" class="internal-link" title="twisted.trial.unittest.TestCase">TestCase</a></code> docstring for more details.</div>
   </div>
 </div><div class="basemethod private">
   
@@ -947,7 +997,7 @@
   <div class="docstring functionBody">
     
     
-    <div><p>Run a single method, either a test method or fixture.</p><table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">suppress</span></td><td class="fieldArgDesc">Any warnings to suppress, as defined by the <code>suppress</code> attribute on this method, test case, or the module it is defined in.</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">todo</span></td><td class="fieldArgDesc">Any expected failure or failures, as defined by the <code>todo</code> attribute on this method, test case, or the module it is defined in.</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">method</span></td><td class="fieldArgDesc">The method to run.</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">result</span></td><td class="fieldArgDesc">The TestResult instance to which to report results.</td></tr><tr class="fieldStart"><td class="fieldName" colspan="2">Returns</td></tr><tr><td colspan="2"><code>True</code> if the method fails and no further method/fixture calls should be made, <code>False</code> otherwise.</td></tr></table></div>
+    <div>Run a single method, either a test method or fixture.<table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">suppress</span></td><td class="fieldArgDesc">Any warnings to suppress, as defined by the <tt class="rst-docutils literal">suppress</tt> attribute on this method, test case, or the module it is defined in.</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">todo</span></td><td class="fieldArgDesc">Any expected failure or failures, as defined by the <tt class="rst-docutils literal">todo</tt> attribute on this method, test case, or the module it is defined in.</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">method</span></td><td class="fieldArgDesc">The method to run.</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">result</span></td><td class="fieldArgDesc">The TestResult instance to which to report results.</td></tr><tr class="fieldStart"><td class="fieldName" colspan="2">Returns</td></tr><tr><td colspan="2"><tt class="rst-docutils literal">True</tt> if the method fails and no further method/fixture calls should be made, <tt class="rst-docutils literal">False</tt> otherwise.</td></tr></table></div>
   </div>
 </div><div class="basemethod private">
   
@@ -969,7 +1019,7 @@
   <div class="docstring functionBody">
     
     
-    <div><p>Synchronously run any cleanups which have been added.</p></div>
+    <div>Synchronously run any cleanups which have been added.</div>
   </div>
 </div><div class="basemethod private">
   
@@ -991,7 +1041,7 @@
   <div class="docstring functionBody">
     
     
-    <div><p>Run <code>setUp</code>, a test method, test cleanups, and <code>tearDown</code>.</p><table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">result</span></td><td class="fieldArgDesc">The TestResult instance to which to report results.</td></tr></table></div>
+    <div>Run <tt class="rst-docutils literal">setUp</tt>, a test method, test cleanups, and <tt class="rst-docutils literal">tearDown</tt>.<table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">result</span></td><td class="fieldArgDesc">The TestResult instance to which to report results.</td></tr></table></div>
   </div>
 </div><div class="baseinstancevariable private">
   
@@ -1004,7 +1054,7 @@
   </a>
   <div class="functionHeader">
     
-    <span class="py-defname">_cleanups</span>: <code><a href="https://docs.python.org/3/library/stdtypes.html#list">list</a></code> =
+    <span class="py-defname">_cleanups</span>: <code><a href="https://docs.python.org/3/library/stdtypes.html#list" class="intersphinx-link">list</a></code> =
     <a class="sourceLink" href="https://github.com/twisted/twisted/tree/twisted-21.2.0/src/twisted/trial/_synctest.py#L942">
       
       (source)
@@ -1014,6 +1064,7 @@
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    
   </div>
 </div><div class="baseinstancevariable private">
   
@@ -1036,6 +1087,7 @@
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    
   </div>
 </div><div class="baseinstancevariable private">
   
@@ -1058,6 +1110,7 @@
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    
   </div>
 </div><div class="baseinstancevariable private">
   
@@ -1070,7 +1123,7 @@
   </a>
   <div class="functionHeader">
     
-    <span class="py-defname">_passed</span>: <code><a href="https://docs.python.org/3/library/functions.html#bool">bool</a></code> =
+    <span class="py-defname">_passed</span>: <code><a href="https://docs.python.org/3/library/functions.html#bool" class="intersphinx-link">bool</a></code> =
     <a class="sourceLink" href="https://github.com/twisted/twisted/tree/twisted-21.2.0/src/twisted/trial/_synctest.py#L941">
       
       (source)
@@ -1080,6 +1133,7 @@
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    
   </div>
 </div><div class="baseinstancevariable private">
   
@@ -1102,6 +1156,7 @@
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    
   </div>
 </div><div class="baseinstancevariable private">
   
@@ -1114,7 +1169,7 @@
   </a>
   <div class="functionHeader">
     
-    <span class="py-defname">_warnings</span>: <code><a href="https://docs.python.org/3/library/stdtypes.html#list">list</a></code> =
+    <span class="py-defname">_warnings</span>: <code><a href="https://docs.python.org/3/library/stdtypes.html#list" class="intersphinx-link">list</a></code> =
     <a class="sourceLink" href="https://github.com/twisted/twisted/tree/twisted-21.2.0/src/twisted/trial/_synctest.py#L1035">
       
       (source)
@@ -1124,6 +1179,7 @@
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    
   </div>
 </div>
 
@@ -1132,11 +1188,33 @@
 
     <footer class="navbar navbar-default">
   
+
   <div class="container">
     <a href="index.html">API Documentation</a> for <a href="https://twistedmatrix.com/" class="projecthome">Twisted</a>,
   generated by <a href="https://github.com/twisted/pydoctor/">pydoctor</a>
-    21.2.2 at 2022-01-12 04:22:24.
+    22.2.2.dev0 at 2022-03-04 05:57:20.
   </div>
+
+  <!-- Google analytics, obviously. -->
+  <script src="//www.google-analytics.com/urchin.js" type="text/javascript"></script>
+  <script type="text/javascript">
+    _uacct = "UA-99018-6";
+    urchinTracker();
+  </script>
+
+  <!-- If the documentation isn't current, insert a current link. -->
+  <script type="text/javascript">
+    if (window.location.pathname.indexOf('/current/') == -1) {
+      <!-- Give the user a link to this page, but in the current version of the docs. -->
+      var link = document.getElementById('current-docs-link');
+      link.href = window.location.pathname.replace(/\/\d+\.\d+\.\d+\/api\//, '/current/api/');
+      <!-- And make it visible -->
+      var container = document.getElementById('current-docs-container');
+      container.style.display = "";
+      delete link;
+      delete container;
+    }
+  </script>
 </footer>
 
     <script src="pydoctor.js" type="text/javascript"></script>

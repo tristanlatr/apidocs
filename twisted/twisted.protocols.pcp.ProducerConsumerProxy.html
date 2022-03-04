@@ -7,7 +7,7 @@
   <head>
     
     <title>twisted.protocols.pcp.ProducerConsumerProxy</title>
-    <meta name="generator" content="pydoctor 21.2.2"> 
+    <meta name="generator" content="pydoctor 22.2.2.dev0"> 
         
     </meta>
     <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
@@ -19,7 +19,13 @@
 
   <body>
 
-    
+    <div style="display: none" id="current-docs-container" class="container">
+  <div class="col-sm-12">
+    <a id="current-docs-link">
+      Go to the latest version of this document.
+    </a>
+  </div>
+</div>
 
     <nav class="navbar navbar-default">
   
@@ -44,69 +50,82 @@
           Names
         </a>
 
-        <form action="search-results.html" id="search-box-container">
+        <div id="search-box-container">
           <div class="input-group">
-            <input id="search-box" name="search-query" placeholder="Search..." aria-label="Search" minlength="2" class="form-control" />
+            <input id="search-box" type="search" name="search-query" placeholder="Search..." aria-label="Search" minlength="2" class="form-control" autocomplete="off" />
+            
             <span class="input-group-btn">
-              <button class="btn btn-default" type="submit" title="Search"><img src="fonts/search.svg" alt="Search!" /></button>
-              <a class="btn btn-default" id="search-help-button" title="Help" onclick="toggleSearchHelpText()"><img src="fonts/info.svg" alt="Help!" /></a>
+              <a style="display: none;" class="btn btn-default" id="search-clear-button" title="Clear" onclick="clearSearch()"><img src="fonts/x-circle.svg" alt="Clear" /></a>
+              <a class="btn btn-default" id="search-help-button" title="Help" onclick="toggleSearchHelpText()"><img src="fonts/info.svg" alt="Help" /></a>
             </span>
           </div>
-        </form>
+        </div>
 
-        <div class="rst-admonition hint" id="search-help-box">
+      </div>
+
+      <div id="search-results-container" style="display: none;">
+        <div>
+          <span class="label label-default" id="search-docstrings-button">
+            <a title="Search in docstrings" onclick="toggleSearchInDocstrings()">search in docstrings</a></span>
+        </div>
+
+        <noscript>
+            <h1>Cannot search: JavaScript is not supported/enabled in your browser.</h1>
+        </noscript>
+
+        <div class="hint" id="search-help-box">
           <p class="rst-last">
       
             Search bar offers the following options:
             <ul>   
                 <li>
                   <strong>Term presence.</strong> The below example searches for documents that 
-                    must contain “foo”, might contain “bar” and must not contain “baz”:
-                  <br /> <code>'+foo bar -baz'</code>
+                    must contain “foo”, might contain “bar” and must not contain “baz”: <code>+foo bar -baz</code>
                 </li> 
 
                 <li>
-                  <strong>Wildcards.</strong> The below example searches for documents with words beginning with “foo”:
-                  <br /> <code>'foo*'</code>
+                  <strong>Wildcards.</strong> The below example searches for documents with words beginning with “foo”: <code>foo*</code>
                 </li> 
 
                 <li>
-                  <strong>Search in specific fields.</strong> The following search matches all documents 
-                  that contains "foo" in their full dotted name and with “bar” in any field:
-                  <br /> <code>'+fullName:*foo* +bar'</code>
+                  <strong>Search in specific fields.</strong> The following search matches all objects 
+                  in "twisted.mail" that matches “search”: <code>+qname:twisted.mail.* +search</code>
 
                   <p>
-                    Possible fields: 'name', 'docstring', 'fullName'.
+                    Possible fields: 'name', 'qname' (fully qualified name), 'docstring', and 'kind'.
+                    Last two fields are only applicable if "search in docstrings" is enabled.
                   </p>
                 </li>
 
                 <li>
                   <strong>Fuzzy matches.</strong> The following search matches all documents 
-                  that have a word within 1 edit distance of “foo”:
-                  <br /> <code>'foo~1'</code>
+                  that have a word within 1 edit distance of “foo”: <code>foo~1</code>
                 </li>
             </ul>
 
           </p>
         </div>
 
-      </div>
+        <div id="search-status"> </div>
+        
+        <div class="warning" id="search-warn-box" style="display: none;">
+          <p class="rst-last"><span id="search-warn"></span></p>
+        </div>
 
+        <table id="search-results">
+          <!-- Filled dynamically by JS -->
+        </table>
+        
+        <div style="margin-top: 8px;">
+          <p>Results provided by <a href="https://lunrjs.com">Lunr.js</a></p>
+        </div>
+      </div>
 
     </div>
   </div>
 
-  <script>
- 
-    function toggleSearchHelpText() {
-        document.body.classList.toggle("search-help-hidden");
-    }
-    // Init search and help text
-    document.getElementById('search-box-container').style.display = 'block';
-    document.getElementById('search-help-box').style.display = 'block';
-    document.body.classList.add("search-help-hidden");
-
-  </script>
+  <script src="ajax.js" type="text/javascript"></script>
+  <script src="search.js" type="text/javascript"></script>
 
 </nav>
 
@@ -115,7 +134,7 @@
     <div class="container">
 
       <div class="page-header">
-        <h1 class="class"><code><code><a href="twisted.html">twisted</a></code><wbr></wbr>.<code><a href="twisted.protocols.html">protocols</a></code><wbr></wbr>.<code><a href="twisted.protocols.pcp.html">pcp</a></code><wbr></wbr>.<code><a href="twisted.protocols.pcp.ProducerConsumerProxy.html">ProducerConsumerProxy</a></code></code></h1>
+        <h1 class="class"><code><code><a href="index.html" class="internal-link">twisted</a></code><wbr></wbr>.<code><a href="twisted.protocols.html" class="internal-link" title="twisted.protocols">protocols</a></code><wbr></wbr>.<code><a href="twisted.protocols.pcp.html" class="internal-link" title="twisted.protocols.pcp">pcp</a></code><wbr></wbr>.<code><a href="twisted.protocols.pcp.ProducerConsumerProxy.html" class="internal-link" title="twisted.protocols.pcp.ProducerConsumerProxy">ProducerConsumerProxy</a></code></code></h1>
         <div id="showPrivate">
           <button class="btn btn-link" onclick="togglePrivate()">Toggle Private API</button>
         </div>
@@ -126,12 +145,16 @@
       </div>
 
       <div class="extrasDocstring">
-        <p><code><span class="py-keyword">class</span> <span class="py-defname">ProducerConsumerProxy</span>(<a href="twisted.protocols.pcp.BasicProducerConsumerProxy.html" title="twisted.protocols.pcp.BasicProducerConsumerProxy">BasicProducerConsumerProxy</a>): <a href="https://github.com/twisted/twisted/tree/twisted-21.2.0/src/twisted/protocols/pcp.py#L98" class="sourceLink">(source)</a></code></p><p>Known subclasses: <code><a href="twisted.protocols.htb.ShapedConsumer.html">twisted.protocols.htb.ShapedConsumer</a></code></p>
+        <p><code><span class="py-keyword">class</span> <span class="py-defname">ProducerConsumerProxy</span>(<a href="twisted.protocols.pcp.BasicProducerConsumerProxy.html" class="internal-link" title="twisted.protocols.pcp.BasicProducerConsumerProxy">BasicProducerConsumerProxy</a>): <a href="https://github.com/twisted/twisted/tree/twisted-21.2.0/src/twisted/protocols/pcp.py#L98" class="sourceLink">(source)</a></code></p><p>Known subclasses: <code><a href="twisted.protocols.htb.ShapedConsumer.html" class="internal-link">twisted.protocols.htb.ShapedConsumer</a></code></p>
         <p><a href="classIndex.html#twisted.protocols.pcp.ProducerConsumerProxy">View In Hierarchy</a></p>
       </div>
 
+      
+
       <div class="moduleDocstring">
-        <div><p>ProducerConsumerProxy with a finite buffer.</p><p>When my buffer fills up, I have my parent Producer pause until my buffer has room in it again.</p></div>
+        <div><p>ProducerConsumerProxy with a finite buffer.</p>
+<p>When my buffer fills up, I have my parent Producer pause until my buffer has room in it again.</p>
+</div>
       </div>
 
       <div id="splitTables">
@@ -141,63 +164,63 @@
   <tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#pauseProducing">pauseProducing</a></code></td>
+    <td><code><a href="#pauseProducing" class="internal-link" title="twisted.protocols.pcp.ProducerConsumerProxy.pauseProducing">pause​Producing</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#registerProducer">registerProducer</a></code></td>
-    <td><span>Register to receive data from a producer.</span></td>
+    <td><code><a href="#registerProducer" class="internal-link" title="twisted.protocols.pcp.ProducerConsumerProxy.registerProducer">register​Producer</a></code></td>
+    <td>Register to receive data from a producer.</td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#resumeProducing">resumeProducing</a></code></td>
+    <td><code><a href="#resumeProducing" class="internal-link" title="twisted.protocols.pcp.ProducerConsumerProxy.resumeProducing">resume​Producing</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#unregisterProducer">unregisterProducer</a></code></td>
-    <td><span>Stop consuming data from a producer, without disconnecting.</span></td>
+    <td><code><a href="#unregisterProducer" class="internal-link" title="twisted.protocols.pcp.ProducerConsumerProxy.unregisterProducer">unregister​Producer</a></code></td>
+    <td>Stop consuming data from a producer, without disconnecting.</td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#write">write</a></code></td>
-    <td><span>The producer will write data by calling this method.</span></td>
+    <td><code><a href="#write" class="internal-link" title="twisted.protocols.pcp.ProducerConsumerProxy.write">write</a></code></td>
+    <td>The producer will write data by calling this method.</td>
   </tr><tr class="classvariable">
     
     <td>Class Variable</td>
-    <td><code><a href="#bufferSize">bufferSize</a></code></td>
+    <td><code><a href="#bufferSize" class="internal-link" title="twisted.protocols.pcp.ProducerConsumerProxy.bufferSize">buffer​Size</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="instancevariable">
     
     <td>Instance Variable</td>
-    <td><code><a href="#outstandingPull">outstandingPull</a></code></td>
+    <td><code><a href="#outstandingPull" class="internal-link" title="twisted.protocols.pcp.ProducerConsumerProxy.outstandingPull">outstanding​Pull</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="instancevariable">
     
     <td>Instance Variable</td>
-    <td><code><a href="#paused">paused</a></code></td>
+    <td><code><a href="#paused" class="internal-link" title="twisted.protocols.pcp.ProducerConsumerProxy.paused">paused</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="instancevariable">
     
     <td>Instance Variable</td>
-    <td><code><a href="#producerPaused">producerPaused</a></code></td>
+    <td><code><a href="#producerPaused" class="internal-link" title="twisted.protocols.pcp.ProducerConsumerProxy.producerPaused">producer​Paused</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="instancevariable">
     
     <td>Instance Variable</td>
-    <td><code><a href="#unregistered">unregistered</a></code></td>
+    <td><code><a href="#unregistered" class="internal-link" title="twisted.protocols.pcp.ProducerConsumerProxy.unregistered">unregistered</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method private">
     
     <td>Method</td>
-    <td><code><a href="#_writeSomeData">_writeSomeData</a></code></td>
-    <td><span>Write as much of this data as possible.</span></td>
+    <td><code><a href="#_writeSomeData" class="internal-link" title="twisted.protocols.pcp.ProducerConsumerProxy._writeSomeData">_write​Some​Data</a></code></td>
+    <td>Write as much of this data as possible.</td>
   </tr>
 </table>
         
           <p class="inheritedFrom">
-            Inherited from <code><a href="twisted.protocols.pcp.BasicProducerConsumerProxy.html">BasicProducerConsumerProxy</a></code>:
+            Inherited from <code><a href="twisted.protocols.pcp.BasicProducerConsumerProxy.html" class="internal-link" title="twisted.protocols.pcp.BasicProducerConsumerProxy">BasicProducerConsumerProxy</a></code>:
           </p>
           <table class="children sortable" id="id2374">
   
@@ -205,52 +228,52 @@
   <tr class="basemethod">
     
     <td>Method</td>
-    <td><code><a href="twisted.protocols.pcp.BasicProducerConsumerProxy.html#__init__">__init__</a></code></td>
+    <td><code><a href="twisted.protocols.pcp.BasicProducerConsumerProxy.html#__init__" class="internal-link" title="twisted.protocols.pcp.BasicProducerConsumerProxy.__init__">__init__</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="basemethod">
     
     <td>Method</td>
-    <td><code><a href="twisted.protocols.pcp.BasicProducerConsumerProxy.html#__repr__">__repr__</a></code></td>
+    <td><code><a href="twisted.protocols.pcp.BasicProducerConsumerProxy.html#__repr__" class="internal-link" title="twisted.protocols.pcp.BasicProducerConsumerProxy.__repr__">__repr__</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="basemethod">
     
     <td>Method</td>
-    <td><code><a href="twisted.protocols.pcp.BasicProducerConsumerProxy.html#finish">finish</a></code></td>
+    <td><code><a href="twisted.protocols.pcp.BasicProducerConsumerProxy.html#finish" class="internal-link" title="twisted.protocols.pcp.BasicProducerConsumerProxy.finish">finish</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="basemethod">
     
     <td>Method</td>
-    <td><code><a href="twisted.protocols.pcp.BasicProducerConsumerProxy.html#stopProducing">stopProducing</a></code></td>
-    <td><span>Stop producing data.</span></td>
+    <td><code><a href="twisted.protocols.pcp.BasicProducerConsumerProxy.html#stopProducing" class="internal-link" title="twisted.protocols.pcp.BasicProducerConsumerProxy.stopProducing">stop​Producing</a></code></td>
+    <td>Stop producing data.</td>
   </tr><tr class="baseclassvariable">
     
     <td>Class Variable</td>
-    <td><code><a href="twisted.protocols.pcp.BasicProducerConsumerProxy.html#iAmStreaming">iAmStreaming</a></code></td>
+    <td><code><a href="twisted.protocols.pcp.BasicProducerConsumerProxy.html#iAmStreaming" class="internal-link" title="twisted.protocols.pcp.BasicProducerConsumerProxy.iAmStreaming">i​Am​Streaming</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="baseclassvariable">
     
     <td>Class Variable</td>
-    <td><code><a href="twisted.protocols.pcp.BasicProducerConsumerProxy.html#stopped">stopped</a></code></td>
+    <td><code><a href="twisted.protocols.pcp.BasicProducerConsumerProxy.html#stopped" class="internal-link" title="twisted.protocols.pcp.BasicProducerConsumerProxy.stopped">stopped</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="baseinstancevariable">
     
     <td>Instance Variable</td>
-    <td><code><a href="twisted.protocols.pcp.BasicProducerConsumerProxy.html#consumer">consumer</a></code></td>
-    <td><span>the Consumer I publish to.</span></td>
+    <td><code><a href="twisted.protocols.pcp.BasicProducerConsumerProxy.html#consumer" class="internal-link" title="twisted.protocols.pcp.BasicProducerConsumerProxy.consumer">consumer</a></code></td>
+    <td>the Consumer I publish to.</td>
   </tr><tr class="baseinstancevariable">
     
     <td>Instance Variable</td>
-    <td><code><a href="twisted.protocols.pcp.BasicProducerConsumerProxy.html#producer">producer</a></code></td>
-    <td><span>the Producer I subscribe to.</span></td>
+    <td><code><a href="twisted.protocols.pcp.BasicProducerConsumerProxy.html#producer" class="internal-link" title="twisted.protocols.pcp.BasicProducerConsumerProxy.producer">producer</a></code></td>
+    <td>the Producer I subscribe to.</td>
   </tr><tr class="baseinstancevariable">
     
     <td>Instance Variable</td>
-    <td><code><a href="twisted.protocols.pcp.BasicProducerConsumerProxy.html#producerIsStreaming">producerIsStreaming</a></code></td>
+    <td><code><a href="twisted.protocols.pcp.BasicProducerConsumerProxy.html#producerIsStreaming" class="internal-link" title="twisted.protocols.pcp.BasicProducerConsumerProxy.producerIsStreaming">producer​Is​Streaming</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="baseinstancevariable private">
     
     <td>Instance Variable</td>
-    <td><code><a href="twisted.protocols.pcp.BasicProducerConsumerProxy.html#_buffer">_buffer</a></code></td>
+    <td><code><a href="twisted.protocols.pcp.BasicProducerConsumerProxy.html#_buffer" class="internal-link" title="twisted.protocols.pcp.BasicProducerConsumerProxy._buffer">_buffer</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr>
 </table>
@@ -279,7 +302,7 @@
     </a>
   </div>
   <div class="docstring functionBody">
-    <div class="interfaceinfo">overrides <code><a href="twisted.protocols.pcp.BasicProducerConsumerProxy.html#pauseProducing">twisted.protocols.pcp.BasicProducerConsumerProxy.pauseProducing</a></code></div>
+    <div class="interfaceinfo">overrides <code><a href="twisted.protocols.pcp.BasicProducerConsumerProxy.html#pauseProducing" class="internal-link">twisted.protocols.pcp.BasicProducerConsumerProxy.pauseProducing</a></code></div>
     
     <div><p class="undocumented">Undocumented</p></div>
   </div>
@@ -301,9 +324,13 @@
     </a>
   </div>
   <div class="docstring functionBody">
-    <div class="interfaceinfo">from <code><a href="twisted.internet.interfaces.IConsumer.html#registerProducer">twisted.internet.interfaces.IConsumer</a></code></div><div class="interfaceinfo">overrides <code><a href="twisted.protocols.pcp.BasicProducerConsumerProxy.html#registerProducer">twisted.protocols.pcp.BasicProducerConsumerProxy.registerProducer</a></code></div>
+    <div class="interfaceinfo">from <code><a href="twisted.internet.interfaces.IConsumer.html#registerProducer" class="internal-link" title="twisted.internet.interfaces.IConsumer.registerProducer">twisted.internet.interfaces.IConsumer</a></code></div><div class="interfaceinfo">overrides <code><a href="twisted.protocols.pcp.BasicProducerConsumerProxy.html#registerProducer" class="internal-link">twisted.protocols.pcp.BasicProducerConsumerProxy.registerProducer</a></code></div>
     
-    <div><p>Register to receive data from a producer.</p><p>This sets self to be a consumer for a producer.  When this object runs out of data (as when a send(2) call on a socket succeeds in moving the last data from a userspace buffer into a kernelspace buffer), it will ask the producer to resumeProducing().</p><p>For <code><a href="twisted.internet.interfaces.IPullProducer.html">IPullProducer</a></code> providers, <code>resumeProducing</code> will be called once each time data is required.</p><p>For <code><a href="twisted.internet.interfaces.IPushProducer.html">IPushProducer</a></code> providers, <code>pauseProducing</code> will be called whenever the write buffer fills up and <code>resumeProducing</code> will only be called when it empties.  The consumer will only call <code>resumeProducing</code> to balance a previous <code>pauseProducing</code> call; the producer is assumed to start in an un-paused state.</p><table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">producer</span></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">streaming</span></td><td class="fieldArgDesc"><code>True</code> if <code>producer</code> provides <code><a href="twisted.internet.interfaces.IPushProducer.html">IPushProducer</a></code>, <code>False</code> if <code>producer</code> provides <code><a href="twisted.internet.interfaces.IPullProducer.html">IPullProducer</a></code>.</td></tr><tr class="fieldStart"><td class="fieldName" colspan="2">Raises</td></tr><tr><td class="fieldArgContainer"><code><a href="https://docs.python.org/3/library/exceptions.html#RuntimeError">RuntimeError</a></code></td><td>If a producer is already registered.</td></tr></table></div>
+    <div><p>Register to receive data from a producer.</p>
+<p>This sets self to be a consumer for a producer.  When this object runs out of data (as when a send(2) call on a socket succeeds in moving the last data from a userspace buffer into a kernelspace buffer), it will ask the producer to resumeProducing().</p>
+<p>For <code><a href="twisted.internet.interfaces.IPullProducer.html" class="internal-link" title="twisted.internet.interfaces.IPullProducer">IPullProducer</a></code> providers, <tt class="rst-docutils literal">resumeProducing</tt> will be called once each time data is required.</p>
+<p>For <code><a href="twisted.internet.interfaces.IPushProducer.html" class="internal-link" title="twisted.internet.interfaces.IPushProducer">IPushProducer</a></code> providers, <tt class="rst-docutils literal">pauseProducing</tt> will be called whenever the write buffer fills up and <tt class="rst-docutils literal">resumeProducing</tt> will only be called when it empties.  The consumer will only call <tt class="rst-docutils literal">resumeProducing</tt> to balance a previous <tt class="rst-docutils literal">pauseProducing</tt> call; the producer is assumed to start in an un-paused state.</p>
+<table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">producer</span></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">streaming</span></td><td class="fieldArgDesc"><tt class="rst-docutils literal">True</tt> if <tt class="rst-docutils literal">producer</tt> provides <code><a href="twisted.internet.interfaces.IPushProducer.html" class="internal-link" title="twisted.internet.interfaces.IPushProducer">IPushProducer</a></code>, <tt class="rst-docutils literal">False</tt> if <tt class="rst-docutils literal">producer</tt> provides <code><a href="twisted.internet.interfaces.IPullProducer.html" class="internal-link" title="twisted.internet.interfaces.IPullProducer">IPullProducer</a></code>.</td></tr><tr class="fieldStart"><td class="fieldName" colspan="2">Raises</td></tr><tr><td class="fieldArgContainer"><code><a href="https://docs.python.org/3/library/exceptions.html#RuntimeError" class="intersphinx-link">RuntimeError</a></code></td><td>If a producer is already registered.</td></tr></table></div>
   </div>
 </div><div class="basemethod">
   
@@ -323,7 +350,7 @@
     </a>
   </div>
   <div class="docstring functionBody">
-    <div class="interfaceinfo">overrides <code><a href="twisted.protocols.pcp.BasicProducerConsumerProxy.html#resumeProducing">twisted.protocols.pcp.BasicProducerConsumerProxy.resumeProducing</a></code></div>
+    <div class="interfaceinfo">overrides <code><a href="twisted.protocols.pcp.BasicProducerConsumerProxy.html#resumeProducing" class="internal-link">twisted.protocols.pcp.BasicProducerConsumerProxy.resumeProducing</a></code></div>
     
     <div><p class="undocumented">Undocumented</p></div>
   </div>
@@ -345,9 +372,9 @@
     </a>
   </div>
   <div class="docstring functionBody">
-    <div class="interfaceinfo">from <code><a href="twisted.internet.interfaces.IConsumer.html#unregisterProducer">twisted.internet.interfaces.IConsumer</a></code></div><div class="interfaceinfo">overrides <code><a href="twisted.protocols.pcp.BasicProducerConsumerProxy.html#unregisterProducer">twisted.protocols.pcp.BasicProducerConsumerProxy.unregisterProducer</a></code></div>
+    <div class="interfaceinfo">from <code><a href="twisted.internet.interfaces.IConsumer.html#unregisterProducer" class="internal-link" title="twisted.internet.interfaces.IConsumer.unregisterProducer">twisted.internet.interfaces.IConsumer</a></code></div><div class="interfaceinfo">overrides <code><a href="twisted.protocols.pcp.BasicProducerConsumerProxy.html#unregisterProducer" class="internal-link">twisted.protocols.pcp.BasicProducerConsumerProxy.unregisterProducer</a></code></div>
     
-    <div><p>Stop consuming data from a producer, without disconnecting.</p></div>
+    <div>Stop consuming data from a producer, without disconnecting.</div>
   </div>
 </div><div class="basemethod">
   
@@ -367,9 +394,11 @@
     </a>
   </div>
   <div class="docstring functionBody">
-    <div class="interfaceinfo">from <code><a href="twisted.internet.interfaces.IConsumer.html#write">twisted.internet.interfaces.IConsumer</a></code></div><div class="interfaceinfo">overrides <code><a href="twisted.protocols.pcp.BasicProducerConsumerProxy.html#write">twisted.protocols.pcp.BasicProducerConsumerProxy.write</a></code></div>
+    <div class="interfaceinfo">from <code><a href="twisted.internet.interfaces.IConsumer.html#write" class="internal-link" title="twisted.internet.interfaces.IConsumer.write">twisted.internet.interfaces.IConsumer</a></code></div><div class="interfaceinfo">overrides <code><a href="twisted.protocols.pcp.BasicProducerConsumerProxy.html#write" class="internal-link">twisted.protocols.pcp.BasicProducerConsumerProxy.write</a></code></div>
     
-    <div><p>The producer will write data by calling this method.</p><p>The implementation must be non-blocking and perform whatever buffering is necessary.  If the producer has provided enough data for now and it is a <code><a href="twisted.internet.interfaces.IPushProducer.html">IPushProducer</a></code>, the consumer may call its <code>pauseProducing</code> method.</p></div>
+    <div><p>The producer will write data by calling this method.</p>
+<p>The implementation must be non-blocking and perform whatever buffering is necessary.  If the producer has provided enough data for now and it is a <code><a href="twisted.internet.interfaces.IPushProducer.html" class="internal-link" title="twisted.internet.interfaces.IPushProducer">IPushProducer</a></code>, the consumer may call its <tt class="rst-docutils literal">pauseProducing</tt> method.</p>
+</div>
   </div>
 </div><div class="baseclassvariable">
   
@@ -392,6 +421,7 @@
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    
   </div>
 </div><div class="baseinstancevariable">
   
@@ -404,16 +434,17 @@
   </a>
   <div class="functionHeader">
     
-    <span class="py-defname">outstandingPull</span>: <code><a href="https://docs.python.org/3/library/functions.html#bool">bool</a></code> =
+    <span class="py-defname">outstandingPull</span> =
     <a class="sourceLink" href="https://github.com/twisted/twisted/tree/twisted-21.2.0/src/twisted/protocols/pcp.py#L141">
       
       (source)
     </a>
   </div>
   <div class="functionBody">
-    <div class="interfaceinfo">overrides <code><a href="twisted.protocols.pcp.BasicProducerConsumerProxy.html#outstandingPull">twisted.protocols.pcp.BasicProducerConsumerProxy.outstandingPull</a></code></div>
+    <div class="interfaceinfo">overrides <code><a href="twisted.protocols.pcp.BasicProducerConsumerProxy.html#outstandingPull" class="internal-link">twisted.protocols.pcp.BasicProducerConsumerProxy.outstandingPull</a></code></div>
     
     <div><p class="undocumented">Undocumented</p></div>
+    
   </div>
 </div><div class="baseinstancevariable">
   
@@ -426,16 +457,17 @@
   </a>
   <div class="functionHeader">
     
-    <span class="py-defname">paused</span>: <code><a href="https://docs.python.org/3/library/functions.html#bool">bool</a></code> =
+    <span class="py-defname">paused</span>: <code><a href="https://docs.python.org/3/library/functions.html#bool" class="intersphinx-link">bool</a></code> =
     <a class="sourceLink" href="https://github.com/twisted/twisted/tree/twisted-21.2.0/src/twisted/protocols/pcp.py#L114">
       
       (source)
     </a>
   </div>
   <div class="functionBody">
-    <div class="interfaceinfo">overrides <code><a href="twisted.protocols.pcp.BasicProducerConsumerProxy.html#paused">twisted.protocols.pcp.BasicProducerConsumerProxy.paused</a></code></div>
+    <div class="interfaceinfo">overrides <code><a href="twisted.protocols.pcp.BasicProducerConsumerProxy.html#paused" class="internal-link">twisted.protocols.pcp.BasicProducerConsumerProxy.paused</a></code></div>
     
     <div><p class="undocumented">Undocumented</p></div>
+    
   </div>
 </div><div class="baseinstancevariable">
   
@@ -448,7 +480,7 @@
   </a>
   <div class="functionHeader">
     
-    <span class="py-defname">producerPaused</span>: <code><a href="https://docs.python.org/3/library/functions.html#bool">bool</a></code> =
+    <span class="py-defname">producerPaused</span>: <code><a href="https://docs.python.org/3/library/functions.html#bool" class="intersphinx-link">bool</a></code> =
     <a class="sourceLink" href="https://github.com/twisted/twisted/tree/twisted-21.2.0/src/twisted/protocols/pcp.py#L108">
       
       (source)
@@ -458,6 +490,7 @@
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    
   </div>
 </div><div class="baseinstancevariable">
   
@@ -470,7 +503,7 @@
   </a>
   <div class="functionHeader">
     
-    <span class="py-defname">unregistered</span>: <code><a href="https://docs.python.org/3/library/functions.html#bool">bool</a></code> =
+    <span class="py-defname">unregistered</span>: <code><a href="https://docs.python.org/3/library/functions.html#bool" class="intersphinx-link">bool</a></code> =
     <a class="sourceLink" href="https://github.com/twisted/twisted/tree/twisted-21.2.0/src/twisted/protocols/pcp.py#L109">
       
       (source)
@@ -480,6 +513,7 @@
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    
   </div>
 </div><div class="basemethod private">
   
@@ -499,9 +533,9 @@
     </a>
   </div>
   <div class="docstring functionBody">
-    <div class="interfaceinfo">overridden in <code><a href="twisted.protocols.htb.ShapedConsumer.html">twisted.protocols.htb.ShapedConsumer</a></code></div>
+    <div class="interfaceinfo">overridden in <code><a href="twisted.protocols.htb.ShapedConsumer.html" class="internal-link">twisted.protocols.htb.ShapedConsumer</a></code></div>
     
-    <div><p>Write as much of this data as possible.</p><table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Returns</td></tr><tr><td colspan="2">The number of bytes written.</td></tr></table></div>
+    <div>Write as much of this data as possible.<table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Returns</td></tr><tr><td colspan="2">The number of bytes written.</td></tr></table></div>
   </div>
 </div>
 
@@ -510,11 +544,33 @@
 
     <footer class="navbar navbar-default">
   
+
   <div class="container">
     <a href="index.html">API Documentation</a> for <a href="https://twistedmatrix.com/" class="projecthome">Twisted</a>,
   generated by <a href="https://github.com/twisted/pydoctor/">pydoctor</a>
-    21.2.2 at 2022-01-12 04:22:24.
+    22.2.2.dev0 at 2022-03-04 05:57:20.
   </div>
+
+  <!-- Google analytics, obviously. -->
+  <script src="//www.google-analytics.com/urchin.js" type="text/javascript"></script>
+  <script type="text/javascript">
+    _uacct = "UA-99018-6";
+    urchinTracker();
+  </script>
+
+  <!-- If the documentation isn't current, insert a current link. -->
+  <script type="text/javascript">
+    if (window.location.pathname.indexOf('/current/') == -1) {
+      <!-- Give the user a link to this page, but in the current version of the docs. -->
+      var link = document.getElementById('current-docs-link');
+      link.href = window.location.pathname.replace(/\/\d+\.\d+\.\d+\/api\//, '/current/api/');
+      <!-- And make it visible -->
+      var container = document.getElementById('current-docs-container');
+      container.style.display = "";
+      delete link;
+      delete container;
+    }
+  </script>
 </footer>
 
     <script src="pydoctor.js" type="text/javascript"></script>

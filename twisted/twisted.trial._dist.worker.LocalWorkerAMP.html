@@ -7,7 +7,7 @@
   <head>
     
     <title>twisted.trial._dist.worker.LocalWorkerAMP</title>
-    <meta name="generator" content="pydoctor 21.2.2"> 
+    <meta name="generator" content="pydoctor 22.2.2.dev0"> 
         
     </meta>
     <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
@@ -19,7 +19,13 @@
 
   <body>
 
-    
+    <div style="display: none" id="current-docs-container" class="container">
+  <div class="col-sm-12">
+    <a id="current-docs-link">
+      Go to the latest version of this document.
+    </a>
+  </div>
+</div>
 
     <nav class="navbar navbar-default">
   
@@ -44,69 +50,82 @@
           Names
         </a>
 
-        <form action="search-results.html" id="search-box-container">
+        <div id="search-box-container">
           <div class="input-group">
-            <input id="search-box" name="search-query" placeholder="Search..." aria-label="Search" minlength="2" class="form-control" />
+            <input id="search-box" type="search" name="search-query" placeholder="Search..." aria-label="Search" minlength="2" class="form-control" autocomplete="off" />
+            
             <span class="input-group-btn">
-              <button class="btn btn-default" type="submit" title="Search"><img src="fonts/search.svg" alt="Search!" /></button>
-              <a class="btn btn-default" id="search-help-button" title="Help" onclick="toggleSearchHelpText()"><img src="fonts/info.svg" alt="Help!" /></a>
+              <a style="display: none;" class="btn btn-default" id="search-clear-button" title="Clear" onclick="clearSearch()"><img src="fonts/x-circle.svg" alt="Clear" /></a>
+              <a class="btn btn-default" id="search-help-button" title="Help" onclick="toggleSearchHelpText()"><img src="fonts/info.svg" alt="Help" /></a>
             </span>
           </div>
-        </form>
+        </div>
 
-        <div class="rst-admonition hint" id="search-help-box">
+      </div>
+
+      <div id="search-results-container" style="display: none;">
+        <div>
+          <span class="label label-default" id="search-docstrings-button">
+            <a title="Search in docstrings" onclick="toggleSearchInDocstrings()">search in docstrings</a></span>
+        </div>
+
+        <noscript>
+            <h1>Cannot search: JavaScript is not supported/enabled in your browser.</h1>
+        </noscript>
+
+        <div class="hint" id="search-help-box">
           <p class="rst-last">
       
             Search bar offers the following options:
             <ul>   
                 <li>
                   <strong>Term presence.</strong> The below example searches for documents that 
-                    must contain “foo”, might contain “bar” and must not contain “baz”:
-                  <br /> <code>'+foo bar -baz'</code>
+                    must contain “foo”, might contain “bar” and must not contain “baz”: <code>+foo bar -baz</code>
                 </li> 
 
                 <li>
-                  <strong>Wildcards.</strong> The below example searches for documents with words beginning with “foo”:
-                  <br /> <code>'foo*'</code>
+                  <strong>Wildcards.</strong> The below example searches for documents with words beginning with “foo”: <code>foo*</code>
                 </li> 
 
                 <li>
-                  <strong>Search in specific fields.</strong> The following search matches all documents 
-                  that contains "foo" in their full dotted name and with “bar” in any field:
-                  <br /> <code>'+fullName:*foo* +bar'</code>
+                  <strong>Search in specific fields.</strong> The following search matches all objects 
+                  in "twisted.mail" that matches “search”: <code>+qname:twisted.mail.* +search</code>
 
                   <p>
-                    Possible fields: 'name', 'docstring', 'fullName'.
+                    Possible fields: 'name', 'qname' (fully qualified name), 'docstring', and 'kind'.
+                    Last two fields are only applicable if "search in docstrings" is enabled.
                   </p>
                 </li>
 
                 <li>
                   <strong>Fuzzy matches.</strong> The following search matches all documents 
-                  that have a word within 1 edit distance of “foo”:
-                  <br /> <code>'foo~1'</code>
+                  that have a word within 1 edit distance of “foo”: <code>foo~1</code>
                 </li>
             </ul>
 
           </p>
         </div>
 
-      </div>
+        <div id="search-status"> </div>
+        
+        <div class="warning" id="search-warn-box" style="display: none;">
+          <p class="rst-last"><span id="search-warn"></span></p>
+        </div>
 
+        <table id="search-results">
+          <!-- Filled dynamically by JS -->
+        </table>
+        
+        <div style="margin-top: 8px;">
+          <p>Results provided by <a href="https://lunrjs.com">Lunr.js</a></p>
+        </div>
+      </div>
 
     </div>
   </div>
 
-  <script>
- 
-    function toggleSearchHelpText() {
-        document.body.classList.toggle("search-help-hidden");
-    }
-    // Init search and help text
-    document.getElementById('search-box-container').style.display = 'block';
-    document.getElementById('search-help-box').style.display = 'block';
-    document.body.classList.add("search-help-hidden");
-
-  </script>
+  <script src="ajax.js" type="text/javascript"></script>
+  <script src="search.js" type="text/javascript"></script>
 
 </nav>
 
@@ -115,7 +134,7 @@
     <div class="container">
 
       <div class="page-header">
-        <h1 class="class"><code><code><a href="twisted.html">twisted</a></code><wbr></wbr>.<code><a href="twisted.trial.html">trial</a></code><wbr></wbr>.<code><a href="twisted.trial._dist.html">_dist</a></code><wbr></wbr>.<code><a href="twisted.trial._dist.worker.html">worker</a></code><wbr></wbr>.<code><a href="twisted.trial._dist.worker.LocalWorkerAMP.html">LocalWorkerAMP</a></code></code></h1>
+        <h1 class="class"><code><code><a href="index.html" class="internal-link">twisted</a></code><wbr></wbr>.<code><a href="twisted.trial.html" class="internal-link" title="twisted.trial">trial</a></code><wbr></wbr>.<code><a href="twisted.trial._dist.html" class="internal-link" title="twisted.trial._dist">_dist</a></code><wbr></wbr>.<code><a href="twisted.trial._dist.worker.html" class="internal-link" title="twisted.trial._dist.worker">worker</a></code><wbr></wbr>.<code><a href="twisted.trial._dist.worker.LocalWorkerAMP.html" class="internal-link" title="twisted.trial._dist.worker.LocalWorkerAMP">LocalWorkerAMP</a></code></code></h1>
         <div id="showPrivate">
           <button class="btn btn-link" onclick="togglePrivate()">Toggle Private API</button>
         </div>
@@ -126,610 +145,612 @@
       </div>
 
       <div class="extrasDocstring">
-        <p><code><span class="py-keyword">class</span> <span class="py-defname">LocalWorkerAMP</span>(<a href="twisted.protocols.amp.AMP.html" title="twisted.protocols.amp.AMP">AMP</a>): <a href="https://github.com/twisted/twisted/tree/twisted-21.2.0/src/twisted/trial/_dist/worker.py#L61" class="sourceLink">(source)</a></code></p>
+        <p><code><span class="py-keyword">class</span> <span class="py-defname">LocalWorkerAMP</span>(<a href="twisted.protocols.amp.AMP.html" class="internal-link" title="twisted.protocols.amp.AMP">AMP</a>): <a href="https://github.com/twisted/twisted/tree/twisted-21.2.0/src/twisted/trial/_dist/worker.py#L61" class="sourceLink">(source)</a></code></p>
         <p><a href="classIndex.html#twisted.trial._dist.worker.LocalWorkerAMP">View In Hierarchy</a></p>
       </div>
 
+      
+
       <div class="moduleDocstring">
-        <div><p>Local implementation of the manager commands.</p></div>
+        <div>Local implementation of the manager commands.</div>
       </div>
 
       <div id="splitTables">
-        <table class="children sortable" id="id3012">
+        <table class="children sortable" id="id2998">
   
   
   <tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#addError">addError</a></code></td>
-    <td><span>Add an error to the reporter.</span></td>
+    <td><code><a href="#addError" class="internal-link" title="twisted.trial._dist.worker.LocalWorkerAMP.addError">add​Error</a></code></td>
+    <td>Add an error to the reporter.</td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#addExpectedFailure">addExpectedFailure</a></code></td>
-    <td><span>Add an expected failure to the reporter.</span></td>
+    <td><code><a href="#addExpectedFailure" class="internal-link" title="twisted.trial._dist.worker.LocalWorkerAMP.addExpectedFailure">add​Expected​Failure</a></code></td>
+    <td>Add an expected failure to the reporter.</td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#addFailure">addFailure</a></code></td>
-    <td><span>Add a failure to the reporter.</span></td>
+    <td><code><a href="#addFailure" class="internal-link" title="twisted.trial._dist.worker.LocalWorkerAMP.addFailure">add​Failure</a></code></td>
+    <td>Add a failure to the reporter.</td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#addSkip">addSkip</a></code></td>
-    <td><span>Add a skip to the reporter.</span></td>
+    <td><code><a href="#addSkip" class="internal-link" title="twisted.trial._dist.worker.LocalWorkerAMP.addSkip">add​Skip</a></code></td>
+    <td>Add a skip to the reporter.</td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#addSuccess">addSuccess</a></code></td>
-    <td><span>Add a success to the reporter.</span></td>
+    <td><code><a href="#addSuccess" class="internal-link" title="twisted.trial._dist.worker.LocalWorkerAMP.addSuccess">add​Success</a></code></td>
+    <td>Add a success to the reporter.</td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#addUnexpectedSuccess">addUnexpectedSuccess</a></code></td>
-    <td><span>Add an unexpected success to the reporter.</span></td>
+    <td><code><a href="#addUnexpectedSuccess" class="internal-link" title="twisted.trial._dist.worker.LocalWorkerAMP.addUnexpectedSuccess">add​Unexpected​Success</a></code></td>
+    <td>Add an unexpected success to the reporter.</td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#run">run</a></code></td>
-    <td><span>Run a test.</span></td>
+    <td><code><a href="#run" class="internal-link" title="twisted.trial._dist.worker.LocalWorkerAMP.run">run</a></code></td>
+    <td>Run a test.</td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#setTestStream">setTestStream</a></code></td>
-    <td><span>Set the stream used to log output from tests.</span></td>
+    <td><code><a href="#setTestStream" class="internal-link" title="twisted.trial._dist.worker.LocalWorkerAMP.setTestStream">set​Test​Stream</a></code></td>
+    <td>Set the stream used to log output from tests.</td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#testWrite">testWrite</a></code></td>
-    <td><span>Print test output from the worker.</span></td>
+    <td><code><a href="#testWrite" class="internal-link" title="twisted.trial._dist.worker.LocalWorkerAMP.testWrite">test​Write</a></code></td>
+    <td>Print test output from the worker.</td>
   </tr><tr class="method private">
     
     <td>Method</td>
-    <td><code><a href="#_buildFailure">_buildFailure</a></code></td>
-    <td><span>Helper to build a <code>Failure</code> with some traceback.</span></td>
+    <td><code><a href="#_buildFailure" class="internal-link" title="twisted.trial._dist.worker.LocalWorkerAMP._buildFailure">_build​Failure</a></code></td>
+    <td>Helper to build a <tt class="rst-docutils literal">Failure</tt> with some traceback.</td>
   </tr><tr class="method private">
     
     <td>Method</td>
-    <td><code><a href="#_stopTest">_stopTest</a></code></td>
-    <td><span>Stop the current running test case, forwarding the result.</span></td>
+    <td><code><a href="#_stopTest" class="internal-link" title="twisted.trial._dist.worker.LocalWorkerAMP._stopTest">_stop​Test</a></code></td>
+    <td>Stop the current running test case, forwarding the result.</td>
   </tr><tr class="instancevariable private">
     
     <td>Instance Variable</td>
-    <td><code><a href="#_result">_result</a></code></td>
+    <td><code><a href="#_result" class="internal-link" title="twisted.trial._dist.worker.LocalWorkerAMP._result">_result</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="instancevariable private">
     
     <td>Instance Variable</td>
-    <td><code><a href="#_testCase">_testCase</a></code></td>
+    <td><code><a href="#_testCase" class="internal-link" title="twisted.trial._dist.worker.LocalWorkerAMP._testCase">_test​Case</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="instancevariable private">
     
     <td>Instance Variable</td>
-    <td><code><a href="#_testStream">_testStream</a></code></td>
+    <td><code><a href="#_testStream" class="internal-link" title="twisted.trial._dist.worker.LocalWorkerAMP._testStream">_test​Stream</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr>
 </table>
         
           <p class="inheritedFrom">
-            Inherited from <code><a href="twisted.protocols.amp.AMP.html">AMP</a></code>:
+            Inherited from <code><a href="twisted.protocols.amp.AMP.html" class="internal-link" title="twisted.protocols.amp.AMP">AMP</a></code>:
           </p>
-          <table class="children sortable" id="id3013">
+          <table class="children sortable" id="id2999">
   
   
   <tr class="basemethod">
     
     <td>Method</td>
-    <td><code><a href="twisted.protocols.amp.AMP.html#__init__">__init__</a></code></td>
+    <td><code><a href="twisted.protocols.amp.AMP.html#__init__" class="internal-link" title="twisted.protocols.amp.AMP.__init__">__init__</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="basemethod">
     
     <td>Method</td>
-    <td><code><a href="twisted.protocols.amp.AMP.html#__repr__">__repr__</a></code></td>
-    <td><span>A verbose string representation which gives us information about this AMP connection.</span></td>
+    <td><code><a href="twisted.protocols.amp.AMP.html#__repr__" class="internal-link" title="twisted.protocols.amp.AMP.__repr__">__repr__</a></code></td>
+    <td>A verbose string representation which gives us information about this AMP connection.</td>
   </tr><tr class="basemethod">
     
     <td>Method</td>
-    <td><code><a href="twisted.protocols.amp.AMP.html#connectionLost">connectionLost</a></code></td>
-    <td><span>Emit a helpful log message when the connection is lost.</span></td>
+    <td><code><a href="twisted.protocols.amp.AMP.html#connectionLost" class="internal-link" title="twisted.protocols.amp.AMP.connectionLost">connection​Lost</a></code></td>
+    <td>Emit a helpful log message when the connection is lost.</td>
   </tr><tr class="basemethod">
     
     <td>Method</td>
-    <td><code><a href="twisted.protocols.amp.AMP.html#locateResponder">locateResponder</a></code></td>
-    <td><span>Unify the implementations of <code><a href="twisted.protocols.amp.CommandLocator.html">CommandLocator</a></code> and <code><a href="twisted.protocols.amp.SimpleStringLocator.html">SimpleStringLocator</a></code> to perform both kinds of dispatch, preferring <code><a href="twisted.protocols.amp.CommandLocator.html">CommandLocator</a></code>.</span></td>
+    <td><code><a href="twisted.protocols.amp.AMP.html#locateResponder" class="internal-link" title="twisted.protocols.amp.AMP.locateResponder">locate​Responder</a></code></td>
+    <td>Unify the implementations of <code><a href="twisted.protocols.amp.CommandLocator.html" class="internal-link" title="twisted.protocols.amp.CommandLocator">CommandLocator</a></code> and <code><a href="twisted.protocols.amp.SimpleStringLocator.html" class="internal-link" title="twisted.protocols.amp.SimpleStringLocator">SimpleStringLocator</a></code> to perform both kinds of dispatch, preferring <code><a href="twisted.protocols.amp.CommandLocator.html" class="internal-link" title="twisted.protocols.amp.CommandLocator">CommandLocator</a></code>.</td>
   </tr><tr class="basemethod">
     
     <td>Method</td>
-    <td><code><a href="twisted.protocols.amp.AMP.html#makeConnection">makeConnection</a></code></td>
-    <td><span>Emit a helpful log message when the connection is made.</span></td>
+    <td><code><a href="twisted.protocols.amp.AMP.html#makeConnection" class="internal-link" title="twisted.protocols.amp.AMP.makeConnection">make​Connection</a></code></td>
+    <td>Emit a helpful log message when the connection is made.</td>
   </tr><tr class="baseinstancevariable">
     
     <td>Instance Variable</td>
-    <td><code><a href="twisted.protocols.amp.AMP.html#transport">transport</a></code></td>
+    <td><code><a href="twisted.protocols.amp.AMP.html#transport" class="internal-link" title="twisted.protocols.amp.AMP.transport">transport</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="baseinstancevariable private">
     
     <td>Instance Variable</td>
-    <td><code><a href="twisted.protocols.amp.AMP.html#_ampInitialized">_ampInitialized</a></code></td>
+    <td><code><a href="twisted.protocols.amp.AMP.html#_ampInitialized" class="internal-link" title="twisted.protocols.amp.AMP._ampInitialized">_amp​Initialized</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="baseinstancevariable private">
     
     <td>Instance Variable</td>
-    <td><code><a href="twisted.protocols.amp.AMP.html#_transportHost">_transportHost</a></code></td>
+    <td><code><a href="twisted.protocols.amp.AMP.html#_transportHost" class="internal-link" title="twisted.protocols.amp.AMP._transportHost">_transport​Host</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="baseinstancevariable private">
     
     <td>Instance Variable</td>
-    <td><code><a href="twisted.protocols.amp.AMP.html#_transportPeer">_transportPeer</a></code></td>
+    <td><code><a href="twisted.protocols.amp.AMP.html#_transportPeer" class="internal-link" title="twisted.protocols.amp.AMP._transportPeer">_transport​Peer</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr>
 </table>
           
           <p class="inheritedFrom">
-            Inherited from <code><a href="twisted.protocols.amp.BinaryBoxProtocol.html">BinaryBoxProtocol</a></code> (via <code><a href="twisted.protocols.amp.AMP.html">AMP</a></code>):
+            Inherited from <code><a href="twisted.protocols.amp.BinaryBoxProtocol.html" class="internal-link" title="twisted.protocols.amp.BinaryBoxProtocol">BinaryBoxProtocol</a></code> (via <code><a href="twisted.protocols.amp.AMP.html" class="internal-link" title="twisted.protocols.amp.AMP">AMP</a></code>):
           </p>
-          <table class="children sortable" id="id3014">
+          <table class="children sortable" id="id3000">
   
   
   <tr class="basemethod">
     
     <td>Method</td>
-    <td><code><a href="twisted.protocols.amp.BinaryBoxProtocol.html#dataReceived">dataReceived</a></code></td>
-    <td><span>Either parse incoming data as <code><a href="twisted.protocols.amp.AmpBox.html">AmpBox</a></code>es or relay it to our nested protocol.</span></td>
+    <td><code><a href="twisted.protocols.amp.BinaryBoxProtocol.html#dataReceived" class="internal-link" title="twisted.protocols.amp.BinaryBoxProtocol.dataReceived">data​Received</a></code></td>
+    <td>Either parse incoming data as <code><a href="twisted.protocols.amp.AmpBox.html" class="internal-link" title="twisted.protocols.amp.AmpBox">AmpBox</a></code>es or relay it to our nested protocol.</td>
   </tr><tr class="basemethod">
     
     <td>Method</td>
-    <td><code><a href="twisted.protocols.amp.BinaryBoxProtocol.html#lengthLimitExceeded">lengthLimitExceeded</a></code></td>
-    <td><span>The key length limit was exceeded.  Disconnect the transport and make sure a meaningful exception is reported.</span></td>
+    <td><code><a href="twisted.protocols.amp.BinaryBoxProtocol.html#lengthLimitExceeded" class="internal-link" title="twisted.protocols.amp.BinaryBoxProtocol.lengthLimitExceeded">length​Limit​Exceeded</a></code></td>
+    <td>The key length limit was exceeded.  Disconnect the transport and make sure a meaningful exception is reported.</td>
   </tr><tr class="basemethod">
     
     <td>Method</td>
-    <td><code><a href="twisted.protocols.amp.BinaryBoxProtocol.html#proto_init">proto_init</a></code></td>
-    <td><span>String received in the 'init' state.</span></td>
+    <td><code><a href="twisted.protocols.amp.BinaryBoxProtocol.html#proto_init" class="internal-link" title="twisted.protocols.amp.BinaryBoxProtocol.proto_init">proto​_init</a></code></td>
+    <td>String received in the 'init' state.</td>
   </tr><tr class="basemethod">
     
     <td>Method</td>
-    <td><code><a href="twisted.protocols.amp.BinaryBoxProtocol.html#proto_key">proto_key</a></code></td>
-    <td><span>String received in the 'key' state.  If the key is empty, a complete box has been received.</span></td>
+    <td><code><a href="twisted.protocols.amp.BinaryBoxProtocol.html#proto_key" class="internal-link" title="twisted.protocols.amp.BinaryBoxProtocol.proto_key">proto​_key</a></code></td>
+    <td>String received in the 'key' state.  If the key is empty, a complete box has been received.</td>
   </tr><tr class="basemethod">
     
     <td>Method</td>
-    <td><code><a href="twisted.protocols.amp.BinaryBoxProtocol.html#proto_value">proto_value</a></code></td>
-    <td><span>String received in the 'value' state.</span></td>
+    <td><code><a href="twisted.protocols.amp.BinaryBoxProtocol.html#proto_value" class="internal-link" title="twisted.protocols.amp.BinaryBoxProtocol.proto_value">proto​_value</a></code></td>
+    <td>String received in the 'value' state.</td>
   </tr><tr class="basemethod">
     
     <td>Method</td>
-    <td><code><a href="twisted.protocols.amp.BinaryBoxProtocol.html#sendBox">sendBox</a></code></td>
-    <td><span>Send a amp.Box to my peer.</span></td>
+    <td><code><a href="twisted.protocols.amp.BinaryBoxProtocol.html#sendBox" class="internal-link" title="twisted.protocols.amp.BinaryBoxProtocol.sendBox">send​Box</a></code></td>
+    <td>Send a amp.Box to my peer.</td>
   </tr><tr class="basemethod">
     
     <td>Method</td>
-    <td><code><a href="twisted.protocols.amp.BinaryBoxProtocol.html#unhandledError">unhandledError</a></code></td>
-    <td><span>The buck stops here.  This error was completely unhandled, time to terminate the connection.</span></td>
+    <td><code><a href="twisted.protocols.amp.BinaryBoxProtocol.html#unhandledError" class="internal-link" title="twisted.protocols.amp.BinaryBoxProtocol.unhandledError">unhandled​Error</a></code></td>
+    <td>The buck stops here.  This error was completely unhandled, time to terminate the connection.</td>
   </tr><tr class="baseclassvariable">
     
     <td>Class Variable</td>
-    <td><code><a href="twisted.protocols.amp.BinaryBoxProtocol.html#noPeerCertificate">noPeerCertificate</a></code></td>
+    <td><code><a href="twisted.protocols.amp.BinaryBoxProtocol.html#noPeerCertificate" class="internal-link" title="twisted.protocols.amp.BinaryBoxProtocol.noPeerCertificate">no​Peer​Certificate</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="baseinstancevariable">
     
     <td>Instance Variable</td>
-    <td><code><a href="twisted.protocols.amp.BinaryBoxProtocol.html#boxReceiver">boxReceiver</a></code></td>
-    <td><span>an <code><a href="twisted.protocols.amp.IBoxReceiver.html">IBoxReceiver</a></code> provider, whose <code><a href="twisted.protocols.amp.IBoxReceiver.html#ampBoxReceived">IBoxReceiver.ampBoxReceived</a></code> method will be invoked for each <code><a href="twisted.protocols.amp.AmpBox.html">AmpBox</a></code> that is received.</span></td>
+    <td><code><a href="twisted.protocols.amp.BinaryBoxProtocol.html#boxReceiver" class="internal-link" title="twisted.protocols.amp.BinaryBoxProtocol.boxReceiver">box​Receiver</a></code></td>
+    <td>an <code><a href="twisted.protocols.amp.IBoxReceiver.html" class="internal-link" title="twisted.protocols.amp.IBoxReceiver">IBoxReceiver</a></code> provider, whose <code><a href="twisted.protocols.amp.IBoxReceiver.html#ampBoxReceived" class="internal-link" title="twisted.protocols.amp.IBoxReceiver.ampBoxReceived">IBoxReceiver.ampBoxReceived</a></code> method will be invoked for each <code><a href="twisted.protocols.amp.AmpBox.html" class="internal-link" title="twisted.protocols.amp.AmpBox">AmpBox</a></code> that is received.</td>
   </tr><tr class="baseinstancevariable">
     
     <td>Instance Variable</td>
-    <td><code><a href="twisted.protocols.amp.BinaryBoxProtocol.html#hostCertificate">hostCertificate</a></code></td>
+    <td><code><a href="twisted.protocols.amp.BinaryBoxProtocol.html#hostCertificate" class="internal-link" title="twisted.protocols.amp.BinaryBoxProtocol.hostCertificate">host​Certificate</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="baseinstancevariable">
     
     <td>Instance Variable</td>
-    <td><code><a href="twisted.protocols.amp.BinaryBoxProtocol.html#innerProtocol">innerProtocol</a></code></td>
+    <td><code><a href="twisted.protocols.amp.BinaryBoxProtocol.html#innerProtocol" class="internal-link" title="twisted.protocols.amp.BinaryBoxProtocol.innerProtocol">inner​Protocol</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="baseinstancevariable">
     
     <td>Instance Variable</td>
-    <td><code><a href="twisted.protocols.amp.BinaryBoxProtocol.html#innerProtocolClientFactory">innerProtocolClientFactory</a></code></td>
+    <td><code><a href="twisted.protocols.amp.BinaryBoxProtocol.html#innerProtocolClientFactory" class="internal-link" title="twisted.protocols.amp.BinaryBoxProtocol.innerProtocolClientFactory">inner​Protocol​Client​Factory</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="baseinstancevariable">
     
     <td>Instance Variable</td>
-    <td><code><a href="twisted.protocols.amp.BinaryBoxProtocol.html#MAX_LENGTH">MAX_LENGTH</a></code></td>
+    <td><code><a href="twisted.protocols.amp.BinaryBoxProtocol.html#MAX_LENGTH" class="internal-link" title="twisted.protocols.amp.BinaryBoxProtocol.MAX_LENGTH">MAX​_LENGTH</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="baseinstancevariable">
     
     <td>Instance Variable</td>
-    <td><code><a href="twisted.protocols.amp.BinaryBoxProtocol.html#recvd">recvd</a></code></td>
+    <td><code><a href="twisted.protocols.amp.BinaryBoxProtocol.html#recvd" class="internal-link" title="twisted.protocols.amp.BinaryBoxProtocol.recvd">recvd</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="baseproperty">
     
     <td>Property</td>
-    <td><code><a href="twisted.protocols.amp.BinaryBoxProtocol.html#peerCertificate">peerCertificate</a></code></td>
+    <td><code><a href="twisted.protocols.amp.BinaryBoxProtocol.html#peerCertificate" class="internal-link" title="twisted.protocols.amp.BinaryBoxProtocol.peerCertificate">peer​Certificate</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="basemethod private">
     
     <td>Method</td>
-    <td><code><a href="twisted.protocols.amp.BinaryBoxProtocol.html#_defaultStartTLSResponder">_defaultStartTLSResponder</a></code></td>
-    <td><span>The default TLS responder doesn't specify any certificate or anything.</span></td>
+    <td><code><a href="twisted.protocols.amp.BinaryBoxProtocol.html#_defaultStartTLSResponder" class="internal-link" title="twisted.protocols.amp.BinaryBoxProtocol._defaultStartTLSResponder">_default​Start​TLSResponder</a></code></td>
+    <td>The default TLS responder doesn't specify any certificate or anything.</td>
   </tr><tr class="basemethod private">
     
     <td>Method</td>
-    <td><code><a href="twisted.protocols.amp.BinaryBoxProtocol.html#_lockForSwitch">_lockForSwitch</a></code></td>
+    <td><code><a href="twisted.protocols.amp.BinaryBoxProtocol.html#_lockForSwitch" class="internal-link" title="twisted.protocols.amp.BinaryBoxProtocol._lockForSwitch">_lock​For​Switch</a></code></td>
     <td><span class="undocumented">No summary</span></td>
   </tr><tr class="basemethod private">
     
     <td>Method</td>
-    <td><code><a href="twisted.protocols.amp.BinaryBoxProtocol.html#_prepareTLS">_prepareTLS</a></code></td>
-    <td><span>Used by StartTLSCommand to put us into the state where we don't actually send things that get sent, instead we buffer them.  see <code><a href="twisted.protocols.amp.BoxDispatcher.html#_sendBoxCommand">_sendBoxCommand</a></code>.</span></td>
+    <td><code><a href="twisted.protocols.amp.BinaryBoxProtocol.html#_prepareTLS" class="internal-link" title="twisted.protocols.amp.BinaryBoxProtocol._prepareTLS">_prepare​TLS</a></code></td>
+    <td>Used by StartTLSCommand to put us into the state where we don't actually send things that get sent, instead we buffer them.  see <code><a href="twisted.protocols.amp.BoxDispatcher.html#_sendBoxCommand" class="internal-link" title="twisted.protocols.amp.BoxDispatcher._sendBoxCommand">_sendBoxCommand</a></code>.</td>
   </tr><tr class="basemethod private">
     
     <td>Method</td>
-    <td><code><a href="twisted.protocols.amp.BinaryBoxProtocol.html#_startTLS">_startTLS</a></code></td>
-    <td><span>Used by TLSBox to initiate the SSL handshake.</span></td>
+    <td><code><a href="twisted.protocols.amp.BinaryBoxProtocol.html#_startTLS" class="internal-link" title="twisted.protocols.amp.BinaryBoxProtocol._startTLS">_start​TLS</a></code></td>
+    <td>Used by TLSBox to initiate the SSL handshake.</td>
   </tr><tr class="basemethod private">
     
     <td>Method</td>
-    <td><code><a href="twisted.protocols.amp.BinaryBoxProtocol.html#_switchTo">_switchTo</a></code></td>
-    <td><span>Switch this BinaryBoxProtocol's transport to a new protocol.  You need to do this 'simultaneously' on both ends of a connection; the easiest way to do this is to use a subclass of ProtocolSwitchCommand.</span></td>
+    <td><code><a href="twisted.protocols.amp.BinaryBoxProtocol.html#_switchTo" class="internal-link" title="twisted.protocols.amp.BinaryBoxProtocol._switchTo">_switch​To</a></code></td>
+    <td>Switch this BinaryBoxProtocol's transport to a new protocol.  You need to do this 'simultaneously' on both ends of a connection; the easiest way to do this is to use a subclass of ProtocolSwitchCommand.</td>
   </tr><tr class="basemethod private">
     
     <td>Method</td>
-    <td><code><a href="twisted.protocols.amp.BinaryBoxProtocol.html#_unlockFromSwitch">_unlockFromSwitch</a></code></td>
-    <td><span>Unlock this locked binary protocol so that further boxes may be sent again.  This is used after an attempt to switch protocols has failed for some reason.</span></td>
-  </tr><tr class="baseclassvariable private">
+    <td><code><a href="twisted.protocols.amp.BinaryBoxProtocol.html#_unlockFromSwitch" class="internal-link" title="twisted.protocols.amp.BinaryBoxProtocol._unlockFromSwitch">_unlock​From​Switch</a></code></td>
+    <td>Unlock this locked binary protocol so that further boxes may be sent again.  This is used after an attempt to switch protocols has failed for some reason.</td>
+  </tr><tr class="baseconstant private">
     
-    <td>Class Variable</td>
-    <td><code><a href="twisted.protocols.amp.BinaryBoxProtocol.html#_MAX_KEY_LENGTH">_MAX_KEY_LENGTH</a></code></td>
+    <td>Constant</td>
+    <td><code><a href="twisted.protocols.amp.BinaryBoxProtocol.html#_MAX_KEY_LENGTH" class="internal-link" title="twisted.protocols.amp.BinaryBoxProtocol._MAX_KEY_LENGTH">_MAX​_KEY​_LENGTH</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
-  </tr><tr class="baseclassvariable private">
+  </tr><tr class="baseconstant private">
     
-    <td>Class Variable</td>
-    <td><code><a href="twisted.protocols.amp.BinaryBoxProtocol.html#_MAX_VALUE_LENGTH">_MAX_VALUE_LENGTH</a></code></td>
-    <td><span class="undocumented">Undocumented</span></td>
-  </tr><tr class="baseinstancevariable private">
-    
-    <td>Instance Variable</td>
-    <td><code><a href="twisted.protocols.amp.BinaryBoxProtocol.html#_currentBox">_currentBox</a></code></td>
+    <td>Constant</td>
+    <td><code><a href="twisted.protocols.amp.BinaryBoxProtocol.html#_MAX_VALUE_LENGTH" class="internal-link" title="twisted.protocols.amp.BinaryBoxProtocol._MAX_VALUE_LENGTH">_MAX​_VALUE​_LENGTH</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="baseinstancevariable private">
     
     <td>Instance Variable</td>
-    <td><code><a href="twisted.protocols.amp.BinaryBoxProtocol.html#_currentKey">_currentKey</a></code></td>
+    <td><code><a href="twisted.protocols.amp.BinaryBoxProtocol.html#_currentBox" class="internal-link" title="twisted.protocols.amp.BinaryBoxProtocol._currentBox">_current​Box</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="baseinstancevariable private">
     
     <td>Instance Variable</td>
-    <td><code><a href="twisted.protocols.amp.BinaryBoxProtocol.html#_justStartedTLS">_justStartedTLS</a></code></td>
+    <td><code><a href="twisted.protocols.amp.BinaryBoxProtocol.html#_currentKey" class="internal-link" title="twisted.protocols.amp.BinaryBoxProtocol._currentKey">_current​Key</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="baseinstancevariable private">
     
     <td>Instance Variable</td>
-    <td><code><a href="twisted.protocols.amp.BinaryBoxProtocol.html#_keyLengthLimitExceeded">_keyLengthLimitExceeded</a></code></td>
-    <td><span>A flag which is only true when the connection is being closed because a key length prefix which was longer than allowed by the protocol was received.</span></td>
-  </tr><tr class="baseinstancevariable private">
-    
-    <td>Instance Variable</td>
-    <td><code><a href="twisted.protocols.amp.BinaryBoxProtocol.html#_locked">_locked</a></code></td>
+    <td><code><a href="twisted.protocols.amp.BinaryBoxProtocol.html#_justStartedTLS" class="internal-link" title="twisted.protocols.amp.BinaryBoxProtocol._justStartedTLS">_just​Started​TLS</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="baseinstancevariable private">
     
     <td>Instance Variable</td>
-    <td><code><a href="twisted.protocols.amp.BinaryBoxProtocol.html#_startingTLSBuffer">_startingTLSBuffer</a></code></td>
+    <td><code><a href="twisted.protocols.amp.BinaryBoxProtocol.html#_keyLengthLimitExceeded" class="internal-link" title="twisted.protocols.amp.BinaryBoxProtocol._keyLengthLimitExceeded">_key​Length​Limit​Exceeded</a></code></td>
+    <td>A flag which is only true when the connection is being closed because a key length prefix which was longer than allowed by the protocol was received.</td>
+  </tr><tr class="baseinstancevariable private">
+    
+    <td>Instance Variable</td>
+    <td><code><a href="twisted.protocols.amp.BinaryBoxProtocol.html#_locked" class="internal-link" title="twisted.protocols.amp.BinaryBoxProtocol._locked">_locked</a></code></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="baseinstancevariable private">
+    
+    <td>Instance Variable</td>
+    <td><code><a href="twisted.protocols.amp.BinaryBoxProtocol.html#_startingTLSBuffer" class="internal-link" title="twisted.protocols.amp.BinaryBoxProtocol._startingTLSBuffer">_starting​TLSBuffer</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr>
 </table>
           
           <p class="inheritedFrom">
-            Inherited from <code><a href="twisted.protocols.basic.StatefulStringProtocol.html">StatefulStringProtocol</a></code> (via <code><a href="twisted.protocols.amp.AMP.html">AMP</a></code>, <code><a href="twisted.protocols.amp.BinaryBoxProtocol.html">BinaryBoxProtocol</a></code>):
+            Inherited from <code><a href="twisted.protocols.basic.StatefulStringProtocol.html" class="internal-link" title="twisted.protocols.basic.StatefulStringProtocol">StatefulStringProtocol</a></code> (via <code><a href="twisted.protocols.amp.AMP.html" class="internal-link" title="twisted.protocols.amp.AMP">AMP</a></code>, <code><a href="twisted.protocols.amp.BinaryBoxProtocol.html" class="internal-link" title="twisted.protocols.amp.BinaryBoxProtocol">BinaryBoxProtocol</a></code>):
           </p>
-          <table class="children sortable" id="id3015">
+          <table class="children sortable" id="id3001">
   
   
   <tr class="basemethod">
     
     <td>Method</td>
-    <td><code><a href="twisted.protocols.basic.StatefulStringProtocol.html#stringReceived">stringReceived</a></code></td>
-    <td><span>Choose a protocol phase function and call it.</span></td>
+    <td><code><a href="twisted.protocols.basic.StatefulStringProtocol.html#stringReceived" class="internal-link" title="twisted.protocols.basic.StatefulStringProtocol.stringReceived">string​Received</a></code></td>
+    <td>Choose a protocol phase function and call it.</td>
   </tr><tr class="baseinstancevariable">
     
     <td>Instance Variable</td>
-    <td><code><a href="twisted.protocols.basic.StatefulStringProtocol.html#state">state</a></code></td>
-    <td><span>Current state of the protocol. Defaults to <code>'init'</code>.</span></td>
+    <td><code><a href="twisted.protocols.basic.StatefulStringProtocol.html#state" class="internal-link" title="twisted.protocols.basic.StatefulStringProtocol.state">state</a></code></td>
+    <td>Current state of the protocol. Defaults to <tt class="rst-docutils literal">'init'</tt>.</td>
   </tr>
 </table>
           
           <p class="inheritedFrom">
-            Inherited from <code><a href="twisted.protocols.basic.Int16StringReceiver.html">Int16StringReceiver</a></code> (via <code><a href="twisted.protocols.amp.AMP.html">AMP</a></code>, <code><a href="twisted.protocols.amp.BinaryBoxProtocol.html">BinaryBoxProtocol</a></code>):
+            Inherited from <code><a href="twisted.protocols.basic.Int16StringReceiver.html" class="internal-link" title="twisted.protocols.basic.Int16StringReceiver">Int16StringReceiver</a></code> (via <code><a href="twisted.protocols.amp.AMP.html" class="internal-link" title="twisted.protocols.amp.AMP">AMP</a></code>, <code><a href="twisted.protocols.amp.BinaryBoxProtocol.html" class="internal-link" title="twisted.protocols.amp.BinaryBoxProtocol">BinaryBoxProtocol</a></code>):
           </p>
-          <table class="children sortable" id="id3016">
+          <table class="children sortable" id="id3002">
   
   
   <tr class="baseclassvariable">
     
     <td>Class Variable</td>
-    <td><code><a href="twisted.protocols.basic.Int16StringReceiver.html#prefixLength">prefixLength</a></code></td>
+    <td><code><a href="twisted.protocols.basic.Int16StringReceiver.html#prefixLength" class="internal-link" title="twisted.protocols.basic.Int16StringReceiver.prefixLength">prefix​Length</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="baseclassvariable">
     
     <td>Class Variable</td>
-    <td><code><a href="twisted.protocols.basic.Int16StringReceiver.html#structFormat">structFormat</a></code></td>
+    <td><code><a href="twisted.protocols.basic.Int16StringReceiver.html#structFormat" class="internal-link" title="twisted.protocols.basic.Int16StringReceiver.structFormat">struct​Format</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr>
 </table>
           
           <p class="inheritedFrom">
-            Inherited from <code><a href="twisted.protocols.basic.IntNStringReceiver.html">IntNStringReceiver</a></code> (via <code><a href="twisted.protocols.amp.AMP.html">AMP</a></code>, <code><a href="twisted.protocols.amp.BinaryBoxProtocol.html">BinaryBoxProtocol</a></code>, <code><a href="twisted.protocols.basic.Int16StringReceiver.html">Int16StringReceiver</a></code>):
+            Inherited from <code><a href="twisted.protocols.basic.IntNStringReceiver.html" class="internal-link" title="twisted.protocols.basic.IntNStringReceiver">IntNStringReceiver</a></code> (via <code><a href="twisted.protocols.amp.AMP.html" class="internal-link" title="twisted.protocols.amp.AMP">AMP</a></code>, <code><a href="twisted.protocols.amp.BinaryBoxProtocol.html" class="internal-link" title="twisted.protocols.amp.BinaryBoxProtocol">BinaryBoxProtocol</a></code>, <code><a href="twisted.protocols.basic.Int16StringReceiver.html" class="internal-link" title="twisted.protocols.basic.Int16StringReceiver">Int16StringReceiver</a></code>):
           </p>
-          <table class="children sortable" id="id3017">
+          <table class="children sortable" id="id3003">
   
   
   <tr class="basemethod">
     
     <td>Method</td>
-    <td><code><a href="twisted.protocols.basic.IntNStringReceiver.html#sendString">sendString</a></code></td>
-    <td><span>Send a prefixed string to the other end of the connection.</span></td>
+    <td><code><a href="twisted.protocols.basic.IntNStringReceiver.html#sendString" class="internal-link" title="twisted.protocols.basic.IntNStringReceiver.sendString">send​String</a></code></td>
+    <td>Send a prefixed string to the other end of the connection.</td>
   </tr><tr class="basemethod">
     
     <td>Method</td>
-    <td><code><a href="twisted.protocols.basic.IntNStringReceiver.html#stringReceived">stringReceived</a></code></td>
-    <td><span>Override this for notification when each complete string is received.</span></td>
+    <td><code><a href="twisted.protocols.basic.IntNStringReceiver.html#stringReceived" class="internal-link" title="twisted.protocols.basic.IntNStringReceiver.stringReceived">string​Received</a></code></td>
+    <td>Override this for notification when each complete string is received.</td>
   </tr><tr class="baseinstancevariable private">
     
     <td>Instance Variable</td>
-    <td><code><a href="twisted.protocols.basic.IntNStringReceiver.html#_compatibilityOffset">_compatibilityOffset</a></code></td>
-    <td><span>the offset within <code>_unprocessed</code> to the next message to be parsed. (used to generate the recvd attribute)</span></td>
+    <td><code><a href="twisted.protocols.basic.IntNStringReceiver.html#_compatibilityOffset" class="internal-link" title="twisted.protocols.basic.IntNStringReceiver._compatibilityOffset">_compatibility​Offset</a></code></td>
+    <td>the offset within <tt class="rst-docutils literal">_unprocessed</tt> to the next message to be parsed. (used to generate the recvd attribute)</td>
   </tr><tr class="baseinstancevariable private">
     
     <td>Instance Variable</td>
-    <td><code><a href="twisted.protocols.basic.IntNStringReceiver.html#_unprocessed">_unprocessed</a></code></td>
-    <td><span>bytes received, but not yet broken up into messages / sent to stringReceived.  _compatibilityOffset must be updated when this value is updated so that the <code>recvd</code> attribute can be generated correctly.</span></td>
+    <td><code><a href="twisted.protocols.basic.IntNStringReceiver.html#_unprocessed" class="internal-link" title="twisted.protocols.basic.IntNStringReceiver._unprocessed">_unprocessed</a></code></td>
+    <td>bytes received, but not yet broken up into messages / sent to stringReceived.  _compatibilityOffset must be updated when this value is updated so that the <tt class="rst-docutils literal">recvd</tt> attribute can be generated correctly.</td>
   </tr>
 </table>
           
           <p class="inheritedFrom">
-            Inherited from <code><a href="twisted.internet.protocol.Protocol.html">Protocol</a></code> (via <code><a href="twisted.protocols.amp.AMP.html">AMP</a></code>, <code><a href="twisted.protocols.amp.BinaryBoxProtocol.html">BinaryBoxProtocol</a></code>, <code><a href="twisted.protocols.basic.Int16StringReceiver.html">Int16StringReceiver</a></code>, <code><a href="twisted.protocols.basic.IntNStringReceiver.html">IntNStringReceiver</a></code>):
+            Inherited from <code><a href="twisted.internet.protocol.Protocol.html" class="internal-link" title="twisted.internet.protocol.Protocol">Protocol</a></code> (via <code><a href="twisted.protocols.amp.AMP.html" class="internal-link" title="twisted.protocols.amp.AMP">AMP</a></code>, <code><a href="twisted.protocols.amp.BinaryBoxProtocol.html" class="internal-link" title="twisted.protocols.amp.BinaryBoxProtocol">BinaryBoxProtocol</a></code>, <code><a href="twisted.protocols.basic.Int16StringReceiver.html" class="internal-link" title="twisted.protocols.basic.Int16StringReceiver">Int16StringReceiver</a></code>, <code><a href="twisted.protocols.basic.IntNStringReceiver.html" class="internal-link" title="twisted.protocols.basic.IntNStringReceiver">IntNStringReceiver</a></code>):
           </p>
-          <table class="children sortable" id="id3018">
+          <table class="children sortable" id="id3004">
   
   
   <tr class="basemethod">
     
     <td>Method</td>
-    <td><code><a href="twisted.internet.protocol.Protocol.html#logPrefix">logPrefix</a></code></td>
-    <td><span>Return a prefix matching the class name, to identify log messages related to this protocol instance.</span></td>
+    <td><code><a href="twisted.internet.protocol.Protocol.html#logPrefix" class="internal-link" title="twisted.internet.protocol.Protocol.logPrefix">log​Prefix</a></code></td>
+    <td>Return a prefix matching the class name, to identify log messages related to this protocol instance.</td>
   </tr><tr class="baseclassvariable">
     
     <td>Class Variable</td>
-    <td><code><a href="twisted.internet.protocol.Protocol.html#factory">factory</a></code></td>
+    <td><code><a href="twisted.internet.protocol.Protocol.html#factory" class="internal-link" title="twisted.internet.protocol.Protocol.factory">factory</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr>
 </table>
           
           <p class="inheritedFrom">
-            Inherited from <code><a href="twisted.internet.protocol.BaseProtocol.html">BaseProtocol</a></code> (via <code><a href="twisted.protocols.amp.AMP.html">AMP</a></code>, <code><a href="twisted.protocols.amp.BinaryBoxProtocol.html">BinaryBoxProtocol</a></code>, <code><a href="twisted.protocols.basic.Int16StringReceiver.html">Int16StringReceiver</a></code>, <code><a href="twisted.protocols.basic.IntNStringReceiver.html">IntNStringReceiver</a></code>, <code><a href="twisted.internet.protocol.Protocol.html">Protocol</a></code>):
+            Inherited from <code><a href="twisted.internet.protocol.BaseProtocol.html" class="internal-link" title="twisted.internet.protocol.BaseProtocol">BaseProtocol</a></code> (via <code><a href="twisted.protocols.amp.AMP.html" class="internal-link" title="twisted.protocols.amp.AMP">AMP</a></code>, <code><a href="twisted.protocols.amp.BinaryBoxProtocol.html" class="internal-link" title="twisted.protocols.amp.BinaryBoxProtocol">BinaryBoxProtocol</a></code>, <code><a href="twisted.protocols.basic.Int16StringReceiver.html" class="internal-link" title="twisted.protocols.basic.Int16StringReceiver">Int16StringReceiver</a></code>, <code><a href="twisted.protocols.basic.IntNStringReceiver.html" class="internal-link" title="twisted.protocols.basic.IntNStringReceiver">IntNStringReceiver</a></code>, <code><a href="twisted.internet.protocol.Protocol.html" class="internal-link" title="twisted.internet.protocol.Protocol">Protocol</a></code>):
           </p>
-          <table class="children sortable" id="id3019">
+          <table class="children sortable" id="id3005">
   
   
   <tr class="basemethod">
     
     <td>Method</td>
-    <td><code><a href="twisted.internet.protocol.BaseProtocol.html#connectionMade">connectionMade</a></code></td>
-    <td><span>Called when a connection is made.</span></td>
+    <td><code><a href="twisted.internet.protocol.BaseProtocol.html#connectionMade" class="internal-link" title="twisted.internet.protocol.BaseProtocol.connectionMade">connection​Made</a></code></td>
+    <td>Called when a connection is made.</td>
   </tr><tr class="baseinstancevariable">
     
     <td>Instance Variable</td>
-    <td><code><a href="twisted.internet.protocol.BaseProtocol.html#connected">connected</a></code></td>
+    <td><code><a href="twisted.internet.protocol.BaseProtocol.html#connected" class="internal-link" title="twisted.internet.protocol.BaseProtocol.connected">connected</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr>
 </table>
           
           <p class="inheritedFrom">
-            Inherited from <code><a href="twisted.protocols.basic._PauseableMixin.html">_PauseableMixin</a></code> (via <code><a href="twisted.protocols.amp.AMP.html">AMP</a></code>, <code><a href="twisted.protocols.amp.BinaryBoxProtocol.html">BinaryBoxProtocol</a></code>, <code><a href="twisted.protocols.basic.Int16StringReceiver.html">Int16StringReceiver</a></code>, <code><a href="twisted.protocols.basic.IntNStringReceiver.html">IntNStringReceiver</a></code>):
+            Inherited from <code><a href="twisted.protocols.basic._PauseableMixin.html" class="internal-link" title="twisted.protocols.basic._PauseableMixin">_PauseableMixin</a></code> (via <code><a href="twisted.protocols.amp.AMP.html" class="internal-link" title="twisted.protocols.amp.AMP">AMP</a></code>, <code><a href="twisted.protocols.amp.BinaryBoxProtocol.html" class="internal-link" title="twisted.protocols.amp.BinaryBoxProtocol">BinaryBoxProtocol</a></code>, <code><a href="twisted.protocols.basic.Int16StringReceiver.html" class="internal-link" title="twisted.protocols.basic.Int16StringReceiver">Int16StringReceiver</a></code>, <code><a href="twisted.protocols.basic.IntNStringReceiver.html" class="internal-link" title="twisted.protocols.basic.IntNStringReceiver">IntNStringReceiver</a></code>):
           </p>
-          <table class="children sortable" id="id3020">
+          <table class="children sortable" id="id3006">
   
   
   <tr class="basemethod">
     
     <td>Method</td>
-    <td><code><a href="twisted.protocols.basic._PauseableMixin.html#pauseProducing">pauseProducing</a></code></td>
+    <td><code><a href="twisted.protocols.basic._PauseableMixin.html#pauseProducing" class="internal-link" title="twisted.protocols.basic._PauseableMixin.pauseProducing">pause​Producing</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="basemethod">
     
     <td>Method</td>
-    <td><code><a href="twisted.protocols.basic._PauseableMixin.html#resumeProducing">resumeProducing</a></code></td>
+    <td><code><a href="twisted.protocols.basic._PauseableMixin.html#resumeProducing" class="internal-link" title="twisted.protocols.basic._PauseableMixin.resumeProducing">resume​Producing</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="basemethod">
     
     <td>Method</td>
-    <td><code><a href="twisted.protocols.basic._PauseableMixin.html#stopProducing">stopProducing</a></code></td>
+    <td><code><a href="twisted.protocols.basic._PauseableMixin.html#stopProducing" class="internal-link" title="twisted.protocols.basic._PauseableMixin.stopProducing">stop​Producing</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="baseinstancevariable">
     
     <td>Instance Variable</td>
-    <td><code><a href="twisted.protocols.basic._PauseableMixin.html#paused">paused</a></code></td>
+    <td><code><a href="twisted.protocols.basic._PauseableMixin.html#paused" class="internal-link" title="twisted.protocols.basic._PauseableMixin.paused">paused</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr>
 </table>
           
           <p class="inheritedFrom">
-            Inherited from <code><a href="twisted.protocols.amp._DescriptorExchanger.html">_DescriptorExchanger</a></code> (via <code><a href="twisted.protocols.amp.AMP.html">AMP</a></code>, <code><a href="twisted.protocols.amp.BinaryBoxProtocol.html">BinaryBoxProtocol</a></code>):
+            Inherited from <code><a href="twisted.protocols.amp._DescriptorExchanger.html" class="internal-link" title="twisted.protocols.amp._DescriptorExchanger">_DescriptorExchanger</a></code> (via <code><a href="twisted.protocols.amp.AMP.html" class="internal-link" title="twisted.protocols.amp.AMP">AMP</a></code>, <code><a href="twisted.protocols.amp.BinaryBoxProtocol.html" class="internal-link" title="twisted.protocols.amp.BinaryBoxProtocol">BinaryBoxProtocol</a></code>):
           </p>
-          <table class="children sortable" id="id3021">
+          <table class="children sortable" id="id3007">
   
   
   <tr class="basemethod">
     
     <td>Method</td>
-    <td><code><a href="twisted.protocols.amp._DescriptorExchanger.html#fileDescriptorReceived">fileDescriptorReceived</a></code></td>
-    <td><span>Collect received file descriptors to be claimed later by <code><a href="twisted.protocols.amp.Descriptor.html">Descriptor</a></code>.</span></td>
+    <td><code><a href="twisted.protocols.amp._DescriptorExchanger.html#fileDescriptorReceived" class="internal-link" title="twisted.protocols.amp._DescriptorExchanger.fileDescriptorReceived">file​Descriptor​Received</a></code></td>
+    <td>Collect received file descriptors to be claimed later by <code><a href="twisted.protocols.amp.Descriptor.html" class="internal-link" title="twisted.protocols.amp.Descriptor">Descriptor</a></code>.</td>
   </tr><tr class="basemethod private">
     
     <td>Method</td>
-    <td><code><a href="twisted.protocols.amp._DescriptorExchanger.html#_sendFileDescriptor">_sendFileDescriptor</a></code></td>
-    <td><span>Assign and return the next ordinal to the given descriptor after sending the descriptor over this protocol's transport.</span></td>
+    <td><code><a href="twisted.protocols.amp._DescriptorExchanger.html#_sendFileDescriptor" class="internal-link" title="twisted.protocols.amp._DescriptorExchanger._sendFileDescriptor">_send​File​Descriptor</a></code></td>
+    <td>Assign and return the next ordinal to the given descriptor after sending the descriptor over this protocol's transport.</td>
   </tr><tr class="baseinstancevariable private">
     
     <td>Instance Variable</td>
-    <td><code><a href="twisted.protocols.amp._DescriptorExchanger.html#_descriptors">_descriptors</a></code></td>
-    <td><span>Temporary storage for all file descriptors received. Values in this dictionary are the file descriptors (as integers).  Keys in this dictionary are ordinals giving the order in which each descriptor was received.  The ordering information is used to allow <code><a href="twisted.protocols.amp.Descriptor.html">Descriptor</a></code> to determine which is the correct descriptor for any particular usage of that argument type.</span></td>
+    <td><code><a href="twisted.protocols.amp._DescriptorExchanger.html#_descriptors" class="internal-link" title="twisted.protocols.amp._DescriptorExchanger._descriptors">_descriptors</a></code></td>
+    <td>Temporary storage for all file descriptors received. Values in this dictionary are the file descriptors (as integers).  Keys in this dictionary are ordinals giving the order in which each descriptor was received.  The ordering information is used to allow <code><a href="twisted.protocols.amp.Descriptor.html" class="internal-link" title="twisted.protocols.amp.Descriptor">Descriptor</a></code> to determine which is the correct descriptor for any particular usage of that argument type.</td>
   </tr><tr class="baseinstancevariable private">
     
     <td>Instance Variable</td>
-    <td><code><a href="twisted.protocols.amp._DescriptorExchanger.html#_getDescriptor">_getDescriptor</a></code></td>
+    <td><code><a href="twisted.protocols.amp._DescriptorExchanger.html#_getDescriptor" class="internal-link" title="twisted.protocols.amp._DescriptorExchanger._getDescriptor">_get​Descriptor</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="baseinstancevariable private">
     
     <td>Instance Variable</td>
-    <td><code><a href="twisted.protocols.amp._DescriptorExchanger.html#_receivingDescriptorCounter">_receivingDescriptorCounter</a></code></td>
-    <td><span>A no-argument callable which returns the ordinals, starting from 0.  This is used to construct values for <code>fileDescriptorReceived</code>.</span></td>
+    <td><code><a href="twisted.protocols.amp._DescriptorExchanger.html#_receivingDescriptorCounter" class="internal-link" title="twisted.protocols.amp._DescriptorExchanger._receivingDescriptorCounter">_receiving​Descriptor​Counter</a></code></td>
+    <td>A no-argument callable which returns the ordinals, starting from 0.  This is used to construct values for <tt class="rst-docutils literal">fileDescriptorReceived</tt>.</td>
   </tr><tr class="baseinstancevariable private">
     
     <td>Instance Variable</td>
-    <td><code><a href="twisted.protocols.amp._DescriptorExchanger.html#_sendingDescriptorCounter">_sendingDescriptorCounter</a></code></td>
-    <td><span>A no-argument callable which returns the ordinals, starting from 0.  This is used to construct values for <code>_sendFileDescriptor</code>.</span></td>
+    <td><code><a href="twisted.protocols.amp._DescriptorExchanger.html#_sendingDescriptorCounter" class="internal-link" title="twisted.protocols.amp._DescriptorExchanger._sendingDescriptorCounter">_sending​Descriptor​Counter</a></code></td>
+    <td>A no-argument callable which returns the ordinals, starting from 0.  This is used to construct values for <tt class="rst-docutils literal">_sendFileDescriptor</tt>.</td>
   </tr>
 </table>
           
           <p class="inheritedFrom">
-            Inherited from <code><a href="twisted.protocols.amp.BoxDispatcher.html">BoxDispatcher</a></code> (via <code><a href="twisted.protocols.amp.AMP.html">AMP</a></code>):
+            Inherited from <code><a href="twisted.protocols.amp.BoxDispatcher.html" class="internal-link" title="twisted.protocols.amp.BoxDispatcher">BoxDispatcher</a></code> (via <code><a href="twisted.protocols.amp.AMP.html" class="internal-link" title="twisted.protocols.amp.AMP">AMP</a></code>):
           </p>
-          <table class="children sortable" id="id3022">
+          <table class="children sortable" id="id3008">
   
   
   <tr class="basemethod">
     
     <td>Method</td>
-    <td><code><a href="twisted.protocols.amp.BoxDispatcher.html#ampBoxReceived">ampBoxReceived</a></code></td>
-    <td><span>An AmpBox was received, representing a command, or an answer to a previously issued command (either successful or erroneous).  Respond to it according to its contents.</span></td>
+    <td><code><a href="twisted.protocols.amp.BoxDispatcher.html#ampBoxReceived" class="internal-link" title="twisted.protocols.amp.BoxDispatcher.ampBoxReceived">amp​Box​Received</a></code></td>
+    <td>An AmpBox was received, representing a command, or an answer to a previously issued command (either successful or erroneous).  Respond to it according to its contents.</td>
   </tr><tr class="basemethod">
     
     <td>Method</td>
-    <td><code><a href="twisted.protocols.amp.BoxDispatcher.html#callRemote">callRemote</a></code></td>
-    <td><span>This is the primary high-level API for sending messages via AMP.  Invoke it with a command and appropriate arguments to send a message to this connection's peer.</span></td>
+    <td><code><a href="twisted.protocols.amp.BoxDispatcher.html#callRemote" class="internal-link" title="twisted.protocols.amp.BoxDispatcher.callRemote">call​Remote</a></code></td>
+    <td>This is the primary high-level API for sending messages via AMP.  Invoke it with a command and appropriate arguments to send a message to this connection's peer.</td>
   </tr><tr class="basemethod">
     
     <td>Method</td>
-    <td><code><a href="twisted.protocols.amp.BoxDispatcher.html#callRemoteString">callRemoteString</a></code></td>
-    <td><span>This is a low-level API, designed only for optimizing simple messages for which the overhead of parsing is too great.</span></td>
+    <td><code><a href="twisted.protocols.amp.BoxDispatcher.html#callRemoteString" class="internal-link" title="twisted.protocols.amp.BoxDispatcher.callRemoteString">call​Remote​String</a></code></td>
+    <td>This is a low-level API, designed only for optimizing simple messages for which the overhead of parsing is too great.</td>
   </tr><tr class="basemethod">
     
     <td>Method</td>
-    <td><code><a href="twisted.protocols.amp.BoxDispatcher.html#dispatchCommand">dispatchCommand</a></code></td>
-    <td><span>A box with a _command key was received.</span></td>
+    <td><code><a href="twisted.protocols.amp.BoxDispatcher.html#dispatchCommand" class="internal-link" title="twisted.protocols.amp.BoxDispatcher.dispatchCommand">dispatch​Command</a></code></td>
+    <td>A box with a _command key was received.</td>
   </tr><tr class="basemethod">
     
     <td>Method</td>
-    <td><code><a href="twisted.protocols.amp.BoxDispatcher.html#failAllOutgoing">failAllOutgoing</a></code></td>
-    <td><span>Call the errback on all outstanding requests awaiting responses.</span></td>
+    <td><code><a href="twisted.protocols.amp.BoxDispatcher.html#failAllOutgoing" class="internal-link" title="twisted.protocols.amp.BoxDispatcher.failAllOutgoing">fail​All​Outgoing</a></code></td>
+    <td>Call the errback on all outstanding requests awaiting responses.</td>
   </tr><tr class="basemethod">
     
     <td>Method</td>
-    <td><code><a href="twisted.protocols.amp.BoxDispatcher.html#startReceivingBoxes">startReceivingBoxes</a></code></td>
-    <td><span>The given boxSender is going to start calling boxReceived on this <code><a href="twisted.protocols.amp.BoxDispatcher.html">BoxDispatcher</a></code>.</span></td>
+    <td><code><a href="twisted.protocols.amp.BoxDispatcher.html#startReceivingBoxes" class="internal-link" title="twisted.protocols.amp.BoxDispatcher.startReceivingBoxes">start​Receiving​Boxes</a></code></td>
+    <td>The given boxSender is going to start calling boxReceived on this <code><a href="twisted.protocols.amp.BoxDispatcher.html" class="internal-link" title="twisted.protocols.amp.BoxDispatcher">BoxDispatcher</a></code>.</td>
   </tr><tr class="basemethod">
     
     <td>Method</td>
-    <td><code><a href="twisted.protocols.amp.BoxDispatcher.html#stopReceivingBoxes">stopReceivingBoxes</a></code></td>
-    <td><span>No further boxes will be received here.  Terminate all currently outstanding command deferreds with the given reason.</span></td>
+    <td><code><a href="twisted.protocols.amp.BoxDispatcher.html#stopReceivingBoxes" class="internal-link" title="twisted.protocols.amp.BoxDispatcher.stopReceivingBoxes">stop​Receiving​Boxes</a></code></td>
+    <td>No further boxes will be received here.  Terminate all currently outstanding command deferreds with the given reason.</td>
   </tr><tr class="basemethod">
     
     <td>Method</td>
-    <td><code><a href="twisted.protocols.amp.BoxDispatcher.html#unhandledError">unhandledError</a></code></td>
-    <td><span>This is a terminal callback called after application code has had a chance to quash any errors.</span></td>
+    <td><code><a href="twisted.protocols.amp.BoxDispatcher.html#unhandledError" class="internal-link" title="twisted.protocols.amp.BoxDispatcher.unhandledError">unhandled​Error</a></code></td>
+    <td>This is a terminal callback called after application code has had a chance to quash any errors.</td>
   </tr><tr class="baseinstancevariable">
     
     <td>Instance Variable</td>
-    <td><code><a href="twisted.protocols.amp.BoxDispatcher.html#boxSender">boxSender</a></code></td>
-    <td><span>an object which can send boxes, via the <code><a href="#_sendBoxCommand">_sendBoxCommand</a></code> method, such as an <code><a href="twisted.protocols.amp.AMP.html">AMP</a></code> instance.</span></td>
+    <td><code><a href="twisted.protocols.amp.BoxDispatcher.html#boxSender" class="internal-link" title="twisted.protocols.amp.BoxDispatcher.boxSender">box​Sender</a></code></td>
+    <td>an object which can send boxes, via the <code><a href="#_sendBoxCommand" class="internal-link" title="twisted.protocols.amp.BoxDispatcher._sendBoxCommand">_sendBoxCommand</a></code> method, such as an <code><a href="twisted.protocols.amp.AMP.html" class="internal-link" title="twisted.protocols.amp.AMP">AMP</a></code> instance.</td>
   </tr><tr class="baseinstancevariable">
     
     <td>Instance Variable</td>
-    <td><code><a href="twisted.protocols.amp.BoxDispatcher.html#locator">locator</a></code></td>
-    <td><span>an object with a <code><a href="twisted.protocols.amp.CommandLocator.html#locateResponder">CommandLocator.locateResponder</a></code> method that locates a responder function that takes a Box and returns a result (either a Box or a Deferred which fires one).</span></td>
+    <td><code><a href="twisted.protocols.amp.BoxDispatcher.html#locator" class="internal-link" title="twisted.protocols.amp.BoxDispatcher.locator">locator</a></code></td>
+    <td>an object with a <code><a href="twisted.protocols.amp.CommandLocator.html#locateResponder" class="internal-link" title="twisted.protocols.amp.CommandLocator.locateResponder">CommandLocator.locateResponder</a></code> method that locates a responder function that takes a Box and returns a result (either a Box or a Deferred which fires one).</td>
   </tr><tr class="basemethod private">
     
     <td>Method</td>
-    <td><code><a href="twisted.protocols.amp.BoxDispatcher.html#_answerReceived">_answerReceived</a></code></td>
-    <td><span>An AMP box was received that answered a command previously sent with <code><a href="#callRemote">callRemote</a></code>.</span></td>
+    <td><code><a href="twisted.protocols.amp.BoxDispatcher.html#_answerReceived" class="internal-link" title="twisted.protocols.amp.BoxDispatcher._answerReceived">_answer​Received</a></code></td>
+    <td>An AMP box was received that answered a command previously sent with <code><a href="#callRemote" class="internal-link" title="twisted.protocols.amp.BoxDispatcher.callRemote">callRemote</a></code>.</td>
   </tr><tr class="basemethod private">
     
     <td>Method</td>
-    <td><code><a href="twisted.protocols.amp.BoxDispatcher.html#_commandReceived">_commandReceived</a></code></td>
-    <td><span></span></td>
+    <td><code><a href="twisted.protocols.amp.BoxDispatcher.html#_commandReceived" class="internal-link" title="twisted.protocols.amp.BoxDispatcher._commandReceived">_command​Received</a></code></td>
+    <td></td>
   </tr><tr class="basemethod private">
     
     <td>Method</td>
-    <td><code><a href="twisted.protocols.amp.BoxDispatcher.html#_errorReceived">_errorReceived</a></code></td>
-    <td><span>An AMP box was received that answered a command previously sent with <code><a href="#callRemote">callRemote</a></code>, with an error.</span></td>
+    <td><code><a href="twisted.protocols.amp.BoxDispatcher.html#_errorReceived" class="internal-link" title="twisted.protocols.amp.BoxDispatcher._errorReceived">_error​Received</a></code></td>
+    <td>An AMP box was received that answered a command previously sent with <code><a href="#callRemote" class="internal-link" title="twisted.protocols.amp.BoxDispatcher.callRemote">callRemote</a></code>, with an error.</td>
   </tr><tr class="basemethod private">
     
     <td>Method</td>
-    <td><code><a href="twisted.protocols.amp.BoxDispatcher.html#_nextTag">_nextTag</a></code></td>
-    <td><span>Generate protocol-local serial numbers for _ask keys.</span></td>
+    <td><code><a href="twisted.protocols.amp.BoxDispatcher.html#_nextTag" class="internal-link" title="twisted.protocols.amp.BoxDispatcher._nextTag">_next​Tag</a></code></td>
+    <td>Generate protocol-local serial numbers for _ask keys.</td>
   </tr><tr class="basemethod private">
     
     <td>Method</td>
-    <td><code><a href="twisted.protocols.amp.BoxDispatcher.html#_safeEmit">_safeEmit</a></code></td>
-    <td><span>Emit a box, ignoring <code><a href="twisted.protocols.amp.ProtocolSwitched.html">ProtocolSwitched</a></code> and <code><a href="twisted.internet.error.ConnectionLost.html">ConnectionLost</a></code> errors which cannot be usefully handled.</span></td>
+    <td><code><a href="twisted.protocols.amp.BoxDispatcher.html#_safeEmit" class="internal-link" title="twisted.protocols.amp.BoxDispatcher._safeEmit">_safe​Emit</a></code></td>
+    <td>Emit a box, ignoring <code><a href="twisted.protocols.amp.ProtocolSwitched.html" class="internal-link" title="twisted.protocols.amp.ProtocolSwitched">ProtocolSwitched</a></code> and <code><a href="twisted.internet.error.ConnectionLost.html" class="internal-link" title="twisted.internet.error.ConnectionLost">ConnectionLost</a></code> errors which cannot be usefully handled.</td>
   </tr><tr class="basemethod private">
     
     <td>Method</td>
-    <td><code><a href="twisted.protocols.amp.BoxDispatcher.html#_sendBoxCommand">_sendBoxCommand</a></code></td>
-    <td><span>Send a command across the wire with the given <code>amp.Box</code>.</span></td>
+    <td><code><a href="twisted.protocols.amp.BoxDispatcher.html#_sendBoxCommand" class="internal-link" title="twisted.protocols.amp.BoxDispatcher._sendBoxCommand">_send​Box​Command</a></code></td>
+    <td>Send a command across the wire with the given <tt class="rst-docutils literal">amp.Box</tt>.</td>
   </tr><tr class="baseclassvariable private">
     
     <td>Class Variable</td>
-    <td><code><a href="twisted.protocols.amp.BoxDispatcher.html#_counter">_counter</a></code></td>
+    <td><code><a href="twisted.protocols.amp.BoxDispatcher.html#_counter" class="internal-link" title="twisted.protocols.amp.BoxDispatcher._counter">_counter</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="baseinstancevariable private">
     
     <td>Instance Variable</td>
-    <td><code><a href="twisted.protocols.amp.BoxDispatcher.html#_failAllReason">_failAllReason</a></code></td>
+    <td><code><a href="twisted.protocols.amp.BoxDispatcher.html#_failAllReason" class="internal-link" title="twisted.protocols.amp.BoxDispatcher._failAllReason">_fail​All​Reason</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="baseinstancevariable private">
     
     <td>Instance Variable</td>
-    <td><code><a href="twisted.protocols.amp.BoxDispatcher.html#_outstandingRequests">_outstandingRequests</a></code></td>
-    <td><span>a dictionary mapping request IDs to <code><a href="twisted.internet.defer.Deferred.html">Deferred</a></code>s which were returned for those requests.</span></td>
+    <td><code><a href="twisted.protocols.amp.BoxDispatcher.html#_outstandingRequests" class="internal-link" title="twisted.protocols.amp.BoxDispatcher._outstandingRequests">_outstanding​Requests</a></code></td>
+    <td>a dictionary mapping request IDs to <code><a href="twisted.internet.defer.Deferred.html" class="internal-link" title="twisted.internet.defer.Deferred">Deferred</a></code>s which were returned for those requests.</td>
   </tr>
 </table>
           
           <p class="inheritedFrom">
-            Inherited from <code><a href="twisted.protocols.amp.CommandLocator.html">CommandLocator</a></code> (via <code><a href="twisted.protocols.amp.AMP.html">AMP</a></code>):
+            Inherited from <code><a href="twisted.protocols.amp.CommandLocator.html" class="internal-link" title="twisted.protocols.amp.CommandLocator">CommandLocator</a></code> (via <code><a href="twisted.protocols.amp.AMP.html" class="internal-link" title="twisted.protocols.amp.AMP">AMP</a></code>):
           </p>
-          <table class="children sortable" id="id3023">
+          <table class="children sortable" id="id3009">
   
   
   <tr class="baseclass">
     
     <td>Class</td>
-    <td><code><a href="twisted.protocols.amp.CommandLocator.__metaclass__.html">__metaclass__</a></code></td>
+    <td><code><a href="twisted.protocols.amp.CommandLocator.__metaclass__.html" class="internal-link" title="twisted.protocols.amp.CommandLocator.__metaclass__">__metaclass__</a></code></td>
     <td><span class="undocumented">No summary</span></td>
   </tr><tr class="basemethod">
     
     <td>Method</td>
-    <td><code><a href="twisted.protocols.amp.CommandLocator.html#lookupFunction">lookupFunction</a></code></td>
-    <td><span>Deprecated synonym for <code><a href="#locateResponder">CommandLocator.locateResponder</a></code></span></td>
+    <td><code><a href="twisted.protocols.amp.CommandLocator.html#lookupFunction" class="internal-link" title="twisted.protocols.amp.CommandLocator.lookupFunction">lookup​Function</a></code></td>
+    <td>Deprecated synonym for <code><a href="#locateResponder" class="internal-link" title="twisted.protocols.amp.CommandLocator.locateResponder">CommandLocator.locateResponder</a></code></td>
   </tr><tr class="basemethod private">
     
     <td>Method</td>
-    <td><code><a href="twisted.protocols.amp.CommandLocator.html#_wrapWithSerialization">_wrapWithSerialization</a></code></td>
-    <td><span>Wrap aCallable with its command's argument de-serialization and result serialization logic.</span></td>
+    <td><code><a href="twisted.protocols.amp.CommandLocator.html#_wrapWithSerialization" class="internal-link" title="twisted.protocols.amp.CommandLocator._wrapWithSerialization">_wrap​With​Serialization</a></code></td>
+    <td>Wrap aCallable with its command's argument de-serialization and result serialization logic.</td>
   </tr>
 </table>
           
           <p class="inheritedFrom">
-            Inherited from <code><a href="twisted.protocols.amp.SimpleStringLocator.html">SimpleStringLocator</a></code> (via <code><a href="twisted.protocols.amp.AMP.html">AMP</a></code>):
+            Inherited from <code><a href="twisted.protocols.amp.SimpleStringLocator.html" class="internal-link" title="twisted.protocols.amp.SimpleStringLocator">SimpleStringLocator</a></code> (via <code><a href="twisted.protocols.amp.AMP.html" class="internal-link" title="twisted.protocols.amp.AMP">AMP</a></code>):
           </p>
-          <table class="children sortable" id="id3024">
+          <table class="children sortable" id="id3010">
   
   
   <tr class="baseclassvariable">
     
     <td>Class Variable</td>
-    <td><code><a href="twisted.protocols.amp.SimpleStringLocator.html#baseDispatchPrefix">baseDispatchPrefix</a></code></td>
+    <td><code><a href="twisted.protocols.amp.SimpleStringLocator.html#baseDispatchPrefix" class="internal-link" title="twisted.protocols.amp.SimpleStringLocator.baseDispatchPrefix">base​Dispatch​Prefix</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr>
 </table>
@@ -760,7 +781,7 @@
   <div class="docstring functionBody">
     
     
-    <div><p>Add an error to the reporter.</p></div>
+    <div>Add an error to the reporter.</div>
   </div>
 </div><div class="basemethod">
   
@@ -782,7 +803,7 @@
   <div class="docstring functionBody">
     
     
-    <div><p>Add an expected failure to the reporter.</p></div>
+    <div>Add an expected failure to the reporter.</div>
   </div>
 </div><div class="basemethod">
   
@@ -804,7 +825,7 @@
   <div class="docstring functionBody">
     
     
-    <div><p>Add a failure to the reporter.</p></div>
+    <div>Add a failure to the reporter.</div>
   </div>
 </div><div class="basemethod">
   
@@ -826,7 +847,7 @@
   <div class="docstring functionBody">
     
     
-    <div><p>Add a skip to the reporter.</p></div>
+    <div>Add a skip to the reporter.</div>
   </div>
 </div><div class="basemethod">
   
@@ -848,7 +869,7 @@
   <div class="docstring functionBody">
     
     
-    <div><p>Add a success to the reporter.</p></div>
+    <div>Add a success to the reporter.</div>
   </div>
 </div><div class="basemethod">
   
@@ -870,7 +891,7 @@
   <div class="docstring functionBody">
     
     
-    <div><p>Add an unexpected success to the reporter.</p></div>
+    <div>Add an unexpected success to the reporter.</div>
   </div>
 </div><div class="basemethod">
   
@@ -892,7 +913,7 @@
   <div class="docstring functionBody">
     
     
-    <div><p>Run a test.</p></div>
+    <div>Run a test.</div>
   </div>
 </div><div class="basemethod">
   
@@ -914,7 +935,7 @@
   <div class="docstring functionBody">
     
     
-    <div><p>Set the stream used to log output from tests.</p></div>
+    <div>Set the stream used to log output from tests.</div>
   </div>
 </div><div class="basemethod">
   
@@ -936,7 +957,7 @@
   <div class="docstring functionBody">
     
     
-    <div><p>Print test output from the worker.</p></div>
+    <div>Print test output from the worker.</div>
   </div>
 </div><div class="basemethod private">
   
@@ -958,7 +979,7 @@
   <div class="docstring functionBody">
     
     
-    <div><p>Helper to build a <code>Failure</code> with some traceback.</p><table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">error</span></td><td class="fieldArgDesc">An <code>Exception</code> instance.</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">errorClass</span></td><td class="fieldArgDesc">The class name of the <code>error</code> class.</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">frames</span></td><td class="fieldArgDesc">A flat list of strings representing the information need to approximatively rebuild <code>Failure</code> frames.</td></tr><tr class="fieldStart"><td class="fieldName" colspan="2">Returns</td></tr><tr><td colspan="2">A <code><a href="twisted.python.failure.Failure.html">Failure</a></code> instance with enough information about a test error.</td></tr></table></div>
+    <div>Helper to build a <tt class="rst-docutils literal">Failure</tt> with some traceback.<table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">error</span></td><td class="fieldArgDesc">An <tt class="rst-docutils literal">Exception</tt> instance.</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">error​Class</span></td><td class="fieldArgDesc">The class name of the <tt class="rst-docutils literal">error</tt> class.</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">frames</span></td><td class="fieldArgDesc">A flat list of strings representing the information need to approximatively rebuild <tt class="rst-docutils literal">Failure</tt> frames.</td></tr><tr class="fieldStart"><td class="fieldName" colspan="2">Returns</td></tr><tr><td colspan="2">A <code><a href="twisted.python.failure.Failure.html" class="internal-link" title="twisted.python.failure.Failure">Failure</a></code> instance with enough information about a test error.</td></tr></table></div>
   </div>
 </div><div class="basemethod private">
   
@@ -980,7 +1001,7 @@
   <div class="docstring functionBody">
     
     
-    <div><p>Stop the current running test case, forwarding the result.</p></div>
+    <div>Stop the current running test case, forwarding the result.</div>
   </div>
 </div><div class="baseinstancevariable private">
   
@@ -1003,6 +1024,7 @@
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    
   </div>
 </div><div class="baseinstancevariable private">
   
@@ -1025,6 +1047,7 @@
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    
   </div>
 </div><div class="baseinstancevariable private">
   
@@ -1047,6 +1070,7 @@
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    
   </div>
 </div>
 
@@ -1055,11 +1079,33 @@
 
     <footer class="navbar navbar-default">
   
+
   <div class="container">
     <a href="index.html">API Documentation</a> for <a href="https://twistedmatrix.com/" class="projecthome">Twisted</a>,
   generated by <a href="https://github.com/twisted/pydoctor/">pydoctor</a>
-    21.2.2 at 2022-01-12 04:22:24.
+    22.2.2.dev0 at 2022-03-04 05:57:20.
   </div>
+
+  <!-- Google analytics, obviously. -->
+  <script src="//www.google-analytics.com/urchin.js" type="text/javascript"></script>
+  <script type="text/javascript">
+    _uacct = "UA-99018-6";
+    urchinTracker();
+  </script>
+
+  <!-- If the documentation isn't current, insert a current link. -->
+  <script type="text/javascript">
+    if (window.location.pathname.indexOf('/current/') == -1) {
+      <!-- Give the user a link to this page, but in the current version of the docs. -->
+      var link = document.getElementById('current-docs-link');
+      link.href = window.location.pathname.replace(/\/\d+\.\d+\.\d+\/api\//, '/current/api/');
+      <!-- And make it visible -->
+      var container = document.getElementById('current-docs-container');
+      container.style.display = "";
+      delete link;
+      delete container;
+    }
+  </script>
 </footer>
 
     <script src="pydoctor.js" type="text/javascript"></script>

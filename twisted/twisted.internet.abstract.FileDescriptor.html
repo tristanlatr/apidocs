@@ -7,7 +7,7 @@
   <head>
     
     <title>twisted.internet.abstract.FileDescriptor</title>
-    <meta name="generator" content="pydoctor 21.2.2"> 
+    <meta name="generator" content="pydoctor 22.2.2.dev0"> 
         
     </meta>
     <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
@@ -19,7 +19,13 @@
 
   <body>
 
-    
+    <div style="display: none" id="current-docs-container" class="container">
+  <div class="col-sm-12">
+    <a id="current-docs-link">
+      Go to the latest version of this document.
+    </a>
+  </div>
+</div>
 
     <nav class="navbar navbar-default">
   
@@ -44,69 +50,82 @@
           Names
         </a>
 
-        <form action="search-results.html" id="search-box-container">
+        <div id="search-box-container">
           <div class="input-group">
-            <input id="search-box" name="search-query" placeholder="Search..." aria-label="Search" minlength="2" class="form-control" />
+            <input id="search-box" type="search" name="search-query" placeholder="Search..." aria-label="Search" minlength="2" class="form-control" autocomplete="off" />
+            
             <span class="input-group-btn">
-              <button class="btn btn-default" type="submit" title="Search"><img src="fonts/search.svg" alt="Search!" /></button>
-              <a class="btn btn-default" id="search-help-button" title="Help" onclick="toggleSearchHelpText()"><img src="fonts/info.svg" alt="Help!" /></a>
+              <a style="display: none;" class="btn btn-default" id="search-clear-button" title="Clear" onclick="clearSearch()"><img src="fonts/x-circle.svg" alt="Clear" /></a>
+              <a class="btn btn-default" id="search-help-button" title="Help" onclick="toggleSearchHelpText()"><img src="fonts/info.svg" alt="Help" /></a>
             </span>
           </div>
-        </form>
+        </div>
 
-        <div class="rst-admonition hint" id="search-help-box">
+      </div>
+
+      <div id="search-results-container" style="display: none;">
+        <div>
+          <span class="label label-default" id="search-docstrings-button">
+            <a title="Search in docstrings" onclick="toggleSearchInDocstrings()">search in docstrings</a></span>
+        </div>
+
+        <noscript>
+            <h1>Cannot search: JavaScript is not supported/enabled in your browser.</h1>
+        </noscript>
+
+        <div class="hint" id="search-help-box">
           <p class="rst-last">
       
             Search bar offers the following options:
             <ul>   
                 <li>
                   <strong>Term presence.</strong> The below example searches for documents that 
-                    must contain “foo”, might contain “bar” and must not contain “baz”:
-                  <br /> <code>'+foo bar -baz'</code>
+                    must contain “foo”, might contain “bar” and must not contain “baz”: <code>+foo bar -baz</code>
                 </li> 
 
                 <li>
-                  <strong>Wildcards.</strong> The below example searches for documents with words beginning with “foo”:
-                  <br /> <code>'foo*'</code>
+                  <strong>Wildcards.</strong> The below example searches for documents with words beginning with “foo”: <code>foo*</code>
                 </li> 
 
                 <li>
-                  <strong>Search in specific fields.</strong> The following search matches all documents 
-                  that contains "foo" in their full dotted name and with “bar” in any field:
-                  <br /> <code>'+fullName:*foo* +bar'</code>
+                  <strong>Search in specific fields.</strong> The following search matches all objects 
+                  in "twisted.mail" that matches “search”: <code>+qname:twisted.mail.* +search</code>
 
                   <p>
-                    Possible fields: 'name', 'docstring', 'fullName'.
+                    Possible fields: 'name', 'qname' (fully qualified name), 'docstring', and 'kind'.
+                    Last two fields are only applicable if "search in docstrings" is enabled.
                   </p>
                 </li>
 
                 <li>
                   <strong>Fuzzy matches.</strong> The following search matches all documents 
-                  that have a word within 1 edit distance of “foo”:
-                  <br /> <code>'foo~1'</code>
+                  that have a word within 1 edit distance of “foo”: <code>foo~1</code>
                 </li>
             </ul>
 
           </p>
         </div>
 
-      </div>
+        <div id="search-status"> </div>
+        
+        <div class="warning" id="search-warn-box" style="display: none;">
+          <p class="rst-last"><span id="search-warn"></span></p>
+        </div>
 
+        <table id="search-results">
+          <!-- Filled dynamically by JS -->
+        </table>
+        
+        <div style="margin-top: 8px;">
+          <p>Results provided by <a href="https://lunrjs.com">Lunr.js</a></p>
+        </div>
+      </div>
 
     </div>
   </div>
 
-  <script>
- 
-    function toggleSearchHelpText() {
-        document.body.classList.toggle("search-help-hidden");
-    }
-    // Init search and help text
-    document.getElementById('search-box-container').style.display = 'block';
-    document.getElementById('search-help-box').style.display = 'block';
-    document.body.classList.add("search-help-hidden");
-
-  </script>
+  <script src="ajax.js" type="text/javascript"></script>
+  <script src="search.js" type="text/javascript"></script>
 
 </nav>
 
@@ -115,7 +134,7 @@
     <div class="container">
 
       <div class="page-header">
-        <h1 class="class"><code><code><a href="twisted.html">twisted</a></code><wbr></wbr>.<code><a href="twisted.internet.html">internet</a></code><wbr></wbr>.<code><a href="twisted.internet.abstract.html">abstract</a></code><wbr></wbr>.<code><a href="twisted.internet.abstract.FileDescriptor.html">FileDescriptor</a></code></code></h1>
+        <h1 class="class"><code><code><a href="index.html" class="internal-link">twisted</a></code><wbr></wbr>.<code><a href="twisted.internet.html" class="internal-link" title="twisted.internet">internet</a></code><wbr></wbr>.<code><a href="twisted.internet.abstract.html" class="internal-link" title="twisted.internet.abstract">abstract</a></code><wbr></wbr>.<code><a href="twisted.internet.abstract.FileDescriptor.html" class="internal-link" title="twisted.internet.abstract.FileDescriptor">FileDescriptor</a></code></code></h1>
         <div id="showPrivate">
           <button class="btn btn-link" onclick="togglePrivate()">Toggle Private API</button>
         </div>
@@ -126,261 +145,265 @@
       </div>
 
       <div class="extrasDocstring">
-        <p><code><span class="py-keyword">class</span> <span class="py-defname">FileDescriptor</span>(<a href="twisted.internet.abstract._ConsumerMixin.html" title="twisted.internet.abstract._ConsumerMixin">_ConsumerMixin</a>, <a href="twisted.internet.abstract._LogOwner.html" title="twisted.internet.abstract._LogOwner">_LogOwner</a>): <a href="https://github.com/twisted/twisted/tree/twisted-21.2.0/src/twisted/internet/abstract.py#L151" class="sourceLink">(source)</a></code></p><p>Known subclasses: <code><a href="twisted.internet.base.BasePort.html">twisted.internet.base.BasePort</a></code>, <code><a href="twisted.internet.inotify.INotify.html">twisted.internet.inotify.INotify</a></code>, <code><a href="twisted.internet.process.ProcessReader.html">twisted.internet.process.ProcessReader</a></code>, <code><a href="twisted.internet.process.ProcessWriter.html">twisted.internet.process.ProcessWriter</a></code>, <code><a href="twisted.internet.process.PTYProcess.html">twisted.internet.process.PTYProcess</a></code>, <code><a href="twisted.internet.serialport.SerialPort.html">twisted.internet.serialport.SerialPort</a></code>, <code><a href="twisted.internet.serialport.SerialPort.html">twisted.internet.serialport.SerialPort</a></code>, <code><a href="twisted.internet.tcp.Connection.html">twisted.internet.tcp.Connection</a></code>, <code><a href="twisted.pair.tuntap.TuntapPort.html">twisted.pair.tuntap.TuntapPort</a></code></p><p>Implements interfaces: <code><a href="twisted.internet.interfaces.IConsumer.html">twisted.internet.interfaces.IConsumer</a></code>, <code><a href="twisted.internet.interfaces.IHalfCloseableDescriptor.html">twisted.internet.interfaces.IHalfCloseableDescriptor</a></code>, <code><a href="twisted.internet.interfaces.IPushProducer.html">twisted.internet.interfaces.IPushProducer</a></code>, <code><a href="twisted.internet.interfaces.IReadWriteDescriptor.html">twisted.internet.interfaces.IReadWriteDescriptor</a></code>, <code><a href="twisted.internet.interfaces.ITransport.html">twisted.internet.interfaces.ITransport</a></code></p>
+        <p><code><span class="py-keyword">class</span> <span class="py-defname">FileDescriptor</span>(<a href="twisted.internet.abstract._ConsumerMixin.html" class="internal-link" title="twisted.internet.abstract._ConsumerMixin">_ConsumerMixin</a>, <a href="twisted.internet.abstract._LogOwner.html" class="internal-link" title="twisted.internet.abstract._LogOwner">_LogOwner</a>): <a href="https://github.com/twisted/twisted/tree/twisted-21.2.0/src/twisted/internet/abstract.py#L151" class="sourceLink">(source)</a></code></p><p>Known subclasses: <code><a href="twisted.internet._posixserialport.SerialPort.html" class="internal-link">twisted.internet._posixserialport.SerialPort</a></code>, <code><a href="twisted.internet.base.BasePort.html" class="internal-link">twisted.internet.base.BasePort</a></code>, <code><a href="twisted.internet.inotify.INotify.html" class="internal-link">twisted.internet.inotify.INotify</a></code>, <code><a href="twisted.internet.process.ProcessReader.html" class="internal-link">twisted.internet.process.ProcessReader</a></code>, <code><a href="twisted.internet.process.ProcessWriter.html" class="internal-link">twisted.internet.process.ProcessWriter</a></code>, <code><a href="twisted.internet.process.PTYProcess.html" class="internal-link">twisted.internet.process.PTYProcess</a></code>, <code><a href="twisted.internet.serialport.SerialPort.html" class="internal-link">twisted.internet.serialport.SerialPort</a></code>, <code><a href="twisted.internet.tcp.Connection.html" class="internal-link">twisted.internet.tcp.Connection</a></code>, <code><a href="twisted.pair.tuntap.TuntapPort.html" class="internal-link">twisted.pair.tuntap.TuntapPort</a></code></p><p>Implements interfaces: <code><a href="twisted.internet.interfaces.IConsumer.html" class="internal-link">twisted.internet.interfaces.IConsumer</a></code>, <code><a href="twisted.internet.interfaces.IHalfCloseableDescriptor.html" class="internal-link">twisted.internet.interfaces.IHalfCloseableDescriptor</a></code>, <code><a href="twisted.internet.interfaces.IPushProducer.html" class="internal-link">twisted.internet.interfaces.IPushProducer</a></code>, <code><a href="twisted.internet.interfaces.IReadWriteDescriptor.html" class="internal-link">twisted.internet.interfaces.IReadWriteDescriptor</a></code>, <code><a href="twisted.internet.interfaces.ITransport.html" class="internal-link">twisted.internet.interfaces.ITransport</a></code></p>
         <p><a href="classIndex.html#twisted.internet.abstract.FileDescriptor">View In Hierarchy</a></p>
       </div>
 
+      
+
       <div class="moduleDocstring">
-        <div><p>An object which can be operated on by select().</p><p>This is an abstract superclass of all objects which may be notified when they are readable or writable; e.g. they have a file-descriptor that is valid to be passed to select(2).</p></div>
+        <div><p>An object which can be operated on by select().</p>
+<p>This is an abstract superclass of all objects which may be notified when they are readable or writable; e.g. they have a file-descriptor that is valid to be passed to select(2).</p>
+</div>
       </div>
 
       <div id="splitTables">
-        <table class="children sortable" id="id672">
+        <table class="children sortable" id="id679">
   
   
   <tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#__init__">__init__</a></code></td>
-    <td><span></span></td>
+    <td><code><a href="#__init__" class="internal-link" title="twisted.internet.abstract.FileDescriptor.__init__">__init__</a></code></td>
+    <td></td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#connectionLost">connectionLost</a></code></td>
-    <td><span>The connection was lost.</span></td>
+    <td><code><a href="#connectionLost" class="internal-link" title="twisted.internet.abstract.FileDescriptor.connectionLost">connection​Lost</a></code></td>
+    <td>The connection was lost.</td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#doRead">doRead</a></code></td>
-    <td><span>Called when data is available for reading.</span></td>
+    <td><code><a href="#doRead" class="internal-link" title="twisted.internet.abstract.FileDescriptor.doRead">do​Read</a></code></td>
+    <td>Called when data is available for reading.</td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#doWrite">doWrite</a></code></td>
-    <td><span>Called when data can be written.</span></td>
+    <td><code><a href="#doWrite" class="internal-link" title="twisted.internet.abstract.FileDescriptor.doWrite">do​Write</a></code></td>
+    <td>Called when data can be written.</td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#fileno">fileno</a></code></td>
-    <td><span>File Descriptor number for select().</span></td>
+    <td><code><a href="#fileno" class="internal-link" title="twisted.internet.abstract.FileDescriptor.fileno">fileno</a></code></td>
+    <td>File Descriptor number for select().</td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#getHost">getHost</a></code></td>
-    <td><span>Similar to getPeer, but returns an address describing this side of the connection.</span></td>
+    <td><code><a href="#getHost" class="internal-link" title="twisted.internet.abstract.FileDescriptor.getHost">get​Host</a></code></td>
+    <td>Similar to getPeer, but returns an address describing this side of the connection.</td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#getPeer">getPeer</a></code></td>
-    <td><span>Get the remote address of this connection.</span></td>
+    <td><code><a href="#getPeer" class="internal-link" title="twisted.internet.abstract.FileDescriptor.getPeer">get​Peer</a></code></td>
+    <td>Get the remote address of this connection.</td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#loseConnection">loseConnection</a></code></td>
-    <td><span>Close the connection at the next available opportunity.</span></td>
+    <td><code><a href="#loseConnection" class="internal-link" title="twisted.internet.abstract.FileDescriptor.loseConnection">lose​Connection</a></code></td>
+    <td>Close the connection at the next available opportunity.</td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#loseWriteConnection">loseWriteConnection</a></code></td>
+    <td><code><a href="#loseWriteConnection" class="internal-link" title="twisted.internet.abstract.FileDescriptor.loseWriteConnection">lose​Write​Connection</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#pauseProducing">pauseProducing</a></code></td>
-    <td><span>Pause producing data.</span></td>
+    <td><code><a href="#pauseProducing" class="internal-link" title="twisted.internet.abstract.FileDescriptor.pauseProducing">pause​Producing</a></code></td>
+    <td>Pause producing data.</td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#readConnectionLost">readConnectionLost</a></code></td>
-    <td><span>Indicates read connection was lost.</span></td>
+    <td><code><a href="#readConnectionLost" class="internal-link" title="twisted.internet.abstract.FileDescriptor.readConnectionLost">read​Connection​Lost</a></code></td>
+    <td>Indicates read connection was lost.</td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#resumeProducing">resumeProducing</a></code></td>
-    <td><span>Resume producing data.</span></td>
+    <td><code><a href="#resumeProducing" class="internal-link" title="twisted.internet.abstract.FileDescriptor.resumeProducing">resume​Producing</a></code></td>
+    <td>Resume producing data.</td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#startReading">startReading</a></code></td>
-    <td><span>Start waiting for read availability.</span></td>
+    <td><code><a href="#startReading" class="internal-link" title="twisted.internet.abstract.FileDescriptor.startReading">start​Reading</a></code></td>
+    <td>Start waiting for read availability.</td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#startWriting">startWriting</a></code></td>
-    <td><span>Start waiting for write availability.</span></td>
+    <td><code><a href="#startWriting" class="internal-link" title="twisted.internet.abstract.FileDescriptor.startWriting">start​Writing</a></code></td>
+    <td>Start waiting for write availability.</td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#stopConsuming">stopConsuming</a></code></td>
-    <td><span>Stop consuming data.</span></td>
+    <td><code><a href="#stopConsuming" class="internal-link" title="twisted.internet.abstract.FileDescriptor.stopConsuming">stop​Consuming</a></code></td>
+    <td>Stop consuming data.</td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#stopProducing">stopProducing</a></code></td>
-    <td><span>Stop producing data.</span></td>
+    <td><code><a href="#stopProducing" class="internal-link" title="twisted.internet.abstract.FileDescriptor.stopProducing">stop​Producing</a></code></td>
+    <td>Stop producing data.</td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#stopReading">stopReading</a></code></td>
-    <td><span>Stop waiting for read availability.</span></td>
+    <td><code><a href="#stopReading" class="internal-link" title="twisted.internet.abstract.FileDescriptor.stopReading">stop​Reading</a></code></td>
+    <td>Stop waiting for read availability.</td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#stopWriting">stopWriting</a></code></td>
-    <td><span>Stop waiting for write availability.</span></td>
+    <td><code><a href="#stopWriting" class="internal-link" title="twisted.internet.abstract.FileDescriptor.stopWriting">stop​Writing</a></code></td>
+    <td>Stop waiting for write availability.</td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#write">write</a></code></td>
-    <td><span>Reliably write some data.</span></td>
+    <td><code><a href="#write" class="internal-link" title="twisted.internet.abstract.FileDescriptor.write">write</a></code></td>
+    <td>Reliably write some data.</td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#writeConnectionLost">writeConnectionLost</a></code></td>
-    <td><span>Indicates write connection was lost.</span></td>
+    <td><code><a href="#writeConnectionLost" class="internal-link" title="twisted.internet.abstract.FileDescriptor.writeConnectionLost">write​Connection​Lost</a></code></td>
+    <td>Indicates write connection was lost.</td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#writeSequence">writeSequence</a></code></td>
-    <td><span>Reliably write a sequence of data.</span></td>
+    <td><code><a href="#writeSequence" class="internal-link" title="twisted.internet.abstract.FileDescriptor.writeSequence">write​Sequence</a></code></td>
+    <td>Reliably write a sequence of data.</td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#writeSomeData">writeSomeData</a></code></td>
-    <td><span>Write as much as possible of the given data, immediately.</span></td>
+    <td><code><a href="#writeSomeData" class="internal-link" title="twisted.internet.abstract.FileDescriptor.writeSomeData">write​Some​Data</a></code></td>
+    <td>Write as much as possible of the given data, immediately.</td>
+  </tr><tr class="constant">
+    
+    <td>Constant</td>
+    <td><code><a href="#SEND_LIMIT" class="internal-link" title="twisted.internet.abstract.FileDescriptor.SEND_LIMIT">SEND​_LIMIT</a></code></td>
+    <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="classvariable">
     
     <td>Class Variable</td>
-    <td><code><a href="#bufferSize">bufferSize</a></code></td>
+    <td><code><a href="#bufferSize" class="internal-link" title="twisted.internet.abstract.FileDescriptor.bufferSize">buffer​Size</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="classvariable">
     
     <td>Class Variable</td>
-    <td><code><a href="#SEND_LIMIT">SEND_LIMIT</a></code></td>
+    <td><code><a href="#disconnecting" class="internal-link" title="twisted.internet.abstract.FileDescriptor.disconnecting">disconnecting</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="instancevariable">
     
     <td>Instance Variable</td>
-    <td><code><a href="#connected">connected</a></code></td>
+    <td><code><a href="#connected" class="internal-link" title="twisted.internet.abstract.FileDescriptor.connected">connected</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="instancevariable">
     
     <td>Instance Variable</td>
-    <td><code><a href="#dataBuffer">dataBuffer</a></code></td>
+    <td><code><a href="#dataBuffer" class="internal-link" title="twisted.internet.abstract.FileDescriptor.dataBuffer">data​Buffer</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="instancevariable">
     
     <td>Instance Variable</td>
-    <td><code><a href="#disconnected">disconnected</a></code></td>
+    <td><code><a href="#disconnected" class="internal-link" title="twisted.internet.abstract.FileDescriptor.disconnected">disconnected</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="instancevariable">
     
     <td>Instance Variable</td>
-    <td><code><a href="#disconnecting">disconnecting</a></code></td>
+    <td><code><a href="#offset" class="internal-link" title="twisted.internet.abstract.FileDescriptor.offset">offset</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="instancevariable">
     
     <td>Instance Variable</td>
-    <td><code><a href="#offset">offset</a></code></td>
+    <td><code><a href="#producer" class="internal-link" title="twisted.internet.abstract.FileDescriptor.producer">producer</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="instancevariable">
     
     <td>Instance Variable</td>
-    <td><code><a href="#producer">producer</a></code></td>
+    <td><code><a href="#producerPaused" class="internal-link" title="twisted.internet.abstract.FileDescriptor.producerPaused">producer​Paused</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="instancevariable">
     
     <td>Instance Variable</td>
-    <td><code><a href="#producerPaused">producerPaused</a></code></td>
-    <td><span class="undocumented">Undocumented</span></td>
-  </tr><tr class="instancevariable">
-    
-    <td>Instance Variable</td>
-    <td><code><a href="#reactor">reactor</a></code></td>
+    <td><code><a href="#reactor" class="internal-link" title="twisted.internet.abstract.FileDescriptor.reactor">reactor</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method private">
     
     <td>Method</td>
-    <td><code><a href="#_closeWriteConnection">_closeWriteConnection</a></code></td>
+    <td><code><a href="#_closeWriteConnection" class="internal-link" title="twisted.internet.abstract.FileDescriptor._closeWriteConnection">_close​Write​Connection</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method private">
     
     <td>Method</td>
-    <td><code><a href="#_isSendBufferFull">_isSendBufferFull</a></code></td>
-    <td><span>Determine whether the user-space send buffer for this transport is full or not.</span></td>
+    <td><code><a href="#_isSendBufferFull" class="internal-link" title="twisted.internet.abstract.FileDescriptor._isSendBufferFull">_is​Send​Buffer​Full</a></code></td>
+    <td>Determine whether the user-space send buffer for this transport is full or not.</td>
   </tr><tr class="method private">
     
     <td>Method</td>
-    <td><code><a href="#_maybePauseProducer">_maybePauseProducer</a></code></td>
-    <td><span>Possibly pause a producer, if there is one and the send buffer is full.</span></td>
+    <td><code><a href="#_maybePauseProducer" class="internal-link" title="twisted.internet.abstract.FileDescriptor._maybePauseProducer">_maybe​Pause​Producer</a></code></td>
+    <td>Possibly pause a producer, if there is one and the send buffer is full.</td>
   </tr><tr class="method private">
     
     <td>Method</td>
-    <td><code><a href="#_postLoseConnection">_postLoseConnection</a></code></td>
-    <td><span>Called after a loseConnection(), when all data has been written.</span></td>
-  </tr><tr class="instancevariable private">
+    <td><code><a href="#_postLoseConnection" class="internal-link" title="twisted.internet.abstract.FileDescriptor._postLoseConnection">_post​Lose​Connection</a></code></td>
+    <td>Called after a loseConnection(), when all data has been written.</td>
+  </tr><tr class="classvariable private">
     
-    <td>Instance Variable</td>
-    <td><code><a href="#_tempDataBuffer">_tempDataBuffer</a></code></td>
+    <td>Class Variable</td>
+    <td><code><a href="#_writeDisconnected" class="internal-link" title="twisted.internet.abstract.FileDescriptor._writeDisconnected">_write​Disconnected</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="instancevariable private">
     
     <td>Instance Variable</td>
-    <td><code><a href="#_tempDataLen">_tempDataLen</a></code></td>
+    <td><code><a href="#_tempDataBuffer" class="internal-link" title="twisted.internet.abstract.FileDescriptor._tempDataBuffer">_temp​Data​Buffer</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="instancevariable private">
     
     <td>Instance Variable</td>
-    <td><code><a href="#_writeDisconnected">_writeDisconnected</a></code></td>
+    <td><code><a href="#_tempDataLen" class="internal-link" title="twisted.internet.abstract.FileDescriptor._tempDataLen">_temp​Data​Len</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="instancevariable private">
     
     <td>Instance Variable</td>
-    <td><code><a href="#_writeDisconnecting">_writeDisconnecting</a></code></td>
+    <td><code><a href="#_writeDisconnecting" class="internal-link" title="twisted.internet.abstract.FileDescriptor._writeDisconnecting">_write​Disconnecting</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr>
 </table>
         
           <p class="inheritedFrom">
-            Inherited from <code><a href="twisted.internet.abstract._ConsumerMixin.html">_ConsumerMixin</a></code>:
+            Inherited from <code><a href="twisted.internet.abstract._ConsumerMixin.html" class="internal-link" title="twisted.internet.abstract._ConsumerMixin">_ConsumerMixin</a></code>:
           </p>
-          <table class="children sortable" id="id673">
+          <table class="children sortable" id="id680">
   
   
   <tr class="basemethod">
     
     <td>Method</td>
-    <td><code><a href="twisted.internet.abstract._ConsumerMixin.html#registerProducer">registerProducer</a></code></td>
-    <td><span>Register to receive data from a producer.</span></td>
+    <td><code><a href="twisted.internet.abstract._ConsumerMixin.html#registerProducer" class="internal-link" title="twisted.internet.abstract._ConsumerMixin.registerProducer">register​Producer</a></code></td>
+    <td>Register to receive data from a producer.</td>
   </tr><tr class="basemethod">
     
     <td>Method</td>
-    <td><code><a href="twisted.internet.abstract._ConsumerMixin.html#unregisterProducer">unregisterProducer</a></code></td>
-    <td><span>Stop consuming data from a producer, without disconnecting.</span></td>
+    <td><code><a href="twisted.internet.abstract._ConsumerMixin.html#unregisterProducer" class="internal-link" title="twisted.internet.abstract._ConsumerMixin.unregisterProducer">unregister​Producer</a></code></td>
+    <td>Stop consuming data from a producer, without disconnecting.</td>
   </tr><tr class="baseinstancevariable">
     
     <td>Instance Variable</td>
-    <td><code><a href="twisted.internet.abstract._ConsumerMixin.html#streamingProducer">streamingProducer</a></code></td>
-    <td><span><code>bool</code> or <code>int</code></span></td>
+    <td><code><a href="twisted.internet.abstract._ConsumerMixin.html#streamingProducer" class="internal-link" title="twisted.internet.abstract._ConsumerMixin.streamingProducer">streaming​Producer</a></code></td>
+    <td><tt class="rst-docutils literal">bool</tt> or <tt class="rst-docutils literal">int</tt></td>
   </tr>
 </table>
           
           <p class="inheritedFrom">
-            Inherited from <code><a href="twisted.internet.abstract._LogOwner.html">_LogOwner</a></code>:
+            Inherited from <code><a href="twisted.internet.abstract._LogOwner.html" class="internal-link" title="twisted.internet.abstract._LogOwner">_LogOwner</a></code>:
           </p>
-          <table class="children sortable" id="id674">
+          <table class="children sortable" id="id681">
   
   
   <tr class="basemethod">
     
     <td>Method</td>
-    <td><code><a href="twisted.internet.abstract._LogOwner.html#logPrefix">logPrefix</a></code></td>
-    <td><span>Override this method to insert custom logging behavior.  Its return value will be inserted in front of every line.  It may be called more times than the number of output lines.</span></td>
+    <td><code><a href="twisted.internet.abstract._LogOwner.html#logPrefix" class="internal-link" title="twisted.internet.abstract._LogOwner.logPrefix">log​Prefix</a></code></td>
+    <td>Override this method to insert custom logging behavior.  Its return value will be inserted in front of every line.  It may be called more times than the number of output lines.</td>
   </tr><tr class="basemethod private">
     
     <td>Method</td>
-    <td><code><a href="twisted.internet.abstract._LogOwner.html#_getLogPrefix">_getLogPrefix</a></code></td>
-    <td><span>Determine the log prefix to use for messages related to <code>applicationObject</code>, which may or may not be an <code><a href="twisted.internet.interfaces.ILoggingContext.html">interfaces.ILoggingContext</a></code> provider.</span></td>
+    <td><code><a href="twisted.internet.abstract._LogOwner.html#_getLogPrefix" class="internal-link" title="twisted.internet.abstract._LogOwner._getLogPrefix">_get​Log​Prefix</a></code></td>
+    <td>Determine the log prefix to use for messages related to <tt class="rst-docutils literal">applicationObject</tt>, which may or may not be an <code><a href="twisted.internet.interfaces.ILoggingContext.html" class="internal-link" title="twisted.internet.interfaces.ILoggingContext">interfaces.ILoggingContext</a></code> provider.</td>
   </tr>
 </table>
           
@@ -401,16 +424,16 @@
   </a>
   <div class="functionHeader">
     
-    <span class="py-keyword">def</span> <span class="py-defname">__init__</span>(self, reactor=None):
+    <span class="py-keyword">def</span> <span class="py-defname">__init__</span>(self, reactor=<a href="https://docs.python.org/3/library/constants.html#None" class="intersphinx-link">None</a>):
     <a class="sourceLink" href="https://github.com/twisted/twisted/tree/twisted-21.2.0/src/twisted/internet/abstract.py#L177">
       
       (source)
     </a>
   </div>
   <div class="docstring functionBody">
-    <div class="interfaceinfo">overridden in <code><a href="twisted.internet.inotify.INotify.html">twisted.internet.inotify.INotify</a></code>, <code><a href="twisted.internet.process.ProcessReader.html">twisted.internet.process.ProcessReader</a></code>, <code><a href="twisted.internet.process.ProcessWriter.html">twisted.internet.process.ProcessWriter</a></code>, <code><a href="twisted.internet.process.PTYProcess.html">twisted.internet.process.PTYProcess</a></code>, <code><a href="twisted.internet.serialport.SerialPort.html">twisted.internet.serialport.SerialPort</a></code>, <code><a href="twisted.internet.serialport.SerialPort.html">twisted.internet.serialport.SerialPort</a></code>, <code><a href="twisted.internet.tcp.Connection.html">twisted.internet.tcp.Connection</a></code>, <code><a href="twisted.internet.tcp.Port.html">twisted.internet.tcp.Port</a></code>, <code><a href="twisted.internet.udp.Port.html">twisted.internet.udp.Port</a></code>, <code><a href="twisted.pair.tuntap.TuntapPort.html">twisted.pair.tuntap.TuntapPort</a></code></div>
+    <div class="interfaceinfo">overridden in <code><a href="twisted.internet._posixserialport.SerialPort.html" class="internal-link">twisted.internet._posixserialport.SerialPort</a></code>, <code><a href="twisted.internet.inotify.INotify.html" class="internal-link">twisted.internet.inotify.INotify</a></code>, <code><a href="twisted.internet.process.ProcessReader.html" class="internal-link">twisted.internet.process.ProcessReader</a></code>, <code><a href="twisted.internet.process.ProcessWriter.html" class="internal-link">twisted.internet.process.ProcessWriter</a></code>, <code><a href="twisted.internet.process.PTYProcess.html" class="internal-link">twisted.internet.process.PTYProcess</a></code>, <code><a href="twisted.internet.serialport.SerialPort.html" class="internal-link">twisted.internet.serialport.SerialPort</a></code>, <code><a href="twisted.internet.tcp.Connection.html" class="internal-link">twisted.internet.tcp.Connection</a></code>, <code><a href="twisted.internet.tcp.Port.html" class="internal-link">twisted.internet.tcp.Port</a></code>, <code><a href="twisted.internet.udp.Port.html" class="internal-link">twisted.internet.udp.Port</a></code>, <code><a href="twisted.pair.tuntap.TuntapPort.html" class="internal-link">twisted.pair.tuntap.TuntapPort</a></code></div>
     
-    <div><table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">reactor:</span><code><a href="https://docs.python.org/3/library/typing.html#typing.Optional">Optional</a>[<wbr></wbr><a href="twisted.internet.interfaces.IReactorFDSet.html">interfaces.IReactorFDSet</a>]</code></td><td class="fieldArgDesc">An <code><a href="twisted.internet.interfaces.IReactorFDSet.html">IReactorFDSet</a></code> provider which this descriptor will use to get readable and writeable event notifications.  If no value is given, the global reactor will be used.</td></tr></table></div>
+    <div><table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">reactor:</span><code><a href="https://docs.python.org/3/library/typing.html#typing.Optional" class="intersphinx-link">Optional</a>[<wbr></wbr><a href="twisted.internet.interfaces.IReactorFDSet.html" class="internal-link" title="twisted.internet.interfaces.IReactorFDSet">interfaces.IReactorFDSet</a>]</code></td><td class="fieldArgDesc">An <code><a href="twisted.internet.interfaces.IReactorFDSet.html" class="internal-link" title="twisted.internet.interfaces.IReactorFDSet">IReactorFDSet</a></code> provider which this descriptor will use to get readable and writeable event notifications.  If no value is given, the global reactor will be used.</td></tr></table></div>
   </div>
 </div><div class="basemethod">
   
@@ -430,9 +453,12 @@
     </a>
   </div>
   <div class="docstring functionBody">
-    <div class="interfaceinfo">from <code><a href="twisted.internet.interfaces.IFileDescriptor.html#connectionLost">twisted.internet.interfaces.IFileDescriptor</a></code></div><div class="interfaceinfo">overridden in <code><a href="twisted.internet.inotify.INotify.html">twisted.internet.inotify.INotify</a></code>, <code><a href="twisted.internet.process.ProcessReader.html">twisted.internet.process.ProcessReader</a></code>, <code><a href="twisted.internet.process.ProcessWriter.html">twisted.internet.process.ProcessWriter</a></code>, <code><a href="twisted.internet.process.PTYProcess.html">twisted.internet.process.PTYProcess</a></code>, <code><a href="twisted.internet.serialport.SerialPort.html">twisted.internet.serialport.SerialPort</a></code>, <code><a href="twisted.internet.serialport.SerialPort.html">twisted.internet.serialport.SerialPort</a></code>, <code><a href="twisted.internet.tcp.Connection.html">twisted.internet.tcp.Connection</a></code>, <code><a href="twisted.internet.tcp.Port.html">twisted.internet.tcp.Port</a></code>, <code><a href="twisted.internet.udp.Port.html">twisted.internet.udp.Port</a></code>, <code><a href="twisted.pair.tuntap.TuntapPort.html">twisted.pair.tuntap.TuntapPort</a></code></div>
+    <div class="interfaceinfo">from <code><a href="twisted.internet.interfaces.IFileDescriptor.html#connectionLost" class="internal-link" title="twisted.internet.interfaces.IFileDescriptor.connectionLost">twisted.internet.interfaces.IFileDescriptor</a></code></div><div class="interfaceinfo">overridden in <code><a href="twisted.internet._posixserialport.SerialPort.html" class="internal-link">twisted.internet._posixserialport.SerialPort</a></code>, <code><a href="twisted.internet.inotify.INotify.html" class="internal-link">twisted.internet.inotify.INotify</a></code>, <code><a href="twisted.internet.process.ProcessReader.html" class="internal-link">twisted.internet.process.ProcessReader</a></code>, <code><a href="twisted.internet.process.ProcessWriter.html" class="internal-link">twisted.internet.process.ProcessWriter</a></code>, <code><a href="twisted.internet.process.PTYProcess.html" class="internal-link">twisted.internet.process.PTYProcess</a></code>, <code><a href="twisted.internet.serialport.SerialPort.html" class="internal-link">twisted.internet.serialport.SerialPort</a></code>, <code><a href="twisted.internet.tcp.Connection.html" class="internal-link">twisted.internet.tcp.Connection</a></code>, <code><a href="twisted.internet.tcp.Port.html" class="internal-link">twisted.internet.tcp.Port</a></code>, <code><a href="twisted.internet.udp.Port.html" class="internal-link">twisted.internet.udp.Port</a></code>, <code><a href="twisted.pair.tuntap.TuntapPort.html" class="internal-link">twisted.pair.tuntap.TuntapPort</a></code></div>
     
-    <div><p>The connection was lost.</p><p>This is called when the connection on a selectable object has been lost.  It will be called whether the connection was closed explicitly, an exception occurred in an event handler, or the other end of the connection closed it first.</p><p>Clean up state here, but make sure to call back up to FileDescriptor.</p></div>
+    <div><p>The connection was lost.</p>
+<p>This is called when the connection on a selectable object has been lost.  It will be called whether the connection was closed explicitly, an exception occurred in an event handler, or the other end of the connection closed it first.</p>
+<p>Clean up state here, but make sure to call back up to FileDescriptor.</p>
+</div>
   </div>
 </div><div class="basemethod">
   
@@ -452,9 +478,11 @@
     </a>
   </div>
   <div class="docstring functionBody">
-    <div class="interfaceinfo">from <code><a href="twisted.internet.interfaces.IReadDescriptor.html#doRead">twisted.internet.interfaces.IReadDescriptor</a></code></div><div class="interfaceinfo">overridden in <code><a href="twisted.internet.inotify.INotify.html">twisted.internet.inotify.INotify</a></code>, <code><a href="twisted.internet.process.ProcessReader.html">twisted.internet.process.ProcessReader</a></code>, <code><a href="twisted.internet.process.ProcessWriter.html">twisted.internet.process.ProcessWriter</a></code>, <code><a href="twisted.internet.process.PTYProcess.html">twisted.internet.process.PTYProcess</a></code>, <code><a href="twisted.internet.serialport.SerialPort.html">twisted.internet.serialport.SerialPort</a></code>, <code><a href="twisted.internet.tcp.Connection.html">twisted.internet.tcp.Connection</a></code>, <code><a href="twisted.internet.tcp.Port.html">twisted.internet.tcp.Port</a></code>, <code><a href="twisted.internet.udp.Port.html">twisted.internet.udp.Port</a></code>, <code><a href="twisted.pair.tuntap.TuntapPort.html">twisted.pair.tuntap.TuntapPort</a></code></div>
+    <div class="interfaceinfo">from <code><a href="twisted.internet.interfaces.IReadDescriptor.html#doRead" class="internal-link" title="twisted.internet.interfaces.IReadDescriptor.doRead">twisted.internet.interfaces.IReadDescriptor</a></code></div><div class="interfaceinfo">overridden in <code><a href="twisted.internet._posixserialport.SerialPort.html" class="internal-link">twisted.internet._posixserialport.SerialPort</a></code>, <code><a href="twisted.internet.inotify.INotify.html" class="internal-link">twisted.internet.inotify.INotify</a></code>, <code><a href="twisted.internet.process.ProcessReader.html" class="internal-link">twisted.internet.process.ProcessReader</a></code>, <code><a href="twisted.internet.process.ProcessWriter.html" class="internal-link">twisted.internet.process.ProcessWriter</a></code>, <code><a href="twisted.internet.process.PTYProcess.html" class="internal-link">twisted.internet.process.PTYProcess</a></code>, <code><a href="twisted.internet.tcp.Connection.html" class="internal-link">twisted.internet.tcp.Connection</a></code>, <code><a href="twisted.internet.tcp.Port.html" class="internal-link">twisted.internet.tcp.Port</a></code>, <code><a href="twisted.internet.udp.Port.html" class="internal-link">twisted.internet.udp.Port</a></code>, <code><a href="twisted.pair.tuntap.TuntapPort.html" class="internal-link">twisted.pair.tuntap.TuntapPort</a></code></div>
     
-    <div><p>Called when data is available for reading.</p><p>Subclasses must override this method. The result will be interpreted in the same way as a result of doWrite().</p></div>
+    <div><p>Called when data is available for reading.</p>
+<p>Subclasses must override this method. The result will be interpreted in the same way as a result of doWrite().</p>
+</div>
   </div>
 </div><div class="basemethod">
   
@@ -474,9 +502,9 @@
     </a>
   </div>
   <div class="docstring functionBody">
-    <div class="interfaceinfo">from <code><a href="twisted.internet.interfaces.IWriteDescriptor.html#doWrite">twisted.internet.interfaces.IWriteDescriptor</a></code></div><div class="interfaceinfo">overridden in <code><a href="twisted.internet.base.BasePort.html">twisted.internet.base.BasePort</a></code></div>
+    <div class="interfaceinfo">from <code><a href="twisted.internet.interfaces.IWriteDescriptor.html#doWrite" class="internal-link" title="twisted.internet.interfaces.IWriteDescriptor.doWrite">twisted.internet.interfaces.IWriteDescriptor</a></code></div><div class="interfaceinfo">overridden in <code><a href="twisted.internet.base.BasePort.html" class="internal-link">twisted.internet.base.BasePort</a></code></div>
     
-    <div><p>Called when data can be written.</p><table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Returns</td></tr><tr><td colspan="2"><code><a href="https://docs.python.org/3/library/constants.html#None">None</a></code> on success, an exception or a negative integer on failure.</td></tr><tr class="fieldStart"><td class="fieldName" colspan="2">See Also</td></tr><tr><td colspan="2"><code><a href="twisted.internet.interfaces.IWriteDescriptor.html#doWrite">twisted.internet.interfaces.IWriteDescriptor.doWrite</a></code>.</td></tr></table></div>
+    <div>Called when data can be written.<table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Returns</td></tr><tr><td colspan="2"><code><a href="https://docs.python.org/3/library/constants.html#None" class="intersphinx-link">None</a></code> on success, an exception or a negative integer on failure.</td></tr><tr class="fieldStart"><td class="fieldName" colspan="2">See Also</td></tr><tr><td colspan="2"><code><a href="twisted.internet.interfaces.IWriteDescriptor.html#doWrite" class="internal-link" title="twisted.internet.interfaces.IWriteDescriptor.doWrite">twisted.internet.interfaces.IWriteDescriptor.doWrite</a></code>.</td></tr></table></div>
   </div>
 </div><div class="basemethod">
   
@@ -496,9 +524,11 @@
     </a>
   </div>
   <div class="docstring functionBody">
-    <div class="interfaceinfo">from <code><a href="twisted.internet.interfaces.IFileDescriptor.html#fileno">twisted.internet.interfaces.IFileDescriptor</a></code></div><div class="interfaceinfo">overridden in <code><a href="twisted.internet.inotify.INotify.html">twisted.internet.inotify.INotify</a></code>, <code><a href="twisted.internet.process.ProcessReader.html">twisted.internet.process.ProcessReader</a></code>, <code><a href="twisted.internet.process.ProcessWriter.html">twisted.internet.process.ProcessWriter</a></code>, <code><a href="twisted.internet.process.PTYProcess.html">twisted.internet.process.PTYProcess</a></code>, <code><a href="twisted.internet.serialport.SerialPort.html">twisted.internet.serialport.SerialPort</a></code>, <code><a href="twisted.pair.tuntap.TuntapPort.html">twisted.pair.tuntap.TuntapPort</a></code></div>
+    <div class="interfaceinfo">from <code><a href="twisted.internet.interfaces.IFileDescriptor.html#fileno" class="internal-link" title="twisted.internet.interfaces.IFileDescriptor.fileno">twisted.internet.interfaces.IFileDescriptor</a></code></div><div class="interfaceinfo">overridden in <code><a href="twisted.internet._posixserialport.SerialPort.html" class="internal-link">twisted.internet._posixserialport.SerialPort</a></code>, <code><a href="twisted.internet.inotify.INotify.html" class="internal-link">twisted.internet.inotify.INotify</a></code>, <code><a href="twisted.internet.process.ProcessReader.html" class="internal-link">twisted.internet.process.ProcessReader</a></code>, <code><a href="twisted.internet.process.ProcessWriter.html" class="internal-link">twisted.internet.process.ProcessWriter</a></code>, <code><a href="twisted.internet.process.PTYProcess.html" class="internal-link">twisted.internet.process.PTYProcess</a></code>, <code><a href="twisted.pair.tuntap.TuntapPort.html" class="internal-link">twisted.pair.tuntap.TuntapPort</a></code></div>
     
-    <div><p>File Descriptor number for select().</p><p>This method must be overridden or assigned in subclasses to indicate a valid file descriptor for the operating system.</p></div>
+    <div><p>File Descriptor number for select().</p>
+<p>This method must be overridden or assigned in subclasses to indicate a valid file descriptor for the operating system.</p>
+</div>
   </div>
 </div><div class="basemethod">
   
@@ -518,9 +548,9 @@
     </a>
   </div>
   <div class="docstring functionBody">
-    <div class="interfaceinfo">from <code><a href="twisted.internet.interfaces.ITransport.html#getHost">twisted.internet.interfaces.ITransport</a></code></div><div class="interfaceinfo">overridden in <code><a href="twisted.internet.tcp.Port.html">twisted.internet.tcp.Port</a></code>, <code><a href="twisted.internet.tcp.Server.html">twisted.internet.tcp.Server</a></code>, <code><a href="twisted.internet.udp.Port.html">twisted.internet.udp.Port</a></code>, <code><a href="twisted.internet.unix.Client.html">twisted.internet.unix.Client</a></code>, <code><a href="twisted.pair.tuntap.TuntapPort.html">twisted.pair.tuntap.TuntapPort</a></code></div>
+    <div class="interfaceinfo">from <code><a href="twisted.internet.interfaces.ITransport.html#getHost" class="internal-link" title="twisted.internet.interfaces.ITransport.getHost">twisted.internet.interfaces.ITransport</a></code></div><div class="interfaceinfo">overridden in <code><a href="twisted.internet.tcp.Port.html" class="internal-link">twisted.internet.tcp.Port</a></code>, <code><a href="twisted.internet.tcp.Server.html" class="internal-link">twisted.internet.tcp.Server</a></code>, <code><a href="twisted.internet.udp.Port.html" class="internal-link">twisted.internet.udp.Port</a></code>, <code><a href="twisted.internet.unix.Client.html" class="internal-link">twisted.internet.unix.Client</a></code>, <code><a href="twisted.pair.tuntap.TuntapPort.html" class="internal-link">twisted.pair.tuntap.TuntapPort</a></code></div>
     
-    <div><p>Similar to getPeer, but returns an address describing this side of the connection.</p><table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Returns</td></tr><tr><td colspan="2">An <code><a href="twisted.internet.interfaces.IAddress.html">IAddress</a></code> provider.</td></tr></table></div>
+    <div>Similar to getPeer, but returns an address describing this side of the connection.<table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Returns</td></tr><tr><td colspan="2">An <code><a href="twisted.internet.interfaces.IAddress.html" class="internal-link" title="twisted.internet.interfaces.IAddress">IAddress</a></code> provider.</td></tr></table></div>
   </div>
 </div><div class="basemethod">
   
@@ -540,9 +570,11 @@
     </a>
   </div>
   <div class="docstring functionBody">
-    <div class="interfaceinfo">from <code><a href="twisted.internet.interfaces.ITransport.html#getPeer">twisted.internet.interfaces.ITransport</a></code></div><div class="interfaceinfo">overridden in <code><a href="twisted.internet.tcp.Server.html">twisted.internet.tcp.Server</a></code>, <code><a href="twisted.internet.unix.Client.html">twisted.internet.unix.Client</a></code>, <code><a href="twisted.internet.unix.ConnectedDatagramPort.html">twisted.internet.unix.ConnectedDatagramPort</a></code></div>
+    <div class="interfaceinfo">from <code><a href="twisted.internet.interfaces.ITransport.html#getPeer" class="internal-link" title="twisted.internet.interfaces.ITransport.getPeer">twisted.internet.interfaces.ITransport</a></code></div><div class="interfaceinfo">overridden in <code><a href="twisted.internet.tcp.Server.html" class="internal-link">twisted.internet.tcp.Server</a></code>, <code><a href="twisted.internet.unix.Client.html" class="internal-link">twisted.internet.unix.Client</a></code>, <code><a href="twisted.internet.unix.ConnectedDatagramPort.html" class="internal-link">twisted.internet.unix.ConnectedDatagramPort</a></code></div>
     
-    <div><p>Get the remote address of this connection.</p><p>Treat this method with caution.  It is the unfortunate result of the CGI and Jabber standards, but should not be considered reliable for the usual host of reasons; port forwarding, proxying, firewalls, IP masquerading, etc.</p><table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Returns</td></tr><tr><td colspan="2">An <code><a href="twisted.internet.interfaces.IAddress.html">IAddress</a></code> provider.</td></tr></table></div>
+    <div><p>Get the remote address of this connection.</p>
+<p>Treat this method with caution.  It is the unfortunate result of the CGI and Jabber standards, but should not be considered reliable for the usual host of reasons; port forwarding, proxying, firewalls, IP masquerading, etc.</p>
+<table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Returns</td></tr><tr><td colspan="2">An <code><a href="twisted.internet.interfaces.IAddress.html" class="internal-link" title="twisted.internet.interfaces.IAddress">IAddress</a></code> provider.</td></tr></table></div>
   </div>
 </div><div class="basemethod">
   
@@ -562,9 +594,12 @@
     </a>
   </div>
   <div class="docstring functionBody">
-    <div class="interfaceinfo">from <code><a href="twisted.internet.interfaces.ITransport.html#loseConnection">twisted.internet.interfaces.ITransport</a></code></div><div class="interfaceinfo">overridden in <code><a href="twisted.internet.process.ProcessReader.html">twisted.internet.process.ProcessReader</a></code>, <code><a href="twisted.internet.tcp.Port.html">twisted.internet.tcp.Port</a></code>, <code><a href="twisted.internet.udp.Port.html">twisted.internet.udp.Port</a></code>, <code><a href="twisted.pair.tuntap.TuntapPort.html">twisted.pair.tuntap.TuntapPort</a></code></div>
+    <div class="interfaceinfo">from <code><a href="twisted.internet.interfaces.ITransport.html#loseConnection" class="internal-link" title="twisted.internet.interfaces.ITransport.loseConnection">twisted.internet.interfaces.ITransport</a></code></div><div class="interfaceinfo">overridden in <code><a href="twisted.internet.process.ProcessReader.html" class="internal-link">twisted.internet.process.ProcessReader</a></code>, <code><a href="twisted.internet.tcp.Port.html" class="internal-link">twisted.internet.tcp.Port</a></code>, <code><a href="twisted.internet.udp.Port.html" class="internal-link">twisted.internet.udp.Port</a></code>, <code><a href="twisted.pair.tuntap.TuntapPort.html" class="internal-link">twisted.pair.tuntap.TuntapPort</a></code></div>
     
-    <div><p>Close the connection at the next available opportunity.</p><p>Call this to cause this FileDescriptor to lose its connection.  It will first write any data that it has buffered.</p><p>If there is data buffered yet to be written, this method will cause the transport to lose its connection as soon as it's done flushing its write buffer.  If you have a producer registered, the connection won't be closed until the producer is finished. Therefore, make sure you unregister your producer when it's finished, or the connection will never close.</p></div>
+    <div><p>Close the connection at the next available opportunity.</p>
+<p>Call this to cause this FileDescriptor to lose its connection.  It will first write any data that it has buffered.</p>
+<p>If there is data buffered yet to be written, this method will cause the transport to lose its connection as soon as it's done flushing its write buffer.  If you have a producer registered, the connection won't be closed until the producer is finished. Therefore, make sure you unregister your producer when it's finished, or the connection will never close.</p>
+</div>
   </div>
 </div><div class="basemethod">
   
@@ -606,9 +641,11 @@
     </a>
   </div>
   <div class="docstring functionBody">
-    <div class="interfaceinfo">from <code><a href="twisted.internet.interfaces.IPushProducer.html#pauseProducing">twisted.internet.interfaces.IPushProducer</a></code></div>
+    <div class="interfaceinfo">from <code><a href="twisted.internet.interfaces.IPushProducer.html#pauseProducing" class="internal-link" title="twisted.internet.interfaces.IPushProducer.pauseProducing">twisted.internet.interfaces.IPushProducer</a></code></div>
     
-    <div><p>Pause producing data.</p><p>Tells a producer that it has produced too much data to process for the time being, and to stop until <code>resumeProducing()</code> is called.</p></div>
+    <div><p>Pause producing data.</p>
+<p>Tells a producer that it has produced too much data to process for the time being, and to stop until <tt class="rst-docutils literal">resumeProducing()</tt> is called.</p>
+</div>
   </div>
 </div><div class="basemethod">
   
@@ -628,9 +665,9 @@
     </a>
   </div>
   <div class="docstring functionBody">
-    <div class="interfaceinfo">from <code><a href="twisted.internet.interfaces.IHalfCloseableDescriptor.html#readConnectionLost">twisted.internet.interfaces.IHalfCloseableDescriptor</a></code></div><div class="interfaceinfo">overridden in <code><a href="twisted.internet.tcp.Connection.html">twisted.internet.tcp.Connection</a></code></div>
+    <div class="interfaceinfo">from <code><a href="twisted.internet.interfaces.IHalfCloseableDescriptor.html#readConnectionLost" class="internal-link" title="twisted.internet.interfaces.IHalfCloseableDescriptor.readConnectionLost">twisted.internet.interfaces.IHalfCloseableDescriptor</a></code></div><div class="interfaceinfo">overridden in <code><a href="twisted.internet.tcp.Connection.html" class="internal-link">twisted.internet.tcp.Connection</a></code></div>
     
-    <div><p>Indicates read connection was lost.</p><table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">reason:</span><code><a href="twisted.python.failure.Failure.html">failure.Failure</a></code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr></table></div>
+    <div>Indicates read connection was lost.<table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">reason:</span><code><a href="twisted.python.failure.Failure.html" class="internal-link" title="twisted.python.failure.Failure">failure.Failure</a></code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr></table></div>
   </div>
 </div><div class="basemethod">
   
@@ -650,9 +687,11 @@
     </a>
   </div>
   <div class="docstring functionBody">
-    <div class="interfaceinfo">from <code><a href="twisted.internet.interfaces.IPushProducer.html#resumeProducing">twisted.internet.interfaces.IPushProducer</a></code></div>
+    <div class="interfaceinfo">from <code><a href="twisted.internet.interfaces.IPushProducer.html#resumeProducing" class="internal-link" title="twisted.internet.interfaces.IPushProducer.resumeProducing">twisted.internet.interfaces.IPushProducer</a></code></div>
     
-    <div><p>Resume producing data.</p><p>This tells a producer to re-add itself to the main loop and produce more data for its consumer.</p></div>
+    <div><p>Resume producing data.</p>
+<p>This tells a producer to re-add itself to the main loop and produce more data for its consumer.</p>
+</div>
   </div>
 </div><div class="basemethod">
   
@@ -674,7 +713,7 @@
   <div class="docstring functionBody">
     
     
-    <div><p>Start waiting for read availability.</p></div>
+    <div>Start waiting for read availability.</div>
   </div>
 </div><div class="basemethod">
   
@@ -694,9 +733,11 @@
     </a>
   </div>
   <div class="docstring functionBody">
-    <div class="interfaceinfo">overrides <code><a href="twisted.internet.abstract._ConsumerMixin.html#startWriting">twisted.internet.abstract._ConsumerMixin.startWriting</a></code></div>
+    <div class="interfaceinfo">overrides <code><a href="twisted.internet.abstract._ConsumerMixin.html#startWriting" class="internal-link">twisted.internet.abstract._ConsumerMixin.startWriting</a></code></div>
     
-    <div><p>Start waiting for write availability.</p><p>Call this to have this FileDescriptor be notified whenever it is ready for writing.</p></div>
+    <div><p>Start waiting for write availability.</p>
+<p>Call this to have this FileDescriptor be notified whenever it is ready for writing.</p>
+</div>
   </div>
 </div><div class="basemethod">
   
@@ -718,7 +759,9 @@
   <div class="docstring functionBody">
     
     
-    <div><p>Stop consuming data.</p><p>This is called when a producer has lost its connection, to tell the consumer to go lose its connection (and break potential circular references).</p></div>
+    <div><p>Stop consuming data.</p>
+<p>This is called when a producer has lost its connection, to tell the consumer to go lose its connection (and break potential circular references).</p>
+</div>
   </div>
 </div><div class="basemethod">
   
@@ -738,9 +781,11 @@
     </a>
   </div>
   <div class="docstring functionBody">
-    <div class="interfaceinfo">from <code><a href="twisted.internet.interfaces.IProducer.html#stopProducing">twisted.internet.interfaces.IProducer</a></code></div>
+    <div class="interfaceinfo">from <code><a href="twisted.internet.interfaces.IProducer.html#stopProducing" class="internal-link" title="twisted.internet.interfaces.IProducer.stopProducing">twisted.internet.interfaces.IProducer</a></code></div>
     
-    <div><p>Stop producing data.</p><p>This tells a producer that its consumer has died, so it must stop producing data for good.</p></div>
+    <div><p>Stop producing data.</p>
+<p>This tells a producer that its consumer has died, so it must stop producing data for good.</p>
+</div>
   </div>
 </div><div class="basemethod">
   
@@ -762,7 +807,9 @@
   <div class="docstring functionBody">
     
     
-    <div><p>Stop waiting for read availability.</p><p>Call this to remove this selectable from being notified when it is ready for reading.</p></div>
+    <div><p>Stop waiting for read availability.</p>
+<p>Call this to remove this selectable from being notified when it is ready for reading.</p>
+</div>
   </div>
 </div><div class="basemethod">
   
@@ -784,7 +831,9 @@
   <div class="docstring functionBody">
     
     
-    <div><p>Stop waiting for write availability.</p><p>Call this to remove this selectable from being notified when it is ready for writing.</p></div>
+    <div><p>Stop waiting for write availability.</p>
+<p>Call this to remove this selectable from being notified when it is ready for writing.</p>
+</div>
   </div>
 </div><div class="basemethod">
   
@@ -804,9 +853,11 @@
     </a>
   </div>
   <div class="docstring functionBody">
-    <div class="interfaceinfo">from <code><a href="twisted.internet.interfaces.IConsumer.html#write">twisted.internet.interfaces.IConsumer</a></code></div><div class="interfaceinfo">overridden in <code><a href="twisted.internet.process.ProcessWriter.html">twisted.internet.process.ProcessWriter</a></code>, <code><a href="twisted.internet.serialport.SerialPort.html">twisted.internet.serialport.SerialPort</a></code>, <code><a href="twisted.internet.udp.Port.html">twisted.internet.udp.Port</a></code>, <code><a href="twisted.pair.tuntap.TuntapPort.html">twisted.pair.tuntap.TuntapPort</a></code></div>
+    <div class="interfaceinfo">from <code><a href="twisted.internet.interfaces.IConsumer.html#write" class="internal-link" title="twisted.internet.interfaces.IConsumer.write">twisted.internet.interfaces.IConsumer</a></code></div><div class="interfaceinfo">overridden in <code><a href="twisted.internet.process.ProcessWriter.html" class="internal-link">twisted.internet.process.ProcessWriter</a></code>, <code><a href="twisted.internet.serialport.SerialPort.html" class="internal-link">twisted.internet.serialport.SerialPort</a></code>, <code><a href="twisted.internet.udp.Port.html" class="internal-link">twisted.internet.udp.Port</a></code>, <code><a href="twisted.pair.tuntap.TuntapPort.html" class="internal-link">twisted.pair.tuntap.TuntapPort</a></code></div>
     
-    <div><p>Reliably write some data.</p><p>The data is buffered until the underlying file descriptor is ready for writing. If there is more than <code>self.bufferSize</code> data in the buffer and this descriptor has a registered streaming producer, its <code>pauseProducing()</code> method will be called.</p><table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">data:</span><code><a href="https://docs.python.org/3/library/stdtypes.html#bytes">bytes</a></code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr></table></div>
+    <div><p>Reliably write some data.</p>
+<p>The data is buffered until the underlying file descriptor is ready for writing. If there is more than <tt class="rst-docutils literal">self.bufferSize</tt> data in the buffer and this descriptor has a registered streaming producer, its <tt class="rst-docutils literal">pauseProducing()</tt> method will be called.</p>
+<table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">data:</span><code><a href="https://docs.python.org/3/library/stdtypes.html#bytes" class="intersphinx-link">bytes</a></code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr></table></div>
   </div>
 </div><div class="basemethod">
   
@@ -826,9 +877,9 @@
     </a>
   </div>
   <div class="docstring functionBody">
-    <div class="interfaceinfo">from <code><a href="twisted.internet.interfaces.IHalfCloseableDescriptor.html#writeConnectionLost">twisted.internet.interfaces.IHalfCloseableDescriptor</a></code></div>
+    <div class="interfaceinfo">from <code><a href="twisted.internet.interfaces.IHalfCloseableDescriptor.html#writeConnectionLost" class="internal-link" title="twisted.internet.interfaces.IHalfCloseableDescriptor.writeConnectionLost">twisted.internet.interfaces.IHalfCloseableDescriptor</a></code></div>
     
-    <div><p>Indicates write connection was lost.</p></div>
+    <div>Indicates write connection was lost.</div>
   </div>
 </div><div class="basemethod">
   
@@ -848,12 +899,17 @@
     </a>
   </div>
   <div class="docstring functionBody">
-    <div class="interfaceinfo">from <code><a href="twisted.internet.interfaces.ITransport.html#writeSequence">twisted.internet.interfaces.ITransport</a></code></div><div class="interfaceinfo">overridden in <code><a href="twisted.internet.udp.Port.html">twisted.internet.udp.Port</a></code>, <code><a href="twisted.pair.tuntap.TuntapPort.html">twisted.pair.tuntap.TuntapPort</a></code></div>
+    <div class="interfaceinfo">from <code><a href="twisted.internet.interfaces.ITransport.html#writeSequence" class="internal-link" title="twisted.internet.interfaces.ITransport.writeSequence">twisted.internet.interfaces.ITransport</a></code></div><div class="interfaceinfo">overridden in <code><a href="twisted.internet.udp.Port.html" class="internal-link">twisted.internet.udp.Port</a></code>, <code><a href="twisted.pair.tuntap.TuntapPort.html" class="internal-link">twisted.pair.tuntap.TuntapPort</a></code></div>
     
-    <div><p>Reliably write a sequence of data.</p><p>Currently, this is a convenience method roughly equivalent to:</p><pre class="literalblock">
+    <div><p>Reliably write a sequence of data.</p>
+<p>Currently, this is a convenience method roughly equivalent to:</p>
+<pre class="rst-literal-block">
     for chunk in iovec:
         fd.write(chunk)
-</pre><p>It may have a more efficient implementation at a later time or in a different reactor.</p><p>As with the <code>write()</code> method, if a buffer size limit is reached and a streaming producer is registered, it will be paused until the buffered data is written to the underlying file descriptor.</p><table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">iovec:</span><code><a href="https://docs.python.org/3/library/typing.html#typing.Iterable">Iterable</a>[<wbr></wbr><a href="https://docs.python.org/3/library/stdtypes.html#bytes">bytes</a>]</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr></table></div>
+</pre>
+<p>It may have a more efficient implementation at a later time or in a different reactor.</p>
+<p>As with the <tt class="rst-docutils literal">write()</tt> method, if a buffer size limit is reached and a streaming producer is registered, it will be paused until the buffered data is written to the underlying file descriptor.</p>
+<table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">iovec:</span><code><a href="https://docs.python.org/3/library/typing.html#typing.Iterable" class="intersphinx-link">Iterable</a>[<wbr></wbr><a href="https://docs.python.org/3/library/stdtypes.html#bytes" class="intersphinx-link">bytes</a>]</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr></table></div>
   </div>
 </div><div class="basemethod">
   
@@ -873,9 +929,34 @@
     </a>
   </div>
   <div class="docstring functionBody">
-    <div class="interfaceinfo">overridden in <code><a href="twisted.internet.process.ProcessReader.html">twisted.internet.process.ProcessReader</a></code>, <code><a href="twisted.internet.process.ProcessWriter.html">twisted.internet.process.ProcessWriter</a></code>, <code><a href="twisted.internet.process.PTYProcess.html">twisted.internet.process.PTYProcess</a></code>, <code><a href="twisted.internet.serialport.SerialPort.html">twisted.internet.serialport.SerialPort</a></code>, <code><a href="twisted.internet.tcp.Connection.html">twisted.internet.tcp.Connection</a></code></div>
+    <div class="interfaceinfo">overridden in <code><a href="twisted.internet._posixserialport.SerialPort.html" class="internal-link">twisted.internet._posixserialport.SerialPort</a></code>, <code><a href="twisted.internet.process.ProcessReader.html" class="internal-link">twisted.internet.process.ProcessReader</a></code>, <code><a href="twisted.internet.process.ProcessWriter.html" class="internal-link">twisted.internet.process.ProcessWriter</a></code>, <code><a href="twisted.internet.process.PTYProcess.html" class="internal-link">twisted.internet.process.PTYProcess</a></code>, <code><a href="twisted.internet.tcp.Connection.html" class="internal-link">twisted.internet.tcp.Connection</a></code></div>
     
-    <div><p>Write as much as possible of the given data, immediately.</p><p>This is called to invoke the lower-level writing functionality, such as a socket's send() method, or a file's write(); this method returns an integer or an exception.  If an integer, it is the number of bytes written (possibly zero); if an exception, it indicates the connection was lost.</p><table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">data:</span><code><a href="https://docs.python.org/3/library/stdtypes.html#bytes">bytes</a></code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr></table></div>
+    <div><p>Write as much as possible of the given data, immediately.</p>
+<p>This is called to invoke the lower-level writing functionality, such as a socket's send() method, or a file's write(); this method returns an integer or an exception.  If an integer, it is the number of bytes written (possibly zero); if an exception, it indicates the connection was lost.</p>
+<table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">data:</span><code><a href="https://docs.python.org/3/library/stdtypes.html#bytes" class="intersphinx-link">bytes</a></code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr></table></div>
+  </div>
+</div><div class="baseconstant">
+  
+  
+  <a name="twisted.internet.abstract.FileDescriptor.SEND_LIMIT">
+    
+  </a>
+  <a name="SEND_LIMIT">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-defname">SEND_LIMIT</span> =
+    <a class="sourceLink" href="https://github.com/twisted/twisted/tree/twisted-21.2.0/src/twisted/internet/abstract.py#L175">
+      
+      (source)
+    </a>
+  </div>
+  <div class="functionBody">
+    
+    
+    <div><p class="undocumented">Undocumented</p></div>
+    <table class="valueTable"><tr class="fieldStart"><td class="fieldName">Value</td></tr><tr><td><pre class="constant-value"><code>128*1024</code></pre></td></tr></table>
   </div>
 </div><div class="baseclassvariable">
   
@@ -898,28 +979,30 @@
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    
   </div>
 </div><div class="baseclassvariable">
   
   
-  <a name="twisted.internet.abstract.FileDescriptor.SEND_LIMIT">
+  <a name="twisted.internet.abstract.FileDescriptor.disconnecting">
     
   </a>
-  <a name="SEND_LIMIT">
+  <a name="disconnecting">
     
   </a>
   <div class="functionHeader">
     
-    <span class="py-defname">SEND_LIMIT</span> =
-    <a class="sourceLink" href="https://github.com/twisted/twisted/tree/twisted-21.2.0/src/twisted/internet/abstract.py#L175">
+    <span class="py-defname">disconnecting</span>: <code><a href="https://docs.python.org/3/library/functions.html#int" class="intersphinx-link">int</a></code> =
+    <a class="sourceLink" href="https://github.com/twisted/twisted/tree/twisted-21.2.0/src/twisted/internet/abstract.py#L169">
       
       (source)
     </a>
   </div>
   <div class="functionBody">
-    
+    <div class="interfaceinfo">overridden in <code><a href="twisted.internet.process.ProcessReader.html" class="internal-link">twisted.internet.process.ProcessReader</a></code>, <code><a href="twisted.internet.tcp.Port.html" class="internal-link">twisted.internet.tcp.Port</a></code></div>
     
     <div><p class="undocumented">Undocumented</p></div>
+    
   </div>
 </div><div class="baseinstancevariable">
   
@@ -932,16 +1015,17 @@
   </a>
   <div class="functionHeader">
     
-    <span class="py-defname">connected</span>: <code><a href="https://docs.python.org/3/library/functions.html#int">int</a></code> =
+    <span class="py-defname">connected</span>: <code><a href="https://docs.python.org/3/library/functions.html#int" class="intersphinx-link">int</a></code> =
     <a class="sourceLink" href="https://github.com/twisted/twisted/tree/twisted-21.2.0/src/twisted/internet/abstract.py#L167">
       
       (source)
     </a>
   </div>
   <div class="functionBody">
-    <div class="interfaceinfo">overridden in <code><a href="twisted.internet.inotify.INotify.html">twisted.internet.inotify.INotify</a></code>, <code><a href="twisted.internet.process.ProcessReader.html">twisted.internet.process.ProcessReader</a></code>, <code><a href="twisted.internet.process.ProcessWriter.html">twisted.internet.process.ProcessWriter</a></code>, <code><a href="twisted.internet.process.PTYProcess.html">twisted.internet.process.PTYProcess</a></code>, <code><a href="twisted.internet.serialport.SerialPort.html">twisted.internet.serialport.SerialPort</a></code>, <code><a href="twisted.internet.serialport.SerialPort.html">twisted.internet.serialport.SerialPort</a></code>, <code><a href="twisted.internet.tcp.BaseClient.html">twisted.internet.tcp.BaseClient</a></code>, <code><a href="twisted.internet.tcp.Port.html">twisted.internet.tcp.Port</a></code>, <code><a href="twisted.internet.tcp.Server.html">twisted.internet.tcp.Server</a></code>, <code><a href="twisted.internet.udp.Port.html">twisted.internet.udp.Port</a></code>, <code><a href="twisted.pair.tuntap.TuntapPort.html">twisted.pair.tuntap.TuntapPort</a></code></div>
+    <div class="interfaceinfo">overridden in <code><a href="twisted.internet._posixserialport.SerialPort.html" class="internal-link">twisted.internet._posixserialport.SerialPort</a></code>, <code><a href="twisted.internet.inotify.INotify.html" class="internal-link">twisted.internet.inotify.INotify</a></code>, <code><a href="twisted.internet.process.ProcessReader.html" class="internal-link">twisted.internet.process.ProcessReader</a></code>, <code><a href="twisted.internet.process.ProcessWriter.html" class="internal-link">twisted.internet.process.ProcessWriter</a></code>, <code><a href="twisted.internet.process.PTYProcess.html" class="internal-link">twisted.internet.process.PTYProcess</a></code>, <code><a href="twisted.internet.serialport.SerialPort.html" class="internal-link">twisted.internet.serialport.SerialPort</a></code>, <code><a href="twisted.internet.tcp.BaseClient.html" class="internal-link">twisted.internet.tcp.BaseClient</a></code>, <code><a href="twisted.internet.tcp.Port.html" class="internal-link">twisted.internet.tcp.Port</a></code>, <code><a href="twisted.internet.tcp.Server.html" class="internal-link">twisted.internet.tcp.Server</a></code>, <code><a href="twisted.internet.udp.Port.html" class="internal-link">twisted.internet.udp.Port</a></code>, <code><a href="twisted.pair.tuntap.TuntapPort.html" class="internal-link">twisted.pair.tuntap.TuntapPort</a></code></div>
     
     <div><p class="undocumented">Undocumented</p></div>
+    
   </div>
 </div><div class="baseinstancevariable">
   
@@ -954,7 +1038,7 @@
   </a>
   <div class="functionHeader">
     
-    <span class="py-defname">dataBuffer</span>: <code><a href="https://docs.python.org/3/library/stdtypes.html#bytes">bytes</a></code> =
+    <span class="py-defname">dataBuffer</span>: <code><a href="https://docs.python.org/3/library/stdtypes.html#bytes" class="intersphinx-link">bytes</a></code> =
     <a class="sourceLink" href="https://github.com/twisted/twisted/tree/twisted-21.2.0/src/twisted/internet/abstract.py#L172">
       
       (source)
@@ -964,6 +1048,7 @@
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    
   </div>
 </div><div class="baseinstancevariable">
   
@@ -976,7 +1061,7 @@
   </a>
   <div class="functionHeader">
     
-    <span class="py-defname">disconnected</span>: <code><a href="https://docs.python.org/3/library/functions.html#int">int</a></code> =
+    <span class="py-defname">disconnected</span>: <code><a href="https://docs.python.org/3/library/functions.html#int" class="intersphinx-link">int</a></code> =
     <a class="sourceLink" href="https://github.com/twisted/twisted/tree/twisted-21.2.0/src/twisted/internet/abstract.py#L168">
       
       (source)
@@ -986,28 +1071,7 @@
     
     
     <div><p class="undocumented">Undocumented</p></div>
-  </div>
-</div><div class="baseinstancevariable">
-  
-  
-  <a name="twisted.internet.abstract.FileDescriptor.disconnecting">
     
-  </a>
-  <a name="disconnecting">
-    
-  </a>
-  <div class="functionHeader">
-    
-    <span class="py-defname">disconnecting</span>: <code><a href="https://docs.python.org/3/library/functions.html#int">int</a></code> =
-    <a class="sourceLink" href="https://github.com/twisted/twisted/tree/twisted-21.2.0/src/twisted/internet/abstract.py#L169">
-      
-      (source)
-    </a>
-  </div>
-  <div class="functionBody">
-    <div class="interfaceinfo">overridden in <code><a href="twisted.internet.process.ProcessReader.html">twisted.internet.process.ProcessReader</a></code>, <code><a href="twisted.internet.tcp.Port.html">twisted.internet.tcp.Port</a></code>, <code><a href="twisted.pair.tuntap.TuntapPort.html">twisted.pair.tuntap.TuntapPort</a></code></div>
-    
-    <div><p class="undocumented">Undocumented</p></div>
   </div>
 </div><div class="baseinstancevariable">
   
@@ -1020,7 +1084,7 @@
   </a>
   <div class="functionHeader">
     
-    <span class="py-defname">offset</span>: <code><a href="https://docs.python.org/3/library/functions.html#int">int</a></code> =
+    <span class="py-defname">offset</span>: <code><a href="https://docs.python.org/3/library/functions.html#int" class="intersphinx-link">int</a></code> =
     <a class="sourceLink" href="https://github.com/twisted/twisted/tree/twisted-21.2.0/src/twisted/internet/abstract.py#L173">
       
       (source)
@@ -1030,6 +1094,7 @@
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    
   </div>
 </div><div class="baseinstancevariable">
   
@@ -1049,9 +1114,10 @@
     </a>
   </div>
   <div class="functionBody">
-    <div class="interfaceinfo">overrides <code><a href="twisted.internet.abstract._ConsumerMixin.html#producer">twisted.internet.abstract._ConsumerMixin.producer</a></code></div>
+    <div class="interfaceinfo">overrides <code><a href="twisted.internet.abstract._ConsumerMixin.html#producer" class="internal-link">twisted.internet.abstract._ConsumerMixin.producer</a></code></div>
     
     <div><p class="undocumented">Undocumented</p></div>
+    
   </div>
 </div><div class="baseinstancevariable">
   
@@ -1064,16 +1130,17 @@
   </a>
   <div class="functionHeader">
     
-    <span class="py-defname">producerPaused</span>: <code><a href="https://docs.python.org/3/library/functions.html#bool">bool</a></code> =
+    <span class="py-defname">producerPaused</span>: <code><a href="https://docs.python.org/3/library/functions.html#bool" class="intersphinx-link">bool</a></code> =
     <a class="sourceLink" href="https://github.com/twisted/twisted/tree/twisted-21.2.0/src/twisted/internet/abstract.py#L278">
       
       (source)
     </a>
   </div>
   <div class="functionBody">
-    <div class="interfaceinfo">overrides <code><a href="twisted.internet.abstract._ConsumerMixin.html#producerPaused">twisted.internet.abstract._ConsumerMixin.producerPaused</a></code></div>
+    <div class="interfaceinfo">overrides <code><a href="twisted.internet.abstract._ConsumerMixin.html#producerPaused" class="internal-link">twisted.internet.abstract._ConsumerMixin.producerPaused</a></code></div>
     
     <div><p class="undocumented">Undocumented</p></div>
+    
   </div>
 </div><div class="baseinstancevariable">
   
@@ -1093,9 +1160,10 @@
     </a>
   </div>
   <div class="functionBody">
-    <div class="interfaceinfo">overridden in <code><a href="twisted.internet.serialport.SerialPort.html">twisted.internet.serialport.SerialPort</a></code>, <code><a href="twisted.internet.serialport.SerialPort.html">twisted.internet.serialport.SerialPort</a></code></div>
+    <div class="interfaceinfo">overridden in <code><a href="twisted.internet._posixserialport.SerialPort.html" class="internal-link">twisted.internet._posixserialport.SerialPort</a></code>, <code><a href="twisted.internet.serialport.SerialPort.html" class="internal-link">twisted.internet.serialport.SerialPort</a></code></div>
     
     <div><p class="undocumented">Undocumented</p></div>
+    
   </div>
 </div><div class="basemethod private">
   
@@ -1115,7 +1183,7 @@
     </a>
   </div>
   <div class="docstring functionBody">
-    <div class="interfaceinfo">overridden in <code><a href="twisted.internet.tcp.Connection.html">twisted.internet.tcp.Connection</a></code></div>
+    <div class="interfaceinfo">overridden in <code><a href="twisted.internet.tcp.Connection.html" class="internal-link">twisted.internet.tcp.Connection</a></code></div>
     
     <div><p class="undocumented">Undocumented</p></div>
   </div>
@@ -1139,7 +1207,9 @@
   <div class="docstring functionBody">
     
     
-    <div><p>Determine whether the user-space send buffer for this transport is full or not.</p><p>When the buffer contains more than <code>self.bufferSize</code> bytes, it is considered full.  This might be improved by considering the size of the kernel send buffer and how much of it is free.</p><table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Returns</td></tr><tr><td colspan="2"><code>True</code> if it is full, <code>False</code> otherwise.</td></tr></table></div>
+    <div><p>Determine whether the user-space send buffer for this transport is full or not.</p>
+<p>When the buffer contains more than <tt class="rst-docutils literal">self.bufferSize</tt> bytes, it is considered full.  This might be improved by considering the size of the kernel send buffer and how much of it is free.</p>
+<table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Returns</td></tr><tr><td colspan="2"><tt class="rst-docutils literal">True</tt> if it is full, <tt class="rst-docutils literal">False</tt> otherwise.</td></tr></table></div>
   </div>
 </div><div class="basemethod private">
   
@@ -1161,7 +1231,7 @@
   <div class="docstring functionBody">
     
     
-    <div><p>Possibly pause a producer, if there is one and the send buffer is full.</p></div>
+    <div>Possibly pause a producer, if there is one and the send buffer is full.</div>
   </div>
 </div><div class="basemethod private">
   
@@ -1183,7 +1253,32 @@
   <div class="docstring functionBody">
     
     
-    <div><p>Called after a loseConnection(), when all data has been written.</p><p>Whatever this returns is then returned by doWrite.</p></div>
+    <div><p>Called after a loseConnection(), when all data has been written.</p>
+<p>Whatever this returns is then returned by doWrite.</p>
+</div>
+  </div>
+</div><div class="baseclassvariable private">
+  
+  
+  <a name="twisted.internet.abstract.FileDescriptor._writeDisconnected">
+    
+  </a>
+  <a name="_writeDisconnected">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-defname">_writeDisconnected</span>: <code><a href="https://docs.python.org/3/library/functions.html#bool" class="intersphinx-link">bool</a></code> =
+    <a class="sourceLink" href="https://github.com/twisted/twisted/tree/twisted-21.2.0/src/twisted/internet/abstract.py#L171">
+      
+      (source)
+    </a>
+  </div>
+  <div class="functionBody">
+    <div class="interfaceinfo">overridden in <code><a href="twisted.internet.inotify.INotify.html" class="internal-link">twisted.internet.inotify.INotify</a></code></div>
+    
+    <div><p class="undocumented">Undocumented</p></div>
+    
   </div>
 </div><div class="baseinstancevariable private">
   
@@ -1196,7 +1291,7 @@
   </a>
   <div class="functionHeader">
     
-    <span class="py-defname">_tempDataBuffer</span>: <code><a href="https://docs.python.org/3/library/stdtypes.html#list">list</a></code> =
+    <span class="py-defname">_tempDataBuffer</span>: <code><a href="https://docs.python.org/3/library/stdtypes.html#list" class="intersphinx-link">list</a></code> =
     <a class="sourceLink" href="https://github.com/twisted/twisted/tree/twisted-21.2.0/src/twisted/internet/abstract.py#L189">
       
       (source)
@@ -1206,6 +1301,7 @@
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    
   </div>
 </div><div class="baseinstancevariable private">
   
@@ -1218,7 +1314,7 @@
   </a>
   <div class="functionHeader">
     
-    <span class="py-defname">_tempDataLen</span>: <code><a href="https://docs.python.org/3/library/functions.html#int">int</a></code> =
+    <span class="py-defname">_tempDataLen</span>: <code><a href="https://docs.python.org/3/library/functions.html#int" class="intersphinx-link">int</a></code> =
     <a class="sourceLink" href="https://github.com/twisted/twisted/tree/twisted-21.2.0/src/twisted/internet/abstract.py#L190">
       
       (source)
@@ -1228,28 +1324,7 @@
     
     
     <div><p class="undocumented">Undocumented</p></div>
-  </div>
-</div><div class="baseinstancevariable private">
-  
-  
-  <a name="twisted.internet.abstract.FileDescriptor._writeDisconnected">
     
-  </a>
-  <a name="_writeDisconnected">
-    
-  </a>
-  <div class="functionHeader">
-    
-    <span class="py-defname">_writeDisconnected</span>: <code><a href="https://docs.python.org/3/library/functions.html#bool">bool</a></code> =
-    <a class="sourceLink" href="https://github.com/twisted/twisted/tree/twisted-21.2.0/src/twisted/internet/abstract.py#L171">
-      
-      (source)
-    </a>
-  </div>
-  <div class="functionBody">
-    <div class="interfaceinfo">overridden in <code><a href="twisted.internet.inotify.INotify.html">twisted.internet.inotify.INotify</a></code></div>
-    
-    <div><p class="undocumented">Undocumented</p></div>
   </div>
 </div><div class="baseinstancevariable private">
   
@@ -1262,7 +1337,7 @@
   </a>
   <div class="functionHeader">
     
-    <span class="py-defname">_writeDisconnecting</span>: <code><a href="https://docs.python.org/3/library/functions.html#bool">bool</a></code> =
+    <span class="py-defname">_writeDisconnecting</span>: <code><a href="https://docs.python.org/3/library/functions.html#bool" class="intersphinx-link">bool</a></code> =
     <a class="sourceLink" href="https://github.com/twisted/twisted/tree/twisted-21.2.0/src/twisted/internet/abstract.py#L170">
       
       (source)
@@ -1272,6 +1347,7 @@
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    
   </div>
 </div>
 
@@ -1280,11 +1356,33 @@
 
     <footer class="navbar navbar-default">
   
+
   <div class="container">
     <a href="index.html">API Documentation</a> for <a href="https://twistedmatrix.com/" class="projecthome">Twisted</a>,
   generated by <a href="https://github.com/twisted/pydoctor/">pydoctor</a>
-    21.2.2 at 2022-01-12 04:22:24.
+    22.2.2.dev0 at 2022-03-04 05:57:20.
   </div>
+
+  <!-- Google analytics, obviously. -->
+  <script src="//www.google-analytics.com/urchin.js" type="text/javascript"></script>
+  <script type="text/javascript">
+    _uacct = "UA-99018-6";
+    urchinTracker();
+  </script>
+
+  <!-- If the documentation isn't current, insert a current link. -->
+  <script type="text/javascript">
+    if (window.location.pathname.indexOf('/current/') == -1) {
+      <!-- Give the user a link to this page, but in the current version of the docs. -->
+      var link = document.getElementById('current-docs-link');
+      link.href = window.location.pathname.replace(/\/\d+\.\d+\.\d+\/api\//, '/current/api/');
+      <!-- And make it visible -->
+      var container = document.getElementById('current-docs-container');
+      container.style.display = "";
+      delete link;
+      delete container;
+    }
+  </script>
 </footer>
 
     <script src="pydoctor.js" type="text/javascript"></script>

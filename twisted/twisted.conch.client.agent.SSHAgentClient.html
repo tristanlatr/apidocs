@@ -7,7 +7,7 @@
   <head>
     
     <title>twisted.conch.client.agent.SSHAgentClient</title>
-    <meta name="generator" content="pydoctor 21.2.2"> 
+    <meta name="generator" content="pydoctor 22.2.2.dev0"> 
         
     </meta>
     <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
@@ -19,7 +19,13 @@
 
   <body>
 
-    
+    <div style="display: none" id="current-docs-container" class="container">
+  <div class="col-sm-12">
+    <a id="current-docs-link">
+      Go to the latest version of this document.
+    </a>
+  </div>
+</div>
 
     <nav class="navbar navbar-default">
   
@@ -44,69 +50,82 @@
           Names
         </a>
 
-        <form action="search-results.html" id="search-box-container">
+        <div id="search-box-container">
           <div class="input-group">
-            <input id="search-box" name="search-query" placeholder="Search..." aria-label="Search" minlength="2" class="form-control" />
+            <input id="search-box" type="search" name="search-query" placeholder="Search..." aria-label="Search" minlength="2" class="form-control" autocomplete="off" />
+            
             <span class="input-group-btn">
-              <button class="btn btn-default" type="submit" title="Search"><img src="fonts/search.svg" alt="Search!" /></button>
-              <a class="btn btn-default" id="search-help-button" title="Help" onclick="toggleSearchHelpText()"><img src="fonts/info.svg" alt="Help!" /></a>
+              <a style="display: none;" class="btn btn-default" id="search-clear-button" title="Clear" onclick="clearSearch()"><img src="fonts/x-circle.svg" alt="Clear" /></a>
+              <a class="btn btn-default" id="search-help-button" title="Help" onclick="toggleSearchHelpText()"><img src="fonts/info.svg" alt="Help" /></a>
             </span>
           </div>
-        </form>
+        </div>
 
-        <div class="rst-admonition hint" id="search-help-box">
+      </div>
+
+      <div id="search-results-container" style="display: none;">
+        <div>
+          <span class="label label-default" id="search-docstrings-button">
+            <a title="Search in docstrings" onclick="toggleSearchInDocstrings()">search in docstrings</a></span>
+        </div>
+
+        <noscript>
+            <h1>Cannot search: JavaScript is not supported/enabled in your browser.</h1>
+        </noscript>
+
+        <div class="hint" id="search-help-box">
           <p class="rst-last">
       
             Search bar offers the following options:
             <ul>   
                 <li>
                   <strong>Term presence.</strong> The below example searches for documents that 
-                    must contain “foo”, might contain “bar” and must not contain “baz”:
-                  <br /> <code>'+foo bar -baz'</code>
+                    must contain “foo”, might contain “bar” and must not contain “baz”: <code>+foo bar -baz</code>
                 </li> 
 
                 <li>
-                  <strong>Wildcards.</strong> The below example searches for documents with words beginning with “foo”:
-                  <br /> <code>'foo*'</code>
+                  <strong>Wildcards.</strong> The below example searches for documents with words beginning with “foo”: <code>foo*</code>
                 </li> 
 
                 <li>
-                  <strong>Search in specific fields.</strong> The following search matches all documents 
-                  that contains "foo" in their full dotted name and with “bar” in any field:
-                  <br /> <code>'+fullName:*foo* +bar'</code>
+                  <strong>Search in specific fields.</strong> The following search matches all objects 
+                  in "twisted.mail" that matches “search”: <code>+qname:twisted.mail.* +search</code>
 
                   <p>
-                    Possible fields: 'name', 'docstring', 'fullName'.
+                    Possible fields: 'name', 'qname' (fully qualified name), 'docstring', and 'kind'.
+                    Last two fields are only applicable if "search in docstrings" is enabled.
                   </p>
                 </li>
 
                 <li>
                   <strong>Fuzzy matches.</strong> The following search matches all documents 
-                  that have a word within 1 edit distance of “foo”:
-                  <br /> <code>'foo~1'</code>
+                  that have a word within 1 edit distance of “foo”: <code>foo~1</code>
                 </li>
             </ul>
 
           </p>
         </div>
 
-      </div>
+        <div id="search-status"> </div>
+        
+        <div class="warning" id="search-warn-box" style="display: none;">
+          <p class="rst-last"><span id="search-warn"></span></p>
+        </div>
 
+        <table id="search-results">
+          <!-- Filled dynamically by JS -->
+        </table>
+        
+        <div style="margin-top: 8px;">
+          <p>Results provided by <a href="https://lunrjs.com">Lunr.js</a></p>
+        </div>
+      </div>
 
     </div>
   </div>
 
-  <script>
- 
-    function toggleSearchHelpText() {
-        document.body.classList.toggle("search-help-hidden");
-    }
-    // Init search and help text
-    document.getElementById('search-box-container').style.display = 'block';
-    document.getElementById('search-help-box').style.display = 'block';
-    document.body.classList.add("search-help-hidden");
-
-  </script>
+  <script src="ajax.js" type="text/javascript"></script>
+  <script src="search.js" type="text/javascript"></script>
 
 </nav>
 
@@ -115,7 +134,7 @@
     <div class="container">
 
       <div class="page-header">
-        <h1 class="class"><code><code><a href="twisted.html">twisted</a></code><wbr></wbr>.<code><a href="twisted.conch.html">conch</a></code><wbr></wbr>.<code><a href="twisted.conch.client.html">client</a></code><wbr></wbr>.<code><a href="twisted.conch.client.agent.html">agent</a></code><wbr></wbr>.<code><a href="twisted.conch.client.agent.SSHAgentClient.html">SSHAgentClient</a></code></code></h1>
+        <h1 class="class"><code><code><a href="index.html" class="internal-link">twisted</a></code><wbr></wbr>.<code><a href="twisted.conch.html" class="internal-link" title="twisted.conch">conch</a></code><wbr></wbr>.<code><a href="twisted.conch.client.html" class="internal-link" title="twisted.conch.client">client</a></code><wbr></wbr>.<code><a href="twisted.conch.client.agent.html" class="internal-link" title="twisted.conch.client.agent">agent</a></code><wbr></wbr>.<code><a href="twisted.conch.client.agent.SSHAgentClient.html" class="internal-link" title="twisted.conch.client.agent.SSHAgentClient">SSHAgentClient</a></code></code></h1>
         <div id="showPrivate">
           <button class="btn btn-link" onclick="togglePrivate()">Toggle Private API</button>
         </div>
@@ -126,53 +145,119 @@
       </div>
 
       <div class="extrasDocstring">
-        <p><code><span class="py-keyword">class</span> <span class="py-defname">SSHAgentClient</span>(<a href="twisted.conch.ssh.agent.SSHAgentClient.html" title="twisted.conch.ssh.agent.SSHAgentClient">agent.SSHAgentClient</a>): <a href="https://github.com/twisted/twisted/tree/twisted-21.2.0/src/twisted/conch/client/agent.py#L18" class="sourceLink">(source)</a></code></p>
+        <p><code><span class="py-keyword">class</span> <span class="py-defname">SSHAgentClient</span>(<a href="twisted.conch.ssh.agent.SSHAgentClient.html" class="internal-link" title="twisted.conch.ssh.agent.SSHAgentClient">agent.SSHAgentClient</a>): <a href="https://github.com/twisted/twisted/tree/twisted-21.2.0/src/twisted/conch/client/agent.py#L18" class="sourceLink">(source)</a></code></p>
         <p><a href="classIndex.html#twisted.conch.client.agent.SSHAgentClient">View In Hierarchy</a></p>
       </div>
+
+      
 
       <div class="moduleDocstring">
         <div><p class="undocumented">Undocumented</p></div>
       </div>
 
       <div id="splitTables">
-        <table class="children sortable" id="id136">
+        <table class="children sortable" id="id135">
   
   
   <tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#__init__">__init__</a></code></td>
+    <td><code><a href="#__init__" class="internal-link" title="twisted.conch.client.agent.SSHAgentClient.__init__">__init__</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#getPublicKey">getPublicKey</a></code></td>
-    <td><span>Return a <code><a href="twisted.conch.ssh.keys.Key.html">Key</a></code> from the first blob in <code>self.blobs</code>, if any, or return <code><a href="https://docs.python.org/3/library/constants.html#None">None</a></code>.</span></td>
+    <td><code><a href="#getPublicKey" class="internal-link" title="twisted.conch.client.agent.SSHAgentClient.getPublicKey">get​Public​Key</a></code></td>
+    <td>Return a <code><a href="twisted.conch.ssh.keys.Key.html" class="internal-link" title="twisted.conch.ssh.keys.Key">Key</a></code> from the first blob in <tt class="rst-docutils literal">self.blobs</tt>, if any, or return <code><a href="https://docs.python.org/3/library/constants.html#None" class="intersphinx-link">None</a></code>.</td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#getPublicKeys">getPublicKeys</a></code></td>
+    <td><code><a href="#getPublicKeys" class="internal-link" title="twisted.conch.client.agent.SSHAgentClient.getPublicKeys">get​Public​Keys</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="instancevariable">
     
     <td>Instance Variable</td>
-    <td><code><a href="#blobs">blobs</a></code></td>
+    <td><code><a href="#blobs" class="internal-link" title="twisted.conch.client.agent.SSHAgentClient.blobs">blobs</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method private">
     
     <td>Method</td>
-    <td><code><a href="#_cbPublicKeys">_cbPublicKeys</a></code></td>
+    <td><code><a href="#_cbPublicKeys" class="internal-link" title="twisted.conch.client.agent.SSHAgentClient._cbPublicKeys">_cb​Public​Keys</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="classvariable private">
     
     <td>Class Variable</td>
-    <td><code><a href="#_log">_log</a></code></td>
+    <td><code><a href="#_log" class="internal-link" title="twisted.conch.client.agent.SSHAgentClient._log">_log</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr>
 </table>
         
           <p class="inheritedFrom">
-            Inherited from <code><a href="twisted.conch.ssh.agent.SSHAgentClient.html">SSHAgentClient</a></code>:
+            Inherited from <code><a href="twisted.conch.ssh.agent.SSHAgentClient.html" class="internal-link" title="twisted.conch.ssh.agent.SSHAgentClient">SSHAgentClient</a></code>:
+          </p>
+          <table class="children sortable" id="id136">
+  
+  
+  <tr class="basemethod">
+    
+    <td>Method</td>
+    <td><code><a href="twisted.conch.ssh.agent.SSHAgentClient.html#addIdentity" class="internal-link" title="twisted.conch.ssh.agent.SSHAgentClient.addIdentity">add​Identity</a></code></td>
+    <td>Add a private key blob to the agent's collection of keys.</td>
+  </tr><tr class="basemethod">
+    
+    <td>Method</td>
+    <td><code><a href="twisted.conch.ssh.agent.SSHAgentClient.html#dataReceived" class="internal-link" title="twisted.conch.ssh.agent.SSHAgentClient.dataReceived">data​Received</a></code></td>
+    <td>Called whenever data is received.</td>
+  </tr><tr class="basemethod">
+    
+    <td>Method</td>
+    <td><code><a href="twisted.conch.ssh.agent.SSHAgentClient.html#removeAllIdentities" class="internal-link" title="twisted.conch.ssh.agent.SSHAgentClient.removeAllIdentities">remove​All​Identities</a></code></td>
+    <td>Remove all keys from the running agent.</td>
+  </tr><tr class="basemethod">
+    
+    <td>Method</td>
+    <td><code><a href="twisted.conch.ssh.agent.SSHAgentClient.html#removeIdentity" class="internal-link" title="twisted.conch.ssh.agent.SSHAgentClient.removeIdentity">remove​Identity</a></code></td>
+    <td>Remove the private key corresponding to the public key in blob from the running agent.</td>
+  </tr><tr class="basemethod">
+    
+    <td>Method</td>
+    <td><code><a href="twisted.conch.ssh.agent.SSHAgentClient.html#requestIdentities" class="internal-link" title="twisted.conch.ssh.agent.SSHAgentClient.requestIdentities">request​Identities</a></code></td>
+    <td></td>
+  </tr><tr class="basemethod">
+    
+    <td>Method</td>
+    <td><code><a href="twisted.conch.ssh.agent.SSHAgentClient.html#sendRequest" class="internal-link" title="twisted.conch.ssh.agent.SSHAgentClient.sendRequest">send​Request</a></code></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="basemethod">
+    
+    <td>Method</td>
+    <td><code><a href="twisted.conch.ssh.agent.SSHAgentClient.html#signData" class="internal-link" title="twisted.conch.ssh.agent.SSHAgentClient.signData">sign​Data</a></code></td>
+    <td>Request that the agent sign the given <tt class="rst-docutils literal">data</tt> with the private key which corresponds to the public key given by <tt class="rst-docutils literal">blob</tt>.  The private key should have been added to the agent already.</td>
+  </tr><tr class="baseinstancevariable">
+    
+    <td>Instance Variable</td>
+    <td><code><a href="twisted.conch.ssh.agent.SSHAgentClient.html#buf" class="internal-link" title="twisted.conch.ssh.agent.SSHAgentClient.buf">buf</a></code></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="baseinstancevariable">
+    
+    <td>Instance Variable</td>
+    <td><code><a href="twisted.conch.ssh.agent.SSHAgentClient.html#deferreds" class="internal-link" title="twisted.conch.ssh.agent.SSHAgentClient.deferreds">deferreds</a></code></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="basemethod private">
+    
+    <td>Method</td>
+    <td><code><a href="twisted.conch.ssh.agent.SSHAgentClient.html#_cbRequestIdentities" class="internal-link" title="twisted.conch.ssh.agent.SSHAgentClient._cbRequestIdentities">_cb​Request​Identities</a></code></td>
+    <td>Unpack a collection of identities into a list of tuples comprised of public key blobs and comments.</td>
+  </tr><tr class="basemethod private">
+    
+    <td>Method</td>
+    <td><code><a href="twisted.conch.ssh.agent.SSHAgentClient.html#_cbSignData" class="internal-link" title="twisted.conch.ssh.agent.SSHAgentClient._cbSignData">_cb​Sign​Data</a></code></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr>
+</table>
+          
+          <p class="inheritedFrom">
+            Inherited from <code><a href="twisted.internet.protocol.Protocol.html" class="internal-link" title="twisted.internet.protocol.Protocol">Protocol</a></code> (via <code><a href="twisted.conch.ssh.agent.SSHAgentClient.html" class="internal-link" title="twisted.conch.ssh.agent.SSHAgentClient">SSHAgentClient</a></code>):
           </p>
           <table class="children sortable" id="id137">
   
@@ -180,63 +265,23 @@
   <tr class="basemethod">
     
     <td>Method</td>
-    <td><code><a href="twisted.conch.ssh.agent.SSHAgentClient.html#addIdentity">addIdentity</a></code></td>
-    <td><span>Add a private key blob to the agent's collection of keys.</span></td>
+    <td><code><a href="twisted.internet.protocol.Protocol.html#connectionLost" class="internal-link" title="twisted.internet.protocol.Protocol.connectionLost">connection​Lost</a></code></td>
+    <td>Called when the connection is shut down.</td>
   </tr><tr class="basemethod">
     
     <td>Method</td>
-    <td><code><a href="twisted.conch.ssh.agent.SSHAgentClient.html#dataReceived">dataReceived</a></code></td>
-    <td><span>Called whenever data is received.</span></td>
-  </tr><tr class="basemethod">
+    <td><code><a href="twisted.internet.protocol.Protocol.html#logPrefix" class="internal-link" title="twisted.internet.protocol.Protocol.logPrefix">log​Prefix</a></code></td>
+    <td>Return a prefix matching the class name, to identify log messages related to this protocol instance.</td>
+  </tr><tr class="baseclassvariable">
     
-    <td>Method</td>
-    <td><code><a href="twisted.conch.ssh.agent.SSHAgentClient.html#removeAllIdentities">removeAllIdentities</a></code></td>
-    <td><span>Remove all keys from the running agent.</span></td>
-  </tr><tr class="basemethod">
-    
-    <td>Method</td>
-    <td><code><a href="twisted.conch.ssh.agent.SSHAgentClient.html#removeIdentity">removeIdentity</a></code></td>
-    <td><span>Remove the private key corresponding to the public key in blob from the running agent.</span></td>
-  </tr><tr class="basemethod">
-    
-    <td>Method</td>
-    <td><code><a href="twisted.conch.ssh.agent.SSHAgentClient.html#requestIdentities">requestIdentities</a></code></td>
-    <td><span></span></td>
-  </tr><tr class="basemethod">
-    
-    <td>Method</td>
-    <td><code><a href="twisted.conch.ssh.agent.SSHAgentClient.html#sendRequest">sendRequest</a></code></td>
-    <td><span class="undocumented">Undocumented</span></td>
-  </tr><tr class="basemethod">
-    
-    <td>Method</td>
-    <td><code><a href="twisted.conch.ssh.agent.SSHAgentClient.html#signData">signData</a></code></td>
-    <td><span>Request that the agent sign the given <code>data</code> with the private key which corresponds to the public key given by <code>blob</code>.  The private key should have been added to the agent already.</span></td>
-  </tr><tr class="baseinstancevariable">
-    
-    <td>Instance Variable</td>
-    <td><code><a href="twisted.conch.ssh.agent.SSHAgentClient.html#buf">buf</a></code></td>
-    <td><span class="undocumented">Undocumented</span></td>
-  </tr><tr class="baseinstancevariable">
-    
-    <td>Instance Variable</td>
-    <td><code><a href="twisted.conch.ssh.agent.SSHAgentClient.html#deferreds">deferreds</a></code></td>
-    <td><span class="undocumented">Undocumented</span></td>
-  </tr><tr class="basemethod private">
-    
-    <td>Method</td>
-    <td><code><a href="twisted.conch.ssh.agent.SSHAgentClient.html#_cbRequestIdentities">_cbRequestIdentities</a></code></td>
-    <td><span>Unpack a collection of identities into a list of tuples comprised of public key blobs and comments.</span></td>
-  </tr><tr class="basemethod private">
-    
-    <td>Method</td>
-    <td><code><a href="twisted.conch.ssh.agent.SSHAgentClient.html#_cbSignData">_cbSignData</a></code></td>
+    <td>Class Variable</td>
+    <td><code><a href="twisted.internet.protocol.Protocol.html#factory" class="internal-link" title="twisted.internet.protocol.Protocol.factory">factory</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr>
 </table>
           
           <p class="inheritedFrom">
-            Inherited from <code><a href="twisted.internet.protocol.Protocol.html">Protocol</a></code> (via <code><a href="twisted.conch.ssh.agent.SSHAgentClient.html">SSHAgentClient</a></code>):
+            Inherited from <code><a href="twisted.internet.protocol.BaseProtocol.html" class="internal-link" title="twisted.internet.protocol.BaseProtocol">BaseProtocol</a></code> (via <code><a href="twisted.conch.ssh.agent.SSHAgentClient.html" class="internal-link" title="twisted.conch.ssh.agent.SSHAgentClient">SSHAgentClient</a></code>, <code><a href="twisted.internet.protocol.Protocol.html" class="internal-link" title="twisted.internet.protocol.Protocol">Protocol</a></code>):
           </p>
           <table class="children sortable" id="id138">
   
@@ -244,46 +289,22 @@
   <tr class="basemethod">
     
     <td>Method</td>
-    <td><code><a href="twisted.internet.protocol.Protocol.html#connectionLost">connectionLost</a></code></td>
-    <td><span>Called when the connection is shut down.</span></td>
+    <td><code><a href="twisted.internet.protocol.BaseProtocol.html#connectionMade" class="internal-link" title="twisted.internet.protocol.BaseProtocol.connectionMade">connection​Made</a></code></td>
+    <td>Called when a connection is made.</td>
   </tr><tr class="basemethod">
     
     <td>Method</td>
-    <td><code><a href="twisted.internet.protocol.Protocol.html#logPrefix">logPrefix</a></code></td>
-    <td><span>Return a prefix matching the class name, to identify log messages related to this protocol instance.</span></td>
-  </tr><tr class="baseclassvariable">
-    
-    <td>Class Variable</td>
-    <td><code><a href="twisted.internet.protocol.Protocol.html#factory">factory</a></code></td>
-    <td><span class="undocumented">Undocumented</span></td>
-  </tr>
-</table>
-          
-          <p class="inheritedFrom">
-            Inherited from <code><a href="twisted.internet.protocol.BaseProtocol.html">BaseProtocol</a></code> (via <code><a href="twisted.conch.ssh.agent.SSHAgentClient.html">SSHAgentClient</a></code>, <code><a href="twisted.internet.protocol.Protocol.html">Protocol</a></code>):
-          </p>
-          <table class="children sortable" id="id139">
-  
-  
-  <tr class="basemethod">
-    
-    <td>Method</td>
-    <td><code><a href="twisted.internet.protocol.BaseProtocol.html#connectionMade">connectionMade</a></code></td>
-    <td><span>Called when a connection is made.</span></td>
-  </tr><tr class="basemethod">
-    
-    <td>Method</td>
-    <td><code><a href="twisted.internet.protocol.BaseProtocol.html#makeConnection">makeConnection</a></code></td>
-    <td><span>Make a connection to a transport and a server.</span></td>
+    <td><code><a href="twisted.internet.protocol.BaseProtocol.html#makeConnection" class="internal-link" title="twisted.internet.protocol.BaseProtocol.makeConnection">make​Connection</a></code></td>
+    <td>Make a connection to a transport and a server.</td>
   </tr><tr class="baseinstancevariable">
     
     <td>Instance Variable</td>
-    <td><code><a href="twisted.internet.protocol.BaseProtocol.html#connected">connected</a></code></td>
+    <td><code><a href="twisted.internet.protocol.BaseProtocol.html#connected" class="internal-link" title="twisted.internet.protocol.BaseProtocol.connected">connected</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="baseinstancevariable">
     
     <td>Instance Variable</td>
-    <td><code><a href="twisted.internet.protocol.BaseProtocol.html#transport">transport</a></code></td>
+    <td><code><a href="twisted.internet.protocol.BaseProtocol.html#transport" class="internal-link" title="twisted.internet.protocol.BaseProtocol.transport">transport</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr>
 </table>
@@ -312,7 +333,7 @@
     </a>
   </div>
   <div class="docstring functionBody">
-    <div class="interfaceinfo">overrides <code><a href="twisted.conch.ssh.agent.SSHAgentClient.html#__init__">twisted.conch.ssh.agent.SSHAgentClient.__init__</a></code></div>
+    <div class="interfaceinfo">overrides <code><a href="twisted.conch.ssh.agent.SSHAgentClient.html#__init__" class="internal-link">twisted.conch.ssh.agent.SSHAgentClient.__init__</a></code></div>
     
     <div><p class="undocumented">Undocumented</p></div>
   </div>
@@ -336,7 +357,7 @@
   <div class="docstring functionBody">
     
     
-    <div><p>Return a <code><a href="twisted.conch.ssh.keys.Key.html">Key</a></code> from the first blob in <code>self.blobs</code>, if any, or return <code><a href="https://docs.python.org/3/library/constants.html#None">None</a></code>.</p></div>
+    <div>Return a <code><a href="twisted.conch.ssh.keys.Key.html" class="internal-link" title="twisted.conch.ssh.keys.Key">Key</a></code> from the first blob in <tt class="rst-docutils literal">self.blobs</tt>, if any, or return <code><a href="https://docs.python.org/3/library/constants.html#None" class="intersphinx-link">None</a></code>.</div>
   </div>
 </div><div class="basemethod">
   
@@ -381,6 +402,7 @@
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    
   </div>
 </div><div class="basemethod private">
   
@@ -425,6 +447,7 @@
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    
   </div>
 </div>
 
@@ -433,11 +456,33 @@
 
     <footer class="navbar navbar-default">
   
+
   <div class="container">
     <a href="index.html">API Documentation</a> for <a href="https://twistedmatrix.com/" class="projecthome">Twisted</a>,
   generated by <a href="https://github.com/twisted/pydoctor/">pydoctor</a>
-    21.2.2 at 2022-01-12 04:22:24.
+    22.2.2.dev0 at 2022-03-04 05:57:20.
   </div>
+
+  <!-- Google analytics, obviously. -->
+  <script src="//www.google-analytics.com/urchin.js" type="text/javascript"></script>
+  <script type="text/javascript">
+    _uacct = "UA-99018-6";
+    urchinTracker();
+  </script>
+
+  <!-- If the documentation isn't current, insert a current link. -->
+  <script type="text/javascript">
+    if (window.location.pathname.indexOf('/current/') == -1) {
+      <!-- Give the user a link to this page, but in the current version of the docs. -->
+      var link = document.getElementById('current-docs-link');
+      link.href = window.location.pathname.replace(/\/\d+\.\d+\.\d+\/api\//, '/current/api/');
+      <!-- And make it visible -->
+      var container = document.getElementById('current-docs-container');
+      container.style.display = "";
+      delete link;
+      delete container;
+    }
+  </script>
 </footer>
 
     <script src="pydoctor.js" type="text/javascript"></script>

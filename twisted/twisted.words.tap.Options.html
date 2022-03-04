@@ -7,7 +7,7 @@
   <head>
     
     <title>twisted.words.tap.Options</title>
-    <meta name="generator" content="pydoctor 21.2.2"> 
+    <meta name="generator" content="pydoctor 22.2.2.dev0"> 
         
     </meta>
     <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
@@ -19,7 +19,13 @@
 
   <body>
 
-    
+    <div style="display: none" id="current-docs-container" class="container">
+  <div class="col-sm-12">
+    <a id="current-docs-link">
+      Go to the latest version of this document.
+    </a>
+  </div>
+</div>
 
     <nav class="navbar navbar-default">
   
@@ -44,69 +50,82 @@
           Names
         </a>
 
-        <form action="search-results.html" id="search-box-container">
+        <div id="search-box-container">
           <div class="input-group">
-            <input id="search-box" name="search-query" placeholder="Search..." aria-label="Search" minlength="2" class="form-control" />
+            <input id="search-box" type="search" name="search-query" placeholder="Search..." aria-label="Search" minlength="2" class="form-control" autocomplete="off" />
+            
             <span class="input-group-btn">
-              <button class="btn btn-default" type="submit" title="Search"><img src="fonts/search.svg" alt="Search!" /></button>
-              <a class="btn btn-default" id="search-help-button" title="Help" onclick="toggleSearchHelpText()"><img src="fonts/info.svg" alt="Help!" /></a>
+              <a style="display: none;" class="btn btn-default" id="search-clear-button" title="Clear" onclick="clearSearch()"><img src="fonts/x-circle.svg" alt="Clear" /></a>
+              <a class="btn btn-default" id="search-help-button" title="Help" onclick="toggleSearchHelpText()"><img src="fonts/info.svg" alt="Help" /></a>
             </span>
           </div>
-        </form>
+        </div>
 
-        <div class="rst-admonition hint" id="search-help-box">
+      </div>
+
+      <div id="search-results-container" style="display: none;">
+        <div>
+          <span class="label label-default" id="search-docstrings-button">
+            <a title="Search in docstrings" onclick="toggleSearchInDocstrings()">search in docstrings</a></span>
+        </div>
+
+        <noscript>
+            <h1>Cannot search: JavaScript is not supported/enabled in your browser.</h1>
+        </noscript>
+
+        <div class="hint" id="search-help-box">
           <p class="rst-last">
       
             Search bar offers the following options:
             <ul>   
                 <li>
                   <strong>Term presence.</strong> The below example searches for documents that 
-                    must contain “foo”, might contain “bar” and must not contain “baz”:
-                  <br /> <code>'+foo bar -baz'</code>
+                    must contain “foo”, might contain “bar” and must not contain “baz”: <code>+foo bar -baz</code>
                 </li> 
 
                 <li>
-                  <strong>Wildcards.</strong> The below example searches for documents with words beginning with “foo”:
-                  <br /> <code>'foo*'</code>
+                  <strong>Wildcards.</strong> The below example searches for documents with words beginning with “foo”: <code>foo*</code>
                 </li> 
 
                 <li>
-                  <strong>Search in specific fields.</strong> The following search matches all documents 
-                  that contains "foo" in their full dotted name and with “bar” in any field:
-                  <br /> <code>'+fullName:*foo* +bar'</code>
+                  <strong>Search in specific fields.</strong> The following search matches all objects 
+                  in "twisted.mail" that matches “search”: <code>+qname:twisted.mail.* +search</code>
 
                   <p>
-                    Possible fields: 'name', 'docstring', 'fullName'.
+                    Possible fields: 'name', 'qname' (fully qualified name), 'docstring', and 'kind'.
+                    Last two fields are only applicable if "search in docstrings" is enabled.
                   </p>
                 </li>
 
                 <li>
                   <strong>Fuzzy matches.</strong> The following search matches all documents 
-                  that have a word within 1 edit distance of “foo”:
-                  <br /> <code>'foo~1'</code>
+                  that have a word within 1 edit distance of “foo”: <code>foo~1</code>
                 </li>
             </ul>
 
           </p>
         </div>
 
-      </div>
+        <div id="search-status"> </div>
+        
+        <div class="warning" id="search-warn-box" style="display: none;">
+          <p class="rst-last"><span id="search-warn"></span></p>
+        </div>
 
+        <table id="search-results">
+          <!-- Filled dynamically by JS -->
+        </table>
+        
+        <div style="margin-top: 8px;">
+          <p>Results provided by <a href="https://lunrjs.com">Lunr.js</a></p>
+        </div>
+      </div>
 
     </div>
   </div>
 
-  <script>
- 
-    function toggleSearchHelpText() {
-        document.body.classList.toggle("search-help-hidden");
-    }
-    // Init search and help text
-    document.getElementById('search-box-container').style.display = 'block';
-    document.getElementById('search-help-box').style.display = 'block';
-    document.body.classList.add("search-help-hidden");
-
-  </script>
+  <script src="ajax.js" type="text/javascript"></script>
+  <script src="search.js" type="text/javascript"></script>
 
 </nav>
 
@@ -115,7 +134,7 @@
     <div class="container">
 
       <div class="page-header">
-        <h1 class="class"><code><code><a href="twisted.html">twisted</a></code><wbr></wbr>.<code><a href="twisted.words.html">words</a></code><wbr></wbr>.<code><a href="twisted.words.tap.html">tap</a></code><wbr></wbr>.<code><a href="twisted.words.tap.Options.html">Options</a></code></code></h1>
+        <h1 class="class"><code><code><a href="index.html" class="internal-link">twisted</a></code><wbr></wbr>.<code><a href="twisted.words.html" class="internal-link" title="twisted.words">words</a></code><wbr></wbr>.<code><a href="twisted.words.tap.html" class="internal-link" title="twisted.words.tap">tap</a></code><wbr></wbr>.<code><a href="twisted.words.tap.Options.html" class="internal-link" title="twisted.words.tap.Options">Options</a></code></code></h1>
         <div id="showPrivate">
           <button class="btn btn-link" onclick="togglePrivate()">Toggle Private API</button>
         </div>
@@ -126,236 +145,238 @@
       </div>
 
       <div class="extrasDocstring">
-        <p><code><span class="py-keyword">class</span> <span class="py-defname">Options</span>(<a href="twisted.python.usage.Options.html" title="twisted.python.usage.Options">usage.Options</a>, <a href="twisted.cred.strcred.AuthOptionMixin.html" title="twisted.cred.strcred.AuthOptionMixin">strcred.AuthOptionMixin</a>): <a href="https://github.com/twisted/twisted/tree/twisted-21.2.0/src/twisted/words/tap.py#L21" class="sourceLink">(source)</a></code></p>
+        <p><code><span class="py-keyword">class</span> <span class="py-defname">Options</span>(<a href="twisted.python.usage.Options.html" class="internal-link" title="twisted.python.usage.Options">usage.Options</a>, <a href="twisted.cred.strcred.AuthOptionMixin.html" class="internal-link" title="twisted.cred.strcred.AuthOptionMixin">strcred.AuthOptionMixin</a>): <a href="https://github.com/twisted/twisted/tree/twisted-21.2.0/src/twisted/words/tap.py#L21" class="sourceLink">(source)</a></code></p>
         <p><a href="classIndex.html#twisted.words.tap.Options">View In Hierarchy</a></p>
       </div>
+
+      
 
       <div class="moduleDocstring">
         <div><p class="undocumented">Undocumented</p></div>
       </div>
 
       <div id="splitTables">
-        <table class="children sortable" id="id3752">
+        <table class="children sortable" id="id3738">
   
   
   <tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#__init__">__init__</a></code></td>
+    <td><code><a href="#__init__" class="internal-link" title="twisted.words.tap.Options.__init__">__init__</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#opt_group">opt_group</a></code></td>
-    <td><span>Specify a group which should exist</span></td>
+    <td><code><a href="#opt_group" class="internal-link" title="twisted.words.tap.Options.opt_group">opt​_group</a></code></td>
+    <td>Specify a group which should exist</td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#opt_passwd">opt_passwd</a></code></td>
-    <td><span>Name of a passwd-style file. (This is for backwards-compatibility only; you should use the --auth command instead.)</span></td>
+    <td><code><a href="#opt_passwd" class="internal-link" title="twisted.words.tap.Options.opt_passwd">opt​_passwd</a></code></td>
+    <td>Name of a passwd-style file. (This is for backwards-compatibility only; you should use the --auth command instead.)</td>
   </tr><tr class="classvariable">
     
     <td>Class Variable</td>
-    <td><code><a href="#compData">compData</a></code></td>
+    <td><code><a href="#compData" class="internal-link" title="twisted.words.tap.Options.compData">comp​Data</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="classvariable">
     
     <td>Class Variable</td>
-    <td><code><a href="#interfacePlugins">interfacePlugins</a></code></td>
+    <td><code><a href="#interfacePlugins" class="internal-link" title="twisted.words.tap.Options.interfacePlugins">interface​Plugins</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="classvariable">
     
     <td>Class Variable</td>
-    <td><code><a href="#optParameters">optParameters</a></code></td>
+    <td><code><a href="#optParameters" class="internal-link" title="twisted.words.tap.Options.optParameters">opt​Parameters</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="classvariable">
     
     <td>Class Variable</td>
-    <td><code><a href="#plg">plg</a></code></td>
+    <td><code><a href="#plg" class="internal-link" title="twisted.words.tap.Options.plg">plg</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="classvariable">
     
     <td>Class Variable</td>
-    <td><code><a href="#supportedInterfaces">supportedInterfaces</a></code></td>
+    <td><code><a href="#supportedInterfaces" class="internal-link" title="twisted.words.tap.Options.supportedInterfaces">supported​Interfaces</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr>
 </table>
         
           <p class="inheritedFrom">
-            Inherited from <code><a href="twisted.python.usage.Options.html">Options</a></code>:
+            Inherited from <code><a href="twisted.python.usage.Options.html" class="internal-link" title="twisted.python.usage.Options">Options</a></code>:
           </p>
-          <table class="children sortable" id="id3753">
+          <table class="children sortable" id="id3739">
   
   
   <tr class="basemethod">
     
     <td>Method</td>
-    <td><code><a href="twisted.python.usage.Options.html#__str__">__str__</a></code></td>
+    <td><code><a href="twisted.python.usage.Options.html#__str__" class="internal-link" title="twisted.python.usage.Options.__str__">__str__</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="basemethod">
     
     <td>Method</td>
-    <td><code><a href="twisted.python.usage.Options.html#getSynopsis">getSynopsis</a></code></td>
-    <td><span>Returns a string containing a description of these options and how to pass them to the executed file.</span></td>
+    <td><code><a href="twisted.python.usage.Options.html#getSynopsis" class="internal-link" title="twisted.python.usage.Options.getSynopsis">get​Synopsis</a></code></td>
+    <td>Returns a string containing a description of these options and how to pass them to the executed file.</td>
   </tr><tr class="basemethod">
     
     <td>Method</td>
-    <td><code><a href="twisted.python.usage.Options.html#getUsage">getUsage</a></code></td>
+    <td><code><a href="twisted.python.usage.Options.html#getUsage" class="internal-link" title="twisted.python.usage.Options.getUsage">get​Usage</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="basemethod">
     
     <td>Method</td>
-    <td><code><a href="twisted.python.usage.Options.html#opt_help">opt_help</a></code></td>
-    <td><span>Display this help and exit.</span></td>
+    <td><code><a href="twisted.python.usage.Options.html#opt_help" class="internal-link" title="twisted.python.usage.Options.opt_help">opt​_help</a></code></td>
+    <td>Display this help and exit.</td>
   </tr><tr class="basemethod">
     
     <td>Method</td>
-    <td><code><a href="twisted.python.usage.Options.html#opt_version">opt_version</a></code></td>
-    <td><span>Display Twisted version and exit.</span></td>
+    <td><code><a href="twisted.python.usage.Options.html#opt_version" class="internal-link" title="twisted.python.usage.Options.opt_version">opt​_version</a></code></td>
+    <td>Display Twisted version and exit.</td>
   </tr><tr class="basemethod">
     
     <td>Method</td>
-    <td><code><a href="twisted.python.usage.Options.html#parseArgs">parseArgs</a></code></td>
-    <td><span>I am called with any leftover arguments which were not options.</span></td>
+    <td><code><a href="twisted.python.usage.Options.html#parseArgs" class="internal-link" title="twisted.python.usage.Options.parseArgs">parse​Args</a></code></td>
+    <td>I am called with any leftover arguments which were not options.</td>
   </tr><tr class="basemethod">
     
     <td>Method</td>
-    <td><code><a href="twisted.python.usage.Options.html#parseOptions">parseOptions</a></code></td>
-    <td><span>The guts of the command-line parser.</span></td>
+    <td><code><a href="twisted.python.usage.Options.html#parseOptions" class="internal-link" title="twisted.python.usage.Options.parseOptions">parse​Options</a></code></td>
+    <td>The guts of the command-line parser.</td>
   </tr><tr class="basemethod">
     
     <td>Method</td>
-    <td><code><a href="twisted.python.usage.Options.html#postOptions">postOptions</a></code></td>
-    <td><span>I am called after the options are parsed.</span></td>
+    <td><code><a href="twisted.python.usage.Options.html#postOptions" class="internal-link" title="twisted.python.usage.Options.postOptions">post​Options</a></code></td>
+    <td>I am called after the options are parsed.</td>
   </tr><tr class="baseclassvariable">
     
     <td>Class Variable</td>
-    <td><code><a href="twisted.python.usage.Options.html#completionData">completionData</a></code></td>
-    <td><span class="undocumented">Undocumented</span></td>
-  </tr><tr class="baseclassvariable">
-    
-    <td>Class Variable</td>
-    <td><code><a href="twisted.python.usage.Options.html#defaultSubCommand">defaultSubCommand</a></code></td>
+    <td><code><a href="twisted.python.usage.Options.html#completionData" class="internal-link" title="twisted.python.usage.Options.completionData">completion​Data</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="baseclassvariable">
     
     <td>Class Variable</td>
-    <td><code><a href="twisted.python.usage.Options.html#parent">parent</a></code></td>
+    <td><code><a href="twisted.python.usage.Options.html#defaultSubCommand" class="internal-link" title="twisted.python.usage.Options.defaultSubCommand">default​Sub​Command</a></code></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="baseclassvariable">
+    
+    <td>Class Variable</td>
+    <td><code><a href="twisted.python.usage.Options.html#parent" class="internal-link" title="twisted.python.usage.Options.parent">parent</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="baseinstancevariable">
     
     <td>Instance Variable</td>
-    <td><code><a href="twisted.python.usage.Options.html#defaults">defaults</a></code></td>
+    <td><code><a href="twisted.python.usage.Options.html#defaults" class="internal-link" title="twisted.python.usage.Options.defaults">defaults</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="baseinstancevariable">
     
     <td>Instance Variable</td>
-    <td><code><a href="twisted.python.usage.Options.html#docs">docs</a></code></td>
+    <td><code><a href="twisted.python.usage.Options.html#docs" class="internal-link" title="twisted.python.usage.Options.docs">docs</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="baseinstancevariable">
     
     <td>Instance Variable</td>
-    <td><code><a href="twisted.python.usage.Options.html#longOpt">longOpt</a></code></td>
+    <td><code><a href="twisted.python.usage.Options.html#longOpt" class="internal-link" title="twisted.python.usage.Options.longOpt">long​Opt</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="baseinstancevariable">
     
     <td>Instance Variable</td>
-    <td><code><a href="twisted.python.usage.Options.html#opts">opts</a></code></td>
+    <td><code><a href="twisted.python.usage.Options.html#opts" class="internal-link" title="twisted.python.usage.Options.opts">opts</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="baseinstancevariable">
     
     <td>Instance Variable</td>
-    <td><code><a href="twisted.python.usage.Options.html#shortOpt">shortOpt</a></code></td>
+    <td><code><a href="twisted.python.usage.Options.html#shortOpt" class="internal-link" title="twisted.python.usage.Options.shortOpt">short​Opt</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="baseinstancevariable">
     
     <td>Instance Variable</td>
-    <td><code><a href="twisted.python.usage.Options.html#subCommand">subCommand</a></code></td>
+    <td><code><a href="twisted.python.usage.Options.html#subCommand" class="internal-link" title="twisted.python.usage.Options.subCommand">sub​Command</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="baseinstancevariable">
     
     <td>Instance Variable</td>
-    <td><code><a href="twisted.python.usage.Options.html#subOptions">subOptions</a></code></td>
+    <td><code><a href="twisted.python.usage.Options.html#subOptions" class="internal-link" title="twisted.python.usage.Options.subOptions">sub​Options</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="baseinstancevariable">
     
     <td>Instance Variable</td>
-    <td><code><a href="twisted.python.usage.Options.html#synonyms">synonyms</a></code></td>
+    <td><code><a href="twisted.python.usage.Options.html#synonyms" class="internal-link" title="twisted.python.usage.Options.synonyms">synonyms</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="basemethod private">
     
     <td>Method</td>
-    <td><code><a href="twisted.python.usage.Options.html#_gather_flags">_gather_flags</a></code></td>
-    <td><span>Gather up boolean (flag) options.</span></td>
+    <td><code><a href="twisted.python.usage.Options.html#_gather_flags" class="internal-link" title="twisted.python.usage.Options._gather_flags">_gather​_flags</a></code></td>
+    <td>Gather up boolean (flag) options.</td>
   </tr><tr class="basemethod private">
     
     <td>Method</td>
-    <td><code><a href="twisted.python.usage.Options.html#_gather_handlers">_gather_handlers</a></code></td>
-    <td><span>Gather up options with their own handler methods.</span></td>
+    <td><code><a href="twisted.python.usage.Options.html#_gather_handlers" class="internal-link" title="twisted.python.usage.Options._gather_handlers">_gather​_handlers</a></code></td>
+    <td>Gather up options with their own handler methods.</td>
   </tr><tr class="basemethod private">
     
     <td>Method</td>
-    <td><code><a href="twisted.python.usage.Options.html#_gather_parameters">_gather_parameters</a></code></td>
-    <td><span>Gather options which take a value.</span></td>
+    <td><code><a href="twisted.python.usage.Options.html#_gather_parameters" class="internal-link" title="twisted.python.usage.Options._gather_parameters">_gather​_parameters</a></code></td>
+    <td>Gather options which take a value.</td>
   </tr><tr class="basemethod private">
     
     <td>Method</td>
-    <td><code><a href="twisted.python.usage.Options.html#_generic_flag">_generic_flag</a></code></td>
+    <td><code><a href="twisted.python.usage.Options.html#_generic_flag" class="internal-link" title="twisted.python.usage.Options._generic_flag">_generic​_flag</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="baseinstancevariable private">
     
     <td>Instance Variable</td>
-    <td><code><a href="twisted.python.usage.Options.html#_dispatch">_dispatch</a></code></td>
+    <td><code><a href="twisted.python.usage.Options.html#_dispatch" class="internal-link" title="twisted.python.usage.Options._dispatch">_dispatch</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr>
 </table>
           
           <p class="inheritedFrom">
-            Inherited from <code><a href="twisted.cred.strcred.AuthOptionMixin.html">AuthOptionMixin</a></code>:
+            Inherited from <code><a href="twisted.cred.strcred.AuthOptionMixin.html" class="internal-link" title="twisted.cred.strcred.AuthOptionMixin">AuthOptionMixin</a></code>:
           </p>
-          <table class="children sortable" id="id3754">
+          <table class="children sortable" id="id3740">
   
   
   <tr class="basemethod">
     
     <td>Method</td>
-    <td><code><a href="twisted.cred.strcred.AuthOptionMixin.html#addChecker">addChecker</a></code></td>
-    <td><span>Supply a supplied credentials checker to the Options class.</span></td>
+    <td><code><a href="twisted.cred.strcred.AuthOptionMixin.html#addChecker" class="internal-link" title="twisted.cred.strcred.AuthOptionMixin.addChecker">add​Checker</a></code></td>
+    <td>Supply a supplied credentials checker to the Options class.</td>
   </tr><tr class="basemethod">
     
     <td>Method</td>
-    <td><code><a href="twisted.cred.strcred.AuthOptionMixin.html#opt_auth">opt_auth</a></code></td>
-    <td><span>Specify an authentication method for the server.</span></td>
+    <td><code><a href="twisted.cred.strcred.AuthOptionMixin.html#opt_auth" class="internal-link" title="twisted.cred.strcred.AuthOptionMixin.opt_auth">opt​_auth</a></code></td>
+    <td>Specify an authentication method for the server.</td>
   </tr><tr class="basemethod">
     
     <td>Method</td>
-    <td><code><a href="twisted.cred.strcred.AuthOptionMixin.html#opt_help_auth">opt_help_auth</a></code></td>
-    <td><span>Show all authentication methods available.</span></td>
+    <td><code><a href="twisted.cred.strcred.AuthOptionMixin.html#opt_help_auth" class="internal-link" title="twisted.cred.strcred.AuthOptionMixin.opt_help_auth">opt​_help​_auth</a></code></td>
+    <td>Show all authentication methods available.</td>
   </tr><tr class="basemethod">
     
     <td>Method</td>
-    <td><code><a href="twisted.cred.strcred.AuthOptionMixin.html#opt_help_auth_type">opt_help_auth_type</a></code></td>
-    <td><span>Show help for a particular authentication type.</span></td>
+    <td><code><a href="twisted.cred.strcred.AuthOptionMixin.html#opt_help_auth_type" class="internal-link" title="twisted.cred.strcred.AuthOptionMixin.opt_help_auth_type">opt​_help​_auth​_type</a></code></td>
+    <td>Show help for a particular authentication type.</td>
   </tr><tr class="basemethod">
     
     <td>Method</td>
-    <td><code><a href="twisted.cred.strcred.AuthOptionMixin.html#supportsCheckerFactory">supportsCheckerFactory</a></code></td>
-    <td><span>Returns whether a checker factory will provide at least one of the credentials interfaces that we care about.</span></td>
+    <td><code><a href="twisted.cred.strcred.AuthOptionMixin.html#supportsCheckerFactory" class="internal-link" title="twisted.cred.strcred.AuthOptionMixin.supportsCheckerFactory">supports​Checker​Factory</a></code></td>
+    <td>Returns whether a checker factory will provide at least one of the credentials interfaces that we care about.</td>
   </tr><tr class="basemethod">
     
     <td>Method</td>
-    <td><code><a href="twisted.cred.strcred.AuthOptionMixin.html#supportsInterface">supportsInterface</a></code></td>
-    <td><span>Returns whether a particular credentials interface is supported.</span></td>
+    <td><code><a href="twisted.cred.strcred.AuthOptionMixin.html#supportsInterface" class="internal-link" title="twisted.cred.strcred.AuthOptionMixin.supportsInterface">supports​Interface</a></code></td>
+    <td>Returns whether a particular credentials interface is supported.</td>
   </tr><tr class="baseclassvariable">
     
     <td>Class Variable</td>
-    <td><code><a href="twisted.cred.strcred.AuthOptionMixin.html#authOutput">authOutput</a></code></td>
-    <td><span>A writeable object to which this options class will send all help-related output. Default: <code><a href="https://docs.python.org/3/library/sys.html#sys.stdout">sys.stdout</a></code></span></td>
+    <td><code><a href="twisted.cred.strcred.AuthOptionMixin.html#authOutput" class="internal-link" title="twisted.cred.strcred.AuthOptionMixin.authOutput">auth​Output</a></code></td>
+    <td>A writeable object to which this options class will send all help-related output. Default: <code><a href="https://docs.python.org/3/library/sys.html#sys.stdout" class="intersphinx-link">sys.stdout</a></code></td>
   </tr><tr class="basemethod private">
     
     <td>Method</td>
-    <td><code><a href="twisted.cred.strcred.AuthOptionMixin.html#_checkerFactoriesForOptHelpAuth">_checkerFactoriesForOptHelpAuth</a></code></td>
-    <td><span>Return a list of which authTypes will be displayed by --help-auth. This makes it a lot easier to test this module.</span></td>
+    <td><code><a href="twisted.cred.strcred.AuthOptionMixin.html#_checkerFactoriesForOptHelpAuth" class="internal-link" title="twisted.cred.strcred.AuthOptionMixin._checkerFactoriesForOptHelpAuth">_checker​Factories​For​Opt​Help​Auth</a></code></td>
+    <td>Return a list of which authTypes will be displayed by --help-auth. This makes it a lot easier to test this module.</td>
   </tr>
 </table>
           
@@ -383,7 +404,7 @@
     </a>
   </div>
   <div class="docstring functionBody">
-    <div class="interfaceinfo">overrides <code><a href="twisted.python.usage.Options.html#__init__">twisted.python.usage.Options.__init__</a></code></div>
+    <div class="interfaceinfo">overrides <code><a href="twisted.python.usage.Options.html#__init__" class="internal-link">twisted.python.usage.Options.__init__</a></code></div>
     
     <div><p class="undocumented">Undocumented</p></div>
   </div>
@@ -407,7 +428,7 @@
   <div class="docstring functionBody">
     
     
-    <div><p>Specify a group which should exist</p></div>
+    <div>Specify a group which should exist</div>
   </div>
 </div><div class="basemethod">
   
@@ -429,7 +450,7 @@
   <div class="docstring functionBody">
     
     
-    <div><p>Name of a passwd-style file. (This is for backwards-compatibility only; you should use the --auth command instead.)</p></div>
+    <div>Name of a passwd-style file. (This is for backwards-compatibility only; you should use the --auth command instead.)</div>
   </div>
 </div><div class="baseclassvariable">
   
@@ -452,6 +473,7 @@
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    
   </div>
 </div><div class="baseclassvariable">
   
@@ -464,7 +486,7 @@
   </a>
   <div class="functionHeader">
     
-    <span class="py-defname">interfacePlugins</span>: <code><a href="https://docs.python.org/3/library/stdtypes.html#dict">dict</a></code> =
+    <span class="py-defname">interfacePlugins</span>: <code><a href="https://docs.python.org/3/library/stdtypes.html#dict" class="intersphinx-link">dict</a></code> =
     <a class="sourceLink" href="https://github.com/twisted/twisted/tree/twisted-21.2.0/src/twisted/words/tap.py#L34">
       
       (source)
@@ -474,6 +496,7 @@
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    
   </div>
 </div><div class="baseclassvariable">
   
@@ -486,7 +509,7 @@
   </a>
   <div class="functionHeader">
     
-    <span class="py-defname">optParameters</span>: <code><a href="https://docs.python.org/3/library/typing.html#typing.List">List</a>[<wbr></wbr><a href="https://docs.python.org/3/library/typing.html#typing.Sequence">Sequence</a>[<wbr></wbr><a href="https://docs.python.org/3/library/typing.html#typing.Optional">Optional</a>[<wbr></wbr><a href="https://docs.python.org/3/library/stdtypes.html#str">str</a>]]]</code> =
+    <span class="py-defname">optParameters</span>: <code><a href="https://docs.python.org/3/library/typing.html#typing.List" class="intersphinx-link">List</a>[<wbr></wbr><a href="https://docs.python.org/3/library/typing.html#typing.Sequence" class="intersphinx-link">Sequence</a>[<wbr></wbr><a href="https://docs.python.org/3/library/typing.html#typing.Optional" class="intersphinx-link">Optional</a>[<wbr></wbr><a href="https://docs.python.org/3/library/stdtypes.html#str" class="intersphinx-link">str</a>]]]</code> =
     <a class="sourceLink" href="https://github.com/twisted/twisted/tree/twisted-21.2.0/src/twisted/words/tap.py#L23">
       
       (source)
@@ -496,6 +519,7 @@
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    
   </div>
 </div><div class="baseclassvariable">
   
@@ -518,6 +542,7 @@
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    
   </div>
 </div><div class="baseclassvariable">
   
@@ -537,9 +562,10 @@
     </a>
   </div>
   <div class="functionBody">
-    <div class="interfaceinfo">overrides <code><a href="twisted.cred.strcred.AuthOptionMixin.html#supportedInterfaces">twisted.cred.strcred.AuthOptionMixin.supportedInterfaces</a></code></div>
+    <div class="interfaceinfo">overrides <code><a href="twisted.cred.strcred.AuthOptionMixin.html#supportedInterfaces" class="internal-link">twisted.cred.strcred.AuthOptionMixin.supportedInterfaces</a></code></div>
     
     <div><p class="undocumented">Undocumented</p></div>
+    
   </div>
 </div>
 
@@ -548,11 +574,33 @@
 
     <footer class="navbar navbar-default">
   
+
   <div class="container">
     <a href="index.html">API Documentation</a> for <a href="https://twistedmatrix.com/" class="projecthome">Twisted</a>,
   generated by <a href="https://github.com/twisted/pydoctor/">pydoctor</a>
-    21.2.2 at 2022-01-12 04:22:24.
+    22.2.2.dev0 at 2022-03-04 05:57:20.
   </div>
+
+  <!-- Google analytics, obviously. -->
+  <script src="//www.google-analytics.com/urchin.js" type="text/javascript"></script>
+  <script type="text/javascript">
+    _uacct = "UA-99018-6";
+    urchinTracker();
+  </script>
+
+  <!-- If the documentation isn't current, insert a current link. -->
+  <script type="text/javascript">
+    if (window.location.pathname.indexOf('/current/') == -1) {
+      <!-- Give the user a link to this page, but in the current version of the docs. -->
+      var link = document.getElementById('current-docs-link');
+      link.href = window.location.pathname.replace(/\/\d+\.\d+\.\d+\/api\//, '/current/api/');
+      <!-- And make it visible -->
+      var container = document.getElementById('current-docs-container');
+      container.style.display = "";
+      delete link;
+      delete container;
+    }
+  </script>
 </footer>
 
     <script src="pydoctor.js" type="text/javascript"></script>

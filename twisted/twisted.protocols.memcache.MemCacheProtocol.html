@@ -7,7 +7,7 @@
   <head>
     
     <title>twisted.protocols.memcache.MemCacheProtocol</title>
-    <meta name="generator" content="pydoctor 21.2.2"> 
+    <meta name="generator" content="pydoctor 22.2.2.dev0"> 
         
     </meta>
     <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
@@ -19,7 +19,13 @@
 
   <body>
 
-    
+    <div style="display: none" id="current-docs-container" class="container">
+  <div class="col-sm-12">
+    <a id="current-docs-link">
+      Go to the latest version of this document.
+    </a>
+  </div>
+</div>
 
     <nav class="navbar navbar-default">
   
@@ -44,69 +50,82 @@
           Names
         </a>
 
-        <form action="search-results.html" id="search-box-container">
+        <div id="search-box-container">
           <div class="input-group">
-            <input id="search-box" name="search-query" placeholder="Search..." aria-label="Search" minlength="2" class="form-control" />
+            <input id="search-box" type="search" name="search-query" placeholder="Search..." aria-label="Search" minlength="2" class="form-control" autocomplete="off" />
+            
             <span class="input-group-btn">
-              <button class="btn btn-default" type="submit" title="Search"><img src="fonts/search.svg" alt="Search!" /></button>
-              <a class="btn btn-default" id="search-help-button" title="Help" onclick="toggleSearchHelpText()"><img src="fonts/info.svg" alt="Help!" /></a>
+              <a style="display: none;" class="btn btn-default" id="search-clear-button" title="Clear" onclick="clearSearch()"><img src="fonts/x-circle.svg" alt="Clear" /></a>
+              <a class="btn btn-default" id="search-help-button" title="Help" onclick="toggleSearchHelpText()"><img src="fonts/info.svg" alt="Help" /></a>
             </span>
           </div>
-        </form>
+        </div>
 
-        <div class="rst-admonition hint" id="search-help-box">
+      </div>
+
+      <div id="search-results-container" style="display: none;">
+        <div>
+          <span class="label label-default" id="search-docstrings-button">
+            <a title="Search in docstrings" onclick="toggleSearchInDocstrings()">search in docstrings</a></span>
+        </div>
+
+        <noscript>
+            <h1>Cannot search: JavaScript is not supported/enabled in your browser.</h1>
+        </noscript>
+
+        <div class="hint" id="search-help-box">
           <p class="rst-last">
       
             Search bar offers the following options:
             <ul>   
                 <li>
                   <strong>Term presence.</strong> The below example searches for documents that 
-                    must contain “foo”, might contain “bar” and must not contain “baz”:
-                  <br /> <code>'+foo bar -baz'</code>
+                    must contain “foo”, might contain “bar” and must not contain “baz”: <code>+foo bar -baz</code>
                 </li> 
 
                 <li>
-                  <strong>Wildcards.</strong> The below example searches for documents with words beginning with “foo”:
-                  <br /> <code>'foo*'</code>
+                  <strong>Wildcards.</strong> The below example searches for documents with words beginning with “foo”: <code>foo*</code>
                 </li> 
 
                 <li>
-                  <strong>Search in specific fields.</strong> The following search matches all documents 
-                  that contains "foo" in their full dotted name and with “bar” in any field:
-                  <br /> <code>'+fullName:*foo* +bar'</code>
+                  <strong>Search in specific fields.</strong> The following search matches all objects 
+                  in "twisted.mail" that matches “search”: <code>+qname:twisted.mail.* +search</code>
 
                   <p>
-                    Possible fields: 'name', 'docstring', 'fullName'.
+                    Possible fields: 'name', 'qname' (fully qualified name), 'docstring', and 'kind'.
+                    Last two fields are only applicable if "search in docstrings" is enabled.
                   </p>
                 </li>
 
                 <li>
                   <strong>Fuzzy matches.</strong> The following search matches all documents 
-                  that have a word within 1 edit distance of “foo”:
-                  <br /> <code>'foo~1'</code>
+                  that have a word within 1 edit distance of “foo”: <code>foo~1</code>
                 </li>
             </ul>
 
           </p>
         </div>
 
-      </div>
+        <div id="search-status"> </div>
+        
+        <div class="warning" id="search-warn-box" style="display: none;">
+          <p class="rst-last"><span id="search-warn"></span></p>
+        </div>
 
+        <table id="search-results">
+          <!-- Filled dynamically by JS -->
+        </table>
+        
+        <div style="margin-top: 8px;">
+          <p>Results provided by <a href="https://lunrjs.com">Lunr.js</a></p>
+        </div>
+      </div>
 
     </div>
   </div>
 
-  <script>
- 
-    function toggleSearchHelpText() {
-        document.body.classList.toggle("search-help-hidden");
-    }
-    // Init search and help text
-    document.getElementById('search-box-container').style.display = 'block';
-    document.getElementById('search-help-box').style.display = 'block';
-    document.body.classList.add("search-help-hidden");
-
-  </script>
+  <script src="ajax.js" type="text/javascript"></script>
+  <script src="search.js" type="text/javascript"></script>
 
 </nav>
 
@@ -115,7 +134,7 @@
     <div class="container">
 
       <div class="page-header">
-        <h1 class="class"><code><code><a href="twisted.html">twisted</a></code><wbr></wbr>.<code><a href="twisted.protocols.html">protocols</a></code><wbr></wbr>.<code><a href="twisted.protocols.memcache.html">memcache</a></code><wbr></wbr>.<code><a href="twisted.protocols.memcache.MemCacheProtocol.html">MemCacheProtocol</a></code></code></h1>
+        <h1 class="class"><code><code><a href="index.html" class="internal-link">twisted</a></code><wbr></wbr>.<code><a href="twisted.protocols.html" class="internal-link" title="twisted.protocols">protocols</a></code><wbr></wbr>.<code><a href="twisted.protocols.memcache.html" class="internal-link" title="twisted.protocols.memcache">memcache</a></code><wbr></wbr>.<code><a href="twisted.protocols.memcache.MemCacheProtocol.html" class="internal-link" title="twisted.protocols.memcache.MemCacheProtocol">MemCacheProtocol</a></code></code></h1>
         <div id="showPrivate">
           <button class="btn btn-link" onclick="togglePrivate()">Toggle Private API</button>
         </div>
@@ -126,12 +145,14 @@
       </div>
 
       <div class="extrasDocstring">
-        <p><code><span class="py-keyword">class</span> <span class="py-defname">MemCacheProtocol</span>(<a href="twisted.protocols.basic.LineReceiver.html" title="twisted.protocols.basic.LineReceiver">LineReceiver</a>, <a href="twisted.protocols.policies.TimeoutMixin.html" title="twisted.protocols.policies.TimeoutMixin">TimeoutMixin</a>): <a href="https://github.com/twisted/twisted/tree/twisted-21.2.0/src/twisted/protocols/memcache.py#L100" class="sourceLink">(source)</a></code></p>
+        <p><code><span class="py-keyword">class</span> <span class="py-defname">MemCacheProtocol</span>(<a href="twisted.protocols.basic.LineReceiver.html" class="internal-link" title="twisted.protocols.basic.LineReceiver">LineReceiver</a>, <a href="twisted.protocols.policies.TimeoutMixin.html" class="internal-link" title="twisted.protocols.policies.TimeoutMixin">TimeoutMixin</a>): <a href="https://github.com/twisted/twisted/tree/twisted-21.2.0/src/twisted/protocols/memcache.py#L100" class="sourceLink">(source)</a></code></p>
         <p><a href="classIndex.html#twisted.protocols.memcache.MemCacheProtocol">View In Hierarchy</a></p>
       </div>
 
+      
+
       <div class="moduleDocstring">
-        <div><p>MemCache protocol: connect to a memcached server to store/retrieve values.</p></div>
+        <div>MemCache protocol: connect to a memcached server to store/retrieve values.</div>
       </div>
 
       <div id="splitTables">
@@ -141,233 +162,233 @@
   <tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#__init__">__init__</a></code></td>
-    <td><span>Create the protocol.</span></td>
+    <td><code><a href="#__init__" class="internal-link" title="twisted.protocols.memcache.MemCacheProtocol.__init__">__init__</a></code></td>
+    <td>Create the protocol.</td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#add">add</a></code></td>
-    <td><span>Add the given <code>key</code>. It must not exist in the server.</span></td>
+    <td><code><a href="#add" class="internal-link" title="twisted.protocols.memcache.MemCacheProtocol.add">add</a></code></td>
+    <td>Add the given <tt class="rst-docutils literal">key</tt>. It must not exist in the server.</td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#append">append</a></code></td>
-    <td><span>Append given data to the value of an existing key.</span></td>
+    <td><code><a href="#append" class="internal-link" title="twisted.protocols.memcache.MemCacheProtocol.append">append</a></code></td>
+    <td>Append given data to the value of an existing key.</td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#checkAndSet">checkAndSet</a></code></td>
-    <td><span>Change the content of <code>key</code> only if the <code>cas</code> value matches the current one associated with the key. Use this to store a value which hasn't been modified since last time you fetched it.</span></td>
+    <td><code><a href="#checkAndSet" class="internal-link" title="twisted.protocols.memcache.MemCacheProtocol.checkAndSet">check​And​Set</a></code></td>
+    <td>Change the content of <tt class="rst-docutils literal">key</tt> only if the <tt class="rst-docutils literal">cas</tt> value matches the current one associated with the key. Use this to store a value which hasn't been modified since last time you fetched it.</td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#cmd_CLIENT_ERROR">cmd_CLIENT_ERROR</a></code></td>
-    <td><span>An invalid input as been sent.</span></td>
+    <td><code><a href="#cmd_CLIENT_ERROR" class="internal-link" title="twisted.protocols.memcache.MemCacheProtocol.cmd_CLIENT_ERROR">cmd_​CLIENT_​ERROR</a></code></td>
+    <td>An invalid input as been sent.</td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#cmd_DELETED">cmd_DELETED</a></code></td>
-    <td><span>A delete command has completed successfully.</span></td>
+    <td><code><a href="#cmd_DELETED" class="internal-link" title="twisted.protocols.memcache.MemCacheProtocol.cmd_DELETED">cmd_​DELETED</a></code></td>
+    <td>A delete command has completed successfully.</td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#cmd_END">cmd_END</a></code></td>
-    <td><span>This the end token to a get or a stat operation.</span></td>
+    <td><code><a href="#cmd_END" class="internal-link" title="twisted.protocols.memcache.MemCacheProtocol.cmd_END">cmd_​END</a></code></td>
+    <td>This the end token to a get or a stat operation.</td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#cmd_ERROR">cmd_ERROR</a></code></td>
-    <td><span>A non-existent command has been sent.</span></td>
+    <td><code><a href="#cmd_ERROR" class="internal-link" title="twisted.protocols.memcache.MemCacheProtocol.cmd_ERROR">cmd_​ERROR</a></code></td>
+    <td>A non-existent command has been sent.</td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#cmd_EXISTS">cmd_EXISTS</a></code></td>
-    <td><span>A <code>checkAndSet</code> update has failed.</span></td>
+    <td><code><a href="#cmd_EXISTS" class="internal-link" title="twisted.protocols.memcache.MemCacheProtocol.cmd_EXISTS">cmd_​EXISTS</a></code></td>
+    <td>A <tt class="rst-docutils literal">checkAndSet</tt> update has failed.</td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#cmd_NOT_FOUND">cmd_NOT_FOUND</a></code></td>
-    <td><span>Manage error response for incr/decr/delete.</span></td>
+    <td><code><a href="#cmd_NOT_FOUND" class="internal-link" title="twisted.protocols.memcache.MemCacheProtocol.cmd_NOT_FOUND">cmd_​NOT_​FOUND</a></code></td>
+    <td>Manage error response for incr/decr/delete.</td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#cmd_NOT_STORED">cmd_NOT_STORED</a></code></td>
-    <td><span>Manage a specific 'not stored' response to a set operation: this is not an error, but some condition wasn't met.</span></td>
+    <td><code><a href="#cmd_NOT_STORED" class="internal-link" title="twisted.protocols.memcache.MemCacheProtocol.cmd_NOT_STORED">cmd_​NOT_​STORED</a></code></td>
+    <td>Manage a specific 'not stored' response to a set operation: this is not an error, but some condition wasn't met.</td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#cmd_OK">cmd_OK</a></code></td>
-    <td><span>The last command has been completed.</span></td>
+    <td><code><a href="#cmd_OK" class="internal-link" title="twisted.protocols.memcache.MemCacheProtocol.cmd_OK">cmd_​OK</a></code></td>
+    <td>The last command has been completed.</td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#cmd_SERVER_ERROR">cmd_SERVER_ERROR</a></code></td>
-    <td><span>An error has happened server-side.</span></td>
+    <td><code><a href="#cmd_SERVER_ERROR" class="internal-link" title="twisted.protocols.memcache.MemCacheProtocol.cmd_SERVER_ERROR">cmd_​SERVER_​ERROR</a></code></td>
+    <td>An error has happened server-side.</td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#cmd_STAT">cmd_STAT</a></code></td>
-    <td><span>Reception of one stat line.</span></td>
+    <td><code><a href="#cmd_STAT" class="internal-link" title="twisted.protocols.memcache.MemCacheProtocol.cmd_STAT">cmd_​STAT</a></code></td>
+    <td>Reception of one stat line.</td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#cmd_STORED">cmd_STORED</a></code></td>
-    <td><span>Manage a success response to a set operation.</span></td>
+    <td><code><a href="#cmd_STORED" class="internal-link" title="twisted.protocols.memcache.MemCacheProtocol.cmd_STORED">cmd_​STORED</a></code></td>
+    <td>Manage a success response to a set operation.</td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#cmd_VALUE">cmd_VALUE</a></code></td>
-    <td><span>Prepare the reading a value after a get.</span></td>
+    <td><code><a href="#cmd_VALUE" class="internal-link" title="twisted.protocols.memcache.MemCacheProtocol.cmd_VALUE">cmd_​VALUE</a></code></td>
+    <td>Prepare the reading a value after a get.</td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#cmd_VERSION">cmd_VERSION</a></code></td>
-    <td><span>Read version token.</span></td>
+    <td><code><a href="#cmd_VERSION" class="internal-link" title="twisted.protocols.memcache.MemCacheProtocol.cmd_VERSION">cmd_​VERSION</a></code></td>
+    <td>Read version token.</td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#connectionLost">connectionLost</a></code></td>
-    <td><span>Cause any outstanding commands to fail.</span></td>
+    <td><code><a href="#connectionLost" class="internal-link" title="twisted.protocols.memcache.MemCacheProtocol.connectionLost">connection​Lost</a></code></td>
+    <td>Cause any outstanding commands to fail.</td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#decrement">decrement</a></code></td>
-    <td><span>Decrement the value of <code>key</code> by given value (default to 1). <code>key</code> must be consistent with an int. Return the new value, coerced to 0 if negative.</span></td>
+    <td><code><a href="#decrement" class="internal-link" title="twisted.protocols.memcache.MemCacheProtocol.decrement">decrement</a></code></td>
+    <td>Decrement the value of <tt class="rst-docutils literal">key</tt> by given value (default to 1). <tt class="rst-docutils literal">key</tt> must be consistent with an int. Return the new value, coerced to 0 if negative.</td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#delete">delete</a></code></td>
-    <td><span>Delete an existing <code>key</code>.</span></td>
+    <td><code><a href="#delete" class="internal-link" title="twisted.protocols.memcache.MemCacheProtocol.delete">delete</a></code></td>
+    <td>Delete an existing <tt class="rst-docutils literal">key</tt>.</td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#flushAll">flushAll</a></code></td>
-    <td><span>Flush all cached values.</span></td>
+    <td><code><a href="#flushAll" class="internal-link" title="twisted.protocols.memcache.MemCacheProtocol.flushAll">flush​All</a></code></td>
+    <td>Flush all cached values.</td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#get">get</a></code></td>
+    <td><code><a href="#get" class="internal-link" title="twisted.protocols.memcache.MemCacheProtocol.get">get</a></code></td>
     <td><span class="undocumented">No summary</span></td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#getMultiple">getMultiple</a></code></td>
+    <td><code><a href="#getMultiple" class="internal-link" title="twisted.protocols.memcache.MemCacheProtocol.getMultiple">get​Multiple</a></code></td>
     <td><span class="undocumented">No summary</span></td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#increment">increment</a></code></td>
-    <td><span>Increment the value of <code>key</code> by given value (default to 1). <code>key</code> must be consistent with an int. Return the new value.</span></td>
+    <td><code><a href="#increment" class="internal-link" title="twisted.protocols.memcache.MemCacheProtocol.increment">increment</a></code></td>
+    <td>Increment the value of <tt class="rst-docutils literal">key</tt> by given value (default to 1). <tt class="rst-docutils literal">key</tt> must be consistent with an int. Return the new value.</td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#lineReceived">lineReceived</a></code></td>
-    <td><span>Receive line commands from the server.</span></td>
+    <td><code><a href="#lineReceived" class="internal-link" title="twisted.protocols.memcache.MemCacheProtocol.lineReceived">line​Received</a></code></td>
+    <td>Receive line commands from the server.</td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#prepend">prepend</a></code></td>
-    <td><span>Prepend given data to the value of an existing key.</span></td>
+    <td><code><a href="#prepend" class="internal-link" title="twisted.protocols.memcache.MemCacheProtocol.prepend">prepend</a></code></td>
+    <td>Prepend given data to the value of an existing key.</td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#rawDataReceived">rawDataReceived</a></code></td>
-    <td><span>Collect data for a get.</span></td>
+    <td><code><a href="#rawDataReceived" class="internal-link" title="twisted.protocols.memcache.MemCacheProtocol.rawDataReceived">raw​Data​Received</a></code></td>
+    <td>Collect data for a get.</td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#replace">replace</a></code></td>
-    <td><span>Replace the given <code>key</code>. It must already exist in the server.</span></td>
+    <td><code><a href="#replace" class="internal-link" title="twisted.protocols.memcache.MemCacheProtocol.replace">replace</a></code></td>
+    <td>Replace the given <tt class="rst-docutils literal">key</tt>. It must already exist in the server.</td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#sendLine">sendLine</a></code></td>
-    <td><span>Override sendLine to add a timeout to response.</span></td>
+    <td><code><a href="#sendLine" class="internal-link" title="twisted.protocols.memcache.MemCacheProtocol.sendLine">send​Line</a></code></td>
+    <td>Override sendLine to add a timeout to response.</td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#set">set</a></code></td>
-    <td><span>Set the given <code>key</code>.</span></td>
+    <td><code><a href="#set" class="internal-link" title="twisted.protocols.memcache.MemCacheProtocol.set">set</a></code></td>
+    <td>Set the given <tt class="rst-docutils literal">key</tt>.</td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#stats">stats</a></code></td>
-    <td><span>Get some stats from the server. It will be available as a dict.</span></td>
+    <td><code><a href="#stats" class="internal-link" title="twisted.protocols.memcache.MemCacheProtocol.stats">stats</a></code></td>
+    <td>Get some stats from the server. It will be available as a dict.</td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#timeoutConnection">timeoutConnection</a></code></td>
-    <td><span>Close the connection in case of timeout.</span></td>
+    <td><code><a href="#timeoutConnection" class="internal-link" title="twisted.protocols.memcache.MemCacheProtocol.timeoutConnection">timeout​Connection</a></code></td>
+    <td>Close the connection in case of timeout.</td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#version">version</a></code></td>
-    <td><span>Get the version of the server.</span></td>
-  </tr><tr class="classvariable">
+    <td><code><a href="#version" class="internal-link" title="twisted.protocols.memcache.MemCacheProtocol.version">version</a></code></td>
+    <td>Get the version of the server.</td>
+  </tr><tr class="constant">
     
-    <td>Class Variable</td>
-    <td><code><a href="#MAX_KEY_LENGTH">MAX_KEY_LENGTH</a></code></td>
+    <td>Constant</td>
+    <td><code><a href="#MAX_KEY_LENGTH" class="internal-link" title="twisted.protocols.memcache.MemCacheProtocol.MAX_KEY_LENGTH">MAX​_KEY​_LENGTH</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="instancevariable">
     
     <td>Instance Variable</td>
-    <td><code><a href="#persistentTimeOut">persistentTimeOut</a></code></td>
-    <td><span>the timeout period used to wait for a response.</span></td>
+    <td><code><a href="#persistentTimeOut" class="internal-link" title="twisted.protocols.memcache.MemCacheProtocol.persistentTimeOut">persistent​Time​Out</a></code></td>
+    <td>the timeout period used to wait for a response.</td>
   </tr><tr class="instancevariable">
     
     <td>Instance Variable</td>
-    <td><code><a href="#timeOut">timeOut</a></code></td>
+    <td><code><a href="#timeOut" class="internal-link" title="twisted.protocols.memcache.MemCacheProtocol.timeOut">time​Out</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method private">
     
     <td>Method</td>
-    <td><code><a href="#_cancelCommands">_cancelCommands</a></code></td>
-    <td><span>Cancel all the outstanding commands, making them fail with <code>reason</code>.</span></td>
+    <td><code><a href="#_cancelCommands" class="internal-link" title="twisted.protocols.memcache.MemCacheProtocol._cancelCommands">_cancel​Commands</a></code></td>
+    <td>Cancel all the outstanding commands, making them fail with <tt class="rst-docutils literal">reason</tt>.</td>
   </tr><tr class="method private">
     
     <td>Method</td>
-    <td><code><a href="#_get">_get</a></code></td>
-    <td><span>Helper method for <code>get</code> and <code>getMultiple</code>.</span></td>
+    <td><code><a href="#_get" class="internal-link" title="twisted.protocols.memcache.MemCacheProtocol._get">_get</a></code></td>
+    <td>Helper method for <tt class="rst-docutils literal">get</tt> and <tt class="rst-docutils literal">getMultiple</tt>.</td>
   </tr><tr class="method private">
     
     <td>Method</td>
-    <td><code><a href="#_incrdecr">_incrdecr</a></code></td>
-    <td><span>Internal wrapper for incr/decr.</span></td>
+    <td><code><a href="#_incrdecr" class="internal-link" title="twisted.protocols.memcache.MemCacheProtocol._incrdecr">_incrdecr</a></code></td>
+    <td>Internal wrapper for incr/decr.</td>
   </tr><tr class="method private">
     
     <td>Method</td>
-    <td><code><a href="#_set">_set</a></code></td>
-    <td><span>Internal wrapper for setting values.</span></td>
+    <td><code><a href="#_set" class="internal-link" title="twisted.protocols.memcache.MemCacheProtocol._set">_set</a></code></td>
+    <td>Internal wrapper for setting values.</td>
   </tr><tr class="instancevariable private">
     
     <td>Instance Variable</td>
-    <td><code><a href="#_bufferLength">_bufferLength</a></code></td>
-    <td><span>the total amount of bytes in <code>_getBuffer</code>.</span></td>
+    <td><code><a href="#_bufferLength" class="internal-link" title="twisted.protocols.memcache.MemCacheProtocol._bufferLength">_buffer​Length</a></code></td>
+    <td>the total amount of bytes in <tt class="rst-docutils literal">_getBuffer</tt>.</td>
   </tr><tr class="instancevariable private">
     
     <td>Instance Variable</td>
-    <td><code><a href="#_current">_current</a></code></td>
-    <td><span>current list of requests waiting for an answer from the server.</span></td>
+    <td><code><a href="#_current" class="internal-link" title="twisted.protocols.memcache.MemCacheProtocol._current">_current</a></code></td>
+    <td>current list of requests waiting for an answer from the server.</td>
   </tr><tr class="instancevariable private">
     
     <td>Instance Variable</td>
-    <td><code><a href="#_disconnected">_disconnected</a></code></td>
-    <td><span>indicate if the connectionLost has been called or not.</span></td>
+    <td><code><a href="#_disconnected" class="internal-link" title="twisted.protocols.memcache.MemCacheProtocol._disconnected">_disconnected</a></code></td>
+    <td>indicate if the connectionLost has been called or not.</td>
   </tr><tr class="instancevariable private">
     
     <td>Instance Variable</td>
-    <td><code><a href="#_getBuffer">_getBuffer</a></code></td>
-    <td><span>current buffer of data, used to store temporary data when reading in raw mode.</span></td>
+    <td><code><a href="#_getBuffer" class="internal-link" title="twisted.protocols.memcache.MemCacheProtocol._getBuffer">_get​Buffer</a></code></td>
+    <td>current buffer of data, used to store temporary data when reading in raw mode.</td>
   </tr><tr class="instancevariable private">
     
     <td>Instance Variable</td>
-    <td><code><a href="#_lenExpected">_lenExpected</a></code></td>
-    <td><span>amount of data expected in raw mode, when reading for a value.</span></td>
+    <td><code><a href="#_lenExpected" class="internal-link" title="twisted.protocols.memcache.MemCacheProtocol._lenExpected">_len​Expected</a></code></td>
+    <td>amount of data expected in raw mode, when reading for a value.</td>
   </tr>
 </table>
         
           <p class="inheritedFrom">
-            Inherited from <code><a href="twisted.protocols.basic.LineReceiver.html">LineReceiver</a></code>:
+            Inherited from <code><a href="twisted.protocols.basic.LineReceiver.html" class="internal-link" title="twisted.protocols.basic.LineReceiver">LineReceiver</a></code>:
           </p>
           <table class="children sortable" id="id2366">
   
@@ -375,58 +396,58 @@
   <tr class="basemethod">
     
     <td>Method</td>
-    <td><code><a href="twisted.protocols.basic.LineReceiver.html#clearLineBuffer">clearLineBuffer</a></code></td>
-    <td><span>Clear buffered data.</span></td>
+    <td><code><a href="twisted.protocols.basic.LineReceiver.html#clearLineBuffer" class="internal-link" title="twisted.protocols.basic.LineReceiver.clearLineBuffer">clear​Line​Buffer</a></code></td>
+    <td>Clear buffered data.</td>
   </tr><tr class="basemethod">
     
     <td>Method</td>
-    <td><code><a href="twisted.protocols.basic.LineReceiver.html#dataReceived">dataReceived</a></code></td>
-    <td><span>Protocol.dataReceived. Translates bytes into lines, and calls lineReceived (or rawDataReceived, depending on mode.)</span></td>
+    <td><code><a href="twisted.protocols.basic.LineReceiver.html#dataReceived" class="internal-link" title="twisted.protocols.basic.LineReceiver.dataReceived">data​Received</a></code></td>
+    <td>Protocol.dataReceived. Translates bytes into lines, and calls lineReceived (or rawDataReceived, depending on mode.)</td>
   </tr><tr class="basemethod">
     
     <td>Method</td>
-    <td><code><a href="twisted.protocols.basic.LineReceiver.html#lineLengthExceeded">lineLengthExceeded</a></code></td>
-    <td><span>Called when the maximum line length has been reached. Override if it needs to be dealt with in some special way.</span></td>
+    <td><code><a href="twisted.protocols.basic.LineReceiver.html#lineLengthExceeded" class="internal-link" title="twisted.protocols.basic.LineReceiver.lineLengthExceeded">line​Length​Exceeded</a></code></td>
+    <td>Called when the maximum line length has been reached. Override if it needs to be dealt with in some special way.</td>
   </tr><tr class="basemethod">
     
     <td>Method</td>
-    <td><code><a href="twisted.protocols.basic.LineReceiver.html#setLineMode">setLineMode</a></code></td>
-    <td><span>Sets the line-mode of this receiver.</span></td>
+    <td><code><a href="twisted.protocols.basic.LineReceiver.html#setLineMode" class="internal-link" title="twisted.protocols.basic.LineReceiver.setLineMode">set​Line​Mode</a></code></td>
+    <td>Sets the line-mode of this receiver.</td>
   </tr><tr class="basemethod">
     
     <td>Method</td>
-    <td><code><a href="twisted.protocols.basic.LineReceiver.html#setRawMode">setRawMode</a></code></td>
-    <td><span>Sets the raw mode of this receiver. Further data received will be sent to rawDataReceived rather than lineReceived.</span></td>
+    <td><code><a href="twisted.protocols.basic.LineReceiver.html#setRawMode" class="internal-link" title="twisted.protocols.basic.LineReceiver.setRawMode">set​Raw​Mode</a></code></td>
+    <td>Sets the raw mode of this receiver. Further data received will be sent to rawDataReceived rather than lineReceived.</td>
+  </tr><tr class="baseconstant">
+    
+    <td>Constant</td>
+    <td><code><a href="twisted.protocols.basic.LineReceiver.html#MAX_LENGTH" class="internal-link" title="twisted.protocols.basic.LineReceiver.MAX_LENGTH">MAX​_LENGTH</a></code></td>
+    <td>The maximum length of a line to allow (If a sent line is longer than this, the connection is dropped). Default is 16384.</td>
   </tr><tr class="baseclassvariable">
     
     <td>Class Variable</td>
-    <td><code><a href="twisted.protocols.basic.LineReceiver.html#delimiter">delimiter</a></code></td>
-    <td><span>The line-ending delimiter to use. By default this is <code>b'\r\n'</code>.</span></td>
-  </tr><tr class="baseclassvariable">
-    
-    <td>Class Variable</td>
-    <td><code><a href="twisted.protocols.basic.LineReceiver.html#MAX_LENGTH">MAX_LENGTH</a></code></td>
-    <td><span>The maximum length of a line to allow (If a sent line is longer than this, the connection is dropped). Default is 16384.</span></td>
+    <td><code><a href="twisted.protocols.basic.LineReceiver.html#delimiter" class="internal-link" title="twisted.protocols.basic.LineReceiver.delimiter">delimiter</a></code></td>
+    <td>The line-ending delimiter to use. By default this is <tt class="rst-docutils literal"><span class="pre">b'\r\n'</span></tt>.</td>
   </tr><tr class="baseinstancevariable">
     
     <td>Instance Variable</td>
-    <td><code><a href="twisted.protocols.basic.LineReceiver.html#line_mode">line_mode</a></code></td>
+    <td><code><a href="twisted.protocols.basic.LineReceiver.html#line_mode" class="internal-link" title="twisted.protocols.basic.LineReceiver.line_mode">line​_mode</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="baseinstancevariable private">
     
     <td>Instance Variable</td>
-    <td><code><a href="twisted.protocols.basic.LineReceiver.html#_buffer">_buffer</a></code></td>
+    <td><code><a href="twisted.protocols.basic.LineReceiver.html#_buffer" class="internal-link" title="twisted.protocols.basic.LineReceiver._buffer">_buffer</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="baseinstancevariable private">
     
     <td>Instance Variable</td>
-    <td><code><a href="twisted.protocols.basic.LineReceiver.html#_busyReceiving">_busyReceiving</a></code></td>
+    <td><code><a href="twisted.protocols.basic.LineReceiver.html#_busyReceiving" class="internal-link" title="twisted.protocols.basic.LineReceiver._busyReceiving">_busy​Receiving</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr>
 </table>
           
           <p class="inheritedFrom">
-            Inherited from <code><a href="twisted.internet.protocol.Protocol.html">Protocol</a></code> (via <code><a href="twisted.protocols.basic.LineReceiver.html">LineReceiver</a></code>):
+            Inherited from <code><a href="twisted.internet.protocol.Protocol.html" class="internal-link" title="twisted.internet.protocol.Protocol">Protocol</a></code> (via <code><a href="twisted.protocols.basic.LineReceiver.html" class="internal-link" title="twisted.protocols.basic.LineReceiver">LineReceiver</a></code>):
           </p>
           <table class="children sortable" id="id2367">
   
@@ -434,18 +455,18 @@
   <tr class="basemethod">
     
     <td>Method</td>
-    <td><code><a href="twisted.internet.protocol.Protocol.html#logPrefix">logPrefix</a></code></td>
-    <td><span>Return a prefix matching the class name, to identify log messages related to this protocol instance.</span></td>
+    <td><code><a href="twisted.internet.protocol.Protocol.html#logPrefix" class="internal-link" title="twisted.internet.protocol.Protocol.logPrefix">log​Prefix</a></code></td>
+    <td>Return a prefix matching the class name, to identify log messages related to this protocol instance.</td>
   </tr><tr class="baseclassvariable">
     
     <td>Class Variable</td>
-    <td><code><a href="twisted.internet.protocol.Protocol.html#factory">factory</a></code></td>
+    <td><code><a href="twisted.internet.protocol.Protocol.html#factory" class="internal-link" title="twisted.internet.protocol.Protocol.factory">factory</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr>
 </table>
           
           <p class="inheritedFrom">
-            Inherited from <code><a href="twisted.internet.protocol.BaseProtocol.html">BaseProtocol</a></code> (via <code><a href="twisted.protocols.basic.LineReceiver.html">LineReceiver</a></code>, <code><a href="twisted.internet.protocol.Protocol.html">Protocol</a></code>):
+            Inherited from <code><a href="twisted.internet.protocol.BaseProtocol.html" class="internal-link" title="twisted.internet.protocol.BaseProtocol">BaseProtocol</a></code> (via <code><a href="twisted.protocols.basic.LineReceiver.html" class="internal-link" title="twisted.protocols.basic.LineReceiver">LineReceiver</a></code>, <code><a href="twisted.internet.protocol.Protocol.html" class="internal-link" title="twisted.internet.protocol.Protocol">Protocol</a></code>):
           </p>
           <table class="children sortable" id="id2368">
   
@@ -453,28 +474,28 @@
   <tr class="basemethod">
     
     <td>Method</td>
-    <td><code><a href="twisted.internet.protocol.BaseProtocol.html#connectionMade">connectionMade</a></code></td>
-    <td><span>Called when a connection is made.</span></td>
+    <td><code><a href="twisted.internet.protocol.BaseProtocol.html#connectionMade" class="internal-link" title="twisted.internet.protocol.BaseProtocol.connectionMade">connection​Made</a></code></td>
+    <td>Called when a connection is made.</td>
   </tr><tr class="basemethod">
     
     <td>Method</td>
-    <td><code><a href="twisted.internet.protocol.BaseProtocol.html#makeConnection">makeConnection</a></code></td>
-    <td><span>Make a connection to a transport and a server.</span></td>
+    <td><code><a href="twisted.internet.protocol.BaseProtocol.html#makeConnection" class="internal-link" title="twisted.internet.protocol.BaseProtocol.makeConnection">make​Connection</a></code></td>
+    <td>Make a connection to a transport and a server.</td>
   </tr><tr class="baseinstancevariable">
     
     <td>Instance Variable</td>
-    <td><code><a href="twisted.internet.protocol.BaseProtocol.html#connected">connected</a></code></td>
+    <td><code><a href="twisted.internet.protocol.BaseProtocol.html#connected" class="internal-link" title="twisted.internet.protocol.BaseProtocol.connected">connected</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="baseinstancevariable">
     
     <td>Instance Variable</td>
-    <td><code><a href="twisted.internet.protocol.BaseProtocol.html#transport">transport</a></code></td>
+    <td><code><a href="twisted.internet.protocol.BaseProtocol.html#transport" class="internal-link" title="twisted.internet.protocol.BaseProtocol.transport">transport</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr>
 </table>
           
           <p class="inheritedFrom">
-            Inherited from <code><a href="twisted.protocols.basic._PauseableMixin.html">_PauseableMixin</a></code> (via <code><a href="twisted.protocols.basic.LineReceiver.html">LineReceiver</a></code>):
+            Inherited from <code><a href="twisted.protocols.basic._PauseableMixin.html" class="internal-link" title="twisted.protocols.basic._PauseableMixin">_PauseableMixin</a></code> (via <code><a href="twisted.protocols.basic.LineReceiver.html" class="internal-link" title="twisted.protocols.basic.LineReceiver">LineReceiver</a></code>):
           </p>
           <table class="children sortable" id="id2369">
   
@@ -482,28 +503,28 @@
   <tr class="basemethod">
     
     <td>Method</td>
-    <td><code><a href="twisted.protocols.basic._PauseableMixin.html#pauseProducing">pauseProducing</a></code></td>
+    <td><code><a href="twisted.protocols.basic._PauseableMixin.html#pauseProducing" class="internal-link" title="twisted.protocols.basic._PauseableMixin.pauseProducing">pause​Producing</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="basemethod">
     
     <td>Method</td>
-    <td><code><a href="twisted.protocols.basic._PauseableMixin.html#resumeProducing">resumeProducing</a></code></td>
+    <td><code><a href="twisted.protocols.basic._PauseableMixin.html#resumeProducing" class="internal-link" title="twisted.protocols.basic._PauseableMixin.resumeProducing">resume​Producing</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="basemethod">
     
     <td>Method</td>
-    <td><code><a href="twisted.protocols.basic._PauseableMixin.html#stopProducing">stopProducing</a></code></td>
+    <td><code><a href="twisted.protocols.basic._PauseableMixin.html#stopProducing" class="internal-link" title="twisted.protocols.basic._PauseableMixin.stopProducing">stop​Producing</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="baseinstancevariable">
     
     <td>Instance Variable</td>
-    <td><code><a href="twisted.protocols.basic._PauseableMixin.html#paused">paused</a></code></td>
+    <td><code><a href="twisted.protocols.basic._PauseableMixin.html#paused" class="internal-link" title="twisted.protocols.basic._PauseableMixin.paused">paused</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr>
 </table>
           
           <p class="inheritedFrom">
-            Inherited from <code><a href="twisted.protocols.policies.TimeoutMixin.html">TimeoutMixin</a></code>:
+            Inherited from <code><a href="twisted.protocols.policies.TimeoutMixin.html" class="internal-link" title="twisted.protocols.policies.TimeoutMixin">TimeoutMixin</a></code>:
           </p>
           <table class="children sortable" id="id2370">
   
@@ -511,27 +532,27 @@
   <tr class="basemethod">
     
     <td>Method</td>
-    <td><code><a href="twisted.protocols.policies.TimeoutMixin.html#callLater">callLater</a></code></td>
-    <td><span>Wrapper around <code><a href="twisted.internet.interfaces.IReactorTime.html#callLater">reactor.callLater</a></code> for test purpose.</span></td>
+    <td><code><a href="twisted.protocols.policies.TimeoutMixin.html#callLater" class="internal-link" title="twisted.protocols.policies.TimeoutMixin.callLater">call​Later</a></code></td>
+    <td>Wrapper around <code><a href="twisted.internet.interfaces.IReactorTime.html#callLater" class="internal-link" title="twisted.internet.interfaces.IReactorTime.callLater">reactor.callLater</a></code> for test purpose.</td>
   </tr><tr class="basemethod">
     
     <td>Method</td>
-    <td><code><a href="twisted.protocols.policies.TimeoutMixin.html#resetTimeout">resetTimeout</a></code></td>
-    <td><span>Reset the timeout count down.</span></td>
+    <td><code><a href="twisted.protocols.policies.TimeoutMixin.html#resetTimeout" class="internal-link" title="twisted.protocols.policies.TimeoutMixin.resetTimeout">reset​Timeout</a></code></td>
+    <td>Reset the timeout count down.</td>
   </tr><tr class="basemethod">
     
     <td>Method</td>
-    <td><code><a href="twisted.protocols.policies.TimeoutMixin.html#setTimeout">setTimeout</a></code></td>
-    <td><span>Change the timeout period</span></td>
+    <td><code><a href="twisted.protocols.policies.TimeoutMixin.html#setTimeout" class="internal-link" title="twisted.protocols.policies.TimeoutMixin.setTimeout">set​Timeout</a></code></td>
+    <td>Change the timeout period</td>
   </tr><tr class="basemethod private">
     
     <td>Method</td>
-    <td><code><a href="twisted.protocols.policies.TimeoutMixin.html#__timedOut">__timedOut</a></code></td>
+    <td><code><a href="twisted.protocols.policies.TimeoutMixin.html#__timedOut" class="internal-link" title="twisted.protocols.policies.TimeoutMixin.__timedOut">__timed​Out</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="baseinstancevariable private">
     
     <td>Instance Variable</td>
-    <td><code><a href="twisted.protocols.policies.TimeoutMixin.html#__timeoutCall">__timeoutCall</a></code></td>
+    <td><code><a href="twisted.protocols.policies.TimeoutMixin.html#__timeoutCall" class="internal-link" title="twisted.protocols.policies.TimeoutMixin.__timeoutCall">__timeout​Call</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr>
 </table>
@@ -562,7 +583,7 @@
   <div class="docstring functionBody">
     
     
-    <div><p>Create the protocol.</p><table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">timeOut:</span><code><a href="https://docs.python.org/3/library/functions.html#int">int</a></code></td><td class="fieldArgDesc">the timeout to wait before detecting that the connection is dead and close it. It's expressed in seconds.</td></tr></table></div>
+    <div>Create the protocol.<table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">time​Out:</span><code><a href="https://docs.python.org/3/library/functions.html#int" class="intersphinx-link">int</a></code></td><td class="fieldArgDesc">the timeout to wait before detecting that the connection is dead and close it. It's expressed in seconds.</td></tr></table></div>
   </div>
 </div><div class="basemethod">
   
@@ -584,7 +605,7 @@
   <div class="docstring functionBody">
     
     
-    <div><p>Add the given <code>key</code>. It must not exist in the server.</p><table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">key:</span><code><a href="https://docs.python.org/3/library/stdtypes.html#bytes">bytes</a></code></td><td class="fieldArgDesc">the key to add.</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">val:</span><code><a href="https://docs.python.org/3/library/stdtypes.html#bytes">bytes</a></code></td><td class="fieldArgDesc">the value associated with the key.</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">flags:</span><code><a href="https://docs.python.org/3/library/functions.html#int">int</a></code></td><td class="fieldArgDesc">the flags to store with the key.</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">expireTime:</span><code><a href="https://docs.python.org/3/library/functions.html#int">int</a></code></td><td class="fieldArgDesc">if different from 0, the relative time in seconds when the key will be deleted from the store.</td></tr><tr class="fieldStart"><td class="fieldName" colspan="2">Returns</td></tr><tr><td class="fieldArgContainer"><code><a href="twisted.internet.defer.Deferred.html">Deferred</a></code></td><td class="fieldArgDesc">a deferred that will fire with <code>True</code> if the operation has succeeded, and <code>False</code> with the key already exists.</td></tr></table></div>
+    <div>Add the given <tt class="rst-docutils literal">key</tt>. It must not exist in the server.<table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">key:</span><code><a href="https://docs.python.org/3/library/stdtypes.html#bytes" class="intersphinx-link">bytes</a></code></td><td class="fieldArgDesc">the key to add.</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">val:</span><code><a href="https://docs.python.org/3/library/stdtypes.html#bytes" class="intersphinx-link">bytes</a></code></td><td class="fieldArgDesc">the value associated with the key.</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">flags:</span><code><a href="https://docs.python.org/3/library/functions.html#int" class="intersphinx-link">int</a></code></td><td class="fieldArgDesc">the flags to store with the key.</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">expire​Time:</span><code><a href="https://docs.python.org/3/library/functions.html#int" class="intersphinx-link">int</a></code></td><td class="fieldArgDesc">if different from 0, the relative time in seconds when the key will be deleted from the store.</td></tr><tr class="fieldStart"><td class="fieldName" colspan="2">Returns</td></tr><tr><td class="fieldArgContainer"><code><a href="twisted.internet.defer.Deferred.html" class="internal-link" title="twisted.internet.defer.Deferred">Deferred</a></code></td><td class="fieldArgDesc">a deferred that will fire with <tt class="rst-docutils literal">True</tt> if the operation has succeeded, and <tt class="rst-docutils literal">False</tt> with the key already exists.</td></tr></table></div>
   </div>
 </div><div class="basemethod">
   
@@ -606,7 +627,7 @@
   <div class="docstring functionBody">
     
     
-    <div><p>Append given data to the value of an existing key.</p><table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">key:</span><code><a href="https://docs.python.org/3/library/stdtypes.html#bytes">bytes</a></code></td><td class="fieldArgDesc">The key to modify.</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">val:</span><code><a href="https://docs.python.org/3/library/stdtypes.html#bytes">bytes</a></code></td><td class="fieldArgDesc">The value to append to the current value associated with the key.</td></tr><tr class="fieldStart"><td class="fieldName" colspan="2">Returns</td></tr><tr><td class="fieldArgContainer"><code><a href="twisted.internet.defer.Deferred.html">Deferred</a></code></td><td class="fieldArgDesc">A deferred that will fire with <code>True</code> if the operation has succeeded, <code>False</code> otherwise.</td></tr></table></div>
+    <div>Append given data to the value of an existing key.<table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">key:</span><code><a href="https://docs.python.org/3/library/stdtypes.html#bytes" class="intersphinx-link">bytes</a></code></td><td class="fieldArgDesc">The key to modify.</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">val:</span><code><a href="https://docs.python.org/3/library/stdtypes.html#bytes" class="intersphinx-link">bytes</a></code></td><td class="fieldArgDesc">The value to append to the current value associated with the key.</td></tr><tr class="fieldStart"><td class="fieldName" colspan="2">Returns</td></tr><tr><td class="fieldArgContainer"><code><a href="twisted.internet.defer.Deferred.html" class="internal-link" title="twisted.internet.defer.Deferred">Deferred</a></code></td><td class="fieldArgDesc">A deferred that will fire with <tt class="rst-docutils literal">True</tt> if the operation has succeeded, <tt class="rst-docutils literal">False</tt> otherwise.</td></tr></table></div>
   </div>
 </div><div class="basemethod">
   
@@ -628,7 +649,7 @@
   <div class="docstring functionBody">
     
     
-    <div><p>Change the content of <code>key</code> only if the <code>cas</code> value matches the current one associated with the key. Use this to store a value which hasn't been modified since last time you fetched it.</p><table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">key:</span><code><a href="https://docs.python.org/3/library/stdtypes.html#bytes">bytes</a></code></td><td class="fieldArgDesc">The key to set.</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">val:</span><code><a href="https://docs.python.org/3/library/stdtypes.html#bytes">bytes</a></code></td><td class="fieldArgDesc">The value associated with the key.</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">cas:</span><code><a href="https://docs.python.org/3/library/stdtypes.html#bytes">bytes</a></code></td><td class="fieldArgDesc">Unique 64-bit value returned by previous call of <code>get</code>.</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">flags:</span><code><a href="https://docs.python.org/3/library/functions.html#int">int</a></code></td><td class="fieldArgDesc">The flags to store with the key.</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">expireTime:</span><code><a href="https://docs.python.org/3/library/functions.html#int">int</a></code></td><td class="fieldArgDesc">If different from 0, the relative time in seconds when the key will be deleted from the store.</td></tr><tr class="fieldStart"><td class="fieldName" colspan="2">Returns</td></tr><tr><td class="fieldArgContainer"><code><a href="twisted.internet.defer.Deferred.html">Deferred</a></code></td><td class="fieldArgDesc">A deferred that will fire with <code>True</code> if the operation has succeeded, <code>False</code> otherwise.</td></tr></table></div>
+    <div>Change the content of <tt class="rst-docutils literal">key</tt> only if the <tt class="rst-docutils literal">cas</tt> value matches the current one associated with the key. Use this to store a value which hasn't been modified since last time you fetched it.<table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">key:</span><code><a href="https://docs.python.org/3/library/stdtypes.html#bytes" class="intersphinx-link">bytes</a></code></td><td class="fieldArgDesc">The key to set.</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">val:</span><code><a href="https://docs.python.org/3/library/stdtypes.html#bytes" class="intersphinx-link">bytes</a></code></td><td class="fieldArgDesc">The value associated with the key.</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">cas:</span><code><a href="https://docs.python.org/3/library/stdtypes.html#bytes" class="intersphinx-link">bytes</a></code></td><td class="fieldArgDesc">Unique 64-bit value returned by previous call of <tt class="rst-docutils literal">get</tt>.</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">flags:</span><code><a href="https://docs.python.org/3/library/functions.html#int" class="intersphinx-link">int</a></code></td><td class="fieldArgDesc">The flags to store with the key.</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">expire​Time:</span><code><a href="https://docs.python.org/3/library/functions.html#int" class="intersphinx-link">int</a></code></td><td class="fieldArgDesc">If different from 0, the relative time in seconds when the key will be deleted from the store.</td></tr><tr class="fieldStart"><td class="fieldName" colspan="2">Returns</td></tr><tr><td class="fieldArgContainer"><code><a href="twisted.internet.defer.Deferred.html" class="internal-link" title="twisted.internet.defer.Deferred">Deferred</a></code></td><td class="fieldArgDesc">A deferred that will fire with <tt class="rst-docutils literal">True</tt> if the operation has succeeded, <tt class="rst-docutils literal">False</tt> otherwise.</td></tr></table></div>
   </div>
 </div><div class="basemethod">
   
@@ -650,7 +671,7 @@
   <div class="docstring functionBody">
     
     
-    <div><p>An invalid input as been sent.</p></div>
+    <div>An invalid input as been sent.</div>
   </div>
 </div><div class="basemethod">
   
@@ -672,7 +693,7 @@
   <div class="docstring functionBody">
     
     
-    <div><p>A delete command has completed successfully.</p></div>
+    <div>A delete command has completed successfully.</div>
   </div>
 </div><div class="basemethod">
   
@@ -694,7 +715,7 @@
   <div class="docstring functionBody">
     
     
-    <div><p>This the end token to a get or a stat operation.</p></div>
+    <div>This the end token to a get or a stat operation.</div>
   </div>
 </div><div class="basemethod">
   
@@ -716,7 +737,7 @@
   <div class="docstring functionBody">
     
     
-    <div><p>A non-existent command has been sent.</p></div>
+    <div>A non-existent command has been sent.</div>
   </div>
 </div><div class="basemethod">
   
@@ -738,7 +759,7 @@
   <div class="docstring functionBody">
     
     
-    <div><p>A <code>checkAndSet</code> update has failed.</p></div>
+    <div>A <tt class="rst-docutils literal">checkAndSet</tt> update has failed.</div>
   </div>
 </div><div class="basemethod">
   
@@ -760,7 +781,7 @@
   <div class="docstring functionBody">
     
     
-    <div><p>Manage error response for incr/decr/delete.</p></div>
+    <div>Manage error response for incr/decr/delete.</div>
   </div>
 </div><div class="basemethod">
   
@@ -782,7 +803,7 @@
   <div class="docstring functionBody">
     
     
-    <div><p>Manage a specific 'not stored' response to a set operation: this is not an error, but some condition wasn't met.</p></div>
+    <div>Manage a specific 'not stored' response to a set operation: this is not an error, but some condition wasn't met.</div>
   </div>
 </div><div class="basemethod">
   
@@ -804,7 +825,7 @@
   <div class="docstring functionBody">
     
     
-    <div><p>The last command has been completed.</p></div>
+    <div>The last command has been completed.</div>
   </div>
 </div><div class="basemethod">
   
@@ -826,7 +847,7 @@
   <div class="docstring functionBody">
     
     
-    <div><p>An error has happened server-side.</p></div>
+    <div>An error has happened server-side.</div>
   </div>
 </div><div class="basemethod">
   
@@ -848,7 +869,7 @@
   <div class="docstring functionBody">
     
     
-    <div><p>Reception of one stat line.</p></div>
+    <div>Reception of one stat line.</div>
   </div>
 </div><div class="basemethod">
   
@@ -870,7 +891,7 @@
   <div class="docstring functionBody">
     
     
-    <div><p>Manage a success response to a set operation.</p></div>
+    <div>Manage a success response to a set operation.</div>
   </div>
 </div><div class="basemethod">
   
@@ -892,7 +913,7 @@
   <div class="docstring functionBody">
     
     
-    <div><p>Prepare the reading a value after a get.</p></div>
+    <div>Prepare the reading a value after a get.</div>
   </div>
 </div><div class="basemethod">
   
@@ -914,7 +935,7 @@
   <div class="docstring functionBody">
     
     
-    <div><p>Read version token.</p></div>
+    <div>Read version token.</div>
   </div>
 </div><div class="basemethod">
   
@@ -934,9 +955,9 @@
     </a>
   </div>
   <div class="docstring functionBody">
-    <div class="interfaceinfo">from <code><a href="twisted.internet.interfaces.IProtocol.html#connectionLost">twisted.internet.interfaces.IProtocol</a></code></div><div class="interfaceinfo">overrides <code><a href="twisted.internet.protocol.Protocol.html#connectionLost">twisted.internet.protocol.Protocol.connectionLost</a></code></div>
+    <div class="interfaceinfo">from <code><a href="twisted.internet.interfaces.IProtocol.html#connectionLost" class="internal-link" title="twisted.internet.interfaces.IProtocol.connectionLost">twisted.internet.interfaces.IProtocol</a></code></div><div class="interfaceinfo">overrides <code><a href="twisted.internet.protocol.Protocol.html#connectionLost" class="internal-link">twisted.internet.protocol.Protocol.connectionLost</a></code></div>
     
-    <div><p>Cause any outstanding commands to fail.</p></div>
+    <div>Cause any outstanding commands to fail.</div>
   </div>
 </div><div class="basemethod">
   
@@ -958,7 +979,7 @@
   <div class="docstring functionBody">
     
     
-    <div><p>Decrement the value of <code>key</code> by given value (default to 1). <code>key</code> must be consistent with an int. Return the new value, coerced to 0 if negative.</p><table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">key:</span><code><a href="https://docs.python.org/3/library/stdtypes.html#bytes">bytes</a></code></td><td class="fieldArgDesc">the key to modify.</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">val:</span><code><a href="https://docs.python.org/3/library/functions.html#int">int</a></code></td><td class="fieldArgDesc">the value to decrement.</td></tr><tr class="fieldStart"><td class="fieldName" colspan="2">Returns</td></tr><tr><td class="fieldArgContainer"><code><a href="twisted.internet.defer.Deferred.html">Deferred</a></code></td><td class="fieldArgDesc">a deferred with will be called back with the new value associated with the key (after the decrement).</td></tr></table></div>
+    <div>Decrement the value of <tt class="rst-docutils literal">key</tt> by given value (default to 1). <tt class="rst-docutils literal">key</tt> must be consistent with an int. Return the new value, coerced to 0 if negative.<table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">key:</span><code><a href="https://docs.python.org/3/library/stdtypes.html#bytes" class="intersphinx-link">bytes</a></code></td><td class="fieldArgDesc">the key to modify.</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">val:</span><code><a href="https://docs.python.org/3/library/functions.html#int" class="intersphinx-link">int</a></code></td><td class="fieldArgDesc">the value to decrement.</td></tr><tr class="fieldStart"><td class="fieldName" colspan="2">Returns</td></tr><tr><td class="fieldArgContainer"><code><a href="twisted.internet.defer.Deferred.html" class="internal-link" title="twisted.internet.defer.Deferred">Deferred</a></code></td><td class="fieldArgDesc">a deferred with will be called back with the new value associated with the key (after the decrement).</td></tr></table></div>
   </div>
 </div><div class="basemethod">
   
@@ -980,7 +1001,7 @@
   <div class="docstring functionBody">
     
     
-    <div><p>Delete an existing <code>key</code>.</p><table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">key:</span><code><a href="https://docs.python.org/3/library/stdtypes.html#bytes">bytes</a></code></td><td class="fieldArgDesc">the key to delete.</td></tr><tr class="fieldStart"><td class="fieldName" colspan="2">Returns</td></tr><tr><td class="fieldArgContainer"><code><a href="twisted.internet.defer.Deferred.html">Deferred</a></code></td><td class="fieldArgDesc">a deferred that will be called back with <code>True</code> if the key was successfully deleted, or <code>False</code> if not.</td></tr></table></div>
+    <div>Delete an existing <tt class="rst-docutils literal">key</tt>.<table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">key:</span><code><a href="https://docs.python.org/3/library/stdtypes.html#bytes" class="intersphinx-link">bytes</a></code></td><td class="fieldArgDesc">the key to delete.</td></tr><tr class="fieldStart"><td class="fieldName" colspan="2">Returns</td></tr><tr><td class="fieldArgContainer"><code><a href="twisted.internet.defer.Deferred.html" class="internal-link" title="twisted.internet.defer.Deferred">Deferred</a></code></td><td class="fieldArgDesc">a deferred that will be called back with <tt class="rst-docutils literal">True</tt> if the key was successfully deleted, or <tt class="rst-docutils literal">False</tt> if not.</td></tr></table></div>
   </div>
 </div><div class="basemethod">
   
@@ -1002,7 +1023,7 @@
   <div class="docstring functionBody">
     
     
-    <div><p>Flush all cached values.</p><table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Returns</td></tr><tr><td class="fieldArgContainer"><code><a href="twisted.internet.defer.Deferred.html">Deferred</a></code></td><td class="fieldArgDesc">a deferred that will be called back with <code>True</code> when the operation has succeeded.</td></tr></table></div>
+    <div>Flush all cached values.<table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Returns</td></tr><tr><td class="fieldArgContainer"><code><a href="twisted.internet.defer.Deferred.html" class="internal-link" title="twisted.internet.defer.Deferred">Deferred</a></code></td><td class="fieldArgDesc">a deferred that will be called back with <tt class="rst-docutils literal">True</tt> when the operation has succeeded.</td></tr></table></div>
   </div>
 </div><div class="basemethod">
   
@@ -1015,7 +1036,7 @@
   </a>
   <div class="functionHeader">
     
-    <span class="py-keyword">def</span> <span class="py-defname">get</span>(self, key, withIdentifier=False):
+    <span class="py-keyword">def</span> <span class="py-defname">get</span>(self, key, withIdentifier=<a href="https://docs.python.org/3/library/constants.html#False" class="intersphinx-link">False</a>):
     <a class="sourceLink" href="https://github.com/twisted/twisted/tree/twisted-21.2.0/src/twisted/protocols/memcache.py#L576">
       
       (source)
@@ -1024,7 +1045,7 @@
   <div class="docstring functionBody">
     
     
-    <div><p>Get the given <code>key</code>. It doesn't support multiple keys. If <code>withIdentifier</code> is set to <code>True</code>, the command issued is a <code>gets</code>, that will return the current identifier associated with the value. This identifier has to be used when issuing <code>checkAndSet</code> update later, using the corresponding method.</p><table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">key:</span><code><a href="https://docs.python.org/3/library/stdtypes.html#bytes">bytes</a></code></td><td class="fieldArgDesc">The key to retrieve.</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">withIdentifier:</span><code><a href="https://docs.python.org/3/library/functions.html#bool">bool</a></code></td><td class="fieldArgDesc">If set to <code>True</code>, retrieve the current identifier along with the value and the flags.</td></tr><tr class="fieldStart"><td class="fieldName" colspan="2">Returns</td></tr><tr><td class="fieldArgContainer"><code><a href="twisted.internet.defer.Deferred.html">Deferred</a></code></td><td class="fieldArgDesc">A deferred that will fire with the tuple (flags, value) if <code>withIdentifier</code> is <code>False</code>, or (flags, cas identifier, value) if <code>True</code>.  If the server indicates there is no value associated with <code>key</code>, the returned value will be <code><a href="https://docs.python.org/3/library/constants.html#None">None</a></code> and the returned flags will be <code>0</code>.</td></tr></table></div>
+    <div>Get the given <tt class="rst-docutils literal">key</tt>. It doesn't support multiple keys. If <tt class="rst-docutils literal">withIdentifier</tt> is set to <tt class="rst-docutils literal">True</tt>, the command issued is a <tt class="rst-docutils literal">gets</tt>, that will return the current identifier associated with the value. This identifier has to be used when issuing <tt class="rst-docutils literal">checkAndSet</tt> update later, using the corresponding method.<table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">key:</span><code><a href="https://docs.python.org/3/library/stdtypes.html#bytes" class="intersphinx-link">bytes</a></code></td><td class="fieldArgDesc">The key to retrieve.</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">with​Identifier:</span><code><a href="https://docs.python.org/3/library/functions.html#bool" class="intersphinx-link">bool</a></code></td><td class="fieldArgDesc">If set to <tt class="rst-docutils literal">True</tt>, retrieve the current identifier along with the value and the flags.</td></tr><tr class="fieldStart"><td class="fieldName" colspan="2">Returns</td></tr><tr><td class="fieldArgContainer"><code><a href="twisted.internet.defer.Deferred.html" class="internal-link" title="twisted.internet.defer.Deferred">Deferred</a></code></td><td class="fieldArgDesc">A deferred that will fire with the tuple (flags, value) if <tt class="rst-docutils literal">withIdentifier</tt> is <tt class="rst-docutils literal">False</tt>, or (flags, cas identifier, value) if <tt class="rst-docutils literal">True</tt>.  If the server indicates there is no value associated with <tt class="rst-docutils literal">key</tt>, the returned value will be <code><a href="https://docs.python.org/3/library/constants.html#None" class="intersphinx-link">None</a></code> and the returned flags will be <tt class="rst-docutils literal">0</tt>.</td></tr></table></div>
   </div>
 </div><div class="basemethod">
   
@@ -1037,7 +1058,7 @@
   </a>
   <div class="functionHeader">
     
-    <span class="py-keyword">def</span> <span class="py-defname">getMultiple</span>(self, keys, withIdentifier=False):
+    <span class="py-keyword">def</span> <span class="py-defname">getMultiple</span>(self, keys, withIdentifier=<a href="https://docs.python.org/3/library/constants.html#False" class="intersphinx-link">False</a>):
     <a class="sourceLink" href="https://github.com/twisted/twisted/tree/twisted-21.2.0/src/twisted/protocols/memcache.py#L600">
       
       (source)
@@ -1046,7 +1067,7 @@
   <div class="docstring functionBody">
     
     
-    <div><p>Get the given list of <code>keys</code>.  If <code>withIdentifier</code> is set to <code>True</code>, the command issued is a <code>gets</code>, that will return the identifiers associated with each values. This identifier has to be used when issuing <code>checkAndSet</code> update later, using the corresponding method.</p><table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">keys:</span><code><a href="https://docs.python.org/3/library/stdtypes.html#list">list</a></code> of <code><a href="https://docs.python.org/3/library/stdtypes.html#bytes">bytes</a></code></td><td class="fieldArgDesc">The keys to retrieve.</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">withIdentifier:</span><code><a href="https://docs.python.org/3/library/functions.html#bool">bool</a></code></td><td class="fieldArgDesc">If set to <code>True</code>, retrieve the identifiers along with the values and the flags.</td></tr><tr class="fieldStart"><td class="fieldName" colspan="2">Returns</td></tr><tr><td class="fieldArgContainer"><code><a href="twisted.internet.defer.Deferred.html">Deferred</a></code></td><td class="fieldArgDesc">A deferred that will fire with a dictionary with the elements of <code>keys</code> as keys and the tuples (flags, value) as values if <code>withIdentifier</code> is <code>False</code>, or (flags, cas identifier, value) if <code>True</code>.  If the server indicates there is no value associated with <code>key</code>, the returned values will be <code><a href="https://docs.python.org/3/library/constants.html#None">None</a></code> and the returned flags will be <code>0</code>.</td></tr><tr class="fieldStart"><td class="fieldName" colspan="2">Present Since</td></tr><tr><td colspan="2">9.0</td></tr></table></div>
+    <div>Get the given list of <tt class="rst-docutils literal">keys</tt>.  If <tt class="rst-docutils literal">withIdentifier</tt> is set to <tt class="rst-docutils literal">True</tt>, the command issued is a <tt class="rst-docutils literal">gets</tt>, that will return the identifiers associated with each values. This identifier has to be used when issuing <tt class="rst-docutils literal">checkAndSet</tt> update later, using the corresponding method.<table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">keys:</span><code><a href="https://docs.python.org/3/library/stdtypes.html#list" class="intersphinx-link">list</a></code> of <code><a href="https://docs.python.org/3/library/stdtypes.html#bytes" class="intersphinx-link">bytes</a></code></td><td class="fieldArgDesc">The keys to retrieve.</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">with​Identifier:</span><code><a href="https://docs.python.org/3/library/functions.html#bool" class="intersphinx-link">bool</a></code></td><td class="fieldArgDesc">If set to <tt class="rst-docutils literal">True</tt>, retrieve the identifiers along with the values and the flags.</td></tr><tr class="fieldStart"><td class="fieldName" colspan="2">Returns</td></tr><tr><td class="fieldArgContainer"><code><a href="twisted.internet.defer.Deferred.html" class="internal-link" title="twisted.internet.defer.Deferred">Deferred</a></code></td><td class="fieldArgDesc">A deferred that will fire with a dictionary with the elements of <tt class="rst-docutils literal">keys</tt> as keys and the tuples (flags, value) as values if <tt class="rst-docutils literal">withIdentifier</tt> is <tt class="rst-docutils literal">False</tt>, or (flags, cas identifier, value) if <tt class="rst-docutils literal">True</tt>.  If the server indicates there is no value associated with <tt class="rst-docutils literal">key</tt>, the returned values will be <code><a href="https://docs.python.org/3/library/constants.html#None" class="intersphinx-link">None</a></code> and the returned flags will be <tt class="rst-docutils literal">0</tt>.</td></tr><tr class="fieldStart"><td class="fieldName" colspan="2">Present Since</td></tr><tr><td colspan="2">9.0</td></tr></table></div>
   </div>
 </div><div class="basemethod">
   
@@ -1068,7 +1089,7 @@
   <div class="docstring functionBody">
     
     
-    <div><p>Increment the value of <code>key</code> by given value (default to 1). <code>key</code> must be consistent with an int. Return the new value.</p><table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">key:</span><code><a href="https://docs.python.org/3/library/stdtypes.html#bytes">bytes</a></code></td><td class="fieldArgDesc">the key to modify.</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">val:</span><code><a href="https://docs.python.org/3/library/functions.html#int">int</a></code></td><td class="fieldArgDesc">the value to increment.</td></tr><tr class="fieldStart"><td class="fieldName" colspan="2">Returns</td></tr><tr><td class="fieldArgContainer"><code><a href="twisted.internet.defer.Deferred.html">Deferred</a></code></td><td class="fieldArgDesc">a deferred with will be called back with the new value associated with the key (after the increment).</td></tr></table></div>
+    <div>Increment the value of <tt class="rst-docutils literal">key</tt> by given value (default to 1). <tt class="rst-docutils literal">key</tt> must be consistent with an int. Return the new value.<table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">key:</span><code><a href="https://docs.python.org/3/library/stdtypes.html#bytes" class="intersphinx-link">bytes</a></code></td><td class="fieldArgDesc">the key to modify.</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">val:</span><code><a href="https://docs.python.org/3/library/functions.html#int" class="intersphinx-link">int</a></code></td><td class="fieldArgDesc">the value to increment.</td></tr><tr class="fieldStart"><td class="fieldName" colspan="2">Returns</td></tr><tr><td class="fieldArgContainer"><code><a href="twisted.internet.defer.Deferred.html" class="internal-link" title="twisted.internet.defer.Deferred">Deferred</a></code></td><td class="fieldArgDesc">a deferred with will be called back with the new value associated with the key (after the increment).</td></tr></table></div>
   </div>
 </div><div class="basemethod">
   
@@ -1088,9 +1109,9 @@
     </a>
   </div>
   <div class="docstring functionBody">
-    <div class="interfaceinfo">overrides <code><a href="twisted.protocols.basic.LineReceiver.html#lineReceived">twisted.protocols.basic.LineReceiver.lineReceived</a></code></div>
+    <div class="interfaceinfo">overrides <code><a href="twisted.protocols.basic.LineReceiver.html#lineReceived" class="internal-link">twisted.protocols.basic.LineReceiver.lineReceived</a></code></div>
     
-    <div><p>Receive line commands from the server.</p></div>
+    <div>Receive line commands from the server.</div>
   </div>
 </div><div class="basemethod">
   
@@ -1112,7 +1133,7 @@
   <div class="docstring functionBody">
     
     
-    <div><p>Prepend given data to the value of an existing key.</p><table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">key:</span><code><a href="https://docs.python.org/3/library/stdtypes.html#bytes">bytes</a></code></td><td class="fieldArgDesc">The key to modify.</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">val:</span><code><a href="https://docs.python.org/3/library/stdtypes.html#bytes">bytes</a></code></td><td class="fieldArgDesc">The value to prepend to the current value associated with the key.</td></tr><tr class="fieldStart"><td class="fieldName" colspan="2">Returns</td></tr><tr><td class="fieldArgContainer"><code><a href="twisted.internet.defer.Deferred.html">Deferred</a></code></td><td class="fieldArgDesc">A deferred that will fire with <code>True</code> if the operation has succeeded, <code>False</code> otherwise.</td></tr></table></div>
+    <div>Prepend given data to the value of an existing key.<table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">key:</span><code><a href="https://docs.python.org/3/library/stdtypes.html#bytes" class="intersphinx-link">bytes</a></code></td><td class="fieldArgDesc">The key to modify.</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">val:</span><code><a href="https://docs.python.org/3/library/stdtypes.html#bytes" class="intersphinx-link">bytes</a></code></td><td class="fieldArgDesc">The value to prepend to the current value associated with the key.</td></tr><tr class="fieldStart"><td class="fieldName" colspan="2">Returns</td></tr><tr><td class="fieldArgContainer"><code><a href="twisted.internet.defer.Deferred.html" class="internal-link" title="twisted.internet.defer.Deferred">Deferred</a></code></td><td class="fieldArgDesc">A deferred that will fire with <tt class="rst-docutils literal">True</tt> if the operation has succeeded, <tt class="rst-docutils literal">False</tt> otherwise.</td></tr></table></div>
   </div>
 </div><div class="basemethod">
   
@@ -1132,9 +1153,9 @@
     </a>
   </div>
   <div class="docstring functionBody">
-    <div class="interfaceinfo">overrides <code><a href="twisted.protocols.basic.LineReceiver.html#rawDataReceived">twisted.protocols.basic.LineReceiver.rawDataReceived</a></code></div>
+    <div class="interfaceinfo">overrides <code><a href="twisted.protocols.basic.LineReceiver.html#rawDataReceived" class="internal-link">twisted.protocols.basic.LineReceiver.rawDataReceived</a></code></div>
     
-    <div><p>Collect data for a get.</p></div>
+    <div>Collect data for a get.</div>
   </div>
 </div><div class="basemethod">
   
@@ -1156,7 +1177,7 @@
   <div class="docstring functionBody">
     
     
-    <div><p>Replace the given <code>key</code>. It must already exist in the server.</p><table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">key:</span><code><a href="https://docs.python.org/3/library/stdtypes.html#bytes">bytes</a></code></td><td class="fieldArgDesc">the key to replace.</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">val:</span><code><a href="https://docs.python.org/3/library/stdtypes.html#bytes">bytes</a></code></td><td class="fieldArgDesc">the new value associated with the key.</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">flags:</span><code><a href="https://docs.python.org/3/library/functions.html#int">int</a></code></td><td class="fieldArgDesc">the flags to store with the key.</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">expireTime:</span><code><a href="https://docs.python.org/3/library/functions.html#int">int</a></code></td><td class="fieldArgDesc">if different from 0, the relative time in seconds when the key will be deleted from the store.</td></tr><tr class="fieldStart"><td class="fieldName" colspan="2">Returns</td></tr><tr><td class="fieldArgContainer"><code><a href="twisted.internet.defer.Deferred.html">Deferred</a></code></td><td class="fieldArgDesc">a deferred that will fire with <code>True</code> if the operation has succeeded, and <code>False</code> with the key didn't previously exist.</td></tr></table></div>
+    <div>Replace the given <tt class="rst-docutils literal">key</tt>. It must already exist in the server.<table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">key:</span><code><a href="https://docs.python.org/3/library/stdtypes.html#bytes" class="intersphinx-link">bytes</a></code></td><td class="fieldArgDesc">the key to replace.</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">val:</span><code><a href="https://docs.python.org/3/library/stdtypes.html#bytes" class="intersphinx-link">bytes</a></code></td><td class="fieldArgDesc">the new value associated with the key.</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">flags:</span><code><a href="https://docs.python.org/3/library/functions.html#int" class="intersphinx-link">int</a></code></td><td class="fieldArgDesc">the flags to store with the key.</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">expire​Time:</span><code><a href="https://docs.python.org/3/library/functions.html#int" class="intersphinx-link">int</a></code></td><td class="fieldArgDesc">if different from 0, the relative time in seconds when the key will be deleted from the store.</td></tr><tr class="fieldStart"><td class="fieldName" colspan="2">Returns</td></tr><tr><td class="fieldArgContainer"><code><a href="twisted.internet.defer.Deferred.html" class="internal-link" title="twisted.internet.defer.Deferred">Deferred</a></code></td><td class="fieldArgDesc">a deferred that will fire with <tt class="rst-docutils literal">True</tt> if the operation has succeeded, and <tt class="rst-docutils literal">False</tt> with the key didn't previously exist.</td></tr></table></div>
   </div>
 </div><div class="basemethod">
   
@@ -1176,9 +1197,9 @@
     </a>
   </div>
   <div class="docstring functionBody">
-    <div class="interfaceinfo">overrides <code><a href="twisted.protocols.basic.LineReceiver.html#sendLine">twisted.protocols.basic.LineReceiver.sendLine</a></code></div>
+    <div class="interfaceinfo">overrides <code><a href="twisted.protocols.basic.LineReceiver.html#sendLine" class="internal-link">twisted.protocols.basic.LineReceiver.sendLine</a></code></div>
     
-    <div><p>Override sendLine to add a timeout to response.</p></div>
+    <div>Override sendLine to add a timeout to response.</div>
   </div>
 </div><div class="basemethod">
   
@@ -1200,7 +1221,7 @@
   <div class="docstring functionBody">
     
     
-    <div><p>Set the given <code>key</code>.</p><table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">key:</span><code><a href="https://docs.python.org/3/library/stdtypes.html#bytes">bytes</a></code></td><td class="fieldArgDesc">the key to set.</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">val:</span><code><a href="https://docs.python.org/3/library/stdtypes.html#bytes">bytes</a></code></td><td class="fieldArgDesc">the value associated with the key.</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">flags:</span><code><a href="https://docs.python.org/3/library/functions.html#int">int</a></code></td><td class="fieldArgDesc">the flags to store with the key.</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">expireTime:</span><code><a href="https://docs.python.org/3/library/functions.html#int">int</a></code></td><td class="fieldArgDesc">if different from 0, the relative time in seconds when the key will be deleted from the store.</td></tr><tr class="fieldStart"><td class="fieldName" colspan="2">Returns</td></tr><tr><td class="fieldArgContainer"><code><a href="twisted.internet.defer.Deferred.html">Deferred</a></code></td><td class="fieldArgDesc">a deferred that will fire with <code>True</code> if the operation has succeeded.</td></tr></table></div>
+    <div>Set the given <tt class="rst-docutils literal">key</tt>.<table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">key:</span><code><a href="https://docs.python.org/3/library/stdtypes.html#bytes" class="intersphinx-link">bytes</a></code></td><td class="fieldArgDesc">the key to set.</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">val:</span><code><a href="https://docs.python.org/3/library/stdtypes.html#bytes" class="intersphinx-link">bytes</a></code></td><td class="fieldArgDesc">the value associated with the key.</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">flags:</span><code><a href="https://docs.python.org/3/library/functions.html#int" class="intersphinx-link">int</a></code></td><td class="fieldArgDesc">the flags to store with the key.</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">expire​Time:</span><code><a href="https://docs.python.org/3/library/functions.html#int" class="intersphinx-link">int</a></code></td><td class="fieldArgDesc">if different from 0, the relative time in seconds when the key will be deleted from the store.</td></tr><tr class="fieldStart"><td class="fieldName" colspan="2">Returns</td></tr><tr><td class="fieldArgContainer"><code><a href="twisted.internet.defer.Deferred.html" class="internal-link" title="twisted.internet.defer.Deferred">Deferred</a></code></td><td class="fieldArgDesc">a deferred that will fire with <tt class="rst-docutils literal">True</tt> if the operation has succeeded.</td></tr></table></div>
   </div>
 </div><div class="basemethod">
   
@@ -1213,7 +1234,7 @@
   </a>
   <div class="functionHeader">
     
-    <span class="py-keyword">def</span> <span class="py-defname">stats</span>(self, arg=None):
+    <span class="py-keyword">def</span> <span class="py-defname">stats</span>(self, arg=<a href="https://docs.python.org/3/library/constants.html#None" class="intersphinx-link">None</a>):
     <a class="sourceLink" href="https://github.com/twisted/twisted/tree/twisted-21.2.0/src/twisted/protocols/memcache.py#L658">
       
       (source)
@@ -1222,7 +1243,7 @@
   <div class="docstring functionBody">
     
     
-    <div><p>Get some stats from the server. It will be available as a dict.</p><table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">arg:</span><code><a href="https://docs.python.org/3/library/constants.html#None">None</a></code> or <code><a href="https://docs.python.org/3/library/stdtypes.html#bytes">bytes</a></code></td><td class="fieldArgDesc">An optional additional string which will be sent along with the <i>stats</i> command.  The interpretation of this value by the server is left undefined by the memcache protocol specification.</td></tr><tr class="fieldStart"><td class="fieldName" colspan="2">Returns</td></tr><tr><td class="fieldArgContainer"><code><a href="twisted.internet.defer.Deferred.html">Deferred</a></code></td><td class="fieldArgDesc">a deferred that will fire with a <code><a href="https://docs.python.org/3/library/stdtypes.html#dict">dict</a></code> of the available statistics.</td></tr></table></div>
+    <div>Get some stats from the server. It will be available as a dict.<table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">arg:</span><code><a href="https://docs.python.org/3/library/constants.html#None" class="intersphinx-link">None</a></code> or <code><a href="https://docs.python.org/3/library/stdtypes.html#bytes" class="intersphinx-link">bytes</a></code></td><td class="fieldArgDesc">An optional additional string which will be sent along with the <em>stats</em> command.  The interpretation of this value by the server is left undefined by the memcache protocol specification.</td></tr><tr class="fieldStart"><td class="fieldName" colspan="2">Returns</td></tr><tr><td class="fieldArgContainer"><code><a href="twisted.internet.defer.Deferred.html" class="internal-link" title="twisted.internet.defer.Deferred">Deferred</a></code></td><td class="fieldArgDesc">a deferred that will fire with a <code><a href="https://docs.python.org/3/library/stdtypes.html#dict" class="intersphinx-link">dict</a></code> of the available statistics.</td></tr></table></div>
   </div>
 </div><div class="basemethod">
   
@@ -1242,9 +1263,9 @@
     </a>
   </div>
   <div class="docstring functionBody">
-    <div class="interfaceinfo">overrides <code><a href="twisted.protocols.policies.TimeoutMixin.html#timeoutConnection">twisted.protocols.policies.TimeoutMixin.timeoutConnection</a></code></div>
+    <div class="interfaceinfo">overrides <code><a href="twisted.protocols.policies.TimeoutMixin.html#timeoutConnection" class="internal-link">twisted.protocols.policies.TimeoutMixin.timeoutConnection</a></code></div>
     
-    <div><p>Close the connection in case of timeout.</p></div>
+    <div>Close the connection in case of timeout.</div>
   </div>
 </div><div class="basemethod">
   
@@ -1266,9 +1287,9 @@
   <div class="docstring functionBody">
     
     
-    <div><p>Get the version of the server.</p><table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Returns</td></tr><tr><td class="fieldArgContainer"><code><a href="twisted.internet.defer.Deferred.html">Deferred</a></code></td><td class="fieldArgDesc">a deferred that will fire with the string value of the version.</td></tr></table></div>
+    <div>Get the version of the server.<table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Returns</td></tr><tr><td class="fieldArgContainer"><code><a href="twisted.internet.defer.Deferred.html" class="internal-link" title="twisted.internet.defer.Deferred">Deferred</a></code></td><td class="fieldArgDesc">a deferred that will fire with the string value of the version.</td></tr></table></div>
   </div>
-</div><div class="baseclassvariable">
+</div><div class="baseconstant">
   
   
   <a name="twisted.protocols.memcache.MemCacheProtocol.MAX_KEY_LENGTH">
@@ -1279,7 +1300,7 @@
   </a>
   <div class="functionHeader">
     
-    <span class="py-defname">MAX_KEY_LENGTH</span>: <code><a href="https://docs.python.org/3/library/functions.html#int">int</a></code> =
+    <span class="py-defname">MAX_KEY_LENGTH</span>: <code><a href="https://docs.python.org/3/library/functions.html#int" class="intersphinx-link">int</a></code> =
     <a class="sourceLink" href="https://github.com/twisted/twisted/tree/twisted-21.2.0/src/twisted/protocols/memcache.py#L126">
       
       (source)
@@ -1289,6 +1310,7 @@
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    <table class="valueTable"><tr class="fieldStart"><td class="fieldName">Value</td></tr><tr><td><pre class="constant-value"><code>250</code></pre></td></tr></table>
   </div>
 </div><div class="baseinstancevariable">
   
@@ -1301,7 +1323,7 @@
   </a>
   <div class="functionHeader">
     
-    <span class="py-defname">persistentTimeOut</span>: <code><a href="https://docs.python.org/3/library/functions.html#int">int</a></code> =
+    <span class="py-defname">persistentTimeOut</span>: <code><a href="https://docs.python.org/3/library/functions.html#int" class="intersphinx-link">int</a></code> =
     <a class="sourceLink" href="https://github.com/twisted/twisted/tree/twisted-21.2.0/src/twisted/protocols/memcache.py#L104">
       
       (source)
@@ -1311,6 +1333,7 @@
     
     
     <div>the timeout period used to wait for a response.</div>
+    
   </div>
 </div><div class="baseinstancevariable">
   
@@ -1330,9 +1353,10 @@
     </a>
   </div>
   <div class="functionBody">
-    <div class="interfaceinfo">overrides <code><a href="twisted.protocols.policies.TimeoutMixin.html#timeOut">twisted.protocols.policies.TimeoutMixin.timeOut</a></code></div>
+    <div class="interfaceinfo">overrides <code><a href="twisted.protocols.policies.TimeoutMixin.html#timeOut" class="internal-link">twisted.protocols.policies.TimeoutMixin.timeOut</a></code></div>
     
     <div><p class="undocumented">Undocumented</p></div>
+    
   </div>
 </div><div class="basemethod private">
   
@@ -1354,7 +1378,7 @@
   <div class="docstring functionBody">
     
     
-    <div><p>Cancel all the outstanding commands, making them fail with <code>reason</code>.</p></div>
+    <div>Cancel all the outstanding commands, making them fail with <tt class="rst-docutils literal">reason</tt>.</div>
   </div>
 </div><div class="basemethod private">
   
@@ -1376,7 +1400,7 @@
   <div class="docstring functionBody">
     
     
-    <div><p>Helper method for <code>get</code> and <code>getMultiple</code>.</p></div>
+    <div>Helper method for <tt class="rst-docutils literal">get</tt> and <tt class="rst-docutils literal">getMultiple</tt>.</div>
   </div>
 </div><div class="basemethod private">
   
@@ -1398,7 +1422,7 @@
   <div class="docstring functionBody">
     
     
-    <div><p>Internal wrapper for incr/decr.</p></div>
+    <div>Internal wrapper for incr/decr.</div>
   </div>
 </div><div class="basemethod private">
   
@@ -1420,7 +1444,7 @@
   <div class="docstring functionBody">
     
     
-    <div><p>Internal wrapper for setting values.</p></div>
+    <div>Internal wrapper for setting values.</div>
   </div>
 </div><div class="baseinstancevariable private">
   
@@ -1433,7 +1457,7 @@
   </a>
   <div class="functionHeader">
     
-    <span class="py-defname">_bufferLength</span>: <code><a href="https://docs.python.org/3/library/functions.html#int">int</a></code> =
+    <span class="py-defname">_bufferLength</span>: <code><a href="https://docs.python.org/3/library/functions.html#int" class="intersphinx-link">int</a></code> =
     <a class="sourceLink" href="https://github.com/twisted/twisted/tree/twisted-21.2.0/src/twisted/protocols/memcache.py#L119">
       
       (source)
@@ -1442,7 +1466,8 @@
   <div class="functionBody">
     
     
-    <div>the total amount of bytes in <code>_getBuffer</code>.</div>
+    <div>the total amount of bytes in <tt class="rst-docutils literal">_getBuffer</tt>.</div>
+    
   </div>
 </div><div class="baseinstancevariable private">
   
@@ -1455,7 +1480,7 @@
   </a>
   <div class="functionHeader">
     
-    <span class="py-defname">_current</span>: <code><a href="https://docs.python.org/3/library/collections.html#collections.deque">deque</a></code> of <code><a href="twisted.protocols.memcache.Command.html">Command</a></code> =
+    <span class="py-defname">_current</span>: <code><a href="https://docs.python.org/3/library/collections.html#collections.deque" class="intersphinx-link">deque</a></code> of <code><a href="twisted.protocols.memcache.Command.html" class="internal-link" title="twisted.protocols.memcache.Command">Command</a></code> =
     <a class="sourceLink" href="https://github.com/twisted/twisted/tree/twisted-21.2.0/src/twisted/protocols/memcache.py#L107">
       
       (source)
@@ -1465,6 +1490,7 @@
     
     
     <div>current list of requests waiting for an answer from the server.</div>
+    
   </div>
 </div><div class="baseinstancevariable private">
   
@@ -1477,7 +1503,7 @@
   </a>
   <div class="functionHeader">
     
-    <span class="py-defname">_disconnected</span>: <code><a href="https://docs.python.org/3/library/functions.html#bool">bool</a></code> =
+    <span class="py-defname">_disconnected</span>: <code><a href="https://docs.python.org/3/library/functions.html#bool" class="intersphinx-link">bool</a></code> =
     <a class="sourceLink" href="https://github.com/twisted/twisted/tree/twisted-21.2.0/src/twisted/protocols/memcache.py#L122">
       
       (source)
@@ -1487,6 +1513,7 @@
     
     
     <div>indicate if the connectionLost has been called or not.</div>
+    
   </div>
 </div><div class="baseinstancevariable private">
   
@@ -1499,7 +1526,7 @@
   </a>
   <div class="functionHeader">
     
-    <span class="py-defname">_getBuffer</span>: <code><a href="https://docs.python.org/3/library/stdtypes.html#list">list</a></code> =
+    <span class="py-defname">_getBuffer</span>: <code><a href="https://docs.python.org/3/library/stdtypes.html#list" class="intersphinx-link">list</a></code> =
     <a class="sourceLink" href="https://github.com/twisted/twisted/tree/twisted-21.2.0/src/twisted/protocols/memcache.py#L115">
       
       (source)
@@ -1509,6 +1536,7 @@
     
     
     <div>current buffer of data, used to store temporary data when reading in raw mode.</div>
+    
   </div>
 </div><div class="baseinstancevariable private">
   
@@ -1521,7 +1549,7 @@
   </a>
   <div class="functionHeader">
     
-    <span class="py-defname">_lenExpected</span>: <code><a href="https://docs.python.org/3/library/functions.html#int">int</a></code> =
+    <span class="py-defname">_lenExpected</span>: <code><a href="https://docs.python.org/3/library/functions.html#int" class="intersphinx-link">int</a></code> =
     <a class="sourceLink" href="https://github.com/twisted/twisted/tree/twisted-21.2.0/src/twisted/protocols/memcache.py#L111">
       
       (source)
@@ -1531,6 +1559,7 @@
     
     
     <div>amount of data expected in raw mode, when reading for a value.</div>
+    
   </div>
 </div>
 
@@ -1539,11 +1568,33 @@
 
     <footer class="navbar navbar-default">
   
+
   <div class="container">
     <a href="index.html">API Documentation</a> for <a href="https://twistedmatrix.com/" class="projecthome">Twisted</a>,
   generated by <a href="https://github.com/twisted/pydoctor/">pydoctor</a>
-    21.2.2 at 2022-01-12 04:22:24.
+    22.2.2.dev0 at 2022-03-04 05:57:20.
   </div>
+
+  <!-- Google analytics, obviously. -->
+  <script src="//www.google-analytics.com/urchin.js" type="text/javascript"></script>
+  <script type="text/javascript">
+    _uacct = "UA-99018-6";
+    urchinTracker();
+  </script>
+
+  <!-- If the documentation isn't current, insert a current link. -->
+  <script type="text/javascript">
+    if (window.location.pathname.indexOf('/current/') == -1) {
+      <!-- Give the user a link to this page, but in the current version of the docs. -->
+      var link = document.getElementById('current-docs-link');
+      link.href = window.location.pathname.replace(/\/\d+\.\d+\.\d+\/api\//, '/current/api/');
+      <!-- And make it visible -->
+      var container = document.getElementById('current-docs-container');
+      container.style.display = "";
+      delete link;
+      delete container;
+    }
+  </script>
 </footer>
 
     <script src="pydoctor.js" type="text/javascript"></script>

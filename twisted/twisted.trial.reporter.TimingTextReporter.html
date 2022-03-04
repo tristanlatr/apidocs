@@ -7,7 +7,7 @@
   <head>
     
     <title>twisted.trial.reporter.TimingTextReporter</title>
-    <meta name="generator" content="pydoctor 21.2.2"> 
+    <meta name="generator" content="pydoctor 22.2.2.dev0"> 
         
     </meta>
     <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
@@ -19,7 +19,13 @@
 
   <body>
 
-    
+    <div style="display: none" id="current-docs-container" class="container">
+  <div class="col-sm-12">
+    <a id="current-docs-link">
+      Go to the latest version of this document.
+    </a>
+  </div>
+</div>
 
     <nav class="navbar navbar-default">
   
@@ -44,69 +50,82 @@
           Names
         </a>
 
-        <form action="search-results.html" id="search-box-container">
+        <div id="search-box-container">
           <div class="input-group">
-            <input id="search-box" name="search-query" placeholder="Search..." aria-label="Search" minlength="2" class="form-control" />
+            <input id="search-box" type="search" name="search-query" placeholder="Search..." aria-label="Search" minlength="2" class="form-control" autocomplete="off" />
+            
             <span class="input-group-btn">
-              <button class="btn btn-default" type="submit" title="Search"><img src="fonts/search.svg" alt="Search!" /></button>
-              <a class="btn btn-default" id="search-help-button" title="Help" onclick="toggleSearchHelpText()"><img src="fonts/info.svg" alt="Help!" /></a>
+              <a style="display: none;" class="btn btn-default" id="search-clear-button" title="Clear" onclick="clearSearch()"><img src="fonts/x-circle.svg" alt="Clear" /></a>
+              <a class="btn btn-default" id="search-help-button" title="Help" onclick="toggleSearchHelpText()"><img src="fonts/info.svg" alt="Help" /></a>
             </span>
           </div>
-        </form>
+        </div>
 
-        <div class="rst-admonition hint" id="search-help-box">
+      </div>
+
+      <div id="search-results-container" style="display: none;">
+        <div>
+          <span class="label label-default" id="search-docstrings-button">
+            <a title="Search in docstrings" onclick="toggleSearchInDocstrings()">search in docstrings</a></span>
+        </div>
+
+        <noscript>
+            <h1>Cannot search: JavaScript is not supported/enabled in your browser.</h1>
+        </noscript>
+
+        <div class="hint" id="search-help-box">
           <p class="rst-last">
       
             Search bar offers the following options:
             <ul>   
                 <li>
                   <strong>Term presence.</strong> The below example searches for documents that 
-                    must contain “foo”, might contain “bar” and must not contain “baz”:
-                  <br /> <code>'+foo bar -baz'</code>
+                    must contain “foo”, might contain “bar” and must not contain “baz”: <code>+foo bar -baz</code>
                 </li> 
 
                 <li>
-                  <strong>Wildcards.</strong> The below example searches for documents with words beginning with “foo”:
-                  <br /> <code>'foo*'</code>
+                  <strong>Wildcards.</strong> The below example searches for documents with words beginning with “foo”: <code>foo*</code>
                 </li> 
 
                 <li>
-                  <strong>Search in specific fields.</strong> The following search matches all documents 
-                  that contains "foo" in their full dotted name and with “bar” in any field:
-                  <br /> <code>'+fullName:*foo* +bar'</code>
+                  <strong>Search in specific fields.</strong> The following search matches all objects 
+                  in "twisted.mail" that matches “search”: <code>+qname:twisted.mail.* +search</code>
 
                   <p>
-                    Possible fields: 'name', 'docstring', 'fullName'.
+                    Possible fields: 'name', 'qname' (fully qualified name), 'docstring', and 'kind'.
+                    Last two fields are only applicable if "search in docstrings" is enabled.
                   </p>
                 </li>
 
                 <li>
                   <strong>Fuzzy matches.</strong> The following search matches all documents 
-                  that have a word within 1 edit distance of “foo”:
-                  <br /> <code>'foo~1'</code>
+                  that have a word within 1 edit distance of “foo”: <code>foo~1</code>
                 </li>
             </ul>
 
           </p>
         </div>
 
-      </div>
+        <div id="search-status"> </div>
+        
+        <div class="warning" id="search-warn-box" style="display: none;">
+          <p class="rst-last"><span id="search-warn"></span></p>
+        </div>
 
+        <table id="search-results">
+          <!-- Filled dynamically by JS -->
+        </table>
+        
+        <div style="margin-top: 8px;">
+          <p>Results provided by <a href="https://lunrjs.com">Lunr.js</a></p>
+        </div>
+      </div>
 
     </div>
   </div>
 
-  <script>
- 
-    function toggleSearchHelpText() {
-        document.body.classList.toggle("search-help-hidden");
-    }
-    // Init search and help text
-    document.getElementById('search-box-container').style.display = 'block';
-    document.getElementById('search-help-box').style.display = 'block';
-    document.body.classList.add("search-help-hidden");
-
-  </script>
+  <script src="ajax.js" type="text/javascript"></script>
+  <script src="search.js" type="text/javascript"></script>
 
 </nav>
 
@@ -115,7 +134,7 @@
     <div class="container">
 
       <div class="page-header">
-        <h1 class="class"><code><code><a href="twisted.html">twisted</a></code><wbr></wbr>.<code><a href="twisted.trial.html">trial</a></code><wbr></wbr>.<code><a href="twisted.trial.reporter.html">reporter</a></code><wbr></wbr>.<code><a href="twisted.trial.reporter.TimingTextReporter.html">TimingTextReporter</a></code></code></h1>
+        <h1 class="class"><code><code><a href="index.html" class="internal-link">twisted</a></code><wbr></wbr>.<code><a href="twisted.trial.html" class="internal-link" title="twisted.trial">trial</a></code><wbr></wbr>.<code><a href="twisted.trial.reporter.html" class="internal-link" title="twisted.trial.reporter">reporter</a></code><wbr></wbr>.<code><a href="twisted.trial.reporter.TimingTextReporter.html" class="internal-link" title="twisted.trial.reporter.TimingTextReporter">TimingTextReporter</a></code></code></h1>
         <div id="showPrivate">
           <button class="btn btn-link" onclick="togglePrivate()">Toggle Private API</button>
         </div>
@@ -126,264 +145,266 @@
       </div>
 
       <div class="extrasDocstring">
-        <p><code><span class="py-keyword">class</span> <span class="py-defname">TimingTextReporter</span>(<a href="twisted.trial.reporter.VerboseTextReporter.html" title="twisted.trial.reporter.VerboseTextReporter">VerboseTextReporter</a>): <a href="https://github.com/twisted/twisted/tree/twisted-21.2.0/src/twisted/trial/reporter.py#L822" class="sourceLink">(source)</a></code></p>
+        <p><code><span class="py-keyword">class</span> <span class="py-defname">TimingTextReporter</span>(<a href="twisted.trial.reporter.VerboseTextReporter.html" class="internal-link" title="twisted.trial.reporter.VerboseTextReporter">VerboseTextReporter</a>): <a href="https://github.com/twisted/twisted/tree/twisted-21.2.0/src/twisted/trial/reporter.py#L822" class="sourceLink">(source)</a></code></p>
         <p><a href="classIndex.html#twisted.trial.reporter.TimingTextReporter">View In Hierarchy</a></p>
       </div>
 
+      
+
       <div class="moduleDocstring">
-        <div><p>Prints out each test as it is running, followed by the time taken for each test to run.</p></div>
+        <div>Prints out each test as it is running, followed by the time taken for each test to run.</div>
       </div>
 
       <div id="splitTables">
-        <table class="children sortable" id="id3068">
+        <table class="children sortable" id="id3054">
   
   
   <tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#stopTest">stopTest</a></code></td>
-    <td><span>Mark the test as stopped, and write the time it took to run the test to the stream.</span></td>
+    <td><code><a href="#stopTest" class="internal-link" title="twisted.trial.reporter.TimingTextReporter.stopTest">stop​Test</a></code></td>
+    <td>Mark the test as stopped, and write the time it took to run the test to the stream.</td>
   </tr>
 </table>
         
           <p class="inheritedFrom">
-            Inherited from <code><a href="twisted.trial.reporter.VerboseTextReporter.html">VerboseTextReporter</a></code>:
+            Inherited from <code><a href="twisted.trial.reporter.VerboseTextReporter.html" class="internal-link" title="twisted.trial.reporter.VerboseTextReporter">VerboseTextReporter</a></code>:
           </p>
-          <table class="children sortable" id="id3069">
+          <table class="children sortable" id="id3055">
   
   
   <tr class="basemethod">
     
     <td>Method</td>
-    <td><code><a href="twisted.trial.reporter.VerboseTextReporter.html#addError">addError</a></code></td>
-    <td><span>Called when a test raises an error. If <code>realtime</code> is set, then it prints the error to the stream.</span></td>
+    <td><code><a href="twisted.trial.reporter.VerboseTextReporter.html#addError" class="internal-link" title="twisted.trial.reporter.VerboseTextReporter.addError">add​Error</a></code></td>
+    <td>Called when a test raises an error. If <tt class="rst-docutils literal">realtime</tt> is set, then it prints the error to the stream.</td>
   </tr><tr class="basemethod">
     
     <td>Method</td>
-    <td><code><a href="twisted.trial.reporter.VerboseTextReporter.html#addExpectedFailure">addExpectedFailure</a></code></td>
-    <td><span>Report that the given test failed, and was expected to do so.</span></td>
+    <td><code><a href="twisted.trial.reporter.VerboseTextReporter.html#addExpectedFailure" class="internal-link" title="twisted.trial.reporter.VerboseTextReporter.addExpectedFailure">add​Expected​Failure</a></code></td>
+    <td>Report that the given test failed, and was expected to do so.</td>
   </tr><tr class="basemethod">
     
     <td>Method</td>
-    <td><code><a href="twisted.trial.reporter.VerboseTextReporter.html#addFailure">addFailure</a></code></td>
-    <td><span>Called when a test fails. If <code>realtime</code> is set, then it prints the error to the stream.</span></td>
+    <td><code><a href="twisted.trial.reporter.VerboseTextReporter.html#addFailure" class="internal-link" title="twisted.trial.reporter.VerboseTextReporter.addFailure">add​Failure</a></code></td>
+    <td>Called when a test fails. If <tt class="rst-docutils literal">realtime</tt> is set, then it prints the error to the stream.</td>
   </tr><tr class="basemethod">
     
     <td>Method</td>
-    <td><code><a href="twisted.trial.reporter.VerboseTextReporter.html#addSkip">addSkip</a></code></td>
-    <td><span>Report that the given test was skipped.</span></td>
+    <td><code><a href="twisted.trial.reporter.VerboseTextReporter.html#addSkip" class="internal-link" title="twisted.trial.reporter.VerboseTextReporter.addSkip">add​Skip</a></code></td>
+    <td>Report that the given test was skipped.</td>
   </tr><tr class="basemethod">
     
     <td>Method</td>
-    <td><code><a href="twisted.trial.reporter.VerboseTextReporter.html#addSuccess">addSuccess</a></code></td>
-    <td><span>Report that the given test succeeded.</span></td>
+    <td><code><a href="twisted.trial.reporter.VerboseTextReporter.html#addSuccess" class="internal-link" title="twisted.trial.reporter.VerboseTextReporter.addSuccess">add​Success</a></code></td>
+    <td>Report that the given test succeeded.</td>
   </tr><tr class="basemethod">
     
     <td>Method</td>
-    <td><code><a href="twisted.trial.reporter.VerboseTextReporter.html#addUnexpectedSuccess">addUnexpectedSuccess</a></code></td>
-    <td><span>Report that the given test succeeded against expectations.</span></td>
+    <td><code><a href="twisted.trial.reporter.VerboseTextReporter.html#addUnexpectedSuccess" class="internal-link" title="twisted.trial.reporter.VerboseTextReporter.addUnexpectedSuccess">add​Unexpected​Success</a></code></td>
+    <td>Report that the given test succeeded against expectations.</td>
   </tr><tr class="basemethod">
     
     <td>Method</td>
-    <td><code><a href="twisted.trial.reporter.VerboseTextReporter.html#startTest">startTest</a></code></td>
-    <td><span>Called when a test begins to run. Records the time when it was first called and resets the warning cache.</span></td>
+    <td><code><a href="twisted.trial.reporter.VerboseTextReporter.html#startTest" class="internal-link" title="twisted.trial.reporter.VerboseTextReporter.startTest">start​Test</a></code></td>
+    <td>Called when a test begins to run. Records the time when it was first called and resets the warning cache.</td>
   </tr>
 </table>
           
           <p class="inheritedFrom">
-            Inherited from <code><a href="twisted.trial.reporter.Reporter.html">Reporter</a></code> (via <code><a href="twisted.trial.reporter.VerboseTextReporter.html">VerboseTextReporter</a></code>):
+            Inherited from <code><a href="twisted.trial.reporter.Reporter.html" class="internal-link" title="twisted.trial.reporter.Reporter">Reporter</a></code> (via <code><a href="twisted.trial.reporter.VerboseTextReporter.html" class="internal-link" title="twisted.trial.reporter.VerboseTextReporter">VerboseTextReporter</a></code>):
           </p>
-          <table class="children sortable" id="id3070">
+          <table class="children sortable" id="id3056">
   
   
   <tr class="basemethod">
     
     <td>Method</td>
-    <td><code><a href="twisted.trial.reporter.Reporter.html#__init__">__init__</a></code></td>
+    <td><code><a href="twisted.trial.reporter.Reporter.html#__init__" class="internal-link" title="twisted.trial.reporter.Reporter.__init__">__init__</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="basemethod">
     
     <td>Method</td>
-    <td><code><a href="twisted.trial.reporter.Reporter.html#cleanupErrors">cleanupErrors</a></code></td>
+    <td><code><a href="twisted.trial.reporter.Reporter.html#cleanupErrors" class="internal-link" title="twisted.trial.reporter.Reporter.cleanupErrors">cleanup​Errors</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="basemethod">
     
     <td>Method</td>
-    <td><code><a href="twisted.trial.reporter.Reporter.html#done">done</a></code></td>
-    <td><span>Summarize the result of the test run.</span></td>
+    <td><code><a href="twisted.trial.reporter.Reporter.html#done" class="internal-link" title="twisted.trial.reporter.Reporter.done">done</a></code></td>
+    <td>Summarize the result of the test run.</td>
   </tr><tr class="basemethod">
     
     <td>Method</td>
-    <td><code><a href="twisted.trial.reporter.Reporter.html#upDownError">upDownError</a></code></td>
+    <td><code><a href="twisted.trial.reporter.Reporter.html#upDownError" class="internal-link" title="twisted.trial.reporter.Reporter.upDownError">up​Down​Error</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="baseinstancevariable">
     
     <td>Instance Variable</td>
-    <td><code><a href="twisted.trial.reporter.Reporter.html#realtime">realtime</a></code></td>
+    <td><code><a href="twisted.trial.reporter.Reporter.html#realtime" class="internal-link" title="twisted.trial.reporter.Reporter.realtime">realtime</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="baseinstancevariable">
     
     <td>Instance Variable</td>
-    <td><code><a href="twisted.trial.reporter.Reporter.html#tbformat">tbformat</a></code></td>
+    <td><code><a href="twisted.trial.reporter.Reporter.html#tbformat" class="internal-link" title="twisted.trial.reporter.Reporter.tbformat">tbformat</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="basemethod private">
     
     <td>Method</td>
-    <td><code><a href="twisted.trial.reporter.Reporter.html#_formatFailureTraceback">_formatFailureTraceback</a></code></td>
+    <td><code><a href="twisted.trial.reporter.Reporter.html#_formatFailureTraceback" class="internal-link" title="twisted.trial.reporter.Reporter._formatFailureTraceback">_format​Failure​Traceback</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="basemethod private">
     
     <td>Method</td>
-    <td><code><a href="twisted.trial.reporter.Reporter.html#_getSummary">_getSummary</a></code></td>
-    <td><span>Return a formatted count of tests status results.</span></td>
+    <td><code><a href="twisted.trial.reporter.Reporter.html#_getSummary" class="internal-link" title="twisted.trial.reporter.Reporter._getSummary">_get​Summary</a></code></td>
+    <td>Return a formatted count of tests status results.</td>
   </tr><tr class="basemethod private">
     
     <td>Method</td>
-    <td><code><a href="twisted.trial.reporter.Reporter.html#_groupResults">_groupResults</a></code></td>
-    <td><span>Group tests together based on their results.</span></td>
+    <td><code><a href="twisted.trial.reporter.Reporter.html#_groupResults" class="internal-link" title="twisted.trial.reporter.Reporter._groupResults">_group​Results</a></code></td>
+    <td>Group tests together based on their results.</td>
   </tr><tr class="basemethod private">
     
     <td>Method</td>
-    <td><code><a href="twisted.trial.reporter.Reporter.html#_observeWarnings">_observeWarnings</a></code></td>
-    <td><span>Observe warning events and write them to <code>self._stream</code>.</span></td>
+    <td><code><a href="twisted.trial.reporter.Reporter.html#_observeWarnings" class="internal-link" title="twisted.trial.reporter.Reporter._observeWarnings">_observe​Warnings</a></code></td>
+    <td>Observe warning events and write them to <tt class="rst-docutils literal">self._stream</tt>.</td>
   </tr><tr class="basemethod private">
     
     <td>Method</td>
-    <td><code><a href="twisted.trial.reporter.Reporter.html#_printErrors">_printErrors</a></code></td>
-    <td><span>Print all of the non-success results to the stream in full.</span></td>
+    <td><code><a href="twisted.trial.reporter.Reporter.html#_printErrors" class="internal-link" title="twisted.trial.reporter.Reporter._printErrors">_print​Errors</a></code></td>
+    <td>Print all of the non-success results to the stream in full.</td>
   </tr><tr class="basemethod private">
     
     <td>Method</td>
-    <td><code><a href="twisted.trial.reporter.Reporter.html#_printExpectedFailure">_printExpectedFailure</a></code></td>
+    <td><code><a href="twisted.trial.reporter.Reporter.html#_printExpectedFailure" class="internal-link" title="twisted.trial.reporter.Reporter._printExpectedFailure">_print​Expected​Failure</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="basemethod private">
     
     <td>Method</td>
-    <td><code><a href="twisted.trial.reporter.Reporter.html#_printResults">_printResults</a></code></td>
-    <td><span>Print a group of errors to the stream.</span></td>
+    <td><code><a href="twisted.trial.reporter.Reporter.html#_printResults" class="internal-link" title="twisted.trial.reporter.Reporter._printResults">_print​Results</a></code></td>
+    <td>Print a group of errors to the stream.</td>
   </tr><tr class="basemethod private">
     
     <td>Method</td>
-    <td><code><a href="twisted.trial.reporter.Reporter.html#_printSummary">_printSummary</a></code></td>
-    <td><span>Print a line summarising the test results to the stream.</span></td>
+    <td><code><a href="twisted.trial.reporter.Reporter.html#_printSummary" class="internal-link" title="twisted.trial.reporter.Reporter._printSummary">_print​Summary</a></code></td>
+    <td>Print a line summarising the test results to the stream.</td>
   </tr><tr class="basemethod private">
     
     <td>Method</td>
-    <td><code><a href="twisted.trial.reporter.Reporter.html#_printUnexpectedSuccess">_printUnexpectedSuccess</a></code></td>
+    <td><code><a href="twisted.trial.reporter.Reporter.html#_printUnexpectedSuccess" class="internal-link" title="twisted.trial.reporter.Reporter._printUnexpectedSuccess">_print​Unexpected​Success</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="basemethod private">
     
     <td>Method</td>
-    <td><code><a href="twisted.trial.reporter.Reporter.html#_trimFrames">_trimFrames</a></code></td>
-    <td><span>Trim frames to remove internal paths.</span></td>
+    <td><code><a href="twisted.trial.reporter.Reporter.html#_trimFrames" class="internal-link" title="twisted.trial.reporter.Reporter._trimFrames">_trim​Frames</a></code></td>
+    <td>Trim frames to remove internal paths.</td>
   </tr><tr class="basemethod private">
     
     <td>Method</td>
-    <td><code><a href="twisted.trial.reporter.Reporter.html#_write">_write</a></code></td>
-    <td><span>Safely write to the reporter's stream.</span></td>
+    <td><code><a href="twisted.trial.reporter.Reporter.html#_write" class="internal-link" title="twisted.trial.reporter.Reporter._write">_write</a></code></td>
+    <td>Safely write to the reporter's stream.</td>
   </tr><tr class="basemethod private">
     
     <td>Method</td>
-    <td><code><a href="twisted.trial.reporter.Reporter.html#_writeln">_writeln</a></code></td>
-    <td><span>Safely write a line to the reporter's stream. Newline is appended to the format string.</span></td>
+    <td><code><a href="twisted.trial.reporter.Reporter.html#_writeln" class="internal-link" title="twisted.trial.reporter.Reporter._writeln">_writeln</a></code></td>
+    <td>Safely write a line to the reporter's stream. Newline is appended to the format string.</td>
   </tr><tr class="baseclassvariable private">
     
     <td>Class Variable</td>
-    <td><code><a href="twisted.trial.reporter.Reporter.html#_doubleSeparator">_doubleSeparator</a></code></td>
+    <td><code><a href="twisted.trial.reporter.Reporter.html#_doubleSeparator" class="internal-link" title="twisted.trial.reporter.Reporter._doubleSeparator">_double​Separator</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="baseclassvariable private">
     
     <td>Class Variable</td>
-    <td><code><a href="twisted.trial.reporter.Reporter.html#_separator">_separator</a></code></td>
+    <td><code><a href="twisted.trial.reporter.Reporter.html#_separator" class="internal-link" title="twisted.trial.reporter.Reporter._separator">_separator</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="baseinstancevariable private">
     
     <td>Instance Variable</td>
-    <td><code><a href="twisted.trial.reporter.Reporter.html#_publisher">_publisher</a></code></td>
-    <td><span>The log publisher which will be observed for warning events.</span></td>
+    <td><code><a href="twisted.trial.reporter.Reporter.html#_publisher" class="internal-link" title="twisted.trial.reporter.Reporter._publisher">_publisher</a></code></td>
+    <td>The log publisher which will be observed for warning events.</td>
   </tr><tr class="baseinstancevariable private">
     
     <td>Instance Variable</td>
-    <td><code><a href="twisted.trial.reporter.Reporter.html#_startTime">_startTime</a></code></td>
-    <td><span>The time when the first test was started. It defaults to <code><a href="https://docs.python.org/3/library/constants.html#None">None</a></code>, which means that no test was actually launched.</span></td>
+    <td><code><a href="twisted.trial.reporter.Reporter.html#_startTime" class="internal-link" title="twisted.trial.reporter.Reporter._startTime">_start​Time</a></code></td>
+    <td>The time when the first test was started. It defaults to <code><a href="https://docs.python.org/3/library/constants.html#None" class="intersphinx-link">None</a></code>, which means that no test was actually launched.</td>
   </tr><tr class="baseinstancevariable private">
     
     <td>Instance Variable</td>
-    <td><code><a href="twisted.trial.reporter.Reporter.html#_stream">_stream</a></code></td>
+    <td><code><a href="twisted.trial.reporter.Reporter.html#_stream" class="internal-link" title="twisted.trial.reporter.Reporter._stream">_stream</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="baseinstancevariable private">
     
     <td>Instance Variable</td>
-    <td><code><a href="twisted.trial.reporter.Reporter.html#_warningCache">_warningCache</a></code></td>
-    <td><span>A <code>set</code> of tuples of warning message (file, line, text, category) which have already been written to the output stream during the currently executing test.  This is used to avoid writing duplicates of the same warning to the output stream.</span></td>
+    <td><code><a href="twisted.trial.reporter.Reporter.html#_warningCache" class="internal-link" title="twisted.trial.reporter.Reporter._warningCache">_warning​Cache</a></code></td>
+    <td>A <tt class="rst-docutils literal">set</tt> of tuples of warning message (file, line, text, category) which have already been written to the output stream during the currently executing test.  This is used to avoid writing duplicates of the same warning to the output stream.</td>
   </tr>
 </table>
           
           <p class="inheritedFrom">
-            Inherited from <code><a href="twisted.trial.reporter.TestResult.html">TestResult</a></code> (via <code><a href="twisted.trial.reporter.VerboseTextReporter.html">VerboseTextReporter</a></code>, <code><a href="twisted.trial.reporter.Reporter.html">Reporter</a></code>):
+            Inherited from <code><a href="twisted.trial.reporter.TestResult.html" class="internal-link" title="twisted.trial.reporter.TestResult">TestResult</a></code> (via <code><a href="twisted.trial.reporter.VerboseTextReporter.html" class="internal-link" title="twisted.trial.reporter.VerboseTextReporter">VerboseTextReporter</a></code>, <code><a href="twisted.trial.reporter.Reporter.html" class="internal-link" title="twisted.trial.reporter.Reporter">Reporter</a></code>):
           </p>
-          <table class="children sortable" id="id3071">
+          <table class="children sortable" id="id3057">
   
   
   <tr class="basemethod">
     
     <td>Method</td>
-    <td><code><a href="twisted.trial.reporter.TestResult.html#__repr__">__repr__</a></code></td>
+    <td><code><a href="twisted.trial.reporter.TestResult.html#__repr__" class="internal-link" title="twisted.trial.reporter.TestResult.__repr__">__repr__</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="basemethod">
     
     <td>Method</td>
-    <td><code><a href="twisted.trial.reporter.TestResult.html#wasSuccessful">wasSuccessful</a></code></td>
-    <td><span>Report whether or not this test suite was successful or not.</span></td>
+    <td><code><a href="twisted.trial.reporter.TestResult.html#wasSuccessful" class="internal-link" title="twisted.trial.reporter.TestResult.wasSuccessful">was​Successful</a></code></td>
+    <td>Report whether or not this test suite was successful or not.</td>
   </tr><tr class="baseinstancevariable">
     
     <td>Instance Variable</td>
-    <td><code><a href="twisted.trial.reporter.TestResult.html#expectedFailures">expectedFailures</a></code></td>
+    <td><code><a href="twisted.trial.reporter.TestResult.html#expectedFailures" class="internal-link" title="twisted.trial.reporter.TestResult.expectedFailures">expected​Failures</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="baseinstancevariable">
     
     <td>Instance Variable</td>
-    <td><code><a href="twisted.trial.reporter.TestResult.html#skips">skips</a></code></td>
+    <td><code><a href="twisted.trial.reporter.TestResult.html#skips" class="internal-link" title="twisted.trial.reporter.TestResult.skips">skips</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="baseinstancevariable">
     
     <td>Instance Variable</td>
-    <td><code><a href="twisted.trial.reporter.TestResult.html#successes">successes</a></code></td>
-    <td><span>count the number of successes achieved by the test run.</span></td>
+    <td><code><a href="twisted.trial.reporter.TestResult.html#successes" class="internal-link" title="twisted.trial.reporter.TestResult.successes">successes</a></code></td>
+    <td>count the number of successes achieved by the test run.</td>
   </tr><tr class="baseinstancevariable">
     
     <td>Instance Variable</td>
-    <td><code><a href="twisted.trial.reporter.TestResult.html#unexpectedSuccesses">unexpectedSuccesses</a></code></td>
+    <td><code><a href="twisted.trial.reporter.TestResult.html#unexpectedSuccesses" class="internal-link" title="twisted.trial.reporter.TestResult.unexpectedSuccesses">unexpected​Successes</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="basemethod private">
     
     <td>Method</td>
-    <td><code><a href="twisted.trial.reporter.TestResult.html#_getFailure">_getFailure</a></code></td>
-    <td><span>Convert a <code>sys.exc_info()</code>-style tuple to a <code><a href="twisted.python.failure.Failure.html">Failure</a></code>, if necessary.</span></td>
+    <td><code><a href="twisted.trial.reporter.TestResult.html#_getFailure" class="internal-link" title="twisted.trial.reporter.TestResult._getFailure">_get​Failure</a></code></td>
+    <td>Convert a <tt class="rst-docutils literal">sys.exc_info()</tt>-style tuple to a <code><a href="twisted.python.failure.Failure.html" class="internal-link" title="twisted.python.failure.Failure">Failure</a></code>, if necessary.</td>
   </tr><tr class="basemethod private">
     
     <td>Method</td>
-    <td><code><a href="twisted.trial.reporter.TestResult.html#_getTime">_getTime</a></code></td>
+    <td><code><a href="twisted.trial.reporter.TestResult.html#_getTime" class="internal-link" title="twisted.trial.reporter.TestResult._getTime">_get​Time</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
-  </tr><tr class="baseclassvariable private">
+  </tr><tr class="baseconstant private">
     
-    <td>Class Variable</td>
-    <td><code><a href="twisted.trial.reporter.TestResult.html#_DEFAULT_TODO">_DEFAULT_TODO</a></code></td>
-    <td><span class="undocumented">Undocumented</span></td>
-  </tr><tr class="baseinstancevariable private">
-    
-    <td>Instance Variable</td>
-    <td><code><a href="twisted.trial.reporter.TestResult.html#_lastTime">_lastTime</a></code></td>
+    <td>Constant</td>
+    <td><code><a href="twisted.trial.reporter.TestResult.html#_DEFAULT_TODO" class="internal-link" title="twisted.trial.reporter.TestResult._DEFAULT_TODO">_DEFAULT​_TODO</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="baseinstancevariable private">
     
     <td>Instance Variable</td>
-    <td><code><a href="twisted.trial.reporter.TestResult.html#_testStarted">_testStarted</a></code></td>
+    <td><code><a href="twisted.trial.reporter.TestResult.html#_lastTime" class="internal-link" title="twisted.trial.reporter.TestResult._lastTime">_last​Time</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="baseinstancevariable private">
     
     <td>Instance Variable</td>
-    <td><code><a href="twisted.trial.reporter.TestResult.html#_timings">_timings</a></code></td>
+    <td><code><a href="twisted.trial.reporter.TestResult.html#_testStarted" class="internal-link" title="twisted.trial.reporter.TestResult._testStarted">_test​Started</a></code></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="baseinstancevariable private">
+    
+    <td>Instance Variable</td>
+    <td><code><a href="twisted.trial.reporter.TestResult.html#_timings" class="internal-link" title="twisted.trial.reporter.TestResult._timings">_timings</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr>
 </table>
@@ -412,9 +433,9 @@
     </a>
   </div>
   <div class="docstring functionBody">
-    <div class="interfaceinfo">from <code><a href="twisted.trial.itrial.IReporter.html#stopTest">twisted.trial.itrial.IReporter</a></code></div><div class="interfaceinfo">overrides <code><a href="twisted.trial.reporter.VerboseTextReporter.html#stopTest">twisted.trial.reporter.VerboseTextReporter.stopTest</a></code></div>
+    <div class="interfaceinfo">from <code><a href="twisted.trial.itrial.IReporter.html#stopTest" class="internal-link" title="twisted.trial.itrial.IReporter.stopTest">twisted.trial.itrial.IReporter</a></code></div><div class="interfaceinfo">overrides <code><a href="twisted.trial.reporter.VerboseTextReporter.html#stopTest" class="internal-link">twisted.trial.reporter.VerboseTextReporter.stopTest</a></code></div>
     
-    <div><p>Mark the test as stopped, and write the time it took to run the test to the stream.</p></div>
+    <div>Mark the test as stopped, and write the time it took to run the test to the stream.</div>
   </div>
 </div>
 
@@ -423,11 +444,33 @@
 
     <footer class="navbar navbar-default">
   
+
   <div class="container">
     <a href="index.html">API Documentation</a> for <a href="https://twistedmatrix.com/" class="projecthome">Twisted</a>,
   generated by <a href="https://github.com/twisted/pydoctor/">pydoctor</a>
-    21.2.2 at 2022-01-12 04:22:24.
+    22.2.2.dev0 at 2022-03-04 05:57:20.
   </div>
+
+  <!-- Google analytics, obviously. -->
+  <script src="//www.google-analytics.com/urchin.js" type="text/javascript"></script>
+  <script type="text/javascript">
+    _uacct = "UA-99018-6";
+    urchinTracker();
+  </script>
+
+  <!-- If the documentation isn't current, insert a current link. -->
+  <script type="text/javascript">
+    if (window.location.pathname.indexOf('/current/') == -1) {
+      <!-- Give the user a link to this page, but in the current version of the docs. -->
+      var link = document.getElementById('current-docs-link');
+      link.href = window.location.pathname.replace(/\/\d+\.\d+\.\d+\/api\//, '/current/api/');
+      <!-- And make it visible -->
+      var container = document.getElementById('current-docs-container');
+      container.style.display = "";
+      delete link;
+      delete container;
+    }
+  </script>
 </footer>
 
     <script src="pydoctor.js" type="text/javascript"></script>

@@ -7,7 +7,7 @@
   <head>
     
     <title>twisted.mail.imap4.IMAP4Server</title>
-    <meta name="generator" content="pydoctor 21.2.2"> 
+    <meta name="generator" content="pydoctor 22.2.2.dev0"> 
         
     </meta>
     <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
@@ -19,7 +19,13 @@
 
   <body>
 
-    
+    <div style="display: none" id="current-docs-container" class="container">
+  <div class="col-sm-12">
+    <a id="current-docs-link">
+      Go to the latest version of this document.
+    </a>
+  </div>
+</div>
 
     <nav class="navbar navbar-default">
   
@@ -44,69 +50,82 @@
           Names
         </a>
 
-        <form action="search-results.html" id="search-box-container">
+        <div id="search-box-container">
           <div class="input-group">
-            <input id="search-box" name="search-query" placeholder="Search..." aria-label="Search" minlength="2" class="form-control" />
+            <input id="search-box" type="search" name="search-query" placeholder="Search..." aria-label="Search" minlength="2" class="form-control" autocomplete="off" />
+            
             <span class="input-group-btn">
-              <button class="btn btn-default" type="submit" title="Search"><img src="fonts/search.svg" alt="Search!" /></button>
-              <a class="btn btn-default" id="search-help-button" title="Help" onclick="toggleSearchHelpText()"><img src="fonts/info.svg" alt="Help!" /></a>
+              <a style="display: none;" class="btn btn-default" id="search-clear-button" title="Clear" onclick="clearSearch()"><img src="fonts/x-circle.svg" alt="Clear" /></a>
+              <a class="btn btn-default" id="search-help-button" title="Help" onclick="toggleSearchHelpText()"><img src="fonts/info.svg" alt="Help" /></a>
             </span>
           </div>
-        </form>
+        </div>
 
-        <div class="rst-admonition hint" id="search-help-box">
+      </div>
+
+      <div id="search-results-container" style="display: none;">
+        <div>
+          <span class="label label-default" id="search-docstrings-button">
+            <a title="Search in docstrings" onclick="toggleSearchInDocstrings()">search in docstrings</a></span>
+        </div>
+
+        <noscript>
+            <h1>Cannot search: JavaScript is not supported/enabled in your browser.</h1>
+        </noscript>
+
+        <div class="hint" id="search-help-box">
           <p class="rst-last">
       
             Search bar offers the following options:
             <ul>   
                 <li>
                   <strong>Term presence.</strong> The below example searches for documents that 
-                    must contain “foo”, might contain “bar” and must not contain “baz”:
-                  <br /> <code>'+foo bar -baz'</code>
+                    must contain “foo”, might contain “bar” and must not contain “baz”: <code>+foo bar -baz</code>
                 </li> 
 
                 <li>
-                  <strong>Wildcards.</strong> The below example searches for documents with words beginning with “foo”:
-                  <br /> <code>'foo*'</code>
+                  <strong>Wildcards.</strong> The below example searches for documents with words beginning with “foo”: <code>foo*</code>
                 </li> 
 
                 <li>
-                  <strong>Search in specific fields.</strong> The following search matches all documents 
-                  that contains "foo" in their full dotted name and with “bar” in any field:
-                  <br /> <code>'+fullName:*foo* +bar'</code>
+                  <strong>Search in specific fields.</strong> The following search matches all objects 
+                  in "twisted.mail" that matches “search”: <code>+qname:twisted.mail.* +search</code>
 
                   <p>
-                    Possible fields: 'name', 'docstring', 'fullName'.
+                    Possible fields: 'name', 'qname' (fully qualified name), 'docstring', and 'kind'.
+                    Last two fields are only applicable if "search in docstrings" is enabled.
                   </p>
                 </li>
 
                 <li>
                   <strong>Fuzzy matches.</strong> The following search matches all documents 
-                  that have a word within 1 edit distance of “foo”:
-                  <br /> <code>'foo~1'</code>
+                  that have a word within 1 edit distance of “foo”: <code>foo~1</code>
                 </li>
             </ul>
 
           </p>
         </div>
 
-      </div>
+        <div id="search-status"> </div>
+        
+        <div class="warning" id="search-warn-box" style="display: none;">
+          <p class="rst-last"><span id="search-warn"></span></p>
+        </div>
 
+        <table id="search-results">
+          <!-- Filled dynamically by JS -->
+        </table>
+        
+        <div style="margin-top: 8px;">
+          <p>Results provided by <a href="https://lunrjs.com">Lunr.js</a></p>
+        </div>
+      </div>
 
     </div>
   </div>
 
-  <script>
- 
-    function toggleSearchHelpText() {
-        document.body.classList.toggle("search-help-hidden");
-    }
-    // Init search and help text
-    document.getElementById('search-box-container').style.display = 'block';
-    document.getElementById('search-help-box').style.display = 'block';
-    document.body.classList.add("search-help-hidden");
-
-  </script>
+  <script src="ajax.js" type="text/javascript"></script>
+  <script src="search.js" type="text/javascript"></script>
 
 </nav>
 
@@ -115,7 +134,7 @@
     <div class="container">
 
       <div class="page-header">
-        <h1 class="class"><code><code><a href="twisted.html">twisted</a></code><wbr></wbr>.<code><a href="twisted.mail.html">mail</a></code><wbr></wbr>.<code><a href="twisted.mail.imap4.html">imap4</a></code><wbr></wbr>.<code><a href="twisted.mail.imap4.IMAP4Server.html">IMAP4Server</a></code></code></h1>
+        <h1 class="class"><code><code><a href="index.html" class="internal-link">twisted</a></code><wbr></wbr>.<code><a href="twisted.mail.html" class="internal-link" title="twisted.mail">mail</a></code><wbr></wbr>.<code><a href="twisted.mail.imap4.html" class="internal-link" title="twisted.mail.imap4">imap4</a></code><wbr></wbr>.<code><a href="twisted.mail.imap4.IMAP4Server.html" class="internal-link" title="twisted.mail.imap4.IMAP4Server">IMAP4Server</a></code></code></h1>
         <div id="showPrivate">
           <button class="btn btn-link" onclick="togglePrivate()">Toggle Private API</button>
         </div>
@@ -126,1222 +145,1232 @@
       </div>
 
       <div class="extrasDocstring">
-        <p><code><span class="py-keyword">class</span> <span class="py-defname">IMAP4Server</span>(<a href="twisted.protocols.basic.LineReceiver.html" title="twisted.protocols.basic.LineReceiver">basic.LineReceiver</a>, <a href="twisted.protocols.policies.TimeoutMixin.html" title="twisted.protocols.policies.TimeoutMixin">policies.TimeoutMixin</a>): <a href="https://github.com/twisted/twisted/tree/twisted-21.2.0/src/twisted/mail/imap4.py#L601" class="sourceLink">(source)</a></code></p><p>Implements interfaces: <code><a href="twisted.mail.interfaces.IMailboxIMAPListener.html">twisted.mail.interfaces.IMailboxIMAPListener</a></code></p>
+        <p><code><span class="py-keyword">class</span> <span class="py-defname">IMAP4Server</span>(<a href="twisted.protocols.basic.LineReceiver.html" class="internal-link" title="twisted.protocols.basic.LineReceiver">basic.LineReceiver</a>, <a href="twisted.protocols.policies.TimeoutMixin.html" class="internal-link" title="twisted.protocols.policies.TimeoutMixin">policies.TimeoutMixin</a>): <a href="https://github.com/twisted/twisted/tree/twisted-21.2.0/src/twisted/mail/imap4.py#L601" class="sourceLink">(source)</a></code></p><p>Implements interfaces: <code><a href="twisted.mail.interfaces.IMailboxIMAPListener.html" class="internal-link">twisted.mail.interfaces.IMailboxIMAPListener</a></code></p>
         <p><a href="classIndex.html#twisted.mail.imap4.IMAP4Server">View In Hierarchy</a></p>
       </div>
 
+      
+
       <div class="moduleDocstring">
-        <div><p>Protocol implementation for an IMAP4rev1 server.</p><p>The server can be in any of four states:</p><ul><li>Non-authenticated</li><li>Authenticated</li><li>Selected</li><li>Logout</li></ul></div>
+        <div><p>Protocol implementation for an IMAP4rev1 server.</p>
+<p>The server can be in any of four states:</p>
+<ul class="rst-simple">
+<li>Non-authenticated</li>
+<li>Authenticated</li>
+<li>Selected</li>
+<li>Logout</li>
+</ul>
+</div>
       </div>
 
       <div id="splitTables">
-        <table class="children sortable" id="id1453">
+        <table class="children sortable" id="id1461">
   
   
   <tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#__init__">__init__</a></code></td>
+    <td><code><a href="#__init__" class="internal-link" title="twisted.mail.imap4.IMAP4Server.__init__">__init__</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#arg_astring">arg_astring</a></code></td>
-    <td><span>Parse an astring from the line, return (arg, rest), possibly via a deferred (to handle literals)</span></td>
+    <td><code><a href="#arg_astring" class="internal-link" title="twisted.mail.imap4.IMAP4Server.arg_astring">arg​_astring</a></code></td>
+    <td>Parse an astring from the line, return (arg, rest), possibly via a deferred (to handle literals)</td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#arg_atom">arg_atom</a></code></td>
-    <td><span>Parse an atom from the line</span></td>
+    <td><code><a href="#arg_atom" class="internal-link" title="twisted.mail.imap4.IMAP4Server.arg_atom">arg​_atom</a></code></td>
+    <td>Parse an atom from the line</td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#arg_fetchatt">arg_fetchatt</a></code></td>
-    <td><span>fetch-att</span></td>
+    <td><code><a href="#arg_fetchatt" class="internal-link" title="twisted.mail.imap4.IMAP4Server.arg_fetchatt">arg​_fetchatt</a></code></td>
+    <td>fetch-att</td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#arg_finalastring">arg_finalastring</a></code></td>
-    <td><span>Parse an astring from line that represents a command's final argument.  This special case exists to enable parsing empty string literals.</span></td>
+    <td><code><a href="#arg_finalastring" class="internal-link" title="twisted.mail.imap4.IMAP4Server.arg_finalastring">arg​_finalastring</a></code></td>
+    <td>Parse an astring from line that represents a command's final argument.  This special case exists to enable parsing empty string literals.</td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#arg_flaglist">arg_flaglist</a></code></td>
-    <td><span>Flag part of store-att-flag</span></td>
+    <td><code><a href="#arg_flaglist" class="internal-link" title="twisted.mail.imap4.IMAP4Server.arg_flaglist">arg​_flaglist</a></code></td>
+    <td>Flag part of store-att-flag</td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#arg_line">arg_line</a></code></td>
-    <td><span>Command line of UID command</span></td>
+    <td><code><a href="#arg_line" class="internal-link" title="twisted.mail.imap4.IMAP4Server.arg_line">arg​_line</a></code></td>
+    <td>Command line of UID command</td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#arg_literal">arg_literal</a></code></td>
-    <td><span>Parse a literal from the line</span></td>
+    <td><code><a href="#arg_literal" class="internal-link" title="twisted.mail.imap4.IMAP4Server.arg_literal">arg​_literal</a></code></td>
+    <td>Parse a literal from the line</td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#arg_plist">arg_plist</a></code></td>
-    <td><span>Parse a (non-nested) parenthesised list from the line</span></td>
+    <td><code><a href="#arg_plist" class="internal-link" title="twisted.mail.imap4.IMAP4Server.arg_plist">arg​_plist</a></code></td>
+    <td>Parse a (non-nested) parenthesised list from the line</td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#arg_searchkeys">arg_searchkeys</a></code></td>
-    <td><span>searchkeys</span></td>
+    <td><code><a href="#arg_searchkeys" class="internal-link" title="twisted.mail.imap4.IMAP4Server.arg_searchkeys">arg​_searchkeys</a></code></td>
+    <td>searchkeys</td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#arg_seqset">arg_seqset</a></code></td>
-    <td><span>sequence-set</span></td>
+    <td><code><a href="#arg_seqset" class="internal-link" title="twisted.mail.imap4.IMAP4Server.arg_seqset">arg​_seqset</a></code></td>
+    <td>sequence-set</td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#authenticate">authenticate</a></code></td>
+    <td><code><a href="#authenticate" class="internal-link" title="twisted.mail.imap4.IMAP4Server.authenticate">authenticate</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#authenticateLogin">authenticateLogin</a></code></td>
-    <td><span>Lookup the account associated with the given parameters</span></td>
+    <td><code><a href="#authenticateLogin" class="internal-link" title="twisted.mail.imap4.IMAP4Server.authenticateLogin">authenticate​Login</a></code></td>
+    <td>Lookup the account associated with the given parameters</td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#capabilities">capabilities</a></code></td>
+    <td><code><a href="#capabilities" class="internal-link" title="twisted.mail.imap4.IMAP4Server.capabilities">capabilities</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#checkpoint">checkpoint</a></code></td>
-    <td><span>Called when the client issues a CHECK command.</span></td>
+    <td><code><a href="#checkpoint" class="internal-link" title="twisted.mail.imap4.IMAP4Server.checkpoint">checkpoint</a></code></td>
+    <td>Called when the client issues a CHECK command.</td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#connectionLost">connectionLost</a></code></td>
-    <td><span>Called when the connection is shut down.</span></td>
+    <td><code><a href="#connectionLost" class="internal-link" title="twisted.mail.imap4.IMAP4Server.connectionLost">connection​Lost</a></code></td>
+    <td>Called when the connection is shut down.</td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#connectionMade">connectionMade</a></code></td>
-    <td><span>Called when a connection is made.</span></td>
+    <td><code><a href="#connectionMade" class="internal-link" title="twisted.mail.imap4.IMAP4Server.connectionMade">connection​Made</a></code></td>
+    <td>Called when a connection is made.</td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#dispatchCommand">dispatchCommand</a></code></td>
+    <td><code><a href="#dispatchCommand" class="internal-link" title="twisted.mail.imap4.IMAP4Server.dispatchCommand">dispatch​Command</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#do_APPEND">do_APPEND</a></code></td>
+    <td><code><a href="#do_APPEND" class="internal-link" title="twisted.mail.imap4.IMAP4Server.do_APPEND">do_​APPEND</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#do_AUTHENTICATE">do_AUTHENTICATE</a></code></td>
+    <td><code><a href="#do_AUTHENTICATE" class="internal-link" title="twisted.mail.imap4.IMAP4Server.do_AUTHENTICATE">do_​AUTHENTICATE</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#do_CAPABILITY">do_CAPABILITY</a></code></td>
+    <td><code><a href="#do_CAPABILITY" class="internal-link" title="twisted.mail.imap4.IMAP4Server.do_CAPABILITY">do_​CAPABILITY</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#do_CHECK">do_CHECK</a></code></td>
+    <td><code><a href="#do_CHECK" class="internal-link" title="twisted.mail.imap4.IMAP4Server.do_CHECK">do_​CHECK</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#do_CLOSE">do_CLOSE</a></code></td>
+    <td><code><a href="#do_CLOSE" class="internal-link" title="twisted.mail.imap4.IMAP4Server.do_CLOSE">do_​CLOSE</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#do_COPY">do_COPY</a></code></td>
+    <td><code><a href="#do_COPY" class="internal-link" title="twisted.mail.imap4.IMAP4Server.do_COPY">do_​COPY</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#do_CREATE">do_CREATE</a></code></td>
+    <td><code><a href="#do_CREATE" class="internal-link" title="twisted.mail.imap4.IMAP4Server.do_CREATE">do_​CREATE</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#do_DELETE">do_DELETE</a></code></td>
+    <td><code><a href="#do_DELETE" class="internal-link" title="twisted.mail.imap4.IMAP4Server.do_DELETE">do_​DELETE</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#do_EXPUNGE">do_EXPUNGE</a></code></td>
+    <td><code><a href="#do_EXPUNGE" class="internal-link" title="twisted.mail.imap4.IMAP4Server.do_EXPUNGE">do_​EXPUNGE</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#do_FETCH">do_FETCH</a></code></td>
+    <td><code><a href="#do_FETCH" class="internal-link" title="twisted.mail.imap4.IMAP4Server.do_FETCH">do_​FETCH</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#do_IDLE">do_IDLE</a></code></td>
+    <td><code><a href="#do_IDLE" class="internal-link" title="twisted.mail.imap4.IMAP4Server.do_IDLE">do_​IDLE</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#do_LOGIN">do_LOGIN</a></code></td>
+    <td><code><a href="#do_LOGIN" class="internal-link" title="twisted.mail.imap4.IMAP4Server.do_LOGIN">do_​LOGIN</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#do_LOGOUT">do_LOGOUT</a></code></td>
+    <td><code><a href="#do_LOGOUT" class="internal-link" title="twisted.mail.imap4.IMAP4Server.do_LOGOUT">do_​LOGOUT</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#do_NAMESPACE">do_NAMESPACE</a></code></td>
+    <td><code><a href="#do_NAMESPACE" class="internal-link" title="twisted.mail.imap4.IMAP4Server.do_NAMESPACE">do_​NAMESPACE</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#do_NOOP">do_NOOP</a></code></td>
+    <td><code><a href="#do_NOOP" class="internal-link" title="twisted.mail.imap4.IMAP4Server.do_NOOP">do_​NOOP</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#do_RENAME">do_RENAME</a></code></td>
+    <td><code><a href="#do_RENAME" class="internal-link" title="twisted.mail.imap4.IMAP4Server.do_RENAME">do_​RENAME</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#do_SEARCH">do_SEARCH</a></code></td>
+    <td><code><a href="#do_SEARCH" class="internal-link" title="twisted.mail.imap4.IMAP4Server.do_SEARCH">do_​SEARCH</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#do_STARTTLS">do_STARTTLS</a></code></td>
+    <td><code><a href="#do_STARTTLS" class="internal-link" title="twisted.mail.imap4.IMAP4Server.do_STARTTLS">do_​STARTTLS</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#do_STATUS">do_STATUS</a></code></td>
+    <td><code><a href="#do_STATUS" class="internal-link" title="twisted.mail.imap4.IMAP4Server.do_STATUS">do_​STATUS</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#do_STORE">do_STORE</a></code></td>
+    <td><code><a href="#do_STORE" class="internal-link" title="twisted.mail.imap4.IMAP4Server.do_STORE">do_​STORE</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#do_SUBSCRIBE">do_SUBSCRIBE</a></code></td>
+    <td><code><a href="#do_SUBSCRIBE" class="internal-link" title="twisted.mail.imap4.IMAP4Server.do_SUBSCRIBE">do_​SUBSCRIBE</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#do_UID">do_UID</a></code></td>
+    <td><code><a href="#do_UID" class="internal-link" title="twisted.mail.imap4.IMAP4Server.do_UID">do_​UID</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#do_UNSUBSCRIBE">do_UNSUBSCRIBE</a></code></td>
+    <td><code><a href="#do_UNSUBSCRIBE" class="internal-link" title="twisted.mail.imap4.IMAP4Server.do_UNSUBSCRIBE">do_​UNSUBSCRIBE</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#flagsChanged">flagsChanged</a></code></td>
-    <td><span>Indicates that the flags of one or more messages have changed.</span></td>
+    <td><code><a href="#flagsChanged" class="internal-link" title="twisted.mail.imap4.IMAP4Server.flagsChanged">flags​Changed</a></code></td>
+    <td>Indicates that the flags of one or more messages have changed.</td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#lineReceived">lineReceived</a></code></td>
-    <td><span>Override this for when each line is received.</span></td>
+    <td><code><a href="#lineReceived" class="internal-link" title="twisted.mail.imap4.IMAP4Server.lineReceived">line​Received</a></code></td>
+    <td>Override this for when each line is received.</td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#listCapabilities">listCapabilities</a></code></td>
+    <td><code><a href="#listCapabilities" class="internal-link" title="twisted.mail.imap4.IMAP4Server.listCapabilities">list​Capabilities</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#lookupCommand">lookupCommand</a></code></td>
+    <td><code><a href="#lookupCommand" class="internal-link" title="twisted.mail.imap4.IMAP4Server.lookupCommand">lookup​Command</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#modeChanged">modeChanged</a></code></td>
-    <td><span>Indicates that the write status of a mailbox has changed.</span></td>
+    <td><code><a href="#modeChanged" class="internal-link" title="twisted.mail.imap4.IMAP4Server.modeChanged">mode​Changed</a></code></td>
+    <td>Indicates that the write status of a mailbox has changed.</td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#newMessages">newMessages</a></code></td>
-    <td><span>Indicates that the number of messages in a mailbox has changed.</span></td>
+    <td><code><a href="#newMessages" class="internal-link" title="twisted.mail.imap4.IMAP4Server.newMessages">new​Messages</a></code></td>
+    <td>Indicates that the number of messages in a mailbox has changed.</td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#opt_charset">opt_charset</a></code></td>
-    <td><span>Optional charset of SEARCH command</span></td>
+    <td><code><a href="#opt_charset" class="internal-link" title="twisted.mail.imap4.IMAP4Server.opt_charset">opt​_charset</a></code></td>
+    <td>Optional charset of SEARCH command</td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#opt_datetime">opt_datetime</a></code></td>
-    <td><span>Optional date-time string</span></td>
+    <td><code><a href="#opt_datetime" class="internal-link" title="twisted.mail.imap4.IMAP4Server.opt_datetime">opt​_datetime</a></code></td>
+    <td>Optional date-time string</td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#opt_plist">opt_plist</a></code></td>
-    <td><span>Optional parenthesised list</span></td>
+    <td><code><a href="#opt_plist" class="internal-link" title="twisted.mail.imap4.IMAP4Server.opt_plist">opt​_plist</a></code></td>
+    <td>Optional parenthesised list</td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#parse_command">parse_command</a></code></td>
+    <td><code><a href="#parse_command" class="internal-link" title="twisted.mail.imap4.IMAP4Server.parse_command">parse​_command</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#parse_idle">parse_idle</a></code></td>
+    <td><code><a href="#parse_idle" class="internal-link" title="twisted.mail.imap4.IMAP4Server.parse_idle">parse​_idle</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#parse_pending">parse_pending</a></code></td>
+    <td><code><a href="#parse_pending" class="internal-link" title="twisted.mail.imap4.IMAP4Server.parse_pending">parse​_pending</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#rawDataReceived">rawDataReceived</a></code></td>
-    <td><span>Override this for when raw data is received.</span></td>
+    <td><code><a href="#rawDataReceived" class="internal-link" title="twisted.mail.imap4.IMAP4Server.rawDataReceived">raw​Data​Received</a></code></td>
+    <td>Override this for when raw data is received.</td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#search_ALL">search_ALL</a></code></td>
-    <td><span>Returns <code>True</code> if the message matches the ALL search key (always).</span></td>
+    <td><code><a href="#search_ALL" class="internal-link" title="twisted.mail.imap4.IMAP4Server.search_ALL">search_​ALL</a></code></td>
+    <td>Returns <tt class="rst-docutils literal">True</tt> if the message matches the ALL search key (always).</td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#search_ANSWERED">search_ANSWERED</a></code></td>
-    <td><span>Returns <code>True</code> if the message has been answered.</span></td>
+    <td><code><a href="#search_ANSWERED" class="internal-link" title="twisted.mail.imap4.IMAP4Server.search_ANSWERED">search_​ANSWERED</a></code></td>
+    <td>Returns <tt class="rst-docutils literal">True</tt> if the message has been answered.</td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#search_BCC">search_BCC</a></code></td>
-    <td><span>Returns <code>True</code> if the message has a BCC address matching the query.</span></td>
+    <td><code><a href="#search_BCC" class="internal-link" title="twisted.mail.imap4.IMAP4Server.search_BCC">search_​BCC</a></code></td>
+    <td>Returns <tt class="rst-docutils literal">True</tt> if the message has a BCC address matching the query.</td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#search_BEFORE">search_BEFORE</a></code></td>
+    <td><code><a href="#search_BEFORE" class="internal-link" title="twisted.mail.imap4.IMAP4Server.search_BEFORE">search_​BEFORE</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#search_BODY">search_BODY</a></code></td>
+    <td><code><a href="#search_BODY" class="internal-link" title="twisted.mail.imap4.IMAP4Server.search_BODY">search_​BODY</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#search_CC">search_CC</a></code></td>
+    <td><code><a href="#search_CC" class="internal-link" title="twisted.mail.imap4.IMAP4Server.search_CC">search_​CC</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#search_DELETED">search_DELETED</a></code></td>
+    <td><code><a href="#search_DELETED" class="internal-link" title="twisted.mail.imap4.IMAP4Server.search_DELETED">search_​DELETED</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#search_DRAFT">search_DRAFT</a></code></td>
+    <td><code><a href="#search_DRAFT" class="internal-link" title="twisted.mail.imap4.IMAP4Server.search_DRAFT">search_​DRAFT</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#search_FLAGGED">search_FLAGGED</a></code></td>
+    <td><code><a href="#search_FLAGGED" class="internal-link" title="twisted.mail.imap4.IMAP4Server.search_FLAGGED">search_​FLAGGED</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#search_FROM">search_FROM</a></code></td>
+    <td><code><a href="#search_FROM" class="internal-link" title="twisted.mail.imap4.IMAP4Server.search_FROM">search_​FROM</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#search_HEADER">search_HEADER</a></code></td>
+    <td><code><a href="#search_HEADER" class="internal-link" title="twisted.mail.imap4.IMAP4Server.search_HEADER">search_​HEADER</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#search_KEYWORD">search_KEYWORD</a></code></td>
+    <td><code><a href="#search_KEYWORD" class="internal-link" title="twisted.mail.imap4.IMAP4Server.search_KEYWORD">search_​KEYWORD</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#search_LARGER">search_LARGER</a></code></td>
+    <td><code><a href="#search_LARGER" class="internal-link" title="twisted.mail.imap4.IMAP4Server.search_LARGER">search_​LARGER</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#search_NEW">search_NEW</a></code></td>
+    <td><code><a href="#search_NEW" class="internal-link" title="twisted.mail.imap4.IMAP4Server.search_NEW">search_​NEW</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#search_NOT">search_NOT</a></code></td>
-    <td><span>Returns <code>True</code> if the message does not match the query.</span></td>
+    <td><code><a href="#search_NOT" class="internal-link" title="twisted.mail.imap4.IMAP4Server.search_NOT">search_​NOT</a></code></td>
+    <td>Returns <tt class="rst-docutils literal">True</tt> if the message does not match the query.</td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#search_OLD">search_OLD</a></code></td>
+    <td><code><a href="#search_OLD" class="internal-link" title="twisted.mail.imap4.IMAP4Server.search_OLD">search_​OLD</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#search_ON">search_ON</a></code></td>
+    <td><code><a href="#search_ON" class="internal-link" title="twisted.mail.imap4.IMAP4Server.search_ON">search_​ON</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#search_OR">search_OR</a></code></td>
-    <td><span>Returns <code>True</code> if the message matches any of the first two query items.</span></td>
+    <td><code><a href="#search_OR" class="internal-link" title="twisted.mail.imap4.IMAP4Server.search_OR">search_​OR</a></code></td>
+    <td>Returns <tt class="rst-docutils literal">True</tt> if the message matches any of the first two query items.</td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#search_RECENT">search_RECENT</a></code></td>
+    <td><code><a href="#search_RECENT" class="internal-link" title="twisted.mail.imap4.IMAP4Server.search_RECENT">search_​RECENT</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#search_SEEN">search_SEEN</a></code></td>
+    <td><code><a href="#search_SEEN" class="internal-link" title="twisted.mail.imap4.IMAP4Server.search_SEEN">search_​SEEN</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#search_SENTBEFORE">search_SENTBEFORE</a></code></td>
-    <td><span>Returns <code>True</code> if the message date is earlier than the query date.</span></td>
+    <td><code><a href="#search_SENTBEFORE" class="internal-link" title="twisted.mail.imap4.IMAP4Server.search_SENTBEFORE">search_​SENTBEFORE</a></code></td>
+    <td>Returns <tt class="rst-docutils literal">True</tt> if the message date is earlier than the query date.</td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#search_SENTON">search_SENTON</a></code></td>
-    <td><span>Returns <code>True</code> if the message date is the same as the query date.</span></td>
+    <td><code><a href="#search_SENTON" class="internal-link" title="twisted.mail.imap4.IMAP4Server.search_SENTON">search_​SENTON</a></code></td>
+    <td>Returns <tt class="rst-docutils literal">True</tt> if the message date is the same as the query date.</td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#search_SENTSINCE">search_SENTSINCE</a></code></td>
-    <td><span>Returns <code>True</code> if the message date is later than the query date.</span></td>
+    <td><code><a href="#search_SENTSINCE" class="internal-link" title="twisted.mail.imap4.IMAP4Server.search_SENTSINCE">search_​SENTSINCE</a></code></td>
+    <td>Returns <tt class="rst-docutils literal">True</tt> if the message date is later than the query date.</td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#search_SINCE">search_SINCE</a></code></td>
+    <td><code><a href="#search_SINCE" class="internal-link" title="twisted.mail.imap4.IMAP4Server.search_SINCE">search_​SINCE</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#search_SMALLER">search_SMALLER</a></code></td>
+    <td><code><a href="#search_SMALLER" class="internal-link" title="twisted.mail.imap4.IMAP4Server.search_SMALLER">search_​SMALLER</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#search_SUBJECT">search_SUBJECT</a></code></td>
+    <td><code><a href="#search_SUBJECT" class="internal-link" title="twisted.mail.imap4.IMAP4Server.search_SUBJECT">search_​SUBJECT</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#search_TEXT">search_TEXT</a></code></td>
+    <td><code><a href="#search_TEXT" class="internal-link" title="twisted.mail.imap4.IMAP4Server.search_TEXT">search_​TEXT</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#search_TO">search_TO</a></code></td>
+    <td><code><a href="#search_TO" class="internal-link" title="twisted.mail.imap4.IMAP4Server.search_TO">search_​TO</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#search_UID">search_UID</a></code></td>
-    <td><span>Returns <code>True</code> if the message UID is in the range defined by the search query.</span></td>
+    <td><code><a href="#search_UID" class="internal-link" title="twisted.mail.imap4.IMAP4Server.search_UID">search_​UID</a></code></td>
+    <td>Returns <tt class="rst-docutils literal">True</tt> if the message UID is in the range defined by the search query.</td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#search_UNANSWERED">search_UNANSWERED</a></code></td>
+    <td><code><a href="#search_UNANSWERED" class="internal-link" title="twisted.mail.imap4.IMAP4Server.search_UNANSWERED">search_​UNANSWERED</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#search_UNDELETED">search_UNDELETED</a></code></td>
+    <td><code><a href="#search_UNDELETED" class="internal-link" title="twisted.mail.imap4.IMAP4Server.search_UNDELETED">search_​UNDELETED</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#search_UNDRAFT">search_UNDRAFT</a></code></td>
+    <td><code><a href="#search_UNDRAFT" class="internal-link" title="twisted.mail.imap4.IMAP4Server.search_UNDRAFT">search_​UNDRAFT</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#search_UNFLAGGED">search_UNFLAGGED</a></code></td>
+    <td><code><a href="#search_UNFLAGGED" class="internal-link" title="twisted.mail.imap4.IMAP4Server.search_UNFLAGGED">search_​UNFLAGGED</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#search_UNKEYWORD">search_UNKEYWORD</a></code></td>
+    <td><code><a href="#search_UNKEYWORD" class="internal-link" title="twisted.mail.imap4.IMAP4Server.search_UNKEYWORD">search_​UNKEYWORD</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#search_UNSEEN">search_UNSEEN</a></code></td>
+    <td><code><a href="#search_UNSEEN" class="internal-link" title="twisted.mail.imap4.IMAP4Server.search_UNSEEN">search_​UNSEEN</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#sendBadResponse">sendBadResponse</a></code></td>
+    <td><code><a href="#sendBadResponse" class="internal-link" title="twisted.mail.imap4.IMAP4Server.sendBadResponse">send​Bad​Response</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#sendContinuationRequest">sendContinuationRequest</a></code></td>
+    <td><code><a href="#sendContinuationRequest" class="internal-link" title="twisted.mail.imap4.IMAP4Server.sendContinuationRequest">send​Continuation​Request</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#sendNegativeResponse">sendNegativeResponse</a></code></td>
+    <td><code><a href="#sendNegativeResponse" class="internal-link" title="twisted.mail.imap4.IMAP4Server.sendNegativeResponse">send​Negative​Response</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#sendPositiveResponse">sendPositiveResponse</a></code></td>
+    <td><code><a href="#sendPositiveResponse" class="internal-link" title="twisted.mail.imap4.IMAP4Server.sendPositiveResponse">send​Positive​Response</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#sendServerGreeting">sendServerGreeting</a></code></td>
+    <td><code><a href="#sendServerGreeting" class="internal-link" title="twisted.mail.imap4.IMAP4Server.sendServerGreeting">send​Server​Greeting</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#sendUntaggedResponse">sendUntaggedResponse</a></code></td>
+    <td><code><a href="#sendUntaggedResponse" class="internal-link" title="twisted.mail.imap4.IMAP4Server.sendUntaggedResponse">send​Untagged​Response</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#spew_body">spew_body</a></code></td>
+    <td><code><a href="#spew_body" class="internal-link" title="twisted.mail.imap4.IMAP4Server.spew_body">spew​_body</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#spew_bodystructure">spew_bodystructure</a></code></td>
+    <td><code><a href="#spew_bodystructure" class="internal-link" title="twisted.mail.imap4.IMAP4Server.spew_bodystructure">spew​_bodystructure</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#spew_envelope">spew_envelope</a></code></td>
+    <td><code><a href="#spew_envelope" class="internal-link" title="twisted.mail.imap4.IMAP4Server.spew_envelope">spew​_envelope</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#spew_flags">spew_flags</a></code></td>
+    <td><code><a href="#spew_flags" class="internal-link" title="twisted.mail.imap4.IMAP4Server.spew_flags">spew​_flags</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#spew_internaldate">spew_internaldate</a></code></td>
+    <td><code><a href="#spew_internaldate" class="internal-link" title="twisted.mail.imap4.IMAP4Server.spew_internaldate">spew​_internaldate</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#spew_rfc822">spew_rfc822</a></code></td>
+    <td><code><a href="#spew_rfc822" class="internal-link" title="twisted.mail.imap4.IMAP4Server.spew_rfc822">spew​_rfc822</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#spew_rfc822header">spew_rfc822header</a></code></td>
+    <td><code><a href="#spew_rfc822header" class="internal-link" title="twisted.mail.imap4.IMAP4Server.spew_rfc822header">spew​_rfc822header</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#spew_rfc822size">spew_rfc822size</a></code></td>
+    <td><code><a href="#spew_rfc822size" class="internal-link" title="twisted.mail.imap4.IMAP4Server.spew_rfc822size">spew​_rfc822size</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#spew_rfc822text">spew_rfc822text</a></code></td>
+    <td><code><a href="#spew_rfc822text" class="internal-link" title="twisted.mail.imap4.IMAP4Server.spew_rfc822text">spew​_rfc822text</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#spew_uid">spew_uid</a></code></td>
+    <td><code><a href="#spew_uid" class="internal-link" title="twisted.mail.imap4.IMAP4Server.spew_uid">spew​_uid</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#spewMessage">spewMessage</a></code></td>
+    <td><code><a href="#spewMessage" class="internal-link" title="twisted.mail.imap4.IMAP4Server.spewMessage">spew​Message</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#timeoutConnection">timeoutConnection</a></code></td>
-    <td><span>Called when the connection times out.</span></td>
-  </tr><tr class="classvariable">
+    <td><code><a href="#timeoutConnection" class="internal-link" title="twisted.mail.imap4.IMAP4Server.timeoutConnection">timeout​Connection</a></code></td>
+    <td>Called when the connection times out.</td>
+  </tr><tr class="constant">
     
-    <td>Class Variable</td>
-    <td><code><a href="#atomre">atomre</a></code></td>
+    <td>Constant</td>
+    <td><code><a href="#IDENT" class="internal-link" title="twisted.mail.imap4.IMAP4Server.IDENT">IDENT</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
-  </tr><tr class="classvariable">
+  </tr><tr class="constant">
     
-    <td>Class Variable</td>
-    <td><code><a href="#auth_APPEND">auth_APPEND</a></code></td>
-    <td><span class="undocumented">Undocumented</span></td>
-  </tr><tr class="classvariable">
-    
-    <td>Class Variable</td>
-    <td><code><a href="#auth_CREATE">auth_CREATE</a></code></td>
+    <td>Constant</td>
+    <td><code><a href="#POSTAUTH_TIMEOUT" class="internal-link" title="twisted.mail.imap4.IMAP4Server.POSTAUTH_TIMEOUT">POSTAUTH​_TIMEOUT</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="classvariable">
     
     <td>Class Variable</td>
-    <td><code><a href="#auth_DELETE">auth_DELETE</a></code></td>
+    <td><code><a href="#atomre" class="internal-link" title="twisted.mail.imap4.IMAP4Server.atomre">atomre</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="classvariable">
     
     <td>Class Variable</td>
-    <td><code><a href="#auth_EXAMINE">auth_EXAMINE</a></code></td>
+    <td><code><a href="#auth_APPEND" class="internal-link" title="twisted.mail.imap4.IMAP4Server.auth_APPEND">auth_​APPEND</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="classvariable">
     
     <td>Class Variable</td>
-    <td><code><a href="#auth_LIST">auth_LIST</a></code></td>
+    <td><code><a href="#auth_CREATE" class="internal-link" title="twisted.mail.imap4.IMAP4Server.auth_CREATE">auth_​CREATE</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="classvariable">
     
     <td>Class Variable</td>
-    <td><code><a href="#auth_LSUB">auth_LSUB</a></code></td>
+    <td><code><a href="#auth_DELETE" class="internal-link" title="twisted.mail.imap4.IMAP4Server.auth_DELETE">auth_​DELETE</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="classvariable">
     
     <td>Class Variable</td>
-    <td><code><a href="#auth_NAMESPACE">auth_NAMESPACE</a></code></td>
+    <td><code><a href="#auth_EXAMINE" class="internal-link" title="twisted.mail.imap4.IMAP4Server.auth_EXAMINE">auth_​EXAMINE</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="classvariable">
     
     <td>Class Variable</td>
-    <td><code><a href="#auth_RENAME">auth_RENAME</a></code></td>
+    <td><code><a href="#auth_LIST" class="internal-link" title="twisted.mail.imap4.IMAP4Server.auth_LIST">auth_​LIST</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="classvariable">
     
     <td>Class Variable</td>
-    <td><code><a href="#auth_SELECT">auth_SELECT</a></code></td>
+    <td><code><a href="#auth_LSUB" class="internal-link" title="twisted.mail.imap4.IMAP4Server.auth_LSUB">auth_​LSUB</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="classvariable">
     
     <td>Class Variable</td>
-    <td><code><a href="#auth_STATUS">auth_STATUS</a></code></td>
+    <td><code><a href="#auth_NAMESPACE" class="internal-link" title="twisted.mail.imap4.IMAP4Server.auth_NAMESPACE">auth_​NAMESPACE</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="classvariable">
     
     <td>Class Variable</td>
-    <td><code><a href="#auth_SUBSCRIBE">auth_SUBSCRIBE</a></code></td>
+    <td><code><a href="#auth_RENAME" class="internal-link" title="twisted.mail.imap4.IMAP4Server.auth_RENAME">auth_​RENAME</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="classvariable">
     
     <td>Class Variable</td>
-    <td><code><a href="#auth_UNSUBSCRIBE">auth_UNSUBSCRIBE</a></code></td>
+    <td><code><a href="#auth_SELECT" class="internal-link" title="twisted.mail.imap4.IMAP4Server.auth_SELECT">auth_​SELECT</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="classvariable">
     
     <td>Class Variable</td>
-    <td><code><a href="#IDENT">IDENT</a></code></td>
+    <td><code><a href="#auth_STATUS" class="internal-link" title="twisted.mail.imap4.IMAP4Server.auth_STATUS">auth_​STATUS</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="classvariable">
     
     <td>Class Variable</td>
-    <td><code><a href="#portal">portal</a></code></td>
+    <td><code><a href="#auth_SUBSCRIBE" class="internal-link" title="twisted.mail.imap4.IMAP4Server.auth_SUBSCRIBE">auth_​SUBSCRIBE</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="classvariable">
     
     <td>Class Variable</td>
-    <td><code><a href="#POSTAUTH_TIMEOUT">POSTAUTH_TIMEOUT</a></code></td>
+    <td><code><a href="#auth_UNSUBSCRIBE" class="internal-link" title="twisted.mail.imap4.IMAP4Server.auth_UNSUBSCRIBE">auth_​UNSUBSCRIBE</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="classvariable">
     
     <td>Class Variable</td>
-    <td><code><a href="#select_CHECK">select_CHECK</a></code></td>
+    <td><code><a href="#portal" class="internal-link" title="twisted.mail.imap4.IMAP4Server.portal">portal</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="classvariable">
     
     <td>Class Variable</td>
-    <td><code><a href="#select_CLOSE">select_CLOSE</a></code></td>
+    <td><code><a href="#select_CHECK" class="internal-link" title="twisted.mail.imap4.IMAP4Server.select_CHECK">select_​CHECK</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="classvariable">
     
     <td>Class Variable</td>
-    <td><code><a href="#select_COPY">select_COPY</a></code></td>
+    <td><code><a href="#select_CLOSE" class="internal-link" title="twisted.mail.imap4.IMAP4Server.select_CLOSE">select_​CLOSE</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="classvariable">
     
     <td>Class Variable</td>
-    <td><code><a href="#select_EXPUNGE">select_EXPUNGE</a></code></td>
+    <td><code><a href="#select_COPY" class="internal-link" title="twisted.mail.imap4.IMAP4Server.select_COPY">select_​COPY</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="classvariable">
     
     <td>Class Variable</td>
-    <td><code><a href="#select_FETCH">select_FETCH</a></code></td>
+    <td><code><a href="#select_EXPUNGE" class="internal-link" title="twisted.mail.imap4.IMAP4Server.select_EXPUNGE">select_​EXPUNGE</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="classvariable">
     
     <td>Class Variable</td>
-    <td><code><a href="#select_IDLE">select_IDLE</a></code></td>
+    <td><code><a href="#select_FETCH" class="internal-link" title="twisted.mail.imap4.IMAP4Server.select_FETCH">select_​FETCH</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="classvariable">
     
     <td>Class Variable</td>
-    <td><code><a href="#select_SEARCH">select_SEARCH</a></code></td>
+    <td><code><a href="#select_IDLE" class="internal-link" title="twisted.mail.imap4.IMAP4Server.select_IDLE">select_​IDLE</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="classvariable">
     
     <td>Class Variable</td>
-    <td><code><a href="#select_STORE">select_STORE</a></code></td>
+    <td><code><a href="#select_SEARCH" class="internal-link" title="twisted.mail.imap4.IMAP4Server.select_SEARCH">select_​SEARCH</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="classvariable">
     
     <td>Class Variable</td>
-    <td><code><a href="#select_UID">select_UID</a></code></td>
+    <td><code><a href="#select_STORE" class="internal-link" title="twisted.mail.imap4.IMAP4Server.select_STORE">select_​STORE</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="classvariable">
     
     <td>Class Variable</td>
-    <td><code><a href="#timeOut">timeOut</a></code></td>
+    <td><code><a href="#select_UID" class="internal-link" title="twisted.mail.imap4.IMAP4Server.select_UID">select_​UID</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="classvariable">
     
     <td>Class Variable</td>
-    <td><code><a href="#unauth_AUTHENTICATE">unauth_AUTHENTICATE</a></code></td>
+    <td><code><a href="#startedTLS" class="internal-link" title="twisted.mail.imap4.IMAP4Server.startedTLS">started​TLS</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="classvariable">
     
     <td>Class Variable</td>
-    <td><code><a href="#unauth_CAPABILITY">unauth_CAPABILITY</a></code></td>
+    <td><code><a href="#timeOut" class="internal-link" title="twisted.mail.imap4.IMAP4Server.timeOut">time​Out</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="classvariable">
     
     <td>Class Variable</td>
-    <td><code><a href="#unauth_LOGIN">unauth_LOGIN</a></code></td>
+    <td><code><a href="#unauth_AUTHENTICATE" class="internal-link" title="twisted.mail.imap4.IMAP4Server.unauth_AUTHENTICATE">unauth_​AUTHENTICATE</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="classvariable">
     
     <td>Class Variable</td>
-    <td><code><a href="#unauth_LOGOUT">unauth_LOGOUT</a></code></td>
+    <td><code><a href="#unauth_CAPABILITY" class="internal-link" title="twisted.mail.imap4.IMAP4Server.unauth_CAPABILITY">unauth_​CAPABILITY</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="classvariable">
     
     <td>Class Variable</td>
-    <td><code><a href="#unauth_NOOP">unauth_NOOP</a></code></td>
+    <td><code><a href="#unauth_LOGIN" class="internal-link" title="twisted.mail.imap4.IMAP4Server.unauth_LOGIN">unauth_​LOGIN</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="classvariable">
     
     <td>Class Variable</td>
-    <td><code><a href="#unauth_STARTTLS">unauth_STARTTLS</a></code></td>
+    <td><code><a href="#unauth_LOGOUT" class="internal-link" title="twisted.mail.imap4.IMAP4Server.unauth_LOGOUT">unauth_​LOGOUT</a></code></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="classvariable">
+    
+    <td>Class Variable</td>
+    <td><code><a href="#unauth_NOOP" class="internal-link" title="twisted.mail.imap4.IMAP4Server.unauth_NOOP">unauth_​NOOP</a></code></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="classvariable">
+    
+    <td>Class Variable</td>
+    <td><code><a href="#unauth_STARTTLS" class="internal-link" title="twisted.mail.imap4.IMAP4Server.unauth_STARTTLS">unauth_​STARTTLS</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="instancevariable">
     
     <td>Instance Variable</td>
-    <td><code><a href="#account">account</a></code></td>
+    <td><code><a href="#account" class="internal-link" title="twisted.mail.imap4.IMAP4Server.account">account</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="instancevariable">
     
     <td>Instance Variable</td>
-    <td><code><a href="#blocked">blocked</a></code></td>
+    <td><code><a href="#blocked" class="internal-link" title="twisted.mail.imap4.IMAP4Server.blocked">blocked</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="instancevariable">
     
     <td>Instance Variable</td>
-    <td><code><a href="#canStartTLS">canStartTLS</a></code></td>
+    <td><code><a href="#canStartTLS" class="internal-link" title="twisted.mail.imap4.IMAP4Server.canStartTLS">can​Start​TLS</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="instancevariable">
     
     <td>Instance Variable</td>
-    <td><code><a href="#challengers">challengers</a></code></td>
+    <td><code><a href="#challengers" class="internal-link" title="twisted.mail.imap4.IMAP4Server.challengers">challengers</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="instancevariable">
     
     <td>Instance Variable</td>
-    <td><code><a href="#ctx">ctx</a></code></td>
+    <td><code><a href="#ctx" class="internal-link" title="twisted.mail.imap4.IMAP4Server.ctx">ctx</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="instancevariable">
     
     <td>Instance Variable</td>
-    <td><code><a href="#lastState">lastState</a></code></td>
+    <td><code><a href="#lastState" class="internal-link" title="twisted.mail.imap4.IMAP4Server.lastState">last​State</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="instancevariable">
     
     <td>Instance Variable</td>
-    <td><code><a href="#mbox">mbox</a></code></td>
+    <td><code><a href="#mbox" class="internal-link" title="twisted.mail.imap4.IMAP4Server.mbox">mbox</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="instancevariable">
     
     <td>Instance Variable</td>
-    <td><code><a href="#parseState">parseState</a></code></td>
+    <td><code><a href="#parseState" class="internal-link" title="twisted.mail.imap4.IMAP4Server.parseState">parse​State</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="instancevariable">
     
     <td>Instance Variable</td>
-    <td><code><a href="#parseTag">parseTag</a></code></td>
+    <td><code><a href="#parseTag" class="internal-link" title="twisted.mail.imap4.IMAP4Server.parseTag">parse​Tag</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="instancevariable">
     
     <td>Instance Variable</td>
-    <td><code><a href="#startedTLS">startedTLS</a></code></td>
+    <td><code><a href="#state" class="internal-link" title="twisted.mail.imap4.IMAP4Server.state">state</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="instancevariable">
     
     <td>Instance Variable</td>
-    <td><code><a href="#state">state</a></code></td>
-    <td><span class="undocumented">Undocumented</span></td>
-  </tr><tr class="instancevariable">
-    
-    <td>Instance Variable</td>
-    <td><code><a href="#tags">tags</a></code></td>
+    <td><code><a href="#tags" class="internal-link" title="twisted.mail.imap4.IMAP4Server.tags">tags</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method private">
     
     <td>Method</td>
-    <td><code><a href="#__cbAppend">__cbAppend</a></code></td>
+    <td><code><a href="#__cbAppend" class="internal-link" title="twisted.mail.imap4.IMAP4Server.__cbAppend">__cb​Append</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method private">
     
     <td>Method</td>
-    <td><code><a href="#__cbAuthChunk">__cbAuthChunk</a></code></td>
+    <td><code><a href="#__cbAuthChunk" class="internal-link" title="twisted.mail.imap4.IMAP4Server.__cbAuthChunk">__cb​Auth​Chunk</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method private">
     
     <td>Method</td>
-    <td><code><a href="#__cbAuthResp">__cbAuthResp</a></code></td>
+    <td><code><a href="#__cbAuthResp" class="internal-link" title="twisted.mail.imap4.IMAP4Server.__cbAuthResp">__cb​Auth​Resp</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method private">
     
     <td>Method</td>
-    <td><code><a href="#__cbCheck">__cbCheck</a></code></td>
+    <td><code><a href="#__cbCheck" class="internal-link" title="twisted.mail.imap4.IMAP4Server.__cbCheck">__cb​Check</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method private">
     
     <td>Method</td>
-    <td><code><a href="#__cbClose">__cbClose</a></code></td>
+    <td><code><a href="#__cbClose" class="internal-link" title="twisted.mail.imap4.IMAP4Server.__cbClose">__cb​Close</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method private">
     
     <td>Method</td>
-    <td><code><a href="#__cbCopied">__cbCopied</a></code></td>
+    <td><code><a href="#__cbCopied" class="internal-link" title="twisted.mail.imap4.IMAP4Server.__cbCopied">__cb​Copied</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method private">
     
     <td>Method</td>
-    <td><code><a href="#__cbCopy">__cbCopy</a></code></td>
+    <td><code><a href="#__cbCopy" class="internal-link" title="twisted.mail.imap4.IMAP4Server.__cbCopy">__cb​Copy</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method private">
     
     <td>Method</td>
-    <td><code><a href="#__cbDispatch">__cbDispatch</a></code></td>
+    <td><code><a href="#__cbDispatch" class="internal-link" title="twisted.mail.imap4.IMAP4Server.__cbDispatch">__cb​Dispatch</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method private">
     
     <td>Method</td>
-    <td><code><a href="#__cbExpunge">__cbExpunge</a></code></td>
+    <td><code><a href="#__cbExpunge" class="internal-link" title="twisted.mail.imap4.IMAP4Server.__cbExpunge">__cb​Expunge</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method private">
     
     <td>Method</td>
-    <td><code><a href="#__cbFetch">__cbFetch</a></code></td>
+    <td><code><a href="#__cbFetch" class="internal-link" title="twisted.mail.imap4.IMAP4Server.__cbFetch">__cb​Fetch</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method private">
     
     <td>Method</td>
-    <td><code><a href="#__cbLogin">__cbLogin</a></code></td>
+    <td><code><a href="#__cbLogin" class="internal-link" title="twisted.mail.imap4.IMAP4Server.__cbLogin">__cb​Login</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method private">
     
     <td>Method</td>
-    <td><code><a href="#__cbManualSearch">__cbManualSearch</a></code></td>
-    <td><span>Apply the search filter to a set of messages. Send the response to the client.</span></td>
+    <td><code><a href="#__cbManualSearch" class="internal-link" title="twisted.mail.imap4.IMAP4Server.__cbManualSearch">__cb​Manual​Search</a></code></td>
+    <td>Apply the search filter to a set of messages. Send the response to the client.</td>
   </tr><tr class="method private">
     
     <td>Method</td>
-    <td><code><a href="#__cbSearch">__cbSearch</a></code></td>
+    <td><code><a href="#__cbSearch" class="internal-link" title="twisted.mail.imap4.IMAP4Server.__cbSearch">__cb​Search</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method private">
     
     <td>Method</td>
-    <td><code><a href="#__cbStatus">__cbStatus</a></code></td>
+    <td><code><a href="#__cbStatus" class="internal-link" title="twisted.mail.imap4.IMAP4Server.__cbStatus">__cb​Status</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method private">
     
     <td>Method</td>
-    <td><code><a href="#__cbStore">__cbStore</a></code></td>
+    <td><code><a href="#__cbStore" class="internal-link" title="twisted.mail.imap4.IMAP4Server.__cbStore">__cb​Store</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method private">
     
     <td>Method</td>
-    <td><code><a href="#__doCommand">__doCommand</a></code></td>
+    <td><code><a href="#__doCommand" class="internal-link" title="twisted.mail.imap4.IMAP4Server.__doCommand">__do​Command</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method private">
     
     <td>Method</td>
-    <td><code><a href="#__ebAppend">__ebAppend</a></code></td>
+    <td><code><a href="#__ebAppend" class="internal-link" title="twisted.mail.imap4.IMAP4Server.__ebAppend">__eb​Append</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method private">
     
     <td>Method</td>
-    <td><code><a href="#__ebAuthChunk">__ebAuthChunk</a></code></td>
+    <td><code><a href="#__ebAuthChunk" class="internal-link" title="twisted.mail.imap4.IMAP4Server.__ebAuthChunk">__eb​Auth​Chunk</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method private">
     
     <td>Method</td>
-    <td><code><a href="#__ebAuthResp">__ebAuthResp</a></code></td>
+    <td><code><a href="#__ebAuthResp" class="internal-link" title="twisted.mail.imap4.IMAP4Server.__ebAuthResp">__eb​Auth​Resp</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method private">
     
     <td>Method</td>
-    <td><code><a href="#__ebCheck">__ebCheck</a></code></td>
+    <td><code><a href="#__ebCheck" class="internal-link" title="twisted.mail.imap4.IMAP4Server.__ebCheck">__eb​Check</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method private">
     
     <td>Method</td>
-    <td><code><a href="#__ebClose">__ebClose</a></code></td>
+    <td><code><a href="#__ebClose" class="internal-link" title="twisted.mail.imap4.IMAP4Server.__ebClose">__eb​Close</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method private">
     
     <td>Method</td>
-    <td><code><a href="#__ebCopy">__ebCopy</a></code></td>
+    <td><code><a href="#__ebCopy" class="internal-link" title="twisted.mail.imap4.IMAP4Server.__ebCopy">__eb​Copy</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method private">
     
     <td>Method</td>
-    <td><code><a href="#__ebDispatch">__ebDispatch</a></code></td>
+    <td><code><a href="#__ebDispatch" class="internal-link" title="twisted.mail.imap4.IMAP4Server.__ebDispatch">__eb​Dispatch</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method private">
     
     <td>Method</td>
-    <td><code><a href="#__ebExpunge">__ebExpunge</a></code></td>
+    <td><code><a href="#__ebExpunge" class="internal-link" title="twisted.mail.imap4.IMAP4Server.__ebExpunge">__eb​Expunge</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method private">
     
     <td>Method</td>
-    <td><code><a href="#__ebFetch">__ebFetch</a></code></td>
+    <td><code><a href="#__ebFetch" class="internal-link" title="twisted.mail.imap4.IMAP4Server.__ebFetch">__eb​Fetch</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method private">
     
     <td>Method</td>
-    <td><code><a href="#__ebLogin">__ebLogin</a></code></td>
+    <td><code><a href="#__ebLogin" class="internal-link" title="twisted.mail.imap4.IMAP4Server.__ebLogin">__eb​Login</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method private">
     
     <td>Method</td>
-    <td><code><a href="#__ebSearch">__ebSearch</a></code></td>
+    <td><code><a href="#__ebSearch" class="internal-link" title="twisted.mail.imap4.IMAP4Server.__ebSearch">__eb​Search</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method private">
     
     <td>Method</td>
-    <td><code><a href="#__ebSpewMessage">__ebSpewMessage</a></code></td>
+    <td><code><a href="#__ebSpewMessage" class="internal-link" title="twisted.mail.imap4.IMAP4Server.__ebSpewMessage">__eb​Spew​Message</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method private">
     
     <td>Method</td>
-    <td><code><a href="#__ebStatus">__ebStatus</a></code></td>
+    <td><code><a href="#__ebStatus" class="internal-link" title="twisted.mail.imap4.IMAP4Server.__ebStatus">__eb​Status</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method private">
     
     <td>Method</td>
-    <td><code><a href="#__ebStore">__ebStore</a></code></td>
+    <td><code><a href="#__ebStore" class="internal-link" title="twisted.mail.imap4.IMAP4Server.__ebStore">__eb​Store</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method private">
     
     <td>Method</td>
-    <td><code><a href="#_cbAppendGotMailbox">_cbAppendGotMailbox</a></code></td>
+    <td><code><a href="#_cbAppendGotMailbox" class="internal-link" title="twisted.mail.imap4.IMAP4Server._cbAppendGotMailbox">_cb​Append​Got​Mailbox</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method private">
     
     <td>Method</td>
-    <td><code><a href="#_cbCopySelectedMailbox">_cbCopySelectedMailbox</a></code></td>
+    <td><code><a href="#_cbCopySelectedMailbox" class="internal-link" title="twisted.mail.imap4.IMAP4Server._cbCopySelectedMailbox">_cb​Copy​Selected​Mailbox</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method private">
     
     <td>Method</td>
-    <td><code><a href="#_cbListWork">_cbListWork</a></code></td>
+    <td><code><a href="#_cbListWork" class="internal-link" title="twisted.mail.imap4.IMAP4Server._cbListWork">_cb​List​Work</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method private">
     
     <td>Method</td>
-    <td><code><a href="#_cbSelectWork">_cbSelectWork</a></code></td>
+    <td><code><a href="#_cbSelectWork" class="internal-link" title="twisted.mail.imap4.IMAP4Server._cbSelectWork">_cb​Select​Work</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method private">
     
     <td>Method</td>
-    <td><code><a href="#_cbStatusGotMailbox">_cbStatusGotMailbox</a></code></td>
+    <td><code><a href="#_cbStatusGotMailbox" class="internal-link" title="twisted.mail.imap4.IMAP4Server._cbStatusGotMailbox">_cb​Status​Got​Mailbox</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method private">
     
     <td>Method</td>
-    <td><code><a href="#_ebAppendGotMailbox">_ebAppendGotMailbox</a></code></td>
+    <td><code><a href="#_ebAppendGotMailbox" class="internal-link" title="twisted.mail.imap4.IMAP4Server._ebAppendGotMailbox">_eb​Append​Got​Mailbox</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method private">
     
     <td>Method</td>
-    <td><code><a href="#_ebCopySelectedMailbox">_ebCopySelectedMailbox</a></code></td>
+    <td><code><a href="#_ebCopySelectedMailbox" class="internal-link" title="twisted.mail.imap4.IMAP4Server._ebCopySelectedMailbox">_eb​Copy​Selected​Mailbox</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method private">
     
     <td>Method</td>
-    <td><code><a href="#_ebListWork">_ebListWork</a></code></td>
+    <td><code><a href="#_ebListWork" class="internal-link" title="twisted.mail.imap4.IMAP4Server._ebListWork">_eb​List​Work</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method private">
     
     <td>Method</td>
-    <td><code><a href="#_ebSelectWork">_ebSelectWork</a></code></td>
+    <td><code><a href="#_ebSelectWork" class="internal-link" title="twisted.mail.imap4.IMAP4Server._ebSelectWork">_eb​Select​Work</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method private">
     
     <td>Method</td>
-    <td><code><a href="#_ebStatusGotMailbox">_ebStatusGotMailbox</a></code></td>
+    <td><code><a href="#_ebStatusGotMailbox" class="internal-link" title="twisted.mail.imap4.IMAP4Server._ebStatusGotMailbox">_eb​Status​Got​Mailbox</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method private">
     
     <td>Method</td>
-    <td><code><a href="#_fileLiteral">_fileLiteral</a></code></td>
+    <td><code><a href="#_fileLiteral" class="internal-link" title="twisted.mail.imap4.IMAP4Server._fileLiteral">_file​Literal</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method private">
     
     <td>Method</td>
-    <td><code><a href="#_listWork">_listWork</a></code></td>
+    <td><code><a href="#_listWork" class="internal-link" title="twisted.mail.imap4.IMAP4Server._listWork">_list​Work</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method private">
     
     <td>Method</td>
-    <td><code><a href="#_respond">_respond</a></code></td>
+    <td><code><a href="#_respond" class="internal-link" title="twisted.mail.imap4.IMAP4Server._respond">_respond</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method private">
     
     <td>Method</td>
-    <td><code><a href="#_searchFilter">_searchFilter</a></code></td>
-    <td><span>Pop search terms from the beginning of <code>query</code> until there are none left and apply them to the given message.</span></td>
+    <td><code><a href="#_searchFilter" class="internal-link" title="twisted.mail.imap4.IMAP4Server._searchFilter">_search​Filter</a></code></td>
+    <td>Pop search terms from the beginning of <tt class="rst-docutils literal">query</tt> until there are none left and apply them to the given message.</td>
   </tr><tr class="method private">
     
     <td>Method</td>
-    <td><code><a href="#_selectWork">_selectWork</a></code></td>
+    <td><code><a href="#_selectWork" class="internal-link" title="twisted.mail.imap4.IMAP4Server._selectWork">_select​Work</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method private">
     
     <td>Method</td>
-    <td><code><a href="#_setupChallenge">_setupChallenge</a></code></td>
+    <td><code><a href="#_setupChallenge" class="internal-link" title="twisted.mail.imap4.IMAP4Server._setupChallenge">_setup​Challenge</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method private">
     
     <td>Method</td>
-    <td><code><a href="#_singleSearchStep">_singleSearchStep</a></code></td>
-    <td><span>Pop one search term from the beginning of <code>query</code> (possibly more than one element) and return whether it matches the given message.</span></td>
+    <td><code><a href="#_singleSearchStep" class="internal-link" title="twisted.mail.imap4.IMAP4Server._singleSearchStep">_single​Search​Step</a></code></td>
+    <td>Pop one search term from the beginning of <tt class="rst-docutils literal">query</tt> (possibly more than one element) and return whether it matches the given message.</td>
   </tr><tr class="method private">
     
     <td>Method</td>
-    <td><code><a href="#_stringLiteral">_stringLiteral</a></code></td>
+    <td><code><a href="#_stringLiteral" class="internal-link" title="twisted.mail.imap4.IMAP4Server._stringLiteral">_string​Literal</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method private">
     
     <td>Method</td>
-    <td><code><a href="#_unblock">_unblock</a></code></td>
+    <td><code><a href="#_unblock" class="internal-link" title="twisted.mail.imap4.IMAP4Server._unblock">_unblock</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="classvariable private">
     
     <td>Class Variable</td>
-    <td><code><a href="#_literalStringLimit">_literalStringLimit</a></code></td>
+    <td><code><a href="#_literalStringLimit" class="internal-link" title="twisted.mail.imap4.IMAP4Server._literalStringLimit">_literal​String​Limit</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="classvariable private">
     
     <td>Class Variable</td>
-    <td><code><a href="#_requiresLastMessageInfo">_requiresLastMessageInfo</a></code></td>
+    <td><code><a href="#_requiresLastMessageInfo" class="internal-link" title="twisted.mail.imap4.IMAP4Server._requiresLastMessageInfo">_requires​Last​Message​Info</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="instancevariable private">
     
     <td>Instance Variable</td>
-    <td><code><a href="#_oldTimeout">_oldTimeout</a></code></td>
+    <td><code><a href="#_oldTimeout" class="internal-link" title="twisted.mail.imap4.IMAP4Server._oldTimeout">_old​Timeout</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="instancevariable private">
     
     <td>Instance Variable</td>
-    <td><code><a href="#_onLogout">_onLogout</a></code></td>
+    <td><code><a href="#_onLogout" class="internal-link" title="twisted.mail.imap4.IMAP4Server._onLogout">_on​Logout</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="instancevariable private">
     
     <td>Instance Variable</td>
-    <td><code><a href="#_pendingLiteral">_pendingLiteral</a></code></td>
+    <td><code><a href="#_pendingLiteral" class="internal-link" title="twisted.mail.imap4.IMAP4Server._pendingLiteral">_pending​Literal</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="instancevariable private">
     
     <td>Instance Variable</td>
-    <td><code><a href="#_queuedAsync">_queuedAsync</a></code></td>
+    <td><code><a href="#_queuedAsync" class="internal-link" title="twisted.mail.imap4.IMAP4Server._queuedAsync">_queued​Async</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="instancevariable private">
     
     <td>Instance Variable</td>
-    <td><code><a href="#_scheduler">_scheduler</a></code></td>
+    <td><code><a href="#_scheduler" class="internal-link" title="twisted.mail.imap4.IMAP4Server._scheduler">_scheduler</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr>
 </table>
         
           <p class="inheritedFrom">
-            Inherited from <code><a href="twisted.protocols.basic.LineReceiver.html">LineReceiver</a></code>:
+            Inherited from <code><a href="twisted.protocols.basic.LineReceiver.html" class="internal-link" title="twisted.protocols.basic.LineReceiver">LineReceiver</a></code>:
           </p>
-          <table class="children sortable" id="id1454">
+          <table class="children sortable" id="id1462">
   
   
   <tr class="basemethod">
     
     <td>Method</td>
-    <td><code><a href="twisted.protocols.basic.LineReceiver.html#clearLineBuffer">clearLineBuffer</a></code></td>
-    <td><span>Clear buffered data.</span></td>
+    <td><code><a href="twisted.protocols.basic.LineReceiver.html#clearLineBuffer" class="internal-link" title="twisted.protocols.basic.LineReceiver.clearLineBuffer">clear​Line​Buffer</a></code></td>
+    <td>Clear buffered data.</td>
   </tr><tr class="basemethod">
     
     <td>Method</td>
-    <td><code><a href="twisted.protocols.basic.LineReceiver.html#dataReceived">dataReceived</a></code></td>
-    <td><span>Protocol.dataReceived. Translates bytes into lines, and calls lineReceived (or rawDataReceived, depending on mode.)</span></td>
+    <td><code><a href="twisted.protocols.basic.LineReceiver.html#dataReceived" class="internal-link" title="twisted.protocols.basic.LineReceiver.dataReceived">data​Received</a></code></td>
+    <td>Protocol.dataReceived. Translates bytes into lines, and calls lineReceived (or rawDataReceived, depending on mode.)</td>
   </tr><tr class="basemethod">
     
     <td>Method</td>
-    <td><code><a href="twisted.protocols.basic.LineReceiver.html#lineLengthExceeded">lineLengthExceeded</a></code></td>
-    <td><span>Called when the maximum line length has been reached. Override if it needs to be dealt with in some special way.</span></td>
+    <td><code><a href="twisted.protocols.basic.LineReceiver.html#lineLengthExceeded" class="internal-link" title="twisted.protocols.basic.LineReceiver.lineLengthExceeded">line​Length​Exceeded</a></code></td>
+    <td>Called when the maximum line length has been reached. Override if it needs to be dealt with in some special way.</td>
   </tr><tr class="basemethod">
     
     <td>Method</td>
-    <td><code><a href="twisted.protocols.basic.LineReceiver.html#sendLine">sendLine</a></code></td>
-    <td><span>Sends a line to the other end of the connection.</span></td>
+    <td><code><a href="twisted.protocols.basic.LineReceiver.html#sendLine" class="internal-link" title="twisted.protocols.basic.LineReceiver.sendLine">send​Line</a></code></td>
+    <td>Sends a line to the other end of the connection.</td>
   </tr><tr class="basemethod">
     
     <td>Method</td>
-    <td><code><a href="twisted.protocols.basic.LineReceiver.html#setLineMode">setLineMode</a></code></td>
-    <td><span>Sets the line-mode of this receiver.</span></td>
+    <td><code><a href="twisted.protocols.basic.LineReceiver.html#setLineMode" class="internal-link" title="twisted.protocols.basic.LineReceiver.setLineMode">set​Line​Mode</a></code></td>
+    <td>Sets the line-mode of this receiver.</td>
   </tr><tr class="basemethod">
     
     <td>Method</td>
-    <td><code><a href="twisted.protocols.basic.LineReceiver.html#setRawMode">setRawMode</a></code></td>
-    <td><span>Sets the raw mode of this receiver. Further data received will be sent to rawDataReceived rather than lineReceived.</span></td>
+    <td><code><a href="twisted.protocols.basic.LineReceiver.html#setRawMode" class="internal-link" title="twisted.protocols.basic.LineReceiver.setRawMode">set​Raw​Mode</a></code></td>
+    <td>Sets the raw mode of this receiver. Further data received will be sent to rawDataReceived rather than lineReceived.</td>
+  </tr><tr class="baseconstant">
+    
+    <td>Constant</td>
+    <td><code><a href="twisted.protocols.basic.LineReceiver.html#MAX_LENGTH" class="internal-link" title="twisted.protocols.basic.LineReceiver.MAX_LENGTH">MAX​_LENGTH</a></code></td>
+    <td>The maximum length of a line to allow (If a sent line is longer than this, the connection is dropped). Default is 16384.</td>
   </tr><tr class="baseclassvariable">
     
     <td>Class Variable</td>
-    <td><code><a href="twisted.protocols.basic.LineReceiver.html#delimiter">delimiter</a></code></td>
-    <td><span>The line-ending delimiter to use. By default this is <code>b'\r\n'</code>.</span></td>
-  </tr><tr class="baseclassvariable">
-    
-    <td>Class Variable</td>
-    <td><code><a href="twisted.protocols.basic.LineReceiver.html#MAX_LENGTH">MAX_LENGTH</a></code></td>
-    <td><span>The maximum length of a line to allow (If a sent line is longer than this, the connection is dropped). Default is 16384.</span></td>
+    <td><code><a href="twisted.protocols.basic.LineReceiver.html#delimiter" class="internal-link" title="twisted.protocols.basic.LineReceiver.delimiter">delimiter</a></code></td>
+    <td>The line-ending delimiter to use. By default this is <tt class="rst-docutils literal"><span class="pre">b'\r\n'</span></tt>.</td>
   </tr><tr class="baseinstancevariable">
     
     <td>Instance Variable</td>
-    <td><code><a href="twisted.protocols.basic.LineReceiver.html#line_mode">line_mode</a></code></td>
+    <td><code><a href="twisted.protocols.basic.LineReceiver.html#line_mode" class="internal-link" title="twisted.protocols.basic.LineReceiver.line_mode">line​_mode</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="baseinstancevariable private">
     
     <td>Instance Variable</td>
-    <td><code><a href="twisted.protocols.basic.LineReceiver.html#_buffer">_buffer</a></code></td>
+    <td><code><a href="twisted.protocols.basic.LineReceiver.html#_buffer" class="internal-link" title="twisted.protocols.basic.LineReceiver._buffer">_buffer</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="baseinstancevariable private">
     
     <td>Instance Variable</td>
-    <td><code><a href="twisted.protocols.basic.LineReceiver.html#_busyReceiving">_busyReceiving</a></code></td>
+    <td><code><a href="twisted.protocols.basic.LineReceiver.html#_busyReceiving" class="internal-link" title="twisted.protocols.basic.LineReceiver._busyReceiving">_busy​Receiving</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr>
 </table>
           
           <p class="inheritedFrom">
-            Inherited from <code><a href="twisted.internet.protocol.Protocol.html">Protocol</a></code> (via <code><a href="twisted.protocols.basic.LineReceiver.html">LineReceiver</a></code>):
+            Inherited from <code><a href="twisted.internet.protocol.Protocol.html" class="internal-link" title="twisted.internet.protocol.Protocol">Protocol</a></code> (via <code><a href="twisted.protocols.basic.LineReceiver.html" class="internal-link" title="twisted.protocols.basic.LineReceiver">LineReceiver</a></code>):
           </p>
-          <table class="children sortable" id="id1455">
+          <table class="children sortable" id="id1463">
   
   
   <tr class="basemethod">
     
     <td>Method</td>
-    <td><code><a href="twisted.internet.protocol.Protocol.html#logPrefix">logPrefix</a></code></td>
-    <td><span>Return a prefix matching the class name, to identify log messages related to this protocol instance.</span></td>
+    <td><code><a href="twisted.internet.protocol.Protocol.html#logPrefix" class="internal-link" title="twisted.internet.protocol.Protocol.logPrefix">log​Prefix</a></code></td>
+    <td>Return a prefix matching the class name, to identify log messages related to this protocol instance.</td>
   </tr><tr class="baseclassvariable">
     
     <td>Class Variable</td>
-    <td><code><a href="twisted.internet.protocol.Protocol.html#factory">factory</a></code></td>
+    <td><code><a href="twisted.internet.protocol.Protocol.html#factory" class="internal-link" title="twisted.internet.protocol.Protocol.factory">factory</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr>
 </table>
           
           <p class="inheritedFrom">
-            Inherited from <code><a href="twisted.internet.protocol.BaseProtocol.html">BaseProtocol</a></code> (via <code><a href="twisted.protocols.basic.LineReceiver.html">LineReceiver</a></code>, <code><a href="twisted.internet.protocol.Protocol.html">Protocol</a></code>):
+            Inherited from <code><a href="twisted.internet.protocol.BaseProtocol.html" class="internal-link" title="twisted.internet.protocol.BaseProtocol">BaseProtocol</a></code> (via <code><a href="twisted.protocols.basic.LineReceiver.html" class="internal-link" title="twisted.protocols.basic.LineReceiver">LineReceiver</a></code>, <code><a href="twisted.internet.protocol.Protocol.html" class="internal-link" title="twisted.internet.protocol.Protocol">Protocol</a></code>):
           </p>
-          <table class="children sortable" id="id1456">
+          <table class="children sortable" id="id1464">
   
   
   <tr class="basemethod">
     
     <td>Method</td>
-    <td><code><a href="twisted.internet.protocol.BaseProtocol.html#makeConnection">makeConnection</a></code></td>
-    <td><span>Make a connection to a transport and a server.</span></td>
+    <td><code><a href="twisted.internet.protocol.BaseProtocol.html#makeConnection" class="internal-link" title="twisted.internet.protocol.BaseProtocol.makeConnection">make​Connection</a></code></td>
+    <td>Make a connection to a transport and a server.</td>
   </tr><tr class="baseinstancevariable">
     
     <td>Instance Variable</td>
-    <td><code><a href="twisted.internet.protocol.BaseProtocol.html#connected">connected</a></code></td>
+    <td><code><a href="twisted.internet.protocol.BaseProtocol.html#connected" class="internal-link" title="twisted.internet.protocol.BaseProtocol.connected">connected</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="baseinstancevariable">
     
     <td>Instance Variable</td>
-    <td><code><a href="twisted.internet.protocol.BaseProtocol.html#transport">transport</a></code></td>
+    <td><code><a href="twisted.internet.protocol.BaseProtocol.html#transport" class="internal-link" title="twisted.internet.protocol.BaseProtocol.transport">transport</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr>
 </table>
           
           <p class="inheritedFrom">
-            Inherited from <code><a href="twisted.protocols.basic._PauseableMixin.html">_PauseableMixin</a></code> (via <code><a href="twisted.protocols.basic.LineReceiver.html">LineReceiver</a></code>):
+            Inherited from <code><a href="twisted.protocols.basic._PauseableMixin.html" class="internal-link" title="twisted.protocols.basic._PauseableMixin">_PauseableMixin</a></code> (via <code><a href="twisted.protocols.basic.LineReceiver.html" class="internal-link" title="twisted.protocols.basic.LineReceiver">LineReceiver</a></code>):
           </p>
-          <table class="children sortable" id="id1457">
+          <table class="children sortable" id="id1465">
   
   
   <tr class="basemethod">
     
     <td>Method</td>
-    <td><code><a href="twisted.protocols.basic._PauseableMixin.html#pauseProducing">pauseProducing</a></code></td>
+    <td><code><a href="twisted.protocols.basic._PauseableMixin.html#pauseProducing" class="internal-link" title="twisted.protocols.basic._PauseableMixin.pauseProducing">pause​Producing</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="basemethod">
     
     <td>Method</td>
-    <td><code><a href="twisted.protocols.basic._PauseableMixin.html#resumeProducing">resumeProducing</a></code></td>
+    <td><code><a href="twisted.protocols.basic._PauseableMixin.html#resumeProducing" class="internal-link" title="twisted.protocols.basic._PauseableMixin.resumeProducing">resume​Producing</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="basemethod">
     
     <td>Method</td>
-    <td><code><a href="twisted.protocols.basic._PauseableMixin.html#stopProducing">stopProducing</a></code></td>
+    <td><code><a href="twisted.protocols.basic._PauseableMixin.html#stopProducing" class="internal-link" title="twisted.protocols.basic._PauseableMixin.stopProducing">stop​Producing</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="baseinstancevariable">
     
     <td>Instance Variable</td>
-    <td><code><a href="twisted.protocols.basic._PauseableMixin.html#paused">paused</a></code></td>
+    <td><code><a href="twisted.protocols.basic._PauseableMixin.html#paused" class="internal-link" title="twisted.protocols.basic._PauseableMixin.paused">paused</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr>
 </table>
           
           <p class="inheritedFrom">
-            Inherited from <code><a href="twisted.protocols.policies.TimeoutMixin.html">TimeoutMixin</a></code>:
+            Inherited from <code><a href="twisted.protocols.policies.TimeoutMixin.html" class="internal-link" title="twisted.protocols.policies.TimeoutMixin">TimeoutMixin</a></code>:
           </p>
-          <table class="children sortable" id="id1458">
+          <table class="children sortable" id="id1466">
   
   
   <tr class="basemethod">
     
     <td>Method</td>
-    <td><code><a href="twisted.protocols.policies.TimeoutMixin.html#callLater">callLater</a></code></td>
-    <td><span>Wrapper around <code><a href="twisted.internet.interfaces.IReactorTime.html#callLater">reactor.callLater</a></code> for test purpose.</span></td>
+    <td><code><a href="twisted.protocols.policies.TimeoutMixin.html#callLater" class="internal-link" title="twisted.protocols.policies.TimeoutMixin.callLater">call​Later</a></code></td>
+    <td>Wrapper around <code><a href="twisted.internet.interfaces.IReactorTime.html#callLater" class="internal-link" title="twisted.internet.interfaces.IReactorTime.callLater">reactor.callLater</a></code> for test purpose.</td>
   </tr><tr class="basemethod">
     
     <td>Method</td>
-    <td><code><a href="twisted.protocols.policies.TimeoutMixin.html#resetTimeout">resetTimeout</a></code></td>
-    <td><span>Reset the timeout count down.</span></td>
+    <td><code><a href="twisted.protocols.policies.TimeoutMixin.html#resetTimeout" class="internal-link" title="twisted.protocols.policies.TimeoutMixin.resetTimeout">reset​Timeout</a></code></td>
+    <td>Reset the timeout count down.</td>
   </tr><tr class="basemethod">
     
     <td>Method</td>
-    <td><code><a href="twisted.protocols.policies.TimeoutMixin.html#setTimeout">setTimeout</a></code></td>
-    <td><span>Change the timeout period</span></td>
+    <td><code><a href="twisted.protocols.policies.TimeoutMixin.html#setTimeout" class="internal-link" title="twisted.protocols.policies.TimeoutMixin.setTimeout">set​Timeout</a></code></td>
+    <td>Change the timeout period</td>
   </tr><tr class="basemethod private">
     
     <td>Method</td>
-    <td><code><a href="twisted.protocols.policies.TimeoutMixin.html#__timedOut">__timedOut</a></code></td>
+    <td><code><a href="twisted.protocols.policies.TimeoutMixin.html#__timedOut" class="internal-link" title="twisted.protocols.policies.TimeoutMixin.__timedOut">__timed​Out</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="baseinstancevariable private">
     
     <td>Instance Variable</td>
-    <td><code><a href="twisted.protocols.policies.TimeoutMixin.html#__timeoutCall">__timeoutCall</a></code></td>
+    <td><code><a href="twisted.protocols.policies.TimeoutMixin.html#__timeoutCall" class="internal-link" title="twisted.protocols.policies.TimeoutMixin.__timeoutCall">__timeout​Call</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr>
 </table>
@@ -1363,7 +1392,7 @@
   </a>
   <div class="functionHeader">
     
-    <span class="py-keyword">def</span> <span class="py-defname">__init__</span>(self, chal=None, contextFactory=None, scheduler=None):
+    <span class="py-keyword">def</span> <span class="py-defname">__init__</span>(self, chal=<a href="https://docs.python.org/3/library/constants.html#None" class="intersphinx-link">None</a>, contextFactory=<a href="https://docs.python.org/3/library/constants.html#None" class="intersphinx-link">None</a>, scheduler=<a href="https://docs.python.org/3/library/constants.html#None" class="intersphinx-link">None</a>):
     <a class="sourceLink" href="https://github.com/twisted/twisted/tree/twisted-21.2.0/src/twisted/mail/imap4.py#L660">
       
       (source)
@@ -1385,7 +1414,7 @@
   </a>
   <div class="functionHeader">
     
-    <span class="py-keyword">def</span> <span class="py-defname">arg_astring</span>(self, line, final=False):
+    <span class="py-keyword">def</span> <span class="py-defname">arg_astring</span>(self, line, final=<a href="https://docs.python.org/3/library/constants.html#False" class="intersphinx-link">False</a>):
     <a class="sourceLink" href="https://github.com/twisted/twisted/tree/twisted-21.2.0/src/twisted/mail/imap4.py#L871">
       
       (source)
@@ -1394,7 +1423,7 @@
   <div class="docstring functionBody">
     
     
-    <div><p>Parse an astring from the line, return (arg, rest), possibly via a deferred (to handle literals)</p><table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">line:</span><code><a href="https://docs.python.org/3/library/stdtypes.html#bytes">bytes</a></code></td><td class="fieldArgDesc">A line that contains a string literal.</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">final</span></td><td class="fieldArgDesc">Is this the final argument? @type final <code><a href="https://docs.python.org/3/library/functions.html#bool">bool</a></code></td></tr><tr class="fieldStart"><td class="fieldName" colspan="2">Returns</td></tr><tr><td class="fieldArgContainer"><code><a href="https://docs.python.org/3/library/stdtypes.html#tuple">tuple</a></code> of (<code><a href="https://docs.python.org/3/library/stdtypes.html#bytes">bytes</a></code>, <code><a href="https://docs.python.org/3/library/stdtypes.html#bytes">bytes</a></code>) or a <code><a href="twisted.internet.defer.Deferred.html">Deferred</a></code></td><td class="fieldArgDesc">A 2-tuple containing the parsed argument and any trailing data, or a <code><a href="twisted.internet.defer.Deferred.html">Deferred</a></code> that fires with that 2-tuple</td></tr></table></div>
+    <div>Parse an astring from the line, return (arg, rest), possibly via a deferred (to handle literals)<table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">line:</span><code><a href="https://docs.python.org/3/library/stdtypes.html#bytes" class="intersphinx-link">bytes</a></code></td><td class="fieldArgDesc">A line that contains a string literal.</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">final</span></td><td class="fieldArgDesc">Is this the final argument? @type final <code><a href="https://docs.python.org/3/library/functions.html#bool" class="intersphinx-link">bool</a></code></td></tr><tr class="fieldStart"><td class="fieldName" colspan="2">Returns</td></tr><tr><td class="fieldArgContainer"><code><a href="https://docs.python.org/3/library/stdtypes.html#tuple" class="intersphinx-link">tuple</a></code> of (<code><a href="https://docs.python.org/3/library/stdtypes.html#bytes" class="intersphinx-link">bytes</a></code>, <code><a href="https://docs.python.org/3/library/stdtypes.html#bytes" class="intersphinx-link">bytes</a></code>) or a <code><a href="twisted.internet.defer.Deferred.html" class="internal-link" title="twisted.internet.defer.Deferred">Deferred</a></code></td><td class="fieldArgDesc">A 2-tuple containing the parsed argument and any trailing data, or a <code><a href="twisted.internet.defer.Deferred.html" class="internal-link" title="twisted.internet.defer.Deferred">Deferred</a></code> that fires with that 2-tuple</td></tr></table></div>
   </div>
 </div><div class="basemethod">
   
@@ -1416,7 +1445,7 @@
   <div class="docstring functionBody">
     
     
-    <div><p>Parse an atom from the line</p></div>
+    <div>Parse an atom from the line</div>
   </div>
 </div><div class="basemethod">
   
@@ -1438,7 +1467,7 @@
   <div class="docstring functionBody">
     
     
-    <div><p>fetch-att</p></div>
+    <div>fetch-att</div>
   </div>
 </div><div class="basemethod">
   
@@ -1460,7 +1489,7 @@
   <div class="docstring functionBody">
     
     
-    <div><p>Parse an astring from line that represents a command's final argument.  This special case exists to enable parsing empty string literals.</p><table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">line:</span><code><a href="https://docs.python.org/3/library/stdtypes.html#bytes">bytes</a></code></td><td class="fieldArgDesc">A line that contains a string literal.</td></tr><tr class="fieldStart"><td class="fieldName" colspan="2">Returns</td></tr><tr><td class="fieldArgContainer"><code><a href="https://docs.python.org/3/library/stdtypes.html#tuple">tuple</a></code> of (<code><a href="https://docs.python.org/3/library/stdtypes.html#bytes">bytes</a></code>, <code><a href="https://docs.python.org/3/library/stdtypes.html#bytes">bytes</a></code>) or a <code><a href="twisted.internet.defer.Deferred.html">Deferred</a></code></td><td class="fieldArgDesc">A 2-tuple containing the parsed argument and any trailing data, or a <code><a href="twisted.internet.defer.Deferred.html">Deferred</a></code> that fires with that 2-tuple</td></tr><tr class="fieldStart"><td class="fieldName" colspan="2">See Also</td></tr><tr><td colspan="2">https://twistedmatrix.com/trac/ticket/9207</td></tr></table></div>
+    <div>Parse an astring from line that represents a command's final argument.  This special case exists to enable parsing empty string literals.<table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">line:</span><code><a href="https://docs.python.org/3/library/stdtypes.html#bytes" class="intersphinx-link">bytes</a></code></td><td class="fieldArgDesc">A line that contains a string literal.</td></tr><tr class="fieldStart"><td class="fieldName" colspan="2">Returns</td></tr><tr><td class="fieldArgContainer"><code><a href="https://docs.python.org/3/library/stdtypes.html#tuple" class="intersphinx-link">tuple</a></code> of (<code><a href="https://docs.python.org/3/library/stdtypes.html#bytes" class="intersphinx-link">bytes</a></code>, <code><a href="https://docs.python.org/3/library/stdtypes.html#bytes" class="intersphinx-link">bytes</a></code>) or a <code><a href="twisted.internet.defer.Deferred.html" class="internal-link" title="twisted.internet.defer.Deferred">Deferred</a></code></td><td class="fieldArgDesc">A 2-tuple containing the parsed argument and any trailing data, or a <code><a href="twisted.internet.defer.Deferred.html" class="internal-link" title="twisted.internet.defer.Deferred">Deferred</a></code> that fires with that 2-tuple</td></tr><tr class="fieldStart"><td class="fieldName" colspan="2">See Also</td></tr><tr><td colspan="2">https://twistedmatrix.com/trac/ticket/9207</td></tr></table></div>
   </div>
 </div><div class="basemethod">
   
@@ -1482,7 +1511,7 @@
   <div class="docstring functionBody">
     
     
-    <div><p>Flag part of store-att-flag</p></div>
+    <div>Flag part of store-att-flag</div>
   </div>
 </div><div class="basemethod">
   
@@ -1504,7 +1533,7 @@
   <div class="docstring functionBody">
     
     
-    <div><p>Command line of UID command</p></div>
+    <div>Command line of UID command</div>
   </div>
 </div><div class="basemethod">
   
@@ -1526,7 +1555,7 @@
   <div class="docstring functionBody">
     
     
-    <div><p>Parse a literal from the line</p></div>
+    <div>Parse a literal from the line</div>
   </div>
 </div><div class="basemethod">
   
@@ -1548,7 +1577,7 @@
   <div class="docstring functionBody">
     
     
-    <div><p>Parse a (non-nested) parenthesised list from the line</p></div>
+    <div>Parse a (non-nested) parenthesised list from the line</div>
   </div>
 </div><div class="basemethod">
   
@@ -1570,7 +1599,7 @@
   <div class="docstring functionBody">
     
     
-    <div><p>searchkeys</p></div>
+    <div>searchkeys</div>
   </div>
 </div><div class="basemethod">
   
@@ -1592,7 +1621,7 @@
   <div class="docstring functionBody">
     
     
-    <div><p>sequence-set</p></div>
+    <div>sequence-set</div>
   </div>
 </div><div class="basemethod">
   
@@ -1636,7 +1665,10 @@
   <div class="docstring functionBody">
     
     
-    <div><p>Lookup the account associated with the given parameters</p><p>Override this method to define the desired authentication behavior.</p><p>The default behavior is to defer authentication to <code>self.portal</code> if it is not None, or to deny the login otherwise.</p><table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">user:</span><code><a href="https://docs.python.org/3/library/stdtypes.html#str">str</a></code></td><td class="fieldArgDesc">The username to lookup</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">passwd:</span><code><a href="https://docs.python.org/3/library/stdtypes.html#str">str</a></code></td><td class="fieldArgDesc">The password to login with</td></tr></table></div>
+    <div><p>Lookup the account associated with the given parameters</p>
+<p>Override this method to define the desired authentication behavior.</p>
+<p>The default behavior is to defer authentication to <tt class="rst-docutils literal">self.portal</tt> if it is not None, or to deny the login otherwise.</p>
+<table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">user:</span><code><a href="https://docs.python.org/3/library/stdtypes.html#str" class="intersphinx-link">str</a></code></td><td class="fieldArgDesc">The username to lookup</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">passwd:</span><code><a href="https://docs.python.org/3/library/stdtypes.html#str" class="intersphinx-link">str</a></code></td><td class="fieldArgDesc">The password to login with</td></tr></table></div>
   </div>
 </div><div class="basemethod">
   
@@ -1680,7 +1712,9 @@
   <div class="docstring functionBody">
     
     
-    <div><p>Called when the client issues a CHECK command.</p><p>This should perform any checkpoint operations required by the server. It may be a long running operation, but may not block.  If it returns a deferred, the client will only be informed of success (or failure) when the deferred's callback (or errback) is invoked.</p></div>
+    <div><p>Called when the client issues a CHECK command.</p>
+<p>This should perform any checkpoint operations required by the server. It may be a long running operation, but may not block.  If it returns a deferred, the client will only be informed of success (or failure) when the deferred's callback (or errback) is invoked.</p>
+</div>
   </div>
 </div><div class="basemethod">
   
@@ -1700,9 +1734,11 @@
     </a>
   </div>
   <div class="docstring functionBody">
-    <div class="interfaceinfo">from <code><a href="twisted.internet.interfaces.IProtocol.html#connectionLost">twisted.internet.interfaces.IProtocol</a></code></div><div class="interfaceinfo">overrides <code><a href="twisted.internet.protocol.Protocol.html#connectionLost">twisted.internet.protocol.Protocol.connectionLost</a></code></div>
+    <div class="interfaceinfo">from <code><a href="twisted.internet.interfaces.IProtocol.html#connectionLost" class="internal-link" title="twisted.internet.interfaces.IProtocol.connectionLost">twisted.internet.interfaces.IProtocol</a></code></div><div class="interfaceinfo">overrides <code><a href="twisted.internet.protocol.Protocol.html#connectionLost" class="internal-link">twisted.internet.protocol.Protocol.connectionLost</a></code></div>
     
-    <div><p>Called when the connection is shut down.</p><p>Clear any circular references here, and any external references to this Protocol.  The connection has been closed.</p><table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">reason:</span><code><a href="twisted.python.failure.Failure.html">twisted.python.failure.Failure</a></code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr></table></div>
+    <div><p>Called when the connection is shut down.</p>
+<p>Clear any circular references here, and any external references to this Protocol.  The connection has been closed.</p>
+<table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">reason:</span><code><a href="twisted.python.failure.Failure.html" class="internal-link" title="twisted.python.failure.Failure">twisted.python.failure.Failure</a></code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr></table></div>
   </div>
 </div><div class="basemethod">
   
@@ -1722,9 +1758,11 @@
     </a>
   </div>
   <div class="docstring functionBody">
-    <div class="interfaceinfo">from <code><a href="twisted.internet.interfaces.IProtocol.html#connectionMade">twisted.internet.interfaces.IProtocol</a></code></div><div class="interfaceinfo">overrides <code><a href="twisted.internet.protocol.BaseProtocol.html#connectionMade">twisted.internet.protocol.BaseProtocol.connectionMade</a></code></div>
+    <div class="interfaceinfo">from <code><a href="twisted.internet.interfaces.IProtocol.html#connectionMade" class="internal-link" title="twisted.internet.interfaces.IProtocol.connectionMade">twisted.internet.interfaces.IProtocol</a></code></div><div class="interfaceinfo">overrides <code><a href="twisted.internet.protocol.BaseProtocol.html#connectionMade" class="internal-link">twisted.internet.protocol.BaseProtocol.connectionMade</a></code></div>
     
-    <div><p>Called when a connection is made.</p><p>This may be considered the initializer of the protocol, because it is called when the connection is completed.  For clients, this is called once the connection to the server has been established; for servers, this is called after an accept() call stops blocking and a socket has been received.  If you need to send any greeting or initial message, do it here.</p></div>
+    <div><p>Called when a connection is made.</p>
+<p>This may be considered the initializer of the protocol, because it is called when the connection is completed.  For clients, this is called once the connection to the server has been established; for servers, this is called after an accept() call stops blocking and a socket has been received.  If you need to send any greeting or initial message, do it here.</p>
+</div>
   </div>
 </div><div class="basemethod">
   
@@ -1737,7 +1775,7 @@
   </a>
   <div class="functionHeader">
     
-    <span class="py-keyword">def</span> <span class="py-defname">dispatchCommand</span>(self, tag, cmd, rest, uid=None):
+    <span class="py-keyword">def</span> <span class="py-defname">dispatchCommand</span>(self, tag, cmd, rest, uid=<a href="https://docs.python.org/3/library/constants.html#None" class="intersphinx-link">None</a>):
     <a class="sourceLink" href="https://github.com/twisted/twisted/tree/twisted-21.2.0/src/twisted/mail/imap4.py#L772">
       
       (source)
@@ -2272,9 +2310,9 @@
     </a>
   </div>
   <div class="docstring functionBody">
-    <div class="interfaceinfo">from <code><a href="twisted.mail.interfaces.IMailboxIMAPListener.html#flagsChanged">twisted.mail.interfaces.IMailboxIMAPListener</a></code></div>
+    <div class="interfaceinfo">from <code><a href="twisted.mail.interfaces.IMailboxIMAPListener.html#flagsChanged" class="internal-link" title="twisted.mail.interfaces.IMailboxIMAPListener.flagsChanged">twisted.mail.interfaces.IMailboxIMAPListener</a></code></div>
     
-    <div><p>Indicates that the flags of one or more messages have changed.</p><table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">newFlags:</span><code><a href="https://docs.python.org/3/library/stdtypes.html#dict">dict</a></code></td><td class="fieldArgDesc">A mapping of message identifiers to tuples of flags now set on that message.</td></tr></table></div>
+    <div>Indicates that the flags of one or more messages have changed.<table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">new​Flags:</span><code><a href="https://docs.python.org/3/library/stdtypes.html#dict" class="intersphinx-link">dict</a></code></td><td class="fieldArgDesc">A mapping of message identifiers to tuples of flags now set on that message.</td></tr></table></div>
   </div>
 </div><div class="basemethod">
   
@@ -2294,9 +2332,9 @@
     </a>
   </div>
   <div class="docstring functionBody">
-    <div class="interfaceinfo">overrides <code><a href="twisted.protocols.basic.LineReceiver.html#lineReceived">twisted.protocols.basic.LineReceiver.lineReceived</a></code></div>
+    <div class="interfaceinfo">overrides <code><a href="twisted.protocols.basic.LineReceiver.html#lineReceived" class="internal-link">twisted.protocols.basic.LineReceiver.lineReceived</a></code></div>
     
-    <div><p>Override this for when each line is received.</p><table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">line:</span><code>bytes</code></td><td class="fieldArgDesc">The line which was received with the delimiter removed.</td></tr></table></div>
+    <div>Override this for when each line is received.<table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">line:</span><tt class="rst-docutils literal">bytes</tt></td><td class="fieldArgDesc">The line which was received with the delimiter removed.</td></tr></table></div>
   </div>
 </div><div class="basemethod">
   
@@ -2360,9 +2398,9 @@
     </a>
   </div>
   <div class="docstring functionBody">
-    <div class="interfaceinfo">from <code><a href="twisted.mail.interfaces.IMailboxIMAPListener.html#modeChanged">twisted.mail.interfaces.IMailboxIMAPListener</a></code></div>
+    <div class="interfaceinfo">from <code><a href="twisted.mail.interfaces.IMailboxIMAPListener.html#modeChanged" class="internal-link" title="twisted.mail.interfaces.IMailboxIMAPListener.modeChanged">twisted.mail.interfaces.IMailboxIMAPListener</a></code></div>
     
-    <div><p>Indicates that the write status of a mailbox has changed.</p><table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">writeable:</span><code><a href="https://docs.python.org/3/library/functions.html#bool">bool</a></code></td><td class="fieldArgDesc">A true value if write is now allowed, false otherwise.</td></tr></table></div>
+    <div>Indicates that the write status of a mailbox has changed.<table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">writeable:</span><code><a href="https://docs.python.org/3/library/functions.html#bool" class="intersphinx-link">bool</a></code></td><td class="fieldArgDesc">A true value if write is now allowed, false otherwise.</td></tr></table></div>
   </div>
 </div><div class="basemethod">
   
@@ -2382,9 +2420,9 @@
     </a>
   </div>
   <div class="docstring functionBody">
-    <div class="interfaceinfo">from <code><a href="twisted.mail.interfaces.IMailboxIMAPListener.html#newMessages">twisted.mail.interfaces.IMailboxIMAPListener</a></code></div>
+    <div class="interfaceinfo">from <code><a href="twisted.mail.interfaces.IMailboxIMAPListener.html#newMessages" class="internal-link" title="twisted.mail.interfaces.IMailboxIMAPListener.newMessages">twisted.mail.interfaces.IMailboxIMAPListener</a></code></div>
     
-    <div><p>Indicates that the number of messages in a mailbox has changed.</p><table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">exists:</span><code><a href="https://docs.python.org/3/library/functions.html#int">int</a></code> or <code><a href="https://docs.python.org/3/library/constants.html#None">None</a></code></td><td class="fieldArgDesc">The total number of messages now in this mailbox. If the total number of messages has not changed, this should be <code><a href="https://docs.python.org/3/library/constants.html#None">None</a></code>.</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">recent:</span><code><a href="https://docs.python.org/3/library/functions.html#int">int</a></code></td><td class="fieldArgDesc">The number of messages now flagged <code>\Recent</code>. If the number of recent messages has not changed, this should be <code><a href="https://docs.python.org/3/library/constants.html#None">None</a></code>.</td></tr></table></div>
+    <div>Indicates that the number of messages in a mailbox has changed.<table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">exists:</span><code><a href="https://docs.python.org/3/library/functions.html#int" class="intersphinx-link">int</a></code> or <code><a href="https://docs.python.org/3/library/constants.html#None" class="intersphinx-link">None</a></code></td><td class="fieldArgDesc">The total number of messages now in this mailbox. If the total number of messages has not changed, this should be <code><a href="https://docs.python.org/3/library/constants.html#None" class="intersphinx-link">None</a></code>.</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">recent:</span><code><a href="https://docs.python.org/3/library/functions.html#int" class="intersphinx-link">int</a></code></td><td class="fieldArgDesc">The number of messages now flagged <tt class="rst-docutils literal">\Recent</tt>. If the number of recent messages has not changed, this should be <code><a href="https://docs.python.org/3/library/constants.html#None" class="intersphinx-link">None</a></code>.</td></tr></table></div>
   </div>
 </div><div class="basemethod">
   
@@ -2406,7 +2444,7 @@
   <div class="docstring functionBody">
     
     
-    <div><p>Optional charset of SEARCH command</p></div>
+    <div>Optional charset of SEARCH command</div>
   </div>
 </div><div class="basemethod">
   
@@ -2428,7 +2466,7 @@
   <div class="docstring functionBody">
     
     
-    <div><p>Optional date-time string</p></div>
+    <div>Optional date-time string</div>
   </div>
 </div><div class="basemethod">
   
@@ -2450,7 +2488,7 @@
   <div class="docstring functionBody">
     
     
-    <div><p>Optional parenthesised list</p></div>
+    <div>Optional parenthesised list</div>
   </div>
 </div><div class="basemethod">
   
@@ -2536,9 +2574,9 @@
     </a>
   </div>
   <div class="docstring functionBody">
-    <div class="interfaceinfo">overrides <code><a href="twisted.protocols.basic.LineReceiver.html#rawDataReceived">twisted.protocols.basic.LineReceiver.rawDataReceived</a></code></div>
+    <div class="interfaceinfo">overrides <code><a href="twisted.protocols.basic.LineReceiver.html#rawDataReceived" class="internal-link">twisted.protocols.basic.LineReceiver.rawDataReceived</a></code></div>
     
-    <div><p>Override this for when raw data is received.</p></div>
+    <div>Override this for when raw data is received.</div>
   </div>
 </div><div class="basemethod">
   
@@ -2560,7 +2598,7 @@
   <div class="docstring functionBody">
     
     
-    <div><p>Returns <code>True</code> if the message matches the ALL search key (always).</p><table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">query:</span>A <code><a href="https://docs.python.org/3/library/stdtypes.html#list">list</a></code> of <code><a href="https://docs.python.org/3/library/stdtypes.html#str">str</a></code></td><td class="fieldArgDesc">A list representing the parsed query string.</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">id:</span><code><a href="https://docs.python.org/3/library/functions.html#int">int</a></code></td><td class="fieldArgDesc">The sequence number of the message being checked.</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">msg:</span>Provider of <code><a href="twisted.mail.interfaces.IMessageIMAP.html">imap4.IMessage</a></code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr></table></div>
+    <div>Returns <tt class="rst-docutils literal">True</tt> if the message matches the ALL search key (always).<table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">query:</span>A <code><a href="https://docs.python.org/3/library/stdtypes.html#list" class="intersphinx-link">list</a></code> of <code><a href="https://docs.python.org/3/library/stdtypes.html#str" class="intersphinx-link">str</a></code></td><td class="fieldArgDesc">A list representing the parsed query string.</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">id:</span><code><a href="https://docs.python.org/3/library/functions.html#int" class="intersphinx-link">int</a></code></td><td class="fieldArgDesc">The sequence number of the message being checked.</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">msg:</span>Provider of <code><a href="twisted.mail.interfaces.IMessageIMAP.html" class="internal-link" title="twisted.mail.interfaces.IMessageIMAP">imap4.IMessage</a></code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr></table></div>
   </div>
 </div><div class="basemethod">
   
@@ -2582,7 +2620,7 @@
   <div class="docstring functionBody">
     
     
-    <div><p>Returns <code>True</code> if the message has been answered.</p><table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">query:</span>A <code><a href="https://docs.python.org/3/library/stdtypes.html#list">list</a></code> of <code><a href="https://docs.python.org/3/library/stdtypes.html#str">str</a></code></td><td class="fieldArgDesc">A list representing the parsed query string.</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">id:</span><code><a href="https://docs.python.org/3/library/functions.html#int">int</a></code></td><td class="fieldArgDesc">The sequence number of the message being checked.</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">msg:</span>Provider of <code><a href="twisted.mail.interfaces.IMessageIMAP.html">imap4.IMessage</a></code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr></table></div>
+    <div>Returns <tt class="rst-docutils literal">True</tt> if the message has been answered.<table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">query:</span>A <code><a href="https://docs.python.org/3/library/stdtypes.html#list" class="intersphinx-link">list</a></code> of <code><a href="https://docs.python.org/3/library/stdtypes.html#str" class="intersphinx-link">str</a></code></td><td class="fieldArgDesc">A list representing the parsed query string.</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">id:</span><code><a href="https://docs.python.org/3/library/functions.html#int" class="intersphinx-link">int</a></code></td><td class="fieldArgDesc">The sequence number of the message being checked.</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">msg:</span>Provider of <code><a href="twisted.mail.interfaces.IMessageIMAP.html" class="internal-link" title="twisted.mail.interfaces.IMessageIMAP">imap4.IMessage</a></code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr></table></div>
   </div>
 </div><div class="basemethod">
   
@@ -2604,7 +2642,7 @@
   <div class="docstring functionBody">
     
     
-    <div><p>Returns <code>True</code> if the message has a BCC address matching the query.</p><table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">query:</span>A <code><a href="https://docs.python.org/3/library/stdtypes.html#list">list</a></code> of <code><a href="https://docs.python.org/3/library/stdtypes.html#str">str</a></code></td><td class="fieldArgDesc">A list whose first element is a BCC <code><a href="https://docs.python.org/3/library/stdtypes.html#str">str</a></code></td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">id:</span><code><a href="https://docs.python.org/3/library/functions.html#int">int</a></code></td><td class="fieldArgDesc">The sequence number of the message being checked.</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">msg:</span>Provider of <code><a href="twisted.mail.interfaces.IMessageIMAP.html">imap4.IMessage</a></code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr></table></div>
+    <div>Returns <tt class="rst-docutils literal">True</tt> if the message has a BCC address matching the query.<table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">query:</span>A <code><a href="https://docs.python.org/3/library/stdtypes.html#list" class="intersphinx-link">list</a></code> of <code><a href="https://docs.python.org/3/library/stdtypes.html#str" class="intersphinx-link">str</a></code></td><td class="fieldArgDesc">A list whose first element is a BCC <code><a href="https://docs.python.org/3/library/stdtypes.html#str" class="intersphinx-link">str</a></code></td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">id:</span><code><a href="https://docs.python.org/3/library/functions.html#int" class="intersphinx-link">int</a></code></td><td class="fieldArgDesc">The sequence number of the message being checked.</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">msg:</span>Provider of <code><a href="twisted.mail.interfaces.IMessageIMAP.html" class="internal-link" title="twisted.mail.interfaces.IMessageIMAP">imap4.IMessage</a></code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr></table></div>
   </div>
 </div><div class="basemethod">
   
@@ -2868,7 +2906,7 @@
   <div class="docstring functionBody">
     
     
-    <div><p>Returns <code>True</code> if the message does not match the query.</p><table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">query:</span>A <code><a href="https://docs.python.org/3/library/stdtypes.html#list">list</a></code> of <code><a href="https://docs.python.org/3/library/stdtypes.html#str">str</a></code></td><td class="fieldArgDesc">A list representing the parsed form of the search query.</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">id:</span><code><a href="https://docs.python.org/3/library/functions.html#int">int</a></code></td><td class="fieldArgDesc">The sequence number of the message being checked.</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">msg:</span>Provider of <code><a href="twisted.mail.interfaces.IMessageIMAP.html">imap4.IMessage</a></code></td><td class="fieldArgDesc">The message being checked.</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">lastIDs:</span><code><a href="https://docs.python.org/3/library/stdtypes.html#tuple">tuple</a></code></td><td class="fieldArgDesc">A tuple of (last sequence id, last message id). The <i>last sequence id</i> is an <code><a href="https://docs.python.org/3/library/functions.html#int">int</a></code> containing the highest sequence number of a message in the mailbox.  The <i>last message id</i> is an <code><a href="https://docs.python.org/3/library/functions.html#int">int</a></code> containing the highest UID of a message in the mailbox.</td></tr></table></div>
+    <div>Returns <tt class="rst-docutils literal">True</tt> if the message does not match the query.<table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">query:</span>A <code><a href="https://docs.python.org/3/library/stdtypes.html#list" class="intersphinx-link">list</a></code> of <code><a href="https://docs.python.org/3/library/stdtypes.html#str" class="intersphinx-link">str</a></code></td><td class="fieldArgDesc">A list representing the parsed form of the search query.</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">id:</span><code><a href="https://docs.python.org/3/library/functions.html#int" class="intersphinx-link">int</a></code></td><td class="fieldArgDesc">The sequence number of the message being checked.</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">msg:</span>Provider of <code><a href="twisted.mail.interfaces.IMessageIMAP.html" class="internal-link" title="twisted.mail.interfaces.IMessageIMAP">imap4.IMessage</a></code></td><td class="fieldArgDesc">The message being checked.</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">last​IDs:</span><code><a href="https://docs.python.org/3/library/stdtypes.html#tuple" class="intersphinx-link">tuple</a></code></td><td class="fieldArgDesc">A tuple of (last sequence id, last message id). The <em>last sequence id</em> is an <code><a href="https://docs.python.org/3/library/functions.html#int" class="intersphinx-link">int</a></code> containing the highest sequence number of a message in the mailbox.  The <em>last message id</em> is an <code><a href="https://docs.python.org/3/library/functions.html#int" class="intersphinx-link">int</a></code> containing the highest UID of a message in the mailbox.</td></tr></table></div>
   </div>
 </div><div class="basemethod">
   
@@ -2934,7 +2972,7 @@
   <div class="docstring functionBody">
     
     
-    <div><p>Returns <code>True</code> if the message matches any of the first two query items.</p><table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">query:</span>A <code><a href="https://docs.python.org/3/library/stdtypes.html#list">list</a></code> of <code><a href="https://docs.python.org/3/library/stdtypes.html#str">str</a></code></td><td class="fieldArgDesc">A list representing the parsed form of the search query.</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">id:</span><code><a href="https://docs.python.org/3/library/functions.html#int">int</a></code></td><td class="fieldArgDesc">The sequence number of the message being checked.</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">msg:</span>Provider of <code><a href="twisted.mail.interfaces.IMessageIMAP.html">imap4.IMessage</a></code></td><td class="fieldArgDesc">The message being checked.</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">lastIDs:</span><code><a href="https://docs.python.org/3/library/stdtypes.html#tuple">tuple</a></code></td><td class="fieldArgDesc">A tuple of (last sequence id, last message id). The <i>last sequence id</i> is an <code><a href="https://docs.python.org/3/library/functions.html#int">int</a></code> containing the highest sequence number of a message in the mailbox.  The <i>last message id</i> is an <code><a href="https://docs.python.org/3/library/functions.html#int">int</a></code> containing the highest UID of a message in the mailbox.</td></tr></table></div>
+    <div>Returns <tt class="rst-docutils literal">True</tt> if the message matches any of the first two query items.<table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">query:</span>A <code><a href="https://docs.python.org/3/library/stdtypes.html#list" class="intersphinx-link">list</a></code> of <code><a href="https://docs.python.org/3/library/stdtypes.html#str" class="intersphinx-link">str</a></code></td><td class="fieldArgDesc">A list representing the parsed form of the search query.</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">id:</span><code><a href="https://docs.python.org/3/library/functions.html#int" class="intersphinx-link">int</a></code></td><td class="fieldArgDesc">The sequence number of the message being checked.</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">msg:</span>Provider of <code><a href="twisted.mail.interfaces.IMessageIMAP.html" class="internal-link" title="twisted.mail.interfaces.IMessageIMAP">imap4.IMessage</a></code></td><td class="fieldArgDesc">The message being checked.</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">last​IDs:</span><code><a href="https://docs.python.org/3/library/stdtypes.html#tuple" class="intersphinx-link">tuple</a></code></td><td class="fieldArgDesc">A tuple of (last sequence id, last message id). The <em>last sequence id</em> is an <code><a href="https://docs.python.org/3/library/functions.html#int" class="intersphinx-link">int</a></code> containing the highest sequence number of a message in the mailbox.  The <em>last message id</em> is an <code><a href="https://docs.python.org/3/library/functions.html#int" class="intersphinx-link">int</a></code> containing the highest UID of a message in the mailbox.</td></tr></table></div>
   </div>
 </div><div class="basemethod">
   
@@ -3000,7 +3038,7 @@
   <div class="docstring functionBody">
     
     
-    <div><p>Returns <code>True</code> if the message date is earlier than the query date.</p><table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">query:</span>A <code><a href="https://docs.python.org/3/library/stdtypes.html#list">list</a></code> of <code><a href="https://docs.python.org/3/library/stdtypes.html#str">str</a></code></td><td class="fieldArgDesc">A list whose first element starts with a stringified date that is a fragment of an <code><a href="twisted.mail.imap4.html#Query">imap4.Query()</a></code>. The date must be in the format 'DD-Mon-YYYY', for example '03-March-2003' or '03-Mar-2003'.</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">id:</span><code><a href="https://docs.python.org/3/library/functions.html#int">int</a></code></td><td class="fieldArgDesc">The sequence number of the message being checked.</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">msg:</span>Provider of <code><a href="twisted.mail.interfaces.IMessageIMAP.html">imap4.IMessage</a></code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr></table></div>
+    <div>Returns <tt class="rst-docutils literal">True</tt> if the message date is earlier than the query date.<table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">query:</span>A <code><a href="https://docs.python.org/3/library/stdtypes.html#list" class="intersphinx-link">list</a></code> of <code><a href="https://docs.python.org/3/library/stdtypes.html#str" class="intersphinx-link">str</a></code></td><td class="fieldArgDesc">A list whose first element starts with a stringified date that is a fragment of an <code><a href="twisted.mail.imap4.html#Query" class="internal-link" title="twisted.mail.imap4.Query">imap4.Query()</a></code>. The date must be in the format 'DD-Mon-YYYY', for example '03-March-2003' or '03-Mar-2003'.</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">id:</span><code><a href="https://docs.python.org/3/library/functions.html#int" class="intersphinx-link">int</a></code></td><td class="fieldArgDesc">The sequence number of the message being checked.</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">msg:</span>Provider of <code><a href="twisted.mail.interfaces.IMessageIMAP.html" class="internal-link" title="twisted.mail.interfaces.IMessageIMAP">imap4.IMessage</a></code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr></table></div>
   </div>
 </div><div class="basemethod">
   
@@ -3022,7 +3060,7 @@
   <div class="docstring functionBody">
     
     
-    <div><p>Returns <code>True</code> if the message date is the same as the query date.</p><table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">query:</span>A <code><a href="https://docs.python.org/3/library/stdtypes.html#list">list</a></code> of <code><a href="https://docs.python.org/3/library/stdtypes.html#str">str</a></code></td><td class="fieldArgDesc">A list whose first element starts with a stringified date that is a fragment of an <code><a href="twisted.mail.imap4.html#Query">imap4.Query()</a></code>. The date must be in the format 'DD-Mon-YYYY', for example '03-March-2003' or '03-Mar-2003'.</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">id</span></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">msg:</span>Provider of <code><a href="twisted.mail.interfaces.IMessageIMAP.html">imap4.IMessage</a></code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr></table></div>
+    <div>Returns <tt class="rst-docutils literal">True</tt> if the message date is the same as the query date.<table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">query:</span>A <code><a href="https://docs.python.org/3/library/stdtypes.html#list" class="intersphinx-link">list</a></code> of <code><a href="https://docs.python.org/3/library/stdtypes.html#str" class="intersphinx-link">str</a></code></td><td class="fieldArgDesc">A list whose first element starts with a stringified date that is a fragment of an <code><a href="twisted.mail.imap4.html#Query" class="internal-link" title="twisted.mail.imap4.Query">imap4.Query()</a></code>. The date must be in the format 'DD-Mon-YYYY', for example '03-March-2003' or '03-Mar-2003'.</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">id</span></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">msg:</span>Provider of <code><a href="twisted.mail.interfaces.IMessageIMAP.html" class="internal-link" title="twisted.mail.interfaces.IMessageIMAP">imap4.IMessage</a></code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr></table></div>
   </div>
 </div><div class="basemethod">
   
@@ -3044,7 +3082,7 @@
   <div class="docstring functionBody">
     
     
-    <div><p>Returns <code>True</code> if the message date is later than the query date.</p><table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">query:</span>A <code><a href="https://docs.python.org/3/library/stdtypes.html#list">list</a></code> of <code><a href="https://docs.python.org/3/library/stdtypes.html#str">str</a></code></td><td class="fieldArgDesc">A list whose first element starts with a stringified date that is a fragment of an <code><a href="twisted.mail.imap4.html#Query">imap4.Query()</a></code>. The date must be in the format 'DD-Mon-YYYY', for example '03-March-2003' or '03-Mar-2003'.</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">id</span></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">msg:</span>Provider of <code><a href="twisted.mail.interfaces.IMessageIMAP.html">imap4.IMessage</a></code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr></table></div>
+    <div>Returns <tt class="rst-docutils literal">True</tt> if the message date is later than the query date.<table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">query:</span>A <code><a href="https://docs.python.org/3/library/stdtypes.html#list" class="intersphinx-link">list</a></code> of <code><a href="https://docs.python.org/3/library/stdtypes.html#str" class="intersphinx-link">str</a></code></td><td class="fieldArgDesc">A list whose first element starts with a stringified date that is a fragment of an <code><a href="twisted.mail.imap4.html#Query" class="internal-link" title="twisted.mail.imap4.Query">imap4.Query()</a></code>. The date must be in the format 'DD-Mon-YYYY', for example '03-March-2003' or '03-Mar-2003'.</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">id</span></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">msg:</span>Provider of <code><a href="twisted.mail.interfaces.IMessageIMAP.html" class="internal-link" title="twisted.mail.interfaces.IMessageIMAP">imap4.IMessage</a></code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr></table></div>
   </div>
 </div><div class="basemethod">
   
@@ -3176,7 +3214,7 @@
   <div class="docstring functionBody">
     
     
-    <div><p>Returns <code>True</code> if the message UID is in the range defined by the search query.</p><table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">query:</span>A <code><a href="https://docs.python.org/3/library/stdtypes.html#list">list</a></code> of <code><a href="https://docs.python.org/3/library/stdtypes.html#bytes">bytes</a></code></td><td class="fieldArgDesc">A list representing the parsed form of the search query. Its first element should be a <code><a href="https://docs.python.org/3/library/stdtypes.html#str">str</a></code> that can be interpreted as a sequence range, for example '2:4,5:*'.</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">id:</span><code><a href="https://docs.python.org/3/library/functions.html#int">int</a></code></td><td class="fieldArgDesc">The sequence number of the message being checked.</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">msg:</span>Provider of <code><a href="twisted.mail.interfaces.IMessageIMAP.html">imap4.IMessage</a></code></td><td class="fieldArgDesc">The message being checked.</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">lastIDs:</span><code><a href="https://docs.python.org/3/library/stdtypes.html#tuple">tuple</a></code></td><td class="fieldArgDesc">A tuple of (last sequence id, last message id). The <i>last sequence id</i> is an <code><a href="https://docs.python.org/3/library/functions.html#int">int</a></code> containing the highest sequence number of a message in the mailbox.  The <i>last message id</i> is an <code><a href="https://docs.python.org/3/library/functions.html#int">int</a></code> containing the highest UID of a message in the mailbox.</td></tr></table></div>
+    <div>Returns <tt class="rst-docutils literal">True</tt> if the message UID is in the range defined by the search query.<table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">query:</span>A <code><a href="https://docs.python.org/3/library/stdtypes.html#list" class="intersphinx-link">list</a></code> of <code><a href="https://docs.python.org/3/library/stdtypes.html#bytes" class="intersphinx-link">bytes</a></code></td><td class="fieldArgDesc">A list representing the parsed form of the search query. Its first element should be a <code><a href="https://docs.python.org/3/library/stdtypes.html#str" class="intersphinx-link">str</a></code> that can be interpreted as a sequence range, for example '2:4,5:*'.</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">id:</span><code><a href="https://docs.python.org/3/library/functions.html#int" class="intersphinx-link">int</a></code></td><td class="fieldArgDesc">The sequence number of the message being checked.</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">msg:</span>Provider of <code><a href="twisted.mail.interfaces.IMessageIMAP.html" class="internal-link" title="twisted.mail.interfaces.IMessageIMAP">imap4.IMessage</a></code></td><td class="fieldArgDesc">The message being checked.</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">last​IDs:</span><code><a href="https://docs.python.org/3/library/stdtypes.html#tuple" class="intersphinx-link">tuple</a></code></td><td class="fieldArgDesc">A tuple of (last sequence id, last message id). The <em>last sequence id</em> is an <code><a href="https://docs.python.org/3/library/functions.html#int" class="intersphinx-link">int</a></code> containing the highest sequence number of a message in the mailbox.  The <em>last message id</em> is an <code><a href="https://docs.python.org/3/library/functions.html#int" class="intersphinx-link">int</a></code> containing the highest UID of a message in the mailbox.</td></tr></table></div>
   </div>
 </div><div class="basemethod">
   
@@ -3321,7 +3359,7 @@
   </a>
   <div class="functionHeader">
     
-    <span class="py-keyword">def</span> <span class="py-defname">sendBadResponse</span>(self, tag=None, message=b''):
+    <span class="py-keyword">def</span> <span class="py-defname">sendBadResponse</span>(self, tag=<a href="https://docs.python.org/3/library/constants.html#None" class="intersphinx-link">None</a>, message=b<span class="rst-variable-quote">'</span><span class="rst-variable-string"></span><span class="rst-variable-quote">'</span>):
     <a class="sourceLink" href="https://github.com/twisted/twisted/tree/twisted-21.2.0/src/twisted/mail/imap4.py#L1074">
       
       (source)
@@ -3343,7 +3381,7 @@
   </a>
   <div class="functionHeader">
     
-    <span class="py-keyword">def</span> <span class="py-defname">sendContinuationRequest</span>(self, msg=b'Ready for additional command text'):
+    <span class="py-keyword">def</span> <span class="py-defname">sendContinuationRequest</span>(self, msg=b<span class="rst-variable-quote">'</span><span class="rst-variable-string">Ready for additional command text</span><span class="rst-variable-quote">'</span>):
     <a class="sourceLink" href="https://github.com/twisted/twisted/tree/twisted-21.2.0/src/twisted/mail/imap4.py#L1090">
       
       (source)
@@ -3365,7 +3403,7 @@
   </a>
   <div class="functionHeader">
     
-    <span class="py-keyword">def</span> <span class="py-defname">sendNegativeResponse</span>(self, tag=None, message=b''):
+    <span class="py-keyword">def</span> <span class="py-defname">sendNegativeResponse</span>(self, tag=<a href="https://docs.python.org/3/library/constants.html#None" class="intersphinx-link">None</a>, message=b<span class="rst-variable-quote">'</span><span class="rst-variable-string"></span><span class="rst-variable-quote">'</span>):
     <a class="sourceLink" href="https://github.com/twisted/twisted/tree/twisted-21.2.0/src/twisted/mail/imap4.py#L1080">
       
       (source)
@@ -3387,7 +3425,7 @@
   </a>
   <div class="functionHeader">
     
-    <span class="py-keyword">def</span> <span class="py-defname">sendPositiveResponse</span>(self, tag=None, message=b''):
+    <span class="py-keyword">def</span> <span class="py-defname">sendPositiveResponse</span>(self, tag=<a href="https://docs.python.org/3/library/constants.html#None" class="intersphinx-link">None</a>, message=b<span class="rst-variable-quote">'</span><span class="rst-variable-string"></span><span class="rst-variable-quote">'</span>):
     <a class="sourceLink" href="https://github.com/twisted/twisted/tree/twisted-21.2.0/src/twisted/mail/imap4.py#L1077">
       
       (source)
@@ -3431,7 +3469,7 @@
   </a>
   <div class="functionHeader">
     
-    <span class="py-keyword">def</span> <span class="py-defname">sendUntaggedResponse</span>(self, message, isAsync=None, **kwargs):
+    <span class="py-keyword">def</span> <span class="py-defname">sendUntaggedResponse</span>(self, message, isAsync=<a href="https://docs.python.org/3/library/constants.html#None" class="intersphinx-link">None</a>, **kwargs):
     <a class="sourceLink" href="https://github.com/twisted/twisted/tree/twisted-21.2.0/src/twisted/mail/imap4.py#L1083">
       
       (source)
@@ -3453,7 +3491,7 @@
   </a>
   <div class="functionHeader">
     
-    <span class="py-keyword">def</span> <span class="py-defname">spew_body</span>(self, part, id, msg, _w=None, _f=None):
+    <span class="py-keyword">def</span> <span class="py-defname">spew_body</span>(self, part, id, msg, _w=<a href="https://docs.python.org/3/library/constants.html#None" class="intersphinx-link">None</a>, _f=<a href="https://docs.python.org/3/library/constants.html#None" class="intersphinx-link">None</a>):
     <a class="sourceLink" href="https://github.com/twisted/twisted/tree/twisted-21.2.0/src/twisted/mail/imap4.py#L2191">
       
       (source)
@@ -3475,7 +3513,7 @@
   </a>
   <div class="functionHeader">
     
-    <span class="py-keyword">def</span> <span class="py-defname">spew_bodystructure</span>(self, id, msg, _w=None, _f=None):
+    <span class="py-keyword">def</span> <span class="py-defname">spew_bodystructure</span>(self, id, msg, _w=<a href="https://docs.python.org/3/library/constants.html#None" class="intersphinx-link">None</a>, _f=<a href="https://docs.python.org/3/library/constants.html#None" class="intersphinx-link">None</a>):
     <a class="sourceLink" href="https://github.com/twisted/twisted/tree/twisted-21.2.0/src/twisted/mail/imap4.py#L2188">
       
       (source)
@@ -3497,7 +3535,7 @@
   </a>
   <div class="functionHeader">
     
-    <span class="py-keyword">def</span> <span class="py-defname">spew_envelope</span>(self, id, msg, _w=None, _f=None):
+    <span class="py-keyword">def</span> <span class="py-defname">spew_envelope</span>(self, id, msg, _w=<a href="https://docs.python.org/3/library/constants.html#None" class="intersphinx-link">None</a>, _f=<a href="https://docs.python.org/3/library/constants.html#None" class="intersphinx-link">None</a>):
     <a class="sourceLink" href="https://github.com/twisted/twisted/tree/twisted-21.2.0/src/twisted/mail/imap4.py#L2115">
       
       (source)
@@ -3519,7 +3557,7 @@
   </a>
   <div class="functionHeader">
     
-    <span class="py-keyword">def</span> <span class="py-defname">spew_flags</span>(self, id, msg, _w=None, _f=None):
+    <span class="py-keyword">def</span> <span class="py-defname">spew_flags</span>(self, id, msg, _w=<a href="https://docs.python.org/3/library/constants.html#None" class="intersphinx-link">None</a>, _f=<a href="https://docs.python.org/3/library/constants.html#None" class="intersphinx-link">None</a>):
     <a class="sourceLink" href="https://github.com/twisted/twisted/tree/twisted-21.2.0/src/twisted/mail/imap4.py#L2120">
       
       (source)
@@ -3541,7 +3579,7 @@
   </a>
   <div class="functionHeader">
     
-    <span class="py-keyword">def</span> <span class="py-defname">spew_internaldate</span>(self, id, msg, _w=None, _f=None):
+    <span class="py-keyword">def</span> <span class="py-defname">spew_internaldate</span>(self, id, msg, _w=<a href="https://docs.python.org/3/library/constants.html#None" class="intersphinx-link">None</a>, _f=<a href="https://docs.python.org/3/library/constants.html#None" class="intersphinx-link">None</a>):
     <a class="sourceLink" href="https://github.com/twisted/twisted/tree/twisted-21.2.0/src/twisted/mail/imap4.py#L2126">
       
       (source)
@@ -3563,7 +3601,7 @@
   </a>
   <div class="functionHeader">
     
-    <span class="py-keyword">def</span> <span class="py-defname">spew_rfc822</span>(self, id, msg, _w=None, _f=None):
+    <span class="py-keyword">def</span> <span class="py-defname">spew_rfc822</span>(self, id, msg, _w=<a href="https://docs.python.org/3/library/constants.html#None" class="intersphinx-link">None</a>, _f=<a href="https://docs.python.org/3/library/constants.html#None" class="intersphinx-link">None</a>):
     <a class="sourceLink" href="https://github.com/twisted/twisted/tree/twisted-21.2.0/src/twisted/mail/imap4.py#L2171">
       
       (source)
@@ -3585,7 +3623,7 @@
   </a>
   <div class="functionHeader">
     
-    <span class="py-keyword">def</span> <span class="py-defname">spew_rfc822header</span>(self, id, msg, _w=None, _f=None):
+    <span class="py-keyword">def</span> <span class="py-defname">spew_rfc822header</span>(self, id, msg, _w=<a href="https://docs.python.org/3/library/constants.html#None" class="intersphinx-link">None</a>, _f=<a href="https://docs.python.org/3/library/constants.html#None" class="intersphinx-link">None</a>):
     <a class="sourceLink" href="https://github.com/twisted/twisted/tree/twisted-21.2.0/src/twisted/mail/imap4.py#L2153">
       
       (source)
@@ -3607,7 +3645,7 @@
   </a>
   <div class="functionHeader">
     
-    <span class="py-keyword">def</span> <span class="py-defname">spew_rfc822size</span>(self, id, msg, _w=None, _f=None):
+    <span class="py-keyword">def</span> <span class="py-defname">spew_rfc822size</span>(self, id, msg, _w=<a href="https://docs.python.org/3/library/constants.html#None" class="intersphinx-link">None</a>, _f=<a href="https://docs.python.org/3/library/constants.html#None" class="intersphinx-link">None</a>):
     <a class="sourceLink" href="https://github.com/twisted/twisted/tree/twisted-21.2.0/src/twisted/mail/imap4.py#L2166">
       
       (source)
@@ -3629,7 +3667,7 @@
   </a>
   <div class="functionHeader">
     
-    <span class="py-keyword">def</span> <span class="py-defname">spew_rfc822text</span>(self, id, msg, _w=None, _f=None):
+    <span class="py-keyword">def</span> <span class="py-defname">spew_rfc822text</span>(self, id, msg, _w=<a href="https://docs.python.org/3/library/constants.html#None" class="intersphinx-link">None</a>, _f=<a href="https://docs.python.org/3/library/constants.html#None" class="intersphinx-link">None</a>):
     <a class="sourceLink" href="https://github.com/twisted/twisted/tree/twisted-21.2.0/src/twisted/mail/imap4.py#L2159">
       
       (source)
@@ -3651,7 +3689,7 @@
   </a>
   <div class="functionHeader">
     
-    <span class="py-keyword">def</span> <span class="py-defname">spew_uid</span>(self, id, msg, _w=None, _f=None):
+    <span class="py-keyword">def</span> <span class="py-defname">spew_uid</span>(self, id, msg, _w=<a href="https://docs.python.org/3/library/constants.html#None" class="intersphinx-link">None</a>, _f=<a href="https://docs.python.org/3/library/constants.html#None" class="intersphinx-link">None</a>):
     <a class="sourceLink" href="https://github.com/twisted/twisted/tree/twisted-21.2.0/src/twisted/mail/imap4.py#L2183">
       
       (source)
@@ -3702,9 +3740,57 @@
     </a>
   </div>
   <div class="docstring functionBody">
-    <div class="interfaceinfo">overrides <code><a href="twisted.protocols.policies.TimeoutMixin.html#timeoutConnection">twisted.protocols.policies.TimeoutMixin.timeoutConnection</a></code></div>
+    <div class="interfaceinfo">overrides <code><a href="twisted.protocols.policies.TimeoutMixin.html#timeoutConnection" class="internal-link">twisted.protocols.policies.TimeoutMixin.timeoutConnection</a></code></div>
     
-    <div><p>Called when the connection times out.</p><p>Override to define behavior other than dropping the connection.</p></div>
+    <div><p>Called when the connection times out.</p>
+<p>Override to define behavior other than dropping the connection.</p>
+</div>
+  </div>
+</div><div class="baseconstant">
+  
+  
+  <a name="twisted.mail.imap4.IMAP4Server.IDENT">
+    
+  </a>
+  <a name="IDENT">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-defname">IDENT</span>: <code><a href="https://docs.python.org/3/library/stdtypes.html#bytes" class="intersphinx-link">bytes</a></code> =
+    <a class="sourceLink" href="https://github.com/twisted/twisted/tree/twisted-21.2.0/src/twisted/mail/imap4.py#L614">
+      
+      (source)
+    </a>
+  </div>
+  <div class="functionBody">
+    
+    
+    <div><p class="undocumented">Undocumented</p></div>
+    <table class="valueTable"><tr class="fieldStart"><td class="fieldName">Value</td></tr><tr><td><pre class="constant-value"><code>b<span class="rst-variable-quote">'</span><span class="rst-variable-string">Twisted IMAP4rev1 Ready</span><span class="rst-variable-quote">'</span></code></pre></td></tr></table>
+  </div>
+</div><div class="baseconstant">
+  
+  
+  <a name="twisted.mail.imap4.IMAP4Server.POSTAUTH_TIMEOUT">
+    
+  </a>
+  <a name="POSTAUTH_TIMEOUT">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-defname">POSTAUTH_TIMEOUT</span> =
+    <a class="sourceLink" href="https://github.com/twisted/twisted/tree/twisted-21.2.0/src/twisted/mail/imap4.py#L620">
+      
+      (source)
+    </a>
+  </div>
+  <div class="functionBody">
+    
+    
+    <div><p class="undocumented">Undocumented</p></div>
+    <table class="valueTable"><tr class="fieldStart"><td class="fieldName">Value</td></tr><tr><td><pre class="constant-value"><code>60*30</code></pre></td></tr></table>
   </div>
 </div><div class="baseclassvariable">
   
@@ -3727,6 +3813,7 @@
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    
   </div>
 </div><div class="baseclassvariable">
   
@@ -3749,6 +3836,7 @@
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    
   </div>
 </div><div class="baseclassvariable">
   
@@ -3771,6 +3859,7 @@
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    
   </div>
 </div><div class="baseclassvariable">
   
@@ -3793,6 +3882,7 @@
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    
   </div>
 </div><div class="baseclassvariable">
   
@@ -3815,6 +3905,7 @@
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    
   </div>
 </div><div class="baseclassvariable">
   
@@ -3837,6 +3928,7 @@
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    
   </div>
 </div><div class="baseclassvariable">
   
@@ -3859,6 +3951,7 @@
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    
   </div>
 </div><div class="baseclassvariable">
   
@@ -3881,6 +3974,7 @@
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    
   </div>
 </div><div class="baseclassvariable">
   
@@ -3903,6 +3997,7 @@
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    
   </div>
 </div><div class="baseclassvariable">
   
@@ -3925,6 +4020,7 @@
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    
   </div>
 </div><div class="baseclassvariable">
   
@@ -3947,6 +4043,7 @@
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    
   </div>
 </div><div class="baseclassvariable">
   
@@ -3969,6 +4066,7 @@
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    
   </div>
 </div><div class="baseclassvariable">
   
@@ -3991,28 +4089,7 @@
     
     
     <div><p class="undocumented">Undocumented</p></div>
-  </div>
-</div><div class="baseclassvariable">
-  
-  
-  <a name="twisted.mail.imap4.IMAP4Server.IDENT">
     
-  </a>
-  <a name="IDENT">
-    
-  </a>
-  <div class="functionHeader">
-    
-    <span class="py-defname">IDENT</span>: <code><a href="https://docs.python.org/3/library/stdtypes.html#bytes">bytes</a></code> =
-    <a class="sourceLink" href="https://github.com/twisted/twisted/tree/twisted-21.2.0/src/twisted/mail/imap4.py#L614">
-      
-      (source)
-    </a>
-  </div>
-  <div class="functionBody">
-    
-    
-    <div><p class="undocumented">Undocumented</p></div>
   </div>
 </div><div class="baseclassvariable">
   
@@ -4035,28 +4112,7 @@
     
     
     <div><p class="undocumented">Undocumented</p></div>
-  </div>
-</div><div class="baseclassvariable">
-  
-  
-  <a name="twisted.mail.imap4.IMAP4Server.POSTAUTH_TIMEOUT">
     
-  </a>
-  <a name="POSTAUTH_TIMEOUT">
-    
-  </a>
-  <div class="functionHeader">
-    
-    <span class="py-defname">POSTAUTH_TIMEOUT</span> =
-    <a class="sourceLink" href="https://github.com/twisted/twisted/tree/twisted-21.2.0/src/twisted/mail/imap4.py#L620">
-      
-      (source)
-    </a>
-  </div>
-  <div class="functionBody">
-    
-    
-    <div><p class="undocumented">Undocumented</p></div>
   </div>
 </div><div class="baseclassvariable">
   
@@ -4079,6 +4135,7 @@
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    
   </div>
 </div><div class="baseclassvariable">
   
@@ -4101,6 +4158,7 @@
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    
   </div>
 </div><div class="baseclassvariable">
   
@@ -4123,6 +4181,7 @@
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    
   </div>
 </div><div class="baseclassvariable">
   
@@ -4145,6 +4204,7 @@
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    
   </div>
 </div><div class="baseclassvariable">
   
@@ -4167,6 +4227,7 @@
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    
   </div>
 </div><div class="baseclassvariable">
   
@@ -4189,6 +4250,7 @@
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    
   </div>
 </div><div class="baseclassvariable">
   
@@ -4211,6 +4273,7 @@
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    
   </div>
 </div><div class="baseclassvariable">
   
@@ -4233,6 +4296,7 @@
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    
   </div>
 </div><div class="baseclassvariable">
   
@@ -4255,6 +4319,30 @@
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    
+  </div>
+</div><div class="baseclassvariable">
+  
+  
+  <a name="twisted.mail.imap4.IMAP4Server.startedTLS">
+    
+  </a>
+  <a name="startedTLS">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-defname">startedTLS</span>: <code><a href="https://docs.python.org/3/library/functions.html#bool" class="intersphinx-link">bool</a></code> =
+    <a class="sourceLink" href="https://github.com/twisted/twisted/tree/twisted-21.2.0/src/twisted/mail/imap4.py#L623">
+      
+      (source)
+    </a>
+  </div>
+  <div class="functionBody">
+    
+    
+    <div><p class="undocumented">Undocumented</p></div>
+    
   </div>
 </div><div class="baseclassvariable">
   
@@ -4267,16 +4355,17 @@
   </a>
   <div class="functionHeader">
     
-    <span class="py-defname">timeOut</span>: <code><a href="https://docs.python.org/3/library/functions.html#int">int</a></code> =
+    <span class="py-defname">timeOut</span>: <code><a href="https://docs.python.org/3/library/functions.html#int" class="intersphinx-link">int</a></code> =
     <a class="sourceLink" href="https://github.com/twisted/twisted/tree/twisted-21.2.0/src/twisted/mail/imap4.py#L618">
       
       (source)
     </a>
   </div>
   <div class="functionBody">
-    <div class="interfaceinfo">overrides <code><a href="twisted.protocols.policies.TimeoutMixin.html#timeOut">twisted.protocols.policies.TimeoutMixin.timeOut</a></code></div>
+    <div class="interfaceinfo">overrides <code><a href="twisted.protocols.policies.TimeoutMixin.html#timeOut" class="internal-link">twisted.protocols.policies.TimeoutMixin.timeOut</a></code></div>
     
     <div><p class="undocumented">Undocumented</p></div>
+    
   </div>
 </div><div class="baseclassvariable">
   
@@ -4299,6 +4388,7 @@
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    
   </div>
 </div><div class="baseclassvariable">
   
@@ -4321,6 +4411,7 @@
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    
   </div>
 </div><div class="baseclassvariable">
   
@@ -4343,6 +4434,7 @@
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    
   </div>
 </div><div class="baseclassvariable">
   
@@ -4365,6 +4457,7 @@
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    
   </div>
 </div><div class="baseclassvariable">
   
@@ -4387,6 +4480,7 @@
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    
   </div>
 </div><div class="baseclassvariable">
   
@@ -4409,6 +4503,7 @@
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    
   </div>
 </div><div class="baseinstancevariable">
   
@@ -4431,6 +4526,7 @@
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    
   </div>
 </div><div class="baseinstancevariable">
   
@@ -4443,7 +4539,7 @@
   </a>
   <div class="functionHeader">
     
-    <span class="py-defname">blocked</span>: <code><a href="https://docs.python.org/3/library/stdtypes.html#list">list</a></code> =
+    <span class="py-defname">blocked</span>: <code><a href="https://docs.python.org/3/library/stdtypes.html#list" class="intersphinx-link">list</a></code> =
     <a class="sourceLink" href="https://github.com/twisted/twisted/tree/twisted-21.2.0/src/twisted/mail/imap4.py#L714">
       
       (source)
@@ -4453,6 +4549,7 @@
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    
   </div>
 </div><div class="baseinstancevariable">
   
@@ -4475,6 +4572,7 @@
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    
   </div>
 </div><div class="baseinstancevariable">
   
@@ -4497,6 +4595,7 @@
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    
   </div>
 </div><div class="baseinstancevariable">
   
@@ -4519,6 +4618,7 @@
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    
   </div>
 </div><div class="baseinstancevariable">
   
@@ -4541,6 +4641,7 @@
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    
   </div>
 </div><div class="baseinstancevariable">
   
@@ -4563,6 +4664,7 @@
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    
   </div>
 </div><div class="baseinstancevariable">
   
@@ -4585,6 +4687,7 @@
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    
   </div>
 </div><div class="baseinstancevariable">
   
@@ -4607,28 +4710,7 @@
     
     
     <div><p class="undocumented">Undocumented</p></div>
-  </div>
-</div><div class="baseinstancevariable">
-  
-  
-  <a name="twisted.mail.imap4.IMAP4Server.startedTLS">
     
-  </a>
-  <a name="startedTLS">
-    
-  </a>
-  <div class="functionHeader">
-    
-    <span class="py-defname">startedTLS</span>: <code><a href="https://docs.python.org/3/library/functions.html#bool">bool</a></code> =
-    <a class="sourceLink" href="https://github.com/twisted/twisted/tree/twisted-21.2.0/src/twisted/mail/imap4.py#L623">
-      
-      (source)
-    </a>
-  </div>
-  <div class="functionBody">
-    
-    
-    <div><p class="undocumented">Undocumented</p></div>
   </div>
 </div><div class="baseinstancevariable">
   
@@ -4641,7 +4723,7 @@
   </a>
   <div class="functionHeader">
     
-    <span class="py-defname">state</span>: <code><a href="https://docs.python.org/3/library/stdtypes.html#str">str</a></code> =
+    <span class="py-defname">state</span>: <code><a href="https://docs.python.org/3/library/stdtypes.html#str" class="intersphinx-link">str</a></code> =
     <a class="sourceLink" href="https://github.com/twisted/twisted/tree/twisted-21.2.0/src/twisted/mail/imap4.py#L656">
       
       (source)
@@ -4651,6 +4733,7 @@
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    
   </div>
 </div><div class="baseinstancevariable">
   
@@ -4663,7 +4746,7 @@
   </a>
   <div class="functionHeader">
     
-    <span class="py-defname">tags</span>: <code><a href="https://docs.python.org/3/library/stdtypes.html#dict">dict</a></code> =
+    <span class="py-defname">tags</span>: <code><a href="https://docs.python.org/3/library/stdtypes.html#dict" class="intersphinx-link">dict</a></code> =
     <a class="sourceLink" href="https://github.com/twisted/twisted/tree/twisted-21.2.0/src/twisted/mail/imap4.py#L629">
       
       (source)
@@ -4673,6 +4756,7 @@
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    
   </div>
 </div><div class="basemethod private">
   
@@ -4927,7 +5011,7 @@
   </a>
   <div class="functionHeader">
     
-    <span class="py-keyword">def</span> <span class="py-defname">__cbManualSearch</span>(self, result, tag, mbox, query, uid, searchResults=None):
+    <span class="py-keyword">def</span> <span class="py-defname">__cbManualSearch</span>(self, result, tag, mbox, query, uid, searchResults=<a href="https://docs.python.org/3/library/constants.html#None" class="intersphinx-link">None</a>):
     <a class="sourceLink" href="https://github.com/twisted/twisted/tree/twisted-21.2.0/src/twisted/mail/imap4.py#L1660">
       
       (source)
@@ -4936,7 +5020,7 @@
   <div class="docstring functionBody">
     
     
-    <div><p>Apply the search filter to a set of messages. Send the response to the client.</p><table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">result:</span><code><a href="https://docs.python.org/3/library/stdtypes.html#list">list</a></code> of <code><a href="https://docs.python.org/3/library/stdtypes.html#tuple">tuple</a></code> of (<code><a href="https://docs.python.org/3/library/functions.html#int">int</a></code>, provider of <code><a href="twisted.mail.interfaces.IMessageIMAP.html">imap4.IMessage</a></code>)</td><td class="fieldArgDesc">A list two tuples of messages with their sequence ids, sorted by the ids in descending order.</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">tag:</span><code><a href="https://docs.python.org/3/library/stdtypes.html#str">str</a></code></td><td class="fieldArgDesc">A command tag.</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">mbox:</span>Provider of <code><a href="twisted.mail.interfaces.IMailboxIMAP.html">imap4.IMailbox</a></code></td><td class="fieldArgDesc">The searched mailbox.</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">query:</span><code><a href="https://docs.python.org/3/library/stdtypes.html#list">list</a></code></td><td class="fieldArgDesc">A list representing the parsed form of the search query.</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">uid</span></td><td class="fieldArgDesc">A flag indicating whether the search is over message sequence numbers or UIDs.</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">searchResults:</span><code><a href="https://docs.python.org/3/library/stdtypes.html#list">list</a></code></td><td class="fieldArgDesc">The search results so far or <code><a href="https://docs.python.org/3/library/constants.html#None">None</a></code> if no results yet.</td></tr></table></div>
+    <div>Apply the search filter to a set of messages. Send the response to the client.<table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">result:</span><code><a href="https://docs.python.org/3/library/stdtypes.html#list" class="intersphinx-link">list</a></code> of <code><a href="https://docs.python.org/3/library/stdtypes.html#tuple" class="intersphinx-link">tuple</a></code> of (<code><a href="https://docs.python.org/3/library/functions.html#int" class="intersphinx-link">int</a></code>, provider of <code><a href="twisted.mail.interfaces.IMessageIMAP.html" class="internal-link" title="twisted.mail.interfaces.IMessageIMAP">imap4.IMessage</a></code>)</td><td class="fieldArgDesc">A list two tuples of messages with their sequence ids, sorted by the ids in descending order.</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">tag:</span><code><a href="https://docs.python.org/3/library/stdtypes.html#str" class="intersphinx-link">str</a></code></td><td class="fieldArgDesc">A command tag.</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">mbox:</span>Provider of <code><a href="twisted.mail.interfaces.IMailboxIMAP.html" class="internal-link" title="twisted.mail.interfaces.IMailboxIMAP">imap4.IMailbox</a></code></td><td class="fieldArgDesc">The searched mailbox.</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">query:</span><code><a href="https://docs.python.org/3/library/stdtypes.html#list" class="intersphinx-link">list</a></code></td><td class="fieldArgDesc">A list representing the parsed form of the search query.</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">uid</span></td><td class="fieldArgDesc">A flag indicating whether the search is over message sequence numbers or UIDs.</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">search​Results:</span><code><a href="https://docs.python.org/3/library/stdtypes.html#list" class="intersphinx-link">list</a></code></td><td class="fieldArgDesc">The search results so far or <code><a href="https://docs.python.org/3/library/constants.html#None" class="intersphinx-link">None</a></code> if no results yet.</td></tr></table></div>
   </div>
 </div><div class="basemethod private">
   
@@ -5640,7 +5724,7 @@
   <div class="docstring functionBody">
     
     
-    <div><p>Pop search terms from the beginning of <code>query</code> until there are none left and apply them to the given message.</p><table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">query</span></td><td class="fieldArgDesc">A list representing the parsed form of the search query.</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">id</span></td><td class="fieldArgDesc">The sequence number of the message being checked.</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">msg</span></td><td class="fieldArgDesc">The message being checked.</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">lastSequenceId:</span><code><a href="https://docs.python.org/3/library/functions.html#int">int</a></code></td><td class="fieldArgDesc">The highest sequence number of any message in the mailbox being searched.</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">lastMessageId:</span><code><a href="https://docs.python.org/3/library/functions.html#int">int</a></code></td><td class="fieldArgDesc">The highest UID of any message in the mailbox being searched.</td></tr><tr class="fieldStart"><td class="fieldName" colspan="2">Returns</td></tr><tr><td colspan="2">Boolean indicating whether all of the query terms match the message.</td></tr></table></div>
+    <div>Pop search terms from the beginning of <tt class="rst-docutils literal">query</tt> until there are none left and apply them to the given message.<table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">query</span></td><td class="fieldArgDesc">A list representing the parsed form of the search query.</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">id</span></td><td class="fieldArgDesc">The sequence number of the message being checked.</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">msg</span></td><td class="fieldArgDesc">The message being checked.</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">last​Sequence​Id:</span><code><a href="https://docs.python.org/3/library/functions.html#int" class="intersphinx-link">int</a></code></td><td class="fieldArgDesc">The highest sequence number of any message in the mailbox being searched.</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">last​Message​Id:</span><code><a href="https://docs.python.org/3/library/functions.html#int" class="intersphinx-link">int</a></code></td><td class="fieldArgDesc">The highest UID of any message in the mailbox being searched.</td></tr><tr class="fieldStart"><td class="fieldName" colspan="2">Returns</td></tr><tr><td colspan="2">Boolean indicating whether all of the query terms match the message.</td></tr></table></div>
   </div>
 </div><div class="basemethod private">
   
@@ -5706,7 +5790,7 @@
   <div class="docstring functionBody">
     
     
-    <div><p>Pop one search term from the beginning of <code>query</code> (possibly more than one element) and return whether it matches the given message.</p><table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">query</span></td><td class="fieldArgDesc">A list representing the parsed form of the search query.</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">msgId</span></td><td class="fieldArgDesc">The sequence number of the message being checked.</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">msg</span></td><td class="fieldArgDesc">The message being checked.</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">lastSequenceId</span></td><td class="fieldArgDesc">The highest sequence number of any message in the mailbox being searched.</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">lastMessageId</span></td><td class="fieldArgDesc">The highest UID of any message in the mailbox being searched.</td></tr><tr class="fieldStart"><td class="fieldName" colspan="2">Returns</td></tr><tr><td colspan="2">Boolean indicating whether the query term matched the message.</td></tr></table></div>
+    <div>Pop one search term from the beginning of <tt class="rst-docutils literal">query</tt> (possibly more than one element) and return whether it matches the given message.<table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">query</span></td><td class="fieldArgDesc">A list representing the parsed form of the search query.</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">msg​Id</span></td><td class="fieldArgDesc">The sequence number of the message being checked.</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">msg</span></td><td class="fieldArgDesc">The message being checked.</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">last​Sequence​Id</span></td><td class="fieldArgDesc">The highest sequence number of any message in the mailbox being searched.</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">last​Message​Id</span></td><td class="fieldArgDesc">The highest UID of any message in the mailbox being searched.</td></tr><tr class="fieldStart"><td class="fieldName" colspan="2">Returns</td></tr><tr><td colspan="2">Boolean indicating whether the query term matched the message.</td></tr></table></div>
   </div>
 </div><div class="basemethod private">
   
@@ -5763,7 +5847,7 @@
   </a>
   <div class="functionHeader">
     
-    <span class="py-defname">_literalStringLimit</span>: <code><a href="https://docs.python.org/3/library/functions.html#int">int</a></code> =
+    <span class="py-defname">_literalStringLimit</span>: <code><a href="https://docs.python.org/3/library/functions.html#int" class="intersphinx-link">int</a></code> =
     <a class="sourceLink" href="https://github.com/twisted/twisted/tree/twisted-21.2.0/src/twisted/mail/imap4.py#L647">
       
       (source)
@@ -5773,6 +5857,7 @@
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    
   </div>
 </div><div class="baseclassvariable private">
   
@@ -5785,7 +5870,7 @@
   </a>
   <div class="functionHeader">
     
-    <span class="py-defname">_requiresLastMessageInfo</span>: <code><a href="https://docs.python.org/3/library/stdtypes.html#set">set</a>[<wbr></wbr><a href="https://docs.python.org/3/library/stdtypes.html#bytes">bytes</a>]</code> =
+    <span class="py-defname">_requiresLastMessageInfo</span>: <code><a href="https://docs.python.org/3/library/stdtypes.html#set" class="intersphinx-link">set</a>[<wbr></wbr><a href="https://docs.python.org/3/library/stdtypes.html#bytes" class="intersphinx-link">bytes</a>]</code> =
     <a class="sourceLink" href="https://github.com/twisted/twisted/tree/twisted-21.2.0/src/twisted/mail/imap4.py#L654">
       
       (source)
@@ -5795,6 +5880,7 @@
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    
   </div>
 </div><div class="baseinstancevariable private">
   
@@ -5817,6 +5903,7 @@
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    
   </div>
 </div><div class="baseinstancevariable private">
   
@@ -5839,6 +5926,7 @@
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    
   </div>
 </div><div class="baseinstancevariable private">
   
@@ -5861,6 +5949,7 @@
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    
   </div>
 </div><div class="baseinstancevariable private">
   
@@ -5873,7 +5962,7 @@
   </a>
   <div class="functionHeader">
     
-    <span class="py-defname">_queuedAsync</span>: <code><a href="https://docs.python.org/3/library/stdtypes.html#list">list</a></code> =
+    <span class="py-defname">_queuedAsync</span>: <code><a href="https://docs.python.org/3/library/stdtypes.html#list" class="intersphinx-link">list</a></code> =
     <a class="sourceLink" href="https://github.com/twisted/twisted/tree/twisted-21.2.0/src/twisted/mail/imap4.py#L668">
       
       (source)
@@ -5883,6 +5972,7 @@
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    
   </div>
 </div><div class="baseinstancevariable private">
   
@@ -5905,6 +5995,7 @@
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    
   </div>
 </div>
 
@@ -5913,11 +6004,33 @@
 
     <footer class="navbar navbar-default">
   
+
   <div class="container">
     <a href="index.html">API Documentation</a> for <a href="https://twistedmatrix.com/" class="projecthome">Twisted</a>,
   generated by <a href="https://github.com/twisted/pydoctor/">pydoctor</a>
-    21.2.2 at 2022-01-12 04:22:24.
+    22.2.2.dev0 at 2022-03-04 05:57:20.
   </div>
+
+  <!-- Google analytics, obviously. -->
+  <script src="//www.google-analytics.com/urchin.js" type="text/javascript"></script>
+  <script type="text/javascript">
+    _uacct = "UA-99018-6";
+    urchinTracker();
+  </script>
+
+  <!-- If the documentation isn't current, insert a current link. -->
+  <script type="text/javascript">
+    if (window.location.pathname.indexOf('/current/') == -1) {
+      <!-- Give the user a link to this page, but in the current version of the docs. -->
+      var link = document.getElementById('current-docs-link');
+      link.href = window.location.pathname.replace(/\/\d+\.\d+\.\d+\/api\//, '/current/api/');
+      <!-- And make it visible -->
+      var container = document.getElementById('current-docs-container');
+      container.style.display = "";
+      delete link;
+      delete container;
+    }
+  </script>
 </footer>
 
     <script src="pydoctor.js" type="text/javascript"></script>

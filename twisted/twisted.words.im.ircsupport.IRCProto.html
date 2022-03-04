@@ -7,7 +7,7 @@
   <head>
     
     <title>twisted.words.im.ircsupport.IRCProto</title>
-    <meta name="generator" content="pydoctor 21.2.2"> 
+    <meta name="generator" content="pydoctor 22.2.2.dev0"> 
         
     </meta>
     <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
@@ -19,7 +19,13 @@
 
   <body>
 
-    
+    <div style="display: none" id="current-docs-container" class="container">
+  <div class="col-sm-12">
+    <a id="current-docs-link">
+      Go to the latest version of this document.
+    </a>
+  </div>
+</div>
 
     <nav class="navbar navbar-default">
   
@@ -44,69 +50,82 @@
           Names
         </a>
 
-        <form action="search-results.html" id="search-box-container">
+        <div id="search-box-container">
           <div class="input-group">
-            <input id="search-box" name="search-query" placeholder="Search..." aria-label="Search" minlength="2" class="form-control" />
+            <input id="search-box" type="search" name="search-query" placeholder="Search..." aria-label="Search" minlength="2" class="form-control" autocomplete="off" />
+            
             <span class="input-group-btn">
-              <button class="btn btn-default" type="submit" title="Search"><img src="fonts/search.svg" alt="Search!" /></button>
-              <a class="btn btn-default" id="search-help-button" title="Help" onclick="toggleSearchHelpText()"><img src="fonts/info.svg" alt="Help!" /></a>
+              <a style="display: none;" class="btn btn-default" id="search-clear-button" title="Clear" onclick="clearSearch()"><img src="fonts/x-circle.svg" alt="Clear" /></a>
+              <a class="btn btn-default" id="search-help-button" title="Help" onclick="toggleSearchHelpText()"><img src="fonts/info.svg" alt="Help" /></a>
             </span>
           </div>
-        </form>
+        </div>
 
-        <div class="rst-admonition hint" id="search-help-box">
+      </div>
+
+      <div id="search-results-container" style="display: none;">
+        <div>
+          <span class="label label-default" id="search-docstrings-button">
+            <a title="Search in docstrings" onclick="toggleSearchInDocstrings()">search in docstrings</a></span>
+        </div>
+
+        <noscript>
+            <h1>Cannot search: JavaScript is not supported/enabled in your browser.</h1>
+        </noscript>
+
+        <div class="hint" id="search-help-box">
           <p class="rst-last">
       
             Search bar offers the following options:
             <ul>   
                 <li>
                   <strong>Term presence.</strong> The below example searches for documents that 
-                    must contain “foo”, might contain “bar” and must not contain “baz”:
-                  <br /> <code>'+foo bar -baz'</code>
+                    must contain “foo”, might contain “bar” and must not contain “baz”: <code>+foo bar -baz</code>
                 </li> 
 
                 <li>
-                  <strong>Wildcards.</strong> The below example searches for documents with words beginning with “foo”:
-                  <br /> <code>'foo*'</code>
+                  <strong>Wildcards.</strong> The below example searches for documents with words beginning with “foo”: <code>foo*</code>
                 </li> 
 
                 <li>
-                  <strong>Search in specific fields.</strong> The following search matches all documents 
-                  that contains "foo" in their full dotted name and with “bar” in any field:
-                  <br /> <code>'+fullName:*foo* +bar'</code>
+                  <strong>Search in specific fields.</strong> The following search matches all objects 
+                  in "twisted.mail" that matches “search”: <code>+qname:twisted.mail.* +search</code>
 
                   <p>
-                    Possible fields: 'name', 'docstring', 'fullName'.
+                    Possible fields: 'name', 'qname' (fully qualified name), 'docstring', and 'kind'.
+                    Last two fields are only applicable if "search in docstrings" is enabled.
                   </p>
                 </li>
 
                 <li>
                   <strong>Fuzzy matches.</strong> The following search matches all documents 
-                  that have a word within 1 edit distance of “foo”:
-                  <br /> <code>'foo~1'</code>
+                  that have a word within 1 edit distance of “foo”: <code>foo~1</code>
                 </li>
             </ul>
 
           </p>
         </div>
 
-      </div>
+        <div id="search-status"> </div>
+        
+        <div class="warning" id="search-warn-box" style="display: none;">
+          <p class="rst-last"><span id="search-warn"></span></p>
+        </div>
 
+        <table id="search-results">
+          <!-- Filled dynamically by JS -->
+        </table>
+        
+        <div style="margin-top: 8px;">
+          <p>Results provided by <a href="https://lunrjs.com">Lunr.js</a></p>
+        </div>
+      </div>
 
     </div>
   </div>
 
-  <script>
- 
-    function toggleSearchHelpText() {
-        document.body.classList.toggle("search-help-hidden");
-    }
-    // Init search and help text
-    document.getElementById('search-box-container').style.display = 'block';
-    document.getElementById('search-help-box').style.display = 'block';
-    document.body.classList.add("search-help-hidden");
-
-  </script>
+  <script src="ajax.js" type="text/javascript"></script>
+  <script src="search.js" type="text/javascript"></script>
 
 </nav>
 
@@ -115,7 +134,7 @@
     <div class="container">
 
       <div class="page-header">
-        <h1 class="class"><code><code><a href="twisted.html">twisted</a></code><wbr></wbr>.<code><a href="twisted.words.html">words</a></code><wbr></wbr>.<code><a href="twisted.words.im.html">im</a></code><wbr></wbr>.<code><a href="twisted.words.im.ircsupport.html">ircsupport</a></code><wbr></wbr>.<code><a href="twisted.words.im.ircsupport.IRCProto.html">IRCProto</a></code></code></h1>
+        <h1 class="class"><code><code><a href="index.html" class="internal-link">twisted</a></code><wbr></wbr>.<code><a href="twisted.words.html" class="internal-link" title="twisted.words">words</a></code><wbr></wbr>.<code><a href="twisted.words.im.html" class="internal-link" title="twisted.words.im">im</a></code><wbr></wbr>.<code><a href="twisted.words.im.ircsupport.html" class="internal-link" title="twisted.words.im.ircsupport">ircsupport</a></code><wbr></wbr>.<code><a href="twisted.words.im.ircsupport.IRCProto.html" class="internal-link" title="twisted.words.im.ircsupport.IRCProto">IRCProto</a></code></code></h1>
         <div id="showPrivate">
           <button class="btn btn-link" onclick="togglePrivate()">Toggle Private API</button>
         </div>
@@ -126,991 +145,993 @@
       </div>
 
       <div class="extrasDocstring">
-        <p><code><span class="py-keyword">class</span> <span class="py-defname">IRCProto</span>(<a href="twisted.words.im.basesupport.AbstractClientMixin.html" title="twisted.words.im.basesupport.AbstractClientMixin">basesupport.AbstractClientMixin</a>, <a href="twisted.words.protocols.irc.IRCClient.html" title="twisted.words.protocols.irc.IRCClient">irc.IRCClient</a>): <a href="https://github.com/twisted/twisted/tree/twisted-21.2.0/src/twisted/words/im/ircsupport.py#L81" class="sourceLink">(source)</a></code></p>
+        <p><code><span class="py-keyword">class</span> <span class="py-defname">IRCProto</span>(<a href="twisted.words.im.basesupport.AbstractClientMixin.html" class="internal-link" title="twisted.words.im.basesupport.AbstractClientMixin">basesupport.AbstractClientMixin</a>, <a href="twisted.words.protocols.irc.IRCClient.html" class="internal-link" title="twisted.words.protocols.irc.IRCClient">irc.IRCClient</a>): <a href="https://github.com/twisted/twisted/tree/twisted-21.2.0/src/twisted/words/im/ircsupport.py#L81" class="sourceLink">(source)</a></code></p>
         <p><a href="classIndex.html#twisted.words.im.ircsupport.IRCProto">View In Hierarchy</a></p>
       </div>
+
+      
 
       <div class="moduleDocstring">
         <div><p class="undocumented">Undocumented</p></div>
       </div>
 
       <div id="splitTables">
-        <table class="children sortable" id="id3535">
+        <table class="children sortable" id="id3521">
   
   
   <tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#__init__">__init__</a></code></td>
+    <td><code><a href="#__init__" class="internal-link" title="twisted.words.im.ircsupport.IRCProto.__init__">__init__</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#action">action</a></code></td>
-    <td><span>Called when I see a user perform an ACTION on a channel.</span></td>
+    <td><code><a href="#action" class="internal-link" title="twisted.words.im.ircsupport.IRCProto.action">action</a></code></td>
+    <td>Called when I see a user perform an ACTION on a channel.</td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#connectionMade">connectionMade</a></code></td>
-    <td><span>Called when a connection is made.</span></td>
+    <td><code><a href="#connectionMade" class="internal-link" title="twisted.words.im.ircsupport.IRCProto.connectionMade">connection​Made</a></code></td>
+    <td>Called when a connection is made.</td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#getGroupConversation">getGroupConversation</a></code></td>
+    <td><code><a href="#getGroupConversation" class="internal-link" title="twisted.words.im.ircsupport.IRCProto.getGroupConversation">get​Group​Conversation</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#getPerson">getPerson</a></code></td>
+    <td><code><a href="#getPerson" class="internal-link" title="twisted.words.im.ircsupport.IRCProto.getPerson">get​Person</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#irc_333">irc_333</a></code></td>
+    <td><code><a href="#irc_333" class="internal-link" title="twisted.words.im.ircsupport.IRCProto.irc_333">irc​_333</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#irc_JOIN">irc_JOIN</a></code></td>
-    <td><span>Called when a user joins a channel.</span></td>
+    <td><code><a href="#irc_JOIN" class="internal-link" title="twisted.words.im.ircsupport.IRCProto.irc_JOIN">irc_​JOIN</a></code></td>
+    <td>Called when a user joins a channel.</td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#irc_NICK">irc_NICK</a></code></td>
-    <td><span>Called when a user changes their nickname.</span></td>
+    <td><code><a href="#irc_NICK" class="internal-link" title="twisted.words.im.ircsupport.IRCProto.irc_NICK">irc_​NICK</a></code></td>
+    <td>Called when a user changes their nickname.</td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#irc_PART">irc_PART</a></code></td>
-    <td><span>Called when a user leaves a channel.</span></td>
+    <td><code><a href="#irc_PART" class="internal-link" title="twisted.words.im.ircsupport.IRCProto.irc_PART">irc_​PART</a></code></td>
+    <td>Called when a user leaves a channel.</td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#irc_QUIT">irc_QUIT</a></code></td>
-    <td><span>Called when a user has quit.</span></td>
+    <td><code><a href="#irc_QUIT" class="internal-link" title="twisted.words.im.ircsupport.IRCProto.irc_QUIT">irc_​QUIT</a></code></td>
+    <td>Called when a user has quit.</td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#irc_RPL_ENDOFNAMES">irc_RPL_ENDOFNAMES</a></code></td>
+    <td><code><a href="#irc_RPL_ENDOFNAMES" class="internal-link" title="twisted.words.im.ircsupport.IRCProto.irc_RPL_ENDOFNAMES">irc_​RPL_​ENDOFNAMES</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#irc_RPL_NAMREPLY">irc_RPL_NAMREPLY</a></code></td>
-    <td><span>RPL_NAMREPLY &gt;&gt; NAMES #bnl &lt;&lt; :Arlington.VA.US.Undernet.Org 353 z3p = #bnl :pSwede Dan-- SkOyg AG</span></td>
+    <td><code><a href="#irc_RPL_NAMREPLY" class="internal-link" title="twisted.words.im.ircsupport.IRCProto.irc_RPL_NAMREPLY">irc_​RPL_​NAMREPLY</a></code></td>
+    <td>RPL_NAMREPLY &gt;&gt; NAMES #bnl &lt;&lt; :Arlington.VA.US.Undernet.Org 353 z3p = #bnl :pSwede Dan-- SkOyg AG</td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#irc_RPL_TOPIC">irc_RPL_TOPIC</a></code></td>
-    <td><span>Called when the topic for a channel is initially reported or when it subsequently changes.</span></td>
+    <td><code><a href="#irc_RPL_TOPIC" class="internal-link" title="twisted.words.im.ircsupport.IRCProto.irc_RPL_TOPIC">irc_​RPL_​TOPIC</a></code></td>
+    <td>Called when the topic for a channel is initially reported or when it subsequently changes.</td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#irc_TOPIC">irc_TOPIC</a></code></td>
-    <td><span>Someone in the channel set the topic.</span></td>
+    <td><code><a href="#irc_TOPIC" class="internal-link" title="twisted.words.im.ircsupport.IRCProto.irc_TOPIC">irc_​TOPIC</a></code></td>
+    <td>Someone in the channel set the topic.</td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#irc_unknown">irc_unknown</a></code></td>
+    <td><code><a href="#irc_unknown" class="internal-link" title="twisted.words.im.ircsupport.IRCProto.irc_unknown">irc​_unknown</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#joinGroup">joinGroup</a></code></td>
+    <td><code><a href="#joinGroup" class="internal-link" title="twisted.words.im.ircsupport.IRCProto.joinGroup">join​Group</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#kickedFrom">kickedFrom</a></code></td>
-    <td><span>Called when I am kicked from a channel.</span></td>
+    <td><code><a href="#kickedFrom" class="internal-link" title="twisted.words.im.ircsupport.IRCProto.kickedFrom">kicked​From</a></code></td>
+    <td>Called when I am kicked from a channel.</td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#noticed">noticed</a></code></td>
-    <td><span>Called when I have a notice from a user to me or a channel.</span></td>
+    <td><code><a href="#noticed" class="internal-link" title="twisted.words.im.ircsupport.IRCProto.noticed">noticed</a></code></td>
+    <td>Called when I have a notice from a user to me or a channel.</td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#privmsg">privmsg</a></code></td>
-    <td><span>Called when I have a message from a user to me or a channel.</span></td>
+    <td><code><a href="#privmsg" class="internal-link" title="twisted.words.im.ircsupport.IRCProto.privmsg">privmsg</a></code></td>
+    <td>Called when I have a message from a user to me or a channel.</td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#setNick">setNick</a></code></td>
-    <td><span>Set this client's nickname.</span></td>
+    <td><code><a href="#setNick" class="internal-link" title="twisted.words.im.ircsupport.IRCProto.setNick">set​Nick</a></code></td>
+    <td>Set this client's nickname.</td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#userKicked">userKicked</a></code></td>
-    <td><span>Called when I observe someone else being kicked from a channel.</span></td>
+    <td><code><a href="#userKicked" class="internal-link" title="twisted.words.im.ircsupport.IRCProto.userKicked">user​Kicked</a></code></td>
+    <td>Called when I observe someone else being kicked from a channel.</td>
   </tr><tr class="instancevariable">
     
     <td>Instance Variable</td>
-    <td><code><a href="#accountName">accountName</a></code></td>
-    <td><span class="undocumented">Undocumented</span></td>
-  </tr><tr class="instancevariable">
-    
-    <td>Instance Variable</td>
-    <td><code><a href="#name">name</a></code></td>
+    <td><code><a href="#accountName" class="internal-link" title="twisted.words.im.ircsupport.IRCProto.accountName">account​Name</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="instancevariable">
     
     <td>Instance Variable</td>
-    <td><code><a href="#nickname">nickname</a></code></td>
+    <td><code><a href="#name" class="internal-link" title="twisted.words.im.ircsupport.IRCProto.name">name</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="instancevariable">
     
     <td>Instance Variable</td>
-    <td><code><a href="#password">password</a></code></td>
+    <td><code><a href="#nickname" class="internal-link" title="twisted.words.im.ircsupport.IRCProto.nickname">nickname</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="instancevariable">
     
     <td>Instance Variable</td>
-    <td><code><a href="#performLogin">performLogin</a></code></td>
+    <td><code><a href="#password" class="internal-link" title="twisted.words.im.ircsupport.IRCProto.password">password</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="instancevariable">
     
     <td>Instance Variable</td>
-    <td><code><a href="#realname">realname</a></code></td>
+    <td><code><a href="#performLogin" class="internal-link" title="twisted.words.im.ircsupport.IRCProto.performLogin">perform​Login</a></code></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="instancevariable">
+    
+    <td>Instance Variable</td>
+    <td><code><a href="#realname" class="internal-link" title="twisted.words.im.ircsupport.IRCProto.realname">realname</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="instancevariable private">
     
     <td>Instance Variable</td>
-    <td><code><a href="#_groups">_groups</a></code></td>
+    <td><code><a href="#_groups" class="internal-link" title="twisted.words.im.ircsupport.IRCProto._groups">_groups</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="instancevariable private">
     
     <td>Instance Variable</td>
-    <td><code><a href="#_ingroups">_ingroups</a></code></td>
+    <td><code><a href="#_ingroups" class="internal-link" title="twisted.words.im.ircsupport.IRCProto._ingroups">_ingroups</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="instancevariable private">
     
     <td>Instance Variable</td>
-    <td><code><a href="#_namreplies">_namreplies</a></code></td>
+    <td><code><a href="#_namreplies" class="internal-link" title="twisted.words.im.ircsupport.IRCProto._namreplies">_namreplies</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="instancevariable private">
     
     <td>Instance Variable</td>
-    <td><code><a href="#_topics">_topics</a></code></td>
+    <td><code><a href="#_topics" class="internal-link" title="twisted.words.im.ircsupport.IRCProto._topics">_topics</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr>
 </table>
         
           <p class="inheritedFrom">
-            Inherited from <code><a href="twisted.words.im.basesupport.AbstractClientMixin.html">AbstractClientMixin</a></code>:
+            Inherited from <code><a href="twisted.words.im.basesupport.AbstractClientMixin.html" class="internal-link" title="twisted.words.im.basesupport.AbstractClientMixin">AbstractClientMixin</a></code>:
           </p>
-          <table class="children sortable" id="id3536">
+          <table class="children sortable" id="id3522">
   
   
   <tr class="basemethod">
     
     <td>Method</td>
-    <td><code><a href="twisted.words.im.basesupport.AbstractClientMixin.html#connectionLost">connectionLost</a></code></td>
+    <td><code><a href="twisted.words.im.basesupport.AbstractClientMixin.html#connectionLost" class="internal-link" title="twisted.words.im.basesupport.AbstractClientMixin.connectionLost">connection​Lost</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="basemethod">
     
     <td>Method</td>
-    <td><code><a href="twisted.words.im.basesupport.AbstractClientMixin.html#unregisterAsAccountClient">unregisterAsAccountClient</a></code></td>
-    <td><span>Tell the chat UI that I have `signed off'.</span></td>
+    <td><code><a href="twisted.words.im.basesupport.AbstractClientMixin.html#unregisterAsAccountClient" class="internal-link" title="twisted.words.im.basesupport.AbstractClientMixin.unregisterAsAccountClient">unregister​As​Account​Client</a></code></td>
+    <td>Tell the chat UI that I have `signed off'.</td>
   </tr><tr class="baseinstancevariable">
     
     <td>Instance Variable</td>
-    <td><code><a href="twisted.words.im.basesupport.AbstractClientMixin.html#account">account</a></code></td>
+    <td><code><a href="twisted.words.im.basesupport.AbstractClientMixin.html#account" class="internal-link" title="twisted.words.im.basesupport.AbstractClientMixin.account">account</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="baseinstancevariable">
     
     <td>Instance Variable</td>
-    <td><code><a href="twisted.words.im.basesupport.AbstractClientMixin.html#chat">chat</a></code></td>
+    <td><code><a href="twisted.words.im.basesupport.AbstractClientMixin.html#chat" class="internal-link" title="twisted.words.im.basesupport.AbstractClientMixin.chat">chat</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="baseclassvariable private">
     
     <td>Class Variable</td>
-    <td><code><a href="twisted.words.im.basesupport.AbstractClientMixin.html#_protoBase">_protoBase</a></code></td>
+    <td><code><a href="twisted.words.im.basesupport.AbstractClientMixin.html#_protoBase" class="internal-link" title="twisted.words.im.basesupport.AbstractClientMixin._protoBase">_proto​Base</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="baseinstancevariable private">
     
     <td>Instance Variable</td>
-    <td><code><a href="twisted.words.im.basesupport.AbstractClientMixin.html#_logonDeferred">_logonDeferred</a></code></td>
-    <td><span>Fired when I am done logging in.</span></td>
+    <td><code><a href="twisted.words.im.basesupport.AbstractClientMixin.html#_logonDeferred" class="internal-link" title="twisted.words.im.basesupport.AbstractClientMixin._logonDeferred">_logon​Deferred</a></code></td>
+    <td>Fired when I am done logging in.</td>
   </tr>
 </table>
           
           <p class="inheritedFrom">
-            Inherited from <code><a href="twisted.words.protocols.irc.IRCClient.html">IRCClient</a></code>:
+            Inherited from <code><a href="twisted.words.protocols.irc.IRCClient.html" class="internal-link" title="twisted.words.protocols.irc.IRCClient">IRCClient</a></code>:
           </p>
-          <table class="children sortable" id="id3537">
+          <table class="children sortable" id="id3523">
   
   
   <tr class="basemethod">
     
     <td>Method</td>
-    <td><code><a href="twisted.words.protocols.irc.IRCClient.html#__getstate__">__getstate__</a></code></td>
+    <td><code><a href="twisted.words.protocols.irc.IRCClient.html#__getstate__" class="internal-link" title="twisted.words.protocols.irc.IRCClient.__getstate__">__getstate__</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="basemethod">
     
     <td>Method</td>
-    <td><code><a href="twisted.words.protocols.irc.IRCClient.html#alterCollidedNick">alterCollidedNick</a></code></td>
-    <td><span>Generate an altered version of a nickname that caused a collision in an effort to create an unused related name for subsequent registration.</span></td>
+    <td><code><a href="twisted.words.protocols.irc.IRCClient.html#alterCollidedNick" class="internal-link" title="twisted.words.protocols.irc.IRCClient.alterCollidedNick">alter​Collided​Nick</a></code></td>
+    <td>Generate an altered version of a nickname that caused a collision in an effort to create an unused related name for subsequent registration.</td>
   </tr><tr class="basemethod">
     
     <td>Method</td>
-    <td><code><a href="twisted.words.protocols.irc.IRCClient.html#away">away</a></code></td>
-    <td><span>Mark this client as away.</span></td>
+    <td><code><a href="twisted.words.protocols.irc.IRCClient.html#away" class="internal-link" title="twisted.words.protocols.irc.IRCClient.away">away</a></code></td>
+    <td>Mark this client as away.</td>
   </tr><tr class="basemethod">
     
     <td>Method</td>
-    <td><code><a href="twisted.words.protocols.irc.IRCClient.html#back">back</a></code></td>
-    <td><span>Clear the away status.</span></td>
+    <td><code><a href="twisted.words.protocols.irc.IRCClient.html#back" class="internal-link" title="twisted.words.protocols.irc.IRCClient.back">back</a></code></td>
+    <td>Clear the away status.</td>
   </tr><tr class="basemethod">
     
     <td>Method</td>
-    <td><code><a href="twisted.words.protocols.irc.IRCClient.html#badMessage">badMessage</a></code></td>
-    <td><span>When I get a message that's so broken I can't use it.</span></td>
+    <td><code><a href="twisted.words.protocols.irc.IRCClient.html#badMessage" class="internal-link" title="twisted.words.protocols.irc.IRCClient.badMessage">bad​Message</a></code></td>
+    <td>When I get a message that's so broken I can't use it.</td>
   </tr><tr class="basemethod">
     
     <td>Method</td>
-    <td><code><a href="twisted.words.protocols.irc.IRCClient.html#bounce">bounce</a></code></td>
-    <td><span>Called with information about where the client should reconnect.</span></td>
+    <td><code><a href="twisted.words.protocols.irc.IRCClient.html#bounce" class="internal-link" title="twisted.words.protocols.irc.IRCClient.bounce">bounce</a></code></td>
+    <td>Called with information about where the client should reconnect.</td>
   </tr><tr class="basemethod">
     
     <td>Method</td>
-    <td><code><a href="twisted.words.protocols.irc.IRCClient.html#connectionLost">connectionLost</a></code></td>
-    <td><span>Called when the connection is shut down.</span></td>
+    <td><code><a href="twisted.words.protocols.irc.IRCClient.html#connectionLost" class="internal-link" title="twisted.words.protocols.irc.IRCClient.connectionLost">connection​Lost</a></code></td>
+    <td>Called when the connection is shut down.</td>
   </tr><tr class="basemethod">
     
     <td>Method</td>
-    <td><code><a href="twisted.words.protocols.irc.IRCClient.html#created">created</a></code></td>
-    <td><span>Called with creation date information about the server, usually at logon.</span></td>
+    <td><code><a href="twisted.words.protocols.irc.IRCClient.html#created" class="internal-link" title="twisted.words.protocols.irc.IRCClient.created">created</a></code></td>
+    <td>Called with creation date information about the server, usually at logon.</td>
   </tr><tr class="basemethod">
     
     <td>Method</td>
-    <td><code><a href="twisted.words.protocols.irc.IRCClient.html#ctcpMakeQuery">ctcpMakeQuery</a></code></td>
-    <td><span>Send one or more <code>extended messages</code> as a CTCP query.</span></td>
+    <td><code><a href="twisted.words.protocols.irc.IRCClient.html#ctcpMakeQuery" class="internal-link" title="twisted.words.protocols.irc.IRCClient.ctcpMakeQuery">ctcp​Make​Query</a></code></td>
+    <td>Send one or more <tt class="rst-docutils literal">extended messages</tt> as a CTCP query.</td>
   </tr><tr class="basemethod">
     
     <td>Method</td>
-    <td><code><a href="twisted.words.protocols.irc.IRCClient.html#ctcpMakeReply">ctcpMakeReply</a></code></td>
-    <td><span>Send one or more <code>extended messages</code> as a CTCP reply.</span></td>
+    <td><code><a href="twisted.words.protocols.irc.IRCClient.html#ctcpMakeReply" class="internal-link" title="twisted.words.protocols.irc.IRCClient.ctcpMakeReply">ctcp​Make​Reply</a></code></td>
+    <td>Send one or more <tt class="rst-docutils literal">extended messages</tt> as a CTCP reply.</td>
   </tr><tr class="basemethod">
     
     <td>Method</td>
-    <td><code><a href="twisted.words.protocols.irc.IRCClient.html#ctcpQuery">ctcpQuery</a></code></td>
-    <td><span>Dispatch method for any CTCP queries received.</span></td>
+    <td><code><a href="twisted.words.protocols.irc.IRCClient.html#ctcpQuery" class="internal-link" title="twisted.words.protocols.irc.IRCClient.ctcpQuery">ctcp​Query</a></code></td>
+    <td>Dispatch method for any CTCP queries received.</td>
   </tr><tr class="basemethod">
     
     <td>Method</td>
-    <td><code><a href="twisted.words.protocols.irc.IRCClient.html#ctcpQuery_ACTION">ctcpQuery_ACTION</a></code></td>
+    <td><code><a href="twisted.words.protocols.irc.IRCClient.html#ctcpQuery_ACTION" class="internal-link" title="twisted.words.protocols.irc.IRCClient.ctcpQuery_ACTION">ctcp​Query_​ACTION</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="basemethod">
     
     <td>Method</td>
-    <td><code><a href="twisted.words.protocols.irc.IRCClient.html#ctcpQuery_CLIENTINFO">ctcpQuery_CLIENTINFO</a></code></td>
-    <td><span>A master index of what CTCP tags this client knows.</span></td>
+    <td><code><a href="twisted.words.protocols.irc.IRCClient.html#ctcpQuery_CLIENTINFO" class="internal-link" title="twisted.words.protocols.irc.IRCClient.ctcpQuery_CLIENTINFO">ctcp​Query_​CLIENTINFO</a></code></td>
+    <td>A master index of what CTCP tags this client knows.</td>
   </tr><tr class="basemethod">
     
     <td>Method</td>
-    <td><code><a href="twisted.words.protocols.irc.IRCClient.html#ctcpQuery_DCC">ctcpQuery_DCC</a></code></td>
-    <td><span>Initiate a Direct Client Connection</span></td>
+    <td><code><a href="twisted.words.protocols.irc.IRCClient.html#ctcpQuery_DCC" class="internal-link" title="twisted.words.protocols.irc.IRCClient.ctcpQuery_DCC">ctcp​Query_​DCC</a></code></td>
+    <td>Initiate a Direct Client Connection</td>
   </tr><tr class="basemethod">
     
     <td>Method</td>
-    <td><code><a href="twisted.words.protocols.irc.IRCClient.html#ctcpQuery_ERRMSG">ctcpQuery_ERRMSG</a></code></td>
+    <td><code><a href="twisted.words.protocols.irc.IRCClient.html#ctcpQuery_ERRMSG" class="internal-link" title="twisted.words.protocols.irc.IRCClient.ctcpQuery_ERRMSG">ctcp​Query_​ERRMSG</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="basemethod">
     
     <td>Method</td>
-    <td><code><a href="twisted.words.protocols.irc.IRCClient.html#ctcpQuery_FINGER">ctcpQuery_FINGER</a></code></td>
+    <td><code><a href="twisted.words.protocols.irc.IRCClient.html#ctcpQuery_FINGER" class="internal-link" title="twisted.words.protocols.irc.IRCClient.ctcpQuery_FINGER">ctcp​Query_​FINGER</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="basemethod">
     
     <td>Method</td>
-    <td><code><a href="twisted.words.protocols.irc.IRCClient.html#ctcpQuery_PING">ctcpQuery_PING</a></code></td>
+    <td><code><a href="twisted.words.protocols.irc.IRCClient.html#ctcpQuery_PING" class="internal-link" title="twisted.words.protocols.irc.IRCClient.ctcpQuery_PING">ctcp​Query_​PING</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="basemethod">
     
     <td>Method</td>
-    <td><code><a href="twisted.words.protocols.irc.IRCClient.html#ctcpQuery_SOURCE">ctcpQuery_SOURCE</a></code></td>
+    <td><code><a href="twisted.words.protocols.irc.IRCClient.html#ctcpQuery_SOURCE" class="internal-link" title="twisted.words.protocols.irc.IRCClient.ctcpQuery_SOURCE">ctcp​Query_​SOURCE</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="basemethod">
     
     <td>Method</td>
-    <td><code><a href="twisted.words.protocols.irc.IRCClient.html#ctcpQuery_TIME">ctcpQuery_TIME</a></code></td>
+    <td><code><a href="twisted.words.protocols.irc.IRCClient.html#ctcpQuery_TIME" class="internal-link" title="twisted.words.protocols.irc.IRCClient.ctcpQuery_TIME">ctcp​Query_​TIME</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="basemethod">
     
     <td>Method</td>
-    <td><code><a href="twisted.words.protocols.irc.IRCClient.html#ctcpQuery_USERINFO">ctcpQuery_USERINFO</a></code></td>
+    <td><code><a href="twisted.words.protocols.irc.IRCClient.html#ctcpQuery_USERINFO" class="internal-link" title="twisted.words.protocols.irc.IRCClient.ctcpQuery_USERINFO">ctcp​Query_​USERINFO</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="basemethod">
     
     <td>Method</td>
-    <td><code><a href="twisted.words.protocols.irc.IRCClient.html#ctcpQuery_VERSION">ctcpQuery_VERSION</a></code></td>
+    <td><code><a href="twisted.words.protocols.irc.IRCClient.html#ctcpQuery_VERSION" class="internal-link" title="twisted.words.protocols.irc.IRCClient.ctcpQuery_VERSION">ctcp​Query_​VERSION</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="basemethod">
     
     <td>Method</td>
-    <td><code><a href="twisted.words.protocols.irc.IRCClient.html#ctcpReply">ctcpReply</a></code></td>
-    <td><span>Dispatch method for any CTCP replies received.</span></td>
+    <td><code><a href="twisted.words.protocols.irc.IRCClient.html#ctcpReply" class="internal-link" title="twisted.words.protocols.irc.IRCClient.ctcpReply">ctcp​Reply</a></code></td>
+    <td>Dispatch method for any CTCP replies received.</td>
   </tr><tr class="basemethod">
     
     <td>Method</td>
-    <td><code><a href="twisted.words.protocols.irc.IRCClient.html#ctcpReply_PING">ctcpReply_PING</a></code></td>
+    <td><code><a href="twisted.words.protocols.irc.IRCClient.html#ctcpReply_PING" class="internal-link" title="twisted.words.protocols.irc.IRCClient.ctcpReply_PING">ctcp​Reply_​PING</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="basemethod">
     
     <td>Method</td>
-    <td><code><a href="twisted.words.protocols.irc.IRCClient.html#ctcpUnknownQuery">ctcpUnknownQuery</a></code></td>
-    <td><span>Fallback handler for unrecognized CTCP queries.</span></td>
+    <td><code><a href="twisted.words.protocols.irc.IRCClient.html#ctcpUnknownQuery" class="internal-link" title="twisted.words.protocols.irc.IRCClient.ctcpUnknownQuery">ctcp​Unknown​Query</a></code></td>
+    <td>Fallback handler for unrecognized CTCP queries.</td>
   </tr><tr class="basemethod">
     
     <td>Method</td>
-    <td><code><a href="twisted.words.protocols.irc.IRCClient.html#ctcpUnknownReply">ctcpUnknownReply</a></code></td>
-    <td><span>Called when a fitting ctcpReply_ method is not found.</span></td>
+    <td><code><a href="twisted.words.protocols.irc.IRCClient.html#ctcpUnknownReply" class="internal-link" title="twisted.words.protocols.irc.IRCClient.ctcpUnknownReply">ctcp​Unknown​Reply</a></code></td>
+    <td>Called when a fitting ctcpReply_ method is not found.</td>
   </tr><tr class="basemethod">
     
     <td>Method</td>
-    <td><code><a href="twisted.words.protocols.irc.IRCClient.html#dataReceived">dataReceived</a></code></td>
-    <td><span>Protocol.dataReceived. Translates bytes into lines, and calls lineReceived (or rawDataReceived, depending on mode.)</span></td>
+    <td><code><a href="twisted.words.protocols.irc.IRCClient.html#dataReceived" class="internal-link" title="twisted.words.protocols.irc.IRCClient.dataReceived">data​Received</a></code></td>
+    <td>Protocol.dataReceived. Translates bytes into lines, and calls lineReceived (or rawDataReceived, depending on mode.)</td>
   </tr><tr class="basemethod">
     
     <td>Method</td>
-    <td><code><a href="twisted.words.protocols.irc.IRCClient.html#dcc_ACCEPT">dcc_ACCEPT</a></code></td>
+    <td><code><a href="twisted.words.protocols.irc.IRCClient.html#dcc_ACCEPT" class="internal-link" title="twisted.words.protocols.irc.IRCClient.dcc_ACCEPT">dcc_​ACCEPT</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="basemethod">
     
     <td>Method</td>
-    <td><code><a href="twisted.words.protocols.irc.IRCClient.html#dcc_CHAT">dcc_CHAT</a></code></td>
+    <td><code><a href="twisted.words.protocols.irc.IRCClient.html#dcc_CHAT" class="internal-link" title="twisted.words.protocols.irc.IRCClient.dcc_CHAT">dcc_​CHAT</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="basemethod">
     
     <td>Method</td>
-    <td><code><a href="twisted.words.protocols.irc.IRCClient.html#dcc_RESUME">dcc_RESUME</a></code></td>
+    <td><code><a href="twisted.words.protocols.irc.IRCClient.html#dcc_RESUME" class="internal-link" title="twisted.words.protocols.irc.IRCClient.dcc_RESUME">dcc_​RESUME</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="basemethod">
     
     <td>Method</td>
-    <td><code><a href="twisted.words.protocols.irc.IRCClient.html#dcc_SEND">dcc_SEND</a></code></td>
+    <td><code><a href="twisted.words.protocols.irc.IRCClient.html#dcc_SEND" class="internal-link" title="twisted.words.protocols.irc.IRCClient.dcc_SEND">dcc_​SEND</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="basemethod">
     
     <td>Method</td>
-    <td><code><a href="twisted.words.protocols.irc.IRCClient.html#dccAcceptResume">dccAcceptResume</a></code></td>
-    <td><span>Send a DCC ACCEPT response to clients who have requested a resume.</span></td>
+    <td><code><a href="twisted.words.protocols.irc.IRCClient.html#dccAcceptResume" class="internal-link" title="twisted.words.protocols.irc.IRCClient.dccAcceptResume">dcc​Accept​Resume</a></code></td>
+    <td>Send a DCC ACCEPT response to clients who have requested a resume.</td>
   </tr><tr class="basemethod">
     
     <td>Method</td>
-    <td><code><a href="twisted.words.protocols.irc.IRCClient.html#dccDoAcceptResume">dccDoAcceptResume</a></code></td>
-    <td><span>Called when a client has verified and accepted a DCC resume request made by us.  By default it will do nothing.</span></td>
+    <td><code><a href="twisted.words.protocols.irc.IRCClient.html#dccDoAcceptResume" class="internal-link" title="twisted.words.protocols.irc.IRCClient.dccDoAcceptResume">dcc​Do​Accept​Resume</a></code></td>
+    <td>Called when a client has verified and accepted a DCC resume request made by us.  By default it will do nothing.</td>
   </tr><tr class="basemethod">
     
     <td>Method</td>
-    <td><code><a href="twisted.words.protocols.irc.IRCClient.html#dccDoChat">dccDoChat</a></code></td>
+    <td><code><a href="twisted.words.protocols.irc.IRCClient.html#dccDoChat" class="internal-link" title="twisted.words.protocols.irc.IRCClient.dccDoChat">dcc​Do​Chat</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="basemethod">
     
     <td>Method</td>
-    <td><code><a href="twisted.words.protocols.irc.IRCClient.html#dccDoResume">dccDoResume</a></code></td>
-    <td><span>Called when a client is trying to resume an offered file via DCC send. It should be either replied to with a DCC ACCEPT or ignored (default).</span></td>
+    <td><code><a href="twisted.words.protocols.irc.IRCClient.html#dccDoResume" class="internal-link" title="twisted.words.protocols.irc.IRCClient.dccDoResume">dcc​Do​Resume</a></code></td>
+    <td>Called when a client is trying to resume an offered file via DCC send. It should be either replied to with a DCC ACCEPT or ignored (default).</td>
   </tr><tr class="basemethod">
     
     <td>Method</td>
-    <td><code><a href="twisted.words.protocols.irc.IRCClient.html#dccDoSend">dccDoSend</a></code></td>
-    <td><span>Called when I receive a DCC SEND offer from a client.</span></td>
+    <td><code><a href="twisted.words.protocols.irc.IRCClient.html#dccDoSend" class="internal-link" title="twisted.words.protocols.irc.IRCClient.dccDoSend">dcc​Do​Send</a></code></td>
+    <td>Called when I receive a DCC SEND offer from a client.</td>
   </tr><tr class="basemethod">
     
     <td>Method</td>
-    <td><code><a href="twisted.words.protocols.irc.IRCClient.html#dccResume">dccResume</a></code></td>
-    <td><span>Send a DCC RESUME request to another user.</span></td>
+    <td><code><a href="twisted.words.protocols.irc.IRCClient.html#dccResume" class="internal-link" title="twisted.words.protocols.irc.IRCClient.dccResume">dcc​Resume</a></code></td>
+    <td>Send a DCC RESUME request to another user.</td>
   </tr><tr class="basemethod">
     
     <td>Method</td>
-    <td><code><a href="twisted.words.protocols.irc.IRCClient.html#dccSend">dccSend</a></code></td>
-    <td><span>This is supposed to send a user a file directly.  This generally doesn't work on any client, and this method is included only for backwards compatibility and completeness.</span></td>
+    <td><code><a href="twisted.words.protocols.irc.IRCClient.html#dccSend" class="internal-link" title="twisted.words.protocols.irc.IRCClient.dccSend">dcc​Send</a></code></td>
+    <td>This is supposed to send a user a file directly.  This generally doesn't work on any client, and this method is included only for backwards compatibility and completeness.</td>
   </tr><tr class="basemethod">
     
     <td>Method</td>
-    <td><code><a href="twisted.words.protocols.irc.IRCClient.html#describe">describe</a></code></td>
-    <td><span>Strike a pose.</span></td>
+    <td><code><a href="twisted.words.protocols.irc.IRCClient.html#describe" class="internal-link" title="twisted.words.protocols.irc.IRCClient.describe">describe</a></code></td>
+    <td>Strike a pose.</td>
   </tr><tr class="basemethod">
     
     <td>Method</td>
-    <td><code><a href="twisted.words.protocols.irc.IRCClient.html#getChannelModeParams">getChannelModeParams</a></code></td>
-    <td><span>Get channel modes that require parameters for correct parsing.</span></td>
+    <td><code><a href="twisted.words.protocols.irc.IRCClient.html#getChannelModeParams" class="internal-link" title="twisted.words.protocols.irc.IRCClient.getChannelModeParams">get​Channel​Mode​Params</a></code></td>
+    <td>Get channel modes that require parameters for correct parsing.</td>
   </tr><tr class="basemethod">
     
     <td>Method</td>
-    <td><code><a href="twisted.words.protocols.irc.IRCClient.html#getUserModeParams">getUserModeParams</a></code></td>
-    <td><span>Get user modes that require parameters for correct parsing.</span></td>
+    <td><code><a href="twisted.words.protocols.irc.IRCClient.html#getUserModeParams" class="internal-link" title="twisted.words.protocols.irc.IRCClient.getUserModeParams">get​User​Mode​Params</a></code></td>
+    <td>Get user modes that require parameters for correct parsing.</td>
   </tr><tr class="basemethod">
     
     <td>Method</td>
-    <td><code><a href="twisted.words.protocols.irc.IRCClient.html#handleCommand">handleCommand</a></code></td>
-    <td><span>Determine the function to call for the given command and call it with the given arguments.</span></td>
+    <td><code><a href="twisted.words.protocols.irc.IRCClient.html#handleCommand" class="internal-link" title="twisted.words.protocols.irc.IRCClient.handleCommand">handle​Command</a></code></td>
+    <td>Determine the function to call for the given command and call it with the given arguments.</td>
   </tr><tr class="basemethod">
     
     <td>Method</td>
-    <td><code><a href="twisted.words.protocols.irc.IRCClient.html#invite">invite</a></code></td>
-    <td><span>Attempt to invite user to channel</span></td>
+    <td><code><a href="twisted.words.protocols.irc.IRCClient.html#invite" class="internal-link" title="twisted.words.protocols.irc.IRCClient.invite">invite</a></code></td>
+    <td>Attempt to invite user to channel</td>
   </tr><tr class="basemethod">
     
     <td>Method</td>
-    <td><code><a href="twisted.words.protocols.irc.IRCClient.html#irc_ERR_ERRONEUSNICKNAME">irc_ERR_ERRONEUSNICKNAME</a></code></td>
-    <td><span>Called when we try to register or change to an illegal nickname.</span></td>
+    <td><code><a href="twisted.words.protocols.irc.IRCClient.html#irc_ERR_ERRONEUSNICKNAME" class="internal-link" title="twisted.words.protocols.irc.IRCClient.irc_ERR_ERRONEUSNICKNAME">irc_​ERR_​ERRONEUSNICKNAME</a></code></td>
+    <td>Called when we try to register or change to an illegal nickname.</td>
   </tr><tr class="basemethod">
     
     <td>Method</td>
-    <td><code><a href="twisted.words.protocols.irc.IRCClient.html#irc_ERR_NICKNAMEINUSE">irc_ERR_NICKNAMEINUSE</a></code></td>
-    <td><span>Called when we try to register or change to a nickname that is already taken.</span></td>
+    <td><code><a href="twisted.words.protocols.irc.IRCClient.html#irc_ERR_NICKNAMEINUSE" class="internal-link" title="twisted.words.protocols.irc.IRCClient.irc_ERR_NICKNAMEINUSE">irc_​ERR_​NICKNAMEINUSE</a></code></td>
+    <td>Called when we try to register or change to a nickname that is already taken.</td>
   </tr><tr class="basemethod">
     
     <td>Method</td>
-    <td><code><a href="twisted.words.protocols.irc.IRCClient.html#irc_ERR_PASSWDMISMATCH">irc_ERR_PASSWDMISMATCH</a></code></td>
-    <td><span>Called when the login was incorrect.</span></td>
+    <td><code><a href="twisted.words.protocols.irc.IRCClient.html#irc_ERR_PASSWDMISMATCH" class="internal-link" title="twisted.words.protocols.irc.IRCClient.irc_ERR_PASSWDMISMATCH">irc_​ERR_​PASSWDMISMATCH</a></code></td>
+    <td>Called when the login was incorrect.</td>
   </tr><tr class="basemethod">
     
     <td>Method</td>
-    <td><code><a href="twisted.words.protocols.irc.IRCClient.html#irc_KICK">irc_KICK</a></code></td>
-    <td><span>Called when a user is kicked from a channel.</span></td>
+    <td><code><a href="twisted.words.protocols.irc.IRCClient.html#irc_KICK" class="internal-link" title="twisted.words.protocols.irc.IRCClient.irc_KICK">irc_​KICK</a></code></td>
+    <td>Called when a user is kicked from a channel.</td>
   </tr><tr class="basemethod">
     
     <td>Method</td>
-    <td><code><a href="twisted.words.protocols.irc.IRCClient.html#irc_MODE">irc_MODE</a></code></td>
-    <td><span>Parse a server mode change message.</span></td>
+    <td><code><a href="twisted.words.protocols.irc.IRCClient.html#irc_MODE" class="internal-link" title="twisted.words.protocols.irc.IRCClient.irc_MODE">irc_​MODE</a></code></td>
+    <td>Parse a server mode change message.</td>
   </tr><tr class="basemethod">
     
     <td>Method</td>
-    <td><code><a href="twisted.words.protocols.irc.IRCClient.html#irc_NOTICE">irc_NOTICE</a></code></td>
-    <td><span>Called when a user gets a notice.</span></td>
+    <td><code><a href="twisted.words.protocols.irc.IRCClient.html#irc_NOTICE" class="internal-link" title="twisted.words.protocols.irc.IRCClient.irc_NOTICE">irc_​NOTICE</a></code></td>
+    <td>Called when a user gets a notice.</td>
   </tr><tr class="basemethod">
     
     <td>Method</td>
-    <td><code><a href="twisted.words.protocols.irc.IRCClient.html#irc_PING">irc_PING</a></code></td>
-    <td><span>Called when some has pinged us.</span></td>
+    <td><code><a href="twisted.words.protocols.irc.IRCClient.html#irc_PING" class="internal-link" title="twisted.words.protocols.irc.IRCClient.irc_PING">irc_​PING</a></code></td>
+    <td>Called when some has pinged us.</td>
   </tr><tr class="basemethod">
     
     <td>Method</td>
-    <td><code><a href="twisted.words.protocols.irc.IRCClient.html#irc_PRIVMSG">irc_PRIVMSG</a></code></td>
-    <td><span>Called when we get a message.</span></td>
+    <td><code><a href="twisted.words.protocols.irc.IRCClient.html#irc_PRIVMSG" class="internal-link" title="twisted.words.protocols.irc.IRCClient.irc_PRIVMSG">irc_​PRIVMSG</a></code></td>
+    <td>Called when we get a message.</td>
   </tr><tr class="basemethod">
     
     <td>Method</td>
-    <td><code><a href="twisted.words.protocols.irc.IRCClient.html#irc_RPL_BOUNCE">irc_RPL_BOUNCE</a></code></td>
+    <td><code><a href="twisted.words.protocols.irc.IRCClient.html#irc_RPL_BOUNCE" class="internal-link" title="twisted.words.protocols.irc.IRCClient.irc_RPL_BOUNCE">irc_​RPL_​BOUNCE</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="basemethod">
     
     <td>Method</td>
-    <td><code><a href="twisted.words.protocols.irc.IRCClient.html#irc_RPL_CREATED">irc_RPL_CREATED</a></code></td>
+    <td><code><a href="twisted.words.protocols.irc.IRCClient.html#irc_RPL_CREATED" class="internal-link" title="twisted.words.protocols.irc.IRCClient.irc_RPL_CREATED">irc_​RPL_​CREATED</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="basemethod">
     
     <td>Method</td>
-    <td><code><a href="twisted.words.protocols.irc.IRCClient.html#irc_RPL_ENDOFMOTD">irc_RPL_ENDOFMOTD</a></code></td>
-    <td><span><i>RPL_ENDOFMOTD</i> indicates the end of the message of the day messages.  Deliver the accumulated lines to <code>receivedMOTD</code>.</span></td>
+    <td><code><a href="twisted.words.protocols.irc.IRCClient.html#irc_RPL_ENDOFMOTD" class="internal-link" title="twisted.words.protocols.irc.IRCClient.irc_RPL_ENDOFMOTD">irc_​RPL_​ENDOFMOTD</a></code></td>
+    <td><em>RPL_ENDOFMOTD</em> indicates the end of the message of the day messages.  Deliver the accumulated lines to <tt class="rst-docutils literal">receivedMOTD</tt>.</td>
   </tr><tr class="basemethod">
     
     <td>Method</td>
-    <td><code><a href="twisted.words.protocols.irc.IRCClient.html#irc_RPL_ISUPPORT">irc_RPL_ISUPPORT</a></code></td>
+    <td><code><a href="twisted.words.protocols.irc.IRCClient.html#irc_RPL_ISUPPORT" class="internal-link" title="twisted.words.protocols.irc.IRCClient.irc_RPL_ISUPPORT">irc_​RPL_​ISUPPORT</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="basemethod">
     
     <td>Method</td>
-    <td><code><a href="twisted.words.protocols.irc.IRCClient.html#irc_RPL_LUSERCHANNELS">irc_RPL_LUSERCHANNELS</a></code></td>
+    <td><code><a href="twisted.words.protocols.irc.IRCClient.html#irc_RPL_LUSERCHANNELS" class="internal-link" title="twisted.words.protocols.irc.IRCClient.irc_RPL_LUSERCHANNELS">irc_​RPL_​LUSERCHANNELS</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="basemethod">
     
     <td>Method</td>
-    <td><code><a href="twisted.words.protocols.irc.IRCClient.html#irc_RPL_LUSERCLIENT">irc_RPL_LUSERCLIENT</a></code></td>
+    <td><code><a href="twisted.words.protocols.irc.IRCClient.html#irc_RPL_LUSERCLIENT" class="internal-link" title="twisted.words.protocols.irc.IRCClient.irc_RPL_LUSERCLIENT">irc_​RPL_​LUSERCLIENT</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="basemethod">
     
     <td>Method</td>
-    <td><code><a href="twisted.words.protocols.irc.IRCClient.html#irc_RPL_LUSERME">irc_RPL_LUSERME</a></code></td>
+    <td><code><a href="twisted.words.protocols.irc.IRCClient.html#irc_RPL_LUSERME" class="internal-link" title="twisted.words.protocols.irc.IRCClient.irc_RPL_LUSERME">irc_​RPL_​LUSERME</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="basemethod">
     
     <td>Method</td>
-    <td><code><a href="twisted.words.protocols.irc.IRCClient.html#irc_RPL_LUSEROP">irc_RPL_LUSEROP</a></code></td>
+    <td><code><a href="twisted.words.protocols.irc.IRCClient.html#irc_RPL_LUSEROP" class="internal-link" title="twisted.words.protocols.irc.IRCClient.irc_RPL_LUSEROP">irc_​RPL_​LUSEROP</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="basemethod">
     
     <td>Method</td>
-    <td><code><a href="twisted.words.protocols.irc.IRCClient.html#irc_RPL_MOTD">irc_RPL_MOTD</a></code></td>
+    <td><code><a href="twisted.words.protocols.irc.IRCClient.html#irc_RPL_MOTD" class="internal-link" title="twisted.words.protocols.irc.IRCClient.irc_RPL_MOTD">irc_​RPL_​MOTD</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="basemethod">
     
     <td>Method</td>
-    <td><code><a href="twisted.words.protocols.irc.IRCClient.html#irc_RPL_MOTDSTART">irc_RPL_MOTDSTART</a></code></td>
+    <td><code><a href="twisted.words.protocols.irc.IRCClient.html#irc_RPL_MOTDSTART" class="internal-link" title="twisted.words.protocols.irc.IRCClient.irc_RPL_MOTDSTART">irc_​RPL_​MOTDSTART</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="basemethod">
     
     <td>Method</td>
-    <td><code><a href="twisted.words.protocols.irc.IRCClient.html#irc_RPL_MYINFO">irc_RPL_MYINFO</a></code></td>
+    <td><code><a href="twisted.words.protocols.irc.IRCClient.html#irc_RPL_MYINFO" class="internal-link" title="twisted.words.protocols.irc.IRCClient.irc_RPL_MYINFO">irc_​RPL_​MYINFO</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="basemethod">
     
     <td>Method</td>
-    <td><code><a href="twisted.words.protocols.irc.IRCClient.html#irc_RPL_NOTOPIC">irc_RPL_NOTOPIC</a></code></td>
+    <td><code><a href="twisted.words.protocols.irc.IRCClient.html#irc_RPL_NOTOPIC" class="internal-link" title="twisted.words.protocols.irc.IRCClient.irc_RPL_NOTOPIC">irc_​RPL_​NOTOPIC</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="basemethod">
     
     <td>Method</td>
-    <td><code><a href="twisted.words.protocols.irc.IRCClient.html#irc_RPL_WELCOME">irc_RPL_WELCOME</a></code></td>
-    <td><span>Called when we have received the welcome from the server.</span></td>
+    <td><code><a href="twisted.words.protocols.irc.IRCClient.html#irc_RPL_WELCOME" class="internal-link" title="twisted.words.protocols.irc.IRCClient.irc_RPL_WELCOME">irc_​RPL_​WELCOME</a></code></td>
+    <td>Called when we have received the welcome from the server.</td>
   </tr><tr class="basemethod">
     
     <td>Method</td>
-    <td><code><a href="twisted.words.protocols.irc.IRCClient.html#irc_RPL_YOURHOST">irc_RPL_YOURHOST</a></code></td>
+    <td><code><a href="twisted.words.protocols.irc.IRCClient.html#irc_RPL_YOURHOST" class="internal-link" title="twisted.words.protocols.irc.IRCClient.irc_RPL_YOURHOST">irc_​RPL_​YOURHOST</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="basemethod">
     
     <td>Method</td>
-    <td><code><a href="twisted.words.protocols.irc.IRCClient.html#isupport">isupport</a></code></td>
-    <td><span>Called with various information about what the server supports.</span></td>
+    <td><code><a href="twisted.words.protocols.irc.IRCClient.html#isupport" class="internal-link" title="twisted.words.protocols.irc.IRCClient.isupport">isupport</a></code></td>
+    <td>Called with various information about what the server supports.</td>
   </tr><tr class="basemethod">
     
     <td>Method</td>
-    <td><code><a href="twisted.words.protocols.irc.IRCClient.html#join">join</a></code></td>
-    <td><span>Join a channel.</span></td>
+    <td><code><a href="twisted.words.protocols.irc.IRCClient.html#join" class="internal-link" title="twisted.words.protocols.irc.IRCClient.join">join</a></code></td>
+    <td>Join a channel.</td>
   </tr><tr class="basemethod">
     
     <td>Method</td>
-    <td><code><a href="twisted.words.protocols.irc.IRCClient.html#joined">joined</a></code></td>
-    <td><span>Called when I finish joining a channel.</span></td>
+    <td><code><a href="twisted.words.protocols.irc.IRCClient.html#joined" class="internal-link" title="twisted.words.protocols.irc.IRCClient.joined">joined</a></code></td>
+    <td>Called when I finish joining a channel.</td>
   </tr><tr class="basemethod">
     
     <td>Method</td>
-    <td><code><a href="twisted.words.protocols.irc.IRCClient.html#kick">kick</a></code></td>
-    <td><span>Attempt to kick a user from a channel.</span></td>
+    <td><code><a href="twisted.words.protocols.irc.IRCClient.html#kick" class="internal-link" title="twisted.words.protocols.irc.IRCClient.kick">kick</a></code></td>
+    <td>Attempt to kick a user from a channel.</td>
   </tr><tr class="basemethod">
     
     <td>Method</td>
-    <td><code><a href="twisted.words.protocols.irc.IRCClient.html#leave">leave</a></code></td>
-    <td><span>Leave a channel.</span></td>
+    <td><code><a href="twisted.words.protocols.irc.IRCClient.html#leave" class="internal-link" title="twisted.words.protocols.irc.IRCClient.leave">leave</a></code></td>
+    <td>Leave a channel.</td>
   </tr><tr class="basemethod">
     
     <td>Method</td>
-    <td><code><a href="twisted.words.protocols.irc.IRCClient.html#left">left</a></code></td>
-    <td><span>Called when I have left a channel.</span></td>
+    <td><code><a href="twisted.words.protocols.irc.IRCClient.html#left" class="internal-link" title="twisted.words.protocols.irc.IRCClient.left">left</a></code></td>
+    <td>Called when I have left a channel.</td>
   </tr><tr class="basemethod">
     
     <td>Method</td>
-    <td><code><a href="twisted.words.protocols.irc.IRCClient.html#lineReceived">lineReceived</a></code></td>
-    <td><span>Override this for when each line is received.</span></td>
+    <td><code><a href="twisted.words.protocols.irc.IRCClient.html#lineReceived" class="internal-link" title="twisted.words.protocols.irc.IRCClient.lineReceived">line​Received</a></code></td>
+    <td>Override this for when each line is received.</td>
   </tr><tr class="basemethod">
     
     <td>Method</td>
-    <td><code><a href="twisted.words.protocols.irc.IRCClient.html#luserChannels">luserChannels</a></code></td>
-    <td><span>Called with the number of channels existent on the server.</span></td>
+    <td><code><a href="twisted.words.protocols.irc.IRCClient.html#luserChannels" class="internal-link" title="twisted.words.protocols.irc.IRCClient.luserChannels">luser​Channels</a></code></td>
+    <td>Called with the number of channels existent on the server.</td>
   </tr><tr class="basemethod">
     
     <td>Method</td>
-    <td><code><a href="twisted.words.protocols.irc.IRCClient.html#luserClient">luserClient</a></code></td>
-    <td><span>Called with information about the number of connections, usually at logon.</span></td>
+    <td><code><a href="twisted.words.protocols.irc.IRCClient.html#luserClient" class="internal-link" title="twisted.words.protocols.irc.IRCClient.luserClient">luser​Client</a></code></td>
+    <td>Called with information about the number of connections, usually at logon.</td>
   </tr><tr class="basemethod">
     
     <td>Method</td>
-    <td><code><a href="twisted.words.protocols.irc.IRCClient.html#luserMe">luserMe</a></code></td>
-    <td><span>Called with information about the server connected to.</span></td>
+    <td><code><a href="twisted.words.protocols.irc.IRCClient.html#luserMe" class="internal-link" title="twisted.words.protocols.irc.IRCClient.luserMe">luser​Me</a></code></td>
+    <td>Called with information about the server connected to.</td>
   </tr><tr class="basemethod">
     
     <td>Method</td>
-    <td><code><a href="twisted.words.protocols.irc.IRCClient.html#luserOp">luserOp</a></code></td>
-    <td><span>Called with the number of ops logged on to the server.</span></td>
+    <td><code><a href="twisted.words.protocols.irc.IRCClient.html#luserOp" class="internal-link" title="twisted.words.protocols.irc.IRCClient.luserOp">luser​Op</a></code></td>
+    <td>Called with the number of ops logged on to the server.</td>
   </tr><tr class="basemethod">
     
     <td>Method</td>
-    <td><code><a href="twisted.words.protocols.irc.IRCClient.html#mode">mode</a></code></td>
-    <td><span>Change the modes on a user or channel.</span></td>
+    <td><code><a href="twisted.words.protocols.irc.IRCClient.html#mode" class="internal-link" title="twisted.words.protocols.irc.IRCClient.mode">mode</a></code></td>
+    <td>Change the modes on a user or channel.</td>
   </tr><tr class="basemethod">
     
     <td>Method</td>
-    <td><code><a href="twisted.words.protocols.irc.IRCClient.html#modeChanged">modeChanged</a></code></td>
-    <td><span>Called when users or channel's modes are changed.</span></td>
+    <td><code><a href="twisted.words.protocols.irc.IRCClient.html#modeChanged" class="internal-link" title="twisted.words.protocols.irc.IRCClient.modeChanged">mode​Changed</a></code></td>
+    <td>Called when users or channel's modes are changed.</td>
   </tr><tr class="basemethod">
     
     <td>Method</td>
-    <td><code><a href="twisted.words.protocols.irc.IRCClient.html#msg">msg</a></code></td>
-    <td><span>Send a message to a user or channel.</span></td>
+    <td><code><a href="twisted.words.protocols.irc.IRCClient.html#msg" class="internal-link" title="twisted.words.protocols.irc.IRCClient.msg">msg</a></code></td>
+    <td>Send a message to a user or channel.</td>
   </tr><tr class="basemethod">
     
     <td>Method</td>
-    <td><code><a href="twisted.words.protocols.irc.IRCClient.html#myInfo">myInfo</a></code></td>
-    <td><span>Called with information about the server, usually at logon.</span></td>
+    <td><code><a href="twisted.words.protocols.irc.IRCClient.html#myInfo" class="internal-link" title="twisted.words.protocols.irc.IRCClient.myInfo">my​Info</a></code></td>
+    <td>Called with information about the server, usually at logon.</td>
   </tr><tr class="basemethod">
     
     <td>Method</td>
-    <td><code><a href="twisted.words.protocols.irc.IRCClient.html#nickChanged">nickChanged</a></code></td>
-    <td><span>Called when my nick has been changed.</span></td>
+    <td><code><a href="twisted.words.protocols.irc.IRCClient.html#nickChanged" class="internal-link" title="twisted.words.protocols.irc.IRCClient.nickChanged">nick​Changed</a></code></td>
+    <td>Called when my nick has been changed.</td>
   </tr><tr class="basemethod">
     
     <td>Method</td>
-    <td><code><a href="twisted.words.protocols.irc.IRCClient.html#notice">notice</a></code></td>
-    <td><span>Send a notice to a user.</span></td>
+    <td><code><a href="twisted.words.protocols.irc.IRCClient.html#notice" class="internal-link" title="twisted.words.protocols.irc.IRCClient.notice">notice</a></code></td>
+    <td>Send a notice to a user.</td>
   </tr><tr class="basemethod">
     
     <td>Method</td>
-    <td><code><a href="twisted.words.protocols.irc.IRCClient.html#ping">ping</a></code></td>
-    <td><span>Measure round-trip delay to another IRC client.</span></td>
+    <td><code><a href="twisted.words.protocols.irc.IRCClient.html#ping" class="internal-link" title="twisted.words.protocols.irc.IRCClient.ping">ping</a></code></td>
+    <td>Measure round-trip delay to another IRC client.</td>
   </tr><tr class="basemethod">
     
     <td>Method</td>
-    <td><code><a href="twisted.words.protocols.irc.IRCClient.html#pong">pong</a></code></td>
-    <td><span>Called with the results of a CTCP PING query.</span></td>
+    <td><code><a href="twisted.words.protocols.irc.IRCClient.html#pong" class="internal-link" title="twisted.words.protocols.irc.IRCClient.pong">pong</a></code></td>
+    <td>Called with the results of a CTCP PING query.</td>
   </tr><tr class="basemethod">
     
     <td>Method</td>
-    <td><code><a href="twisted.words.protocols.irc.IRCClient.html#quirkyMessage">quirkyMessage</a></code></td>
-    <td><span>This is called when I receive a message which is peculiar, but not wholly indecipherable.</span></td>
+    <td><code><a href="twisted.words.protocols.irc.IRCClient.html#quirkyMessage" class="internal-link" title="twisted.words.protocols.irc.IRCClient.quirkyMessage">quirky​Message</a></code></td>
+    <td>This is called when I receive a message which is peculiar, but not wholly indecipherable.</td>
   </tr><tr class="basemethod">
     
     <td>Method</td>
-    <td><code><a href="twisted.words.protocols.irc.IRCClient.html#quit">quit</a></code></td>
-    <td><span>Disconnect from the server</span></td>
+    <td><code><a href="twisted.words.protocols.irc.IRCClient.html#quit" class="internal-link" title="twisted.words.protocols.irc.IRCClient.quit">quit</a></code></td>
+    <td>Disconnect from the server</td>
   </tr><tr class="basemethod">
     
     <td>Method</td>
-    <td><code><a href="twisted.words.protocols.irc.IRCClient.html#receivedMOTD">receivedMOTD</a></code></td>
-    <td><span>I received a message-of-the-day banner from the server.</span></td>
+    <td><code><a href="twisted.words.protocols.irc.IRCClient.html#receivedMOTD" class="internal-link" title="twisted.words.protocols.irc.IRCClient.receivedMOTD">received​MOTD</a></code></td>
+    <td>I received a message-of-the-day banner from the server.</td>
   </tr><tr class="basemethod">
     
     <td>Method</td>
-    <td><code><a href="twisted.words.protocols.irc.IRCClient.html#register">register</a></code></td>
-    <td><span>Login to the server.</span></td>
+    <td><code><a href="twisted.words.protocols.irc.IRCClient.html#register" class="internal-link" title="twisted.words.protocols.irc.IRCClient.register">register</a></code></td>
+    <td>Login to the server.</td>
   </tr><tr class="basemethod">
     
     <td>Method</td>
-    <td><code><a href="twisted.words.protocols.irc.IRCClient.html#say">say</a></code></td>
-    <td><span>Send a message to a channel</span></td>
+    <td><code><a href="twisted.words.protocols.irc.IRCClient.html#say" class="internal-link" title="twisted.words.protocols.irc.IRCClient.say">say</a></code></td>
+    <td>Send a message to a channel</td>
   </tr><tr class="basemethod">
     
     <td>Method</td>
-    <td><code><a href="twisted.words.protocols.irc.IRCClient.html#sendLine">sendLine</a></code></td>
-    <td><span>Sends a line to the other end of the connection.</span></td>
+    <td><code><a href="twisted.words.protocols.irc.IRCClient.html#sendLine" class="internal-link" title="twisted.words.protocols.irc.IRCClient.sendLine">send​Line</a></code></td>
+    <td>Sends a line to the other end of the connection.</td>
   </tr><tr class="basemethod">
     
     <td>Method</td>
-    <td><code><a href="twisted.words.protocols.irc.IRCClient.html#signedOn">signedOn</a></code></td>
-    <td><span>Called after successfully signing on to the server.</span></td>
+    <td><code><a href="twisted.words.protocols.irc.IRCClient.html#signedOn" class="internal-link" title="twisted.words.protocols.irc.IRCClient.signedOn">signed​On</a></code></td>
+    <td>Called after successfully signing on to the server.</td>
   </tr><tr class="basemethod">
     
     <td>Method</td>
-    <td><code><a href="twisted.words.protocols.irc.IRCClient.html#startHeartbeat">startHeartbeat</a></code></td>
-    <td><span>Start sending <i>PING</i> messages every <code><a href="#heartbeatInterval">IRCClient.heartbeatInterval</a></code> seconds to keep the connection to the server alive during periods of no activity.</span></td>
+    <td><code><a href="twisted.words.protocols.irc.IRCClient.html#startHeartbeat" class="internal-link" title="twisted.words.protocols.irc.IRCClient.startHeartbeat">start​Heartbeat</a></code></td>
+    <td>Start sending <em>PING</em> messages every <code><a href="#heartbeatInterval" class="internal-link" title="twisted.words.protocols.irc.IRCClient.heartbeatInterval">IRCClient.heartbeatInterval</a></code> seconds to keep the connection to the server alive during periods of no activity.</td>
   </tr><tr class="basemethod">
     
     <td>Method</td>
-    <td><code><a href="twisted.words.protocols.irc.IRCClient.html#stopHeartbeat">stopHeartbeat</a></code></td>
-    <td><span>Stop sending <i>PING</i> messages to keep the connection to the server alive.</span></td>
+    <td><code><a href="twisted.words.protocols.irc.IRCClient.html#stopHeartbeat" class="internal-link" title="twisted.words.protocols.irc.IRCClient.stopHeartbeat">stop​Heartbeat</a></code></td>
+    <td>Stop sending <em>PING</em> messages to keep the connection to the server alive.</td>
   </tr><tr class="basemethod">
     
     <td>Method</td>
-    <td><code><a href="twisted.words.protocols.irc.IRCClient.html#topic">topic</a></code></td>
-    <td><span>Attempt to set the topic of the given channel, or ask what it is.</span></td>
+    <td><code><a href="twisted.words.protocols.irc.IRCClient.html#topic" class="internal-link" title="twisted.words.protocols.irc.IRCClient.topic">topic</a></code></td>
+    <td>Attempt to set the topic of the given channel, or ask what it is.</td>
   </tr><tr class="basemethod">
     
     <td>Method</td>
-    <td><code><a href="twisted.words.protocols.irc.IRCClient.html#topicUpdated">topicUpdated</a></code></td>
-    <td><span>In channel, user changed the topic to newTopic.</span></td>
+    <td><code><a href="twisted.words.protocols.irc.IRCClient.html#topicUpdated" class="internal-link" title="twisted.words.protocols.irc.IRCClient.topicUpdated">topic​Updated</a></code></td>
+    <td>In channel, user changed the topic to newTopic.</td>
   </tr><tr class="basemethod">
     
     <td>Method</td>
-    <td><code><a href="twisted.words.protocols.irc.IRCClient.html#userJoined">userJoined</a></code></td>
-    <td><span>Called when I see another user joining a channel.</span></td>
+    <td><code><a href="twisted.words.protocols.irc.IRCClient.html#userJoined" class="internal-link" title="twisted.words.protocols.irc.IRCClient.userJoined">user​Joined</a></code></td>
+    <td>Called when I see another user joining a channel.</td>
   </tr><tr class="basemethod">
     
     <td>Method</td>
-    <td><code><a href="twisted.words.protocols.irc.IRCClient.html#userLeft">userLeft</a></code></td>
-    <td><span>Called when I see another user leaving a channel.</span></td>
+    <td><code><a href="twisted.words.protocols.irc.IRCClient.html#userLeft" class="internal-link" title="twisted.words.protocols.irc.IRCClient.userLeft">user​Left</a></code></td>
+    <td>Called when I see another user leaving a channel.</td>
   </tr><tr class="basemethod">
     
     <td>Method</td>
-    <td><code><a href="twisted.words.protocols.irc.IRCClient.html#userQuit">userQuit</a></code></td>
-    <td><span>Called when I see another user disconnect from the network.</span></td>
+    <td><code><a href="twisted.words.protocols.irc.IRCClient.html#userQuit" class="internal-link" title="twisted.words.protocols.irc.IRCClient.userQuit">user​Quit</a></code></td>
+    <td>Called when I see another user disconnect from the network.</td>
   </tr><tr class="basemethod">
     
     <td>Method</td>
-    <td><code><a href="twisted.words.protocols.irc.IRCClient.html#userRenamed">userRenamed</a></code></td>
-    <td><span>A user changed their name from oldname to newname.</span></td>
+    <td><code><a href="twisted.words.protocols.irc.IRCClient.html#userRenamed" class="internal-link" title="twisted.words.protocols.irc.IRCClient.userRenamed">user​Renamed</a></code></td>
+    <td>A user changed their name from oldname to newname.</td>
   </tr><tr class="basemethod">
     
     <td>Method</td>
-    <td><code><a href="twisted.words.protocols.irc.IRCClient.html#whois">whois</a></code></td>
-    <td><span>Retrieve user information about the given nickname.</span></td>
+    <td><code><a href="twisted.words.protocols.irc.IRCClient.html#whois" class="internal-link" title="twisted.words.protocols.irc.IRCClient.whois">whois</a></code></td>
+    <td>Retrieve user information about the given nickname.</td>
   </tr><tr class="basemethod">
     
     <td>Method</td>
-    <td><code><a href="twisted.words.protocols.irc.IRCClient.html#yourHost">yourHost</a></code></td>
-    <td><span>Called with daemon information about the server, usually at logon.</span></td>
+    <td><code><a href="twisted.words.protocols.irc.IRCClient.html#yourHost" class="internal-link" title="twisted.words.protocols.irc.IRCClient.yourHost">your​Host</a></code></td>
+    <td>Called with daemon information about the server, usually at logon.</td>
   </tr><tr class="baseclassvariable">
     
     <td>Class Variable</td>
-    <td><code><a href="twisted.words.protocols.irc.IRCClient.html#__pychecker__">__pychecker__</a></code></td>
-    <td><span class="undocumented">Undocumented</span></td>
-  </tr><tr class="baseclassvariable">
-    
-    <td>Class Variable</td>
-    <td><code><a href="twisted.words.protocols.irc.IRCClient.html#dcc_destdir">dcc_destdir</a></code></td>
+    <td><code><a href="twisted.words.protocols.irc.IRCClient.html#__pychecker__" class="internal-link" title="twisted.words.protocols.irc.IRCClient.__pychecker__">__pychecker__</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="baseclassvariable">
     
     <td>Class Variable</td>
-    <td><code><a href="twisted.words.protocols.irc.IRCClient.html#delimiter">delimiter</a></code></td>
+    <td><code><a href="twisted.words.protocols.irc.IRCClient.html#dcc_destdir" class="internal-link" title="twisted.words.protocols.irc.IRCClient.dcc_destdir">dcc​_destdir</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
-  </tr><tr class="baseinstancevariable">
-    
-    <td>Instance Variable</td>
-    <td><code><a href="twisted.words.protocols.irc.IRCClient.html#dcc_sessions">dcc_sessions</a></code></td>
-    <td><span class="undocumented">Undocumented</span></td>
-  </tr><tr class="baseinstancevariable">
-    
-    <td>Instance Variable</td>
-    <td><code><a href="twisted.words.protocols.irc.IRCClient.html#erroneousNickFallback">erroneousNickFallback</a></code></td>
-    <td><span>Default nickname assigned when an unregistered client triggers an <code>ERR_ERRONEUSNICKNAME</code> while trying to register with an illegal nickname.</span></td>
-  </tr><tr class="baseinstancevariable">
-    
-    <td>Instance Variable</td>
-    <td><code><a href="twisted.words.protocols.irc.IRCClient.html#fingerReply">fingerReply</a></code></td>
-    <td><span>Sent in reply to a <code>FINGER</code> CTCP query.  If <code><a href="https://docs.python.org/3/library/constants.html#None">None</a></code>, no FINGER reply will be sent.</span></td>
-  </tr><tr class="baseinstancevariable">
-    
-    <td>Instance Variable</td>
-    <td><code><a href="twisted.words.protocols.irc.IRCClient.html#heartbeatInterval">heartbeatInterval</a></code></td>
-    <td><span>Interval, in seconds, to send <i>PING</i> messages to the server as a form of keepalive, defaults to 120 seconds. Use <code><a href="https://docs.python.org/3/library/constants.html#None">None</a></code> to disable the heartbeat.</span></td>
-  </tr><tr class="baseinstancevariable">
-    
-    <td>Instance Variable</td>
-    <td><code><a href="twisted.words.protocols.irc.IRCClient.html#hostname">hostname</a></code></td>
-    <td><span>Host name of the IRC server the client is connected to. Initially the host name is <code><a href="https://docs.python.org/3/library/constants.html#None">None</a></code> and later is set to the host name from which the <i>RPL_WELCOME</i> message is received.</span></td>
-  </tr><tr class="baseinstancevariable">
-    
-    <td>Instance Variable</td>
-    <td><code><a href="twisted.words.protocols.irc.IRCClient.html#lineRate">lineRate</a></code></td>
-    <td><span>Minimum delay between lines sent to the server.  If <code><a href="https://docs.python.org/3/library/constants.html#None">None</a></code>, no delay will be imposed.</span></td>
-  </tr><tr class="baseinstancevariable">
-    
-    <td>Instance Variable</td>
-    <td><code><a href="twisted.words.protocols.irc.IRCClient.html#motd">motd</a></code></td>
-    <td><span>Either <code><a href="https://docs.python.org/3/library/constants.html#None">None</a></code> or, between receipt of <i>RPL_MOTDSTART</i> and <i>RPL_ENDOFMOTD</i>, a <code><a href="https://docs.python.org/3/library/stdtypes.html#list">list</a></code> of <code><a href="https://docs.python.org/3/library/stdtypes.html#str">str</a></code>, each of which is the content of an <i>RPL_MOTD</i> message.</span></td>
-  </tr><tr class="baseinstancevariable">
-    
-    <td>Instance Variable</td>
-    <td><code><a href="twisted.words.protocols.irc.IRCClient.html#sourceURL">sourceURL</a></code></td>
-    <td><span>CTCP SOURCE reply, a URL where the source code of this client may be found.  If <code><a href="https://docs.python.org/3/library/constants.html#None">None</a></code>, no SOURCE reply will be sent.</span></td>
-  </tr><tr class="baseinstancevariable">
-    
-    <td>Instance Variable</td>
-    <td><code><a href="twisted.words.protocols.irc.IRCClient.html#supported">supported</a></code></td>
-    <td><span>Available ISUPPORT features on the server</span></td>
-  </tr><tr class="baseinstancevariable">
-    
-    <td>Instance Variable</td>
-    <td><code><a href="twisted.words.protocols.irc.IRCClient.html#userinfo">userinfo</a></code></td>
-    <td><span>Sent in reply to a <code>USERINFO</code> CTCP query.  If <code><a href="https://docs.python.org/3/library/constants.html#None">None</a></code>, no USERINFO reply will be sent. "This is used to transmit a string which is settable by the user (and never should be set by the client)."</span></td>
-  </tr><tr class="baseinstancevariable">
-    
-    <td>Instance Variable</td>
-    <td><code><a href="twisted.words.protocols.irc.IRCClient.html#username">username</a></code></td>
-    <td><span>Supplied to the server during login as the "User name". May be <code><a href="https://docs.python.org/3/library/constants.html#None">None</a></code></span></td>
-  </tr><tr class="baseinstancevariable">
-    
-    <td>Instance Variable</td>
-    <td><code><a href="twisted.words.protocols.irc.IRCClient.html#versionEnv">versionEnv</a></code></td>
-    <td><span>CTCP VERSION reply, environment the client is running in.</span></td>
-  </tr><tr class="baseinstancevariable">
-    
-    <td>Instance Variable</td>
-    <td><code><a href="twisted.words.protocols.irc.IRCClient.html#versionName">versionName</a></code></td>
-    <td><span>CTCP VERSION reply, client name.  If <code><a href="https://docs.python.org/3/library/constants.html#None">None</a></code>, no VERSION reply will be sent.</span></td>
-  </tr><tr class="baseinstancevariable">
-    
-    <td>Instance Variable</td>
-    <td><code><a href="twisted.words.protocols.irc.IRCClient.html#versionNum">versionNum</a></code></td>
-    <td><span>CTCP VERSION reply, client version.</span></td>
-  </tr><tr class="basemethod private">
-    
-    <td>Method</td>
-    <td><code><a href="twisted.words.protocols.irc.IRCClient.html#_createHeartbeat">_createHeartbeat</a></code></td>
-    <td><span>Create the heartbeat <code><a href="twisted.internet.task.LoopingCall.html">LoopingCall</a></code>.</span></td>
-  </tr><tr class="basemethod private">
-    
-    <td>Method</td>
-    <td><code><a href="twisted.words.protocols.irc.IRCClient.html#_reallySendLine">_reallySendLine</a></code></td>
-    <td><span class="undocumented">Undocumented</span></td>
-  </tr><tr class="basemethod private">
-    
-    <td>Method</td>
-    <td><code><a href="twisted.words.protocols.irc.IRCClient.html#_safeMaximumLineLength">_safeMaximumLineLength</a></code></td>
-    <td><span>Estimate a safe maximum line length for the given command.</span></td>
-  </tr><tr class="basemethod private">
-    
-    <td>Method</td>
-    <td><code><a href="twisted.words.protocols.irc.IRCClient.html#_sendHeartbeat">_sendHeartbeat</a></code></td>
-    <td><span>Send a <i>PING</i> message to the IRC server as a form of keepalive.</span></td>
-  </tr><tr class="basemethod private">
-    
-    <td>Method</td>
-    <td><code><a href="twisted.words.protocols.irc.IRCClient.html#_sendLine">_sendLine</a></code></td>
-    <td><span class="undocumented">Undocumented</span></td>
-  </tr><tr class="baseclassvariable private">
+  </tr><tr class="baseclassvariable">
     
     <td>Class Variable</td>
-    <td><code><a href="twisted.words.protocols.irc.IRCClient.html#_MAX_PINGRING">_MAX_PINGRING</a></code></td>
+    <td><code><a href="twisted.words.protocols.irc.IRCClient.html#delimiter" class="internal-link" title="twisted.words.protocols.irc.IRCClient.delimiter">delimiter</a></code></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="baseinstancevariable">
+    
+    <td>Instance Variable</td>
+    <td><code><a href="twisted.words.protocols.irc.IRCClient.html#dcc_sessions" class="internal-link" title="twisted.words.protocols.irc.IRCClient.dcc_sessions">dcc​_sessions</a></code></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="baseinstancevariable">
+    
+    <td>Instance Variable</td>
+    <td><code><a href="twisted.words.protocols.irc.IRCClient.html#erroneousNickFallback" class="internal-link" title="twisted.words.protocols.irc.IRCClient.erroneousNickFallback">erroneous​Nick​Fallback</a></code></td>
+    <td>Default nickname assigned when an unregistered client triggers an <tt class="rst-docutils literal">ERR_ERRONEUSNICKNAME</tt> while trying to register with an illegal nickname.</td>
+  </tr><tr class="baseinstancevariable">
+    
+    <td>Instance Variable</td>
+    <td><code><a href="twisted.words.protocols.irc.IRCClient.html#fingerReply" class="internal-link" title="twisted.words.protocols.irc.IRCClient.fingerReply">finger​Reply</a></code></td>
+    <td>Sent in reply to a <tt class="rst-docutils literal">FINGER</tt> CTCP query.  If <code><a href="https://docs.python.org/3/library/constants.html#None" class="intersphinx-link">None</a></code>, no FINGER reply will be sent.</td>
+  </tr><tr class="baseinstancevariable">
+    
+    <td>Instance Variable</td>
+    <td><code><a href="twisted.words.protocols.irc.IRCClient.html#heartbeatInterval" class="internal-link" title="twisted.words.protocols.irc.IRCClient.heartbeatInterval">heartbeat​Interval</a></code></td>
+    <td>Interval, in seconds, to send <em>PING</em> messages to the server as a form of keepalive, defaults to 120 seconds. Use <code><a href="https://docs.python.org/3/library/constants.html#None" class="intersphinx-link">None</a></code> to disable the heartbeat.</td>
+  </tr><tr class="baseinstancevariable">
+    
+    <td>Instance Variable</td>
+    <td><code><a href="twisted.words.protocols.irc.IRCClient.html#hostname" class="internal-link" title="twisted.words.protocols.irc.IRCClient.hostname">hostname</a></code></td>
+    <td>Host name of the IRC server the client is connected to. Initially the host name is <code><a href="https://docs.python.org/3/library/constants.html#None" class="intersphinx-link">None</a></code> and later is set to the host name from which the <em>RPL_WELCOME</em> message is received.</td>
+  </tr><tr class="baseinstancevariable">
+    
+    <td>Instance Variable</td>
+    <td><code><a href="twisted.words.protocols.irc.IRCClient.html#lineRate" class="internal-link" title="twisted.words.protocols.irc.IRCClient.lineRate">line​Rate</a></code></td>
+    <td>Minimum delay between lines sent to the server.  If <code><a href="https://docs.python.org/3/library/constants.html#None" class="intersphinx-link">None</a></code>, no delay will be imposed.</td>
+  </tr><tr class="baseinstancevariable">
+    
+    <td>Instance Variable</td>
+    <td><code><a href="twisted.words.protocols.irc.IRCClient.html#motd" class="internal-link" title="twisted.words.protocols.irc.IRCClient.motd">motd</a></code></td>
+    <td>Either <code><a href="https://docs.python.org/3/library/constants.html#None" class="intersphinx-link">None</a></code> or, between receipt of <em>RPL_MOTDSTART</em> and <em>RPL_ENDOFMOTD</em>, a <code><a href="https://docs.python.org/3/library/stdtypes.html#list" class="intersphinx-link">list</a></code> of <code><a href="https://docs.python.org/3/library/stdtypes.html#str" class="intersphinx-link">str</a></code>, each of which is the content of an <em>RPL_MOTD</em> message.</td>
+  </tr><tr class="baseinstancevariable">
+    
+    <td>Instance Variable</td>
+    <td><code><a href="twisted.words.protocols.irc.IRCClient.html#sourceURL" class="internal-link" title="twisted.words.protocols.irc.IRCClient.sourceURL">source​URL</a></code></td>
+    <td>CTCP SOURCE reply, a URL where the source code of this client may be found.  If <code><a href="https://docs.python.org/3/library/constants.html#None" class="intersphinx-link">None</a></code>, no SOURCE reply will be sent.</td>
+  </tr><tr class="baseinstancevariable">
+    
+    <td>Instance Variable</td>
+    <td><code><a href="twisted.words.protocols.irc.IRCClient.html#supported" class="internal-link" title="twisted.words.protocols.irc.IRCClient.supported">supported</a></code></td>
+    <td>Available ISUPPORT features on the server</td>
+  </tr><tr class="baseinstancevariable">
+    
+    <td>Instance Variable</td>
+    <td><code><a href="twisted.words.protocols.irc.IRCClient.html#userinfo" class="internal-link" title="twisted.words.protocols.irc.IRCClient.userinfo">userinfo</a></code></td>
+    <td>Sent in reply to a <tt class="rst-docutils literal">USERINFO</tt> CTCP query.  If <code><a href="https://docs.python.org/3/library/constants.html#None" class="intersphinx-link">None</a></code>, no USERINFO reply will be sent. "This is used to transmit a string which is settable by the user (and never should be set by the client)."</td>
+  </tr><tr class="baseinstancevariable">
+    
+    <td>Instance Variable</td>
+    <td><code><a href="twisted.words.protocols.irc.IRCClient.html#username" class="internal-link" title="twisted.words.protocols.irc.IRCClient.username">username</a></code></td>
+    <td>Supplied to the server during login as the "User name". May be <code><a href="https://docs.python.org/3/library/constants.html#None" class="intersphinx-link">None</a></code></td>
+  </tr><tr class="baseinstancevariable">
+    
+    <td>Instance Variable</td>
+    <td><code><a href="twisted.words.protocols.irc.IRCClient.html#versionEnv" class="internal-link" title="twisted.words.protocols.irc.IRCClient.versionEnv">version​Env</a></code></td>
+    <td>CTCP VERSION reply, environment the client is running in.</td>
+  </tr><tr class="baseinstancevariable">
+    
+    <td>Instance Variable</td>
+    <td><code><a href="twisted.words.protocols.irc.IRCClient.html#versionName" class="internal-link" title="twisted.words.protocols.irc.IRCClient.versionName">version​Name</a></code></td>
+    <td>CTCP VERSION reply, client name.  If <code><a href="https://docs.python.org/3/library/constants.html#None" class="intersphinx-link">None</a></code>, no VERSION reply will be sent.</td>
+  </tr><tr class="baseinstancevariable">
+    
+    <td>Instance Variable</td>
+    <td><code><a href="twisted.words.protocols.irc.IRCClient.html#versionNum" class="internal-link" title="twisted.words.protocols.irc.IRCClient.versionNum">version​Num</a></code></td>
+    <td>CTCP VERSION reply, client version.</td>
+  </tr><tr class="basemethod private">
+    
+    <td>Method</td>
+    <td><code><a href="twisted.words.protocols.irc.IRCClient.html#_createHeartbeat" class="internal-link" title="twisted.words.protocols.irc.IRCClient._createHeartbeat">_create​Heartbeat</a></code></td>
+    <td>Create the heartbeat <code><a href="twisted.internet.task.LoopingCall.html" class="internal-link" title="twisted.internet.task.LoopingCall">LoopingCall</a></code>.</td>
+  </tr><tr class="basemethod private">
+    
+    <td>Method</td>
+    <td><code><a href="twisted.words.protocols.irc.IRCClient.html#_reallySendLine" class="internal-link" title="twisted.words.protocols.irc.IRCClient._reallySendLine">_really​Send​Line</a></code></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="basemethod private">
+    
+    <td>Method</td>
+    <td><code><a href="twisted.words.protocols.irc.IRCClient.html#_safeMaximumLineLength" class="internal-link" title="twisted.words.protocols.irc.IRCClient._safeMaximumLineLength">_safe​Maximum​Line​Length</a></code></td>
+    <td>Estimate a safe maximum line length for the given command.</td>
+  </tr><tr class="basemethod private">
+    
+    <td>Method</td>
+    <td><code><a href="twisted.words.protocols.irc.IRCClient.html#_sendHeartbeat" class="internal-link" title="twisted.words.protocols.irc.IRCClient._sendHeartbeat">_send​Heartbeat</a></code></td>
+    <td>Send a <em>PING</em> message to the IRC server as a form of keepalive.</td>
+  </tr><tr class="basemethod private">
+    
+    <td>Method</td>
+    <td><code><a href="twisted.words.protocols.irc.IRCClient.html#_sendLine" class="internal-link" title="twisted.words.protocols.irc.IRCClient._sendLine">_send​Line</a></code></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="baseconstant private">
+    
+    <td>Constant</td>
+    <td><code><a href="twisted.words.protocols.irc.IRCClient.html#_MAX_PINGRING" class="internal-link" title="twisted.words.protocols.irc.IRCClient._MAX_PINGRING">_MAX​_PINGRING</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="baseinstancevariable private">
     
     <td>Instance Variable</td>
-    <td><code><a href="twisted.words.protocols.irc.IRCClient.html#_attemptedNick">_attemptedNick</a></code></td>
-    <td><span>The nickname that will try to get registered. It may change if it is illegal or already taken. <code><a href="#nickname">nickname</a></code> becomes the <code><a href="#_attemptedNick">_attemptedNick</a></code> that is successfully registered.</span></td>
+    <td><code><a href="twisted.words.protocols.irc.IRCClient.html#_attemptedNick" class="internal-link" title="twisted.words.protocols.irc.IRCClient._attemptedNick">_attempted​Nick</a></code></td>
+    <td>The nickname that will try to get registered. It may change if it is illegal or already taken. <code><a href="#nickname" class="internal-link" title="twisted.words.protocols.irc.IRCClient.nickname">nickname</a></code> becomes the <code><a href="#_attemptedNick" class="internal-link" title="twisted.words.protocols.irc.IRCClient._attemptedNick">_attemptedNick</a></code> that is successfully registered.</td>
   </tr><tr class="baseinstancevariable private">
     
     <td>Instance Variable</td>
-    <td><code><a href="twisted.words.protocols.irc.IRCClient.html#_heartbeat">_heartbeat</a></code></td>
-    <td><span>Looping call to perform the keepalive by calling <code><a href="#_sendHeartbeat">IRCClient._sendHeartbeat</a></code> every <code><a href="#heartbeatInterval">heartbeatInterval</a></code> seconds, or <code><a href="https://docs.python.org/3/library/constants.html#None">None</a></code> if there is no heartbeat.</span></td>
+    <td><code><a href="twisted.words.protocols.irc.IRCClient.html#_heartbeat" class="internal-link" title="twisted.words.protocols.irc.IRCClient._heartbeat">_heartbeat</a></code></td>
+    <td>Looping call to perform the keepalive by calling <code><a href="#_sendHeartbeat" class="internal-link" title="twisted.words.protocols.irc.IRCClient._sendHeartbeat">IRCClient._sendHeartbeat</a></code> every <code><a href="#heartbeatInterval" class="internal-link" title="twisted.words.protocols.irc.IRCClient.heartbeatInterval">heartbeatInterval</a></code> seconds, or <code><a href="https://docs.python.org/3/library/constants.html#None" class="intersphinx-link">None</a></code> if there is no heartbeat.</td>
   </tr><tr class="baseinstancevariable private">
     
     <td>Instance Variable</td>
-    <td><code><a href="twisted.words.protocols.irc.IRCClient.html#_pings">_pings</a></code></td>
+    <td><code><a href="twisted.words.protocols.irc.IRCClient.html#_pings" class="internal-link" title="twisted.words.protocols.irc.IRCClient._pings">_pings</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="baseinstancevariable private">
     
     <td>Instance Variable</td>
-    <td><code><a href="twisted.words.protocols.irc.IRCClient.html#_queue">_queue</a></code></td>
+    <td><code><a href="twisted.words.protocols.irc.IRCClient.html#_queue" class="internal-link" title="twisted.words.protocols.irc.IRCClient._queue">_queue</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="baseinstancevariable private">
     
     <td>Instance Variable</td>
-    <td><code><a href="twisted.words.protocols.irc.IRCClient.html#_queueEmptying">_queueEmptying</a></code></td>
+    <td><code><a href="twisted.words.protocols.irc.IRCClient.html#_queueEmptying" class="internal-link" title="twisted.words.protocols.irc.IRCClient._queueEmptying">_queue​Emptying</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="baseinstancevariable private">
     
     <td>Instance Variable</td>
-    <td><code><a href="twisted.words.protocols.irc.IRCClient.html#_registered">_registered</a></code></td>
-    <td><span>Whether or not the user is registered. It becomes True once a welcome has been received from the server.</span></td>
+    <td><code><a href="twisted.words.protocols.irc.IRCClient.html#_registered" class="internal-link" title="twisted.words.protocols.irc.IRCClient._registered">_registered</a></code></td>
+    <td>Whether or not the user is registered. It becomes True once a welcome has been received from the server.</td>
   </tr>
 </table>
           
           <p class="inheritedFrom">
-            Inherited from <code><a href="twisted.protocols.basic.LineReceiver.html">LineReceiver</a></code> (via <code><a href="twisted.words.protocols.irc.IRCClient.html">IRCClient</a></code>):
+            Inherited from <code><a href="twisted.protocols.basic.LineReceiver.html" class="internal-link" title="twisted.protocols.basic.LineReceiver">LineReceiver</a></code> (via <code><a href="twisted.words.protocols.irc.IRCClient.html" class="internal-link" title="twisted.words.protocols.irc.IRCClient">IRCClient</a></code>):
           </p>
-          <table class="children sortable" id="id3538">
+          <table class="children sortable" id="id3524">
   
   
   <tr class="basemethod">
     
     <td>Method</td>
-    <td><code><a href="twisted.protocols.basic.LineReceiver.html#clearLineBuffer">clearLineBuffer</a></code></td>
-    <td><span>Clear buffered data.</span></td>
+    <td><code><a href="twisted.protocols.basic.LineReceiver.html#clearLineBuffer" class="internal-link" title="twisted.protocols.basic.LineReceiver.clearLineBuffer">clear​Line​Buffer</a></code></td>
+    <td>Clear buffered data.</td>
   </tr><tr class="basemethod">
     
     <td>Method</td>
-    <td><code><a href="twisted.protocols.basic.LineReceiver.html#lineLengthExceeded">lineLengthExceeded</a></code></td>
-    <td><span>Called when the maximum line length has been reached. Override if it needs to be dealt with in some special way.</span></td>
+    <td><code><a href="twisted.protocols.basic.LineReceiver.html#lineLengthExceeded" class="internal-link" title="twisted.protocols.basic.LineReceiver.lineLengthExceeded">line​Length​Exceeded</a></code></td>
+    <td>Called when the maximum line length has been reached. Override if it needs to be dealt with in some special way.</td>
   </tr><tr class="basemethod">
     
     <td>Method</td>
-    <td><code><a href="twisted.protocols.basic.LineReceiver.html#rawDataReceived">rawDataReceived</a></code></td>
-    <td><span>Override this for when raw data is received.</span></td>
+    <td><code><a href="twisted.protocols.basic.LineReceiver.html#rawDataReceived" class="internal-link" title="twisted.protocols.basic.LineReceiver.rawDataReceived">raw​Data​Received</a></code></td>
+    <td>Override this for when raw data is received.</td>
   </tr><tr class="basemethod">
     
     <td>Method</td>
-    <td><code><a href="twisted.protocols.basic.LineReceiver.html#setLineMode">setLineMode</a></code></td>
-    <td><span>Sets the line-mode of this receiver.</span></td>
+    <td><code><a href="twisted.protocols.basic.LineReceiver.html#setLineMode" class="internal-link" title="twisted.protocols.basic.LineReceiver.setLineMode">set​Line​Mode</a></code></td>
+    <td>Sets the line-mode of this receiver.</td>
   </tr><tr class="basemethod">
     
     <td>Method</td>
-    <td><code><a href="twisted.protocols.basic.LineReceiver.html#setRawMode">setRawMode</a></code></td>
-    <td><span>Sets the raw mode of this receiver. Further data received will be sent to rawDataReceived rather than lineReceived.</span></td>
-  </tr><tr class="baseclassvariable">
+    <td><code><a href="twisted.protocols.basic.LineReceiver.html#setRawMode" class="internal-link" title="twisted.protocols.basic.LineReceiver.setRawMode">set​Raw​Mode</a></code></td>
+    <td>Sets the raw mode of this receiver. Further data received will be sent to rawDataReceived rather than lineReceived.</td>
+  </tr><tr class="baseconstant">
     
-    <td>Class Variable</td>
-    <td><code><a href="twisted.protocols.basic.LineReceiver.html#MAX_LENGTH">MAX_LENGTH</a></code></td>
-    <td><span>The maximum length of a line to allow (If a sent line is longer than this, the connection is dropped). Default is 16384.</span></td>
+    <td>Constant</td>
+    <td><code><a href="twisted.protocols.basic.LineReceiver.html#MAX_LENGTH" class="internal-link" title="twisted.protocols.basic.LineReceiver.MAX_LENGTH">MAX​_LENGTH</a></code></td>
+    <td>The maximum length of a line to allow (If a sent line is longer than this, the connection is dropped). Default is 16384.</td>
   </tr><tr class="baseinstancevariable">
     
     <td>Instance Variable</td>
-    <td><code><a href="twisted.protocols.basic.LineReceiver.html#line_mode">line_mode</a></code></td>
+    <td><code><a href="twisted.protocols.basic.LineReceiver.html#line_mode" class="internal-link" title="twisted.protocols.basic.LineReceiver.line_mode">line​_mode</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="baseinstancevariable private">
     
     <td>Instance Variable</td>
-    <td><code><a href="twisted.protocols.basic.LineReceiver.html#_buffer">_buffer</a></code></td>
+    <td><code><a href="twisted.protocols.basic.LineReceiver.html#_buffer" class="internal-link" title="twisted.protocols.basic.LineReceiver._buffer">_buffer</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="baseinstancevariable private">
     
     <td>Instance Variable</td>
-    <td><code><a href="twisted.protocols.basic.LineReceiver.html#_busyReceiving">_busyReceiving</a></code></td>
+    <td><code><a href="twisted.protocols.basic.LineReceiver.html#_busyReceiving" class="internal-link" title="twisted.protocols.basic.LineReceiver._busyReceiving">_busy​Receiving</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr>
 </table>
           
           <p class="inheritedFrom">
-            Inherited from <code><a href="twisted.internet.protocol.Protocol.html">Protocol</a></code> (via <code><a href="twisted.words.protocols.irc.IRCClient.html">IRCClient</a></code>, <code><a href="twisted.protocols.basic.LineReceiver.html">LineReceiver</a></code>):
+            Inherited from <code><a href="twisted.internet.protocol.Protocol.html" class="internal-link" title="twisted.internet.protocol.Protocol">Protocol</a></code> (via <code><a href="twisted.words.protocols.irc.IRCClient.html" class="internal-link" title="twisted.words.protocols.irc.IRCClient">IRCClient</a></code>, <code><a href="twisted.protocols.basic.LineReceiver.html" class="internal-link" title="twisted.protocols.basic.LineReceiver">LineReceiver</a></code>):
           </p>
-          <table class="children sortable" id="id3539">
+          <table class="children sortable" id="id3525">
   
   
   <tr class="basemethod">
     
     <td>Method</td>
-    <td><code><a href="twisted.internet.protocol.Protocol.html#logPrefix">logPrefix</a></code></td>
-    <td><span>Return a prefix matching the class name, to identify log messages related to this protocol instance.</span></td>
+    <td><code><a href="twisted.internet.protocol.Protocol.html#logPrefix" class="internal-link" title="twisted.internet.protocol.Protocol.logPrefix">log​Prefix</a></code></td>
+    <td>Return a prefix matching the class name, to identify log messages related to this protocol instance.</td>
   </tr><tr class="baseclassvariable">
     
     <td>Class Variable</td>
-    <td><code><a href="twisted.internet.protocol.Protocol.html#factory">factory</a></code></td>
+    <td><code><a href="twisted.internet.protocol.Protocol.html#factory" class="internal-link" title="twisted.internet.protocol.Protocol.factory">factory</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr>
 </table>
           
           <p class="inheritedFrom">
-            Inherited from <code><a href="twisted.internet.protocol.BaseProtocol.html">BaseProtocol</a></code> (via <code><a href="twisted.words.protocols.irc.IRCClient.html">IRCClient</a></code>, <code><a href="twisted.protocols.basic.LineReceiver.html">LineReceiver</a></code>, <code><a href="twisted.internet.protocol.Protocol.html">Protocol</a></code>):
+            Inherited from <code><a href="twisted.internet.protocol.BaseProtocol.html" class="internal-link" title="twisted.internet.protocol.BaseProtocol">BaseProtocol</a></code> (via <code><a href="twisted.words.protocols.irc.IRCClient.html" class="internal-link" title="twisted.words.protocols.irc.IRCClient">IRCClient</a></code>, <code><a href="twisted.protocols.basic.LineReceiver.html" class="internal-link" title="twisted.protocols.basic.LineReceiver">LineReceiver</a></code>, <code><a href="twisted.internet.protocol.Protocol.html" class="internal-link" title="twisted.internet.protocol.Protocol">Protocol</a></code>):
           </p>
-          <table class="children sortable" id="id3540">
+          <table class="children sortable" id="id3526">
   
   
   <tr class="basemethod">
     
     <td>Method</td>
-    <td><code><a href="twisted.internet.protocol.BaseProtocol.html#makeConnection">makeConnection</a></code></td>
-    <td><span>Make a connection to a transport and a server.</span></td>
+    <td><code><a href="twisted.internet.protocol.BaseProtocol.html#makeConnection" class="internal-link" title="twisted.internet.protocol.BaseProtocol.makeConnection">make​Connection</a></code></td>
+    <td>Make a connection to a transport and a server.</td>
   </tr><tr class="baseinstancevariable">
     
     <td>Instance Variable</td>
-    <td><code><a href="twisted.internet.protocol.BaseProtocol.html#connected">connected</a></code></td>
+    <td><code><a href="twisted.internet.protocol.BaseProtocol.html#connected" class="internal-link" title="twisted.internet.protocol.BaseProtocol.connected">connected</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="baseinstancevariable">
     
     <td>Instance Variable</td>
-    <td><code><a href="twisted.internet.protocol.BaseProtocol.html#transport">transport</a></code></td>
+    <td><code><a href="twisted.internet.protocol.BaseProtocol.html#transport" class="internal-link" title="twisted.internet.protocol.BaseProtocol.transport">transport</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr>
 </table>
           
           <p class="inheritedFrom">
-            Inherited from <code><a href="twisted.protocols.basic._PauseableMixin.html">_PauseableMixin</a></code> (via <code><a href="twisted.words.protocols.irc.IRCClient.html">IRCClient</a></code>, <code><a href="twisted.protocols.basic.LineReceiver.html">LineReceiver</a></code>):
+            Inherited from <code><a href="twisted.protocols.basic._PauseableMixin.html" class="internal-link" title="twisted.protocols.basic._PauseableMixin">_PauseableMixin</a></code> (via <code><a href="twisted.words.protocols.irc.IRCClient.html" class="internal-link" title="twisted.words.protocols.irc.IRCClient">IRCClient</a></code>, <code><a href="twisted.protocols.basic.LineReceiver.html" class="internal-link" title="twisted.protocols.basic.LineReceiver">LineReceiver</a></code>):
           </p>
-          <table class="children sortable" id="id3541">
+          <table class="children sortable" id="id3527">
   
   
   <tr class="basemethod">
     
     <td>Method</td>
-    <td><code><a href="twisted.protocols.basic._PauseableMixin.html#pauseProducing">pauseProducing</a></code></td>
+    <td><code><a href="twisted.protocols.basic._PauseableMixin.html#pauseProducing" class="internal-link" title="twisted.protocols.basic._PauseableMixin.pauseProducing">pause​Producing</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="basemethod">
     
     <td>Method</td>
-    <td><code><a href="twisted.protocols.basic._PauseableMixin.html#resumeProducing">resumeProducing</a></code></td>
+    <td><code><a href="twisted.protocols.basic._PauseableMixin.html#resumeProducing" class="internal-link" title="twisted.protocols.basic._PauseableMixin.resumeProducing">resume​Producing</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="basemethod">
     
     <td>Method</td>
-    <td><code><a href="twisted.protocols.basic._PauseableMixin.html#stopProducing">stopProducing</a></code></td>
+    <td><code><a href="twisted.protocols.basic._PauseableMixin.html#stopProducing" class="internal-link" title="twisted.protocols.basic._PauseableMixin.stopProducing">stop​Producing</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="baseinstancevariable">
     
     <td>Instance Variable</td>
-    <td><code><a href="twisted.protocols.basic._PauseableMixin.html#paused">paused</a></code></td>
+    <td><code><a href="twisted.protocols.basic._PauseableMixin.html#paused" class="internal-link" title="twisted.protocols.basic._PauseableMixin.paused">paused</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr>
 </table>
@@ -1132,14 +1153,14 @@
   </a>
   <div class="functionHeader">
     
-    <span class="py-keyword">def</span> <span class="py-defname">__init__</span>(self, account, chatui, logonDeferred=None):
+    <span class="py-keyword">def</span> <span class="py-defname">__init__</span>(self, account, chatui, logonDeferred=<a href="https://docs.python.org/3/library/constants.html#None" class="intersphinx-link">None</a>):
     <a class="sourceLink" href="https://github.com/twisted/twisted/tree/twisted-21.2.0/src/twisted/words/im/ircsupport.py#L82">
       
       (source)
     </a>
   </div>
   <div class="docstring functionBody">
-    <div class="interfaceinfo">overrides <code><a href="twisted.words.im.basesupport.AbstractClientMixin.html#__init__">twisted.words.im.basesupport.AbstractClientMixin.__init__</a></code></div>
+    <div class="interfaceinfo">overrides <code><a href="twisted.words.im.basesupport.AbstractClientMixin.html#__init__" class="internal-link">twisted.words.im.basesupport.AbstractClientMixin.__init__</a></code></div>
     
     <div><p class="undocumented">Undocumented</p></div>
   </div>
@@ -1161,9 +1182,9 @@
     </a>
   </div>
   <div class="docstring functionBody">
-    <div class="interfaceinfo">overrides <code><a href="twisted.words.protocols.irc.IRCClient.html#action">twisted.words.protocols.irc.IRCClient.action</a></code></div>
+    <div class="interfaceinfo">overrides <code><a href="twisted.words.protocols.irc.IRCClient.html#action" class="internal-link">twisted.words.protocols.irc.IRCClient.action</a></code></div>
     
-    <div><p>Called when I see a user perform an ACTION on a channel.</p></div>
+    <div>Called when I see a user perform an ACTION on a channel.</div>
   </div>
 </div><div class="basemethod">
   
@@ -1183,9 +1204,11 @@
     </a>
   </div>
   <div class="docstring functionBody">
-    <div class="interfaceinfo">from <code><a href="twisted.internet.interfaces.IProtocol.html#connectionMade">twisted.internet.interfaces.IProtocol</a></code></div><div class="interfaceinfo">overrides <code><a href="twisted.words.im.basesupport.AbstractClientMixin.html#connectionMade">twisted.words.im.basesupport.AbstractClientMixin.connectionMade</a></code></div>
+    <div class="interfaceinfo">from <code><a href="twisted.internet.interfaces.IProtocol.html#connectionMade" class="internal-link" title="twisted.internet.interfaces.IProtocol.connectionMade">twisted.internet.interfaces.IProtocol</a></code></div><div class="interfaceinfo">overrides <code><a href="twisted.words.im.basesupport.AbstractClientMixin.html#connectionMade" class="internal-link">twisted.words.im.basesupport.AbstractClientMixin.connectionMade</a></code></div>
     
-    <div><p>Called when a connection is made.</p><p>This may be considered the initializer of the protocol, because it is called when the connection is completed.  For clients, this is called once the connection to the server has been established; for servers, this is called after an accept() call stops blocking and a socket has been received.  If you need to send any greeting or initial message, do it here.</p></div>
+    <div><p>Called when a connection is made.</p>
+<p>This may be considered the initializer of the protocol, because it is called when the connection is completed.  For clients, this is called once the connection to the server has been established; for servers, this is called after an accept() call stops blocking and a socket has been received.  If you need to send any greeting or initial message, do it here.</p>
+</div>
   </div>
 </div><div class="basemethod">
   
@@ -1271,9 +1294,9 @@
     </a>
   </div>
   <div class="docstring functionBody">
-    <div class="interfaceinfo">overrides <code><a href="twisted.words.protocols.irc.IRCClient.html#irc_JOIN">twisted.words.protocols.irc.IRCClient.irc_JOIN</a></code></div>
+    <div class="interfaceinfo">overrides <code><a href="twisted.words.protocols.irc.IRCClient.html#irc_JOIN" class="internal-link">twisted.words.protocols.irc.IRCClient.irc_JOIN</a></code></div>
     
-    <div><p>Called when a user joins a channel.</p></div>
+    <div>Called when a user joins a channel.</div>
   </div>
 </div><div class="basemethod">
   
@@ -1293,9 +1316,9 @@
     </a>
   </div>
   <div class="docstring functionBody">
-    <div class="interfaceinfo">overrides <code><a href="twisted.words.protocols.irc.IRCClient.html#irc_NICK">twisted.words.protocols.irc.IRCClient.irc_NICK</a></code></div>
+    <div class="interfaceinfo">overrides <code><a href="twisted.words.protocols.irc.IRCClient.html#irc_NICK" class="internal-link">twisted.words.protocols.irc.IRCClient.irc_NICK</a></code></div>
     
-    <div><p>Called when a user changes their nickname.</p></div>
+    <div>Called when a user changes their nickname.</div>
   </div>
 </div><div class="basemethod">
   
@@ -1315,9 +1338,9 @@
     </a>
   </div>
   <div class="docstring functionBody">
-    <div class="interfaceinfo">overrides <code><a href="twisted.words.protocols.irc.IRCClient.html#irc_PART">twisted.words.protocols.irc.IRCClient.irc_PART</a></code></div>
+    <div class="interfaceinfo">overrides <code><a href="twisted.words.protocols.irc.IRCClient.html#irc_PART" class="internal-link">twisted.words.protocols.irc.IRCClient.irc_PART</a></code></div>
     
-    <div><p>Called when a user leaves a channel.</p></div>
+    <div>Called when a user leaves a channel.</div>
   </div>
 </div><div class="basemethod">
   
@@ -1337,9 +1360,9 @@
     </a>
   </div>
   <div class="docstring functionBody">
-    <div class="interfaceinfo">overrides <code><a href="twisted.words.protocols.irc.IRCClient.html#irc_QUIT">twisted.words.protocols.irc.IRCClient.irc_QUIT</a></code></div>
+    <div class="interfaceinfo">overrides <code><a href="twisted.words.protocols.irc.IRCClient.html#irc_QUIT" class="internal-link">twisted.words.protocols.irc.IRCClient.irc_QUIT</a></code></div>
     
-    <div><p>Called when a user has quit.</p></div>
+    <div>Called when a user has quit.</div>
   </div>
 </div><div class="basemethod">
   
@@ -1383,7 +1406,7 @@
   <div class="docstring functionBody">
     
     
-    <div><p>RPL_NAMREPLY &gt;&gt; NAMES #bnl &lt;&lt; :Arlington.VA.US.Undernet.Org 353 z3p = #bnl :pSwede Dan-- SkOyg AG</p></div>
+    <div>RPL_NAMREPLY &gt;&gt; NAMES #bnl &lt;&lt; :Arlington.VA.US.Undernet.Org 353 z3p = #bnl :pSwede Dan-- SkOyg AG</div>
   </div>
 </div><div class="basemethod">
   
@@ -1403,9 +1426,9 @@
     </a>
   </div>
   <div class="docstring functionBody">
-    <div class="interfaceinfo">overrides <code><a href="twisted.words.protocols.irc.IRCClient.html#irc_RPL_TOPIC">twisted.words.protocols.irc.IRCClient.irc_RPL_TOPIC</a></code></div>
+    <div class="interfaceinfo">overrides <code><a href="twisted.words.protocols.irc.IRCClient.html#irc_RPL_TOPIC" class="internal-link">twisted.words.protocols.irc.IRCClient.irc_RPL_TOPIC</a></code></div>
     
-    <div><p>Called when the topic for a channel is initially reported or when it subsequently changes.</p></div>
+    <div>Called when the topic for a channel is initially reported or when it subsequently changes.</div>
   </div>
 </div><div class="basemethod">
   
@@ -1425,9 +1448,9 @@
     </a>
   </div>
   <div class="docstring functionBody">
-    <div class="interfaceinfo">overrides <code><a href="twisted.words.protocols.irc.IRCClient.html#irc_TOPIC">twisted.words.protocols.irc.IRCClient.irc_TOPIC</a></code></div>
+    <div class="interfaceinfo">overrides <code><a href="twisted.words.protocols.irc.IRCClient.html#irc_TOPIC" class="internal-link">twisted.words.protocols.irc.IRCClient.irc_TOPIC</a></code></div>
     
-    <div><p>Someone in the channel set the topic.</p></div>
+    <div>Someone in the channel set the topic.</div>
   </div>
 </div><div class="basemethod">
   
@@ -1447,7 +1470,7 @@
     </a>
   </div>
   <div class="docstring functionBody">
-    <div class="interfaceinfo">overrides <code><a href="twisted.words.protocols.irc.IRCClient.html#irc_unknown">twisted.words.protocols.irc.IRCClient.irc_unknown</a></code></div>
+    <div class="interfaceinfo">overrides <code><a href="twisted.words.protocols.irc.IRCClient.html#irc_unknown" class="internal-link">twisted.words.protocols.irc.IRCClient.irc_unknown</a></code></div>
     
     <div><p class="undocumented">Undocumented</p></div>
   </div>
@@ -1491,9 +1514,9 @@
     </a>
   </div>
   <div class="docstring functionBody">
-    <div class="interfaceinfo">overrides <code><a href="twisted.words.protocols.irc.IRCClient.html#kickedFrom">twisted.words.protocols.irc.IRCClient.kickedFrom</a></code></div>
+    <div class="interfaceinfo">overrides <code><a href="twisted.words.protocols.irc.IRCClient.html#kickedFrom" class="internal-link">twisted.words.protocols.irc.IRCClient.kickedFrom</a></code></div>
     
-    <div><p>Called when I am kicked from a channel.</p></div>
+    <div>Called when I am kicked from a channel.</div>
   </div>
 </div><div class="basemethod">
   
@@ -1513,15 +1536,18 @@
     </a>
   </div>
   <div class="docstring functionBody">
-    <div class="interfaceinfo">overrides <code><a href="twisted.words.protocols.irc.IRCClient.html#noticed">twisted.words.protocols.irc.IRCClient.noticed</a></code></div>
+    <div class="interfaceinfo">overrides <code><a href="twisted.words.protocols.irc.IRCClient.html#noticed" class="internal-link">twisted.words.protocols.irc.IRCClient.noticed</a></code></div>
     
-    <div><p>Called when I have a notice from a user to me or a channel.</p><p>If the client makes any automated replies, it must not do so in response to a NOTICE message, per the RFC:</p><pre class="literalblock">
+    <div><p>Called when I have a notice from a user to me or a channel.</p>
+<p>If the client makes any automated replies, it must not do so in response to a NOTICE message, per the RFC:</p>
+<pre class="rst-literal-block">
     The difference between NOTICE and PRIVMSG is that
     automatic replies MUST NEVER be sent in response to a
     NOTICE message. [...] The object of this rule is to avoid
     loops between clients automatically sending something in
     response to something it received.
-</pre></div>
+</pre>
+</div>
   </div>
 </div><div class="basemethod">
   
@@ -1534,16 +1560,16 @@
   </a>
   <div class="functionHeader">
     
-    <span class="py-keyword">def</span> <span class="py-defname">privmsg</span>(self, username, channel, message, metadata=None):
+    <span class="py-keyword">def</span> <span class="py-defname">privmsg</span>(self, username, channel, message, metadata=<a href="https://docs.python.org/3/library/constants.html#None" class="intersphinx-link">None</a>):
     <a class="sourceLink" href="https://github.com/twisted/twisted/tree/twisted-21.2.0/src/twisted/words/im/ircsupport.py#L136">
       
       (source)
     </a>
   </div>
   <div class="docstring functionBody">
-    <div class="interfaceinfo">overrides <code><a href="twisted.words.protocols.irc.IRCClient.html#privmsg">twisted.words.protocols.irc.IRCClient.privmsg</a></code></div>
+    <div class="interfaceinfo">overrides <code><a href="twisted.words.protocols.irc.IRCClient.html#privmsg" class="internal-link">twisted.words.protocols.irc.IRCClient.privmsg</a></code></div>
     
-    <div><p>Called when I have a message from a user to me or a channel.</p></div>
+    <div>Called when I have a message from a user to me or a channel.</div>
   </div>
 </div><div class="basemethod">
   
@@ -1563,9 +1589,9 @@
     </a>
   </div>
   <div class="docstring functionBody">
-    <div class="interfaceinfo">overrides <code><a href="twisted.words.protocols.irc.IRCClient.html#setNick">twisted.words.protocols.irc.IRCClient.setNick</a></code></div>
+    <div class="interfaceinfo">overrides <code><a href="twisted.words.protocols.irc.IRCClient.html#setNick" class="internal-link">twisted.words.protocols.irc.IRCClient.setNick</a></code></div>
     
-    <div><p>Set this client's nickname.</p><table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">nick</span></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">nickname:</span><code>str</code></td><td class="fieldArgDesc">The nickname to change to.</td></tr></table></div>
+    <div>Set this client's nickname.<table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">nick</span></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">nickname:</span><tt class="rst-docutils literal">str</tt></td><td class="fieldArgDesc">The nickname to change to.</td></tr></table></div>
   </div>
 </div><div class="basemethod">
   
@@ -1585,9 +1611,9 @@
     </a>
   </div>
   <div class="docstring functionBody">
-    <div class="interfaceinfo">overrides <code><a href="twisted.words.protocols.irc.IRCClient.html#userKicked">twisted.words.protocols.irc.IRCClient.userKicked</a></code></div>
+    <div class="interfaceinfo">overrides <code><a href="twisted.words.protocols.irc.IRCClient.html#userKicked" class="internal-link">twisted.words.protocols.irc.IRCClient.userKicked</a></code></div>
     
-    <div><p>Called when I observe someone else being kicked from a channel.</p></div>
+    <div>Called when I observe someone else being kicked from a channel.</div>
   </div>
 </div><div class="baseinstancevariable">
   
@@ -1610,6 +1636,7 @@
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    
   </div>
 </div><div class="baseinstancevariable">
   
@@ -1632,6 +1659,7 @@
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    
   </div>
 </div><div class="baseinstancevariable">
   
@@ -1651,9 +1679,10 @@
     </a>
   </div>
   <div class="functionBody">
-    <div class="interfaceinfo">overrides <code><a href="twisted.words.protocols.irc.IRCClient.html#nickname">twisted.words.protocols.irc.IRCClient.nickname</a></code></div>
+    <div class="interfaceinfo">overrides <code><a href="twisted.words.protocols.irc.IRCClient.html#nickname" class="internal-link">twisted.words.protocols.irc.IRCClient.nickname</a></code></div>
     
     <div><p class="undocumented">Undocumented</p></div>
+    
   </div>
 </div><div class="baseinstancevariable">
   
@@ -1673,9 +1702,10 @@
     </a>
   </div>
   <div class="functionBody">
-    <div class="interfaceinfo">overrides <code><a href="twisted.words.protocols.irc.IRCClient.html#password">twisted.words.protocols.irc.IRCClient.password</a></code></div>
+    <div class="interfaceinfo">overrides <code><a href="twisted.words.protocols.irc.IRCClient.html#password" class="internal-link">twisted.words.protocols.irc.IRCClient.password</a></code></div>
     
     <div><p class="undocumented">Undocumented</p></div>
+    
   </div>
 </div><div class="baseinstancevariable">
   
@@ -1688,16 +1718,17 @@
   </a>
   <div class="functionHeader">
     
-    <span class="py-defname">performLogin</span>: <code><a href="https://docs.python.org/3/library/functions.html#bool">bool</a></code> =
+    <span class="py-defname">performLogin</span>: <code><a href="https://docs.python.org/3/library/functions.html#bool" class="intersphinx-link">bool</a></code> =
     <a class="sourceLink" href="https://github.com/twisted/twisted/tree/twisted-21.2.0/src/twisted/words/im/ircsupport.py#L101">
       
       (source)
     </a>
   </div>
   <div class="functionBody">
-    <div class="interfaceinfo">overrides <code><a href="twisted.words.protocols.irc.IRCClient.html#performLogin">twisted.words.protocols.irc.IRCClient.performLogin</a></code></div>
+    <div class="interfaceinfo">overrides <code><a href="twisted.words.protocols.irc.IRCClient.html#performLogin" class="internal-link">twisted.words.protocols.irc.IRCClient.performLogin</a></code></div>
     
     <div><p class="undocumented">Undocumented</p></div>
+    
   </div>
 </div><div class="baseinstancevariable">
   
@@ -1710,16 +1741,17 @@
   </a>
   <div class="functionHeader">
     
-    <span class="py-defname">realname</span>: <code><a href="https://docs.python.org/3/library/stdtypes.html#str">str</a></code> =
+    <span class="py-defname">realname</span>: <code><a href="https://docs.python.org/3/library/stdtypes.html#str" class="intersphinx-link">str</a></code> =
     <a class="sourceLink" href="https://github.com/twisted/twisted/tree/twisted-21.2.0/src/twisted/words/im/ircsupport.py#L104">
       
       (source)
     </a>
   </div>
   <div class="functionBody">
-    <div class="interfaceinfo">overrides <code><a href="twisted.words.protocols.irc.IRCClient.html#realname">twisted.words.protocols.irc.IRCClient.realname</a></code></div>
+    <div class="interfaceinfo">overrides <code><a href="twisted.words.protocols.irc.IRCClient.html#realname" class="internal-link">twisted.words.protocols.irc.IRCClient.realname</a></code></div>
     
     <div><p class="undocumented">Undocumented</p></div>
+    
   </div>
 </div><div class="baseinstancevariable private">
   
@@ -1732,7 +1764,7 @@
   </a>
   <div class="functionHeader">
     
-    <span class="py-defname">_groups</span>: <code><a href="https://docs.python.org/3/library/stdtypes.html#dict">dict</a></code> =
+    <span class="py-defname">_groups</span>: <code><a href="https://docs.python.org/3/library/stdtypes.html#dict" class="intersphinx-link">dict</a></code> =
     <a class="sourceLink" href="https://github.com/twisted/twisted/tree/twisted-21.2.0/src/twisted/words/im/ircsupport.py#L86">
       
       (source)
@@ -1742,6 +1774,7 @@
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    
   </div>
 </div><div class="baseinstancevariable private">
   
@@ -1754,7 +1787,7 @@
   </a>
   <div class="functionHeader">
     
-    <span class="py-defname">_ingroups</span>: <code><a href="https://docs.python.org/3/library/stdtypes.html#dict">dict</a></code> =
+    <span class="py-defname">_ingroups</span>: <code><a href="https://docs.python.org/3/library/stdtypes.html#dict" class="intersphinx-link">dict</a></code> =
     <a class="sourceLink" href="https://github.com/twisted/twisted/tree/twisted-21.2.0/src/twisted/words/im/ircsupport.py#L85">
       
       (source)
@@ -1764,6 +1797,7 @@
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    
   </div>
 </div><div class="baseinstancevariable private">
   
@@ -1776,7 +1810,7 @@
   </a>
   <div class="functionHeader">
     
-    <span class="py-defname">_namreplies</span>: <code><a href="https://docs.python.org/3/library/stdtypes.html#dict">dict</a></code> =
+    <span class="py-defname">_namreplies</span>: <code><a href="https://docs.python.org/3/library/stdtypes.html#dict" class="intersphinx-link">dict</a></code> =
     <a class="sourceLink" href="https://github.com/twisted/twisted/tree/twisted-21.2.0/src/twisted/words/im/ircsupport.py#L84">
       
       (source)
@@ -1786,6 +1820,7 @@
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    
   </div>
 </div><div class="baseinstancevariable private">
   
@@ -1798,7 +1833,7 @@
   </a>
   <div class="functionHeader">
     
-    <span class="py-defname">_topics</span>: <code><a href="https://docs.python.org/3/library/stdtypes.html#dict">dict</a></code> =
+    <span class="py-defname">_topics</span>: <code><a href="https://docs.python.org/3/library/stdtypes.html#dict" class="intersphinx-link">dict</a></code> =
     <a class="sourceLink" href="https://github.com/twisted/twisted/tree/twisted-21.2.0/src/twisted/words/im/ircsupport.py#L87">
       
       (source)
@@ -1808,6 +1843,7 @@
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    
   </div>
 </div>
 
@@ -1816,11 +1852,33 @@
 
     <footer class="navbar navbar-default">
   
+
   <div class="container">
     <a href="index.html">API Documentation</a> for <a href="https://twistedmatrix.com/" class="projecthome">Twisted</a>,
   generated by <a href="https://github.com/twisted/pydoctor/">pydoctor</a>
-    21.2.2 at 2022-01-12 04:22:24.
+    22.2.2.dev0 at 2022-03-04 05:57:20.
   </div>
+
+  <!-- Google analytics, obviously. -->
+  <script src="//www.google-analytics.com/urchin.js" type="text/javascript"></script>
+  <script type="text/javascript">
+    _uacct = "UA-99018-6";
+    urchinTracker();
+  </script>
+
+  <!-- If the documentation isn't current, insert a current link. -->
+  <script type="text/javascript">
+    if (window.location.pathname.indexOf('/current/') == -1) {
+      <!-- Give the user a link to this page, but in the current version of the docs. -->
+      var link = document.getElementById('current-docs-link');
+      link.href = window.location.pathname.replace(/\/\d+\.\d+\.\d+\/api\//, '/current/api/');
+      <!-- And make it visible -->
+      var container = document.getElementById('current-docs-container');
+      container.style.display = "";
+      delete link;
+      delete container;
+    }
+  </script>
 </footer>
 
     <script src="pydoctor.js" type="text/javascript"></script>

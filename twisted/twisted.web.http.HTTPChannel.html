@@ -7,7 +7,7 @@
   <head>
     
     <title>twisted.web.http.HTTPChannel</title>
-    <meta name="generator" content="pydoctor 21.2.2"> 
+    <meta name="generator" content="pydoctor 22.2.2.dev0"> 
         
     </meta>
     <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
@@ -19,7 +19,13 @@
 
   <body>
 
-    
+    <div style="display: none" id="current-docs-container" class="container">
+  <div class="col-sm-12">
+    <a id="current-docs-link">
+      Go to the latest version of this document.
+    </a>
+  </div>
+</div>
 
     <nav class="navbar navbar-default">
   
@@ -44,69 +50,82 @@
           Names
         </a>
 
-        <form action="search-results.html" id="search-box-container">
+        <div id="search-box-container">
           <div class="input-group">
-            <input id="search-box" name="search-query" placeholder="Search..." aria-label="Search" minlength="2" class="form-control" />
+            <input id="search-box" type="search" name="search-query" placeholder="Search..." aria-label="Search" minlength="2" class="form-control" autocomplete="off" />
+            
             <span class="input-group-btn">
-              <button class="btn btn-default" type="submit" title="Search"><img src="fonts/search.svg" alt="Search!" /></button>
-              <a class="btn btn-default" id="search-help-button" title="Help" onclick="toggleSearchHelpText()"><img src="fonts/info.svg" alt="Help!" /></a>
+              <a style="display: none;" class="btn btn-default" id="search-clear-button" title="Clear" onclick="clearSearch()"><img src="fonts/x-circle.svg" alt="Clear" /></a>
+              <a class="btn btn-default" id="search-help-button" title="Help" onclick="toggleSearchHelpText()"><img src="fonts/info.svg" alt="Help" /></a>
             </span>
           </div>
-        </form>
+        </div>
 
-        <div class="rst-admonition hint" id="search-help-box">
+      </div>
+
+      <div id="search-results-container" style="display: none;">
+        <div>
+          <span class="label label-default" id="search-docstrings-button">
+            <a title="Search in docstrings" onclick="toggleSearchInDocstrings()">search in docstrings</a></span>
+        </div>
+
+        <noscript>
+            <h1>Cannot search: JavaScript is not supported/enabled in your browser.</h1>
+        </noscript>
+
+        <div class="hint" id="search-help-box">
           <p class="rst-last">
       
             Search bar offers the following options:
             <ul>   
                 <li>
                   <strong>Term presence.</strong> The below example searches for documents that 
-                    must contain “foo”, might contain “bar” and must not contain “baz”:
-                  <br /> <code>'+foo bar -baz'</code>
+                    must contain “foo”, might contain “bar” and must not contain “baz”: <code>+foo bar -baz</code>
                 </li> 
 
                 <li>
-                  <strong>Wildcards.</strong> The below example searches for documents with words beginning with “foo”:
-                  <br /> <code>'foo*'</code>
+                  <strong>Wildcards.</strong> The below example searches for documents with words beginning with “foo”: <code>foo*</code>
                 </li> 
 
                 <li>
-                  <strong>Search in specific fields.</strong> The following search matches all documents 
-                  that contains "foo" in their full dotted name and with “bar” in any field:
-                  <br /> <code>'+fullName:*foo* +bar'</code>
+                  <strong>Search in specific fields.</strong> The following search matches all objects 
+                  in "twisted.mail" that matches “search”: <code>+qname:twisted.mail.* +search</code>
 
                   <p>
-                    Possible fields: 'name', 'docstring', 'fullName'.
+                    Possible fields: 'name', 'qname' (fully qualified name), 'docstring', and 'kind'.
+                    Last two fields are only applicable if "search in docstrings" is enabled.
                   </p>
                 </li>
 
                 <li>
                   <strong>Fuzzy matches.</strong> The following search matches all documents 
-                  that have a word within 1 edit distance of “foo”:
-                  <br /> <code>'foo~1'</code>
+                  that have a word within 1 edit distance of “foo”: <code>foo~1</code>
                 </li>
             </ul>
 
           </p>
         </div>
 
-      </div>
+        <div id="search-status"> </div>
+        
+        <div class="warning" id="search-warn-box" style="display: none;">
+          <p class="rst-last"><span id="search-warn"></span></p>
+        </div>
 
+        <table id="search-results">
+          <!-- Filled dynamically by JS -->
+        </table>
+        
+        <div style="margin-top: 8px;">
+          <p>Results provided by <a href="https://lunrjs.com">Lunr.js</a></p>
+        </div>
+      </div>
 
     </div>
   </div>
 
-  <script>
- 
-    function toggleSearchHelpText() {
-        document.body.classList.toggle("search-help-hidden");
-    }
-    // Init search and help text
-    document.getElementById('search-box-container').style.display = 'block';
-    document.getElementById('search-help-box').style.display = 'block';
-    document.body.classList.add("search-help-hidden");
-
-  </script>
+  <script src="ajax.js" type="text/javascript"></script>
+  <script src="search.js" type="text/javascript"></script>
 
 </nav>
 
@@ -115,7 +134,7 @@
     <div class="container">
 
       <div class="page-header">
-        <h1 class="class"><code><code><a href="twisted.html">twisted</a></code><wbr></wbr>.<code><a href="twisted.web.html">web</a></code><wbr></wbr>.<code><a href="twisted.web.http.html">http</a></code><wbr></wbr>.<code><a href="twisted.web.http.HTTPChannel.html">HTTPChannel</a></code></code></h1>
+        <h1 class="class"><code><code><a href="index.html" class="internal-link">twisted</a></code><wbr></wbr>.<code><a href="twisted.web.html" class="internal-link" title="twisted.web">web</a></code><wbr></wbr>.<code><a href="twisted.web.http.html" class="internal-link" title="twisted.web.http">http</a></code><wbr></wbr>.<code><a href="twisted.web.http.HTTPChannel.html" class="internal-link" title="twisted.web.http.HTTPChannel">HTTPChannel</a></code></code></h1>
         <div id="showPrivate">
           <button class="btn btn-link" onclick="togglePrivate()">Toggle Private API</button>
         </div>
@@ -126,442 +145,446 @@
       </div>
 
       <div class="extrasDocstring">
-        <p><code><span class="py-keyword">class</span> <span class="py-defname">HTTPChannel</span>(<a href="twisted.protocols.basic.LineReceiver.html" title="twisted.protocols.basic.LineReceiver">basic.LineReceiver</a>, <a href="twisted.protocols.policies.TimeoutMixin.html" title="twisted.protocols.policies.TimeoutMixin">policies.TimeoutMixin</a>): <a href="https://github.com/twisted/twisted/tree/twisted-21.2.0/src/twisted/web/http.py#L1953" class="sourceLink">(source)</a></code></p><p>Known subclasses: <code><a href="twisted.web.proxy.Proxy.html">twisted.web.proxy.Proxy</a></code>, <code><a href="twisted.web.proxy.ReverseProxy.html">twisted.web.proxy.ReverseProxy</a></code></p><p>Implements interfaces: <code><a href="twisted.internet.interfaces.IConsumer.html">twisted.internet.interfaces.IConsumer</a></code>, <code><a href="twisted.internet.interfaces.IPushProducer.html">twisted.internet.interfaces.IPushProducer</a></code>, <code><a href="twisted.internet.interfaces.ITransport.html">twisted.internet.interfaces.ITransport</a></code></p>
+        <p><code><span class="py-keyword">class</span> <span class="py-defname">HTTPChannel</span>(<a href="twisted.protocols.basic.LineReceiver.html" class="internal-link" title="twisted.protocols.basic.LineReceiver">basic.LineReceiver</a>, <a href="twisted.protocols.policies.TimeoutMixin.html" class="internal-link" title="twisted.protocols.policies.TimeoutMixin">policies.TimeoutMixin</a>): <a href="https://github.com/twisted/twisted/tree/twisted-21.2.0/src/twisted/web/http.py#L1953" class="sourceLink">(source)</a></code></p><p>Known subclasses: <code><a href="twisted.web.proxy.Proxy.html" class="internal-link">twisted.web.proxy.Proxy</a></code>, <code><a href="twisted.web.proxy.ReverseProxy.html" class="internal-link">twisted.web.proxy.ReverseProxy</a></code></p><p>Implements interfaces: <code><a href="twisted.internet.interfaces.IConsumer.html" class="internal-link">twisted.internet.interfaces.IConsumer</a></code>, <code><a href="twisted.internet.interfaces.IPushProducer.html" class="internal-link">twisted.internet.interfaces.IPushProducer</a></code>, <code><a href="twisted.internet.interfaces.ITransport.html" class="internal-link">twisted.internet.interfaces.ITransport</a></code></p>
         <p><a href="classIndex.html#twisted.web.http.HTTPChannel">View In Hierarchy</a></p>
       </div>
 
+      
+
       <div class="moduleDocstring">
-        <div><p>A receiver for HTTP requests.</p><p>The <code><a href="twisted.web.http.HTTPChannel.html">HTTPChannel</a></code> provides <code><a href="twisted.internet.interfaces.ITransport.html">interfaces.ITransport</a></code> and <code><a href="twisted.internet.interfaces.IConsumer.html">interfaces.IConsumer</a></code> to the <code><a href="twisted.web.http.Request.html">Request</a></code> objects it creates.  It also implements <code><a href="twisted.internet.interfaces.IPushProducer.html">interfaces.IPushProducer</a></code> to <code>self.transport</code>, allowing the transport to pause it.</p></div>
+        <div><p>A receiver for HTTP requests.</p>
+<p>The <code><a href="twisted.web.http.HTTPChannel.html" class="internal-link" title="twisted.web.http.HTTPChannel">HTTPChannel</a></code> provides <code><a href="twisted.internet.interfaces.ITransport.html" class="internal-link" title="twisted.internet.interfaces.ITransport">interfaces.ITransport</a></code> and <code><a href="twisted.internet.interfaces.IConsumer.html" class="internal-link" title="twisted.internet.interfaces.IConsumer">interfaces.IConsumer</a></code> to the <code><a href="twisted.web.http.Request.html" class="internal-link" title="twisted.web.http.Request">Request</a></code> objects it creates.  It also implements <code><a href="twisted.internet.interfaces.IPushProducer.html" class="internal-link" title="twisted.internet.interfaces.IPushProducer">interfaces.IPushProducer</a></code> to <tt class="rst-docutils literal">self.transport</tt>, allowing the transport to pause it.</p>
+</div>
       </div>
 
       <div id="splitTables">
-        <table class="children sortable" id="id3258">
+        <table class="children sortable" id="id3244">
   
   
   <tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#__init__">__init__</a></code></td>
+    <td><code><a href="#__init__" class="internal-link" title="twisted.web.http.HTTPChannel.__init__">__init__</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#allContentReceived">allContentReceived</a></code></td>
+    <td><code><a href="#allContentReceived" class="internal-link" title="twisted.web.http.HTTPChannel.allContentReceived">all​Content​Received</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#allHeadersReceived">allHeadersReceived</a></code></td>
+    <td><code><a href="#allHeadersReceived" class="internal-link" title="twisted.web.http.HTTPChannel.allHeadersReceived">all​Headers​Received</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#checkPersistence">checkPersistence</a></code></td>
-    <td><span>Check if the channel should close or not.</span></td>
+    <td><code><a href="#checkPersistence" class="internal-link" title="twisted.web.http.HTTPChannel.checkPersistence">check​Persistence</a></code></td>
+    <td>Check if the channel should close or not.</td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#connectionLost">connectionLost</a></code></td>
-    <td><span>Called when the connection is shut down.</span></td>
+    <td><code><a href="#connectionLost" class="internal-link" title="twisted.web.http.HTTPChannel.connectionLost">connection​Lost</a></code></td>
+    <td>Called when the connection is shut down.</td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#connectionMade">connectionMade</a></code></td>
-    <td><span>Called when a connection is made.</span></td>
+    <td><code><a href="#connectionMade" class="internal-link" title="twisted.web.http.HTTPChannel.connectionMade">connection​Made</a></code></td>
+    <td>Called when a connection is made.</td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#dataReceived">dataReceived</a></code></td>
-    <td><span>Data was received from the network.  Process it.</span></td>
+    <td><code><a href="#dataReceived" class="internal-link" title="twisted.web.http.HTTPChannel.dataReceived">data​Received</a></code></td>
+    <td>Data was received from the network.  Process it.</td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#forceAbortClient">forceAbortClient</a></code></td>
+    <td><code><a href="#forceAbortClient" class="internal-link" title="twisted.web.http.HTTPChannel.forceAbortClient">force​Abort​Client</a></code></td>
     <td><span class="undocumented">No summary</span></td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#getHost">getHost</a></code></td>
-    <td><span>Get the local address of this connection.</span></td>
+    <td><code><a href="#getHost" class="internal-link" title="twisted.web.http.HTTPChannel.getHost">get​Host</a></code></td>
+    <td>Get the local address of this connection.</td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#getPeer">getPeer</a></code></td>
-    <td><span>Get the remote address of this connection.</span></td>
+    <td><code><a href="#getPeer" class="internal-link" title="twisted.web.http.HTTPChannel.getPeer">get​Peer</a></code></td>
+    <td>Get the remote address of this connection.</td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#headerReceived">headerReceived</a></code></td>
-    <td><span>Do pre-processing (for content-length) and store this header away. Enforce the per-request header limit.</span></td>
+    <td><code><a href="#headerReceived" class="internal-link" title="twisted.web.http.HTTPChannel.headerReceived">header​Received</a></code></td>
+    <td>Do pre-processing (for content-length) and store this header away. Enforce the per-request header limit.</td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#isSecure">isSecure</a></code></td>
-    <td><span>Return <code><a href="https://docs.python.org/3/library/constants.html#True">True</a></code> if this channel is using a secure transport.</span></td>
+    <td><code><a href="#isSecure" class="internal-link" title="twisted.web.http.HTTPChannel.isSecure">is​Secure</a></code></td>
+    <td>Return <code><a href="https://docs.python.org/3/library/constants.html#True" class="intersphinx-link">True</a></code> if this channel is using a secure transport.</td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#lineReceived">lineReceived</a></code></td>
-    <td><span>Called for each line from request until the end of headers when it enters binary mode.</span></td>
+    <td><code><a href="#lineReceived" class="internal-link" title="twisted.web.http.HTTPChannel.lineReceived">line​Received</a></code></td>
+    <td>Called for each line from request until the end of headers when it enters binary mode.</td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#loseConnection">loseConnection</a></code></td>
-    <td><span>Closes the connection. Will write any data that is pending to be sent on the network, but if this response has not yet been written to the network will not write anything.</span></td>
+    <td><code><a href="#loseConnection" class="internal-link" title="twisted.web.http.HTTPChannel.loseConnection">lose​Connection</a></code></td>
+    <td>Closes the connection. Will write any data that is pending to be sent on the network, but if this response has not yet been written to the network will not write anything.</td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#pauseProducing">pauseProducing</a></code></td>
-    <td><span>Pause producing data.</span></td>
+    <td><code><a href="#pauseProducing" class="internal-link" title="twisted.web.http.HTTPChannel.pauseProducing">pause​Producing</a></code></td>
+    <td>Pause producing data.</td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#rawDataReceived">rawDataReceived</a></code></td>
-    <td><span>Override this for when raw data is received.</span></td>
+    <td><code><a href="#rawDataReceived" class="internal-link" title="twisted.web.http.HTTPChannel.rawDataReceived">raw​Data​Received</a></code></td>
+    <td>Override this for when raw data is received.</td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#registerProducer">registerProducer</a></code></td>
-    <td><span>Register to receive data from a producer.</span></td>
+    <td><code><a href="#registerProducer" class="internal-link" title="twisted.web.http.HTTPChannel.registerProducer">register​Producer</a></code></td>
+    <td>Register to receive data from a producer.</td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#requestDone">requestDone</a></code></td>
-    <td><span>Called by first request in queue when it is done.</span></td>
+    <td><code><a href="#requestDone" class="internal-link" title="twisted.web.http.HTTPChannel.requestDone">request​Done</a></code></td>
+    <td>Called by first request in queue when it is done.</td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#resumeProducing">resumeProducing</a></code></td>
-    <td><span>Resume producing data.</span></td>
+    <td><code><a href="#resumeProducing" class="internal-link" title="twisted.web.http.HTTPChannel.resumeProducing">resume​Producing</a></code></td>
+    <td>Resume producing data.</td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#stopProducing">stopProducing</a></code></td>
-    <td><span>Stop producing data.</span></td>
+    <td><code><a href="#stopProducing" class="internal-link" title="twisted.web.http.HTTPChannel.stopProducing">stop​Producing</a></code></td>
+    <td>Stop producing data.</td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#timeoutConnection">timeoutConnection</a></code></td>
-    <td><span>Called when the connection times out.</span></td>
+    <td><code><a href="#timeoutConnection" class="internal-link" title="twisted.web.http.HTTPChannel.timeoutConnection">timeout​Connection</a></code></td>
+    <td>Called when the connection times out.</td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#unregisterProducer">unregisterProducer</a></code></td>
-    <td><span>Stop consuming data from a producer, without disconnecting.</span></td>
+    <td><code><a href="#unregisterProducer" class="internal-link" title="twisted.web.http.HTTPChannel.unregisterProducer">unregister​Producer</a></code></td>
+    <td>Stop consuming data from a producer, without disconnecting.</td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#write">write</a></code></td>
-    <td><span>Called by <code><a href="twisted.web.http.Request.html">Request</a></code> objects to write response data.</span></td>
+    <td><code><a href="#write" class="internal-link" title="twisted.web.http.HTTPChannel.write">write</a></code></td>
+    <td>Called by <code><a href="twisted.web.http.Request.html" class="internal-link" title="twisted.web.http.Request">Request</a></code> objects to write response data.</td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#writeHeaders">writeHeaders</a></code></td>
-    <td><span>Called by <code><a href="twisted.web.http.Request.html">Request</a></code> objects to write a complete set of HTTP headers to a transport.</span></td>
+    <td><code><a href="#writeHeaders" class="internal-link" title="twisted.web.http.HTTPChannel.writeHeaders">write​Headers</a></code></td>
+    <td>Called by <code><a href="twisted.web.http.Request.html" class="internal-link" title="twisted.web.http.Request">Request</a></code> objects to write a complete set of HTTP headers to a transport.</td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#writeSequence">writeSequence</a></code></td>
-    <td><span>Write a list of strings to the HTTP response.</span></td>
+    <td><code><a href="#writeSequence" class="internal-link" title="twisted.web.http.HTTPChannel.writeSequence">write​Sequence</a></code></td>
+    <td>Write a list of strings to the HTTP response.</td>
   </tr><tr class="instancevariable">
     
     <td>Instance Variable</td>
-    <td><code><a href="#abortTimeout">abortTimeout</a></code></td>
-    <td><span>The number of seconds to wait after we attempt to shut the transport down cleanly to give up and forcibly terminate it.  This is only used when we time a connection out, to prevent errors causing the FD to get leaked.  If this is <code><a href="https://docs.python.org/3/library/constants.html#None">None</a></code>, we will wait forever.</span></td>
+    <td><code><a href="#abortTimeout" class="internal-link" title="twisted.web.http.HTTPChannel.abortTimeout">abort​Timeout</a></code></td>
+    <td>The number of seconds to wait after we attempt to shut the transport down cleanly to give up and forcibly terminate it.  This is only used when we time a connection out, to prevent errors causing the FD to get leaked.  If this is <code><a href="https://docs.python.org/3/library/constants.html#None" class="intersphinx-link">None</a></code>, we will wait forever.</td>
   </tr><tr class="instancevariable">
     
     <td>Instance Variable</td>
-    <td><code><a href="#length">length</a></code></td>
+    <td><code><a href="#length" class="internal-link" title="twisted.web.http.HTTPChannel.length">length</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="instancevariable">
     
     <td>Instance Variable</td>
-    <td><code><a href="#MAX_LENGTH">MAX_LENGTH</a></code></td>
-    <td><span>Maximum length for initial request line and each line from the header.</span></td>
+    <td><code><a href="#MAX_LENGTH" class="internal-link" title="twisted.web.http.HTTPChannel.MAX_LENGTH">MAX​_LENGTH</a></code></td>
+    <td>Maximum length for initial request line and each line from the header.</td>
   </tr><tr class="instancevariable">
     
     <td>Instance Variable</td>
-    <td><code><a href="#maxHeaders">maxHeaders</a></code></td>
-    <td><span>Maximum number of headers allowed per request.</span></td>
+    <td><code><a href="#maxHeaders" class="internal-link" title="twisted.web.http.HTTPChannel.maxHeaders">max​Headers</a></code></td>
+    <td>Maximum number of headers allowed per request.</td>
   </tr><tr class="instancevariable">
     
     <td>Instance Variable</td>
-    <td><code><a href="#persistent">persistent</a></code></td>
+    <td><code><a href="#persistent" class="internal-link" title="twisted.web.http.HTTPChannel.persistent">persistent</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="instancevariable">
     
     <td>Instance Variable</td>
-    <td><code><a href="#requests">requests</a></code></td>
+    <td><code><a href="#requests" class="internal-link" title="twisted.web.http.HTTPChannel.requests">requests</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="instancevariable">
     
     <td>Instance Variable</td>
-    <td><code><a href="#totalHeadersSize">totalHeadersSize</a></code></td>
-    <td><span>Maximum bytes for request line plus all headers from the request.</span></td>
+    <td><code><a href="#totalHeadersSize" class="internal-link" title="twisted.web.http.HTTPChannel.totalHeadersSize">total​Headers​Size</a></code></td>
+    <td>Maximum bytes for request line plus all headers from the request.</td>
   </tr><tr class="method private">
     
     <td>Method</td>
-    <td><code><a href="#_finishRequestBody">_finishRequestBody</a></code></td>
+    <td><code><a href="#_finishRequestBody" class="internal-link" title="twisted.web.http.HTTPChannel._finishRequestBody">_finish​Request​Body</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method private">
     
     <td>Method</td>
-    <td><code><a href="#_maybeChooseTransferDecoder">_maybeChooseTransferDecoder</a></code></td>
-    <td><span>If the provided header is <code>content-length</code> or <code>transfer-encoding</code>, choose the appropriate decoder if any.</span></td>
+    <td><code><a href="#_maybeChooseTransferDecoder" class="internal-link" title="twisted.web.http.HTTPChannel._maybeChooseTransferDecoder">_maybe​Choose​Transfer​Decoder</a></code></td>
+    <td>If the provided header is <tt class="rst-docutils literal"><span class="pre">content-length</span></tt> or <tt class="rst-docutils literal"><span class="pre">transfer-encoding</span></tt>, choose the appropriate decoder if any.</td>
   </tr><tr class="method private">
     
     <td>Method</td>
-    <td><code><a href="#_respondToBadRequestAndDisconnect">_respondToBadRequestAndDisconnect</a></code></td>
-    <td><span>This is a quick and dirty way of responding to bad requests.</span></td>
+    <td><code><a href="#_respondToBadRequestAndDisconnect" class="internal-link" title="twisted.web.http.HTTPChannel._respondToBadRequestAndDisconnect">_respond​To​Bad​Request​And​Disconnect</a></code></td>
+    <td>This is a quick and dirty way of responding to bad requests.</td>
   </tr><tr class="method private">
     
     <td>Method</td>
-    <td><code><a href="#_send100Continue">_send100Continue</a></code></td>
-    <td><span>Sends a 100 Continue response, used to signal to clients that further processing will be performed.</span></td>
+    <td><code><a href="#_send100Continue" class="internal-link" title="twisted.web.http.HTTPChannel._send100Continue">_send100​Continue</a></code></td>
+    <td>Sends a 100 Continue response, used to signal to clients that further processing will be performed.</td>
   </tr><tr class="classvariable private">
     
     <td>Class Variable</td>
-    <td><code><a href="#__content">__content</a></code></td>
+    <td><code><a href="#__content" class="internal-link" title="twisted.web.http.HTTPChannel.__content">__content</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="classvariable private">
     
     <td>Class Variable</td>
-    <td><code><a href="#_log">_log</a></code></td>
+    <td><code><a href="#__header" class="internal-link" title="twisted.web.http.HTTPChannel.__header">__header</a></code></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="classvariable private">
+    
+    <td>Class Variable</td>
+    <td><code><a href="#_log" class="internal-link" title="twisted.web.http.HTTPChannel._log">_log</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="instancevariable private">
     
     <td>Instance Variable</td>
-    <td><code><a href="#__first_line">__first_line</a></code></td>
+    <td><code><a href="#__first_line" class="internal-link" title="twisted.web.http.HTTPChannel.__first_line">__first​_line</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="instancevariable private">
     
     <td>Instance Variable</td>
-    <td><code><a href="#__header">__header</a></code></td>
+    <td><code><a href="#_abortingCall" class="internal-link" title="twisted.web.http.HTTPChannel._abortingCall">_aborting​Call</a></code></td>
+    <td>The <code><a href="twisted.internet.base.DelayedCall.html" class="internal-link" title="twisted.internet.base.DelayedCall">twisted.internet.base.DelayedCall</a></code> that will be used to forcibly close the transport if it doesn't close cleanly.</td>
+  </tr><tr class="instancevariable private">
+    
+    <td>Instance Variable</td>
+    <td><code><a href="#_command" class="internal-link" title="twisted.web.http.HTTPChannel._command">_command</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="instancevariable private">
     
     <td>Instance Variable</td>
-    <td><code><a href="#_abortingCall">_abortingCall</a></code></td>
-    <td><span>The <code><a href="twisted.internet.base.DelayedCall.html">twisted.internet.base.DelayedCall</a></code> that will be used to forcibly close the transport if it doesn't close cleanly.</span></td>
+    <td><code><a href="#_dataBuffer" class="internal-link" title="twisted.web.http.HTTPChannel._dataBuffer">_data​Buffer</a></code></td>
+    <td>Any data that has been received from the connection while processing an outstanding request.</td>
   </tr><tr class="instancevariable private">
     
     <td>Instance Variable</td>
-    <td><code><a href="#_command">_command</a></code></td>
+    <td><code><a href="#_handlingRequest" class="internal-link" title="twisted.web.http.HTTPChannel._handlingRequest">_handling​Request</a></code></td>
+    <td>Whether a request is currently being processed.</td>
+  </tr><tr class="instancevariable private">
+    
+    <td>Instance Variable</td>
+    <td><code><a href="#_networkProducer" class="internal-link" title="twisted.web.http.HTTPChannel._networkProducer">_network​Producer</a></code></td>
+    <td>Either the transport, if it provides <code><a href="twisted.internet.interfaces.IPushProducer.html" class="internal-link" title="twisted.internet.interfaces.IPushProducer">interfaces.IPushProducer</a></code>, or a null implementation of <code><a href="twisted.internet.interfaces.IPushProducer.html" class="internal-link" title="twisted.internet.interfaces.IPushProducer">interfaces.IPushProducer</a></code>.  Used to attempt to prevent the transport from producing excess data when we're responding to a request.</td>
+  </tr><tr class="instancevariable private">
+    
+    <td>Instance Variable</td>
+    <td><code><a href="#_optimisticEagerReadSize" class="internal-link" title="twisted.web.http.HTTPChannel._optimisticEagerReadSize">_optimistic​Eager​Read​Size</a></code></td>
+    <td>When a resource takes a long time to answer a request (via <code><a href="twisted.web.server.html#NOT_DONE_YET" class="internal-link" title="twisted.web.server.NOT_DONE_YET">twisted.web.server.NOT_DONE_YET</a></code>, hopefully one day by a <code><a href="twisted.internet.defer.Deferred.html" class="internal-link" title="twisted.internet.defer.Deferred">Deferred</a></code>), we would like to be able to let that resource know about the underlying transport disappearing as promptly as possible, via <code><a href="twisted.web.http.Request.html#notifyFinish" class="internal-link" title="twisted.web.http.Request.notifyFinish">Request.notifyFinish</a></code>, and therefore via <tt class="rst-docutils literal"><span class="pre">self.requests[...].connectionLost()</span></tt> on this <code><a href="twisted.web.http.HTTPChannel.html" class="internal-link" title="twisted.web.http.HTTPChannel">HTTPChannel</a></code>.</td>
+  </tr><tr class="instancevariable private">
+    
+    <td>Instance Variable</td>
+    <td><code><a href="#_path" class="internal-link" title="twisted.web.http.HTTPChannel._path">_path</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="instancevariable private">
     
     <td>Instance Variable</td>
-    <td><code><a href="#_dataBuffer">_dataBuffer</a></code></td>
-    <td><span>Any data that has been received from the connection while processing an outstanding request.</span></td>
-  </tr><tr class="instancevariable private">
-    
-    <td>Instance Variable</td>
-    <td><code><a href="#_handlingRequest">_handlingRequest</a></code></td>
-    <td><span>Whether a request is currently being processed.</span></td>
-  </tr><tr class="instancevariable private">
-    
-    <td>Instance Variable</td>
-    <td><code><a href="#_networkProducer">_networkProducer</a></code></td>
-    <td><span>Either the transport, if it provides <code><a href="twisted.internet.interfaces.IPushProducer.html">interfaces.IPushProducer</a></code>, or a null implementation of <code><a href="twisted.internet.interfaces.IPushProducer.html">interfaces.IPushProducer</a></code>.  Used to attempt to prevent the transport from producing excess data when we're responding to a request.</span></td>
-  </tr><tr class="instancevariable private">
-    
-    <td>Instance Variable</td>
-    <td><code><a href="#_optimisticEagerReadSize">_optimisticEagerReadSize</a></code></td>
-    <td><span>When a resource takes a long time to answer a request (via <code><a href="twisted.web.server.html#NOT_DONE_YET">twisted.web.server.NOT_DONE_YET</a></code>, hopefully one day by a <code><a href="twisted.internet.defer.Deferred.html">Deferred</a></code>), we would like to be able to let that resource know about the underlying transport disappearing as promptly as possible, via <code><a href="twisted.web.http.Request.html#notifyFinish">Request.notifyFinish</a></code>, and therefore via <code>self.requests[...].connectionLost()</code> on this <code><a href="twisted.web.http.HTTPChannel.html">HTTPChannel</a></code>.<p>However, in order to simplify application logic, we implement head-of-line blocking, and do not relay pipelined requests to the application until the previous request has been answered.  This means that said application cannot dispose of any entity-body that comes in from those subsequent requests, which may be arbitrarily large, and it may need to be buffered in memory.</p><p>To implement this tradeoff between prompt notification when possible (in the most frequent case of non-pipelined requests) and correct behavior when not (say, if a client sends a very long-running GET request followed by a PUT request with a very large body) we will continue reading pipelined requests into <code>self._dataBuffer</code> up to a given limit.</p><p><code>_optimisticEagerReadSize</code> is the number of bytes we will accept from the client and buffer before pausing the transport.</p><p>This behavior has been in place since Twisted 17.9.0 .</p></span></td>
-  </tr><tr class="instancevariable private">
-    
-    <td>Instance Variable</td>
-    <td><code><a href="#_path">_path</a></code></td>
+    <td><code><a href="#_receivedHeaderCount" class="internal-link" title="twisted.web.http.HTTPChannel._receivedHeaderCount">_received​Header​Count</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="instancevariable private">
     
     <td>Instance Variable</td>
-    <td><code><a href="#_receivedHeaderCount">_receivedHeaderCount</a></code></td>
+    <td><code><a href="#_receivedHeaderSize" class="internal-link" title="twisted.web.http.HTTPChannel._receivedHeaderSize">_received​Header​Size</a></code></td>
+    <td>Bytes received so far for the header.</td>
+  </tr><tr class="instancevariable private">
+    
+    <td>Instance Variable</td>
+    <td><code><a href="#_requestProducer" class="internal-link" title="twisted.web.http.HTTPChannel._requestProducer">_request​Producer</a></code></td>
+    <td>If the <code><a href="twisted.web.http.Request.html" class="internal-link" title="twisted.web.http.Request">Request</a></code> object or anything it calls registers itself as an <code><a href="twisted.internet.interfaces.IProducer.html" class="internal-link" title="twisted.internet.interfaces.IProducer">interfaces.IProducer</a></code>, it will be stored here. This is used to create a producing pipeline: pause/resume producing methods will be propagated from the <tt class="rst-docutils literal">transport</tt>, through the <code><a href="twisted.web.http.HTTPChannel.html" class="internal-link" title="twisted.web.http.HTTPChannel">HTTPChannel</a></code> instance, to the c{_requestProducer}.</td>
+  </tr><tr class="instancevariable private">
+    
+    <td>Instance Variable</td>
+    <td><code><a href="#_requestProducerStreaming" class="internal-link" title="twisted.web.http.HTTPChannel._requestProducerStreaming">_request​Producer​Streaming</a></code></td>
+    <td>A boolean that tracks whether the producer on the <code><a href="twisted.web.http.Request.html" class="internal-link" title="twisted.web.http.Request">Request</a></code> side of this channel has registered itself as a <code><a href="twisted.internet.interfaces.IPushProducer.html" class="internal-link" title="twisted.internet.interfaces.IPushProducer">interfaces.IPushProducer</a></code> or an <code><a href="twisted.internet.interfaces.IPullProducer.html" class="internal-link" title="twisted.internet.interfaces.IPullProducer">interfaces.IPullProducer</a></code>.</td>
+  </tr><tr class="instancevariable private">
+    
+    <td>Instance Variable</td>
+    <td><code><a href="#_savedTimeOut" class="internal-link" title="twisted.web.http.HTTPChannel._savedTimeOut">_saved​Time​Out</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="instancevariable private">
     
     <td>Instance Variable</td>
-    <td><code><a href="#_receivedHeaderSize">_receivedHeaderSize</a></code></td>
-    <td><span>Bytes received so far for the header.</span></td>
+    <td><code><a href="#_transferDecoder" class="internal-link" title="twisted.web.http.HTTPChannel._transferDecoder">_transfer​Decoder</a></code></td>
+    <td><code><a href="https://docs.python.org/3/library/constants.html#None" class="intersphinx-link">None</a></code> or a decoder instance if the request body uses the <em>chunked</em> Transfer-Encoding.</td>
   </tr><tr class="instancevariable private">
     
     <td>Instance Variable</td>
-    <td><code><a href="#_requestProducer">_requestProducer</a></code></td>
-    <td><span>If the <code><a href="twisted.web.http.Request.html">Request</a></code> object or anything it calls registers itself as an <code><a href="twisted.internet.interfaces.IProducer.html">interfaces.IProducer</a></code>, it will be stored here. This is used to create a producing pipeline: pause/resume producing methods will be propagated from the <code>transport</code>, through the <code><a href="twisted.web.http.HTTPChannel.html">HTTPChannel</a></code> instance, to the c{_requestProducer}.<p>The reason we proxy through the producing methods rather than the old behaviour (where we literally just set the <code><a href="twisted.web.http.Request.html">Request</a></code> object as the producer on the transport) is because we want to be able to exert backpressure on the client to prevent it from sending in arbitrarily many requests without ever reading responses.  Essentially, if the client never reads our responses we will eventually stop reading its requests.</p></span></td>
-  </tr><tr class="instancevariable private">
-    
-    <td>Instance Variable</td>
-    <td><code><a href="#_requestProducerStreaming">_requestProducerStreaming</a></code></td>
-    <td><span>A boolean that tracks whether the producer on the <code><a href="twisted.web.http.Request.html">Request</a></code> side of this channel has registered itself as a <code><a href="twisted.internet.interfaces.IPushProducer.html">interfaces.IPushProducer</a></code> or an <code><a href="twisted.internet.interfaces.IPullProducer.html">interfaces.IPullProducer</a></code>.</span></td>
-  </tr><tr class="instancevariable private">
-    
-    <td>Instance Variable</td>
-    <td><code><a href="#_savedTimeOut">_savedTimeOut</a></code></td>
+    <td><code><a href="#_version" class="internal-link" title="twisted.web.http.HTTPChannel._version">_version</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="instancevariable private">
     
     <td>Instance Variable</td>
-    <td><code><a href="#_transferDecoder">_transferDecoder</a></code></td>
-    <td><span><code><a href="https://docs.python.org/3/library/constants.html#None">None</a></code> or a decoder instance if the request body uses the <i>chunked</i> Transfer-Encoding.</span></td>
-  </tr><tr class="instancevariable private">
-    
-    <td>Instance Variable</td>
-    <td><code><a href="#_version">_version</a></code></td>
-    <td><span class="undocumented">Undocumented</span></td>
-  </tr><tr class="instancevariable private">
-    
-    <td>Instance Variable</td>
-    <td><code><a href="#_waitingForTransport">_waitingForTransport</a></code></td>
-    <td><span>A boolean that tracks whether the transport has asked us to stop producing.  This is used to keep track of what we're waiting for: if the transport has asked us to stop producing then we don't want to unpause the transport until it asks us to produce again.</span></td>
+    <td><code><a href="#_waitingForTransport" class="internal-link" title="twisted.web.http.HTTPChannel._waitingForTransport">_waiting​For​Transport</a></code></td>
+    <td>A boolean that tracks whether the transport has asked us to stop producing.  This is used to keep track of what we're waiting for: if the transport has asked us to stop producing then we don't want to unpause the transport until it asks us to produce again.</td>
   </tr>
 </table>
         
           <p class="inheritedFrom">
-            Inherited from <code><a href="twisted.protocols.basic.LineReceiver.html">LineReceiver</a></code>:
+            Inherited from <code><a href="twisted.protocols.basic.LineReceiver.html" class="internal-link" title="twisted.protocols.basic.LineReceiver">LineReceiver</a></code>:
           </p>
-          <table class="children sortable" id="id3259">
+          <table class="children sortable" id="id3245">
   
   
   <tr class="basemethod">
     
     <td>Method</td>
-    <td><code><a href="twisted.protocols.basic.LineReceiver.html#clearLineBuffer">clearLineBuffer</a></code></td>
-    <td><span>Clear buffered data.</span></td>
+    <td><code><a href="twisted.protocols.basic.LineReceiver.html#clearLineBuffer" class="internal-link" title="twisted.protocols.basic.LineReceiver.clearLineBuffer">clear​Line​Buffer</a></code></td>
+    <td>Clear buffered data.</td>
   </tr><tr class="basemethod">
     
     <td>Method</td>
-    <td><code><a href="twisted.protocols.basic.LineReceiver.html#lineLengthExceeded">lineLengthExceeded</a></code></td>
-    <td><span>Called when the maximum line length has been reached. Override if it needs to be dealt with in some special way.</span></td>
+    <td><code><a href="twisted.protocols.basic.LineReceiver.html#lineLengthExceeded" class="internal-link" title="twisted.protocols.basic.LineReceiver.lineLengthExceeded">line​Length​Exceeded</a></code></td>
+    <td>Called when the maximum line length has been reached. Override if it needs to be dealt with in some special way.</td>
   </tr><tr class="basemethod">
     
     <td>Method</td>
-    <td><code><a href="twisted.protocols.basic.LineReceiver.html#sendLine">sendLine</a></code></td>
-    <td><span>Sends a line to the other end of the connection.</span></td>
+    <td><code><a href="twisted.protocols.basic.LineReceiver.html#sendLine" class="internal-link" title="twisted.protocols.basic.LineReceiver.sendLine">send​Line</a></code></td>
+    <td>Sends a line to the other end of the connection.</td>
   </tr><tr class="basemethod">
     
     <td>Method</td>
-    <td><code><a href="twisted.protocols.basic.LineReceiver.html#setLineMode">setLineMode</a></code></td>
-    <td><span>Sets the line-mode of this receiver.</span></td>
+    <td><code><a href="twisted.protocols.basic.LineReceiver.html#setLineMode" class="internal-link" title="twisted.protocols.basic.LineReceiver.setLineMode">set​Line​Mode</a></code></td>
+    <td>Sets the line-mode of this receiver.</td>
   </tr><tr class="basemethod">
     
     <td>Method</td>
-    <td><code><a href="twisted.protocols.basic.LineReceiver.html#setRawMode">setRawMode</a></code></td>
-    <td><span>Sets the raw mode of this receiver. Further data received will be sent to rawDataReceived rather than lineReceived.</span></td>
+    <td><code><a href="twisted.protocols.basic.LineReceiver.html#setRawMode" class="internal-link" title="twisted.protocols.basic.LineReceiver.setRawMode">set​Raw​Mode</a></code></td>
+    <td>Sets the raw mode of this receiver. Further data received will be sent to rawDataReceived rather than lineReceived.</td>
   </tr><tr class="baseclassvariable">
     
     <td>Class Variable</td>
-    <td><code><a href="twisted.protocols.basic.LineReceiver.html#delimiter">delimiter</a></code></td>
-    <td><span>The line-ending delimiter to use. By default this is <code>b'\r\n'</code>.</span></td>
+    <td><code><a href="twisted.protocols.basic.LineReceiver.html#delimiter" class="internal-link" title="twisted.protocols.basic.LineReceiver.delimiter">delimiter</a></code></td>
+    <td>The line-ending delimiter to use. By default this is <tt class="rst-docutils literal"><span class="pre">b'\r\n'</span></tt>.</td>
   </tr><tr class="baseinstancevariable">
     
     <td>Instance Variable</td>
-    <td><code><a href="twisted.protocols.basic.LineReceiver.html#line_mode">line_mode</a></code></td>
+    <td><code><a href="twisted.protocols.basic.LineReceiver.html#line_mode" class="internal-link" title="twisted.protocols.basic.LineReceiver.line_mode">line​_mode</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="baseinstancevariable private">
     
     <td>Instance Variable</td>
-    <td><code><a href="twisted.protocols.basic.LineReceiver.html#_buffer">_buffer</a></code></td>
+    <td><code><a href="twisted.protocols.basic.LineReceiver.html#_buffer" class="internal-link" title="twisted.protocols.basic.LineReceiver._buffer">_buffer</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="baseinstancevariable private">
     
     <td>Instance Variable</td>
-    <td><code><a href="twisted.protocols.basic.LineReceiver.html#_busyReceiving">_busyReceiving</a></code></td>
+    <td><code><a href="twisted.protocols.basic.LineReceiver.html#_busyReceiving" class="internal-link" title="twisted.protocols.basic.LineReceiver._busyReceiving">_busy​Receiving</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr>
 </table>
           
           <p class="inheritedFrom">
-            Inherited from <code><a href="twisted.internet.protocol.Protocol.html">Protocol</a></code> (via <code><a href="twisted.protocols.basic.LineReceiver.html">LineReceiver</a></code>):
+            Inherited from <code><a href="twisted.internet.protocol.Protocol.html" class="internal-link" title="twisted.internet.protocol.Protocol">Protocol</a></code> (via <code><a href="twisted.protocols.basic.LineReceiver.html" class="internal-link" title="twisted.protocols.basic.LineReceiver">LineReceiver</a></code>):
           </p>
-          <table class="children sortable" id="id3260">
+          <table class="children sortable" id="id3246">
   
   
   <tr class="basemethod">
     
     <td>Method</td>
-    <td><code><a href="twisted.internet.protocol.Protocol.html#logPrefix">logPrefix</a></code></td>
-    <td><span>Return a prefix matching the class name, to identify log messages related to this protocol instance.</span></td>
+    <td><code><a href="twisted.internet.protocol.Protocol.html#logPrefix" class="internal-link" title="twisted.internet.protocol.Protocol.logPrefix">log​Prefix</a></code></td>
+    <td>Return a prefix matching the class name, to identify log messages related to this protocol instance.</td>
   </tr><tr class="baseclassvariable">
     
     <td>Class Variable</td>
-    <td><code><a href="twisted.internet.protocol.Protocol.html#factory">factory</a></code></td>
+    <td><code><a href="twisted.internet.protocol.Protocol.html#factory" class="internal-link" title="twisted.internet.protocol.Protocol.factory">factory</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr>
 </table>
           
           <p class="inheritedFrom">
-            Inherited from <code><a href="twisted.internet.protocol.BaseProtocol.html">BaseProtocol</a></code> (via <code><a href="twisted.protocols.basic.LineReceiver.html">LineReceiver</a></code>, <code><a href="twisted.internet.protocol.Protocol.html">Protocol</a></code>):
+            Inherited from <code><a href="twisted.internet.protocol.BaseProtocol.html" class="internal-link" title="twisted.internet.protocol.BaseProtocol">BaseProtocol</a></code> (via <code><a href="twisted.protocols.basic.LineReceiver.html" class="internal-link" title="twisted.protocols.basic.LineReceiver">LineReceiver</a></code>, <code><a href="twisted.internet.protocol.Protocol.html" class="internal-link" title="twisted.internet.protocol.Protocol">Protocol</a></code>):
           </p>
-          <table class="children sortable" id="id3261">
+          <table class="children sortable" id="id3247">
   
   
   <tr class="basemethod">
     
     <td>Method</td>
-    <td><code><a href="twisted.internet.protocol.BaseProtocol.html#makeConnection">makeConnection</a></code></td>
-    <td><span>Make a connection to a transport and a server.</span></td>
+    <td><code><a href="twisted.internet.protocol.BaseProtocol.html#makeConnection" class="internal-link" title="twisted.internet.protocol.BaseProtocol.makeConnection">make​Connection</a></code></td>
+    <td>Make a connection to a transport and a server.</td>
   </tr><tr class="baseinstancevariable">
     
     <td>Instance Variable</td>
-    <td><code><a href="twisted.internet.protocol.BaseProtocol.html#connected">connected</a></code></td>
+    <td><code><a href="twisted.internet.protocol.BaseProtocol.html#connected" class="internal-link" title="twisted.internet.protocol.BaseProtocol.connected">connected</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="baseinstancevariable">
     
     <td>Instance Variable</td>
-    <td><code><a href="twisted.internet.protocol.BaseProtocol.html#transport">transport</a></code></td>
+    <td><code><a href="twisted.internet.protocol.BaseProtocol.html#transport" class="internal-link" title="twisted.internet.protocol.BaseProtocol.transport">transport</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr>
 </table>
           
           <p class="inheritedFrom">
-            Inherited from <code><a href="twisted.protocols.basic._PauseableMixin.html">_PauseableMixin</a></code> (via <code><a href="twisted.protocols.basic.LineReceiver.html">LineReceiver</a></code>):
+            Inherited from <code><a href="twisted.protocols.basic._PauseableMixin.html" class="internal-link" title="twisted.protocols.basic._PauseableMixin">_PauseableMixin</a></code> (via <code><a href="twisted.protocols.basic.LineReceiver.html" class="internal-link" title="twisted.protocols.basic.LineReceiver">LineReceiver</a></code>):
           </p>
-          <table class="children sortable" id="id3262">
+          <table class="children sortable" id="id3248">
   
   
   <tr class="baseinstancevariable">
     
     <td>Instance Variable</td>
-    <td><code><a href="twisted.protocols.basic._PauseableMixin.html#paused">paused</a></code></td>
+    <td><code><a href="twisted.protocols.basic._PauseableMixin.html#paused" class="internal-link" title="twisted.protocols.basic._PauseableMixin.paused">paused</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr>
 </table>
           
           <p class="inheritedFrom">
-            Inherited from <code><a href="twisted.protocols.policies.TimeoutMixin.html">TimeoutMixin</a></code>:
+            Inherited from <code><a href="twisted.protocols.policies.TimeoutMixin.html" class="internal-link" title="twisted.protocols.policies.TimeoutMixin">TimeoutMixin</a></code>:
           </p>
-          <table class="children sortable" id="id3263">
+          <table class="children sortable" id="id3249">
   
   
   <tr class="basemethod">
     
     <td>Method</td>
-    <td><code><a href="twisted.protocols.policies.TimeoutMixin.html#callLater">callLater</a></code></td>
-    <td><span>Wrapper around <code><a href="twisted.internet.interfaces.IReactorTime.html#callLater">reactor.callLater</a></code> for test purpose.</span></td>
+    <td><code><a href="twisted.protocols.policies.TimeoutMixin.html#callLater" class="internal-link" title="twisted.protocols.policies.TimeoutMixin.callLater">call​Later</a></code></td>
+    <td>Wrapper around <code><a href="twisted.internet.interfaces.IReactorTime.html#callLater" class="internal-link" title="twisted.internet.interfaces.IReactorTime.callLater">reactor.callLater</a></code> for test purpose.</td>
   </tr><tr class="basemethod">
     
     <td>Method</td>
-    <td><code><a href="twisted.protocols.policies.TimeoutMixin.html#resetTimeout">resetTimeout</a></code></td>
-    <td><span>Reset the timeout count down.</span></td>
+    <td><code><a href="twisted.protocols.policies.TimeoutMixin.html#resetTimeout" class="internal-link" title="twisted.protocols.policies.TimeoutMixin.resetTimeout">reset​Timeout</a></code></td>
+    <td>Reset the timeout count down.</td>
   </tr><tr class="basemethod">
     
     <td>Method</td>
-    <td><code><a href="twisted.protocols.policies.TimeoutMixin.html#setTimeout">setTimeout</a></code></td>
-    <td><span>Change the timeout period</span></td>
+    <td><code><a href="twisted.protocols.policies.TimeoutMixin.html#setTimeout" class="internal-link" title="twisted.protocols.policies.TimeoutMixin.setTimeout">set​Timeout</a></code></td>
+    <td>Change the timeout period</td>
   </tr><tr class="baseinstancevariable">
     
     <td>Instance Variable</td>
-    <td><code><a href="twisted.protocols.policies.TimeoutMixin.html#timeOut">timeOut</a></code></td>
-    <td><span>The number of seconds after which to timeout the connection.</span></td>
+    <td><code><a href="twisted.protocols.policies.TimeoutMixin.html#timeOut" class="internal-link" title="twisted.protocols.policies.TimeoutMixin.timeOut">time​Out</a></code></td>
+    <td>The number of seconds after which to timeout the connection.</td>
   </tr><tr class="basemethod private">
     
     <td>Method</td>
-    <td><code><a href="twisted.protocols.policies.TimeoutMixin.html#__timedOut">__timedOut</a></code></td>
+    <td><code><a href="twisted.protocols.policies.TimeoutMixin.html#__timedOut" class="internal-link" title="twisted.protocols.policies.TimeoutMixin.__timedOut">__timed​Out</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="baseinstancevariable private">
     
     <td>Instance Variable</td>
-    <td><code><a href="twisted.protocols.policies.TimeoutMixin.html#__timeoutCall">__timeoutCall</a></code></td>
+    <td><code><a href="twisted.protocols.policies.TimeoutMixin.html#__timeoutCall" class="internal-link" title="twisted.protocols.policies.TimeoutMixin.__timeoutCall">__timeout​Call</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr>
 </table>
@@ -658,7 +681,7 @@
   <div class="docstring functionBody">
     
     
-    <div><p>Check if the channel should close or not.</p><table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">request</span></td><td class="fieldArgDesc">The request most recently received over this channel against which checks will be made to determine if this connection can remain open after a matching response is returned.</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">version:</span><code>bytes</code></td><td class="fieldArgDesc">The version of the request.</td></tr><tr class="fieldStart"><td class="fieldName" colspan="2">Returns</td></tr><tr><td class="fieldArgContainer"><code>bool</code></td><td class="fieldArgDesc">A flag which, if <code>True</code>, indicates that this connection may remain open to receive another request; if <code>False</code>, the connection must be closed in order to indicate the completion of the response to <code>request</code>.</td></tr></table></div>
+    <div>Check if the channel should close or not.<table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">request</span></td><td class="fieldArgDesc">The request most recently received over this channel against which checks will be made to determine if this connection can remain open after a matching response is returned.</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">version:</span><tt class="rst-docutils literal">bytes</tt></td><td class="fieldArgDesc">The version of the request.</td></tr><tr class="fieldStart"><td class="fieldName" colspan="2">Returns</td></tr><tr><td class="fieldArgContainer"><tt class="rst-docutils literal">bool</tt></td><td class="fieldArgDesc">A flag which, if <tt class="rst-docutils literal">True</tt>, indicates that this connection may remain open to receive another request; if <tt class="rst-docutils literal">False</tt>, the connection must be closed in order to indicate the completion of the response to <tt class="rst-docutils literal">request</tt>.</td></tr></table></div>
   </div>
 </div><div class="basemethod">
   
@@ -678,9 +701,11 @@
     </a>
   </div>
   <div class="docstring functionBody">
-    <div class="interfaceinfo">from <code><a href="twisted.internet.interfaces.IProtocol.html#connectionLost">twisted.internet.interfaces.IProtocol</a></code></div><div class="interfaceinfo">overrides <code><a href="twisted.internet.protocol.Protocol.html#connectionLost">twisted.internet.protocol.Protocol.connectionLost</a></code></div>
+    <div class="interfaceinfo">from <code><a href="twisted.internet.interfaces.IProtocol.html#connectionLost" class="internal-link" title="twisted.internet.interfaces.IProtocol.connectionLost">twisted.internet.interfaces.IProtocol</a></code></div><div class="interfaceinfo">overrides <code><a href="twisted.internet.protocol.Protocol.html#connectionLost" class="internal-link">twisted.internet.protocol.Protocol.connectionLost</a></code></div>
     
-    <div><p>Called when the connection is shut down.</p><p>Clear any circular references here, and any external references to this Protocol.  The connection has been closed.</p><table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">reason:</span><code><a href="twisted.python.failure.Failure.html">twisted.python.failure.Failure</a></code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr></table></div>
+    <div><p>Called when the connection is shut down.</p>
+<p>Clear any circular references here, and any external references to this Protocol.  The connection has been closed.</p>
+<table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">reason:</span><code><a href="twisted.python.failure.Failure.html" class="internal-link" title="twisted.python.failure.Failure">twisted.python.failure.Failure</a></code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr></table></div>
   </div>
 </div><div class="basemethod">
   
@@ -700,9 +725,11 @@
     </a>
   </div>
   <div class="docstring functionBody">
-    <div class="interfaceinfo">from <code><a href="twisted.internet.interfaces.IProtocol.html#connectionMade">twisted.internet.interfaces.IProtocol</a></code></div><div class="interfaceinfo">overrides <code><a href="twisted.internet.protocol.BaseProtocol.html#connectionMade">twisted.internet.protocol.BaseProtocol.connectionMade</a></code></div>
+    <div class="interfaceinfo">from <code><a href="twisted.internet.interfaces.IProtocol.html#connectionMade" class="internal-link" title="twisted.internet.interfaces.IProtocol.connectionMade">twisted.internet.interfaces.IProtocol</a></code></div><div class="interfaceinfo">overrides <code><a href="twisted.internet.protocol.BaseProtocol.html#connectionMade" class="internal-link">twisted.internet.protocol.BaseProtocol.connectionMade</a></code></div>
     
-    <div><p>Called when a connection is made.</p><p>This may be considered the initializer of the protocol, because it is called when the connection is completed.  For clients, this is called once the connection to the server has been established; for servers, this is called after an accept() call stops blocking and a socket has been received.  If you need to send any greeting or initial message, do it here.</p></div>
+    <div><p>Called when a connection is made.</p>
+<p>This may be considered the initializer of the protocol, because it is called when the connection is completed.  For clients, this is called once the connection to the server has been established; for servers, this is called after an accept() call stops blocking and a socket has been received.  If you need to send any greeting or initial message, do it here.</p>
+</div>
   </div>
 </div><div class="basemethod">
   
@@ -722,9 +749,9 @@
     </a>
   </div>
   <div class="docstring functionBody">
-    <div class="interfaceinfo">from <code><a href="twisted.internet.interfaces.IProtocol.html#dataReceived">twisted.internet.interfaces.IProtocol</a></code></div><div class="interfaceinfo">overrides <code><a href="twisted.protocols.basic.LineReceiver.html#dataReceived">twisted.protocols.basic.LineReceiver.dataReceived</a></code></div>
+    <div class="interfaceinfo">from <code><a href="twisted.internet.interfaces.IProtocol.html#dataReceived" class="internal-link" title="twisted.internet.interfaces.IProtocol.dataReceived">twisted.internet.interfaces.IProtocol</a></code></div><div class="interfaceinfo">overrides <code><a href="twisted.protocols.basic.LineReceiver.html#dataReceived" class="internal-link">twisted.protocols.basic.LineReceiver.dataReceived</a></code></div>
     
-    <div><p>Data was received from the network.  Process it.</p></div>
+    <div>Data was received from the network.  Process it.</div>
   </div>
 </div><div class="basemethod">
   
@@ -746,7 +773,7 @@
   <div class="docstring functionBody">
     
     
-    <div><p>Called if <code>abortTimeout</code> seconds have passed since the timeout fired, and the connection still hasn't gone away. This can really only happen on extremely bad connections or when clients are maliciously attempting to keep connections open.</p></div>
+    <div>Called if <tt class="rst-docutils literal">abortTimeout</tt> seconds have passed since the timeout fired, and the connection still hasn't gone away. This can really only happen on extremely bad connections or when clients are maliciously attempting to keep connections open.</div>
   </div>
 </div><div class="basemethod">
   
@@ -766,9 +793,9 @@
     </a>
   </div>
   <div class="docstring functionBody">
-    <div class="interfaceinfo">from <code><a href="twisted.internet.interfaces.ITransport.html#getHost">twisted.internet.interfaces.ITransport</a></code></div>
+    <div class="interfaceinfo">from <code><a href="twisted.internet.interfaces.ITransport.html#getHost" class="internal-link" title="twisted.internet.interfaces.ITransport.getHost">twisted.internet.interfaces.ITransport</a></code></div>
     
-    <div><p>Get the local address of this connection.</p><table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Returns</td></tr><tr><td colspan="2">An <code><a href="twisted.internet.interfaces.IAddress.html">IAddress</a></code> provider.</td></tr></table></div>
+    <div>Get the local address of this connection.<table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Returns</td></tr><tr><td colspan="2">An <code><a href="twisted.internet.interfaces.IAddress.html" class="internal-link" title="twisted.internet.interfaces.IAddress">IAddress</a></code> provider.</td></tr></table></div>
   </div>
 </div><div class="basemethod">
   
@@ -788,9 +815,9 @@
     </a>
   </div>
   <div class="docstring functionBody">
-    <div class="interfaceinfo">from <code><a href="twisted.internet.interfaces.ITransport.html#getPeer">twisted.internet.interfaces.ITransport</a></code></div>
+    <div class="interfaceinfo">from <code><a href="twisted.internet.interfaces.ITransport.html#getPeer" class="internal-link" title="twisted.internet.interfaces.ITransport.getPeer">twisted.internet.interfaces.ITransport</a></code></div>
     
-    <div><p>Get the remote address of this connection.</p><table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Returns</td></tr><tr><td colspan="2">An <code><a href="twisted.internet.interfaces.IAddress.html">IAddress</a></code> provider.</td></tr></table></div>
+    <div>Get the remote address of this connection.<table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Returns</td></tr><tr><td colspan="2">An <code><a href="twisted.internet.interfaces.IAddress.html" class="internal-link" title="twisted.internet.interfaces.IAddress">IAddress</a></code> provider.</td></tr></table></div>
   </div>
 </div><div class="basemethod">
   
@@ -812,7 +839,7 @@
   <div class="docstring functionBody">
     
     
-    <div><p>Do pre-processing (for content-length) and store this header away. Enforce the per-request header limit.</p><table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">line:</span><code>bytes</code></td><td class="fieldArgDesc">A line from the header section of a request, excluding the line delimiter.</td></tr><tr class="fieldStart"><td class="fieldName" colspan="2">Returns</td></tr><tr><td class="fieldArgContainer"><code><a href="https://docs.python.org/3/library/functions.html#bool">bool</a></code></td><td class="fieldArgDesc">A flag indicating whether the header was valid.</td></tr></table></div>
+    <div>Do pre-processing (for content-length) and store this header away. Enforce the per-request header limit.<table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">line:</span><tt class="rst-docutils literal">bytes</tt></td><td class="fieldArgDesc">A line from the header section of a request, excluding the line delimiter.</td></tr><tr class="fieldStart"><td class="fieldName" colspan="2">Returns</td></tr><tr><td class="fieldArgContainer"><code><a href="https://docs.python.org/3/library/functions.html#bool" class="intersphinx-link">bool</a></code></td><td class="fieldArgDesc">A flag indicating whether the header was valid.</td></tr></table></div>
   </div>
 </div><div class="basemethod">
   
@@ -834,7 +861,9 @@
   <div class="docstring functionBody">
     
     
-    <div><p>Return <code><a href="https://docs.python.org/3/library/constants.html#True">True</a></code> if this channel is using a secure transport.</p><p>Normally this method returns <code><a href="https://docs.python.org/3/library/constants.html#True">True</a></code> if this instance is using a transport that implements <code><a href="twisted.internet.interfaces.ISSLTransport.html">interfaces.ISSLTransport</a></code>.</p><table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Returns</td></tr><tr><td class="fieldArgContainer"><code>bool</code></td><td class="fieldArgDesc"><code><a href="https://docs.python.org/3/library/constants.html#True">True</a></code> if this request is secure</td></tr></table></div>
+    <div><p>Return <code><a href="https://docs.python.org/3/library/constants.html#True" class="intersphinx-link">True</a></code> if this channel is using a secure transport.</p>
+<p>Normally this method returns <code><a href="https://docs.python.org/3/library/constants.html#True" class="intersphinx-link">True</a></code> if this instance is using a transport that implements <code><a href="twisted.internet.interfaces.ISSLTransport.html" class="internal-link" title="twisted.internet.interfaces.ISSLTransport">interfaces.ISSLTransport</a></code>.</p>
+<table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Returns</td></tr><tr><td class="fieldArgContainer"><tt class="rst-docutils literal">bool</tt></td><td class="fieldArgDesc"><code><a href="https://docs.python.org/3/library/constants.html#True" class="intersphinx-link">True</a></code> if this request is secure</td></tr></table></div>
   </div>
 </div><div class="basemethod">
   
@@ -854,9 +883,9 @@
     </a>
   </div>
   <div class="docstring functionBody">
-    <div class="interfaceinfo">overrides <code><a href="twisted.protocols.basic.LineReceiver.html#lineReceived">twisted.protocols.basic.LineReceiver.lineReceived</a></code></div>
+    <div class="interfaceinfo">overrides <code><a href="twisted.protocols.basic.LineReceiver.html#lineReceived" class="internal-link">twisted.protocols.basic.LineReceiver.lineReceived</a></code></div>
     
-    <div><p>Called for each line from request until the end of headers when it enters binary mode.</p></div>
+    <div>Called for each line from request until the end of headers when it enters binary mode.</div>
   </div>
 </div><div class="basemethod">
   
@@ -876,9 +905,9 @@
     </a>
   </div>
   <div class="docstring functionBody">
-    <div class="interfaceinfo">from <code><a href="twisted.internet.interfaces.ITransport.html#loseConnection">twisted.internet.interfaces.ITransport</a></code></div>
+    <div class="interfaceinfo">from <code><a href="twisted.internet.interfaces.ITransport.html#loseConnection" class="internal-link" title="twisted.internet.interfaces.ITransport.loseConnection">twisted.internet.interfaces.ITransport</a></code></div>
     
-    <div><p>Closes the connection. Will write any data that is pending to be sent on the network, but if this response has not yet been written to the network will not write anything.</p><table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Returns</td></tr><tr><td colspan="2"><code><a href="https://docs.python.org/3/library/constants.html#None">None</a></code></td></tr></table></div>
+    <div>Closes the connection. Will write any data that is pending to be sent on the network, but if this response has not yet been written to the network will not write anything.<table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Returns</td></tr><tr><td colspan="2"><code><a href="https://docs.python.org/3/library/constants.html#None" class="intersphinx-link">None</a></code></td></tr></table></div>
   </div>
 </div><div class="basemethod">
   
@@ -898,9 +927,13 @@
     </a>
   </div>
   <div class="docstring functionBody">
-    <div class="interfaceinfo">from <code><a href="twisted.internet.interfaces.IPushProducer.html#pauseProducing">twisted.internet.interfaces.IPushProducer</a></code></div><div class="interfaceinfo">overrides <code><a href="twisted.protocols.basic._PauseableMixin.html#pauseProducing">twisted.protocols.basic._PauseableMixin.pauseProducing</a></code></div>
+    <div class="interfaceinfo">from <code><a href="twisted.internet.interfaces.IPushProducer.html#pauseProducing" class="internal-link" title="twisted.internet.interfaces.IPushProducer.pauseProducing">twisted.internet.interfaces.IPushProducer</a></code></div><div class="interfaceinfo">overrides <code><a href="twisted.protocols.basic._PauseableMixin.html#pauseProducing" class="internal-link">twisted.protocols.basic._PauseableMixin.pauseProducing</a></code></div>
     
-    <div><p>Pause producing data.</p><p>This will be called by the transport when the send buffers have been filled up. We want to simultaneously pause the producing <code><a href="twisted.web.http.Request.html">Request</a></code> object and also pause our transport.</p><p>The logic behind pausing the transport is specifically to avoid issues like https://twistedmatrix.com/trac/ticket/8868. In this case, our inability to send does not prevent us handling more requests, which means we increasingly queue up more responses in our send buffer without end. The easiest way to handle this is to ensure that if we are unable to send our responses, we will not read further data from the connection until the client pulls some data out. This is a bit of a blunt instrument, but it's ok.</p><p>Note that this potentially interacts with timeout handling in a positive way. Once the transport is paused the client may run into a timeout which will cause us to tear the connection down. That's a good thing!</p></div>
+    <div><p>Pause producing data.</p>
+<p>This will be called by the transport when the send buffers have been filled up. We want to simultaneously pause the producing <code><a href="twisted.web.http.Request.html" class="internal-link" title="twisted.web.http.Request">Request</a></code> object and also pause our transport.</p>
+<p>The logic behind pausing the transport is specifically to avoid issues like https://twistedmatrix.com/trac/ticket/8868. In this case, our inability to send does not prevent us handling more requests, which means we increasingly queue up more responses in our send buffer without end. The easiest way to handle this is to ensure that if we are unable to send our responses, we will not read further data from the connection until the client pulls some data out. This is a bit of a blunt instrument, but it's ok.</p>
+<p>Note that this potentially interacts with timeout handling in a positive way. Once the transport is paused the client may run into a timeout which will cause us to tear the connection down. That's a good thing!</p>
+</div>
   </div>
 </div><div class="basemethod">
   
@@ -920,9 +953,9 @@
     </a>
   </div>
   <div class="docstring functionBody">
-    <div class="interfaceinfo">overrides <code><a href="twisted.protocols.basic.LineReceiver.html#rawDataReceived">twisted.protocols.basic.LineReceiver.rawDataReceived</a></code></div>
+    <div class="interfaceinfo">overrides <code><a href="twisted.protocols.basic.LineReceiver.html#rawDataReceived" class="internal-link">twisted.protocols.basic.LineReceiver.rawDataReceived</a></code></div>
     
-    <div><p>Override this for when raw data is received.</p></div>
+    <div>Override this for when raw data is received.</div>
   </div>
 </div><div class="basemethod">
   
@@ -942,9 +975,13 @@
     </a>
   </div>
   <div class="docstring functionBody">
-    <div class="interfaceinfo">from <code><a href="twisted.internet.interfaces.IConsumer.html#registerProducer">twisted.internet.interfaces.IConsumer</a></code></div>
+    <div class="interfaceinfo">from <code><a href="twisted.internet.interfaces.IConsumer.html#registerProducer" class="internal-link" title="twisted.internet.interfaces.IConsumer.registerProducer">twisted.internet.interfaces.IConsumer</a></code></div>
     
-    <div><p>Register to receive data from a producer.</p><p>This sets self to be a consumer for a producer.  When this object runs out of data (as when a send(2) call on a socket succeeds in moving the last data from a userspace buffer into a kernelspace buffer), it will ask the producer to resumeProducing().</p><p>For <code><a href="twisted.internet.interfaces.IPullProducer.html">IPullProducer</a></code> providers, <code>resumeProducing</code> will be called once each time data is required.</p><p>For <code><a href="twisted.internet.interfaces.IPushProducer.html">IPushProducer</a></code> providers, <code>pauseProducing</code> will be called whenever the write buffer fills up and <code>resumeProducing</code> will only be called when it empties.</p><table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">producer:</span><code><a href="twisted.internet.interfaces.IProducer.html">IProducer</a></code> provider</td><td class="fieldArgDesc">The <code><a href="twisted.internet.interfaces.IProducer.html">IProducer</a></code> that will be producing data.</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">streaming:</span><code><a href="https://docs.python.org/3/library/functions.html#bool">bool</a></code></td><td class="fieldArgDesc"><code>True</code> if <code>producer</code> provides <code><a href="twisted.internet.interfaces.IPushProducer.html">IPushProducer</a></code>, <code>False</code> if <code>producer</code> provides <code><a href="twisted.internet.interfaces.IPullProducer.html">IPullProducer</a></code>.</td></tr><tr class="fieldStart"><td class="fieldName" colspan="2">Returns</td></tr><tr><td colspan="2"><code><a href="https://docs.python.org/3/library/constants.html#None">None</a></code></td></tr><tr class="fieldStart"><td class="fieldName" colspan="2">Raises</td></tr><tr><td class="fieldArgContainer"><code><a href="https://docs.python.org/3/library/exceptions.html#RuntimeError">RuntimeError</a></code></td><td>If a producer is already registered.</td></tr></table></div>
+    <div><p>Register to receive data from a producer.</p>
+<p>This sets self to be a consumer for a producer.  When this object runs out of data (as when a send(2) call on a socket succeeds in moving the last data from a userspace buffer into a kernelspace buffer), it will ask the producer to resumeProducing().</p>
+<p>For <code><a href="twisted.internet.interfaces.IPullProducer.html" class="internal-link" title="twisted.internet.interfaces.IPullProducer">IPullProducer</a></code> providers, <tt class="rst-docutils literal">resumeProducing</tt> will be called once each time data is required.</p>
+<p>For <code><a href="twisted.internet.interfaces.IPushProducer.html" class="internal-link" title="twisted.internet.interfaces.IPushProducer">IPushProducer</a></code> providers, <tt class="rst-docutils literal">pauseProducing</tt> will be called whenever the write buffer fills up and <tt class="rst-docutils literal">resumeProducing</tt> will only be called when it empties.</p>
+<table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">producer:</span><code><a href="twisted.internet.interfaces.IProducer.html" class="internal-link" title="twisted.internet.interfaces.IProducer">IProducer</a></code> provider</td><td class="fieldArgDesc">The <code><a href="twisted.internet.interfaces.IProducer.html" class="internal-link" title="twisted.internet.interfaces.IProducer">IProducer</a></code> that will be producing data.</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">streaming:</span><code><a href="https://docs.python.org/3/library/functions.html#bool" class="intersphinx-link">bool</a></code></td><td class="fieldArgDesc"><tt class="rst-docutils literal">True</tt> if <tt class="rst-docutils literal">producer</tt> provides <code><a href="twisted.internet.interfaces.IPushProducer.html" class="internal-link" title="twisted.internet.interfaces.IPushProducer">IPushProducer</a></code>, <tt class="rst-docutils literal">False</tt> if <tt class="rst-docutils literal">producer</tt> provides <code><a href="twisted.internet.interfaces.IPullProducer.html" class="internal-link" title="twisted.internet.interfaces.IPullProducer">IPullProducer</a></code>.</td></tr><tr class="fieldStart"><td class="fieldName" colspan="2">Returns</td></tr><tr><td colspan="2"><code><a href="https://docs.python.org/3/library/constants.html#None" class="intersphinx-link">None</a></code></td></tr><tr class="fieldStart"><td class="fieldName" colspan="2">Raises</td></tr><tr><td class="fieldArgContainer"><code><a href="https://docs.python.org/3/library/exceptions.html#RuntimeError" class="intersphinx-link">RuntimeError</a></code></td><td>If a producer is already registered.</td></tr></table></div>
   </div>
 </div><div class="basemethod">
   
@@ -966,7 +1003,7 @@
   <div class="docstring functionBody">
     
     
-    <div><p>Called by first request in queue when it is done.</p></div>
+    <div>Called by first request in queue when it is done.</div>
   </div>
 </div><div class="basemethod">
   
@@ -986,9 +1023,11 @@
     </a>
   </div>
   <div class="docstring functionBody">
-    <div class="interfaceinfo">from <code><a href="twisted.internet.interfaces.IPushProducer.html#resumeProducing">twisted.internet.interfaces.IPushProducer</a></code></div><div class="interfaceinfo">overrides <code><a href="twisted.protocols.basic._PauseableMixin.html#resumeProducing">twisted.protocols.basic._PauseableMixin.resumeProducing</a></code></div>
+    <div class="interfaceinfo">from <code><a href="twisted.internet.interfaces.IPushProducer.html#resumeProducing" class="internal-link" title="twisted.internet.interfaces.IPushProducer.resumeProducing">twisted.internet.interfaces.IPushProducer</a></code></div><div class="interfaceinfo">overrides <code><a href="twisted.protocols.basic._PauseableMixin.html#resumeProducing" class="internal-link">twisted.protocols.basic._PauseableMixin.resumeProducing</a></code></div>
     
-    <div><p>Resume producing data.</p><p>This will be called by the transport when the send buffer has dropped enough to actually send more data. When this happens we can unpause any outstanding <code><a href="twisted.web.http.Request.html">Request</a></code> producers we have, and also unpause our transport.</p></div>
+    <div><p>Resume producing data.</p>
+<p>This will be called by the transport when the send buffer has dropped enough to actually send more data. When this happens we can unpause any outstanding <code><a href="twisted.web.http.Request.html" class="internal-link" title="twisted.web.http.Request">Request</a></code> producers we have, and also unpause our transport.</p>
+</div>
   </div>
 </div><div class="basemethod">
   
@@ -1008,9 +1047,11 @@
     </a>
   </div>
   <div class="docstring functionBody">
-    <div class="interfaceinfo">from <code><a href="twisted.internet.interfaces.IProducer.html#stopProducing">twisted.internet.interfaces.IProducer</a></code></div><div class="interfaceinfo">overrides <code><a href="twisted.protocols.basic._PauseableMixin.html#stopProducing">twisted.protocols.basic._PauseableMixin.stopProducing</a></code></div>
+    <div class="interfaceinfo">from <code><a href="twisted.internet.interfaces.IProducer.html#stopProducing" class="internal-link" title="twisted.internet.interfaces.IProducer.stopProducing">twisted.internet.interfaces.IProducer</a></code></div><div class="interfaceinfo">overrides <code><a href="twisted.protocols.basic._PauseableMixin.html#stopProducing" class="internal-link">twisted.protocols.basic._PauseableMixin.stopProducing</a></code></div>
     
-    <div><p>Stop producing data.</p><p>The HTTPChannel doesn't *actually* implement this, beacuse the assumption is that it will only be called just before <code>loseConnection</code> is called. There's nothing sensible we can do other than call <code>loseConnection</code> anyway.</p></div>
+    <div><p>Stop producing data.</p>
+<p>The HTTPChannel doesn't *actually* implement this, beacuse the assumption is that it will only be called just before <tt class="rst-docutils literal">loseConnection</tt> is called. There's nothing sensible we can do other than call <tt class="rst-docutils literal">loseConnection</tt> anyway.</p>
+</div>
   </div>
 </div><div class="basemethod">
   
@@ -1030,9 +1071,11 @@
     </a>
   </div>
   <div class="docstring functionBody">
-    <div class="interfaceinfo">overrides <code><a href="twisted.protocols.policies.TimeoutMixin.html#timeoutConnection">twisted.protocols.policies.TimeoutMixin.timeoutConnection</a></code></div>
+    <div class="interfaceinfo">overrides <code><a href="twisted.protocols.policies.TimeoutMixin.html#timeoutConnection" class="internal-link">twisted.protocols.policies.TimeoutMixin.timeoutConnection</a></code></div>
     
-    <div><p>Called when the connection times out.</p><p>Override to define behavior other than dropping the connection.</p></div>
+    <div><p>Called when the connection times out.</p>
+<p>Override to define behavior other than dropping the connection.</p>
+</div>
   </div>
 </div><div class="basemethod">
   
@@ -1052,9 +1095,9 @@
     </a>
   </div>
   <div class="docstring functionBody">
-    <div class="interfaceinfo">from <code><a href="twisted.internet.interfaces.IConsumer.html#unregisterProducer">twisted.internet.interfaces.IConsumer</a></code></div>
+    <div class="interfaceinfo">from <code><a href="twisted.internet.interfaces.IConsumer.html#unregisterProducer" class="internal-link" title="twisted.internet.interfaces.IConsumer.unregisterProducer">twisted.internet.interfaces.IConsumer</a></code></div>
     
-    <div><p>Stop consuming data from a producer, without disconnecting.</p><table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Returns</td></tr><tr><td colspan="2"><code><a href="https://docs.python.org/3/library/constants.html#None">None</a></code></td></tr></table></div>
+    <div>Stop consuming data from a producer, without disconnecting.<table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Returns</td></tr><tr><td colspan="2"><code><a href="https://docs.python.org/3/library/constants.html#None" class="intersphinx-link">None</a></code></td></tr></table></div>
   </div>
 </div><div class="basemethod">
   
@@ -1074,9 +1117,9 @@
     </a>
   </div>
   <div class="docstring functionBody">
-    <div class="interfaceinfo">from <code><a href="twisted.internet.interfaces.ITransport.html#write">twisted.internet.interfaces.ITransport</a></code></div>
+    <div class="interfaceinfo">from <code><a href="twisted.internet.interfaces.ITransport.html#write" class="internal-link" title="twisted.internet.interfaces.ITransport.write">twisted.internet.interfaces.ITransport</a></code></div>
     
-    <div><p>Called by <code><a href="twisted.web.http.Request.html">Request</a></code> objects to write response data.</p><table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">data:</span><code><a href="https://docs.python.org/3/library/stdtypes.html#bytes">bytes</a></code></td><td class="fieldArgDesc">The data chunk to write to the stream.</td></tr><tr class="fieldStart"><td class="fieldName" colspan="2">Returns</td></tr><tr><td colspan="2"><code><a href="https://docs.python.org/3/library/constants.html#None">None</a></code></td></tr></table></div>
+    <div>Called by <code><a href="twisted.web.http.Request.html" class="internal-link" title="twisted.web.http.Request">Request</a></code> objects to write response data.<table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">data:</span><code><a href="https://docs.python.org/3/library/stdtypes.html#bytes" class="intersphinx-link">bytes</a></code></td><td class="fieldArgDesc">The data chunk to write to the stream.</td></tr><tr class="fieldStart"><td class="fieldName" colspan="2">Returns</td></tr><tr><td colspan="2"><code><a href="https://docs.python.org/3/library/constants.html#None" class="intersphinx-link">None</a></code></td></tr></table></div>
   </div>
 </div><div class="basemethod">
   
@@ -1098,7 +1141,7 @@
   <div class="docstring functionBody">
     
     
-    <div><p>Called by <code><a href="twisted.web.http.Request.html">Request</a></code> objects to write a complete set of HTTP headers to a transport.</p><table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">version:</span><code><a href="https://docs.python.org/3/library/stdtypes.html#bytes">bytes</a></code></td><td class="fieldArgDesc">The HTTP version in use.</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">code:</span><code><a href="https://docs.python.org/3/library/stdtypes.html#bytes">bytes</a></code></td><td class="fieldArgDesc">The HTTP status code to write.</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">reason:</span><code><a href="https://docs.python.org/3/library/stdtypes.html#bytes">bytes</a></code></td><td class="fieldArgDesc">The HTTP reason phrase to write.</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">headers:</span><code><a href="twisted.web.http_headers.Headers.html">twisted.web.http_headers.Headers</a></code></td><td class="fieldArgDesc">The headers to write to the transport.</td></tr></table></div>
+    <div>Called by <code><a href="twisted.web.http.Request.html" class="internal-link" title="twisted.web.http.Request">Request</a></code> objects to write a complete set of HTTP headers to a transport.<table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">version:</span><code><a href="https://docs.python.org/3/library/stdtypes.html#bytes" class="intersphinx-link">bytes</a></code></td><td class="fieldArgDesc">The HTTP version in use.</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">code:</span><code><a href="https://docs.python.org/3/library/stdtypes.html#bytes" class="intersphinx-link">bytes</a></code></td><td class="fieldArgDesc">The HTTP status code to write.</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">reason:</span><code><a href="https://docs.python.org/3/library/stdtypes.html#bytes" class="intersphinx-link">bytes</a></code></td><td class="fieldArgDesc">The HTTP reason phrase to write.</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">headers:</span><code><a href="twisted.web.http_headers.Headers.html" class="internal-link" title="twisted.web.http_headers.Headers">twisted.web.http_headers.Headers</a></code></td><td class="fieldArgDesc">The headers to write to the transport.</td></tr></table></div>
   </div>
 </div><div class="basemethod">
   
@@ -1118,9 +1161,9 @@
     </a>
   </div>
   <div class="docstring functionBody">
-    <div class="interfaceinfo">from <code><a href="twisted.internet.interfaces.ITransport.html#writeSequence">twisted.internet.interfaces.ITransport</a></code></div>
+    <div class="interfaceinfo">from <code><a href="twisted.internet.interfaces.ITransport.html#writeSequence" class="internal-link" title="twisted.internet.interfaces.ITransport.writeSequence">twisted.internet.interfaces.ITransport</a></code></div>
     
-    <div><p>Write a list of strings to the HTTP response.</p><table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">iovec:</span><code><a href="https://docs.python.org/3/library/stdtypes.html#list">list</a></code> of <code><a href="https://docs.python.org/3/library/stdtypes.html#bytes">bytes</a></code></td><td class="fieldArgDesc">A list of byte strings to write to the stream.</td></tr><tr class="fieldStart"><td class="fieldName" colspan="2">Returns</td></tr><tr><td colspan="2"><code><a href="https://docs.python.org/3/library/constants.html#None">None</a></code></td></tr></table></div>
+    <div>Write a list of strings to the HTTP response.<table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">iovec:</span><code><a href="https://docs.python.org/3/library/stdtypes.html#list" class="intersphinx-link">list</a></code> of <code><a href="https://docs.python.org/3/library/stdtypes.html#bytes" class="intersphinx-link">bytes</a></code></td><td class="fieldArgDesc">A list of byte strings to write to the stream.</td></tr><tr class="fieldStart"><td class="fieldName" colspan="2">Returns</td></tr><tr><td colspan="2"><code><a href="https://docs.python.org/3/library/constants.html#None" class="intersphinx-link">None</a></code></td></tr></table></div>
   </div>
 </div><div class="baseinstancevariable">
   
@@ -1133,7 +1176,7 @@
   </a>
   <div class="functionHeader">
     
-    <span class="py-defname">abortTimeout</span>: <code><a href="https://docs.python.org/3/library/functions.html#int">int</a></code> =
+    <span class="py-defname">abortTimeout</span>: <code><a href="https://docs.python.org/3/library/functions.html#int" class="intersphinx-link">int</a></code> =
     <a class="sourceLink" href="https://github.com/twisted/twisted/tree/twisted-21.2.0/src/twisted/web/http.py#L2020">
       
       (source)
@@ -1142,7 +1185,8 @@
   <div class="functionBody">
     
     
-    <div>The number of seconds to wait after we attempt to shut the transport down cleanly to give up and forcibly terminate it.  This is only used when we time a connection out, to prevent errors causing the FD to get leaked.  If this is <code><a href="https://docs.python.org/3/library/constants.html#None">None</a></code>, we will wait forever.</div>
+    <div>The number of seconds to wait after we attempt to shut the transport down cleanly to give up and forcibly terminate it.  This is only used when we time a connection out, to prevent errors causing the FD to get leaked.  If this is <code><a href="https://docs.python.org/3/library/constants.html#None" class="intersphinx-link">None</a></code>, we will wait forever.</div>
+    
   </div>
 </div><div class="baseinstancevariable">
   
@@ -1155,7 +1199,7 @@
   </a>
   <div class="functionHeader">
     
-    <span class="py-defname">length</span>: <code><a href="https://docs.python.org/3/library/functions.html#int">int</a></code> =
+    <span class="py-defname">length</span>: <code><a href="https://docs.python.org/3/library/functions.html#int" class="intersphinx-link">int</a></code> =
     <a class="sourceLink" href="https://github.com/twisted/twisted/tree/twisted-21.2.0/src/twisted/web/http.py#L2063">
       
       (source)
@@ -1165,6 +1209,7 @@
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    
   </div>
 </div><div class="baseinstancevariable">
   
@@ -1184,9 +1229,10 @@
     </a>
   </div>
   <div class="functionBody">
-    <div class="interfaceinfo">overrides <code><a href="twisted.protocols.basic.LineReceiver.html#MAX_LENGTH">twisted.protocols.basic.LineReceiver.MAX_LENGTH</a></code></div>
+    <div class="interfaceinfo">overrides <code><a href="twisted.protocols.basic.LineReceiver.html#MAX_LENGTH" class="internal-link">twisted.protocols.basic.LineReceiver.MAX_LENGTH</a></code></div>
     
     <div>Maximum length for initial request line and each line from the header.</div>
+    
   </div>
 </div><div class="baseinstancevariable">
   
@@ -1199,7 +1245,7 @@
   </a>
   <div class="functionHeader">
     
-    <span class="py-defname">maxHeaders</span>: <code>int</code> =
+    <span class="py-defname">maxHeaders</span>: <tt class="rst-docutils literal">int</tt> =
     <a class="sourceLink" href="https://github.com/twisted/twisted/tree/twisted-21.2.0/src/twisted/web/http.py#L1970">
       
       (source)
@@ -1209,6 +1255,7 @@
     
     
     <div>Maximum number of headers allowed per request.</div>
+    
   </div>
 </div><div class="baseinstancevariable">
   
@@ -1231,6 +1278,7 @@
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    
   </div>
 </div><div class="baseinstancevariable">
   
@@ -1243,7 +1291,7 @@
   </a>
   <div class="functionHeader">
     
-    <span class="py-defname">requests</span>: <code><a href="https://docs.python.org/3/library/stdtypes.html#list">list</a></code> =
+    <span class="py-defname">requests</span>: <code><a href="https://docs.python.org/3/library/stdtypes.html#list" class="intersphinx-link">list</a></code> =
     <a class="sourceLink" href="https://github.com/twisted/twisted/tree/twisted-21.2.0/src/twisted/web/http.py#L2084">
       
       (source)
@@ -1253,6 +1301,7 @@
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    
   </div>
 </div><div class="baseinstancevariable">
   
@@ -1265,7 +1314,7 @@
   </a>
   <div class="functionHeader">
     
-    <span class="py-defname">totalHeadersSize</span>: <code>int</code> =
+    <span class="py-defname">totalHeadersSize</span>: <tt class="rst-docutils literal">int</tt> =
     <a class="sourceLink" href="https://github.com/twisted/twisted/tree/twisted-21.2.0/src/twisted/web/http.py#L1973">
       
       (source)
@@ -1275,6 +1324,7 @@
     
     
     <div>Maximum bytes for request line plus all headers from the request.</div>
+    
   </div>
 </div><div class="basemethod private">
   
@@ -1318,7 +1368,9 @@
   <div class="docstring functionBody">
     
     
-    <div><p>If the provided header is <code>content-length</code> or <code>transfer-encoding</code>, choose the appropriate decoder if any.</p><p>Returns <code><a href="https://docs.python.org/3/library/constants.html#True">True</a></code> if the request can proceed and <code><a href="https://docs.python.org/3/library/constants.html#False">False</a></code> if not.</p></div>
+    <div><p>If the provided header is <tt class="rst-docutils literal"><span class="pre">content-length</span></tt> or <tt class="rst-docutils literal"><span class="pre">transfer-encoding</span></tt>, choose the appropriate decoder if any.</p>
+<p>Returns <code><a href="https://docs.python.org/3/library/constants.html#True" class="intersphinx-link">True</a></code> if the request can proceed and <code><a href="https://docs.python.org/3/library/constants.html#False" class="intersphinx-link">False</a></code> if not.</p>
+</div>
   </div>
 </div><div class="basemethod private">
   
@@ -1340,7 +1392,9 @@
   <div class="docstring functionBody">
     
     
-    <div><p>This is a quick and dirty way of responding to bad requests.</p><p>As described by HTTP standard we should be patient and accept the whole request from the client before sending a polite bad request response, even in the case when clients send tons of data.</p></div>
+    <div><p>This is a quick and dirty way of responding to bad requests.</p>
+<p>As described by HTTP standard we should be patient and accept the whole request from the client before sending a polite bad request response, even in the case when clients send tons of data.</p>
+</div>
   </div>
 </div><div class="basemethod private">
   
@@ -1362,7 +1416,7 @@
   <div class="docstring functionBody">
     
     
-    <div><p>Sends a 100 Continue response, used to signal to clients that further processing will be performed.</p></div>
+    <div>Sends a 100 Continue response, used to signal to clients that further processing will be performed.</div>
   </div>
 </div><div class="baseclassvariable private">
   
@@ -1385,6 +1439,30 @@
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    
+  </div>
+</div><div class="baseclassvariable private">
+  
+  
+  <a name="twisted.web.http.HTTPChannel.__header">
+    
+  </a>
+  <a name="__header">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-defname">__header</span>: <code><a href="https://docs.python.org/3/library/stdtypes.html#bytes" class="intersphinx-link">bytes</a></code> =
+    <a class="sourceLink" href="https://github.com/twisted/twisted/tree/twisted-21.2.0/src/twisted/web/http.py#L2065">
+      
+      (source)
+    </a>
+  </div>
+  <div class="functionBody">
+    
+    
+    <div><p class="undocumented">Undocumented</p></div>
+    
   </div>
 </div><div class="baseclassvariable private">
   
@@ -1407,6 +1485,7 @@
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    
   </div>
 </div><div class="baseinstancevariable private">
   
@@ -1419,7 +1498,7 @@
   </a>
   <div class="functionHeader">
     
-    <span class="py-defname">__first_line</span>: <code><a href="https://docs.python.org/3/library/functions.html#int">int</a></code> =
+    <span class="py-defname">__first_line</span>: <code><a href="https://docs.python.org/3/library/functions.html#int" class="intersphinx-link">int</a></code> =
     <a class="sourceLink" href="https://github.com/twisted/twisted/tree/twisted-21.2.0/src/twisted/web/http.py#L2066">
       
       (source)
@@ -1429,28 +1508,7 @@
     
     
     <div><p class="undocumented">Undocumented</p></div>
-  </div>
-</div><div class="baseinstancevariable private">
-  
-  
-  <a name="twisted.web.http.HTTPChannel.__header">
     
-  </a>
-  <a name="__header">
-    
-  </a>
-  <div class="functionHeader">
-    
-    <span class="py-defname">__header</span> =
-    <a class="sourceLink" href="https://github.com/twisted/twisted/tree/twisted-21.2.0/src/twisted/web/http.py#L2065">
-      
-      (source)
-    </a>
-  </div>
-  <div class="functionBody">
-    
-    
-    <div><p class="undocumented">Undocumented</p></div>
   </div>
 </div><div class="baseinstancevariable private">
   
@@ -1463,7 +1521,7 @@
   </a>
   <div class="functionHeader">
     
-    <span class="py-defname">_abortingCall</span>: <code><a href="twisted.internet.base.DelayedCall.html">twisted.internet.base.DelayedCall</a></code> =
+    <span class="py-defname">_abortingCall</span>: <code><a href="twisted.internet.base.DelayedCall.html" class="internal-link" title="twisted.internet.base.DelayedCall">twisted.internet.base.DelayedCall</a></code> =
     <a class="sourceLink" href="https://github.com/twisted/twisted/tree/twisted-21.2.0/src/twisted/web/http.py#L2026">
       
       (source)
@@ -1472,7 +1530,8 @@
   <div class="functionBody">
     
     
-    <div>The <code><a href="twisted.internet.base.DelayedCall.html">twisted.internet.base.DelayedCall</a></code> that will be used to forcibly close the transport if it doesn't close cleanly.</div>
+    <div>The <code><a href="twisted.internet.base.DelayedCall.html" class="internal-link" title="twisted.internet.base.DelayedCall">twisted.internet.base.DelayedCall</a></code> that will be used to forcibly close the transport if it doesn't close cleanly.</div>
+    
   </div>
 </div><div class="baseinstancevariable private">
   
@@ -1495,6 +1554,7 @@
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    
   </div>
 </div><div class="baseinstancevariable private">
   
@@ -1507,7 +1567,7 @@
   </a>
   <div class="functionHeader">
     
-    <span class="py-defname">_dataBuffer</span>: <code><a href="https://docs.python.org/3/library/stdtypes.html#list">list</a></code> of <code><a href="https://docs.python.org/3/library/stdtypes.html#bytes">bytes</a></code> =
+    <span class="py-defname">_dataBuffer</span>: <code><a href="https://docs.python.org/3/library/stdtypes.html#list" class="intersphinx-link">list</a></code> of <code><a href="https://docs.python.org/3/library/stdtypes.html#bytes" class="intersphinx-link">bytes</a></code> =
     <a class="sourceLink" href="https://github.com/twisted/twisted/tree/twisted-21.2.0/src/twisted/web/http.py#L1983">
       
       (source)
@@ -1517,6 +1577,7 @@
     
     
     <div>Any data that has been received from the connection while processing an outstanding request.</div>
+    
   </div>
 </div><div class="baseinstancevariable private">
   
@@ -1529,7 +1590,7 @@
   </a>
   <div class="functionHeader">
     
-    <span class="py-defname">_handlingRequest</span>: <code><a href="https://docs.python.org/3/library/functions.html#bool">bool</a></code> =
+    <span class="py-defname">_handlingRequest</span>: <code><a href="https://docs.python.org/3/library/functions.html#bool" class="intersphinx-link">bool</a></code> =
     <a class="sourceLink" href="https://github.com/twisted/twisted/tree/twisted-21.2.0/src/twisted/web/http.py#L1980">
       
       (source)
@@ -1539,6 +1600,7 @@
     
     
     <div>Whether a request is currently being processed.</div>
+    
   </div>
 </div><div class="baseinstancevariable private">
   
@@ -1551,7 +1613,7 @@
   </a>
   <div class="functionHeader">
     
-    <span class="py-defname">_networkProducer</span>: <code><a href="twisted.internet.interfaces.IPushProducer.html">interfaces.IPushProducer</a></code> =
+    <span class="py-defname">_networkProducer</span>: <code><a href="twisted.internet.interfaces.IPushProducer.html" class="internal-link" title="twisted.internet.interfaces.IPushProducer">interfaces.IPushProducer</a></code> =
     <a class="sourceLink" href="https://github.com/twisted/twisted/tree/twisted-21.2.0/src/twisted/web/http.py#L1987">
       
       (source)
@@ -1560,7 +1622,8 @@
   <div class="functionBody">
     
     
-    <div>Either the transport, if it provides <code><a href="twisted.internet.interfaces.IPushProducer.html">interfaces.IPushProducer</a></code>, or a null implementation of <code><a href="twisted.internet.interfaces.IPushProducer.html">interfaces.IPushProducer</a></code>.  Used to attempt to prevent the transport from producing excess data when we're responding to a request.</div>
+    <div>Either the transport, if it provides <code><a href="twisted.internet.interfaces.IPushProducer.html" class="internal-link" title="twisted.internet.interfaces.IPushProducer">interfaces.IPushProducer</a></code>, or a null implementation of <code><a href="twisted.internet.interfaces.IPushProducer.html" class="internal-link" title="twisted.internet.interfaces.IPushProducer">interfaces.IPushProducer</a></code>.  Used to attempt to prevent the transport from producing excess data when we're responding to a request.</div>
+    
   </div>
 </div><div class="baseinstancevariable private">
   
@@ -1573,7 +1636,7 @@
   </a>
   <div class="functionHeader">
     
-    <span class="py-defname">_optimisticEagerReadSize</span>: <code><a href="https://docs.python.org/3/library/functions.html#int">int</a></code> =
+    <span class="py-defname">_optimisticEagerReadSize</span>: <code><a href="https://docs.python.org/3/library/functions.html#int" class="intersphinx-link">int</a></code> =
     <a class="sourceLink" href="https://github.com/twisted/twisted/tree/twisted-21.2.0/src/twisted/web/http.py#L2030">
       
       (source)
@@ -1582,7 +1645,13 @@
   <div class="functionBody">
     
     
-    <div>When a resource takes a long time to answer a request (via <code><a href="twisted.web.server.html#NOT_DONE_YET">twisted.web.server.NOT_DONE_YET</a></code>, hopefully one day by a <code><a href="twisted.internet.defer.Deferred.html">Deferred</a></code>), we would like to be able to let that resource know about the underlying transport disappearing as promptly as possible, via <code><a href="twisted.web.http.Request.html#notifyFinish">Request.notifyFinish</a></code>, and therefore via <code>self.requests[...].connectionLost()</code> on this <code><a href="twisted.web.http.HTTPChannel.html">HTTPChannel</a></code>.<p>However, in order to simplify application logic, we implement head-of-line blocking, and do not relay pipelined requests to the application until the previous request has been answered.  This means that said application cannot dispose of any entity-body that comes in from those subsequent requests, which may be arbitrarily large, and it may need to be buffered in memory.</p><p>To implement this tradeoff between prompt notification when possible (in the most frequent case of non-pipelined requests) and correct behavior when not (say, if a client sends a very long-running GET request followed by a PUT request with a very large body) we will continue reading pipelined requests into <code>self._dataBuffer</code> up to a given limit.</p><p><code>_optimisticEagerReadSize</code> is the number of bytes we will accept from the client and buffer before pausing the transport.</p><p>This behavior has been in place since Twisted 17.9.0 .</p></div>
+    <div><p>When a resource takes a long time to answer a request (via <code><a href="twisted.web.server.html#NOT_DONE_YET" class="internal-link" title="twisted.web.server.NOT_DONE_YET">twisted.web.server.NOT_DONE_YET</a></code>, hopefully one day by a <code><a href="twisted.internet.defer.Deferred.html" class="internal-link" title="twisted.internet.defer.Deferred">Deferred</a></code>), we would like to be able to let that resource know about the underlying transport disappearing as promptly as possible, via <code><a href="twisted.web.http.Request.html#notifyFinish" class="internal-link" title="twisted.web.http.Request.notifyFinish">Request.notifyFinish</a></code>, and therefore via <tt class="rst-docutils literal"><span class="pre">self.requests[...].connectionLost()</span></tt> on this <code><a href="twisted.web.http.HTTPChannel.html" class="internal-link" title="twisted.web.http.HTTPChannel">HTTPChannel</a></code>.</p>
+<p>However, in order to simplify application logic, we implement head-of-line blocking, and do not relay pipelined requests to the application until the previous request has been answered.  This means that said application cannot dispose of any entity-body that comes in from those subsequent requests, which may be arbitrarily large, and it may need to be buffered in memory.</p>
+<p>To implement this tradeoff between prompt notification when possible (in the most frequent case of non-pipelined requests) and correct behavior when not (say, if a client sends a very long-running GET request followed by a PUT request with a very large body) we will continue reading pipelined requests into <tt class="rst-docutils literal">self._dataBuffer</tt> up to a given limit.</p>
+<p><tt class="rst-docutils literal">_optimisticEagerReadSize</tt> is the number of bytes we will accept from the client and buffer before pausing the transport.</p>
+<p>This behavior has been in place since Twisted 17.9.0 .</p>
+</div>
+    
   </div>
 </div><div class="baseinstancevariable private">
   
@@ -1605,6 +1674,7 @@
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    
   </div>
 </div><div class="baseinstancevariable private">
   
@@ -1617,7 +1687,7 @@
   </a>
   <div class="functionHeader">
     
-    <span class="py-defname">_receivedHeaderCount</span>: <code><a href="https://docs.python.org/3/library/functions.html#int">int</a></code> =
+    <span class="py-defname">_receivedHeaderCount</span>: <code><a href="https://docs.python.org/3/library/functions.html#int" class="intersphinx-link">int</a></code> =
     <a class="sourceLink" href="https://github.com/twisted/twisted/tree/twisted-21.2.0/src/twisted/web/http.py#L2073">
       
       (source)
@@ -1627,6 +1697,7 @@
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    
   </div>
 </div><div class="baseinstancevariable private">
   
@@ -1639,7 +1710,7 @@
   </a>
   <div class="functionHeader">
     
-    <span class="py-defname">_receivedHeaderSize</span>: <code>int</code> =
+    <span class="py-defname">_receivedHeaderSize</span>: <tt class="rst-docutils literal">int</tt> =
     <a class="sourceLink" href="https://github.com/twisted/twisted/tree/twisted-21.2.0/src/twisted/web/http.py#L1977">
       
       (source)
@@ -1649,6 +1720,7 @@
     
     
     <div>Bytes received so far for the header.</div>
+    
   </div>
 </div><div class="baseinstancevariable private">
   
@@ -1661,7 +1733,7 @@
   </a>
   <div class="functionHeader">
     
-    <span class="py-defname">_requestProducer</span>: <code><a href="twisted.internet.interfaces.IPushProducer.html">interfaces.IPushProducer</a></code> =
+    <span class="py-defname">_requestProducer</span>: <code><a href="twisted.internet.interfaces.IPushProducer.html" class="internal-link" title="twisted.internet.interfaces.IPushProducer">interfaces.IPushProducer</a></code> =
     <a class="sourceLink" href="https://github.com/twisted/twisted/tree/twisted-21.2.0/src/twisted/web/http.py#L1993">
       
       (source)
@@ -1670,7 +1742,10 @@
   <div class="functionBody">
     
     
-    <div>If the <code><a href="twisted.web.http.Request.html">Request</a></code> object or anything it calls registers itself as an <code><a href="twisted.internet.interfaces.IProducer.html">interfaces.IProducer</a></code>, it will be stored here. This is used to create a producing pipeline: pause/resume producing methods will be propagated from the <code>transport</code>, through the <code><a href="twisted.web.http.HTTPChannel.html">HTTPChannel</a></code> instance, to the c{_requestProducer}.<p>The reason we proxy through the producing methods rather than the old behaviour (where we literally just set the <code><a href="twisted.web.http.Request.html">Request</a></code> object as the producer on the transport) is because we want to be able to exert backpressure on the client to prevent it from sending in arbitrarily many requests without ever reading responses.  Essentially, if the client never reads our responses we will eventually stop reading its requests.</p></div>
+    <div><p>If the <code><a href="twisted.web.http.Request.html" class="internal-link" title="twisted.web.http.Request">Request</a></code> object or anything it calls registers itself as an <code><a href="twisted.internet.interfaces.IProducer.html" class="internal-link" title="twisted.internet.interfaces.IProducer">interfaces.IProducer</a></code>, it will be stored here. This is used to create a producing pipeline: pause/resume producing methods will be propagated from the <tt class="rst-docutils literal">transport</tt>, through the <code><a href="twisted.web.http.HTTPChannel.html" class="internal-link" title="twisted.web.http.HTTPChannel">HTTPChannel</a></code> instance, to the c{_requestProducer}.</p>
+<p>The reason we proxy through the producing methods rather than the old behaviour (where we literally just set the <code><a href="twisted.web.http.Request.html" class="internal-link" title="twisted.web.http.Request">Request</a></code> object as the producer on the transport) is because we want to be able to exert backpressure on the client to prevent it from sending in arbitrarily many requests without ever reading responses.  Essentially, if the client never reads our responses we will eventually stop reading its requests.</p>
+</div>
+    
   </div>
 </div><div class="baseinstancevariable private">
   
@@ -1683,7 +1758,7 @@
   </a>
   <div class="functionHeader">
     
-    <span class="py-defname">_requestProducerStreaming</span>: <code><a href="https://docs.python.org/3/library/functions.html#bool">bool</a></code> or <code><a href="https://docs.python.org/3/library/constants.html#None">None</a></code> =
+    <span class="py-defname">_requestProducerStreaming</span>: <code><a href="https://docs.python.org/3/library/functions.html#bool" class="intersphinx-link">bool</a></code> or <code><a href="https://docs.python.org/3/library/constants.html#None" class="intersphinx-link">None</a></code> =
     <a class="sourceLink" href="https://github.com/twisted/twisted/tree/twisted-21.2.0/src/twisted/web/http.py#L2009">
       
       (source)
@@ -1692,7 +1767,8 @@
   <div class="functionBody">
     
     
-    <div>A boolean that tracks whether the producer on the <code><a href="twisted.web.http.Request.html">Request</a></code> side of this channel has registered itself as a <code><a href="twisted.internet.interfaces.IPushProducer.html">interfaces.IPushProducer</a></code> or an <code><a href="twisted.internet.interfaces.IPullProducer.html">interfaces.IPullProducer</a></code>.</div>
+    <div>A boolean that tracks whether the producer on the <code><a href="twisted.web.http.Request.html" class="internal-link" title="twisted.web.http.Request">Request</a></code> side of this channel has registered itself as a <code><a href="twisted.internet.interfaces.IPushProducer.html" class="internal-link" title="twisted.internet.interfaces.IPushProducer">interfaces.IPushProducer</a></code> or an <code><a href="twisted.internet.interfaces.IPullProducer.html" class="internal-link" title="twisted.internet.interfaces.IPullProducer">interfaces.IPullProducer</a></code>.</div>
+    
   </div>
 </div><div class="baseinstancevariable private">
   
@@ -1715,6 +1791,7 @@
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    
   </div>
 </div><div class="baseinstancevariable private">
   
@@ -1727,7 +1804,7 @@
   </a>
   <div class="functionHeader">
     
-    <span class="py-defname">_transferDecoder</span>: <code><a href="twisted.web.http._ChunkedTransferDecoder.html">_ChunkedTransferDecoder</a></code> =
+    <span class="py-defname">_transferDecoder</span>: <code><a href="twisted.web.http._ChunkedTransferDecoder.html" class="internal-link" title="twisted.web.http._ChunkedTransferDecoder">_ChunkedTransferDecoder</a></code> =
     <a class="sourceLink" href="https://github.com/twisted/twisted/tree/twisted-21.2.0/src/twisted/web/http.py#L1966">
       
       (source)
@@ -1736,7 +1813,8 @@
   <div class="functionBody">
     
     
-    <div><code><a href="https://docs.python.org/3/library/constants.html#None">None</a></code> or a decoder instance if the request body uses the <i>chunked</i> Transfer-Encoding.</div>
+    <div><code><a href="https://docs.python.org/3/library/constants.html#None" class="intersphinx-link">None</a></code> or a decoder instance if the request body uses the <em>chunked</em> Transfer-Encoding.</div>
+    
   </div>
 </div><div class="baseinstancevariable private">
   
@@ -1759,6 +1837,7 @@
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    
   </div>
 </div><div class="baseinstancevariable private">
   
@@ -1771,7 +1850,7 @@
   </a>
   <div class="functionHeader">
     
-    <span class="py-defname">_waitingForTransport</span>: <code><a href="https://docs.python.org/3/library/functions.html#bool">bool</a></code> =
+    <span class="py-defname">_waitingForTransport</span>: <code><a href="https://docs.python.org/3/library/functions.html#bool" class="intersphinx-link">bool</a></code> =
     <a class="sourceLink" href="https://github.com/twisted/twisted/tree/twisted-21.2.0/src/twisted/web/http.py#L2014">
       
       (source)
@@ -1781,6 +1860,7 @@
     
     
     <div>A boolean that tracks whether the transport has asked us to stop producing.  This is used to keep track of what we're waiting for: if the transport has asked us to stop producing then we don't want to unpause the transport until it asks us to produce again.</div>
+    
   </div>
 </div>
 
@@ -1789,11 +1869,33 @@
 
     <footer class="navbar navbar-default">
   
+
   <div class="container">
     <a href="index.html">API Documentation</a> for <a href="https://twistedmatrix.com/" class="projecthome">Twisted</a>,
   generated by <a href="https://github.com/twisted/pydoctor/">pydoctor</a>
-    21.2.2 at 2022-01-12 04:22:24.
+    22.2.2.dev0 at 2022-03-04 05:57:20.
   </div>
+
+  <!-- Google analytics, obviously. -->
+  <script src="//www.google-analytics.com/urchin.js" type="text/javascript"></script>
+  <script type="text/javascript">
+    _uacct = "UA-99018-6";
+    urchinTracker();
+  </script>
+
+  <!-- If the documentation isn't current, insert a current link. -->
+  <script type="text/javascript">
+    if (window.location.pathname.indexOf('/current/') == -1) {
+      <!-- Give the user a link to this page, but in the current version of the docs. -->
+      var link = document.getElementById('current-docs-link');
+      link.href = window.location.pathname.replace(/\/\d+\.\d+\.\d+\/api\//, '/current/api/');
+      <!-- And make it visible -->
+      var container = document.getElementById('current-docs-container');
+      container.style.display = "";
+      delete link;
+      delete container;
+    }
+  </script>
 </footer>
 
     <script src="pydoctor.js" type="text/javascript"></script>

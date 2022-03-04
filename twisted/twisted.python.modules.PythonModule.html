@@ -7,7 +7,7 @@
   <head>
     
     <title>twisted.python.modules.PythonModule</title>
-    <meta name="generator" content="pydoctor 21.2.2"> 
+    <meta name="generator" content="pydoctor 22.2.2.dev0"> 
         
     </meta>
     <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
@@ -19,7 +19,13 @@
 
   <body>
 
-    
+    <div style="display: none" id="current-docs-container" class="container">
+  <div class="col-sm-12">
+    <a id="current-docs-link">
+      Go to the latest version of this document.
+    </a>
+  </div>
+</div>
 
     <nav class="navbar navbar-default">
   
@@ -44,69 +50,82 @@
           Names
         </a>
 
-        <form action="search-results.html" id="search-box-container">
+        <div id="search-box-container">
           <div class="input-group">
-            <input id="search-box" name="search-query" placeholder="Search..." aria-label="Search" minlength="2" class="form-control" />
+            <input id="search-box" type="search" name="search-query" placeholder="Search..." aria-label="Search" minlength="2" class="form-control" autocomplete="off" />
+            
             <span class="input-group-btn">
-              <button class="btn btn-default" type="submit" title="Search"><img src="fonts/search.svg" alt="Search!" /></button>
-              <a class="btn btn-default" id="search-help-button" title="Help" onclick="toggleSearchHelpText()"><img src="fonts/info.svg" alt="Help!" /></a>
+              <a style="display: none;" class="btn btn-default" id="search-clear-button" title="Clear" onclick="clearSearch()"><img src="fonts/x-circle.svg" alt="Clear" /></a>
+              <a class="btn btn-default" id="search-help-button" title="Help" onclick="toggleSearchHelpText()"><img src="fonts/info.svg" alt="Help" /></a>
             </span>
           </div>
-        </form>
+        </div>
 
-        <div class="rst-admonition hint" id="search-help-box">
+      </div>
+
+      <div id="search-results-container" style="display: none;">
+        <div>
+          <span class="label label-default" id="search-docstrings-button">
+            <a title="Search in docstrings" onclick="toggleSearchInDocstrings()">search in docstrings</a></span>
+        </div>
+
+        <noscript>
+            <h1>Cannot search: JavaScript is not supported/enabled in your browser.</h1>
+        </noscript>
+
+        <div class="hint" id="search-help-box">
           <p class="rst-last">
       
             Search bar offers the following options:
             <ul>   
                 <li>
                   <strong>Term presence.</strong> The below example searches for documents that 
-                    must contain “foo”, might contain “bar” and must not contain “baz”:
-                  <br /> <code>'+foo bar -baz'</code>
+                    must contain “foo”, might contain “bar” and must not contain “baz”: <code>+foo bar -baz</code>
                 </li> 
 
                 <li>
-                  <strong>Wildcards.</strong> The below example searches for documents with words beginning with “foo”:
-                  <br /> <code>'foo*'</code>
+                  <strong>Wildcards.</strong> The below example searches for documents with words beginning with “foo”: <code>foo*</code>
                 </li> 
 
                 <li>
-                  <strong>Search in specific fields.</strong> The following search matches all documents 
-                  that contains "foo" in their full dotted name and with “bar” in any field:
-                  <br /> <code>'+fullName:*foo* +bar'</code>
+                  <strong>Search in specific fields.</strong> The following search matches all objects 
+                  in "twisted.mail" that matches “search”: <code>+qname:twisted.mail.* +search</code>
 
                   <p>
-                    Possible fields: 'name', 'docstring', 'fullName'.
+                    Possible fields: 'name', 'qname' (fully qualified name), 'docstring', and 'kind'.
+                    Last two fields are only applicable if "search in docstrings" is enabled.
                   </p>
                 </li>
 
                 <li>
                   <strong>Fuzzy matches.</strong> The following search matches all documents 
-                  that have a word within 1 edit distance of “foo”:
-                  <br /> <code>'foo~1'</code>
+                  that have a word within 1 edit distance of “foo”: <code>foo~1</code>
                 </li>
             </ul>
 
           </p>
         </div>
 
-      </div>
+        <div id="search-status"> </div>
+        
+        <div class="warning" id="search-warn-box" style="display: none;">
+          <p class="rst-last"><span id="search-warn"></span></p>
+        </div>
 
+        <table id="search-results">
+          <!-- Filled dynamically by JS -->
+        </table>
+        
+        <div style="margin-top: 8px;">
+          <p>Results provided by <a href="https://lunrjs.com">Lunr.js</a></p>
+        </div>
+      </div>
 
     </div>
   </div>
 
-  <script>
- 
-    function toggleSearchHelpText() {
-        document.body.classList.toggle("search-help-hidden");
-    }
-    // Init search and help text
-    document.getElementById('search-box-container').style.display = 'block';
-    document.getElementById('search-help-box').style.display = 'block';
-    document.body.classList.add("search-help-hidden");
-
-  </script>
+  <script src="ajax.js" type="text/javascript"></script>
+  <script src="search.js" type="text/javascript"></script>
 
 </nav>
 
@@ -115,7 +134,7 @@
     <div class="container">
 
       <div class="page-header">
-        <h1 class="class"><code><code><a href="twisted.html">twisted</a></code><wbr></wbr>.<code><a href="twisted.python.html">python</a></code><wbr></wbr>.<code><a href="twisted.python.modules.html">modules</a></code><wbr></wbr>.<code><a href="twisted.python.modules.PythonModule.html">PythonModule</a></code></code></h1>
+        <h1 class="class"><code><code><a href="index.html" class="internal-link">twisted</a></code><wbr></wbr>.<code><a href="twisted.python.html" class="internal-link" title="twisted.python">python</a></code><wbr></wbr>.<code><a href="twisted.python.modules.html" class="internal-link" title="twisted.python.modules">modules</a></code><wbr></wbr>.<code><a href="twisted.python.modules.PythonModule.html" class="internal-link" title="twisted.python.modules.PythonModule">PythonModule</a></code></code></h1>
         <div id="showPrivate">
           <button class="btn btn-link" onclick="togglePrivate()">Toggle Private API</button>
         </div>
@@ -126,117 +145,119 @@
       </div>
 
       <div class="extrasDocstring">
-        <p><code><span class="py-keyword">class</span> <span class="py-defname">PythonModule</span>(<a href="twisted.python.modules._ModuleIteratorHelper.html" title="twisted.python.modules._ModuleIteratorHelper">_ModuleIteratorHelper</a>): <a href="https://github.com/twisted/twisted/tree/twisted-21.2.0/src/twisted/python/modules.py#L298" class="sourceLink">(source)</a></code></p>
+        <p><code><span class="py-keyword">class</span> <span class="py-defname">PythonModule</span>(<a href="twisted.python.modules._ModuleIteratorHelper.html" class="internal-link" title="twisted.python.modules._ModuleIteratorHelper">_ModuleIteratorHelper</a>): <a href="https://github.com/twisted/twisted/tree/twisted-21.2.0/src/twisted/python/modules.py#L298" class="sourceLink">(source)</a></code></p>
         <p><a href="classIndex.html#twisted.python.modules.PythonModule">View In Hierarchy</a></p>
       </div>
 
+      
+
       <div class="moduleDocstring">
-        <div><p>Representation of a module which could be imported from sys.path.</p></div>
+        <div>Representation of a module which could be imported from sys.path.</div>
       </div>
 
       <div id="splitTables">
-        <table class="children sortable" id="id2681">
+        <table class="children sortable" id="id2667">
   
   
   <tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#__eq__">__eq__</a></code></td>
-    <td><span>PythonModules with the same name are equal.</span></td>
+    <td><code><a href="#__eq__" class="internal-link" title="twisted.python.modules.PythonModule.__eq__">__eq__</a></code></td>
+    <td>PythonModules with the same name are equal.</td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#__init__">__init__</a></code></td>
-    <td><span>Create a PythonModule.  Do not construct this directly, instead inspect a PythonPath or other PythonModule instances.</span></td>
+    <td><code><a href="#__init__" class="internal-link" title="twisted.python.modules.PythonModule.__init__">__init__</a></code></td>
+    <td>Create a PythonModule.  Do not construct this directly, instead inspect a PythonPath or other PythonModule instances.</td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#__repr__">__repr__</a></code></td>
-    <td><span>Return a string representation including the module name.</span></td>
+    <td><code><a href="#__repr__" class="internal-link" title="twisted.python.modules.PythonModule.__repr__">__repr__</a></code></td>
+    <td>Return a string representation including the module name.</td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#isLoaded">isLoaded</a></code></td>
-    <td><span>Determine if the module is loaded into sys.modules.</span></td>
+    <td><code><a href="#isLoaded" class="internal-link" title="twisted.python.modules.PythonModule.isLoaded">is​Loaded</a></code></td>
+    <td>Determine if the module is loaded into sys.modules.</td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#isPackage">isPackage</a></code></td>
-    <td><span>Returns true if this module is also a package, and might yield something from iterModules.</span></td>
+    <td><code><a href="#isPackage" class="internal-link" title="twisted.python.modules.PythonModule.isPackage">is​Package</a></code></td>
+    <td>Returns true if this module is also a package, and might yield something from iterModules.</td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#iterAttributes">iterAttributes</a></code></td>
-    <td><span>List all the attributes defined in this module.</span></td>
+    <td><code><a href="#iterAttributes" class="internal-link" title="twisted.python.modules.PythonModule.iterAttributes">iter​Attributes</a></code></td>
+    <td>List all the attributes defined in this module.</td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#load">load</a></code></td>
-    <td><span>Load this module.</span></td>
+    <td><code><a href="#load" class="internal-link" title="twisted.python.modules.PythonModule.load">load</a></code></td>
+    <td>Load this module.</td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#walkModules">walkModules</a></code></td>
-    <td><span>Similar to <code><a href="#iterModules">iterModules</a></code>, this yields self, and then every module in my package or entry, and every submodule in each package or entry.</span></td>
+    <td><code><a href="#walkModules" class="internal-link" title="twisted.python.modules.PythonModule.walkModules">walk​Modules</a></code></td>
+    <td>Similar to <code><a href="#iterModules" class="internal-link" title="twisted.python.modules._ModuleIteratorHelper.iterModules">iterModules</a></code>, this yields self, and then every module in my package or entry, and every submodule in each package or entry.</td>
   </tr><tr class="instancevariable">
     
     <td>Instance Variable</td>
-    <td><code><a href="#filePath">filePath</a></code></td>
-    <td><span>a FilePath-like object which points to the location of this module.</span></td>
+    <td><code><a href="#filePath" class="internal-link" title="twisted.python.modules.PythonModule.filePath">file​Path</a></code></td>
+    <td>a FilePath-like object which points to the location of this module.</td>
   </tr><tr class="instancevariable">
     
     <td>Instance Variable</td>
-    <td><code><a href="#name">name</a></code></td>
-    <td><span>the fully qualified python name of this module.</span></td>
+    <td><code><a href="#name" class="internal-link" title="twisted.python.modules.PythonModule.name">name</a></code></td>
+    <td>the fully qualified python name of this module.</td>
   </tr><tr class="instancevariable">
     
     <td>Instance Variable</td>
-    <td><code><a href="#parentPath">parentPath</a></code></td>
+    <td><code><a href="#parentPath" class="internal-link" title="twisted.python.modules.PythonModule.parentPath">parent​Path</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="instancevariable">
     
     <td>Instance Variable</td>
-    <td><code><a href="#pathEntry">pathEntry</a></code></td>
-    <td><span>a <code><a href="twisted.python.modules.PathEntry.html">PathEntry</a></code> instance which this module was located from.</span></td>
+    <td><code><a href="#pathEntry" class="internal-link" title="twisted.python.modules.PythonModule.pathEntry">path​Entry</a></code></td>
+    <td>a <code><a href="twisted.python.modules.PathEntry.html" class="internal-link" title="twisted.python.modules.PathEntry">PathEntry</a></code> instance which this module was located from.</td>
   </tr><tr class="method private">
     
     <td>Method</td>
-    <td><code><a href="#_getEntry">_getEntry</a></code></td>
-    <td><span>Implement in subclasses to specify what path entry submodules will come from.</span></td>
+    <td><code><a href="#_getEntry" class="internal-link" title="twisted.python.modules.PythonModule._getEntry">_get​Entry</a></code></td>
+    <td>Implement in subclasses to specify what path entry submodules will come from.</td>
   </tr><tr class="method private">
     
     <td>Method</td>
-    <td><code><a href="#_packagePaths">_packagePaths</a></code></td>
-    <td><span>Yield a sequence of FilePath-like objects which represent path segments.</span></td>
+    <td><code><a href="#_packagePaths" class="internal-link" title="twisted.python.modules.PythonModule._packagePaths">_package​Paths</a></code></td>
+    <td>Yield a sequence of FilePath-like objects which represent path segments.</td>
   </tr><tr class="method private">
     
     <td>Method</td>
-    <td><code><a href="#_subModuleName">_subModuleName</a></code></td>
-    <td><span>submodules of this module are prefixed with our name.</span></td>
+    <td><code><a href="#_subModuleName" class="internal-link" title="twisted.python.modules.PythonModule._subModuleName">_sub​Module​Name</a></code></td>
+    <td>submodules of this module are prefixed with our name.</td>
   </tr>
 </table>
         
           <p class="inheritedFrom">
-            Inherited from <code><a href="twisted.python.modules._ModuleIteratorHelper.html">_ModuleIteratorHelper</a></code>:
+            Inherited from <code><a href="twisted.python.modules._ModuleIteratorHelper.html" class="internal-link" title="twisted.python.modules._ModuleIteratorHelper">_ModuleIteratorHelper</a></code>:
           </p>
-          <table class="children sortable" id="id2682">
+          <table class="children sortable" id="id2668">
   
   
   <tr class="basemethod">
     
     <td>Method</td>
-    <td><code><a href="twisted.python.modules._ModuleIteratorHelper.html#__getitem__">__getitem__</a></code></td>
-    <td><span>Retrieve a module from below this path or package.</span></td>
+    <td><code><a href="twisted.python.modules._ModuleIteratorHelper.html#__getitem__" class="internal-link" title="twisted.python.modules._ModuleIteratorHelper.__getitem__">__getitem__</a></code></td>
+    <td>Retrieve a module from below this path or package.</td>
   </tr><tr class="basemethod">
     
     <td>Method</td>
-    <td><code><a href="twisted.python.modules._ModuleIteratorHelper.html#__iter__">__iter__</a></code></td>
-    <td><span>Implemented to raise NotImplementedError for clarity, so that attempting to loop over this object won't call __getitem__.</span></td>
+    <td><code><a href="twisted.python.modules._ModuleIteratorHelper.html#__iter__" class="internal-link" title="twisted.python.modules._ModuleIteratorHelper.__iter__">__iter__</a></code></td>
+    <td>Implemented to raise NotImplementedError for clarity, so that attempting to loop over this object won't call __getitem__.</td>
   </tr><tr class="basemethod">
     
     <td>Method</td>
-    <td><code><a href="twisted.python.modules._ModuleIteratorHelper.html#iterModules">iterModules</a></code></td>
-    <td><span>Loop over the modules present below this entry or package on PYTHONPATH.</span></td>
+    <td><code><a href="twisted.python.modules._ModuleIteratorHelper.html#iterModules" class="internal-link" title="twisted.python.modules._ModuleIteratorHelper.iterModules">iter​Modules</a></code></td>
+    <td>Loop over the modules present below this entry or package on PYTHONPATH.</td>
   </tr>
 </table>
           
@@ -266,7 +287,7 @@
   <div class="docstring functionBody">
     
     
-    <div><p>PythonModules with the same name are equal.</p><table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">other:</span><code><a href="https://docs.python.org/3/library/functions.html#object">object</a></code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr class="fieldStart"><td class="fieldName" colspan="2">Returns</td></tr><tr><td class="fieldArgContainer"><code><a href="https://docs.python.org/3/library/functions.html#bool">bool</a></code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr></table></div>
+    <div>PythonModules with the same name are equal.<table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">other:</span><code><a href="https://docs.python.org/3/library/functions.html#object" class="intersphinx-link">object</a></code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr class="fieldStart"><td class="fieldName" colspan="2">Returns</td></tr><tr><td class="fieldArgContainer"><code><a href="https://docs.python.org/3/library/functions.html#bool" class="intersphinx-link">bool</a></code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr></table></div>
   </div>
 </div><div class="basemethod">
   
@@ -288,7 +309,7 @@
   <div class="docstring functionBody">
     
     
-    <div><p>Create a PythonModule.  Do not construct this directly, instead inspect a PythonPath or other PythonModule instances.</p><table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">name</span></td><td class="fieldArgDesc">see ivar</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">filePath</span></td><td class="fieldArgDesc">see ivar</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">pathEntry</span></td><td class="fieldArgDesc">see ivar</td></tr></table></div>
+    <div>Create a PythonModule.  Do not construct this directly, instead inspect a PythonPath or other PythonModule instances.<table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">name</span></td><td class="fieldArgDesc">see ivar</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">file​Path</span></td><td class="fieldArgDesc">see ivar</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">path​Entry</span></td><td class="fieldArgDesc">see ivar</td></tr></table></div>
   </div>
 </div><div class="basemethod">
   
@@ -310,7 +331,7 @@
   <div class="docstring functionBody">
     
     
-    <div><p>Return a string representation including the module name.</p><table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Returns</td></tr><tr><td class="fieldArgContainer"><code><a href="https://docs.python.org/3/library/stdtypes.html#str">str</a></code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr></table></div>
+    <div>Return a string representation including the module name.<table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Returns</td></tr><tr><td class="fieldArgContainer"><code><a href="https://docs.python.org/3/library/stdtypes.html#str" class="intersphinx-link">str</a></code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr></table></div>
   </div>
 </div><div class="basemethod">
   
@@ -332,7 +353,7 @@
   <div class="docstring functionBody">
     
     
-    <div><p>Determine if the module is loaded into sys.modules.</p><table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Returns</td></tr><tr><td colspan="2">a boolean: true if loaded, false if not.</td></tr></table></div>
+    <div>Determine if the module is loaded into sys.modules.<table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Returns</td></tr><tr><td colspan="2">a boolean: true if loaded, false if not.</td></tr></table></div>
   </div>
 </div><div class="basemethod">
   
@@ -354,7 +375,7 @@
   <div class="docstring functionBody">
     
     
-    <div><p>Returns true if this module is also a package, and might yield something from iterModules.</p></div>
+    <div>Returns true if this module is also a package, and might yield something from iterModules.</div>
   </div>
 </div><div class="basemethod">
   
@@ -376,7 +397,9 @@
   <div class="docstring functionBody">
     
     
-    <div><p>List all the attributes defined in this module.</p><p>Note: Future work is planned here to make it possible to list python attributes on a module without loading the module by inspecting ASTs or bytecode, but currently any iteration of PythonModule objects insists they must be loaded, and will use inspect.getmodule.</p><table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Returns</td></tr><tr><td colspan="2">a generator yielding PythonAttribute instances describing the attributes of this module.</td></tr><tr class="fieldStart"><td class="fieldName" colspan="2">Raises</td></tr><tr><td class="fieldArgContainer"><code><a href="https://docs.python.org/3/library/exceptions.html#NotImplementedError">NotImplementedError</a></code></td><td>if this module is not loaded.</td></tr></table></div>
+    <div><p>List all the attributes defined in this module.</p>
+<p>Note: Future work is planned here to make it possible to list python attributes on a module without loading the module by inspecting ASTs or bytecode, but currently any iteration of PythonModule objects insists they must be loaded, and will use inspect.getmodule.</p>
+<table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Returns</td></tr><tr><td colspan="2">a generator yielding PythonAttribute instances describing the attributes of this module.</td></tr><tr class="fieldStart"><td class="fieldName" colspan="2">Raises</td></tr><tr><td class="fieldArgContainer"><code><a href="https://docs.python.org/3/library/exceptions.html#NotImplementedError" class="intersphinx-link">NotImplementedError</a></code></td><td>if this module is not loaded.</td></tr></table></div>
   </div>
 </div><div class="basemethod">
   
@@ -389,7 +412,7 @@
   </a>
   <div class="functionHeader">
     
-    <span class="py-keyword">def</span> <span class="py-defname">load</span>(self, default=_nothing):
+    <span class="py-keyword">def</span> <span class="py-defname">load</span>(self, default=<a href="twisted.python.modules.html#_nothing" class="internal-link" title="twisted.python.modules._nothing">_nothing</a>):
     <a class="sourceLink" href="https://github.com/twisted/twisted/tree/twisted-21.2.0/src/twisted/python/modules.py#L372">
       
       (source)
@@ -398,7 +421,7 @@
   <div class="docstring functionBody">
     
     
-    <div><p>Load this module.</p><table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">default</span></td><td class="fieldArgDesc">if specified, the value to return in case of an error.</td></tr><tr class="fieldStart"><td class="fieldName" colspan="2">Returns</td></tr><tr><td class="fieldArgContainer">types.ModuleType.</td><td class="fieldArgDesc">a genuine python module.</td></tr><tr class="fieldStart"><td class="fieldName" colspan="2">Raises</td></tr><tr><td class="fieldArgContainer"><code><a href="https://docs.python.org/3/library/exceptions.html#Exception">Exception</a></code></td><td>Importing modules is a risky business; the erorrs of any code run at module scope may be raised from here, as well as ImportError if something bizarre happened to the system path between the discovery of this PythonModule object and the attempt to import it.  If you specify a default, the error will be swallowed entirely, and not logged.</td></tr></table></div>
+    <div>Load this module.<table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">default</span></td><td class="fieldArgDesc">if specified, the value to return in case of an error.</td></tr><tr class="fieldStart"><td class="fieldName" colspan="2">Returns</td></tr><tr><td class="fieldArgContainer">types.ModuleType.</td><td class="fieldArgDesc">a genuine python module.</td></tr><tr class="fieldStart"><td class="fieldName" colspan="2">Raises</td></tr><tr><td class="fieldArgContainer"><code><a href="https://docs.python.org/3/library/exceptions.html#Exception" class="intersphinx-link">Exception</a></code></td><td>Importing modules is a risky business; the erorrs of any code run at module scope may be raised from here, as well as ImportError if something bizarre happened to the system path between the discovery of this PythonModule object and the attempt to import it.  If you specify a default, the error will be swallowed entirely, and not logged.</td></tr></table></div>
   </div>
 </div><div class="basemethod">
   
@@ -411,16 +434,18 @@
   </a>
   <div class="functionHeader">
     
-    <span class="py-keyword">def</span> <span class="py-defname">walkModules</span>(self, importPackages=False):
+    <span class="py-keyword">def</span> <span class="py-defname">walkModules</span>(self, importPackages=<a href="https://docs.python.org/3/library/constants.html#False" class="intersphinx-link">False</a>):
     <a class="sourceLink" href="https://github.com/twisted/twisted/tree/twisted-21.2.0/src/twisted/python/modules.py#L404">
       
       (source)
     </a>
   </div>
   <div class="docstring functionBody">
-    <div class="interfaceinfo">overrides <code><a href="twisted.python.modules._ModuleIteratorHelper.html#walkModules">twisted.python.modules._ModuleIteratorHelper.walkModules</a></code></div>
+    <div class="interfaceinfo">overrides <code><a href="twisted.python.modules._ModuleIteratorHelper.html#walkModules" class="internal-link">twisted.python.modules._ModuleIteratorHelper.walkModules</a></code></div>
     
-    <div><p>Similar to <code><a href="#iterModules">iterModules</a></code>, this yields self, and then every module in my package or entry, and every submodule in each package or entry.</p><p>In other words, this is deep, and <code><a href="#iterModules">iterModules</a></code> is shallow.</p></div>
+    <div><p>Similar to <code><a href="#iterModules" class="internal-link" title="twisted.python.modules._ModuleIteratorHelper.iterModules">iterModules</a></code>, this yields self, and then every module in my package or entry, and every submodule in each package or entry.</p>
+<p>In other words, this is deep, and <code><a href="#iterModules" class="internal-link" title="twisted.python.modules._ModuleIteratorHelper.iterModules">iterModules</a></code> is shallow.</p>
+</div>
   </div>
 </div><div class="baseinstancevariable">
   
@@ -443,6 +468,7 @@
     
     
     <div>a FilePath-like object which points to the location of this module.</div>
+    
   </div>
 </div><div class="baseinstancevariable">
   
@@ -465,6 +491,7 @@
     
     
     <div>the fully qualified python name of this module.</div>
+    
   </div>
 </div><div class="baseinstancevariable">
   
@@ -487,6 +514,7 @@
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    
   </div>
 </div><div class="baseinstancevariable">
   
@@ -508,7 +536,8 @@
   <div class="functionBody">
     
     
-    <div>a <code><a href="twisted.python.modules.PathEntry.html">PathEntry</a></code> instance which this module was located from.</div>
+    <div>a <code><a href="twisted.python.modules.PathEntry.html" class="internal-link" title="twisted.python.modules.PathEntry">PathEntry</a></code> instance which this module was located from.</div>
+    
   </div>
 </div><div class="basemethod private">
   
@@ -528,9 +557,9 @@
     </a>
   </div>
   <div class="docstring functionBody">
-    <div class="interfaceinfo">overrides <code><a href="twisted.python.modules._ModuleIteratorHelper.html#_getEntry">twisted.python.modules._ModuleIteratorHelper._getEntry</a></code></div>
+    <div class="interfaceinfo">overrides <code><a href="twisted.python.modules._ModuleIteratorHelper.html#_getEntry" class="internal-link">twisted.python.modules._ModuleIteratorHelper._getEntry</a></code></div>
     
-    <div><p>Implement in subclasses to specify what path entry submodules will come from.</p><table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Returns</td></tr><tr><td colspan="2">a PathEntry instance.</td></tr></table></div>
+    <div>Implement in subclasses to specify what path entry submodules will come from.<table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Returns</td></tr><tr><td colspan="2">a PathEntry instance.</td></tr></table></div>
   </div>
 </div><div class="basemethod private">
   
@@ -550,9 +579,9 @@
     </a>
   </div>
   <div class="docstring functionBody">
-    <div class="interfaceinfo">overrides <code><a href="twisted.python.modules._ModuleIteratorHelper.html#_packagePaths">twisted.python.modules._ModuleIteratorHelper._packagePaths</a></code></div>
+    <div class="interfaceinfo">overrides <code><a href="twisted.python.modules._ModuleIteratorHelper.html#_packagePaths" class="internal-link">twisted.python.modules._ModuleIteratorHelper._packagePaths</a></code></div>
     
-    <div><p>Yield a sequence of FilePath-like objects which represent path segments.</p></div>
+    <div>Yield a sequence of FilePath-like objects which represent path segments.</div>
   </div>
 </div><div class="basemethod private">
   
@@ -572,9 +601,9 @@
     </a>
   </div>
   <div class="docstring functionBody">
-    <div class="interfaceinfo">overrides <code><a href="twisted.python.modules._ModuleIteratorHelper.html#_subModuleName">twisted.python.modules._ModuleIteratorHelper._subModuleName</a></code></div>
+    <div class="interfaceinfo">overrides <code><a href="twisted.python.modules._ModuleIteratorHelper.html#_subModuleName" class="internal-link">twisted.python.modules._ModuleIteratorHelper._subModuleName</a></code></div>
     
-    <div><p>submodules of this module are prefixed with our name.</p></div>
+    <div>submodules of this module are prefixed with our name.</div>
   </div>
 </div>
 
@@ -583,11 +612,33 @@
 
     <footer class="navbar navbar-default">
   
+
   <div class="container">
     <a href="index.html">API Documentation</a> for <a href="https://twistedmatrix.com/" class="projecthome">Twisted</a>,
   generated by <a href="https://github.com/twisted/pydoctor/">pydoctor</a>
-    21.2.2 at 2022-01-12 04:22:24.
+    22.2.2.dev0 at 2022-03-04 05:57:20.
   </div>
+
+  <!-- Google analytics, obviously. -->
+  <script src="//www.google-analytics.com/urchin.js" type="text/javascript"></script>
+  <script type="text/javascript">
+    _uacct = "UA-99018-6";
+    urchinTracker();
+  </script>
+
+  <!-- If the documentation isn't current, insert a current link. -->
+  <script type="text/javascript">
+    if (window.location.pathname.indexOf('/current/') == -1) {
+      <!-- Give the user a link to this page, but in the current version of the docs. -->
+      var link = document.getElementById('current-docs-link');
+      link.href = window.location.pathname.replace(/\/\d+\.\d+\.\d+\/api\//, '/current/api/');
+      <!-- And make it visible -->
+      var container = document.getElementById('current-docs-container');
+      container.style.display = "";
+      delete link;
+      delete container;
+    }
+  </script>
 </footer>
 
     <script src="pydoctor.js" type="text/javascript"></script>
