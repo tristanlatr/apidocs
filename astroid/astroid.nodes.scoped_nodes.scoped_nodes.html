@@ -7,7 +7,7 @@
   <head>
     
     <title>astroid.nodes.scoped_nodes.scoped_nodes</title>
-    <meta name="generator" content="pydoctor 21.2.2"> 
+    <meta name="generator" content="pydoctor 22.2.2.dev0"> 
         
     </meta>
     <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
@@ -44,69 +44,82 @@
           Names
         </a>
 
-        <form action="search-results.html" id="search-box-container">
+        <div id="search-box-container">
           <div class="input-group">
-            <input id="search-box" name="search-query" placeholder="Search..." aria-label="Search" minlength="2" class="form-control" />
+            <input id="search-box" type="search" name="search-query" placeholder="Search..." aria-label="Search" minlength="2" class="form-control" autocomplete="off" />
+            
             <span class="input-group-btn">
-              <button class="btn btn-default" type="submit" title="Search"><img src="fonts/search.svg" alt="Search!" /></button>
-              <a class="btn btn-default" id="search-help-button" title="Help" onclick="toggleSearchHelpText()"><img src="fonts/info.svg" alt="Help!" /></a>
+              <a style="display: none;" class="btn btn-default" id="search-clear-button" title="Clear" onclick="clearSearch()"><img src="fonts/x-circle.svg" alt="Clear" /></a>
+              <a class="btn btn-default" id="search-help-button" title="Help" onclick="toggleSearchHelpText()"><img src="fonts/info.svg" alt="Help" /></a>
             </span>
           </div>
-        </form>
+        </div>
 
-        <div class="rst-admonition hint" id="search-help-box">
+      </div>
+
+      <div id="search-results-container" style="display: none;">
+        <div>
+          <span class="label label-default" id="search-docstrings-button">
+            <a title="Search in docstrings" onclick="toggleSearchInDocstrings()">search in docstrings</a></span>
+        </div>
+
+        <noscript>
+            <h1>Cannot search: JavaScript is not supported/enabled in your browser.</h1>
+        </noscript>
+
+        <div class="hint" id="search-help-box">
           <p class="rst-last">
       
             Search bar offers the following options:
             <ul>   
                 <li>
                   <strong>Term presence.</strong> The below example searches for documents that 
-                    must contain “foo”, might contain “bar” and must not contain “baz”:
-                  <br /> <code>'+foo bar -baz'</code>
+                    must contain “foo”, might contain “bar” and must not contain “baz”: <code>+foo bar -baz</code>
                 </li> 
 
                 <li>
-                  <strong>Wildcards.</strong> The below example searches for documents with words beginning with “foo”:
-                  <br /> <code>'foo*'</code>
+                  <strong>Wildcards.</strong> The below example searches for documents with words beginning with “foo”: <code>foo*</code>
                 </li> 
 
                 <li>
-                  <strong>Search in specific fields.</strong> The following search matches all documents 
-                  that contains "foo" in their full dotted name and with “bar” in any field:
-                  <br /> <code>'+fullName:*foo* +bar'</code>
+                  <strong>Search in specific fields.</strong> The following search matches all objects 
+                  in "twisted.mail" that matches “search”: <code>+qname:twisted.mail.* +search</code>
 
                   <p>
-                    Possible fields: 'name', 'docstring', 'fullName'.
+                    Possible fields: 'name', 'qname' (fully qualified name), 'docstring', and 'kind'.
+                    Last two fields are only applicable if "search in docstrings" is enabled.
                   </p>
                 </li>
 
                 <li>
                   <strong>Fuzzy matches.</strong> The following search matches all documents 
-                  that have a word within 1 edit distance of “foo”:
-                  <br /> <code>'foo~1'</code>
+                  that have a word within 1 edit distance of “foo”: <code>foo~1</code>
                 </li>
             </ul>
 
           </p>
         </div>
 
-      </div>
+        <div id="search-status"> </div>
+        
+        <div class="warning" id="search-warn-box" style="display: none;">
+          <p class="rst-last"><span id="search-warn"></span></p>
+        </div>
 
+        <table id="search-results">
+          <!-- Filled dynamically by JS -->
+        </table>
+        
+        <div style="margin-top: 8px;">
+          <p>Results provided by <a href="https://lunrjs.com">Lunr.js</a></p>
+        </div>
+      </div>
 
     </div>
   </div>
 
-  <script>
- 
-    function toggleSearchHelpText() {
-        document.body.classList.toggle("search-help-hidden");
-    }
-    // Init search and help text
-    document.getElementById('search-box-container').style.display = 'block';
-    document.getElementById('search-help-box').style.display = 'block';
-    document.body.classList.add("search-help-hidden");
-
-  </script>
+  <script src="ajax.js" type="text/javascript"></script>
+  <script src="search.js" type="text/javascript"></script>
 
 </nav>
 
@@ -115,7 +128,7 @@
     <div class="container">
 
       <div class="page-header">
-        <h1 class="module"><code><code><a href="astroid.html">astroid</a></code><wbr></wbr>.<code><a href="astroid.nodes.html">nodes</a></code><wbr></wbr>.<code><a href="astroid.nodes.scoped_nodes.html">scoped_nodes</a></code><wbr></wbr>.<code><a href="astroid.nodes.scoped_nodes.scoped_nodes.html">scoped_nodes</a></code></code></h1>
+        <h1 class="module"><code><code><a href="index.html" class="internal-link">astroid</a></code><wbr></wbr>.<code><a href="astroid.nodes.html" class="internal-link" title="astroid.nodes">nodes</a></code><wbr></wbr>.<code><a href="astroid.nodes.scoped_nodes.html" class="internal-link" title="astroid.nodes.scoped_nodes">scoped_nodes</a></code><wbr></wbr>.<code><a href="astroid.nodes.scoped_nodes.scoped_nodes.html" class="internal-link" title="astroid.nodes.scoped_nodes.scoped_nodes">scoped_nodes</a></code></code></h1>
         <div id="showPrivate">
           <button class="btn btn-link" onclick="togglePrivate()">Toggle Private API</button>
         </div>
@@ -137,69 +150,69 @@ Lambda, GeneratorExp, DictComp and SetComp to some extent).</div>
       </div>
 
       <div id="splitTables">
-        <table class="children sortable" id="id233">
+        <table class="children sortable" id="id232">
   
   
   <tr class="function">
     
     <td>Function</td>
-    <td><code><a href="#clean_duplicates_mro">clean_duplicates_mro</a></code></td>
+    <td><code><a href="#clean_duplicates_mro" class="internal-link" title="astroid.nodes.scoped_nodes.scoped_nodes.clean_duplicates_mro">clean​_duplicates​_mro</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="function">
     
     <td>Function</td>
-    <td><code><a href="#clean_typing_generic_mro">clean_typing_generic_mro</a></code></td>
+    <td><code><a href="#clean_typing_generic_mro" class="internal-link" title="astroid.nodes.scoped_nodes.scoped_nodes.clean_typing_generic_mro">clean​_typing​_generic​_mro</a></code></td>
     <td><span class="undocumented">No summary</span></td>
-  </tr><tr class="variable">
+  </tr><tr class="constant">
     
-    <td>Variable</td>
-    <td><code><a href="#BUILTIN_DESCRIPTORS">BUILTIN_DESCRIPTORS</a></code></td>
+    <td>Constant</td>
+    <td><code><a href="#BUILTIN_DESCRIPTORS" class="internal-link" title="astroid.nodes.scoped_nodes.scoped_nodes.BUILTIN_DESCRIPTORS">BUILTIN​_DESCRIPTORS</a></code></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="constant">
+    
+    <td>Constant</td>
+    <td><code><a href="#EXCEPTION_BASE_CLASSES" class="internal-link" title="astroid.nodes.scoped_nodes.scoped_nodes.EXCEPTION_BASE_CLASSES">EXCEPTION​_BASE​_CLASSES</a></code></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="constant">
+    
+    <td>Constant</td>
+    <td><code><a href="#ITER_METHODS" class="internal-link" title="astroid.nodes.scoped_nodes.scoped_nodes.ITER_METHODS">ITER​_METHODS</a></code></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="constant">
+    
+    <td>Constant</td>
+    <td><code><a href="#T" class="internal-link" title="astroid.nodes.scoped_nodes.scoped_nodes.T">T</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="variable">
     
     <td>Variable</td>
-    <td><code><a href="#EXCEPTION_BASE_CLASSES">EXCEPTION_BASE_CLASSES</a></code></td>
-    <td><span class="undocumented">Undocumented</span></td>
-  </tr><tr class="variable">
-    
-    <td>Variable</td>
-    <td><code><a href="#ITER_METHODS">ITER_METHODS</a></code></td>
-    <td><span class="undocumented">Undocumented</span></td>
-  </tr><tr class="variable">
-    
-    <td>Variable</td>
-    <td><code><a href="#objects">objects</a></code></td>
-    <td><span class="undocumented">Undocumented</span></td>
-  </tr><tr class="variable">
-    
-    <td>Variable</td>
-    <td><code><a href="#T">T</a></code></td>
+    <td><code><a href="#objects" class="internal-link" title="astroid.nodes.scoped_nodes.scoped_nodes.objects">objects</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="class private">
     
     <td>Class</td>
-    <td><code><a href="astroid.nodes.scoped_nodes.scoped_nodes._ListComp.html">_ListComp</a></code></td>
-    <td><span>Class representing an <a href="#system-message-1"><span class="rst-problematic" id="rst-problematic-1">:class:`ast.ListComp`</span></a> node.</span></td>
+    <td><code><a href="astroid.nodes.scoped_nodes.scoped_nodes._ListComp.html" class="internal-link" title="astroid.nodes.scoped_nodes.scoped_nodes._ListComp">_​List​Comp</a></code></td>
+    <td>Class representing an <code>ast.ListComp</code> node.</td>
   </tr><tr class="function private">
     
     <td>Function</td>
-    <td><code><a href="#_c3_merge">_c3_merge</a></code></td>
-    <td><span>Merges MROs in <em>sequences</em> to a single MRO using the C3 algorithm.</span></td>
+    <td><code><a href="#_c3_merge" class="internal-link" title="astroid.nodes.scoped_nodes.scoped_nodes._c3_merge">_c3​_merge</a></code></td>
+    <td>Merges MROs in <em>sequences</em> to a single MRO using the C3 algorithm.</td>
   </tr><tr class="function private">
     
     <td>Function</td>
-    <td><code><a href="#_class_type">_class_type</a></code></td>
-    <td><span>return a ClassDef node type to differ metaclass and exception from 'regular' classes</span></td>
+    <td><code><a href="#_class_type" class="internal-link" title="astroid.nodes.scoped_nodes.scoped_nodes._class_type">_class​_type</a></code></td>
+    <td>return a ClassDef node type to differ metaclass and exception from 'regular' classes</td>
   </tr><tr class="function private">
     
     <td>Function</td>
-    <td><code><a href="#_infer_decorator_callchain">_infer_decorator_callchain</a></code></td>
-    <td><span>Detect decorator call chaining and see if the end result is a static or a classmethod.</span></td>
+    <td><code><a href="#_infer_decorator_callchain" class="internal-link" title="astroid.nodes.scoped_nodes.scoped_nodes._infer_decorator_callchain">_infer​_decorator​_callchain</a></code></td>
+    <td>Detect decorator call chaining and see if the end result is a static or a classmethod.</td>
   </tr><tr class="function private">
     
     <td>Function</td>
-    <td><code><a href="#_rec_get_names">_rec_get_names</a></code></td>
-    <td><span>return a list of all argument names</span></td>
+    <td><code><a href="#_rec_get_names" class="internal-link" title="astroid.nodes.scoped_nodes.scoped_nodes._rec_get_names">_rec​_get​_names</a></code></td>
+    <td>return a list of all argument names</td>
   </tr>
 </table>
         
@@ -259,9 +272,9 @@ sequences if multiple are present.</p>
 part of bases_mro. If true, remove it from inferred_bases
 as well as its entry the bases_mro.</p>
 <p>Format sequences: [[self]] + bases_mro + [inferred_bases]</p>
-<table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">sequences:</span><code>List[<wbr></wbr>List[<wbr></wbr><a href="astroid.nodes.scoped_nodes.ClassDef.html">ClassDef</a>]]</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr></table></div>
+<table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">sequences:</span><code>List[<wbr></wbr>List[<wbr></wbr><a href="astroid.nodes.scoped_nodes.ClassDef.html" class="internal-link" title="astroid.nodes.scoped_nodes.ClassDef">ClassDef</a>]]</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr></table></div>
   </div>
-</div><div class="basevariable">
+</div><div class="baseconstant">
   
   
   <a name="astroid.nodes.scoped_nodes.scoped_nodes.BUILTIN_DESCRIPTORS">
@@ -282,8 +295,12 @@ as well as its entry the bases_mro.</p>
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    <table class="valueTable"><tr class="fieldStart"><td class="fieldName">Value</td></tr><tr><td><pre class="constant-value"><code>frozenset(<wbr></wbr>set([<wbr></wbr><span class="rst-variable-quote">'</span><span class="rst-variable-string">classmethod</span><span class="rst-variable-quote">'</span>,
+               <wbr></wbr><span class="rst-variable-quote">'</span><span class="rst-variable-string">staticmethod</span><span class="rst-variable-quote">'</span>,
+               <wbr></wbr><span class="rst-variable-quote">'</span><span class="rst-variable-string">builtins.classmethod</span><span class="rst-variable-quote">'</span>,
+               <wbr></wbr><span class="rst-variable-quote">'</span><span class="rst-variable-string">builtins.staticmethod</span><span class="rst-variable-quote">'</span>]))</code></pre></td></tr></table>
   </div>
-</div><div class="basevariable">
+</div><div class="baseconstant">
   
   
   <a name="astroid.nodes.scoped_nodes.scoped_nodes.EXCEPTION_BASE_CLASSES">
@@ -304,8 +321,9 @@ as well as its entry the bases_mro.</p>
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    <table class="valueTable"><tr class="fieldStart"><td class="fieldName">Value</td></tr><tr><td><pre class="constant-value"><code>frozenset(<wbr></wbr>set([<wbr></wbr><span class="rst-variable-quote">'</span><span class="rst-variable-string">Exception</span><span class="rst-variable-quote">'</span>, <wbr></wbr><span class="rst-variable-quote">'</span><span class="rst-variable-string">BaseException</span><span class="rst-variable-quote">'</span>]))</code></pre></td></tr></table>
   </div>
-</div><div class="basevariable">
+</div><div class="baseconstant">
   
   
   <a name="astroid.nodes.scoped_nodes.scoped_nodes.ITER_METHODS">
@@ -316,7 +334,7 @@ as well as its entry the bases_mro.</p>
   </a>
   <div class="functionHeader">
     
-    <span class="py-defname">ITER_METHODS</span>: <code>tuple[<wbr></wbr>str, <wbr></wbr>...]</code> =
+    <span class="py-defname">ITER_METHODS</span>: <code>tuple[<wbr></wbr>str, <wbr></wbr><span class="rst-variable-ellipsis">...</span>]</code> =
     <a class="sourceLink" href="https://github.com/PyCQA/astroid/tree/v2.9.3/astroid/nodes/scoped_nodes/scoped_nodes.py#L94">
       
       (source)
@@ -326,6 +344,30 @@ as well as its entry the bases_mro.</p>
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    <table class="valueTable"><tr class="fieldStart"><td class="fieldName">Value</td></tr><tr><td><pre class="constant-value"><code>(<wbr></wbr><span class="rst-variable-quote">'</span><span class="rst-variable-string">__iter__</span><span class="rst-variable-quote">'</span>, <wbr></wbr><span class="rst-variable-quote">'</span><span class="rst-variable-string">__getitem__</span><span class="rst-variable-quote">'</span>)</code></pre></td></tr></table>
+  </div>
+</div><div class="baseconstant">
+  
+  
+  <a name="astroid.nodes.scoped_nodes.scoped_nodes.T">
+    
+  </a>
+  <a name="T">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-defname">T</span> =
+    <a class="sourceLink" href="https://github.com/PyCQA/astroid/tree/v2.9.3/astroid/nodes/scoped_nodes/scoped_nodes.py#L101">
+      
+      (source)
+    </a>
+  </div>
+  <div class="functionBody">
+    
+    
+    <div><p class="undocumented">Undocumented</p></div>
+    <table class="valueTable"><tr class="fieldStart"><td class="fieldName">Value</td></tr><tr><td><pre class="constant-value"><code>TypeVar(<wbr></wbr><span class="rst-variable-quote">'</span><span class="rst-variable-string">T</span><span class="rst-variable-quote">'</span>)</code></pre></td></tr></table>
   </div>
 </div><div class="basevariable">
   
@@ -348,28 +390,7 @@ as well as its entry the bases_mro.</p>
     
     
     <div><p class="undocumented">Undocumented</p></div>
-  </div>
-</div><div class="basevariable">
-  
-  
-  <a name="astroid.nodes.scoped_nodes.scoped_nodes.T">
     
-  </a>
-  <a name="T">
-    
-  </a>
-  <div class="functionHeader">
-    
-    <span class="py-defname">T</span> =
-    <a class="sourceLink" href="https://github.com/PyCQA/astroid/tree/v2.9.3/astroid/nodes/scoped_nodes/scoped_nodes.py#L101">
-      
-      (source)
-    </a>
-  </div>
-  <div class="functionBody">
-    
-    
-    <div><p class="undocumented">Undocumented</p></div>
   </div>
 </div><div class="basefunction private">
   
@@ -473,7 +494,7 @@ static or a classmethod.</div>
   <div class="container">
     <a href="index.html">API Documentation</a> for <a href="https://github.com/PyCQA/astroid/" class="projecthome">astroid-v2.9.3</a>,
   generated by <a href="https://github.com/twisted/pydoctor/">pydoctor</a>
-    21.2.2 at 2022-01-12 04:22:11.
+    22.2.2.dev0 at 2022-03-04 05:57:12.
   </div>
 </footer>
 

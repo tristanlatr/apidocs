@@ -7,7 +7,7 @@
   <head>
     
     <title>astroid.inference</title>
-    <meta name="generator" content="pydoctor 21.2.2"> 
+    <meta name="generator" content="pydoctor 22.2.2.dev0"> 
         
     </meta>
     <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
@@ -44,69 +44,82 @@
           Names
         </a>
 
-        <form action="search-results.html" id="search-box-container">
+        <div id="search-box-container">
           <div class="input-group">
-            <input id="search-box" name="search-query" placeholder="Search..." aria-label="Search" minlength="2" class="form-control" />
+            <input id="search-box" type="search" name="search-query" placeholder="Search..." aria-label="Search" minlength="2" class="form-control" autocomplete="off" />
+            
             <span class="input-group-btn">
-              <button class="btn btn-default" type="submit" title="Search"><img src="fonts/search.svg" alt="Search!" /></button>
-              <a class="btn btn-default" id="search-help-button" title="Help" onclick="toggleSearchHelpText()"><img src="fonts/info.svg" alt="Help!" /></a>
+              <a style="display: none;" class="btn btn-default" id="search-clear-button" title="Clear" onclick="clearSearch()"><img src="fonts/x-circle.svg" alt="Clear" /></a>
+              <a class="btn btn-default" id="search-help-button" title="Help" onclick="toggleSearchHelpText()"><img src="fonts/info.svg" alt="Help" /></a>
             </span>
           </div>
-        </form>
+        </div>
 
-        <div class="rst-admonition hint" id="search-help-box">
+      </div>
+
+      <div id="search-results-container" style="display: none;">
+        <div>
+          <span class="label label-default" id="search-docstrings-button">
+            <a title="Search in docstrings" onclick="toggleSearchInDocstrings()">search in docstrings</a></span>
+        </div>
+
+        <noscript>
+            <h1>Cannot search: JavaScript is not supported/enabled in your browser.</h1>
+        </noscript>
+
+        <div class="hint" id="search-help-box">
           <p class="rst-last">
       
             Search bar offers the following options:
             <ul>   
                 <li>
                   <strong>Term presence.</strong> The below example searches for documents that 
-                    must contain “foo”, might contain “bar” and must not contain “baz”:
-                  <br /> <code>'+foo bar -baz'</code>
+                    must contain “foo”, might contain “bar” and must not contain “baz”: <code>+foo bar -baz</code>
                 </li> 
 
                 <li>
-                  <strong>Wildcards.</strong> The below example searches for documents with words beginning with “foo”:
-                  <br /> <code>'foo*'</code>
+                  <strong>Wildcards.</strong> The below example searches for documents with words beginning with “foo”: <code>foo*</code>
                 </li> 
 
                 <li>
-                  <strong>Search in specific fields.</strong> The following search matches all documents 
-                  that contains "foo" in their full dotted name and with “bar” in any field:
-                  <br /> <code>'+fullName:*foo* +bar'</code>
+                  <strong>Search in specific fields.</strong> The following search matches all objects 
+                  in "twisted.mail" that matches “search”: <code>+qname:twisted.mail.* +search</code>
 
                   <p>
-                    Possible fields: 'name', 'docstring', 'fullName'.
+                    Possible fields: 'name', 'qname' (fully qualified name), 'docstring', and 'kind'.
+                    Last two fields are only applicable if "search in docstrings" is enabled.
                   </p>
                 </li>
 
                 <li>
                   <strong>Fuzzy matches.</strong> The following search matches all documents 
-                  that have a word within 1 edit distance of “foo”:
-                  <br /> <code>'foo~1'</code>
+                  that have a word within 1 edit distance of “foo”: <code>foo~1</code>
                 </li>
             </ul>
 
           </p>
         </div>
 
-      </div>
+        <div id="search-status"> </div>
+        
+        <div class="warning" id="search-warn-box" style="display: none;">
+          <p class="rst-last"><span id="search-warn"></span></p>
+        </div>
 
+        <table id="search-results">
+          <!-- Filled dynamically by JS -->
+        </table>
+        
+        <div style="margin-top: 8px;">
+          <p>Results provided by <a href="https://lunrjs.com">Lunr.js</a></p>
+        </div>
+      </div>
 
     </div>
   </div>
 
-  <script>
- 
-    function toggleSearchHelpText() {
-        document.body.classList.toggle("search-help-hidden");
-    }
-    // Init search and help text
-    document.getElementById('search-box-container').style.display = 'block';
-    document.getElementById('search-help-box').style.display = 'block';
-    document.body.classList.add("search-help-hidden");
-
-  </script>
+  <script src="ajax.js" type="text/javascript"></script>
+  <script src="search.js" type="text/javascript"></script>
 
 </nav>
 
@@ -115,7 +128,7 @@
     <div class="container">
 
       <div class="page-header">
-        <h1 class="module"><code><code><a href="astroid.html">astroid</a></code><wbr></wbr>.<code><a href="astroid.inference.html">inference</a></code></code></h1>
+        <h1 class="module"><code><code><a href="index.html" class="internal-link">astroid</a></code><wbr></wbr>.<code><a href="astroid.inference.html" class="internal-link" title="astroid.inference">inference</a></code></code></h1>
         <div id="showPrivate">
           <button class="btn btn-link" onclick="togglePrivate()">Toggle Private API</button>
         </div>
@@ -141,232 +154,232 @@
   <tr class="function">
     
     <td>Function</td>
-    <td><code><a href="#infer_arguments">infer_arguments</a></code></td>
+    <td><code><a href="#infer_arguments" class="internal-link" title="astroid.inference.infer_arguments">infer​_arguments</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="function">
     
     <td>Function</td>
-    <td><code><a href="#infer_assign">infer_assign</a></code></td>
-    <td><span>infer a AssignName/AssignAttr: need to inspect the RHS part of the assign node</span></td>
+    <td><code><a href="#infer_assign" class="internal-link" title="astroid.inference.infer_assign">infer​_assign</a></code></td>
+    <td>infer a AssignName/AssignAttr: need to inspect the RHS part of the assign node</td>
   </tr><tr class="function">
     
     <td>Function</td>
-    <td><code><a href="#infer_attribute">infer_attribute</a></code></td>
-    <td><span>infer an Attribute node by using getattr on the associated object</span></td>
+    <td><code><a href="#infer_attribute" class="internal-link" title="astroid.inference.infer_attribute">infer​_attribute</a></code></td>
+    <td>infer an Attribute node by using getattr on the associated object</td>
   </tr><tr class="function">
     
     <td>Function</td>
-    <td><code><a href="#infer_augassign">infer_augassign</a></code></td>
+    <td><code><a href="#infer_augassign" class="internal-link" title="astroid.inference.infer_augassign">infer​_augassign</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="function">
     
     <td>Function</td>
-    <td><code><a href="#infer_binop">infer_binop</a></code></td>
+    <td><code><a href="#infer_binop" class="internal-link" title="astroid.inference.infer_binop">infer​_binop</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="function">
     
     <td>Function</td>
-    <td><code><a href="#infer_call">infer_call</a></code></td>
-    <td><span>infer a Call node by trying to guess what the function returns</span></td>
+    <td><code><a href="#infer_call" class="internal-link" title="astroid.inference.infer_call">infer​_call</a></code></td>
+    <td>infer a Call node by trying to guess what the function returns</td>
   </tr><tr class="function">
     
     <td>Function</td>
-    <td><code><a href="#infer_empty_node">infer_empty_node</a></code></td>
+    <td><code><a href="#infer_empty_node" class="internal-link" title="astroid.inference.infer_empty_node">infer​_empty​_node</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="function">
     
     <td>Function</td>
-    <td><code><a href="#infer_end">infer_end</a></code></td>
-    <td><span>Inference's end for nodes that yield themselves on inference</span></td>
+    <td><code><a href="#infer_end" class="internal-link" title="astroid.inference.infer_end">infer​_end</a></code></td>
+    <td>Inference's end for nodes that yield themselves on inference</td>
   </tr><tr class="function">
     
     <td>Function</td>
-    <td><code><a href="#infer_functiondef">infer_functiondef</a></code></td>
+    <td><code><a href="#infer_functiondef" class="internal-link" title="astroid.inference.infer_functiondef">infer​_functiondef</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="function">
     
     <td>Function</td>
-    <td><code><a href="#infer_global">infer_global</a></code></td>
+    <td><code><a href="#infer_global" class="internal-link" title="astroid.inference.infer_global">infer​_global</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="function">
     
     <td>Function</td>
-    <td><code><a href="#infer_ifexp">infer_ifexp</a></code></td>
-    <td><span>Support IfExp inference</span></td>
+    <td><code><a href="#infer_ifexp" class="internal-link" title="astroid.inference.infer_ifexp">infer​_ifexp</a></code></td>
+    <td>Support IfExp inference</td>
   </tr><tr class="function">
     
     <td>Function</td>
-    <td><code><a href="#infer_import">infer_import</a></code></td>
-    <td><span>infer an Import node: return the imported module/object</span></td>
+    <td><code><a href="#infer_import" class="internal-link" title="astroid.inference.infer_import">infer​_import</a></code></td>
+    <td>infer an Import node: return the imported module/object</td>
   </tr><tr class="function">
     
     <td>Function</td>
-    <td><code><a href="#infer_import_from">infer_import_from</a></code></td>
-    <td><span>infer a ImportFrom node: return the imported module/object</span></td>
+    <td><code><a href="#infer_import_from" class="internal-link" title="astroid.inference.infer_import_from">infer​_import​_from</a></code></td>
+    <td>infer a ImportFrom node: return the imported module/object</td>
   </tr><tr class="function">
     
     <td>Function</td>
-    <td><code><a href="#infer_index">infer_index</a></code></td>
+    <td><code><a href="#infer_index" class="internal-link" title="astroid.inference.infer_index">infer​_index</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="function">
     
     <td>Function</td>
-    <td><code><a href="#infer_map">infer_map</a></code></td>
+    <td><code><a href="#infer_map" class="internal-link" title="astroid.inference.infer_map">infer​_map</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="function">
     
     <td>Function</td>
-    <td><code><a href="#infer_name">infer_name</a></code></td>
-    <td><span>infer a Name: use name lookup rules</span></td>
+    <td><code><a href="#infer_name" class="internal-link" title="astroid.inference.infer_name">infer​_name</a></code></td>
+    <td>infer a Name: use name lookup rules</td>
   </tr><tr class="function">
     
     <td>Function</td>
-    <td><code><a href="#infer_sequence">infer_sequence</a></code></td>
+    <td><code><a href="#infer_sequence" class="internal-link" title="astroid.inference.infer_sequence">infer​_sequence</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="function">
     
     <td>Function</td>
-    <td><code><a href="#infer_subscript">infer_subscript</a></code></td>
-    <td><span>Inference for subscripts</span></td>
+    <td><code><a href="#infer_subscript" class="internal-link" title="astroid.inference.infer_subscript">infer​_subscript</a></code></td>
+    <td>Inference for subscripts</td>
   </tr><tr class="function">
     
     <td>Function</td>
-    <td><code><a href="#infer_unaryop">infer_unaryop</a></code></td>
-    <td><span>Infer what an UnaryOp should return when evaluated.</span></td>
+    <td><code><a href="#infer_unaryop" class="internal-link" title="astroid.inference.infer_unaryop">infer​_unaryop</a></code></td>
+    <td>Infer what an UnaryOp should return when evaluated.</td>
+  </tr><tr class="constant">
+    
+    <td>Constant</td>
+    <td><code><a href="#COMPARE_OPS" class="internal-link" title="astroid.inference.COMPARE_OPS">COMPARE​_OPS</a></code></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="constant">
+    
+    <td>Constant</td>
+    <td><code><a href="#UNINFERABLE_OPS" class="internal-link" title="astroid.inference.UNINFERABLE_OPS">UNINFERABLE​_OPS</a></code></td>
+    <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="variable">
     
     <td>Variable</td>
-    <td><code><a href="#COMPARE_OPS">COMPARE_OPS</a></code></td>
-    <td><span class="undocumented">Undocumented</span></td>
-  </tr><tr class="variable">
-    
-    <td>Variable</td>
-    <td><code><a href="#objects">objects</a></code></td>
-    <td><span class="undocumented">Undocumented</span></td>
-  </tr><tr class="variable">
-    
-    <td>Variable</td>
-    <td><code><a href="#UNINFERABLE_OPS">UNINFERABLE_OPS</a></code></td>
+    <td><code><a href="#objects" class="internal-link" title="astroid.inference.objects">objects</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="function private">
     
     <td>Function</td>
-    <td><code><a href="#_aug_op">_aug_op</a></code></td>
-    <td><span>Get an inference callable for an augmented binary operation.</span></td>
+    <td><code><a href="#_aug_op" class="internal-link" title="astroid.inference._aug_op">_aug​_op</a></code></td>
+    <td>Get an inference callable for an augmented binary operation.</td>
   </tr><tr class="function private">
     
     <td>Function</td>
-    <td><code><a href="#_bin_op">_bin_op</a></code></td>
-    <td><span>Get an inference callable for a normal binary operation.</span></td>
+    <td><code><a href="#_bin_op" class="internal-link" title="astroid.inference._bin_op">_bin​_op</a></code></td>
+    <td>Get an inference callable for a normal binary operation.</td>
   </tr><tr class="function private">
     
     <td>Function</td>
-    <td><code><a href="#_cached_generator">_cached_generator</a></code></td>
+    <td><code><a href="#_cached_generator" class="internal-link" title="astroid.inference._cached_generator">_cached​_generator</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="function private">
     
     <td>Function</td>
-    <td><code><a href="#_do_compare">_do_compare</a></code></td>
+    <td><code><a href="#_do_compare" class="internal-link" title="astroid.inference._do_compare">_do​_compare</a></code></td>
     <td><span class="undocumented">No summary</span></td>
   </tr><tr class="function private">
     
     <td>Function</td>
-    <td><code><a href="#_filter_operation_errors">_filter_operation_errors</a></code></td>
+    <td><code><a href="#_filter_operation_errors" class="internal-link" title="astroid.inference._filter_operation_errors">_filter​_operation​_errors</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="function private">
     
     <td>Function</td>
-    <td><code><a href="#_get_aug_flow">_get_aug_flow</a></code></td>
-    <td><span>Get the flow for augmented binary operations.</span></td>
+    <td><code><a href="#_get_aug_flow" class="internal-link" title="astroid.inference._get_aug_flow">_get​_aug​_flow</a></code></td>
+    <td>Get the flow for augmented binary operations.</td>
   </tr><tr class="function private">
     
     <td>Function</td>
-    <td><code><a href="#_get_binop_contexts">_get_binop_contexts</a></code></td>
-    <td><span>Get contexts for binary operations.</span></td>
+    <td><code><a href="#_get_binop_contexts" class="internal-link" title="astroid.inference._get_binop_contexts">_get​_binop​_contexts</a></code></td>
+    <td>Get contexts for binary operations.</td>
   </tr><tr class="function private">
     
     <td>Function</td>
-    <td><code><a href="#_get_binop_flow">_get_binop_flow</a></code></td>
-    <td><span>Get the flow for binary operations.</span></td>
+    <td><code><a href="#_get_binop_flow" class="internal-link" title="astroid.inference._get_binop_flow">_get​_binop​_flow</a></code></td>
+    <td>Get the flow for binary operations.</td>
   </tr><tr class="function private">
     
     <td>Function</td>
-    <td><code><a href="#_higher_function_scope">_higher_function_scope</a></code></td>
+    <td><code><a href="#_higher_function_scope" class="internal-link" title="astroid.inference._higher_function_scope">_higher​_function​_scope</a></code></td>
     <td><span class="undocumented">No summary</span></td>
   </tr><tr class="function private">
     
     <td>Function</td>
-    <td><code><a href="#_infer_augassign">_infer_augassign</a></code></td>
-    <td><span>Inference logic for augmented binary operations.</span></td>
+    <td><code><a href="#_infer_augassign" class="internal-link" title="astroid.inference._infer_augassign">_infer​_augassign</a></code></td>
+    <td>Inference logic for augmented binary operations.</td>
   </tr><tr class="function private">
     
     <td>Function</td>
-    <td><code><a href="#_infer_binary_operation">_infer_binary_operation</a></code></td>
-    <td><span>Infer a binary operation between a left operand and a right operand</span></td>
+    <td><code><a href="#_infer_binary_operation" class="internal-link" title="astroid.inference._infer_binary_operation">_infer​_binary​_operation</a></code></td>
+    <td>Infer a binary operation between a left operand and a right operand</td>
   </tr><tr class="function private">
     
     <td>Function</td>
-    <td><code><a href="#_infer_binop">_infer_binop</a></code></td>
-    <td><span>Binary operation inference logic.</span></td>
+    <td><code><a href="#_infer_binop" class="internal-link" title="astroid.inference._infer_binop">_infer​_binop</a></code></td>
+    <td>Binary operation inference logic.</td>
   </tr><tr class="function private">
     
     <td>Function</td>
-    <td><code><a href="#_infer_boolop">_infer_boolop</a></code></td>
-    <td><span>Infer a boolean operation (and / or / not).</span></td>
+    <td><code><a href="#_infer_boolop" class="internal-link" title="astroid.inference._infer_boolop">_infer​_boolop</a></code></td>
+    <td>Infer a boolean operation (and / or / not).</td>
   </tr><tr class="function private">
     
     <td>Function</td>
-    <td><code><a href="#_infer_compare">_infer_compare</a></code></td>
-    <td><span>Chained comparison inference logic.</span></td>
+    <td><code><a href="#_infer_compare" class="internal-link" title="astroid.inference._infer_compare">_infer​_compare</a></code></td>
+    <td>Chained comparison inference logic.</td>
   </tr><tr class="function private">
     
     <td>Function</td>
-    <td><code><a href="#_infer_map">_infer_map</a></code></td>
-    <td><span>Infer all values based on Dict.items</span></td>
+    <td><code><a href="#_infer_map" class="internal-link" title="astroid.inference._infer_map">_infer​_map</a></code></td>
+    <td>Infer all values based on Dict.items</td>
   </tr><tr class="function private">
     
     <td>Function</td>
-    <td><code><a href="#_infer_sequence_helper">_infer_sequence_helper</a></code></td>
-    <td><span>Infer all values based on _BaseContainer.elts</span></td>
+    <td><code><a href="#_infer_sequence_helper" class="internal-link" title="astroid.inference._infer_sequence_helper">_infer​_sequence​_helper</a></code></td>
+    <td>Infer all values based on _BaseContainer.elts</td>
   </tr><tr class="function private">
     
     <td>Function</td>
-    <td><code><a href="#_infer_unaryop">_infer_unaryop</a></code></td>
-    <td><span>Infer what an UnaryOp should return when evaluated.</span></td>
+    <td><code><a href="#_infer_unaryop" class="internal-link" title="astroid.inference._infer_unaryop">_infer​_unaryop</a></code></td>
+    <td>Infer what an UnaryOp should return when evaluated.</td>
   </tr><tr class="function private">
     
     <td>Function</td>
-    <td><code><a href="#_invoke_binop_inference">_invoke_binop_inference</a></code></td>
-    <td><span>Invoke binary operation inference on the given instance.</span></td>
+    <td><code><a href="#_invoke_binop_inference" class="internal-link" title="astroid.inference._invoke_binop_inference">_invoke​_binop​_inference</a></code></td>
+    <td>Invoke binary operation inference on the given instance.</td>
   </tr><tr class="function private">
     
     <td>Function</td>
-    <td><code><a href="#_is_not_implemented">_is_not_implemented</a></code></td>
-    <td><span>Check if the given const node is NotImplemented.</span></td>
+    <td><code><a href="#_is_not_implemented" class="internal-link" title="astroid.inference._is_not_implemented">_is​_not​_implemented</a></code></td>
+    <td>Check if the given const node is NotImplemented.</td>
   </tr><tr class="function private">
     
     <td>Function</td>
-    <td><code><a href="#_populate_context_lookup">_populate_context_lookup</a></code></td>
+    <td><code><a href="#_populate_context_lookup" class="internal-link" title="astroid.inference._populate_context_lookup">_populate​_context​_lookup</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="function private">
     
     <td>Function</td>
-    <td><code><a href="#_same_type">_same_type</a></code></td>
-    <td><span>Check if type1 is the same as type2.</span></td>
+    <td><code><a href="#_same_type" class="internal-link" title="astroid.inference._same_type">_same​_type</a></code></td>
+    <td>Check if type1 is the same as type2.</td>
   </tr><tr class="function private">
     
     <td>Function</td>
-    <td><code><a href="#_to_literal">_to_literal</a></code></td>
+    <td><code><a href="#_to_literal" class="internal-link" title="astroid.inference._to_literal">_to​_literal</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="function private">
     
     <td>Function</td>
-    <td><code><a href="#_update_with_replacement">_update_with_replacement</a></code></td>
-    <td><span>Delete nodes that equate to duplicate keys</span></td>
-  </tr><tr class="variable private">
+    <td><code><a href="#_update_with_replacement" class="internal-link" title="astroid.inference._update_with_replacement">_update​_with​_replacement</a></code></td>
+    <td>Delete nodes that equate to duplicate keys</td>
+  </tr><tr class="constant private">
     
-    <td>Variable</td>
-    <td><code><a href="#_SUBSCRIPT_SENTINEL">_SUBSCRIPT_SENTINEL</a></code></td>
+    <td>Constant</td>
+    <td><code><a href="#_SUBSCRIPT_SENTINEL" class="internal-link" title="astroid.inference._SUBSCRIPT_SENTINEL">_SUBSCRIPT​_SENTINEL</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr>
 </table>
@@ -387,7 +400,7 @@
     
   </a>
   <div class="functionHeader">
-    @decorators.raise_if_nothing_inferred<br />
+    @<a href="astroid.decorators.html#raise_if_nothing_inferred" class="internal-link" title="astroid.decorators.raise_if_nothing_inferred">decorators.raise_if_nothing_inferred</a><br />
     <span class="py-keyword">def</span> <span class="py-defname">infer_arguments</span>(self, context=None):
     <a class="sourceLink" href="https://github.com/PyCQA/astroid/tree/v2.9.3/astroid/inference.py#L936">
       
@@ -409,7 +422,7 @@
     
   </a>
   <div class="functionHeader">
-    @decorators.raise_if_nothing_inferred<br />@decorators.path_wrapper<br />
+    @<a href="astroid.decorators.html#raise_if_nothing_inferred" class="internal-link" title="astroid.decorators.raise_if_nothing_inferred">decorators.raise_if_nothing_inferred</a><br />@<a href="astroid.decorators.html#path_wrapper" class="internal-link" title="astroid.decorators.path_wrapper">decorators.path_wrapper</a><br />
     <span class="py-keyword">def</span> <span class="py-defname">infer_assign</span>(self, context=None):
     <a class="sourceLink" href="https://github.com/PyCQA/astroid/tree/v2.9.3/astroid/inference.py#L947">
       
@@ -454,7 +467,7 @@ assign node</div>
     
   </a>
   <div class="functionHeader">
-    @decorators.raise_if_nothing_inferred<br />@decorators.path_wrapper<br />
+    @<a href="astroid.decorators.html#raise_if_nothing_inferred" class="internal-link" title="astroid.decorators.raise_if_nothing_inferred">decorators.raise_if_nothing_inferred</a><br />@<a href="astroid.decorators.html#path_wrapper" class="internal-link" title="astroid.decorators.path_wrapper">decorators.path_wrapper</a><br />
     <span class="py-keyword">def</span> <span class="py-defname">infer_augassign</span>(self, context=None):
     <a class="sourceLink" href="https://github.com/PyCQA/astroid/tree/v2.9.3/astroid/inference.py#L922">
       
@@ -476,7 +489,7 @@ assign node</div>
     
   </a>
   <div class="functionHeader">
-    @decorators.yes_if_nothing_inferred<br />@decorators.path_wrapper<br />
+    @<a href="astroid.decorators.html#yes_if_nothing_inferred" class="internal-link" title="astroid.decorators.yes_if_nothing_inferred">decorators.yes_if_nothing_inferred</a><br />@<a href="astroid.decorators.html#path_wrapper" class="internal-link" title="astroid.decorators.path_wrapper">decorators.path_wrapper</a><br />
     <span class="py-keyword">def</span> <span class="py-defname">infer_binop</span>(self, context=None):
     <a class="sourceLink" href="https://github.com/PyCQA/astroid/tree/v2.9.3/astroid/inference.py#L788">
       
@@ -498,7 +511,7 @@ assign node</div>
     
   </a>
   <div class="functionHeader">
-    @decorators.raise_if_nothing_inferred<br />@decorators.path_wrapper<br />
+    @<a href="astroid.decorators.html#raise_if_nothing_inferred" class="internal-link" title="astroid.decorators.raise_if_nothing_inferred">decorators.raise_if_nothing_inferred</a><br />@<a href="astroid.decorators.html#path_wrapper" class="internal-link" title="astroid.decorators.path_wrapper">decorators.path_wrapper</a><br />
     <span class="py-keyword">def</span> <span class="py-defname">infer_call</span>(self, context=None):
     <a class="sourceLink" href="https://github.com/PyCQA/astroid/tree/v2.9.3/astroid/inference.py#L232">
       
@@ -520,7 +533,7 @@ assign node</div>
     
   </a>
   <div class="functionHeader">
-    @decorators.raise_if_nothing_inferred<br />@decorators.path_wrapper<br />
+    @<a href="astroid.decorators.html#raise_if_nothing_inferred" class="internal-link" title="astroid.decorators.raise_if_nothing_inferred">decorators.raise_if_nothing_inferred</a><br />@<a href="astroid.decorators.html#path_wrapper" class="internal-link" title="astroid.decorators.path_wrapper">decorators.path_wrapper</a><br />
     <span class="py-keyword">def</span> <span class="py-defname">infer_empty_node</span>(self, context=None):
     <a class="sourceLink" href="https://github.com/PyCQA/astroid/tree/v2.9.3/astroid/inference.py#L964">
       
@@ -567,7 +580,7 @@ such as Module or Consts.</p>
     
   </a>
   <div class="functionHeader">
-    @_cached_generator<br />
+    @<a href="#_cached_generator" class="internal-link" title="astroid.inference._cached_generator">_cached_generator</a><br />
     <span class="py-keyword">def</span> <span class="py-defname">infer_functiondef</span>(self, context=None):
     <a class="sourceLink" href="https://github.com/PyCQA/astroid/tree/v2.9.3/astroid/inference.py#L1061">
       
@@ -589,7 +602,7 @@ such as Module or Consts.</p>
     
   </a>
   <div class="functionHeader">
-    @decorators.raise_if_nothing_inferred<br />@decorators.path_wrapper<br />
+    @<a href="astroid.decorators.html#raise_if_nothing_inferred" class="internal-link" title="astroid.decorators.raise_if_nothing_inferred">decorators.raise_if_nothing_inferred</a><br />@<a href="astroid.decorators.html#path_wrapper" class="internal-link" title="astroid.decorators.path_wrapper">decorators.path_wrapper</a><br />
     <span class="py-keyword">def</span> <span class="py-defname">infer_global</span>(self, context=None):
     <a class="sourceLink" href="https://github.com/PyCQA/astroid/tree/v2.9.3/astroid/inference.py#L343">
       
@@ -611,7 +624,7 @@ such as Module or Consts.</p>
     
   </a>
   <div class="functionHeader">
-    @decorators.raise_if_nothing_inferred<br />
+    @<a href="astroid.decorators.html#raise_if_nothing_inferred" class="internal-link" title="astroid.decorators.raise_if_nothing_inferred">decorators.raise_if_nothing_inferred</a><br />
     <span class="py-keyword">def</span> <span class="py-defname">infer_ifexp</span>(self, context=None):
     <a class="sourceLink" href="https://github.com/PyCQA/astroid/tree/v2.9.3/astroid/inference.py#L1006">
       
@@ -637,7 +650,7 @@ depending on the condition.</p>
     
   </a>
   <div class="functionHeader">
-    @decorators.raise_if_nothing_inferred<br />@decorators.path_wrapper<br />
+    @<a href="astroid.decorators.html#raise_if_nothing_inferred" class="internal-link" title="astroid.decorators.raise_if_nothing_inferred">decorators.raise_if_nothing_inferred</a><br />@<a href="astroid.decorators.html#path_wrapper" class="internal-link" title="astroid.decorators.path_wrapper">decorators.path_wrapper</a><br />
     <span class="py-keyword">def</span> <span class="py-defname">infer_import</span>(self, context=None, asname=True):
     <a class="sourceLink" href="https://github.com/PyCQA/astroid/tree/v2.9.3/astroid/inference.py#L259">
       
@@ -659,7 +672,7 @@ depending on the condition.</p>
     
   </a>
   <div class="functionHeader">
-    @decorators.raise_if_nothing_inferred<br />@decorators.path_wrapper<br />
+    @<a href="astroid.decorators.html#raise_if_nothing_inferred" class="internal-link" title="astroid.decorators.raise_if_nothing_inferred">decorators.raise_if_nothing_inferred</a><br />@<a href="astroid.decorators.html#path_wrapper" class="internal-link" title="astroid.decorators.path_wrapper">decorators.path_wrapper</a><br />
     <span class="py-keyword">def</span> <span class="py-defname">infer_import_from</span>(self, context=None, asname=True):
     <a class="sourceLink" href="https://github.com/PyCQA/astroid/tree/v2.9.3/astroid/inference.py#L279">
       
@@ -681,7 +694,7 @@ depending on the condition.</p>
     
   </a>
   <div class="functionHeader">
-    @decorators.raise_if_nothing_inferred<br />
+    @<a href="astroid.decorators.html#raise_if_nothing_inferred" class="internal-link" title="astroid.decorators.raise_if_nothing_inferred">decorators.raise_if_nothing_inferred</a><br />
     <span class="py-keyword">def</span> <span class="py-defname">infer_index</span>(self, context=None):
     <a class="sourceLink" href="https://github.com/PyCQA/astroid/tree/v2.9.3/astroid/inference.py#L981">
       
@@ -747,7 +760,7 @@ depending on the condition.</p>
     
   </a>
   <div class="functionHeader">
-    @decorators.raise_if_nothing_inferred<br />
+    @<a href="astroid.decorators.html#raise_if_nothing_inferred" class="internal-link" title="astroid.decorators.raise_if_nothing_inferred">decorators.raise_if_nothing_inferred</a><br />
     <span class="py-keyword">def</span> <span class="py-defname">infer_sequence</span>(self, context=None):
     <a class="sourceLink" href="https://github.com/PyCQA/astroid/tree/v2.9.3/astroid/inference.py#L107">
       
@@ -796,7 +809,7 @@ handle each supported index type accordingly.</p>
     
   </a>
   <div class="functionHeader">
-    @decorators.raise_if_nothing_inferred<br />@decorators.path_wrapper<br />
+    @<a href="astroid.decorators.html#raise_if_nothing_inferred" class="internal-link" title="astroid.decorators.raise_if_nothing_inferred">decorators.raise_if_nothing_inferred</a><br />@<a href="astroid.decorators.html#path_wrapper" class="internal-link" title="astroid.decorators.path_wrapper">decorators.path_wrapper</a><br />
     <span class="py-keyword">def</span> <span class="py-defname">infer_unaryop</span>(self, context=None):
     <a class="sourceLink" href="https://github.com/PyCQA/astroid/tree/v2.9.3/astroid/inference.py#L550">
       
@@ -808,7 +821,7 @@ handle each supported index type accordingly.</p>
     
     <div>Infer what an UnaryOp should return when evaluated.</div>
   </div>
-</div><div class="basevariable">
+</div><div class="baseconstant">
   
   
   <a name="astroid.inference.COMPARE_OPS">
@@ -829,6 +842,37 @@ handle each supported index type accordingly.</p>
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    <table class="valueTable"><tr class="fieldStart"><td class="fieldName">Value</td></tr><tr><td><pre class="constant-value"><code>{<wbr></wbr><span class="rst-variable-quote">'</span><span class="rst-variable-string">==</span><span class="rst-variable-quote">'</span>: operator.eq,
+ <wbr></wbr><span class="rst-variable-quote">'</span><span class="rst-variable-string">!=</span><span class="rst-variable-quote">'</span>: operator.ne,
+ <wbr></wbr><span class="rst-variable-quote">'</span><span class="rst-variable-string">&lt;</span><span class="rst-variable-quote">'</span>: operator.lt,
+ <wbr></wbr><span class="rst-variable-quote">'</span><span class="rst-variable-string">&lt;=</span><span class="rst-variable-quote">'</span>: operator.le,
+ <wbr></wbr><span class="rst-variable-quote">'</span><span class="rst-variable-string">&gt;</span><span class="rst-variable-quote">'</span>: operator.gt,
+ <wbr></wbr><span class="rst-variable-quote">'</span><span class="rst-variable-string">&gt;=</span><span class="rst-variable-quote">'</span>: operator.ge,
+ <wbr></wbr><span class="rst-variable-quote">'</span><span class="rst-variable-string">in</span><span class="rst-variable-quote">'</span>: (lambda a, b: a in b),
+<span class="rst-variable-ellipsis">...</span></code></pre></td></tr></table>
+  </div>
+</div><div class="baseconstant">
+  
+  
+  <a name="astroid.inference.UNINFERABLE_OPS">
+    
+  </a>
+  <a name="UNINFERABLE_OPS">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-defname">UNINFERABLE_OPS</span>: <code>set[<wbr></wbr>str]</code> =
+    <a class="sourceLink" href="https://github.com/PyCQA/astroid/tree/v2.9.3/astroid/inference.py#L809">
+      
+      (source)
+    </a>
+  </div>
+  <div class="functionBody">
+    
+    
+    <div><p class="undocumented">Undocumented</p></div>
+    <table class="valueTable"><tr class="fieldStart"><td class="fieldName">Value</td></tr><tr><td><pre class="constant-value"><code>set([<wbr></wbr><span class="rst-variable-quote">'</span><span class="rst-variable-string">is</span><span class="rst-variable-quote">'</span>, <wbr></wbr><span class="rst-variable-quote">'</span><span class="rst-variable-string">is not</span><span class="rst-variable-quote">'</span>])</code></pre></td></tr></table>
   </div>
 </div><div class="basevariable">
   
@@ -851,28 +895,7 @@ handle each supported index type accordingly.</p>
     
     
     <div><p class="undocumented">Undocumented</p></div>
-  </div>
-</div><div class="basevariable">
-  
-  
-  <a name="astroid.inference.UNINFERABLE_OPS">
     
-  </a>
-  <a name="UNINFERABLE_OPS">
-    
-  </a>
-  <div class="functionHeader">
-    
-    <span class="py-defname">UNINFERABLE_OPS</span>: <code>set[<wbr></wbr>str]</code> =
-    <a class="sourceLink" href="https://github.com/PyCQA/astroid/tree/v2.9.3/astroid/inference.py#L809">
-      
-      (source)
-    </a>
-  </div>
-  <div class="functionBody">
-    
-    
-    <div><p class="undocumented">Undocumented</p></div>
   </div>
 </div><div class="basefunction private">
   
@@ -971,7 +994,7 @@ False</p>
 are False, return Uninferable:
 &gt;&gt;&gt; _do_compare([1, 3], '&lt;=', [2, 4])
 util.Uninferable</p>
-<table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">left_iter:</span><code>Iterable[<wbr></wbr>nodes.NodeNG]</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">op:</span><code>str</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">right_iter:</span><code>Iterable[<wbr></wbr>nodes.NodeNG]</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr class="fieldStart"><td class="fieldName" colspan="2">Returns</td></tr><tr><td class="fieldArgContainer"><code>(bool | type[util.Uninferable])</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr></table></div>
+<table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">left​_iter:</span><code>Iterable[<wbr></wbr><a href="astroid.nodes.NodeNG.html" class="internal-link" title="astroid.nodes.NodeNG">nodes.NodeNG</a>]</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">op:</span><code>str</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">right​_iter:</span><code>Iterable[<wbr></wbr><a href="astroid.nodes.NodeNG.html" class="internal-link" title="astroid.nodes.NodeNG">nodes.NodeNG</a>]</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr class="fieldStart"><td class="fieldName" colspan="2">Returns</td></tr><tr><td class="fieldArgContainer"><code>bool|type[<wbr></wbr><a href="astroid.util.Uninferable.html" class="internal-link" title="astroid.util.Uninferable">util.Uninferable</a>]</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr></table></div>
   </div>
 </div><div class="basefunction private">
   
@@ -1120,7 +1143,7 @@ is first tried and then left.__op__(right)</li>
 scope. This can be used for looking up in that function's
 scope, in case looking up in a lower scope for a particular
 name fails.<table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">node</span></td><td class="fieldArgDesc">A scope node.</td></tr><tr class="fieldStart"><td class="fieldName" colspan="2">Returns</td></tr><tr><td colspan="2"><tt class="rst-docutils literal">None</tt>, if no parent function scope was found,
-otherwise an instance of <a href="#system-message-1"><span class="rst-problematic" id="rst-problematic-1">:class:`astroid.nodes.scoped_nodes.Function`</span></a>,
+otherwise an instance of <code>astroid.nodes.scoped_nodes.Function</code>,
 which encloses the given node.</td></tr></table></div>
   </div>
 </div><div class="basefunction private">
@@ -1202,7 +1225,7 @@ operations, the only difference is the flow factory used.</p>
     
   </a>
   <div class="functionHeader">
-    @decorators.raise_if_nothing_inferred<br />@decorators.path_wrapper<br />
+    @<a href="astroid.decorators.html#raise_if_nothing_inferred" class="internal-link" title="astroid.decorators.raise_if_nothing_inferred">decorators.raise_if_nothing_inferred</a><br />@<a href="astroid.decorators.html#path_wrapper" class="internal-link" title="astroid.decorators.path_wrapper">decorators.path_wrapper</a><br />
     <span class="py-keyword">def</span> <span class="py-defname">_infer_boolop</span>(self, context=None):
     <a class="sourceLink" href="https://github.com/PyCQA/astroid/tree/v2.9.3/astroid/inference.py#L424">
       
@@ -1238,7 +1261,7 @@ node.</p>
   <div class="docstring functionBody">
     
     
-    <div>Chained comparison inference logic.<table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">context:</span><code>Optional[<wbr></wbr><a href="astroid.context.InferenceContext.html">InferenceContext</a>]</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr class="fieldStart"><td class="fieldName" colspan="2">Returns</td></tr><tr><td class="fieldArgContainer"><code>Any</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr></table></div>
+    <div>Chained comparison inference logic.<table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">context:</span><code>Optional[<wbr></wbr><a href="astroid.context.InferenceContext.html" class="internal-link" title="astroid.context.InferenceContext">InferenceContext</a>]</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr class="fieldStart"><td class="fieldName" colspan="2">Returns</td></tr><tr><td class="fieldArgContainer"><code>Any</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr></table></div>
   </div>
 </div><div class="basefunction private">
   
@@ -1414,7 +1437,7 @@ node.</p>
   <div class="docstring functionBody">
     
     
-    <div><p class="undocumented">Undocumented</p><table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">node:</span><code>nodes.NodeNG</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr class="fieldStart"><td class="fieldName" colspan="2">Returns</td></tr><tr><td class="fieldArgContainer"><code>Any</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr></table></div>
+    <div><p class="undocumented">Undocumented</p><table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">node:</span><code><a href="astroid.nodes.NodeNG.html" class="internal-link" title="astroid.nodes.NodeNG">nodes.NodeNG</a></code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr class="fieldStart"><td class="fieldName" colspan="2">Returns</td></tr><tr><td class="fieldArgContainer"><code>Any</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr></table></div>
   </div>
 </div><div class="basefunction private">
   
@@ -1443,9 +1466,9 @@ don't get through</p>
 <p>Note that both the key and the value are astroid nodes</p>
 <p>Fixes issue with DictUnpack causing duplicte keys
 in inferred Dict items</p>
-<table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">lhs_dict</span></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">rhs_dict</span></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">dict(nodes.NodeNG, nodes.NodeNG) lhs_dict</span></td><td class="fieldArgDesc">Dictionary to 'merge' nodes into</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">dict(nodes.NodeNG, nodes.NodeNG) rhs_dict</span></td><td class="fieldArgDesc">Dictionary with nodes to pull from</td></tr><tr class="fieldStart"><td class="fieldName" colspan="2">Returns</td></tr><tr><td colspan="2">merged dictionary of nodes</td></tr></table></div>
+<table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">lhs​_dict</span></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">rhs​_dict</span></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">dict(nodes​.​Node​NG, nodes​.​Node​NG) lhs_dict</span></td><td class="fieldArgDesc">Dictionary to 'merge' nodes into</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">dict(nodes​.​Node​NG, nodes​.​Node​NG) rhs_dict</span></td><td class="fieldArgDesc">Dictionary with nodes to pull from</td></tr><tr class="fieldStart"><td class="fieldName" colspan="2">Returns</td></tr><tr><td colspan="2">merged dictionary of nodes</td></tr></table></div>
   </div>
-</div><div class="basevariable private">
+</div><div class="baseconstant private">
   
   
   <a name="astroid.inference._SUBSCRIPT_SENTINEL">
@@ -1466,6 +1489,7 @@ in inferred Dict items</p>
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    <table class="valueTable"><tr class="fieldStart"><td class="fieldName">Value</td></tr><tr><td><pre class="constant-value"><code>object()</code></pre></td></tr></table>
   </div>
 </div>
 
@@ -1477,7 +1501,7 @@ in inferred Dict items</p>
   <div class="container">
     <a href="index.html">API Documentation</a> for <a href="https://github.com/PyCQA/astroid/" class="projecthome">astroid-v2.9.3</a>,
   generated by <a href="https://github.com/twisted/pydoctor/">pydoctor</a>
-    21.2.2 at 2022-01-12 04:22:11.
+    22.2.2.dev0 at 2022-03-04 05:57:12.
   </div>
 </footer>
 
