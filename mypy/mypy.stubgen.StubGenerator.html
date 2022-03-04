@@ -7,7 +7,7 @@
   <head>
     
     <title>mypy.stubgen.StubGenerator</title>
-    <meta name="generator" content="pydoctor 21.2.2"> 
+    <meta name="generator" content="pydoctor 22.2.2.dev0"> 
         
     </meta>
     <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
@@ -44,69 +44,82 @@
           Names
         </a>
 
-        <form action="search-results.html" id="search-box-container">
+        <div id="search-box-container">
           <div class="input-group">
-            <input id="search-box" name="search-query" placeholder="Search..." aria-label="Search" minlength="2" class="form-control" />
+            <input id="search-box" type="search" name="search-query" placeholder="Search..." aria-label="Search" minlength="2" class="form-control" autocomplete="off" />
+            
             <span class="input-group-btn">
-              <button class="btn btn-default" type="submit" title="Search"><img src="fonts/search.svg" alt="Search!" /></button>
-              <a class="btn btn-default" id="search-help-button" title="Help" onclick="toggleSearchHelpText()"><img src="fonts/info.svg" alt="Help!" /></a>
+              <a style="display: none;" class="btn btn-default" id="search-clear-button" title="Clear" onclick="clearSearch()"><img src="fonts/x-circle.svg" alt="Clear" /></a>
+              <a class="btn btn-default" id="search-help-button" title="Help" onclick="toggleSearchHelpText()"><img src="fonts/info.svg" alt="Help" /></a>
             </span>
           </div>
-        </form>
+        </div>
 
-        <div class="rst-admonition hint" id="search-help-box">
+      </div>
+
+      <div id="search-results-container" style="display: none;">
+        <div>
+          <span class="label label-default" id="search-docstrings-button">
+            <a title="Search in docstrings" onclick="toggleSearchInDocstrings()">search in docstrings</a></span>
+        </div>
+
+        <noscript>
+            <h1>Cannot search: JavaScript is not supported/enabled in your browser.</h1>
+        </noscript>
+
+        <div class="hint" id="search-help-box">
           <p class="rst-last">
       
             Search bar offers the following options:
             <ul>   
                 <li>
                   <strong>Term presence.</strong> The below example searches for documents that 
-                    must contain “foo”, might contain “bar” and must not contain “baz”:
-                  <br /> <code>'+foo bar -baz'</code>
+                    must contain “foo”, might contain “bar” and must not contain “baz”: <code>+foo bar -baz</code>
                 </li> 
 
                 <li>
-                  <strong>Wildcards.</strong> The below example searches for documents with words beginning with “foo”:
-                  <br /> <code>'foo*'</code>
+                  <strong>Wildcards.</strong> The below example searches for documents with words beginning with “foo”: <code>foo*</code>
                 </li> 
 
                 <li>
-                  <strong>Search in specific fields.</strong> The following search matches all documents 
-                  that contains "foo" in their full dotted name and with “bar” in any field:
-                  <br /> <code>'+fullName:*foo* +bar'</code>
+                  <strong>Search in specific fields.</strong> The following search matches all objects 
+                  in "twisted.mail" that matches “search”: <code>+qname:twisted.mail.* +search</code>
 
                   <p>
-                    Possible fields: 'name', 'docstring', 'fullName'.
+                    Possible fields: 'name', 'qname' (fully qualified name), 'docstring', and 'kind'.
+                    Last two fields are only applicable if "search in docstrings" is enabled.
                   </p>
                 </li>
 
                 <li>
                   <strong>Fuzzy matches.</strong> The following search matches all documents 
-                  that have a word within 1 edit distance of “foo”:
-                  <br /> <code>'foo~1'</code>
+                  that have a word within 1 edit distance of “foo”: <code>foo~1</code>
                 </li>
             </ul>
 
           </p>
         </div>
 
-      </div>
+        <div id="search-status"> </div>
+        
+        <div class="warning" id="search-warn-box" style="display: none;">
+          <p class="rst-last"><span id="search-warn"></span></p>
+        </div>
 
+        <table id="search-results">
+          <!-- Filled dynamically by JS -->
+        </table>
+        
+        <div style="margin-top: 8px;">
+          <p>Results provided by <a href="https://lunrjs.com">Lunr.js</a></p>
+        </div>
+      </div>
 
     </div>
   </div>
 
-  <script>
- 
-    function toggleSearchHelpText() {
-        document.body.classList.toggle("search-help-hidden");
-    }
-    // Init search and help text
-    document.getElementById('search-box-container').style.display = 'block';
-    document.getElementById('search-help-box').style.display = 'block';
-    document.body.classList.add("search-help-hidden");
-
-  </script>
+  <script src="ajax.js" type="text/javascript"></script>
+  <script src="search.js" type="text/javascript"></script>
 
 </nav>
 
@@ -115,7 +128,7 @@
     <div class="container">
 
       <div class="page-header">
-        <h1 class="class"><code><code><a href="mypy.html">mypy</a></code><wbr></wbr>.<code><a href="mypy.stubgen.html">stubgen</a></code><wbr></wbr>.<code><a href="mypy.stubgen.StubGenerator.html">StubGenerator</a></code></code></h1>
+        <h1 class="class"><code><code><a href="index.html" class="internal-link">mypy</a></code><wbr></wbr>.<code><a href="mypy.stubgen.html" class="internal-link" title="mypy.stubgen">stubgen</a></code><wbr></wbr>.<code><a href="mypy.stubgen.StubGenerator.html" class="internal-link" title="mypy.stubgen.StubGenerator">StubGenerator</a></code></code></h1>
         <div id="showPrivate">
           <button class="btn btn-link" onclick="togglePrivate()">Toggle Private API</button>
         </div>
@@ -126,7 +139,7 @@
       </div>
 
       <div class="extrasDocstring">
-        <p><code><span class="py-keyword">class</span> <span class="py-defname">StubGenerator</span>(<a href="mypy.traverser.TraverserVisitor.html" title="mypy.traverser.TraverserVisitor">mypy.traverser.TraverserVisitor</a>): <a href="https://github.com/python/mypy/tree/v0.930/mypy/stubgen.py#L526" class="sourceLink">(source)</a></code></p>
+        <p><code><span class="py-keyword">class</span> <span class="py-defname">StubGenerator</span>(<a href="mypy.traverser.TraverserVisitor.html" class="internal-link" title="mypy.traverser.TraverserVisitor">mypy.traverser.TraverserVisitor</a>): <a href="https://github.com/python/mypy/tree/v0.930/mypy/stubgen.py#L526" class="sourceLink">(source)</a></code></p>
         <p><a href="classIndex.html#mypy.stubgen.StubGenerator">View In Hierarchy</a></p>
       </div>
 
@@ -141,298 +154,298 @@
   <tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#__init__">__init__</a></code></td>
+    <td><code><a href="#__init__" class="internal-link" title="mypy.stubgen.StubGenerator.__init__">__init__</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#add">add</a></code></td>
-    <td><span>Add text to generated stub.</span></td>
+    <td><code><a href="#add" class="internal-link" title="mypy.stubgen.StubGenerator.add">add</a></code></td>
+    <td>Add text to generated stub.</td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#add_abc_import">add_abc_import</a></code></td>
-    <td><span>Add a name to be imported from collections.abc, unless it's imported already.</span></td>
+    <td><code><a href="#add_abc_import" class="internal-link" title="mypy.stubgen.StubGenerator.add_abc_import">add​_abc​_import</a></code></td>
+    <td>Add a name to be imported from collections.abc, unless it's imported already.</td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#add_coroutine_decorator">add_coroutine_decorator</a></code></td>
+    <td><code><a href="#add_coroutine_decorator" class="internal-link" title="mypy.stubgen.StubGenerator.add_coroutine_decorator">add​_coroutine​_decorator</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#add_decorator">add_decorator</a></code></td>
+    <td><code><a href="#add_decorator" class="internal-link" title="mypy.stubgen.StubGenerator.add_decorator">add​_decorator</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#add_import_line">add_import_line</a></code></td>
-    <td><span>Add a line of text to the import section, unless it's already there.</span></td>
+    <td><code><a href="#add_import_line" class="internal-link" title="mypy.stubgen.StubGenerator.add_import_line">add​_import​_line</a></code></td>
+    <td>Add a line of text to the import section, unless it's already there.</td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#add_typing_import">add_typing_import</a></code></td>
-    <td><span>Add a name to be imported from typing, unless it's imported already.</span></td>
+    <td><code><a href="#add_typing_import" class="internal-link" title="mypy.stubgen.StubGenerator.add_typing_import">add​_typing​_import</a></code></td>
+    <td>Add a name to be imported from typing, unless it's imported already.</td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#clear_decorators">clear_decorators</a></code></td>
+    <td><code><a href="#clear_decorators" class="internal-link" title="mypy.stubgen.StubGenerator.clear_decorators">clear​_decorators</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#get_base_types">get_base_types</a></code></td>
-    <td><span>Get list of base classes for a class.</span></td>
+    <td><code><a href="#get_base_types" class="internal-link" title="mypy.stubgen.StubGenerator.get_base_types">get​_base​_types</a></code></td>
+    <td>Get list of base classes for a class.</td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#get_init">get_init</a></code></td>
-    <td><span>Return initializer for a variable.</span></td>
+    <td><code><a href="#get_init" class="internal-link" title="mypy.stubgen.StubGenerator.get_init">get​_init</a></code></td>
+    <td>Return initializer for a variable.</td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#get_str_type_of_node">get_str_type_of_node</a></code></td>
+    <td><code><a href="#get_str_type_of_node" class="internal-link" title="mypy.stubgen.StubGenerator.get_str_type_of_node">get​_str​_type​_of​_node</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#is_alias_expression">is_alias_expression</a></code></td>
-    <td><span>Return True for things that look like target for an alias.</span></td>
+    <td><code><a href="#is_alias_expression" class="internal-link" title="mypy.stubgen.StubGenerator.is_alias_expression">is​_alias​_expression</a></code></td>
+    <td>Return True for things that look like target for an alias.</td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#is_namedtuple">is_namedtuple</a></code></td>
+    <td><code><a href="#is_namedtuple" class="internal-link" title="mypy.stubgen.StubGenerator.is_namedtuple">is​_namedtuple</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#is_none_expr">is_none_expr</a></code></td>
+    <td><code><a href="#is_none_expr" class="internal-link" title="mypy.stubgen.StubGenerator.is_none_expr">is​_none​_expr</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#is_not_in_all">is_not_in_all</a></code></td>
+    <td><code><a href="#is_not_in_all" class="internal-link" title="mypy.stubgen.StubGenerator.is_not_in_all">is​_not​_in​_all</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#is_private_member">is_private_member</a></code></td>
+    <td><code><a href="#is_private_member" class="internal-link" title="mypy.stubgen.StubGenerator.is_private_member">is​_private​_member</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#is_private_name">is_private_name</a></code></td>
+    <td><code><a href="#is_private_name" class="internal-link" title="mypy.stubgen.StubGenerator.is_private_name">is​_private​_name</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#is_recorded_name">is_recorded_name</a></code></td>
-    <td><span>Has this name been recorded previously?</span></td>
+    <td><code><a href="#is_recorded_name" class="internal-link" title="mypy.stubgen.StubGenerator.is_recorded_name">is​_recorded​_name</a></code></td>
+    <td>Has this name been recorded previously?</td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#is_top_level">is_top_level</a></code></td>
-    <td><span>Are we processing the top level of a file?</span></td>
+    <td><code><a href="#is_top_level" class="internal-link" title="mypy.stubgen.StubGenerator.is_top_level">is​_top​_level</a></code></td>
+    <td>Are we processing the top level of a file?</td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#output">output</a></code></td>
-    <td><span>Return the text for the stub.</span></td>
+    <td><code><a href="#output" class="internal-link" title="mypy.stubgen.StubGenerator.output">output</a></code></td>
+    <td>Return the text for the stub.</td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#print_annotation">print_annotation</a></code></td>
+    <td><code><a href="#print_annotation" class="internal-link" title="mypy.stubgen.StubGenerator.print_annotation">print​_annotation</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#process_decorator">process_decorator</a></code></td>
-    <td><span>Process a series of decorators.</span></td>
+    <td><code><a href="#process_decorator" class="internal-link" title="mypy.stubgen.StubGenerator.process_decorator">process​_decorator</a></code></td>
+    <td>Process a series of decorators.</td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#process_member_expr_decorator">process_member_expr_decorator</a></code></td>
-    <td><span>Process a function decorator of form @foo.bar.</span></td>
+    <td><code><a href="#process_member_expr_decorator" class="internal-link" title="mypy.stubgen.StubGenerator.process_member_expr_decorator">process​_member​_expr​_decorator</a></code></td>
+    <td>Process a function decorator of form @foo.bar.</td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#process_name_expr_decorator">process_name_expr_decorator</a></code></td>
-    <td><span>Process a function decorator of form @foo.</span></td>
+    <td><code><a href="#process_name_expr_decorator" class="internal-link" title="mypy.stubgen.StubGenerator.process_name_expr_decorator">process​_name​_expr​_decorator</a></code></td>
+    <td>Process a function decorator of form @foo.</td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#process_namedtuple">process_namedtuple</a></code></td>
+    <td><code><a href="#process_namedtuple" class="internal-link" title="mypy.stubgen.StubGenerator.process_namedtuple">process​_namedtuple</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#process_typealias">process_typealias</a></code></td>
+    <td><code><a href="#process_typealias" class="internal-link" title="mypy.stubgen.StubGenerator.process_typealias">process​_typealias</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#record_name">record_name</a></code></td>
-    <td><span>Mark a name as defined.</span></td>
+    <td><code><a href="#record_name" class="internal-link" title="mypy.stubgen.StubGenerator.record_name">record​_name</a></code></td>
+    <td>Mark a name as defined.</td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#refers_to_fullname">refers_to_fullname</a></code></td>
+    <td><code><a href="#refers_to_fullname" class="internal-link" title="mypy.stubgen.StubGenerator.refers_to_fullname">refers​_to​_fullname</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#typing_name">typing_name</a></code></td>
+    <td><code><a href="#typing_name" class="internal-link" title="mypy.stubgen.StubGenerator.typing_name">typing​_name</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#visit_assignment_stmt">visit_assignment_stmt</a></code></td>
+    <td><code><a href="#visit_assignment_stmt" class="internal-link" title="mypy.stubgen.StubGenerator.visit_assignment_stmt">visit​_assignment​_stmt</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#visit_block">visit_block</a></code></td>
+    <td><code><a href="#visit_block" class="internal-link" title="mypy.stubgen.StubGenerator.visit_block">visit​_block</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#visit_class_def">visit_class_def</a></code></td>
+    <td><code><a href="#visit_class_def" class="internal-link" title="mypy.stubgen.StubGenerator.visit_class_def">visit​_class​_def</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#visit_decorator">visit_decorator</a></code></td>
+    <td><code><a href="#visit_decorator" class="internal-link" title="mypy.stubgen.StubGenerator.visit_decorator">visit​_decorator</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#visit_func_def">visit_func_def</a></code></td>
+    <td><code><a href="#visit_func_def" class="internal-link" title="mypy.stubgen.StubGenerator.visit_func_def">visit​_func​_def</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#visit_if_stmt">visit_if_stmt</a></code></td>
+    <td><code><a href="#visit_if_stmt" class="internal-link" title="mypy.stubgen.StubGenerator.visit_if_stmt">visit​_if​_stmt</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#visit_import">visit_import</a></code></td>
+    <td><code><a href="#visit_import" class="internal-link" title="mypy.stubgen.StubGenerator.visit_import">visit​_import</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#visit_import_all">visit_import_all</a></code></td>
+    <td><code><a href="#visit_import_all" class="internal-link" title="mypy.stubgen.StubGenerator.visit_import_all">visit​_import​_all</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#visit_import_from">visit_import_from</a></code></td>
+    <td><code><a href="#visit_import_from" class="internal-link" title="mypy.stubgen.StubGenerator.visit_import_from">visit​_import​_from</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#visit_mypy_file">visit_mypy_file</a></code></td>
+    <td><code><a href="#visit_mypy_file" class="internal-link" title="mypy.stubgen.StubGenerator.visit_mypy_file">visit​_mypy​_file</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#visit_overloaded_func_def">visit_overloaded_func_def</a></code></td>
-    <td><span>@property with setters and getters, or @overload chain</span></td>
+    <td><code><a href="#visit_overloaded_func_def" class="internal-link" title="mypy.stubgen.StubGenerator.visit_overloaded_func_def">visit​_overloaded​_func​_def</a></code></td>
+    <td>@property with setters and getters, or @overload chain</td>
   </tr><tr class="instancevariable">
     
     <td>Instance Variable</td>
-    <td><code><a href="#analyzed">analyzed</a></code></td>
-    <td><span class="undocumented">Undocumented</span></td>
-  </tr><tr class="instancevariable">
-    
-    <td>Instance Variable</td>
-    <td><code><a href="#defined_names">defined_names</a></code></td>
+    <td><code><a href="#analyzed" class="internal-link" title="mypy.stubgen.StubGenerator.analyzed">analyzed</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="instancevariable">
     
     <td>Instance Variable</td>
-    <td><code><a href="#export_less">export_less</a></code></td>
+    <td><code><a href="#defined_names" class="internal-link" title="mypy.stubgen.StubGenerator.defined_names">defined​_names</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="instancevariable">
     
     <td>Instance Variable</td>
-    <td><code><a href="#import_tracker">import_tracker</a></code></td>
+    <td><code><a href="#export_less" class="internal-link" title="mypy.stubgen.StubGenerator.export_less">export​_less</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="instancevariable">
     
     <td>Instance Variable</td>
-    <td><code><a href="#method_names">method_names</a></code></td>
+    <td><code><a href="#import_tracker" class="internal-link" title="mypy.stubgen.StubGenerator.import_tracker">import​_tracker</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="instancevariable">
     
     <td>Instance Variable</td>
-    <td><code><a href="#module">module</a></code></td>
+    <td><code><a href="#method_names" class="internal-link" title="mypy.stubgen.StubGenerator.method_names">method​_names</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="instancevariable">
     
     <td>Instance Variable</td>
-    <td><code><a href="#path">path</a></code></td>
+    <td><code><a href="#module" class="internal-link" title="mypy.stubgen.StubGenerator.module">module</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="instancevariable">
     
     <td>Instance Variable</td>
-    <td><code><a href="#referenced_names">referenced_names</a></code></td>
+    <td><code><a href="#path" class="internal-link" title="mypy.stubgen.StubGenerator.path">path</a></code></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="instancevariable">
+    
+    <td>Instance Variable</td>
+    <td><code><a href="#referenced_names" class="internal-link" title="mypy.stubgen.StubGenerator.referenced_names">referenced​_names</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="instancevariable private">
     
     <td>Instance Variable</td>
-    <td><code><a href="#_all_">_all_</a></code></td>
+    <td><code><a href="#_all_" class="internal-link" title="mypy.stubgen.StubGenerator._all_">_all_</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="instancevariable private">
     
     <td>Instance Variable</td>
-    <td><code><a href="#_decorators">_decorators</a></code></td>
+    <td><code><a href="#_decorators" class="internal-link" title="mypy.stubgen.StubGenerator._decorators">_decorators</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="instancevariable private">
     
     <td>Instance Variable</td>
-    <td><code><a href="#_import_lines">_import_lines</a></code></td>
+    <td><code><a href="#_import_lines" class="internal-link" title="mypy.stubgen.StubGenerator._import_lines">_import​_lines</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="instancevariable private">
     
     <td>Instance Variable</td>
-    <td><code><a href="#_include_private">_include_private</a></code></td>
+    <td><code><a href="#_include_private" class="internal-link" title="mypy.stubgen.StubGenerator._include_private">_include​_private</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="instancevariable private">
     
     <td>Instance Variable</td>
-    <td><code><a href="#_indent">_indent</a></code></td>
+    <td><code><a href="#_indent" class="internal-link" title="mypy.stubgen.StubGenerator._indent">_indent</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="instancevariable private">
     
     <td>Instance Variable</td>
-    <td><code><a href="#_output">_output</a></code></td>
+    <td><code><a href="#_output" class="internal-link" title="mypy.stubgen.StubGenerator._output">_output</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="instancevariable private">
     
     <td>Instance Variable</td>
-    <td><code><a href="#_pyversion">_pyversion</a></code></td>
+    <td><code><a href="#_pyversion" class="internal-link" title="mypy.stubgen.StubGenerator._pyversion">_pyversion</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="instancevariable private">
     
     <td>Instance Variable</td>
-    <td><code><a href="#_state">_state</a></code></td>
+    <td><code><a href="#_state" class="internal-link" title="mypy.stubgen.StubGenerator._state">_state</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="instancevariable private">
     
     <td>Instance Variable</td>
-    <td><code><a href="#_toplevel_names">_toplevel_names</a></code></td>
+    <td><code><a href="#_toplevel_names" class="internal-link" title="mypy.stubgen.StubGenerator._toplevel_names">_toplevel​_names</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="instancevariable private">
     
     <td>Instance Variable</td>
-    <td><code><a href="#_vars">_vars</a></code></td>
+    <td><code><a href="#_vars" class="internal-link" title="mypy.stubgen.StubGenerator._vars">_vars</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr>
 </table>
         
           <p class="inheritedFrom">
-            Inherited from <code><a href="mypy.traverser.TraverserVisitor.html">TraverserVisitor</a></code>:
+            Inherited from <code><a href="mypy.traverser.TraverserVisitor.html" class="internal-link" title="mypy.traverser.TraverserVisitor">TraverserVisitor</a></code>:
           </p>
           <table class="children sortable" id="id596">
   
@@ -440,202 +453,202 @@
   <tr class="basemethod">
     
     <td>Method</td>
-    <td><code><a href="mypy.traverser.TraverserVisitor.html#visit_assert_stmt">visit_assert_stmt</a></code></td>
+    <td><code><a href="mypy.traverser.TraverserVisitor.html#visit_assert_stmt" class="internal-link" title="mypy.traverser.TraverserVisitor.visit_assert_stmt">visit​_assert​_stmt</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="basemethod">
     
     <td>Method</td>
-    <td><code><a href="mypy.traverser.TraverserVisitor.html#visit_assignment_expr">visit_assignment_expr</a></code></td>
+    <td><code><a href="mypy.traverser.TraverserVisitor.html#visit_assignment_expr" class="internal-link" title="mypy.traverser.TraverserVisitor.visit_assignment_expr">visit​_assignment​_expr</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="basemethod">
     
     <td>Method</td>
-    <td><code><a href="mypy.traverser.TraverserVisitor.html#visit_await_expr">visit_await_expr</a></code></td>
+    <td><code><a href="mypy.traverser.TraverserVisitor.html#visit_await_expr" class="internal-link" title="mypy.traverser.TraverserVisitor.visit_await_expr">visit​_await​_expr</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="basemethod">
     
     <td>Method</td>
-    <td><code><a href="mypy.traverser.TraverserVisitor.html#visit_backquote_expr">visit_backquote_expr</a></code></td>
+    <td><code><a href="mypy.traverser.TraverserVisitor.html#visit_backquote_expr" class="internal-link" title="mypy.traverser.TraverserVisitor.visit_backquote_expr">visit​_backquote​_expr</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="basemethod">
     
     <td>Method</td>
-    <td><code><a href="mypy.traverser.TraverserVisitor.html#visit_call_expr">visit_call_expr</a></code></td>
+    <td><code><a href="mypy.traverser.TraverserVisitor.html#visit_call_expr" class="internal-link" title="mypy.traverser.TraverserVisitor.visit_call_expr">visit​_call​_expr</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="basemethod">
     
     <td>Method</td>
-    <td><code><a href="mypy.traverser.TraverserVisitor.html#visit_cast_expr">visit_cast_expr</a></code></td>
+    <td><code><a href="mypy.traverser.TraverserVisitor.html#visit_cast_expr" class="internal-link" title="mypy.traverser.TraverserVisitor.visit_cast_expr">visit​_cast​_expr</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="basemethod">
     
     <td>Method</td>
-    <td><code><a href="mypy.traverser.TraverserVisitor.html#visit_comparison_expr">visit_comparison_expr</a></code></td>
+    <td><code><a href="mypy.traverser.TraverserVisitor.html#visit_comparison_expr" class="internal-link" title="mypy.traverser.TraverserVisitor.visit_comparison_expr">visit​_comparison​_expr</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="basemethod">
     
     <td>Method</td>
-    <td><code><a href="mypy.traverser.TraverserVisitor.html#visit_conditional_expr">visit_conditional_expr</a></code></td>
+    <td><code><a href="mypy.traverser.TraverserVisitor.html#visit_conditional_expr" class="internal-link" title="mypy.traverser.TraverserVisitor.visit_conditional_expr">visit​_conditional​_expr</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="basemethod">
     
     <td>Method</td>
-    <td><code><a href="mypy.traverser.TraverserVisitor.html#visit_del_stmt">visit_del_stmt</a></code></td>
+    <td><code><a href="mypy.traverser.TraverserVisitor.html#visit_del_stmt" class="internal-link" title="mypy.traverser.TraverserVisitor.visit_del_stmt">visit​_del​_stmt</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="basemethod">
     
     <td>Method</td>
-    <td><code><a href="mypy.traverser.TraverserVisitor.html#visit_dict_expr">visit_dict_expr</a></code></td>
+    <td><code><a href="mypy.traverser.TraverserVisitor.html#visit_dict_expr" class="internal-link" title="mypy.traverser.TraverserVisitor.visit_dict_expr">visit​_dict​_expr</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="basemethod">
     
     <td>Method</td>
-    <td><code><a href="mypy.traverser.TraverserVisitor.html#visit_dictionary_comprehension">visit_dictionary_comprehension</a></code></td>
+    <td><code><a href="mypy.traverser.TraverserVisitor.html#visit_dictionary_comprehension" class="internal-link" title="mypy.traverser.TraverserVisitor.visit_dictionary_comprehension">visit​_dictionary​_comprehension</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="basemethod">
     
     <td>Method</td>
-    <td><code><a href="mypy.traverser.TraverserVisitor.html#visit_exec_stmt">visit_exec_stmt</a></code></td>
+    <td><code><a href="mypy.traverser.TraverserVisitor.html#visit_exec_stmt" class="internal-link" title="mypy.traverser.TraverserVisitor.visit_exec_stmt">visit​_exec​_stmt</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="basemethod">
     
     <td>Method</td>
-    <td><code><a href="mypy.traverser.TraverserVisitor.html#visit_expression_stmt">visit_expression_stmt</a></code></td>
+    <td><code><a href="mypy.traverser.TraverserVisitor.html#visit_expression_stmt" class="internal-link" title="mypy.traverser.TraverserVisitor.visit_expression_stmt">visit​_expression​_stmt</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="basemethod">
     
     <td>Method</td>
-    <td><code><a href="mypy.traverser.TraverserVisitor.html#visit_for_stmt">visit_for_stmt</a></code></td>
+    <td><code><a href="mypy.traverser.TraverserVisitor.html#visit_for_stmt" class="internal-link" title="mypy.traverser.TraverserVisitor.visit_for_stmt">visit​_for​_stmt</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="basemethod">
     
     <td>Method</td>
-    <td><code><a href="mypy.traverser.TraverserVisitor.html#visit_func">visit_func</a></code></td>
+    <td><code><a href="mypy.traverser.TraverserVisitor.html#visit_func" class="internal-link" title="mypy.traverser.TraverserVisitor.visit_func">visit​_func</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="basemethod">
     
     <td>Method</td>
-    <td><code><a href="mypy.traverser.TraverserVisitor.html#visit_generator_expr">visit_generator_expr</a></code></td>
+    <td><code><a href="mypy.traverser.TraverserVisitor.html#visit_generator_expr" class="internal-link" title="mypy.traverser.TraverserVisitor.visit_generator_expr">visit​_generator​_expr</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="basemethod">
     
     <td>Method</td>
-    <td><code><a href="mypy.traverser.TraverserVisitor.html#visit_index_expr">visit_index_expr</a></code></td>
+    <td><code><a href="mypy.traverser.TraverserVisitor.html#visit_index_expr" class="internal-link" title="mypy.traverser.TraverserVisitor.visit_index_expr">visit​_index​_expr</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="basemethod">
     
     <td>Method</td>
-    <td><code><a href="mypy.traverser.TraverserVisitor.html#visit_lambda_expr">visit_lambda_expr</a></code></td>
+    <td><code><a href="mypy.traverser.TraverserVisitor.html#visit_lambda_expr" class="internal-link" title="mypy.traverser.TraverserVisitor.visit_lambda_expr">visit​_lambda​_expr</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="basemethod">
     
     <td>Method</td>
-    <td><code><a href="mypy.traverser.TraverserVisitor.html#visit_list_comprehension">visit_list_comprehension</a></code></td>
+    <td><code><a href="mypy.traverser.TraverserVisitor.html#visit_list_comprehension" class="internal-link" title="mypy.traverser.TraverserVisitor.visit_list_comprehension">visit​_list​_comprehension</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="basemethod">
     
     <td>Method</td>
-    <td><code><a href="mypy.traverser.TraverserVisitor.html#visit_list_expr">visit_list_expr</a></code></td>
+    <td><code><a href="mypy.traverser.TraverserVisitor.html#visit_list_expr" class="internal-link" title="mypy.traverser.TraverserVisitor.visit_list_expr">visit​_list​_expr</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="basemethod">
     
     <td>Method</td>
-    <td><code><a href="mypy.traverser.TraverserVisitor.html#visit_member_expr">visit_member_expr</a></code></td>
+    <td><code><a href="mypy.traverser.TraverserVisitor.html#visit_member_expr" class="internal-link" title="mypy.traverser.TraverserVisitor.visit_member_expr">visit​_member​_expr</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="basemethod">
     
     <td>Method</td>
-    <td><code><a href="mypy.traverser.TraverserVisitor.html#visit_op_expr">visit_op_expr</a></code></td>
+    <td><code><a href="mypy.traverser.TraverserVisitor.html#visit_op_expr" class="internal-link" title="mypy.traverser.TraverserVisitor.visit_op_expr">visit​_op​_expr</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="basemethod">
     
     <td>Method</td>
-    <td><code><a href="mypy.traverser.TraverserVisitor.html#visit_operator_assignment_stmt">visit_operator_assignment_stmt</a></code></td>
+    <td><code><a href="mypy.traverser.TraverserVisitor.html#visit_operator_assignment_stmt" class="internal-link" title="mypy.traverser.TraverserVisitor.visit_operator_assignment_stmt">visit​_operator​_assignment​_stmt</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="basemethod">
     
     <td>Method</td>
-    <td><code><a href="mypy.traverser.TraverserVisitor.html#visit_print_stmt">visit_print_stmt</a></code></td>
+    <td><code><a href="mypy.traverser.TraverserVisitor.html#visit_print_stmt" class="internal-link" title="mypy.traverser.TraverserVisitor.visit_print_stmt">visit​_print​_stmt</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="basemethod">
     
     <td>Method</td>
-    <td><code><a href="mypy.traverser.TraverserVisitor.html#visit_raise_stmt">visit_raise_stmt</a></code></td>
+    <td><code><a href="mypy.traverser.TraverserVisitor.html#visit_raise_stmt" class="internal-link" title="mypy.traverser.TraverserVisitor.visit_raise_stmt">visit​_raise​_stmt</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="basemethod">
     
     <td>Method</td>
-    <td><code><a href="mypy.traverser.TraverserVisitor.html#visit_return_stmt">visit_return_stmt</a></code></td>
+    <td><code><a href="mypy.traverser.TraverserVisitor.html#visit_return_stmt" class="internal-link" title="mypy.traverser.TraverserVisitor.visit_return_stmt">visit​_return​_stmt</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="basemethod">
     
     <td>Method</td>
-    <td><code><a href="mypy.traverser.TraverserVisitor.html#visit_reveal_expr">visit_reveal_expr</a></code></td>
+    <td><code><a href="mypy.traverser.TraverserVisitor.html#visit_reveal_expr" class="internal-link" title="mypy.traverser.TraverserVisitor.visit_reveal_expr">visit​_reveal​_expr</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="basemethod">
     
     <td>Method</td>
-    <td><code><a href="mypy.traverser.TraverserVisitor.html#visit_set_comprehension">visit_set_comprehension</a></code></td>
+    <td><code><a href="mypy.traverser.TraverserVisitor.html#visit_set_comprehension" class="internal-link" title="mypy.traverser.TraverserVisitor.visit_set_comprehension">visit​_set​_comprehension</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="basemethod">
     
     <td>Method</td>
-    <td><code><a href="mypy.traverser.TraverserVisitor.html#visit_set_expr">visit_set_expr</a></code></td>
+    <td><code><a href="mypy.traverser.TraverserVisitor.html#visit_set_expr" class="internal-link" title="mypy.traverser.TraverserVisitor.visit_set_expr">visit​_set​_expr</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="basemethod">
     
     <td>Method</td>
-    <td><code><a href="mypy.traverser.TraverserVisitor.html#visit_slice_expr">visit_slice_expr</a></code></td>
+    <td><code><a href="mypy.traverser.TraverserVisitor.html#visit_slice_expr" class="internal-link" title="mypy.traverser.TraverserVisitor.visit_slice_expr">visit​_slice​_expr</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="basemethod">
     
     <td>Method</td>
-    <td><code><a href="mypy.traverser.TraverserVisitor.html#visit_star_expr">visit_star_expr</a></code></td>
+    <td><code><a href="mypy.traverser.TraverserVisitor.html#visit_star_expr" class="internal-link" title="mypy.traverser.TraverserVisitor.visit_star_expr">visit​_star​_expr</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="basemethod">
     
     <td>Method</td>
-    <td><code><a href="mypy.traverser.TraverserVisitor.html#visit_super_expr">visit_super_expr</a></code></td>
+    <td><code><a href="mypy.traverser.TraverserVisitor.html#visit_super_expr" class="internal-link" title="mypy.traverser.TraverserVisitor.visit_super_expr">visit​_super​_expr</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="basemethod">
     
     <td>Method</td>
-    <td><code><a href="mypy.traverser.TraverserVisitor.html#visit_try_stmt">visit_try_stmt</a></code></td>
+    <td><code><a href="mypy.traverser.TraverserVisitor.html#visit_try_stmt" class="internal-link" title="mypy.traverser.TraverserVisitor.visit_try_stmt">visit​_try​_stmt</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="basemethod">
     
     <td>Method</td>
-    <td><code><a href="mypy.traverser.TraverserVisitor.html#visit_tuple_expr">visit_tuple_expr</a></code></td>
+    <td><code><a href="mypy.traverser.TraverserVisitor.html#visit_tuple_expr" class="internal-link" title="mypy.traverser.TraverserVisitor.visit_tuple_expr">visit​_tuple​_expr</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="basemethod">
     
     <td>Method</td>
-    <td><code><a href="mypy.traverser.TraverserVisitor.html#visit_type_application">visit_type_application</a></code></td>
+    <td><code><a href="mypy.traverser.TraverserVisitor.html#visit_type_application" class="internal-link" title="mypy.traverser.TraverserVisitor.visit_type_application">visit​_type​_application</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="basemethod">
     
     <td>Method</td>
-    <td><code><a href="mypy.traverser.TraverserVisitor.html#visit_unary_expr">visit_unary_expr</a></code></td>
+    <td><code><a href="mypy.traverser.TraverserVisitor.html#visit_unary_expr" class="internal-link" title="mypy.traverser.TraverserVisitor.visit_unary_expr">visit​_unary​_expr</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="basemethod">
     
     <td>Method</td>
-    <td><code><a href="mypy.traverser.TraverserVisitor.html#visit_while_stmt">visit_while_stmt</a></code></td>
+    <td><code><a href="mypy.traverser.TraverserVisitor.html#visit_while_stmt" class="internal-link" title="mypy.traverser.TraverserVisitor.visit_while_stmt">visit​_while​_stmt</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="basemethod">
     
     <td>Method</td>
-    <td><code><a href="mypy.traverser.TraverserVisitor.html#visit_with_stmt">visit_with_stmt</a></code></td>
+    <td><code><a href="mypy.traverser.TraverserVisitor.html#visit_with_stmt" class="internal-link" title="mypy.traverser.TraverserVisitor.visit_with_stmt">visit​_with​_stmt</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="basemethod">
     
     <td>Method</td>
-    <td><code><a href="mypy.traverser.TraverserVisitor.html#visit_yield_expr">visit_yield_expr</a></code></td>
+    <td><code><a href="mypy.traverser.TraverserVisitor.html#visit_yield_expr" class="internal-link" title="mypy.traverser.TraverserVisitor.visit_yield_expr">visit​_yield​_expr</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="basemethod">
     
     <td>Method</td>
-    <td><code><a href="mypy.traverser.TraverserVisitor.html#visit_yield_from_expr">visit_yield_from_expr</a></code></td>
+    <td><code><a href="mypy.traverser.TraverserVisitor.html#visit_yield_from_expr" class="internal-link" title="mypy.traverser.TraverserVisitor.visit_yield_from_expr">visit​_yield​_from​_expr</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr>
 </table>
@@ -664,9 +677,9 @@
     </a>
   </div>
   <div class="docstring functionBody">
-    <div class="interfaceinfo">overrides <code><a href="mypy.traverser.TraverserVisitor.html#__init__">mypy.traverser.TraverserVisitor.__init__</a></code></div>
+    <div class="interfaceinfo">overrides <code><a href="mypy.traverser.TraverserVisitor.html#__init__" class="internal-link">mypy.traverser.TraverserVisitor.__init__</a></code></div>
     
-    <div><p class="undocumented">Undocumented</p><table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">_all_:</span><code>Optional[<wbr></wbr>List[<wbr></wbr>str]]</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">pyversion:</span><code>Tuple[<wbr></wbr>int, <wbr></wbr>int]</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">include_private:</span><code>bool</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">analyzed:</span><code>bool</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">export_less:</span><code>bool</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr></table></div>
+    <div><p class="undocumented">Undocumented</p><table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">_all_:</span><code>Optional[<wbr></wbr>List[<wbr></wbr>str]]</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">pyversion:</span><code>Tuple[<wbr></wbr>int, <wbr></wbr>int]</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">include​_private:</span><code>bool</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">analyzed:</span><code>bool</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">export​_less:</span><code>bool</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr></table></div>
   </div>
 </div><div class="basemethod">
   
@@ -734,7 +747,7 @@
   <div class="docstring functionBody">
     
     
-    <div><p class="undocumented">Undocumented</p><table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">func:</span><code><a href="mypy.nodes.FuncDef.html">FuncDef</a></code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">name:</span><code>str</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">require_name:</span><code>str</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr></table></div>
+    <div><p class="undocumented">Undocumented</p><table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">func:</span><code><a href="mypy.nodes.FuncDef.html" class="internal-link" title="mypy.nodes.FuncDef">FuncDef</a></code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">name:</span><code>str</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">require​_name:</span><code>str</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr></table></div>
   </div>
 </div><div class="basemethod">
   
@@ -846,7 +859,7 @@
   <div class="docstring functionBody">
     
     
-    <div>Get list of base classes for a class.<table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">cdef:</span><code><a href="mypy.nodes.ClassDef.html">ClassDef</a></code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr class="fieldStart"><td class="fieldName" colspan="2">Returns</td></tr><tr><td class="fieldArgContainer"><code>List[<wbr></wbr>str]</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr></table></div>
+    <div>Get list of base classes for a class.<table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">cdef:</span><code><a href="mypy.nodes.ClassDef.html" class="internal-link" title="mypy.nodes.ClassDef">ClassDef</a></code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr class="fieldStart"><td class="fieldName" colspan="2">Returns</td></tr><tr><td class="fieldArgContainer"><code>List[<wbr></wbr>str]</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr></table></div>
   </div>
 </div><div class="basemethod">
   
@@ -870,7 +883,7 @@
     
     <div><p>Return initializer for a variable.</p>
 <p>Return None if we've generated one already or if the variable is internal.</p>
-<table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">lvalue:</span><code>str</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">rvalue:</span><code><a href="mypy.nodes.Expression.html">Expression</a></code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">annotation:</span><code>Optional[<wbr></wbr><a href="mypy.types.Type.html">Type</a>]</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr class="fieldStart"><td class="fieldName" colspan="2">Returns</td></tr><tr><td class="fieldArgContainer"><code>Optional[<wbr></wbr>str]</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr></table></div>
+<table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">lvalue:</span><code>str</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">rvalue:</span><code><a href="mypy.nodes.Expression.html" class="internal-link" title="mypy.nodes.Expression">Expression</a></code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">annotation:</span><code>Optional[<wbr></wbr><a href="mypy.types.Type.html" class="internal-link" title="mypy.types.Type">Type</a>]</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr class="fieldStart"><td class="fieldName" colspan="2">Returns</td></tr><tr><td class="fieldArgContainer"><code>Optional[<wbr></wbr>str]</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr></table></div>
   </div>
 </div><div class="basemethod">
   
@@ -892,7 +905,7 @@
   <div class="docstring functionBody">
     
     
-    <div><p class="undocumented">Undocumented</p><table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">rvalue:</span><code><a href="mypy.nodes.Expression.html">Expression</a></code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">can_infer_optional:</span><code>bool</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">can_be_any:</span><code>bool</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr class="fieldStart"><td class="fieldName" colspan="2">Returns</td></tr><tr><td class="fieldArgContainer"><code>str</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr></table></div>
+    <div><p class="undocumented">Undocumented</p><table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">rvalue:</span><code><a href="mypy.nodes.Expression.html" class="internal-link" title="mypy.nodes.Expression">Expression</a></code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">can​_infer​_optional:</span><code>bool</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">can​_be​_any:</span><code>bool</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr class="fieldStart"><td class="fieldName" colspan="2">Returns</td></tr><tr><td class="fieldArgContainer"><code>str</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr></table></div>
   </div>
 </div><div class="basemethod">
   
@@ -917,7 +930,7 @@
     <div><p>Return True for things that look like target for an alias.</p>
 <p>Used to know if assignments look like type aliases, function alias,
 or module alias.</p>
-<table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">expr:</span><code><a href="mypy.nodes.Expression.html">Expression</a></code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">top_level:</span><code>bool</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr class="fieldStart"><td class="fieldName" colspan="2">Returns</td></tr><tr><td class="fieldArgContainer"><code>bool</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr></table></div>
+<table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">expr:</span><code><a href="mypy.nodes.Expression.html" class="internal-link" title="mypy.nodes.Expression">Expression</a></code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">top​_level:</span><code>bool</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr class="fieldStart"><td class="fieldName" colspan="2">Returns</td></tr><tr><td class="fieldArgContainer"><code>bool</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr></table></div>
   </div>
 </div><div class="basemethod">
   
@@ -939,7 +952,7 @@ or module alias.</p>
   <div class="docstring functionBody">
     
     
-    <div><p class="undocumented">Undocumented</p><table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">expr:</span><code><a href="mypy.nodes.Expression.html">Expression</a></code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr class="fieldStart"><td class="fieldName" colspan="2">Returns</td></tr><tr><td class="fieldArgContainer"><code>bool</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr></table></div>
+    <div><p class="undocumented">Undocumented</p><table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">expr:</span><code><a href="mypy.nodes.Expression.html" class="internal-link" title="mypy.nodes.Expression">Expression</a></code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr class="fieldStart"><td class="fieldName" colspan="2">Returns</td></tr><tr><td class="fieldArgContainer"><code>bool</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr></table></div>
   </div>
 </div><div class="basemethod">
   
@@ -961,7 +974,7 @@ or module alias.</p>
   <div class="docstring functionBody">
     
     
-    <div><p class="undocumented">Undocumented</p><table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">expr:</span><code><a href="mypy.nodes.Expression.html">Expression</a></code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr class="fieldStart"><td class="fieldName" colspan="2">Returns</td></tr><tr><td class="fieldArgContainer"><code>bool</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr></table></div>
+    <div><p class="undocumented">Undocumented</p><table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">expr:</span><code><a href="mypy.nodes.Expression.html" class="internal-link" title="mypy.nodes.Expression">Expression</a></code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr class="fieldStart"><td class="fieldName" colspan="2">Returns</td></tr><tr><td class="fieldArgContainer"><code>bool</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr></table></div>
   </div>
 </div><div class="basemethod">
   
@@ -1115,7 +1128,7 @@ or module alias.</p>
   <div class="docstring functionBody">
     
     
-    <div><p class="undocumented">Undocumented</p><table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">t:</span><code><a href="mypy.types.Type.html">Type</a></code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr class="fieldStart"><td class="fieldName" colspan="2">Returns</td></tr><tr><td class="fieldArgContainer"><code>str</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr></table></div>
+    <div><p class="undocumented">Undocumented</p><table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">t:</span><code><a href="mypy.types.Type.html" class="internal-link" title="mypy.types.Type">Type</a></code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr class="fieldStart"><td class="fieldName" colspan="2">Returns</td></tr><tr><td class="fieldArgContainer"><code>str</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr></table></div>
   </div>
 </div><div class="basemethod">
   
@@ -1142,7 +1155,7 @@ or module alias.</p>
 <p>Return a pair of booleans:
 - True if any of the decorators makes a method abstract.
 - True if any of the decorators is typing.overload.</p>
-<table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">o:</span><code><a href="mypy.nodes.Decorator.html">Decorator</a></code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr class="fieldStart"><td class="fieldName" colspan="2">Returns</td></tr><tr><td class="fieldArgContainer"><code>Tuple[<wbr></wbr>bool, <wbr></wbr>bool]</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr></table></div>
+<table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">o:</span><code><a href="mypy.nodes.Decorator.html" class="internal-link" title="mypy.nodes.Decorator">Decorator</a></code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr class="fieldStart"><td class="fieldName" colspan="2">Returns</td></tr><tr><td class="fieldArgContainer"><code>Tuple[<wbr></wbr>bool, <wbr></wbr>bool]</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr></table></div>
   </div>
 </div><div class="basemethod">
   
@@ -1169,7 +1182,7 @@ or module alias.</p>
 <p>Return a pair of booleans:
 - True if the decorator makes a method abstract.
 - True if the decorator is typing.overload.</p>
-<table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">expr:</span><code><a href="mypy.nodes.MemberExpr.html">MemberExpr</a></code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">context:</span><code><a href="mypy.nodes.Decorator.html">Decorator</a></code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr class="fieldStart"><td class="fieldName" colspan="2">Returns</td></tr><tr><td class="fieldArgContainer"><code>Tuple[<wbr></wbr>bool, <wbr></wbr>bool]</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr></table></div>
+<table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">expr:</span><code><a href="mypy.nodes.MemberExpr.html" class="internal-link" title="mypy.nodes.MemberExpr">MemberExpr</a></code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">context:</span><code><a href="mypy.nodes.Decorator.html" class="internal-link" title="mypy.nodes.Decorator">Decorator</a></code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr class="fieldStart"><td class="fieldName" colspan="2">Returns</td></tr><tr><td class="fieldArgContainer"><code>Tuple[<wbr></wbr>bool, <wbr></wbr>bool]</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr></table></div>
   </div>
 </div><div class="basemethod">
   
@@ -1196,7 +1209,7 @@ or module alias.</p>
 <p>Return a pair of booleans:
 - True if the decorator makes a method abstract.
 - True if the decorator is typing.overload.</p>
-<table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">expr:</span><code><a href="mypy.nodes.NameExpr.html">NameExpr</a></code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">context:</span><code><a href="mypy.nodes.Decorator.html">Decorator</a></code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr class="fieldStart"><td class="fieldName" colspan="2">Returns</td></tr><tr><td class="fieldArgContainer"><code>Tuple[<wbr></wbr>bool, <wbr></wbr>bool]</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr></table></div>
+<table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">expr:</span><code><a href="mypy.nodes.NameExpr.html" class="internal-link" title="mypy.nodes.NameExpr">NameExpr</a></code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">context:</span><code><a href="mypy.nodes.Decorator.html" class="internal-link" title="mypy.nodes.Decorator">Decorator</a></code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr class="fieldStart"><td class="fieldName" colspan="2">Returns</td></tr><tr><td class="fieldArgContainer"><code>Tuple[<wbr></wbr>bool, <wbr></wbr>bool]</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr></table></div>
   </div>
 </div><div class="basemethod">
   
@@ -1218,7 +1231,7 @@ or module alias.</p>
   <div class="docstring functionBody">
     
     
-    <div><p class="undocumented">Undocumented</p><table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">lvalue:</span><code><a href="mypy.nodes.NameExpr.html">NameExpr</a></code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">rvalue:</span><code><a href="mypy.nodes.CallExpr.html">CallExpr</a></code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr></table></div>
+    <div><p class="undocumented">Undocumented</p><table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">lvalue:</span><code><a href="mypy.nodes.NameExpr.html" class="internal-link" title="mypy.nodes.NameExpr">NameExpr</a></code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">rvalue:</span><code><a href="mypy.nodes.CallExpr.html" class="internal-link" title="mypy.nodes.CallExpr">CallExpr</a></code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr></table></div>
   </div>
 </div><div class="basemethod">
   
@@ -1240,7 +1253,7 @@ or module alias.</p>
   <div class="docstring functionBody">
     
     
-    <div><p class="undocumented">Undocumented</p><table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">lvalue:</span><code><a href="mypy.nodes.NameExpr.html">NameExpr</a></code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">rvalue:</span><code><a href="mypy.nodes.Expression.html">Expression</a></code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr></table></div>
+    <div><p class="undocumented">Undocumented</p><table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">lvalue:</span><code><a href="mypy.nodes.NameExpr.html" class="internal-link" title="mypy.nodes.NameExpr">NameExpr</a></code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">rvalue:</span><code><a href="mypy.nodes.Expression.html" class="internal-link" title="mypy.nodes.Expression">Expression</a></code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr></table></div>
   </div>
 </div><div class="basemethod">
   
@@ -1328,9 +1341,9 @@ or module alias.</p>
     </a>
   </div>
   <div class="docstring functionBody">
-    <div class="interfaceinfo">overrides <code><a href="mypy.traverser.TraverserVisitor.html#visit_assignment_stmt">mypy.traverser.TraverserVisitor.visit_assignment_stmt</a></code></div>
+    <div class="interfaceinfo">overrides <code><a href="mypy.traverser.TraverserVisitor.html#visit_assignment_stmt" class="internal-link">mypy.traverser.TraverserVisitor.visit_assignment_stmt</a></code></div>
     
-    <div><p class="undocumented">Undocumented</p><table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">o:</span><code><a href="mypy.nodes.AssignmentStmt.html">AssignmentStmt</a></code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr></table></div>
+    <div><p class="undocumented">Undocumented</p><table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">o:</span><code><a href="mypy.nodes.AssignmentStmt.html" class="internal-link" title="mypy.nodes.AssignmentStmt">AssignmentStmt</a></code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr></table></div>
   </div>
 </div><div class="basemethod">
   
@@ -1350,9 +1363,9 @@ or module alias.</p>
     </a>
   </div>
   <div class="docstring functionBody">
-    <div class="interfaceinfo">overrides <code><a href="mypy.traverser.TraverserVisitor.html#visit_block">mypy.traverser.TraverserVisitor.visit_block</a></code></div>
+    <div class="interfaceinfo">overrides <code><a href="mypy.traverser.TraverserVisitor.html#visit_block" class="internal-link">mypy.traverser.TraverserVisitor.visit_block</a></code></div>
     
-    <div><p class="undocumented">Undocumented</p><table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">o:</span><code><a href="mypy.nodes.Block.html">Block</a></code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr></table></div>
+    <div><p class="undocumented">Undocumented</p><table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">o:</span><code><a href="mypy.nodes.Block.html" class="internal-link" title="mypy.nodes.Block">Block</a></code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr></table></div>
   </div>
 </div><div class="basemethod">
   
@@ -1372,9 +1385,9 @@ or module alias.</p>
     </a>
   </div>
   <div class="docstring functionBody">
-    <div class="interfaceinfo">overrides <code><a href="mypy.traverser.TraverserVisitor.html#visit_class_def">mypy.traverser.TraverserVisitor.visit_class_def</a></code></div>
+    <div class="interfaceinfo">overrides <code><a href="mypy.traverser.TraverserVisitor.html#visit_class_def" class="internal-link">mypy.traverser.TraverserVisitor.visit_class_def</a></code></div>
     
-    <div><p class="undocumented">Undocumented</p><table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">o:</span><code><a href="mypy.nodes.ClassDef.html">ClassDef</a></code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr></table></div>
+    <div><p class="undocumented">Undocumented</p><table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">o:</span><code><a href="mypy.nodes.ClassDef.html" class="internal-link" title="mypy.nodes.ClassDef">ClassDef</a></code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr></table></div>
   </div>
 </div><div class="basemethod">
   
@@ -1394,9 +1407,9 @@ or module alias.</p>
     </a>
   </div>
   <div class="docstring functionBody">
-    <div class="interfaceinfo">overrides <code><a href="mypy.traverser.TraverserVisitor.html#visit_decorator">mypy.traverser.TraverserVisitor.visit_decorator</a></code></div>
+    <div class="interfaceinfo">overrides <code><a href="mypy.traverser.TraverserVisitor.html#visit_decorator" class="internal-link">mypy.traverser.TraverserVisitor.visit_decorator</a></code></div>
     
-    <div><p class="undocumented">Undocumented</p><table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">o:</span><code><a href="mypy.nodes.Decorator.html">Decorator</a></code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr></table></div>
+    <div><p class="undocumented">Undocumented</p><table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">o:</span><code><a href="mypy.nodes.Decorator.html" class="internal-link" title="mypy.nodes.Decorator">Decorator</a></code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr></table></div>
   </div>
 </div><div class="basemethod">
   
@@ -1416,9 +1429,9 @@ or module alias.</p>
     </a>
   </div>
   <div class="docstring functionBody">
-    <div class="interfaceinfo">overrides <code><a href="mypy.traverser.TraverserVisitor.html#visit_func_def">mypy.traverser.TraverserVisitor.visit_func_def</a></code></div>
+    <div class="interfaceinfo">overrides <code><a href="mypy.traverser.TraverserVisitor.html#visit_func_def" class="internal-link">mypy.traverser.TraverserVisitor.visit_func_def</a></code></div>
     
-    <div><p class="undocumented">Undocumented</p><table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">o:</span><code><a href="mypy.nodes.FuncDef.html">FuncDef</a></code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">is_abstract:</span><code>bool</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">is_overload:</span><code>bool</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr></table></div>
+    <div><p class="undocumented">Undocumented</p><table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">o:</span><code><a href="mypy.nodes.FuncDef.html" class="internal-link" title="mypy.nodes.FuncDef">FuncDef</a></code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">is​_abstract:</span><code>bool</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">is​_overload:</span><code>bool</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr></table></div>
   </div>
 </div><div class="basemethod">
   
@@ -1438,9 +1451,9 @@ or module alias.</p>
     </a>
   </div>
   <div class="docstring functionBody">
-    <div class="interfaceinfo">overrides <code><a href="mypy.traverser.TraverserVisitor.html#visit_if_stmt">mypy.traverser.TraverserVisitor.visit_if_stmt</a></code></div>
+    <div class="interfaceinfo">overrides <code><a href="mypy.traverser.TraverserVisitor.html#visit_if_stmt" class="internal-link">mypy.traverser.TraverserVisitor.visit_if_stmt</a></code></div>
     
-    <div><p class="undocumented">Undocumented</p><table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">o:</span><code><a href="mypy.nodes.IfStmt.html">IfStmt</a></code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr></table></div>
+    <div><p class="undocumented">Undocumented</p><table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">o:</span><code><a href="mypy.nodes.IfStmt.html" class="internal-link" title="mypy.nodes.IfStmt">IfStmt</a></code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr></table></div>
   </div>
 </div><div class="basemethod">
   
@@ -1460,9 +1473,9 @@ or module alias.</p>
     </a>
   </div>
   <div class="docstring functionBody">
-    <div class="interfaceinfo">overrides <code><a href="mypy.traverser.TraverserVisitor.html#visit_import">mypy.traverser.TraverserVisitor.visit_import</a></code></div>
+    <div class="interfaceinfo">overrides <code><a href="mypy.traverser.TraverserVisitor.html#visit_import" class="internal-link">mypy.traverser.TraverserVisitor.visit_import</a></code></div>
     
-    <div><p class="undocumented">Undocumented</p><table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">o:</span><code><a href="mypy.nodes.Import.html">Import</a></code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr></table></div>
+    <div><p class="undocumented">Undocumented</p><table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">o:</span><code><a href="mypy.nodes.Import.html" class="internal-link" title="mypy.nodes.Import">Import</a></code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr></table></div>
   </div>
 </div><div class="basemethod">
   
@@ -1484,7 +1497,7 @@ or module alias.</p>
   <div class="docstring functionBody">
     
     
-    <div><p class="undocumented">Undocumented</p><table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">o:</span><code><a href="mypy.nodes.ImportAll.html">ImportAll</a></code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr></table></div>
+    <div><p class="undocumented">Undocumented</p><table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">o:</span><code><a href="mypy.nodes.ImportAll.html" class="internal-link" title="mypy.nodes.ImportAll">ImportAll</a></code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr></table></div>
   </div>
 </div><div class="basemethod">
   
@@ -1504,9 +1517,9 @@ or module alias.</p>
     </a>
   </div>
   <div class="docstring functionBody">
-    <div class="interfaceinfo">overrides <code><a href="mypy.traverser.TraverserVisitor.html#visit_import_from">mypy.traverser.TraverserVisitor.visit_import_from</a></code></div>
+    <div class="interfaceinfo">overrides <code><a href="mypy.traverser.TraverserVisitor.html#visit_import_from" class="internal-link">mypy.traverser.TraverserVisitor.visit_import_from</a></code></div>
     
-    <div><p class="undocumented">Undocumented</p><table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">o:</span><code><a href="mypy.nodes.ImportFrom.html">ImportFrom</a></code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr></table></div>
+    <div><p class="undocumented">Undocumented</p><table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">o:</span><code><a href="mypy.nodes.ImportFrom.html" class="internal-link" title="mypy.nodes.ImportFrom">ImportFrom</a></code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr></table></div>
   </div>
 </div><div class="basemethod">
   
@@ -1526,9 +1539,9 @@ or module alias.</p>
     </a>
   </div>
   <div class="docstring functionBody">
-    <div class="interfaceinfo">overrides <code><a href="mypy.traverser.TraverserVisitor.html#visit_mypy_file">mypy.traverser.TraverserVisitor.visit_mypy_file</a></code></div>
+    <div class="interfaceinfo">overrides <code><a href="mypy.traverser.TraverserVisitor.html#visit_mypy_file" class="internal-link">mypy.traverser.TraverserVisitor.visit_mypy_file</a></code></div>
     
-    <div><p class="undocumented">Undocumented</p><table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">o:</span><code><a href="mypy.nodes.MypyFile.html">MypyFile</a></code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr></table></div>
+    <div><p class="undocumented">Undocumented</p><table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">o:</span><code><a href="mypy.nodes.MypyFile.html" class="internal-link" title="mypy.nodes.MypyFile">MypyFile</a></code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr></table></div>
   </div>
 </div><div class="basemethod">
   
@@ -1548,9 +1561,9 @@ or module alias.</p>
     </a>
   </div>
   <div class="docstring functionBody">
-    <div class="interfaceinfo">overrides <code><a href="mypy.traverser.TraverserVisitor.html#visit_overloaded_func_def">mypy.traverser.TraverserVisitor.visit_overloaded_func_def</a></code></div>
+    <div class="interfaceinfo">overrides <code><a href="mypy.traverser.TraverserVisitor.html#visit_overloaded_func_def" class="internal-link">mypy.traverser.TraverserVisitor.visit_overloaded_func_def</a></code></div>
     
-    <div>@property with setters and getters, or @overload chain<table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">o:</span><code><a href="mypy.nodes.OverloadedFuncDef.html">OverloadedFuncDef</a></code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr></table></div>
+    <div>@property with setters and getters, or @overload chain<table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">o:</span><code><a href="mypy.nodes.OverloadedFuncDef.html" class="internal-link" title="mypy.nodes.OverloadedFuncDef">OverloadedFuncDef</a></code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr></table></div>
   </div>
 </div><div class="baseinstancevariable">
   
@@ -1573,6 +1586,7 @@ or module alias.</p>
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    
   </div>
 </div><div class="baseinstancevariable">
   
@@ -1595,6 +1609,7 @@ or module alias.</p>
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    
   </div>
 </div><div class="baseinstancevariable">
   
@@ -1617,6 +1632,7 @@ or module alias.</p>
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    
   </div>
 </div><div class="baseinstancevariable">
   
@@ -1639,6 +1655,7 @@ or module alias.</p>
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    
   </div>
 </div><div class="baseinstancevariable">
   
@@ -1661,6 +1678,7 @@ or module alias.</p>
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    
   </div>
 </div><div class="baseinstancevariable">
   
@@ -1683,6 +1701,7 @@ or module alias.</p>
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    
   </div>
 </div><div class="baseinstancevariable">
   
@@ -1705,6 +1724,7 @@ or module alias.</p>
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    
   </div>
 </div><div class="baseinstancevariable">
   
@@ -1727,6 +1747,7 @@ or module alias.</p>
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    
   </div>
 </div><div class="baseinstancevariable private">
   
@@ -1749,6 +1770,7 @@ or module alias.</p>
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    
   </div>
 </div><div class="baseinstancevariable private">
   
@@ -1771,6 +1793,7 @@ or module alias.</p>
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    
   </div>
 </div><div class="baseinstancevariable private">
   
@@ -1793,6 +1816,7 @@ or module alias.</p>
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    
   </div>
 </div><div class="baseinstancevariable private">
   
@@ -1815,6 +1839,7 @@ or module alias.</p>
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    
   </div>
 </div><div class="baseinstancevariable private">
   
@@ -1837,6 +1862,7 @@ or module alias.</p>
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    
   </div>
 </div><div class="baseinstancevariable private">
   
@@ -1859,6 +1885,7 @@ or module alias.</p>
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    
   </div>
 </div><div class="baseinstancevariable private">
   
@@ -1881,6 +1908,7 @@ or module alias.</p>
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    
   </div>
 </div><div class="baseinstancevariable private">
   
@@ -1903,6 +1931,7 @@ or module alias.</p>
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    
   </div>
 </div><div class="baseinstancevariable private">
   
@@ -1925,6 +1954,7 @@ or module alias.</p>
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    
   </div>
 </div><div class="baseinstancevariable private">
   
@@ -1947,6 +1977,7 @@ or module alias.</p>
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    
   </div>
 </div>
 
@@ -1958,7 +1989,7 @@ or module alias.</p>
   <div class="container">
     <a href="index.html">API Documentation</a> for <a href="https://github.com/python/mypy" class="projecthome">mypy-0.930</a>,
   generated by <a href="https://github.com/twisted/pydoctor/">pydoctor</a>
-    21.2.2 at 2022-01-12 04:22:24.
+    22.2.2.dev0 at 2022-03-04 05:57:16.
   </div>
 </footer>
 

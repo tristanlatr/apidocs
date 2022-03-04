@@ -7,7 +7,7 @@
   <head>
     
     <title>mypy.plugins.attrs</title>
-    <meta name="generator" content="pydoctor 21.2.2"> 
+    <meta name="generator" content="pydoctor 22.2.2.dev0"> 
         
     </meta>
     <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
@@ -44,69 +44,82 @@
           Names
         </a>
 
-        <form action="search-results.html" id="search-box-container">
+        <div id="search-box-container">
           <div class="input-group">
-            <input id="search-box" name="search-query" placeholder="Search..." aria-label="Search" minlength="2" class="form-control" />
+            <input id="search-box" type="search" name="search-query" placeholder="Search..." aria-label="Search" minlength="2" class="form-control" autocomplete="off" />
+            
             <span class="input-group-btn">
-              <button class="btn btn-default" type="submit" title="Search"><img src="fonts/search.svg" alt="Search!" /></button>
-              <a class="btn btn-default" id="search-help-button" title="Help" onclick="toggleSearchHelpText()"><img src="fonts/info.svg" alt="Help!" /></a>
+              <a style="display: none;" class="btn btn-default" id="search-clear-button" title="Clear" onclick="clearSearch()"><img src="fonts/x-circle.svg" alt="Clear" /></a>
+              <a class="btn btn-default" id="search-help-button" title="Help" onclick="toggleSearchHelpText()"><img src="fonts/info.svg" alt="Help" /></a>
             </span>
           </div>
-        </form>
+        </div>
 
-        <div class="rst-admonition hint" id="search-help-box">
+      </div>
+
+      <div id="search-results-container" style="display: none;">
+        <div>
+          <span class="label label-default" id="search-docstrings-button">
+            <a title="Search in docstrings" onclick="toggleSearchInDocstrings()">search in docstrings</a></span>
+        </div>
+
+        <noscript>
+            <h1>Cannot search: JavaScript is not supported/enabled in your browser.</h1>
+        </noscript>
+
+        <div class="hint" id="search-help-box">
           <p class="rst-last">
       
             Search bar offers the following options:
             <ul>   
                 <li>
                   <strong>Term presence.</strong> The below example searches for documents that 
-                    must contain “foo”, might contain “bar” and must not contain “baz”:
-                  <br /> <code>'+foo bar -baz'</code>
+                    must contain “foo”, might contain “bar” and must not contain “baz”: <code>+foo bar -baz</code>
                 </li> 
 
                 <li>
-                  <strong>Wildcards.</strong> The below example searches for documents with words beginning with “foo”:
-                  <br /> <code>'foo*'</code>
+                  <strong>Wildcards.</strong> The below example searches for documents with words beginning with “foo”: <code>foo*</code>
                 </li> 
 
                 <li>
-                  <strong>Search in specific fields.</strong> The following search matches all documents 
-                  that contains "foo" in their full dotted name and with “bar” in any field:
-                  <br /> <code>'+fullName:*foo* +bar'</code>
+                  <strong>Search in specific fields.</strong> The following search matches all objects 
+                  in "twisted.mail" that matches “search”: <code>+qname:twisted.mail.* +search</code>
 
                   <p>
-                    Possible fields: 'name', 'docstring', 'fullName'.
+                    Possible fields: 'name', 'qname' (fully qualified name), 'docstring', and 'kind'.
+                    Last two fields are only applicable if "search in docstrings" is enabled.
                   </p>
                 </li>
 
                 <li>
                   <strong>Fuzzy matches.</strong> The following search matches all documents 
-                  that have a word within 1 edit distance of “foo”:
-                  <br /> <code>'foo~1'</code>
+                  that have a word within 1 edit distance of “foo”: <code>foo~1</code>
                 </li>
             </ul>
 
           </p>
         </div>
 
-      </div>
+        <div id="search-status"> </div>
+        
+        <div class="warning" id="search-warn-box" style="display: none;">
+          <p class="rst-last"><span id="search-warn"></span></p>
+        </div>
 
+        <table id="search-results">
+          <!-- Filled dynamically by JS -->
+        </table>
+        
+        <div style="margin-top: 8px;">
+          <p>Results provided by <a href="https://lunrjs.com">Lunr.js</a></p>
+        </div>
+      </div>
 
     </div>
   </div>
 
-  <script>
- 
-    function toggleSearchHelpText() {
-        document.body.classList.toggle("search-help-hidden");
-    }
-    // Init search and help text
-    document.getElementById('search-box-container').style.display = 'block';
-    document.getElementById('search-help-box').style.display = 'block';
-    document.body.classList.add("search-help-hidden");
-
-  </script>
+  <script src="ajax.js" type="text/javascript"></script>
+  <script src="search.js" type="text/javascript"></script>
 
 </nav>
 
@@ -115,7 +128,7 @@
     <div class="container">
 
       <div class="page-header">
-        <h1 class="module"><code><code><a href="mypy.html">mypy</a></code><wbr></wbr>.<code><a href="mypy.plugins.html">plugins</a></code><wbr></wbr>.<code><a href="mypy.plugins.attrs.html">attrs</a></code></code></h1>
+        <h1 class="module"><code><code><a href="index.html" class="internal-link">mypy</a></code><wbr></wbr>.<code><a href="mypy.plugins.html" class="internal-link" title="mypy.plugins">plugins</a></code><wbr></wbr>.<code><a href="mypy.plugins.attrs.html" class="internal-link" title="mypy.plugins.attrs">attrs</a></code></code></h1>
         <div id="showPrivate">
           <button class="btn btn-link" onclick="togglePrivate()">Toggle Private API</button>
         </div>
@@ -141,143 +154,143 @@
   <tr class="class">
     
     <td>Class</td>
-    <td><code><a href="mypy.plugins.attrs.Attribute.html">Attribute</a></code></td>
-    <td><span>The value of an attr.ib() call.</span></td>
+    <td><code><a href="mypy.plugins.attrs.Attribute.html" class="internal-link" title="mypy.plugins.attrs.Attribute">​Attribute</a></code></td>
+    <td>The value of an attr.ib() call.</td>
   </tr><tr class="class">
     
     <td>Class</td>
-    <td><code><a href="mypy.plugins.attrs.Converter.html">Converter</a></code></td>
-    <td><span>Holds information about a <code>converter=</code> argument</span></td>
+    <td><code><a href="mypy.plugins.attrs.Converter.html" class="internal-link" title="mypy.plugins.attrs.Converter">​Converter</a></code></td>
+    <td>Holds information about a <code>converter=</code> argument</td>
   </tr><tr class="class">
     
     <td>Class</td>
-    <td><code><a href="mypy.plugins.attrs.MethodAdder.html">MethodAdder</a></code></td>
-    <td><span>Helper to add methods to a TypeInfo.</span></td>
+    <td><code><a href="mypy.plugins.attrs.MethodAdder.html" class="internal-link" title="mypy.plugins.attrs.MethodAdder">​Method​Adder</a></code></td>
+    <td>Helper to add methods to a TypeInfo.</td>
   </tr><tr class="function">
     
     <td>Function</td>
-    <td><code><a href="#attr_class_maker_callback">attr_class_maker_callback</a></code></td>
-    <td><span>Add necessary dunder methods to classes decorated with attr.s.</span></td>
+    <td><code><a href="#attr_class_maker_callback" class="internal-link" title="mypy.plugins.attrs.attr_class_maker_callback">attr​_class​_maker​_callback</a></code></td>
+    <td>Add necessary dunder methods to classes decorated with attr.s.</td>
   </tr><tr class="function">
     
     <td>Function</td>
-    <td><code><a href="#is_valid_overloaded_converter">is_valid_overloaded_converter</a></code></td>
+    <td><code><a href="#is_valid_overloaded_converter" class="internal-link" title="mypy.plugins.attrs.is_valid_overloaded_converter">is​_valid​_overloaded​_converter</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
-  </tr><tr class="variable">
+  </tr><tr class="constant">
     
-    <td>Variable</td>
-    <td><code><a href="#attr_attrib_makers">attr_attrib_makers</a></code></td>
+    <td>Constant</td>
+    <td><code><a href="#attr_attrib_makers" class="internal-link" title="mypy.plugins.attrs.attr_attrib_makers">attr​_attrib​_makers</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
-  </tr><tr class="variable">
+  </tr><tr class="constant">
     
-    <td>Variable</td>
-    <td><code><a href="#attr_class_makers">attr_class_makers</a></code></td>
+    <td>Constant</td>
+    <td><code><a href="#attr_class_makers" class="internal-link" title="mypy.plugins.attrs.attr_class_makers">attr​_class​_makers</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
-  </tr><tr class="variable">
+  </tr><tr class="constant">
     
-    <td>Variable</td>
-    <td><code><a href="#attr_dataclass_makers">attr_dataclass_makers</a></code></td>
+    <td>Constant</td>
+    <td><code><a href="#attr_dataclass_makers" class="internal-link" title="mypy.plugins.attrs.attr_dataclass_makers">attr​_dataclass​_makers</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
-  </tr><tr class="variable">
+  </tr><tr class="constant">
     
-    <td>Variable</td>
-    <td><code><a href="#attr_define_makers">attr_define_makers</a></code></td>
+    <td>Constant</td>
+    <td><code><a href="#attr_define_makers" class="internal-link" title="mypy.plugins.attrs.attr_define_makers">attr​_define​_makers</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
-  </tr><tr class="variable">
+  </tr><tr class="constant">
     
-    <td>Variable</td>
-    <td><code><a href="#attr_frozen_makers">attr_frozen_makers</a></code></td>
+    <td>Constant</td>
+    <td><code><a href="#attr_frozen_makers" class="internal-link" title="mypy.plugins.attrs.attr_frozen_makers">attr​_frozen​_makers</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
-  </tr><tr class="variable">
+  </tr><tr class="constant">
     
-    <td>Variable</td>
-    <td><code><a href="#KW_ONLY_PYTHON_2_UNSUPPORTED">KW_ONLY_PYTHON_2_UNSUPPORTED</a></code></td>
+    <td>Constant</td>
+    <td><code><a href="#KW_ONLY_PYTHON_2_UNSUPPORTED" class="internal-link" title="mypy.plugins.attrs.KW_ONLY_PYTHON_2_UNSUPPORTED">KW​_ONLY​_PYTHON​_2​_UNSUPPORTED</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
-  </tr><tr class="variable">
+  </tr><tr class="constant">
     
-    <td>Variable</td>
-    <td><code><a href="#SELF_TVAR_NAME">SELF_TVAR_NAME</a></code></td>
-    <td><span class="undocumented">Undocumented</span></td>
-  </tr><tr class="function private">
-    
-    <td>Function</td>
-    <td><code><a href="#_add_attrs_magic_attribute">_add_attrs_magic_attribute</a></code></td>
+    <td>Constant</td>
+    <td><code><a href="#SELF_TVAR_NAME" class="internal-link" title="mypy.plugins.attrs.SELF_TVAR_NAME">SELF​_TVAR​_NAME</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="function private">
     
     <td>Function</td>
-    <td><code><a href="#_add_init">_add_init</a></code></td>
-    <td><span>Generate an __init__ method for the attributes and add it to the class.</span></td>
-  </tr><tr class="function private">
-    
-    <td>Function</td>
-    <td><code><a href="#_add_order">_add_order</a></code></td>
-    <td><span>Generate all the ordering methods for this class.</span></td>
-  </tr><tr class="function private">
-    
-    <td>Function</td>
-    <td><code><a href="#_add_slots">_add_slots</a></code></td>
+    <td><code><a href="#_add_attrs_magic_attribute" class="internal-link" title="mypy.plugins.attrs._add_attrs_magic_attribute">_add​_attrs​_magic​_attribute</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="function private">
     
     <td>Function</td>
-    <td><code><a href="#_analyze_class">_analyze_class</a></code></td>
-    <td><span>Analyze the class body of an attr maker, its parents, and return the Attributes found.</span></td>
+    <td><code><a href="#_add_init" class="internal-link" title="mypy.plugins.attrs._add_init">_add​_init</a></code></td>
+    <td>Generate an __init__ method for the attributes and add it to the class.</td>
   </tr><tr class="function private">
     
     <td>Function</td>
-    <td><code><a href="#_attribute_from_attrib_maker">_attribute_from_attrib_maker</a></code></td>
-    <td><span>Return an Attribute from the assignment or None if you can't make one.</span></td>
+    <td><code><a href="#_add_order" class="internal-link" title="mypy.plugins.attrs._add_order">_add​_order</a></code></td>
+    <td>Generate all the ordering methods for this class.</td>
   </tr><tr class="function private">
     
     <td>Function</td>
-    <td><code><a href="#_attribute_from_auto_attrib">_attribute_from_auto_attrib</a></code></td>
-    <td><span>Return an Attribute for a new type assignment.</span></td>
+    <td><code><a href="#_add_slots" class="internal-link" title="mypy.plugins.attrs._add_slots">_add​_slots</a></code></td>
+    <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="function private">
     
     <td>Function</td>
-    <td><code><a href="#_attributes_from_assignment">_attributes_from_assignment</a></code></td>
-    <td><span>Return Attribute objects that are created by this assignment.</span></td>
+    <td><code><a href="#_analyze_class" class="internal-link" title="mypy.plugins.attrs._analyze_class">_analyze​_class</a></code></td>
+    <td>Analyze the class body of an attr maker, its parents, and return the Attributes found.</td>
   </tr><tr class="function private">
     
     <td>Function</td>
-    <td><code><a href="#_cleanup_decorator">_cleanup_decorator</a></code></td>
-    <td><span>Handle decorators in class bodies.</span></td>
+    <td><code><a href="#_attribute_from_attrib_maker" class="internal-link" title="mypy.plugins.attrs._attribute_from_attrib_maker">_attribute​_from​_attrib​_maker</a></code></td>
+    <td>Return an Attribute from the assignment or None if you can't make one.</td>
   </tr><tr class="function private">
     
     <td>Function</td>
-    <td><code><a href="#_detect_auto_attribs">_detect_auto_attribs</a></code></td>
-    <td><span>Return whether auto_attribs should be enabled or disabled.</span></td>
+    <td><code><a href="#_attribute_from_auto_attrib" class="internal-link" title="mypy.plugins.attrs._attribute_from_auto_attrib">_attribute​_from​_auto​_attrib</a></code></td>
+    <td>Return an Attribute for a new type assignment.</td>
   </tr><tr class="function private">
     
     <td>Function</td>
-    <td><code><a href="#_determine_eq_order">_determine_eq_order</a></code></td>
-    <td><span>Validate the combination of <em>cmp</em>, <em>eq</em>, and <em>order</em>. Derive the effective value of order.</span></td>
+    <td><code><a href="#_attributes_from_assignment" class="internal-link" title="mypy.plugins.attrs._attributes_from_assignment">_attributes​_from​_assignment</a></code></td>
+    <td>Return Attribute objects that are created by this assignment.</td>
   </tr><tr class="function private">
     
     <td>Function</td>
-    <td><code><a href="#_get_decorator_optional_bool_argument">_get_decorator_optional_bool_argument</a></code></td>
-    <td><span>Return the Optional[bool] argument for the decorator.</span></td>
+    <td><code><a href="#_cleanup_decorator" class="internal-link" title="mypy.plugins.attrs._cleanup_decorator">_cleanup​_decorator</a></code></td>
+    <td>Handle decorators in class bodies.</td>
   </tr><tr class="function private">
     
     <td>Function</td>
-    <td><code><a href="#_get_frozen">_get_frozen</a></code></td>
-    <td><span>Return whether this class is frozen.</span></td>
+    <td><code><a href="#_detect_auto_attribs" class="internal-link" title="mypy.plugins.attrs._detect_auto_attribs">_detect​_auto​_attribs</a></code></td>
+    <td>Return whether auto_attribs should be enabled or disabled.</td>
   </tr><tr class="function private">
     
     <td>Function</td>
-    <td><code><a href="#_make_frozen">_make_frozen</a></code></td>
-    <td><span>Turn all the attributes into properties to simulate frozen classes.</span></td>
+    <td><code><a href="#_determine_eq_order" class="internal-link" title="mypy.plugins.attrs._determine_eq_order">_determine​_eq​_order</a></code></td>
+    <td>Validate the combination of <em>cmp</em>, <em>eq</em>, and <em>order</em>. Derive the effective value of order.</td>
   </tr><tr class="function private">
     
     <td>Function</td>
-    <td><code><a href="#_parse_assignments">_parse_assignments</a></code></td>
-    <td><span>Convert a possibly complex assignment expression into lists of lvalues and rvalues.</span></td>
+    <td><code><a href="#_get_decorator_optional_bool_argument" class="internal-link" title="mypy.plugins.attrs._get_decorator_optional_bool_argument">_get​_decorator​_optional​_bool​_argument</a></code></td>
+    <td>Return the Optional[bool] argument for the decorator.</td>
   </tr><tr class="function private">
     
     <td>Function</td>
-    <td><code><a href="#_parse_converter">_parse_converter</a></code></td>
-    <td><span>Return the Converter object from an Expression.</span></td>
+    <td><code><a href="#_get_frozen" class="internal-link" title="mypy.plugins.attrs._get_frozen">_get​_frozen</a></code></td>
+    <td>Return whether this class is frozen.</td>
+  </tr><tr class="function private">
+    
+    <td>Function</td>
+    <td><code><a href="#_make_frozen" class="internal-link" title="mypy.plugins.attrs._make_frozen">_make​_frozen</a></code></td>
+    <td>Turn all the attributes into properties to simulate frozen classes.</td>
+  </tr><tr class="function private">
+    
+    <td>Function</td>
+    <td><code><a href="#_parse_assignments" class="internal-link" title="mypy.plugins.attrs._parse_assignments">_parse​_assignments</a></code></td>
+    <td>Convert a possibly complex assignment expression into lists of lvalues and rvalues.</td>
+  </tr><tr class="function private">
+    
+    <td>Function</td>
+    <td><code><a href="#_parse_converter" class="internal-link" title="mypy.plugins.attrs._parse_converter">_parse​_converter</a></code></td>
+    <td>Return the Converter object from an Expression.</td>
   </tr>
 </table>
         
@@ -314,7 +327,7 @@ annotated variables if auto_attribs=True), then depending on how the decorator i
 it will add an __init__ or all the __cmp__ methods.  For frozen=True it will turn the attrs
 into properties.</p>
 <p>See <a class="rst-reference external" href="http://www.attrs.org/en/stable/how-does-it-work.html" target="_top">http://www.attrs.org/en/stable/how-does-it-work.html</a> for information on how attrs works.</p>
-<table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">ctx:</span><code><a href="mypy.plugin.html#ClassDefContext">mypy.plugin.ClassDefContext</a></code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">auto_attribs_default:</span><code>Optional[<wbr></wbr>bool]</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">frozen_default:</span><code>bool</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr></table></div>
+<table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">ctx:</span><code><a href="mypy.plugin.html#ClassDefContext" class="internal-link">mypy.plugin.ClassDefContext</a></code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">auto​_attribs​_default:</span><code>Optional[<wbr></wbr>bool]</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">frozen​_default:</span><code>bool</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr></table></div>
   </div>
 </div><div class="basefunction">
   
@@ -336,9 +349,9 @@ into properties.</p>
   <div class="docstring functionBody">
     
     
-    <div><p class="undocumented">Undocumented</p><table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">defn:</span><code><a href="mypy.nodes.OverloadedFuncDef.html">OverloadedFuncDef</a></code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr class="fieldStart"><td class="fieldName" colspan="2">Returns</td></tr><tr><td class="fieldArgContainer"><code>bool</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr></table></div>
+    <div><p class="undocumented">Undocumented</p><table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">defn:</span><code><a href="mypy.nodes.OverloadedFuncDef.html" class="internal-link" title="mypy.nodes.OverloadedFuncDef">OverloadedFuncDef</a></code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr class="fieldStart"><td class="fieldName" colspan="2">Returns</td></tr><tr><td class="fieldArgContainer"><code>bool</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr></table></div>
   </div>
-</div><div class="basevariable">
+</div><div class="baseconstant">
   
   
   <a name="mypy.plugins.attrs.attr_attrib_makers">
@@ -349,7 +362,7 @@ into properties.</p>
   </a>
   <div class="functionHeader">
     
-    <span class="py-defname">attr_attrib_makers</span>: <code>Final</code> =
+    <span class="py-defname">attr_attrib_makers</span>: <code>set[<wbr></wbr>str]</code> =
     <a class="sourceLink" href="https://github.com/python/mypy/tree/v0.930/mypy/plugins/attrs.py#L45">
       
       (source)
@@ -359,8 +372,9 @@ into properties.</p>
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    <table class="valueTable"><tr class="fieldStart"><td class="fieldName">Value</td></tr><tr><td><pre class="constant-value"><code>set([<wbr></wbr><span class="rst-variable-quote">'</span><span class="rst-variable-string">attr.ib</span><span class="rst-variable-quote">'</span>, <wbr></wbr><span class="rst-variable-quote">'</span><span class="rst-variable-string">attr.attrib</span><span class="rst-variable-quote">'</span>, <wbr></wbr><span class="rst-variable-quote">'</span><span class="rst-variable-string">attr.attr</span><span class="rst-variable-quote">'</span>, <wbr></wbr><span class="rst-variable-quote">'</span><span class="rst-variable-string">attr.field</span><span class="rst-variable-quote">'</span>])</code></pre></td></tr></table>
   </div>
-</div><div class="basevariable">
+</div><div class="baseconstant">
   
   
   <a name="mypy.plugins.attrs.attr_class_makers">
@@ -371,7 +385,7 @@ into properties.</p>
   </a>
   <div class="functionHeader">
     
-    <span class="py-defname">attr_class_makers</span>: <code>Final</code> =
+    <span class="py-defname">attr_class_makers</span>: <code>set[<wbr></wbr>str]</code> =
     <a class="sourceLink" href="https://github.com/python/mypy/tree/v0.930/mypy/plugins/attrs.py#L35">
       
       (source)
@@ -381,8 +395,9 @@ into properties.</p>
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    <table class="valueTable"><tr class="fieldStart"><td class="fieldName">Value</td></tr><tr><td><pre class="constant-value"><code>set([<wbr></wbr><span class="rst-variable-quote">'</span><span class="rst-variable-string">attr.s</span><span class="rst-variable-quote">'</span>, <wbr></wbr><span class="rst-variable-quote">'</span><span class="rst-variable-string">attr.attrs</span><span class="rst-variable-quote">'</span>, <wbr></wbr><span class="rst-variable-quote">'</span><span class="rst-variable-string">attr.attributes</span><span class="rst-variable-quote">'</span>])</code></pre></td></tr></table>
   </div>
-</div><div class="basevariable">
+</div><div class="baseconstant">
   
   
   <a name="mypy.plugins.attrs.attr_dataclass_makers">
@@ -393,7 +408,7 @@ into properties.</p>
   </a>
   <div class="functionHeader">
     
-    <span class="py-defname">attr_dataclass_makers</span>: <code>Final</code> =
+    <span class="py-defname">attr_dataclass_makers</span>: <code>set[<wbr></wbr>str]</code> =
     <a class="sourceLink" href="https://github.com/python/mypy/tree/v0.930/mypy/plugins/attrs.py#L40">
       
       (source)
@@ -403,8 +418,9 @@ into properties.</p>
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    <table class="valueTable"><tr class="fieldStart"><td class="fieldName">Value</td></tr><tr><td><pre class="constant-value"><code>set([<wbr></wbr><span class="rst-variable-quote">'</span><span class="rst-variable-string">attr.dataclass</span><span class="rst-variable-quote">'</span>])</code></pre></td></tr></table>
   </div>
-</div><div class="basevariable">
+</div><div class="baseconstant">
   
   
   <a name="mypy.plugins.attrs.attr_define_makers">
@@ -415,7 +431,7 @@ into properties.</p>
   </a>
   <div class="functionHeader">
     
-    <span class="py-defname">attr_define_makers</span>: <code>Final</code> =
+    <span class="py-defname">attr_define_makers</span>: <code>set[<wbr></wbr>str]</code> =
     <a class="sourceLink" href="https://github.com/python/mypy/tree/v0.930/mypy/plugins/attrs.py#L44">
       
       (source)
@@ -425,8 +441,9 @@ into properties.</p>
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    <table class="valueTable"><tr class="fieldStart"><td class="fieldName">Value</td></tr><tr><td><pre class="constant-value"><code>set([<wbr></wbr><span class="rst-variable-quote">'</span><span class="rst-variable-string">attr.define</span><span class="rst-variable-quote">'</span>, <wbr></wbr><span class="rst-variable-quote">'</span><span class="rst-variable-string">attr.mutable</span><span class="rst-variable-quote">'</span>])</code></pre></td></tr></table>
   </div>
-</div><div class="basevariable">
+</div><div class="baseconstant">
   
   
   <a name="mypy.plugins.attrs.attr_frozen_makers">
@@ -437,7 +454,7 @@ into properties.</p>
   </a>
   <div class="functionHeader">
     
-    <span class="py-defname">attr_frozen_makers</span>: <code>Final</code> =
+    <span class="py-defname">attr_frozen_makers</span>: <code>set[<wbr></wbr>str]</code> =
     <a class="sourceLink" href="https://github.com/python/mypy/tree/v0.930/mypy/plugins/attrs.py#L43">
       
       (source)
@@ -447,8 +464,9 @@ into properties.</p>
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    <table class="valueTable"><tr class="fieldStart"><td class="fieldName">Value</td></tr><tr><td><pre class="constant-value"><code>set([<wbr></wbr><span class="rst-variable-quote">'</span><span class="rst-variable-string">attr.frozen</span><span class="rst-variable-quote">'</span>])</code></pre></td></tr></table>
   </div>
-</div><div class="basevariable">
+</div><div class="baseconstant">
   
   
   <a name="mypy.plugins.attrs.KW_ONLY_PYTHON_2_UNSUPPORTED">
@@ -469,8 +487,9 @@ into properties.</p>
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    <table class="valueTable"><tr class="fieldStart"><td class="fieldName">Value</td></tr><tr><td><pre class="constant-value"><code><span class="rst-variable-quote">'</span><span class="rst-variable-string">kw_only is not supported in Python 2</span><span class="rst-variable-quote">'</span></code></pre></td></tr></table>
   </div>
-</div><div class="basevariable">
+</div><div class="baseconstant">
   
   
   <a name="mypy.plugins.attrs.SELF_TVAR_NAME">
@@ -481,7 +500,7 @@ into properties.</p>
   </a>
   <div class="functionHeader">
     
-    <span class="py-defname">SELF_TVAR_NAME</span>: <code>Final</code> =
+    <span class="py-defname">SELF_TVAR_NAME</span>: <code>str</code> =
     <a class="sourceLink" href="https://github.com/python/mypy/tree/v0.930/mypy/plugins/attrs.py#L52">
       
       (source)
@@ -491,6 +510,7 @@ into properties.</p>
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    <table class="valueTable"><tr class="fieldStart"><td class="fieldName">Value</td></tr><tr><td><pre class="constant-value"><code><span class="rst-variable-quote">'</span><span class="rst-variable-string">_AT</span><span class="rst-variable-quote">'</span></code></pre></td></tr></table>
   </div>
 </div><div class="basefunction private">
   
@@ -512,7 +532,7 @@ into properties.</p>
   <div class="docstring functionBody">
     
     
-    <div><p class="undocumented">Undocumented</p><table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">ctx:</span><code><a href="mypy.plugin.html#ClassDefContext">mypy.plugin.ClassDefContext</a></code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">raw_attr_types:</span><code>List[<wbr></wbr>Optional[<wbr></wbr><a href="mypy.types.Type.html">Type</a>]]</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr></table></div>
+    <div><p class="undocumented">Undocumented</p><table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">ctx:</span><code><a href="mypy.plugin.html#ClassDefContext" class="internal-link">mypy.plugin.ClassDefContext</a></code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">raw​_attr​_types:</span><code>List[<wbr></wbr>Optional[<wbr></wbr><a href="mypy.types.Type.html" class="internal-link" title="mypy.types.Type">Type</a>]]</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr></table></div>
   </div>
 </div><div class="basefunction private">
   
@@ -534,7 +554,7 @@ into properties.</p>
   <div class="docstring functionBody">
     
     
-    <div>Generate an __init__ method for the attributes and add it to the class.<table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">ctx:</span><code><a href="mypy.plugin.html#ClassDefContext">mypy.plugin.ClassDefContext</a></code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">attributes:</span><code>List[<wbr></wbr><a href="mypy.plugins.attrs.Attribute.html">Attribute</a>]</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">adder:</span><code><a href="mypy.plugins.attrs.MethodAdder.html">MethodAdder</a></code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr></table></div>
+    <div>Generate an __init__ method for the attributes and add it to the class.<table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">ctx:</span><code><a href="mypy.plugin.html#ClassDefContext" class="internal-link">mypy.plugin.ClassDefContext</a></code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">attributes:</span><code>List[<wbr></wbr><a href="mypy.plugins.attrs.Attribute.html" class="internal-link" title="mypy.plugins.attrs.Attribute">Attribute</a>]</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">adder:</span><code><a href="mypy.plugins.attrs.MethodAdder.html" class="internal-link" title="mypy.plugins.attrs.MethodAdder">MethodAdder</a></code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr></table></div>
   </div>
 </div><div class="basefunction private">
   
@@ -556,7 +576,7 @@ into properties.</p>
   <div class="docstring functionBody">
     
     
-    <div>Generate all the ordering methods for this class.<table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">ctx:</span><code><a href="mypy.plugin.html#ClassDefContext">mypy.plugin.ClassDefContext</a></code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">adder:</span><code><a href="mypy.plugins.attrs.MethodAdder.html">MethodAdder</a></code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr></table></div>
+    <div>Generate all the ordering methods for this class.<table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">ctx:</span><code><a href="mypy.plugin.html#ClassDefContext" class="internal-link">mypy.plugin.ClassDefContext</a></code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">adder:</span><code><a href="mypy.plugins.attrs.MethodAdder.html" class="internal-link" title="mypy.plugins.attrs.MethodAdder">MethodAdder</a></code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr></table></div>
   </div>
 </div><div class="basefunction private">
   
@@ -578,7 +598,7 @@ into properties.</p>
   <div class="docstring functionBody">
     
     
-    <div><p class="undocumented">Undocumented</p><table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">ctx:</span><code><a href="mypy.plugin.html#ClassDefContext">mypy.plugin.ClassDefContext</a></code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">attributes:</span><code>List[<wbr></wbr><a href="mypy.plugins.attrs.Attribute.html">Attribute</a>]</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr></table></div>
+    <div><p class="undocumented">Undocumented</p><table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">ctx:</span><code><a href="mypy.plugin.html#ClassDefContext" class="internal-link">mypy.plugin.ClassDefContext</a></code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">attributes:</span><code>List[<wbr></wbr><a href="mypy.plugins.attrs.Attribute.html" class="internal-link" title="mypy.plugins.attrs.Attribute">Attribute</a>]</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr></table></div>
   </div>
 </div><div class="basefunction private">
   
@@ -604,7 +624,7 @@ into properties.</p>
 <p>auto_attribs=True means we'll generate attributes from type annotations also.
 auto_attribs=None means we'll detect which mode to use.
 kw_only=True means that all attributes created here will be keyword only args in __init__.</p>
-<table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">ctx:</span><code><a href="mypy.plugin.html#ClassDefContext">mypy.plugin.ClassDefContext</a></code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">auto_attribs:</span><code>Optional[<wbr></wbr>bool]</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">kw_only:</span><code>bool</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr class="fieldStart"><td class="fieldName" colspan="2">Returns</td></tr><tr><td class="fieldArgContainer"><code>List[<wbr></wbr><a href="mypy.plugins.attrs.Attribute.html">Attribute</a>]</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr></table></div>
+<table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">ctx:</span><code><a href="mypy.plugin.html#ClassDefContext" class="internal-link">mypy.plugin.ClassDefContext</a></code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">auto​_attribs:</span><code>Optional[<wbr></wbr>bool]</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">kw​_only:</span><code>bool</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr class="fieldStart"><td class="fieldName" colspan="2">Returns</td></tr><tr><td class="fieldArgContainer"><code>List[<wbr></wbr><a href="mypy.plugins.attrs.Attribute.html" class="internal-link" title="mypy.plugins.attrs.Attribute">Attribute</a>]</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr></table></div>
   </div>
 </div><div class="basefunction private">
   
@@ -626,7 +646,7 @@ kw_only=True means that all attributes created here will be keyword only args in
   <div class="docstring functionBody">
     
     
-    <div>Return an Attribute from the assignment or None if you can't make one.<table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">ctx:</span><code><a href="mypy.plugin.html#ClassDefContext">mypy.plugin.ClassDefContext</a></code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">auto_attribs:</span><code>bool</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">kw_only:</span><code>bool</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">lhs:</span><code><a href="mypy.nodes.NameExpr.html">NameExpr</a></code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">rvalue:</span><code><a href="mypy.nodes.CallExpr.html">CallExpr</a></code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">stmt:</span><code><a href="mypy.nodes.AssignmentStmt.html">AssignmentStmt</a></code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr class="fieldStart"><td class="fieldName" colspan="2">Returns</td></tr><tr><td class="fieldArgContainer"><code>Optional[<wbr></wbr><a href="mypy.plugins.attrs.Attribute.html">Attribute</a>]</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr></table></div>
+    <div>Return an Attribute from the assignment or None if you can't make one.<table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">ctx:</span><code><a href="mypy.plugin.html#ClassDefContext" class="internal-link">mypy.plugin.ClassDefContext</a></code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">auto​_attribs:</span><code>bool</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">kw​_only:</span><code>bool</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">lhs:</span><code><a href="mypy.nodes.NameExpr.html" class="internal-link" title="mypy.nodes.NameExpr">NameExpr</a></code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">rvalue:</span><code><a href="mypy.nodes.CallExpr.html" class="internal-link" title="mypy.nodes.CallExpr">CallExpr</a></code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">stmt:</span><code><a href="mypy.nodes.AssignmentStmt.html" class="internal-link" title="mypy.nodes.AssignmentStmt">AssignmentStmt</a></code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr class="fieldStart"><td class="fieldName" colspan="2">Returns</td></tr><tr><td class="fieldArgContainer"><code>Optional[<wbr></wbr><a href="mypy.plugins.attrs.Attribute.html" class="internal-link" title="mypy.plugins.attrs.Attribute">Attribute</a>]</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr></table></div>
   </div>
 </div><div class="basefunction private">
   
@@ -648,7 +668,7 @@ kw_only=True means that all attributes created here will be keyword only args in
   <div class="docstring functionBody">
     
     
-    <div>Return an Attribute for a new type assignment.<table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">ctx:</span><code><a href="mypy.plugin.html#ClassDefContext">mypy.plugin.ClassDefContext</a></code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">kw_only:</span><code>bool</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">lhs:</span><code><a href="mypy.nodes.NameExpr.html">NameExpr</a></code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">rvalue:</span><code><a href="mypy.nodes.Expression.html">Expression</a></code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">stmt:</span><code><a href="mypy.nodes.AssignmentStmt.html">AssignmentStmt</a></code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr class="fieldStart"><td class="fieldName" colspan="2">Returns</td></tr><tr><td class="fieldArgContainer"><code><a href="mypy.plugins.attrs.Attribute.html">Attribute</a></code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr></table></div>
+    <div>Return an Attribute for a new type assignment.<table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">ctx:</span><code><a href="mypy.plugin.html#ClassDefContext" class="internal-link">mypy.plugin.ClassDefContext</a></code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">kw​_only:</span><code>bool</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">lhs:</span><code><a href="mypy.nodes.NameExpr.html" class="internal-link" title="mypy.nodes.NameExpr">NameExpr</a></code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">rvalue:</span><code><a href="mypy.nodes.Expression.html" class="internal-link" title="mypy.nodes.Expression">Expression</a></code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">stmt:</span><code><a href="mypy.nodes.AssignmentStmt.html" class="internal-link" title="mypy.nodes.AssignmentStmt">AssignmentStmt</a></code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr class="fieldStart"><td class="fieldName" colspan="2">Returns</td></tr><tr><td class="fieldArgContainer"><code><a href="mypy.plugins.attrs.Attribute.html" class="internal-link" title="mypy.plugins.attrs.Attribute">Attribute</a></code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr></table></div>
   </div>
 </div><div class="basefunction private">
   
@@ -680,7 +700,7 @@ x, y = attr.ib(), attr.ib()</dd>
 <dd>x: type
 x: type = default_value</dd>
 </dl>
-<table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">ctx:</span><code><a href="mypy.plugin.html#ClassDefContext">mypy.plugin.ClassDefContext</a></code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">stmt:</span><code><a href="mypy.nodes.AssignmentStmt.html">AssignmentStmt</a></code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">auto_attribs:</span><code>bool</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">kw_only:</span><code>bool</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr class="fieldStart"><td class="fieldName" colspan="2">Returns</td></tr><tr><td class="fieldArgContainer"><code>Iterable[<wbr></wbr><a href="mypy.plugins.attrs.Attribute.html">Attribute</a>]</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr></table></div>
+<table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">ctx:</span><code><a href="mypy.plugin.html#ClassDefContext" class="internal-link">mypy.plugin.ClassDefContext</a></code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">stmt:</span><code><a href="mypy.nodes.AssignmentStmt.html" class="internal-link" title="mypy.nodes.AssignmentStmt">AssignmentStmt</a></code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">auto​_attribs:</span><code>bool</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">kw​_only:</span><code>bool</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr class="fieldStart"><td class="fieldName" colspan="2">Returns</td></tr><tr><td class="fieldArgContainer"><code>Iterable[<wbr></wbr><a href="mypy.plugins.attrs.Attribute.html" class="internal-link" title="mypy.plugins.attrs.Attribute">Attribute</a>]</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr></table></div>
   </div>
 </div><div class="basefunction private">
   
@@ -705,7 +725,7 @@ x: type = default_value</dd>
     <div><p>Handle decorators in class bodies.</p>
 <p><code>x.default</code> will set a default value on x
 <code>x.validator</code> and <code>x.default</code> will get removed to avoid throwing a type error.</p>
-<table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">stmt:</span><code><a href="mypy.nodes.Decorator.html">Decorator</a></code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">attr_map:</span><code>Dict[<wbr></wbr>str, <wbr></wbr><a href="mypy.plugins.attrs.Attribute.html">Attribute</a>]</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr></table></div>
+<table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">stmt:</span><code><a href="mypy.nodes.Decorator.html" class="internal-link" title="mypy.nodes.Decorator">Decorator</a></code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">attr​_map:</span><code>Dict[<wbr></wbr>str, <wbr></wbr><a href="mypy.plugins.attrs.Attribute.html" class="internal-link" title="mypy.plugins.attrs.Attribute">Attribute</a>]</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr></table></div>
   </div>
 </div><div class="basefunction private">
   
@@ -729,7 +749,7 @@ x: type = default_value</dd>
     
     <div><p>Return whether auto_attribs should be enabled or disabled.</p>
 <p>It's disabled if there are any unannotated attribs()</p>
-<table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">ctx:</span><code><a href="mypy.plugin.html#ClassDefContext">mypy.plugin.ClassDefContext</a></code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr class="fieldStart"><td class="fieldName" colspan="2">Returns</td></tr><tr><td class="fieldArgContainer"><code>bool</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr></table></div>
+<table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">ctx:</span><code><a href="mypy.plugin.html#ClassDefContext" class="internal-link">mypy.plugin.ClassDefContext</a></code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr class="fieldStart"><td class="fieldName" colspan="2">Returns</td></tr><tr><td class="fieldArgContainer"><code>bool</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr></table></div>
   </div>
 </div><div class="basefunction private">
   
@@ -752,7 +772,7 @@ x: type = default_value</dd>
     
     
     <div>Validate the combination of <em>cmp</em>, <em>eq</em>, and <em>order</em>. Derive the effective
-value of order.<table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">ctx:</span><code><a href="mypy.plugin.html#ClassDefContext">mypy.plugin.ClassDefContext</a></code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr class="fieldStart"><td class="fieldName" colspan="2">Returns</td></tr><tr><td class="fieldArgContainer"><code>bool</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr></table></div>
+value of order.<table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">ctx:</span><code><a href="mypy.plugin.html#ClassDefContext" class="internal-link">mypy.plugin.ClassDefContext</a></code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr class="fieldStart"><td class="fieldName" colspan="2">Returns</td></tr><tr><td class="fieldArgContainer"><code>bool</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr></table></div>
   </div>
 </div><div class="basefunction private">
   
@@ -776,7 +796,7 @@ value of order.<table class="fieldTable"><tr class="fieldStart"><td class="field
     
     <div><p>Return the Optional[bool] argument for the decorator.</p>
 <p>This handles both @decorator(...) and @decorator.</p>
-<table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">ctx:</span><code><a href="mypy.plugin.html#ClassDefContext">mypy.plugin.ClassDefContext</a></code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">name:</span><code>str</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">default:</span><code>Optional[<wbr></wbr>bool]</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr class="fieldStart"><td class="fieldName" colspan="2">Returns</td></tr><tr><td class="fieldArgContainer"><code>Optional[<wbr></wbr>bool]</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr></table></div>
+<table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">ctx:</span><code><a href="mypy.plugin.html#ClassDefContext" class="internal-link">mypy.plugin.ClassDefContext</a></code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">name:</span><code>str</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">default:</span><code>Optional[<wbr></wbr>bool]</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr class="fieldStart"><td class="fieldName" colspan="2">Returns</td></tr><tr><td class="fieldArgContainer"><code>Optional[<wbr></wbr>bool]</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr></table></div>
   </div>
 </div><div class="basefunction private">
   
@@ -798,7 +818,7 @@ value of order.<table class="fieldTable"><tr class="fieldStart"><td class="field
   <div class="docstring functionBody">
     
     
-    <div>Return whether this class is frozen.<table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">ctx:</span><code><a href="mypy.plugin.html#ClassDefContext">mypy.plugin.ClassDefContext</a></code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">frozen_default:</span><code>bool</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr class="fieldStart"><td class="fieldName" colspan="2">Returns</td></tr><tr><td class="fieldArgContainer"><code>bool</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr></table></div>
+    <div>Return whether this class is frozen.<table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">ctx:</span><code><a href="mypy.plugin.html#ClassDefContext" class="internal-link">mypy.plugin.ClassDefContext</a></code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">frozen​_default:</span><code>bool</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr class="fieldStart"><td class="fieldName" colspan="2">Returns</td></tr><tr><td class="fieldArgContainer"><code>bool</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr></table></div>
   </div>
 </div><div class="basefunction private">
   
@@ -820,7 +840,7 @@ value of order.<table class="fieldTable"><tr class="fieldStart"><td class="field
   <div class="docstring functionBody">
     
     
-    <div>Turn all the attributes into properties to simulate frozen classes.<table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">ctx:</span><code><a href="mypy.plugin.html#ClassDefContext">mypy.plugin.ClassDefContext</a></code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">attributes:</span><code>List[<wbr></wbr><a href="mypy.plugins.attrs.Attribute.html">Attribute</a>]</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr></table></div>
+    <div>Turn all the attributes into properties to simulate frozen classes.<table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">ctx:</span><code><a href="mypy.plugin.html#ClassDefContext" class="internal-link">mypy.plugin.ClassDefContext</a></code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">attributes:</span><code>List[<wbr></wbr><a href="mypy.plugins.attrs.Attribute.html" class="internal-link" title="mypy.plugins.attrs.Attribute">Attribute</a>]</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr></table></div>
   </div>
 </div><div class="basefunction private">
   
@@ -842,7 +862,7 @@ value of order.<table class="fieldTable"><tr class="fieldStart"><td class="field
   <div class="docstring functionBody">
     
     
-    <div>Convert a possibly complex assignment expression into lists of lvalues and rvalues.<table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">lvalue:</span><code><a href="mypy.nodes.Expression.html">Expression</a></code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">stmt:</span><code><a href="mypy.nodes.AssignmentStmt.html">AssignmentStmt</a></code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr class="fieldStart"><td class="fieldName" colspan="2">Returns</td></tr><tr><td class="fieldArgContainer"><code>Tuple[<wbr></wbr>List[<wbr></wbr><a href="mypy.nodes.NameExpr.html">NameExpr</a>], <wbr></wbr>List[<wbr></wbr><a href="mypy.nodes.Expression.html">Expression</a>]]</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr></table></div>
+    <div>Convert a possibly complex assignment expression into lists of lvalues and rvalues.<table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">lvalue:</span><code><a href="mypy.nodes.Expression.html" class="internal-link" title="mypy.nodes.Expression">Expression</a></code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">stmt:</span><code><a href="mypy.nodes.AssignmentStmt.html" class="internal-link" title="mypy.nodes.AssignmentStmt">AssignmentStmt</a></code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr class="fieldStart"><td class="fieldName" colspan="2">Returns</td></tr><tr><td class="fieldArgContainer"><code>Tuple[<wbr></wbr>List[<wbr></wbr><a href="mypy.nodes.NameExpr.html" class="internal-link" title="mypy.nodes.NameExpr">NameExpr</a>], <wbr></wbr>List[<wbr></wbr><a href="mypy.nodes.Expression.html" class="internal-link" title="mypy.nodes.Expression">Expression</a>]]</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr></table></div>
   </div>
 </div><div class="basefunction private">
   
@@ -864,7 +884,7 @@ value of order.<table class="fieldTable"><tr class="fieldStart"><td class="field
   <div class="docstring functionBody">
     
     
-    <div>Return the Converter object from an Expression.<table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">ctx:</span><code><a href="mypy.plugin.html#ClassDefContext">mypy.plugin.ClassDefContext</a></code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">converter:</span><code>Optional[<wbr></wbr><a href="mypy.nodes.Expression.html">Expression</a>]</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr class="fieldStart"><td class="fieldName" colspan="2">Returns</td></tr><tr><td class="fieldArgContainer"><code><a href="mypy.plugins.attrs.Converter.html">Converter</a></code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr></table></div>
+    <div>Return the Converter object from an Expression.<table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">ctx:</span><code><a href="mypy.plugin.html#ClassDefContext" class="internal-link">mypy.plugin.ClassDefContext</a></code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">converter:</span><code>Optional[<wbr></wbr><a href="mypy.nodes.Expression.html" class="internal-link" title="mypy.nodes.Expression">Expression</a>]</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr class="fieldStart"><td class="fieldName" colspan="2">Returns</td></tr><tr><td class="fieldArgContainer"><code><a href="mypy.plugins.attrs.Converter.html" class="internal-link" title="mypy.plugins.attrs.Converter">Converter</a></code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr></table></div>
   </div>
 </div>
 
@@ -876,7 +896,7 @@ value of order.<table class="fieldTable"><tr class="fieldStart"><td class="field
   <div class="container">
     <a href="index.html">API Documentation</a> for <a href="https://github.com/python/mypy" class="projecthome">mypy-0.930</a>,
   generated by <a href="https://github.com/twisted/pydoctor/">pydoctor</a>
-    21.2.2 at 2022-01-12 04:22:24.
+    22.2.2.dev0 at 2022-03-04 05:57:16.
   </div>
 </footer>
 

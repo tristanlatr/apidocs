@@ -7,7 +7,7 @@
   <head>
     
     <title>mypy.types.TypeAliasType</title>
-    <meta name="generator" content="pydoctor 21.2.2"> 
+    <meta name="generator" content="pydoctor 22.2.2.dev0"> 
         
     </meta>
     <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
@@ -44,69 +44,82 @@
           Names
         </a>
 
-        <form action="search-results.html" id="search-box-container">
+        <div id="search-box-container">
           <div class="input-group">
-            <input id="search-box" name="search-query" placeholder="Search..." aria-label="Search" minlength="2" class="form-control" />
+            <input id="search-box" type="search" name="search-query" placeholder="Search..." aria-label="Search" minlength="2" class="form-control" autocomplete="off" />
+            
             <span class="input-group-btn">
-              <button class="btn btn-default" type="submit" title="Search"><img src="fonts/search.svg" alt="Search!" /></button>
-              <a class="btn btn-default" id="search-help-button" title="Help" onclick="toggleSearchHelpText()"><img src="fonts/info.svg" alt="Help!" /></a>
+              <a style="display: none;" class="btn btn-default" id="search-clear-button" title="Clear" onclick="clearSearch()"><img src="fonts/x-circle.svg" alt="Clear" /></a>
+              <a class="btn btn-default" id="search-help-button" title="Help" onclick="toggleSearchHelpText()"><img src="fonts/info.svg" alt="Help" /></a>
             </span>
           </div>
-        </form>
+        </div>
 
-        <div class="rst-admonition hint" id="search-help-box">
+      </div>
+
+      <div id="search-results-container" style="display: none;">
+        <div>
+          <span class="label label-default" id="search-docstrings-button">
+            <a title="Search in docstrings" onclick="toggleSearchInDocstrings()">search in docstrings</a></span>
+        </div>
+
+        <noscript>
+            <h1>Cannot search: JavaScript is not supported/enabled in your browser.</h1>
+        </noscript>
+
+        <div class="hint" id="search-help-box">
           <p class="rst-last">
       
             Search bar offers the following options:
             <ul>   
                 <li>
                   <strong>Term presence.</strong> The below example searches for documents that 
-                    must contain “foo”, might contain “bar” and must not contain “baz”:
-                  <br /> <code>'+foo bar -baz'</code>
+                    must contain “foo”, might contain “bar” and must not contain “baz”: <code>+foo bar -baz</code>
                 </li> 
 
                 <li>
-                  <strong>Wildcards.</strong> The below example searches for documents with words beginning with “foo”:
-                  <br /> <code>'foo*'</code>
+                  <strong>Wildcards.</strong> The below example searches for documents with words beginning with “foo”: <code>foo*</code>
                 </li> 
 
                 <li>
-                  <strong>Search in specific fields.</strong> The following search matches all documents 
-                  that contains "foo" in their full dotted name and with “bar” in any field:
-                  <br /> <code>'+fullName:*foo* +bar'</code>
+                  <strong>Search in specific fields.</strong> The following search matches all objects 
+                  in "twisted.mail" that matches “search”: <code>+qname:twisted.mail.* +search</code>
 
                   <p>
-                    Possible fields: 'name', 'docstring', 'fullName'.
+                    Possible fields: 'name', 'qname' (fully qualified name), 'docstring', and 'kind'.
+                    Last two fields are only applicable if "search in docstrings" is enabled.
                   </p>
                 </li>
 
                 <li>
                   <strong>Fuzzy matches.</strong> The following search matches all documents 
-                  that have a word within 1 edit distance of “foo”:
-                  <br /> <code>'foo~1'</code>
+                  that have a word within 1 edit distance of “foo”: <code>foo~1</code>
                 </li>
             </ul>
 
           </p>
         </div>
 
-      </div>
+        <div id="search-status"> </div>
+        
+        <div class="warning" id="search-warn-box" style="display: none;">
+          <p class="rst-last"><span id="search-warn"></span></p>
+        </div>
 
+        <table id="search-results">
+          <!-- Filled dynamically by JS -->
+        </table>
+        
+        <div style="margin-top: 8px;">
+          <p>Results provided by <a href="https://lunrjs.com">Lunr.js</a></p>
+        </div>
+      </div>
 
     </div>
   </div>
 
-  <script>
- 
-    function toggleSearchHelpText() {
-        document.body.classList.toggle("search-help-hidden");
-    }
-    // Init search and help text
-    document.getElementById('search-box-container').style.display = 'block';
-    document.getElementById('search-help-box').style.display = 'block';
-    document.body.classList.add("search-help-hidden");
-
-  </script>
+  <script src="ajax.js" type="text/javascript"></script>
+  <script src="search.js" type="text/javascript"></script>
 
 </nav>
 
@@ -115,7 +128,7 @@
     <div class="container">
 
       <div class="page-header">
-        <h1 class="class"><code><code><a href="mypy.html">mypy</a></code><wbr></wbr>.<code><a href="mypy.types.html">types</a></code><wbr></wbr>.<code><a href="mypy.types.TypeAliasType.html">TypeAliasType</a></code></code></h1>
+        <h1 class="class"><code><code><a href="index.html" class="internal-link">mypy</a></code><wbr></wbr>.<code><a href="mypy.types.html" class="internal-link" title="mypy.types">types</a></code><wbr></wbr>.<code><a href="mypy.types.TypeAliasType.html" class="internal-link" title="mypy.types.TypeAliasType">TypeAliasType</a></code></code></h1>
         <div id="showPrivate">
           <button class="btn btn-link" onclick="togglePrivate()">Toggle Private API</button>
         </div>
@@ -126,7 +139,7 @@
       </div>
 
       <div class="extrasDocstring">
-        <p><code><span class="py-keyword">class</span> <span class="py-defname">TypeAliasType</span>(<a href="mypy.types.Type.html" title="mypy.types.Type">Type</a>): <a href="https://github.com/python/mypy/tree/v0.930/mypy/types.py#L168" class="sourceLink">(source)</a></code></p>
+        <p><code><span class="py-keyword">class</span> <span class="py-defname">TypeAliasType</span>(<a href="mypy.types.Type.html" class="internal-link" title="mypy.types.Type">Type</a>): <a href="https://github.com/python/mypy/tree/v0.930/mypy/types.py#L168" class="sourceLink">(source)</a></code></p>
         <p><a href="classIndex.html#mypy.types.TypeAliasType">View In Hierarchy</a></p>
       </div>
 
@@ -150,156 +163,156 @@ children: List[Node]</dd>
       </div>
 
       <div id="splitTables">
-        <table class="children sortable" id="id793">
+        <table class="children sortable" id="id795">
   
   
   <tr class="classmethod">
     
     <td>Class Method</td>
-    <td><code><a href="#deserialize">deserialize</a></code></td>
+    <td><code><a href="#deserialize" class="internal-link" title="mypy.types.TypeAliasType.deserialize">deserialize</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#__eq__">__eq__</a></code></td>
+    <td><code><a href="#__eq__" class="internal-link" title="mypy.types.TypeAliasType.__eq__">__eq__</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#__hash__">__hash__</a></code></td>
+    <td><code><a href="#__hash__" class="internal-link" title="mypy.types.TypeAliasType.__hash__">__hash__</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#__init__">__init__</a></code></td>
+    <td><code><a href="#__init__" class="internal-link" title="mypy.types.TypeAliasType.__init__">__init__</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#accept">accept</a></code></td>
+    <td><code><a href="#accept" class="internal-link" title="mypy.types.TypeAliasType.accept">accept</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#can_be_false_default">can_be_false_default</a></code></td>
+    <td><code><a href="#can_be_false_default" class="internal-link" title="mypy.types.TypeAliasType.can_be_false_default">can​_be​_false​_default</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#can_be_true_default">can_be_true_default</a></code></td>
+    <td><code><a href="#can_be_true_default" class="internal-link" title="mypy.types.TypeAliasType.can_be_true_default">can​_be​_true​_default</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#copy_modified">copy_modified</a></code></td>
+    <td><code><a href="#copy_modified" class="internal-link" title="mypy.types.TypeAliasType.copy_modified">copy​_modified</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#expand_all_if_possible">expand_all_if_possible</a></code></td>
-    <td><span>Attempt a full expansion of the type alias (including nested aliases).</span></td>
+    <td><code><a href="#expand_all_if_possible" class="internal-link" title="mypy.types.TypeAliasType.expand_all_if_possible">expand​_all​_if​_possible</a></code></td>
+    <td>Attempt a full expansion of the type alias (including nested aliases).</td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#serialize">serialize</a></code></td>
+    <td><code><a href="#serialize" class="internal-link" title="mypy.types.TypeAliasType.serialize">serialize</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="classvariable">
     
     <td>Class Variable</td>
-    <td><code><a href="#__slots__">__slots__</a></code></td>
+    <td><code><a href="#__slots__" class="internal-link" title="mypy.types.TypeAliasType.__slots__">__slots__</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="instancevariable">
     
     <td>Instance Variable</td>
-    <td><code><a href="#alias">alias</a></code></td>
+    <td><code><a href="#alias" class="internal-link" title="mypy.types.TypeAliasType.alias">alias</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="instancevariable">
     
     <td>Instance Variable</td>
-    <td><code><a href="#args">args</a></code></td>
+    <td><code><a href="#args" class="internal-link" title="mypy.types.TypeAliasType.args">args</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="instancevariable">
     
     <td>Instance Variable</td>
-    <td><code><a href="#type_ref">type_ref</a></code></td>
+    <td><code><a href="#type_ref" class="internal-link" title="mypy.types.TypeAliasType.type_ref">type​_ref</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="property">
     
     <td>Property</td>
-    <td><code><a href="#is_recursive">is_recursive</a></code></td>
+    <td><code><a href="#is_recursive" class="internal-link" title="mypy.types.TypeAliasType.is_recursive">is​_recursive</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method private">
     
     <td>Method</td>
-    <td><code><a href="#_expand_once">_expand_once</a></code></td>
-    <td><span>Expand to the target type exactly once.</span></td>
+    <td><code><a href="#_expand_once" class="internal-link" title="mypy.types.TypeAliasType._expand_once">_expand​_once</a></code></td>
+    <td>Expand to the target type exactly once.</td>
   </tr><tr class="method private">
     
     <td>Method</td>
-    <td><code><a href="#_partial_expansion">_partial_expansion</a></code></td>
+    <td><code><a href="#_partial_expansion" class="internal-link" title="mypy.types.TypeAliasType._partial_expansion">_partial​_expansion</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr>
 </table>
         
           <p class="inheritedFrom">
-            Inherited from <code><a href="mypy.types.Type.html">Type</a></code>:
+            Inherited from <code><a href="mypy.types.Type.html" class="internal-link" title="mypy.types.Type">Type</a></code>:
           </p>
-          <table class="children sortable" id="id794">
+          <table class="children sortable" id="id796">
   
   
   <tr class="basemethod">
     
     <td>Method</td>
-    <td><code><a href="mypy.types.Type.html#__repr__">__repr__</a></code></td>
+    <td><code><a href="mypy.types.Type.html#__repr__" class="internal-link" title="mypy.types.Type.__repr__">__repr__</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="baseinstancevariable">
     
     <td>Instance Variable</td>
-    <td><code><a href="mypy.types.Type.html#can_be_false">can_be_false</a></code></td>
+    <td><code><a href="mypy.types.Type.html#can_be_false" class="internal-link" title="mypy.types.Type.can_be_false">can​_be​_false</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="baseinstancevariable">
     
     <td>Instance Variable</td>
-    <td><code><a href="mypy.types.Type.html#can_be_true">can_be_true</a></code></td>
+    <td><code><a href="mypy.types.Type.html#can_be_true" class="internal-link" title="mypy.types.Type.can_be_true">can​_be​_true</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr>
 </table>
           
           <p class="inheritedFrom">
-            Inherited from <code><a href="mypy.nodes.Context.html">Context</a></code> (via <code><a href="mypy.types.Type.html">Type</a></code>):
+            Inherited from <code><a href="mypy.nodes.Context.html" class="internal-link" title="mypy.nodes.Context">Context</a></code> (via <code><a href="mypy.types.Type.html" class="internal-link" title="mypy.types.Type">Type</a></code>):
           </p>
-          <table class="children sortable" id="id795">
+          <table class="children sortable" id="id797">
   
   
   <tr class="basemethod">
     
     <td>Method</td>
-    <td><code><a href="mypy.nodes.Context.html#get_column">get_column</a></code></td>
-    <td><span>Don't use. Use x.column.</span></td>
+    <td><code><a href="mypy.nodes.Context.html#get_column" class="internal-link" title="mypy.nodes.Context.get_column">get​_column</a></code></td>
+    <td>Don't use. Use x.column.</td>
   </tr><tr class="basemethod">
     
     <td>Method</td>
-    <td><code><a href="mypy.nodes.Context.html#get_line">get_line</a></code></td>
-    <td><span>Don't use. Use x.line.</span></td>
+    <td><code><a href="mypy.nodes.Context.html#get_line" class="internal-link" title="mypy.nodes.Context.get_line">get​_line</a></code></td>
+    <td>Don't use. Use x.line.</td>
   </tr><tr class="basemethod">
     
     <td>Method</td>
-    <td><code><a href="mypy.nodes.Context.html#set_line">set_line</a></code></td>
-    <td><span>If target is a node, pull line (and column) information into this node. If column is specified, this will override any column information coming from a node.</span></td>
+    <td><code><a href="mypy.nodes.Context.html#set_line" class="internal-link" title="mypy.nodes.Context.set_line">set​_line</a></code></td>
+    <td>If target is a node, pull line (and column) information into this node. If column is specified, this will override any column information coming from a node.</td>
   </tr><tr class="baseinstancevariable">
     
     <td>Instance Variable</td>
-    <td><code><a href="mypy.nodes.Context.html#column">column</a></code></td>
+    <td><code><a href="mypy.nodes.Context.html#column" class="internal-link" title="mypy.nodes.Context.column">column</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="baseinstancevariable">
     
     <td>Instance Variable</td>
-    <td><code><a href="mypy.nodes.Context.html#end_line">end_line</a></code></td>
+    <td><code><a href="mypy.nodes.Context.html#end_line" class="internal-link" title="mypy.nodes.Context.end_line">end​_line</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="baseinstancevariable">
     
     <td>Instance Variable</td>
-    <td><code><a href="mypy.nodes.Context.html#line">line</a></code></td>
+    <td><code><a href="mypy.nodes.Context.html#line" class="internal-link" title="mypy.nodes.Context.line">line</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr>
 </table>
@@ -328,9 +341,9 @@ children: List[Node]</dd>
     </a>
   </div>
   <div class="docstring functionBody">
-    <div class="interfaceinfo">overrides <code><a href="mypy.types.Type.html#deserialize">mypy.types.Type.deserialize</a></code></div>
+    <div class="interfaceinfo">overrides <code><a href="mypy.types.Type.html#deserialize" class="internal-link">mypy.types.Type.deserialize</a></code></div>
     
-    <div><p class="undocumented">Undocumented</p><table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">data:</span><code><a href="mypy.types.html#JsonDict">JsonDict</a></code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr class="fieldStart"><td class="fieldName" colspan="2">Returns</td></tr><tr><td class="fieldArgContainer"><code><a href="mypy.types.TypeAliasType.html">TypeAliasType</a></code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr></table></div>
+    <div><p class="undocumented">Undocumented</p><table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">data:</span><code><a href="mypy.types.html#JsonDict" class="internal-link" title="mypy.types.JsonDict">JsonDict</a></code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr class="fieldStart"><td class="fieldName" colspan="2">Returns</td></tr><tr><td class="fieldArgContainer"><code><a href="mypy.types.TypeAliasType.html" class="internal-link" title="mypy.types.TypeAliasType">TypeAliasType</a></code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr></table></div>
   </div>
 </div><div class="basemethod">
   
@@ -394,9 +407,9 @@ children: List[Node]</dd>
     </a>
   </div>
   <div class="docstring functionBody">
-    <div class="interfaceinfo">overrides <code><a href="mypy.types.Type.html#__init__">mypy.types.Type.__init__</a></code></div>
+    <div class="interfaceinfo">overrides <code><a href="mypy.types.Type.html#__init__" class="internal-link">mypy.types.Type.__init__</a></code></div>
     
-    <div><p class="undocumented">Undocumented</p><table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">alias:</span><code>Optional[<wbr></wbr><a href="mypy.nodes.TypeAlias.html">mypy.nodes.TypeAlias</a>]</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">args:</span><code>List[<wbr></wbr><a href="mypy.types.Type.html">Type</a>]</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">line:</span><code>int</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">column:</span><code>int</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr></table></div>
+    <div><p class="undocumented">Undocumented</p><table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">alias:</span><code>Optional[<wbr></wbr><a href="mypy.nodes.TypeAlias.html" class="internal-link">mypy.nodes.TypeAlias</a>]</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">args:</span><code>List[<wbr></wbr><a href="mypy.types.Type.html" class="internal-link" title="mypy.types.Type">Type</a>]</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">line:</span><code>int</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">column:</span><code>int</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr></table></div>
   </div>
 </div><div class="basemethod">
   
@@ -416,9 +429,9 @@ children: List[Node]</dd>
     </a>
   </div>
   <div class="docstring functionBody">
-    <div class="interfaceinfo">overrides <code><a href="mypy.types.Type.html#accept">mypy.types.Type.accept</a></code></div>
+    <div class="interfaceinfo">overrides <code><a href="mypy.types.Type.html#accept" class="internal-link">mypy.types.Type.accept</a></code></div>
     
-    <div><p class="undocumented">Undocumented</p><table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">visitor:</span><code><a href="mypy.type_visitor.TypeVisitor.html">TypeVisitor</a>[<wbr></wbr><a href="mypy.types.html#T">T</a>]</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr class="fieldStart"><td class="fieldName" colspan="2">Returns</td></tr><tr><td class="fieldArgContainer"><code><a href="mypy.types.html#T">T</a></code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr></table></div>
+    <div><p class="undocumented">Undocumented</p><table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">visitor:</span><code><a href="mypy.type_visitor.TypeVisitor.html" class="internal-link" title="mypy.type_visitor.TypeVisitor">TypeVisitor</a>[<wbr></wbr><a href="mypy.types.html#T" class="internal-link" title="mypy.types.T">T</a>]</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr class="fieldStart"><td class="fieldName" colspan="2">Returns</td></tr><tr><td class="fieldArgContainer"><code><a href="mypy.types.html#T" class="internal-link" title="mypy.types.T">T</a></code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr></table></div>
   </div>
 </div><div class="basemethod">
   
@@ -438,7 +451,7 @@ children: List[Node]</dd>
     </a>
   </div>
   <div class="docstring functionBody">
-    <div class="interfaceinfo">overrides <code><a href="mypy.types.Type.html#can_be_false_default">mypy.types.Type.can_be_false_default</a></code></div>
+    <div class="interfaceinfo">overrides <code><a href="mypy.types.Type.html#can_be_false_default" class="internal-link">mypy.types.Type.can_be_false_default</a></code></div>
     
     <div><p class="undocumented">Undocumented</p><table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Returns</td></tr><tr><td class="fieldArgContainer"><code>bool</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr></table></div>
   </div>
@@ -460,7 +473,7 @@ children: List[Node]</dd>
     </a>
   </div>
   <div class="docstring functionBody">
-    <div class="interfaceinfo">overrides <code><a href="mypy.types.Type.html#can_be_true_default">mypy.types.Type.can_be_true_default</a></code></div>
+    <div class="interfaceinfo">overrides <code><a href="mypy.types.Type.html#can_be_true_default" class="internal-link">mypy.types.Type.can_be_true_default</a></code></div>
     
     <div><p class="undocumented">Undocumented</p><table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Returns</td></tr><tr><td class="fieldArgContainer"><code>bool</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr></table></div>
   </div>
@@ -484,7 +497,7 @@ children: List[Node]</dd>
   <div class="docstring functionBody">
     
     
-    <div><p class="undocumented">Undocumented</p><table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">args:</span><code>Optional[<wbr></wbr>List[<wbr></wbr><a href="mypy.types.Type.html">Type</a>]]</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr class="fieldStart"><td class="fieldName" colspan="2">Returns</td></tr><tr><td class="fieldArgContainer"><code><a href="mypy.types.TypeAliasType.html">TypeAliasType</a></code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr></table></div>
+    <div><p class="undocumented">Undocumented</p><table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">args:</span><code>Optional[<wbr></wbr>List[<wbr></wbr><a href="mypy.types.Type.html" class="internal-link" title="mypy.types.Type">Type</a>]]</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr class="fieldStart"><td class="fieldName" colspan="2">Returns</td></tr><tr><td class="fieldArgContainer"><code><a href="mypy.types.TypeAliasType.html" class="internal-link" title="mypy.types.TypeAliasType">TypeAliasType</a></code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr></table></div>
   </div>
 </div><div class="basemethod">
   
@@ -509,7 +522,7 @@ children: List[Node]</dd>
     <div><p>Attempt a full expansion of the type alias (including nested aliases).</p>
 <p>If the expansion is not possible, i.e. the alias is (mutually-)recursive,
 return None.</p>
-<table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Returns</td></tr><tr><td class="fieldArgContainer"><code>Optional[<wbr></wbr><a href="mypy.types.ProperType.html">ProperType</a>]</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr></table></div>
+<table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Returns</td></tr><tr><td class="fieldArgContainer"><code>Optional[<wbr></wbr><a href="mypy.types.ProperType.html" class="internal-link" title="mypy.types.ProperType">ProperType</a>]</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr></table></div>
   </div>
 </div><div class="basemethod">
   
@@ -529,9 +542,9 @@ return None.</p>
     </a>
   </div>
   <div class="docstring functionBody">
-    <div class="interfaceinfo">overrides <code><a href="mypy.types.Type.html#serialize">mypy.types.Type.serialize</a></code></div>
+    <div class="interfaceinfo">overrides <code><a href="mypy.types.Type.html#serialize" class="internal-link">mypy.types.Type.serialize</a></code></div>
     
-    <div><p class="undocumented">Undocumented</p><table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Returns</td></tr><tr><td class="fieldArgContainer"><code><a href="mypy.types.html#JsonDict">JsonDict</a></code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr></table></div>
+    <div><p class="undocumented">Undocumented</p><table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Returns</td></tr><tr><td class="fieldArgContainer"><code><a href="mypy.types.html#JsonDict" class="internal-link" title="mypy.types.JsonDict">JsonDict</a></code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr></table></div>
   </div>
 </div><div class="baseclassvariable">
   
@@ -544,16 +557,17 @@ return None.</p>
   </a>
   <div class="functionHeader">
     
-    <span class="py-defname">__slots__</span>: <code>tuple[<wbr></wbr>str, <wbr></wbr>...]</code> =
+    <span class="py-defname">__slots__</span>: <code>tuple[<wbr></wbr>str, <wbr></wbr><span class="rst-variable-ellipsis">...</span>]</code> =
     <a class="sourceLink" href="https://github.com/python/mypy/tree/v0.930/mypy/types.py#L185">
       
       (source)
     </a>
   </div>
   <div class="functionBody">
-    <div class="interfaceinfo">overrides <code><a href="mypy.types.Type.html#__slots__">mypy.types.Type.__slots__</a></code></div>
+    <div class="interfaceinfo">overrides <code><a href="mypy.types.Type.html#__slots__" class="internal-link">mypy.types.Type.__slots__</a></code></div>
     
     <div><p class="undocumented">Undocumented</p></div>
+    
   </div>
 </div><div class="baseinstancevariable">
   
@@ -576,6 +590,7 @@ return None.</p>
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    
   </div>
 </div><div class="baseinstancevariable">
   
@@ -598,6 +613,7 @@ return None.</p>
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    
   </div>
 </div><div class="baseinstancevariable">
   
@@ -620,6 +636,7 @@ return None.</p>
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    
   </div>
 </div><div class="baseproperty">
   
@@ -642,6 +659,7 @@ return None.</p>
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    
   </div>
 </div><div class="basemethod private">
   
@@ -667,7 +685,7 @@ return None.</p>
 <p>This doesn't do full expansion, i.e. the result can contain another
 (or even this same) type alias. Use this internal helper only when really needed,
 its public wrapper mypy.types.get_proper_type() is preferred.</p>
-<table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Returns</td></tr><tr><td class="fieldArgContainer"><code><a href="mypy.types.Type.html">Type</a></code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr></table></div>
+<table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Returns</td></tr><tr><td class="fieldArgContainer"><code><a href="mypy.types.Type.html" class="internal-link" title="mypy.types.Type">Type</a></code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr></table></div>
   </div>
 </div><div class="basemethod private">
   
@@ -689,7 +707,7 @@ its public wrapper mypy.types.get_proper_type() is preferred.</p>
   <div class="docstring functionBody">
     
     
-    <div><p class="undocumented">Undocumented</p><table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Returns</td></tr><tr><td class="fieldArgContainer"><code>Tuple[<wbr></wbr><a href="mypy.types.ProperType.html">ProperType</a>, <wbr></wbr>bool]</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr></table></div>
+    <div><p class="undocumented">Undocumented</p><table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Returns</td></tr><tr><td class="fieldArgContainer"><code>Tuple[<wbr></wbr><a href="mypy.types.ProperType.html" class="internal-link" title="mypy.types.ProperType">ProperType</a>, <wbr></wbr>bool]</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr></table></div>
   </div>
 </div>
 
@@ -701,7 +719,7 @@ its public wrapper mypy.types.get_proper_type() is preferred.</p>
   <div class="container">
     <a href="index.html">API Documentation</a> for <a href="https://github.com/python/mypy" class="projecthome">mypy-0.930</a>,
   generated by <a href="https://github.com/twisted/pydoctor/">pydoctor</a>
-    21.2.2 at 2022-01-12 04:22:24.
+    22.2.2.dev0 at 2022-03-04 05:57:16.
   </div>
 </footer>
 

@@ -7,7 +7,7 @@
   <head>
     
     <title>mypy.test.testtypes.TypeOpsSuite</title>
-    <meta name="generator" content="pydoctor 21.2.2"> 
+    <meta name="generator" content="pydoctor 22.2.2.dev0"> 
         
     </meta>
     <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
@@ -44,69 +44,82 @@
           Names
         </a>
 
-        <form action="search-results.html" id="search-box-container">
+        <div id="search-box-container">
           <div class="input-group">
-            <input id="search-box" name="search-query" placeholder="Search..." aria-label="Search" minlength="2" class="form-control" />
+            <input id="search-box" type="search" name="search-query" placeholder="Search..." aria-label="Search" minlength="2" class="form-control" autocomplete="off" />
+            
             <span class="input-group-btn">
-              <button class="btn btn-default" type="submit" title="Search"><img src="fonts/search.svg" alt="Search!" /></button>
-              <a class="btn btn-default" id="search-help-button" title="Help" onclick="toggleSearchHelpText()"><img src="fonts/info.svg" alt="Help!" /></a>
+              <a style="display: none;" class="btn btn-default" id="search-clear-button" title="Clear" onclick="clearSearch()"><img src="fonts/x-circle.svg" alt="Clear" /></a>
+              <a class="btn btn-default" id="search-help-button" title="Help" onclick="toggleSearchHelpText()"><img src="fonts/info.svg" alt="Help" /></a>
             </span>
           </div>
-        </form>
+        </div>
 
-        <div class="rst-admonition hint" id="search-help-box">
+      </div>
+
+      <div id="search-results-container" style="display: none;">
+        <div>
+          <span class="label label-default" id="search-docstrings-button">
+            <a title="Search in docstrings" onclick="toggleSearchInDocstrings()">search in docstrings</a></span>
+        </div>
+
+        <noscript>
+            <h1>Cannot search: JavaScript is not supported/enabled in your browser.</h1>
+        </noscript>
+
+        <div class="hint" id="search-help-box">
           <p class="rst-last">
       
             Search bar offers the following options:
             <ul>   
                 <li>
                   <strong>Term presence.</strong> The below example searches for documents that 
-                    must contain “foo”, might contain “bar” and must not contain “baz”:
-                  <br /> <code>'+foo bar -baz'</code>
+                    must contain “foo”, might contain “bar” and must not contain “baz”: <code>+foo bar -baz</code>
                 </li> 
 
                 <li>
-                  <strong>Wildcards.</strong> The below example searches for documents with words beginning with “foo”:
-                  <br /> <code>'foo*'</code>
+                  <strong>Wildcards.</strong> The below example searches for documents with words beginning with “foo”: <code>foo*</code>
                 </li> 
 
                 <li>
-                  <strong>Search in specific fields.</strong> The following search matches all documents 
-                  that contains "foo" in their full dotted name and with “bar” in any field:
-                  <br /> <code>'+fullName:*foo* +bar'</code>
+                  <strong>Search in specific fields.</strong> The following search matches all objects 
+                  in "twisted.mail" that matches “search”: <code>+qname:twisted.mail.* +search</code>
 
                   <p>
-                    Possible fields: 'name', 'docstring', 'fullName'.
+                    Possible fields: 'name', 'qname' (fully qualified name), 'docstring', and 'kind'.
+                    Last two fields are only applicable if "search in docstrings" is enabled.
                   </p>
                 </li>
 
                 <li>
                   <strong>Fuzzy matches.</strong> The following search matches all documents 
-                  that have a word within 1 edit distance of “foo”:
-                  <br /> <code>'foo~1'</code>
+                  that have a word within 1 edit distance of “foo”: <code>foo~1</code>
                 </li>
             </ul>
 
           </p>
         </div>
 
-      </div>
+        <div id="search-status"> </div>
+        
+        <div class="warning" id="search-warn-box" style="display: none;">
+          <p class="rst-last"><span id="search-warn"></span></p>
+        </div>
 
+        <table id="search-results">
+          <!-- Filled dynamically by JS -->
+        </table>
+        
+        <div style="margin-top: 8px;">
+          <p>Results provided by <a href="https://lunrjs.com">Lunr.js</a></p>
+        </div>
+      </div>
 
     </div>
   </div>
 
-  <script>
- 
-    function toggleSearchHelpText() {
-        document.body.classList.toggle("search-help-hidden");
-    }
-    // Init search and help text
-    document.getElementById('search-box-container').style.display = 'block';
-    document.getElementById('search-help-box').style.display = 'block';
-    document.body.classList.add("search-help-hidden");
-
-  </script>
+  <script src="ajax.js" type="text/javascript"></script>
+  <script src="search.js" type="text/javascript"></script>
 
 </nav>
 
@@ -115,7 +128,7 @@
     <div class="container">
 
       <div class="page-header">
-        <h1 class="class"><code><code><a href="mypy.html">mypy</a></code><wbr></wbr>.<code><a href="mypy.test.html">test</a></code><wbr></wbr>.<code><a href="mypy.test.testtypes.html">testtypes</a></code><wbr></wbr>.<code><a href="mypy.test.testtypes.TypeOpsSuite.html">TypeOpsSuite</a></code></code></h1>
+        <h1 class="class"><code><code><a href="index.html" class="internal-link">mypy</a></code><wbr></wbr>.<code><a href="mypy.test.html" class="internal-link" title="mypy.test">test</a></code><wbr></wbr>.<code><a href="mypy.test.testtypes.html" class="internal-link" title="mypy.test.testtypes">testtypes</a></code><wbr></wbr>.<code><a href="mypy.test.testtypes.TypeOpsSuite.html" class="internal-link" title="mypy.test.testtypes.TypeOpsSuite">TypeOpsSuite</a></code></code></h1>
         <div id="showPrivate">
           <button class="btn btn-link" onclick="togglePrivate()">Toggle Private API</button>
         </div>
@@ -126,7 +139,7 @@
       </div>
 
       <div class="extrasDocstring">
-        <p><code><span class="py-keyword">class</span> <span class="py-defname">TypeOpsSuite</span>(<span title="mypy.test.helpers.Suite">Suite</span>): <a href="https://github.com/python/mypy/tree/v0.930/mypy/test/testtypes.py#L129" class="sourceLink">(source)</a></code></p>
+        <p><code><span class="py-keyword">class</span> <span class="py-defname">TypeOpsSuite</span>(Suite): <a href="https://github.com/python/mypy/tree/v0.930/mypy/test/testtypes.py#L129" class="sourceLink">(source)</a></code></p>
         <p><a href="classIndex.html#mypy.test.testtypes.TypeOpsSuite">View In Hierarchy</a></p>
       </div>
 
@@ -135,228 +148,228 @@
       </div>
 
       <div id="splitTables">
-        <table class="children sortable" id="id738">
+        <table class="children sortable" id="id740">
   
   
   <tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#assert_erase">assert_erase</a></code></td>
+    <td><code><a href="#assert_erase" class="internal-link" title="mypy.test.testtypes.TypeOpsSuite.assert_erase">assert​_erase</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#assert_expand">assert_expand</a></code></td>
+    <td><code><a href="#assert_expand" class="internal-link" title="mypy.test.testtypes.TypeOpsSuite.assert_expand">assert​_expand</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#assert_simplified_union">assert_simplified_union</a></code></td>
+    <td><code><a href="#assert_simplified_union" class="internal-link" title="mypy.test.testtypes.TypeOpsSuite.assert_simplified_union">assert​_simplified​_union</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#callable">callable</a></code></td>
-    <td><span>callable(args, a1, ..., an, r) constructs a callable with argument types a1, ... an and return type r and type arguments vars.</span></td>
+    <td><code><a href="#callable" class="internal-link" title="mypy.test.testtypes.TypeOpsSuite.callable">callable</a></code></td>
+    <td>callable(args, a1, ..., an, r) constructs a callable with argument types a1, ... an and return type r and type arguments vars.</td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#setUp">setUp</a></code></td>
+    <td><code><a href="#setUp" class="internal-link" title="mypy.test.testtypes.TypeOpsSuite.setUp">set​Up</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#test_empty_tuple_always_false">test_empty_tuple_always_false</a></code></td>
+    <td><code><a href="#test_empty_tuple_always_false" class="internal-link" title="mypy.test.testtypes.TypeOpsSuite.test_empty_tuple_always_false">test​_empty​_tuple​_always​_false</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#test_erase_with_function_type">test_erase_with_function_type</a></code></td>
+    <td><code><a href="#test_erase_with_function_type" class="internal-link" title="mypy.test.testtypes.TypeOpsSuite.test_erase_with_function_type">test​_erase​_with​_function​_type</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#test_erase_with_generic_type">test_erase_with_generic_type</a></code></td>
+    <td><code><a href="#test_erase_with_generic_type" class="internal-link" title="mypy.test.testtypes.TypeOpsSuite.test_erase_with_generic_type">test​_erase​_with​_generic​_type</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#test_erase_with_generic_type_recursive">test_erase_with_generic_type_recursive</a></code></td>
+    <td><code><a href="#test_erase_with_generic_type_recursive" class="internal-link" title="mypy.test.testtypes.TypeOpsSuite.test_erase_with_generic_type_recursive">test​_erase​_with​_generic​_type​_recursive</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#test_erase_with_tuple_type">test_erase_with_tuple_type</a></code></td>
+    <td><code><a href="#test_erase_with_tuple_type" class="internal-link" title="mypy.test.testtypes.TypeOpsSuite.test_erase_with_tuple_type">test​_erase​_with​_tuple​_type</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#test_erase_with_type_object">test_erase_with_type_object</a></code></td>
+    <td><code><a href="#test_erase_with_type_object" class="internal-link" title="mypy.test.testtypes.TypeOpsSuite.test_erase_with_type_object">test​_erase​_with​_type​_object</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#test_erase_with_type_type">test_erase_with_type_type</a></code></td>
+    <td><code><a href="#test_erase_with_type_type" class="internal-link" title="mypy.test.testtypes.TypeOpsSuite.test_erase_with_type_type">test​_erase​_with​_type​_type</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#test_erase_with_type_variable">test_erase_with_type_variable</a></code></td>
+    <td><code><a href="#test_erase_with_type_variable" class="internal-link" title="mypy.test.testtypes.TypeOpsSuite.test_erase_with_type_variable">test​_erase​_with​_type​_variable</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#test_expand_basic_generic_types">test_expand_basic_generic_types</a></code></td>
+    <td><code><a href="#test_expand_basic_generic_types" class="internal-link" title="mypy.test.testtypes.TypeOpsSuite.test_expand_basic_generic_types">test​_expand​_basic​_generic​_types</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#test_expand_naked_type_var">test_expand_naked_type_var</a></code></td>
+    <td><code><a href="#test_expand_naked_type_var" class="internal-link" title="mypy.test.testtypes.TypeOpsSuite.test_expand_naked_type_var">test​_expand​_naked​_type​_var</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#test_false_only_of_false_type_is_idempotent">test_false_only_of_false_type_is_idempotent</a></code></td>
+    <td><code><a href="#test_false_only_of_false_type_is_idempotent" class="internal-link" title="mypy.test.testtypes.TypeOpsSuite.test_false_only_of_false_type_is_idempotent">test​_false​_only​_of​_false​_type​_is​_idempotent</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#test_false_only_of_instance">test_false_only_of_instance</a></code></td>
+    <td><code><a href="#test_false_only_of_instance" class="internal-link" title="mypy.test.testtypes.TypeOpsSuite.test_false_only_of_instance">test​_false​_only​_of​_instance</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#test_false_only_of_true_type_is_uninhabited">test_false_only_of_true_type_is_uninhabited</a></code></td>
+    <td><code><a href="#test_false_only_of_true_type_is_uninhabited" class="internal-link" title="mypy.test.testtypes.TypeOpsSuite.test_false_only_of_true_type_is_uninhabited">test​_false​_only​_of​_true​_type​_is​_uninhabited</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#test_false_only_of_union">test_false_only_of_union</a></code></td>
+    <td><code><a href="#test_false_only_of_union" class="internal-link" title="mypy.test.testtypes.TypeOpsSuite.test_false_only_of_union">test​_false​_only​_of​_union</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#test_false_only_tuple">test_false_only_tuple</a></code></td>
+    <td><code><a href="#test_false_only_tuple" class="internal-link" title="mypy.test.testtypes.TypeOpsSuite.test_false_only_tuple">test​_false​_only​_tuple</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#test_is_more_precise">test_is_more_precise</a></code></td>
+    <td><code><a href="#test_is_more_precise" class="internal-link" title="mypy.test.testtypes.TypeOpsSuite.test_is_more_precise">test​_is​_more​_precise</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#test_is_proper_subtype">test_is_proper_subtype</a></code></td>
+    <td><code><a href="#test_is_proper_subtype" class="internal-link" title="mypy.test.testtypes.TypeOpsSuite.test_is_proper_subtype">test​_is​_proper​_subtype</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#test_is_proper_subtype_and_subtype_literal_types">test_is_proper_subtype_and_subtype_literal_types</a></code></td>
+    <td><code><a href="#test_is_proper_subtype_and_subtype_literal_types" class="internal-link" title="mypy.test.testtypes.TypeOpsSuite.test_is_proper_subtype_and_subtype_literal_types">test​_is​_proper​_subtype​_and​_subtype​_literal​_types</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#test_is_proper_subtype_contravariance">test_is_proper_subtype_contravariance</a></code></td>
+    <td><code><a href="#test_is_proper_subtype_contravariance" class="internal-link" title="mypy.test.testtypes.TypeOpsSuite.test_is_proper_subtype_contravariance">test​_is​_proper​_subtype​_contravariance</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#test_is_proper_subtype_covariance">test_is_proper_subtype_covariance</a></code></td>
+    <td><code><a href="#test_is_proper_subtype_covariance" class="internal-link" title="mypy.test.testtypes.TypeOpsSuite.test_is_proper_subtype_covariance">test​_is​_proper​_subtype​_covariance</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#test_is_proper_subtype_invariance">test_is_proper_subtype_invariance</a></code></td>
+    <td><code><a href="#test_is_proper_subtype_invariance" class="internal-link" title="mypy.test.testtypes.TypeOpsSuite.test_is_proper_subtype_invariance">test​_is​_proper​_subtype​_invariance</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#test_nonempty_tuple_always_true">test_nonempty_tuple_always_true</a></code></td>
+    <td><code><a href="#test_nonempty_tuple_always_true" class="internal-link" title="mypy.test.testtypes.TypeOpsSuite.test_nonempty_tuple_always_true">test​_nonempty​_tuple​_always​_true</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#test_simplified_union">test_simplified_union</a></code></td>
+    <td><code><a href="#test_simplified_union" class="internal-link" title="mypy.test.testtypes.TypeOpsSuite.test_simplified_union">test​_simplified​_union</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#test_subtype_aliases">test_subtype_aliases</a></code></td>
+    <td><code><a href="#test_subtype_aliases" class="internal-link" title="mypy.test.testtypes.TypeOpsSuite.test_subtype_aliases">test​_subtype​_aliases</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#test_trivial_erase">test_trivial_erase</a></code></td>
+    <td><code><a href="#test_trivial_erase" class="internal-link" title="mypy.test.testtypes.TypeOpsSuite.test_trivial_erase">test​_trivial​_erase</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#test_trivial_expand">test_trivial_expand</a></code></td>
+    <td><code><a href="#test_trivial_expand" class="internal-link" title="mypy.test.testtypes.TypeOpsSuite.test_trivial_expand">test​_trivial​_expand</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#test_trivial_expand_recursive">test_trivial_expand_recursive</a></code></td>
+    <td><code><a href="#test_trivial_expand_recursive" class="internal-link" title="mypy.test.testtypes.TypeOpsSuite.test_trivial_expand_recursive">test​_trivial​_expand​_recursive</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#test_true_only_of_false_type_is_uninhabited">test_true_only_of_false_type_is_uninhabited</a></code></td>
+    <td><code><a href="#test_true_only_of_false_type_is_uninhabited" class="internal-link" title="mypy.test.testtypes.TypeOpsSuite.test_true_only_of_false_type_is_uninhabited">test​_true​_only​_of​_false​_type​_is​_uninhabited</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#test_true_only_of_instance">test_true_only_of_instance</a></code></td>
+    <td><code><a href="#test_true_only_of_instance" class="internal-link" title="mypy.test.testtypes.TypeOpsSuite.test_true_only_of_instance">test​_true​_only​_of​_instance</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#test_true_only_of_true_type_is_idempotent">test_true_only_of_true_type_is_idempotent</a></code></td>
+    <td><code><a href="#test_true_only_of_true_type_is_idempotent" class="internal-link" title="mypy.test.testtypes.TypeOpsSuite.test_true_only_of_true_type_is_idempotent">test​_true​_only​_of​_true​_type​_is​_idempotent</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#test_true_only_of_union">test_true_only_of_union</a></code></td>
+    <td><code><a href="#test_true_only_of_union" class="internal-link" title="mypy.test.testtypes.TypeOpsSuite.test_true_only_of_union">test​_true​_only​_of​_union</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#test_union_can_be_false_if_any_false">test_union_can_be_false_if_any_false</a></code></td>
+    <td><code><a href="#test_union_can_be_false_if_any_false" class="internal-link" title="mypy.test.testtypes.TypeOpsSuite.test_union_can_be_false_if_any_false">test​_union​_can​_be​_false​_if​_any​_false</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#test_union_can_be_true_if_any_true">test_union_can_be_true_if_any_true</a></code></td>
+    <td><code><a href="#test_union_can_be_true_if_any_true" class="internal-link" title="mypy.test.testtypes.TypeOpsSuite.test_union_can_be_true_if_any_true">test​_union​_can​_be​_true​_if​_any​_true</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#test_union_can_not_be_false_if_none_false">test_union_can_not_be_false_if_none_false</a></code></td>
+    <td><code><a href="#test_union_can_not_be_false_if_none_false" class="internal-link" title="mypy.test.testtypes.TypeOpsSuite.test_union_can_not_be_false_if_none_false">test​_union​_can​_not​_be​_false​_if​_none​_false</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#test_union_can_not_be_true_if_none_true">test_union_can_not_be_true_if_none_true</a></code></td>
+    <td><code><a href="#test_union_can_not_be_true_if_none_true" class="internal-link" title="mypy.test.testtypes.TypeOpsSuite.test_union_can_not_be_true_if_none_true">test​_union​_can​_not​_be​_true​_if​_none​_true</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#tuple">tuple</a></code></td>
+    <td><code><a href="#tuple" class="internal-link" title="mypy.test.testtypes.TypeOpsSuite.tuple">tuple</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="instancevariable">
     
     <td>Instance Variable</td>
-    <td><code><a href="#fx">fx</a></code></td>
+    <td><code><a href="#fx" class="internal-link" title="mypy.test.testtypes.TypeOpsSuite.fx">fx</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="instancevariable">
     
     <td>Instance Variable</td>
-    <td><code><a href="#fx_co">fx_co</a></code></td>
+    <td><code><a href="#fx_co" class="internal-link" title="mypy.test.testtypes.TypeOpsSuite.fx_co">fx​_co</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="instancevariable">
     
     <td>Instance Variable</td>
-    <td><code><a href="#fx_contra">fx_contra</a></code></td>
+    <td><code><a href="#fx_contra" class="internal-link" title="mypy.test.testtypes.TypeOpsSuite.fx_contra">fx​_contra</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr>
 </table>
@@ -387,7 +400,7 @@
   <div class="docstring functionBody">
     
     
-    <div><p class="undocumented">Undocumented</p><table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">orig:</span><code><a href="mypy.types.Type.html">Type</a></code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">result:</span><code><a href="mypy.types.Type.html">Type</a></code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr></table></div>
+    <div><p class="undocumented">Undocumented</p><table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">orig:</span><code><a href="mypy.types.Type.html" class="internal-link" title="mypy.types.Type">Type</a></code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">result:</span><code><a href="mypy.types.Type.html" class="internal-link" title="mypy.types.Type">Type</a></code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr></table></div>
   </div>
 </div><div class="basemethod">
   
@@ -409,7 +422,7 @@
   <div class="docstring functionBody">
     
     
-    <div><p class="undocumented">Undocumented</p><table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">orig:</span><code><a href="mypy.types.Type.html">Type</a></code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">map_items:</span><code>List[<wbr></wbr>Tuple[<wbr></wbr><a href="mypy.types.TypeVarId.html">TypeVarId</a>, <wbr></wbr><a href="mypy.types.Type.html">Type</a>]]</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">result:</span><code><a href="mypy.types.Type.html">Type</a></code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr></table></div>
+    <div><p class="undocumented">Undocumented</p><table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">orig:</span><code><a href="mypy.types.Type.html" class="internal-link" title="mypy.types.Type">Type</a></code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">map​_items:</span><code>List[<wbr></wbr>Tuple[<wbr></wbr><a href="mypy.types.TypeVarId.html" class="internal-link" title="mypy.types.TypeVarId">TypeVarId</a>, <wbr></wbr><a href="mypy.types.Type.html" class="internal-link" title="mypy.types.Type">Type</a>]]</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">result:</span><code><a href="mypy.types.Type.html" class="internal-link" title="mypy.types.Type">Type</a></code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr></table></div>
   </div>
 </div><div class="basemethod">
   
@@ -431,7 +444,7 @@
   <div class="docstring functionBody">
     
     
-    <div><p class="undocumented">Undocumented</p><table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">original:</span><code>List[<wbr></wbr><a href="mypy.types.Type.html">Type</a>]</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">union:</span><code><a href="mypy.types.Type.html">Type</a></code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr></table></div>
+    <div><p class="undocumented">Undocumented</p><table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">original:</span><code>List[<wbr></wbr><a href="mypy.types.Type.html" class="internal-link" title="mypy.types.Type">Type</a>]</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">union:</span><code><a href="mypy.types.Type.html" class="internal-link" title="mypy.types.Type">Type</a></code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr></table></div>
   </div>
 </div><div class="basemethod">
   
@@ -455,7 +468,7 @@
     
     <div>callable(args, a1, ..., an, r) constructs a callable with
 argument types a1, ... an and return type r and type arguments
-vars.<table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">vars:</span><code>List[<wbr></wbr>str]</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">a:</span><code><a href="mypy.types.Type.html">Type</a></code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr class="fieldStart"><td class="fieldName" colspan="2">Returns</td></tr><tr><td class="fieldArgContainer"><code><a href="mypy.types.CallableType.html">CallableType</a></code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr></table></div>
+vars.<table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">vars:</span><code>List[<wbr></wbr>str]</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">*a:</span><code><a href="mypy.types.Type.html" class="internal-link" title="mypy.types.Type">Type</a></code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr class="fieldStart"><td class="fieldName" colspan="2">Returns</td></tr><tr><td class="fieldArgContainer"><code><a href="mypy.types.CallableType.html" class="internal-link" title="mypy.types.CallableType">CallableType</a></code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr></table></div>
   </div>
 </div><div class="basemethod">
   
@@ -1269,7 +1282,7 @@ vars.<table class="fieldTable"><tr class="fieldStart"><td class="fieldName" cols
   <div class="docstring functionBody">
     
     
-    <div><p class="undocumented">Undocumented</p><table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">a:</span><code><a href="mypy.types.Type.html">Type</a></code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr class="fieldStart"><td class="fieldName" colspan="2">Returns</td></tr><tr><td class="fieldArgContainer"><code><a href="mypy.types.TupleType.html">TupleType</a></code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr></table></div>
+    <div><p class="undocumented">Undocumented</p><table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">*a:</span><code><a href="mypy.types.Type.html" class="internal-link" title="mypy.types.Type">Type</a></code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr class="fieldStart"><td class="fieldName" colspan="2">Returns</td></tr><tr><td class="fieldArgContainer"><code><a href="mypy.types.TupleType.html" class="internal-link" title="mypy.types.TupleType">TupleType</a></code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr></table></div>
   </div>
 </div><div class="baseinstancevariable">
   
@@ -1292,6 +1305,7 @@ vars.<table class="fieldTable"><tr class="fieldStart"><td class="fieldName" cols
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    
   </div>
 </div><div class="baseinstancevariable">
   
@@ -1314,6 +1328,7 @@ vars.<table class="fieldTable"><tr class="fieldStart"><td class="fieldName" cols
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    
   </div>
 </div><div class="baseinstancevariable">
   
@@ -1336,6 +1351,7 @@ vars.<table class="fieldTable"><tr class="fieldStart"><td class="fieldName" cols
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    
   </div>
 </div>
 
@@ -1347,7 +1363,7 @@ vars.<table class="fieldTable"><tr class="fieldStart"><td class="fieldName" cols
   <div class="container">
     <a href="index.html">API Documentation</a> for <a href="https://github.com/python/mypy" class="projecthome">mypy-0.930</a>,
   generated by <a href="https://github.com/twisted/pydoctor/">pydoctor</a>
-    21.2.2 at 2022-01-12 04:22:24.
+    22.2.2.dev0 at 2022-03-04 05:57:16.
   </div>
 </footer>
 

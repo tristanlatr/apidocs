@@ -7,7 +7,7 @@
   <head>
     
     <title>mypy.test.teststubgen.StubgenUtilSuite</title>
-    <meta name="generator" content="pydoctor 21.2.2"> 
+    <meta name="generator" content="pydoctor 22.2.2.dev0"> 
         
     </meta>
     <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
@@ -44,69 +44,82 @@
           Names
         </a>
 
-        <form action="search-results.html" id="search-box-container">
+        <div id="search-box-container">
           <div class="input-group">
-            <input id="search-box" name="search-query" placeholder="Search..." aria-label="Search" minlength="2" class="form-control" />
+            <input id="search-box" type="search" name="search-query" placeholder="Search..." aria-label="Search" minlength="2" class="form-control" autocomplete="off" />
+            
             <span class="input-group-btn">
-              <button class="btn btn-default" type="submit" title="Search"><img src="fonts/search.svg" alt="Search!" /></button>
-              <a class="btn btn-default" id="search-help-button" title="Help" onclick="toggleSearchHelpText()"><img src="fonts/info.svg" alt="Help!" /></a>
+              <a style="display: none;" class="btn btn-default" id="search-clear-button" title="Clear" onclick="clearSearch()"><img src="fonts/x-circle.svg" alt="Clear" /></a>
+              <a class="btn btn-default" id="search-help-button" title="Help" onclick="toggleSearchHelpText()"><img src="fonts/info.svg" alt="Help" /></a>
             </span>
           </div>
-        </form>
+        </div>
 
-        <div class="rst-admonition hint" id="search-help-box">
+      </div>
+
+      <div id="search-results-container" style="display: none;">
+        <div>
+          <span class="label label-default" id="search-docstrings-button">
+            <a title="Search in docstrings" onclick="toggleSearchInDocstrings()">search in docstrings</a></span>
+        </div>
+
+        <noscript>
+            <h1>Cannot search: JavaScript is not supported/enabled in your browser.</h1>
+        </noscript>
+
+        <div class="hint" id="search-help-box">
           <p class="rst-last">
       
             Search bar offers the following options:
             <ul>   
                 <li>
                   <strong>Term presence.</strong> The below example searches for documents that 
-                    must contain “foo”, might contain “bar” and must not contain “baz”:
-                  <br /> <code>'+foo bar -baz'</code>
+                    must contain “foo”, might contain “bar” and must not contain “baz”: <code>+foo bar -baz</code>
                 </li> 
 
                 <li>
-                  <strong>Wildcards.</strong> The below example searches for documents with words beginning with “foo”:
-                  <br /> <code>'foo*'</code>
+                  <strong>Wildcards.</strong> The below example searches for documents with words beginning with “foo”: <code>foo*</code>
                 </li> 
 
                 <li>
-                  <strong>Search in specific fields.</strong> The following search matches all documents 
-                  that contains "foo" in their full dotted name and with “bar” in any field:
-                  <br /> <code>'+fullName:*foo* +bar'</code>
+                  <strong>Search in specific fields.</strong> The following search matches all objects 
+                  in "twisted.mail" that matches “search”: <code>+qname:twisted.mail.* +search</code>
 
                   <p>
-                    Possible fields: 'name', 'docstring', 'fullName'.
+                    Possible fields: 'name', 'qname' (fully qualified name), 'docstring', and 'kind'.
+                    Last two fields are only applicable if "search in docstrings" is enabled.
                   </p>
                 </li>
 
                 <li>
                   <strong>Fuzzy matches.</strong> The following search matches all documents 
-                  that have a word within 1 edit distance of “foo”:
-                  <br /> <code>'foo~1'</code>
+                  that have a word within 1 edit distance of “foo”: <code>foo~1</code>
                 </li>
             </ul>
 
           </p>
         </div>
 
-      </div>
+        <div id="search-status"> </div>
+        
+        <div class="warning" id="search-warn-box" style="display: none;">
+          <p class="rst-last"><span id="search-warn"></span></p>
+        </div>
 
+        <table id="search-results">
+          <!-- Filled dynamically by JS -->
+        </table>
+        
+        <div style="margin-top: 8px;">
+          <p>Results provided by <a href="https://lunrjs.com">Lunr.js</a></p>
+        </div>
+      </div>
 
     </div>
   </div>
 
-  <script>
- 
-    function toggleSearchHelpText() {
-        document.body.classList.toggle("search-help-hidden");
-    }
-    // Init search and help text
-    document.getElementById('search-box-container').style.display = 'block';
-    document.getElementById('search-help-box').style.display = 'block';
-    document.body.classList.add("search-help-hidden");
-
-  </script>
+  <script src="ajax.js" type="text/javascript"></script>
+  <script src="search.js" type="text/javascript"></script>
 
 </nav>
 
@@ -115,7 +128,7 @@
     <div class="container">
 
       <div class="page-header">
-        <h1 class="class"><code><code><a href="mypy.html">mypy</a></code><wbr></wbr>.<code><a href="mypy.test.html">test</a></code><wbr></wbr>.<code><a href="mypy.test.teststubgen.html">teststubgen</a></code><wbr></wbr>.<code><a href="mypy.test.teststubgen.StubgenUtilSuite.html">StubgenUtilSuite</a></code></code></h1>
+        <h1 class="class"><code><code><a href="index.html" class="internal-link">mypy</a></code><wbr></wbr>.<code><a href="mypy.test.html" class="internal-link" title="mypy.test">test</a></code><wbr></wbr>.<code><a href="mypy.test.teststubgen.html" class="internal-link" title="mypy.test.teststubgen">teststubgen</a></code><wbr></wbr>.<code><a href="mypy.test.teststubgen.StubgenUtilSuite.html" class="internal-link" title="mypy.test.teststubgen.StubgenUtilSuite">StubgenUtilSuite</a></code></code></h1>
         <div id="showPrivate">
           <button class="btn btn-link" onclick="togglePrivate()">Toggle Private API</button>
         </div>
@@ -126,7 +139,7 @@
       </div>
 
       <div class="extrasDocstring">
-        <p><code><span class="py-keyword">class</span> <span class="py-defname">StubgenUtilSuite</span>(<span title="unittest.TestCase">unittest.TestCase</span>): <a href="https://github.com/python/mypy/tree/v0.930/mypy/test/teststubgen.py#L124" class="sourceLink">(source)</a></code></p>
+        <p><code><span class="py-keyword">class</span> <span class="py-defname">StubgenUtilSuite</span>(unittest.TestCase): <a href="https://github.com/python/mypy/tree/v0.930/mypy/test/teststubgen.py#L124" class="sourceLink">(source)</a></code></p>
         <p><a href="classIndex.html#mypy.test.teststubgen.StubgenUtilSuite">View In Hierarchy</a></p>
       </div>
 
@@ -135,138 +148,138 @@
       </div>
 
       <div id="splitTables">
-        <table class="children sortable" id="id714">
+        <table class="children sortable" id="id716">
   
   
   <tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#assert_parse_signature">assert_parse_signature</a></code></td>
+    <td><code><a href="#assert_parse_signature" class="internal-link" title="mypy.test.teststubgen.StubgenUtilSuite.assert_parse_signature">assert​_parse​_signature</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#test_build_signature">test_build_signature</a></code></td>
+    <td><code><a href="#test_build_signature" class="internal-link" title="mypy.test.teststubgen.StubgenUtilSuite.test_build_signature">test​_build​_signature</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#test_common_dir_prefix_unix">test_common_dir_prefix_unix</a></code></td>
+    <td><code><a href="#test_common_dir_prefix_unix" class="internal-link" title="mypy.test.teststubgen.StubgenUtilSuite.test_common_dir_prefix_unix">test​_common​_dir​_prefix​_unix</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#test_common_dir_prefix_win">test_common_dir_prefix_win</a></code></td>
+    <td><code><a href="#test_common_dir_prefix_win" class="internal-link" title="mypy.test.teststubgen.StubgenUtilSuite.test_common_dir_prefix_win">test​_common​_dir​_prefix​_win</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#test_find_unique_signatures">test_find_unique_signatures</a></code></td>
+    <td><code><a href="#test_find_unique_signatures" class="internal-link" title="mypy.test.teststubgen.StubgenUtilSuite.test_find_unique_signatures">test​_find​_unique​_signatures</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#test_infer_arg_sig_from_anon_docstring">test_infer_arg_sig_from_anon_docstring</a></code></td>
+    <td><code><a href="#test_infer_arg_sig_from_anon_docstring" class="internal-link" title="mypy.test.teststubgen.StubgenUtilSuite.test_infer_arg_sig_from_anon_docstring">test​_infer​_arg​_sig​_from​_anon​_docstring</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#test_infer_prop_type_from_docstring">test_infer_prop_type_from_docstring</a></code></td>
+    <td><code><a href="#test_infer_prop_type_from_docstring" class="internal-link" title="mypy.test.teststubgen.StubgenUtilSuite.test_infer_prop_type_from_docstring">test​_infer​_prop​_type​_from​_docstring</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#test_infer_sig_from_docstring">test_infer_sig_from_docstring</a></code></td>
+    <td><code><a href="#test_infer_sig_from_docstring" class="internal-link" title="mypy.test.teststubgen.StubgenUtilSuite.test_infer_sig_from_docstring">test​_infer​_sig​_from​_docstring</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#test_infer_sig_from_docstring_bad_indentation">test_infer_sig_from_docstring_bad_indentation</a></code></td>
+    <td><code><a href="#test_infer_sig_from_docstring_bad_indentation" class="internal-link" title="mypy.test.teststubgen.StubgenUtilSuite.test_infer_sig_from_docstring_bad_indentation">test​_infer​_sig​_from​_docstring​_bad​_indentation</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#test_infer_sig_from_docstring_duplicate_args">test_infer_sig_from_docstring_duplicate_args</a></code></td>
+    <td><code><a href="#test_infer_sig_from_docstring_duplicate_args" class="internal-link" title="mypy.test.teststubgen.StubgenUtilSuite.test_infer_sig_from_docstring_duplicate_args">test​_infer​_sig​_from​_docstring​_duplicate​_args</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#test_infer_sig_from_docstring_square_brackets">test_infer_sig_from_docstring_square_brackets</a></code></td>
+    <td><code><a href="#test_infer_sig_from_docstring_square_brackets" class="internal-link" title="mypy.test.teststubgen.StubgenUtilSuite.test_infer_sig_from_docstring_square_brackets">test​_infer​_sig​_from​_docstring​_square​_brackets</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#test_parse_all_signatures">test_parse_all_signatures</a></code></td>
+    <td><code><a href="#test_parse_all_signatures" class="internal-link" title="mypy.test.teststubgen.StubgenUtilSuite.test_parse_all_signatures">test​_parse​_all​_signatures</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#test_parse_signature">test_parse_signature</a></code></td>
+    <td><code><a href="#test_parse_signature" class="internal-link" title="mypy.test.teststubgen.StubgenUtilSuite.test_parse_signature">test​_parse​_signature</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#test_parse_signature_with_args">test_parse_signature_with_args</a></code></td>
+    <td><code><a href="#test_parse_signature_with_args" class="internal-link" title="mypy.test.teststubgen.StubgenUtilSuite.test_parse_signature_with_args">test​_parse​_signature​_with​_args</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#test_parse_signature_with_default_arg">test_parse_signature_with_default_arg</a></code></td>
+    <td><code><a href="#test_parse_signature_with_default_arg" class="internal-link" title="mypy.test.teststubgen.StubgenUtilSuite.test_parse_signature_with_default_arg">test​_parse​_signature​_with​_default​_arg</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#test_parse_signature_with_kw_only_arg">test_parse_signature_with_kw_only_arg</a></code></td>
+    <td><code><a href="#test_parse_signature_with_kw_only_arg" class="internal-link" title="mypy.test.teststubgen.StubgenUtilSuite.test_parse_signature_with_kw_only_arg">test​_parse​_signature​_with​_kw​_only​_arg</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#test_parse_signature_with_optional_args">test_parse_signature_with_optional_args</a></code></td>
+    <td><code><a href="#test_parse_signature_with_optional_args" class="internal-link" title="mypy.test.teststubgen.StubgenUtilSuite.test_parse_signature_with_optional_args">test​_parse​_signature​_with​_optional​_args</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#test_parse_signature_with_qualified_function">test_parse_signature_with_qualified_function</a></code></td>
+    <td><code><a href="#test_parse_signature_with_qualified_function" class="internal-link" title="mypy.test.teststubgen.StubgenUtilSuite.test_parse_signature_with_qualified_function">test​_parse​_signature​_with​_qualified​_function</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#test_parse_signature_with_star_arg">test_parse_signature_with_star_arg</a></code></td>
+    <td><code><a href="#test_parse_signature_with_star_arg" class="internal-link" title="mypy.test.teststubgen.StubgenUtilSuite.test_parse_signature_with_star_arg">test​_parse​_signature​_with​_star​_arg</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#test_parse_signature_with_star_star_arg">test_parse_signature_with_star_star_arg</a></code></td>
+    <td><code><a href="#test_parse_signature_with_star_star_arg" class="internal-link" title="mypy.test.teststubgen.StubgenUtilSuite.test_parse_signature_with_star_star_arg">test​_parse​_signature​_with​_star​_star​_arg</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#test_remove_misplaced_type_comments_1">test_remove_misplaced_type_comments_1</a></code></td>
+    <td><code><a href="#test_remove_misplaced_type_comments_1" class="internal-link" title="mypy.test.teststubgen.StubgenUtilSuite.test_remove_misplaced_type_comments_1">test​_remove​_misplaced​_type​_comments​_1</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#test_remove_misplaced_type_comments_2">test_remove_misplaced_type_comments_2</a></code></td>
+    <td><code><a href="#test_remove_misplaced_type_comments_2" class="internal-link" title="mypy.test.teststubgen.StubgenUtilSuite.test_remove_misplaced_type_comments_2">test​_remove​_misplaced​_type​_comments​_2</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#test_remove_misplaced_type_comments_3">test_remove_misplaced_type_comments_3</a></code></td>
+    <td><code><a href="#test_remove_misplaced_type_comments_3" class="internal-link" title="mypy.test.teststubgen.StubgenUtilSuite.test_remove_misplaced_type_comments_3">test​_remove​_misplaced​_type​_comments​_3</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#test_remove_misplaced_type_comments_4">test_remove_misplaced_type_comments_4</a></code></td>
+    <td><code><a href="#test_remove_misplaced_type_comments_4" class="internal-link" title="mypy.test.teststubgen.StubgenUtilSuite.test_remove_misplaced_type_comments_4">test​_remove​_misplaced​_type​_comments​_4</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#test_remove_misplaced_type_comments_5">test_remove_misplaced_type_comments_5</a></code></td>
+    <td><code><a href="#test_remove_misplaced_type_comments_5" class="internal-link" title="mypy.test.teststubgen.StubgenUtilSuite.test_remove_misplaced_type_comments_5">test​_remove​_misplaced​_type​_comments​_5</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#test_remove_misplaced_type_comments_bytes">test_remove_misplaced_type_comments_bytes</a></code></td>
+    <td><code><a href="#test_remove_misplaced_type_comments_bytes" class="internal-link" title="mypy.test.teststubgen.StubgenUtilSuite.test_remove_misplaced_type_comments_bytes">test​_remove​_misplaced​_type​_comments​_bytes</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr>
 </table>
@@ -331,8 +344,7 @@
     
   </a>
   <div class="functionHeader">
-    @unittest.skipIf(sys.platform == 'win32',
-    'Tests building the paths common ancestor on *nix')<br />
+    @unittest.skipIf(<wbr></wbr>(sys.platform == 'win32'), <wbr></wbr><span class="rst-variable-quote">'</span><span class="rst-variable-string">Tests building the paths common ancestor on *nix</span><span class="rst-variable-quote">'</span>)<br />
     <span class="py-keyword">def</span> <span class="py-defname">test_common_dir_prefix_unix</span>(self):
     <a class="sourceLink" href="https://github.com/python/mypy/tree/v0.930/mypy/test/teststubgen.py#L457">
       
@@ -354,8 +366,7 @@
     
   </a>
   <div class="functionHeader">
-    @unittest.skipIf(sys.platform != 'win32',
-    'Tests building the paths common ancestor on Windows')<br />
+    @unittest.skipIf(<wbr></wbr>(sys.platform != 'win32'), <wbr></wbr><span class="rst-variable-quote">'</span><span class="rst-variable-string">Tests building the paths common ancestor on Windows</span><span class="rst-variable-quote">'</span>)<br />
     <span class="py-keyword">def</span> <span class="py-defname">test_common_dir_prefix_win</span>(self):
     <a class="sourceLink" href="https://github.com/python/mypy/tree/v0.930/mypy/test/teststubgen.py#L475">
       
@@ -861,7 +872,7 @@
   <div class="container">
     <a href="index.html">API Documentation</a> for <a href="https://github.com/python/mypy" class="projecthome">mypy-0.930</a>,
   generated by <a href="https://github.com/twisted/pydoctor/">pydoctor</a>
-    21.2.2 at 2022-01-12 04:22:24.
+    22.2.2.dev0 at 2022-03-04 05:57:16.
   </div>
 </footer>
 

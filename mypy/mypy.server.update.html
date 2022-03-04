@@ -7,7 +7,7 @@
   <head>
     
     <title>mypy.server.update</title>
-    <meta name="generator" content="pydoctor 21.2.2"> 
+    <meta name="generator" content="pydoctor 22.2.2.dev0"> 
         
     </meta>
     <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
@@ -44,69 +44,82 @@
           Names
         </a>
 
-        <form action="search-results.html" id="search-box-container">
+        <div id="search-box-container">
           <div class="input-group">
-            <input id="search-box" name="search-query" placeholder="Search..." aria-label="Search" minlength="2" class="form-control" />
+            <input id="search-box" type="search" name="search-query" placeholder="Search..." aria-label="Search" minlength="2" class="form-control" autocomplete="off" />
+            
             <span class="input-group-btn">
-              <button class="btn btn-default" type="submit" title="Search"><img src="fonts/search.svg" alt="Search!" /></button>
-              <a class="btn btn-default" id="search-help-button" title="Help" onclick="toggleSearchHelpText()"><img src="fonts/info.svg" alt="Help!" /></a>
+              <a style="display: none;" class="btn btn-default" id="search-clear-button" title="Clear" onclick="clearSearch()"><img src="fonts/x-circle.svg" alt="Clear" /></a>
+              <a class="btn btn-default" id="search-help-button" title="Help" onclick="toggleSearchHelpText()"><img src="fonts/info.svg" alt="Help" /></a>
             </span>
           </div>
-        </form>
+        </div>
 
-        <div class="rst-admonition hint" id="search-help-box">
+      </div>
+
+      <div id="search-results-container" style="display: none;">
+        <div>
+          <span class="label label-default" id="search-docstrings-button">
+            <a title="Search in docstrings" onclick="toggleSearchInDocstrings()">search in docstrings</a></span>
+        </div>
+
+        <noscript>
+            <h1>Cannot search: JavaScript is not supported/enabled in your browser.</h1>
+        </noscript>
+
+        <div class="hint" id="search-help-box">
           <p class="rst-last">
       
             Search bar offers the following options:
             <ul>   
                 <li>
                   <strong>Term presence.</strong> The below example searches for documents that 
-                    must contain “foo”, might contain “bar” and must not contain “baz”:
-                  <br /> <code>'+foo bar -baz'</code>
+                    must contain “foo”, might contain “bar” and must not contain “baz”: <code>+foo bar -baz</code>
                 </li> 
 
                 <li>
-                  <strong>Wildcards.</strong> The below example searches for documents with words beginning with “foo”:
-                  <br /> <code>'foo*'</code>
+                  <strong>Wildcards.</strong> The below example searches for documents with words beginning with “foo”: <code>foo*</code>
                 </li> 
 
                 <li>
-                  <strong>Search in specific fields.</strong> The following search matches all documents 
-                  that contains "foo" in their full dotted name and with “bar” in any field:
-                  <br /> <code>'+fullName:*foo* +bar'</code>
+                  <strong>Search in specific fields.</strong> The following search matches all objects 
+                  in "twisted.mail" that matches “search”: <code>+qname:twisted.mail.* +search</code>
 
                   <p>
-                    Possible fields: 'name', 'docstring', 'fullName'.
+                    Possible fields: 'name', 'qname' (fully qualified name), 'docstring', and 'kind'.
+                    Last two fields are only applicable if "search in docstrings" is enabled.
                   </p>
                 </li>
 
                 <li>
                   <strong>Fuzzy matches.</strong> The following search matches all documents 
-                  that have a word within 1 edit distance of “foo”:
-                  <br /> <code>'foo~1'</code>
+                  that have a word within 1 edit distance of “foo”: <code>foo~1</code>
                 </li>
             </ul>
 
           </p>
         </div>
 
-      </div>
+        <div id="search-status"> </div>
+        
+        <div class="warning" id="search-warn-box" style="display: none;">
+          <p class="rst-last"><span id="search-warn"></span></p>
+        </div>
 
+        <table id="search-results">
+          <!-- Filled dynamically by JS -->
+        </table>
+        
+        <div style="margin-top: 8px;">
+          <p>Results provided by <a href="https://lunrjs.com">Lunr.js</a></p>
+        </div>
+      </div>
 
     </div>
   </div>
 
-  <script>
- 
-    function toggleSearchHelpText() {
-        document.body.classList.toggle("search-help-hidden");
-    }
-    // Init search and help text
-    document.getElementById('search-box-container').style.display = 'block';
-    document.getElementById('search-help-box').style.display = 'block';
-    document.body.classList.add("search-help-hidden");
-
-  </script>
+  <script src="ajax.js" type="text/javascript"></script>
+  <script src="search.js" type="text/javascript"></script>
 
 </nav>
 
@@ -115,7 +128,7 @@
     <div class="container">
 
       <div class="page-header">
-        <h1 class="module"><code><code><a href="mypy.html">mypy</a></code><wbr></wbr>.<code><a href="mypy.server.html">server</a></code><wbr></wbr>.<code><a href="mypy.server.update.html">update</a></code></code></h1>
+        <h1 class="module"><code><code><a href="index.html" class="internal-link">mypy</a></code><wbr></wbr>.<code><a href="mypy.server.html" class="internal-link" title="mypy.server">server</a></code><wbr></wbr>.<code><a href="mypy.server.update.html" class="internal-link" title="mypy.server.update">update</a></code></code></h1>
         <div id="showPrivate">
           <button class="btn btn-link" onclick="togglePrivate()">Toggle Private API</button>
         </div>
@@ -235,142 +248,142 @@ test cases (test-data/unit/fine-grained*.test).</p>
   <tr class="class">
     
     <td>Class</td>
-    <td><code><a href="mypy.server.update.FineGrainedBuildManager.html">FineGrainedBuildManager</a></code></td>
+    <td><code><a href="mypy.server.update.FineGrainedBuildManager.html" class="internal-link" title="mypy.server.update.FineGrainedBuildManager">​Fine​Grained​Build​Manager</a></code></td>
     <td><span class="undocumented">No class docstring; 0/12 instance variable, 6/6 methods documented</span></td>
   </tr><tr class="function">
     
     <td>Function</td>
-    <td><code><a href="#calculate_active_triggers">calculate_active_triggers</a></code></td>
-    <td><span>Determine activated triggers by comparing old and new symbol tables.</span></td>
+    <td><code><a href="#calculate_active_triggers" class="internal-link" title="mypy.server.update.calculate_active_triggers">calculate​_active​_triggers</a></code></td>
+    <td>Determine activated triggers by comparing old and new symbol tables.</td>
   </tr><tr class="function">
     
     <td>Function</td>
-    <td><code><a href="#dedupe_modules">dedupe_modules</a></code></td>
+    <td><code><a href="#dedupe_modules" class="internal-link" title="mypy.server.update.dedupe_modules">dedupe​_modules</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="function">
     
     <td>Function</td>
-    <td><code><a href="#delete_module">delete_module</a></code></td>
+    <td><code><a href="#delete_module" class="internal-link" title="mypy.server.update.delete_module">delete​_module</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="function">
     
     <td>Function</td>
-    <td><code><a href="#ensure_deps_loaded">ensure_deps_loaded</a></code></td>
-    <td><span>Ensure that the dependencies on a module are loaded.</span></td>
+    <td><code><a href="#ensure_deps_loaded" class="internal-link" title="mypy.server.update.ensure_deps_loaded">ensure​_deps​_loaded</a></code></td>
+    <td>Ensure that the dependencies on a module are loaded.</td>
   </tr><tr class="function">
     
     <td>Function</td>
-    <td><code><a href="#ensure_trees_loaded">ensure_trees_loaded</a></code></td>
-    <td><span>Ensure that the modules in initial and their deps have loaded trees.</span></td>
+    <td><code><a href="#ensure_trees_loaded" class="internal-link" title="mypy.server.update.ensure_trees_loaded">ensure​_trees​_loaded</a></code></td>
+    <td>Ensure that the modules in initial and their deps have loaded trees.</td>
   </tr><tr class="function">
     
     <td>Function</td>
-    <td><code><a href="#find_relative_leaf_module">find_relative_leaf_module</a></code></td>
-    <td><span>Find a module in a list that directly imports no other module in the list.</span></td>
+    <td><code><a href="#find_relative_leaf_module" class="internal-link" title="mypy.server.update.find_relative_leaf_module">find​_relative​_leaf​_module</a></code></td>
+    <td>Find a module in a list that directly imports no other module in the list.</td>
   </tr><tr class="function">
     
     <td>Function</td>
-    <td><code><a href="#find_symbol_tables_recursive">find_symbol_tables_recursive</a></code></td>
-    <td><span>Find all nested symbol tables.</span></td>
+    <td><code><a href="#find_symbol_tables_recursive" class="internal-link" title="mypy.server.update.find_symbol_tables_recursive">find​_symbol​_tables​_recursive</a></code></td>
+    <td>Find all nested symbol tables.</td>
   </tr><tr class="function">
     
     <td>Function</td>
-    <td><code><a href="#find_targets_recursive">find_targets_recursive</a></code></td>
-    <td><span>Find names of all targets that need to reprocessed, given some triggers.</span></td>
+    <td><code><a href="#find_targets_recursive" class="internal-link" title="mypy.server.update.find_targets_recursive">find​_targets​_recursive</a></code></td>
+    <td>Find names of all targets that need to reprocessed, given some triggers.</td>
   </tr><tr class="function">
     
     <td>Function</td>
-    <td><code><a href="#find_unloaded_deps">find_unloaded_deps</a></code></td>
-    <td><span>Find all the deps of the nodes in initial that haven't had their tree loaded.</span></td>
+    <td><code><a href="#find_unloaded_deps" class="internal-link" title="mypy.server.update.find_unloaded_deps">find​_unloaded​_deps</a></code></td>
+    <td>Find all the deps of the nodes in initial that haven't had their tree loaded.</td>
   </tr><tr class="function">
     
     <td>Function</td>
-    <td><code><a href="#fix_fg_dependencies">fix_fg_dependencies</a></code></td>
-    <td><span>Populate the dependencies with stuff that build may have missed</span></td>
+    <td><code><a href="#fix_fg_dependencies" class="internal-link" title="mypy.server.update.fix_fg_dependencies">fix​_fg​_dependencies</a></code></td>
+    <td>Populate the dependencies with stuff that build may have missed</td>
   </tr><tr class="function">
     
     <td>Function</td>
-    <td><code><a href="#get_module_to_path_map">get_module_to_path_map</a></code></td>
+    <td><code><a href="#get_module_to_path_map" class="internal-link" title="mypy.server.update.get_module_to_path_map">get​_module​_to​_path​_map</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="function">
     
     <td>Function</td>
-    <td><code><a href="#get_sources">get_sources</a></code></td>
+    <td><code><a href="#get_sources" class="internal-link" title="mypy.server.update.get_sources">get​_sources</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="function">
     
     <td>Function</td>
-    <td><code><a href="#is_verbose">is_verbose</a></code></td>
+    <td><code><a href="#is_verbose" class="internal-link" title="mypy.server.update.is_verbose">is​_verbose</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="function">
     
     <td>Function</td>
-    <td><code><a href="#lookup_target">lookup_target</a></code></td>
-    <td><span>Look up a target by fully-qualified name.</span></td>
+    <td><code><a href="#lookup_target" class="internal-link" title="mypy.server.update.lookup_target">lookup​_target</a></code></td>
+    <td>Look up a target by fully-qualified name.</td>
   </tr><tr class="function">
     
     <td>Function</td>
-    <td><code><a href="#propagate_changes_using_dependencies">propagate_changes_using_dependencies</a></code></td>
-    <td><span>Transitively rechecks targets based on triggers and the dependency map.</span></td>
+    <td><code><a href="#propagate_changes_using_dependencies" class="internal-link" title="mypy.server.update.propagate_changes_using_dependencies">propagate​_changes​_using​_dependencies</a></code></td>
+    <td>Transitively rechecks targets based on triggers and the dependency map.</td>
   </tr><tr class="function">
     
     <td>Function</td>
-    <td><code><a href="#refresh_suppressed_submodules">refresh_suppressed_submodules</a></code></td>
-    <td><span>Look for submodules that are now suppressed in target package.</span></td>
+    <td><code><a href="#refresh_suppressed_submodules" class="internal-link" title="mypy.server.update.refresh_suppressed_submodules">refresh​_suppressed​_submodules</a></code></td>
+    <td>Look for submodules that are now suppressed in target package.</td>
   </tr><tr class="function">
     
     <td>Function</td>
-    <td><code><a href="#replace_modules_with_new_variants">replace_modules_with_new_variants</a></code></td>
-    <td><span>Replace modules with newly builds versions.</span></td>
+    <td><code><a href="#replace_modules_with_new_variants" class="internal-link" title="mypy.server.update.replace_modules_with_new_variants">replace​_modules​_with​_new​_variants</a></code></td>
+    <td>Replace modules with newly builds versions.</td>
   </tr><tr class="function">
     
     <td>Function</td>
-    <td><code><a href="#reprocess_nodes">reprocess_nodes</a></code></td>
-    <td><span>Reprocess a set of nodes within a single module.</span></td>
+    <td><code><a href="#reprocess_nodes" class="internal-link" title="mypy.server.update.reprocess_nodes">reprocess​_nodes</a></code></td>
+    <td>Reprocess a set of nodes within a single module.</td>
   </tr><tr class="function">
     
     <td>Function</td>
-    <td><code><a href="#target_from_node">target_from_node</a></code></td>
-    <td><span>Return the target name corresponding to a deferred node.</span></td>
+    <td><code><a href="#target_from_node" class="internal-link" title="mypy.server.update.target_from_node">target​_from​_node</a></code></td>
+    <td>Return the target name corresponding to a deferred node.</td>
   </tr><tr class="function">
     
     <td>Function</td>
-    <td><code><a href="#update_deps">update_deps</a></code></td>
+    <td><code><a href="#update_deps" class="internal-link" title="mypy.server.update.update_deps">update​_deps</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="function">
     
     <td>Function</td>
-    <td><code><a href="#update_module_isolated">update_module_isolated</a></code></td>
-    <td><span>Build a new version of one changed module only.</span></td>
-  </tr><tr class="variable">
+    <td><code><a href="#update_module_isolated" class="internal-link" title="mypy.server.update.update_module_isolated">update​_module​_isolated</a></code></td>
+    <td>Build a new version of one changed module only.</td>
+  </tr><tr class="constant">
     
-    <td>Variable</td>
-    <td><code><a href="#BlockedUpdate">BlockedUpdate</a></code></td>
+    <td>Constant</td>
+    <td><code><a href="#INIT_SUFFIXES" class="internal-link" title="mypy.server.update.INIT_SUFFIXES">INIT​_SUFFIXES</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
-  </tr><tr class="variable">
+  </tr><tr class="constant">
     
-    <td>Variable</td>
-    <td><code><a href="#INIT_SUFFIXES">INIT_SUFFIXES</a></code></td>
+    <td>Constant</td>
+    <td><code><a href="#MAX_ITER" class="internal-link" title="mypy.server.update.MAX_ITER">MAX​_ITER</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
-  </tr><tr class="variable">
+  </tr><tr class="constant">
     
-    <td>Variable</td>
-    <td><code><a href="#MAX_ITER">MAX_ITER</a></code></td>
-    <td><span class="undocumented">Undocumented</span></td>
-  </tr><tr class="variable">
-    
-    <td>Variable</td>
-    <td><code><a href="#NormalUpdate">NormalUpdate</a></code></td>
+    <td>Constant</td>
+    <td><code><a href="#SENSITIVE_INTERNAL_MODULES" class="internal-link" title="mypy.server.update.SENSITIVE_INTERNAL_MODULES">SENSITIVE​_INTERNAL​_MODULES</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="variable">
     
     <td>Variable</td>
-    <td><code><a href="#SENSITIVE_INTERNAL_MODULES">SENSITIVE_INTERNAL_MODULES</a></code></td>
+    <td><code><a href="#BlockedUpdate" class="internal-link" title="mypy.server.update.BlockedUpdate">​Blocked​Update</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="variable">
     
     <td>Variable</td>
-    <td><code><a href="#UpdateResult">UpdateResult</a></code></td>
+    <td><code><a href="#NormalUpdate" class="internal-link" title="mypy.server.update.NormalUpdate">​Normal​Update</a></code></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="variable">
+    
+    <td>Variable</td>
+    <td><code><a href="#UpdateResult" class="internal-link" title="mypy.server.update.UpdateResult">​Update​Result</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr>
 </table>
@@ -404,7 +417,7 @@ test cases (test-data/unit/fine-grained*.test).</p>
     <div><p>Determine activated triggers by comparing old and new symbol tables.</p>
 <p>For example, if only the signature of function m.f is different in the new
 symbol table, return {'&lt;m.f&gt;'}.</p>
-<table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">manager:</span><code><a href="mypy.build.BuildManager.html">BuildManager</a></code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">old_snapshots:</span><code>Dict[<wbr></wbr>str, <wbr></wbr>Dict[<wbr></wbr>str, <wbr></wbr><a href="mypy.server.astdiff.html#SnapshotItem">SnapshotItem</a>]]</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">new_modules:</span><code>Dict[<wbr></wbr>str, <wbr></wbr>Optional[<wbr></wbr><a href="mypy.nodes.MypyFile.html">MypyFile</a>]]</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr class="fieldStart"><td class="fieldName" colspan="2">Returns</td></tr><tr><td class="fieldArgContainer"><code>Set[<wbr></wbr>str]</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr></table></div>
+<table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">manager:</span><code><a href="mypy.build.BuildManager.html" class="internal-link" title="mypy.build.BuildManager">BuildManager</a></code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">old​_snapshots:</span><code>Dict[<wbr></wbr>str, <wbr></wbr>Dict[<wbr></wbr>str, <wbr></wbr><a href="mypy.server.astdiff.html#SnapshotItem" class="internal-link" title="mypy.server.astdiff.SnapshotItem">SnapshotItem</a>]]</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">new​_modules:</span><code>Dict[<wbr></wbr>str, <wbr></wbr>Optional[<wbr></wbr><a href="mypy.nodes.MypyFile.html" class="internal-link" title="mypy.nodes.MypyFile">MypyFile</a>]]</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr class="fieldStart"><td class="fieldName" colspan="2">Returns</td></tr><tr><td class="fieldArgContainer"><code>Set[<wbr></wbr>str]</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr></table></div>
   </div>
 </div><div class="basefunction">
   
@@ -448,7 +461,7 @@ symbol table, return {'&lt;m.f&gt;'}.</p>
   <div class="docstring functionBody">
     
     
-    <div><p class="undocumented">Undocumented</p><table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">module_id:</span><code>str</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">path:</span><code>str</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">graph:</span><code><a href="mypy.build.html#Graph">Graph</a></code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">manager:</span><code><a href="mypy.build.BuildManager.html">BuildManager</a></code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr></table></div>
+    <div><p class="undocumented">Undocumented</p><table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">module​_id:</span><code>str</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">path:</span><code>str</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">graph:</span><code><a href="mypy.build.html#Graph" class="internal-link" title="mypy.build.Graph">Graph</a></code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">manager:</span><code><a href="mypy.build.BuildManager.html" class="internal-link" title="mypy.build.BuildManager">BuildManager</a></code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr></table></div>
   </div>
 </div><div class="basefunction">
   
@@ -475,7 +488,7 @@ symbol table, return {'&lt;m.f&gt;'}.</p>
 <p>This also requires loading dependencies from any parent modules,
 since dependencies will get stored with parent modules when a module
 doesn't exist.</p>
-<table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">module:</span><code>str</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">deps:</span><code>Dict[<wbr></wbr>str, <wbr></wbr>Set[<wbr></wbr>str]]</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">graph:</span><code>Dict[<wbr></wbr>str, <wbr></wbr><a href="mypy.build.State.html">State</a>]</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr></table></div>
+<table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">module:</span><code>str</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">deps:</span><code>Dict[<wbr></wbr>str, <wbr></wbr>Set[<wbr></wbr>str]]</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">graph:</span><code>Dict[<wbr></wbr>str, <wbr></wbr><a href="mypy.build.State.html" class="internal-link" title="mypy.build.State">State</a>]</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr></table></div>
   </div>
 </div><div class="basefunction">
   
@@ -497,7 +510,7 @@ doesn't exist.</p>
   <div class="docstring functionBody">
     
     
-    <div>Ensure that the modules in initial and their deps have loaded trees.<table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">manager:</span><code><a href="mypy.build.BuildManager.html">BuildManager</a></code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">graph:</span><code>Dict[<wbr></wbr>str, <wbr></wbr><a href="mypy.build.State.html">State</a>]</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">initial:</span><code>Sequence[<wbr></wbr>str]</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr></table></div>
+    <div>Ensure that the modules in initial and their deps have loaded trees.<table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">manager:</span><code><a href="mypy.build.BuildManager.html" class="internal-link" title="mypy.build.BuildManager">BuildManager</a></code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">graph:</span><code>Dict[<wbr></wbr>str, <wbr></wbr><a href="mypy.build.State.html" class="internal-link" title="mypy.build.State">State</a>]</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">initial:</span><code>Sequence[<wbr></wbr>str]</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr></table></div>
   </div>
 </div><div class="basefunction">
   
@@ -530,7 +543,7 @@ positive in 'typing', at least in tests.</dd>
 <dd>modules: List of (module, path) tuples (non-empty)
 graph: Program import graph that contains all modules in the module list</dd>
 </dl>
-<table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">modules:</span><code>List[<wbr></wbr>Tuple[<wbr></wbr>str, <wbr></wbr>str]]</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">graph:</span><code><a href="mypy.build.html#Graph">Graph</a></code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr class="fieldStart"><td class="fieldName" colspan="2">Returns</td></tr><tr><td class="fieldArgContainer"><code>Tuple[<wbr></wbr>str, <wbr></wbr>str]</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr></table></div>
+<table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">modules:</span><code>List[<wbr></wbr>Tuple[<wbr></wbr>str, <wbr></wbr>str]]</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">graph:</span><code><a href="mypy.build.html#Graph" class="internal-link" title="mypy.build.Graph">Graph</a></code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr class="fieldStart"><td class="fieldName" colspan="2">Returns</td></tr><tr><td class="fieldArgContainer"><code>Tuple[<wbr></wbr>str, <wbr></wbr>str]</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr></table></div>
   </div>
 </div><div class="basefunction">
   
@@ -563,7 +576,7 @@ graph: Program import graph that contains all modules in the module list</dd>
 </dd>
 </dl>
 <p>Returns a dictionary from full name to corresponding symbol table.</p>
-<table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">prefix:</span><code>str</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">symbols:</span><code><a href="mypy.nodes.SymbolTable.html">SymbolTable</a></code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr class="fieldStart"><td class="fieldName" colspan="2">Returns</td></tr><tr><td class="fieldArgContainer"><code>Dict[<wbr></wbr>str, <wbr></wbr><a href="mypy.nodes.SymbolTable.html">SymbolTable</a>]</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr></table></div>
+<table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">prefix:</span><code>str</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">symbols:</span><code><a href="mypy.nodes.SymbolTable.html" class="internal-link" title="mypy.nodes.SymbolTable">SymbolTable</a></code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr class="fieldStart"><td class="fieldName" colspan="2">Returns</td></tr><tr><td class="fieldArgContainer"><code>Dict[<wbr></wbr>str, <wbr></wbr><a href="mypy.nodes.SymbolTable.html" class="internal-link" title="mypy.nodes.SymbolTable">SymbolTable</a>]</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr></table></div>
   </div>
 </div><div class="basefunction">
   
@@ -594,7 +607,7 @@ graph: Program import graph that contains all modules in the module list</dd>
 </ul>
 </dd>
 </dl>
-<table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">manager:</span><code><a href="mypy.build.BuildManager.html">BuildManager</a></code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">graph:</span><code><a href="mypy.build.html#Graph">Graph</a></code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">triggers:</span><code>Set[<wbr></wbr>str]</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">deps:</span><code>Dict[<wbr></wbr>str, <wbr></wbr>Set[<wbr></wbr>str]]</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">up_to_date_modules:</span><code>Set[<wbr></wbr>str]</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr class="fieldStart"><td class="fieldName" colspan="2">Returns</td></tr><tr><td class="fieldArgContainer"><code>Tuple[<wbr></wbr>Dict[<wbr></wbr>str, <wbr></wbr>Set[<wbr></wbr><a href="mypy.checker.html#FineGrainedDeferredNode">FineGrainedDeferredNode</a>]], <wbr></wbr>Set[<wbr></wbr>str], <wbr></wbr>Set[<wbr></wbr><a href="mypy.nodes.TypeInfo.html">TypeInfo</a>]]</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr></table></div>
+<table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">manager:</span><code><a href="mypy.build.BuildManager.html" class="internal-link" title="mypy.build.BuildManager">BuildManager</a></code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">graph:</span><code><a href="mypy.build.html#Graph" class="internal-link" title="mypy.build.Graph">Graph</a></code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">triggers:</span><code>Set[<wbr></wbr>str]</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">deps:</span><code>Dict[<wbr></wbr>str, <wbr></wbr>Set[<wbr></wbr>str]]</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">up​_to​_date​_modules:</span><code>Set[<wbr></wbr>str]</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr class="fieldStart"><td class="fieldName" colspan="2">Returns</td></tr><tr><td class="fieldArgContainer"><code>Tuple[<wbr></wbr>Dict[<wbr></wbr>str, <wbr></wbr>Set[<wbr></wbr><a href="mypy.checker.html#FineGrainedDeferredNode" class="internal-link" title="mypy.checker.FineGrainedDeferredNode">FineGrainedDeferredNode</a>]], <wbr></wbr>Set[<wbr></wbr>str], <wbr></wbr>Set[<wbr></wbr><a href="mypy.nodes.TypeInfo.html" class="internal-link" title="mypy.nodes.TypeInfo">TypeInfo</a>]]</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr></table></div>
   </div>
 </div><div class="basefunction">
   
@@ -623,7 +636,7 @@ module, we don't need to explore its dependencies.  (This
 invariant is slightly violated when dependencies are added, which
 can be handled by calling find_unloaded_deps directly on the new
 dependencies.)</p>
-<table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">manager:</span><code><a href="mypy.build.BuildManager.html">BuildManager</a></code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">graph:</span><code>Dict[<wbr></wbr>str, <wbr></wbr><a href="mypy.build.State.html">State</a>]</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">initial:</span><code>Sequence[<wbr></wbr>str]</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr class="fieldStart"><td class="fieldName" colspan="2">Returns</td></tr><tr><td class="fieldArgContainer"><code>List[<wbr></wbr>str]</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr></table></div>
+<table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">manager:</span><code><a href="mypy.build.BuildManager.html" class="internal-link" title="mypy.build.BuildManager">BuildManager</a></code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">graph:</span><code>Dict[<wbr></wbr>str, <wbr></wbr><a href="mypy.build.State.html" class="internal-link" title="mypy.build.State">State</a>]</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">initial:</span><code>Sequence[<wbr></wbr>str]</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr class="fieldStart"><td class="fieldName" colspan="2">Returns</td></tr><tr><td class="fieldArgContainer"><code>List[<wbr></wbr>str]</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr></table></div>
   </div>
 </div><div class="basefunction">
   
@@ -645,7 +658,7 @@ dependencies.)</p>
   <div class="docstring functionBody">
     
     
-    <div>Populate the dependencies with stuff that build may have missed<table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">manager:</span><code><a href="mypy.build.BuildManager.html">BuildManager</a></code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">deps:</span><code>Dict[<wbr></wbr>str, <wbr></wbr>Set[<wbr></wbr>str]]</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr></table></div>
+    <div>Populate the dependencies with stuff that build may have missed<table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">manager:</span><code><a href="mypy.build.BuildManager.html" class="internal-link" title="mypy.build.BuildManager">BuildManager</a></code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">deps:</span><code>Dict[<wbr></wbr>str, <wbr></wbr>Set[<wbr></wbr>str]]</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr></table></div>
   </div>
 </div><div class="basefunction">
   
@@ -667,7 +680,7 @@ dependencies.)</p>
   <div class="docstring functionBody">
     
     
-    <div><p class="undocumented">Undocumented</p><table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">graph:</span><code><a href="mypy.build.html#Graph">Graph</a></code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr class="fieldStart"><td class="fieldName" colspan="2">Returns</td></tr><tr><td class="fieldArgContainer"><code>Dict[<wbr></wbr>str, <wbr></wbr>str]</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr></table></div>
+    <div><p class="undocumented">Undocumented</p><table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">graph:</span><code><a href="mypy.build.html#Graph" class="internal-link" title="mypy.build.Graph">Graph</a></code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr class="fieldStart"><td class="fieldName" colspan="2">Returns</td></tr><tr><td class="fieldArgContainer"><code>Dict[<wbr></wbr>str, <wbr></wbr>str]</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr></table></div>
   </div>
 </div><div class="basefunction">
   
@@ -689,7 +702,7 @@ dependencies.)</p>
   <div class="docstring functionBody">
     
     
-    <div><p class="undocumented">Undocumented</p><table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">fscache:</span><code><a href="mypy.fscache.FileSystemCache.html">FileSystemCache</a></code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">modules:</span><code>Dict[<wbr></wbr>str, <wbr></wbr>str]</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">changed_modules:</span><code>List[<wbr></wbr>Tuple[<wbr></wbr>str, <wbr></wbr>str]]</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr class="fieldStart"><td class="fieldName" colspan="2">Returns</td></tr><tr><td class="fieldArgContainer"><code>List[<wbr></wbr><a href="mypy.modulefinder.BuildSource.html">BuildSource</a>]</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr></table></div>
+    <div><p class="undocumented">Undocumented</p><table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">fscache:</span><code><a href="mypy.fscache.FileSystemCache.html" class="internal-link" title="mypy.fscache.FileSystemCache">FileSystemCache</a></code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">modules:</span><code>Dict[<wbr></wbr>str, <wbr></wbr>str]</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">changed​_modules:</span><code>List[<wbr></wbr>Tuple[<wbr></wbr>str, <wbr></wbr>str]]</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr class="fieldStart"><td class="fieldName" colspan="2">Returns</td></tr><tr><td class="fieldArgContainer"><code>List[<wbr></wbr><a href="mypy.modulefinder.BuildSource.html" class="internal-link" title="mypy.modulefinder.BuildSource">BuildSource</a>]</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr></table></div>
   </div>
 </div><div class="basefunction">
   
@@ -711,7 +724,7 @@ dependencies.)</p>
   <div class="docstring functionBody">
     
     
-    <div><p class="undocumented">Undocumented</p><table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">manager:</span><code><a href="mypy.build.BuildManager.html">BuildManager</a></code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr class="fieldStart"><td class="fieldName" colspan="2">Returns</td></tr><tr><td class="fieldArgContainer"><code>bool</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr></table></div>
+    <div><p class="undocumented">Undocumented</p><table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">manager:</span><code><a href="mypy.build.BuildManager.html" class="internal-link" title="mypy.build.BuildManager">BuildManager</a></code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr class="fieldStart"><td class="fieldName" colspan="2">Returns</td></tr><tr><td class="fieldArgContainer"><code>bool</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr></table></div>
   </div>
 </div><div class="basefunction">
   
@@ -737,7 +750,7 @@ dependencies.)</p>
 <p>The first item in the return tuple is a list of deferred nodes that
 needs to be reprocessed. If the target represents a TypeInfo corresponding
 to a protocol, return it as a second item in the return tuple, otherwise None.</p>
-<table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">manager:</span><code><a href="mypy.build.BuildManager.html">BuildManager</a></code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">target:</span><code>str</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr class="fieldStart"><td class="fieldName" colspan="2">Returns</td></tr><tr><td class="fieldArgContainer"><code>Tuple[<wbr></wbr>List[<wbr></wbr><a href="mypy.checker.html#FineGrainedDeferredNode">FineGrainedDeferredNode</a>], <wbr></wbr>Optional[<wbr></wbr><a href="mypy.nodes.TypeInfo.html">TypeInfo</a>]]</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr></table></div>
+<table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">manager:</span><code><a href="mypy.build.BuildManager.html" class="internal-link" title="mypy.build.BuildManager">BuildManager</a></code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">target:</span><code>str</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr class="fieldStart"><td class="fieldName" colspan="2">Returns</td></tr><tr><td class="fieldArgContainer"><code>Tuple[<wbr></wbr>List[<wbr></wbr><a href="mypy.checker.html#FineGrainedDeferredNode" class="internal-link" title="mypy.checker.FineGrainedDeferredNode">FineGrainedDeferredNode</a>], <wbr></wbr>Optional[<wbr></wbr><a href="mypy.nodes.TypeInfo.html" class="internal-link" title="mypy.nodes.TypeInfo">TypeInfo</a>]]</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr></table></div>
   </div>
 </div><div class="basefunction">
   
@@ -764,7 +777,7 @@ to a protocol, return it as a second item in the return tuple, otherwise None.</
 a target that needs to be reprocessed but that has not been parsed yet.</p>
 <p>Processed targets should be appended to processed_targets (used in tests only,
 to test the order of processing targets).</p>
-<table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">manager:</span><code><a href="mypy.build.BuildManager.html">BuildManager</a></code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">graph:</span><code>Dict[<wbr></wbr>str, <wbr></wbr><a href="mypy.build.State.html">State</a>]</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">deps:</span><code>Dict[<wbr></wbr>str, <wbr></wbr>Set[<wbr></wbr>str]]</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">triggered:</span><code>Set[<wbr></wbr>str]</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">up_to_date_modules:</span><code>Set[<wbr></wbr>str]</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">targets_with_errors:</span><code>Set[<wbr></wbr>str]</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">processed_targets:</span><code>List[<wbr></wbr>str]</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr class="fieldStart"><td class="fieldName" colspan="2">Returns</td></tr><tr><td class="fieldArgContainer"><code>List[<wbr></wbr>Tuple[<wbr></wbr>str, <wbr></wbr>str]]</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr></table></div>
+<table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">manager:</span><code><a href="mypy.build.BuildManager.html" class="internal-link" title="mypy.build.BuildManager">BuildManager</a></code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">graph:</span><code>Dict[<wbr></wbr>str, <wbr></wbr><a href="mypy.build.State.html" class="internal-link" title="mypy.build.State">State</a>]</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">deps:</span><code>Dict[<wbr></wbr>str, <wbr></wbr>Set[<wbr></wbr>str]]</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">triggered:</span><code>Set[<wbr></wbr>str]</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">up​_to​_date​_modules:</span><code>Set[<wbr></wbr>str]</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">targets​_with​_errors:</span><code>Set[<wbr></wbr>str]</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">processed​_targets:</span><code>List[<wbr></wbr>str]</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr class="fieldStart"><td class="fieldName" colspan="2">Returns</td></tr><tr><td class="fieldArgContainer"><code>List[<wbr></wbr>Tuple[<wbr></wbr>str, <wbr></wbr>str]]</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr></table></div>
   </div>
 </div><div class="basefunction">
   
@@ -799,7 +812,7 @@ refresh_file: function that reads the AST of a module (returns error messages)</
 </dl>
 <p>Return a list of errors from refresh_file() if it was called. If the
 return value is None, we didn't call refresh_file().</p>
-<table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">module:</span><code>str</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">path:</span><code>Optional[<wbr></wbr>str]</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">deps:</span><code>Dict[<wbr></wbr>str, <wbr></wbr>Set[<wbr></wbr>str]]</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">graph:</span><code><a href="mypy.build.html#Graph">Graph</a></code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">fscache:</span><code><a href="mypy.fscache.FileSystemCache.html">FileSystemCache</a></code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">refresh_file:</span><code>Callable[<wbr></wbr>[<wbr></wbr>str, <wbr></wbr>str], <wbr></wbr>List[<wbr></wbr>str]]</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr class="fieldStart"><td class="fieldName" colspan="2">Returns</td></tr><tr><td class="fieldArgContainer"><code>Optional[<wbr></wbr>List[<wbr></wbr>str]]</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr></table></div>
+<table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">module:</span><code>str</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">path:</span><code>Optional[<wbr></wbr>str]</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">deps:</span><code>Dict[<wbr></wbr>str, <wbr></wbr>Set[<wbr></wbr>str]]</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">graph:</span><code><a href="mypy.build.html#Graph" class="internal-link" title="mypy.build.Graph">Graph</a></code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">fscache:</span><code><a href="mypy.fscache.FileSystemCache.html" class="internal-link" title="mypy.fscache.FileSystemCache">FileSystemCache</a></code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">refresh​_file:</span><code>Callable[<wbr></wbr>[<wbr></wbr>str, <wbr></wbr>str], <wbr></wbr>List[<wbr></wbr>str]]</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr class="fieldStart"><td class="fieldName" colspan="2">Returns</td></tr><tr><td class="fieldArgContainer"><code>Optional[<wbr></wbr>List[<wbr></wbr>str]]</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr></table></div>
   </div>
 </div><div class="basefunction">
   
@@ -828,7 +841,7 @@ modules will still be valid (unless something was deleted or
 replaced with an incompatible definition, in which case there
 will be dangling references that will be handled by
 propagate_changes_using_dependencies).</p>
-<table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">manager:</span><code><a href="mypy.build.BuildManager.html">BuildManager</a></code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">graph:</span><code>Dict[<wbr></wbr>str, <wbr></wbr><a href="mypy.build.State.html">State</a>]</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">old_modules:</span><code>Dict[<wbr></wbr>str, <wbr></wbr>Optional[<wbr></wbr><a href="mypy.nodes.MypyFile.html">MypyFile</a>]]</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">new_modules:</span><code>Dict[<wbr></wbr>str, <wbr></wbr>Optional[<wbr></wbr><a href="mypy.nodes.MypyFile.html">MypyFile</a>]]</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr></table></div>
+<table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">manager:</span><code><a href="mypy.build.BuildManager.html" class="internal-link" title="mypy.build.BuildManager">BuildManager</a></code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">graph:</span><code>Dict[<wbr></wbr>str, <wbr></wbr><a href="mypy.build.State.html" class="internal-link" title="mypy.build.State">State</a>]</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">old​_modules:</span><code>Dict[<wbr></wbr>str, <wbr></wbr>Optional[<wbr></wbr><a href="mypy.nodes.MypyFile.html" class="internal-link" title="mypy.nodes.MypyFile">MypyFile</a>]]</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">new​_modules:</span><code>Dict[<wbr></wbr>str, <wbr></wbr>Optional[<wbr></wbr><a href="mypy.nodes.MypyFile.html" class="internal-link" title="mypy.nodes.MypyFile">MypyFile</a>]]</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr></table></div>
   </div>
 </div><div class="basefunction">
   
@@ -852,7 +865,7 @@ propagate_changes_using_dependencies).</p>
     
     <div><p>Reprocess a set of nodes within a single module.</p>
 <p>Return fired triggers.</p>
-<table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">manager:</span><code><a href="mypy.build.BuildManager.html">BuildManager</a></code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">graph:</span><code>Dict[<wbr></wbr>str, <wbr></wbr><a href="mypy.build.State.html">State</a>]</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">module_id:</span><code>str</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">nodeset:</span><code>Set[<wbr></wbr><a href="mypy.checker.html#FineGrainedDeferredNode">FineGrainedDeferredNode</a>]</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">deps:</span><code>Dict[<wbr></wbr>str, <wbr></wbr>Set[<wbr></wbr>str]]</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">processed_targets:</span><code>List[<wbr></wbr>str]</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr class="fieldStart"><td class="fieldName" colspan="2">Returns</td></tr><tr><td class="fieldArgContainer"><code>Set[<wbr></wbr>str]</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr></table></div>
+<table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">manager:</span><code><a href="mypy.build.BuildManager.html" class="internal-link" title="mypy.build.BuildManager">BuildManager</a></code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">graph:</span><code>Dict[<wbr></wbr>str, <wbr></wbr><a href="mypy.build.State.html" class="internal-link" title="mypy.build.State">State</a>]</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">module​_id:</span><code>str</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">nodeset:</span><code>Set[<wbr></wbr><a href="mypy.checker.html#FineGrainedDeferredNode" class="internal-link" title="mypy.checker.FineGrainedDeferredNode">FineGrainedDeferredNode</a>]</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">deps:</span><code>Dict[<wbr></wbr>str, <wbr></wbr>Set[<wbr></wbr>str]]</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">processed​_targets:</span><code>List[<wbr></wbr>str]</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr class="fieldStart"><td class="fieldName" colspan="2">Returns</td></tr><tr><td class="fieldArgContainer"><code>Set[<wbr></wbr>str]</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr></table></div>
   </div>
 </div><div class="basefunction">
   
@@ -881,7 +894,7 @@ propagate_changes_using_dependencies).</p>
 </dl>
 <p>Returns the target name, or None if the node is not a valid target in the given
 module (for example, if it's actually defined in another module).</p>
-<table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">module:</span><code>str</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">node:</span><code>Union[<wbr></wbr><a href="mypy.nodes.FuncDef.html">FuncDef</a>, <wbr></wbr><a href="mypy.nodes.MypyFile.html">MypyFile</a>, <wbr></wbr><a href="mypy.nodes.OverloadedFuncDef.html">OverloadedFuncDef</a>]</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr class="fieldStart"><td class="fieldName" colspan="2">Returns</td></tr><tr><td class="fieldArgContainer"><code>Optional[<wbr></wbr>str]</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr></table></div>
+<table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">module:</span><code>str</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">node:</span><code>Union[<wbr></wbr><a href="mypy.nodes.FuncDef.html" class="internal-link" title="mypy.nodes.FuncDef">FuncDef</a>, <wbr></wbr><a href="mypy.nodes.MypyFile.html" class="internal-link" title="mypy.nodes.MypyFile">MypyFile</a>, <wbr></wbr><a href="mypy.nodes.OverloadedFuncDef.html" class="internal-link" title="mypy.nodes.OverloadedFuncDef">OverloadedFuncDef</a>]</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr class="fieldStart"><td class="fieldName" colspan="2">Returns</td></tr><tr><td class="fieldArgContainer"><code>Optional[<wbr></wbr>str]</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr></table></div>
   </div>
 </div><div class="basefunction">
   
@@ -903,7 +916,7 @@ module (for example, if it's actually defined in another module).</p>
   <div class="docstring functionBody">
     
     
-    <div><p class="undocumented">Undocumented</p><table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">module_id:</span><code>str</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">nodes:</span><code>List[<wbr></wbr><a href="mypy.checker.html#FineGrainedDeferredNode">FineGrainedDeferredNode</a>]</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">graph:</span><code>Dict[<wbr></wbr>str, <wbr></wbr><a href="mypy.build.State.html">State</a>]</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">deps:</span><code>Dict[<wbr></wbr>str, <wbr></wbr>Set[<wbr></wbr>str]]</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">options:</span><code><a href="mypy.options.Options.html">Options</a></code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr></table></div>
+    <div><p class="undocumented">Undocumented</p><table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">module​_id:</span><code>str</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">nodes:</span><code>List[<wbr></wbr><a href="mypy.checker.html#FineGrainedDeferredNode" class="internal-link" title="mypy.checker.FineGrainedDeferredNode">FineGrainedDeferredNode</a>]</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">graph:</span><code>Dict[<wbr></wbr>str, <wbr></wbr><a href="mypy.build.State.html" class="internal-link" title="mypy.build.State">State</a>]</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">deps:</span><code>Dict[<wbr></wbr>str, <wbr></wbr>Set[<wbr></wbr>str]]</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">options:</span><code><a href="mypy.options.Options.html" class="internal-link" title="mypy.options.Options">Options</a></code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr></table></div>
   </div>
 </div><div class="basefunction">
   
@@ -940,7 +953,76 @@ file exists</blockquote>
 </dd>
 </dl>
 <p>Returns a named tuple describing the result (see above for details).</p>
-<table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">module:</span><code>str</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">path:</span><code>str</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">manager:</span><code><a href="mypy.build.BuildManager.html">BuildManager</a></code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">previous_modules:</span><code>Dict[<wbr></wbr>str, <wbr></wbr>str]</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">graph:</span><code><a href="mypy.build.html#Graph">Graph</a></code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">force_removed:</span><code>bool</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr class="fieldStart"><td class="fieldName" colspan="2">Returns</td></tr><tr><td class="fieldArgContainer"><code><a href="#UpdateResult">UpdateResult</a></code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr></table></div>
+<table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">module:</span><code>str</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">path:</span><code>str</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">manager:</span><code><a href="mypy.build.BuildManager.html" class="internal-link" title="mypy.build.BuildManager">BuildManager</a></code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">previous​_modules:</span><code>Dict[<wbr></wbr>str, <wbr></wbr>str]</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">graph:</span><code><a href="mypy.build.html#Graph" class="internal-link" title="mypy.build.Graph">Graph</a></code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">force​_removed:</span><code>bool</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr class="fieldStart"><td class="fieldName" colspan="2">Returns</td></tr><tr><td class="fieldArgContainer"><code><a href="#UpdateResult" class="internal-link" title="mypy.server.update.UpdateResult">UpdateResult</a></code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr></table></div>
+  </div>
+</div><div class="baseconstant">
+  
+  
+  <a name="mypy.server.update.INIT_SUFFIXES">
+    
+  </a>
+  <a name="INIT_SUFFIXES">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-defname">INIT_SUFFIXES</span>: <code>tuple[<wbr></wbr>str, <wbr></wbr><span class="rst-variable-ellipsis">...</span>]</code> =
+    <a class="sourceLink" href="https://github.com/python/mypy/tree/v0.930/mypy/server/update.py#L1144">
+      
+      (source)
+    </a>
+  </div>
+  <div class="functionBody">
+    
+    
+    <div><p class="undocumented">Undocumented</p></div>
+    <table class="valueTable"><tr class="fieldStart"><td class="fieldName">Value</td></tr><tr><td><pre class="constant-value"><code>(<wbr></wbr><span class="rst-variable-quote">'</span><span class="rst-variable-string">/__init__.py</span><span class="rst-variable-quote">'</span>, <wbr></wbr><span class="rst-variable-quote">'</span><span class="rst-variable-string">/__init__.pyi</span><span class="rst-variable-quote">'</span>)</code></pre></td></tr></table>
+  </div>
+</div><div class="baseconstant">
+  
+  
+  <a name="mypy.server.update.MAX_ITER">
+    
+  </a>
+  <a name="MAX_ITER">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-defname">MAX_ITER</span>: <code>int</code> =
+    <a class="sourceLink" href="https://github.com/python/mypy/tree/v0.930/mypy/server/update.py#L151">
+      
+      (source)
+    </a>
+  </div>
+  <div class="functionBody">
+    
+    
+    <div><p class="undocumented">Undocumented</p></div>
+    <table class="valueTable"><tr class="fieldStart"><td class="fieldName">Value</td></tr><tr><td><pre class="constant-value"><code>1000</code></pre></td></tr></table>
+  </div>
+</div><div class="baseconstant">
+  
+  
+  <a name="mypy.server.update.SENSITIVE_INTERNAL_MODULES">
+    
+  </a>
+  <a name="SENSITIVE_INTERNAL_MODULES">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-defname">SENSITIVE_INTERNAL_MODULES</span> =
+    <a class="sourceLink" href="https://github.com/python/mypy/tree/v0.930/mypy/server/update.py#L153">
+      
+      (source)
+    </a>
+  </div>
+  <div class="functionBody">
+    
+    
+    <div><p class="undocumented">Undocumented</p></div>
+    <table class="valueTable"><tr class="fieldStart"><td class="fieldName">Value</td></tr><tr><td><pre class="constant-value"><code>tuple(<wbr></wbr><a href="mypy.semanal_main.html#core_modules" class="internal-link" title="mypy.semanal_main.core_modules">core_modules</a>)+(<wbr></wbr><span class="rst-variable-quote">'</span><span class="rst-variable-string">mypy_extensions</span><span class="rst-variable-quote">'</span>, <wbr></wbr><span class="rst-variable-quote">'</span><span class="rst-variable-string">typing_extensions</span><span class="rst-variable-quote">'</span>)</code></pre></td></tr></table>
   </div>
 </div><div class="basevariable">
   
@@ -963,50 +1045,7 @@ file exists</blockquote>
     
     
     <div><p class="undocumented">Undocumented</p></div>
-  </div>
-</div><div class="basevariable">
-  
-  
-  <a name="mypy.server.update.INIT_SUFFIXES">
     
-  </a>
-  <a name="INIT_SUFFIXES">
-    
-  </a>
-  <div class="functionHeader">
-    
-    <span class="py-defname">INIT_SUFFIXES</span>: <code>Final</code> =
-    <a class="sourceLink" href="https://github.com/python/mypy/tree/v0.930/mypy/server/update.py#L1144">
-      
-      (source)
-    </a>
-  </div>
-  <div class="functionBody">
-    
-    
-    <div><p class="undocumented">Undocumented</p></div>
-  </div>
-</div><div class="basevariable">
-  
-  
-  <a name="mypy.server.update.MAX_ITER">
-    
-  </a>
-  <a name="MAX_ITER">
-    
-  </a>
-  <div class="functionHeader">
-    
-    <span class="py-defname">MAX_ITER</span>: <code>Final</code> =
-    <a class="sourceLink" href="https://github.com/python/mypy/tree/v0.930/mypy/server/update.py#L151">
-      
-      (source)
-    </a>
-  </div>
-  <div class="functionBody">
-    
-    
-    <div><p class="undocumented">Undocumented</p></div>
   </div>
 </div><div class="basevariable">
   
@@ -1029,28 +1068,7 @@ file exists</blockquote>
     
     
     <div><p class="undocumented">Undocumented</p></div>
-  </div>
-</div><div class="basevariable">
-  
-  
-  <a name="mypy.server.update.SENSITIVE_INTERNAL_MODULES">
     
-  </a>
-  <a name="SENSITIVE_INTERNAL_MODULES">
-    
-  </a>
-  <div class="functionHeader">
-    
-    <span class="py-defname">SENSITIVE_INTERNAL_MODULES</span> =
-    <a class="sourceLink" href="https://github.com/python/mypy/tree/v0.930/mypy/server/update.py#L153">
-      
-      (source)
-    </a>
-  </div>
-  <div class="functionBody">
-    
-    
-    <div><p class="undocumented">Undocumented</p></div>
   </div>
 </div><div class="basevariable">
   
@@ -1073,6 +1091,7 @@ file exists</blockquote>
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    
   </div>
 </div>
 
@@ -1084,7 +1103,7 @@ file exists</blockquote>
   <div class="container">
     <a href="index.html">API Documentation</a> for <a href="https://github.com/python/mypy" class="projecthome">mypy-0.930</a>,
   generated by <a href="https://github.com/twisted/pydoctor/">pydoctor</a>
-    21.2.2 at 2022-01-12 04:22:24.
+    22.2.2.dev0 at 2022-03-04 05:57:16.
   </div>
 </footer>
 

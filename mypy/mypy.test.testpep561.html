@@ -7,7 +7,7 @@
   <head>
     
     <title>mypy.test.testpep561</title>
-    <meta name="generator" content="pydoctor 21.2.2"> 
+    <meta name="generator" content="pydoctor 22.2.2.dev0"> 
         
     </meta>
     <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
@@ -44,69 +44,82 @@
           Names
         </a>
 
-        <form action="search-results.html" id="search-box-container">
+        <div id="search-box-container">
           <div class="input-group">
-            <input id="search-box" name="search-query" placeholder="Search..." aria-label="Search" minlength="2" class="form-control" />
+            <input id="search-box" type="search" name="search-query" placeholder="Search..." aria-label="Search" minlength="2" class="form-control" autocomplete="off" />
+            
             <span class="input-group-btn">
-              <button class="btn btn-default" type="submit" title="Search"><img src="fonts/search.svg" alt="Search!" /></button>
-              <a class="btn btn-default" id="search-help-button" title="Help" onclick="toggleSearchHelpText()"><img src="fonts/info.svg" alt="Help!" /></a>
+              <a style="display: none;" class="btn btn-default" id="search-clear-button" title="Clear" onclick="clearSearch()"><img src="fonts/x-circle.svg" alt="Clear" /></a>
+              <a class="btn btn-default" id="search-help-button" title="Help" onclick="toggleSearchHelpText()"><img src="fonts/info.svg" alt="Help" /></a>
             </span>
           </div>
-        </form>
+        </div>
 
-        <div class="rst-admonition hint" id="search-help-box">
+      </div>
+
+      <div id="search-results-container" style="display: none;">
+        <div>
+          <span class="label label-default" id="search-docstrings-button">
+            <a title="Search in docstrings" onclick="toggleSearchInDocstrings()">search in docstrings</a></span>
+        </div>
+
+        <noscript>
+            <h1>Cannot search: JavaScript is not supported/enabled in your browser.</h1>
+        </noscript>
+
+        <div class="hint" id="search-help-box">
           <p class="rst-last">
       
             Search bar offers the following options:
             <ul>   
                 <li>
                   <strong>Term presence.</strong> The below example searches for documents that 
-                    must contain “foo”, might contain “bar” and must not contain “baz”:
-                  <br /> <code>'+foo bar -baz'</code>
+                    must contain “foo”, might contain “bar” and must not contain “baz”: <code>+foo bar -baz</code>
                 </li> 
 
                 <li>
-                  <strong>Wildcards.</strong> The below example searches for documents with words beginning with “foo”:
-                  <br /> <code>'foo*'</code>
+                  <strong>Wildcards.</strong> The below example searches for documents with words beginning with “foo”: <code>foo*</code>
                 </li> 
 
                 <li>
-                  <strong>Search in specific fields.</strong> The following search matches all documents 
-                  that contains "foo" in their full dotted name and with “bar” in any field:
-                  <br /> <code>'+fullName:*foo* +bar'</code>
+                  <strong>Search in specific fields.</strong> The following search matches all objects 
+                  in "twisted.mail" that matches “search”: <code>+qname:twisted.mail.* +search</code>
 
                   <p>
-                    Possible fields: 'name', 'docstring', 'fullName'.
+                    Possible fields: 'name', 'qname' (fully qualified name), 'docstring', and 'kind'.
+                    Last two fields are only applicable if "search in docstrings" is enabled.
                   </p>
                 </li>
 
                 <li>
                   <strong>Fuzzy matches.</strong> The following search matches all documents 
-                  that have a word within 1 edit distance of “foo”:
-                  <br /> <code>'foo~1'</code>
+                  that have a word within 1 edit distance of “foo”: <code>foo~1</code>
                 </li>
             </ul>
 
           </p>
         </div>
 
-      </div>
+        <div id="search-status"> </div>
+        
+        <div class="warning" id="search-warn-box" style="display: none;">
+          <p class="rst-last"><span id="search-warn"></span></p>
+        </div>
 
+        <table id="search-results">
+          <!-- Filled dynamically by JS -->
+        </table>
+        
+        <div style="margin-top: 8px;">
+          <p>Results provided by <a href="https://lunrjs.com">Lunr.js</a></p>
+        </div>
+      </div>
 
     </div>
   </div>
 
-  <script>
- 
-    function toggleSearchHelpText() {
-        document.body.classList.toggle("search-help-hidden");
-    }
-    // Init search and help text
-    document.getElementById('search-box-container').style.display = 'block';
-    document.getElementById('search-help-box').style.display = 'block';
-    document.body.classList.add("search-help-hidden");
-
-  </script>
+  <script src="ajax.js" type="text/javascript"></script>
+  <script src="search.js" type="text/javascript"></script>
 
 </nav>
 
@@ -115,7 +128,7 @@
     <div class="container">
 
       <div class="page-header">
-        <h1 class="module"><code><code><a href="mypy.html">mypy</a></code><wbr></wbr>.<code><a href="mypy.test.html">test</a></code><wbr></wbr>.<code><a href="mypy.test.testpep561.html">testpep561</a></code></code></h1>
+        <h1 class="module"><code><code><a href="index.html" class="internal-link">mypy</a></code><wbr></wbr>.<code><a href="mypy.test.html" class="internal-link" title="mypy.test">test</a></code><wbr></wbr>.<code><a href="mypy.test.testpep561.html" class="internal-link" title="mypy.test.testpep561">testpep561</a></code></code></h1>
         <div id="showPrivate">
           <button class="btn btn-link" onclick="togglePrivate()">Toggle Private API</button>
         </div>
@@ -135,44 +148,44 @@
       </div>
 
       <div id="splitTables">
-        <table class="children sortable" id="id689">
+        <table class="children sortable" id="id691">
   
   
   <tr class="class">
     
     <td>Class</td>
-    <td><code><a href="mypy.test.testpep561.PEP561Suite.html">PEP561Suite</a></code></td>
+    <td><code><a href="mypy.test.testpep561.PEP561Suite.html" class="internal-link" title="mypy.test.testpep561.PEP561Suite">​PEP561​Suite</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="function">
     
     <td>Function</td>
-    <td><code><a href="#install_package">install_package</a></code></td>
-    <td><span>Install a package from test-data/packages/pkg/</span></td>
+    <td><code><a href="#install_package" class="internal-link" title="mypy.test.testpep561.install_package">install​_package</a></code></td>
+    <td>Install a package from test-data/packages/pkg/</td>
   </tr><tr class="function">
     
     <td>Function</td>
-    <td><code><a href="#parse_mypy_args">parse_mypy_args</a></code></td>
+    <td><code><a href="#parse_mypy_args" class="internal-link" title="mypy.test.testpep561.parse_mypy_args">parse​_mypy​_args</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="function">
     
     <td>Function</td>
-    <td><code><a href="#parse_pkgs">parse_pkgs</a></code></td>
+    <td><code><a href="#parse_pkgs" class="internal-link" title="mypy.test.testpep561.parse_pkgs">parse​_pkgs</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="function">
     
     <td>Function</td>
-    <td><code><a href="#test_mypy_path_is_respected">test_mypy_path_is_respected</a></code></td>
+    <td><code><a href="#test_mypy_path_is_respected" class="internal-link" title="mypy.test.testpep561.test_mypy_path_is_respected">test​_mypy​_path​_is​_respected</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="function">
     
     <td>Function</td>
-    <td><code><a href="#test_pep561">test_pep561</a></code></td>
-    <td><span>Test running mypy on files that depend on PEP 561 packages.</span></td>
+    <td><code><a href="#test_pep561" class="internal-link" title="mypy.test.testpep561.test_pep561">test​_pep561</a></code></td>
+    <td>Test running mypy on files that depend on PEP 561 packages.</td>
   </tr><tr class="function">
     
     <td>Function</td>
-    <td><code><a href="#virtualenv">virtualenv</a></code></td>
-    <td><span>Context manager that creates a virtualenv in a temporary directory</span></td>
+    <td><code><a href="#virtualenv" class="internal-link" title="mypy.test.testpep561.virtualenv">virtualenv</a></code></td>
+    <td>Context manager that creates a virtualenv in a temporary directory</td>
   </tr>
 </table>
         
@@ -202,7 +215,7 @@
   <div class="docstring functionBody">
     
     
-    <div>Install a package from test-data/packages/pkg/<table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">pkg:</span><code>str</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">python_executable:</span><code>str</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">use_pip:</span><code>bool</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">editable:</span><code>bool</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr></table></div>
+    <div>Install a package from test-data/packages/pkg/<table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">pkg:</span><code>str</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">python​_executable:</span><code>str</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">use​_pip:</span><code>bool</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">editable:</span><code>bool</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr></table></div>
   </div>
 </div><div class="basefunction">
   
@@ -290,7 +303,7 @@
   <div class="docstring functionBody">
     
     
-    <div>Test running mypy on files that depend on PEP 561 packages.<table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">testcase:</span><code><a href="mypy.test.data.DataDrivenTestCase.html">DataDrivenTestCase</a></code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr></table></div>
+    <div>Test running mypy on files that depend on PEP 561 packages.<table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">testcase:</span><code><a href="mypy.test.data.DataDrivenTestCase.html" class="internal-link" title="mypy.test.data.DataDrivenTestCase">DataDrivenTestCase</a></code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr></table></div>
   </div>
 </div><div class="basefunction">
   
@@ -314,7 +327,7 @@
     
     <div><p>Context manager that creates a virtualenv in a temporary directory</p>
 <p>returns the path to the created Python executable</p>
-<table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">python_executable:</span><code>str</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr class="fieldStart"><td class="fieldName" colspan="2">Returns</td></tr><tr><td class="fieldArgContainer"><code>Generator[<wbr></wbr>Tuple[<wbr></wbr>str, <wbr></wbr>str], <wbr></wbr>None, <wbr></wbr>None]</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr></table></div>
+<table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">python​_executable:</span><code>str</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr class="fieldStart"><td class="fieldName" colspan="2">Returns</td></tr><tr><td class="fieldArgContainer"><code>Generator[<wbr></wbr>Tuple[<wbr></wbr>str, <wbr></wbr>str], <wbr></wbr>None, <wbr></wbr>None]</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr></table></div>
   </div>
 </div>
 
@@ -326,7 +339,7 @@
   <div class="container">
     <a href="index.html">API Documentation</a> for <a href="https://github.com/python/mypy" class="projecthome">mypy-0.930</a>,
   generated by <a href="https://github.com/twisted/pydoctor/">pydoctor</a>
-    21.2.2 at 2022-01-12 04:22:24.
+    22.2.2.dev0 at 2022-03-04 05:57:16.
   </div>
 </footer>
 

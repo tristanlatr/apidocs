@@ -7,7 +7,7 @@
   <head>
     
     <title>mypy.suggestions.SuggestionEngine</title>
-    <meta name="generator" content="pydoctor 21.2.2"> 
+    <meta name="generator" content="pydoctor 22.2.2.dev0"> 
         
     </meta>
     <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
@@ -44,69 +44,82 @@
           Names
         </a>
 
-        <form action="search-results.html" id="search-box-container">
+        <div id="search-box-container">
           <div class="input-group">
-            <input id="search-box" name="search-query" placeholder="Search..." aria-label="Search" minlength="2" class="form-control" />
+            <input id="search-box" type="search" name="search-query" placeholder="Search..." aria-label="Search" minlength="2" class="form-control" autocomplete="off" />
+            
             <span class="input-group-btn">
-              <button class="btn btn-default" type="submit" title="Search"><img src="fonts/search.svg" alt="Search!" /></button>
-              <a class="btn btn-default" id="search-help-button" title="Help" onclick="toggleSearchHelpText()"><img src="fonts/info.svg" alt="Help!" /></a>
+              <a style="display: none;" class="btn btn-default" id="search-clear-button" title="Clear" onclick="clearSearch()"><img src="fonts/x-circle.svg" alt="Clear" /></a>
+              <a class="btn btn-default" id="search-help-button" title="Help" onclick="toggleSearchHelpText()"><img src="fonts/info.svg" alt="Help" /></a>
             </span>
           </div>
-        </form>
+        </div>
 
-        <div class="rst-admonition hint" id="search-help-box">
+      </div>
+
+      <div id="search-results-container" style="display: none;">
+        <div>
+          <span class="label label-default" id="search-docstrings-button">
+            <a title="Search in docstrings" onclick="toggleSearchInDocstrings()">search in docstrings</a></span>
+        </div>
+
+        <noscript>
+            <h1>Cannot search: JavaScript is not supported/enabled in your browser.</h1>
+        </noscript>
+
+        <div class="hint" id="search-help-box">
           <p class="rst-last">
       
             Search bar offers the following options:
             <ul>   
                 <li>
                   <strong>Term presence.</strong> The below example searches for documents that 
-                    must contain “foo”, might contain “bar” and must not contain “baz”:
-                  <br /> <code>'+foo bar -baz'</code>
+                    must contain “foo”, might contain “bar” and must not contain “baz”: <code>+foo bar -baz</code>
                 </li> 
 
                 <li>
-                  <strong>Wildcards.</strong> The below example searches for documents with words beginning with “foo”:
-                  <br /> <code>'foo*'</code>
+                  <strong>Wildcards.</strong> The below example searches for documents with words beginning with “foo”: <code>foo*</code>
                 </li> 
 
                 <li>
-                  <strong>Search in specific fields.</strong> The following search matches all documents 
-                  that contains "foo" in their full dotted name and with “bar” in any field:
-                  <br /> <code>'+fullName:*foo* +bar'</code>
+                  <strong>Search in specific fields.</strong> The following search matches all objects 
+                  in "twisted.mail" that matches “search”: <code>+qname:twisted.mail.* +search</code>
 
                   <p>
-                    Possible fields: 'name', 'docstring', 'fullName'.
+                    Possible fields: 'name', 'qname' (fully qualified name), 'docstring', and 'kind'.
+                    Last two fields are only applicable if "search in docstrings" is enabled.
                   </p>
                 </li>
 
                 <li>
                   <strong>Fuzzy matches.</strong> The following search matches all documents 
-                  that have a word within 1 edit distance of “foo”:
-                  <br /> <code>'foo~1'</code>
+                  that have a word within 1 edit distance of “foo”: <code>foo~1</code>
                 </li>
             </ul>
 
           </p>
         </div>
 
-      </div>
+        <div id="search-status"> </div>
+        
+        <div class="warning" id="search-warn-box" style="display: none;">
+          <p class="rst-last"><span id="search-warn"></span></p>
+        </div>
 
+        <table id="search-results">
+          <!-- Filled dynamically by JS -->
+        </table>
+        
+        <div style="margin-top: 8px;">
+          <p>Results provided by <a href="https://lunrjs.com">Lunr.js</a></p>
+        </div>
+      </div>
 
     </div>
   </div>
 
-  <script>
- 
-    function toggleSearchHelpText() {
-        document.body.classList.toggle("search-help-hidden");
-    }
-    // Init search and help text
-    document.getElementById('search-box-container').style.display = 'block';
-    document.getElementById('search-help-box').style.display = 'block';
-    document.body.classList.add("search-help-hidden");
-
-  </script>
+  <script src="ajax.js" type="text/javascript"></script>
+  <script src="search.js" type="text/javascript"></script>
 
 </nav>
 
@@ -115,7 +128,7 @@
     <div class="container">
 
       <div class="page-header">
-        <h1 class="class"><code><code><a href="mypy.html">mypy</a></code><wbr></wbr>.<code><a href="mypy.suggestions.html">suggestions</a></code><wbr></wbr>.<code><a href="mypy.suggestions.SuggestionEngine.html">SuggestionEngine</a></code></code></h1>
+        <h1 class="class"><code><code><a href="index.html" class="internal-link">mypy</a></code><wbr></wbr>.<code><a href="mypy.suggestions.html" class="internal-link" title="mypy.suggestions">suggestions</a></code><wbr></wbr>.<code><a href="mypy.suggestions.SuggestionEngine.html" class="internal-link" title="mypy.suggestions.SuggestionEngine">SuggestionEngine</a></code></code></h1>
         <div id="showPrivate">
           <button class="btn btn-link" onclick="togglePrivate()">Toggle Private API</button>
         </div>
@@ -141,212 +154,212 @@
   <tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#__init__">__init__</a></code></td>
+    <td><code><a href="#__init__" class="internal-link" title="mypy.suggestions.SuggestionEngine.__init__">__init__</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#add_adjustments">add_adjustments</a></code></td>
+    <td><code><a href="#add_adjustments" class="internal-link" title="mypy.suggestions.SuggestionEngine.add_adjustments">add​_adjustments</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#ensure_loaded">ensure_loaded</a></code></td>
-    <td><span>Make sure that the module represented by state is fully loaded.</span></td>
+    <td><code><a href="#ensure_loaded" class="internal-link" title="mypy.suggestions.SuggestionEngine.ensure_loaded">ensure​_loaded</a></code></td>
+    <td>Make sure that the module represented by state is fully loaded.</td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#extract_from_decorator">extract_from_decorator</a></code></td>
+    <td><code><a href="#extract_from_decorator" class="internal-link" title="mypy.suggestions.SuggestionEngine.extract_from_decorator">extract​_from​_decorator</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#filter_options">filter_options</a></code></td>
-    <td><span>Apply any configured filters to the possible guesses.</span></td>
+    <td><code><a href="#filter_options" class="internal-link" title="mypy.suggestions.SuggestionEngine.filter_options">filter​_options</a></code></td>
+    <td>Apply any configured filters to the possible guesses.</td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#find_best">find_best</a></code></td>
-    <td><span>From a list of possible function types, find the best one.</span></td>
+    <td><code><a href="#find_best" class="internal-link" title="mypy.suggestions.SuggestionEngine.find_best">find​_best</a></code></td>
+    <td>From a list of possible function types, find the best one.</td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#find_node">find_node</a></code></td>
-    <td><span>From a target name, return module/target names and the func def.</span></td>
+    <td><code><a href="#find_node" class="internal-link" title="mypy.suggestions.SuggestionEngine.find_node">find​_node</a></code></td>
+    <td>From a target name, return module/target names and the func def.</td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#find_node_by_file_and_line">find_node_by_file_and_line</a></code></td>
-    <td><span>Find symbol node by path to file and line number.</span></td>
+    <td><code><a href="#find_node_by_file_and_line" class="internal-link" title="mypy.suggestions.SuggestionEngine.find_node_by_file_and_line">find​_node​_by​_file​_and​_line</a></code></td>
+    <td>Find symbol node by path to file and line number.</td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#find_node_by_module_and_name">find_node_by_module_and_name</a></code></td>
-    <td><span>Find symbol node by module id and qualified name.</span></td>
+    <td><code><a href="#find_node_by_module_and_name" class="internal-link" title="mypy.suggestions.SuggestionEngine.find_node_by_module_and_name">find​_node​_by​_module​_and​_name</a></code></td>
+    <td>Find symbol node by module id and qualified name.</td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#format_args">format_args</a></code></td>
+    <td><code><a href="#format_args" class="internal-link" title="mypy.suggestions.SuggestionEngine.format_args">format​_args</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#format_signature">format_signature</a></code></td>
-    <td><span>Format a callable type in a way suitable as an annotation... kind of</span></td>
+    <td><code><a href="#format_signature" class="internal-link" title="mypy.suggestions.SuggestionEngine.format_signature">format​_signature</a></code></td>
+    <td>Format a callable type in a way suitable as an annotation... kind of</td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#format_type">format_type</a></code></td>
+    <td><code><a href="#format_type" class="internal-link" title="mypy.suggestions.SuggestionEngine.format_type">format​_type</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#get_args">get_args</a></code></td>
-    <td><span>Produce a list of type suggestions for each argument type.</span></td>
+    <td><code><a href="#get_args" class="internal-link" title="mypy.suggestions.SuggestionEngine.get_args">get​_args</a></code></td>
+    <td>Produce a list of type suggestions for each argument type.</td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#get_callsites">get_callsites</a></code></td>
-    <td><span>Find all call sites of a function.</span></td>
+    <td><code><a href="#get_callsites" class="internal-link" title="mypy.suggestions.SuggestionEngine.get_callsites">get​_callsites</a></code></td>
+    <td>Find all call sites of a function.</td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#get_default_arg_types">get_default_arg_types</a></code></td>
+    <td><code><a href="#get_default_arg_types" class="internal-link" title="mypy.suggestions.SuggestionEngine.get_default_arg_types">get​_default​_arg​_types</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#get_guesses">get_guesses</a></code></td>
-    <td><span>Compute a list of guesses for a function's type.</span></td>
+    <td><code><a href="#get_guesses" class="internal-link" title="mypy.suggestions.SuggestionEngine.get_guesses">get​_guesses</a></code></td>
+    <td>Compute a list of guesses for a function's type.</td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#get_guesses_from_parent">get_guesses_from_parent</a></code></td>
-    <td><span>Try to get a guess of a method type from a parent class.</span></td>
+    <td><code><a href="#get_guesses_from_parent" class="internal-link" title="mypy.suggestions.SuggestionEngine.get_guesses_from_parent">get​_guesses​_from​_parent</a></code></td>
+    <td>Try to get a guess of a method type from a parent class.</td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#get_starting_type">get_starting_type</a></code></td>
+    <td><code><a href="#get_starting_type" class="internal-link" title="mypy.suggestions.SuggestionEngine.get_starting_type">get​_starting​_type</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#get_suggestion">get_suggestion</a></code></td>
-    <td><span>Compute a suggestion for a function.</span></td>
+    <td><code><a href="#get_suggestion" class="internal-link" title="mypy.suggestions.SuggestionEngine.get_suggestion">get​_suggestion</a></code></td>
+    <td>Compute a suggestion for a function.</td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#get_trivial_type">get_trivial_type</a></code></td>
-    <td><span>Generate a trivial callable type from a func def, with all Anys</span></td>
+    <td><code><a href="#get_trivial_type" class="internal-link" title="mypy.suggestions.SuggestionEngine.get_trivial_type">get​_trivial​_type</a></code></td>
+    <td>Generate a trivial callable type from a func def, with all Anys</td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#json_suggestion">json_suggestion</a></code></td>
-    <td><span>Produce a json blob for a suggestion suitable for application by pyannotate.</span></td>
+    <td><code><a href="#json_suggestion" class="internal-link" title="mypy.suggestions.SuggestionEngine.json_suggestion">json​_suggestion</a></code></td>
+    <td>Produce a json blob for a suggestion suitable for application by pyannotate.</td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#named_type">named_type</a></code></td>
+    <td><code><a href="#named_type" class="internal-link" title="mypy.suggestions.SuggestionEngine.named_type">named​_type</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#pyannotate_signature">pyannotate_signature</a></code></td>
-    <td><span>Format a callable type as a pyannotate dict</span></td>
+    <td><code><a href="#pyannotate_signature" class="internal-link" title="mypy.suggestions.SuggestionEngine.pyannotate_signature">pyannotate​_signature</a></code></td>
+    <td>Format a callable type as a pyannotate dict</td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#reload">reload</a></code></td>
-    <td><span>Recheck the module given by state.</span></td>
+    <td><code><a href="#reload" class="internal-link" title="mypy.suggestions.SuggestionEngine.reload">reload</a></code></td>
+    <td>Recheck the module given by state.</td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#restore_after">restore_after</a></code></td>
-    <td><span>Context manager that reloads a module after executing the body.</span></td>
+    <td><code><a href="#restore_after" class="internal-link" title="mypy.suggestions.SuggestionEngine.restore_after">restore​_after</a></code></td>
+    <td>Context manager that reloads a module after executing the body.</td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#score_callable">score_callable</a></code></td>
+    <td><code><a href="#score_callable" class="internal-link" title="mypy.suggestions.SuggestionEngine.score_callable">score​_callable</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#score_type">score_type</a></code></td>
-    <td><span>Generate a score for a type that we use to pick which type to use.</span></td>
+    <td><code><a href="#score_type" class="internal-link" title="mypy.suggestions.SuggestionEngine.score_type">score​_type</a></code></td>
+    <td>Generate a score for a type that we use to pick which type to use.</td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#suggest">suggest</a></code></td>
-    <td><span>Suggest an inferred type for function.</span></td>
+    <td><code><a href="#suggest" class="internal-link" title="mypy.suggestions.SuggestionEngine.suggest">suggest</a></code></td>
+    <td>Suggest an inferred type for function.</td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#suggest_callsites">suggest_callsites</a></code></td>
-    <td><span>Find a list of call sites of function.</span></td>
+    <td><code><a href="#suggest_callsites" class="internal-link" title="mypy.suggestions.SuggestionEngine.suggest_callsites">suggest​_callsites</a></code></td>
+    <td>Find a list of call sites of function.</td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#try_type">try_type</a></code></td>
-    <td><span>Recheck a function while assuming it has type typ.</span></td>
+    <td><code><a href="#try_type" class="internal-link" title="mypy.suggestions.SuggestionEngine.try_type">try​_type</a></code></td>
+    <td>Recheck a function while assuming it has type typ.</td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#with_export_types">with_export_types</a></code></td>
-    <td><span>Context manager that enables the export_types flag in the body.</span></td>
+    <td><code><a href="#with_export_types" class="internal-link" title="mypy.suggestions.SuggestionEngine.with_export_types">with​_export​_types</a></code></td>
+    <td>Context manager that enables the export_types flag in the body.</td>
   </tr><tr class="instancevariable">
     
     <td>Instance Variable</td>
-    <td><code><a href="#fgmanager">fgmanager</a></code></td>
-    <td><span class="undocumented">Undocumented</span></td>
-  </tr><tr class="instancevariable">
-    
-    <td>Instance Variable</td>
-    <td><code><a href="#finder">finder</a></code></td>
+    <td><code><a href="#fgmanager" class="internal-link" title="mypy.suggestions.SuggestionEngine.fgmanager">fgmanager</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="instancevariable">
     
     <td>Instance Variable</td>
-    <td><code><a href="#flex_any">flex_any</a></code></td>
+    <td><code><a href="#finder" class="internal-link" title="mypy.suggestions.SuggestionEngine.finder">finder</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="instancevariable">
     
     <td>Instance Variable</td>
-    <td><code><a href="#give_json">give_json</a></code></td>
+    <td><code><a href="#flex_any" class="internal-link" title="mypy.suggestions.SuggestionEngine.flex_any">flex​_any</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="instancevariable">
     
     <td>Instance Variable</td>
-    <td><code><a href="#graph">graph</a></code></td>
+    <td><code><a href="#give_json" class="internal-link" title="mypy.suggestions.SuggestionEngine.give_json">give​_json</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="instancevariable">
     
     <td>Instance Variable</td>
-    <td><code><a href="#manager">manager</a></code></td>
+    <td><code><a href="#graph" class="internal-link" title="mypy.suggestions.SuggestionEngine.graph">graph</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="instancevariable">
     
     <td>Instance Variable</td>
-    <td><code><a href="#max_guesses">max_guesses</a></code></td>
+    <td><code><a href="#manager" class="internal-link" title="mypy.suggestions.SuggestionEngine.manager">manager</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="instancevariable">
     
     <td>Instance Variable</td>
-    <td><code><a href="#no_errors">no_errors</a></code></td>
+    <td><code><a href="#max_guesses" class="internal-link" title="mypy.suggestions.SuggestionEngine.max_guesses">max​_guesses</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="instancevariable">
     
     <td>Instance Variable</td>
-    <td><code><a href="#plugin">plugin</a></code></td>
+    <td><code><a href="#no_errors" class="internal-link" title="mypy.suggestions.SuggestionEngine.no_errors">no​_errors</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="instancevariable">
     
     <td>Instance Variable</td>
-    <td><code><a href="#try_text">try_text</a></code></td>
+    <td><code><a href="#plugin" class="internal-link" title="mypy.suggestions.SuggestionEngine.plugin">plugin</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="instancevariable">
     
     <td>Instance Variable</td>
-    <td><code><a href="#use_fixme">use_fixme</a></code></td>
+    <td><code><a href="#try_text" class="internal-link" title="mypy.suggestions.SuggestionEngine.try_text">try​_text</a></code></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="instancevariable">
+    
+    <td>Instance Variable</td>
+    <td><code><a href="#use_fixme" class="internal-link" title="mypy.suggestions.SuggestionEngine.use_fixme">use​_fixme</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr>
 </table>
@@ -377,7 +390,7 @@
   <div class="docstring functionBody">
     
     
-    <div><p class="undocumented">Undocumented</p><table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">fgmanager:</span><code><a href="mypy.server.update.FineGrainedBuildManager.html">FineGrainedBuildManager</a></code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">json:</span><code>bool</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">no_errors:</span><code>bool</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">no_any:</span><code>bool</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">try_text:</span><code>bool</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">flex_any:</span><code>Optional[<wbr></wbr>float]</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">use_fixme:</span><code>Optional[<wbr></wbr>str]</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">max_guesses:</span><code>Optional[<wbr></wbr>int]</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr></table></div>
+    <div><p class="undocumented">Undocumented</p><table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">fgmanager:</span><code><a href="mypy.server.update.FineGrainedBuildManager.html" class="internal-link" title="mypy.server.update.FineGrainedBuildManager">FineGrainedBuildManager</a></code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">json:</span><code>bool</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">no​_errors:</span><code>bool</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">no​_any:</span><code>bool</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">try​_text:</span><code>bool</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">flex​_any:</span><code>Optional[<wbr></wbr>float]</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">use​_fixme:</span><code>Optional[<wbr></wbr>str]</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">max​_guesses:</span><code>Optional[<wbr></wbr>int]</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr></table></div>
   </div>
 </div><div class="basemethod">
   
@@ -399,7 +412,7 @@
   <div class="docstring functionBody">
     
     
-    <div><p class="undocumented">Undocumented</p><table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">typs:</span><code>List[<wbr></wbr><a href="mypy.types.Type.html">Type</a>]</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr class="fieldStart"><td class="fieldName" colspan="2">Returns</td></tr><tr><td class="fieldArgContainer"><code>List[<wbr></wbr><a href="mypy.types.Type.html">Type</a>]</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr></table></div>
+    <div><p class="undocumented">Undocumented</p><table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">typs:</span><code>List[<wbr></wbr><a href="mypy.types.Type.html" class="internal-link" title="mypy.types.Type">Type</a>]</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr class="fieldStart"><td class="fieldName" colspan="2">Returns</td></tr><tr><td class="fieldArgContainer"><code>List[<wbr></wbr><a href="mypy.types.Type.html" class="internal-link" title="mypy.types.Type">Type</a>]</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr></table></div>
   </div>
 </div><div class="basemethod">
   
@@ -421,7 +434,7 @@
   <div class="docstring functionBody">
     
     
-    <div>Make sure that the module represented by state is fully loaded.<table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">state:</span><code><a href="mypy.build.State.html">State</a></code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">force:</span><code>bool</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr class="fieldStart"><td class="fieldName" colspan="2">Returns</td></tr><tr><td class="fieldArgContainer"><code><a href="mypy.nodes.MypyFile.html">MypyFile</a></code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr></table></div>
+    <div>Make sure that the module represented by state is fully loaded.<table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">state:</span><code><a href="mypy.build.State.html" class="internal-link" title="mypy.build.State">State</a></code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">force:</span><code>bool</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr class="fieldStart"><td class="fieldName" colspan="2">Returns</td></tr><tr><td class="fieldArgContainer"><code><a href="mypy.nodes.MypyFile.html" class="internal-link" title="mypy.nodes.MypyFile">MypyFile</a></code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr></table></div>
   </div>
 </div><div class="basemethod">
   
@@ -443,7 +456,7 @@
   <div class="docstring functionBody">
     
     
-    <div><p class="undocumented">Undocumented</p><table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">node:</span><code><a href="mypy.nodes.Decorator.html">Decorator</a></code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr class="fieldStart"><td class="fieldName" colspan="2">Returns</td></tr><tr><td class="fieldArgContainer"><code>Optional[<wbr></wbr><a href="mypy.nodes.FuncDef.html">FuncDef</a>]</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr></table></div>
+    <div><p class="undocumented">Undocumented</p><table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">node:</span><code><a href="mypy.nodes.Decorator.html" class="internal-link" title="mypy.nodes.Decorator">Decorator</a></code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr class="fieldStart"><td class="fieldName" colspan="2">Returns</td></tr><tr><td class="fieldArgContainer"><code>Optional[<wbr></wbr><a href="mypy.nodes.FuncDef.html" class="internal-link" title="mypy.nodes.FuncDef">FuncDef</a>]</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr></table></div>
   </div>
 </div><div class="basemethod">
   
@@ -467,7 +480,7 @@
     
     <div><p>Apply any configured filters to the possible guesses.</p>
 <p>Currently the only option is filtering based on Any prevalance.</p>
-<table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">guesses:</span><code>List[<wbr></wbr><a href="mypy.types.CallableType.html">CallableType</a>]</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">is_method:</span><code>bool</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">ignore_return:</span><code>bool</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr class="fieldStart"><td class="fieldName" colspan="2">Returns</td></tr><tr><td class="fieldArgContainer"><code>List[<wbr></wbr><a href="mypy.types.CallableType.html">CallableType</a>]</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr></table></div>
+<table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">guesses:</span><code>List[<wbr></wbr><a href="mypy.types.CallableType.html" class="internal-link" title="mypy.types.CallableType">CallableType</a>]</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">is​_method:</span><code>bool</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">ignore​_return:</span><code>bool</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr class="fieldStart"><td class="fieldName" colspan="2">Returns</td></tr><tr><td class="fieldArgContainer"><code>List[<wbr></wbr><a href="mypy.types.CallableType.html" class="internal-link" title="mypy.types.CallableType">CallableType</a>]</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr></table></div>
   </div>
 </div><div class="basemethod">
   
@@ -491,7 +504,7 @@
     
     <div><p>From a list of possible function types, find the best one.</p>
 <p>For best, we want the fewest errors, then the best "score" from score_callable.</p>
-<table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">func:</span><code><a href="mypy.nodes.FuncDef.html">FuncDef</a></code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">guesses:</span><code>List[<wbr></wbr><a href="mypy.types.CallableType.html">CallableType</a>]</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr class="fieldStart"><td class="fieldName" colspan="2">Returns</td></tr><tr><td class="fieldArgContainer"><code>Tuple[<wbr></wbr><a href="mypy.types.CallableType.html">CallableType</a>, <wbr></wbr>int]</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr></table></div>
+<table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">func:</span><code><a href="mypy.nodes.FuncDef.html" class="internal-link" title="mypy.nodes.FuncDef">FuncDef</a></code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">guesses:</span><code>List[<wbr></wbr><a href="mypy.types.CallableType.html" class="internal-link" title="mypy.types.CallableType">CallableType</a>]</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr class="fieldStart"><td class="fieldName" colspan="2">Returns</td></tr><tr><td class="fieldArgContainer"><code>Tuple[<wbr></wbr><a href="mypy.types.CallableType.html" class="internal-link" title="mypy.types.CallableType">CallableType</a>, <wbr></wbr>int]</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr></table></div>
   </div>
 </div><div class="basemethod">
   
@@ -519,7 +532,7 @@
 * As the function location as file and line separated by column,</p>
 <blockquote>
 e.g., path/to/file.py:42</blockquote>
-<table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">key:</span><code>str</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr class="fieldStart"><td class="fieldName" colspan="2">Returns</td></tr><tr><td class="fieldArgContainer"><code>Tuple[<wbr></wbr>str, <wbr></wbr>str, <wbr></wbr><a href="mypy.nodes.FuncDef.html">FuncDef</a>]</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr></table></div>
+<table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">key:</span><code>str</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr class="fieldStart"><td class="fieldName" colspan="2">Returns</td></tr><tr><td class="fieldArgContainer"><code>Tuple[<wbr></wbr>str, <wbr></wbr>str, <wbr></wbr><a href="mypy.nodes.FuncDef.html" class="internal-link" title="mypy.nodes.FuncDef">FuncDef</a>]</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr></table></div>
   </div>
 </div><div class="basemethod">
   
@@ -544,7 +557,7 @@ e.g., path/to/file.py:42</blockquote>
     <div><p>Find symbol node by path to file and line number.</p>
 <p>Find the first function declared <em>before or on</em> the line number.</p>
 <p>Return module id and the node found. Raise SuggestionFailure if can't find one.</p>
-<table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">file:</span><code>str</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">line:</span><code>int</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr class="fieldStart"><td class="fieldName" colspan="2">Returns</td></tr><tr><td class="fieldArgContainer"><code>Tuple[<wbr></wbr>str, <wbr></wbr><a href="mypy.nodes.SymbolNode.html">SymbolNode</a>]</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr></table></div>
+<table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">file:</span><code>str</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">line:</span><code>int</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr class="fieldStart"><td class="fieldName" colspan="2">Returns</td></tr><tr><td class="fieldArgContainer"><code>Tuple[<wbr></wbr>str, <wbr></wbr><a href="mypy.nodes.SymbolNode.html" class="internal-link" title="mypy.nodes.SymbolNode">SymbolNode</a>]</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr></table></div>
   </div>
 </div><div class="basemethod">
   
@@ -568,7 +581,7 @@ e.g., path/to/file.py:42</blockquote>
     
     <div><p>Find symbol node by module id and qualified name.</p>
 <p>Raise SuggestionFailure if can't find one.</p>
-<table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">modname:</span><code>str</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">tail:</span><code>str</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr class="fieldStart"><td class="fieldName" colspan="2">Returns</td></tr><tr><td class="fieldArgContainer"><code>Optional[<wbr></wbr><a href="mypy.nodes.SymbolNode.html">SymbolNode</a>]</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr></table></div>
+<table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">modname:</span><code>str</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">tail:</span><code>str</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr class="fieldStart"><td class="fieldName" colspan="2">Returns</td></tr><tr><td class="fieldArgContainer"><code>Optional[<wbr></wbr><a href="mypy.nodes.SymbolNode.html" class="internal-link" title="mypy.nodes.SymbolNode">SymbolNode</a>]</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr></table></div>
   </div>
 </div><div class="basemethod">
   
@@ -590,7 +603,7 @@ e.g., path/to/file.py:42</blockquote>
   <div class="docstring functionBody">
     
     
-    <div><p class="undocumented">Undocumented</p><table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">arg_kinds:</span><code>List[<wbr></wbr>List[<wbr></wbr><a href="mypy.nodes.ArgKind.html">ArgKind</a>]]</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">arg_names:</span><code>List[<wbr></wbr>List[<wbr></wbr>Optional[<wbr></wbr>str]]]</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">arg_types:</span><code>List[<wbr></wbr>List[<wbr></wbr><a href="mypy.types.Type.html">Type</a>]]</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr class="fieldStart"><td class="fieldName" colspan="2">Returns</td></tr><tr><td class="fieldArgContainer"><code>str</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr></table></div>
+    <div><p class="undocumented">Undocumented</p><table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">arg​_kinds:</span><code>List[<wbr></wbr>List[<wbr></wbr><a href="mypy.nodes.ArgKind.html" class="internal-link" title="mypy.nodes.ArgKind">ArgKind</a>]]</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">arg​_names:</span><code>List[<wbr></wbr>List[<wbr></wbr>Optional[<wbr></wbr>str]]]</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">arg​_types:</span><code>List[<wbr></wbr>List[<wbr></wbr><a href="mypy.types.Type.html" class="internal-link" title="mypy.types.Type">Type</a>]]</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr class="fieldStart"><td class="fieldName" colspan="2">Returns</td></tr><tr><td class="fieldArgContainer"><code>str</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr></table></div>
   </div>
 </div><div class="basemethod">
   
@@ -612,7 +625,7 @@ e.g., path/to/file.py:42</blockquote>
   <div class="docstring functionBody">
     
     
-    <div>Format a callable type in a way suitable as an annotation... kind of<table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">sig:</span><code><a href="mypy.suggestions.html#PyAnnotateSignature">PyAnnotateSignature</a></code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr class="fieldStart"><td class="fieldName" colspan="2">Returns</td></tr><tr><td class="fieldArgContainer"><code>str</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr></table></div>
+    <div>Format a callable type in a way suitable as an annotation... kind of<table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">sig:</span><code><a href="mypy.suggestions.html#PyAnnotateSignature" class="internal-link" title="mypy.suggestions.PyAnnotateSignature">PyAnnotateSignature</a></code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr class="fieldStart"><td class="fieldName" colspan="2">Returns</td></tr><tr><td class="fieldArgContainer"><code>str</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr></table></div>
   </div>
 </div><div class="basemethod">
   
@@ -634,7 +647,7 @@ e.g., path/to/file.py:42</blockquote>
   <div class="docstring functionBody">
     
     
-    <div><p class="undocumented">Undocumented</p><table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">cur_module:</span><code>Optional[<wbr></wbr>str]</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">typ:</span><code><a href="mypy.types.Type.html">Type</a></code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr class="fieldStart"><td class="fieldName" colspan="2">Returns</td></tr><tr><td class="fieldArgContainer"><code>str</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr></table></div>
+    <div><p class="undocumented">Undocumented</p><table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">cur​_module:</span><code>Optional[<wbr></wbr>str]</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">typ:</span><code><a href="mypy.types.Type.html" class="internal-link" title="mypy.types.Type">Type</a></code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr class="fieldStart"><td class="fieldName" colspan="2">Returns</td></tr><tr><td class="fieldArgContainer"><code>str</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr></table></div>
   </div>
 </div><div class="basemethod">
   
@@ -656,7 +669,7 @@ e.g., path/to/file.py:42</blockquote>
   <div class="docstring functionBody">
     
     
-    <div>Produce a list of type suggestions for each argument type.<table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">is_method:</span><code>bool</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">base:</span><code><a href="mypy.types.CallableType.html">CallableType</a></code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">defaults:</span><code>List[<wbr></wbr>Optional[<wbr></wbr><a href="mypy.types.Type.html">Type</a>]]</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">callsites:</span><code>List[<wbr></wbr><a href="mypy.suggestions.html#Callsite">Callsite</a>]</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">uses:</span><code>List[<wbr></wbr>List[<wbr></wbr><a href="mypy.types.Type.html">Type</a>]]</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr class="fieldStart"><td class="fieldName" colspan="2">Returns</td></tr><tr><td class="fieldArgContainer"><code>List[<wbr></wbr>List[<wbr></wbr><a href="mypy.types.Type.html">Type</a>]]</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr></table></div>
+    <div>Produce a list of type suggestions for each argument type.<table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">is​_method:</span><code>bool</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">base:</span><code><a href="mypy.types.CallableType.html" class="internal-link" title="mypy.types.CallableType">CallableType</a></code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">defaults:</span><code>List[<wbr></wbr>Optional[<wbr></wbr><a href="mypy.types.Type.html" class="internal-link" title="mypy.types.Type">Type</a>]]</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">callsites:</span><code>List[<wbr></wbr><a href="mypy.suggestions.html#Callsite" class="internal-link" title="mypy.suggestions.Callsite">Callsite</a>]</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">uses:</span><code>List[<wbr></wbr>List[<wbr></wbr><a href="mypy.types.Type.html" class="internal-link" title="mypy.types.Type">Type</a>]]</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr class="fieldStart"><td class="fieldName" colspan="2">Returns</td></tr><tr><td class="fieldArgContainer"><code>List[<wbr></wbr>List[<wbr></wbr><a href="mypy.types.Type.html" class="internal-link" title="mypy.types.Type">Type</a>]]</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr></table></div>
   </div>
 </div><div class="basemethod">
   
@@ -678,7 +691,7 @@ e.g., path/to/file.py:42</blockquote>
   <div class="docstring functionBody">
     
     
-    <div>Find all call sites of a function.<table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">func:</span><code><a href="mypy.nodes.FuncDef.html">FuncDef</a></code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr class="fieldStart"><td class="fieldName" colspan="2">Returns</td></tr><tr><td class="fieldArgContainer"><code>Tuple[<wbr></wbr>List[<wbr></wbr><a href="mypy.suggestions.html#Callsite">Callsite</a>], <wbr></wbr>List[<wbr></wbr>str]]</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr></table></div>
+    <div>Find all call sites of a function.<table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">func:</span><code><a href="mypy.nodes.FuncDef.html" class="internal-link" title="mypy.nodes.FuncDef">FuncDef</a></code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr class="fieldStart"><td class="fieldName" colspan="2">Returns</td></tr><tr><td class="fieldArgContainer"><code>Tuple[<wbr></wbr>List[<wbr></wbr><a href="mypy.suggestions.html#Callsite" class="internal-link" title="mypy.suggestions.Callsite">Callsite</a>], <wbr></wbr>List[<wbr></wbr>str]]</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr></table></div>
   </div>
 </div><div class="basemethod">
   
@@ -700,7 +713,7 @@ e.g., path/to/file.py:42</blockquote>
   <div class="docstring functionBody">
     
     
-    <div><p class="undocumented">Undocumented</p><table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">state:</span><code><a href="mypy.build.State.html">State</a></code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">fdef:</span><code><a href="mypy.nodes.FuncDef.html">FuncDef</a></code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr class="fieldStart"><td class="fieldName" colspan="2">Returns</td></tr><tr><td class="fieldArgContainer"><code>List[<wbr></wbr>Optional[<wbr></wbr><a href="mypy.types.Type.html">Type</a>]]</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr></table></div>
+    <div><p class="undocumented">Undocumented</p><table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">state:</span><code><a href="mypy.build.State.html" class="internal-link" title="mypy.build.State">State</a></code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">fdef:</span><code><a href="mypy.nodes.FuncDef.html" class="internal-link" title="mypy.nodes.FuncDef">FuncDef</a></code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr class="fieldStart"><td class="fieldName" colspan="2">Returns</td></tr><tr><td class="fieldArgContainer"><code>List[<wbr></wbr>Optional[<wbr></wbr><a href="mypy.types.Type.html" class="internal-link" title="mypy.types.Type">Type</a>]]</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr></table></div>
   </div>
 </div><div class="basemethod">
   
@@ -724,7 +737,7 @@ e.g., path/to/file.py:42</blockquote>
     
     <div><p>Compute a list of guesses for a function's type.</p>
 <p>This focuses just on the argument types, and doesn't change the provided return type.</p>
-<table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">is_method:</span><code>bool</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">base:</span><code><a href="mypy.types.CallableType.html">CallableType</a></code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">defaults:</span><code>List[<wbr></wbr>Optional[<wbr></wbr><a href="mypy.types.Type.html">Type</a>]]</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">callsites:</span><code>List[<wbr></wbr><a href="mypy.suggestions.html#Callsite">Callsite</a>]</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">uses:</span><code>List[<wbr></wbr>List[<wbr></wbr><a href="mypy.types.Type.html">Type</a>]]</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr class="fieldStart"><td class="fieldName" colspan="2">Returns</td></tr><tr><td class="fieldArgContainer"><code>List[<wbr></wbr><a href="mypy.types.CallableType.html">CallableType</a>]</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr></table></div>
+<table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">is​_method:</span><code>bool</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">base:</span><code><a href="mypy.types.CallableType.html" class="internal-link" title="mypy.types.CallableType">CallableType</a></code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">defaults:</span><code>List[<wbr></wbr>Optional[<wbr></wbr><a href="mypy.types.Type.html" class="internal-link" title="mypy.types.Type">Type</a>]]</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">callsites:</span><code>List[<wbr></wbr><a href="mypy.suggestions.html#Callsite" class="internal-link" title="mypy.suggestions.Callsite">Callsite</a>]</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">uses:</span><code>List[<wbr></wbr>List[<wbr></wbr><a href="mypy.types.Type.html" class="internal-link" title="mypy.types.Type">Type</a>]]</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr class="fieldStart"><td class="fieldName" colspan="2">Returns</td></tr><tr><td class="fieldArgContainer"><code>List[<wbr></wbr><a href="mypy.types.CallableType.html" class="internal-link" title="mypy.types.CallableType">CallableType</a>]</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr></table></div>
   </div>
 </div><div class="basemethod">
   
@@ -746,7 +759,7 @@ e.g., path/to/file.py:42</blockquote>
   <div class="docstring functionBody">
     
     
-    <div>Try to get a guess of a method type from a parent class.<table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">node:</span><code><a href="mypy.nodes.FuncDef.html">FuncDef</a></code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr class="fieldStart"><td class="fieldName" colspan="2">Returns</td></tr><tr><td class="fieldArgContainer"><code>List[<wbr></wbr><a href="mypy.types.CallableType.html">CallableType</a>]</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr></table></div>
+    <div>Try to get a guess of a method type from a parent class.<table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">node:</span><code><a href="mypy.nodes.FuncDef.html" class="internal-link" title="mypy.nodes.FuncDef">FuncDef</a></code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr class="fieldStart"><td class="fieldName" colspan="2">Returns</td></tr><tr><td class="fieldArgContainer"><code>List[<wbr></wbr><a href="mypy.types.CallableType.html" class="internal-link" title="mypy.types.CallableType">CallableType</a>]</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr></table></div>
   </div>
 </div><div class="basemethod">
   
@@ -768,7 +781,7 @@ e.g., path/to/file.py:42</blockquote>
   <div class="docstring functionBody">
     
     
-    <div><p class="undocumented">Undocumented</p><table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">fdef:</span><code><a href="mypy.nodes.FuncDef.html">FuncDef</a></code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr class="fieldStart"><td class="fieldName" colspan="2">Returns</td></tr><tr><td class="fieldArgContainer"><code><a href="mypy.types.CallableType.html">CallableType</a></code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr></table></div>
+    <div><p class="undocumented">Undocumented</p><table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">fdef:</span><code><a href="mypy.nodes.FuncDef.html" class="internal-link" title="mypy.nodes.FuncDef">FuncDef</a></code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr class="fieldStart"><td class="fieldName" colspan="2">Returns</td></tr><tr><td class="fieldArgContainer"><code><a href="mypy.types.CallableType.html" class="internal-link" title="mypy.types.CallableType">CallableType</a></code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr></table></div>
   </div>
 </div><div class="basemethod">
   
@@ -792,7 +805,7 @@ e.g., path/to/file.py:42</blockquote>
     
     <div><p>Compute a suggestion for a function.</p>
 <p>Return the type and whether the first argument should be ignored.</p>
-<table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">mod:</span><code>str</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">node:</span><code><a href="mypy.nodes.FuncDef.html">FuncDef</a></code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr class="fieldStart"><td class="fieldName" colspan="2">Returns</td></tr><tr><td class="fieldArgContainer"><code><a href="mypy.suggestions.html#PyAnnotateSignature">PyAnnotateSignature</a></code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr></table></div>
+<table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">mod:</span><code>str</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">node:</span><code><a href="mypy.nodes.FuncDef.html" class="internal-link" title="mypy.nodes.FuncDef">FuncDef</a></code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr class="fieldStart"><td class="fieldName" colspan="2">Returns</td></tr><tr><td class="fieldArgContainer"><code><a href="mypy.suggestions.html#PyAnnotateSignature" class="internal-link" title="mypy.suggestions.PyAnnotateSignature">PyAnnotateSignature</a></code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr></table></div>
   </div>
 </div><div class="basemethod">
   
@@ -814,7 +827,7 @@ e.g., path/to/file.py:42</blockquote>
   <div class="docstring functionBody">
     
     
-    <div>Generate a trivial callable type from a func def, with all Anys<table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">fdef:</span><code><a href="mypy.nodes.FuncDef.html">FuncDef</a></code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr class="fieldStart"><td class="fieldName" colspan="2">Returns</td></tr><tr><td class="fieldArgContainer"><code><a href="mypy.types.CallableType.html">CallableType</a></code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr></table></div>
+    <div>Generate a trivial callable type from a func def, with all Anys<table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">fdef:</span><code><a href="mypy.nodes.FuncDef.html" class="internal-link" title="mypy.nodes.FuncDef">FuncDef</a></code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr class="fieldStart"><td class="fieldName" colspan="2">Returns</td></tr><tr><td class="fieldArgContainer"><code><a href="mypy.types.CallableType.html" class="internal-link" title="mypy.types.CallableType">CallableType</a></code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr></table></div>
   </div>
 </div><div class="basemethod">
   
@@ -836,7 +849,7 @@ e.g., path/to/file.py:42</blockquote>
   <div class="docstring functionBody">
     
     
-    <div>Produce a json blob for a suggestion suitable for application by pyannotate.<table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">mod:</span><code>str</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">func_name:</span><code>str</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">node:</span><code><a href="mypy.nodes.FuncDef.html">FuncDef</a></code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">suggestion:</span><code><a href="mypy.suggestions.html#PyAnnotateSignature">PyAnnotateSignature</a></code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr class="fieldStart"><td class="fieldName" colspan="2">Returns</td></tr><tr><td class="fieldArgContainer"><code>str</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr></table></div>
+    <div>Produce a json blob for a suggestion suitable for application by pyannotate.<table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">mod:</span><code>str</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">func​_name:</span><code>str</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">node:</span><code><a href="mypy.nodes.FuncDef.html" class="internal-link" title="mypy.nodes.FuncDef">FuncDef</a></code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">suggestion:</span><code><a href="mypy.suggestions.html#PyAnnotateSignature" class="internal-link" title="mypy.suggestions.PyAnnotateSignature">PyAnnotateSignature</a></code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr class="fieldStart"><td class="fieldName" colspan="2">Returns</td></tr><tr><td class="fieldArgContainer"><code>str</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr></table></div>
   </div>
 </div><div class="basemethod">
   
@@ -858,7 +871,7 @@ e.g., path/to/file.py:42</blockquote>
   <div class="docstring functionBody">
     
     
-    <div><p class="undocumented">Undocumented</p><table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">s:</span><code>str</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr class="fieldStart"><td class="fieldName" colspan="2">Returns</td></tr><tr><td class="fieldArgContainer"><code><a href="mypy.types.Instance.html">Instance</a></code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr></table></div>
+    <div><p class="undocumented">Undocumented</p><table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">s:</span><code>str</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr class="fieldStart"><td class="fieldName" colspan="2">Returns</td></tr><tr><td class="fieldArgContainer"><code><a href="mypy.types.Instance.html" class="internal-link" title="mypy.types.Instance">Instance</a></code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr></table></div>
   </div>
 </div><div class="basemethod">
   
@@ -880,7 +893,7 @@ e.g., path/to/file.py:42</blockquote>
   <div class="docstring functionBody">
     
     
-    <div>Format a callable type as a pyannotate dict<table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">cur_module:</span><code>Optional[<wbr></wbr>str]</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">is_method:</span><code>bool</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">typ:</span><code><a href="mypy.types.CallableType.html">CallableType</a></code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr class="fieldStart"><td class="fieldName" colspan="2">Returns</td></tr><tr><td class="fieldArgContainer"><code><a href="mypy.suggestions.html#PyAnnotateSignature">PyAnnotateSignature</a></code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr></table></div>
+    <div>Format a callable type as a pyannotate dict<table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">cur​_module:</span><code>Optional[<wbr></wbr>str]</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">is​_method:</span><code>bool</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">typ:</span><code><a href="mypy.types.CallableType.html" class="internal-link" title="mypy.types.CallableType">CallableType</a></code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr class="fieldStart"><td class="fieldName" colspan="2">Returns</td></tr><tr><td class="fieldArgContainer"><code><a href="mypy.suggestions.html#PyAnnotateSignature" class="internal-link" title="mypy.suggestions.PyAnnotateSignature">PyAnnotateSignature</a></code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr></table></div>
   </div>
 </div><div class="basemethod">
   
@@ -904,7 +917,7 @@ e.g., path/to/file.py:42</blockquote>
     
     <div><p>Recheck the module given by state.</p>
 <p>If check_errors is true, raise an exception if there are errors.</p>
-<table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">state:</span><code><a href="mypy.build.State.html">State</a></code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">check_errors:</span><code>bool</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr class="fieldStart"><td class="fieldName" colspan="2">Returns</td></tr><tr><td class="fieldArgContainer"><code>List[<wbr></wbr>str]</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr></table></div>
+<table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">state:</span><code><a href="mypy.build.State.html" class="internal-link" title="mypy.build.State">State</a></code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">check​_errors:</span><code>bool</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr class="fieldStart"><td class="fieldName" colspan="2">Returns</td></tr><tr><td class="fieldArgContainer"><code>List[<wbr></wbr>str]</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr></table></div>
   </div>
 </div><div class="basemethod">
   
@@ -950,7 +963,7 @@ e.g., path/to/file.py:42</blockquote>
   <div class="docstring functionBody">
     
     
-    <div><p class="undocumented">Undocumented</p><table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">t:</span><code><a href="mypy.types.CallableType.html">CallableType</a></code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr class="fieldStart"><td class="fieldName" colspan="2">Returns</td></tr><tr><td class="fieldArgContainer"><code>int</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr></table></div>
+    <div><p class="undocumented">Undocumented</p><table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">t:</span><code><a href="mypy.types.CallableType.html" class="internal-link" title="mypy.types.CallableType">CallableType</a></code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr class="fieldStart"><td class="fieldName" colspan="2">Returns</td></tr><tr><td class="fieldArgContainer"><code>int</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr></table></div>
   </div>
 </div><div class="basemethod">
   
@@ -974,7 +987,7 @@ e.g., path/to/file.py:42</blockquote>
     
     <div><p>Generate a score for a type that we use to pick which type to use.</p>
 <p>Lower is better, prefer non-union/non-any types. Don't penalize optionals.</p>
-<table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">t:</span><code><a href="mypy.types.Type.html">Type</a></code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">arg_pos:</span><code>bool</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr class="fieldStart"><td class="fieldName" colspan="2">Returns</td></tr><tr><td class="fieldArgContainer"><code>int</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr></table></div>
+<table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">t:</span><code><a href="mypy.types.Type.html" class="internal-link" title="mypy.types.Type">Type</a></code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">arg​_pos:</span><code>bool</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr class="fieldStart"><td class="fieldName" colspan="2">Returns</td></tr><tr><td class="fieldArgContainer"><code>int</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr></table></div>
   </div>
 </div><div class="basemethod">
   
@@ -1042,7 +1055,7 @@ e.g., path/to/file.py:42</blockquote>
     
     <div><p>Recheck a function while assuming it has type typ.</p>
 <p>Return all error messages.</p>
-<table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">func:</span><code><a href="mypy.nodes.FuncDef.html">FuncDef</a></code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">typ:</span><code><a href="mypy.types.ProperType.html">ProperType</a></code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr class="fieldStart"><td class="fieldName" colspan="2">Returns</td></tr><tr><td class="fieldArgContainer"><code>List[<wbr></wbr>str]</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr></table></div>
+<table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">func:</span><code><a href="mypy.nodes.FuncDef.html" class="internal-link" title="mypy.nodes.FuncDef">FuncDef</a></code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">typ:</span><code><a href="mypy.types.ProperType.html" class="internal-link" title="mypy.types.ProperType">ProperType</a></code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr class="fieldStart"><td class="fieldName" colspan="2">Returns</td></tr><tr><td class="fieldArgContainer"><code>List[<wbr></wbr>str]</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr></table></div>
   </div>
 </div><div class="basemethod">
   
@@ -1089,6 +1102,7 @@ e.g., path/to/file.py:42</blockquote>
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    
   </div>
 </div><div class="baseinstancevariable">
   
@@ -1111,6 +1125,7 @@ e.g., path/to/file.py:42</blockquote>
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    
   </div>
 </div><div class="baseinstancevariable">
   
@@ -1133,6 +1148,7 @@ e.g., path/to/file.py:42</blockquote>
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    
   </div>
 </div><div class="baseinstancevariable">
   
@@ -1155,6 +1171,7 @@ e.g., path/to/file.py:42</blockquote>
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    
   </div>
 </div><div class="baseinstancevariable">
   
@@ -1177,6 +1194,7 @@ e.g., path/to/file.py:42</blockquote>
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    
   </div>
 </div><div class="baseinstancevariable">
   
@@ -1199,6 +1217,7 @@ e.g., path/to/file.py:42</blockquote>
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    
   </div>
 </div><div class="baseinstancevariable">
   
@@ -1221,6 +1240,7 @@ e.g., path/to/file.py:42</blockquote>
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    
   </div>
 </div><div class="baseinstancevariable">
   
@@ -1243,6 +1263,7 @@ e.g., path/to/file.py:42</blockquote>
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    
   </div>
 </div><div class="baseinstancevariable">
   
@@ -1265,6 +1286,7 @@ e.g., path/to/file.py:42</blockquote>
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    
   </div>
 </div><div class="baseinstancevariable">
   
@@ -1287,6 +1309,7 @@ e.g., path/to/file.py:42</blockquote>
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    
   </div>
 </div><div class="baseinstancevariable">
   
@@ -1309,6 +1332,7 @@ e.g., path/to/file.py:42</blockquote>
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    
   </div>
 </div>
 
@@ -1320,7 +1344,7 @@ e.g., path/to/file.py:42</blockquote>
   <div class="container">
     <a href="index.html">API Documentation</a> for <a href="https://github.com/python/mypy" class="projecthome">mypy-0.930</a>,
   generated by <a href="https://github.com/twisted/pydoctor/">pydoctor</a>
-    21.2.2 at 2022-01-12 04:22:24.
+    22.2.2.dev0 at 2022-03-04 05:57:16.
   </div>
 </footer>
 

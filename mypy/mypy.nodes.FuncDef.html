@@ -7,7 +7,7 @@
   <head>
     
     <title>mypy.nodes.FuncDef</title>
-    <meta name="generator" content="pydoctor 21.2.2"> 
+    <meta name="generator" content="pydoctor 22.2.2.dev0"> 
         
     </meta>
     <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
@@ -44,69 +44,82 @@
           Names
         </a>
 
-        <form action="search-results.html" id="search-box-container">
+        <div id="search-box-container">
           <div class="input-group">
-            <input id="search-box" name="search-query" placeholder="Search..." aria-label="Search" minlength="2" class="form-control" />
+            <input id="search-box" type="search" name="search-query" placeholder="Search..." aria-label="Search" minlength="2" class="form-control" autocomplete="off" />
+            
             <span class="input-group-btn">
-              <button class="btn btn-default" type="submit" title="Search"><img src="fonts/search.svg" alt="Search!" /></button>
-              <a class="btn btn-default" id="search-help-button" title="Help" onclick="toggleSearchHelpText()"><img src="fonts/info.svg" alt="Help!" /></a>
+              <a style="display: none;" class="btn btn-default" id="search-clear-button" title="Clear" onclick="clearSearch()"><img src="fonts/x-circle.svg" alt="Clear" /></a>
+              <a class="btn btn-default" id="search-help-button" title="Help" onclick="toggleSearchHelpText()"><img src="fonts/info.svg" alt="Help" /></a>
             </span>
           </div>
-        </form>
+        </div>
 
-        <div class="rst-admonition hint" id="search-help-box">
+      </div>
+
+      <div id="search-results-container" style="display: none;">
+        <div>
+          <span class="label label-default" id="search-docstrings-button">
+            <a title="Search in docstrings" onclick="toggleSearchInDocstrings()">search in docstrings</a></span>
+        </div>
+
+        <noscript>
+            <h1>Cannot search: JavaScript is not supported/enabled in your browser.</h1>
+        </noscript>
+
+        <div class="hint" id="search-help-box">
           <p class="rst-last">
       
             Search bar offers the following options:
             <ul>   
                 <li>
                   <strong>Term presence.</strong> The below example searches for documents that 
-                    must contain “foo”, might contain “bar” and must not contain “baz”:
-                  <br /> <code>'+foo bar -baz'</code>
+                    must contain “foo”, might contain “bar” and must not contain “baz”: <code>+foo bar -baz</code>
                 </li> 
 
                 <li>
-                  <strong>Wildcards.</strong> The below example searches for documents with words beginning with “foo”:
-                  <br /> <code>'foo*'</code>
+                  <strong>Wildcards.</strong> The below example searches for documents with words beginning with “foo”: <code>foo*</code>
                 </li> 
 
                 <li>
-                  <strong>Search in specific fields.</strong> The following search matches all documents 
-                  that contains "foo" in their full dotted name and with “bar” in any field:
-                  <br /> <code>'+fullName:*foo* +bar'</code>
+                  <strong>Search in specific fields.</strong> The following search matches all objects 
+                  in "twisted.mail" that matches “search”: <code>+qname:twisted.mail.* +search</code>
 
                   <p>
-                    Possible fields: 'name', 'docstring', 'fullName'.
+                    Possible fields: 'name', 'qname' (fully qualified name), 'docstring', and 'kind'.
+                    Last two fields are only applicable if "search in docstrings" is enabled.
                   </p>
                 </li>
 
                 <li>
                   <strong>Fuzzy matches.</strong> The following search matches all documents 
-                  that have a word within 1 edit distance of “foo”:
-                  <br /> <code>'foo~1'</code>
+                  that have a word within 1 edit distance of “foo”: <code>foo~1</code>
                 </li>
             </ul>
 
           </p>
         </div>
 
-      </div>
+        <div id="search-status"> </div>
+        
+        <div class="warning" id="search-warn-box" style="display: none;">
+          <p class="rst-last"><span id="search-warn"></span></p>
+        </div>
 
+        <table id="search-results">
+          <!-- Filled dynamically by JS -->
+        </table>
+        
+        <div style="margin-top: 8px;">
+          <p>Results provided by <a href="https://lunrjs.com">Lunr.js</a></p>
+        </div>
+      </div>
 
     </div>
   </div>
 
-  <script>
- 
-    function toggleSearchHelpText() {
-        document.body.classList.toggle("search-help-hidden");
-    }
-    // Init search and help text
-    document.getElementById('search-box-container').style.display = 'block';
-    document.getElementById('search-help-box').style.display = 'block';
-    document.body.classList.add("search-help-hidden");
-
-  </script>
+  <script src="ajax.js" type="text/javascript"></script>
+  <script src="search.js" type="text/javascript"></script>
 
 </nav>
 
@@ -115,7 +128,7 @@
     <div class="container">
 
       <div class="page-header">
-        <h1 class="class"><code><code><a href="mypy.html">mypy</a></code><wbr></wbr>.<code><a href="mypy.nodes.html">nodes</a></code><wbr></wbr>.<code><a href="mypy.nodes.FuncDef.html">FuncDef</a></code></code></h1>
+        <h1 class="class"><code><code><a href="index.html" class="internal-link">mypy</a></code><wbr></wbr>.<code><a href="mypy.nodes.html" class="internal-link" title="mypy.nodes">nodes</a></code><wbr></wbr>.<code><a href="mypy.nodes.FuncDef.html" class="internal-link" title="mypy.nodes.FuncDef">FuncDef</a></code></code></h1>
         <div id="showPrivate">
           <button class="btn btn-link" onclick="togglePrivate()">Toggle Private API</button>
         </div>
@@ -126,7 +139,7 @@
       </div>
 
       <div class="extrasDocstring">
-        <p><code><span class="py-keyword">class</span> <span class="py-defname">FuncDef</span>(<a href="mypy.nodes.FuncItem.html" title="mypy.nodes.FuncItem">FuncItem</a>, <a href="mypy.nodes.SymbolNode.html" title="mypy.nodes.SymbolNode">SymbolNode</a>, <a href="mypy.nodes.Statement.html" title="mypy.nodes.Statement">Statement</a>): <a href="https://github.com/python/mypy/tree/v0.930/mypy/nodes.py#L695" class="sourceLink">(source)</a></code></p>
+        <p><code><span class="py-keyword">class</span> <span class="py-defname">FuncDef</span>(<a href="mypy.nodes.FuncItem.html" class="internal-link" title="mypy.nodes.FuncItem">FuncItem</a>, <a href="mypy.nodes.SymbolNode.html" class="internal-link" title="mypy.nodes.SymbolNode">SymbolNode</a>, <a href="mypy.nodes.Statement.html" class="internal-link" title="mypy.nodes.Statement">Statement</a>): <a href="https://github.com/python/mypy/tree/v0.930/mypy/nodes.py#L695" class="sourceLink">(source)</a></code></p>
         <p><a href="classIndex.html#mypy.nodes.FuncDef">View In Hierarchy</a></p>
       </div>
 
@@ -143,68 +156,68 @@
   <tr class="classmethod">
     
     <td>Class Method</td>
-    <td><code><a href="#deserialize">deserialize</a></code></td>
+    <td><code><a href="#deserialize" class="internal-link" title="mypy.nodes.FuncDef.deserialize">deserialize</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#__init__">__init__</a></code></td>
+    <td><code><a href="#__init__" class="internal-link" title="mypy.nodes.FuncDef.__init__">__init__</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#accept">accept</a></code></td>
+    <td><code><a href="#accept" class="internal-link" title="mypy.nodes.FuncDef.accept">accept</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#serialize">serialize</a></code></td>
+    <td><code><a href="#serialize" class="internal-link" title="mypy.nodes.FuncDef.serialize">serialize</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="classvariable">
     
     <td>Class Variable</td>
-    <td><code><a href="#__slots__">__slots__</a></code></td>
+    <td><code><a href="#__slots__" class="internal-link" title="mypy.nodes.FuncDef.__slots__">__slots__</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="instancevariable">
     
     <td>Instance Variable</td>
-    <td><code><a href="#is_abstract">is_abstract</a></code></td>
+    <td><code><a href="#is_abstract" class="internal-link" title="mypy.nodes.FuncDef.is_abstract">is​_abstract</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="instancevariable">
     
     <td>Instance Variable</td>
-    <td><code><a href="#is_conditional">is_conditional</a></code></td>
+    <td><code><a href="#is_conditional" class="internal-link" title="mypy.nodes.FuncDef.is_conditional">is​_conditional</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="instancevariable">
     
     <td>Instance Variable</td>
-    <td><code><a href="#is_decorated">is_decorated</a></code></td>
+    <td><code><a href="#is_decorated" class="internal-link" title="mypy.nodes.FuncDef.is_decorated">is​_decorated</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="instancevariable">
     
     <td>Instance Variable</td>
-    <td><code><a href="#is_final">is_final</a></code></td>
+    <td><code><a href="#is_final" class="internal-link" title="mypy.nodes.FuncDef.is_final">is​_final</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="instancevariable">
     
     <td>Instance Variable</td>
-    <td><code><a href="#original_def">original_def</a></code></td>
+    <td><code><a href="#original_def" class="internal-link" title="mypy.nodes.FuncDef.original_def">original​_def</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="property">
     
     <td>Property</td>
-    <td><code><a href="#name">name</a></code></td>
+    <td><code><a href="#name" class="internal-link" title="mypy.nodes.FuncDef.name">name</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="instancevariable private">
     
     <td>Instance Variable</td>
-    <td><code><a href="#_name">_name</a></code></td>
+    <td><code><a href="#_name" class="internal-link" title="mypy.nodes.FuncDef._name">_name</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr>
 </table>
         
           <p class="inheritedFrom">
-            Inherited from <code><a href="mypy.nodes.FuncItem.html">FuncItem</a></code>:
+            Inherited from <code><a href="mypy.nodes.FuncItem.html" class="internal-link" title="mypy.nodes.FuncItem">FuncItem</a></code>:
           </p>
           <table class="children sortable" id="id189">
   
@@ -212,98 +225,98 @@
   <tr class="basemethod">
     
     <td>Method</td>
-    <td><code><a href="mypy.nodes.FuncItem.html#is_dynamic">is_dynamic</a></code></td>
+    <td><code><a href="mypy.nodes.FuncItem.html#is_dynamic" class="internal-link" title="mypy.nodes.FuncItem.is_dynamic">is​_dynamic</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="basemethod">
     
     <td>Method</td>
-    <td><code><a href="mypy.nodes.FuncItem.html#max_fixed_argc">max_fixed_argc</a></code></td>
+    <td><code><a href="mypy.nodes.FuncItem.html#max_fixed_argc" class="internal-link" title="mypy.nodes.FuncItem.max_fixed_argc">max​_fixed​_argc</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="basemethod">
     
     <td>Method</td>
-    <td><code><a href="mypy.nodes.FuncItem.html#set_line">set_line</a></code></td>
-    <td><span>If target is a node, pull line (and column) information into this node. If column is specified, this will override any column information coming from a node.</span></td>
+    <td><code><a href="mypy.nodes.FuncItem.html#set_line" class="internal-link" title="mypy.nodes.FuncItem.set_line">set​_line</a></code></td>
+    <td>If target is a node, pull line (and column) information into this node. If column is specified, this will override any column information coming from a node.</td>
   </tr><tr class="baseclassvariable">
     
     <td>Class Variable</td>
-    <td><code><a href="mypy.nodes.FuncItem.html#__deletable__">__deletable__</a></code></td>
+    <td><code><a href="mypy.nodes.FuncItem.html#__deletable__" class="internal-link" title="mypy.nodes.FuncItem.__deletable__">__deletable__</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="baseinstancevariable">
     
     <td>Instance Variable</td>
-    <td><code><a href="mypy.nodes.FuncItem.html#arg_kinds">arg_kinds</a></code></td>
+    <td><code><a href="mypy.nodes.FuncItem.html#arg_kinds" class="internal-link" title="mypy.nodes.FuncItem.arg_kinds">arg​_kinds</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="baseinstancevariable">
     
     <td>Instance Variable</td>
-    <td><code><a href="mypy.nodes.FuncItem.html#arg_names">arg_names</a></code></td>
+    <td><code><a href="mypy.nodes.FuncItem.html#arg_names" class="internal-link" title="mypy.nodes.FuncItem.arg_names">arg​_names</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="baseinstancevariable">
     
     <td>Instance Variable</td>
-    <td><code><a href="mypy.nodes.FuncItem.html#arguments">arguments</a></code></td>
+    <td><code><a href="mypy.nodes.FuncItem.html#arguments" class="internal-link" title="mypy.nodes.FuncItem.arguments">arguments</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="baseinstancevariable">
     
     <td>Instance Variable</td>
-    <td><code><a href="mypy.nodes.FuncItem.html#body">body</a></code></td>
+    <td><code><a href="mypy.nodes.FuncItem.html#body" class="internal-link" title="mypy.nodes.FuncItem.body">body</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="baseinstancevariable">
     
     <td>Instance Variable</td>
-    <td><code><a href="mypy.nodes.FuncItem.html#expanded">expanded</a></code></td>
+    <td><code><a href="mypy.nodes.FuncItem.html#expanded" class="internal-link" title="mypy.nodes.FuncItem.expanded">expanded</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="baseinstancevariable">
     
     <td>Instance Variable</td>
-    <td><code><a href="mypy.nodes.FuncItem.html#is_async_generator">is_async_generator</a></code></td>
+    <td><code><a href="mypy.nodes.FuncItem.html#is_async_generator" class="internal-link" title="mypy.nodes.FuncItem.is_async_generator">is​_async​_generator</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="baseinstancevariable">
     
     <td>Instance Variable</td>
-    <td><code><a href="mypy.nodes.FuncItem.html#is_awaitable_coroutine">is_awaitable_coroutine</a></code></td>
+    <td><code><a href="mypy.nodes.FuncItem.html#is_awaitable_coroutine" class="internal-link" title="mypy.nodes.FuncItem.is_awaitable_coroutine">is​_awaitable​_coroutine</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="baseinstancevariable">
     
     <td>Instance Variable</td>
-    <td><code><a href="mypy.nodes.FuncItem.html#is_coroutine">is_coroutine</a></code></td>
+    <td><code><a href="mypy.nodes.FuncItem.html#is_coroutine" class="internal-link" title="mypy.nodes.FuncItem.is_coroutine">is​_coroutine</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="baseinstancevariable">
     
     <td>Instance Variable</td>
-    <td><code><a href="mypy.nodes.FuncItem.html#is_generator">is_generator</a></code></td>
+    <td><code><a href="mypy.nodes.FuncItem.html#is_generator" class="internal-link" title="mypy.nodes.FuncItem.is_generator">is​_generator</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="baseinstancevariable">
     
     <td>Instance Variable</td>
-    <td><code><a href="mypy.nodes.FuncItem.html#is_overload">is_overload</a></code></td>
+    <td><code><a href="mypy.nodes.FuncItem.html#is_overload" class="internal-link" title="mypy.nodes.FuncItem.is_overload">is​_overload</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="baseinstancevariable">
     
     <td>Instance Variable</td>
-    <td><code><a href="mypy.nodes.FuncItem.html#max_pos">max_pos</a></code></td>
+    <td><code><a href="mypy.nodes.FuncItem.html#max_pos" class="internal-link" title="mypy.nodes.FuncItem.max_pos">max​_pos</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="baseinstancevariable">
     
     <td>Instance Variable</td>
-    <td><code><a href="mypy.nodes.FuncItem.html#min_args">min_args</a></code></td>
+    <td><code><a href="mypy.nodes.FuncItem.html#min_args" class="internal-link" title="mypy.nodes.FuncItem.min_args">min​_args</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="baseinstancevariable">
     
     <td>Instance Variable</td>
-    <td><code><a href="mypy.nodes.FuncItem.html#type">type</a></code></td>
+    <td><code><a href="mypy.nodes.FuncItem.html#type" class="internal-link" title="mypy.nodes.FuncItem.type">type</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="baseinstancevariable">
     
     <td>Instance Variable</td>
-    <td><code><a href="mypy.nodes.FuncItem.html#unanalyzed_type">unanalyzed_type</a></code></td>
+    <td><code><a href="mypy.nodes.FuncItem.html#unanalyzed_type" class="internal-link" title="mypy.nodes.FuncItem.unanalyzed_type">unanalyzed​_type</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr>
 </table>
           
           <p class="inheritedFrom">
-            Inherited from <code><a href="mypy.nodes.FuncBase.html">FuncBase</a></code> (via <code><a href="mypy.nodes.FuncItem.html">FuncItem</a></code>):
+            Inherited from <code><a href="mypy.nodes.FuncBase.html" class="internal-link" title="mypy.nodes.FuncBase">FuncBase</a></code> (via <code><a href="mypy.nodes.FuncItem.html" class="internal-link" title="mypy.nodes.FuncItem">FuncItem</a></code>):
           </p>
           <table class="children sortable" id="id190">
   
@@ -311,38 +324,38 @@
   <tr class="baseinstancevariable">
     
     <td>Instance Variable</td>
-    <td><code><a href="mypy.nodes.FuncBase.html#info">info</a></code></td>
+    <td><code><a href="mypy.nodes.FuncBase.html#info" class="internal-link" title="mypy.nodes.FuncBase.info">info</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="baseinstancevariable">
     
     <td>Instance Variable</td>
-    <td><code><a href="mypy.nodes.FuncBase.html#is_class">is_class</a></code></td>
+    <td><code><a href="mypy.nodes.FuncBase.html#is_class" class="internal-link" title="mypy.nodes.FuncBase.is_class">is​_class</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="baseinstancevariable">
     
     <td>Instance Variable</td>
-    <td><code><a href="mypy.nodes.FuncBase.html#is_property">is_property</a></code></td>
+    <td><code><a href="mypy.nodes.FuncBase.html#is_property" class="internal-link" title="mypy.nodes.FuncBase.is_property">is​_property</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="baseinstancevariable">
     
     <td>Instance Variable</td>
-    <td><code><a href="mypy.nodes.FuncBase.html#is_static">is_static</a></code></td>
+    <td><code><a href="mypy.nodes.FuncBase.html#is_static" class="internal-link" title="mypy.nodes.FuncBase.is_static">is​_static</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="baseproperty">
     
     <td>Property</td>
-    <td><code><a href="mypy.nodes.FuncBase.html#fullname">fullname</a></code></td>
+    <td><code><a href="mypy.nodes.FuncBase.html#fullname" class="internal-link" title="mypy.nodes.FuncBase.fullname">fullname</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="baseinstancevariable private">
     
     <td>Instance Variable</td>
-    <td><code><a href="mypy.nodes.FuncBase.html#_fullname">_fullname</a></code></td>
+    <td><code><a href="mypy.nodes.FuncBase.html#_fullname" class="internal-link" title="mypy.nodes.FuncBase._fullname">_fullname</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr>
 </table>
           
           <p class="inheritedFrom">
-            Inherited from <code><a href="mypy.nodes.Node.html">Node</a></code> (via <code><a href="mypy.nodes.FuncItem.html">FuncItem</a></code>, <code><a href="mypy.nodes.FuncBase.html">FuncBase</a></code>):
+            Inherited from <code><a href="mypy.nodes.Node.html" class="internal-link" title="mypy.nodes.Node">Node</a></code> (via <code><a href="mypy.nodes.FuncItem.html" class="internal-link" title="mypy.nodes.FuncItem">FuncItem</a></code>, <code><a href="mypy.nodes.FuncBase.html" class="internal-link" title="mypy.nodes.FuncBase">FuncBase</a></code>):
           </p>
           <table class="children sortable" id="id191">
   
@@ -350,13 +363,13 @@
   <tr class="basemethod">
     
     <td>Method</td>
-    <td><code><a href="mypy.nodes.Node.html#__str__">__str__</a></code></td>
+    <td><code><a href="mypy.nodes.Node.html#__str__" class="internal-link" title="mypy.nodes.Node.__str__">__str__</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr>
 </table>
           
           <p class="inheritedFrom">
-            Inherited from <code><a href="mypy.nodes.Context.html">Context</a></code> (via <code><a href="mypy.nodes.FuncItem.html">FuncItem</a></code>, <code><a href="mypy.nodes.FuncBase.html">FuncBase</a></code>, <code><a href="mypy.nodes.Node.html">Node</a></code>):
+            Inherited from <code><a href="mypy.nodes.Context.html" class="internal-link" title="mypy.nodes.Context">Context</a></code> (via <code><a href="mypy.nodes.FuncItem.html" class="internal-link" title="mypy.nodes.FuncItem">FuncItem</a></code>, <code><a href="mypy.nodes.FuncBase.html" class="internal-link" title="mypy.nodes.FuncBase">FuncBase</a></code>, <code><a href="mypy.nodes.Node.html" class="internal-link" title="mypy.nodes.Node">Node</a></code>):
           </p>
           <table class="children sortable" id="id192">
   
@@ -364,33 +377,33 @@
   <tr class="basemethod">
     
     <td>Method</td>
-    <td><code><a href="mypy.nodes.Context.html#get_column">get_column</a></code></td>
-    <td><span>Don't use. Use x.column.</span></td>
+    <td><code><a href="mypy.nodes.Context.html#get_column" class="internal-link" title="mypy.nodes.Context.get_column">get​_column</a></code></td>
+    <td>Don't use. Use x.column.</td>
   </tr><tr class="basemethod">
     
     <td>Method</td>
-    <td><code><a href="mypy.nodes.Context.html#get_line">get_line</a></code></td>
-    <td><span>Don't use. Use x.line.</span></td>
+    <td><code><a href="mypy.nodes.Context.html#get_line" class="internal-link" title="mypy.nodes.Context.get_line">get​_line</a></code></td>
+    <td>Don't use. Use x.line.</td>
   </tr><tr class="baseinstancevariable">
     
     <td>Instance Variable</td>
-    <td><code><a href="mypy.nodes.Context.html#column">column</a></code></td>
+    <td><code><a href="mypy.nodes.Context.html#column" class="internal-link" title="mypy.nodes.Context.column">column</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="baseinstancevariable">
     
     <td>Instance Variable</td>
-    <td><code><a href="mypy.nodes.Context.html#end_line">end_line</a></code></td>
+    <td><code><a href="mypy.nodes.Context.html#end_line" class="internal-link" title="mypy.nodes.Context.end_line">end​_line</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="baseinstancevariable">
     
     <td>Instance Variable</td>
-    <td><code><a href="mypy.nodes.Context.html#line">line</a></code></td>
+    <td><code><a href="mypy.nodes.Context.html#line" class="internal-link" title="mypy.nodes.Context.line">line</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr>
 </table>
           
           <p class="inheritedFrom">
-            Inherited from <code><a href="mypy.nodes.SymbolNode.html">SymbolNode</a></code>:
+            Inherited from <code><a href="mypy.nodes.SymbolNode.html" class="internal-link" title="mypy.nodes.SymbolNode">SymbolNode</a></code>:
           </p>
           <table class="children sortable" id="id193">
   
@@ -398,13 +411,13 @@
   <tr class="baseproperty">
     
     <td>Property</td>
-    <td><code><a href="mypy.nodes.SymbolNode.html#fullname">fullname</a></code></td>
+    <td><code><a href="mypy.nodes.SymbolNode.html#fullname" class="internal-link" title="mypy.nodes.SymbolNode.fullname">fullname</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr>
 </table>
           
           <p class="inheritedFrom">
-            Inherited from <code><a href="mypy.nodes.Node.html">Node</a></code> (via <code><a href="mypy.nodes.SymbolNode.html">SymbolNode</a></code>):
+            Inherited from <code><a href="mypy.nodes.Node.html" class="internal-link" title="mypy.nodes.Node">Node</a></code> (via <code><a href="mypy.nodes.SymbolNode.html" class="internal-link" title="mypy.nodes.SymbolNode">SymbolNode</a></code>):
           </p>
           <table class="children sortable" id="id194">
   
@@ -412,13 +425,13 @@
   <tr class="basemethod">
     
     <td>Method</td>
-    <td><code><a href="mypy.nodes.Node.html#__str__">__str__</a></code></td>
+    <td><code><a href="mypy.nodes.Node.html#__str__" class="internal-link" title="mypy.nodes.Node.__str__">__str__</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr>
 </table>
           
           <p class="inheritedFrom">
-            Inherited from <code><a href="mypy.nodes.Context.html">Context</a></code> (via <code><a href="mypy.nodes.SymbolNode.html">SymbolNode</a></code>, <code><a href="mypy.nodes.Node.html">Node</a></code>):
+            Inherited from <code><a href="mypy.nodes.Context.html" class="internal-link" title="mypy.nodes.Context">Context</a></code> (via <code><a href="mypy.nodes.SymbolNode.html" class="internal-link" title="mypy.nodes.SymbolNode">SymbolNode</a></code>, <code><a href="mypy.nodes.Node.html" class="internal-link" title="mypy.nodes.Node">Node</a></code>):
           </p>
           <table class="children sortable" id="id195">
   
@@ -426,38 +439,38 @@
   <tr class="basemethod">
     
     <td>Method</td>
-    <td><code><a href="mypy.nodes.Context.html#get_column">get_column</a></code></td>
-    <td><span>Don't use. Use x.column.</span></td>
+    <td><code><a href="mypy.nodes.Context.html#get_column" class="internal-link" title="mypy.nodes.Context.get_column">get​_column</a></code></td>
+    <td>Don't use. Use x.column.</td>
   </tr><tr class="basemethod">
     
     <td>Method</td>
-    <td><code><a href="mypy.nodes.Context.html#get_line">get_line</a></code></td>
-    <td><span>Don't use. Use x.line.</span></td>
+    <td><code><a href="mypy.nodes.Context.html#get_line" class="internal-link" title="mypy.nodes.Context.get_line">get​_line</a></code></td>
+    <td>Don't use. Use x.line.</td>
   </tr><tr class="basemethod">
     
     <td>Method</td>
-    <td><code><a href="mypy.nodes.Context.html#set_line">set_line</a></code></td>
-    <td><span>If target is a node, pull line (and column) information into this node. If column is specified, this will override any column information coming from a node.</span></td>
+    <td><code><a href="mypy.nodes.Context.html#set_line" class="internal-link" title="mypy.nodes.Context.set_line">set​_line</a></code></td>
+    <td>If target is a node, pull line (and column) information into this node. If column is specified, this will override any column information coming from a node.</td>
   </tr><tr class="baseinstancevariable">
     
     <td>Instance Variable</td>
-    <td><code><a href="mypy.nodes.Context.html#column">column</a></code></td>
+    <td><code><a href="mypy.nodes.Context.html#column" class="internal-link" title="mypy.nodes.Context.column">column</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="baseinstancevariable">
     
     <td>Instance Variable</td>
-    <td><code><a href="mypy.nodes.Context.html#end_line">end_line</a></code></td>
+    <td><code><a href="mypy.nodes.Context.html#end_line" class="internal-link" title="mypy.nodes.Context.end_line">end​_line</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="baseinstancevariable">
     
     <td>Instance Variable</td>
-    <td><code><a href="mypy.nodes.Context.html#line">line</a></code></td>
+    <td><code><a href="mypy.nodes.Context.html#line" class="internal-link" title="mypy.nodes.Context.line">line</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr>
 </table>
           
           <p class="inheritedFrom">
-            Inherited from <code><a href="mypy.nodes.Node.html">Node</a></code> (via <code><a href="mypy.nodes.Statement.html">Statement</a></code>):
+            Inherited from <code><a href="mypy.nodes.Node.html" class="internal-link" title="mypy.nodes.Node">Node</a></code> (via <code><a href="mypy.nodes.Statement.html" class="internal-link" title="mypy.nodes.Statement">Statement</a></code>):
           </p>
           <table class="children sortable" id="id196">
   
@@ -465,13 +478,13 @@
   <tr class="basemethod">
     
     <td>Method</td>
-    <td><code><a href="mypy.nodes.Node.html#__str__">__str__</a></code></td>
+    <td><code><a href="mypy.nodes.Node.html#__str__" class="internal-link" title="mypy.nodes.Node.__str__">__str__</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr>
 </table>
           
           <p class="inheritedFrom">
-            Inherited from <code><a href="mypy.nodes.Context.html">Context</a></code> (via <code><a href="mypy.nodes.Statement.html">Statement</a></code>, <code><a href="mypy.nodes.Node.html">Node</a></code>):
+            Inherited from <code><a href="mypy.nodes.Context.html" class="internal-link" title="mypy.nodes.Context">Context</a></code> (via <code><a href="mypy.nodes.Statement.html" class="internal-link" title="mypy.nodes.Statement">Statement</a></code>, <code><a href="mypy.nodes.Node.html" class="internal-link" title="mypy.nodes.Node">Node</a></code>):
           </p>
           <table class="children sortable" id="id197">
   
@@ -479,32 +492,32 @@
   <tr class="basemethod">
     
     <td>Method</td>
-    <td><code><a href="mypy.nodes.Context.html#get_column">get_column</a></code></td>
-    <td><span>Don't use. Use x.column.</span></td>
+    <td><code><a href="mypy.nodes.Context.html#get_column" class="internal-link" title="mypy.nodes.Context.get_column">get​_column</a></code></td>
+    <td>Don't use. Use x.column.</td>
   </tr><tr class="basemethod">
     
     <td>Method</td>
-    <td><code><a href="mypy.nodes.Context.html#get_line">get_line</a></code></td>
-    <td><span>Don't use. Use x.line.</span></td>
+    <td><code><a href="mypy.nodes.Context.html#get_line" class="internal-link" title="mypy.nodes.Context.get_line">get​_line</a></code></td>
+    <td>Don't use. Use x.line.</td>
   </tr><tr class="basemethod">
     
     <td>Method</td>
-    <td><code><a href="mypy.nodes.Context.html#set_line">set_line</a></code></td>
-    <td><span>If target is a node, pull line (and column) information into this node. If column is specified, this will override any column information coming from a node.</span></td>
+    <td><code><a href="mypy.nodes.Context.html#set_line" class="internal-link" title="mypy.nodes.Context.set_line">set​_line</a></code></td>
+    <td>If target is a node, pull line (and column) information into this node. If column is specified, this will override any column information coming from a node.</td>
   </tr><tr class="baseinstancevariable">
     
     <td>Instance Variable</td>
-    <td><code><a href="mypy.nodes.Context.html#column">column</a></code></td>
+    <td><code><a href="mypy.nodes.Context.html#column" class="internal-link" title="mypy.nodes.Context.column">column</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="baseinstancevariable">
     
     <td>Instance Variable</td>
-    <td><code><a href="mypy.nodes.Context.html#end_line">end_line</a></code></td>
+    <td><code><a href="mypy.nodes.Context.html#end_line" class="internal-link" title="mypy.nodes.Context.end_line">end​_line</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="baseinstancevariable">
     
     <td>Instance Variable</td>
-    <td><code><a href="mypy.nodes.Context.html#line">line</a></code></td>
+    <td><code><a href="mypy.nodes.Context.html#line" class="internal-link" title="mypy.nodes.Context.line">line</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr>
 </table>
@@ -533,9 +546,9 @@
     </a>
   </div>
   <div class="docstring functionBody">
-    <div class="interfaceinfo">overrides <code><a href="mypy.nodes.SymbolNode.html#deserialize">mypy.nodes.SymbolNode.deserialize</a></code></div>
+    <div class="interfaceinfo">overrides <code><a href="mypy.nodes.SymbolNode.html#deserialize" class="internal-link">mypy.nodes.SymbolNode.deserialize</a></code></div>
     
-    <div><p class="undocumented">Undocumented</p><table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">data:</span><code><a href="mypy.nodes.html#JsonDict">JsonDict</a></code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr class="fieldStart"><td class="fieldName" colspan="2">Returns</td></tr><tr><td class="fieldArgContainer"><code><a href="mypy.nodes.FuncDef.html">FuncDef</a></code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr></table></div>
+    <div><p class="undocumented">Undocumented</p><table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">data:</span><code><a href="mypy.nodes.html#JsonDict" class="internal-link" title="mypy.nodes.JsonDict">JsonDict</a></code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr class="fieldStart"><td class="fieldName" colspan="2">Returns</td></tr><tr><td class="fieldArgContainer"><code><a href="mypy.nodes.FuncDef.html" class="internal-link" title="mypy.nodes.FuncDef">FuncDef</a></code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr></table></div>
   </div>
 </div><div class="basemethod">
   
@@ -555,9 +568,9 @@
     </a>
   </div>
   <div class="docstring functionBody">
-    <div class="interfaceinfo">overrides <code><a href="mypy.nodes.FuncItem.html#__init__">mypy.nodes.FuncItem.__init__</a></code></div>
+    <div class="interfaceinfo">overrides <code><a href="mypy.nodes.FuncItem.html#__init__" class="internal-link">mypy.nodes.FuncItem.__init__</a></code></div>
     
-    <div><p class="undocumented">Undocumented</p><table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">name:</span><code>str</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">arguments:</span><code>List[<wbr></wbr><a href="mypy.nodes.Argument.html">Argument</a>]</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">body:</span><code><a href="mypy.nodes.Block.html">Block</a></code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">typ:</span><code>Optional[<wbr></wbr><a href="mypy.types.FunctionLike.html">mypy.types.FunctionLike</a>]</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr></table></div>
+    <div><p class="undocumented">Undocumented</p><table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">name:</span><code>str</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">arguments:</span><code>List[<wbr></wbr><a href="mypy.nodes.Argument.html" class="internal-link" title="mypy.nodes.Argument">Argument</a>]</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">body:</span><code><a href="mypy.nodes.Block.html" class="internal-link" title="mypy.nodes.Block">Block</a></code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">typ:</span><code>Optional[<wbr></wbr><a href="mypy.types.FunctionLike.html" class="internal-link">mypy.types.FunctionLike</a>]</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr></table></div>
   </div>
 </div><div class="basemethod">
   
@@ -577,9 +590,9 @@
     </a>
   </div>
   <div class="docstring functionBody">
-    <div class="interfaceinfo">overrides <code><a href="mypy.nodes.Node.html#accept">mypy.nodes.Node.accept</a></code></div>
+    <div class="interfaceinfo">overrides <code><a href="mypy.nodes.Node.html#accept" class="internal-link">mypy.nodes.Node.accept</a></code></div>
     
-    <div><p class="undocumented">Undocumented</p><table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">visitor:</span><code><a href="mypy.visitor.StatementVisitor.html">StatementVisitor</a>[<wbr></wbr><a href="mypy.nodes.html#T">T</a>]</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr class="fieldStart"><td class="fieldName" colspan="2">Returns</td></tr><tr><td class="fieldArgContainer"><code><a href="mypy.nodes.html#T">T</a></code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr></table></div>
+    <div><p class="undocumented">Undocumented</p><table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">visitor:</span><code><a href="mypy.visitor.StatementVisitor.html" class="internal-link" title="mypy.visitor.StatementVisitor">StatementVisitor</a>[<wbr></wbr><a href="mypy.nodes.html#T" class="internal-link" title="mypy.nodes.T">T</a>]</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr class="fieldStart"><td class="fieldName" colspan="2">Returns</td></tr><tr><td class="fieldArgContainer"><code><a href="mypy.nodes.html#T" class="internal-link" title="mypy.nodes.T">T</a></code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr></table></div>
   </div>
 </div><div class="basemethod">
   
@@ -599,9 +612,9 @@
     </a>
   </div>
   <div class="docstring functionBody">
-    <div class="interfaceinfo">overrides <code><a href="mypy.nodes.SymbolNode.html#serialize">mypy.nodes.SymbolNode.serialize</a></code></div>
+    <div class="interfaceinfo">overrides <code><a href="mypy.nodes.SymbolNode.html#serialize" class="internal-link">mypy.nodes.SymbolNode.serialize</a></code></div>
     
-    <div><p class="undocumented">Undocumented</p><table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Returns</td></tr><tr><td class="fieldArgContainer"><code><a href="mypy.nodes.html#JsonDict">JsonDict</a></code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr></table></div>
+    <div><p class="undocumented">Undocumented</p><table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Returns</td></tr><tr><td class="fieldArgContainer"><code><a href="mypy.nodes.html#JsonDict" class="internal-link" title="mypy.nodes.JsonDict">JsonDict</a></code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr></table></div>
   </div>
 </div><div class="baseclassvariable">
   
@@ -614,16 +627,17 @@
   </a>
   <div class="functionHeader">
     
-    <span class="py-defname">__slots__</span>: <code>tuple[<wbr></wbr>str, <wbr></wbr>...]</code> =
+    <span class="py-defname">__slots__</span>: <code>tuple[<wbr></wbr>str, <wbr></wbr><span class="rst-variable-ellipsis">...</span>]</code> =
     <a class="sourceLink" href="https://github.com/python/mypy/tree/v0.930/mypy/nodes.py#L701">
       
       (source)
     </a>
   </div>
   <div class="functionBody">
-    <div class="interfaceinfo">overrides <code><a href="mypy.nodes.FuncItem.html#__slots__">mypy.nodes.FuncItem.__slots__</a></code></div>
+    <div class="interfaceinfo">overrides <code><a href="mypy.nodes.FuncItem.html#__slots__" class="internal-link">mypy.nodes.FuncItem.__slots__</a></code></div>
     
     <div><p class="undocumented">Undocumented</p></div>
+    
   </div>
 </div><div class="baseinstancevariable">
   
@@ -646,6 +660,7 @@
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    
   </div>
 </div><div class="baseinstancevariable">
   
@@ -668,6 +683,7 @@
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    
   </div>
 </div><div class="baseinstancevariable">
   
@@ -690,6 +706,7 @@
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    
   </div>
 </div><div class="baseinstancevariable">
   
@@ -709,9 +726,10 @@
     </a>
   </div>
   <div class="functionBody">
-    <div class="interfaceinfo">overrides <code><a href="mypy.nodes.FuncBase.html#is_final">mypy.nodes.FuncBase.is_final</a></code></div>
+    <div class="interfaceinfo">overrides <code><a href="mypy.nodes.FuncBase.html#is_final" class="internal-link">mypy.nodes.FuncBase.is_final</a></code></div>
     
     <div><p class="undocumented">Undocumented</p></div>
+    
   </div>
 </div><div class="baseinstancevariable">
   
@@ -724,7 +742,7 @@
   </a>
   <div class="functionHeader">
     
-    <span class="py-defname">original_def</span>: <code>Union[<wbr></wbr>None, <wbr></wbr><a href="mypy.nodes.FuncDef.html">FuncDef</a>, <wbr></wbr><a href="mypy.nodes.Var.html">Var</a>, <wbr></wbr><a href="mypy.nodes.Decorator.html">Decorator</a>]</code> =
+    <span class="py-defname">original_def</span>: <code>Union[<wbr></wbr>None, <wbr></wbr><a href="mypy.nodes.FuncDef.html" class="internal-link" title="mypy.nodes.FuncDef">FuncDef</a>, <wbr></wbr><a href="mypy.nodes.Var.html" class="internal-link" title="mypy.nodes.Var">Var</a>, <wbr></wbr><a href="mypy.nodes.Decorator.html" class="internal-link" title="mypy.nodes.Decorator">Decorator</a>]</code> =
     <a class="sourceLink" href="https://github.com/python/mypy/tree/v0.930/mypy/nodes.py#L720">
       
       (source)
@@ -734,6 +752,7 @@
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    
   </div>
 </div><div class="baseproperty">
   
@@ -753,9 +772,10 @@
     </a>
   </div>
   <div class="functionBody">
-    <div class="interfaceinfo">overrides <code><a href="mypy.nodes.FuncBase.html#name">mypy.nodes.FuncBase.name</a></code></div>
+    <div class="interfaceinfo">overrides <code><a href="mypy.nodes.FuncBase.html#name" class="internal-link">mypy.nodes.FuncBase.name</a></code></div>
     
     <div><p class="undocumented">Undocumented</p></div>
+    
   </div>
 </div><div class="baseinstancevariable private">
   
@@ -778,6 +798,7 @@
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    
   </div>
 </div>
 
@@ -789,7 +810,7 @@
   <div class="container">
     <a href="index.html">API Documentation</a> for <a href="https://github.com/python/mypy" class="projecthome">mypy-0.930</a>,
   generated by <a href="https://github.com/twisted/pydoctor/">pydoctor</a>
-    21.2.2 at 2022-01-12 04:22:24.
+    22.2.2.dev0 at 2022-03-04 05:57:16.
   </div>
 </footer>
 

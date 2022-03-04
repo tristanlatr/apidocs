@@ -7,7 +7,7 @@
   <head>
     
     <title>mypy.modulefinder</title>
-    <meta name="generator" content="pydoctor 21.2.2"> 
+    <meta name="generator" content="pydoctor 22.2.2.dev0"> 
         
     </meta>
     <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
@@ -44,69 +44,82 @@
           Names
         </a>
 
-        <form action="search-results.html" id="search-box-container">
+        <div id="search-box-container">
           <div class="input-group">
-            <input id="search-box" name="search-query" placeholder="Search..." aria-label="Search" minlength="2" class="form-control" />
+            <input id="search-box" type="search" name="search-query" placeholder="Search..." aria-label="Search" minlength="2" class="form-control" autocomplete="off" />
+            
             <span class="input-group-btn">
-              <button class="btn btn-default" type="submit" title="Search"><img src="fonts/search.svg" alt="Search!" /></button>
-              <a class="btn btn-default" id="search-help-button" title="Help" onclick="toggleSearchHelpText()"><img src="fonts/info.svg" alt="Help!" /></a>
+              <a style="display: none;" class="btn btn-default" id="search-clear-button" title="Clear" onclick="clearSearch()"><img src="fonts/x-circle.svg" alt="Clear" /></a>
+              <a class="btn btn-default" id="search-help-button" title="Help" onclick="toggleSearchHelpText()"><img src="fonts/info.svg" alt="Help" /></a>
             </span>
           </div>
-        </form>
+        </div>
 
-        <div class="rst-admonition hint" id="search-help-box">
+      </div>
+
+      <div id="search-results-container" style="display: none;">
+        <div>
+          <span class="label label-default" id="search-docstrings-button">
+            <a title="Search in docstrings" onclick="toggleSearchInDocstrings()">search in docstrings</a></span>
+        </div>
+
+        <noscript>
+            <h1>Cannot search: JavaScript is not supported/enabled in your browser.</h1>
+        </noscript>
+
+        <div class="hint" id="search-help-box">
           <p class="rst-last">
       
             Search bar offers the following options:
             <ul>   
                 <li>
                   <strong>Term presence.</strong> The below example searches for documents that 
-                    must contain “foo”, might contain “bar” and must not contain “baz”:
-                  <br /> <code>'+foo bar -baz'</code>
+                    must contain “foo”, might contain “bar” and must not contain “baz”: <code>+foo bar -baz</code>
                 </li> 
 
                 <li>
-                  <strong>Wildcards.</strong> The below example searches for documents with words beginning with “foo”:
-                  <br /> <code>'foo*'</code>
+                  <strong>Wildcards.</strong> The below example searches for documents with words beginning with “foo”: <code>foo*</code>
                 </li> 
 
                 <li>
-                  <strong>Search in specific fields.</strong> The following search matches all documents 
-                  that contains "foo" in their full dotted name and with “bar” in any field:
-                  <br /> <code>'+fullName:*foo* +bar'</code>
+                  <strong>Search in specific fields.</strong> The following search matches all objects 
+                  in "twisted.mail" that matches “search”: <code>+qname:twisted.mail.* +search</code>
 
                   <p>
-                    Possible fields: 'name', 'docstring', 'fullName'.
+                    Possible fields: 'name', 'qname' (fully qualified name), 'docstring', and 'kind'.
+                    Last two fields are only applicable if "search in docstrings" is enabled.
                   </p>
                 </li>
 
                 <li>
                   <strong>Fuzzy matches.</strong> The following search matches all documents 
-                  that have a word within 1 edit distance of “foo”:
-                  <br /> <code>'foo~1'</code>
+                  that have a word within 1 edit distance of “foo”: <code>foo~1</code>
                 </li>
             </ul>
 
           </p>
         </div>
 
-      </div>
+        <div id="search-status"> </div>
+        
+        <div class="warning" id="search-warn-box" style="display: none;">
+          <p class="rst-last"><span id="search-warn"></span></p>
+        </div>
 
+        <table id="search-results">
+          <!-- Filled dynamically by JS -->
+        </table>
+        
+        <div style="margin-top: 8px;">
+          <p>Results provided by <a href="https://lunrjs.com">Lunr.js</a></p>
+        </div>
+      </div>
 
     </div>
   </div>
 
-  <script>
- 
-    function toggleSearchHelpText() {
-        document.body.classList.toggle("search-help-hidden");
-    }
-    // Init search and help text
-    document.getElementById('search-box-container').style.display = 'block';
-    document.getElementById('search-help-box').style.display = 'block';
-    document.body.classList.add("search-help-hidden");
-
-  </script>
+  <script src="ajax.js" type="text/javascript"></script>
+  <script src="search.js" type="text/javascript"></script>
 
 </nav>
 
@@ -115,7 +128,7 @@
     <div class="container">
 
       <div class="page-header">
-        <h1 class="module"><code><code><a href="mypy.html">mypy</a></code><wbr></wbr>.<code><a href="mypy.modulefinder.html">modulefinder</a></code></code></h1>
+        <h1 class="module"><code><code><a href="index.html" class="internal-link">mypy</a></code><wbr></wbr>.<code><a href="mypy.modulefinder.html" class="internal-link" title="mypy.modulefinder">modulefinder</a></code></code></h1>
         <div id="showPrivate">
           <button class="btn btn-link" onclick="togglePrivate()">Toggle Private API</button>
         </div>
@@ -143,133 +156,133 @@
   <tr class="class">
     
     <td>Class</td>
-    <td><code><a href="mypy.modulefinder.BuildSource.html">BuildSource</a></code></td>
-    <td><span>A single source file.</span></td>
+    <td><code><a href="mypy.modulefinder.BuildSource.html" class="internal-link" title="mypy.modulefinder.BuildSource">​Build​Source</a></code></td>
+    <td>A single source file.</td>
   </tr><tr class="class">
     
     <td>Class</td>
-    <td><code><a href="mypy.modulefinder.FindModuleCache.html">FindModuleCache</a></code></td>
-    <td><span>Module finder with integrated cache.</span></td>
+    <td><code><a href="mypy.modulefinder.FindModuleCache.html" class="internal-link" title="mypy.modulefinder.FindModuleCache">​Find​Module​Cache</a></code></td>
+    <td>Module finder with integrated cache.</td>
   </tr><tr class="class">
     
     <td>Class</td>
-    <td><code><a href="mypy.modulefinder.ModuleNotFoundReason.html">ModuleNotFoundReason</a></code></td>
+    <td><code><a href="mypy.modulefinder.ModuleNotFoundReason.html" class="internal-link" title="mypy.modulefinder.ModuleNotFoundReason">​Module​Not​Found​Reason</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="function">
     
     <td>Function</td>
-    <td><code><a href="#add_py2_mypypath_entries">add_py2_mypypath_entries</a></code></td>
-    <td><span>Add corresponding @python2 subdirectories to mypypath.</span></td>
+    <td><code><a href="#add_py2_mypypath_entries" class="internal-link" title="mypy.modulefinder.add_py2_mypypath_entries">add​_py2​_mypypath​_entries</a></code></td>
+    <td>Add corresponding @python2 subdirectories to mypypath.</td>
   </tr><tr class="function">
     
     <td>Function</td>
-    <td><code><a href="#compute_search_paths">compute_search_paths</a></code></td>
-    <td><span>Compute the search paths as specified in PEP 561.</span></td>
+    <td><code><a href="#compute_search_paths" class="internal-link" title="mypy.modulefinder.compute_search_paths">compute​_search​_paths</a></code></td>
+    <td>Compute the search paths as specified in PEP 561.</td>
   </tr><tr class="function">
     
     <td>Function</td>
-    <td><code><a href="#default_lib_path">default_lib_path</a></code></td>
-    <td><span>Return default standard library search paths.</span></td>
+    <td><code><a href="#default_lib_path" class="internal-link" title="mypy.modulefinder.default_lib_path">default​_lib​_path</a></code></td>
+    <td>Return default standard library search paths.</td>
   </tr><tr class="function">
     
     <td>Function</td>
-    <td><code><a href="#expand_site_packages">expand_site_packages</a></code></td>
-    <td><span>Expands .pth imports in site-packages directories</span></td>
+    <td><code><a href="#expand_site_packages" class="internal-link" title="mypy.modulefinder.expand_site_packages">expand​_site​_packages</a></code></td>
+    <td>Expands .pth imports in site-packages directories</td>
   </tr><tr class="function">
     
     <td>Function</td>
-    <td><code><a href="#filter_redundant_py2_dirs">filter_redundant_py2_dirs</a></code></td>
-    <td><span>If dirs has &lt;dir&gt;/@python2 followed by &lt;dir&gt;, filter out the latter.</span></td>
+    <td><code><a href="#filter_redundant_py2_dirs" class="internal-link" title="mypy.modulefinder.filter_redundant_py2_dirs">filter​_redundant​_py2​_dirs</a></code></td>
+    <td>If dirs has &lt;dir&gt;/@python2 followed by &lt;dir&gt;, filter out the latter.</td>
   </tr><tr class="function">
     
     <td>Function</td>
-    <td><code><a href="#get_prefixes">get_prefixes</a></code></td>
-    <td><span>Get the sys.base_prefix and sys.prefix for the given python.</span></td>
+    <td><code><a href="#get_prefixes" class="internal-link" title="mypy.modulefinder.get_prefixes">get​_prefixes</a></code></td>
+    <td>Get the sys.base_prefix and sys.prefix for the given python.</td>
   </tr><tr class="function">
     
     <td>Function</td>
-    <td><code><a href="#get_site_packages_dirs">get_site_packages_dirs</a></code></td>
-    <td><span>Find package directories for given python.</span></td>
+    <td><code><a href="#get_site_packages_dirs" class="internal-link" title="mypy.modulefinder.get_site_packages_dirs">get​_site​_packages​_dirs</a></code></td>
+    <td>Find package directories for given python.</td>
   </tr><tr class="function">
     
     <td>Function</td>
-    <td><code><a href="#highest_init_level">highest_init_level</a></code></td>
-    <td><span>Compute the highest level where an __init__ file is found.</span></td>
+    <td><code><a href="#highest_init_level" class="internal-link" title="mypy.modulefinder.highest_init_level">highest​_init​_level</a></code></td>
+    <td>Compute the highest level where an __init__ file is found.</td>
   </tr><tr class="function">
     
     <td>Function</td>
-    <td><code><a href="#load_stdlib_py_versions">load_stdlib_py_versions</a></code></td>
-    <td><span>Return dict with minimum and maximum Python versions of stdlib modules.</span></td>
+    <td><code><a href="#load_stdlib_py_versions" class="internal-link" title="mypy.modulefinder.load_stdlib_py_versions">load​_stdlib​_py​_versions</a></code></td>
+    <td>Return dict with minimum and maximum Python versions of stdlib modules.</td>
   </tr><tr class="function">
     
     <td>Function</td>
-    <td><code><a href="#matches_exclude">matches_exclude</a></code></td>
+    <td><code><a href="#matches_exclude" class="internal-link" title="mypy.modulefinder.matches_exclude">matches​_exclude</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="function">
     
     <td>Function</td>
-    <td><code><a href="#mypy_path">mypy_path</a></code></td>
+    <td><code><a href="#mypy_path" class="internal-link" title="mypy.modulefinder.mypy_path">mypy​_path</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="function">
     
     <td>Function</td>
-    <td><code><a href="#parse_version">parse_version</a></code></td>
+    <td><code><a href="#parse_version" class="internal-link" title="mypy.modulefinder.parse_version">parse​_version</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="function">
     
     <td>Function</td>
-    <td><code><a href="#typeshed_py_version">typeshed_py_version</a></code></td>
-    <td><span>Return Python version used for checking whether module supports typeshed.</span></td>
+    <td><code><a href="#typeshed_py_version" class="internal-link" title="mypy.modulefinder.typeshed_py_version">typeshed​_py​_version</a></code></td>
+    <td>Return Python version used for checking whether module supports typeshed.</td>
   </tr><tr class="function">
     
     <td>Function</td>
-    <td><code><a href="#verify_module">verify_module</a></code></td>
-    <td><span>Check that all packages containing id have a __init__ file.</span></td>
-  </tr><tr class="variable">
+    <td><code><a href="#verify_module" class="internal-link" title="mypy.modulefinder.verify_module">verify​_module</a></code></td>
+    <td>Check that all packages containing id have a __init__ file.</td>
+  </tr><tr class="constant">
     
-    <td>Variable</td>
-    <td><code><a href="#ModuleSearchResult">ModuleSearchResult</a></code></td>
+    <td>Constant</td>
+    <td><code><a href="#PYTHON2_STUB_DIR" class="internal-link" title="mypy.modulefinder.PYTHON2_STUB_DIR">PYTHON2​_STUB​_DIR</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
-  </tr><tr class="variable">
+  </tr><tr class="constant">
     
-    <td>Variable</td>
-    <td><code><a href="#OnePackageDir">OnePackageDir</a></code></td>
-    <td><span class="undocumented">Undocumented</span></td>
-  </tr><tr class="variable">
-    
-    <td>Variable</td>
-    <td><code><a href="#PackageDirs">PackageDirs</a></code></td>
+    <td>Constant</td>
+    <td><code><a href="#PYTHON_EXTENSIONS" class="internal-link" title="mypy.modulefinder.PYTHON_EXTENSIONS">PYTHON​_EXTENSIONS</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="variable">
     
     <td>Variable</td>
-    <td><code><a href="#PYTHON2_STUB_DIR">PYTHON2_STUB_DIR</a></code></td>
+    <td><code><a href="#ModuleSearchResult" class="internal-link" title="mypy.modulefinder.ModuleSearchResult">​Module​Search​Result</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="variable">
     
     <td>Variable</td>
-    <td><code><a href="#PYTHON_EXTENSIONS">PYTHON_EXTENSIONS</a></code></td>
+    <td><code><a href="#OnePackageDir" class="internal-link" title="mypy.modulefinder.OnePackageDir">​One​Package​Dir</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="variable">
     
     <td>Variable</td>
-    <td><code><a href="#SearchPaths">SearchPaths</a></code></td>
+    <td><code><a href="#PackageDirs" class="internal-link" title="mypy.modulefinder.PackageDirs">​Package​Dirs</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="variable">
     
     <td>Variable</td>
-    <td><code><a href="#StdlibVersions">StdlibVersions</a></code></td>
+    <td><code><a href="#SearchPaths" class="internal-link" title="mypy.modulefinder.SearchPaths">​Search​Paths</a></code></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="variable">
+    
+    <td>Variable</td>
+    <td><code><a href="#StdlibVersions" class="internal-link" title="mypy.modulefinder.StdlibVersions">​Stdlib​Versions</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="function private">
     
     <td>Function</td>
-    <td><code><a href="#_make_abspath">_make_abspath</a></code></td>
-    <td><span>Take a path and make it absolute relative to root if not already absolute.</span></td>
+    <td><code><a href="#_make_abspath" class="internal-link" title="mypy.modulefinder._make_abspath">_make​_abspath</a></code></td>
+    <td>Take a path and make it absolute relative to root if not already absolute.</td>
   </tr><tr class="function private">
     
     <td>Function</td>
-    <td><code><a href="#_parse_pth_file">_parse_pth_file</a></code></td>
-    <td><span>Mimics a subset of .pth import hook from Lib/site.py See <a class="rst-reference external" href="https://github.com/python/cpython/blob/3.5/Lib/site.py#L146-L185" target="_top">https://github.com/python/cpython/blob/3.5/Lib/site.py#L146-L185</a></span></td>
+    <td><code><a href="#_parse_pth_file" class="internal-link" title="mypy.modulefinder._parse_pth_file">_parse​_pth​_file</a></code></td>
+    <td>Mimics a subset of .pth import hook from Lib/site.py See <a class="rst-reference external" href="https://github.com/python/cpython/blob/3.5/Lib/site.py#L146-L185" target="_top">https://github.com/python/cpython/blob/3.5/Lib/site.py#L146-L185</a></td>
   </tr>
 </table>
         
@@ -330,7 +343,7 @@ a directory.</p>
 - MYPYPATH (set either via config or environment variable)
 - installed package directories (which will later be split into stub-only and inline)
 - typeshed</p>
-<table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">sources:</span><code>List[<wbr></wbr><a href="mypy.modulefinder.BuildSource.html">BuildSource</a>]</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">options:</span><code><a href="mypy.options.Options.html">Options</a></code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">data_dir:</span><code>str</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">alt_lib_path:</span><code>Optional[<wbr></wbr>str]</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr class="fieldStart"><td class="fieldName" colspan="2">Returns</td></tr><tr><td class="fieldArgContainer"><code><a href="#SearchPaths">SearchPaths</a></code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr></table></div>
+<table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">sources:</span><code>List[<wbr></wbr><a href="mypy.modulefinder.BuildSource.html" class="internal-link" title="mypy.modulefinder.BuildSource">BuildSource</a>]</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">options:</span><code><a href="mypy.options.Options.html" class="internal-link" title="mypy.options.Options">Options</a></code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">data​_dir:</span><code>str</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">alt​_lib​_path:</span><code>Optional[<wbr></wbr>str]</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr class="fieldStart"><td class="fieldName" colspan="2">Returns</td></tr><tr><td class="fieldArgContainer"><code><a href="#SearchPaths" class="internal-link" title="mypy.modulefinder.SearchPaths">SearchPaths</a></code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr></table></div>
   </div>
 </div><div class="basefunction">
   
@@ -352,7 +365,7 @@ a directory.</p>
   <div class="docstring functionBody">
     
     
-    <div>Return default standard library search paths.<table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">data_dir:</span><code>str</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">pyversion:</span><code>Tuple[<wbr></wbr>int, <wbr></wbr>int]</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">custom_typeshed_dir:</span><code>Optional[<wbr></wbr>str]</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr class="fieldStart"><td class="fieldName" colspan="2">Returns</td></tr><tr><td class="fieldArgContainer"><code>List[<wbr></wbr>str]</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr></table></div>
+    <div>Return default standard library search paths.<table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">data​_dir:</span><code>str</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">pyversion:</span><code>Tuple[<wbr></wbr>int, <wbr></wbr>int]</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">custom​_typeshed​_dir:</span><code>Optional[<wbr></wbr>str]</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr class="fieldStart"><td class="fieldName" colspan="2">Returns</td></tr><tr><td class="fieldArgContainer"><code>List[<wbr></wbr>str]</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr></table></div>
   </div>
 </div><div class="basefunction">
   
@@ -374,7 +387,7 @@ a directory.</p>
   <div class="docstring functionBody">
     
     
-    <div>Expands .pth imports in site-packages directories<table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">site_packages:</span><code>List[<wbr></wbr>str]</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr class="fieldStart"><td class="fieldName" colspan="2">Returns</td></tr><tr><td class="fieldArgContainer"><code>Tuple[<wbr></wbr>List[<wbr></wbr>str], <wbr></wbr>List[<wbr></wbr>str]]</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr></table></div>
+    <div>Expands .pth imports in site-packages directories<table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">site​_packages:</span><code>List[<wbr></wbr>str]</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr class="fieldStart"><td class="fieldName" colspan="2">Returns</td></tr><tr><td class="fieldArgContainer"><code>Tuple[<wbr></wbr>List[<wbr></wbr>str], <wbr></wbr>List[<wbr></wbr>str]]</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr></table></div>
   </div>
 </div><div class="basefunction">
   
@@ -408,7 +421,7 @@ a directory.</p>
     
   </a>
   <div class="functionHeader">
-    @functools.lru_cache(maxsize=None)<br />
+    @functools.lru_cache(<wbr></wbr>maxsize=None)<br />
     <span class="py-keyword">def</span> <span class="py-defname">get_prefixes</span>(python_executable):
     <a class="sourceLink" href="https://github.com/python/mypy/tree/v0.930/mypy/modulefinder.py#L607">
       
@@ -422,7 +435,7 @@ a directory.</p>
 <p>This runs a subprocess call to get the prefix paths of the given Python executable.
 To avoid repeatedly calling a subprocess (which can be slow!) we
 lru_cache the results.</p>
-<table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">python_executable:</span><code>Optional[<wbr></wbr>str]</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr class="fieldStart"><td class="fieldName" colspan="2">Returns</td></tr><tr><td class="fieldArgContainer"><code>Tuple[<wbr></wbr>str, <wbr></wbr>str]</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr></table></div>
+<table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">python​_executable:</span><code>Optional[<wbr></wbr>str]</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr class="fieldStart"><td class="fieldName" colspan="2">Returns</td></tr><tr><td class="fieldArgContainer"><code>Tuple[<wbr></wbr>str, <wbr></wbr>str]</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr></table></div>
   </div>
 </div><div class="basefunction">
   
@@ -434,7 +447,7 @@ lru_cache the results.</p>
     
   </a>
   <div class="functionHeader">
-    @functools.lru_cache(maxsize=None)<br />
+    @functools.lru_cache(<wbr></wbr>maxsize=None)<br />
     <span class="py-keyword">def</span> <span class="py-defname">get_site_packages_dirs</span>(python_executable):
     <a class="sourceLink" href="https://github.com/python/mypy/tree/v0.930/mypy/modulefinder.py#L628">
       
@@ -448,7 +461,7 @@ lru_cache the results.</p>
 <p>This runs a subprocess call, which generates a list of the egg directories, and the site
 package directories. To avoid repeatedly calling a subprocess (which can be slow!) we
 lru_cache the results.</p>
-<table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">python_executable:</span><code>Optional[<wbr></wbr>str]</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr class="fieldStart"><td class="fieldName" colspan="2">Returns</td></tr><tr><td class="fieldArgContainer"><code>Tuple[<wbr></wbr>List[<wbr></wbr>str], <wbr></wbr>List[<wbr></wbr>str]]</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr></table></div>
+<table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">python​_executable:</span><code>Optional[<wbr></wbr>str]</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr class="fieldStart"><td class="fieldName" colspan="2">Returns</td></tr><tr><td class="fieldArgContainer"><code>Tuple[<wbr></wbr>List[<wbr></wbr>str], <wbr></wbr>List[<wbr></wbr>str]]</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr></table></div>
   </div>
 </div><div class="basefunction">
   
@@ -470,7 +483,7 @@ lru_cache the results.</p>
   <div class="docstring functionBody">
     
     
-    <div>Compute the highest level where an __init__ file is found.<table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">fscache:</span><code><a href="mypy.fscache.FileSystemCache.html">FileSystemCache</a></code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">id:</span><code>str</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">path:</span><code>str</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">prefix:</span><code>str</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr class="fieldStart"><td class="fieldName" colspan="2">Returns</td></tr><tr><td class="fieldArgContainer"><code>int</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr></table></div>
+    <div>Compute the highest level where an __init__ file is found.<table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">fscache:</span><code><a href="mypy.fscache.FileSystemCache.html" class="internal-link" title="mypy.fscache.FileSystemCache">FileSystemCache</a></code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">id:</span><code>str</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">path:</span><code>str</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">prefix:</span><code>str</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr class="fieldStart"><td class="fieldName" colspan="2">Returns</td></tr><tr><td class="fieldArgContainer"><code>int</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr></table></div>
   </div>
 </div><div class="basefunction">
   
@@ -496,7 +509,7 @@ lru_cache the results.</p>
 <p>The contents look like
 {..., 'secrets': ((3, 6), None), 'symbol': ((2, 7), (3, 9)), ...}</p>
 <p>None means there is no maximum version.</p>
-<table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">custom_typeshed_dir:</span><code>Optional[<wbr></wbr>str]</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr class="fieldStart"><td class="fieldName" colspan="2">Returns</td></tr><tr><td class="fieldArgContainer"><code><a href="#StdlibVersions">StdlibVersions</a></code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr></table></div>
+<table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">custom​_typeshed​_dir:</span><code>Optional[<wbr></wbr>str]</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr class="fieldStart"><td class="fieldName" colspan="2">Returns</td></tr><tr><td class="fieldArgContainer"><code><a href="#StdlibVersions" class="internal-link" title="mypy.modulefinder.StdlibVersions">StdlibVersions</a></code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr></table></div>
   </div>
 </div><div class="basefunction">
   
@@ -518,7 +531,7 @@ lru_cache the results.</p>
   <div class="docstring functionBody">
     
     
-    <div><p class="undocumented">Undocumented</p><table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">subpath:</span><code>str</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">excludes:</span><code>List[<wbr></wbr>str]</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">fscache:</span><code><a href="mypy.fscache.FileSystemCache.html">FileSystemCache</a></code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">verbose:</span><code>bool</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr class="fieldStart"><td class="fieldName" colspan="2">Returns</td></tr><tr><td class="fieldArgContainer"><code>bool</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr></table></div>
+    <div><p class="undocumented">Undocumented</p><table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">subpath:</span><code>str</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">excludes:</span><code>List[<wbr></wbr>str]</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">fscache:</span><code><a href="mypy.fscache.FileSystemCache.html" class="internal-link" title="mypy.fscache.FileSystemCache">FileSystemCache</a></code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">verbose:</span><code>bool</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr class="fieldStart"><td class="fieldName" colspan="2">Returns</td></tr><tr><td class="fieldArgContainer"><code>bool</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr></table></div>
   </div>
 </div><div class="basefunction">
   
@@ -584,7 +597,7 @@ lru_cache the results.</p>
   <div class="docstring functionBody">
     
     
-    <div>Return Python version used for checking whether module supports typeshed.<table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">options:</span><code><a href="mypy.options.Options.html">Options</a></code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr class="fieldStart"><td class="fieldName" colspan="2">Returns</td></tr><tr><td class="fieldArgContainer"><code>Tuple[<wbr></wbr>int, <wbr></wbr>int]</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr></table></div>
+    <div>Return Python version used for checking whether module supports typeshed.<table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">options:</span><code><a href="mypy.options.Options.html" class="internal-link" title="mypy.options.Options">Options</a></code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr class="fieldStart"><td class="fieldName" colspan="2">Returns</td></tr><tr><td class="fieldArgContainer"><code>Tuple[<wbr></wbr>int, <wbr></wbr>int]</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr></table></div>
   </div>
 </div><div class="basefunction">
   
@@ -606,7 +619,53 @@ lru_cache the results.</p>
   <div class="docstring functionBody">
     
     
-    <div>Check that all packages containing id have a __init__ file.<table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">fscache:</span><code><a href="mypy.fscache.FileSystemCache.html">FileSystemCache</a></code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">id:</span><code>str</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">path:</span><code>str</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">prefix:</span><code>str</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr class="fieldStart"><td class="fieldName" colspan="2">Returns</td></tr><tr><td class="fieldArgContainer"><code>bool</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr></table></div>
+    <div>Check that all packages containing id have a __init__ file.<table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">fscache:</span><code><a href="mypy.fscache.FileSystemCache.html" class="internal-link" title="mypy.fscache.FileSystemCache">FileSystemCache</a></code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">id:</span><code>str</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">path:</span><code>str</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">prefix:</span><code>str</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr class="fieldStart"><td class="fieldName" colspan="2">Returns</td></tr><tr><td class="fieldArgContainer"><code>bool</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr></table></div>
+  </div>
+</div><div class="baseconstant">
+  
+  
+  <a name="mypy.modulefinder.PYTHON2_STUB_DIR">
+    
+  </a>
+  <a name="PYTHON2_STUB_DIR">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-defname">PYTHON2_STUB_DIR</span>: <code>str</code> =
+    <a class="sourceLink" href="https://github.com/python/mypy/tree/v0.930/mypy/modulefinder.py#L41">
+      
+      (source)
+    </a>
+  </div>
+  <div class="functionBody">
+    
+    
+    <div><p class="undocumented">Undocumented</p></div>
+    <table class="valueTable"><tr class="fieldStart"><td class="fieldName">Value</td></tr><tr><td><pre class="constant-value"><code><span class="rst-variable-quote">'</span><span class="rst-variable-string">@python2</span><span class="rst-variable-quote">'</span></code></pre></td></tr></table>
+  </div>
+</div><div class="baseconstant">
+  
+  
+  <a name="mypy.modulefinder.PYTHON_EXTENSIONS">
+    
+  </a>
+  <a name="PYTHON_EXTENSIONS">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-defname">PYTHON_EXTENSIONS</span>: <code>list[<wbr></wbr>str]</code> =
+    <a class="sourceLink" href="https://github.com/python/mypy/tree/v0.930/mypy/modulefinder.py#L39">
+      
+      (source)
+    </a>
+  </div>
+  <div class="functionBody">
+    
+    
+    <div><p class="undocumented">Undocumented</p></div>
+    <table class="valueTable"><tr class="fieldStart"><td class="fieldName">Value</td></tr><tr><td><pre class="constant-value"><code>[<wbr></wbr><span class="rst-variable-quote">'</span><span class="rst-variable-string">.pyi</span><span class="rst-variable-quote">'</span>, <wbr></wbr><span class="rst-variable-quote">'</span><span class="rst-variable-string">.py</span><span class="rst-variable-quote">'</span>]</code></pre></td></tr></table>
   </div>
 </div><div class="basevariable">
   
@@ -629,6 +688,7 @@ lru_cache the results.</p>
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    
   </div>
 </div><div class="basevariable">
   
@@ -651,6 +711,7 @@ lru_cache the results.</p>
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    
   </div>
 </div><div class="basevariable">
   
@@ -673,50 +734,7 @@ lru_cache the results.</p>
     
     
     <div><p class="undocumented">Undocumented</p></div>
-  </div>
-</div><div class="basevariable">
-  
-  
-  <a name="mypy.modulefinder.PYTHON2_STUB_DIR">
     
-  </a>
-  <a name="PYTHON2_STUB_DIR">
-    
-  </a>
-  <div class="functionHeader">
-    
-    <span class="py-defname">PYTHON2_STUB_DIR</span>: <code>Final</code> =
-    <a class="sourceLink" href="https://github.com/python/mypy/tree/v0.930/mypy/modulefinder.py#L41">
-      
-      (source)
-    </a>
-  </div>
-  <div class="functionBody">
-    
-    
-    <div><p class="undocumented">Undocumented</p></div>
-  </div>
-</div><div class="basevariable">
-  
-  
-  <a name="mypy.modulefinder.PYTHON_EXTENSIONS">
-    
-  </a>
-  <a name="PYTHON_EXTENSIONS">
-    
-  </a>
-  <div class="functionHeader">
-    
-    <span class="py-defname">PYTHON_EXTENSIONS</span>: <code>Final</code> =
-    <a class="sourceLink" href="https://github.com/python/mypy/tree/v0.930/mypy/modulefinder.py#L39">
-      
-      (source)
-    </a>
-  </div>
-  <div class="functionBody">
-    
-    
-    <div><p class="undocumented">Undocumented</p></div>
   </div>
 </div><div class="basevariable">
   
@@ -739,6 +757,7 @@ lru_cache the results.</p>
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    
   </div>
 </div><div class="basevariable">
   
@@ -761,6 +780,7 @@ lru_cache the results.</p>
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    
   </div>
 </div><div class="basefunction private">
   
@@ -805,7 +825,7 @@ lru_cache the results.</p>
     
     
     <div>Mimics a subset of .pth import hook from Lib/site.py
-See <a class="rst-reference external" href="https://github.com/python/cpython/blob/3.5/Lib/site.py#L146-L185" target="_top">https://github.com/python/cpython/blob/3.5/Lib/site.py#L146-L185</a><table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">dir:</span><code>str</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">pth_filename:</span><code>str</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr class="fieldStart"><td class="fieldName" colspan="2">Returns</td></tr><tr><td class="fieldArgContainer"><code>Iterator[<wbr></wbr>str]</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr></table></div>
+See <a class="rst-reference external" href="https://github.com/python/cpython/blob/3.5/Lib/site.py#L146-L185" target="_top">https://github.com/python/cpython/blob/3.5/Lib/site.py#L146-L185</a><table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">dir:</span><code>str</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">pth​_filename:</span><code>str</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr class="fieldStart"><td class="fieldName" colspan="2">Returns</td></tr><tr><td class="fieldArgContainer"><code>Iterator[<wbr></wbr>str]</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr></table></div>
   </div>
 </div>
 
@@ -817,7 +837,7 @@ See <a class="rst-reference external" href="https://github.com/python/cpython/bl
   <div class="container">
     <a href="index.html">API Documentation</a> for <a href="https://github.com/python/mypy" class="projecthome">mypy-0.930</a>,
   generated by <a href="https://github.com/twisted/pydoctor/">pydoctor</a>
-    21.2.2 at 2022-01-12 04:22:24.
+    22.2.2.dev0 at 2022-03-04 05:57:16.
   </div>
 </footer>
 

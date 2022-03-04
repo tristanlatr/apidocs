@@ -7,7 +7,7 @@
   <head>
     
     <title>mypy.dmypy.client</title>
-    <meta name="generator" content="pydoctor 21.2.2"> 
+    <meta name="generator" content="pydoctor 22.2.2.dev0"> 
         
     </meta>
     <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
@@ -44,69 +44,82 @@
           Names
         </a>
 
-        <form action="search-results.html" id="search-box-container">
+        <div id="search-box-container">
           <div class="input-group">
-            <input id="search-box" name="search-query" placeholder="Search..." aria-label="Search" minlength="2" class="form-control" />
+            <input id="search-box" type="search" name="search-query" placeholder="Search..." aria-label="Search" minlength="2" class="form-control" autocomplete="off" />
+            
             <span class="input-group-btn">
-              <button class="btn btn-default" type="submit" title="Search"><img src="fonts/search.svg" alt="Search!" /></button>
-              <a class="btn btn-default" id="search-help-button" title="Help" onclick="toggleSearchHelpText()"><img src="fonts/info.svg" alt="Help!" /></a>
+              <a style="display: none;" class="btn btn-default" id="search-clear-button" title="Clear" onclick="clearSearch()"><img src="fonts/x-circle.svg" alt="Clear" /></a>
+              <a class="btn btn-default" id="search-help-button" title="Help" onclick="toggleSearchHelpText()"><img src="fonts/info.svg" alt="Help" /></a>
             </span>
           </div>
-        </form>
+        </div>
 
-        <div class="rst-admonition hint" id="search-help-box">
+      </div>
+
+      <div id="search-results-container" style="display: none;">
+        <div>
+          <span class="label label-default" id="search-docstrings-button">
+            <a title="Search in docstrings" onclick="toggleSearchInDocstrings()">search in docstrings</a></span>
+        </div>
+
+        <noscript>
+            <h1>Cannot search: JavaScript is not supported/enabled in your browser.</h1>
+        </noscript>
+
+        <div class="hint" id="search-help-box">
           <p class="rst-last">
       
             Search bar offers the following options:
             <ul>   
                 <li>
                   <strong>Term presence.</strong> The below example searches for documents that 
-                    must contain “foo”, might contain “bar” and must not contain “baz”:
-                  <br /> <code>'+foo bar -baz'</code>
+                    must contain “foo”, might contain “bar” and must not contain “baz”: <code>+foo bar -baz</code>
                 </li> 
 
                 <li>
-                  <strong>Wildcards.</strong> The below example searches for documents with words beginning with “foo”:
-                  <br /> <code>'foo*'</code>
+                  <strong>Wildcards.</strong> The below example searches for documents with words beginning with “foo”: <code>foo*</code>
                 </li> 
 
                 <li>
-                  <strong>Search in specific fields.</strong> The following search matches all documents 
-                  that contains "foo" in their full dotted name and with “bar” in any field:
-                  <br /> <code>'+fullName:*foo* +bar'</code>
+                  <strong>Search in specific fields.</strong> The following search matches all objects 
+                  in "twisted.mail" that matches “search”: <code>+qname:twisted.mail.* +search</code>
 
                   <p>
-                    Possible fields: 'name', 'docstring', 'fullName'.
+                    Possible fields: 'name', 'qname' (fully qualified name), 'docstring', and 'kind'.
+                    Last two fields are only applicable if "search in docstrings" is enabled.
                   </p>
                 </li>
 
                 <li>
                   <strong>Fuzzy matches.</strong> The following search matches all documents 
-                  that have a word within 1 edit distance of “foo”:
-                  <br /> <code>'foo~1'</code>
+                  that have a word within 1 edit distance of “foo”: <code>foo~1</code>
                 </li>
             </ul>
 
           </p>
         </div>
 
-      </div>
+        <div id="search-status"> </div>
+        
+        <div class="warning" id="search-warn-box" style="display: none;">
+          <p class="rst-last"><span id="search-warn"></span></p>
+        </div>
 
+        <table id="search-results">
+          <!-- Filled dynamically by JS -->
+        </table>
+        
+        <div style="margin-top: 8px;">
+          <p>Results provided by <a href="https://lunrjs.com">Lunr.js</a></p>
+        </div>
+      </div>
 
     </div>
   </div>
 
-  <script>
- 
-    function toggleSearchHelpText() {
-        document.body.classList.toggle("search-help-hidden");
-    }
-    // Init search and help text
-    document.getElementById('search-box-container').style.display = 'block';
-    document.getElementById('search-help-box').style.display = 'block';
-    document.body.classList.add("search-help-hidden");
-
-  </script>
+  <script src="ajax.js" type="text/javascript"></script>
+  <script src="search.js" type="text/javascript"></script>
 
 </nav>
 
@@ -115,7 +128,7 @@
     <div class="container">
 
       <div class="page-header">
-        <h1 class="module"><code><code><a href="mypy.html">mypy</a></code><wbr></wbr>.<code><a href="mypy.dmypy.html">dmypy</a></code><wbr></wbr>.<code><a href="mypy.dmypy.client.html">client</a></code></code></h1>
+        <h1 class="module"><code><code><a href="index.html" class="internal-link">mypy</a></code><wbr></wbr>.<code><a href="mypy.dmypy.html" class="internal-link" title="mypy.dmypy">dmypy</a></code><wbr></wbr>.<code><a href="mypy.dmypy.client.html" class="internal-link" title="mypy.dmypy.client">client</a></code></code></h1>
         <div id="showPrivate">
           <button class="btn btn-link" onclick="togglePrivate()">Toggle Private API</button>
         </div>
@@ -144,222 +157,222 @@ rather than having to read it back from disk on each run.</p>
   <tr class="class">
     
     <td>Class</td>
-    <td><code><a href="mypy.dmypy.client.AugmentedHelpFormatter.html">AugmentedHelpFormatter</a></code></td>
+    <td><code><a href="mypy.dmypy.client.AugmentedHelpFormatter.html" class="internal-link" title="mypy.dmypy.client.AugmentedHelpFormatter">​Augmented​Help​Formatter</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="class">
     
     <td>Class</td>
-    <td><code><a href="mypy.dmypy.client.BadStatus.html">BadStatus</a></code></td>
-    <td><span>Exception raised when there is something wrong with the status file.</span></td>
+    <td><code><a href="mypy.dmypy.client.BadStatus.html" class="internal-link" title="mypy.dmypy.client.BadStatus">​Bad​Status</a></code></td>
+    <td>Exception raised when there is something wrong with the status file.</td>
   </tr><tr class="function">
     
     <td>Function</td>
-    <td><code><a href="#action">action</a></code></td>
-    <td><span>Decorator to tie an action function to a subparser.</span></td>
+    <td><code><a href="#action" class="internal-link" title="mypy.dmypy.client.action">action</a></code></td>
+    <td>Decorator to tie an action function to a subparser.</td>
   </tr><tr class="function">
     
     <td>Function</td>
-    <td><code><a href="#check_output">check_output</a></code></td>
-    <td><span>Print the output from a check or recheck command.</span></td>
+    <td><code><a href="#check_output" class="internal-link" title="mypy.dmypy.client.check_output">check​_output</a></code></td>
+    <td>Print the output from a check or recheck command.</td>
   </tr><tr class="function">
     
     <td>Function</td>
-    <td><code><a href="#check_status">check_status</a></code></td>
-    <td><span>Check if the process is alive.</span></td>
+    <td><code><a href="#check_status" class="internal-link" title="mypy.dmypy.client.check_status">check​_status</a></code></td>
+    <td>Check if the process is alive.</td>
   </tr><tr class="function">
     
     <td>Function</td>
-    <td><code><a href="#console_entry">console_entry</a></code></td>
+    <td><code><a href="#console_entry" class="internal-link" title="mypy.dmypy.client.console_entry">console​_entry</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="function">
     
     <td>Function</td>
-    <td><code><a href="#do_check">do_check</a></code></td>
-    <td><span>Ask the daemon to check a list of files.</span></td>
+    <td><code><a href="#do_check" class="internal-link" title="mypy.dmypy.client.do_check">do​_check</a></code></td>
+    <td>Ask the daemon to check a list of files.</td>
   </tr><tr class="function">
     
     <td>Function</td>
-    <td><code><a href="#do_daemon">do_daemon</a></code></td>
-    <td><span>Serve requests in the foreground.</span></td>
+    <td><code><a href="#do_daemon" class="internal-link" title="mypy.dmypy.client.do_daemon">do​_daemon</a></code></td>
+    <td>Serve requests in the foreground.</td>
   </tr><tr class="function">
     
     <td>Function</td>
-    <td><code><a href="#do_hang">do_hang</a></code></td>
-    <td><span>Hang for 100 seconds, as a debug hack.</span></td>
+    <td><code><a href="#do_hang" class="internal-link" title="mypy.dmypy.client.do_hang">do​_hang</a></code></td>
+    <td>Hang for 100 seconds, as a debug hack.</td>
   </tr><tr class="function">
     
     <td>Function</td>
-    <td><code><a href="#do_help">do_help</a></code></td>
-    <td><span>Print full help (same as dmypy --help).</span></td>
+    <td><code><a href="#do_help" class="internal-link" title="mypy.dmypy.client.do_help">do​_help</a></code></td>
+    <td>Print full help (same as dmypy --help).</td>
   </tr><tr class="function">
     
     <td>Function</td>
-    <td><code><a href="#do_kill">do_kill</a></code></td>
-    <td><span>Kill daemon process with SIGKILL.</span></td>
+    <td><code><a href="#do_kill" class="internal-link" title="mypy.dmypy.client.do_kill">do​_kill</a></code></td>
+    <td>Kill daemon process with SIGKILL.</td>
   </tr><tr class="function">
     
     <td>Function</td>
-    <td><code><a href="#do_recheck">do_recheck</a></code></td>
-    <td><span>Ask the daemon to recheck the previous list of files, with optional modifications.</span></td>
+    <td><code><a href="#do_recheck" class="internal-link" title="mypy.dmypy.client.do_recheck">do​_recheck</a></code></td>
+    <td>Ask the daemon to recheck the previous list of files, with optional modifications.</td>
   </tr><tr class="function">
     
     <td>Function</td>
-    <td><code><a href="#do_restart">do_restart</a></code></td>
-    <td><span>Restart daemon (it may or may not be running; but not hanging).</span></td>
+    <td><code><a href="#do_restart" class="internal-link" title="mypy.dmypy.client.do_restart">do​_restart</a></code></td>
+    <td>Restart daemon (it may or may not be running; but not hanging).</td>
   </tr><tr class="function">
     
     <td>Function</td>
-    <td><code><a href="#do_run">do_run</a></code></td>
-    <td><span>Do a check, starting (or restarting) the daemon as necessary</span></td>
+    <td><code><a href="#do_run" class="internal-link" title="mypy.dmypy.client.do_run">do​_run</a></code></td>
+    <td>Do a check, starting (or restarting) the daemon as necessary</td>
   </tr><tr class="function">
     
     <td>Function</td>
-    <td><code><a href="#do_start">do_start</a></code></td>
-    <td><span>Start daemon (it must not already be running).</span></td>
+    <td><code><a href="#do_start" class="internal-link" title="mypy.dmypy.client.do_start">do​_start</a></code></td>
+    <td>Start daemon (it must not already be running).</td>
   </tr><tr class="function">
     
     <td>Function</td>
-    <td><code><a href="#do_status">do_status</a></code></td>
-    <td><span>Print daemon status.</span></td>
+    <td><code><a href="#do_status" class="internal-link" title="mypy.dmypy.client.do_status">do​_status</a></code></td>
+    <td>Print daemon status.</td>
   </tr><tr class="function">
     
     <td>Function</td>
-    <td><code><a href="#do_stop">do_stop</a></code></td>
-    <td><span>Stop daemon via a 'stop' request.</span></td>
+    <td><code><a href="#do_stop" class="internal-link" title="mypy.dmypy.client.do_stop">do​_stop</a></code></td>
+    <td>Stop daemon via a 'stop' request.</td>
   </tr><tr class="function">
     
     <td>Function</td>
-    <td><code><a href="#do_suggest">do_suggest</a></code></td>
-    <td><span>Ask the daemon for a suggested signature.</span></td>
+    <td><code><a href="#do_suggest" class="internal-link" title="mypy.dmypy.client.do_suggest">do​_suggest</a></code></td>
+    <td>Ask the daemon for a suggested signature.</td>
   </tr><tr class="function">
     
     <td>Function</td>
-    <td><code><a href="#fail">fail</a></code></td>
+    <td><code><a href="#fail" class="internal-link" title="mypy.dmypy.client.fail">fail</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="function">
     
     <td>Function</td>
-    <td><code><a href="#get_status">get_status</a></code></td>
-    <td><span>Read status file and check if the process is alive.</span></td>
+    <td><code><a href="#get_status" class="internal-link" title="mypy.dmypy.client.get_status">get​_status</a></code></td>
+    <td>Read status file and check if the process is alive.</td>
   </tr><tr class="function">
     
     <td>Function</td>
-    <td><code><a href="#is_running">is_running</a></code></td>
-    <td><span>Check if the server is running cleanly</span></td>
+    <td><code><a href="#is_running" class="internal-link" title="mypy.dmypy.client.is_running">is​_running</a></code></td>
+    <td>Check if the server is running cleanly</td>
   </tr><tr class="function">
     
     <td>Function</td>
-    <td><code><a href="#main">main</a></code></td>
-    <td><span>The code is top-down.</span></td>
+    <td><code><a href="#main" class="internal-link" title="mypy.dmypy.client.main">main</a></code></td>
+    <td>The code is top-down.</td>
   </tr><tr class="function">
     
     <td>Function</td>
-    <td><code><a href="#read_status">read_status</a></code></td>
-    <td><span>Read status file.</span></td>
+    <td><code><a href="#read_status" class="internal-link" title="mypy.dmypy.client.read_status">read​_status</a></code></td>
+    <td>Read status file.</td>
   </tr><tr class="function">
     
     <td>Function</td>
-    <td><code><a href="#request">request</a></code></td>
-    <td><span>Send a request to the daemon.</span></td>
+    <td><code><a href="#request" class="internal-link" title="mypy.dmypy.client.request">request</a></code></td>
+    <td>Send a request to the daemon.</td>
   </tr><tr class="function">
     
     <td>Function</td>
-    <td><code><a href="#restart_server">restart_server</a></code></td>
-    <td><span>Restart daemon (it may or may not be running; but not hanging).</span></td>
+    <td><code><a href="#restart_server" class="internal-link" title="mypy.dmypy.client.restart_server">restart​_server</a></code></td>
+    <td>Restart daemon (it may or may not be running; but not hanging).</td>
   </tr><tr class="function">
     
     <td>Function</td>
-    <td><code><a href="#show_stats">show_stats</a></code></td>
+    <td><code><a href="#show_stats" class="internal-link" title="mypy.dmypy.client.show_stats">show​_stats</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="function">
     
     <td>Function</td>
-    <td><code><a href="#start_server">start_server</a></code></td>
-    <td><span>Start the server from command arguments and wait for it.</span></td>
+    <td><code><a href="#start_server" class="internal-link" title="mypy.dmypy.client.start_server">start​_server</a></code></td>
+    <td>Start the server from command arguments and wait for it.</td>
   </tr><tr class="function">
     
     <td>Function</td>
-    <td><code><a href="#wait_for_server">wait_for_server</a></code></td>
-    <td><span>Wait until the server is up.</span></td>
+    <td><code><a href="#wait_for_server" class="internal-link" title="mypy.dmypy.client.wait_for_server">wait​_for​_server</a></code></td>
+    <td>Wait until the server is up.</td>
   </tr><tr class="variable">
     
     <td>Variable</td>
-    <td><code><a href="#ActionFunction">ActionFunction</a></code></td>
-    <td><span class="undocumented">Undocumented</span></td>
-  </tr><tr class="variable">
-    
-    <td>Variable</td>
-    <td><code><a href="#check_parser">check_parser</a></code></td>
+    <td><code><a href="#ActionFunction" class="internal-link" title="mypy.dmypy.client.ActionFunction">​Action​Function</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="variable">
     
     <td>Variable</td>
-    <td><code><a href="#daemon_parser">daemon_parser</a></code></td>
+    <td><code><a href="#check_parser" class="internal-link" title="mypy.dmypy.client.check_parser">check​_parser</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="variable">
     
     <td>Variable</td>
-    <td><code><a href="#hang_parser">hang_parser</a></code></td>
+    <td><code><a href="#daemon_parser" class="internal-link" title="mypy.dmypy.client.daemon_parser">daemon​_parser</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="variable">
     
     <td>Variable</td>
-    <td><code><a href="#help_parser">help_parser</a></code></td>
+    <td><code><a href="#hang_parser" class="internal-link" title="mypy.dmypy.client.hang_parser">hang​_parser</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="variable">
     
     <td>Variable</td>
-    <td><code><a href="#kill_parser">kill_parser</a></code></td>
+    <td><code><a href="#help_parser" class="internal-link" title="mypy.dmypy.client.help_parser">help​_parser</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="variable">
     
     <td>Variable</td>
-    <td><code><a href="#p">p</a></code></td>
+    <td><code><a href="#kill_parser" class="internal-link" title="mypy.dmypy.client.kill_parser">kill​_parser</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="variable">
     
     <td>Variable</td>
-    <td><code><a href="#parser">parser</a></code></td>
+    <td><code><a href="#p" class="internal-link" title="mypy.dmypy.client.p">p</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="variable">
     
     <td>Variable</td>
-    <td><code><a href="#recheck_parser">recheck_parser</a></code></td>
+    <td><code><a href="#parser" class="internal-link" title="mypy.dmypy.client.parser">parser</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="variable">
     
     <td>Variable</td>
-    <td><code><a href="#restart_parser">restart_parser</a></code></td>
+    <td><code><a href="#recheck_parser" class="internal-link" title="mypy.dmypy.client.recheck_parser">recheck​_parser</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="variable">
     
     <td>Variable</td>
-    <td><code><a href="#run_parser">run_parser</a></code></td>
+    <td><code><a href="#restart_parser" class="internal-link" title="mypy.dmypy.client.restart_parser">restart​_parser</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="variable">
     
     <td>Variable</td>
-    <td><code><a href="#start_parser">start_parser</a></code></td>
+    <td><code><a href="#run_parser" class="internal-link" title="mypy.dmypy.client.run_parser">run​_parser</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="variable">
     
     <td>Variable</td>
-    <td><code><a href="#status_parser">status_parser</a></code></td>
+    <td><code><a href="#start_parser" class="internal-link" title="mypy.dmypy.client.start_parser">start​_parser</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="variable">
     
     <td>Variable</td>
-    <td><code><a href="#stop_parser">stop_parser</a></code></td>
+    <td><code><a href="#status_parser" class="internal-link" title="mypy.dmypy.client.status_parser">status​_parser</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="variable">
     
     <td>Variable</td>
-    <td><code><a href="#subparsers">subparsers</a></code></td>
+    <td><code><a href="#stop_parser" class="internal-link" title="mypy.dmypy.client.stop_parser">stop​_parser</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="variable">
     
     <td>Variable</td>
-    <td><code><a href="#suggest_parser">suggest_parser</a></code></td>
+    <td><code><a href="#subparsers" class="internal-link" title="mypy.dmypy.client.subparsers">subparsers</a></code></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="variable">
+    
+    <td>Variable</td>
+    <td><code><a href="#suggest_parser" class="internal-link" title="mypy.dmypy.client.suggest_parser">suggest​_parser</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr>
 </table>
@@ -390,7 +403,7 @@ rather than having to read it back from disk on each run.</p>
   <div class="docstring functionBody">
     
     
-    <div>Decorator to tie an action function to a subparser.<table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">subparser:</span><code>argparse.ArgumentParser</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr class="fieldStart"><td class="fieldName" colspan="2">Returns</td></tr><tr><td class="fieldArgContainer"><code>Callable[<wbr></wbr>[<wbr></wbr><a href="#ActionFunction">ActionFunction</a>], <wbr></wbr><a href="#ActionFunction">ActionFunction</a>]</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr></table></div>
+    <div>Decorator to tie an action function to a subparser.<table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">subparser:</span><code>argparse.ArgumentParser</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr class="fieldStart"><td class="fieldName" colspan="2">Returns</td></tr><tr><td class="fieldArgContainer"><code>Callable[<wbr></wbr>[<wbr></wbr><a href="#ActionFunction" class="internal-link" title="mypy.dmypy.client.ActionFunction">ActionFunction</a>], <wbr></wbr><a href="#ActionFunction" class="internal-link" title="mypy.dmypy.client.ActionFunction">ActionFunction</a>]</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr></table></div>
   </div>
 </div><div class="basefunction">
   
@@ -414,7 +427,7 @@ rather than having to read it back from disk on each run.</p>
     
     <div><p>Print the output from a check or recheck command.</p>
 <p>Call sys.exit() unless the status code is zero.</p>
-<table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">response:</span><code>Dict[<wbr></wbr>str, <wbr></wbr>Any]</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">verbose:</span><code>bool</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">junit_xml:</span><code>Optional[<wbr></wbr>str]</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">perf_stats_file:</span><code>Optional[<wbr></wbr>str]</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr></table></div>
+<table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">response:</span><code>Dict[<wbr></wbr>str, <wbr></wbr>Any]</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">verbose:</span><code>bool</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">junit​_xml:</span><code>Optional[<wbr></wbr>str]</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">perf​_stats​_file:</span><code>Optional[<wbr></wbr>str]</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr></table></div>
   </div>
 </div><div class="basefunction">
   
@@ -473,7 +486,7 @@ rather than having to read it back from disk on each run.</p>
     
   </a>
   <div class="functionHeader">
-    @action(check_parser)<br />
+    @<a href="#action" class="internal-link" title="mypy.dmypy.client.action">action</a>(<wbr></wbr><a href="#check_parser" class="internal-link" title="mypy.dmypy.client.check_parser">check_parser</a>)<br />
     <span class="py-keyword">def</span> <span class="py-defname">do_check</span>(args):
     <a class="sourceLink" href="https://github.com/python/mypy/tree/v0.930/mypy/dmypy/client.py#L330">
       
@@ -495,7 +508,7 @@ rather than having to read it back from disk on each run.</p>
     
   </a>
   <div class="functionHeader">
-    @action(daemon_parser)<br />
+    @<a href="#action" class="internal-link" title="mypy.dmypy.client.action">action</a>(<wbr></wbr><a href="#daemon_parser" class="internal-link" title="mypy.dmypy.client.daemon_parser">daemon_parser</a>)<br />
     <span class="py-keyword">def</span> <span class="py-defname">do_daemon</span>(args):
     <a class="sourceLink" href="https://github.com/python/mypy/tree/v0.930/mypy/dmypy/client.py#L429">
       
@@ -517,7 +530,7 @@ rather than having to read it back from disk on each run.</p>
     
   </a>
   <div class="functionHeader">
-    @action(hang_parser)<br />
+    @<a href="#action" class="internal-link" title="mypy.dmypy.client.action">action</a>(<wbr></wbr><a href="#hang_parser" class="internal-link" title="mypy.dmypy.client.hang_parser">hang_parser</a>)<br />
     <span class="py-keyword">def</span> <span class="py-defname">do_hang</span>(args):
     <a class="sourceLink" href="https://github.com/python/mypy/tree/v0.930/mypy/dmypy/client.py#L423">
       
@@ -539,7 +552,7 @@ rather than having to read it back from disk on each run.</p>
     
   </a>
   <div class="functionHeader">
-    @action(help_parser)<br />
+    @<a href="#action" class="internal-link" title="mypy.dmypy.client.action">action</a>(<wbr></wbr><a href="#help_parser" class="internal-link" title="mypy.dmypy.client.help_parser">help_parser</a>)<br />
     <span class="py-keyword">def</span> <span class="py-defname">do_help</span>(args):
     <a class="sourceLink" href="https://github.com/python/mypy/tree/v0.930/mypy/dmypy/client.py#L450">
       
@@ -561,7 +574,7 @@ rather than having to read it back from disk on each run.</p>
     
   </a>
   <div class="functionHeader">
-    @action(kill_parser)<br />
+    @<a href="#action" class="internal-link" title="mypy.dmypy.client.action">action</a>(<wbr></wbr><a href="#kill_parser" class="internal-link" title="mypy.dmypy.client.kill_parser">kill_parser</a>)<br />
     <span class="py-keyword">def</span> <span class="py-defname">do_kill</span>(args):
     <a class="sourceLink" href="https://github.com/python/mypy/tree/v0.930/mypy/dmypy/client.py#L318">
       
@@ -583,7 +596,7 @@ rather than having to read it back from disk on each run.</p>
     
   </a>
   <div class="functionHeader">
-    @action(recheck_parser)<br />
+    @<a href="#action" class="internal-link" title="mypy.dmypy.client.action">action</a>(<wbr></wbr><a href="#recheck_parser" class="internal-link" title="mypy.dmypy.client.recheck_parser">recheck_parser</a>)<br />
     <span class="py-keyword">def</span> <span class="py-defname">do_recheck</span>(args):
     <a class="sourceLink" href="https://github.com/python/mypy/tree/v0.930/mypy/dmypy/client.py#L340">
       
@@ -614,7 +627,7 @@ The lists may be empty but oughtn't contain duplicates or overlap.</p>
     
   </a>
   <div class="functionHeader">
-    @action(restart_parser)<br />
+    @<a href="#action" class="internal-link" title="mypy.dmypy.client.action">action</a>(<wbr></wbr><a href="#restart_parser" class="internal-link" title="mypy.dmypy.client.restart_parser">restart_parser</a>)<br />
     <span class="py-keyword">def</span> <span class="py-defname">do_restart</span>(args):
     <a class="sourceLink" href="https://github.com/python/mypy/tree/v0.930/mypy/dmypy/client.py#L204">
       
@@ -639,7 +652,7 @@ mypy flags from the command line (see do_start()).</p>
     
   </a>
   <div class="functionHeader">
-    @action(run_parser)<br />
+    @<a href="#action" class="internal-link" title="mypy.dmypy.client.action">action</a>(<wbr></wbr><a href="#run_parser" class="internal-link" title="mypy.dmypy.client.run_parser">run_parser</a>)<br />
     <span class="py-keyword">def</span> <span class="py-defname">do_run</span>(args):
     <a class="sourceLink" href="https://github.com/python/mypy/tree/v0.930/mypy/dmypy/client.py#L254">
       
@@ -669,7 +682,7 @@ dmypy run -- --strict a.py b.py ...</blockquote>
     
   </a>
   <div class="functionHeader">
-    @action(start_parser)<br />
+    @<a href="#action" class="internal-link" title="mypy.dmypy.client.action">action</a>(<wbr></wbr><a href="#start_parser" class="internal-link" title="mypy.dmypy.client.start_parser">start_parser</a>)<br />
     <span class="py-keyword">def</span> <span class="py-defname">do_start</span>(args):
     <a class="sourceLink" href="https://github.com/python/mypy/tree/v0.930/mypy/dmypy/client.py#L182">
       
@@ -697,7 +710,7 @@ dmypy start -- --strict</blockquote>
     
   </a>
   <div class="functionHeader">
-    @action(status_parser)<br />
+    @<a href="#action" class="internal-link" title="mypy.dmypy.client.action">action</a>(<wbr></wbr><a href="#status_parser" class="internal-link" title="mypy.dmypy.client.status_parser">status_parser</a>)<br />
     <span class="py-keyword">def</span> <span class="py-defname">do_status</span>(args):
     <a class="sourceLink" href="https://github.com/python/mypy/tree/v0.930/mypy/dmypy/client.py#L284">
       
@@ -721,7 +734,7 @@ dmypy start -- --strict</blockquote>
     
   </a>
   <div class="functionHeader">
-    @action(stop_parser)<br />
+    @<a href="#action" class="internal-link" title="mypy.dmypy.client.action">action</a>(<wbr></wbr><a href="#stop_parser" class="internal-link" title="mypy.dmypy.client.stop_parser">stop_parser</a>)<br />
     <span class="py-keyword">def</span> <span class="py-defname">do_stop</span>(args):
     <a class="sourceLink" href="https://github.com/python/mypy/tree/v0.930/mypy/dmypy/client.py#L306">
       
@@ -743,7 +756,7 @@ dmypy start -- --strict</blockquote>
     
   </a>
   <div class="functionHeader">
-    @action(suggest_parser)<br />
+    @<a href="#action" class="internal-link" title="mypy.dmypy.client.action">action</a>(<wbr></wbr><a href="#suggest_parser" class="internal-link" title="mypy.dmypy.client.suggest_parser">suggest_parser</a>)<br />
     <span class="py-keyword">def</span> <span class="py-defname">do_suggest</span>(args):
     <a class="sourceLink" href="https://github.com/python/mypy/tree/v0.930/mypy/dmypy/client.py#L365">
       
@@ -803,7 +816,7 @@ For now it may be closer to a list of call sites.</p>
     <div><p>Read status file and check if the process is alive.</p>
 <p>Return (pid, connection_name) on success.</p>
 <p>Raise BadStatus if something's wrong.</p>
-<table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">status_file:</span><code>str</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr class="fieldStart"><td class="fieldName" colspan="2">Returns</td></tr><tr><td class="fieldArgContainer"><code>Tuple[<wbr></wbr>int, <wbr></wbr>str]</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr></table></div>
+<table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">status​_file:</span><code>str</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr class="fieldStart"><td class="fieldName" colspan="2">Returns</td></tr><tr><td class="fieldArgContainer"><code>Tuple[<wbr></wbr>int, <wbr></wbr>str]</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr></table></div>
   </div>
 </div><div class="basefunction">
   
@@ -825,7 +838,7 @@ For now it may be closer to a list of call sites.</p>
   <div class="docstring functionBody">
     
     
-    <div>Check if the server is running cleanly<table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">status_file:</span><code>str</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr class="fieldStart"><td class="fieldName" colspan="2">Returns</td></tr><tr><td class="fieldArgContainer"><code>bool</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr></table></div>
+    <div>Check if the server is running cleanly<table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">status​_file:</span><code>str</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr class="fieldStart"><td class="fieldName" colspan="2">Returns</td></tr><tr><td class="fieldArgContainer"><code>bool</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr></table></div>
   </div>
 </div><div class="basefunction">
   
@@ -872,7 +885,7 @@ For now it may be closer to a list of call sites.</p>
     <div><p>Read status file.</p>
 <p>Raise BadStatus if the status file doesn't exist or contains
 invalid JSON or the JSON is not a dict.</p>
-<table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">status_file:</span><code>str</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr class="fieldStart"><td class="fieldName" colspan="2">Returns</td></tr><tr><td class="fieldArgContainer"><code>Dict[<wbr></wbr>str, <wbr></wbr>object]</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr></table></div>
+<table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">status​_file:</span><code>str</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr class="fieldStart"><td class="fieldName" colspan="2">Returns</td></tr><tr><td class="fieldArgContainer"><code>Dict[<wbr></wbr>str, <wbr></wbr>object]</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr></table></div>
   </div>
 </div><div class="basefunction">
   
@@ -901,7 +914,7 @@ or if the process whose pid is in the status file has died.</p>
 <p>Return {'error': &lt;message&gt;} if an IPC operation or receive()
 raised OSError.  This covers cases such as connection refused or
 closed prematurely as well as invalid JSON received.</p>
-<table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">status_file:</span><code>str</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">command:</span><code>str</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">timeout:</span><code>Optional[<wbr></wbr>int]</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">kwds:</span><code>object</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr class="fieldStart"><td class="fieldName" colspan="2">Returns</td></tr><tr><td class="fieldArgContainer"><code>Dict[<wbr></wbr>str, <wbr></wbr>Any]</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr></table></div>
+<table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">status​_file:</span><code>str</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">command:</span><code>str</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">timeout:</span><code>Optional[<wbr></wbr>int]</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">**kwds:</span><code>object</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr class="fieldStart"><td class="fieldName" colspan="2">Returns</td></tr><tr><td class="fieldArgContainer"><code>Dict[<wbr></wbr>str, <wbr></wbr>Any]</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr></table></div>
   </div>
 </div><div class="basefunction">
   
@@ -923,7 +936,7 @@ closed prematurely as well as invalid JSON received.</p>
   <div class="docstring functionBody">
     
     
-    <div>Restart daemon (it may or may not be running; but not hanging).<table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">args:</span><code>argparse.Namespace</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">allow_sources:</span><code>bool</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr></table></div>
+    <div>Restart daemon (it may or may not be running; but not hanging).<table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">args:</span><code>argparse.Namespace</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">allow​_sources:</span><code>bool</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr></table></div>
   </div>
 </div><div class="basefunction">
   
@@ -967,7 +980,7 @@ closed prematurely as well as invalid JSON received.</p>
   <div class="docstring functionBody">
     
     
-    <div>Start the server from command arguments and wait for it.<table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">args:</span><code>argparse.Namespace</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">allow_sources:</span><code>bool</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr></table></div>
+    <div>Start the server from command arguments and wait for it.<table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">args:</span><code>argparse.Namespace</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">allow​_sources:</span><code>bool</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr></table></div>
   </div>
 </div><div class="basefunction">
   
@@ -991,7 +1004,7 @@ closed prematurely as well as invalid JSON received.</p>
     
     <div><p>Wait until the server is up.</p>
 <p>Exit if it doesn't happen within the timeout.</p>
-<table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">status_file:</span><code>str</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">timeout:</span><code>float</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr></table></div>
+<table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">status​_file:</span><code>str</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">timeout:</span><code>float</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr></table></div>
   </div>
 </div><div class="basevariable">
   
@@ -1014,6 +1027,7 @@ closed prematurely as well as invalid JSON received.</p>
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    
   </div>
 </div><div class="basevariable">
   
@@ -1036,6 +1050,7 @@ closed prematurely as well as invalid JSON received.</p>
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    
   </div>
 </div><div class="basevariable">
   
@@ -1058,6 +1073,7 @@ closed prematurely as well as invalid JSON received.</p>
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    
   </div>
 </div><div class="basevariable">
   
@@ -1080,6 +1096,7 @@ closed prematurely as well as invalid JSON received.</p>
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    
   </div>
 </div><div class="basevariable">
   
@@ -1102,6 +1119,7 @@ closed prematurely as well as invalid JSON received.</p>
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    
   </div>
 </div><div class="basevariable">
   
@@ -1124,6 +1142,7 @@ closed prematurely as well as invalid JSON received.</p>
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    
   </div>
 </div><div class="basevariable">
   
@@ -1146,6 +1165,7 @@ closed prematurely as well as invalid JSON received.</p>
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    
   </div>
 </div><div class="basevariable">
   
@@ -1168,6 +1188,7 @@ closed prematurely as well as invalid JSON received.</p>
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    
   </div>
 </div><div class="basevariable">
   
@@ -1190,6 +1211,7 @@ closed prematurely as well as invalid JSON received.</p>
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    
   </div>
 </div><div class="basevariable">
   
@@ -1212,6 +1234,7 @@ closed prematurely as well as invalid JSON received.</p>
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    
   </div>
 </div><div class="basevariable">
   
@@ -1234,6 +1257,7 @@ closed prematurely as well as invalid JSON received.</p>
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    
   </div>
 </div><div class="basevariable">
   
@@ -1256,6 +1280,7 @@ closed prematurely as well as invalid JSON received.</p>
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    
   </div>
 </div><div class="basevariable">
   
@@ -1278,6 +1303,7 @@ closed prematurely as well as invalid JSON received.</p>
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    
   </div>
 </div><div class="basevariable">
   
@@ -1300,6 +1326,7 @@ closed prematurely as well as invalid JSON received.</p>
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    
   </div>
 </div><div class="basevariable">
   
@@ -1322,6 +1349,7 @@ closed prematurely as well as invalid JSON received.</p>
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    
   </div>
 </div><div class="basevariable">
   
@@ -1344,6 +1372,7 @@ closed prematurely as well as invalid JSON received.</p>
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    
   </div>
 </div>
 
@@ -1355,7 +1384,7 @@ closed prematurely as well as invalid JSON received.</p>
   <div class="container">
     <a href="index.html">API Documentation</a> for <a href="https://github.com/python/mypy" class="projecthome">mypy-0.930</a>,
   generated by <a href="https://github.com/twisted/pydoctor/">pydoctor</a>
-    21.2.2 at 2022-01-12 04:22:24.
+    22.2.2.dev0 at 2022-03-04 05:57:16.
   </div>
 </footer>
 

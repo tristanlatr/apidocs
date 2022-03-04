@@ -7,7 +7,7 @@
   <head>
     
     <title>mypy.message_registry</title>
-    <meta name="generator" content="pydoctor 21.2.2"> 
+    <meta name="generator" content="pydoctor 22.2.2.dev0"> 
         
     </meta>
     <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
@@ -44,69 +44,82 @@
           Names
         </a>
 
-        <form action="search-results.html" id="search-box-container">
+        <div id="search-box-container">
           <div class="input-group">
-            <input id="search-box" name="search-query" placeholder="Search..." aria-label="Search" minlength="2" class="form-control" />
+            <input id="search-box" type="search" name="search-query" placeholder="Search..." aria-label="Search" minlength="2" class="form-control" autocomplete="off" />
+            
             <span class="input-group-btn">
-              <button class="btn btn-default" type="submit" title="Search"><img src="fonts/search.svg" alt="Search!" /></button>
-              <a class="btn btn-default" id="search-help-button" title="Help" onclick="toggleSearchHelpText()"><img src="fonts/info.svg" alt="Help!" /></a>
+              <a style="display: none;" class="btn btn-default" id="search-clear-button" title="Clear" onclick="clearSearch()"><img src="fonts/x-circle.svg" alt="Clear" /></a>
+              <a class="btn btn-default" id="search-help-button" title="Help" onclick="toggleSearchHelpText()"><img src="fonts/info.svg" alt="Help" /></a>
             </span>
           </div>
-        </form>
+        </div>
 
-        <div class="rst-admonition hint" id="search-help-box">
+      </div>
+
+      <div id="search-results-container" style="display: none;">
+        <div>
+          <span class="label label-default" id="search-docstrings-button">
+            <a title="Search in docstrings" onclick="toggleSearchInDocstrings()">search in docstrings</a></span>
+        </div>
+
+        <noscript>
+            <h1>Cannot search: JavaScript is not supported/enabled in your browser.</h1>
+        </noscript>
+
+        <div class="hint" id="search-help-box">
           <p class="rst-last">
       
             Search bar offers the following options:
             <ul>   
                 <li>
                   <strong>Term presence.</strong> The below example searches for documents that 
-                    must contain “foo”, might contain “bar” and must not contain “baz”:
-                  <br /> <code>'+foo bar -baz'</code>
+                    must contain “foo”, might contain “bar” and must not contain “baz”: <code>+foo bar -baz</code>
                 </li> 
 
                 <li>
-                  <strong>Wildcards.</strong> The below example searches for documents with words beginning with “foo”:
-                  <br /> <code>'foo*'</code>
+                  <strong>Wildcards.</strong> The below example searches for documents with words beginning with “foo”: <code>foo*</code>
                 </li> 
 
                 <li>
-                  <strong>Search in specific fields.</strong> The following search matches all documents 
-                  that contains "foo" in their full dotted name and with “bar” in any field:
-                  <br /> <code>'+fullName:*foo* +bar'</code>
+                  <strong>Search in specific fields.</strong> The following search matches all objects 
+                  in "twisted.mail" that matches “search”: <code>+qname:twisted.mail.* +search</code>
 
                   <p>
-                    Possible fields: 'name', 'docstring', 'fullName'.
+                    Possible fields: 'name', 'qname' (fully qualified name), 'docstring', and 'kind'.
+                    Last two fields are only applicable if "search in docstrings" is enabled.
                   </p>
                 </li>
 
                 <li>
                   <strong>Fuzzy matches.</strong> The following search matches all documents 
-                  that have a word within 1 edit distance of “foo”:
-                  <br /> <code>'foo~1'</code>
+                  that have a word within 1 edit distance of “foo”: <code>foo~1</code>
                 </li>
             </ul>
 
           </p>
         </div>
 
-      </div>
+        <div id="search-status"> </div>
+        
+        <div class="warning" id="search-warn-box" style="display: none;">
+          <p class="rst-last"><span id="search-warn"></span></p>
+        </div>
 
+        <table id="search-results">
+          <!-- Filled dynamically by JS -->
+        </table>
+        
+        <div style="margin-top: 8px;">
+          <p>Results provided by <a href="https://lunrjs.com">Lunr.js</a></p>
+        </div>
+      </div>
 
     </div>
   </div>
 
-  <script>
- 
-    function toggleSearchHelpText() {
-        document.body.classList.toggle("search-help-hidden");
-    }
-    // Init search and help text
-    document.getElementById('search-box-container').style.display = 'block';
-    document.getElementById('search-help-box').style.display = 'block';
-    document.body.classList.add("search-help-hidden");
-
-  </script>
+  <script src="ajax.js" type="text/javascript"></script>
+  <script src="search.js" type="text/javascript"></script>
 
 </nav>
 
@@ -115,7 +128,7 @@
     <div class="container">
 
       <div class="page-header">
-        <h1 class="module"><code><code><a href="mypy.html">mypy</a></code><wbr></wbr>.<code><a href="mypy.message_registry.html">message_registry</a></code></code></h1>
+        <h1 class="module"><code><code><a href="index.html" class="internal-link">mypy</a></code><wbr></wbr>.<code><a href="mypy.message_registry.html" class="internal-link" title="mypy.message_registry">message_registry</a></code></code></h1>
         <div id="showPrivate">
           <button class="btn btn-link" onclick="togglePrivate()">Toggle Private API</button>
         </div>
@@ -146,512 +159,512 @@ add a method to MessageBuilder and call this instead.</p>
   <tr class="class">
     
     <td>Class</td>
-    <td><code><a href="mypy.message_registry.ErrorMessage.html">ErrorMessage</a></code></td>
+    <td><code><a href="mypy.message_registry.ErrorMessage.html" class="internal-link" title="mypy.message_registry.ErrorMessage">​Error​Message</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
-  </tr><tr class="variable">
+  </tr><tr class="constant">
     
-    <td>Variable</td>
-    <td><code><a href="#ALL_MUST_BE_SEQ_STR">ALL_MUST_BE_SEQ_STR</a></code></td>
+    <td>Constant</td>
+    <td><code><a href="#ALL_MUST_BE_SEQ_STR" class="internal-link" title="mypy.message_registry.ALL_MUST_BE_SEQ_STR">ALL​_MUST​_BE​_SEQ​_STR</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
-  </tr><tr class="variable">
+  </tr><tr class="constant">
     
-    <td>Variable</td>
-    <td><code><a href="#ARGUMENT_TYPE_EXPECTED">ARGUMENT_TYPE_EXPECTED</a></code></td>
+    <td>Constant</td>
+    <td><code><a href="#ARGUMENT_TYPE_EXPECTED" class="internal-link" title="mypy.message_registry.ARGUMENT_TYPE_EXPECTED">ARGUMENT​_TYPE​_EXPECTED</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
-  </tr><tr class="variable">
+  </tr><tr class="constant">
     
-    <td>Variable</td>
-    <td><code><a href="#BAD_CONSTRUCTOR_TYPE">BAD_CONSTRUCTOR_TYPE</a></code></td>
+    <td>Constant</td>
+    <td><code><a href="#BAD_CONSTRUCTOR_TYPE" class="internal-link" title="mypy.message_registry.BAD_CONSTRUCTOR_TYPE">BAD​_CONSTRUCTOR​_TYPE</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
-  </tr><tr class="variable">
+  </tr><tr class="constant">
     
-    <td>Variable</td>
-    <td><code><a href="#BARE_GENERIC">BARE_GENERIC</a></code></td>
+    <td>Constant</td>
+    <td><code><a href="#BARE_GENERIC" class="internal-link" title="mypy.message_registry.BARE_GENERIC">BARE​_GENERIC</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
-  </tr><tr class="variable">
+  </tr><tr class="constant">
     
-    <td>Variable</td>
-    <td><code><a href="#CANNOT_ACCESS_FINAL_INSTANCE_ATTR">CANNOT_ACCESS_FINAL_INSTANCE_ATTR</a></code></td>
+    <td>Constant</td>
+    <td><code><a href="#CANNOT_ACCESS_FINAL_INSTANCE_ATTR" class="internal-link" title="mypy.message_registry.CANNOT_ACCESS_FINAL_INSTANCE_ATTR">CANNOT​_ACCESS​_FINAL​_INSTANCE​_ATTR</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
-  </tr><tr class="variable">
+  </tr><tr class="constant">
     
-    <td>Variable</td>
-    <td><code><a href="#CANNOT_ACCESS_INIT">CANNOT_ACCESS_INIT</a></code></td>
+    <td>Constant</td>
+    <td><code><a href="#CANNOT_ACCESS_INIT" class="internal-link" title="mypy.message_registry.CANNOT_ACCESS_INIT">CANNOT​_ACCESS​_INIT</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
-  </tr><tr class="variable">
+  </tr><tr class="constant">
     
-    <td>Variable</td>
-    <td><code><a href="#CANNOT_ASSIGN_TO_METHOD">CANNOT_ASSIGN_TO_METHOD</a></code></td>
+    <td>Constant</td>
+    <td><code><a href="#CANNOT_ASSIGN_TO_METHOD" class="internal-link" title="mypy.message_registry.CANNOT_ASSIGN_TO_METHOD">CANNOT​_ASSIGN​_TO​_METHOD</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
-  </tr><tr class="variable">
+  </tr><tr class="constant">
     
-    <td>Variable</td>
-    <td><code><a href="#CANNOT_ASSIGN_TO_TYPE">CANNOT_ASSIGN_TO_TYPE</a></code></td>
+    <td>Constant</td>
+    <td><code><a href="#CANNOT_ASSIGN_TO_TYPE" class="internal-link" title="mypy.message_registry.CANNOT_ASSIGN_TO_TYPE">CANNOT​_ASSIGN​_TO​_TYPE</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
-  </tr><tr class="variable">
+  </tr><tr class="constant">
     
-    <td>Variable</td>
-    <td><code><a href="#CANNOT_INFER_LAMBDA_TYPE">CANNOT_INFER_LAMBDA_TYPE</a></code></td>
+    <td>Constant</td>
+    <td><code><a href="#CANNOT_INFER_LAMBDA_TYPE" class="internal-link" title="mypy.message_registry.CANNOT_INFER_LAMBDA_TYPE">CANNOT​_INFER​_LAMBDA​_TYPE</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
-  </tr><tr class="variable">
+  </tr><tr class="constant">
     
-    <td>Variable</td>
-    <td><code><a href="#CANNOT_INHERIT_FROM_FINAL">CANNOT_INHERIT_FROM_FINAL</a></code></td>
+    <td>Constant</td>
+    <td><code><a href="#CANNOT_INHERIT_FROM_FINAL" class="internal-link" title="mypy.message_registry.CANNOT_INHERIT_FROM_FINAL">CANNOT​_INHERIT​_FROM​_FINAL</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
-  </tr><tr class="variable">
+  </tr><tr class="constant">
     
-    <td>Variable</td>
-    <td><code><a href="#CANNOT_INSTANTIATE_PROTOCOL">CANNOT_INSTANTIATE_PROTOCOL</a></code></td>
+    <td>Constant</td>
+    <td><code><a href="#CANNOT_INSTANTIATE_PROTOCOL" class="internal-link" title="mypy.message_registry.CANNOT_INSTANTIATE_PROTOCOL">CANNOT​_INSTANTIATE​_PROTOCOL</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
-  </tr><tr class="variable">
+  </tr><tr class="constant">
     
-    <td>Variable</td>
-    <td><code><a href="#CANNOT_MAKE_DELETABLE_FINAL">CANNOT_MAKE_DELETABLE_FINAL</a></code></td>
+    <td>Constant</td>
+    <td><code><a href="#CANNOT_MAKE_DELETABLE_FINAL" class="internal-link" title="mypy.message_registry.CANNOT_MAKE_DELETABLE_FINAL">CANNOT​_MAKE​_DELETABLE​_FINAL</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
-  </tr><tr class="variable">
+  </tr><tr class="constant">
     
-    <td>Variable</td>
-    <td><code><a href="#CANNOT_OVERRIDE_CLASS_VAR">CANNOT_OVERRIDE_CLASS_VAR</a></code></td>
+    <td>Constant</td>
+    <td><code><a href="#CANNOT_OVERRIDE_CLASS_VAR" class="internal-link" title="mypy.message_registry.CANNOT_OVERRIDE_CLASS_VAR">CANNOT​_OVERRIDE​_CLASS​_VAR</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
-  </tr><tr class="variable">
+  </tr><tr class="constant">
     
-    <td>Variable</td>
-    <td><code><a href="#CANNOT_OVERRIDE_INSTANCE_VAR">CANNOT_OVERRIDE_INSTANCE_VAR</a></code></td>
+    <td>Constant</td>
+    <td><code><a href="#CANNOT_OVERRIDE_INSTANCE_VAR" class="internal-link" title="mypy.message_registry.CANNOT_OVERRIDE_INSTANCE_VAR">CANNOT​_OVERRIDE​_INSTANCE​_VAR</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
-  </tr><tr class="variable">
+  </tr><tr class="constant">
     
-    <td>Variable</td>
-    <td><code><a href="#CANNOT_USE_TYPEVAR_AS_EXPRESSION">CANNOT_USE_TYPEVAR_AS_EXPRESSION</a></code></td>
+    <td>Constant</td>
+    <td><code><a href="#CANNOT_USE_TYPEVAR_AS_EXPRESSION" class="internal-link" title="mypy.message_registry.CANNOT_USE_TYPEVAR_AS_EXPRESSION">CANNOT​_USE​_TYPEVAR​_AS​_EXPRESSION</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
-  </tr><tr class="variable">
+  </tr><tr class="constant">
     
-    <td>Variable</td>
-    <td><code><a href="#CLASS_VAR_OUTSIDE_OF_CLASS">CLASS_VAR_OUTSIDE_OF_CLASS</a></code></td>
+    <td>Constant</td>
+    <td><code><a href="#CLASS_VAR_OUTSIDE_OF_CLASS" class="internal-link" title="mypy.message_registry.CLASS_VAR_OUTSIDE_OF_CLASS">CLASS​_VAR​_OUTSIDE​_OF​_CLASS</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
-  </tr><tr class="variable">
+  </tr><tr class="constant">
     
-    <td>Variable</td>
-    <td><code><a href="#CLASS_VAR_WITH_TYPEVARS">CLASS_VAR_WITH_TYPEVARS</a></code></td>
+    <td>Constant</td>
+    <td><code><a href="#CLASS_VAR_WITH_TYPEVARS" class="internal-link" title="mypy.message_registry.CLASS_VAR_WITH_TYPEVARS">CLASS​_VAR​_WITH​_TYPEVARS</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
-  </tr><tr class="variable">
+  </tr><tr class="constant">
     
-    <td>Variable</td>
-    <td><code><a href="#CONTIGUOUS_ITERABLE_EXPECTED">CONTIGUOUS_ITERABLE_EXPECTED</a></code></td>
+    <td>Constant</td>
+    <td><code><a href="#CONTIGUOUS_ITERABLE_EXPECTED" class="internal-link" title="mypy.message_registry.CONTIGUOUS_ITERABLE_EXPECTED">CONTIGUOUS​_ITERABLE​_EXPECTED</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
-  </tr><tr class="variable">
+  </tr><tr class="constant">
     
-    <td>Variable</td>
-    <td><code><a href="#DEPENDENT_FINAL_IN_CLASS_BODY">DEPENDENT_FINAL_IN_CLASS_BODY</a></code></td>
+    <td>Constant</td>
+    <td><code><a href="#DEPENDENT_FINAL_IN_CLASS_BODY" class="internal-link" title="mypy.message_registry.DEPENDENT_FINAL_IN_CLASS_BODY">DEPENDENT​_FINAL​_IN​_CLASS​_BODY</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
-  </tr><tr class="variable">
+  </tr><tr class="constant">
     
-    <td>Variable</td>
-    <td><code><a href="#DESCRIPTOR_GET_NOT_CALLABLE">DESCRIPTOR_GET_NOT_CALLABLE</a></code></td>
+    <td>Constant</td>
+    <td><code><a href="#DESCRIPTOR_GET_NOT_CALLABLE" class="internal-link" title="mypy.message_registry.DESCRIPTOR_GET_NOT_CALLABLE">DESCRIPTOR​_GET​_NOT​_CALLABLE</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
-  </tr><tr class="variable">
+  </tr><tr class="constant">
     
-    <td>Variable</td>
-    <td><code><a href="#DESCRIPTOR_SET_NOT_CALLABLE">DESCRIPTOR_SET_NOT_CALLABLE</a></code></td>
+    <td>Constant</td>
+    <td><code><a href="#DESCRIPTOR_SET_NOT_CALLABLE" class="internal-link" title="mypy.message_registry.DESCRIPTOR_SET_NOT_CALLABLE">DESCRIPTOR​_SET​_NOT​_CALLABLE</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
-  </tr><tr class="variable">
+  </tr><tr class="constant">
     
-    <td>Variable</td>
-    <td><code><a href="#DUPLICATE_TYPE_SIGNATURES">DUPLICATE_TYPE_SIGNATURES</a></code></td>
+    <td>Constant</td>
+    <td><code><a href="#DUPLICATE_TYPE_SIGNATURES" class="internal-link" title="mypy.message_registry.DUPLICATE_TYPE_SIGNATURES">DUPLICATE​_TYPE​_SIGNATURES</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
-  </tr><tr class="variable">
+  </tr><tr class="constant">
     
-    <td>Variable</td>
-    <td><code><a href="#ERASED_SELF_TYPE_NOT_SUPERTYPE">ERASED_SELF_TYPE_NOT_SUPERTYPE</a></code></td>
+    <td>Constant</td>
+    <td><code><a href="#ERASED_SELF_TYPE_NOT_SUPERTYPE" class="internal-link" title="mypy.message_registry.ERASED_SELF_TYPE_NOT_SUPERTYPE">ERASED​_SELF​_TYPE​_NOT​_SUPERTYPE</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
-  </tr><tr class="variable">
+  </tr><tr class="constant">
     
-    <td>Variable</td>
-    <td><code><a href="#FORMAT_REQUIRES_MAPPING">FORMAT_REQUIRES_MAPPING</a></code></td>
+    <td>Constant</td>
+    <td><code><a href="#FORMAT_REQUIRES_MAPPING" class="internal-link" title="mypy.message_registry.FORMAT_REQUIRES_MAPPING">FORMAT​_REQUIRES​_MAPPING</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
-  </tr><tr class="variable">
+  </tr><tr class="constant">
     
-    <td>Variable</td>
-    <td><code><a href="#FUNCTION_ALWAYS_TRUE">FUNCTION_ALWAYS_TRUE</a></code></td>
+    <td>Constant</td>
+    <td><code><a href="#FUNCTION_ALWAYS_TRUE" class="internal-link" title="mypy.message_registry.FUNCTION_ALWAYS_TRUE">FUNCTION​_ALWAYS​_TRUE</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
-  </tr><tr class="variable">
+  </tr><tr class="constant">
     
-    <td>Variable</td>
-    <td><code><a href="#FUNCTION_PARAMETER_CANNOT_BE_COVARIANT">FUNCTION_PARAMETER_CANNOT_BE_COVARIANT</a></code></td>
+    <td>Constant</td>
+    <td><code><a href="#FUNCTION_PARAMETER_CANNOT_BE_COVARIANT" class="internal-link" title="mypy.message_registry.FUNCTION_PARAMETER_CANNOT_BE_COVARIANT">FUNCTION​_PARAMETER​_CANNOT​_BE​_COVARIANT</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
-  </tr><tr class="variable">
+  </tr><tr class="constant">
     
-    <td>Variable</td>
-    <td><code><a href="#FUNCTION_TYPE_EXPECTED">FUNCTION_TYPE_EXPECTED</a></code></td>
+    <td>Constant</td>
+    <td><code><a href="#FUNCTION_TYPE_EXPECTED" class="internal-link" title="mypy.message_registry.FUNCTION_TYPE_EXPECTED">FUNCTION​_TYPE​_EXPECTED</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
-  </tr><tr class="variable">
+  </tr><tr class="constant">
     
-    <td>Variable</td>
-    <td><code><a href="#GENERIC_CLASS_VAR_ACCESS">GENERIC_CLASS_VAR_ACCESS</a></code></td>
+    <td>Constant</td>
+    <td><code><a href="#GENERIC_CLASS_VAR_ACCESS" class="internal-link" title="mypy.message_registry.GENERIC_CLASS_VAR_ACCESS">GENERIC​_CLASS​_VAR​_ACCESS</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
-  </tr><tr class="variable">
+  </tr><tr class="constant">
     
-    <td>Variable</td>
-    <td><code><a href="#GENERIC_INSTANCE_VAR_CLASS_ACCESS">GENERIC_INSTANCE_VAR_CLASS_ACCESS</a></code></td>
+    <td>Constant</td>
+    <td><code><a href="#GENERIC_INSTANCE_VAR_CLASS_ACCESS" class="internal-link" title="mypy.message_registry.GENERIC_INSTANCE_VAR_CLASS_ACCESS">GENERIC​_INSTANCE​_VAR​_CLASS​_ACCESS</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
-  </tr><tr class="variable">
+  </tr><tr class="constant">
     
-    <td>Variable</td>
-    <td><code><a href="#IMPLICIT_GENERIC_ANY_BUILTIN">IMPLICIT_GENERIC_ANY_BUILTIN</a></code></td>
+    <td>Constant</td>
+    <td><code><a href="#IMPLICIT_GENERIC_ANY_BUILTIN" class="internal-link" title="mypy.message_registry.IMPLICIT_GENERIC_ANY_BUILTIN">IMPLICIT​_GENERIC​_ANY​_BUILTIN</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
-  </tr><tr class="variable">
+  </tr><tr class="constant">
     
-    <td>Variable</td>
-    <td><code><a href="#INCOMPATIBLE_IMPORT_OF">INCOMPATIBLE_IMPORT_OF</a></code></td>
+    <td>Constant</td>
+    <td><code><a href="#INCOMPATIBLE_IMPORT_OF" class="internal-link" title="mypy.message_registry.INCOMPATIBLE_IMPORT_OF">INCOMPATIBLE​_IMPORT​_OF</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
-  </tr><tr class="variable">
+  </tr><tr class="constant">
     
-    <td>Variable</td>
-    <td><code><a href="#INCOMPATIBLE_REDEFINITION">INCOMPATIBLE_REDEFINITION</a></code></td>
+    <td>Constant</td>
+    <td><code><a href="#INCOMPATIBLE_REDEFINITION" class="internal-link" title="mypy.message_registry.INCOMPATIBLE_REDEFINITION">INCOMPATIBLE​_REDEFINITION</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
-  </tr><tr class="variable">
+  </tr><tr class="constant">
     
-    <td>Variable</td>
-    <td><code><a href="#INCOMPATIBLE_RETURN_VALUE_TYPE">INCOMPATIBLE_RETURN_VALUE_TYPE</a></code></td>
+    <td>Constant</td>
+    <td><code><a href="#INCOMPATIBLE_RETURN_VALUE_TYPE" class="internal-link" title="mypy.message_registry.INCOMPATIBLE_RETURN_VALUE_TYPE">INCOMPATIBLE​_RETURN​_VALUE​_TYPE</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
-  </tr><tr class="variable">
+  </tr><tr class="constant">
     
-    <td>Variable</td>
-    <td><code><a href="#INCOMPATIBLE_TYPES">INCOMPATIBLE_TYPES</a></code></td>
+    <td>Constant</td>
+    <td><code><a href="#INCOMPATIBLE_TYPES" class="internal-link" title="mypy.message_registry.INCOMPATIBLE_TYPES">INCOMPATIBLE​_TYPES</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
-  </tr><tr class="variable">
+  </tr><tr class="constant">
     
-    <td>Variable</td>
-    <td><code><a href="#INCOMPATIBLE_TYPES_IN_ASSIGNMENT">INCOMPATIBLE_TYPES_IN_ASSIGNMENT</a></code></td>
+    <td>Constant</td>
+    <td><code><a href="#INCOMPATIBLE_TYPES_IN_ASSIGNMENT" class="internal-link" title="mypy.message_registry.INCOMPATIBLE_TYPES_IN_ASSIGNMENT">INCOMPATIBLE​_TYPES​_IN​_ASSIGNMENT</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
-  </tr><tr class="variable">
+  </tr><tr class="constant">
     
-    <td>Variable</td>
-    <td><code><a href="#INCOMPATIBLE_TYPES_IN_ASYNC_FOR">INCOMPATIBLE_TYPES_IN_ASYNC_FOR</a></code></td>
+    <td>Constant</td>
+    <td><code><a href="#INCOMPATIBLE_TYPES_IN_ASYNC_FOR" class="internal-link" title="mypy.message_registry.INCOMPATIBLE_TYPES_IN_ASYNC_FOR">INCOMPATIBLE​_TYPES​_IN​_ASYNC​_FOR</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
-  </tr><tr class="variable">
+  </tr><tr class="constant">
     
-    <td>Variable</td>
-    <td><code><a href="#INCOMPATIBLE_TYPES_IN_ASYNC_WITH_AENTER">INCOMPATIBLE_TYPES_IN_ASYNC_WITH_AENTER</a></code></td>
+    <td>Constant</td>
+    <td><code><a href="#INCOMPATIBLE_TYPES_IN_ASYNC_WITH_AENTER" class="internal-link" title="mypy.message_registry.INCOMPATIBLE_TYPES_IN_ASYNC_WITH_AENTER">INCOMPATIBLE​_TYPES​_IN​_ASYNC​_WITH​_AENTER</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
-  </tr><tr class="variable">
+  </tr><tr class="constant">
     
-    <td>Variable</td>
-    <td><code><a href="#INCOMPATIBLE_TYPES_IN_ASYNC_WITH_AEXIT">INCOMPATIBLE_TYPES_IN_ASYNC_WITH_AEXIT</a></code></td>
+    <td>Constant</td>
+    <td><code><a href="#INCOMPATIBLE_TYPES_IN_ASYNC_WITH_AEXIT" class="internal-link" title="mypy.message_registry.INCOMPATIBLE_TYPES_IN_ASYNC_WITH_AEXIT">INCOMPATIBLE​_TYPES​_IN​_ASYNC​_WITH​_AEXIT</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
-  </tr><tr class="variable">
+  </tr><tr class="constant">
     
-    <td>Variable</td>
-    <td><code><a href="#INCOMPATIBLE_TYPES_IN_AWAIT">INCOMPATIBLE_TYPES_IN_AWAIT</a></code></td>
+    <td>Constant</td>
+    <td><code><a href="#INCOMPATIBLE_TYPES_IN_AWAIT" class="internal-link" title="mypy.message_registry.INCOMPATIBLE_TYPES_IN_AWAIT">INCOMPATIBLE​_TYPES​_IN​_AWAIT</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
-  </tr><tr class="variable">
+  </tr><tr class="constant">
     
-    <td>Variable</td>
-    <td><code><a href="#INCOMPATIBLE_TYPES_IN_STR_INTERPOLATION">INCOMPATIBLE_TYPES_IN_STR_INTERPOLATION</a></code></td>
+    <td>Constant</td>
+    <td><code><a href="#INCOMPATIBLE_TYPES_IN_STR_INTERPOLATION" class="internal-link" title="mypy.message_registry.INCOMPATIBLE_TYPES_IN_STR_INTERPOLATION">INCOMPATIBLE​_TYPES​_IN​_STR​_INTERPOLATION</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
-  </tr><tr class="variable">
+  </tr><tr class="constant">
     
-    <td>Variable</td>
-    <td><code><a href="#INCOMPATIBLE_TYPES_IN_YIELD">INCOMPATIBLE_TYPES_IN_YIELD</a></code></td>
+    <td>Constant</td>
+    <td><code><a href="#INCOMPATIBLE_TYPES_IN_YIELD" class="internal-link" title="mypy.message_registry.INCOMPATIBLE_TYPES_IN_YIELD">INCOMPATIBLE​_TYPES​_IN​_YIELD</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
-  </tr><tr class="variable">
+  </tr><tr class="constant">
     
-    <td>Variable</td>
-    <td><code><a href="#INCOMPATIBLE_TYPES_IN_YIELD_FROM">INCOMPATIBLE_TYPES_IN_YIELD_FROM</a></code></td>
+    <td>Constant</td>
+    <td><code><a href="#INCOMPATIBLE_TYPES_IN_YIELD_FROM" class="internal-link" title="mypy.message_registry.INCOMPATIBLE_TYPES_IN_YIELD_FROM">INCOMPATIBLE​_TYPES​_IN​_YIELD​_FROM</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
-  </tr><tr class="variable">
+  </tr><tr class="constant">
     
-    <td>Variable</td>
-    <td><code><a href="#INCOMPATIBLE_TYPEVAR_VALUE">INCOMPATIBLE_TYPEVAR_VALUE</a></code></td>
+    <td>Constant</td>
+    <td><code><a href="#INCOMPATIBLE_TYPEVAR_VALUE" class="internal-link" title="mypy.message_registry.INCOMPATIBLE_TYPEVAR_VALUE">INCOMPATIBLE​_TYPEVAR​_VALUE</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
-  </tr><tr class="variable">
+  </tr><tr class="constant">
     
-    <td>Variable</td>
-    <td><code><a href="#INCONSISTENT_ABSTRACT_OVERLOAD">INCONSISTENT_ABSTRACT_OVERLOAD</a></code></td>
+    <td>Constant</td>
+    <td><code><a href="#INCONSISTENT_ABSTRACT_OVERLOAD" class="internal-link" title="mypy.message_registry.INCONSISTENT_ABSTRACT_OVERLOAD">INCONSISTENT​_ABSTRACT​_OVERLOAD</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
-  </tr><tr class="variable">
+  </tr><tr class="constant">
     
-    <td>Variable</td>
-    <td><code><a href="#INVALID_EXCEPTION">INVALID_EXCEPTION</a></code></td>
+    <td>Constant</td>
+    <td><code><a href="#INVALID_EXCEPTION" class="internal-link" title="mypy.message_registry.INVALID_EXCEPTION">INVALID​_EXCEPTION</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
-  </tr><tr class="variable">
+  </tr><tr class="constant">
     
-    <td>Variable</td>
-    <td><code><a href="#INVALID_EXCEPTION_TYPE">INVALID_EXCEPTION_TYPE</a></code></td>
+    <td>Constant</td>
+    <td><code><a href="#INVALID_EXCEPTION_TYPE" class="internal-link" title="mypy.message_registry.INVALID_EXCEPTION_TYPE">INVALID​_EXCEPTION​_TYPE</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
-  </tr><tr class="variable">
+  </tr><tr class="constant">
     
-    <td>Variable</td>
-    <td><code><a href="#INVALID_GENERATOR_RETURN_ITEM_TYPE">INVALID_GENERATOR_RETURN_ITEM_TYPE</a></code></td>
+    <td>Constant</td>
+    <td><code><a href="#INVALID_GENERATOR_RETURN_ITEM_TYPE" class="internal-link" title="mypy.message_registry.INVALID_GENERATOR_RETURN_ITEM_TYPE">INVALID​_GENERATOR​_RETURN​_ITEM​_TYPE</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
-  </tr><tr class="variable">
+  </tr><tr class="constant">
     
-    <td>Variable</td>
-    <td><code><a href="#INVALID_IMPLICIT_RETURN">INVALID_IMPLICIT_RETURN</a></code></td>
+    <td>Constant</td>
+    <td><code><a href="#INVALID_IMPLICIT_RETURN" class="internal-link" title="mypy.message_registry.INVALID_IMPLICIT_RETURN">INVALID​_IMPLICIT​_RETURN</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
-  </tr><tr class="variable">
+  </tr><tr class="constant">
     
-    <td>Variable</td>
-    <td><code><a href="#INVALID_NEW_TYPE">INVALID_NEW_TYPE</a></code></td>
+    <td>Constant</td>
+    <td><code><a href="#INVALID_NEW_TYPE" class="internal-link" title="mypy.message_registry.INVALID_NEW_TYPE">INVALID​_NEW​_TYPE</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
-  </tr><tr class="variable">
+  </tr><tr class="constant">
     
-    <td>Variable</td>
-    <td><code><a href="#INVALID_RETURN_TYPE_FOR_ASYNC_GENERATOR">INVALID_RETURN_TYPE_FOR_ASYNC_GENERATOR</a></code></td>
+    <td>Constant</td>
+    <td><code><a href="#INVALID_RETURN_TYPE_FOR_ASYNC_GENERATOR" class="internal-link" title="mypy.message_registry.INVALID_RETURN_TYPE_FOR_ASYNC_GENERATOR">INVALID​_RETURN​_TYPE​_FOR​_ASYNC​_GENERATOR</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
-  </tr><tr class="variable">
+  </tr><tr class="constant">
     
-    <td>Variable</td>
-    <td><code><a href="#INVALID_RETURN_TYPE_FOR_GENERATOR">INVALID_RETURN_TYPE_FOR_GENERATOR</a></code></td>
+    <td>Constant</td>
+    <td><code><a href="#INVALID_RETURN_TYPE_FOR_GENERATOR" class="internal-link" title="mypy.message_registry.INVALID_RETURN_TYPE_FOR_GENERATOR">INVALID​_RETURN​_TYPE​_FOR​_GENERATOR</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
-  </tr><tr class="variable">
+  </tr><tr class="constant">
     
-    <td>Variable</td>
-    <td><code><a href="#INVALID_SELF_TYPE_OR_EXTRA_ARG">INVALID_SELF_TYPE_OR_EXTRA_ARG</a></code></td>
+    <td>Constant</td>
+    <td><code><a href="#INVALID_SELF_TYPE_OR_EXTRA_ARG" class="internal-link" title="mypy.message_registry.INVALID_SELF_TYPE_OR_EXTRA_ARG">INVALID​_SELF​_TYPE​_OR​_EXTRA​_ARG</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
-  </tr><tr class="variable">
+  </tr><tr class="constant">
     
-    <td>Variable</td>
-    <td><code><a href="#INVALID_SLICE_INDEX">INVALID_SLICE_INDEX</a></code></td>
+    <td>Constant</td>
+    <td><code><a href="#INVALID_SLICE_INDEX" class="internal-link" title="mypy.message_registry.INVALID_SLICE_INDEX">INVALID​_SLICE​_INDEX</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
-  </tr><tr class="variable">
+  </tr><tr class="constant">
     
-    <td>Variable</td>
-    <td><code><a href="#INVALID_TUPLE_INDEX_TYPE">INVALID_TUPLE_INDEX_TYPE</a></code></td>
+    <td>Constant</td>
+    <td><code><a href="#INVALID_TUPLE_INDEX_TYPE" class="internal-link" title="mypy.message_registry.INVALID_TUPLE_INDEX_TYPE">INVALID​_TUPLE​_INDEX​_TYPE</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
-  </tr><tr class="variable">
+  </tr><tr class="constant">
     
-    <td>Variable</td>
-    <td><code><a href="#INVALID_TYPE_RAW_ENUM_VALUE">INVALID_TYPE_RAW_ENUM_VALUE</a></code></td>
+    <td>Constant</td>
+    <td><code><a href="#INVALID_TYPE_RAW_ENUM_VALUE" class="internal-link" title="mypy.message_registry.INVALID_TYPE_RAW_ENUM_VALUE">INVALID​_TYPE​_RAW​_ENUM​_VALUE</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
-  </tr><tr class="variable">
+  </tr><tr class="constant">
     
-    <td>Variable</td>
-    <td><code><a href="#INVALID_TYPEDDICT_ARGS">INVALID_TYPEDDICT_ARGS</a></code></td>
+    <td>Constant</td>
+    <td><code><a href="#INVALID_TYPEDDICT_ARGS" class="internal-link" title="mypy.message_registry.INVALID_TYPEDDICT_ARGS">INVALID​_TYPEDDICT​_ARGS</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
-  </tr><tr class="variable">
+  </tr><tr class="constant">
     
-    <td>Variable</td>
-    <td><code><a href="#INVALID_TYPEVAR_ARG_BOUND">INVALID_TYPEVAR_ARG_BOUND</a></code></td>
+    <td>Constant</td>
+    <td><code><a href="#INVALID_TYPEVAR_ARG_BOUND" class="internal-link" title="mypy.message_registry.INVALID_TYPEVAR_ARG_BOUND">INVALID​_TYPEVAR​_ARG​_BOUND</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
-  </tr><tr class="variable">
+  </tr><tr class="constant">
     
-    <td>Variable</td>
-    <td><code><a href="#INVALID_TYPEVAR_ARG_VALUE">INVALID_TYPEVAR_ARG_VALUE</a></code></td>
+    <td>Constant</td>
+    <td><code><a href="#INVALID_TYPEVAR_ARG_VALUE" class="internal-link" title="mypy.message_registry.INVALID_TYPEVAR_ARG_VALUE">INVALID​_TYPEVAR​_ARG​_VALUE</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
-  </tr><tr class="variable">
+  </tr><tr class="constant">
     
-    <td>Variable</td>
-    <td><code><a href="#INVALID_TYPEVAR_AS_TYPEARG">INVALID_TYPEVAR_AS_TYPEARG</a></code></td>
+    <td>Constant</td>
+    <td><code><a href="#INVALID_TYPEVAR_AS_TYPEARG" class="internal-link" title="mypy.message_registry.INVALID_TYPEVAR_AS_TYPEARG">INVALID​_TYPEVAR​_AS​_TYPEARG</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
-  </tr><tr class="variable">
+  </tr><tr class="constant">
     
-    <td>Variable</td>
-    <td><code><a href="#ITERABLE_TYPE_EXPECTED">ITERABLE_TYPE_EXPECTED</a></code></td>
+    <td>Constant</td>
+    <td><code><a href="#ITERABLE_TYPE_EXPECTED" class="internal-link" title="mypy.message_registry.ITERABLE_TYPE_EXPECTED">ITERABLE​_TYPE​_EXPECTED</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
-  </tr><tr class="variable">
+  </tr><tr class="constant">
     
-    <td>Variable</td>
-    <td><code><a href="#KEYWORD_ARGUMENT_REQUIRES_STR_KEY_TYPE">KEYWORD_ARGUMENT_REQUIRES_STR_KEY_TYPE</a></code></td>
+    <td>Constant</td>
+    <td><code><a href="#KEYWORD_ARGUMENT_REQUIRES_STR_KEY_TYPE" class="internal-link" title="mypy.message_registry.KEYWORD_ARGUMENT_REQUIRES_STR_KEY_TYPE">KEYWORD​_ARGUMENT​_REQUIRES​_STR​_KEY​_TYPE</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
-  </tr><tr class="variable">
+  </tr><tr class="constant">
     
-    <td>Variable</td>
-    <td><code><a href="#MALFORMED_ASSERT">MALFORMED_ASSERT</a></code></td>
+    <td>Constant</td>
+    <td><code><a href="#MALFORMED_ASSERT" class="internal-link" title="mypy.message_registry.MALFORMED_ASSERT">MALFORMED​_ASSERT</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
-  </tr><tr class="variable">
+  </tr><tr class="constant">
     
-    <td>Variable</td>
-    <td><code><a href="#MISSING_OR_INVALID_SELF_TYPE">MISSING_OR_INVALID_SELF_TYPE</a></code></td>
+    <td>Constant</td>
+    <td><code><a href="#MISSING_OR_INVALID_SELF_TYPE" class="internal-link" title="mypy.message_registry.MISSING_OR_INVALID_SELF_TYPE">MISSING​_OR​_INVALID​_SELF​_TYPE</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
-  </tr><tr class="variable">
+  </tr><tr class="constant">
     
-    <td>Variable</td>
-    <td><code><a href="#MISSING_RETURN_STATEMENT">MISSING_RETURN_STATEMENT</a></code></td>
+    <td>Constant</td>
+    <td><code><a href="#MISSING_RETURN_STATEMENT" class="internal-link" title="mypy.message_registry.MISSING_RETURN_STATEMENT">MISSING​_RETURN​_STATEMENT</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
-  </tr><tr class="variable">
+  </tr><tr class="constant">
     
-    <td>Variable</td>
-    <td><code><a href="#MODULE_LEVEL_GETATTRIBUTE">MODULE_LEVEL_GETATTRIBUTE</a></code></td>
+    <td>Constant</td>
+    <td><code><a href="#MODULE_LEVEL_GETATTRIBUTE" class="internal-link" title="mypy.message_registry.MODULE_LEVEL_GETATTRIBUTE">MODULE​_LEVEL​_GETATTRIBUTE</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
-  </tr><tr class="variable">
+  </tr><tr class="constant">
     
-    <td>Variable</td>
-    <td><code><a href="#MULTIPLE_OVERLOADS_REQUIRED">MULTIPLE_OVERLOADS_REQUIRED</a></code></td>
+    <td>Constant</td>
+    <td><code><a href="#MULTIPLE_OVERLOADS_REQUIRED" class="internal-link" title="mypy.message_registry.MULTIPLE_OVERLOADS_REQUIRED">MULTIPLE​_OVERLOADS​_REQUIRED</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
-  </tr><tr class="variable">
+  </tr><tr class="constant">
     
-    <td>Variable</td>
-    <td><code><a href="#MUST_HAVE_NONE_RETURN_TYPE">MUST_HAVE_NONE_RETURN_TYPE</a></code></td>
+    <td>Constant</td>
+    <td><code><a href="#MUST_HAVE_NONE_RETURN_TYPE" class="internal-link" title="mypy.message_registry.MUST_HAVE_NONE_RETURN_TYPE">MUST​_HAVE​_NONE​_RETURN​_TYPE</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
-  </tr><tr class="variable">
+  </tr><tr class="constant">
     
-    <td>Variable</td>
-    <td><code><a href="#NAME_NOT_IN_SLOTS">NAME_NOT_IN_SLOTS</a></code></td>
+    <td>Constant</td>
+    <td><code><a href="#NAME_NOT_IN_SLOTS" class="internal-link" title="mypy.message_registry.NAME_NOT_IN_SLOTS">NAME​_NOT​_IN​_SLOTS</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
-  </tr><tr class="variable">
+  </tr><tr class="constant">
     
-    <td>Variable</td>
-    <td><code><a href="#NO_RETURN_EXPECTED">NO_RETURN_EXPECTED</a></code></td>
+    <td>Constant</td>
+    <td><code><a href="#NO_RETURN_EXPECTED" class="internal-link" title="mypy.message_registry.NO_RETURN_EXPECTED">NO​_RETURN​_EXPECTED</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
-  </tr><tr class="variable">
+  </tr><tr class="constant">
     
-    <td>Variable</td>
-    <td><code><a href="#NO_RETURN_VALUE_EXPECTED">NO_RETURN_VALUE_EXPECTED</a></code></td>
+    <td>Constant</td>
+    <td><code><a href="#NO_RETURN_VALUE_EXPECTED" class="internal-link" title="mypy.message_registry.NO_RETURN_VALUE_EXPECTED">NO​_RETURN​_VALUE​_EXPECTED</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
-  </tr><tr class="variable">
+  </tr><tr class="constant">
     
-    <td>Variable</td>
-    <td><code><a href="#NON_INSTANCE_NEW_TYPE">NON_INSTANCE_NEW_TYPE</a></code></td>
+    <td>Constant</td>
+    <td><code><a href="#NON_INSTANCE_NEW_TYPE" class="internal-link" title="mypy.message_registry.NON_INSTANCE_NEW_TYPE">NON​_INSTANCE​_NEW​_TYPE</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
-  </tr><tr class="variable">
+  </tr><tr class="constant">
     
-    <td>Variable</td>
-    <td><code><a href="#NOT_CALLABLE">NOT_CALLABLE</a></code></td>
+    <td>Constant</td>
+    <td><code><a href="#NOT_CALLABLE" class="internal-link" title="mypy.message_registry.NOT_CALLABLE">NOT​_CALLABLE</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
-  </tr><tr class="variable">
+  </tr><tr class="constant">
     
-    <td>Variable</td>
-    <td><code><a href="#ONLY_CLASS_APPLICATION">ONLY_CLASS_APPLICATION</a></code></td>
+    <td>Constant</td>
+    <td><code><a href="#ONLY_CLASS_APPLICATION" class="internal-link" title="mypy.message_registry.ONLY_CLASS_APPLICATION">ONLY​_CLASS​_APPLICATION</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
-  </tr><tr class="variable">
+  </tr><tr class="constant">
     
-    <td>Variable</td>
-    <td><code><a href="#PYTHON2_PRINT_FILE_TYPE">PYTHON2_PRINT_FILE_TYPE</a></code></td>
+    <td>Constant</td>
+    <td><code><a href="#PYTHON2_PRINT_FILE_TYPE" class="internal-link" title="mypy.message_registry.PYTHON2_PRINT_FILE_TYPE">PYTHON2​_PRINT​_FILE​_TYPE</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
-  </tr><tr class="variable">
+  </tr><tr class="constant">
     
-    <td>Variable</td>
-    <td><code><a href="#READ_ONLY_PROPERTY_OVERRIDES_READ_WRITE">READ_ONLY_PROPERTY_OVERRIDES_READ_WRITE</a></code></td>
+    <td>Constant</td>
+    <td><code><a href="#READ_ONLY_PROPERTY_OVERRIDES_READ_WRITE" class="internal-link" title="mypy.message_registry.READ_ONLY_PROPERTY_OVERRIDES_READ_WRITE">READ​_ONLY​_PROPERTY​_OVERRIDES​_READ​_WRITE</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
-  </tr><tr class="variable">
+  </tr><tr class="constant">
     
-    <td>Variable</td>
-    <td><code><a href="#RETURN_IN_ASYNC_GENERATOR">RETURN_IN_ASYNC_GENERATOR</a></code></td>
+    <td>Constant</td>
+    <td><code><a href="#RETURN_IN_ASYNC_GENERATOR" class="internal-link" title="mypy.message_registry.RETURN_IN_ASYNC_GENERATOR">RETURN​_IN​_ASYNC​_GENERATOR</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
-  </tr><tr class="variable">
+  </tr><tr class="constant">
     
-    <td>Variable</td>
-    <td><code><a href="#RETURN_TYPE_CANNOT_BE_CONTRAVARIANT">RETURN_TYPE_CANNOT_BE_CONTRAVARIANT</a></code></td>
+    <td>Constant</td>
+    <td><code><a href="#RETURN_TYPE_CANNOT_BE_CONTRAVARIANT" class="internal-link" title="mypy.message_registry.RETURN_TYPE_CANNOT_BE_CONTRAVARIANT">RETURN​_TYPE​_CANNOT​_BE​_CONTRAVARIANT</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
-  </tr><tr class="variable">
+  </tr><tr class="constant">
     
-    <td>Variable</td>
-    <td><code><a href="#RETURN_TYPE_EXPECTED">RETURN_TYPE_EXPECTED</a></code></td>
+    <td>Constant</td>
+    <td><code><a href="#RETURN_TYPE_EXPECTED" class="internal-link" title="mypy.message_registry.RETURN_TYPE_EXPECTED">RETURN​_TYPE​_EXPECTED</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
-  </tr><tr class="variable">
+  </tr><tr class="constant">
     
-    <td>Variable</td>
-    <td><code><a href="#RETURN_VALUE_EXPECTED">RETURN_VALUE_EXPECTED</a></code></td>
+    <td>Constant</td>
+    <td><code><a href="#RETURN_VALUE_EXPECTED" class="internal-link" title="mypy.message_registry.RETURN_VALUE_EXPECTED">RETURN​_VALUE​_EXPECTED</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
-  </tr><tr class="variable">
+  </tr><tr class="constant">
     
-    <td>Variable</td>
-    <td><code><a href="#RUNTIME_PROTOCOL_EXPECTED">RUNTIME_PROTOCOL_EXPECTED</a></code></td>
+    <td>Constant</td>
+    <td><code><a href="#RUNTIME_PROTOCOL_EXPECTED" class="internal-link" title="mypy.message_registry.RUNTIME_PROTOCOL_EXPECTED">RUNTIME​_PROTOCOL​_EXPECTED</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
-  </tr><tr class="variable">
+  </tr><tr class="constant">
     
-    <td>Variable</td>
-    <td><code><a href="#SUPER_ARG_2_NOT_INSTANCE_OF_ARG_1">SUPER_ARG_2_NOT_INSTANCE_OF_ARG_1</a></code></td>
+    <td>Constant</td>
+    <td><code><a href="#SUPER_ARG_2_NOT_INSTANCE_OF_ARG_1" class="internal-link" title="mypy.message_registry.SUPER_ARG_2_NOT_INSTANCE_OF_ARG_1">SUPER​_ARG​_2​_NOT​_INSTANCE​_OF​_ARG​_1</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
-  </tr><tr class="variable">
+  </tr><tr class="constant">
     
-    <td>Variable</td>
-    <td><code><a href="#SUPER_ENCLOSING_POSITIONAL_ARGS_REQUIRED">SUPER_ENCLOSING_POSITIONAL_ARGS_REQUIRED</a></code></td>
+    <td>Constant</td>
+    <td><code><a href="#SUPER_ENCLOSING_POSITIONAL_ARGS_REQUIRED" class="internal-link" title="mypy.message_registry.SUPER_ENCLOSING_POSITIONAL_ARGS_REQUIRED">SUPER​_ENCLOSING​_POSITIONAL​_ARGS​_REQUIRED</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
-  </tr><tr class="variable">
+  </tr><tr class="constant">
     
-    <td>Variable</td>
-    <td><code><a href="#SUPER_OUTSIDE_OF_METHOD_NOT_SUPPORTED">SUPER_OUTSIDE_OF_METHOD_NOT_SUPPORTED</a></code></td>
+    <td>Constant</td>
+    <td><code><a href="#SUPER_OUTSIDE_OF_METHOD_NOT_SUPPORTED" class="internal-link" title="mypy.message_registry.SUPER_OUTSIDE_OF_METHOD_NOT_SUPPORTED">SUPER​_OUTSIDE​_OF​_METHOD​_NOT​_SUPPORTED</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
-  </tr><tr class="variable">
+  </tr><tr class="constant">
     
-    <td>Variable</td>
-    <td><code><a href="#SUPER_POSITIONAL_ARGS_REQUIRED">SUPER_POSITIONAL_ARGS_REQUIRED</a></code></td>
+    <td>Constant</td>
+    <td><code><a href="#SUPER_POSITIONAL_ARGS_REQUIRED" class="internal-link" title="mypy.message_registry.SUPER_POSITIONAL_ARGS_REQUIRED">SUPER​_POSITIONAL​_ARGS​_REQUIRED</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
-  </tr><tr class="variable">
+  </tr><tr class="constant">
     
-    <td>Variable</td>
-    <td><code><a href="#SUPER_VARARGS_NOT_SUPPORTED">SUPER_VARARGS_NOT_SUPPORTED</a></code></td>
+    <td>Constant</td>
+    <td><code><a href="#SUPER_VARARGS_NOT_SUPPORTED" class="internal-link" title="mypy.message_registry.SUPER_VARARGS_NOT_SUPPORTED">SUPER​_VARARGS​_NOT​_SUPPORTED</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
-  </tr><tr class="variable">
+  </tr><tr class="constant">
     
-    <td>Variable</td>
-    <td><code><a href="#SUPER_WITH_SINGLE_ARG_NOT_SUPPORTED">SUPER_WITH_SINGLE_ARG_NOT_SUPPORTED</a></code></td>
+    <td>Constant</td>
+    <td><code><a href="#SUPER_WITH_SINGLE_ARG_NOT_SUPPORTED" class="internal-link" title="mypy.message_registry.SUPER_WITH_SINGLE_ARG_NOT_SUPPORTED">SUPER​_WITH​_SINGLE​_ARG​_NOT​_SUPPORTED</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
-  </tr><tr class="variable">
+  </tr><tr class="constant">
     
-    <td>Variable</td>
-    <td><code><a href="#TARGET_CLASS_HAS_NO_BASE_CLASS">TARGET_CLASS_HAS_NO_BASE_CLASS</a></code></td>
+    <td>Constant</td>
+    <td><code><a href="#TARGET_CLASS_HAS_NO_BASE_CLASS" class="internal-link" title="mypy.message_registry.TARGET_CLASS_HAS_NO_BASE_CLASS">TARGET​_CLASS​_HAS​_NO​_BASE​_CLASS</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
-  </tr><tr class="variable">
+  </tr><tr class="constant">
     
-    <td>Variable</td>
-    <td><code><a href="#TOO_FEW_ARGS_FOR_SUPER">TOO_FEW_ARGS_FOR_SUPER</a></code></td>
+    <td>Constant</td>
+    <td><code><a href="#TOO_FEW_ARGS_FOR_SUPER" class="internal-link" title="mypy.message_registry.TOO_FEW_ARGS_FOR_SUPER">TOO​_FEW​_ARGS​_FOR​_SUPER</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
-  </tr><tr class="variable">
+  </tr><tr class="constant">
     
-    <td>Variable</td>
-    <td><code><a href="#TOO_MANY_ARGS_FOR_SUPER">TOO_MANY_ARGS_FOR_SUPER</a></code></td>
+    <td>Constant</td>
+    <td><code><a href="#TOO_MANY_ARGS_FOR_SUPER" class="internal-link" title="mypy.message_registry.TOO_MANY_ARGS_FOR_SUPER">TOO​_MANY​_ARGS​_FOR​_SUPER</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
-  </tr><tr class="variable">
+  </tr><tr class="constant">
     
-    <td>Variable</td>
-    <td><code><a href="#TOO_MANY_UNION_COMBINATIONS">TOO_MANY_UNION_COMBINATIONS</a></code></td>
+    <td>Constant</td>
+    <td><code><a href="#TOO_MANY_UNION_COMBINATIONS" class="internal-link" title="mypy.message_registry.TOO_MANY_UNION_COMBINATIONS">TOO​_MANY​_UNION​_COMBINATIONS</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
-  </tr><tr class="variable">
+  </tr><tr class="constant">
     
-    <td>Variable</td>
-    <td><code><a href="#TUPLE_INDEX_OUT_OF_RANGE">TUPLE_INDEX_OUT_OF_RANGE</a></code></td>
+    <td>Constant</td>
+    <td><code><a href="#TUPLE_INDEX_OUT_OF_RANGE" class="internal-link" title="mypy.message_registry.TUPLE_INDEX_OUT_OF_RANGE">TUPLE​_INDEX​_OUT​_OF​_RANGE</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
-  </tr><tr class="variable">
+  </tr><tr class="constant">
     
-    <td>Variable</td>
-    <td><code><a href="#TYPE_ALWAYS_TRUE">TYPE_ALWAYS_TRUE</a></code></td>
+    <td>Constant</td>
+    <td><code><a href="#TYPE_ALWAYS_TRUE" class="internal-link" title="mypy.message_registry.TYPE_ALWAYS_TRUE">TYPE​_ALWAYS​_TRUE</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
-  </tr><tr class="variable">
+  </tr><tr class="constant">
     
-    <td>Variable</td>
-    <td><code><a href="#TYPE_ALWAYS_TRUE_UNIONTYPE">TYPE_ALWAYS_TRUE_UNIONTYPE</a></code></td>
+    <td>Constant</td>
+    <td><code><a href="#TYPE_ALWAYS_TRUE_UNIONTYPE" class="internal-link" title="mypy.message_registry.TYPE_ALWAYS_TRUE_UNIONTYPE">TYPE​_ALWAYS​_TRUE​_UNIONTYPE</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
-  </tr><tr class="variable">
+  </tr><tr class="constant">
     
-    <td>Variable</td>
-    <td><code><a href="#TYPE_GUARD_POS_ARG_REQUIRED">TYPE_GUARD_POS_ARG_REQUIRED</a></code></td>
+    <td>Constant</td>
+    <td><code><a href="#TYPE_GUARD_POS_ARG_REQUIRED" class="internal-link" title="mypy.message_registry.TYPE_GUARD_POS_ARG_REQUIRED">TYPE​_GUARD​_POS​_ARG​_REQUIRED</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
-  </tr><tr class="variable">
+  </tr><tr class="constant">
     
-    <td>Variable</td>
-    <td><code><a href="#TYPEDDICT_KEY_MUST_BE_STRING_LITERAL">TYPEDDICT_KEY_MUST_BE_STRING_LITERAL</a></code></td>
+    <td>Constant</td>
+    <td><code><a href="#TYPEDDICT_KEY_MUST_BE_STRING_LITERAL" class="internal-link" title="mypy.message_registry.TYPEDDICT_KEY_MUST_BE_STRING_LITERAL">TYPEDDICT​_KEY​_MUST​_BE​_STRING​_LITERAL</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
-  </tr><tr class="variable">
+  </tr><tr class="constant">
     
-    <td>Variable</td>
-    <td><code><a href="#TYPEVAR_BOUND_MUST_BE_TYPE">TYPEVAR_BOUND_MUST_BE_TYPE</a></code></td>
+    <td>Constant</td>
+    <td><code><a href="#TYPEVAR_BOUND_MUST_BE_TYPE" class="internal-link" title="mypy.message_registry.TYPEVAR_BOUND_MUST_BE_TYPE">TYPEVAR​_BOUND​_MUST​_BE​_TYPE</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
-  </tr><tr class="variable">
+  </tr><tr class="constant">
     
-    <td>Variable</td>
-    <td><code><a href="#TYPEVAR_UNEXPECTED_ARGUMENT">TYPEVAR_UNEXPECTED_ARGUMENT</a></code></td>
+    <td>Constant</td>
+    <td><code><a href="#TYPEVAR_UNEXPECTED_ARGUMENT" class="internal-link" title="mypy.message_registry.TYPEVAR_UNEXPECTED_ARGUMENT">TYPEVAR​_UNEXPECTED​_ARGUMENT</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
-  </tr><tr class="variable">
+  </tr><tr class="constant">
     
-    <td>Variable</td>
-    <td><code><a href="#TYPEVAR_VARIANCE_DEF">TYPEVAR_VARIANCE_DEF</a></code></td>
+    <td>Constant</td>
+    <td><code><a href="#TYPEVAR_VARIANCE_DEF" class="internal-link" title="mypy.message_registry.TYPEVAR_VARIANCE_DEF">TYPEVAR​_VARIANCE​_DEF</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
-  </tr><tr class="variable">
+  </tr><tr class="constant">
     
-    <td>Variable</td>
-    <td><code><a href="#UNSUPPORTED_ARG_1_FOR_SUPER">UNSUPPORTED_ARG_1_FOR_SUPER</a></code></td>
+    <td>Constant</td>
+    <td><code><a href="#UNSUPPORTED_ARG_1_FOR_SUPER" class="internal-link" title="mypy.message_registry.UNSUPPORTED_ARG_1_FOR_SUPER">UNSUPPORTED​_ARG​_1​_FOR​_SUPER</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
-  </tr><tr class="variable">
+  </tr><tr class="constant">
     
-    <td>Variable</td>
-    <td><code><a href="#UNSUPPORTED_ARG_2_FOR_SUPER">UNSUPPORTED_ARG_2_FOR_SUPER</a></code></td>
+    <td>Constant</td>
+    <td><code><a href="#UNSUPPORTED_ARG_2_FOR_SUPER" class="internal-link" title="mypy.message_registry.UNSUPPORTED_ARG_2_FOR_SUPER">UNSUPPORTED​_ARG​_2​_FOR​_SUPER</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
-  </tr><tr class="variable">
+  </tr><tr class="constant">
     
-    <td>Variable</td>
-    <td><code><a href="#YIELD_VALUE_EXPECTED">YIELD_VALUE_EXPECTED</a></code></td>
+    <td>Constant</td>
+    <td><code><a href="#YIELD_VALUE_EXPECTED" class="internal-link" title="mypy.message_registry.YIELD_VALUE_EXPECTED">YIELD​_VALUE​_EXPECTED</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr>
 </table>
@@ -662,7 +675,7 @@ add a method to MessageBuilder and call this instead.</p>
 
       <div id="childList">
 
-        <div class="basevariable">
+        <div class="baseconstant">
   
   
   <a name="mypy.message_registry.ALL_MUST_BE_SEQ_STR">
@@ -673,7 +686,7 @@ add a method to MessageBuilder and call this instead.</p>
   </a>
   <div class="functionHeader">
     
-    <span class="py-defname">ALL_MUST_BE_SEQ_STR</span>: <code>Final</code> =
+    <span class="py-defname">ALL_MUST_BE_SEQ_STR</span> =
     <a class="sourceLink" href="https://github.com/python/mypy/tree/v0.930/mypy/message_registry.py#L108">
       
       (source)
@@ -683,8 +696,9 @@ add a method to MessageBuilder and call this instead.</p>
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    <table class="valueTable"><tr class="fieldStart"><td class="fieldName">Value</td></tr><tr><td><pre class="constant-value"><code><a href="mypy.message_registry.ErrorMessage.html" class="internal-link" title="mypy.message_registry.ErrorMessage">ErrorMessage</a>(<wbr></wbr><span class="rst-variable-quote">'</span><span class="rst-variable-string">Type of __all__ must be {}, not {}</span><span class="rst-variable-quote">'</span>)</code></pre></td></tr></table>
   </div>
-</div><div class="basevariable">
+</div><div class="baseconstant">
   
   
   <a name="mypy.message_registry.ARGUMENT_TYPE_EXPECTED">
@@ -695,7 +709,7 @@ add a method to MessageBuilder and call this instead.</p>
   </a>
   <div class="functionHeader">
     
-    <span class="py-defname">ARGUMENT_TYPE_EXPECTED</span>: <code>Final</code> =
+    <span class="py-defname">ARGUMENT_TYPE_EXPECTED</span> =
     <a class="sourceLink" href="https://github.com/python/mypy/tree/v0.930/mypy/message_registry.py#L102">
       
       (source)
@@ -705,8 +719,10 @@ add a method to MessageBuilder and call this instead.</p>
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    <table class="valueTable"><tr class="fieldStart"><td class="fieldName">Value</td></tr><tr><td><pre class="constant-value"><code><a href="mypy.message_registry.ErrorMessage.html" class="internal-link" title="mypy.message_registry.ErrorMessage">ErrorMessage</a>(<wbr></wbr><span class="rst-variable-quote">'</span><span class="rst-variable-string">Function is missing a type annotation for one or more arguments</span><span class="rst-variable-quote">'</span>, <wbr></wbr><a href="mypy.errorcodes.html#NO_UNTYPED_DEF" class="internal-link" title="mypy.errorcodes.NO_UNTYPED_DEF">codes.NO_UNTYPED_DEF</a><span class="rst-variable-linewrap">↵</span>
+)</code></pre></td></tr></table>
   </div>
-</div><div class="basevariable">
+</div><div class="baseconstant">
   
   
   <a name="mypy.message_registry.BAD_CONSTRUCTOR_TYPE">
@@ -717,7 +733,7 @@ add a method to MessageBuilder and call this instead.</p>
   </a>
   <div class="functionHeader">
     
-    <span class="py-defname">BAD_CONSTRUCTOR_TYPE</span>: <code>Final</code> =
+    <span class="py-defname">BAD_CONSTRUCTOR_TYPE</span> =
     <a class="sourceLink" href="https://github.com/python/mypy/tree/v0.930/mypy/message_registry.py#L75">
       
       (source)
@@ -727,8 +743,9 @@ add a method to MessageBuilder and call this instead.</p>
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    <table class="valueTable"><tr class="fieldStart"><td class="fieldName">Value</td></tr><tr><td><pre class="constant-value"><code><a href="mypy.message_registry.ErrorMessage.html" class="internal-link" title="mypy.message_registry.ErrorMessage">ErrorMessage</a>(<wbr></wbr><span class="rst-variable-quote">'</span><span class="rst-variable-string">Unsupported decorated constructor type</span><span class="rst-variable-quote">'</span>)</code></pre></td></tr></table>
   </div>
-</div><div class="basevariable">
+</div><div class="baseconstant">
   
   
   <a name="mypy.message_registry.BARE_GENERIC">
@@ -739,7 +756,7 @@ add a method to MessageBuilder and call this instead.</p>
   </a>
   <div class="functionHeader">
     
-    <span class="py-defname">BARE_GENERIC</span>: <code>Final</code> =
+    <span class="py-defname">BARE_GENERIC</span>: <code>str</code> =
     <a class="sourceLink" href="https://github.com/python/mypy/tree/v0.930/mypy/message_registry.py#L149">
       
       (source)
@@ -749,8 +766,9 @@ add a method to MessageBuilder and call this instead.</p>
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    <table class="valueTable"><tr class="fieldStart"><td class="fieldName">Value</td></tr><tr><td><pre class="constant-value"><code><span class="rst-variable-quote">'</span><span class="rst-variable-string">Missing type parameters for generic type {}</span><span class="rst-variable-quote">'</span></code></pre></td></tr></table>
   </div>
-</div><div class="basevariable">
+</div><div class="baseconstant">
   
   
   <a name="mypy.message_registry.CANNOT_ACCESS_FINAL_INSTANCE_ATTR">
@@ -761,7 +779,7 @@ add a method to MessageBuilder and call this instead.</p>
   </a>
   <div class="functionHeader">
     
-    <span class="py-defname">CANNOT_ACCESS_FINAL_INSTANCE_ATTR</span>: <code>Final</code> =
+    <span class="py-defname">CANNOT_ACCESS_FINAL_INSTANCE_ATTR</span>: <code>str</code> =
     <a class="sourceLink" href="https://github.com/python/mypy/tree/v0.930/mypy/message_registry.py#L201">
       
       (source)
@@ -771,8 +789,9 @@ add a method to MessageBuilder and call this instead.</p>
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    <table class="valueTable"><tr class="fieldStart"><td class="fieldName">Value</td></tr><tr><td><pre class="constant-value"><code><span class="rst-variable-quote">'</span><span class="rst-variable-string">Cannot access final instance attribute "{}" on class object</span><span class="rst-variable-quote">'</span></code></pre></td></tr></table>
   </div>
-</div><div class="basevariable">
+</div><div class="baseconstant">
   
   
   <a name="mypy.message_registry.CANNOT_ACCESS_INIT">
@@ -783,7 +802,7 @@ add a method to MessageBuilder and call this instead.</p>
   </a>
   <div class="functionHeader">
     
-    <span class="py-defname">CANNOT_ACCESS_INIT</span>: <code>Final</code> =
+    <span class="py-defname">CANNOT_ACCESS_INIT</span>: <code>str</code> =
     <a class="sourceLink" href="https://github.com/python/mypy/tree/v0.930/mypy/message_registry.py#L72">
       
       (source)
@@ -793,8 +812,9 @@ add a method to MessageBuilder and call this instead.</p>
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    <table class="valueTable"><tr class="fieldStart"><td class="fieldName">Value</td></tr><tr><td><pre class="constant-value"><code><span class="rst-variable-quote">'</span><span class="rst-variable-string">Cannot access "__init__" directly</span><span class="rst-variable-quote">'</span></code></pre></td></tr></table>
   </div>
-</div><div class="basevariable">
+</div><div class="baseconstant">
   
   
   <a name="mypy.message_registry.CANNOT_ASSIGN_TO_METHOD">
@@ -805,7 +825,7 @@ add a method to MessageBuilder and call this instead.</p>
   </a>
   <div class="functionHeader">
     
-    <span class="py-defname">CANNOT_ASSIGN_TO_METHOD</span>: <code>Final</code> =
+    <span class="py-defname">CANNOT_ASSIGN_TO_METHOD</span>: <code>str</code> =
     <a class="sourceLink" href="https://github.com/python/mypy/tree/v0.930/mypy/message_registry.py#L76">
       
       (source)
@@ -815,8 +835,9 @@ add a method to MessageBuilder and call this instead.</p>
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    <table class="valueTable"><tr class="fieldStart"><td class="fieldName">Value</td></tr><tr><td><pre class="constant-value"><code><span class="rst-variable-quote">'</span><span class="rst-variable-string">Cannot assign to a method</span><span class="rst-variable-quote">'</span></code></pre></td></tr></table>
   </div>
-</div><div class="basevariable">
+</div><div class="baseconstant">
   
   
   <a name="mypy.message_registry.CANNOT_ASSIGN_TO_TYPE">
@@ -827,7 +848,7 @@ add a method to MessageBuilder and call this instead.</p>
   </a>
   <div class="functionHeader">
     
-    <span class="py-defname">CANNOT_ASSIGN_TO_TYPE</span>: <code>Final</code> =
+    <span class="py-defname">CANNOT_ASSIGN_TO_TYPE</span>: <code>str</code> =
     <a class="sourceLink" href="https://github.com/python/mypy/tree/v0.930/mypy/message_registry.py#L77">
       
       (source)
@@ -837,8 +858,9 @@ add a method to MessageBuilder and call this instead.</p>
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    <table class="valueTable"><tr class="fieldStart"><td class="fieldName">Value</td></tr><tr><td><pre class="constant-value"><code><span class="rst-variable-quote">'</span><span class="rst-variable-string">Cannot assign to a type</span><span class="rst-variable-quote">'</span></code></pre></td></tr></table>
   </div>
-</div><div class="basevariable">
+</div><div class="baseconstant">
   
   
   <a name="mypy.message_registry.CANNOT_INFER_LAMBDA_TYPE">
@@ -849,7 +871,7 @@ add a method to MessageBuilder and call this instead.</p>
   </a>
   <div class="functionHeader">
     
-    <span class="py-defname">CANNOT_INFER_LAMBDA_TYPE</span>: <code>Final</code> =
+    <span class="py-defname">CANNOT_INFER_LAMBDA_TYPE</span> =
     <a class="sourceLink" href="https://github.com/python/mypy/tree/v0.930/mypy/message_registry.py#L71">
       
       (source)
@@ -859,8 +881,9 @@ add a method to MessageBuilder and call this instead.</p>
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    <table class="valueTable"><tr class="fieldStart"><td class="fieldName">Value</td></tr><tr><td><pre class="constant-value"><code><a href="mypy.message_registry.ErrorMessage.html" class="internal-link" title="mypy.message_registry.ErrorMessage">ErrorMessage</a>(<wbr></wbr><span class="rst-variable-quote">'</span><span class="rst-variable-string">Cannot infer type of lambda</span><span class="rst-variable-quote">'</span>)</code></pre></td></tr></table>
   </div>
-</div><div class="basevariable">
+</div><div class="baseconstant">
   
   
   <a name="mypy.message_registry.CANNOT_INHERIT_FROM_FINAL">
@@ -871,7 +894,7 @@ add a method to MessageBuilder and call this instead.</p>
   </a>
   <div class="functionHeader">
     
-    <span class="py-defname">CANNOT_INHERIT_FROM_FINAL</span>: <code>Final</code> =
+    <span class="py-defname">CANNOT_INHERIT_FROM_FINAL</span> =
     <a class="sourceLink" href="https://github.com/python/mypy/tree/v0.930/mypy/message_registry.py#L197">
       
       (source)
@@ -881,8 +904,9 @@ add a method to MessageBuilder and call this instead.</p>
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    <table class="valueTable"><tr class="fieldStart"><td class="fieldName">Value</td></tr><tr><td><pre class="constant-value"><code><a href="mypy.message_registry.ErrorMessage.html" class="internal-link" title="mypy.message_registry.ErrorMessage">ErrorMessage</a>(<wbr></wbr><span class="rst-variable-quote">'</span><span class="rst-variable-string">Cannot inherit from final class "{}"</span><span class="rst-variable-quote">'</span>)</code></pre></td></tr></table>
   </div>
-</div><div class="basevariable">
+</div><div class="baseconstant">
   
   
   <a name="mypy.message_registry.CANNOT_INSTANTIATE_PROTOCOL">
@@ -893,7 +917,7 @@ add a method to MessageBuilder and call this instead.</p>
   </a>
   <div class="functionHeader">
     
-    <span class="py-defname">CANNOT_INSTANTIATE_PROTOCOL</span>: <code>Final</code> =
+    <span class="py-defname">CANNOT_INSTANTIATE_PROTOCOL</span> =
     <a class="sourceLink" href="https://github.com/python/mypy/tree/v0.930/mypy/message_registry.py#L224">
       
       (source)
@@ -903,8 +927,9 @@ add a method to MessageBuilder and call this instead.</p>
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    <table class="valueTable"><tr class="fieldStart"><td class="fieldName">Value</td></tr><tr><td><pre class="constant-value"><code><a href="mypy.message_registry.ErrorMessage.html" class="internal-link" title="mypy.message_registry.ErrorMessage">ErrorMessage</a>(<wbr></wbr><span class="rst-variable-quote">'</span><span class="rst-variable-string">Cannot instantiate protocol class "{}"</span><span class="rst-variable-quote">'</span>)</code></pre></td></tr></table>
   </div>
-</div><div class="basevariable">
+</div><div class="baseconstant">
   
   
   <a name="mypy.message_registry.CANNOT_MAKE_DELETABLE_FINAL">
@@ -915,7 +940,7 @@ add a method to MessageBuilder and call this instead.</p>
   </a>
   <div class="functionHeader">
     
-    <span class="py-defname">CANNOT_MAKE_DELETABLE_FINAL</span>: <code>Final</code> =
+    <span class="py-defname">CANNOT_MAKE_DELETABLE_FINAL</span> =
     <a class="sourceLink" href="https://github.com/python/mypy/tree/v0.930/mypy/message_registry.py#L204">
       
       (source)
@@ -925,8 +950,9 @@ add a method to MessageBuilder and call this instead.</p>
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    <table class="valueTable"><tr class="fieldStart"><td class="fieldName">Value</td></tr><tr><td><pre class="constant-value"><code><a href="mypy.message_registry.ErrorMessage.html" class="internal-link" title="mypy.message_registry.ErrorMessage">ErrorMessage</a>(<wbr></wbr><span class="rst-variable-quote">'</span><span class="rst-variable-string">Deletable attribute cannot be final</span><span class="rst-variable-quote">'</span>)</code></pre></td></tr></table>
   </div>
-</div><div class="basevariable">
+</div><div class="baseconstant">
   
   
   <a name="mypy.message_registry.CANNOT_OVERRIDE_CLASS_VAR">
@@ -937,7 +963,7 @@ add a method to MessageBuilder and call this instead.</p>
   </a>
   <div class="functionHeader">
     
-    <span class="py-defname">CANNOT_OVERRIDE_CLASS_VAR</span>: <code>Final</code> =
+    <span class="py-defname">CANNOT_OVERRIDE_CLASS_VAR</span> =
     <a class="sourceLink" href="https://github.com/python/mypy/tree/v0.930/mypy/message_registry.py#L211">
       
       (source)
@@ -947,8 +973,10 @@ add a method to MessageBuilder and call this instead.</p>
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    <table class="valueTable"><tr class="fieldStart"><td class="fieldName">Value</td></tr><tr><td><pre class="constant-value"><code><a href="mypy.message_registry.ErrorMessage.html" class="internal-link" title="mypy.message_registry.ErrorMessage">ErrorMessage</a>(<wbr></wbr><span class="rst-variable-quote">'</span><span class="rst-variable-string">Cannot override class variable (previously declared on base class </span><span class="rst-variable-linewrap">↵</span>
+<span class="rst-variable-string">"{}") with instance variable</span><span class="rst-variable-quote">'</span>)</code></pre></td></tr></table>
   </div>
-</div><div class="basevariable">
+</div><div class="baseconstant">
   
   
   <a name="mypy.message_registry.CANNOT_OVERRIDE_INSTANCE_VAR">
@@ -959,7 +987,7 @@ add a method to MessageBuilder and call this instead.</p>
   </a>
   <div class="functionHeader">
     
-    <span class="py-defname">CANNOT_OVERRIDE_INSTANCE_VAR</span>: <code>Final</code> =
+    <span class="py-defname">CANNOT_OVERRIDE_INSTANCE_VAR</span> =
     <a class="sourceLink" href="https://github.com/python/mypy/tree/v0.930/mypy/message_registry.py#L207">
       
       (source)
@@ -969,8 +997,10 @@ add a method to MessageBuilder and call this instead.</p>
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    <table class="valueTable"><tr class="fieldStart"><td class="fieldName">Value</td></tr><tr><td><pre class="constant-value"><code><a href="mypy.message_registry.ErrorMessage.html" class="internal-link" title="mypy.message_registry.ErrorMessage">ErrorMessage</a>(<wbr></wbr><span class="rst-variable-quote">'</span><span class="rst-variable-string">Cannot override instance variable (previously declared on base cla</span><span class="rst-variable-linewrap">↵</span>
+<span class="rst-variable-string">ss "{}") with class variable</span><span class="rst-variable-quote">'</span>)</code></pre></td></tr></table>
   </div>
-</div><div class="basevariable">
+</div><div class="baseconstant">
   
   
   <a name="mypy.message_registry.CANNOT_USE_TYPEVAR_AS_EXPRESSION">
@@ -981,7 +1011,7 @@ add a method to MessageBuilder and call this instead.</p>
   </a>
   <div class="functionHeader">
     
-    <span class="py-defname">CANNOT_USE_TYPEVAR_AS_EXPRESSION</span>: <code>Final</code> =
+    <span class="py-defname">CANNOT_USE_TYPEVAR_AS_EXPRESSION</span>: <code>str</code> =
     <a class="sourceLink" href="https://github.com/python/mypy/tree/v0.930/mypy/message_registry.py#L156">
       
       (source)
@@ -991,8 +1021,9 @@ add a method to MessageBuilder and call this instead.</p>
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    <table class="valueTable"><tr class="fieldStart"><td class="fieldName">Value</td></tr><tr><td><pre class="constant-value"><code><span class="rst-variable-quote">'</span><span class="rst-variable-string">Type variable "{}.{}" cannot be used as an expression</span><span class="rst-variable-quote">'</span></code></pre></td></tr></table>
   </div>
-</div><div class="basevariable">
+</div><div class="baseconstant">
   
   
   <a name="mypy.message_registry.CLASS_VAR_OUTSIDE_OF_CLASS">
@@ -1003,7 +1034,7 @@ add a method to MessageBuilder and call this instead.</p>
   </a>
   <div class="functionHeader">
     
-    <span class="py-defname">CLASS_VAR_OUTSIDE_OF_CLASS</span>: <code>Final</code> =
+    <span class="py-defname">CLASS_VAR_OUTSIDE_OF_CLASS</span>: <code>str</code> =
     <a class="sourceLink" href="https://github.com/python/mypy/tree/v0.930/mypy/message_registry.py#L216">
       
       (source)
@@ -1013,8 +1044,9 @@ add a method to MessageBuilder and call this instead.</p>
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    <table class="valueTable"><tr class="fieldStart"><td class="fieldName">Value</td></tr><tr><td><pre class="constant-value"><code><span class="rst-variable-quote">'</span><span class="rst-variable-string">ClassVar can only be used for assignments in class body</span><span class="rst-variable-quote">'</span></code></pre></td></tr></table>
   </div>
-</div><div class="basevariable">
+</div><div class="baseconstant">
   
   
   <a name="mypy.message_registry.CLASS_VAR_WITH_TYPEVARS">
@@ -1025,7 +1057,7 @@ add a method to MessageBuilder and call this instead.</p>
   </a>
   <div class="functionHeader">
     
-    <span class="py-defname">CLASS_VAR_WITH_TYPEVARS</span>: <code>Final</code> =
+    <span class="py-defname">CLASS_VAR_WITH_TYPEVARS</span>: <code>str</code> =
     <a class="sourceLink" href="https://github.com/python/mypy/tree/v0.930/mypy/message_registry.py#L215">
       
       (source)
@@ -1035,8 +1067,9 @@ add a method to MessageBuilder and call this instead.</p>
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    <table class="valueTable"><tr class="fieldStart"><td class="fieldName">Value</td></tr><tr><td><pre class="constant-value"><code><span class="rst-variable-quote">'</span><span class="rst-variable-string">ClassVar cannot contain type variables</span><span class="rst-variable-quote">'</span></code></pre></td></tr></table>
   </div>
-</div><div class="basevariable">
+</div><div class="baseconstant">
   
   
   <a name="mypy.message_registry.CONTIGUOUS_ITERABLE_EXPECTED">
@@ -1047,7 +1080,7 @@ add a method to MessageBuilder and call this instead.</p>
   </a>
   <div class="functionHeader">
     
-    <span class="py-defname">CONTIGUOUS_ITERABLE_EXPECTED</span>: <code>Final</code> =
+    <span class="py-defname">CONTIGUOUS_ITERABLE_EXPECTED</span> =
     <a class="sourceLink" href="https://github.com/python/mypy/tree/v0.930/mypy/message_registry.py#L229">
       
       (source)
@@ -1057,8 +1090,9 @@ add a method to MessageBuilder and call this instead.</p>
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    <table class="valueTable"><tr class="fieldStart"><td class="fieldName">Value</td></tr><tr><td><pre class="constant-value"><code><a href="mypy.message_registry.ErrorMessage.html" class="internal-link" title="mypy.message_registry.ErrorMessage">ErrorMessage</a>(<wbr></wbr><span class="rst-variable-quote">'</span><span class="rst-variable-string">Contiguous iterable with same type expected</span><span class="rst-variable-quote">'</span>)</code></pre></td></tr></table>
   </div>
-</div><div class="basevariable">
+</div><div class="baseconstant">
   
   
   <a name="mypy.message_registry.DEPENDENT_FINAL_IN_CLASS_BODY">
@@ -1069,7 +1103,7 @@ add a method to MessageBuilder and call this instead.</p>
   </a>
   <div class="functionHeader">
     
-    <span class="py-defname">DEPENDENT_FINAL_IN_CLASS_BODY</span>: <code>Final</code> =
+    <span class="py-defname">DEPENDENT_FINAL_IN_CLASS_BODY</span> =
     <a class="sourceLink" href="https://github.com/python/mypy/tree/v0.930/mypy/message_registry.py#L198">
       
       (source)
@@ -1079,8 +1113,10 @@ add a method to MessageBuilder and call this instead.</p>
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    <table class="valueTable"><tr class="fieldStart"><td class="fieldName">Value</td></tr><tr><td><pre class="constant-value"><code><a href="mypy.message_registry.ErrorMessage.html" class="internal-link" title="mypy.message_registry.ErrorMessage">ErrorMessage</a>(<wbr></wbr><span class="rst-variable-quote">'</span><span class="rst-variable-string">Final name declared in class body cannot depend on type variables</span><span class="rst-variable-quote">'</span><span class="rst-variable-linewrap">↵</span>
+)</code></pre></td></tr></table>
   </div>
-</div><div class="basevariable">
+</div><div class="baseconstant">
   
   
   <a name="mypy.message_registry.DESCRIPTOR_GET_NOT_CALLABLE">
@@ -1091,7 +1127,7 @@ add a method to MessageBuilder and call this instead.</p>
   </a>
   <div class="functionHeader">
     
-    <span class="py-defname">DESCRIPTOR_GET_NOT_CALLABLE</span>: <code>Final</code> =
+    <span class="py-defname">DESCRIPTOR_GET_NOT_CALLABLE</span>: <code>str</code> =
     <a class="sourceLink" href="https://github.com/python/mypy/tree/v0.930/mypy/message_registry.py#L118">
       
       (source)
@@ -1101,8 +1137,9 @@ add a method to MessageBuilder and call this instead.</p>
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    <table class="valueTable"><tr class="fieldStart"><td class="fieldName">Value</td></tr><tr><td><pre class="constant-value"><code><span class="rst-variable-quote">'</span><span class="rst-variable-string">{}.__get__ is not callable</span><span class="rst-variable-quote">'</span></code></pre></td></tr></table>
   </div>
-</div><div class="basevariable">
+</div><div class="baseconstant">
   
   
   <a name="mypy.message_registry.DESCRIPTOR_SET_NOT_CALLABLE">
@@ -1113,7 +1150,7 @@ add a method to MessageBuilder and call this instead.</p>
   </a>
   <div class="functionHeader">
     
-    <span class="py-defname">DESCRIPTOR_SET_NOT_CALLABLE</span>: <code>Final</code> =
+    <span class="py-defname">DESCRIPTOR_SET_NOT_CALLABLE</span> =
     <a class="sourceLink" href="https://github.com/python/mypy/tree/v0.930/mypy/message_registry.py#L117">
       
       (source)
@@ -1123,8 +1160,9 @@ add a method to MessageBuilder and call this instead.</p>
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    <table class="valueTable"><tr class="fieldStart"><td class="fieldName">Value</td></tr><tr><td><pre class="constant-value"><code><a href="mypy.message_registry.ErrorMessage.html" class="internal-link" title="mypy.message_registry.ErrorMessage">ErrorMessage</a>(<wbr></wbr><span class="rst-variable-quote">'</span><span class="rst-variable-string">{}.__set__ is not callable</span><span class="rst-variable-quote">'</span>)</code></pre></td></tr></table>
   </div>
-</div><div class="basevariable">
+</div><div class="baseconstant">
   
   
   <a name="mypy.message_registry.DUPLICATE_TYPE_SIGNATURES">
@@ -1135,7 +1173,7 @@ add a method to MessageBuilder and call this instead.</p>
   </a>
   <div class="functionHeader">
     
-    <span class="py-defname">DUPLICATE_TYPE_SIGNATURES</span>: <code>Final</code> =
+    <span class="py-defname">DUPLICATE_TYPE_SIGNATURES</span>: <code>str</code> =
     <a class="sourceLink" href="https://github.com/python/mypy/tree/v0.930/mypy/message_registry.py#L116">
       
       (source)
@@ -1145,8 +1183,9 @@ add a method to MessageBuilder and call this instead.</p>
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    <table class="valueTable"><tr class="fieldStart"><td class="fieldName">Value</td></tr><tr><td><pre class="constant-value"><code><span class="rst-variable-quote">'</span><span class="rst-variable-string">Function has duplicate type signatures</span><span class="rst-variable-quote">'</span></code></pre></td></tr></table>
   </div>
-</div><div class="basevariable">
+</div><div class="baseconstant">
   
   
   <a name="mypy.message_registry.ERASED_SELF_TYPE_NOT_SUPERTYPE">
@@ -1157,7 +1196,7 @@ add a method to MessageBuilder and call this instead.</p>
   </a>
   <div class="functionHeader">
     
-    <span class="py-defname">ERASED_SELF_TYPE_NOT_SUPERTYPE</span>: <code>Final</code> =
+    <span class="py-defname">ERASED_SELF_TYPE_NOT_SUPERTYPE</span> =
     <a class="sourceLink" href="https://github.com/python/mypy/tree/v0.930/mypy/message_registry.py#L189">
       
       (source)
@@ -1167,8 +1206,10 @@ add a method to MessageBuilder and call this instead.</p>
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    <table class="valueTable"><tr class="fieldStart"><td class="fieldName">Value</td></tr><tr><td><pre class="constant-value"><code><a href="mypy.message_registry.ErrorMessage.html" class="internal-link" title="mypy.message_registry.ErrorMessage">ErrorMessage</a>(<wbr></wbr><span class="rst-variable-quote">'</span><span class="rst-variable-string">The erased type of self "{}" is not a supertype of its class "{}"</span><span class="rst-variable-quote">'</span><span class="rst-variable-linewrap">↵</span>
+)</code></pre></td></tr></table>
   </div>
-</div><div class="basevariable">
+</div><div class="baseconstant">
   
   
   <a name="mypy.message_registry.FORMAT_REQUIRES_MAPPING">
@@ -1179,7 +1220,7 @@ add a method to MessageBuilder and call this instead.</p>
   </a>
   <div class="functionHeader">
     
-    <span class="py-defname">FORMAT_REQUIRES_MAPPING</span>: <code>Final</code> =
+    <span class="py-defname">FORMAT_REQUIRES_MAPPING</span>: <code>str</code> =
     <a class="sourceLink" href="https://github.com/python/mypy/tree/v0.930/mypy/message_registry.py#L85">
       
       (source)
@@ -1189,8 +1230,9 @@ add a method to MessageBuilder and call this instead.</p>
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    <table class="valueTable"><tr class="fieldStart"><td class="fieldName">Value</td></tr><tr><td><pre class="constant-value"><code><span class="rst-variable-quote">'</span><span class="rst-variable-string">Format requires a mapping</span><span class="rst-variable-quote">'</span></code></pre></td></tr></table>
   </div>
-</div><div class="basevariable">
+</div><div class="baseconstant">
   
   
   <a name="mypy.message_registry.FUNCTION_ALWAYS_TRUE">
@@ -1201,7 +1243,7 @@ add a method to MessageBuilder and call this instead.</p>
   </a>
   <div class="functionHeader">
     
-    <span class="py-defname">FUNCTION_ALWAYS_TRUE</span>: <code>Final</code> =
+    <span class="py-defname">FUNCTION_ALWAYS_TRUE</span> =
     <a class="sourceLink" href="https://github.com/python/mypy/tree/v0.930/mypy/message_registry.py#L135">
       
       (source)
@@ -1211,8 +1253,10 @@ add a method to MessageBuilder and call this instead.</p>
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    <table class="valueTable"><tr class="fieldStart"><td class="fieldName">Value</td></tr><tr><td><pre class="constant-value"><code><a href="mypy.message_registry.ErrorMessage.html" class="internal-link" title="mypy.message_registry.ErrorMessage">ErrorMessage</a>(<wbr></wbr><span class="rst-variable-quote">'</span><span class="rst-variable-string">Function {} could always be true in boolean context</span><span class="rst-variable-quote">'</span>,
+             <wbr></wbr>code=<a href="mypy.errorcodes.html#TRUTHY_BOOL" class="internal-link" title="mypy.errorcodes.TRUTHY_BOOL">codes.TRUTHY_BOOL</a>)</code></pre></td></tr></table>
   </div>
-</div><div class="basevariable">
+</div><div class="baseconstant">
   
   
   <a name="mypy.message_registry.FUNCTION_PARAMETER_CANNOT_BE_COVARIANT">
@@ -1223,7 +1267,7 @@ add a method to MessageBuilder and call this instead.</p>
   </a>
   <div class="functionHeader">
     
-    <span class="py-defname">FUNCTION_PARAMETER_CANNOT_BE_COVARIANT</span>: <code>Final</code> =
+    <span class="py-defname">FUNCTION_PARAMETER_CANNOT_BE_COVARIANT</span> =
     <a class="sourceLink" href="https://github.com/python/mypy/tree/v0.930/mypy/message_registry.py#L89">
       
       (source)
@@ -1233,8 +1277,9 @@ add a method to MessageBuilder and call this instead.</p>
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    <table class="valueTable"><tr class="fieldStart"><td class="fieldName">Value</td></tr><tr><td><pre class="constant-value"><code><a href="mypy.message_registry.ErrorMessage.html" class="internal-link" title="mypy.message_registry.ErrorMessage">ErrorMessage</a>(<wbr></wbr><span class="rst-variable-quote">'</span><span class="rst-variable-string">Cannot use a covariant type variable as a parameter</span><span class="rst-variable-quote">'</span>)</code></pre></td></tr></table>
   </div>
-</div><div class="basevariable">
+</div><div class="baseconstant">
   
   
   <a name="mypy.message_registry.FUNCTION_TYPE_EXPECTED">
@@ -1245,7 +1290,7 @@ add a method to MessageBuilder and call this instead.</p>
   </a>
   <div class="functionHeader">
     
-    <span class="py-defname">FUNCTION_TYPE_EXPECTED</span>: <code>Final</code> =
+    <span class="py-defname">FUNCTION_TYPE_EXPECTED</span> =
     <a class="sourceLink" href="https://github.com/python/mypy/tree/v0.930/mypy/message_registry.py#L93">
       
       (source)
@@ -1255,8 +1300,9 @@ add a method to MessageBuilder and call this instead.</p>
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    <table class="valueTable"><tr class="fieldStart"><td class="fieldName">Value</td></tr><tr><td><pre class="constant-value"><code><a href="mypy.message_registry.ErrorMessage.html" class="internal-link" title="mypy.message_registry.ErrorMessage">ErrorMessage</a>(<wbr></wbr><span class="rst-variable-quote">'</span><span class="rst-variable-string">Function is missing a type annotation</span><span class="rst-variable-quote">'</span>, <wbr></wbr><a href="mypy.errorcodes.html#NO_UNTYPED_DEF" class="internal-link" title="mypy.errorcodes.NO_UNTYPED_DEF">codes.NO_UNTYPED_DEF</a>)</code></pre></td></tr></table>
   </div>
-</div><div class="basevariable">
+</div><div class="baseconstant">
   
   
   <a name="mypy.message_registry.GENERIC_CLASS_VAR_ACCESS">
@@ -1267,7 +1313,7 @@ add a method to MessageBuilder and call this instead.</p>
   </a>
   <div class="functionHeader">
     
-    <span class="py-defname">GENERIC_CLASS_VAR_ACCESS</span>: <code>Final</code> =
+    <span class="py-defname">GENERIC_CLASS_VAR_ACCESS</span>: <code>str</code> =
     <a class="sourceLink" href="https://github.com/python/mypy/tree/v0.930/mypy/message_registry.py#L148">
       
       (source)
@@ -1277,8 +1323,9 @@ add a method to MessageBuilder and call this instead.</p>
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    <table class="valueTable"><tr class="fieldStart"><td class="fieldName">Value</td></tr><tr><td><pre class="constant-value"><code><span class="rst-variable-quote">'</span><span class="rst-variable-string">Access to generic class variables is ambiguous</span><span class="rst-variable-quote">'</span></code></pre></td></tr></table>
   </div>
-</div><div class="basevariable">
+</div><div class="baseconstant">
   
   
   <a name="mypy.message_registry.GENERIC_INSTANCE_VAR_CLASS_ACCESS">
@@ -1289,7 +1336,7 @@ add a method to MessageBuilder and call this instead.</p>
   </a>
   <div class="functionHeader">
     
-    <span class="py-defname">GENERIC_INSTANCE_VAR_CLASS_ACCESS</span>: <code>Final</code> =
+    <span class="py-defname">GENERIC_INSTANCE_VAR_CLASS_ACCESS</span>: <code>str</code> =
     <a class="sourceLink" href="https://github.com/python/mypy/tree/v0.930/mypy/message_registry.py#L145">
       
       (source)
@@ -1299,8 +1346,9 @@ add a method to MessageBuilder and call this instead.</p>
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    <table class="valueTable"><tr class="fieldStart"><td class="fieldName">Value</td></tr><tr><td><pre class="constant-value"><code><span class="rst-variable-quote">'</span><span class="rst-variable-string">Access to generic instance variables via class is ambiguous</span><span class="rst-variable-quote">'</span></code></pre></td></tr></table>
   </div>
-</div><div class="basevariable">
+</div><div class="baseconstant">
   
   
   <a name="mypy.message_registry.IMPLICIT_GENERIC_ANY_BUILTIN">
@@ -1311,7 +1359,7 @@ add a method to MessageBuilder and call this instead.</p>
   </a>
   <div class="functionHeader">
     
-    <span class="py-defname">IMPLICIT_GENERIC_ANY_BUILTIN</span>: <code>Final</code> =
+    <span class="py-defname">IMPLICIT_GENERIC_ANY_BUILTIN</span>: <code>str</code> =
     <a class="sourceLink" href="https://github.com/python/mypy/tree/v0.930/mypy/message_registry.py#L150">
       
       (source)
@@ -1321,8 +1369,9 @@ add a method to MessageBuilder and call this instead.</p>
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    <table class="valueTable"><tr class="fieldStart"><td class="fieldName">Value</td></tr><tr><td><pre class="constant-value"><code><span class="rst-variable-quote">'</span><span class="rst-variable-string">Implicit generic "Any". Use "{}" and specify generic parameters</span><span class="rst-variable-quote">'</span></code></pre></td></tr></table>
   </div>
-</div><div class="basevariable">
+</div><div class="baseconstant">
   
   
   <a name="mypy.message_registry.INCOMPATIBLE_IMPORT_OF">
@@ -1333,7 +1382,7 @@ add a method to MessageBuilder and call this instead.</p>
   </a>
   <div class="functionHeader">
     
-    <span class="py-defname">INCOMPATIBLE_IMPORT_OF</span>: <code>Final</code> =
+    <span class="py-defname">INCOMPATIBLE_IMPORT_OF</span>: <code>str</code> =
     <a class="sourceLink" href="https://github.com/python/mypy/tree/v0.930/mypy/message_registry.py#L92">
       
       (source)
@@ -1343,8 +1392,9 @@ add a method to MessageBuilder and call this instead.</p>
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    <table class="valueTable"><tr class="fieldStart"><td class="fieldName">Value</td></tr><tr><td><pre class="constant-value"><code><span class="rst-variable-quote">'</span><span class="rst-variable-string">Incompatible import of</span><span class="rst-variable-quote">'</span></code></pre></td></tr></table>
   </div>
-</div><div class="basevariable">
+</div><div class="baseconstant">
   
   
   <a name="mypy.message_registry.INCOMPATIBLE_REDEFINITION">
@@ -1355,7 +1405,7 @@ add a method to MessageBuilder and call this instead.</p>
   </a>
   <div class="functionHeader">
     
-    <span class="py-defname">INCOMPATIBLE_REDEFINITION</span>: <code>Final</code> =
+    <span class="py-defname">INCOMPATIBLE_REDEFINITION</span> =
     <a class="sourceLink" href="https://github.com/python/mypy/tree/v0.930/mypy/message_registry.py#L55">
       
       (source)
@@ -1365,8 +1415,9 @@ add a method to MessageBuilder and call this instead.</p>
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    <table class="valueTable"><tr class="fieldStart"><td class="fieldName">Value</td></tr><tr><td><pre class="constant-value"><code><a href="mypy.message_registry.ErrorMessage.html" class="internal-link" title="mypy.message_registry.ErrorMessage">ErrorMessage</a>(<wbr></wbr><span class="rst-variable-quote">'</span><span class="rst-variable-string">Incompatible redefinition</span><span class="rst-variable-quote">'</span>)</code></pre></td></tr></table>
   </div>
-</div><div class="basevariable">
+</div><div class="baseconstant">
   
   
   <a name="mypy.message_registry.INCOMPATIBLE_RETURN_VALUE_TYPE">
@@ -1377,7 +1428,7 @@ add a method to MessageBuilder and call this instead.</p>
   </a>
   <div class="functionHeader">
     
-    <span class="py-defname">INCOMPATIBLE_RETURN_VALUE_TYPE</span>: <code>Final</code> =
+    <span class="py-defname">INCOMPATIBLE_RETURN_VALUE_TYPE</span> =
     <a class="sourceLink" href="https://github.com/python/mypy/tree/v0.930/mypy/message_registry.py#L30">
       
       (source)
@@ -1387,8 +1438,9 @@ add a method to MessageBuilder and call this instead.</p>
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    <table class="valueTable"><tr class="fieldStart"><td class="fieldName">Value</td></tr><tr><td><pre class="constant-value"><code><a href="mypy.message_registry.ErrorMessage.html" class="internal-link" title="mypy.message_registry.ErrorMessage">ErrorMessage</a>(<wbr></wbr><span class="rst-variable-quote">'</span><span class="rst-variable-string">Incompatible return value type</span><span class="rst-variable-quote">'</span>, <wbr></wbr><a href="mypy.errorcodes.html#RETURN_VALUE" class="internal-link" title="mypy.errorcodes.RETURN_VALUE">codes.RETURN_VALUE</a>)</code></pre></td></tr></table>
   </div>
-</div><div class="basevariable">
+</div><div class="baseconstant">
   
   
   <a name="mypy.message_registry.INCOMPATIBLE_TYPES">
@@ -1399,7 +1451,7 @@ add a method to MessageBuilder and call this instead.</p>
   </a>
   <div class="functionHeader">
     
-    <span class="py-defname">INCOMPATIBLE_TYPES</span>: <code>Final</code> =
+    <span class="py-defname">INCOMPATIBLE_TYPES</span>: <code>str</code> =
     <a class="sourceLink" href="https://github.com/python/mypy/tree/v0.930/mypy/message_registry.py#L52">
       
       (source)
@@ -1409,8 +1461,9 @@ add a method to MessageBuilder and call this instead.</p>
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    <table class="valueTable"><tr class="fieldStart"><td class="fieldName">Value</td></tr><tr><td><pre class="constant-value"><code><span class="rst-variable-quote">'</span><span class="rst-variable-string">Incompatible types</span><span class="rst-variable-quote">'</span></code></pre></td></tr></table>
   </div>
-</div><div class="basevariable">
+</div><div class="baseconstant">
   
   
   <a name="mypy.message_registry.INCOMPATIBLE_TYPES_IN_ASSIGNMENT">
@@ -1421,7 +1474,7 @@ add a method to MessageBuilder and call this instead.</p>
   </a>
   <div class="functionHeader">
     
-    <span class="py-defname">INCOMPATIBLE_TYPES_IN_ASSIGNMENT</span>: <code>Final</code> =
+    <span class="py-defname">INCOMPATIBLE_TYPES_IN_ASSIGNMENT</span>: <code>str</code> =
     <a class="sourceLink" href="https://github.com/python/mypy/tree/v0.930/mypy/message_registry.py#L53">
       
       (source)
@@ -1431,8 +1484,9 @@ add a method to MessageBuilder and call this instead.</p>
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    <table class="valueTable"><tr class="fieldStart"><td class="fieldName">Value</td></tr><tr><td><pre class="constant-value"><code><span class="rst-variable-quote">'</span><span class="rst-variable-string">Incompatible types in assignment</span><span class="rst-variable-quote">'</span></code></pre></td></tr></table>
   </div>
-</div><div class="basevariable">
+</div><div class="baseconstant">
   
   
   <a name="mypy.message_registry.INCOMPATIBLE_TYPES_IN_ASYNC_FOR">
@@ -1443,7 +1497,7 @@ add a method to MessageBuilder and call this instead.</p>
   </a>
   <div class="functionHeader">
     
-    <span class="py-defname">INCOMPATIBLE_TYPES_IN_ASYNC_FOR</span>: <code>Final</code> =
+    <span class="py-defname">INCOMPATIBLE_TYPES_IN_ASYNC_FOR</span>: <code>str</code> =
     <a class="sourceLink" href="https://github.com/python/mypy/tree/v0.930/mypy/message_registry.py#L62">
       
       (source)
@@ -1453,8 +1507,9 @@ add a method to MessageBuilder and call this instead.</p>
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    <table class="valueTable"><tr class="fieldStart"><td class="fieldName">Value</td></tr><tr><td><pre class="constant-value"><code><span class="rst-variable-quote">'</span><span class="rst-variable-string">Incompatible types in "async for"</span><span class="rst-variable-quote">'</span></code></pre></td></tr></table>
   </div>
-</div><div class="basevariable">
+</div><div class="baseconstant">
   
   
   <a name="mypy.message_registry.INCOMPATIBLE_TYPES_IN_ASYNC_WITH_AENTER">
@@ -1465,7 +1520,7 @@ add a method to MessageBuilder and call this instead.</p>
   </a>
   <div class="functionHeader">
     
-    <span class="py-defname">INCOMPATIBLE_TYPES_IN_ASYNC_WITH_AENTER</span>: <code>Final</code> =
+    <span class="py-defname">INCOMPATIBLE_TYPES_IN_ASYNC_WITH_AENTER</span>: <code>str</code> =
     <a class="sourceLink" href="https://github.com/python/mypy/tree/v0.930/mypy/message_registry.py#L56">
       
       (source)
@@ -1475,8 +1530,9 @@ add a method to MessageBuilder and call this instead.</p>
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    <table class="valueTable"><tr class="fieldStart"><td class="fieldName">Value</td></tr><tr><td><pre class="constant-value"><code><span class="rst-variable-quote">'</span><span class="rst-variable-string">Incompatible types in "async with" for "__aenter__"</span><span class="rst-variable-quote">'</span></code></pre></td></tr></table>
   </div>
-</div><div class="basevariable">
+</div><div class="baseconstant">
   
   
   <a name="mypy.message_registry.INCOMPATIBLE_TYPES_IN_ASYNC_WITH_AEXIT">
@@ -1487,7 +1543,7 @@ add a method to MessageBuilder and call this instead.</p>
   </a>
   <div class="functionHeader">
     
-    <span class="py-defname">INCOMPATIBLE_TYPES_IN_ASYNC_WITH_AEXIT</span>: <code>Final</code> =
+    <span class="py-defname">INCOMPATIBLE_TYPES_IN_ASYNC_WITH_AEXIT</span>: <code>str</code> =
     <a class="sourceLink" href="https://github.com/python/mypy/tree/v0.930/mypy/message_registry.py#L59">
       
       (source)
@@ -1497,8 +1553,9 @@ add a method to MessageBuilder and call this instead.</p>
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    <table class="valueTable"><tr class="fieldStart"><td class="fieldName">Value</td></tr><tr><td><pre class="constant-value"><code><span class="rst-variable-quote">'</span><span class="rst-variable-string">Incompatible types in "async with" for "__aexit__"</span><span class="rst-variable-quote">'</span></code></pre></td></tr></table>
   </div>
-</div><div class="basevariable">
+</div><div class="baseconstant">
   
   
   <a name="mypy.message_registry.INCOMPATIBLE_TYPES_IN_AWAIT">
@@ -1509,7 +1566,7 @@ add a method to MessageBuilder and call this instead.</p>
   </a>
   <div class="functionHeader">
     
-    <span class="py-defname">INCOMPATIBLE_TYPES_IN_AWAIT</span>: <code>Final</code> =
+    <span class="py-defname">INCOMPATIBLE_TYPES_IN_AWAIT</span> =
     <a class="sourceLink" href="https://github.com/python/mypy/tree/v0.930/mypy/message_registry.py#L54">
       
       (source)
@@ -1519,8 +1576,9 @@ add a method to MessageBuilder and call this instead.</p>
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    <table class="valueTable"><tr class="fieldStart"><td class="fieldName">Value</td></tr><tr><td><pre class="constant-value"><code><a href="mypy.message_registry.ErrorMessage.html" class="internal-link" title="mypy.message_registry.ErrorMessage">ErrorMessage</a>(<wbr></wbr><span class="rst-variable-quote">'</span><span class="rst-variable-string">Incompatible types in "await"</span><span class="rst-variable-quote">'</span>)</code></pre></td></tr></table>
   </div>
-</div><div class="basevariable">
+</div><div class="baseconstant">
   
   
   <a name="mypy.message_registry.INCOMPATIBLE_TYPES_IN_STR_INTERPOLATION">
@@ -1531,7 +1589,7 @@ add a method to MessageBuilder and call this instead.</p>
   </a>
   <div class="functionHeader">
     
-    <span class="py-defname">INCOMPATIBLE_TYPES_IN_STR_INTERPOLATION</span>: <code>Final</code> =
+    <span class="py-defname">INCOMPATIBLE_TYPES_IN_STR_INTERPOLATION</span>: <code>str</code> =
     <a class="sourceLink" href="https://github.com/python/mypy/tree/v0.930/mypy/message_registry.py#L66">
       
       (source)
@@ -1541,8 +1599,9 @@ add a method to MessageBuilder and call this instead.</p>
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    <table class="valueTable"><tr class="fieldStart"><td class="fieldName">Value</td></tr><tr><td><pre class="constant-value"><code><span class="rst-variable-quote">'</span><span class="rst-variable-string">Incompatible types in string interpolation</span><span class="rst-variable-quote">'</span></code></pre></td></tr></table>
   </div>
-</div><div class="basevariable">
+</div><div class="baseconstant">
   
   
   <a name="mypy.message_registry.INCOMPATIBLE_TYPES_IN_YIELD">
@@ -1553,7 +1612,7 @@ add a method to MessageBuilder and call this instead.</p>
   </a>
   <div class="functionHeader">
     
-    <span class="py-defname">INCOMPATIBLE_TYPES_IN_YIELD</span>: <code>Final</code> =
+    <span class="py-defname">INCOMPATIBLE_TYPES_IN_YIELD</span> =
     <a class="sourceLink" href="https://github.com/python/mypy/tree/v0.930/mypy/message_registry.py#L64">
       
       (source)
@@ -1563,8 +1622,9 @@ add a method to MessageBuilder and call this instead.</p>
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    <table class="valueTable"><tr class="fieldStart"><td class="fieldName">Value</td></tr><tr><td><pre class="constant-value"><code><a href="mypy.message_registry.ErrorMessage.html" class="internal-link" title="mypy.message_registry.ErrorMessage">ErrorMessage</a>(<wbr></wbr><span class="rst-variable-quote">'</span><span class="rst-variable-string">Incompatible types in "yield"</span><span class="rst-variable-quote">'</span>)</code></pre></td></tr></table>
   </div>
-</div><div class="basevariable">
+</div><div class="baseconstant">
   
   
   <a name="mypy.message_registry.INCOMPATIBLE_TYPES_IN_YIELD_FROM">
@@ -1575,7 +1635,7 @@ add a method to MessageBuilder and call this instead.</p>
   </a>
   <div class="functionHeader">
     
-    <span class="py-defname">INCOMPATIBLE_TYPES_IN_YIELD_FROM</span>: <code>Final</code> =
+    <span class="py-defname">INCOMPATIBLE_TYPES_IN_YIELD_FROM</span> =
     <a class="sourceLink" href="https://github.com/python/mypy/tree/v0.930/mypy/message_registry.py#L65">
       
       (source)
@@ -1585,8 +1645,9 @@ add a method to MessageBuilder and call this instead.</p>
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    <table class="valueTable"><tr class="fieldStart"><td class="fieldName">Value</td></tr><tr><td><pre class="constant-value"><code><a href="mypy.message_registry.ErrorMessage.html" class="internal-link" title="mypy.message_registry.ErrorMessage">ErrorMessage</a>(<wbr></wbr><span class="rst-variable-quote">'</span><span class="rst-variable-string">Incompatible types in "yield from"</span><span class="rst-variable-quote">'</span>)</code></pre></td></tr></table>
   </div>
-</div><div class="basevariable">
+</div><div class="baseconstant">
   
   
   <a name="mypy.message_registry.INCOMPATIBLE_TYPEVAR_VALUE">
@@ -1597,7 +1658,7 @@ add a method to MessageBuilder and call this instead.</p>
   </a>
   <div class="functionHeader">
     
-    <span class="py-defname">INCOMPATIBLE_TYPEVAR_VALUE</span>: <code>Final</code> =
+    <span class="py-defname">INCOMPATIBLE_TYPEVAR_VALUE</span>: <code>str</code> =
     <a class="sourceLink" href="https://github.com/python/mypy/tree/v0.930/mypy/message_registry.py#L155">
       
       (source)
@@ -1607,8 +1668,9 @@ add a method to MessageBuilder and call this instead.</p>
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    <table class="valueTable"><tr class="fieldStart"><td class="fieldName">Value</td></tr><tr><td><pre class="constant-value"><code><span class="rst-variable-quote">'</span><span class="rst-variable-string">Value of type variable "{}" of {} cannot be {}</span><span class="rst-variable-quote">'</span></code></pre></td></tr></table>
   </div>
-</div><div class="basevariable">
+</div><div class="baseconstant">
   
   
   <a name="mypy.message_registry.INCONSISTENT_ABSTRACT_OVERLOAD">
@@ -1619,7 +1681,7 @@ add a method to MessageBuilder and call this instead.</p>
   </a>
   <div class="functionHeader">
     
-    <span class="py-defname">INCONSISTENT_ABSTRACT_OVERLOAD</span>: <code>Final</code> =
+    <span class="py-defname">INCONSISTENT_ABSTRACT_OVERLOAD</span> =
     <a class="sourceLink" href="https://github.com/python/mypy/tree/v0.930/mypy/message_registry.py#L78">
       
       (source)
@@ -1629,8 +1691,9 @@ add a method to MessageBuilder and call this instead.</p>
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    <table class="valueTable"><tr class="fieldStart"><td class="fieldName">Value</td></tr><tr><td><pre class="constant-value"><code><a href="mypy.message_registry.ErrorMessage.html" class="internal-link" title="mypy.message_registry.ErrorMessage">ErrorMessage</a>(<wbr></wbr><span class="rst-variable-quote">'</span><span class="rst-variable-string">Overloaded method has both abstract and non-abstract variants</span><span class="rst-variable-quote">'</span>)</code></pre></td></tr></table>
   </div>
-</div><div class="basevariable">
+</div><div class="baseconstant">
   
   
   <a name="mypy.message_registry.INVALID_EXCEPTION">
@@ -1641,7 +1704,7 @@ add a method to MessageBuilder and call this instead.</p>
   </a>
   <div class="functionHeader">
     
-    <span class="py-defname">INVALID_EXCEPTION</span>: <code>Final</code> =
+    <span class="py-defname">INVALID_EXCEPTION</span> =
     <a class="sourceLink" href="https://github.com/python/mypy/tree/v0.930/mypy/message_registry.py#L35">
       
       (source)
@@ -1651,8 +1714,9 @@ add a method to MessageBuilder and call this instead.</p>
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    <table class="valueTable"><tr class="fieldStart"><td class="fieldName">Value</td></tr><tr><td><pre class="constant-value"><code><a href="mypy.message_registry.ErrorMessage.html" class="internal-link" title="mypy.message_registry.ErrorMessage">ErrorMessage</a>(<wbr></wbr><span class="rst-variable-quote">'</span><span class="rst-variable-string">Exception must be derived from BaseException</span><span class="rst-variable-quote">'</span>)</code></pre></td></tr></table>
   </div>
-</div><div class="basevariable">
+</div><div class="baseconstant">
   
   
   <a name="mypy.message_registry.INVALID_EXCEPTION_TYPE">
@@ -1663,7 +1727,7 @@ add a method to MessageBuilder and call this instead.</p>
   </a>
   <div class="functionHeader">
     
-    <span class="py-defname">INVALID_EXCEPTION_TYPE</span>: <code>Final</code> =
+    <span class="py-defname">INVALID_EXCEPTION_TYPE</span> =
     <a class="sourceLink" href="https://github.com/python/mypy/tree/v0.930/mypy/message_registry.py#L36">
       
       (source)
@@ -1673,8 +1737,9 @@ add a method to MessageBuilder and call this instead.</p>
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    <table class="valueTable"><tr class="fieldStart"><td class="fieldName">Value</td></tr><tr><td><pre class="constant-value"><code><a href="mypy.message_registry.ErrorMessage.html" class="internal-link" title="mypy.message_registry.ErrorMessage">ErrorMessage</a>(<wbr></wbr><span class="rst-variable-quote">'</span><span class="rst-variable-string">Exception type must be derived from BaseException</span><span class="rst-variable-quote">'</span>)</code></pre></td></tr></table>
   </div>
-</div><div class="basevariable">
+</div><div class="baseconstant">
   
   
   <a name="mypy.message_registry.INVALID_GENERATOR_RETURN_ITEM_TYPE">
@@ -1685,7 +1750,7 @@ add a method to MessageBuilder and call this instead.</p>
   </a>
   <div class="functionHeader">
     
-    <span class="py-defname">INVALID_GENERATOR_RETURN_ITEM_TYPE</span>: <code>Final</code> =
+    <span class="py-defname">INVALID_GENERATOR_RETURN_ITEM_TYPE</span> =
     <a class="sourceLink" href="https://github.com/python/mypy/tree/v0.930/mypy/message_registry.py#L47">
       
       (source)
@@ -1695,8 +1760,10 @@ add a method to MessageBuilder and call this instead.</p>
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    <table class="valueTable"><tr class="fieldStart"><td class="fieldName">Value</td></tr><tr><td><pre class="constant-value"><code><a href="mypy.message_registry.ErrorMessage.html" class="internal-link" title="mypy.message_registry.ErrorMessage">ErrorMessage</a>(<wbr></wbr><span class="rst-variable-quote">'</span><span class="rst-variable-string">The return type of a generator function must be None in its third </span><span class="rst-variable-linewrap">↵</span>
+<span class="rst-variable-string">type parameter in Python 2</span><span class="rst-variable-quote">'</span>)</code></pre></td></tr></table>
   </div>
-</div><div class="basevariable">
+</div><div class="baseconstant">
   
   
   <a name="mypy.message_registry.INVALID_IMPLICIT_RETURN">
@@ -1707,7 +1774,7 @@ add a method to MessageBuilder and call this instead.</p>
   </a>
   <div class="functionHeader">
     
-    <span class="py-defname">INVALID_IMPLICIT_RETURN</span>: <code>Final</code> =
+    <span class="py-defname">INVALID_IMPLICIT_RETURN</span> =
     <a class="sourceLink" href="https://github.com/python/mypy/tree/v0.930/mypy/message_registry.py#L29">
       
       (source)
@@ -1717,8 +1784,9 @@ add a method to MessageBuilder and call this instead.</p>
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    <table class="valueTable"><tr class="fieldStart"><td class="fieldName">Value</td></tr><tr><td><pre class="constant-value"><code><a href="mypy.message_registry.ErrorMessage.html" class="internal-link" title="mypy.message_registry.ErrorMessage">ErrorMessage</a>(<wbr></wbr><span class="rst-variable-quote">'</span><span class="rst-variable-string">Implicit return in function which does not return</span><span class="rst-variable-quote">'</span>)</code></pre></td></tr></table>
   </div>
-</div><div class="basevariable">
+</div><div class="baseconstant">
   
   
   <a name="mypy.message_registry.INVALID_NEW_TYPE">
@@ -1729,7 +1797,7 @@ add a method to MessageBuilder and call this instead.</p>
   </a>
   <div class="functionHeader">
     
-    <span class="py-defname">INVALID_NEW_TYPE</span>: <code>Final</code> =
+    <span class="py-defname">INVALID_NEW_TYPE</span> =
     <a class="sourceLink" href="https://github.com/python/mypy/tree/v0.930/mypy/message_registry.py#L74">
       
       (source)
@@ -1739,8 +1807,9 @@ add a method to MessageBuilder and call this instead.</p>
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    <table class="valueTable"><tr class="fieldStart"><td class="fieldName">Value</td></tr><tr><td><pre class="constant-value"><code><a href="mypy.message_registry.ErrorMessage.html" class="internal-link" title="mypy.message_registry.ErrorMessage">ErrorMessage</a>(<wbr></wbr><span class="rst-variable-quote">'</span><span class="rst-variable-string">Incompatible return type for "__new__"</span><span class="rst-variable-quote">'</span>)</code></pre></td></tr></table>
   </div>
-</div><div class="basevariable">
+</div><div class="baseconstant">
   
   
   <a name="mypy.message_registry.INVALID_RETURN_TYPE_FOR_ASYNC_GENERATOR">
@@ -1751,7 +1820,7 @@ add a method to MessageBuilder and call this instead.</p>
   </a>
   <div class="functionHeader">
     
-    <span class="py-defname">INVALID_RETURN_TYPE_FOR_ASYNC_GENERATOR</span>: <code>Final</code> =
+    <span class="py-defname">INVALID_RETURN_TYPE_FOR_ASYNC_GENERATOR</span> =
     <a class="sourceLink" href="https://github.com/python/mypy/tree/v0.930/mypy/message_registry.py#L43">
       
       (source)
@@ -1761,8 +1830,10 @@ add a method to MessageBuilder and call this instead.</p>
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    <table class="valueTable"><tr class="fieldStart"><td class="fieldName">Value</td></tr><tr><td><pre class="constant-value"><code><a href="mypy.message_registry.ErrorMessage.html" class="internal-link" title="mypy.message_registry.ErrorMessage">ErrorMessage</a>(<wbr></wbr><span class="rst-variable-quote">'</span><span class="rst-variable-string">The return type of an async generator function should be "AsyncGen</span><span class="rst-variable-linewrap">↵</span>
+<span class="rst-variable-string">erator" or one of its supertypes</span><span class="rst-variable-quote">'</span>)</code></pre></td></tr></table>
   </div>
-</div><div class="basevariable">
+</div><div class="baseconstant">
   
   
   <a name="mypy.message_registry.INVALID_RETURN_TYPE_FOR_GENERATOR">
@@ -1773,7 +1844,7 @@ add a method to MessageBuilder and call this instead.</p>
   </a>
   <div class="functionHeader">
     
-    <span class="py-defname">INVALID_RETURN_TYPE_FOR_GENERATOR</span>: <code>Final</code> =
+    <span class="py-defname">INVALID_RETURN_TYPE_FOR_GENERATOR</span> =
     <a class="sourceLink" href="https://github.com/python/mypy/tree/v0.930/mypy/message_registry.py#L40">
       
       (source)
@@ -1783,8 +1854,10 @@ add a method to MessageBuilder and call this instead.</p>
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    <table class="valueTable"><tr class="fieldStart"><td class="fieldName">Value</td></tr><tr><td><pre class="constant-value"><code><a href="mypy.message_registry.ErrorMessage.html" class="internal-link" title="mypy.message_registry.ErrorMessage">ErrorMessage</a>(<wbr></wbr><span class="rst-variable-quote">'</span><span class="rst-variable-string">The return type of a generator function should be "Generator" or o</span><span class="rst-variable-linewrap">↵</span>
+<span class="rst-variable-string">ne of its supertypes</span><span class="rst-variable-quote">'</span>)</code></pre></td></tr></table>
   </div>
-</div><div class="basevariable">
+</div><div class="baseconstant">
   
   
   <a name="mypy.message_registry.INVALID_SELF_TYPE_OR_EXTRA_ARG">
@@ -1795,7 +1868,7 @@ add a method to MessageBuilder and call this instead.</p>
   </a>
   <div class="functionHeader">
     
-    <span class="py-defname">INVALID_SELF_TYPE_OR_EXTRA_ARG</span>: <code>Final</code> =
+    <span class="py-defname">INVALID_SELF_TYPE_OR_EXTRA_ARG</span> =
     <a class="sourceLink" href="https://github.com/python/mypy/tree/v0.930/mypy/message_registry.py#L192">
       
       (source)
@@ -1805,8 +1878,10 @@ add a method to MessageBuilder and call this instead.</p>
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    <table class="valueTable"><tr class="fieldStart"><td class="fieldName">Value</td></tr><tr><td><pre class="constant-value"><code><a href="mypy.message_registry.ErrorMessage.html" class="internal-link" title="mypy.message_registry.ErrorMessage">ErrorMessage</a>(<wbr></wbr><span class="rst-variable-quote">'</span><span class="rst-variable-string">Invalid type for self, or extra argument type in function annotati</span><span class="rst-variable-linewrap">↵</span>
+<span class="rst-variable-string">on</span><span class="rst-variable-quote">'</span>)</code></pre></td></tr></table>
   </div>
-</div><div class="basevariable">
+</div><div class="baseconstant">
   
   
   <a name="mypy.message_registry.INVALID_SLICE_INDEX">
@@ -1817,7 +1892,7 @@ add a method to MessageBuilder and call this instead.</p>
   </a>
   <div class="functionHeader">
     
-    <span class="py-defname">INVALID_SLICE_INDEX</span>: <code>Final</code> =
+    <span class="py-defname">INVALID_SLICE_INDEX</span> =
     <a class="sourceLink" href="https://github.com/python/mypy/tree/v0.930/mypy/message_registry.py#L70">
       
       (source)
@@ -1827,8 +1902,9 @@ add a method to MessageBuilder and call this instead.</p>
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    <table class="valueTable"><tr class="fieldStart"><td class="fieldName">Value</td></tr><tr><td><pre class="constant-value"><code><a href="mypy.message_registry.ErrorMessage.html" class="internal-link" title="mypy.message_registry.ErrorMessage">ErrorMessage</a>(<wbr></wbr><span class="rst-variable-quote">'</span><span class="rst-variable-string">Slice index must be an integer or None</span><span class="rst-variable-quote">'</span>)</code></pre></td></tr></table>
   </div>
-</div><div class="basevariable">
+</div><div class="baseconstant">
   
   
   <a name="mypy.message_registry.INVALID_TUPLE_INDEX_TYPE">
@@ -1839,7 +1915,7 @@ add a method to MessageBuilder and call this instead.</p>
   </a>
   <div class="functionHeader">
     
-    <span class="py-defname">INVALID_TUPLE_INDEX_TYPE</span>: <code>Final</code> =
+    <span class="py-defname">INVALID_TUPLE_INDEX_TYPE</span> =
     <a class="sourceLink" href="https://github.com/python/mypy/tree/v0.930/mypy/message_registry.py#L68">
       
       (source)
@@ -1849,8 +1925,9 @@ add a method to MessageBuilder and call this instead.</p>
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    <table class="valueTable"><tr class="fieldStart"><td class="fieldName">Value</td></tr><tr><td><pre class="constant-value"><code><a href="mypy.message_registry.ErrorMessage.html" class="internal-link" title="mypy.message_registry.ErrorMessage">ErrorMessage</a>(<wbr></wbr><span class="rst-variable-quote">'</span><span class="rst-variable-string">Invalid tuple index type</span><span class="rst-variable-quote">'</span>)</code></pre></td></tr></table>
   </div>
-</div><div class="basevariable">
+</div><div class="baseconstant">
   
   
   <a name="mypy.message_registry.INVALID_TYPE_RAW_ENUM_VALUE">
@@ -1861,7 +1938,7 @@ add a method to MessageBuilder and call this instead.</p>
   </a>
   <div class="functionHeader">
     
-    <span class="py-defname">INVALID_TYPE_RAW_ENUM_VALUE</span>: <code>Final</code> =
+    <span class="py-defname">INVALID_TYPE_RAW_ENUM_VALUE</span>: <code>str</code> =
     <a class="sourceLink" href="https://github.com/python/mypy/tree/v0.930/mypy/message_registry.py#L24">
       
       (source)
@@ -1871,8 +1948,9 @@ add a method to MessageBuilder and call this instead.</p>
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    <table class="valueTable"><tr class="fieldStart"><td class="fieldName">Value</td></tr><tr><td><pre class="constant-value"><code><span class="rst-variable-quote">'</span><span class="rst-variable-string">Invalid type: try using Literal[{}.{}] instead?</span><span class="rst-variable-quote">'</span></code></pre></td></tr></table>
   </div>
-</div><div class="basevariable">
+</div><div class="baseconstant">
   
   
   <a name="mypy.message_registry.INVALID_TYPEDDICT_ARGS">
@@ -1883,7 +1961,7 @@ add a method to MessageBuilder and call this instead.</p>
   </a>
   <div class="functionHeader">
     
-    <span class="py-defname">INVALID_TYPEDDICT_ARGS</span>: <code>Final</code> =
+    <span class="py-defname">INVALID_TYPEDDICT_ARGS</span> =
     <a class="sourceLink" href="https://github.com/python/mypy/tree/v0.930/mypy/message_registry.py#L109">
       
       (source)
@@ -1893,8 +1971,10 @@ add a method to MessageBuilder and call this instead.</p>
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    <table class="valueTable"><tr class="fieldStart"><td class="fieldName">Value</td></tr><tr><td><pre class="constant-value"><code><a href="mypy.message_registry.ErrorMessage.html" class="internal-link" title="mypy.message_registry.ErrorMessage">ErrorMessage</a>(<wbr></wbr><span class="rst-variable-quote">'</span><span class="rst-variable-string">Expected keyword arguments, {...}, or dict(...) in TypedDict const</span><span class="rst-variable-linewrap">↵</span>
+<span class="rst-variable-string">ructor</span><span class="rst-variable-quote">'</span>)</code></pre></td></tr></table>
   </div>
-</div><div class="basevariable">
+</div><div class="baseconstant">
   
   
   <a name="mypy.message_registry.INVALID_TYPEVAR_ARG_BOUND">
@@ -1905,7 +1985,7 @@ add a method to MessageBuilder and call this instead.</p>
   </a>
   <div class="functionHeader">
     
-    <span class="py-defname">INVALID_TYPEVAR_ARG_BOUND</span>: <code>Final</code> =
+    <span class="py-defname">INVALID_TYPEVAR_ARG_BOUND</span>: <code>str</code> =
     <a class="sourceLink" href="https://github.com/python/mypy/tree/v0.930/mypy/message_registry.py#L158">
       
       (source)
@@ -1915,8 +1995,9 @@ add a method to MessageBuilder and call this instead.</p>
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    <table class="valueTable"><tr class="fieldStart"><td class="fieldName">Value</td></tr><tr><td><pre class="constant-value"><code><span class="rst-variable-quote">'</span><span class="rst-variable-string">Type argument {} of "{}" must be a subtype of {}</span><span class="rst-variable-quote">'</span></code></pre></td></tr></table>
   </div>
-</div><div class="basevariable">
+</div><div class="baseconstant">
   
   
   <a name="mypy.message_registry.INVALID_TYPEVAR_ARG_VALUE">
@@ -1927,7 +2008,7 @@ add a method to MessageBuilder and call this instead.</p>
   </a>
   <div class="functionHeader">
     
-    <span class="py-defname">INVALID_TYPEVAR_ARG_VALUE</span>: <code>Final</code> =
+    <span class="py-defname">INVALID_TYPEVAR_ARG_VALUE</span>: <code>str</code> =
     <a class="sourceLink" href="https://github.com/python/mypy/tree/v0.930/mypy/message_registry.py#L159">
       
       (source)
@@ -1937,8 +2018,9 @@ add a method to MessageBuilder and call this instead.</p>
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    <table class="valueTable"><tr class="fieldStart"><td class="fieldName">Value</td></tr><tr><td><pre class="constant-value"><code><span class="rst-variable-quote">'</span><span class="rst-variable-string">Invalid type argument value for "{}"</span><span class="rst-variable-quote">'</span></code></pre></td></tr></table>
   </div>
-</div><div class="basevariable">
+</div><div class="baseconstant">
   
   
   <a name="mypy.message_registry.INVALID_TYPEVAR_AS_TYPEARG">
@@ -1949,7 +2031,7 @@ add a method to MessageBuilder and call this instead.</p>
   </a>
   <div class="functionHeader">
     
-    <span class="py-defname">INVALID_TYPEVAR_AS_TYPEARG</span>: <code>Final</code> =
+    <span class="py-defname">INVALID_TYPEVAR_AS_TYPEARG</span>: <code>str</code> =
     <a class="sourceLink" href="https://github.com/python/mypy/tree/v0.930/mypy/message_registry.py#L157">
       
       (source)
@@ -1959,8 +2041,9 @@ add a method to MessageBuilder and call this instead.</p>
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    <table class="valueTable"><tr class="fieldStart"><td class="fieldName">Value</td></tr><tr><td><pre class="constant-value"><code><span class="rst-variable-quote">'</span><span class="rst-variable-string">Type variable "{}" not valid as type argument value for "{}"</span><span class="rst-variable-quote">'</span></code></pre></td></tr></table>
   </div>
-</div><div class="basevariable">
+</div><div class="baseconstant">
   
   
   <a name="mypy.message_registry.ITERABLE_TYPE_EXPECTED">
@@ -1971,7 +2054,7 @@ add a method to MessageBuilder and call this instead.</p>
   </a>
   <div class="functionHeader">
     
-    <span class="py-defname">ITERABLE_TYPE_EXPECTED</span>: <code>Final</code> =
+    <span class="py-defname">ITERABLE_TYPE_EXPECTED</span> =
     <a class="sourceLink" href="https://github.com/python/mypy/tree/v0.930/mypy/message_registry.py#L230">
       
       (source)
@@ -1981,8 +2064,9 @@ add a method to MessageBuilder and call this instead.</p>
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    <table class="valueTable"><tr class="fieldStart"><td class="fieldName">Value</td></tr><tr><td><pre class="constant-value"><code><a href="mypy.message_registry.ErrorMessage.html" class="internal-link" title="mypy.message_registry.ErrorMessage">ErrorMessage</a>(<wbr></wbr><span class="rst-variable-quote">'</span><span class="rst-variable-string">Invalid type \'{}\' for *expr (iterable expected)</span><span class="rst-variable-quote">'</span>)</code></pre></td></tr></table>
   </div>
-</div><div class="basevariable">
+</div><div class="baseconstant">
   
   
   <a name="mypy.message_registry.KEYWORD_ARGUMENT_REQUIRES_STR_KEY_TYPE">
@@ -1993,7 +2077,7 @@ add a method to MessageBuilder and call this instead.</p>
   </a>
   <div class="functionHeader">
     
-    <span class="py-defname">KEYWORD_ARGUMENT_REQUIRES_STR_KEY_TYPE</span>: <code>Final</code> =
+    <span class="py-defname">KEYWORD_ARGUMENT_REQUIRES_STR_KEY_TYPE</span> =
     <a class="sourceLink" href="https://github.com/python/mypy/tree/v0.930/mypy/message_registry.py#L105">
       
       (source)
@@ -2003,8 +2087,10 @@ add a method to MessageBuilder and call this instead.</p>
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    <table class="valueTable"><tr class="fieldStart"><td class="fieldName">Value</td></tr><tr><td><pre class="constant-value"><code><a href="mypy.message_registry.ErrorMessage.html" class="internal-link" title="mypy.message_registry.ErrorMessage">ErrorMessage</a>(<wbr></wbr><span class="rst-variable-quote">'</span><span class="rst-variable-string">Keyword argument only valid with "str" key type in call to "dict"</span><span class="rst-variable-quote">'</span><span class="rst-variable-linewrap">↵</span>
+)</code></pre></td></tr></table>
   </div>
-</div><div class="basevariable">
+</div><div class="baseconstant">
   
   
   <a name="mypy.message_registry.MALFORMED_ASSERT">
@@ -2015,7 +2101,7 @@ add a method to MessageBuilder and call this instead.</p>
   </a>
   <div class="functionHeader">
     
-    <span class="py-defname">MALFORMED_ASSERT</span>: <code>Final</code> =
+    <span class="py-defname">MALFORMED_ASSERT</span> =
     <a class="sourceLink" href="https://github.com/python/mypy/tree/v0.930/mypy/message_registry.py#L115">
       
       (source)
@@ -2025,8 +2111,9 @@ add a method to MessageBuilder and call this instead.</p>
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    <table class="valueTable"><tr class="fieldStart"><td class="fieldName">Value</td></tr><tr><td><pre class="constant-value"><code><a href="mypy.message_registry.ErrorMessage.html" class="internal-link" title="mypy.message_registry.ErrorMessage">ErrorMessage</a>(<wbr></wbr><span class="rst-variable-quote">'</span><span class="rst-variable-string">Assertion is always true, perhaps remove parentheses?</span><span class="rst-variable-quote">'</span>)</code></pre></td></tr></table>
   </div>
-</div><div class="basevariable">
+</div><div class="baseconstant">
   
   
   <a name="mypy.message_registry.MISSING_OR_INVALID_SELF_TYPE">
@@ -2037,7 +2124,7 @@ add a method to MessageBuilder and call this instead.</p>
   </a>
   <div class="functionHeader">
     
-    <span class="py-defname">MISSING_OR_INVALID_SELF_TYPE</span>: <code>Final</code> =
+    <span class="py-defname">MISSING_OR_INVALID_SELF_TYPE</span> =
     <a class="sourceLink" href="https://github.com/python/mypy/tree/v0.930/mypy/message_registry.py#L186">
       
       (source)
@@ -2047,8 +2134,10 @@ add a method to MessageBuilder and call this instead.</p>
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    <table class="valueTable"><tr class="fieldStart"><td class="fieldName">Value</td></tr><tr><td><pre class="constant-value"><code><a href="mypy.message_registry.ErrorMessage.html" class="internal-link" title="mypy.message_registry.ErrorMessage">ErrorMessage</a>(<wbr></wbr><span class="rst-variable-quote">'</span><span class="rst-variable-string">Self argument missing for a non-static method (or an invalid type </span><span class="rst-variable-linewrap">↵</span>
+<span class="rst-variable-string">for self)</span><span class="rst-variable-quote">'</span>)</code></pre></td></tr></table>
   </div>
-</div><div class="basevariable">
+</div><div class="baseconstant">
   
   
   <a name="mypy.message_registry.MISSING_RETURN_STATEMENT">
@@ -2059,7 +2148,7 @@ add a method to MessageBuilder and call this instead.</p>
   </a>
   <div class="functionHeader">
     
-    <span class="py-defname">MISSING_RETURN_STATEMENT</span>: <code>Final</code> =
+    <span class="py-defname">MISSING_RETURN_STATEMENT</span> =
     <a class="sourceLink" href="https://github.com/python/mypy/tree/v0.930/mypy/message_registry.py#L28">
       
       (source)
@@ -2069,8 +2158,9 @@ add a method to MessageBuilder and call this instead.</p>
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    <table class="valueTable"><tr class="fieldStart"><td class="fieldName">Value</td></tr><tr><td><pre class="constant-value"><code><a href="mypy.message_registry.ErrorMessage.html" class="internal-link" title="mypy.message_registry.ErrorMessage">ErrorMessage</a>(<wbr></wbr><span class="rst-variable-quote">'</span><span class="rst-variable-string">Missing return statement</span><span class="rst-variable-quote">'</span>, <wbr></wbr><a href="mypy.errorcodes.html#RETURN" class="internal-link" title="mypy.errorcodes.RETURN">codes.RETURN</a>)</code></pre></td></tr></table>
   </div>
-</div><div class="basevariable">
+</div><div class="baseconstant">
   
   
   <a name="mypy.message_registry.MODULE_LEVEL_GETATTRIBUTE">
@@ -2081,7 +2171,7 @@ add a method to MessageBuilder and call this instead.</p>
   </a>
   <div class="functionHeader">
     
-    <span class="py-defname">MODULE_LEVEL_GETATTRIBUTE</span>: <code>Final</code> =
+    <span class="py-defname">MODULE_LEVEL_GETATTRIBUTE</span> =
     <a class="sourceLink" href="https://github.com/python/mypy/tree/v0.930/mypy/message_registry.py#L119">
       
       (source)
@@ -2091,8 +2181,9 @@ add a method to MessageBuilder and call this instead.</p>
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    <table class="valueTable"><tr class="fieldStart"><td class="fieldName">Value</td></tr><tr><td><pre class="constant-value"><code><a href="mypy.message_registry.ErrorMessage.html" class="internal-link" title="mypy.message_registry.ErrorMessage">ErrorMessage</a>(<wbr></wbr><span class="rst-variable-quote">'</span><span class="rst-variable-string">__getattribute__ is not valid at the module level</span><span class="rst-variable-quote">'</span>)</code></pre></td></tr></table>
   </div>
-</div><div class="basevariable">
+</div><div class="baseconstant">
   
   
   <a name="mypy.message_registry.MULTIPLE_OVERLOADS_REQUIRED">
@@ -2103,7 +2194,7 @@ add a method to MessageBuilder and call this instead.</p>
   </a>
   <div class="functionHeader">
     
-    <span class="py-defname">MULTIPLE_OVERLOADS_REQUIRED</span>: <code>Final</code> =
+    <span class="py-defname">MULTIPLE_OVERLOADS_REQUIRED</span> =
     <a class="sourceLink" href="https://github.com/python/mypy/tree/v0.930/mypy/message_registry.py#L81">
       
       (source)
@@ -2113,8 +2204,9 @@ add a method to MessageBuilder and call this instead.</p>
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    <table class="valueTable"><tr class="fieldStart"><td class="fieldName">Value</td></tr><tr><td><pre class="constant-value"><code><a href="mypy.message_registry.ErrorMessage.html" class="internal-link" title="mypy.message_registry.ErrorMessage">ErrorMessage</a>(<wbr></wbr><span class="rst-variable-quote">'</span><span class="rst-variable-string">Single overload definition, multiple required</span><span class="rst-variable-quote">'</span>)</code></pre></td></tr></table>
   </div>
-</div><div class="basevariable">
+</div><div class="baseconstant">
   
   
   <a name="mypy.message_registry.MUST_HAVE_NONE_RETURN_TYPE">
@@ -2125,7 +2217,7 @@ add a method to MessageBuilder and call this instead.</p>
   </a>
   <div class="functionHeader">
     
-    <span class="py-defname">MUST_HAVE_NONE_RETURN_TYPE</span>: <code>Final</code> =
+    <span class="py-defname">MUST_HAVE_NONE_RETURN_TYPE</span> =
     <a class="sourceLink" href="https://github.com/python/mypy/tree/v0.930/mypy/message_registry.py#L67">
       
       (source)
@@ -2135,8 +2227,9 @@ add a method to MessageBuilder and call this instead.</p>
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    <table class="valueTable"><tr class="fieldStart"><td class="fieldName">Value</td></tr><tr><td><pre class="constant-value"><code><a href="mypy.message_registry.ErrorMessage.html" class="internal-link" title="mypy.message_registry.ErrorMessage">ErrorMessage</a>(<wbr></wbr><span class="rst-variable-quote">'</span><span class="rst-variable-string">The return type of "{}" must be None</span><span class="rst-variable-quote">'</span>)</code></pre></td></tr></table>
   </div>
-</div><div class="basevariable">
+</div><div class="baseconstant">
   
   
   <a name="mypy.message_registry.NAME_NOT_IN_SLOTS">
@@ -2147,7 +2240,7 @@ add a method to MessageBuilder and call this instead.</p>
   </a>
   <div class="functionHeader">
     
-    <span class="py-defname">NAME_NOT_IN_SLOTS</span>: <code>Final</code> =
+    <span class="py-defname">NAME_NOT_IN_SLOTS</span> =
     <a class="sourceLink" href="https://github.com/python/mypy/tree/v0.930/mypy/message_registry.py#L122">
       
       (source)
@@ -2157,8 +2250,10 @@ add a method to MessageBuilder and call this instead.</p>
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    <table class="valueTable"><tr class="fieldStart"><td class="fieldName">Value</td></tr><tr><td><pre class="constant-value"><code><a href="mypy.message_registry.ErrorMessage.html" class="internal-link" title="mypy.message_registry.ErrorMessage">ErrorMessage</a>(<wbr></wbr><span class="rst-variable-quote">'</span><span class="rst-variable-string">Trying to assign name "{}" that is not in "__slots__" of type "{}"</span><span class="rst-variable-quote">'</span><span class="rst-variable-linewrap">↵</span>
+)</code></pre></td></tr></table>
   </div>
-</div><div class="basevariable">
+</div><div class="baseconstant">
   
   
   <a name="mypy.message_registry.NO_RETURN_EXPECTED">
@@ -2169,7 +2264,7 @@ add a method to MessageBuilder and call this instead.</p>
   </a>
   <div class="functionHeader">
     
-    <span class="py-defname">NO_RETURN_EXPECTED</span>: <code>Final</code> =
+    <span class="py-defname">NO_RETURN_EXPECTED</span> =
     <a class="sourceLink" href="https://github.com/python/mypy/tree/v0.930/mypy/message_registry.py#L34">
       
       (source)
@@ -2179,8 +2274,9 @@ add a method to MessageBuilder and call this instead.</p>
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    <table class="valueTable"><tr class="fieldStart"><td class="fieldName">Value</td></tr><tr><td><pre class="constant-value"><code><a href="mypy.message_registry.ErrorMessage.html" class="internal-link" title="mypy.message_registry.ErrorMessage">ErrorMessage</a>(<wbr></wbr><span class="rst-variable-quote">'</span><span class="rst-variable-string">Return statement in function which does not return</span><span class="rst-variable-quote">'</span>)</code></pre></td></tr></table>
   </div>
-</div><div class="basevariable">
+</div><div class="baseconstant">
   
   
   <a name="mypy.message_registry.NO_RETURN_VALUE_EXPECTED">
@@ -2191,7 +2287,7 @@ add a method to MessageBuilder and call this instead.</p>
   </a>
   <div class="functionHeader">
     
-    <span class="py-defname">NO_RETURN_VALUE_EXPECTED</span>: <code>Final</code> =
+    <span class="py-defname">NO_RETURN_VALUE_EXPECTED</span> =
     <a class="sourceLink" href="https://github.com/python/mypy/tree/v0.930/mypy/message_registry.py#L27">
       
       (source)
@@ -2201,8 +2297,9 @@ add a method to MessageBuilder and call this instead.</p>
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    <table class="valueTable"><tr class="fieldStart"><td class="fieldName">Value</td></tr><tr><td><pre class="constant-value"><code><a href="mypy.message_registry.ErrorMessage.html" class="internal-link" title="mypy.message_registry.ErrorMessage">ErrorMessage</a>(<wbr></wbr><span class="rst-variable-quote">'</span><span class="rst-variable-string">No return value expected</span><span class="rst-variable-quote">'</span>, <wbr></wbr><a href="mypy.errorcodes.html#RETURN_VALUE" class="internal-link" title="mypy.errorcodes.RETURN_VALUE">codes.RETURN_VALUE</a>)</code></pre></td></tr></table>
   </div>
-</div><div class="basevariable">
+</div><div class="baseconstant">
   
   
   <a name="mypy.message_registry.NON_INSTANCE_NEW_TYPE">
@@ -2213,7 +2310,7 @@ add a method to MessageBuilder and call this instead.</p>
   </a>
   <div class="functionHeader">
     
-    <span class="py-defname">NON_INSTANCE_NEW_TYPE</span>: <code>Final</code> =
+    <span class="py-defname">NON_INSTANCE_NEW_TYPE</span> =
     <a class="sourceLink" href="https://github.com/python/mypy/tree/v0.930/mypy/message_registry.py#L73">
       
       (source)
@@ -2223,8 +2320,9 @@ add a method to MessageBuilder and call this instead.</p>
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    <table class="valueTable"><tr class="fieldStart"><td class="fieldName">Value</td></tr><tr><td><pre class="constant-value"><code><a href="mypy.message_registry.ErrorMessage.html" class="internal-link" title="mypy.message_registry.ErrorMessage">ErrorMessage</a>(<wbr></wbr><span class="rst-variable-quote">'</span><span class="rst-variable-string">"__new__" must return a class instance (got {})</span><span class="rst-variable-quote">'</span>)</code></pre></td></tr></table>
   </div>
-</div><div class="basevariable">
+</div><div class="baseconstant">
   
   
   <a name="mypy.message_registry.NOT_CALLABLE">
@@ -2235,7 +2333,7 @@ add a method to MessageBuilder and call this instead.</p>
   </a>
   <div class="functionHeader">
     
-    <span class="py-defname">NOT_CALLABLE</span>: <code>Final</code> =
+    <span class="py-defname">NOT_CALLABLE</span>: <code>str</code> =
     <a class="sourceLink" href="https://github.com/python/mypy/tree/v0.930/mypy/message_registry.py#L139">
       
       (source)
@@ -2245,8 +2343,9 @@ add a method to MessageBuilder and call this instead.</p>
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    <table class="valueTable"><tr class="fieldStart"><td class="fieldName">Value</td></tr><tr><td><pre class="constant-value"><code><span class="rst-variable-quote">'</span><span class="rst-variable-string">{} not callable</span><span class="rst-variable-quote">'</span></code></pre></td></tr></table>
   </div>
-</div><div class="basevariable">
+</div><div class="baseconstant">
   
   
   <a name="mypy.message_registry.ONLY_CLASS_APPLICATION">
@@ -2257,7 +2356,7 @@ add a method to MessageBuilder and call this instead.</p>
   </a>
   <div class="functionHeader">
     
-    <span class="py-defname">ONLY_CLASS_APPLICATION</span>: <code>Final</code> =
+    <span class="py-defname">ONLY_CLASS_APPLICATION</span> =
     <a class="sourceLink" href="https://github.com/python/mypy/tree/v0.930/mypy/message_registry.py#L96">
       
       (source)
@@ -2267,8 +2366,9 @@ add a method to MessageBuilder and call this instead.</p>
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    <table class="valueTable"><tr class="fieldStart"><td class="fieldName">Value</td></tr><tr><td><pre class="constant-value"><code><a href="mypy.message_registry.ErrorMessage.html" class="internal-link" title="mypy.message_registry.ErrorMessage">ErrorMessage</a>(<wbr></wbr><span class="rst-variable-quote">'</span><span class="rst-variable-string">Type application is only supported for generic classes</span><span class="rst-variable-quote">'</span>)</code></pre></td></tr></table>
   </div>
-</div><div class="basevariable">
+</div><div class="baseconstant">
   
   
   <a name="mypy.message_registry.PYTHON2_PRINT_FILE_TYPE">
@@ -2279,7 +2379,7 @@ add a method to MessageBuilder and call this instead.</p>
   </a>
   <div class="functionHeader">
     
-    <span class="py-defname">PYTHON2_PRINT_FILE_TYPE</span>: <code>Final</code> =
+    <span class="py-defname">PYTHON2_PRINT_FILE_TYPE</span>: <code>str</code> =
     <a class="sourceLink" href="https://github.com/python/mypy/tree/v0.930/mypy/message_registry.py#L140">
       
       (source)
@@ -2289,8 +2389,9 @@ add a method to MessageBuilder and call this instead.</p>
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    <table class="valueTable"><tr class="fieldStart"><td class="fieldName">Value</td></tr><tr><td><pre class="constant-value"><code><span class="rst-variable-quote">'</span><span class="rst-variable-string">Argument "file" to "print" has incompatible type "{}"; expected "{}"</span><span class="rst-variable-quote">'</span></code></pre></td></tr></table>
   </div>
-</div><div class="basevariable">
+</div><div class="baseconstant">
   
   
   <a name="mypy.message_registry.READ_ONLY_PROPERTY_OVERRIDES_READ_WRITE">
@@ -2301,7 +2402,7 @@ add a method to MessageBuilder and call this instead.</p>
   </a>
   <div class="functionHeader">
     
-    <span class="py-defname">READ_ONLY_PROPERTY_OVERRIDES_READ_WRITE</span>: <code>Final</code> =
+    <span class="py-defname">READ_ONLY_PROPERTY_OVERRIDES_READ_WRITE</span> =
     <a class="sourceLink" href="https://github.com/python/mypy/tree/v0.930/mypy/message_registry.py#L82">
       
       (source)
@@ -2311,8 +2412,9 @@ add a method to MessageBuilder and call this instead.</p>
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    <table class="valueTable"><tr class="fieldStart"><td class="fieldName">Value</td></tr><tr><td><pre class="constant-value"><code><a href="mypy.message_registry.ErrorMessage.html" class="internal-link" title="mypy.message_registry.ErrorMessage">ErrorMessage</a>(<wbr></wbr><span class="rst-variable-quote">'</span><span class="rst-variable-string">Read-only property cannot override read-write property</span><span class="rst-variable-quote">'</span>)</code></pre></td></tr></table>
   </div>
-</div><div class="basevariable">
+</div><div class="baseconstant">
   
   
   <a name="mypy.message_registry.RETURN_IN_ASYNC_GENERATOR">
@@ -2323,7 +2425,7 @@ add a method to MessageBuilder and call this instead.</p>
   </a>
   <div class="functionHeader">
     
-    <span class="py-defname">RETURN_IN_ASYNC_GENERATOR</span>: <code>Final</code> =
+    <span class="py-defname">RETURN_IN_ASYNC_GENERATOR</span> =
     <a class="sourceLink" href="https://github.com/python/mypy/tree/v0.930/mypy/message_registry.py#L37">
       
       (source)
@@ -2333,8 +2435,9 @@ add a method to MessageBuilder and call this instead.</p>
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    <table class="valueTable"><tr class="fieldStart"><td class="fieldName">Value</td></tr><tr><td><pre class="constant-value"><code><a href="mypy.message_registry.ErrorMessage.html" class="internal-link" title="mypy.message_registry.ErrorMessage">ErrorMessage</a>(<wbr></wbr><span class="rst-variable-quote">'</span><span class="rst-variable-string">"return" with value in async generator is not allowed</span><span class="rst-variable-quote">'</span>)</code></pre></td></tr></table>
   </div>
-</div><div class="basevariable">
+</div><div class="baseconstant">
   
   
   <a name="mypy.message_registry.RETURN_TYPE_CANNOT_BE_CONTRAVARIANT">
@@ -2345,7 +2448,7 @@ add a method to MessageBuilder and call this instead.</p>
   </a>
   <div class="functionHeader">
     
-    <span class="py-defname">RETURN_TYPE_CANNOT_BE_CONTRAVARIANT</span>: <code>Final</code> =
+    <span class="py-defname">RETURN_TYPE_CANNOT_BE_CONTRAVARIANT</span> =
     <a class="sourceLink" href="https://github.com/python/mypy/tree/v0.930/mypy/message_registry.py#L86">
       
       (source)
@@ -2355,8 +2458,9 @@ add a method to MessageBuilder and call this instead.</p>
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    <table class="valueTable"><tr class="fieldStart"><td class="fieldName">Value</td></tr><tr><td><pre class="constant-value"><code><a href="mypy.message_registry.ErrorMessage.html" class="internal-link" title="mypy.message_registry.ErrorMessage">ErrorMessage</a>(<wbr></wbr><span class="rst-variable-quote">'</span><span class="rst-variable-string">Cannot use a contravariant type variable as return type</span><span class="rst-variable-quote">'</span>)</code></pre></td></tr></table>
   </div>
-</div><div class="basevariable">
+</div><div class="baseconstant">
   
   
   <a name="mypy.message_registry.RETURN_TYPE_EXPECTED">
@@ -2367,7 +2471,7 @@ add a method to MessageBuilder and call this instead.</p>
   </a>
   <div class="functionHeader">
     
-    <span class="py-defname">RETURN_TYPE_EXPECTED</span>: <code>Final</code> =
+    <span class="py-defname">RETURN_TYPE_EXPECTED</span> =
     <a class="sourceLink" href="https://github.com/python/mypy/tree/v0.930/mypy/message_registry.py#L99">
       
       (source)
@@ -2377,8 +2481,10 @@ add a method to MessageBuilder and call this instead.</p>
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    <table class="valueTable"><tr class="fieldStart"><td class="fieldName">Value</td></tr><tr><td><pre class="constant-value"><code><a href="mypy.message_registry.ErrorMessage.html" class="internal-link" title="mypy.message_registry.ErrorMessage">ErrorMessage</a>(<wbr></wbr><span class="rst-variable-quote">'</span><span class="rst-variable-string">Function is missing a return type annotation</span><span class="rst-variable-quote">'</span>, <wbr></wbr><a href="mypy.errorcodes.html#NO_UNTYPED_DEF" class="internal-link" title="mypy.errorcodes.NO_UNTYPED_DEF">codes.NO_UNTYPED_DEF</a><span class="rst-variable-linewrap">↵</span>
+)</code></pre></td></tr></table>
   </div>
-</div><div class="basevariable">
+</div><div class="baseconstant">
   
   
   <a name="mypy.message_registry.RETURN_VALUE_EXPECTED">
@@ -2389,7 +2495,7 @@ add a method to MessageBuilder and call this instead.</p>
   </a>
   <div class="functionHeader">
     
-    <span class="py-defname">RETURN_VALUE_EXPECTED</span>: <code>Final</code> =
+    <span class="py-defname">RETURN_VALUE_EXPECTED</span> =
     <a class="sourceLink" href="https://github.com/python/mypy/tree/v0.930/mypy/message_registry.py#L33">
       
       (source)
@@ -2399,8 +2505,9 @@ add a method to MessageBuilder and call this instead.</p>
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    <table class="valueTable"><tr class="fieldStart"><td class="fieldName">Value</td></tr><tr><td><pre class="constant-value"><code><a href="mypy.message_registry.ErrorMessage.html" class="internal-link" title="mypy.message_registry.ErrorMessage">ErrorMessage</a>(<wbr></wbr><span class="rst-variable-quote">'</span><span class="rst-variable-string">Return value expected</span><span class="rst-variable-quote">'</span>, <wbr></wbr><a href="mypy.errorcodes.html#RETURN_VALUE" class="internal-link" title="mypy.errorcodes.RETURN_VALUE">codes.RETURN_VALUE</a>)</code></pre></td></tr></table>
   </div>
-</div><div class="basevariable">
+</div><div class="baseconstant">
   
   
   <a name="mypy.message_registry.RUNTIME_PROTOCOL_EXPECTED">
@@ -2411,7 +2518,7 @@ add a method to MessageBuilder and call this instead.</p>
   </a>
   <div class="functionHeader">
     
-    <span class="py-defname">RUNTIME_PROTOCOL_EXPECTED</span>: <code>Final</code> =
+    <span class="py-defname">RUNTIME_PROTOCOL_EXPECTED</span> =
     <a class="sourceLink" href="https://github.com/python/mypy/tree/v0.930/mypy/message_registry.py#L221">
       
       (source)
@@ -2421,8 +2528,10 @@ add a method to MessageBuilder and call this instead.</p>
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    <table class="valueTable"><tr class="fieldStart"><td class="fieldName">Value</td></tr><tr><td><pre class="constant-value"><code><a href="mypy.message_registry.ErrorMessage.html" class="internal-link" title="mypy.message_registry.ErrorMessage">ErrorMessage</a>(<wbr></wbr><span class="rst-variable-quote">'</span><span class="rst-variable-string">Only @runtime_checkable protocols can be used with instance and cl</span><span class="rst-variable-linewrap">↵</span>
+<span class="rst-variable-string">ass checks</span><span class="rst-variable-quote">'</span>)</code></pre></td></tr></table>
   </div>
-</div><div class="basevariable">
+</div><div class="baseconstant">
   
   
   <a name="mypy.message_registry.SUPER_ARG_2_NOT_INSTANCE_OF_ARG_1">
@@ -2433,7 +2542,7 @@ add a method to MessageBuilder and call this instead.</p>
   </a>
   <div class="functionHeader">
     
-    <span class="py-defname">SUPER_ARG_2_NOT_INSTANCE_OF_ARG_1</span>: <code>Final</code> =
+    <span class="py-defname">SUPER_ARG_2_NOT_INSTANCE_OF_ARG_1</span> =
     <a class="sourceLink" href="https://github.com/python/mypy/tree/v0.930/mypy/message_registry.py#L174">
       
       (source)
@@ -2443,8 +2552,9 @@ add a method to MessageBuilder and call this instead.</p>
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    <table class="valueTable"><tr class="fieldStart"><td class="fieldName">Value</td></tr><tr><td><pre class="constant-value"><code><a href="mypy.message_registry.ErrorMessage.html" class="internal-link" title="mypy.message_registry.ErrorMessage">ErrorMessage</a>(<wbr></wbr><span class="rst-variable-quote">'</span><span class="rst-variable-string">Argument 2 for "super" not an instance of argument 1</span><span class="rst-variable-quote">'</span>)</code></pre></td></tr></table>
   </div>
-</div><div class="basevariable">
+</div><div class="baseconstant">
   
   
   <a name="mypy.message_registry.SUPER_ENCLOSING_POSITIONAL_ARGS_REQUIRED">
@@ -2455,7 +2565,7 @@ add a method to MessageBuilder and call this instead.</p>
   </a>
   <div class="functionHeader">
     
-    <span class="py-defname">SUPER_ENCLOSING_POSITIONAL_ARGS_REQUIRED</span>: <code>Final</code> =
+    <span class="py-defname">SUPER_ENCLOSING_POSITIONAL_ARGS_REQUIRED</span> =
     <a class="sourceLink" href="https://github.com/python/mypy/tree/v0.930/mypy/message_registry.py#L181">
       
       (source)
@@ -2465,8 +2575,10 @@ add a method to MessageBuilder and call this instead.</p>
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    <table class="valueTable"><tr class="fieldStart"><td class="fieldName">Value</td></tr><tr><td><pre class="constant-value"><code><a href="mypy.message_registry.ErrorMessage.html" class="internal-link" title="mypy.message_registry.ErrorMessage">ErrorMessage</a>(<wbr></wbr><span class="rst-variable-quote">'</span><span class="rst-variable-string">super() requires one or more positional arguments in enclosing fun</span><span class="rst-variable-linewrap">↵</span>
+<span class="rst-variable-string">ction</span><span class="rst-variable-quote">'</span>)</code></pre></td></tr></table>
   </div>
-</div><div class="basevariable">
+</div><div class="baseconstant">
   
   
   <a name="mypy.message_registry.SUPER_OUTSIDE_OF_METHOD_NOT_SUPPORTED">
@@ -2477,7 +2589,7 @@ add a method to MessageBuilder and call this instead.</p>
   </a>
   <div class="functionHeader">
     
-    <span class="py-defname">SUPER_OUTSIDE_OF_METHOD_NOT_SUPPORTED</span>: <code>Final</code> =
+    <span class="py-defname">SUPER_OUTSIDE_OF_METHOD_NOT_SUPPORTED</span> =
     <a class="sourceLink" href="https://github.com/python/mypy/tree/v0.930/mypy/message_registry.py#L178">
       
       (source)
@@ -2487,8 +2599,9 @@ add a method to MessageBuilder and call this instead.</p>
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    <table class="valueTable"><tr class="fieldStart"><td class="fieldName">Value</td></tr><tr><td><pre class="constant-value"><code><a href="mypy.message_registry.ErrorMessage.html" class="internal-link" title="mypy.message_registry.ErrorMessage">ErrorMessage</a>(<wbr></wbr><span class="rst-variable-quote">'</span><span class="rst-variable-string">super() outside of a method is not supported</span><span class="rst-variable-quote">'</span>)</code></pre></td></tr></table>
   </div>
-</div><div class="basevariable">
+</div><div class="baseconstant">
   
   
   <a name="mypy.message_registry.SUPER_POSITIONAL_ARGS_REQUIRED">
@@ -2499,7 +2612,7 @@ add a method to MessageBuilder and call this instead.</p>
   </a>
   <div class="functionHeader">
     
-    <span class="py-defname">SUPER_POSITIONAL_ARGS_REQUIRED</span>: <code>Final</code> =
+    <span class="py-defname">SUPER_POSITIONAL_ARGS_REQUIRED</span> =
     <a class="sourceLink" href="https://github.com/python/mypy/tree/v0.930/mypy/message_registry.py#L173">
       
       (source)
@@ -2509,8 +2622,9 @@ add a method to MessageBuilder and call this instead.</p>
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    <table class="valueTable"><tr class="fieldStart"><td class="fieldName">Value</td></tr><tr><td><pre class="constant-value"><code><a href="mypy.message_registry.ErrorMessage.html" class="internal-link" title="mypy.message_registry.ErrorMessage">ErrorMessage</a>(<wbr></wbr><span class="rst-variable-quote">'</span><span class="rst-variable-string">"super" only accepts positional arguments</span><span class="rst-variable-quote">'</span>)</code></pre></td></tr></table>
   </div>
-</div><div class="basevariable">
+</div><div class="baseconstant">
   
   
   <a name="mypy.message_registry.SUPER_VARARGS_NOT_SUPPORTED">
@@ -2521,7 +2635,7 @@ add a method to MessageBuilder and call this instead.</p>
   </a>
   <div class="functionHeader">
     
-    <span class="py-defname">SUPER_VARARGS_NOT_SUPPORTED</span>: <code>Final</code> =
+    <span class="py-defname">SUPER_VARARGS_NOT_SUPPORTED</span> =
     <a class="sourceLink" href="https://github.com/python/mypy/tree/v0.930/mypy/message_registry.py#L172">
       
       (source)
@@ -2531,8 +2645,9 @@ add a method to MessageBuilder and call this instead.</p>
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    <table class="valueTable"><tr class="fieldStart"><td class="fieldName">Value</td></tr><tr><td><pre class="constant-value"><code><a href="mypy.message_registry.ErrorMessage.html" class="internal-link" title="mypy.message_registry.ErrorMessage">ErrorMessage</a>(<wbr></wbr><span class="rst-variable-quote">'</span><span class="rst-variable-string">Varargs not supported with "super"</span><span class="rst-variable-quote">'</span>)</code></pre></td></tr></table>
   </div>
-</div><div class="basevariable">
+</div><div class="baseconstant">
   
   
   <a name="mypy.message_registry.SUPER_WITH_SINGLE_ARG_NOT_SUPPORTED">
@@ -2543,7 +2658,7 @@ add a method to MessageBuilder and call this instead.</p>
   </a>
   <div class="functionHeader">
     
-    <span class="py-defname">SUPER_WITH_SINGLE_ARG_NOT_SUPPORTED</span>: <code>Final</code> =
+    <span class="py-defname">SUPER_WITH_SINGLE_ARG_NOT_SUPPORTED</span> =
     <a class="sourceLink" href="https://github.com/python/mypy/tree/v0.930/mypy/message_registry.py#L167">
       
       (source)
@@ -2553,8 +2668,9 @@ add a method to MessageBuilder and call this instead.</p>
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    <table class="valueTable"><tr class="fieldStart"><td class="fieldName">Value</td></tr><tr><td><pre class="constant-value"><code><a href="mypy.message_registry.ErrorMessage.html" class="internal-link" title="mypy.message_registry.ErrorMessage">ErrorMessage</a>(<wbr></wbr><span class="rst-variable-quote">'</span><span class="rst-variable-string">"super" with a single argument not supported</span><span class="rst-variable-quote">'</span>)</code></pre></td></tr></table>
   </div>
-</div><div class="basevariable">
+</div><div class="baseconstant">
   
   
   <a name="mypy.message_registry.TARGET_CLASS_HAS_NO_BASE_CLASS">
@@ -2565,7 +2681,7 @@ add a method to MessageBuilder and call this instead.</p>
   </a>
   <div class="functionHeader">
     
-    <span class="py-defname">TARGET_CLASS_HAS_NO_BASE_CLASS</span>: <code>Final</code> =
+    <span class="py-defname">TARGET_CLASS_HAS_NO_BASE_CLASS</span> =
     <a class="sourceLink" href="https://github.com/python/mypy/tree/v0.930/mypy/message_registry.py#L177">
       
       (source)
@@ -2575,8 +2691,9 @@ add a method to MessageBuilder and call this instead.</p>
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    <table class="valueTable"><tr class="fieldStart"><td class="fieldName">Value</td></tr><tr><td><pre class="constant-value"><code><a href="mypy.message_registry.ErrorMessage.html" class="internal-link" title="mypy.message_registry.ErrorMessage">ErrorMessage</a>(<wbr></wbr><span class="rst-variable-quote">'</span><span class="rst-variable-string">Target class has no base class</span><span class="rst-variable-quote">'</span>)</code></pre></td></tr></table>
   </div>
-</div><div class="basevariable">
+</div><div class="baseconstant">
   
   
   <a name="mypy.message_registry.TOO_FEW_ARGS_FOR_SUPER">
@@ -2587,7 +2704,7 @@ add a method to MessageBuilder and call this instead.</p>
   </a>
   <div class="functionHeader">
     
-    <span class="py-defname">TOO_FEW_ARGS_FOR_SUPER</span>: <code>Final</code> =
+    <span class="py-defname">TOO_FEW_ARGS_FOR_SUPER</span> =
     <a class="sourceLink" href="https://github.com/python/mypy/tree/v0.930/mypy/message_registry.py#L166">
       
       (source)
@@ -2597,8 +2714,9 @@ add a method to MessageBuilder and call this instead.</p>
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    <table class="valueTable"><tr class="fieldStart"><td class="fieldName">Value</td></tr><tr><td><pre class="constant-value"><code><a href="mypy.message_registry.ErrorMessage.html" class="internal-link" title="mypy.message_registry.ErrorMessage">ErrorMessage</a>(<wbr></wbr><span class="rst-variable-quote">'</span><span class="rst-variable-string">Too few arguments for "super"</span><span class="rst-variable-quote">'</span>, <wbr></wbr><a href="mypy.errorcodes.html#CALL_ARG" class="internal-link" title="mypy.errorcodes.CALL_ARG">codes.CALL_ARG</a>)</code></pre></td></tr></table>
   </div>
-</div><div class="basevariable">
+</div><div class="baseconstant">
   
   
   <a name="mypy.message_registry.TOO_MANY_ARGS_FOR_SUPER">
@@ -2609,7 +2727,7 @@ add a method to MessageBuilder and call this instead.</p>
   </a>
   <div class="functionHeader">
     
-    <span class="py-defname">TOO_MANY_ARGS_FOR_SUPER</span>: <code>Final</code> =
+    <span class="py-defname">TOO_MANY_ARGS_FOR_SUPER</span> =
     <a class="sourceLink" href="https://github.com/python/mypy/tree/v0.930/mypy/message_registry.py#L165">
       
       (source)
@@ -2619,8 +2737,9 @@ add a method to MessageBuilder and call this instead.</p>
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    <table class="valueTable"><tr class="fieldStart"><td class="fieldName">Value</td></tr><tr><td><pre class="constant-value"><code><a href="mypy.message_registry.ErrorMessage.html" class="internal-link" title="mypy.message_registry.ErrorMessage">ErrorMessage</a>(<wbr></wbr><span class="rst-variable-quote">'</span><span class="rst-variable-string">Too many arguments for "super"</span><span class="rst-variable-quote">'</span>)</code></pre></td></tr></table>
   </div>
-</div><div class="basevariable">
+</div><div class="baseconstant">
   
   
   <a name="mypy.message_registry.TOO_MANY_UNION_COMBINATIONS">
@@ -2631,7 +2750,7 @@ add a method to MessageBuilder and call this instead.</p>
   </a>
   <div class="functionHeader">
     
-    <span class="py-defname">TOO_MANY_UNION_COMBINATIONS</span>: <code>Final</code> =
+    <span class="py-defname">TOO_MANY_UNION_COMBINATIONS</span> =
     <a class="sourceLink" href="https://github.com/python/mypy/tree/v0.930/mypy/message_registry.py#L225">
       
       (source)
@@ -2641,8 +2760,10 @@ add a method to MessageBuilder and call this instead.</p>
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    <table class="valueTable"><tr class="fieldStart"><td class="fieldName">Value</td></tr><tr><td><pre class="constant-value"><code><a href="mypy.message_registry.ErrorMessage.html" class="internal-link" title="mypy.message_registry.ErrorMessage">ErrorMessage</a>(<wbr></wbr><span class="rst-variable-quote">'</span><span class="rst-variable-string">Not all union combinations were tried because there are too many u</span><span class="rst-variable-linewrap">↵</span>
+<span class="rst-variable-string">nions</span><span class="rst-variable-quote">'</span>)</code></pre></td></tr></table>
   </div>
-</div><div class="basevariable">
+</div><div class="baseconstant">
   
   
   <a name="mypy.message_registry.TUPLE_INDEX_OUT_OF_RANGE">
@@ -2653,7 +2774,7 @@ add a method to MessageBuilder and call this instead.</p>
   </a>
   <div class="functionHeader">
     
-    <span class="py-defname">TUPLE_INDEX_OUT_OF_RANGE</span>: <code>Final</code> =
+    <span class="py-defname">TUPLE_INDEX_OUT_OF_RANGE</span> =
     <a class="sourceLink" href="https://github.com/python/mypy/tree/v0.930/mypy/message_registry.py#L69">
       
       (source)
@@ -2663,8 +2784,9 @@ add a method to MessageBuilder and call this instead.</p>
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    <table class="valueTable"><tr class="fieldStart"><td class="fieldName">Value</td></tr><tr><td><pre class="constant-value"><code><a href="mypy.message_registry.ErrorMessage.html" class="internal-link" title="mypy.message_registry.ErrorMessage">ErrorMessage</a>(<wbr></wbr><span class="rst-variable-quote">'</span><span class="rst-variable-string">Tuple index out of range</span><span class="rst-variable-quote">'</span>)</code></pre></td></tr></table>
   </div>
-</div><div class="basevariable">
+</div><div class="baseconstant">
   
   
   <a name="mypy.message_registry.TYPE_ALWAYS_TRUE">
@@ -2675,7 +2797,7 @@ add a method to MessageBuilder and call this instead.</p>
   </a>
   <div class="functionHeader">
     
-    <span class="py-defname">TYPE_ALWAYS_TRUE</span>: <code>Final</code> =
+    <span class="py-defname">TYPE_ALWAYS_TRUE</span> =
     <a class="sourceLink" href="https://github.com/python/mypy/tree/v0.930/mypy/message_registry.py#L125">
       
       (source)
@@ -2685,8 +2807,11 @@ add a method to MessageBuilder and call this instead.</p>
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    <table class="valueTable"><tr class="fieldStart"><td class="fieldName">Value</td></tr><tr><td><pre class="constant-value"><code><a href="mypy.message_registry.ErrorMessage.html" class="internal-link" title="mypy.message_registry.ErrorMessage">ErrorMessage</a>(<wbr></wbr><span class="rst-variable-quote">'</span><span class="rst-variable-string">{} which does not implement __bool__ or __len__ so it could always</span><span class="rst-variable-linewrap">↵</span>
+<span class="rst-variable-string"> be true in boolean context</span><span class="rst-variable-quote">'</span>,
+             <wbr></wbr>code=<a href="mypy.errorcodes.html#TRUTHY_BOOL" class="internal-link" title="mypy.errorcodes.TRUTHY_BOOL">codes.TRUTHY_BOOL</a>)</code></pre></td></tr></table>
   </div>
-</div><div class="basevariable">
+</div><div class="baseconstant">
   
   
   <a name="mypy.message_registry.TYPE_ALWAYS_TRUE_UNIONTYPE">
@@ -2697,7 +2822,7 @@ add a method to MessageBuilder and call this instead.</p>
   </a>
   <div class="functionHeader">
     
-    <span class="py-defname">TYPE_ALWAYS_TRUE_UNIONTYPE</span>: <code>Final</code> =
+    <span class="py-defname">TYPE_ALWAYS_TRUE_UNIONTYPE</span> =
     <a class="sourceLink" href="https://github.com/python/mypy/tree/v0.930/mypy/message_registry.py#L130">
       
       (source)
@@ -2707,8 +2832,11 @@ add a method to MessageBuilder and call this instead.</p>
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    <table class="valueTable"><tr class="fieldStart"><td class="fieldName">Value</td></tr><tr><td><pre class="constant-value"><code><a href="mypy.message_registry.ErrorMessage.html" class="internal-link" title="mypy.message_registry.ErrorMessage">ErrorMessage</a>(<wbr></wbr><span class="rst-variable-quote">'</span><span class="rst-variable-string">{} of which no members implement __bool__ or __len__ so it could a</span><span class="rst-variable-linewrap">↵</span>
+<span class="rst-variable-string">lways be true in boolean context</span><span class="rst-variable-quote">'</span>,
+             <wbr></wbr>code=<a href="mypy.errorcodes.html#TRUTHY_BOOL" class="internal-link" title="mypy.errorcodes.TRUTHY_BOOL">codes.TRUTHY_BOOL</a>)</code></pre></td></tr></table>
   </div>
-</div><div class="basevariable">
+</div><div class="baseconstant">
   
   
   <a name="mypy.message_registry.TYPE_GUARD_POS_ARG_REQUIRED">
@@ -2719,7 +2847,7 @@ add a method to MessageBuilder and call this instead.</p>
   </a>
   <div class="functionHeader">
     
-    <span class="py-defname">TYPE_GUARD_POS_ARG_REQUIRED</span>: <code>Final</code> =
+    <span class="py-defname">TYPE_GUARD_POS_ARG_REQUIRED</span> =
     <a class="sourceLink" href="https://github.com/python/mypy/tree/v0.930/mypy/message_registry.py#L231">
       
       (source)
@@ -2729,8 +2857,9 @@ add a method to MessageBuilder and call this instead.</p>
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    <table class="valueTable"><tr class="fieldStart"><td class="fieldName">Value</td></tr><tr><td><pre class="constant-value"><code><a href="mypy.message_registry.ErrorMessage.html" class="internal-link" title="mypy.message_registry.ErrorMessage">ErrorMessage</a>(<wbr></wbr><span class="rst-variable-quote">'</span><span class="rst-variable-string">Type guard requires positional argument</span><span class="rst-variable-quote">'</span>)</code></pre></td></tr></table>
   </div>
-</div><div class="basevariable">
+</div><div class="baseconstant">
   
   
   <a name="mypy.message_registry.TYPEDDICT_KEY_MUST_BE_STRING_LITERAL">
@@ -2741,7 +2870,7 @@ add a method to MessageBuilder and call this instead.</p>
   </a>
   <div class="functionHeader">
     
-    <span class="py-defname">TYPEDDICT_KEY_MUST_BE_STRING_LITERAL</span>: <code>Final</code> =
+    <span class="py-defname">TYPEDDICT_KEY_MUST_BE_STRING_LITERAL</span> =
     <a class="sourceLink" href="https://github.com/python/mypy/tree/v0.930/mypy/message_registry.py#L112">
       
       (source)
@@ -2751,8 +2880,9 @@ add a method to MessageBuilder and call this instead.</p>
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    <table class="valueTable"><tr class="fieldStart"><td class="fieldName">Value</td></tr><tr><td><pre class="constant-value"><code><a href="mypy.message_registry.ErrorMessage.html" class="internal-link" title="mypy.message_registry.ErrorMessage">ErrorMessage</a>(<wbr></wbr><span class="rst-variable-quote">'</span><span class="rst-variable-string">Expected TypedDict key to be string literal</span><span class="rst-variable-quote">'</span>)</code></pre></td></tr></table>
   </div>
-</div><div class="basevariable">
+</div><div class="baseconstant">
   
   
   <a name="mypy.message_registry.TYPEVAR_BOUND_MUST_BE_TYPE">
@@ -2763,7 +2893,7 @@ add a method to MessageBuilder and call this instead.</p>
   </a>
   <div class="functionHeader">
     
-    <span class="py-defname">TYPEVAR_BOUND_MUST_BE_TYPE</span>: <code>Final</code> =
+    <span class="py-defname">TYPEVAR_BOUND_MUST_BE_TYPE</span>: <code>str</code> =
     <a class="sourceLink" href="https://github.com/python/mypy/tree/v0.930/mypy/message_registry.py#L161">
       
       (source)
@@ -2773,8 +2903,9 @@ add a method to MessageBuilder and call this instead.</p>
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    <table class="valueTable"><tr class="fieldStart"><td class="fieldName">Value</td></tr><tr><td><pre class="constant-value"><code><span class="rst-variable-quote">'</span><span class="rst-variable-string">TypeVar "bound" must be a type</span><span class="rst-variable-quote">'</span></code></pre></td></tr></table>
   </div>
-</div><div class="basevariable">
+</div><div class="baseconstant">
   
   
   <a name="mypy.message_registry.TYPEVAR_UNEXPECTED_ARGUMENT">
@@ -2785,7 +2916,7 @@ add a method to MessageBuilder and call this instead.</p>
   </a>
   <div class="functionHeader">
     
-    <span class="py-defname">TYPEVAR_UNEXPECTED_ARGUMENT</span>: <code>Final</code> =
+    <span class="py-defname">TYPEVAR_UNEXPECTED_ARGUMENT</span>: <code>str</code> =
     <a class="sourceLink" href="https://github.com/python/mypy/tree/v0.930/mypy/message_registry.py#L162">
       
       (source)
@@ -2795,8 +2926,9 @@ add a method to MessageBuilder and call this instead.</p>
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    <table class="valueTable"><tr class="fieldStart"><td class="fieldName">Value</td></tr><tr><td><pre class="constant-value"><code><span class="rst-variable-quote">'</span><span class="rst-variable-string">Unexpected argument to "TypeVar()"</span><span class="rst-variable-quote">'</span></code></pre></td></tr></table>
   </div>
-</div><div class="basevariable">
+</div><div class="baseconstant">
   
   
   <a name="mypy.message_registry.TYPEVAR_VARIANCE_DEF">
@@ -2807,7 +2939,7 @@ add a method to MessageBuilder and call this instead.</p>
   </a>
   <div class="functionHeader">
     
-    <span class="py-defname">TYPEVAR_VARIANCE_DEF</span>: <code>Final</code> =
+    <span class="py-defname">TYPEVAR_VARIANCE_DEF</span>: <code>str</code> =
     <a class="sourceLink" href="https://github.com/python/mypy/tree/v0.930/mypy/message_registry.py#L160">
       
       (source)
@@ -2817,8 +2949,9 @@ add a method to MessageBuilder and call this instead.</p>
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    <table class="valueTable"><tr class="fieldStart"><td class="fieldName">Value</td></tr><tr><td><pre class="constant-value"><code><span class="rst-variable-quote">'</span><span class="rst-variable-string">TypeVar "{}" may only be a literal bool</span><span class="rst-variable-quote">'</span></code></pre></td></tr></table>
   </div>
-</div><div class="basevariable">
+</div><div class="baseconstant">
   
   
   <a name="mypy.message_registry.UNSUPPORTED_ARG_1_FOR_SUPER">
@@ -2829,7 +2962,7 @@ add a method to MessageBuilder and call this instead.</p>
   </a>
   <div class="functionHeader">
     
-    <span class="py-defname">UNSUPPORTED_ARG_1_FOR_SUPER</span>: <code>Final</code> =
+    <span class="py-defname">UNSUPPORTED_ARG_1_FOR_SUPER</span> =
     <a class="sourceLink" href="https://github.com/python/mypy/tree/v0.930/mypy/message_registry.py#L170">
       
       (source)
@@ -2839,8 +2972,9 @@ add a method to MessageBuilder and call this instead.</p>
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    <table class="valueTable"><tr class="fieldStart"><td class="fieldName">Value</td></tr><tr><td><pre class="constant-value"><code><a href="mypy.message_registry.ErrorMessage.html" class="internal-link" title="mypy.message_registry.ErrorMessage">ErrorMessage</a>(<wbr></wbr><span class="rst-variable-quote">'</span><span class="rst-variable-string">Unsupported argument 1 for "super"</span><span class="rst-variable-quote">'</span>)</code></pre></td></tr></table>
   </div>
-</div><div class="basevariable">
+</div><div class="baseconstant">
   
   
   <a name="mypy.message_registry.UNSUPPORTED_ARG_2_FOR_SUPER">
@@ -2851,7 +2985,7 @@ add a method to MessageBuilder and call this instead.</p>
   </a>
   <div class="functionHeader">
     
-    <span class="py-defname">UNSUPPORTED_ARG_2_FOR_SUPER</span>: <code>Final</code> =
+    <span class="py-defname">UNSUPPORTED_ARG_2_FOR_SUPER</span> =
     <a class="sourceLink" href="https://github.com/python/mypy/tree/v0.930/mypy/message_registry.py#L171">
       
       (source)
@@ -2861,8 +2995,9 @@ add a method to MessageBuilder and call this instead.</p>
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    <table class="valueTable"><tr class="fieldStart"><td class="fieldName">Value</td></tr><tr><td><pre class="constant-value"><code><a href="mypy.message_registry.ErrorMessage.html" class="internal-link" title="mypy.message_registry.ErrorMessage">ErrorMessage</a>(<wbr></wbr><span class="rst-variable-quote">'</span><span class="rst-variable-string">Unsupported argument 2 for "super"</span><span class="rst-variable-quote">'</span>)</code></pre></td></tr></table>
   </div>
-</div><div class="basevariable">
+</div><div class="baseconstant">
   
   
   <a name="mypy.message_registry.YIELD_VALUE_EXPECTED">
@@ -2873,7 +3008,7 @@ add a method to MessageBuilder and call this instead.</p>
   </a>
   <div class="functionHeader">
     
-    <span class="py-defname">YIELD_VALUE_EXPECTED</span>: <code>Final</code> =
+    <span class="py-defname">YIELD_VALUE_EXPECTED</span> =
     <a class="sourceLink" href="https://github.com/python/mypy/tree/v0.930/mypy/message_registry.py#L51">
       
       (source)
@@ -2883,6 +3018,7 @@ add a method to MessageBuilder and call this instead.</p>
     
     
     <div><p class="undocumented">Undocumented</p></div>
+    <table class="valueTable"><tr class="fieldStart"><td class="fieldName">Value</td></tr><tr><td><pre class="constant-value"><code><a href="mypy.message_registry.ErrorMessage.html" class="internal-link" title="mypy.message_registry.ErrorMessage">ErrorMessage</a>(<wbr></wbr><span class="rst-variable-quote">'</span><span class="rst-variable-string">Yield value expected</span><span class="rst-variable-quote">'</span>)</code></pre></td></tr></table>
   </div>
 </div>
 
@@ -2894,7 +3030,7 @@ add a method to MessageBuilder and call this instead.</p>
   <div class="container">
     <a href="index.html">API Documentation</a> for <a href="https://github.com/python/mypy" class="projecthome">mypy-0.930</a>,
   generated by <a href="https://github.com/twisted/pydoctor/">pydoctor</a>
-    21.2.2 at 2022-01-12 04:22:24.
+    22.2.2.dev0 at 2022-03-04 05:57:16.
   </div>
 </footer>
 
