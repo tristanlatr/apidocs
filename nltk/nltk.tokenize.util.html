@@ -7,23 +7,26 @@
   <head>
     
     <title>nltk.tokenize.util</title>
-    <meta name="generator" content="pydoctor 22.2.2.dev0"> 
+    <meta name="generator" content="pydoctor 24.11.2"> 
         
     </meta>
     <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=0.75" />
+    <meta name="viewport" content="width=device-width, initial-scale=1 maximum-scale=1" />
     <link rel="stylesheet" type="text/css" href="bootstrap.min.css" />
     <link rel="stylesheet" type="text/css" href="apidocs.css" />
     <link rel="stylesheet" type="text/css" href="extra.css" />
+    
 </head>
 
   <body>
 
     
 
-    <nav class="navbar navbar-default">
+    <nav class="navbar navbar-default mainnavbar">
+      
   
-  <div class="container">
+  <div class="container-fluid">
+
 
     <div class="navbar-header">
       
@@ -50,7 +53,7 @@
             
             <span class="input-group-btn">
               <a style="display: none;" class="btn btn-default" id="search-clear-button" title="Clear" onclick="clearSearch()"><img src="fonts/x-circle.svg" alt="Clear" /></a>
-              <a class="btn btn-default" id="search-help-button" title="Help" onclick="toggleSearchHelpText()"><img src="fonts/info.svg" alt="Help" /></a>
+              <a class="btn btn-default" id="apidocs-help-button" title="Help" href="apidocs-help.html"><img src="fonts/info.svg" alt="Help" /></a>
             </span>
           </div>
         </div>
@@ -58,50 +61,24 @@
       </div>
 
       <div id="search-results-container" style="display: none;">
-        <div>
+        
+        <div id="search-buttons">
           <span class="label label-default" id="search-docstrings-button">
-            <a title="Search in docstrings" onclick="toggleSearchInDocstrings()">search in docstrings</a></span>
+          <label class="checkbox-inline">
+            <input type="checkbox" id="toggle-search-in-docstrings-checkbox" value="false" onclick="toggleSearchInDocstrings()">
+              search in docstrings
+            </input>
+          </label>
+          </span>
+          
         </div>
-
+        
         <noscript>
             <h1>Cannot search: JavaScript is not supported/enabled in your browser.</h1>
         </noscript>
 
-        <div class="hint" id="search-help-box">
-          <p class="rst-last">
-      
-            Search bar offers the following options:
-            <ul>   
-                <li>
-                  <strong>Term presence.</strong> The below example searches for documents that 
-                    must contain “foo”, might contain “bar” and must not contain “baz”: <code>+foo bar -baz</code>
-                </li> 
-
-                <li>
-                  <strong>Wildcards.</strong> The below example searches for documents with words beginning with “foo”: <code>foo*</code>
-                </li> 
-
-                <li>
-                  <strong>Search in specific fields.</strong> The following search matches all objects 
-                  in "twisted.mail" that matches “search”: <code>+qname:twisted.mail.* +search</code>
-
-                  <p>
-                    Possible fields: 'name', 'qname' (fully qualified name), 'docstring', and 'kind'.
-                    Last two fields are only applicable if "search in docstrings" is enabled.
-                  </p>
-                </li>
-
-                <li>
-                  <strong>Fuzzy matches.</strong> The following search matches all documents 
-                  that have a word within 1 edit distance of “foo”: <code>foo~1</code>
-                </li>
-            </ul>
-
-          </p>
-        </div>
-
         <div id="search-status"> </div>
-        
+
         <div class="warning" id="search-warn-box" style="display: none;">
           <p class="rst-last"><span id="search-warn"></span></p>
         </div>
@@ -110,97 +87,478 @@
           <!-- Filled dynamically by JS -->
         </table>
         
-        <div style="margin-top: 8px;">
-          <p>Results provided by <a href="https://lunrjs.com">Lunr.js</a></p>
+        <div style="margin-top: 10px;">
+          <p>For more information on the search, visit the <a href="apidocs-help.html#rst-search">help page</a>.</p>
         </div>
       </div>
 
     </div>
+
+
+  </div>
+</nav>
+    
+    <div class="container-fluid">
+
+      <!-- Side navigation -->
+      <div class="sidebarcontainer" style="display: none;">
+        
+        <div class="sidebar"><nav class="sidebar">
+  
+
+  <div>
+
+      <div class="thingTitle">
+        <span>Module</span>
+        <code class="thisobject"><a href="nltk.tokenize.util.html" class="internal-link" title="This module">util</a></code> 
+      </div>
+      
+      <div>
+        
+
+        
+         
+
+        <div class="childrenKindTitle">Classes</div>
+        <ul>
+    
+    <li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="nltk.tokenize.util.CJKChars.html" class="internal-link" title="nltk.tokenize.util.CJKChars"><wbr></wbr>CJKChars</a></code>
+            </div>
+        
+
+    </li>
+</ul>
+
+        <div class="childrenKindTitle">Functions</div>
+        <ul>
+    
+    <li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="#align_tokens" class="internal-link" title="nltk.tokenize.util.align_tokens">align<wbr></wbr>_tokens</a></code>
+            </div>
+        
+
+    </li><li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="#is_cjk" class="internal-link" title="nltk.tokenize.util.is_cjk">is<wbr></wbr>_cjk</a></code>
+            </div>
+        
+
+    </li><li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="#regexp_span_tokenize" class="internal-link" title="nltk.tokenize.util.regexp_span_tokenize">regexp<wbr></wbr>_span<wbr></wbr>_tokenize</a></code>
+            </div>
+        
+
+    </li><li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="#spans_to_relative" class="internal-link" title="nltk.tokenize.util.spans_to_relative">spans<wbr></wbr>_to<wbr></wbr>_relative</a></code>
+            </div>
+        
+
+    </li><li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="#string_span_tokenize" class="internal-link" title="nltk.tokenize.util.string_span_tokenize">string<wbr></wbr>_span<wbr></wbr>_tokenize</a></code>
+            </div>
+        
+
+    </li><li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="#xml_escape" class="internal-link" title="nltk.tokenize.util.xml_escape">xml<wbr></wbr>_escape</a></code>
+            </div>
+        
+
+    </li><li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="#xml_unescape" class="internal-link" title="nltk.tokenize.util.xml_unescape">xml<wbr></wbr>_unescape</a></code>
+            </div>
+        
+
+    </li>
+</ul> 
+
+        
+         
+
+        
+         
+
+        
+         
+        
+      </div>
+  </div><div>
+
+      <div class="thingTitle">
+        <span>Package</span>
+        <code><a href="nltk.tokenize.html" class="internal-link" title="The parent of this module">tokenize</a></code> 
+      </div>
+      
+      <div>
+        
+
+        <div class="childrenKindTitle">Modules</div>
+        <ul>
+    
+    <li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="nltk.tokenize.api.html" class="internal-link" title="nltk.tokenize.api">api</a></code>
+            </div>
+        
+
+    </li><li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="nltk.tokenize.casual.html" class="internal-link" title="nltk.tokenize.casual">casual</a></code>
+            </div>
+        
+
+    </li><li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="nltk.tokenize.destructive.html" class="internal-link" title="nltk.tokenize.destructive">destructive</a></code>
+            </div>
+        
+
+    </li><li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="nltk.tokenize.legality_principle.html" class="internal-link" title="nltk.tokenize.legality_principle">legality<wbr></wbr>_principle</a></code>
+            </div>
+        
+
+    </li><li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="nltk.tokenize.mwe.html" class="internal-link" title="nltk.tokenize.mwe">mwe</a></code>
+            </div>
+        
+
+    </li><li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="nltk.tokenize.nist.html" class="internal-link" title="nltk.tokenize.nist">nist</a></code>
+            </div>
+        
+
+    </li><li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="nltk.tokenize.punkt.html" class="internal-link" title="nltk.tokenize.punkt">punkt</a></code>
+            </div>
+        
+
+    </li><li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="nltk.tokenize.regexp.html" class="internal-link" title="nltk.tokenize.regexp">regexp</a></code>
+            </div>
+        
+
+    </li><li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="nltk.tokenize.repp.html" class="internal-link" title="nltk.tokenize.repp">repp</a></code>
+            </div>
+        
+
+    </li><li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="nltk.tokenize.sexpr.html" class="internal-link" title="nltk.tokenize.sexpr">sexpr</a></code>
+            </div>
+        
+
+    </li><li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="nltk.tokenize.simple.html" class="internal-link" title="nltk.tokenize.simple">simple</a></code>
+            </div>
+        
+
+    </li><li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="nltk.tokenize.sonority_sequencing.html" class="internal-link" title="nltk.tokenize.sonority_sequencing">sonority<wbr></wbr>_sequencing</a></code>
+            </div>
+        
+
+    </li><li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="nltk.tokenize.stanford.html" class="internal-link" title="nltk.tokenize.stanford">stanford</a></code>
+            </div>
+        
+
+    </li><li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="nltk.tokenize.stanford_segmenter.html" class="internal-link" title="nltk.tokenize.stanford_segmenter">stanford<wbr></wbr>_segmenter</a></code>
+            </div>
+        
+
+    </li><li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="nltk.tokenize.texttiling.html" class="internal-link" title="nltk.tokenize.texttiling">texttiling</a></code>
+            </div>
+        
+
+    </li><li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="nltk.tokenize.toktok.html" class="internal-link" title="nltk.tokenize.toktok">toktok</a></code>
+            </div>
+        
+
+    </li><li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="nltk.tokenize.treebank.html" class="internal-link" title="nltk.tokenize.treebank">treebank</a></code>
+            </div>
+        
+
+    </li><li class=" thisobject">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="nltk.tokenize.util.html" class="internal-link" title="nltk.tokenize.util">util</a></code>
+            </div>
+        
+
+    </li>
+</ul> 
+
+        
+        
+
+        <div class="childrenKindTitle">Functions</div>
+        <ul>
+    
+    <li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="nltk.tokenize.html#sent_tokenize" class="internal-link" title="nltk.tokenize.sent_tokenize">sent<wbr></wbr>_tokenize</a></code>
+            </div>
+        
+
+    </li><li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="nltk.tokenize.html#word_tokenize" class="internal-link" title="nltk.tokenize.word_tokenize">word<wbr></wbr>_tokenize</a></code>
+            </div>
+        
+
+    </li>
+</ul> 
+
+        
+         
+
+        <div class="childrenKindTitle">Variables</div>
+        <ul>
+    
+    <li class="private">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="nltk.tokenize.html#_treebank_word_tokenizer" class="internal-link" title="nltk.tokenize._treebank_word_tokenizer">_treebank<wbr></wbr>_word<wbr></wbr>_tokenizer</a></code>
+            </div>
+        
+
+    </li>
+</ul> 
+
+        
+         
+        
+      </div>
   </div>
 
-  <script src="ajax.js" type="text/javascript"></script>
-  <script src="search.js" type="text/javascript"></script>
-
 </nav>
-
-    
-
-    <div class="container">
-
-      <div class="page-header">
-        <h1 class="module"><code><code><a href="index.html" class="internal-link">nltk</a></code><wbr></wbr>.<code><a href="nltk.tokenize.html" class="internal-link" title="nltk.tokenize">tokenize</a></code><wbr></wbr>.<code><a href="nltk.tokenize.util.html" class="internal-link" title="nltk.tokenize.util">util</a></code></code></h1>
-        <div id="showPrivate">
-          <button class="btn btn-link" onclick="togglePrivate()">Toggle Private API</button>
         </div>
+        <div id="collapseSideBar">
+          <a class="btn btn-link" onclick="toggleSideBarCollapse()" title="Toggle Sidebar Collapse">
+          </a>
+        </div> 
+        <script src="sidebartoggle.js" type="text/javascript"></script>
+       
       </div>
 
-      <div class="categoryHeader">
-        module documentation
-      </div>
+      <div id="main" class="">
+        
 
-      <div class="extrasDocstring">
-        <a href="https://github.com/nltk/nltk/tree/3.6.2/nltk/tokenize/util.py" class="sourceLink">(source)</a>
-        <p></p>
-      </div>
+        
 
-      <div class="moduleDocstring">
-        <div><p class="undocumented">Undocumented</p></div>
-      </div>
+        <div class="page-header">
+          <h1 class="module"><code><code><a href="index.html" class="internal-link">nltk</a></code><wbr></wbr>.<code><a href="nltk.tokenize.html" class="internal-link" title="nltk.tokenize">tokenize</a></code><wbr></wbr>.<code><a href="nltk.tokenize.util.html" class="internal-link" title="nltk.tokenize.util">util</a></code></code></h1>
+          <div id="showPrivate">
+            <button class="btn btn-link" onclick="togglePrivate()">Toggle Private API</button>
+          </div>
+        </div>
 
-      <div id="splitTables">
-        <table class="children sortable" id="id1863">
+        <div class="categoryHeader">
+          module documentation
+        </div>
+
+        <div class="extrasDocstring">
+          <a href="https://github.com/nltk/nltk/tree/3.6.2/nltk/tokenize/util.py" class="sourceLink">(source)</a>
+          <p></p>
+        </div>
+
+        <div class="moduleDocstring">
+          <div><p class="undocumented">Undocumented</p></div>
+        </div>
+
+        <div id="splitTables">
+          <table class="children sortable" id="id1804">
   
   
   <tr class="class">
     
     <td>Class</td>
-    <td><code><a href="nltk.tokenize.util.CJKChars.html" class="internal-link" title="nltk.tokenize.util.CJKChars">​CJKChars</a></code></td>
-    <td>An object that enumerates the code points of the CJK characters as listed on <a class="rst-reference external" href="http://en.wikipedia.org/wiki/Basic_Multilingual_Plane#Basic_Multilingual_Plane" target="_top">http://en.wikipedia.org/wiki/Basic_Multilingual_Plane#Basic_Multilingual_Plane</a></td>
+    <td><code><a href="nltk.tokenize.util.CJKChars.html" class="internal-link" title="nltk.tokenize.util.CJKChars"><wbr></wbr>CJKChars</a></code></td>
+    <td>An object that enumerates the code points of the CJK characters as listed on <a class="rst-external rst-reference" href="http://en.wikipedia.org/wiki/Basic_Multilingual_Plane#Basic_Multilingual_Plane" target="_top">http://en.wikipedia.org/wiki/Basic_Multilingual_Plane#Basic_Multilingual_Plane</a></td>
   </tr><tr class="function">
     
     <td>Function</td>
-    <td><code><a href="#align_tokens" class="internal-link" title="nltk.tokenize.util.align_tokens">align​_tokens</a></code></td>
-    <td>This module attempt to find the offsets of the tokens in <em>s</em>, as a sequence of <tt class="rst-docutils literal">(start, end)</tt> tuples, given the tokens and also the source string.</td>
+    <td><code><a href="#align_tokens" class="internal-link" title="nltk.tokenize.util.align_tokens">align<wbr></wbr>_tokens</a></code></td>
+    <td>This module attempt to find the offsets of the tokens in <em>s</em>, as a sequence of <tt class="rst-docutils rst-literal">(start, end)</tt> tuples, given the tokens and also the source string.</td>
   </tr><tr class="function">
     
     <td>Function</td>
-    <td><code><a href="#is_cjk" class="internal-link" title="nltk.tokenize.util.is_cjk">is​_cjk</a></code></td>
+    <td><code><a href="#is_cjk" class="internal-link" title="nltk.tokenize.util.is_cjk">is<wbr></wbr>_cjk</a></code></td>
     <td>Python port of Moses' code to check for CJK character.</td>
   </tr><tr class="function">
     
     <td>Function</td>
-    <td><code><a href="#regexp_span_tokenize" class="internal-link" title="nltk.tokenize.util.regexp_span_tokenize">regexp​_span​_tokenize</a></code></td>
-    <td>Return the offsets of the tokens in <em>s</em>, as a sequence of <tt class="rst-docutils literal">(start, end)</tt> tuples, by splitting the string at each successive match of <em>regexp</em>.</td>
+    <td><code><a href="#regexp_span_tokenize" class="internal-link" title="nltk.tokenize.util.regexp_span_tokenize">regexp<wbr></wbr>_span<wbr></wbr>_tokenize</a></code></td>
+    <td>Return the offsets of the tokens in <em>s</em>, as a sequence of <tt class="rst-docutils rst-literal">(start, end)</tt> tuples, by splitting the string at each successive match of <em>regexp</em>.</td>
   </tr><tr class="function">
     
     <td>Function</td>
-    <td><code><a href="#spans_to_relative" class="internal-link" title="nltk.tokenize.util.spans_to_relative">spans​_to​_relative</a></code></td>
+    <td><code><a href="#spans_to_relative" class="internal-link" title="nltk.tokenize.util.spans_to_relative">spans<wbr></wbr>_to<wbr></wbr>_relative</a></code></td>
     <td>Return a sequence of relative spans, given a sequence of spans.</td>
   </tr><tr class="function">
     
     <td>Function</td>
-    <td><code><a href="#string_span_tokenize" class="internal-link" title="nltk.tokenize.util.string_span_tokenize">string​_span​_tokenize</a></code></td>
-    <td>Return the offsets of the tokens in <em>s</em>, as a sequence of <tt class="rst-docutils literal">(start, end)</tt> tuples, by splitting the string at each occurrence of <em>sep</em>.</td>
+    <td><code><a href="#string_span_tokenize" class="internal-link" title="nltk.tokenize.util.string_span_tokenize">string<wbr></wbr>_span<wbr></wbr>_tokenize</a></code></td>
+    <td>Return the offsets of the tokens in <em>s</em>, as a sequence of <tt class="rst-docutils rst-literal">(start, end)</tt> tuples, by splitting the string at each occurrence of <em>sep</em>.</td>
   </tr><tr class="function">
     
     <td>Function</td>
-    <td><code><a href="#xml_escape" class="internal-link" title="nltk.tokenize.util.xml_escape">xml​_escape</a></code></td>
+    <td><code><a href="#xml_escape" class="internal-link" title="nltk.tokenize.util.xml_escape">xml<wbr></wbr>_escape</a></code></td>
     <td>This function transforms the input text into an "escaped" version suitable for well-formed XML formatting.</td>
   </tr><tr class="function">
     
     <td>Function</td>
-    <td><code><a href="#xml_unescape" class="internal-link" title="nltk.tokenize.util.xml_unescape">xml​_unescape</a></code></td>
+    <td><code><a href="#xml_unescape" class="internal-link" title="nltk.tokenize.util.xml_unescape">xml<wbr></wbr>_unescape</a></code></td>
     <td>This function transforms the "escaped" version suitable for well-formed XML formatting into humanly-readable string.</td>
   </tr>
 </table>
-        
-
           
-      </div>
 
-      <div id="childList">
+            
+        </div>
 
-        <div class="basefunction">
+        <div id="childList">
+          <div class="basefunction">
   
   
   <a name="nltk.tokenize.util.align_tokens">
@@ -211,17 +569,22 @@
   </a>
   <div class="functionHeader">
     
-    <span class="py-keyword">def</span> <span class="py-defname">align_tokens</span>(tokens, sentence):
+    
+    <span class="py-keyword">def</span> <span class="py-defname">align_tokens</span><span class="function-signature">(tokens, sentence)</span>:
     <a class="sourceLink" href="https://github.com/nltk/nltk/tree/3.6.2/nltk/tokenize/util.py#L257">
       
       (source)
     </a>
+    <a class="headerLink" href="#align_tokens" title="nltk.tokenize.util.align_tokens">
+      
+      
+      ¶
+    </a>
   </div>
   <div class="docstring functionBody">
     
-    
     <div><p>This module attempt to find the offsets of the tokens in <em>s</em>, as a sequence
-of <tt class="rst-docutils literal">(start, end)</tt> tuples, given the tokens and also the source string.</p>
+of <tt class="rst-docutils rst-literal">(start, end)</tt> tuples, given the tokens and also the source string.</p>
 <blockquote>
 <pre class="py-doctest">
 <span class="py-prompt">&gt;&gt;&gt; </span><span class="py-keyword">from</span> nltk.tokenize <span class="py-keyword">import</span> TreebankWordTokenizer
@@ -256,14 +619,19 @@ of <tt class="rst-docutils literal">(start, end)</tt> tuples, given the tokens a
   </a>
   <div class="functionHeader">
     
-    <span class="py-keyword">def</span> <span class="py-defname">is_cjk</span>(character):
+    
+    <span class="py-keyword">def</span> <span class="py-defname">is_cjk</span><span class="function-signature">(character)</span>:
     <a class="sourceLink" href="https://github.com/nltk/nltk/tree/3.6.2/nltk/tokenize/util.py#L162">
       
       (source)
     </a>
+    <a class="headerLink" href="#is_cjk" title="nltk.tokenize.util.is_cjk">
+      
+      
+      ¶
+    </a>
   </div>
   <div class="docstring functionBody">
-    
     
     <div><p>Python port of Moses' code to check for CJK character.</p>
 <pre class="py-doctest">
@@ -286,16 +654,21 @@ of <tt class="rst-docutils literal">(start, end)</tt> tuples, given the tokens a
   </a>
   <div class="functionHeader">
     
-    <span class="py-keyword">def</span> <span class="py-defname">regexp_span_tokenize</span>(s, regexp):
+    
+    <span class="py-keyword">def</span> <span class="py-defname">regexp_span_tokenize</span><span class="function-signature">(s, regexp)</span>:
     <a class="sourceLink" href="https://github.com/nltk/nltk/tree/3.6.2/nltk/tokenize/util.py#L47">
       
       (source)
     </a>
+    <a class="headerLink" href="#regexp_span_tokenize" title="nltk.tokenize.util.regexp_span_tokenize">
+      
+      
+      ¶
+    </a>
   </div>
   <div class="docstring functionBody">
     
-    
-    <div><p>Return the offsets of the tokens in <em>s</em>, as a sequence of <tt class="rst-docutils literal">(start, end)</tt>
+    <div><p>Return the offsets of the tokens in <em>s</em>, as a sequence of <tt class="rst-docutils rst-literal">(start, end)</tt>
 tuples, by splitting the string at each successive match of <em>regexp</em>.</p>
 <blockquote>
 <pre class="py-doctest">
@@ -319,14 +692,19 @@ tuples, by splitting the string at each successive match of <em>regexp</em>.</p>
   </a>
   <div class="functionHeader">
     
-    <span class="py-keyword">def</span> <span class="py-defname">spans_to_relative</span>(spans):
+    
+    <span class="py-keyword">def</span> <span class="py-defname">spans_to_relative</span><span class="function-signature">(spans)</span>:
     <a class="sourceLink" href="https://github.com/nltk/nltk/tree/3.6.2/nltk/tokenize/util.py#L74">
       
       (source)
     </a>
+    <a class="headerLink" href="#spans_to_relative" title="nltk.tokenize.util.spans_to_relative">
+      
+      
+      ¶
+    </a>
   </div>
   <div class="docstring functionBody">
-    
     
     <div><p>Return a sequence of relative spans, given a sequence of spans.</p>
 <blockquote>
@@ -352,16 +730,21 @@ tuples, by splitting the string at each successive match of <em>regexp</em>.</p>
   </a>
   <div class="functionHeader">
     
-    <span class="py-keyword">def</span> <span class="py-defname">string_span_tokenize</span>(s, sep):
+    
+    <span class="py-keyword">def</span> <span class="py-defname">string_span_tokenize</span><span class="function-signature">(s, sep)</span>:
     <a class="sourceLink" href="https://github.com/nltk/nltk/tree/3.6.2/nltk/tokenize/util.py#L13">
       
       (source)
     </a>
+    <a class="headerLink" href="#string_span_tokenize" title="nltk.tokenize.util.string_span_tokenize">
+      
+      
+      ¶
+    </a>
   </div>
   <div class="docstring functionBody">
     
-    
-    <div><p>Return the offsets of the tokens in <em>s</em>, as a sequence of <tt class="rst-docutils literal">(start, end)</tt>
+    <div><p>Return the offsets of the tokens in <em>s</em>, as a sequence of <tt class="rst-docutils rst-literal">(start, end)</tt>
 tuples, by splitting the string at each occurrence of <em>sep</em>.</p>
 <blockquote>
 <pre class="py-doctest">
@@ -385,14 +768,19 @@ tuples, by splitting the string at each occurrence of <em>sep</em>.</p>
   </a>
   <div class="functionHeader">
     
-    <span class="py-keyword">def</span> <span class="py-defname">xml_escape</span>(text):
+    
+    <span class="py-keyword">def</span> <span class="py-defname">xml_escape</span><span class="function-signature">(text)</span>:
     <a class="sourceLink" href="https://github.com/nltk/nltk/tree/3.6.2/nltk/tokenize/util.py#L194">
       
       (source)
     </a>
+    <a class="headerLink" href="#xml_escape" title="nltk.tokenize.util.xml_escape">
+      
+      
+      ¶
+    </a>
   </div>
   <div class="docstring functionBody">
-    
     
     <div><p>This function transforms the input text into an "escaped" version suitable
 for well-formed XML formatting.</p>
@@ -421,14 +809,19 @@ entities dictionary.</p>
   </a>
   <div class="functionHeader">
     
-    <span class="py-keyword">def</span> <span class="py-defname">xml_unescape</span>(text):
+    
+    <span class="py-keyword">def</span> <span class="py-defname">xml_unescape</span><span class="function-signature">(text)</span>:
     <a class="sourceLink" href="https://github.com/nltk/nltk/tree/3.6.2/nltk/tokenize/util.py#L226">
       
       (source)
     </a>
+    <a class="headerLink" href="#xml_unescape" title="nltk.tokenize.util.xml_unescape">
+      
+      
+      ¶
+    </a>
   </div>
   <div class="docstring functionBody">
-    
     
     <div><p>This function transforms the "escaped" version suitable
 for well-formed XML formatting into humanly-readable string.</p>
@@ -446,19 +839,28 @@ entities dictionary.</p>
 <table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">text:</span>str</td><td class="fieldArgDesc">The text that needs to be unescaped.</td></tr><tr class="fieldStart"><td class="fieldName" colspan="2">Returns</td></tr><tr><td class="fieldArgContainer">str</td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr></table></div>
   </div>
 </div>
-
+        </div>
+      
       </div>
     </div>
 
     <footer class="navbar navbar-default">
+
   
-  <div class="container">
+  <div class="container-fluid">
     <a href="index.html">API Documentation</a> for <a href="http://www.nltk.org/" class="projecthome">nltk-3.6.2</a>,
   generated by <a href="https://github.com/twisted/pydoctor/">pydoctor</a>
-    22.2.2.dev0 at 2025-02-28 00:01:09.
+    24.11.2 at 2025-02-28 00:02:28.
   </div>
-</footer>
 
+  <!-- Search related scripts needs to be loaded at the end of HTML 
+    parsing not to introduce overhead and display HTML data asap -->
+  <script src="ajax.js" type="text/javascript"></script>
+  <script src="searchlib.js" type="text/javascript"></script>
+  <script src="search.js" type="text/javascript"></script>
+
+</footer>
+  
     <script src="pydoctor.js" type="text/javascript"></script>
 
   </body>

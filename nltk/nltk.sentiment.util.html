@@ -7,23 +7,26 @@
   <head>
     
     <title>nltk.sentiment.util</title>
-    <meta name="generator" content="pydoctor 22.2.2.dev0"> 
+    <meta name="generator" content="pydoctor 24.11.2"> 
         
     </meta>
     <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=0.75" />
+    <meta name="viewport" content="width=device-width, initial-scale=1 maximum-scale=1" />
     <link rel="stylesheet" type="text/css" href="bootstrap.min.css" />
     <link rel="stylesheet" type="text/css" href="apidocs.css" />
     <link rel="stylesheet" type="text/css" href="extra.css" />
+    
 </head>
 
   <body>
 
     
 
-    <nav class="navbar navbar-default">
+    <nav class="navbar navbar-default mainnavbar">
+      
   
-  <div class="container">
+  <div class="container-fluid">
+
 
     <div class="navbar-header">
       
@@ -50,7 +53,7 @@
             
             <span class="input-group-btn">
               <a style="display: none;" class="btn btn-default" id="search-clear-button" title="Clear" onclick="clearSearch()"><img src="fonts/x-circle.svg" alt="Clear" /></a>
-              <a class="btn btn-default" id="search-help-button" title="Help" onclick="toggleSearchHelpText()"><img src="fonts/info.svg" alt="Help" /></a>
+              <a class="btn btn-default" id="apidocs-help-button" title="Help" href="apidocs-help.html"><img src="fonts/info.svg" alt="Help" /></a>
             </span>
           </div>
         </div>
@@ -58,50 +61,24 @@
       </div>
 
       <div id="search-results-container" style="display: none;">
-        <div>
+        
+        <div id="search-buttons">
           <span class="label label-default" id="search-docstrings-button">
-            <a title="Search in docstrings" onclick="toggleSearchInDocstrings()">search in docstrings</a></span>
+          <label class="checkbox-inline">
+            <input type="checkbox" id="toggle-search-in-docstrings-checkbox" value="false" onclick="toggleSearchInDocstrings()">
+              search in docstrings
+            </input>
+          </label>
+          </span>
+          
         </div>
-
+        
         <noscript>
             <h1>Cannot search: JavaScript is not supported/enabled in your browser.</h1>
         </noscript>
 
-        <div class="hint" id="search-help-box">
-          <p class="rst-last">
-      
-            Search bar offers the following options:
-            <ul>   
-                <li>
-                  <strong>Term presence.</strong> The below example searches for documents that 
-                    must contain “foo”, might contain “bar” and must not contain “baz”: <code>+foo bar -baz</code>
-                </li> 
-
-                <li>
-                  <strong>Wildcards.</strong> The below example searches for documents with words beginning with “foo”: <code>foo*</code>
-                </li> 
-
-                <li>
-                  <strong>Search in specific fields.</strong> The following search matches all objects 
-                  in "twisted.mail" that matches “search”: <code>+qname:twisted.mail.* +search</code>
-
-                  <p>
-                    Possible fields: 'name', 'qname' (fully qualified name), 'docstring', and 'kind'.
-                    Last two fields are only applicable if "search in docstrings" is enabled.
-                  </p>
-                </li>
-
-                <li>
-                  <strong>Fuzzy matches.</strong> The following search matches all documents 
-                  that have a word within 1 edit distance of “foo”: <code>foo~1</code>
-                </li>
-            </ul>
-
-          </p>
-        </div>
-
         <div id="search-status"> </div>
-        
+
         <div class="warning" id="search-warn-box" style="display: none;">
           <p class="rst-last"><span id="search-warn"></span></p>
         </div>
@@ -110,116 +87,452 @@
           <!-- Filled dynamically by JS -->
         </table>
         
-        <div style="margin-top: 8px;">
-          <p>Results provided by <a href="https://lunrjs.com">Lunr.js</a></p>
+        <div style="margin-top: 10px;">
+          <p>For more information on the search, visit the <a href="apidocs-help.html#rst-search">help page</a>.</p>
         </div>
       </div>
 
     </div>
+
+
+  </div>
+</nav>
+    
+    <div class="container-fluid">
+
+      <!-- Side navigation -->
+      <div class="sidebarcontainer" style="display: none;">
+        
+        <div class="sidebar"><nav class="sidebar">
+  
+
+  <div>
+
+      <div class="thingTitle">
+        <span>Module</span>
+        <code class="thisobject"><a href="nltk.sentiment.util.html" class="internal-link" title="This module">util</a></code> 
+      </div>
+      
+      <div>
+        
+
+        
+         
+
+        
+        
+
+        <div class="childrenKindTitle">Functions</div>
+        <ul>
+    
+    <li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="#demo_liu_hu_lexicon" class="internal-link" title="nltk.sentiment.util.demo_liu_hu_lexicon">demo<wbr></wbr>_liu<wbr></wbr>_hu<wbr></wbr>_lexicon</a></code>
+            </div>
+        
+
+    </li><li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="#demo_movie_reviews" class="internal-link" title="nltk.sentiment.util.demo_movie_reviews">demo<wbr></wbr>_movie<wbr></wbr>_reviews</a></code>
+            </div>
+        
+
+    </li><li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="#demo_sent_subjectivity" class="internal-link" title="nltk.sentiment.util.demo_sent_subjectivity">demo<wbr></wbr>_sent<wbr></wbr>_subjectivity</a></code>
+            </div>
+        
+
+    </li><li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="#demo_subjectivity" class="internal-link" title="nltk.sentiment.util.demo_subjectivity">demo<wbr></wbr>_subjectivity</a></code>
+            </div>
+        
+
+    </li><li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="#demo_tweets" class="internal-link" title="nltk.sentiment.util.demo_tweets">demo<wbr></wbr>_tweets</a></code>
+            </div>
+        
+
+    </li><li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="#demo_vader_instance" class="internal-link" title="nltk.sentiment.util.demo_vader_instance">demo<wbr></wbr>_vader<wbr></wbr>_instance</a></code>
+            </div>
+        
+
+    </li><li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="#demo_vader_tweets" class="internal-link" title="nltk.sentiment.util.demo_vader_tweets">demo<wbr></wbr>_vader<wbr></wbr>_tweets</a></code>
+            </div>
+        
+
+    </li><li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="#extract_bigram_feats" class="internal-link" title="nltk.sentiment.util.extract_bigram_feats">extract<wbr></wbr>_bigram<wbr></wbr>_feats</a></code>
+            </div>
+        
+
+    </li><li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="#extract_unigram_feats" class="internal-link" title="nltk.sentiment.util.extract_unigram_feats">extract<wbr></wbr>_unigram<wbr></wbr>_feats</a></code>
+            </div>
+        
+
+    </li><li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="#json2csv_preprocess" class="internal-link" title="nltk.sentiment.util.json2csv_preprocess">json2csv<wbr></wbr>_preprocess</a></code>
+            </div>
+        
+
+    </li><li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="#mark_negation" class="internal-link" title="nltk.sentiment.util.mark_negation">mark<wbr></wbr>_negation</a></code>
+            </div>
+        
+
+    </li><li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="#output_markdown" class="internal-link" title="nltk.sentiment.util.output_markdown">output<wbr></wbr>_markdown</a></code>
+            </div>
+        
+
+    </li><li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="#parse_tweets_set" class="internal-link" title="nltk.sentiment.util.parse_tweets_set">parse<wbr></wbr>_tweets<wbr></wbr>_set</a></code>
+            </div>
+        
+
+    </li><li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="#split_train_test" class="internal-link" title="nltk.sentiment.util.split_train_test">split<wbr></wbr>_train<wbr></wbr>_test</a></code>
+            </div>
+        
+
+    </li><li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="#timer" class="internal-link" title="nltk.sentiment.util.timer">timer</a></code>
+            </div>
+        
+
+    </li><li class="private">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="#_show_plot" class="internal-link" title="nltk.sentiment.util._show_plot">_show<wbr></wbr>_plot</a></code>
+            </div>
+        
+
+    </li>
+</ul> 
+
+        
+         
+
+        <div class="childrenKindTitle">Variables</div>
+        <ul>
+    
+    <li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="#CLAUSE_PUNCT" class="internal-link" title="nltk.sentiment.util.CLAUSE_PUNCT">CLAUSE<wbr></wbr>_PUNCT</a></code>
+            </div>
+        
+
+    </li><li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="#CLAUSE_PUNCT_RE" class="internal-link" title="nltk.sentiment.util.CLAUSE_PUNCT_RE">CLAUSE<wbr></wbr>_PUNCT<wbr></wbr>_RE</a></code>
+            </div>
+        
+
+    </li><li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="#HAPPY" class="internal-link" title="nltk.sentiment.util.HAPPY">HAPPY</a></code>
+            </div>
+        
+
+    </li><li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="#NEGATION" class="internal-link" title="nltk.sentiment.util.NEGATION">NEGATION</a></code>
+            </div>
+        
+
+    </li><li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="#NEGATION_RE" class="internal-link" title="nltk.sentiment.util.NEGATION_RE">NEGATION<wbr></wbr>_RE</a></code>
+            </div>
+        
+
+    </li><li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="#SAD" class="internal-link" title="nltk.sentiment.util.SAD">SAD</a></code>
+            </div>
+        
+
+    </li>
+</ul> 
+
+        
+         
+        
+      </div>
+  </div><div>
+
+      <div class="thingTitle">
+        <span>Package</span>
+        <code><a href="nltk.sentiment.html" class="internal-link" title="The parent of this module">sentiment</a></code> 
+      </div>
+      
+      <div>
+        
+
+        <div class="childrenKindTitle">Modules</div>
+        <ul>
+    
+    <li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="nltk.sentiment.sentiment_analyzer.html" class="internal-link" title="nltk.sentiment.sentiment_analyzer">sentiment<wbr></wbr>_analyzer</a></code>
+            </div>
+        
+
+    </li><li class=" thisobject">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="nltk.sentiment.util.html" class="internal-link" title="nltk.sentiment.util">util</a></code>
+            </div>
+        
+
+    </li><li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="nltk.sentiment.vader.html" class="internal-link" title="nltk.sentiment.vader">vader</a></code>
+            </div>
+        
+
+    </li>
+</ul> 
+
+        
+        
+
+        
+         
+
+        
+         
+
+        
+         
+
+        
+         
+        
+      </div>
   </div>
 
-  <script src="ajax.js" type="text/javascript"></script>
-  <script src="search.js" type="text/javascript"></script>
-
 </nav>
-
-    
-
-    <div class="container">
-
-      <div class="page-header">
-        <h1 class="module"><code><code><a href="index.html" class="internal-link">nltk</a></code><wbr></wbr>.<code><a href="nltk.sentiment.html" class="internal-link" title="nltk.sentiment">sentiment</a></code><wbr></wbr>.<code><a href="nltk.sentiment.util.html" class="internal-link" title="nltk.sentiment.util">util</a></code></code></h1>
-        <div id="showPrivate">
-          <button class="btn btn-link" onclick="togglePrivate()">Toggle Private API</button>
         </div>
+        <div id="collapseSideBar">
+          <a class="btn btn-link" onclick="toggleSideBarCollapse()" title="Toggle Sidebar Collapse">
+          </a>
+        </div> 
+        <script src="sidebartoggle.js" type="text/javascript"></script>
+       
       </div>
 
-      <div class="categoryHeader">
-        module documentation
-      </div>
+      <div id="main" class="">
+        
 
-      <div class="extrasDocstring">
-        <a href="https://github.com/nltk/nltk/tree/3.6.2/nltk/sentiment/util.py" class="sourceLink">(source)</a>
-        <p></p>
-      </div>
+        
 
-      <div class="moduleDocstring">
-        <div>Utility methods for Sentiment Analysis.</div>
-      </div>
+        <div class="page-header">
+          <h1 class="module"><code><code><a href="index.html" class="internal-link">nltk</a></code><wbr></wbr>.<code><a href="nltk.sentiment.html" class="internal-link" title="nltk.sentiment">sentiment</a></code><wbr></wbr>.<code><a href="nltk.sentiment.util.html" class="internal-link" title="nltk.sentiment.util">util</a></code></code></h1>
+          <div id="showPrivate">
+            <button class="btn btn-link" onclick="togglePrivate()">Toggle Private API</button>
+          </div>
+        </div>
 
-      <div id="splitTables">
-        <table class="children sortable" id="id1459">
+        <div class="categoryHeader">
+          module documentation
+        </div>
+
+        <div class="extrasDocstring">
+          <a href="https://github.com/nltk/nltk/tree/3.6.2/nltk/sentiment/util.py" class="sourceLink">(source)</a>
+          <p></p>
+        </div>
+
+        <div class="moduleDocstring">
+          <div><p>Utility methods for Sentiment Analysis.</p></div>
+        </div>
+
+        <div id="splitTables">
+          <table class="children sortable" id="id1403">
   
   
   <tr class="function">
     
     <td>Function</td>
-    <td><code><a href="#demo_liu_hu_lexicon" class="internal-link" title="nltk.sentiment.util.demo_liu_hu_lexicon">demo​_liu​_hu​_lexicon</a></code></td>
-    <td><span class="undocumented">No summary</span></td>
+    <td><code><a href="#demo_liu_hu_lexicon" class="internal-link" title="nltk.sentiment.util.demo_liu_hu_lexicon">demo<wbr></wbr>_liu<wbr></wbr>_hu<wbr></wbr>_lexicon</a></code></td>
+    <td>Basic example of sentiment classification using Liu and Hu opinion lexicon. This function simply counts the number of positive, negative and neutral words in the sentence and classifies it depending on which polarity is more represented...</td>
   </tr><tr class="function">
     
     <td>Function</td>
-    <td><code><a href="#demo_movie_reviews" class="internal-link" title="nltk.sentiment.util.demo_movie_reviews">demo​_movie​_reviews</a></code></td>
-    <td><span class="undocumented">No summary</span></td>
+    <td><code><a href="#demo_movie_reviews" class="internal-link" title="nltk.sentiment.util.demo_movie_reviews">demo<wbr></wbr>_movie<wbr></wbr>_reviews</a></code></td>
+    <td>Train classifier on all instances of the Movie Reviews dataset. The corpus has been preprocessed using the default sentence tokenizer and WordPunctTokenizer. Features are composed of:</td>
   </tr><tr class="function">
     
     <td>Function</td>
-    <td><code><a href="#demo_sent_subjectivity" class="internal-link" title="nltk.sentiment.util.demo_sent_subjectivity">demo​_sent​_subjectivity</a></code></td>
+    <td><code><a href="#demo_sent_subjectivity" class="internal-link" title="nltk.sentiment.util.demo_sent_subjectivity">demo<wbr></wbr>_sent<wbr></wbr>_subjectivity</a></code></td>
     <td>Classify a single sentence as subjective or objective using a stored SentimentAnalyzer.</td>
   </tr><tr class="function">
     
     <td>Function</td>
-    <td><code><a href="#demo_subjectivity" class="internal-link" title="nltk.sentiment.util.demo_subjectivity">demo​_subjectivity</a></code></td>
-    <td><span class="undocumented">No summary</span></td>
+    <td><code><a href="#demo_subjectivity" class="internal-link" title="nltk.sentiment.util.demo_subjectivity">demo<wbr></wbr>_subjectivity</a></code></td>
+    <td>Train and test a classifier on instances of the Subjective Dataset by Pang and Lee. The dataset is made of 5000 subjective and 5000 objective sentences. All tokens (words and punctuation marks) are separated by a whitespace, so we use the basic WhitespaceTokenizer to parse the data.</td>
   </tr><tr class="function">
     
     <td>Function</td>
-    <td><code><a href="#demo_tweets" class="internal-link" title="nltk.sentiment.util.demo_tweets">demo​_tweets</a></code></td>
-    <td><span class="undocumented">No summary</span></td>
+    <td><code><a href="#demo_tweets" class="internal-link" title="nltk.sentiment.util.demo_tweets">demo<wbr></wbr>_tweets</a></code></td>
+    <td>Train and test Naive Bayes classifier on 10000 tweets, tokenized using TweetTokenizer. Features are composed of:</td>
   </tr><tr class="function">
     
     <td>Function</td>
-    <td><code><a href="#demo_vader_instance" class="internal-link" title="nltk.sentiment.util.demo_vader_instance">demo​_vader​_instance</a></code></td>
+    <td><code><a href="#demo_vader_instance" class="internal-link" title="nltk.sentiment.util.demo_vader_instance">demo<wbr></wbr>_vader<wbr></wbr>_instance</a></code></td>
     <td>Output polarity scores for a text using Vader approach.</td>
   </tr><tr class="function">
     
     <td>Function</td>
-    <td><code><a href="#demo_vader_tweets" class="internal-link" title="nltk.sentiment.util.demo_vader_tweets">demo​_vader​_tweets</a></code></td>
+    <td><code><a href="#demo_vader_tweets" class="internal-link" title="nltk.sentiment.util.demo_vader_tweets">demo<wbr></wbr>_vader<wbr></wbr>_tweets</a></code></td>
     <td>Classify 10000 positive and negative tweets using Vader approach.</td>
   </tr><tr class="function">
     
     <td>Function</td>
-    <td><code><a href="#extract_bigram_feats" class="internal-link" title="nltk.sentiment.util.extract_bigram_feats">extract​_bigram​_feats</a></code></td>
-    <td>Populate a dictionary of bigram features, reflecting the presence/absence in the document of each of the tokens in <code><a href="nltk.util.html#bigrams" class="internal-link" title="nltk.util.bigrams">bigrams</a></code>. This extractor function only considers contiguous bigrams obtained by <code><a href="nltk.util.html#bigrams" class="internal-link" title="nltk.util.bigrams">nltk.bigrams</a></code>.</td>
+    <td><code><a href="#extract_bigram_feats" class="internal-link" title="nltk.sentiment.util.extract_bigram_feats">extract<wbr></wbr>_bigram<wbr></wbr>_feats</a></code></td>
+    <td>Populate a dictionary of bigram features, reflecting the presence/absence in the document of each of the tokens in <code><a href="nltk.util.html#bigrams" class="internal-link" title="nltk.util.bigrams">bigrams</a></code>. This extractor function only considers contiguous bigrams obtained by <code><a href="nltk.util.html#bigrams" class="internal-link" title="nltk.util.bigrams">nltk.bigrams</a></code>...</td>
   </tr><tr class="function">
     
     <td>Function</td>
-    <td><code><a href="#extract_unigram_feats" class="internal-link" title="nltk.sentiment.util.extract_unigram_feats">extract​_unigram​_feats</a></code></td>
+    <td><code><a href="#extract_unigram_feats" class="internal-link" title="nltk.sentiment.util.extract_unigram_feats">extract<wbr></wbr>_unigram<wbr></wbr>_feats</a></code></td>
     <td>Populate a dictionary of unigram features, reflecting the presence/absence in the document of each of the tokens in <code>unigrams</code>.</td>
   </tr><tr class="function">
     
     <td>Function</td>
-    <td><code><a href="#json2csv_preprocess" class="internal-link" title="nltk.sentiment.util.json2csv_preprocess">json2csv​_preprocess</a></code></td>
+    <td><code><a href="#json2csv_preprocess" class="internal-link" title="nltk.sentiment.util.json2csv_preprocess">json2csv<wbr></wbr>_preprocess</a></code></td>
     <td>Convert json file to csv file, preprocessing each row to obtain a suitable dataset for tweets Semantic Analysis.</td>
   </tr><tr class="function">
     
     <td>Function</td>
-    <td><code><a href="#mark_negation" class="internal-link" title="nltk.sentiment.util.mark_negation">mark​_negation</a></code></td>
+    <td><code><a href="#mark_negation" class="internal-link" title="nltk.sentiment.util.mark_negation">mark<wbr></wbr>_negation</a></code></td>
     <td>Append _NEG suffix to words that appear in the scope between a negation and a punctuation mark.</td>
   </tr><tr class="function">
     
     <td>Function</td>
-    <td><code><a href="#output_markdown" class="internal-link" title="nltk.sentiment.util.output_markdown">output​_markdown</a></code></td>
+    <td><code><a href="#output_markdown" class="internal-link" title="nltk.sentiment.util.output_markdown">output<wbr></wbr>_markdown</a></code></td>
     <td>Write the output of an analysis to a file.</td>
   </tr><tr class="function">
     
     <td>Function</td>
-    <td><code><a href="#parse_tweets_set" class="internal-link" title="nltk.sentiment.util.parse_tweets_set">parse​_tweets​_set</a></code></td>
+    <td><code><a href="#parse_tweets_set" class="internal-link" title="nltk.sentiment.util.parse_tweets_set">parse<wbr></wbr>_tweets<wbr></wbr>_set</a></code></td>
     <td>Parse csv file containing tweets and output data a list of (text, label) tuples.</td>
   </tr><tr class="function">
     
     <td>Function</td>
-    <td><code><a href="#split_train_test" class="internal-link" title="nltk.sentiment.util.split_train_test">split​_train​_test</a></code></td>
+    <td><code><a href="#split_train_test" class="internal-link" title="nltk.sentiment.util.split_train_test">split<wbr></wbr>_train<wbr></wbr>_test</a></code></td>
     <td>Randomly split <code>n</code> instances of the dataset into train and test sets.</td>
   </tr><tr class="function">
     
@@ -229,12 +542,12 @@
   </tr><tr class="constant">
     
     <td>Constant</td>
-    <td><code><a href="#CLAUSE_PUNCT" class="internal-link" title="nltk.sentiment.util.CLAUSE_PUNCT">CLAUSE​_PUNCT</a></code></td>
+    <td><code><a href="#CLAUSE_PUNCT" class="internal-link" title="nltk.sentiment.util.CLAUSE_PUNCT">CLAUSE<wbr></wbr>_PUNCT</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="constant">
     
     <td>Constant</td>
-    <td><code><a href="#CLAUSE_PUNCT_RE" class="internal-link" title="nltk.sentiment.util.CLAUSE_PUNCT_RE">CLAUSE​_PUNCT​_RE</a></code></td>
+    <td><code><a href="#CLAUSE_PUNCT_RE" class="internal-link" title="nltk.sentiment.util.CLAUSE_PUNCT_RE">CLAUSE<wbr></wbr>_PUNCT<wbr></wbr>_RE</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="constant">
     
@@ -249,7 +562,7 @@
   </tr><tr class="constant">
     
     <td>Constant</td>
-    <td><code><a href="#NEGATION_RE" class="internal-link" title="nltk.sentiment.util.NEGATION_RE">NEGATION​_RE</a></code></td>
+    <td><code><a href="#NEGATION_RE" class="internal-link" title="nltk.sentiment.util.NEGATION_RE">NEGATION<wbr></wbr>_RE</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="constant">
     
@@ -259,18 +572,17 @@
   </tr><tr class="function private">
     
     <td>Function</td>
-    <td><code><a href="#_show_plot" class="internal-link" title="nltk.sentiment.util._show_plot">_show​_plot</a></code></td>
+    <td><code><a href="#_show_plot" class="internal-link" title="nltk.sentiment.util._show_plot">_show<wbr></wbr>_plot</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr>
 </table>
-        
-
           
-      </div>
 
-      <div id="childList">
+            
+        </div>
 
-        <div class="basefunction">
+        <div id="childList">
+          <div class="basefunction">
   
   
   <a name="nltk.sentiment.util.demo_liu_hu_lexicon">
@@ -281,19 +593,24 @@
   </a>
   <div class="functionHeader">
     
-    <span class="py-keyword">def</span> <span class="py-defname">demo_liu_hu_lexicon</span>(sentence, plot=False):
+    
+    <span class="py-keyword">def</span> <span class="py-defname">demo_liu_hu_lexicon</span><span class="function-signature">(sentence, plot=False)</span>:
     <a class="sourceLink" href="https://github.com/nltk/nltk/tree/3.6.2/nltk/sentiment/util.py#L728">
       
       (source)
     </a>
+    <a class="headerLink" href="#demo_liu_hu_lexicon" title="nltk.sentiment.util.demo_liu_hu_lexicon">
+      
+      
+      ¶
+    </a>
   </div>
   <div class="docstring functionBody">
     
-    
-    <div>Basic example of sentiment classification using Liu and Hu opinion lexicon.
+    <div><p>Basic example of sentiment classification using Liu and Hu opinion lexicon.
 This function simply counts the number of positive, negative and neutral words
 in the sentence and classifies it depending on which polarity is more represented.
-Words that do not appear in the lexicon are considered as neutral.<table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">sentence</span></td><td class="fieldArgDesc">a sentence whose polarity has to be classified.</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">plot</span></td><td class="fieldArgDesc">if True, plot a visual representation of the sentence polarity.</td></tr></table></div>
+Words that do not appear in the lexicon are considered as neutral.</p><table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">sentence</span></td><td class="fieldArgDesc">a sentence whose polarity has to be classified.</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">plot</span></td><td class="fieldArgDesc">if True, plot a visual representation of the sentence polarity.</td></tr></table></div>
   </div>
 </div><div class="basefunction">
   
@@ -306,14 +623,19 @@ Words that do not appear in the lexicon are considered as neutral.<table class="
   </a>
   <div class="functionHeader">
     
-    <span class="py-keyword">def</span> <span class="py-defname">demo_movie_reviews</span>(trainer, n_instances=None, output=None):
+    
+    <span class="py-keyword">def</span> <span class="py-defname">demo_movie_reviews</span><span class="function-signature">(trainer, n_instances=None, output=None)</span>:
     <a class="sourceLink" href="https://github.com/nltk/nltk/tree/3.6.2/nltk/sentiment/util.py#L562">
       
       (source)
     </a>
+    <a class="headerLink" href="#demo_movie_reviews" title="nltk.sentiment.util.demo_movie_reviews">
+      
+      
+      ¶
+    </a>
   </div>
   <div class="docstring functionBody">
-    
     
     <div><p>Train classifier on all instances of the Movie Reviews dataset.
 The corpus has been preprocessed using the default sentence tokenizer and
@@ -324,7 +646,7 @@ Features are composed of:</p>
 <li>most frequent unigrams</li>
 </ul>
 </blockquote>
-<table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">trainer</span></td><td class="fieldArgDesc"><code>train</code> method of a classifier.</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">n​_instances</span></td><td class="fieldArgDesc">the number of total reviews that have to be used for
+<table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">trainer</span></td><td class="fieldArgDesc"><code>train</code> method of a classifier.</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">n<wbr></wbr>_instances</span></td><td class="fieldArgDesc">the number of total reviews that have to be used for
 training and testing. Reviews will be equally split between positive and
 negative.</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">output</span></td><td class="fieldArgDesc">the output file where results have to be reported.</td></tr></table></div>
   </div>
@@ -339,17 +661,22 @@ negative.</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">outp
   </a>
   <div class="functionHeader">
     
-    <span class="py-keyword">def</span> <span class="py-defname">demo_sent_subjectivity</span>(text):
+    
+    <span class="py-keyword">def</span> <span class="py-defname">demo_sent_subjectivity</span><span class="function-signature">(text)</span>:
     <a class="sourceLink" href="https://github.com/nltk/nltk/tree/3.6.2/nltk/sentiment/util.py#L705">
       
       (source)
     </a>
+    <a class="headerLink" href="#demo_sent_subjectivity" title="nltk.sentiment.util.demo_sent_subjectivity">
+      
+      
+      ¶
+    </a>
   </div>
   <div class="docstring functionBody">
     
-    
-    <div>Classify a single sentence as subjective or objective using a stored
-SentimentAnalyzer.<table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">text</span></td><td class="fieldArgDesc">a sentence whose subjectivity has to be classified.</td></tr></table></div>
+    <div><p>Classify a single sentence as subjective or objective using a stored
+SentimentAnalyzer.</p><table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">text</span></td><td class="fieldArgDesc">a sentence whose subjectivity has to be classified.</td></tr></table></div>
   </div>
 </div><div class="basefunction">
   
@@ -362,19 +689,24 @@ SentimentAnalyzer.<table class="fieldTable"><tr class="fieldStart"><td class="fi
   </a>
   <div class="functionHeader">
     
-    <span class="py-keyword">def</span> <span class="py-defname">demo_subjectivity</span>(trainer, save_analyzer=False, n_instances=None, output=None):
+    
+    <span class="py-keyword">def</span> <span class="py-defname">demo_subjectivity</span><span class="function-signature">(trainer, save_analyzer=False, n_instances=None, output=None)</span>:
     <a class="sourceLink" href="https://github.com/nltk/nltk/tree/3.6.2/nltk/sentiment/util.py#L630">
       
       (source)
     </a>
+    <a class="headerLink" href="#demo_subjectivity" title="nltk.sentiment.util.demo_subjectivity">
+      
+      
+      ¶
+    </a>
   </div>
   <div class="docstring functionBody">
     
-    
-    <div>Train and test a classifier on instances of the Subjective Dataset by Pang and
+    <div><p>Train and test a classifier on instances of the Subjective Dataset by Pang and
 Lee. The dataset is made of 5000 subjective and 5000 objective sentences.
 All tokens (words and punctuation marks) are separated by a whitespace, so
-we use the basic WhitespaceTokenizer to parse the data.<table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">trainer</span></td><td class="fieldArgDesc"><code>train</code> method of a classifier.</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">save​_analyzer</span></td><td class="fieldArgDesc">if <code>True</code>, store the SentimentAnalyzer in a pickle file.</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">n​_instances</span></td><td class="fieldArgDesc">the number of total sentences that have to be used for
+we use the basic WhitespaceTokenizer to parse the data.</p><table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">trainer</span></td><td class="fieldArgDesc"><code>train</code> method of a classifier.</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">save<wbr></wbr>_analyzer</span></td><td class="fieldArgDesc">if <code>True</code>, store the SentimentAnalyzer in a pickle file.</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">n<wbr></wbr>_instances</span></td><td class="fieldArgDesc">the number of total sentences that have to be used for
 training and testing. Sentences will be equally split between positive
 and negative.</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">output</span></td><td class="fieldArgDesc">the output file where results have to be reported.</td></tr></table></div>
   </div>
@@ -389,14 +721,19 @@ and negative.</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">
   </a>
   <div class="functionHeader">
     
-    <span class="py-keyword">def</span> <span class="py-defname">demo_tweets</span>(trainer, n_instances=None, output=None):
+    
+    <span class="py-keyword">def</span> <span class="py-defname">demo_tweets</span><span class="function-signature">(trainer, n_instances=None, output=None)</span>:
     <a class="sourceLink" href="https://github.com/nltk/nltk/tree/3.6.2/nltk/sentiment/util.py#L473">
       
       (source)
     </a>
+    <a class="headerLink" href="#demo_tweets" title="nltk.sentiment.util.demo_tweets">
+      
+      
+      ¶
+    </a>
   </div>
   <div class="docstring functionBody">
-    
     
     <div><p>Train and test Naive Bayes classifier on 10000 tweets, tokenized using
 TweetTokenizer.
@@ -407,7 +744,7 @@ Features are composed of:</p>
 <li>100 top bigrams (using BigramAssocMeasures.pmi)</li>
 </ul>
 </blockquote>
-<table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">trainer</span></td><td class="fieldArgDesc"><code>train</code> method of a classifier.</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">n​_instances</span></td><td class="fieldArgDesc">the number of total tweets that have to be used for
+<table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">trainer</span></td><td class="fieldArgDesc"><code>train</code> method of a classifier.</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">n<wbr></wbr>_instances</span></td><td class="fieldArgDesc">the number of total tweets that have to be used for
 training and testing. Tweets will be equally split between positive and
 negative.</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">output</span></td><td class="fieldArgDesc">the output file where results have to be reported.</td></tr></table></div>
   </div>
@@ -422,16 +759,21 @@ negative.</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">outp
   </a>
   <div class="functionHeader">
     
-    <span class="py-keyword">def</span> <span class="py-defname">demo_vader_instance</span>(text):
+    
+    <span class="py-keyword">def</span> <span class="py-defname">demo_vader_instance</span><span class="function-signature">(text)</span>:
     <a class="sourceLink" href="https://github.com/nltk/nltk/tree/3.6.2/nltk/sentiment/util.py#L772">
       
       (source)
     </a>
+    <a class="headerLink" href="#demo_vader_instance" title="nltk.sentiment.util.demo_vader_instance">
+      
+      
+      ¶
+    </a>
   </div>
   <div class="docstring functionBody">
     
-    
-    <div>Output polarity scores for a text using Vader approach.<table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">text</span></td><td class="fieldArgDesc">a text whose polarity has to be evaluated.</td></tr></table></div>
+    <div><p>Output polarity scores for a text using Vader approach.</p><table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">text</span></td><td class="fieldArgDesc">a text whose polarity has to be evaluated.</td></tr></table></div>
   </div>
 </div><div class="basefunction">
   
@@ -444,16 +786,21 @@ negative.</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">outp
   </a>
   <div class="functionHeader">
     
-    <span class="py-keyword">def</span> <span class="py-defname">demo_vader_tweets</span>(n_instances=None, output=None):
+    
+    <span class="py-keyword">def</span> <span class="py-defname">demo_vader_tweets</span><span class="function-signature">(n_instances=None, output=None)</span>:
     <a class="sourceLink" href="https://github.com/nltk/nltk/tree/3.6.2/nltk/sentiment/util.py#L784">
       
       (source)
     </a>
+    <a class="headerLink" href="#demo_vader_tweets" title="nltk.sentiment.util.demo_vader_tweets">
+      
+      
+      ¶
+    </a>
   </div>
   <div class="docstring functionBody">
     
-    
-    <div>Classify 10000 positive and negative tweets using Vader approach.<table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">n​_instances</span></td><td class="fieldArgDesc">the number of total tweets that have to be classified.</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">output</span></td><td class="fieldArgDesc">the output file where results have to be reported.</td></tr></table></div>
+    <div><p>Classify 10000 positive and negative tweets using Vader approach.</p><table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">n<wbr></wbr>_instances</span></td><td class="fieldArgDesc">the number of total tweets that have to be classified.</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">output</span></td><td class="fieldArgDesc">the output file where results have to be reported.</td></tr></table></div>
   </div>
 </div><div class="basefunction">
   
@@ -466,14 +813,19 @@ negative.</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">outp
   </a>
   <div class="functionHeader">
     
-    <span class="py-keyword">def</span> <span class="py-defname">extract_bigram_feats</span>(document, bigrams):
+    
+    <span class="py-keyword">def</span> <span class="py-defname">extract_bigram_feats</span><span class="function-signature">(document, bigrams)</span>:
     <a class="sourceLink" href="https://github.com/nltk/nltk/tree/3.6.2/nltk/sentiment/util.py#L196">
       
       (source)
     </a>
+    <a class="headerLink" href="#extract_bigram_feats" title="nltk.sentiment.util.extract_bigram_feats">
+      
+      
+      ¶
+    </a>
   </div>
   <div class="docstring functionBody">
-    
     
     <div><p>Populate a dictionary of bigram features, reflecting the presence/absence in
 the document of each of the tokens in <code><a href="nltk.util.html#bigrams" class="internal-link" title="nltk.util.bigrams">bigrams</a></code>. This extractor function only
@@ -498,14 +850,19 @@ checked in <code>document</code>.</td></tr><tr class="fieldStart"><td class="fie
   </a>
   <div class="functionHeader">
     
-    <span class="py-keyword">def</span> <span class="py-defname">extract_unigram_feats</span>(document, unigrams, handle_negation=False):
+    
+    <span class="py-keyword">def</span> <span class="py-defname">extract_unigram_feats</span><span class="function-signature">(document, unigrams, handle_negation=False)</span>:
     <a class="sourceLink" href="https://github.com/nltk/nltk/tree/3.6.2/nltk/sentiment/util.py#L171">
       
       (source)
     </a>
+    <a class="headerLink" href="#extract_unigram_feats" title="nltk.sentiment.util.extract_unigram_feats">
+      
+      
+      ¶
+    </a>
   </div>
   <div class="docstring functionBody">
-    
     
     <div><p>Populate a dictionary of unigram features, reflecting the presence/absence in
 the document of each of the tokens in <code>unigrams</code>.</p>
@@ -515,7 +872,7 @@ the document of each of the tokens in <code>unigrams</code>.</p>
 <span class="py-prompt">&gt;&gt;&gt; </span><span class="py-builtin">sorted</span>(extract_unigram_feats(document, words).items())
 <span class="py-output">[('contains(ice)', True), ('contains(police)', False), ('contains(riot)', False)]</span>
 </pre><table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">document</span></td><td class="fieldArgDesc">a list of words/tokens.</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">unigrams</span></td><td class="fieldArgDesc">a list of words/tokens whose presence/absence has to be
-checked in <code>document</code>.</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">handle​_negation</span></td><td class="fieldArgDesc">if <code>handle_negation == True</code> apply <code><a href="#mark_negation" class="internal-link" title="nltk.sentiment.util.mark_negation">mark_negation</a></code>
+checked in <code>document</code>.</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">handle<wbr></wbr>_negation</span></td><td class="fieldArgDesc">if <code>handle_negation == True</code> apply <code><a href="#mark_negation" class="internal-link" title="nltk.sentiment.util.mark_negation">mark_negation</a></code>
 method to <code>document</code> before checking for unigram presence/absence.</td></tr><tr class="fieldStart"><td class="fieldName" colspan="2">Returns</td></tr><tr><td colspan="2">a dictionary of unigram features {unigram : boolean}.</td></tr></table></div>
   </div>
 </div><div class="basefunction">
@@ -529,20 +886,25 @@ method to <code>document</code> before checking for unigram presence/absence.</t
   </a>
   <div class="functionHeader">
     
-    <span class="py-keyword">def</span> <span class="py-defname">json2csv_preprocess</span>(json_file, outfile, fields, encoding=<span class="rst-variable-quote">'</span><span class="rst-variable-string">utf8</span><span class="rst-variable-quote">'</span>, errors=<span class="rst-variable-quote">'</span><span class="rst-variable-string">replace</span><span class="rst-variable-quote">'</span>, gzip_compress=False, skip_retweets=True, skip_tongue_tweets=True, skip_ambiguous_tweets=True, strip_off_emoticons=True, remove_duplicates=True, limit=None):
+    
+    <span class="py-keyword">def</span> <span class="py-defname">json2csv_preprocess</span><span class="function-signature">(json_file, outfile, fields, encoding=<span class="rst-variable-quote">'</span><span class="rst-variable-string">utf8</span><span class="rst-variable-quote">'</span>, errors=<span class="rst-variable-quote">'</span><span class="rst-variable-string">replace</span><span class="rst-variable-quote">'</span>, gzip_compress=False, skip_retweets=True, skip_tongue_tweets=True, skip_ambiguous_tweets=True, strip_off_emoticons=True, remove_duplicates=True, limit=None)</span>:
     <a class="sourceLink" href="https://github.com/nltk/nltk/tree/3.6.2/nltk/sentiment/util.py#L338">
       
       (source)
     </a>
+    <a class="headerLink" href="#json2csv_preprocess" title="nltk.sentiment.util.json2csv_preprocess">
+      
+      
+      ¶
+    </a>
   </div>
   <div class="docstring functionBody">
     
-    
-    <div>Convert json file to csv file, preprocessing each row to obtain a suitable
-dataset for tweets Semantic Analysis.<table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">json​_file</span></td><td class="fieldArgDesc">the original json file containing tweets.</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">outfile</span></td><td class="fieldArgDesc">the output csv filename.</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">fields</span></td><td class="fieldArgDesc">a list of fields that will be extracted from the json file and
-kept in the output csv file.</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">encoding</span></td><td class="fieldArgDesc">the encoding of the files.</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">errors</span></td><td class="fieldArgDesc">the error handling strategy for the output writer.</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">gzip​_compress</span></td><td class="fieldArgDesc">if True, create a compressed GZIP file.</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">skip​_retweets</span></td><td class="fieldArgDesc">if True, remove retweets.</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">skip​_tongue​_tweets</span></td><td class="fieldArgDesc">if True, remove tweets containing ":P" and ":-P"
-emoticons.</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">skip​_ambiguous​_tweets</span></td><td class="fieldArgDesc">if True, remove tweets containing both happy
-and sad emoticons.</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">strip​_off​_emoticons</span></td><td class="fieldArgDesc">if True, strip off emoticons from all tweets.</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">remove​_duplicates</span></td><td class="fieldArgDesc">if True, remove tweets appearing more than once.</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">limit</span></td><td class="fieldArgDesc">an integer to set the number of tweets to convert. After the
+    <div><p>Convert json file to csv file, preprocessing each row to obtain a suitable
+dataset for tweets Semantic Analysis.</p><table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">json<wbr></wbr>_file</span></td><td class="fieldArgDesc">the original json file containing tweets.</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">outfile</span></td><td class="fieldArgDesc">the output csv filename.</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">fields</span></td><td class="fieldArgDesc">a list of fields that will be extracted from the json file and
+kept in the output csv file.</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">encoding</span></td><td class="fieldArgDesc">the encoding of the files.</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">errors</span></td><td class="fieldArgDesc">the error handling strategy for the output writer.</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">gzip<wbr></wbr>_compress</span></td><td class="fieldArgDesc">if True, create a compressed GZIP file.</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">skip<wbr></wbr>_retweets</span></td><td class="fieldArgDesc">if True, remove retweets.</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">skip<wbr></wbr>_tongue<wbr></wbr>_tweets</span></td><td class="fieldArgDesc">if True, remove tweets containing ":P" and ":-P"
+emoticons.</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">skip<wbr></wbr>_ambiguous<wbr></wbr>_tweets</span></td><td class="fieldArgDesc">if True, remove tweets containing both happy
+and sad emoticons.</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">strip<wbr></wbr>_off<wbr></wbr>_emoticons</span></td><td class="fieldArgDesc">if True, strip off emoticons from all tweets.</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">remove<wbr></wbr>_duplicates</span></td><td class="fieldArgDesc">if True, remove tweets appearing more than once.</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">limit</span></td><td class="fieldArgDesc">an integer to set the number of tweets to convert. After the
 limit is reached the conversion will stop. It can be useful to create
 subsets of the original tweets json data.</td></tr></table></div>
   </div>
@@ -557,14 +919,19 @@ subsets of the original tweets json data.</td></tr></table></div>
   </a>
   <div class="functionHeader">
     
-    <span class="py-keyword">def</span> <span class="py-defname">mark_negation</span>(document, double_neg_flip=False, shallow=False):
+    
+    <span class="py-keyword">def</span> <span class="py-defname">mark_negation</span><span class="function-signature">(document, double_neg_flip=False, shallow=False)</span>:
     <a class="sourceLink" href="https://github.com/nltk/nltk/tree/3.6.2/nltk/sentiment/util.py#L226">
       
       (source)
     </a>
+    <a class="headerLink" href="#mark_negation" title="nltk.sentiment.util.mark_negation">
+      
+      
+      ¶
+    </a>
   </div>
   <div class="docstring functionBody">
-    
     
     <div><p>Append _NEG suffix to words that appear in the scope between a negation
 and a punctuation mark.</p>
@@ -572,7 +939,7 @@ and a punctuation mark.</p>
 <span class="py-prompt">&gt;&gt;&gt; </span>sent = <span class="py-string">"I didn't like this movie . It was bad ."</span>.split()
 <span class="py-prompt">&gt;&gt;&gt; </span>mark_negation(sent)
 <span class="py-output">['I', "didn't", 'like_NEG', 'this_NEG', 'movie_NEG', '.', 'It', 'was', 'bad', '.']</span>
-</pre><table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">document</span></td><td class="fieldArgDesc">a list of words/tokens, or a tuple (words, label).</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">double​_neg​_flip</span></td><td class="fieldArgDesc">if True, double negation is considered affirmation
+</pre><table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">document</span></td><td class="fieldArgDesc">a list of words/tokens, or a tuple (words, label).</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">double<wbr></wbr>_neg<wbr></wbr>_flip</span></td><td class="fieldArgDesc">if True, double negation is considered affirmation
 (we activate/deactivate negation scope everytime we find a negation).</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">shallow</span></td><td class="fieldArgDesc">if True, the method will modify the original document in place.</td></tr><tr class="fieldStart"><td class="fieldName" colspan="2">Returns</td></tr><tr><td colspan="2">if <code>shallow == True</code> the method will modify the original document
 and return it. If <code>shallow == False</code> the method will return a modified
 document, leaving the original unmodified.</td></tr></table></div>
@@ -588,16 +955,21 @@ document, leaving the original unmodified.</td></tr></table></div>
   </a>
   <div class="functionHeader">
     
-    <span class="py-keyword">def</span> <span class="py-defname">output_markdown</span>(filename, **kwargs):
+    
+    <span class="py-keyword">def</span> <span class="py-defname">output_markdown</span><span class="function-signature">(filename, **kwargs)</span>:
     <a class="sourceLink" href="https://github.com/nltk/nltk/tree/3.6.2/nltk/sentiment/util.py#L267">
       
       (source)
     </a>
+    <a class="headerLink" href="#output_markdown" title="nltk.sentiment.util.output_markdown">
+      
+      
+      ¶
+    </a>
   </div>
   <div class="docstring functionBody">
     
-    
-    <div>Write the output of an analysis to a file.</div>
+    <div><p>Write the output of an analysis to a file.</p></div>
   </div>
 </div><div class="basefunction">
   
@@ -610,19 +982,24 @@ document, leaving the original unmodified.</td></tr></table></div>
   </a>
   <div class="functionHeader">
     
-    <span class="py-keyword">def</span> <span class="py-defname">parse_tweets_set</span>(filename, label, word_tokenizer=None, sent_tokenizer=None, skip_header=True):
+    
+    <span class="py-keyword">def</span> <span class="py-defname">parse_tweets_set</span><span class="function-signature">(filename, label, word_tokenizer=None, sent_tokenizer=None, skip_header=True)</span>:
     <a class="sourceLink" href="https://github.com/nltk/nltk/tree/3.6.2/nltk/sentiment/util.py#L422">
       
       (source)
     </a>
+    <a class="headerLink" href="#parse_tweets_set" title="nltk.sentiment.util.parse_tweets_set">
+      
+      
+      ¶
+    </a>
   </div>
   <div class="docstring functionBody">
     
-    
-    <div>Parse csv file containing tweets and output data a list of (text, label) tuples.<table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">filename</span></td><td class="fieldArgDesc">the input csv filename.</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">label</span></td><td class="fieldArgDesc">the label to be appended to each tweet contained in the csv file.</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">word​_tokenizer</span></td><td class="fieldArgDesc">the tokenizer instance that will be used to tokenize
+    <div><p>Parse csv file containing tweets and output data a list of (text, label) tuples.</p><table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">filename</span></td><td class="fieldArgDesc">the input csv filename.</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">label</span></td><td class="fieldArgDesc">the label to be appended to each tweet contained in the csv file.</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">word<wbr></wbr>_tokenizer</span></td><td class="fieldArgDesc">the tokenizer instance that will be used to tokenize
 each sentence into tokens (e.g. WordPunctTokenizer() or BlanklineTokenizer()).
-If no word_tokenizer is specified, tweets will not be tokenized.</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">sent​_tokenizer</span></td><td class="fieldArgDesc">the tokenizer that will be used to split each tweet into
-sentences.</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">skip​_header</span></td><td class="fieldArgDesc">if True, skip the first line of the csv file (which usually
+If no word_tokenizer is specified, tweets will not be tokenized.</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">sent<wbr></wbr>_tokenizer</span></td><td class="fieldArgDesc">the tokenizer that will be used to split each tweet into
+sentences.</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">skip<wbr></wbr>_header</span></td><td class="fieldArgDesc">if True, skip the first line of the csv file (which usually
 contains headers).</td></tr><tr class="fieldStart"><td class="fieldName" colspan="2">Returns</td></tr><tr><td colspan="2">a list of (text, label) tuples.</td></tr></table></div>
   </div>
 </div><div class="basefunction">
@@ -636,16 +1013,21 @@ contains headers).</td></tr><tr class="fieldStart"><td class="fieldName" colspan
   </a>
   <div class="functionHeader">
     
-    <span class="py-keyword">def</span> <span class="py-defname">split_train_test</span>(all_instances, n=None):
+    
+    <span class="py-keyword">def</span> <span class="py-defname">split_train_test</span><span class="function-signature">(all_instances, n=None)</span>:
     <a class="sourceLink" href="https://github.com/nltk/nltk/tree/3.6.2/nltk/sentiment/util.py#L289">
       
       (source)
     </a>
+    <a class="headerLink" href="#split_train_test" title="nltk.sentiment.util.split_train_test">
+      
+      
+      ¶
+    </a>
   </div>
   <div class="docstring functionBody">
     
-    
-    <div>Randomly split <code>n</code> instances of the dataset into train and test sets.<table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">all​_instances</span></td><td class="fieldArgDesc">a list of instances (e.g. documents) that will be split.</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">n</span></td><td class="fieldArgDesc">the number of instances to consider (in case we want to use only a
+    <div><p>Randomly split <code>n</code> instances of the dataset into train and test sets.</p><table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">all<wbr></wbr>_instances</span></td><td class="fieldArgDesc">a list of instances (e.g. documents) that will be split.</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">n</span></td><td class="fieldArgDesc">the number of instances to consider (in case we want to use only a
 subset).</td></tr><tr class="fieldStart"><td class="fieldName" colspan="2">Returns</td></tr><tr><td colspan="2">two lists of instances. Train set is 8/10 of the total and test set
 is 2/10 of the total.</td></tr></table></div>
   </div>
@@ -660,16 +1042,21 @@ is 2/10 of the total.</td></tr></table></div>
   </a>
   <div class="functionHeader">
     
-    <span class="py-keyword">def</span> <span class="py-defname">timer</span>(method):
+    
+    <span class="py-keyword">def</span> <span class="py-defname">timer</span><span class="function-signature">(method)</span>:
     <a class="sourceLink" href="https://github.com/nltk/nltk/tree/3.6.2/nltk/sentiment/util.py#L134">
       
       (source)
     </a>
+    <a class="headerLink" href="#timer" title="nltk.sentiment.util.timer">
+      
+      
+      ¶
+    </a>
   </div>
   <div class="docstring functionBody">
     
-    
-    <div>A timer decorator to measure execution performance of methods.</div>
+    <div><p>A timer decorator to measure execution performance of methods.</p></div>
   </div>
 </div><div class="baseconstant">
   
@@ -687,9 +1074,13 @@ is 2/10 of the total.</td></tr></table></div>
       
       (source)
     </a>
+    <a class="headerLink" href="#CLAUSE_PUNCT" title="nltk.sentiment.util.CLAUSE_PUNCT">
+      
+      
+      ¶
+    </a>
   </div>
   <div class="functionBody">
-    
     
     <div><p class="undocumented">Undocumented</p></div>
     <table class="valueTable"><tr class="fieldStart"><td class="fieldName">Value</td></tr><tr><td><pre class="constant-value"><code><span class="rst-variable-quote">'</span><span class="rst-variable-string">^[.:;!?]$</span><span class="rst-variable-quote">'</span></code></pre></td></tr></table>
@@ -710,9 +1101,13 @@ is 2/10 of the total.</td></tr></table></div>
       
       (source)
     </a>
+    <a class="headerLink" href="#CLAUSE_PUNCT_RE" title="nltk.sentiment.util.CLAUSE_PUNCT_RE">
+      
+      
+      ¶
+    </a>
   </div>
   <div class="functionBody">
-    
     
     <div><p class="undocumented">Undocumented</p></div>
     <table class="valueTable"><tr class="fieldStart"><td class="fieldName">Value</td></tr><tr><td><pre class="constant-value"><code>re.compile(<wbr></wbr><a href="#CLAUSE_PUNCT" class="internal-link" title="nltk.sentiment.util.CLAUSE_PUNCT">CLAUSE_PUNCT</a>)</code></pre></td></tr></table>
@@ -733,9 +1128,13 @@ is 2/10 of the total.</td></tr></table></div>
       
       (source)
     </a>
+    <a class="headerLink" href="#HAPPY" title="nltk.sentiment.util.HAPPY">
+      
+      
+      ¶
+    </a>
   </div>
   <div class="functionBody">
-    
     
     <div><p class="undocumented">Undocumented</p></div>
     <table class="valueTable"><tr class="fieldStart"><td class="fieldName">Value</td></tr><tr><td><pre class="constant-value"><code>set(<wbr></wbr>[<wbr></wbr><span class="rst-variable-quote">'</span><span class="rst-variable-string">:-)</span><span class="rst-variable-quote">'</span>,
@@ -763,9 +1162,13 @@ is 2/10 of the total.</td></tr></table></div>
       
       (source)
     </a>
+    <a class="headerLink" href="#NEGATION" title="nltk.sentiment.util.NEGATION">
+      
+      
+      ¶
+    </a>
   </div>
   <div class="functionBody">
-    
     
     <div><p class="undocumented">Undocumented</p></div>
     <table class="valueTable"><tr class="fieldStart"><td class="fieldName">Value</td></tr><tr><td><pre class="constant-value"><code><span class="rst-variable-quote">'''</span><span class="rst-variable-string"></span>
@@ -793,9 +1196,13 @@ is 2/10 of the total.</td></tr></table></div>
       
       (source)
     </a>
+    <a class="headerLink" href="#NEGATION_RE" title="nltk.sentiment.util.NEGATION_RE">
+      
+      
+      ¶
+    </a>
   </div>
   <div class="functionBody">
-    
     
     <div><p class="undocumented">Undocumented</p></div>
     <table class="valueTable"><tr class="fieldStart"><td class="fieldName">Value</td></tr><tr><td><pre class="constant-value"><code>re.compile(<wbr></wbr><a href="#NEGATION" class="internal-link" title="nltk.sentiment.util.NEGATION">NEGATION</a>, <wbr></wbr>re.VERBOSE)</code></pre></td></tr></table>
@@ -816,9 +1223,13 @@ is 2/10 of the total.</td></tr></table></div>
       
       (source)
     </a>
+    <a class="headerLink" href="#SAD" title="nltk.sentiment.util.SAD">
+      
+      
+      ¶
+    </a>
   </div>
   <div class="functionBody">
-    
     
     <div><p class="undocumented">Undocumented</p></div>
     <table class="valueTable"><tr class="fieldStart"><td class="fieldName">Value</td></tr><tr><td><pre class="constant-value"><code>set(<wbr></wbr>[<wbr></wbr><span class="rst-variable-quote">'</span><span class="rst-variable-string">:L</span><span class="rst-variable-quote">'</span>,
@@ -841,31 +1252,45 @@ is 2/10 of the total.</td></tr></table></div>
   </a>
   <div class="functionHeader">
     
-    <span class="py-keyword">def</span> <span class="py-defname">_show_plot</span>(x_values, y_values, x_labels=None, y_labels=None):
+    
+    <span class="py-keyword">def</span> <span class="py-defname">_show_plot</span><span class="function-signature">(x_values, y_values, x_labels=None, y_labels=None)</span>:
     <a class="sourceLink" href="https://github.com/nltk/nltk/tree/3.6.2/nltk/sentiment/util.py#L309">
       
       (source)
     </a>
+    <a class="headerLink" href="#_show_plot" title="nltk.sentiment.util._show_plot">
+      
+      
+      ¶
+    </a>
   </div>
   <div class="docstring functionBody">
-    
     
     <div><p class="undocumented">Undocumented</p></div>
   </div>
 </div>
-
+        </div>
+      
       </div>
     </div>
 
     <footer class="navbar navbar-default">
+
   
-  <div class="container">
+  <div class="container-fluid">
     <a href="index.html">API Documentation</a> for <a href="http://www.nltk.org/" class="projecthome">nltk-3.6.2</a>,
   generated by <a href="https://github.com/twisted/pydoctor/">pydoctor</a>
-    22.2.2.dev0 at 2025-02-28 00:01:09.
+    24.11.2 at 2025-02-28 00:02:28.
   </div>
-</footer>
 
+  <!-- Search related scripts needs to be loaded at the end of HTML 
+    parsing not to introduce overhead and display HTML data asap -->
+  <script src="ajax.js" type="text/javascript"></script>
+  <script src="searchlib.js" type="text/javascript"></script>
+  <script src="search.js" type="text/javascript"></script>
+
+</footer>
+  
     <script src="pydoctor.js" type="text/javascript"></script>
 
   </body>

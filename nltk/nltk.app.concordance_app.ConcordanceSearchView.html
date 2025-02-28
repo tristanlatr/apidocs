@@ -7,23 +7,26 @@
   <head>
     
     <title>nltk.app.concordance_app.ConcordanceSearchView</title>
-    <meta name="generator" content="pydoctor 22.2.2.dev0"> 
+    <meta name="generator" content="pydoctor 24.11.2"> 
         
     </meta>
     <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=0.75" />
+    <meta name="viewport" content="width=device-width, initial-scale=1 maximum-scale=1" />
     <link rel="stylesheet" type="text/css" href="bootstrap.min.css" />
     <link rel="stylesheet" type="text/css" href="apidocs.css" />
     <link rel="stylesheet" type="text/css" href="extra.css" />
+    
 </head>
 
   <body>
 
     
 
-    <nav class="navbar navbar-default">
+    <nav class="navbar navbar-default mainnavbar">
+      
   
-  <div class="container">
+  <div class="container-fluid">
+
 
     <div class="navbar-header">
       
@@ -50,7 +53,7 @@
             
             <span class="input-group-btn">
               <a style="display: none;" class="btn btn-default" id="search-clear-button" title="Clear" onclick="clearSearch()"><img src="fonts/x-circle.svg" alt="Clear" /></a>
-              <a class="btn btn-default" id="search-help-button" title="Help" onclick="toggleSearchHelpText()"><img src="fonts/info.svg" alt="Help" /></a>
+              <a class="btn btn-default" id="apidocs-help-button" title="Help" href="apidocs-help.html"><img src="fonts/info.svg" alt="Help" /></a>
             </span>
           </div>
         </div>
@@ -58,50 +61,24 @@
       </div>
 
       <div id="search-results-container" style="display: none;">
-        <div>
+        
+        <div id="search-buttons">
           <span class="label label-default" id="search-docstrings-button">
-            <a title="Search in docstrings" onclick="toggleSearchInDocstrings()">search in docstrings</a></span>
+          <label class="checkbox-inline">
+            <input type="checkbox" id="toggle-search-in-docstrings-checkbox" value="false" onclick="toggleSearchInDocstrings()">
+              search in docstrings
+            </input>
+          </label>
+          </span>
+          
         </div>
-
+        
         <noscript>
             <h1>Cannot search: JavaScript is not supported/enabled in your browser.</h1>
         </noscript>
 
-        <div class="hint" id="search-help-box">
-          <p class="rst-last">
-      
-            Search bar offers the following options:
-            <ul>   
-                <li>
-                  <strong>Term presence.</strong> The below example searches for documents that 
-                    must contain “foo”, might contain “bar” and must not contain “baz”: <code>+foo bar -baz</code>
-                </li> 
-
-                <li>
-                  <strong>Wildcards.</strong> The below example searches for documents with words beginning with “foo”: <code>foo*</code>
-                </li> 
-
-                <li>
-                  <strong>Search in specific fields.</strong> The following search matches all objects 
-                  in "twisted.mail" that matches “search”: <code>+qname:twisted.mail.* +search</code>
-
-                  <p>
-                    Possible fields: 'name', 'qname' (fully qualified name), 'docstring', and 'kind'.
-                    Last two fields are only applicable if "search in docstrings" is enabled.
-                  </p>
-                </li>
-
-                <li>
-                  <strong>Fuzzy matches.</strong> The following search matches all documents 
-                  that have a word within 1 edit distance of “foo”: <code>foo~1</code>
-                </li>
-            </ul>
-
-          </p>
-        </div>
-
         <div id="search-status"> </div>
-        
+
         <div class="warning" id="search-warn-box" style="display: none;">
           <p class="rst-last"><span id="search-warn"></span></p>
         </div>
@@ -110,45 +87,857 @@
           <!-- Filled dynamically by JS -->
         </table>
         
-        <div style="margin-top: 8px;">
-          <p>Results provided by <a href="https://lunrjs.com">Lunr.js</a></p>
+        <div style="margin-top: 10px;">
+          <p>For more information on the search, visit the <a href="apidocs-help.html#rst-search">help page</a>.</p>
         </div>
       </div>
 
     </div>
+
+
+  </div>
+</nav>
+    
+    <div class="container-fluid">
+
+      <!-- Side navigation -->
+      <div class="sidebarcontainer" style="display: none;">
+        
+        <div class="sidebar"><nav class="sidebar">
+  
+
+  <div>
+
+      <div class="thingTitle">
+        <span>Class</span>
+        <code class="thisobject"><a href="nltk.app.concordance_app.ConcordanceSearchView.html" class="internal-link" title="This class"><wbr></wbr>Concordance<wbr></wbr>Search<wbr></wbr>View</a></code> 
+      </div>
+      
+      <div>
+        
+
+        
+         
+
+        
+        
+
+        <div class="childrenKindTitle">Methods</div>
+        <ul>
+    
+    <li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="#__init__" class="internal-link" title="nltk.app.concordance_app.ConcordanceSearchView.__init__">__init__</a></code>
+            </div>
+        
+
+    </li><li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="#__next__" class="internal-link" title="nltk.app.concordance_app.ConcordanceSearchView.__next__">__next__</a></code>
+            </div>
+        
+
+    </li><li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="#about" class="internal-link" title="nltk.app.concordance_app.ConcordanceSearchView.about">about</a></code>
+            </div>
+        
+
+    </li><li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="#clear_all" class="internal-link" title="nltk.app.concordance_app.ConcordanceSearchView.clear_all">clear<wbr></wbr>_all</a></code>
+            </div>
+        
+
+    </li><li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="#clear_results_box" class="internal-link" title="nltk.app.concordance_app.ConcordanceSearchView.clear_results_box">clear<wbr></wbr>_results<wbr></wbr>_box</a></code>
+            </div>
+        
+
+    </li><li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="#corpus_selected" class="internal-link" title="nltk.app.concordance_app.ConcordanceSearchView.corpus_selected">corpus<wbr></wbr>_selected</a></code>
+            </div>
+        
+
+    </li><li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="#destroy" class="internal-link" title="nltk.app.concordance_app.ConcordanceSearchView.destroy">destroy</a></code>
+            </div>
+        
+
+    </li><li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="#fire_event" class="internal-link" title="nltk.app.concordance_app.ConcordanceSearchView.fire_event">fire<wbr></wbr>_event</a></code>
+            </div>
+        
+
+    </li><li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="#freeze_editable" class="internal-link" title="nltk.app.concordance_app.ConcordanceSearchView.freeze_editable">freeze<wbr></wbr>_editable</a></code>
+            </div>
+        
+
+    </li><li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="#handle_corpus_loaded" class="internal-link" title="nltk.app.concordance_app.ConcordanceSearchView.handle_corpus_loaded">handle<wbr></wbr>_corpus<wbr></wbr>_loaded</a></code>
+            </div>
+        
+
+    </li><li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="#handle_error_loading_corpus" class="internal-link" title="nltk.app.concordance_app.ConcordanceSearchView.handle_error_loading_corpus">handle<wbr></wbr>_error<wbr></wbr>_loading<wbr></wbr>_corpus</a></code>
+            </div>
+        
+
+    </li><li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="#handle_search_error" class="internal-link" title="nltk.app.concordance_app.ConcordanceSearchView.handle_search_error">handle<wbr></wbr>_search<wbr></wbr>_error</a></code>
+            </div>
+        
+
+    </li><li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="#handle_search_terminated" class="internal-link" title="nltk.app.concordance_app.ConcordanceSearchView.handle_search_terminated">handle<wbr></wbr>_search<wbr></wbr>_terminated</a></code>
+            </div>
+        
+
+    </li><li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="#load_corpus" class="internal-link" title="nltk.app.concordance_app.ConcordanceSearchView.load_corpus">load<wbr></wbr>_corpus</a></code>
+            </div>
+        
+
+    </li><li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="#mainloop" class="internal-link" title="nltk.app.concordance_app.ConcordanceSearchView.mainloop">mainloop</a></code>
+            </div>
+        
+
+    </li><li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="#pad" class="internal-link" title="nltk.app.concordance_app.ConcordanceSearchView.pad">pad</a></code>
+            </div>
+        
+
+    </li><li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="#previous" class="internal-link" title="nltk.app.concordance_app.ConcordanceSearchView.previous">previous</a></code>
+            </div>
+        
+
+    </li><li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="#search" class="internal-link" title="nltk.app.concordance_app.ConcordanceSearchView.search">search</a></code>
+            </div>
+        
+
+    </li><li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="#search_enter_keypress_handler" class="internal-link" title="nltk.app.concordance_app.ConcordanceSearchView.search_enter_keypress_handler">search<wbr></wbr>_enter<wbr></wbr>_keypress<wbr></wbr>_handler</a></code>
+            </div>
+        
+
+    </li><li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="#set_cntx_af_len" class="internal-link" title="nltk.app.concordance_app.ConcordanceSearchView.set_cntx_af_len">set<wbr></wbr>_cntx<wbr></wbr>_af<wbr></wbr>_len</a></code>
+            </div>
+        
+
+    </li><li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="#set_cntx_bf_len" class="internal-link" title="nltk.app.concordance_app.ConcordanceSearchView.set_cntx_bf_len">set<wbr></wbr>_cntx<wbr></wbr>_bf<wbr></wbr>_len</a></code>
+            </div>
+        
+
+    </li><li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="#set_paging_button_states" class="internal-link" title="nltk.app.concordance_app.ConcordanceSearchView.set_paging_button_states">set<wbr></wbr>_paging<wbr></wbr>_button<wbr></wbr>_states</a></code>
+            </div>
+        
+
+    </li><li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="#set_result_size" class="internal-link" title="nltk.app.concordance_app.ConcordanceSearchView.set_result_size">set<wbr></wbr>_result<wbr></wbr>_size</a></code>
+            </div>
+        
+
+    </li><li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="#unfreeze_editable" class="internal-link" title="nltk.app.concordance_app.ConcordanceSearchView.unfreeze_editable">unfreeze<wbr></wbr>_editable</a></code>
+            </div>
+        
+
+    </li><li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="#words_and_labels" class="internal-link" title="nltk.app.concordance_app.ConcordanceSearchView.words_and_labels">words<wbr></wbr>_and<wbr></wbr>_labels</a></code>
+            </div>
+        
+
+    </li><li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="#write_results" class="internal-link" title="nltk.app.concordance_app.ConcordanceSearchView.write_results">write<wbr></wbr>_results</a></code>
+            </div>
+        
+
+    </li><li class="private">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="#_bind_event_handlers" class="internal-link" title="nltk.app.concordance_app.ConcordanceSearchView._bind_event_handlers">_bind<wbr></wbr>_event<wbr></wbr>_handlers</a></code>
+            </div>
+        
+
+    </li><li class="private">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="#_init_corpus_select" class="internal-link" title="nltk.app.concordance_app.ConcordanceSearchView._init_corpus_select">_init<wbr></wbr>_corpus<wbr></wbr>_select</a></code>
+            </div>
+        
+
+    </li><li class="private">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="#_init_menubar" class="internal-link" title="nltk.app.concordance_app.ConcordanceSearchView._init_menubar">_init<wbr></wbr>_menubar</a></code>
+            </div>
+        
+
+    </li><li class="private">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="#_init_paging" class="internal-link" title="nltk.app.concordance_app.ConcordanceSearchView._init_paging">_init<wbr></wbr>_paging</a></code>
+            </div>
+        
+
+    </li><li class="private">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="#_init_query_box" class="internal-link" title="nltk.app.concordance_app.ConcordanceSearchView._init_query_box">_init<wbr></wbr>_query<wbr></wbr>_box</a></code>
+            </div>
+        
+
+    </li><li class="private">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="#_init_results_box" class="internal-link" title="nltk.app.concordance_app.ConcordanceSearchView._init_results_box">_init<wbr></wbr>_results<wbr></wbr>_box</a></code>
+            </div>
+        
+
+    </li><li class="private">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="#_init_status" class="internal-link" title="nltk.app.concordance_app.ConcordanceSearchView._init_status">_init<wbr></wbr>_status</a></code>
+            </div>
+        
+
+    </li><li class="private">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="#_init_top" class="internal-link" title="nltk.app.concordance_app.ConcordanceSearchView._init_top">_init<wbr></wbr>_top</a></code>
+            </div>
+        
+
+    </li><li class="private">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="#_init_widgets" class="internal-link" title="nltk.app.concordance_app.ConcordanceSearchView._init_widgets">_init<wbr></wbr>_widgets</a></code>
+            </div>
+        
+
+    </li><li class="private">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="#_poll" class="internal-link" title="nltk.app.concordance_app.ConcordanceSearchView._poll">_poll</a></code>
+            </div>
+        
+
+    </li>
+</ul> 
+
+        
+         
+
+        <div class="childrenKindTitle">Attributes</div>
+        <ul>
+    
+    <li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="#after" class="internal-link" title="nltk.app.concordance_app.ConcordanceSearchView.after">after</a></code>
+            </div>
+        
+
+    </li><li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="#current_page" class="internal-link" title="nltk.app.concordance_app.ConcordanceSearchView.current_page">current<wbr></wbr>_page</a></code>
+            </div>
+        
+
+    </li><li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="#main_frame" class="internal-link" title="nltk.app.concordance_app.ConcordanceSearchView.main_frame">main<wbr></wbr>_frame</a></code>
+            </div>
+        
+
+    </li><li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="#model" class="internal-link" title="nltk.app.concordance_app.ConcordanceSearchView.model">model</a></code>
+            </div>
+        
+
+    </li><li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="#next" class="internal-link" title="nltk.app.concordance_app.ConcordanceSearchView.next">next</a></code>
+            </div>
+        
+
+    </li><li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="#prev" class="internal-link" title="nltk.app.concordance_app.ConcordanceSearchView.prev">prev</a></code>
+            </div>
+        
+
+    </li><li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="#query_box" class="internal-link" title="nltk.app.concordance_app.ConcordanceSearchView.query_box">query<wbr></wbr>_box</a></code>
+            </div>
+        
+
+    </li><li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="#queue" class="internal-link" title="nltk.app.concordance_app.ConcordanceSearchView.queue">queue</a></code>
+            </div>
+        
+
+    </li><li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="#results_box" class="internal-link" title="nltk.app.concordance_app.ConcordanceSearchView.results_box">results<wbr></wbr>_box</a></code>
+            </div>
+        
+
+    </li><li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="#search_button" class="internal-link" title="nltk.app.concordance_app.ConcordanceSearchView.search_button">search<wbr></wbr>_button</a></code>
+            </div>
+        
+
+    </li><li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="#status" class="internal-link" title="nltk.app.concordance_app.ConcordanceSearchView.status">status</a></code>
+            </div>
+        
+
+    </li><li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="#top" class="internal-link" title="nltk.app.concordance_app.ConcordanceSearchView.top">top</a></code>
+            </div>
+        
+
+    </li><li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="#var" class="internal-link" title="nltk.app.concordance_app.ConcordanceSearchView.var">var</a></code>
+            </div>
+        
+
+    </li><li class="private">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="#_BACKGROUND_COLOUR" class="internal-link" title="nltk.app.concordance_app.ConcordanceSearchView._BACKGROUND_COLOUR">_BACKGROUND<wbr></wbr>_COLOUR</a></code>
+            </div>
+        
+
+    </li><li class="private">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="#_FRACTION_LEFT_TEXT" class="internal-link" title="nltk.app.concordance_app.ConcordanceSearchView._FRACTION_LEFT_TEXT">_FRACTION<wbr></wbr>_LEFT<wbr></wbr>_TEXT</a></code>
+            </div>
+        
+
+    </li><li class="private">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="#_HIGHLIGHT_LABEL_COLOUR" class="internal-link" title="nltk.app.concordance_app.ConcordanceSearchView._HIGHLIGHT_LABEL_COLOUR">_HIGHLIGHT<wbr></wbr>_LABEL<wbr></wbr>_COLOUR</a></code>
+            </div>
+        
+
+    </li><li class="private">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="#_HIGHLIGHT_LABEL_TAG" class="internal-link" title="nltk.app.concordance_app.ConcordanceSearchView._HIGHLIGHT_LABEL_TAG">_HIGHLIGHT<wbr></wbr>_LABEL<wbr></wbr>_TAG</a></code>
+            </div>
+        
+
+    </li><li class="private">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="#_HIGHLIGHT_WORD_COLOUR" class="internal-link" title="nltk.app.concordance_app.ConcordanceSearchView._HIGHLIGHT_WORD_COLOUR">_HIGHLIGHT<wbr></wbr>_WORD<wbr></wbr>_COLOUR</a></code>
+            </div>
+        
+
+    </li><li class="private">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="#_HIGHLIGHT_WORD_TAG" class="internal-link" title="nltk.app.concordance_app.ConcordanceSearchView._HIGHLIGHT_WORD_TAG">_HIGHLIGHT<wbr></wbr>_WORD<wbr></wbr>_TAG</a></code>
+            </div>
+        
+
+    </li><li class="private">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="#_char_after" class="internal-link" title="nltk.app.concordance_app.ConcordanceSearchView._char_after">_char<wbr></wbr>_after</a></code>
+            </div>
+        
+
+    </li><li class="private">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="#_char_before" class="internal-link" title="nltk.app.concordance_app.ConcordanceSearchView._char_before">_char<wbr></wbr>_before</a></code>
+            </div>
+        
+
+    </li><li class="private">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="#_cntx_af_len" class="internal-link" title="nltk.app.concordance_app.ConcordanceSearchView._cntx_af_len">_cntx<wbr></wbr>_af<wbr></wbr>_len</a></code>
+            </div>
+        
+
+    </li><li class="private">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="#_cntx_bf_len" class="internal-link" title="nltk.app.concordance_app.ConcordanceSearchView._cntx_bf_len">_cntx<wbr></wbr>_bf<wbr></wbr>_len</a></code>
+            </div>
+        
+
+    </li><li class="private">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="#_result_size" class="internal-link" title="nltk.app.concordance_app.ConcordanceSearchView._result_size">_result<wbr></wbr>_size</a></code>
+            </div>
+        
+
+    </li>
+</ul> 
+
+        
+         
+        
+      </div>
+  </div><div>
+
+      <div class="thingTitle">
+        <span>Module</span>
+        <code><a href="nltk.app.concordance_app.html" class="internal-link" title="The parent of this class">concordance<wbr></wbr>_app</a></code> 
+      </div>
+      
+      <div>
+        
+
+        
+         
+
+        <div class="childrenKindTitle">Classes</div>
+        <ul>
+    
+    <li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="nltk.app.concordance_app.ConcordanceSearchModel.html" class="internal-link" title="nltk.app.concordance_app.ConcordanceSearchModel"><wbr></wbr>Concordance<wbr></wbr>Search<wbr></wbr>Model</a></code>
+            </div>
+        
+
+    </li><li class=" thisobject">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="nltk.app.concordance_app.ConcordanceSearchView.html" class="internal-link" title="nltk.app.concordance_app.ConcordanceSearchView"><wbr></wbr>Concordance<wbr></wbr>Search<wbr></wbr>View</a></code>
+            </div>
+        
+
+    </li>
+</ul>
+
+        <div class="childrenKindTitle">Functions</div>
+        <ul>
+    
+    <li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="nltk.app.concordance_app.html#app" class="internal-link" title="nltk.app.concordance_app.app">app</a></code>
+            </div>
+        
+
+    </li>
+</ul> 
+
+        
+         
+
+        <div class="childrenKindTitle">Variables</div>
+        <ul>
+    
+    <li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="nltk.app.concordance_app.html#BOUNDARY" class="internal-link" title="nltk.app.concordance_app.BOUNDARY">BOUNDARY</a></code>
+            </div>
+        
+
+    </li><li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="nltk.app.concordance_app.html#CORPUS_LOADED_EVENT" class="internal-link" title="nltk.app.concordance_app.CORPUS_LOADED_EVENT">CORPUS<wbr></wbr>_LOADED<wbr></wbr>_EVENT</a></code>
+            </div>
+        
+
+    </li><li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="nltk.app.concordance_app.html#ERROR_LOADING_CORPUS_EVENT" class="internal-link" title="nltk.app.concordance_app.ERROR_LOADING_CORPUS_EVENT">ERROR<wbr></wbr>_LOADING<wbr></wbr>_CORPUS<wbr></wbr>_EVENT</a></code>
+            </div>
+        
+
+    </li><li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="nltk.app.concordance_app.html#POLL_INTERVAL" class="internal-link" title="nltk.app.concordance_app.POLL_INTERVAL">POLL<wbr></wbr>_INTERVAL</a></code>
+            </div>
+        
+
+    </li><li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="nltk.app.concordance_app.html#SEARCH_ERROR_EVENT" class="internal-link" title="nltk.app.concordance_app.SEARCH_ERROR_EVENT">SEARCH<wbr></wbr>_ERROR<wbr></wbr>_EVENT</a></code>
+            </div>
+        
+
+    </li><li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="nltk.app.concordance_app.html#SEARCH_TERMINATED_EVENT" class="internal-link" title="nltk.app.concordance_app.SEARCH_TERMINATED_EVENT">SEARCH<wbr></wbr>_TERMINATED<wbr></wbr>_EVENT</a></code>
+            </div>
+        
+
+    </li><li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="nltk.app.concordance_app.html#WORD_OR_TAG" class="internal-link" title="nltk.app.concordance_app.WORD_OR_TAG">WORD<wbr></wbr>_OR<wbr></wbr>_TAG</a></code>
+            </div>
+        
+
+    </li><li class="private">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="nltk.app.concordance_app.html#_CORPORA" class="internal-link" title="nltk.app.concordance_app._CORPORA">_CORPORA</a></code>
+            </div>
+        
+
+    </li><li class="private">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="nltk.app.concordance_app.html#_DEFAULT" class="internal-link" title="nltk.app.concordance_app._DEFAULT">_DEFAULT</a></code>
+            </div>
+        
+
+    </li>
+</ul> 
+
+        
+         
+        
+      </div>
   </div>
 
-  <script src="ajax.js" type="text/javascript"></script>
-  <script src="search.js" type="text/javascript"></script>
-
 </nav>
-
-    
-
-    <div class="container">
-
-      <div class="page-header">
-        <h1 class="class"><code><code><a href="index.html" class="internal-link">nltk</a></code><wbr></wbr>.<code><a href="nltk.app.html" class="internal-link" title="nltk.app">app</a></code><wbr></wbr>.<code><a href="nltk.app.concordance_app.html" class="internal-link" title="nltk.app.concordance_app">concordance_app</a></code><wbr></wbr>.<code><a href="nltk.app.concordance_app.ConcordanceSearchView.html" class="internal-link" title="nltk.app.concordance_app.ConcordanceSearchView">ConcordanceSearchView</a></code></code></h1>
-        <div id="showPrivate">
-          <button class="btn btn-link" onclick="togglePrivate()">Toggle Private API</button>
         </div>
+        <div id="collapseSideBar">
+          <a class="btn btn-link" onclick="toggleSideBarCollapse()" title="Toggle Sidebar Collapse">
+          </a>
+        </div> 
+        <script src="sidebartoggle.js" type="text/javascript"></script>
+       
       </div>
 
-      <div class="categoryHeader">
-        class documentation
-      </div>
+      <div id="main" class="">
+        
 
-      <div class="extrasDocstring">
-        <p><code><span class="py-keyword">class</span> <span class="py-defname">ConcordanceSearchView</span>(object): <a href="https://github.com/nltk/nltk/tree/3.6.2/nltk/app/concordance_app.py#L119" class="sourceLink">(source)</a></code></p>
-        <p><a href="classIndex.html#nltk.app.concordance_app.ConcordanceSearchView">View In Hierarchy</a></p>
-      </div>
+        
 
-      <div class="moduleDocstring">
-        <div><p class="undocumented">Undocumented</p></div>
-      </div>
+        <div class="page-header">
+          <h1 class="class"><code><code><a href="index.html" class="internal-link">nltk</a></code><wbr></wbr>.<code><a href="nltk.app.html" class="internal-link" title="nltk.app">app</a></code><wbr></wbr>.<code><a href="nltk.app.concordance_app.html" class="internal-link" title="nltk.app.concordance_app">concordance_app</a></code><wbr></wbr>.<code><a href="nltk.app.concordance_app.ConcordanceSearchView.html" class="internal-link" title="nltk.app.concordance_app.ConcordanceSearchView">ConcordanceSearchView</a></code></code></h1>
+          <div id="showPrivate">
+            <button class="btn btn-link" onclick="togglePrivate()">Toggle Private API</button>
+          </div>
+        </div>
 
-      <div id="splitTables">
-        <table class="children sortable" id="id32">
+        <div class="categoryHeader">
+          class documentation
+        </div>
+
+        <div class="extrasDocstring">
+          <p class="class-signature"><code><span class="py-keyword">class</span> <span class="py-defname">ConcordanceSearchView</span>(object): <a href="https://github.com/nltk/nltk/tree/3.6.2/nltk/app/concordance_app.py#L119" class="sourceLink">(source)</a></code></p>
+          <p><a href="classIndex.html#nltk.app.concordance_app.ConcordanceSearchView">View In Hierarchy</a></p>
+        </div>
+
+        <div class="moduleDocstring">
+          <div><p class="undocumented">Undocumented</p></div>
+        </div>
+
+        <div id="splitTables">
+          <table class="children sortable" id="id29">
   
   
   <tr class="method">
@@ -169,17 +958,17 @@
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#clear_all" class="internal-link" title="nltk.app.concordance_app.ConcordanceSearchView.clear_all">clear​_all</a></code></td>
+    <td><code><a href="#clear_all" class="internal-link" title="nltk.app.concordance_app.ConcordanceSearchView.clear_all">clear<wbr></wbr>_all</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#clear_results_box" class="internal-link" title="nltk.app.concordance_app.ConcordanceSearchView.clear_results_box">clear​_results​_box</a></code></td>
+    <td><code><a href="#clear_results_box" class="internal-link" title="nltk.app.concordance_app.ConcordanceSearchView.clear_results_box">clear<wbr></wbr>_results<wbr></wbr>_box</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#corpus_selected" class="internal-link" title="nltk.app.concordance_app.ConcordanceSearchView.corpus_selected">corpus​_selected</a></code></td>
+    <td><code><a href="#corpus_selected" class="internal-link" title="nltk.app.concordance_app.ConcordanceSearchView.corpus_selected">corpus<wbr></wbr>_selected</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method">
     
@@ -189,37 +978,37 @@
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#fire_event" class="internal-link" title="nltk.app.concordance_app.ConcordanceSearchView.fire_event">fire​_event</a></code></td>
+    <td><code><a href="#fire_event" class="internal-link" title="nltk.app.concordance_app.ConcordanceSearchView.fire_event">fire<wbr></wbr>_event</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#freeze_editable" class="internal-link" title="nltk.app.concordance_app.ConcordanceSearchView.freeze_editable">freeze​_editable</a></code></td>
+    <td><code><a href="#freeze_editable" class="internal-link" title="nltk.app.concordance_app.ConcordanceSearchView.freeze_editable">freeze<wbr></wbr>_editable</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#handle_corpus_loaded" class="internal-link" title="nltk.app.concordance_app.ConcordanceSearchView.handle_corpus_loaded">handle​_corpus​_loaded</a></code></td>
+    <td><code><a href="#handle_corpus_loaded" class="internal-link" title="nltk.app.concordance_app.ConcordanceSearchView.handle_corpus_loaded">handle<wbr></wbr>_corpus<wbr></wbr>_loaded</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#handle_error_loading_corpus" class="internal-link" title="nltk.app.concordance_app.ConcordanceSearchView.handle_error_loading_corpus">handle​_error​_loading​_corpus</a></code></td>
+    <td><code><a href="#handle_error_loading_corpus" class="internal-link" title="nltk.app.concordance_app.ConcordanceSearchView.handle_error_loading_corpus">handle<wbr></wbr>_error<wbr></wbr>_loading<wbr></wbr>_corpus</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#handle_search_error" class="internal-link" title="nltk.app.concordance_app.ConcordanceSearchView.handle_search_error">handle​_search​_error</a></code></td>
+    <td><code><a href="#handle_search_error" class="internal-link" title="nltk.app.concordance_app.ConcordanceSearchView.handle_search_error">handle<wbr></wbr>_search<wbr></wbr>_error</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#handle_search_terminated" class="internal-link" title="nltk.app.concordance_app.ConcordanceSearchView.handle_search_terminated">handle​_search​_terminated</a></code></td>
+    <td><code><a href="#handle_search_terminated" class="internal-link" title="nltk.app.concordance_app.ConcordanceSearchView.handle_search_terminated">handle<wbr></wbr>_search<wbr></wbr>_terminated</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#load_corpus" class="internal-link" title="nltk.app.concordance_app.ConcordanceSearchView.load_corpus">load​_corpus</a></code></td>
+    <td><code><a href="#load_corpus" class="internal-link" title="nltk.app.concordance_app.ConcordanceSearchView.load_corpus">load<wbr></wbr>_corpus</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method">
     
@@ -244,42 +1033,42 @@
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#search_enter_keypress_handler" class="internal-link" title="nltk.app.concordance_app.ConcordanceSearchView.search_enter_keypress_handler">search​_enter​_keypress​_handler</a></code></td>
+    <td><code><a href="#search_enter_keypress_handler" class="internal-link" title="nltk.app.concordance_app.ConcordanceSearchView.search_enter_keypress_handler">search<wbr></wbr>_enter<wbr></wbr>_keypress<wbr></wbr>_handler</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#set_cntx_af_len" class="internal-link" title="nltk.app.concordance_app.ConcordanceSearchView.set_cntx_af_len">set​_cntx​_af​_len</a></code></td>
+    <td><code><a href="#set_cntx_af_len" class="internal-link" title="nltk.app.concordance_app.ConcordanceSearchView.set_cntx_af_len">set<wbr></wbr>_cntx<wbr></wbr>_af<wbr></wbr>_len</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#set_cntx_bf_len" class="internal-link" title="nltk.app.concordance_app.ConcordanceSearchView.set_cntx_bf_len">set​_cntx​_bf​_len</a></code></td>
+    <td><code><a href="#set_cntx_bf_len" class="internal-link" title="nltk.app.concordance_app.ConcordanceSearchView.set_cntx_bf_len">set<wbr></wbr>_cntx<wbr></wbr>_bf<wbr></wbr>_len</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#set_paging_button_states" class="internal-link" title="nltk.app.concordance_app.ConcordanceSearchView.set_paging_button_states">set​_paging​_button​_states</a></code></td>
+    <td><code><a href="#set_paging_button_states" class="internal-link" title="nltk.app.concordance_app.ConcordanceSearchView.set_paging_button_states">set<wbr></wbr>_paging<wbr></wbr>_button<wbr></wbr>_states</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#set_result_size" class="internal-link" title="nltk.app.concordance_app.ConcordanceSearchView.set_result_size">set​_result​_size</a></code></td>
+    <td><code><a href="#set_result_size" class="internal-link" title="nltk.app.concordance_app.ConcordanceSearchView.set_result_size">set<wbr></wbr>_result<wbr></wbr>_size</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#unfreeze_editable" class="internal-link" title="nltk.app.concordance_app.ConcordanceSearchView.unfreeze_editable">unfreeze​_editable</a></code></td>
+    <td><code><a href="#unfreeze_editable" class="internal-link" title="nltk.app.concordance_app.ConcordanceSearchView.unfreeze_editable">unfreeze<wbr></wbr>_editable</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#words_and_labels" class="internal-link" title="nltk.app.concordance_app.ConcordanceSearchView.words_and_labels">words​_and​_labels</a></code></td>
+    <td><code><a href="#words_and_labels" class="internal-link" title="nltk.app.concordance_app.ConcordanceSearchView.words_and_labels">words<wbr></wbr>_and<wbr></wbr>_labels</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#write_results" class="internal-link" title="nltk.app.concordance_app.ConcordanceSearchView.write_results">write​_results</a></code></td>
+    <td><code><a href="#write_results" class="internal-link" title="nltk.app.concordance_app.ConcordanceSearchView.write_results">write<wbr></wbr>_results</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="instancevariable">
     
@@ -289,12 +1078,12 @@
   </tr><tr class="instancevariable">
     
     <td>Instance Variable</td>
-    <td><code><a href="#current_page" class="internal-link" title="nltk.app.concordance_app.ConcordanceSearchView.current_page">current​_page</a></code></td>
+    <td><code><a href="#current_page" class="internal-link" title="nltk.app.concordance_app.ConcordanceSearchView.current_page">current<wbr></wbr>_page</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="instancevariable">
     
     <td>Instance Variable</td>
-    <td><code><a href="#main_frame" class="internal-link" title="nltk.app.concordance_app.ConcordanceSearchView.main_frame">main​_frame</a></code></td>
+    <td><code><a href="#main_frame" class="internal-link" title="nltk.app.concordance_app.ConcordanceSearchView.main_frame">main<wbr></wbr>_frame</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="instancevariable">
     
@@ -314,7 +1103,7 @@
   </tr><tr class="instancevariable">
     
     <td>Instance Variable</td>
-    <td><code><a href="#query_box" class="internal-link" title="nltk.app.concordance_app.ConcordanceSearchView.query_box">query​_box</a></code></td>
+    <td><code><a href="#query_box" class="internal-link" title="nltk.app.concordance_app.ConcordanceSearchView.query_box">query<wbr></wbr>_box</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="instancevariable">
     
@@ -324,12 +1113,12 @@
   </tr><tr class="instancevariable">
     
     <td>Instance Variable</td>
-    <td><code><a href="#results_box" class="internal-link" title="nltk.app.concordance_app.ConcordanceSearchView.results_box">results​_box</a></code></td>
+    <td><code><a href="#results_box" class="internal-link" title="nltk.app.concordance_app.ConcordanceSearchView.results_box">results<wbr></wbr>_box</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="instancevariable">
     
     <td>Instance Variable</td>
-    <td><code><a href="#search_button" class="internal-link" title="nltk.app.concordance_app.ConcordanceSearchView.search_button">search​_button</a></code></td>
+    <td><code><a href="#search_button" class="internal-link" title="nltk.app.concordance_app.ConcordanceSearchView.search_button">search<wbr></wbr>_button</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="instancevariable">
     
@@ -349,47 +1138,47 @@
   </tr><tr class="method private">
     
     <td>Method</td>
-    <td><code><a href="#_bind_event_handlers" class="internal-link" title="nltk.app.concordance_app.ConcordanceSearchView._bind_event_handlers">_bind​_event​_handlers</a></code></td>
+    <td><code><a href="#_bind_event_handlers" class="internal-link" title="nltk.app.concordance_app.ConcordanceSearchView._bind_event_handlers">_bind<wbr></wbr>_event<wbr></wbr>_handlers</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method private">
     
     <td>Method</td>
-    <td><code><a href="#_init_corpus_select" class="internal-link" title="nltk.app.concordance_app.ConcordanceSearchView._init_corpus_select">_init​_corpus​_select</a></code></td>
+    <td><code><a href="#_init_corpus_select" class="internal-link" title="nltk.app.concordance_app.ConcordanceSearchView._init_corpus_select">_init<wbr></wbr>_corpus<wbr></wbr>_select</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method private">
     
     <td>Method</td>
-    <td><code><a href="#_init_menubar" class="internal-link" title="nltk.app.concordance_app.ConcordanceSearchView._init_menubar">_init​_menubar</a></code></td>
+    <td><code><a href="#_init_menubar" class="internal-link" title="nltk.app.concordance_app.ConcordanceSearchView._init_menubar">_init<wbr></wbr>_menubar</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method private">
     
     <td>Method</td>
-    <td><code><a href="#_init_paging" class="internal-link" title="nltk.app.concordance_app.ConcordanceSearchView._init_paging">_init​_paging</a></code></td>
+    <td><code><a href="#_init_paging" class="internal-link" title="nltk.app.concordance_app.ConcordanceSearchView._init_paging">_init<wbr></wbr>_paging</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method private">
     
     <td>Method</td>
-    <td><code><a href="#_init_query_box" class="internal-link" title="nltk.app.concordance_app.ConcordanceSearchView._init_query_box">_init​_query​_box</a></code></td>
+    <td><code><a href="#_init_query_box" class="internal-link" title="nltk.app.concordance_app.ConcordanceSearchView._init_query_box">_init<wbr></wbr>_query<wbr></wbr>_box</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method private">
     
     <td>Method</td>
-    <td><code><a href="#_init_results_box" class="internal-link" title="nltk.app.concordance_app.ConcordanceSearchView._init_results_box">_init​_results​_box</a></code></td>
+    <td><code><a href="#_init_results_box" class="internal-link" title="nltk.app.concordance_app.ConcordanceSearchView._init_results_box">_init<wbr></wbr>_results<wbr></wbr>_box</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method private">
     
     <td>Method</td>
-    <td><code><a href="#_init_status" class="internal-link" title="nltk.app.concordance_app.ConcordanceSearchView._init_status">_init​_status</a></code></td>
+    <td><code><a href="#_init_status" class="internal-link" title="nltk.app.concordance_app.ConcordanceSearchView._init_status">_init<wbr></wbr>_status</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method private">
     
     <td>Method</td>
-    <td><code><a href="#_init_top" class="internal-link" title="nltk.app.concordance_app.ConcordanceSearchView._init_top">_init​_top</a></code></td>
+    <td><code><a href="#_init_top" class="internal-link" title="nltk.app.concordance_app.ConcordanceSearchView._init_top">_init<wbr></wbr>_top</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method private">
     
     <td>Method</td>
-    <td><code><a href="#_init_widgets" class="internal-link" title="nltk.app.concordance_app.ConcordanceSearchView._init_widgets">_init​_widgets</a></code></td>
+    <td><code><a href="#_init_widgets" class="internal-link" title="nltk.app.concordance_app.ConcordanceSearchView._init_widgets">_init<wbr></wbr>_widgets</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method private">
     
@@ -399,68 +1188,67 @@
   </tr><tr class="constant private">
     
     <td>Constant</td>
-    <td><code><a href="#_BACKGROUND_COLOUR" class="internal-link" title="nltk.app.concordance_app.ConcordanceSearchView._BACKGROUND_COLOUR">_BACKGROUND​_COLOUR</a></code></td>
+    <td><code><a href="#_BACKGROUND_COLOUR" class="internal-link" title="nltk.app.concordance_app.ConcordanceSearchView._BACKGROUND_COLOUR">_BACKGROUND<wbr></wbr>_COLOUR</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="constant private">
     
     <td>Constant</td>
-    <td><code><a href="#_FRACTION_LEFT_TEXT" class="internal-link" title="nltk.app.concordance_app.ConcordanceSearchView._FRACTION_LEFT_TEXT">_FRACTION​_LEFT​_TEXT</a></code></td>
+    <td><code><a href="#_FRACTION_LEFT_TEXT" class="internal-link" title="nltk.app.concordance_app.ConcordanceSearchView._FRACTION_LEFT_TEXT">_FRACTION<wbr></wbr>_LEFT<wbr></wbr>_TEXT</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="constant private">
     
     <td>Constant</td>
-    <td><code><a href="#_HIGHLIGHT_LABEL_COLOUR" class="internal-link" title="nltk.app.concordance_app.ConcordanceSearchView._HIGHLIGHT_LABEL_COLOUR">_HIGHLIGHT​_LABEL​_COLOUR</a></code></td>
+    <td><code><a href="#_HIGHLIGHT_LABEL_COLOUR" class="internal-link" title="nltk.app.concordance_app.ConcordanceSearchView._HIGHLIGHT_LABEL_COLOUR">_HIGHLIGHT<wbr></wbr>_LABEL<wbr></wbr>_COLOUR</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="constant private">
     
     <td>Constant</td>
-    <td><code><a href="#_HIGHLIGHT_LABEL_TAG" class="internal-link" title="nltk.app.concordance_app.ConcordanceSearchView._HIGHLIGHT_LABEL_TAG">_HIGHLIGHT​_LABEL​_TAG</a></code></td>
+    <td><code><a href="#_HIGHLIGHT_LABEL_TAG" class="internal-link" title="nltk.app.concordance_app.ConcordanceSearchView._HIGHLIGHT_LABEL_TAG">_HIGHLIGHT<wbr></wbr>_LABEL<wbr></wbr>_TAG</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="constant private">
     
     <td>Constant</td>
-    <td><code><a href="#_HIGHLIGHT_WORD_COLOUR" class="internal-link" title="nltk.app.concordance_app.ConcordanceSearchView._HIGHLIGHT_WORD_COLOUR">_HIGHLIGHT​_WORD​_COLOUR</a></code></td>
+    <td><code><a href="#_HIGHLIGHT_WORD_COLOUR" class="internal-link" title="nltk.app.concordance_app.ConcordanceSearchView._HIGHLIGHT_WORD_COLOUR">_HIGHLIGHT<wbr></wbr>_WORD<wbr></wbr>_COLOUR</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="constant private">
     
     <td>Constant</td>
-    <td><code><a href="#_HIGHLIGHT_WORD_TAG" class="internal-link" title="nltk.app.concordance_app.ConcordanceSearchView._HIGHLIGHT_WORD_TAG">_HIGHLIGHT​_WORD​_TAG</a></code></td>
+    <td><code><a href="#_HIGHLIGHT_WORD_TAG" class="internal-link" title="nltk.app.concordance_app.ConcordanceSearchView._HIGHLIGHT_WORD_TAG">_HIGHLIGHT<wbr></wbr>_WORD<wbr></wbr>_TAG</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="instancevariable private">
     
     <td>Instance Variable</td>
-    <td><code><a href="#_char_after" class="internal-link" title="nltk.app.concordance_app.ConcordanceSearchView._char_after">_char​_after</a></code></td>
+    <td><code><a href="#_char_after" class="internal-link" title="nltk.app.concordance_app.ConcordanceSearchView._char_after">_char<wbr></wbr>_after</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="instancevariable private">
     
     <td>Instance Variable</td>
-    <td><code><a href="#_char_before" class="internal-link" title="nltk.app.concordance_app.ConcordanceSearchView._char_before">_char​_before</a></code></td>
+    <td><code><a href="#_char_before" class="internal-link" title="nltk.app.concordance_app.ConcordanceSearchView._char_before">_char<wbr></wbr>_before</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="instancevariable private">
     
     <td>Instance Variable</td>
-    <td><code><a href="#_cntx_af_len" class="internal-link" title="nltk.app.concordance_app.ConcordanceSearchView._cntx_af_len">_cntx​_af​_len</a></code></td>
+    <td><code><a href="#_cntx_af_len" class="internal-link" title="nltk.app.concordance_app.ConcordanceSearchView._cntx_af_len">_cntx<wbr></wbr>_af<wbr></wbr>_len</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="instancevariable private">
     
     <td>Instance Variable</td>
-    <td><code><a href="#_cntx_bf_len" class="internal-link" title="nltk.app.concordance_app.ConcordanceSearchView._cntx_bf_len">_cntx​_bf​_len</a></code></td>
+    <td><code><a href="#_cntx_bf_len" class="internal-link" title="nltk.app.concordance_app.ConcordanceSearchView._cntx_bf_len">_cntx<wbr></wbr>_bf<wbr></wbr>_len</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="instancevariable private">
     
     <td>Instance Variable</td>
-    <td><code><a href="#_result_size" class="internal-link" title="nltk.app.concordance_app.ConcordanceSearchView._result_size">_result​_size</a></code></td>
+    <td><code><a href="#_result_size" class="internal-link" title="nltk.app.concordance_app.ConcordanceSearchView._result_size">_result<wbr></wbr>_size</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr>
 </table>
-        
-
           
-      </div>
 
-      <div id="childList">
+            
+        </div>
 
-        <div class="basemethod">
+        <div id="childList">
+          <div class="basemethod">
   
   
   <a name="nltk.app.concordance_app.ConcordanceSearchView.__init__">
@@ -471,14 +1259,19 @@
   </a>
   <div class="functionHeader">
     
-    <span class="py-keyword">def</span> <span class="py-defname">__init__</span>(self):
+    
+    <span class="py-keyword">def</span> <span class="py-defname">__init__</span><span class="function-signature">(self)</span>:
     <a class="sourceLink" href="https://github.com/nltk/nltk/tree/3.6.2/nltk/app/concordance_app.py#L132">
       
       (source)
     </a>
+    <a class="headerLink" href="#__init__" title="nltk.app.concordance_app.ConcordanceSearchView.__init__">
+      
+      
+      ¶
+    </a>
   </div>
   <div class="docstring functionBody">
-    
     
     <div><p class="undocumented">Undocumented</p></div>
   </div>
@@ -493,14 +1286,19 @@
   </a>
   <div class="functionHeader">
     
-    <span class="py-keyword">def</span> <span class="py-defname">__next__</span>(self):
+    
+    <span class="py-keyword">def</span> <span class="py-defname">__next__</span><span class="function-signature">(self)</span>:
     <a class="sourceLink" href="https://github.com/nltk/nltk/tree/3.6.2/nltk/app/concordance_app.py#L392">
       
       (source)
     </a>
+    <a class="headerLink" href="#__next__" title="nltk.app.concordance_app.ConcordanceSearchView.__next__">
+      
+      
+      ¶
+    </a>
   </div>
   <div class="docstring functionBody">
-    
     
     <div><p class="undocumented">Undocumented</p></div>
   </div>
@@ -515,14 +1313,19 @@
   </a>
   <div class="functionHeader">
     
-    <span class="py-keyword">def</span> <span class="py-defname">about</span>(self, *e):
+    
+    <span class="py-keyword">def</span> <span class="py-defname">about</span><span class="function-signature">(self, *e)</span>:
     <a class="sourceLink" href="https://github.com/nltk/nltk/tree/3.6.2/nltk/app/concordance_app.py#L397">
       
       (source)
     </a>
+    <a class="headerLink" href="#about" title="nltk.app.concordance_app.ConcordanceSearchView.about">
+      
+      
+      ¶
+    </a>
   </div>
   <div class="docstring functionBody">
-    
     
     <div><p class="undocumented">Undocumented</p></div>
   </div>
@@ -537,14 +1340,19 @@
   </a>
   <div class="functionHeader">
     
-    <span class="py-keyword">def</span> <span class="py-defname">clear_all</span>(self):
+    
+    <span class="py-keyword">def</span> <span class="py-defname">clear_all</span><span class="function-signature">(self)</span>:
     <a class="sourceLink" href="https://github.com/nltk/nltk/tree/3.6.2/nltk/app/concordance_app.py#L541">
       
       (source)
     </a>
+    <a class="headerLink" href="#clear_all" title="nltk.app.concordance_app.ConcordanceSearchView.clear_all">
+      
+      
+      ¶
+    </a>
   </div>
   <div class="docstring functionBody">
-    
     
     <div><p class="undocumented">Undocumented</p></div>
   </div>
@@ -559,14 +1367,19 @@
   </a>
   <div class="functionHeader">
     
-    <span class="py-keyword">def</span> <span class="py-defname">clear_results_box</span>(self):
+    
+    <span class="py-keyword">def</span> <span class="py-defname">clear_results_box</span><span class="function-signature">(self)</span>:
     <a class="sourceLink" href="https://github.com/nltk/nltk/tree/3.6.2/nltk/app/concordance_app.py#L546">
       
       (source)
     </a>
+    <a class="headerLink" href="#clear_results_box" title="nltk.app.concordance_app.ConcordanceSearchView.clear_results_box">
+      
+      
+      ¶
+    </a>
   </div>
   <div class="docstring functionBody">
-    
     
     <div><p class="undocumented">Undocumented</p></div>
   </div>
@@ -581,14 +1394,19 @@
   </a>
   <div class="functionHeader">
     
-    <span class="py-keyword">def</span> <span class="py-defname">corpus_selected</span>(self, *args):
+    
+    <span class="py-keyword">def</span> <span class="py-defname">corpus_selected</span><span class="function-signature">(self, *args)</span>:
     <a class="sourceLink" href="https://github.com/nltk/nltk/tree/3.6.2/nltk/app/concordance_app.py#L457">
       
       (source)
     </a>
+    <a class="headerLink" href="#corpus_selected" title="nltk.app.concordance_app.ConcordanceSearchView.corpus_selected">
+      
+      
+      ¶
+    </a>
   </div>
   <div class="docstring functionBody">
-    
     
     <div><p class="undocumented">Undocumented</p></div>
   </div>
@@ -603,14 +1421,19 @@
   </a>
   <div class="functionHeader">
     
-    <span class="py-keyword">def</span> <span class="py-defname">destroy</span>(self, *e):
+    
+    <span class="py-keyword">def</span> <span class="py-defname">destroy</span><span class="function-signature">(self, *e)</span>:
     <a class="sourceLink" href="https://github.com/nltk/nltk/tree/3.6.2/nltk/app/concordance_app.py#L534">
       
       (source)
     </a>
+    <a class="headerLink" href="#destroy" title="nltk.app.concordance_app.ConcordanceSearchView.destroy">
+      
+      
+      ¶
+    </a>
   </div>
   <div class="docstring functionBody">
-    
     
     <div><p class="undocumented">Undocumented</p></div>
   </div>
@@ -625,14 +1448,19 @@
   </a>
   <div class="functionHeader">
     
-    <span class="py-keyword">def</span> <span class="py-defname">fire_event</span>(self, event):
+    
+    <span class="py-keyword">def</span> <span class="py-defname">fire_event</span><span class="function-signature">(self, event)</span>:
     <a class="sourceLink" href="https://github.com/nltk/nltk/tree/3.6.2/nltk/app/concordance_app.py#L572">
       
       (source)
     </a>
+    <a class="headerLink" href="#fire_event" title="nltk.app.concordance_app.ConcordanceSearchView.fire_event">
+      
+      
+      ¶
+    </a>
   </div>
   <div class="docstring functionBody">
-    
     
     <div><p class="undocumented">Undocumented</p></div>
   </div>
@@ -647,14 +1475,19 @@
   </a>
   <div class="functionHeader">
     
-    <span class="py-keyword">def</span> <span class="py-defname">freeze_editable</span>(self):
+    
+    <span class="py-keyword">def</span> <span class="py-defname">freeze_editable</span><span class="function-signature">(self)</span>:
     <a class="sourceLink" href="https://github.com/nltk/nltk/tree/3.6.2/nltk/app/concordance_app.py#L551">
       
       (source)
     </a>
+    <a class="headerLink" href="#freeze_editable" title="nltk.app.concordance_app.ConcordanceSearchView.freeze_editable">
+      
+      
+      ¶
+    </a>
   </div>
   <div class="docstring functionBody">
-    
     
     <div><p class="undocumented">Undocumented</p></div>
   </div>
@@ -669,14 +1502,19 @@
   </a>
   <div class="functionHeader">
     
-    <span class="py-keyword">def</span> <span class="py-defname">handle_corpus_loaded</span>(self, event):
+    
+    <span class="py-keyword">def</span> <span class="py-defname">handle_corpus_loaded</span><span class="function-signature">(self, event)</span>:
     <a class="sourceLink" href="https://github.com/nltk/nltk/tree/3.6.2/nltk/app/concordance_app.py#L435">
       
       (source)
     </a>
+    <a class="headerLink" href="#handle_corpus_loaded" title="nltk.app.concordance_app.ConcordanceSearchView.handle_corpus_loaded">
+      
+      
+      ¶
+    </a>
   </div>
   <div class="docstring functionBody">
-    
     
     <div><p class="undocumented">Undocumented</p></div>
   </div>
@@ -691,14 +1529,19 @@
   </a>
   <div class="functionHeader">
     
-    <span class="py-keyword">def</span> <span class="py-defname">handle_error_loading_corpus</span>(self, event):
+    
+    <span class="py-keyword">def</span> <span class="py-defname">handle_error_loading_corpus</span><span class="function-signature">(self, event)</span>:
     <a class="sourceLink" href="https://github.com/nltk/nltk/tree/3.6.2/nltk/app/concordance_app.py#L429">
       
       (source)
     </a>
+    <a class="headerLink" href="#handle_error_loading_corpus" title="nltk.app.concordance_app.ConcordanceSearchView.handle_error_loading_corpus">
+      
+      
+      ¶
+    </a>
   </div>
   <div class="docstring functionBody">
-    
     
     <div><p class="undocumented">Undocumented</p></div>
   </div>
@@ -713,14 +1556,19 @@
   </a>
   <div class="functionHeader">
     
-    <span class="py-keyword">def</span> <span class="py-defname">handle_search_error</span>(self, event):
+    
+    <span class="py-keyword">def</span> <span class="py-defname">handle_search_error</span><span class="function-signature">(self, event)</span>:
     <a class="sourceLink" href="https://github.com/nltk/nltk/tree/3.6.2/nltk/app/concordance_app.py#L453">
       
       (source)
     </a>
+    <a class="headerLink" href="#handle_search_error" title="nltk.app.concordance_app.ConcordanceSearchView.handle_search_error">
+      
+      
+      ¶
+    </a>
   </div>
   <div class="docstring functionBody">
-    
     
     <div><p class="undocumented">Undocumented</p></div>
   </div>
@@ -735,14 +1583,19 @@
   </a>
   <div class="functionHeader">
     
-    <span class="py-keyword">def</span> <span class="py-defname">handle_search_terminated</span>(self, event):
+    
+    <span class="py-keyword">def</span> <span class="py-defname">handle_search_terminated</span><span class="function-signature">(self, event)</span>:
     <a class="sourceLink" href="https://github.com/nltk/nltk/tree/3.6.2/nltk/app/concordance_app.py#L441">
       
       (source)
     </a>
+    <a class="headerLink" href="#handle_search_terminated" title="nltk.app.concordance_app.ConcordanceSearchView.handle_search_terminated">
+      
+      
+      ¶
+    </a>
   </div>
   <div class="docstring functionBody">
-    
     
     <div><p class="undocumented">Undocumented</p></div>
   </div>
@@ -757,14 +1610,19 @@
   </a>
   <div class="functionHeader">
     
-    <span class="py-keyword">def</span> <span class="py-defname">load_corpus</span>(self, selection):
+    
+    <span class="py-keyword">def</span> <span class="py-defname">load_corpus</span><span class="function-signature">(self, selection)</span>:
     <a class="sourceLink" href="https://github.com/nltk/nltk/tree/3.6.2/nltk/app/concordance_app.py#L461">
       
       (source)
     </a>
+    <a class="headerLink" href="#load_corpus" title="nltk.app.concordance_app.ConcordanceSearchView.load_corpus">
+      
+      
+      ¶
+    </a>
   </div>
   <div class="docstring functionBody">
-    
     
     <div><p class="undocumented">Undocumented</p></div>
   </div>
@@ -779,14 +1637,19 @@
   </a>
   <div class="functionHeader">
     
-    <span class="py-keyword">def</span> <span class="py-defname">mainloop</span>(self, *args, **kwargs):
+    
+    <span class="py-keyword">def</span> <span class="py-defname">mainloop</span><span class="function-signature">(self, *args, **kwargs)</span>:
     <a class="sourceLink" href="https://github.com/nltk/nltk/tree/3.6.2/nltk/app/concordance_app.py#L576">
       
       (source)
     </a>
+    <a class="headerLink" href="#mainloop" title="nltk.app.concordance_app.ConcordanceSearchView.mainloop">
+      
+      
+      ¶
+    </a>
   </div>
   <div class="docstring functionBody">
-    
     
     <div><p class="undocumented">Undocumented</p></div>
   </div>
@@ -801,14 +1664,19 @@
   </a>
   <div class="functionHeader">
     
-    <span class="py-keyword">def</span> <span class="py-defname">pad</span>(self, sent, hstart, hend):
+    
+    <span class="py-keyword">def</span> <span class="py-defname">pad</span><span class="function-signature">(self, sent, hstart, hend)</span>:
     <a class="sourceLink" href="https://github.com/nltk/nltk/tree/3.6.2/nltk/app/concordance_app.py#L527">
       
       (source)
     </a>
+    <a class="headerLink" href="#pad" title="nltk.app.concordance_app.ConcordanceSearchView.pad">
+      
+      
+      ¶
+    </a>
   </div>
   <div class="docstring functionBody">
-    
     
     <div><p class="undocumented">Undocumented</p></div>
   </div>
@@ -823,14 +1691,19 @@
   </a>
   <div class="functionHeader">
     
-    <span class="py-keyword">def</span> <span class="py-defname">previous</span>(self):
+    
+    <span class="py-keyword">def</span> <span class="py-defname">previous</span><span class="function-signature">(self)</span>:
     <a class="sourceLink" href="https://github.com/nltk/nltk/tree/3.6.2/nltk/app/concordance_app.py#L387">
       
       (source)
     </a>
+    <a class="headerLink" href="#previous" title="nltk.app.concordance_app.ConcordanceSearchView.previous">
+      
+      
+      ¶
+    </a>
   </div>
   <div class="docstring functionBody">
-    
     
     <div><p class="undocumented">Undocumented</p></div>
   </div>
@@ -845,14 +1718,19 @@
   </a>
   <div class="functionHeader">
     
-    <span class="py-keyword">def</span> <span class="py-defname">search</span>(self):
+    
+    <span class="py-keyword">def</span> <span class="py-defname">search</span><span class="function-signature">(self)</span>:
     <a class="sourceLink" href="https://github.com/nltk/nltk/tree/3.6.2/nltk/app/concordance_app.py#L467">
       
       (source)
     </a>
+    <a class="headerLink" href="#search" title="nltk.app.concordance_app.ConcordanceSearchView.search">
+      
+      
+      ¶
+    </a>
   </div>
   <div class="docstring functionBody">
-    
     
     <div><p class="undocumented">Undocumented</p></div>
   </div>
@@ -867,14 +1745,19 @@
   </a>
   <div class="functionHeader">
     
-    <span class="py-keyword">def</span> <span class="py-defname">search_enter_keypress_handler</span>(self, *event):
+    
+    <span class="py-keyword">def</span> <span class="py-defname">search_enter_keypress_handler</span><span class="function-signature">(self, *event)</span>:
     <a class="sourceLink" href="https://github.com/nltk/nltk/tree/3.6.2/nltk/app/concordance_app.py#L322">
       
       (source)
     </a>
+    <a class="headerLink" href="#search_enter_keypress_handler" title="nltk.app.concordance_app.ConcordanceSearchView.search_enter_keypress_handler">
+      
+      
+      ¶
+    </a>
   </div>
   <div class="docstring functionBody">
-    
     
     <div><p class="undocumented">Undocumented</p></div>
   </div>
@@ -889,14 +1772,19 @@
   </a>
   <div class="functionHeader">
     
-    <span class="py-keyword">def</span> <span class="py-defname">set_cntx_af_len</span>(self, **kwargs):
+    
+    <span class="py-keyword">def</span> <span class="py-defname">set_cntx_af_len</span><span class="function-signature">(self, **kwargs)</span>:
     <a class="sourceLink" href="https://github.com/nltk/nltk/tree/3.6.2/nltk/app/concordance_app.py#L258">
       
       (source)
     </a>
+    <a class="headerLink" href="#set_cntx_af_len" title="nltk.app.concordance_app.ConcordanceSearchView.set_cntx_af_len">
+      
+      
+      ¶
+    </a>
   </div>
   <div class="docstring functionBody">
-    
     
     <div><p class="undocumented">Undocumented</p></div>
   </div>
@@ -911,14 +1799,19 @@
   </a>
   <div class="functionHeader">
     
-    <span class="py-keyword">def</span> <span class="py-defname">set_cntx_bf_len</span>(self, **kwargs):
+    
+    <span class="py-keyword">def</span> <span class="py-defname">set_cntx_bf_len</span><span class="function-signature">(self, **kwargs)</span>:
     <a class="sourceLink" href="https://github.com/nltk/nltk/tree/3.6.2/nltk/app/concordance_app.py#L261">
       
       (source)
     </a>
+    <a class="headerLink" href="#set_cntx_bf_len" title="nltk.app.concordance_app.ConcordanceSearchView.set_cntx_bf_len">
+      
+      
+      ¶
+    </a>
   </div>
   <div class="docstring functionBody">
-    
     
     <div><p class="undocumented">Undocumented</p></div>
   </div>
@@ -933,14 +1826,19 @@
   </a>
   <div class="functionHeader">
     
-    <span class="py-keyword">def</span> <span class="py-defname">set_paging_button_states</span>(self):
+    
+    <span class="py-keyword">def</span> <span class="py-defname">set_paging_button_states</span><span class="function-signature">(self)</span>:
     <a class="sourceLink" href="https://github.com/nltk/nltk/tree/3.6.2/nltk/app/concordance_app.py#L562">
       
       (source)
     </a>
+    <a class="headerLink" href="#set_paging_button_states" title="nltk.app.concordance_app.ConcordanceSearchView.set_paging_button_states">
+      
+      
+      ¶
+    </a>
   </div>
   <div class="docstring functionBody">
-    
     
     <div><p class="undocumented">Undocumented</p></div>
   </div>
@@ -955,14 +1853,19 @@
   </a>
   <div class="functionHeader">
     
-    <span class="py-keyword">def</span> <span class="py-defname">set_result_size</span>(self, **kwargs):
+    
+    <span class="py-keyword">def</span> <span class="py-defname">set_result_size</span><span class="function-signature">(self, **kwargs)</span>:
     <a class="sourceLink" href="https://github.com/nltk/nltk/tree/3.6.2/nltk/app/concordance_app.py#L255">
       
       (source)
     </a>
+    <a class="headerLink" href="#set_result_size" title="nltk.app.concordance_app.ConcordanceSearchView.set_result_size">
+      
+      
+      ¶
+    </a>
   </div>
   <div class="docstring functionBody">
-    
     
     <div><p class="undocumented">Undocumented</p></div>
   </div>
@@ -977,14 +1880,19 @@
   </a>
   <div class="functionHeader">
     
-    <span class="py-keyword">def</span> <span class="py-defname">unfreeze_editable</span>(self):
+    
+    <span class="py-keyword">def</span> <span class="py-defname">unfreeze_editable</span><span class="function-signature">(self)</span>:
     <a class="sourceLink" href="https://github.com/nltk/nltk/tree/3.6.2/nltk/app/concordance_app.py#L557">
       
       (source)
     </a>
+    <a class="headerLink" href="#unfreeze_editable" title="nltk.app.concordance_app.ConcordanceSearchView.unfreeze_editable">
+      
+      
+      ¶
+    </a>
   </div>
   <div class="docstring functionBody">
-    
     
     <div><p class="undocumented">Undocumented</p></div>
   </div>
@@ -999,14 +1907,19 @@
   </a>
   <div class="functionHeader">
     
-    <span class="py-keyword">def</span> <span class="py-defname">words_and_labels</span>(self, sentence, pos1, pos2):
+    
+    <span class="py-keyword">def</span> <span class="py-defname">words_and_labels</span><span class="function-signature">(self, sentence, pos1, pos2)</span>:
     <a class="sourceLink" href="https://github.com/nltk/nltk/tree/3.6.2/nltk/app/concordance_app.py#L506">
       
       (source)
     </a>
+    <a class="headerLink" href="#words_and_labels" title="nltk.app.concordance_app.ConcordanceSearchView.words_and_labels">
+      
+      
+      ¶
+    </a>
   </div>
   <div class="docstring functionBody">
-    
     
     <div><p class="undocumented">Undocumented</p></div>
   </div>
@@ -1021,14 +1934,19 @@
   </a>
   <div class="functionHeader">
     
-    <span class="py-keyword">def</span> <span class="py-defname">write_results</span>(self, results):
+    
+    <span class="py-keyword">def</span> <span class="py-defname">write_results</span><span class="function-signature">(self, results)</span>:
     <a class="sourceLink" href="https://github.com/nltk/nltk/tree/3.6.2/nltk/app/concordance_app.py#L478">
       
       (source)
     </a>
+    <a class="headerLink" href="#write_results" title="nltk.app.concordance_app.ConcordanceSearchView.write_results">
+      
+      
+      ¶
+    </a>
   </div>
   <div class="docstring functionBody">
-    
     
     <div><p class="undocumented">Undocumented</p></div>
   </div>
@@ -1048,9 +1966,13 @@
       
       (source)
     </a>
+    <a class="headerLink" href="#after" title="nltk.app.concordance_app.ConcordanceSearchView.after">
+      
+      
+      ¶
+    </a>
   </div>
   <div class="functionBody">
-    
     
     <div><p class="undocumented">Undocumented</p></div>
     
@@ -1071,9 +1993,13 @@
       
       (source)
     </a>
+    <a class="headerLink" href="#current_page" title="nltk.app.concordance_app.ConcordanceSearchView.current_page">
+      
+      
+      ¶
+    </a>
   </div>
   <div class="functionBody">
-    
     
     <div><p class="undocumented">Undocumented</p></div>
     
@@ -1094,9 +2020,13 @@
       
       (source)
     </a>
+    <a class="headerLink" href="#main_frame" title="nltk.app.concordance_app.ConcordanceSearchView.main_frame">
+      
+      
+      ¶
+    </a>
   </div>
   <div class="functionBody">
-    
     
     <div><p class="undocumented">Undocumented</p></div>
     
@@ -1117,9 +2047,13 @@
       
       (source)
     </a>
+    <a class="headerLink" href="#model" title="nltk.app.concordance_app.ConcordanceSearchView.model">
+      
+      
+      ¶
+    </a>
   </div>
   <div class="functionBody">
-    
     
     <div><p class="undocumented">Undocumented</p></div>
     
@@ -1140,9 +2074,13 @@
       
       (source)
     </a>
+    <a class="headerLink" href="#next" title="nltk.app.concordance_app.ConcordanceSearchView.next">
+      
+      
+      ¶
+    </a>
   </div>
   <div class="functionBody">
-    
     
     <div><p class="undocumented">Undocumented</p></div>
     
@@ -1163,9 +2101,13 @@
       
       (source)
     </a>
+    <a class="headerLink" href="#prev" title="nltk.app.concordance_app.ConcordanceSearchView.prev">
+      
+      
+      ¶
+    </a>
   </div>
   <div class="functionBody">
-    
     
     <div><p class="undocumented">Undocumented</p></div>
     
@@ -1186,9 +2128,13 @@
       
       (source)
     </a>
+    <a class="headerLink" href="#query_box" title="nltk.app.concordance_app.ConcordanceSearchView.query_box">
+      
+      
+      ¶
+    </a>
   </div>
   <div class="functionBody">
-    
     
     <div><p class="undocumented">Undocumented</p></div>
     
@@ -1209,9 +2155,13 @@
       
       (source)
     </a>
+    <a class="headerLink" href="#queue" title="nltk.app.concordance_app.ConcordanceSearchView.queue">
+      
+      
+      ¶
+    </a>
   </div>
   <div class="functionBody">
-    
     
     <div><p class="undocumented">Undocumented</p></div>
     
@@ -1232,9 +2182,13 @@
       
       (source)
     </a>
+    <a class="headerLink" href="#results_box" title="nltk.app.concordance_app.ConcordanceSearchView.results_box">
+      
+      
+      ¶
+    </a>
   </div>
   <div class="functionBody">
-    
     
     <div><p class="undocumented">Undocumented</p></div>
     
@@ -1255,9 +2209,13 @@
       
       (source)
     </a>
+    <a class="headerLink" href="#search_button" title="nltk.app.concordance_app.ConcordanceSearchView.search_button">
+      
+      
+      ¶
+    </a>
   </div>
   <div class="functionBody">
-    
     
     <div><p class="undocumented">Undocumented</p></div>
     
@@ -1278,9 +2236,13 @@
       
       (source)
     </a>
+    <a class="headerLink" href="#status" title="nltk.app.concordance_app.ConcordanceSearchView.status">
+      
+      
+      ¶
+    </a>
   </div>
   <div class="functionBody">
-    
     
     <div><p class="undocumented">Undocumented</p></div>
     
@@ -1301,9 +2263,13 @@
       
       (source)
     </a>
+    <a class="headerLink" href="#top" title="nltk.app.concordance_app.ConcordanceSearchView.top">
+      
+      
+      ¶
+    </a>
   </div>
   <div class="functionBody">
-    
     
     <div><p class="undocumented">Undocumented</p></div>
     
@@ -1324,9 +2290,13 @@
       
       (source)
     </a>
+    <a class="headerLink" href="#var" title="nltk.app.concordance_app.ConcordanceSearchView.var">
+      
+      
+      ¶
+    </a>
   </div>
   <div class="functionBody">
-    
     
     <div><p class="undocumented">Undocumented</p></div>
     
@@ -1342,14 +2312,19 @@
   </a>
   <div class="functionHeader">
     
-    <span class="py-keyword">def</span> <span class="py-defname">_bind_event_handlers</span>(self):
+    
+    <span class="py-keyword">def</span> <span class="py-defname">_bind_event_handlers</span><span class="function-signature">(self)</span>:
     <a class="sourceLink" href="https://github.com/nltk/nltk/tree/3.6.2/nltk/app/concordance_app.py#L407">
       
       (source)
     </a>
+    <a class="headerLink" href="#_bind_event_handlers" title="nltk.app.concordance_app.ConcordanceSearchView._bind_event_handlers">
+      
+      
+      ¶
+    </a>
   </div>
   <div class="docstring functionBody">
-    
     
     <div><p class="undocumented">Undocumented</p></div>
   </div>
@@ -1364,14 +2339,19 @@
   </a>
   <div class="functionHeader">
     
-    <span class="py-keyword">def</span> <span class="py-defname">_init_corpus_select</span>(self, parent):
+    
+    <span class="py-keyword">def</span> <span class="py-defname">_init_corpus_select</span><span class="function-signature">(self, parent)</span>:
     <a class="sourceLink" href="https://github.com/nltk/nltk/tree/3.6.2/nltk/app/concordance_app.py#L264">
       
       (source)
     </a>
+    <a class="headerLink" href="#_init_corpus_select" title="nltk.app.concordance_app.ConcordanceSearchView._init_corpus_select">
+      
+      
+      ¶
+    </a>
   </div>
   <div class="docstring functionBody">
-    
     
     <div><p class="undocumented">Undocumented</p></div>
   </div>
@@ -1386,14 +2366,19 @@
   </a>
   <div class="functionHeader">
     
-    <span class="py-keyword">def</span> <span class="py-defname">_init_menubar</span>(self):
+    
+    <span class="py-keyword">def</span> <span class="py-defname">_init_menubar</span><span class="function-signature">(self)</span>:
     <a class="sourceLink" href="https://github.com/nltk/nltk/tree/3.6.2/nltk/app/concordance_app.py#L160">
       
       (source)
     </a>
+    <a class="headerLink" href="#_init_menubar" title="nltk.app.concordance_app.ConcordanceSearchView._init_menubar">
+      
+      
+      ¶
+    </a>
   </div>
   <div class="docstring functionBody">
-    
     
     <div><p class="undocumented">Undocumented</p></div>
   </div>
@@ -1408,14 +2393,19 @@
   </a>
   <div class="functionHeader">
     
-    <span class="py-keyword">def</span> <span class="py-defname">_init_paging</span>(self, parent):
+    
+    <span class="py-keyword">def</span> <span class="py-defname">_init_paging</span><span class="function-signature">(self, parent)</span>:
     <a class="sourceLink" href="https://github.com/nltk/nltk/tree/3.6.2/nltk/app/concordance_app.py#L362">
       
       (source)
     </a>
+    <a class="headerLink" href="#_init_paging" title="nltk.app.concordance_app.ConcordanceSearchView._init_paging">
+      
+      
+      ¶
+    </a>
   </div>
   <div class="docstring functionBody">
-    
     
     <div><p class="undocumented">Undocumented</p></div>
   </div>
@@ -1430,14 +2420,19 @@
   </a>
   <div class="functionHeader">
     
-    <span class="py-keyword">def</span> <span class="py-defname">_init_query_box</span>(self, parent):
+    
+    <span class="py-keyword">def</span> <span class="py-defname">_init_query_box</span><span class="function-signature">(self, parent)</span>:
     <a class="sourceLink" href="https://github.com/nltk/nltk/tree/3.6.2/nltk/app/concordance_app.py#L305">
       
       (source)
     </a>
+    <a class="headerLink" href="#_init_query_box" title="nltk.app.concordance_app.ConcordanceSearchView._init_query_box">
+      
+      
+      ¶
+    </a>
   </div>
   <div class="docstring functionBody">
-    
     
     <div><p class="undocumented">Undocumented</p></div>
   </div>
@@ -1452,14 +2447,19 @@
   </a>
   <div class="functionHeader">
     
-    <span class="py-keyword">def</span> <span class="py-defname">_init_results_box</span>(self, parent):
+    
+    <span class="py-keyword">def</span> <span class="py-defname">_init_results_box</span><span class="function-signature">(self, parent)</span>:
     <a class="sourceLink" href="https://github.com/nltk/nltk/tree/3.6.2/nltk/app/concordance_app.py#L325">
       
       (source)
     </a>
+    <a class="headerLink" href="#_init_results_box" title="nltk.app.concordance_app.ConcordanceSearchView._init_results_box">
+      
+      
+      ¶
+    </a>
   </div>
   <div class="docstring functionBody">
-    
     
     <div><p class="undocumented">Undocumented</p></div>
   </div>
@@ -1474,14 +2474,19 @@
   </a>
   <div class="functionHeader">
     
-    <span class="py-keyword">def</span> <span class="py-defname">_init_status</span>(self, parent):
+    
+    <span class="py-keyword">def</span> <span class="py-defname">_init_status</span><span class="function-signature">(self, parent)</span>:
     <a class="sourceLink" href="https://github.com/nltk/nltk/tree/3.6.2/nltk/app/concordance_app.py#L293">
       
       (source)
     </a>
+    <a class="headerLink" href="#_init_status" title="nltk.app.concordance_app.ConcordanceSearchView._init_status">
+      
+      
+      ¶
+    </a>
   </div>
   <div class="docstring functionBody">
-    
     
     <div><p class="undocumented">Undocumented</p></div>
   </div>
@@ -1496,14 +2501,19 @@
   </a>
   <div class="functionHeader">
     
-    <span class="py-keyword">def</span> <span class="py-defname">_init_top</span>(self, top):
+    
+    <span class="py-keyword">def</span> <span class="py-defname">_init_top</span><span class="function-signature">(self, top)</span>:
     <a class="sourceLink" href="https://github.com/nltk/nltk/tree/3.6.2/nltk/app/concordance_app.py#L142">
       
       (source)
     </a>
+    <a class="headerLink" href="#_init_top" title="nltk.app.concordance_app.ConcordanceSearchView._init_top">
+      
+      
+      ¶
+    </a>
   </div>
   <div class="docstring functionBody">
-    
     
     <div><p class="undocumented">Undocumented</p></div>
   </div>
@@ -1518,14 +2528,19 @@
   </a>
   <div class="functionHeader">
     
-    <span class="py-keyword">def</span> <span class="py-defname">_init_widgets</span>(self, parent):
+    
+    <span class="py-keyword">def</span> <span class="py-defname">_init_widgets</span><span class="function-signature">(self, parent)</span>:
     <a class="sourceLink" href="https://github.com/nltk/nltk/tree/3.6.2/nltk/app/concordance_app.py#L149">
       
       (source)
     </a>
+    <a class="headerLink" href="#_init_widgets" title="nltk.app.concordance_app.ConcordanceSearchView._init_widgets">
+      
+      
+      ¶
+    </a>
   </div>
   <div class="docstring functionBody">
-    
     
     <div><p class="undocumented">Undocumented</p></div>
   </div>
@@ -1540,14 +2555,19 @@
   </a>
   <div class="functionHeader">
     
-    <span class="py-keyword">def</span> <span class="py-defname">_poll</span>(self):
+    
+    <span class="py-keyword">def</span> <span class="py-defname">_poll</span><span class="function-signature">(self)</span>:
     <a class="sourceLink" href="https://github.com/nltk/nltk/tree/3.6.2/nltk/app/concordance_app.py#L413">
       
       (source)
     </a>
+    <a class="headerLink" href="#_poll" title="nltk.app.concordance_app.ConcordanceSearchView._poll">
+      
+      
+      ¶
+    </a>
   </div>
   <div class="docstring functionBody">
-    
     
     <div><p class="undocumented">Undocumented</p></div>
   </div>
@@ -1567,9 +2587,13 @@
       
       (source)
     </a>
+    <a class="headerLink" href="#_BACKGROUND_COLOUR" title="nltk.app.concordance_app.ConcordanceSearchView._BACKGROUND_COLOUR">
+      
+      
+      ¶
+    </a>
   </div>
   <div class="functionBody">
-    
     
     <div><p class="undocumented">Undocumented</p></div>
     <table class="valueTable"><tr class="fieldStart"><td class="fieldName">Value</td></tr><tr><td><pre class="constant-value"><code><span class="rst-variable-quote">'</span><span class="rst-variable-string">#FFF</span><span class="rst-variable-quote">'</span></code></pre></td></tr></table>
@@ -1590,9 +2614,13 @@
       
       (source)
     </a>
+    <a class="headerLink" href="#_FRACTION_LEFT_TEXT" title="nltk.app.concordance_app.ConcordanceSearchView._FRACTION_LEFT_TEXT">
+      
+      
+      ¶
+    </a>
   </div>
   <div class="functionBody">
-    
     
     <div><p class="undocumented">Undocumented</p></div>
     <table class="valueTable"><tr class="fieldStart"><td class="fieldName">Value</td></tr><tr><td><pre class="constant-value"><code>0.3</code></pre></td></tr></table>
@@ -1613,9 +2641,13 @@
       
       (source)
     </a>
+    <a class="headerLink" href="#_HIGHLIGHT_LABEL_COLOUR" title="nltk.app.concordance_app.ConcordanceSearchView._HIGHLIGHT_LABEL_COLOUR">
+      
+      
+      ¶
+    </a>
   </div>
   <div class="functionBody">
-    
     
     <div><p class="undocumented">Undocumented</p></div>
     <table class="valueTable"><tr class="fieldStart"><td class="fieldName">Value</td></tr><tr><td><pre class="constant-value"><code><span class="rst-variable-quote">'</span><span class="rst-variable-string">#C0C0C0</span><span class="rst-variable-quote">'</span></code></pre></td></tr></table>
@@ -1636,9 +2668,13 @@
       
       (source)
     </a>
+    <a class="headerLink" href="#_HIGHLIGHT_LABEL_TAG" title="nltk.app.concordance_app.ConcordanceSearchView._HIGHLIGHT_LABEL_TAG">
+      
+      
+      ¶
+    </a>
   </div>
   <div class="functionBody">
-    
     
     <div><p class="undocumented">Undocumented</p></div>
     <table class="valueTable"><tr class="fieldStart"><td class="fieldName">Value</td></tr><tr><td><pre class="constant-value"><code><span class="rst-variable-quote">'</span><span class="rst-variable-string">HL_LBL_TAG</span><span class="rst-variable-quote">'</span></code></pre></td></tr></table>
@@ -1659,9 +2695,13 @@
       
       (source)
     </a>
+    <a class="headerLink" href="#_HIGHLIGHT_WORD_COLOUR" title="nltk.app.concordance_app.ConcordanceSearchView._HIGHLIGHT_WORD_COLOUR">
+      
+      
+      ¶
+    </a>
   </div>
   <div class="functionBody">
-    
     
     <div><p class="undocumented">Undocumented</p></div>
     <table class="valueTable"><tr class="fieldStart"><td class="fieldName">Value</td></tr><tr><td><pre class="constant-value"><code><span class="rst-variable-quote">'</span><span class="rst-variable-string">#F00</span><span class="rst-variable-quote">'</span></code></pre></td></tr></table>
@@ -1682,9 +2722,13 @@
       
       (source)
     </a>
+    <a class="headerLink" href="#_HIGHLIGHT_WORD_TAG" title="nltk.app.concordance_app.ConcordanceSearchView._HIGHLIGHT_WORD_TAG">
+      
+      
+      ¶
+    </a>
   </div>
   <div class="functionBody">
-    
     
     <div><p class="undocumented">Undocumented</p></div>
     <table class="valueTable"><tr class="fieldStart"><td class="fieldName">Value</td></tr><tr><td><pre class="constant-value"><code><span class="rst-variable-quote">'</span><span class="rst-variable-string">HL_WRD_TAG</span><span class="rst-variable-quote">'</span></code></pre></td></tr></table>
@@ -1705,9 +2749,13 @@
       
       (source)
     </a>
+    <a class="headerLink" href="#_char_after" title="nltk.app.concordance_app.ConcordanceSearchView._char_after">
+      
+      
+      ¶
+    </a>
   </div>
   <div class="functionBody">
-    
     
     <div><p class="undocumented">Undocumented</p></div>
     
@@ -1728,9 +2776,13 @@
       
       (source)
     </a>
+    <a class="headerLink" href="#_char_before" title="nltk.app.concordance_app.ConcordanceSearchView._char_before">
+      
+      
+      ¶
+    </a>
   </div>
   <div class="functionBody">
-    
     
     <div><p class="undocumented">Undocumented</p></div>
     
@@ -1751,9 +2803,13 @@
       
       (source)
     </a>
+    <a class="headerLink" href="#_cntx_af_len" title="nltk.app.concordance_app.ConcordanceSearchView._cntx_af_len">
+      
+      
+      ¶
+    </a>
   </div>
   <div class="functionBody">
-    
     
     <div><p class="undocumented">Undocumented</p></div>
     
@@ -1774,9 +2830,13 @@
       
       (source)
     </a>
+    <a class="headerLink" href="#_cntx_bf_len" title="nltk.app.concordance_app.ConcordanceSearchView._cntx_bf_len">
+      
+      
+      ¶
+    </a>
   </div>
   <div class="functionBody">
-    
     
     <div><p class="undocumented">Undocumented</p></div>
     
@@ -1797,27 +2857,40 @@
       
       (source)
     </a>
+    <a class="headerLink" href="#_result_size" title="nltk.app.concordance_app.ConcordanceSearchView._result_size">
+      
+      
+      ¶
+    </a>
   </div>
   <div class="functionBody">
-    
     
     <div><p class="undocumented">Undocumented</p></div>
     
   </div>
 </div>
-
+        </div>
+      
       </div>
     </div>
 
     <footer class="navbar navbar-default">
+
   
-  <div class="container">
+  <div class="container-fluid">
     <a href="index.html">API Documentation</a> for <a href="http://www.nltk.org/" class="projecthome">nltk-3.6.2</a>,
   generated by <a href="https://github.com/twisted/pydoctor/">pydoctor</a>
-    22.2.2.dev0 at 2025-02-28 00:01:09.
+    24.11.2 at 2025-02-28 00:02:28.
   </div>
-</footer>
 
+  <!-- Search related scripts needs to be loaded at the end of HTML 
+    parsing not to introduce overhead and display HTML data asap -->
+  <script src="ajax.js" type="text/javascript"></script>
+  <script src="searchlib.js" type="text/javascript"></script>
+  <script src="search.js" type="text/javascript"></script>
+
+</footer>
+  
     <script src="pydoctor.js" type="text/javascript"></script>
 
   </body>

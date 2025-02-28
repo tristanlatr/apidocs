@@ -7,23 +7,26 @@
   <head>
     
     <title>nltk.sem.drt.DrtParser</title>
-    <meta name="generator" content="pydoctor 22.2.2.dev0"> 
+    <meta name="generator" content="pydoctor 24.11.2"> 
         
     </meta>
     <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=0.75" />
+    <meta name="viewport" content="width=device-width, initial-scale=1 maximum-scale=1" />
     <link rel="stylesheet" type="text/css" href="bootstrap.min.css" />
     <link rel="stylesheet" type="text/css" href="apidocs.css" />
     <link rel="stylesheet" type="text/css" href="extra.css" />
+    
 </head>
 
   <body>
 
     
 
-    <nav class="navbar navbar-default">
+    <nav class="navbar navbar-default mainnavbar">
+      
   
-  <div class="container">
+  <div class="container-fluid">
+
 
     <div class="navbar-header">
       
@@ -50,7 +53,7 @@
             
             <span class="input-group-btn">
               <a style="display: none;" class="btn btn-default" id="search-clear-button" title="Clear" onclick="clearSearch()"><img src="fonts/x-circle.svg" alt="Clear" /></a>
-              <a class="btn btn-default" id="search-help-button" title="Help" onclick="toggleSearchHelpText()"><img src="fonts/info.svg" alt="Help" /></a>
+              <a class="btn btn-default" id="apidocs-help-button" title="Help" href="apidocs-help.html"><img src="fonts/info.svg" alt="Help" /></a>
             </span>
           </div>
         </div>
@@ -58,50 +61,24 @@
       </div>
 
       <div id="search-results-container" style="display: none;">
-        <div>
+        
+        <div id="search-buttons">
           <span class="label label-default" id="search-docstrings-button">
-            <a title="Search in docstrings" onclick="toggleSearchInDocstrings()">search in docstrings</a></span>
+          <label class="checkbox-inline">
+            <input type="checkbox" id="toggle-search-in-docstrings-checkbox" value="false" onclick="toggleSearchInDocstrings()">
+              search in docstrings
+            </input>
+          </label>
+          </span>
+          
         </div>
-
+        
         <noscript>
             <h1>Cannot search: JavaScript is not supported/enabled in your browser.</h1>
         </noscript>
 
-        <div class="hint" id="search-help-box">
-          <p class="rst-last">
-      
-            Search bar offers the following options:
-            <ul>   
-                <li>
-                  <strong>Term presence.</strong> The below example searches for documents that 
-                    must contain “foo”, might contain “bar” and must not contain “baz”: <code>+foo bar -baz</code>
-                </li> 
-
-                <li>
-                  <strong>Wildcards.</strong> The below example searches for documents with words beginning with “foo”: <code>foo*</code>
-                </li> 
-
-                <li>
-                  <strong>Search in specific fields.</strong> The following search matches all objects 
-                  in "twisted.mail" that matches “search”: <code>+qname:twisted.mail.* +search</code>
-
-                  <p>
-                    Possible fields: 'name', 'qname' (fully qualified name), 'docstring', and 'kind'.
-                    Last two fields are only applicable if "search in docstrings" is enabled.
-                  </p>
-                </li>
-
-                <li>
-                  <strong>Fuzzy matches.</strong> The following search matches all documents 
-                  that have a word within 1 edit distance of “foo”: <code>foo~1</code>
-                </li>
-            </ul>
-
-          </p>
-        </div>
-
         <div id="search-status"> </div>
-        
+
         <div class="warning" id="search-warn-box" style="display: none;">
           <p class="rst-last"><span id="search-warn"></span></p>
         </div>
@@ -110,61 +87,846 @@
           <!-- Filled dynamically by JS -->
         </table>
         
-        <div style="margin-top: 8px;">
-          <p>Results provided by <a href="https://lunrjs.com">Lunr.js</a></p>
+        <div style="margin-top: 10px;">
+          <p>For more information on the search, visit the <a href="apidocs-help.html#rst-search">help page</a>.</p>
         </div>
       </div>
 
     </div>
+
+
+  </div>
+</nav>
+    
+    <div class="container-fluid">
+
+      <!-- Side navigation -->
+      <div class="sidebarcontainer" style="display: none;">
+        
+        <div class="sidebar"><nav class="sidebar">
+  
+
+  <div>
+
+      <div class="thingTitle">
+        <span>Class</span>
+        <code class="thisobject"><a href="nltk.sem.drt.DrtParser.html" class="internal-link" title="This class"><wbr></wbr>Drt<wbr></wbr>Parser</a></code> 
+      </div>
+      
+      <div>
+        
+
+        
+         
+
+        
+        
+
+        <div class="childrenKindTitle">Methods</div>
+        <ul>
+    
+    <li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="#__init__" class="internal-link" title="nltk.sem.drt.DrtParser.__init__">__init__</a></code>
+            </div>
+        
+
+    </li><li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="#get_all_symbols" class="internal-link" title="nltk.sem.drt.DrtParser.get_all_symbols">get<wbr></wbr>_all<wbr></wbr>_symbols</a></code>
+            </div>
+        
+
+    </li><li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="#get_BooleanExpression_factory" class="internal-link" title="nltk.sem.drt.DrtParser.get_BooleanExpression_factory">get_<wbr></wbr>Boolean<wbr></wbr>Expression_factory</a></code>
+            </div>
+        
+
+    </li><li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="#handle" class="internal-link" title="nltk.sem.drt.DrtParser.handle">handle</a></code>
+            </div>
+        
+
+    </li><li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="#handle_conds" class="internal-link" title="nltk.sem.drt.DrtParser.handle_conds">handle<wbr></wbr>_conds</a></code>
+            </div>
+        
+
+    </li><li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="#handle_DRS" class="internal-link" title="nltk.sem.drt.DrtParser.handle_DRS">handle_<wbr></wbr>DRS</a></code>
+            </div>
+        
+
+    </li><li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="#handle_prop" class="internal-link" title="nltk.sem.drt.DrtParser.handle_prop">handle<wbr></wbr>_prop</a></code>
+            </div>
+        
+
+    </li><li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="#handle_refs" class="internal-link" title="nltk.sem.drt.DrtParser.handle_refs">handle<wbr></wbr>_refs</a></code>
+            </div>
+        
+
+    </li><li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="#isvariable" class="internal-link" title="nltk.sem.drt.DrtParser.isvariable">isvariable</a></code>
+            </div>
+        
+
+    </li><li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="#make_ApplicationExpression" class="internal-link" title="nltk.sem.drt.DrtParser.make_ApplicationExpression">make_<wbr></wbr>Application<wbr></wbr>Expression</a></code>
+            </div>
+        
+
+    </li><li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="#make_BooleanExpression" class="internal-link" title="nltk.sem.drt.DrtParser.make_BooleanExpression">make_<wbr></wbr>Boolean<wbr></wbr>Expression</a></code>
+            </div>
+        
+
+    </li><li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="#make_EqualityExpression" class="internal-link" title="nltk.sem.drt.DrtParser.make_EqualityExpression">make_<wbr></wbr>Equality<wbr></wbr>Expression</a></code>
+            </div>
+        
+
+    </li><li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="#make_LambdaExpression" class="internal-link" title="nltk.sem.drt.DrtParser.make_LambdaExpression">make_<wbr></wbr>Lambda<wbr></wbr>Expression</a></code>
+            </div>
+        
+
+    </li><li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="#make_NegatedExpression" class="internal-link" title="nltk.sem.drt.DrtParser.make_NegatedExpression">make_<wbr></wbr>Negated<wbr></wbr>Expression</a></code>
+            </div>
+        
+
+    </li><li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="#make_VariableExpression" class="internal-link" title="nltk.sem.drt.DrtParser.make_VariableExpression">make_<wbr></wbr>Variable<wbr></wbr>Expression</a></code>
+            </div>
+        
+
+    </li>
+</ul> 
+
+        <div class="childrenKindTitle">Inherited Methods</div>
+        <ul>
+    
+    <li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="nltk.sem.logic.LogicParser.html#__repr__" class="internal-link" title="nltk.sem.logic.LogicParser.__repr__">__repr__</a></code>
+            </div>
+        
+
+    </li><li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="nltk.sem.logic.LogicParser.html#assertNextToken" class="internal-link" title="nltk.sem.logic.LogicParser.assertNextToken">assert<wbr></wbr>Next<wbr></wbr>Token</a></code>
+            </div>
+        
+
+    </li><li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="nltk.sem.logic.LogicParser.html#assertToken" class="internal-link" title="nltk.sem.logic.LogicParser.assertToken">assert<wbr></wbr>Token</a></code>
+            </div>
+        
+
+    </li><li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="nltk.sem.logic.LogicParser.html#attempt_adjuncts" class="internal-link" title="nltk.sem.logic.LogicParser.attempt_adjuncts">attempt<wbr></wbr>_adjuncts</a></code>
+            </div>
+        
+
+    </li><li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="nltk.sem.logic.LogicParser.html#attempt_ApplicationExpression" class="internal-link" title="nltk.sem.logic.LogicParser.attempt_ApplicationExpression">attempt_<wbr></wbr>Application<wbr></wbr>Expression</a></code>
+            </div>
+        
+
+    </li><li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="nltk.sem.logic.LogicParser.html#attempt_BooleanExpression" class="internal-link" title="nltk.sem.logic.LogicParser.attempt_BooleanExpression">attempt_<wbr></wbr>Boolean<wbr></wbr>Expression</a></code>
+            </div>
+        
+
+    </li><li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="nltk.sem.logic.LogicParser.html#attempt_EqualityExpression" class="internal-link" title="nltk.sem.logic.LogicParser.attempt_EqualityExpression">attempt_<wbr></wbr>Equality<wbr></wbr>Expression</a></code>
+            </div>
+        
+
+    </li><li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="nltk.sem.logic.LogicParser.html#get_next_token_variable" class="internal-link" title="nltk.sem.logic.LogicParser.get_next_token_variable">get<wbr></wbr>_next<wbr></wbr>_token<wbr></wbr>_variable</a></code>
+            </div>
+        
+
+    </li><li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="nltk.sem.logic.LogicParser.html#get_QuantifiedExpression_factory" class="internal-link" title="nltk.sem.logic.LogicParser.get_QuantifiedExpression_factory">get_<wbr></wbr>Quantified<wbr></wbr>Expression_factory</a></code>
+            </div>
+        
+
+    </li><li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="nltk.sem.logic.LogicParser.html#handle_lambda" class="internal-link" title="nltk.sem.logic.LogicParser.handle_lambda">handle<wbr></wbr>_lambda</a></code>
+            </div>
+        
+
+    </li><li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="nltk.sem.logic.LogicParser.html#handle_negation" class="internal-link" title="nltk.sem.logic.LogicParser.handle_negation">handle<wbr></wbr>_negation</a></code>
+            </div>
+        
+
+    </li><li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="nltk.sem.logic.LogicParser.html#handle_open" class="internal-link" title="nltk.sem.logic.LogicParser.handle_open">handle<wbr></wbr>_open</a></code>
+            </div>
+        
+
+    </li><li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="nltk.sem.logic.LogicParser.html#handle_quant" class="internal-link" title="nltk.sem.logic.LogicParser.handle_quant">handle<wbr></wbr>_quant</a></code>
+            </div>
+        
+
+    </li><li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="nltk.sem.logic.LogicParser.html#handle_variable" class="internal-link" title="nltk.sem.logic.LogicParser.handle_variable">handle<wbr></wbr>_variable</a></code>
+            </div>
+        
+
+    </li><li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="nltk.sem.logic.LogicParser.html#has_priority" class="internal-link" title="nltk.sem.logic.LogicParser.has_priority">has<wbr></wbr>_priority</a></code>
+            </div>
+        
+
+    </li><li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="nltk.sem.logic.LogicParser.html#inRange" class="internal-link" title="nltk.sem.logic.LogicParser.inRange">in<wbr></wbr>Range</a></code>
+            </div>
+        
+
+    </li><li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="nltk.sem.logic.LogicParser.html#make_QuanifiedExpression" class="internal-link" title="nltk.sem.logic.LogicParser.make_QuanifiedExpression">make_<wbr></wbr>Quanified<wbr></wbr>Expression</a></code>
+            </div>
+        
+
+    </li><li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="nltk.sem.logic.LogicParser.html#parse" class="internal-link" title="nltk.sem.logic.LogicParser.parse">parse</a></code>
+            </div>
+        
+
+    </li><li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="nltk.sem.logic.LogicParser.html#process" class="internal-link" title="nltk.sem.logic.LogicParser.process">process</a></code>
+            </div>
+        
+
+    </li><li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="nltk.sem.logic.LogicParser.html#process_next_expression" class="internal-link" title="nltk.sem.logic.LogicParser.process_next_expression">process<wbr></wbr>_next<wbr></wbr>_expression</a></code>
+            </div>
+        
+
+    </li><li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="nltk.sem.logic.LogicParser.html#process_quoted_token" class="internal-link" title="nltk.sem.logic.LogicParser.process_quoted_token">process<wbr></wbr>_quoted<wbr></wbr>_token</a></code>
+            </div>
+        
+
+    </li><li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="nltk.sem.logic.LogicParser.html#token" class="internal-link" title="nltk.sem.logic.LogicParser.token">token</a></code>
+            </div>
+        
+
+    </li>
+</ul> 
+
+        <div class="childrenKindTitle">Attributes</div>
+        <ul>
+    
+    <li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="#operator_precedence" class="internal-link" title="nltk.sem.drt.DrtParser.operator_precedence">operator<wbr></wbr>_precedence</a></code>
+            </div>
+        
+
+    </li>
+</ul> 
+
+        <div class="childrenKindTitle">Inherited Attributes</div>
+        <ul>
+    
+    <li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="nltk.sem.logic.LogicParser.html#quote_chars" class="internal-link" title="nltk.sem.logic.LogicParser.quote_chars">quote<wbr></wbr>_chars</a></code>
+            </div>
+        
+
+    </li><li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="nltk.sem.logic.LogicParser.html#right_associated_operations" class="internal-link" title="nltk.sem.logic.LogicParser.right_associated_operations">right<wbr></wbr>_associated<wbr></wbr>_operations</a></code>
+            </div>
+        
+
+    </li><li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="nltk.sem.logic.LogicParser.html#type_check" class="internal-link" title="nltk.sem.logic.LogicParser.type_check">type<wbr></wbr>_check</a></code>
+            </div>
+        
+
+    </li><li class="private">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="nltk.sem.logic.LogicParser.html#_buffer" class="internal-link" title="nltk.sem.logic.LogicParser._buffer">_buffer</a></code>
+            </div>
+        
+
+    </li><li class="private">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="nltk.sem.logic.LogicParser.html#_currentIndex" class="internal-link" title="nltk.sem.logic.LogicParser._currentIndex">_current<wbr></wbr>Index</a></code>
+            </div>
+        
+
+    </li>
+</ul> 
+        
+      </div>
+  </div><div>
+
+      <div class="thingTitle">
+        <span>Module</span>
+        <code><a href="nltk.sem.drt.html" class="internal-link" title="The parent of this class">drt</a></code> 
+      </div>
+      
+      <div>
+        
+
+        
+         
+
+        <div class="childrenKindTitle">Classes</div>
+        <ul>
+    
+    <li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="nltk.sem.drt.DRS.html" class="internal-link" title="nltk.sem.drt.DRS">DRS</a></code>
+            </div>
+        
+
+    </li><li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="nltk.sem.drt.DrsDrawer.html" class="internal-link" title="nltk.sem.drt.DrsDrawer"><wbr></wbr>Drs<wbr></wbr>Drawer</a></code>
+            </div>
+        
+
+    </li><li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="nltk.sem.drt.DrtAbstractVariableExpression.html" class="internal-link" title="nltk.sem.drt.DrtAbstractVariableExpression"><wbr></wbr>Drt<wbr></wbr>Abstract<wbr></wbr>Variable<wbr></wbr>Expression</a></code>
+            </div>
+        
+
+    </li><li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="nltk.sem.drt.DrtApplicationExpression.html" class="internal-link" title="nltk.sem.drt.DrtApplicationExpression"><wbr></wbr>Drt<wbr></wbr>Application<wbr></wbr>Expression</a></code>
+            </div>
+        
+
+    </li><li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="nltk.sem.drt.DrtBinaryExpression.html" class="internal-link" title="nltk.sem.drt.DrtBinaryExpression"><wbr></wbr>Drt<wbr></wbr>Binary<wbr></wbr>Expression</a></code>
+            </div>
+        
+
+    </li><li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="nltk.sem.drt.DrtBooleanExpression.html" class="internal-link" title="nltk.sem.drt.DrtBooleanExpression"><wbr></wbr>Drt<wbr></wbr>Boolean<wbr></wbr>Expression</a></code>
+            </div>
+        
+
+    </li><li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="nltk.sem.drt.DrtConcatenation.html" class="internal-link" title="nltk.sem.drt.DrtConcatenation"><wbr></wbr>Drt<wbr></wbr>Concatenation</a></code>
+            </div>
+        
+
+    </li><li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="nltk.sem.drt.DrtConstantExpression.html" class="internal-link" title="nltk.sem.drt.DrtConstantExpression"><wbr></wbr>Drt<wbr></wbr>Constant<wbr></wbr>Expression</a></code>
+            </div>
+        
+
+    </li><li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="nltk.sem.drt.DrtEqualityExpression.html" class="internal-link" title="nltk.sem.drt.DrtEqualityExpression"><wbr></wbr>Drt<wbr></wbr>Equality<wbr></wbr>Expression</a></code>
+            </div>
+        
+
+    </li><li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="nltk.sem.drt.DrtEventVariableExpression.html" class="internal-link" title="nltk.sem.drt.DrtEventVariableExpression"><wbr></wbr>Drt<wbr></wbr>Event<wbr></wbr>Variable<wbr></wbr>Expression</a></code>
+            </div>
+        
+
+    </li><li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="nltk.sem.drt.DrtExpression.html" class="internal-link" title="nltk.sem.drt.DrtExpression"><wbr></wbr>Drt<wbr></wbr>Expression</a></code>
+            </div>
+        
+
+    </li><li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="nltk.sem.drt.DrtFunctionVariableExpression.html" class="internal-link" title="nltk.sem.drt.DrtFunctionVariableExpression"><wbr></wbr>Drt<wbr></wbr>Function<wbr></wbr>Variable<wbr></wbr>Expression</a></code>
+            </div>
+        
+
+    </li><li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="nltk.sem.drt.DrtIndividualVariableExpression.html" class="internal-link" title="nltk.sem.drt.DrtIndividualVariableExpression"><wbr></wbr>Drt<wbr></wbr>Individual<wbr></wbr>Variable<wbr></wbr>Expression</a></code>
+            </div>
+        
+
+    </li><li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="nltk.sem.drt.DrtLambdaExpression.html" class="internal-link" title="nltk.sem.drt.DrtLambdaExpression"><wbr></wbr>Drt<wbr></wbr>Lambda<wbr></wbr>Expression</a></code>
+            </div>
+        
+
+    </li><li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="nltk.sem.drt.DrtNegatedExpression.html" class="internal-link" title="nltk.sem.drt.DrtNegatedExpression"><wbr></wbr>Drt<wbr></wbr>Negated<wbr></wbr>Expression</a></code>
+            </div>
+        
+
+    </li><li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="nltk.sem.drt.DrtOrExpression.html" class="internal-link" title="nltk.sem.drt.DrtOrExpression"><wbr></wbr>Drt<wbr></wbr>Or<wbr></wbr>Expression</a></code>
+            </div>
+        
+
+    </li><li class=" thisobject">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="nltk.sem.drt.DrtParser.html" class="internal-link" title="nltk.sem.drt.DrtParser"><wbr></wbr>Drt<wbr></wbr>Parser</a></code>
+            </div>
+        
+
+    </li><li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="nltk.sem.drt.DrtProposition.html" class="internal-link" title="nltk.sem.drt.DrtProposition"><wbr></wbr>Drt<wbr></wbr>Proposition</a></code>
+            </div>
+        
+
+    </li><li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="nltk.sem.drt.DrtTokens.html" class="internal-link" title="nltk.sem.drt.DrtTokens"><wbr></wbr>Drt<wbr></wbr>Tokens</a></code>
+            </div>
+        
+
+    </li><li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="nltk.sem.drt.PossibleAntecedents.html" class="internal-link" title="nltk.sem.drt.PossibleAntecedents"><wbr></wbr>Possible<wbr></wbr>Antecedents</a></code>
+            </div>
+        
+
+    </li><li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="nltk.sem.drt.AnaphoraResolutionException.html" class="internal-link" title="nltk.sem.drt.AnaphoraResolutionException"><wbr></wbr>Anaphora<wbr></wbr>Resolution<wbr></wbr>Exception</a></code>
+            </div>
+        
+
+    </li>
+</ul>
+
+        <div class="childrenKindTitle">Functions</div>
+        <ul>
+    
+    <li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="nltk.sem.drt.html#demo" class="internal-link" title="nltk.sem.drt.demo">demo</a></code>
+            </div>
+        
+
+    </li><li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="nltk.sem.drt.html#DrtVariableExpression" class="internal-link" title="nltk.sem.drt.DrtVariableExpression"><wbr></wbr>Drt<wbr></wbr>Variable<wbr></wbr>Expression</a></code>
+            </div>
+        
+
+    </li><li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="nltk.sem.drt.html#resolve_anaphora" class="internal-link" title="nltk.sem.drt.resolve_anaphora">resolve<wbr></wbr>_anaphora</a></code>
+            </div>
+        
+
+    </li><li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="nltk.sem.drt.html#test_draw" class="internal-link" title="nltk.sem.drt.test_draw">test<wbr></wbr>_draw</a></code>
+            </div>
+        
+
+    </li><li class="private">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="nltk.sem.drt.html#_pad_vertically" class="internal-link" title="nltk.sem.drt._pad_vertically">_pad<wbr></wbr>_vertically</a></code>
+            </div>
+        
+
+    </li>
+</ul> 
+
+        
+         
+
+        
+         
+
+        
+         
+        
+      </div>
   </div>
 
-  <script src="ajax.js" type="text/javascript"></script>
-  <script src="search.js" type="text/javascript"></script>
-
 </nav>
-
-    
-
-    <div class="container">
-
-      <div class="page-header">
-        <h1 class="class"><code><code><a href="index.html" class="internal-link">nltk</a></code><wbr></wbr>.<code><a href="nltk.sem.html" class="internal-link" title="nltk.sem">sem</a></code><wbr></wbr>.<code><a href="nltk.sem.drt.html" class="internal-link" title="nltk.sem.drt">drt</a></code><wbr></wbr>.<code><a href="nltk.sem.drt.DrtParser.html" class="internal-link" title="nltk.sem.drt.DrtParser">DrtParser</a></code></code></h1>
-        <div id="showPrivate">
-          <button class="btn btn-link" onclick="togglePrivate()">Toggle Private API</button>
         </div>
+        <div id="collapseSideBar">
+          <a class="btn btn-link" onclick="toggleSideBarCollapse()" title="Toggle Sidebar Collapse">
+          </a>
+        </div> 
+        <script src="sidebartoggle.js" type="text/javascript"></script>
+       
       </div>
 
-      <div class="categoryHeader">
-        class documentation
-      </div>
+      <div id="main" class="">
+        
 
-      <div class="extrasDocstring">
-        <p><code><span class="py-keyword">class</span> <span class="py-defname">DrtParser</span>(<a href="nltk.sem.logic.LogicParser.html" class="internal-link" title="nltk.sem.logic.LogicParser">LogicParser</a>): <a href="https://github.com/nltk/nltk/tree/3.6.2/nltk/sem/drt.py#L67" class="sourceLink">(source)</a></code></p><p>Known subclasses: <code><a href="nltk.sem.boxer.BoxerDrsParser.html" class="internal-link">nltk.sem.boxer.BoxerDrsParser</a></code>, <code><a href="nltk.sem.boxer.BoxerOutputDrsParser.html" class="internal-link">nltk.sem.boxer.BoxerOutputDrsParser</a></code></p>
-        <p><a href="classIndex.html#nltk.sem.drt.DrtParser">View In Hierarchy</a></p>
-      </div>
+        
 
-      <div class="moduleDocstring">
-        <div>A lambda calculus expression parser.</div>
-      </div>
+        <div class="page-header">
+          <h1 class="class"><code><code><a href="index.html" class="internal-link">nltk</a></code><wbr></wbr>.<code><a href="nltk.sem.html" class="internal-link" title="nltk.sem">sem</a></code><wbr></wbr>.<code><a href="nltk.sem.drt.html" class="internal-link" title="nltk.sem.drt">drt</a></code><wbr></wbr>.<code><a href="nltk.sem.drt.DrtParser.html" class="internal-link" title="nltk.sem.drt.DrtParser">DrtParser</a></code></code></h1>
+          <div id="showPrivate">
+            <button class="btn btn-link" onclick="togglePrivate()">Toggle Private API</button>
+          </div>
+        </div>
 
-      <div id="splitTables">
-        <table class="children sortable" id="id1221">
+        <div class="categoryHeader">
+          class documentation
+        </div>
+
+        <div class="extrasDocstring">
+          <p class="class-signature"><code><span class="py-keyword">class</span> <span class="py-defname">DrtParser</span>(<a href="nltk.sem.logic.LogicParser.html" class="internal-link" title="nltk.sem.logic.LogicParser">LogicParser</a>): <a href="https://github.com/nltk/nltk/tree/3.6.2/nltk/sem/drt.py#L67" class="sourceLink">(source)</a></code></p><p>Known subclasses: <code><a href="nltk.sem.boxer.BoxerDrsParser.html" class="internal-link">nltk.sem.boxer.BoxerDrsParser</a></code>, <code><a href="nltk.sem.boxer.BoxerOutputDrsParser.html" class="internal-link">nltk.sem.boxer.BoxerOutputDrsParser</a></code></p><p>Constructor: <code><a href="#__init__" class="internal-link" title="nltk.sem.drt.DrtParser.__init__">DrtParser()</a></code></p>
+          <p><a href="classIndex.html#nltk.sem.drt.DrtParser">View In Hierarchy</a></p>
+        </div>
+
+        <div class="moduleDocstring">
+          <div><p>A lambda calculus expression parser.</p></div>
+        </div>
+
+        <div id="splitTables">
+          <table class="children sortable" id="id1188">
   
   
   <tr class="method">
     
     <td>Method</td>
     <td><code><a href="#__init__" class="internal-link" title="nltk.sem.drt.DrtParser.__init__">__init__</a></code></td>
-    <td></td>
+    <td>to their types.</td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#get_all_symbols" class="internal-link" title="nltk.sem.drt.DrtParser.get_all_symbols">get​_all​_symbols</a></code></td>
+    <td><code><a href="#get_all_symbols" class="internal-link" title="nltk.sem.drt.DrtParser.get_all_symbols">get<wbr></wbr>_all<wbr></wbr>_symbols</a></code></td>
     <td>This method exists to be overridden</td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#get_BooleanExpression_factory" class="internal-link" title="nltk.sem.drt.DrtParser.get_BooleanExpression_factory">get_​Boolean​Expression_factory</a></code></td>
+    <td><code><a href="#get_BooleanExpression_factory" class="internal-link" title="nltk.sem.drt.DrtParser.get_BooleanExpression_factory">get_<wbr></wbr>Boolean<wbr></wbr>Expression_factory</a></code></td>
     <td>This method serves as a hook for other logic parsers that have different boolean operators</td>
   </tr><tr class="method">
     
@@ -174,22 +936,22 @@
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#handle_conds" class="internal-link" title="nltk.sem.drt.DrtParser.handle_conds">handle​_conds</a></code></td>
+    <td><code><a href="#handle_conds" class="internal-link" title="nltk.sem.drt.DrtParser.handle_conds">handle<wbr></wbr>_conds</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#handle_DRS" class="internal-link" title="nltk.sem.drt.DrtParser.handle_DRS">handle_​DRS</a></code></td>
+    <td><code><a href="#handle_DRS" class="internal-link" title="nltk.sem.drt.DrtParser.handle_DRS">handle_<wbr></wbr>DRS</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#handle_prop" class="internal-link" title="nltk.sem.drt.DrtParser.handle_prop">handle​_prop</a></code></td>
+    <td><code><a href="#handle_prop" class="internal-link" title="nltk.sem.drt.DrtParser.handle_prop">handle<wbr></wbr>_prop</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#handle_refs" class="internal-link" title="nltk.sem.drt.DrtParser.handle_refs">handle​_refs</a></code></td>
+    <td><code><a href="#handle_refs" class="internal-link" title="nltk.sem.drt.DrtParser.handle_refs">handle<wbr></wbr>_refs</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method">
     
@@ -199,45 +961,45 @@
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#make_ApplicationExpression" class="internal-link" title="nltk.sem.drt.DrtParser.make_ApplicationExpression">make_​Application​Expression</a></code></td>
+    <td><code><a href="#make_ApplicationExpression" class="internal-link" title="nltk.sem.drt.DrtParser.make_ApplicationExpression">make_<wbr></wbr>Application<wbr></wbr>Expression</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#make_BooleanExpression" class="internal-link" title="nltk.sem.drt.DrtParser.make_BooleanExpression">make_​Boolean​Expression</a></code></td>
+    <td><code><a href="#make_BooleanExpression" class="internal-link" title="nltk.sem.drt.DrtParser.make_BooleanExpression">make_<wbr></wbr>Boolean<wbr></wbr>Expression</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#make_EqualityExpression" class="internal-link" title="nltk.sem.drt.DrtParser.make_EqualityExpression">make_​Equality​Expression</a></code></td>
+    <td><code><a href="#make_EqualityExpression" class="internal-link" title="nltk.sem.drt.DrtParser.make_EqualityExpression">make_<wbr></wbr>Equality<wbr></wbr>Expression</a></code></td>
     <td>This method serves as a hook for other logic parsers that have different equality expression classes</td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#make_LambdaExpression" class="internal-link" title="nltk.sem.drt.DrtParser.make_LambdaExpression">make_​Lambda​Expression</a></code></td>
+    <td><code><a href="#make_LambdaExpression" class="internal-link" title="nltk.sem.drt.DrtParser.make_LambdaExpression">make_<wbr></wbr>Lambda<wbr></wbr>Expression</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#make_NegatedExpression" class="internal-link" title="nltk.sem.drt.DrtParser.make_NegatedExpression">make_​Negated​Expression</a></code></td>
+    <td><code><a href="#make_NegatedExpression" class="internal-link" title="nltk.sem.drt.DrtParser.make_NegatedExpression">make_<wbr></wbr>Negated<wbr></wbr>Expression</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#make_VariableExpression" class="internal-link" title="nltk.sem.drt.DrtParser.make_VariableExpression">make_​Variable​Expression</a></code></td>
+    <td><code><a href="#make_VariableExpression" class="internal-link" title="nltk.sem.drt.DrtParser.make_VariableExpression">make_<wbr></wbr>Variable<wbr></wbr>Expression</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="instancevariable">
     
     <td>Instance Variable</td>
-    <td><code><a href="#operator_precedence" class="internal-link" title="nltk.sem.drt.DrtParser.operator_precedence">operator​_precedence</a></code></td>
+    <td><code><a href="#operator_precedence" class="internal-link" title="nltk.sem.drt.DrtParser.operator_precedence">operator<wbr></wbr>_precedence</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr>
 </table>
-        
-          <p class="inheritedFrom">
-            Inherited from <code><a href="nltk.sem.logic.LogicParser.html" class="internal-link" title="nltk.sem.logic.LogicParser">LogicParser</a></code>:
-          </p>
-          <table class="children sortable" id="id1222">
+          
+            <p class="inheritedFrom">
+              Inherited from <code><a href="nltk.sem.logic.LogicParser.html" class="internal-link" title="nltk.sem.logic.LogicParser">LogicParser</a></code>:
+            </p>
+            <table class="children sortable" id="id1189">
   
   
   <tr class="basemethod">
@@ -248,82 +1010,82 @@
   </tr><tr class="basemethod">
     
     <td>Method</td>
-    <td><code><a href="nltk.sem.logic.LogicParser.html#assertNextToken" class="internal-link" title="nltk.sem.logic.LogicParser.assertNextToken">assert​Next​Token</a></code></td>
+    <td><code><a href="nltk.sem.logic.LogicParser.html#assertNextToken" class="internal-link" title="nltk.sem.logic.LogicParser.assertNextToken">assert<wbr></wbr>Next<wbr></wbr>Token</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="basemethod">
     
     <td>Method</td>
-    <td><code><a href="nltk.sem.logic.LogicParser.html#assertToken" class="internal-link" title="nltk.sem.logic.LogicParser.assertToken">assert​Token</a></code></td>
+    <td><code><a href="nltk.sem.logic.LogicParser.html#assertToken" class="internal-link" title="nltk.sem.logic.LogicParser.assertToken">assert<wbr></wbr>Token</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="basemethod">
     
     <td>Method</td>
-    <td><code><a href="nltk.sem.logic.LogicParser.html#attempt_adjuncts" class="internal-link" title="nltk.sem.logic.LogicParser.attempt_adjuncts">attempt​_adjuncts</a></code></td>
+    <td><code><a href="nltk.sem.logic.LogicParser.html#attempt_adjuncts" class="internal-link" title="nltk.sem.logic.LogicParser.attempt_adjuncts">attempt<wbr></wbr>_adjuncts</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="basemethod">
     
     <td>Method</td>
-    <td><code><a href="nltk.sem.logic.LogicParser.html#attempt_ApplicationExpression" class="internal-link" title="nltk.sem.logic.LogicParser.attempt_ApplicationExpression">attempt_​Application​Expression</a></code></td>
-    <td><span class="undocumented">No summary</span></td>
+    <td><code><a href="nltk.sem.logic.LogicParser.html#attempt_ApplicationExpression" class="internal-link" title="nltk.sem.logic.LogicParser.attempt_ApplicationExpression">attempt_<wbr></wbr>Application<wbr></wbr>Expression</a></code></td>
+    <td>Attempt to make an application expression.  The next tokens are a list of arguments in parens, then the argument expression is a function being applied to the arguments.  Otherwise, return the argument expression.</td>
   </tr><tr class="basemethod">
     
     <td>Method</td>
-    <td><code><a href="nltk.sem.logic.LogicParser.html#attempt_BooleanExpression" class="internal-link" title="nltk.sem.logic.LogicParser.attempt_BooleanExpression">attempt_​Boolean​Expression</a></code></td>
+    <td><code><a href="nltk.sem.logic.LogicParser.html#attempt_BooleanExpression" class="internal-link" title="nltk.sem.logic.LogicParser.attempt_BooleanExpression">attempt_<wbr></wbr>Boolean<wbr></wbr>Expression</a></code></td>
     <td>Attempt to make a boolean expression.  If the next token is a boolean operator, then a BooleanExpression will be returned.  Otherwise, the parameter will be returned.</td>
   </tr><tr class="basemethod">
     
     <td>Method</td>
-    <td><code><a href="nltk.sem.logic.LogicParser.html#attempt_EqualityExpression" class="internal-link" title="nltk.sem.logic.LogicParser.attempt_EqualityExpression">attempt_​Equality​Expression</a></code></td>
+    <td><code><a href="nltk.sem.logic.LogicParser.html#attempt_EqualityExpression" class="internal-link" title="nltk.sem.logic.LogicParser.attempt_EqualityExpression">attempt_<wbr></wbr>Equality<wbr></wbr>Expression</a></code></td>
     <td>Attempt to make an equality expression.  If the next token is an equality operator, then an EqualityExpression will be returned. Otherwise, the parameter will be returned.</td>
   </tr><tr class="basemethod">
     
     <td>Method</td>
-    <td><code><a href="nltk.sem.logic.LogicParser.html#get_next_token_variable" class="internal-link" title="nltk.sem.logic.LogicParser.get_next_token_variable">get​_next​_token​_variable</a></code></td>
+    <td><code><a href="nltk.sem.logic.LogicParser.html#get_next_token_variable" class="internal-link" title="nltk.sem.logic.LogicParser.get_next_token_variable">get<wbr></wbr>_next<wbr></wbr>_token<wbr></wbr>_variable</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="basemethod">
     
     <td>Method</td>
-    <td><code><a href="nltk.sem.logic.LogicParser.html#get_QuantifiedExpression_factory" class="internal-link" title="nltk.sem.logic.LogicParser.get_QuantifiedExpression_factory">get_​Quantified​Expression_factory</a></code></td>
+    <td><code><a href="nltk.sem.logic.LogicParser.html#get_QuantifiedExpression_factory" class="internal-link" title="nltk.sem.logic.LogicParser.get_QuantifiedExpression_factory">get_<wbr></wbr>Quantified<wbr></wbr>Expression_factory</a></code></td>
     <td>This method serves as a hook for other logic parsers that have different quantifiers</td>
   </tr><tr class="basemethod">
     
     <td>Method</td>
-    <td><code><a href="nltk.sem.logic.LogicParser.html#handle_lambda" class="internal-link" title="nltk.sem.logic.LogicParser.handle_lambda">handle​_lambda</a></code></td>
+    <td><code><a href="nltk.sem.logic.LogicParser.html#handle_lambda" class="internal-link" title="nltk.sem.logic.LogicParser.handle_lambda">handle<wbr></wbr>_lambda</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="basemethod">
     
     <td>Method</td>
-    <td><code><a href="nltk.sem.logic.LogicParser.html#handle_negation" class="internal-link" title="nltk.sem.logic.LogicParser.handle_negation">handle​_negation</a></code></td>
+    <td><code><a href="nltk.sem.logic.LogicParser.html#handle_negation" class="internal-link" title="nltk.sem.logic.LogicParser.handle_negation">handle<wbr></wbr>_negation</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="basemethod">
     
     <td>Method</td>
-    <td><code><a href="nltk.sem.logic.LogicParser.html#handle_open" class="internal-link" title="nltk.sem.logic.LogicParser.handle_open">handle​_open</a></code></td>
+    <td><code><a href="nltk.sem.logic.LogicParser.html#handle_open" class="internal-link" title="nltk.sem.logic.LogicParser.handle_open">handle<wbr></wbr>_open</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="basemethod">
     
     <td>Method</td>
-    <td><code><a href="nltk.sem.logic.LogicParser.html#handle_quant" class="internal-link" title="nltk.sem.logic.LogicParser.handle_quant">handle​_quant</a></code></td>
+    <td><code><a href="nltk.sem.logic.LogicParser.html#handle_quant" class="internal-link" title="nltk.sem.logic.LogicParser.handle_quant">handle<wbr></wbr>_quant</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="basemethod">
     
     <td>Method</td>
-    <td><code><a href="nltk.sem.logic.LogicParser.html#handle_variable" class="internal-link" title="nltk.sem.logic.LogicParser.handle_variable">handle​_variable</a></code></td>
+    <td><code><a href="nltk.sem.logic.LogicParser.html#handle_variable" class="internal-link" title="nltk.sem.logic.LogicParser.handle_variable">handle<wbr></wbr>_variable</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="basemethod">
     
     <td>Method</td>
-    <td><code><a href="nltk.sem.logic.LogicParser.html#has_priority" class="internal-link" title="nltk.sem.logic.LogicParser.has_priority">has​_priority</a></code></td>
+    <td><code><a href="nltk.sem.logic.LogicParser.html#has_priority" class="internal-link" title="nltk.sem.logic.LogicParser.has_priority">has<wbr></wbr>_priority</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="basemethod">
     
     <td>Method</td>
-    <td><code><a href="nltk.sem.logic.LogicParser.html#inRange" class="internal-link" title="nltk.sem.logic.LogicParser.inRange">in​Range</a></code></td>
+    <td><code><a href="nltk.sem.logic.LogicParser.html#inRange" class="internal-link" title="nltk.sem.logic.LogicParser.inRange">in<wbr></wbr>Range</a></code></td>
     <td>Return TRUE if the given location is within the buffer</td>
   </tr><tr class="basemethod">
     
     <td>Method</td>
-    <td><code><a href="nltk.sem.logic.LogicParser.html#make_QuanifiedExpression" class="internal-link" title="nltk.sem.logic.LogicParser.make_QuanifiedExpression">make_​Quanified​Expression</a></code></td>
+    <td><code><a href="nltk.sem.logic.LogicParser.html#make_QuanifiedExpression" class="internal-link" title="nltk.sem.logic.LogicParser.make_QuanifiedExpression">make_<wbr></wbr>Quanified<wbr></wbr>Expression</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="basemethod">
     
@@ -338,12 +1100,12 @@
   </tr><tr class="basemethod">
     
     <td>Method</td>
-    <td><code><a href="nltk.sem.logic.LogicParser.html#process_next_expression" class="internal-link" title="nltk.sem.logic.LogicParser.process_next_expression">process​_next​_expression</a></code></td>
+    <td><code><a href="nltk.sem.logic.LogicParser.html#process_next_expression" class="internal-link" title="nltk.sem.logic.LogicParser.process_next_expression">process<wbr></wbr>_next<wbr></wbr>_expression</a></code></td>
     <td>Parse the next complete expression from the stream and return it.</td>
   </tr><tr class="basemethod">
     
     <td>Method</td>
-    <td><code><a href="nltk.sem.logic.LogicParser.html#process_quoted_token" class="internal-link" title="nltk.sem.logic.LogicParser.process_quoted_token">process​_quoted​_token</a></code></td>
+    <td><code><a href="nltk.sem.logic.LogicParser.html#process_quoted_token" class="internal-link" title="nltk.sem.logic.LogicParser.process_quoted_token">process<wbr></wbr>_quoted<wbr></wbr>_token</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="basemethod">
     
@@ -353,18 +1115,18 @@
   </tr><tr class="baseinstancevariable">
     
     <td>Instance Variable</td>
-    <td><code><a href="nltk.sem.logic.LogicParser.html#quote_chars" class="internal-link" title="nltk.sem.logic.LogicParser.quote_chars">quote​_chars</a></code></td>
+    <td><code><a href="nltk.sem.logic.LogicParser.html#quote_chars" class="internal-link" title="nltk.sem.logic.LogicParser.quote_chars">quote<wbr></wbr>_chars</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="baseinstancevariable">
     
     <td>Instance Variable</td>
-    <td><code><a href="nltk.sem.logic.LogicParser.html#right_associated_operations" class="internal-link" title="nltk.sem.logic.LogicParser.right_associated_operations">right​_associated​_operations</a></code></td>
+    <td><code><a href="nltk.sem.logic.LogicParser.html#right_associated_operations" class="internal-link" title="nltk.sem.logic.LogicParser.right_associated_operations">right<wbr></wbr>_associated<wbr></wbr>_operations</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="baseinstancevariable">
     
     <td>Instance Variable</td>
-    <td><code><a href="nltk.sem.logic.LogicParser.html#type_check" class="internal-link" title="nltk.sem.logic.LogicParser.type_check">type​_check</a></code></td>
-    <td><span class="undocumented">No summary</span></td>
+    <td><code><a href="nltk.sem.logic.LogicParser.html#type_check" class="internal-link" title="nltk.sem.logic.LogicParser.type_check">type<wbr></wbr>_check</a></code></td>
+    <td>A list of tuples of quote characters.  The 4-tuple is comprised of the start character, the end character, the escape character, and a boolean indicating whether the quotes should be included in the result...</td>
   </tr><tr class="baseinstancevariable private">
     
     <td>Instance Variable</td>
@@ -373,18 +1135,17 @@
   </tr><tr class="baseinstancevariable private">
     
     <td>Instance Variable</td>
-    <td><code><a href="nltk.sem.logic.LogicParser.html#_currentIndex" class="internal-link" title="nltk.sem.logic.LogicParser._currentIndex">_current​Index</a></code></td>
+    <td><code><a href="nltk.sem.logic.LogicParser.html#_currentIndex" class="internal-link" title="nltk.sem.logic.LogicParser._currentIndex">_current<wbr></wbr>Index</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr>
 </table>
-          
+            
 
-          
-      </div>
+            
+        </div>
 
-      <div id="childList">
-
-        <div class="basemethod">
+        <div id="childList">
+          <div class="basemethod">
   
   
   <a name="nltk.sem.drt.DrtParser.__init__">
@@ -395,16 +1156,21 @@
   </a>
   <div class="functionHeader">
     
-    <span class="py-keyword">def</span> <span class="py-defname">__init__</span>(self):
+    
+    <span class="py-keyword">def</span> <span class="py-defname">__init__</span><span class="function-signature">(self)</span>:
     <a class="sourceLink" href="https://github.com/nltk/nltk/tree/3.6.2/nltk/sem/drt.py#L70">
       
       (source)
     </a>
+    <a class="headerLink" href="#__init__" title="nltk.sem.drt.DrtParser.__init__">
+      
+      
+      ¶
+    </a>
   </div>
   <div class="docstring functionBody">
     <div class="interfaceinfo">overrides <code><a href="nltk.sem.logic.LogicParser.html#__init__" class="internal-link">nltk.sem.logic.LogicParser.__init__</a></code></div><div class="interfaceinfo">overridden in <code><a href="nltk.sem.boxer.BoxerDrsParser.html" class="internal-link">nltk.sem.boxer.BoxerDrsParser</a></code>, <code><a href="nltk.sem.boxer.BoxerOutputDrsParser.html" class="internal-link">nltk.sem.boxer.BoxerOutputDrsParser</a></code></div>
-    
-    <div>to their types.<table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">type​_check</span></td><td class="fieldArgDesc">bool should type checking be performed?</td></tr></table></div>
+    <div><p>to their types.</p><table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">type<wbr></wbr>_check</span></td><td class="fieldArgDesc">bool should type checking be performed?</td></tr></table></div>
   </div>
 </div><div class="basemethod">
   
@@ -417,16 +1183,21 @@
   </a>
   <div class="functionHeader">
     
-    <span class="py-keyword">def</span> <span class="py-defname">get_all_symbols</span>(self):
+    
+    <span class="py-keyword">def</span> <span class="py-defname">get_all_symbols</span><span class="function-signature">(self)</span>:
     <a class="sourceLink" href="https://github.com/nltk/nltk/tree/3.6.2/nltk/sem/drt.py#L85">
       
       (source)
     </a>
+    <a class="headerLink" href="#get_all_symbols" title="nltk.sem.drt.DrtParser.get_all_symbols">
+      
+      
+      ¶
+    </a>
   </div>
   <div class="docstring functionBody">
     <div class="interfaceinfo">overrides <code><a href="nltk.sem.logic.LogicParser.html#get_all_symbols" class="internal-link">nltk.sem.logic.LogicParser.get_all_symbols</a></code></div><div class="interfaceinfo">overridden in <code><a href="nltk.sem.boxer.BoxerDrsParser.html" class="internal-link">nltk.sem.boxer.BoxerDrsParser</a></code>, <code><a href="nltk.sem.boxer.BoxerOutputDrsParser.html" class="internal-link">nltk.sem.boxer.BoxerOutputDrsParser</a></code></div>
-    
-    <div>This method exists to be overridden</div>
+    <div><p>This method exists to be overridden</p></div>
   </div>
 </div><div class="basemethod">
   
@@ -439,17 +1210,22 @@
   </a>
   <div class="functionHeader">
     
-    <span class="py-keyword">def</span> <span class="py-defname">get_BooleanExpression_factory</span>(self, tok):
+    
+    <span class="py-keyword">def</span> <span class="py-defname">get_BooleanExpression_factory</span><span class="function-signature">(self, tok)</span>:
     <a class="sourceLink" href="https://github.com/nltk/nltk/tree/3.6.2/nltk/sem/drt.py#L164">
       
       (source)
     </a>
+    <a class="headerLink" href="#get_BooleanExpression_factory" title="nltk.sem.drt.DrtParser.get_BooleanExpression_factory">
+      
+      
+      ¶
+    </a>
   </div>
   <div class="docstring functionBody">
     <div class="interfaceinfo">overrides <code><a href="nltk.sem.logic.LogicParser.html#get_BooleanExpression_factory" class="internal-link">nltk.sem.logic.LogicParser.get_BooleanExpression_factory</a></code></div>
-    
-    <div>This method serves as a hook for other logic parsers that
-have different boolean operators</div>
+    <div><p>This method serves as a hook for other logic parsers that
+have different boolean operators</p></div>
   </div>
 </div><div class="basemethod">
   
@@ -462,17 +1238,22 @@ have different boolean operators</div>
   </a>
   <div class="functionHeader">
     
-    <span class="py-keyword">def</span> <span class="py-defname">handle</span>(self, tok, context):
+    
+    <span class="py-keyword">def</span> <span class="py-defname">handle</span><span class="function-signature">(self, tok, context)</span>:
     <a class="sourceLink" href="https://github.com/nltk/nltk/tree/3.6.2/nltk/sem/drt.py#L92">
       
       (source)
     </a>
+    <a class="headerLink" href="#handle" title="nltk.sem.drt.DrtParser.handle">
+      
+      
+      ¶
+    </a>
   </div>
   <div class="docstring functionBody">
     <div class="interfaceinfo">overrides <code><a href="nltk.sem.logic.LogicParser.html#handle" class="internal-link">nltk.sem.logic.LogicParser.handle</a></code></div><div class="interfaceinfo">overridden in <code><a href="nltk.sem.boxer.BoxerDrsParser.html" class="internal-link">nltk.sem.boxer.BoxerDrsParser</a></code>, <code><a href="nltk.sem.boxer.BoxerOutputDrsParser.html" class="internal-link">nltk.sem.boxer.BoxerOutputDrsParser</a></code></div>
-    
-    <div>This method is intended to be overridden for logics that
-use different operators or expressions</div>
+    <div><p>This method is intended to be overridden for logics that
+use different operators or expressions</p></div>
   </div>
 </div><div class="basemethod">
   
@@ -485,14 +1266,19 @@ use different operators or expressions</div>
   </a>
   <div class="functionHeader">
     
-    <span class="py-keyword">def</span> <span class="py-defname">handle_conds</span>(self, context):
+    
+    <span class="py-keyword">def</span> <span class="py-defname">handle_conds</span><span class="function-signature">(self, context)</span>:
     <a class="sourceLink" href="https://github.com/nltk/nltk/tree/3.6.2/nltk/sem/drt.py#L142">
       
       (source)
     </a>
+    <a class="headerLink" href="#handle_conds" title="nltk.sem.drt.DrtParser.handle_conds">
+      
+      
+      ¶
+    </a>
   </div>
   <div class="docstring functionBody">
-    
     
     <div><p class="undocumented">Undocumented</p></div>
   </div>
@@ -507,14 +1293,19 @@ use different operators or expressions</div>
   </a>
   <div class="functionHeader">
     
-    <span class="py-keyword">def</span> <span class="py-defname">handle_DRS</span>(self, tok, context):
+    
+    <span class="py-keyword">def</span> <span class="py-defname">handle_DRS</span><span class="function-signature">(self, tok, context)</span>:
     <a class="sourceLink" href="https://github.com/nltk/nltk/tree/3.6.2/nltk/sem/drt.py#L120">
       
       (source)
     </a>
+    <a class="headerLink" href="#handle_DRS" title="nltk.sem.drt.DrtParser.handle_DRS">
+      
+      
+      ¶
+    </a>
   </div>
   <div class="docstring functionBody">
-    
     
     <div><p class="undocumented">Undocumented</p></div>
   </div>
@@ -529,14 +1320,19 @@ use different operators or expressions</div>
   </a>
   <div class="functionHeader">
     
-    <span class="py-keyword">def</span> <span class="py-defname">handle_prop</span>(self, tok, context):
+    
+    <span class="py-keyword">def</span> <span class="py-defname">handle_prop</span><span class="function-signature">(self, tok, context)</span>:
     <a class="sourceLink" href="https://github.com/nltk/nltk/tree/3.6.2/nltk/sem/drt.py#L153">
       
       (source)
     </a>
+    <a class="headerLink" href="#handle_prop" title="nltk.sem.drt.DrtParser.handle_prop">
+      
+      
+      ¶
+    </a>
   </div>
   <div class="docstring functionBody">
-    
     
     <div><p class="undocumented">Undocumented</p></div>
   </div>
@@ -551,14 +1347,19 @@ use different operators or expressions</div>
   </a>
   <div class="functionHeader">
     
-    <span class="py-keyword">def</span> <span class="py-defname">handle_refs</span>(self):
+    
+    <span class="py-keyword">def</span> <span class="py-defname">handle_refs</span><span class="function-signature">(self)</span>:
     <a class="sourceLink" href="https://github.com/nltk/nltk/tree/3.6.2/nltk/sem/drt.py#L131">
       
       (source)
     </a>
+    <a class="headerLink" href="#handle_refs" title="nltk.sem.drt.DrtParser.handle_refs">
+      
+      
+      ¶
+    </a>
   </div>
   <div class="docstring functionBody">
-    
     
     <div><p class="undocumented">Undocumented</p></div>
   </div>
@@ -573,15 +1374,20 @@ use different operators or expressions</div>
   </a>
   <div class="functionHeader">
     
-    <span class="py-keyword">def</span> <span class="py-defname">isvariable</span>(self, tok):
+    
+    <span class="py-keyword">def</span> <span class="py-defname">isvariable</span><span class="function-signature">(self, tok)</span>:
     <a class="sourceLink" href="https://github.com/nltk/nltk/tree/3.6.2/nltk/sem/drt.py#L89">
       
       (source)
     </a>
+    <a class="headerLink" href="#isvariable" title="nltk.sem.drt.DrtParser.isvariable">
+      
+      
+      ¶
+    </a>
   </div>
   <div class="docstring functionBody">
     <div class="interfaceinfo">overrides <code><a href="nltk.sem.logic.LogicParser.html#isvariable" class="internal-link">nltk.sem.logic.LogicParser.isvariable</a></code></div>
-    
     <div><p class="undocumented">Undocumented</p></div>
   </div>
 </div><div class="basemethod">
@@ -595,15 +1401,20 @@ use different operators or expressions</div>
   </a>
   <div class="functionHeader">
     
-    <span class="py-keyword">def</span> <span class="py-defname">make_ApplicationExpression</span>(self, function, argument):
+    
+    <span class="py-keyword">def</span> <span class="py-defname">make_ApplicationExpression</span><span class="function-signature">(self, function, argument)</span>:
     <a class="sourceLink" href="https://github.com/nltk/nltk/tree/3.6.2/nltk/sem/drt.py#L187">
       
       (source)
     </a>
+    <a class="headerLink" href="#make_ApplicationExpression" title="nltk.sem.drt.DrtParser.make_ApplicationExpression">
+      
+      
+      ¶
+    </a>
   </div>
   <div class="docstring functionBody">
     <div class="interfaceinfo">overrides <code><a href="nltk.sem.logic.LogicParser.html#make_ApplicationExpression" class="internal-link">nltk.sem.logic.LogicParser.make_ApplicationExpression</a></code></div>
-    
     <div><p class="undocumented">Undocumented</p></div>
   </div>
 </div><div class="basemethod">
@@ -617,15 +1428,20 @@ use different operators or expressions</div>
   </a>
   <div class="functionHeader">
     
-    <span class="py-keyword">def</span> <span class="py-defname">make_BooleanExpression</span>(self, factory, first, second):
+    
+    <span class="py-keyword">def</span> <span class="py-defname">make_BooleanExpression</span><span class="function-signature">(self, factory, first, second)</span>:
     <a class="sourceLink" href="https://github.com/nltk/nltk/tree/3.6.2/nltk/sem/drt.py#L184">
       
       (source)
     </a>
+    <a class="headerLink" href="#make_BooleanExpression" title="nltk.sem.drt.DrtParser.make_BooleanExpression">
+      
+      
+      ¶
+    </a>
   </div>
   <div class="docstring functionBody">
     <div class="interfaceinfo">overrides <code><a href="nltk.sem.logic.LogicParser.html#make_BooleanExpression" class="internal-link">nltk.sem.logic.LogicParser.make_BooleanExpression</a></code></div>
-    
     <div><p class="undocumented">Undocumented</p></div>
   </div>
 </div><div class="basemethod">
@@ -639,17 +1455,22 @@ use different operators or expressions</div>
   </a>
   <div class="functionHeader">
     
-    <span class="py-keyword">def</span> <span class="py-defname">make_EqualityExpression</span>(self, first, second):
+    
+    <span class="py-keyword">def</span> <span class="py-defname">make_EqualityExpression</span><span class="function-signature">(self, first, second)</span>:
     <a class="sourceLink" href="https://github.com/nltk/nltk/tree/3.6.2/nltk/sem/drt.py#L159">
       
       (source)
     </a>
+    <a class="headerLink" href="#make_EqualityExpression" title="nltk.sem.drt.DrtParser.make_EqualityExpression">
+      
+      
+      ¶
+    </a>
   </div>
   <div class="docstring functionBody">
     <div class="interfaceinfo">overrides <code><a href="nltk.sem.logic.LogicParser.html#make_EqualityExpression" class="internal-link">nltk.sem.logic.LogicParser.make_EqualityExpression</a></code></div>
-    
-    <div>This method serves as a hook for other logic parsers that
-have different equality expression classes</div>
+    <div><p>This method serves as a hook for other logic parsers that
+have different equality expression classes</p></div>
   </div>
 </div><div class="basemethod">
   
@@ -662,15 +1483,20 @@ have different equality expression classes</div>
   </a>
   <div class="functionHeader">
     
-    <span class="py-keyword">def</span> <span class="py-defname">make_LambdaExpression</span>(self, variables, term):
+    
+    <span class="py-keyword">def</span> <span class="py-defname">make_LambdaExpression</span><span class="function-signature">(self, variables, term)</span>:
     <a class="sourceLink" href="https://github.com/nltk/nltk/tree/3.6.2/nltk/sem/drt.py#L193">
       
       (source)
     </a>
+    <a class="headerLink" href="#make_LambdaExpression" title="nltk.sem.drt.DrtParser.make_LambdaExpression">
+      
+      
+      ¶
+    </a>
   </div>
   <div class="docstring functionBody">
     <div class="interfaceinfo">overrides <code><a href="nltk.sem.logic.LogicParser.html#make_LambdaExpression" class="internal-link">nltk.sem.logic.LogicParser.make_LambdaExpression</a></code></div>
-    
     <div><p class="undocumented">Undocumented</p></div>
   </div>
 </div><div class="basemethod">
@@ -684,15 +1510,20 @@ have different equality expression classes</div>
   </a>
   <div class="functionHeader">
     
-    <span class="py-keyword">def</span> <span class="py-defname">make_NegatedExpression</span>(self, expression):
+    
+    <span class="py-keyword">def</span> <span class="py-defname">make_NegatedExpression</span><span class="function-signature">(self, expression)</span>:
     <a class="sourceLink" href="https://github.com/nltk/nltk/tree/3.6.2/nltk/sem/drt.py#L117">
       
       (source)
     </a>
+    <a class="headerLink" href="#make_NegatedExpression" title="nltk.sem.drt.DrtParser.make_NegatedExpression">
+      
+      
+      ¶
+    </a>
   </div>
   <div class="docstring functionBody">
     <div class="interfaceinfo">overrides <code><a href="nltk.sem.logic.LogicParser.html#make_NegatedExpression" class="internal-link">nltk.sem.logic.LogicParser.make_NegatedExpression</a></code></div>
-    
     <div><p class="undocumented">Undocumented</p></div>
   </div>
 </div><div class="basemethod">
@@ -706,15 +1537,20 @@ have different equality expression classes</div>
   </a>
   <div class="functionHeader">
     
-    <span class="py-keyword">def</span> <span class="py-defname">make_VariableExpression</span>(self, name):
+    
+    <span class="py-keyword">def</span> <span class="py-defname">make_VariableExpression</span><span class="function-signature">(self, name)</span>:
     <a class="sourceLink" href="https://github.com/nltk/nltk/tree/3.6.2/nltk/sem/drt.py#L190">
       
       (source)
     </a>
+    <a class="headerLink" href="#make_VariableExpression" title="nltk.sem.drt.DrtParser.make_VariableExpression">
+      
+      
+      ¶
+    </a>
   </div>
   <div class="docstring functionBody">
     <div class="interfaceinfo">overrides <code><a href="nltk.sem.logic.LogicParser.html#make_VariableExpression" class="internal-link">nltk.sem.logic.LogicParser.make_VariableExpression</a></code></div>
-    
     <div><p class="undocumented">Undocumented</p></div>
   </div>
 </div><div class="baseinstancevariable">
@@ -733,27 +1569,40 @@ have different equality expression classes</div>
       
       (source)
     </a>
+    <a class="headerLink" href="#operator_precedence" title="nltk.sem.drt.DrtParser.operator_precedence">
+      
+      
+      ¶
+    </a>
   </div>
   <div class="functionBody">
     <div class="interfaceinfo">overrides <code><a href="nltk.sem.logic.LogicParser.html#operator_precedence" class="internal-link">nltk.sem.logic.LogicParser.operator_precedence</a></code></div>
-    
     <div><p class="undocumented">Undocumented</p></div>
     
   </div>
 </div>
-
+        </div>
+      
       </div>
     </div>
 
     <footer class="navbar navbar-default">
+
   
-  <div class="container">
+  <div class="container-fluid">
     <a href="index.html">API Documentation</a> for <a href="http://www.nltk.org/" class="projecthome">nltk-3.6.2</a>,
   generated by <a href="https://github.com/twisted/pydoctor/">pydoctor</a>
-    22.2.2.dev0 at 2025-02-28 00:01:09.
+    24.11.2 at 2025-02-28 00:02:28.
   </div>
-</footer>
 
+  <!-- Search related scripts needs to be loaded at the end of HTML 
+    parsing not to introduce overhead and display HTML data asap -->
+  <script src="ajax.js" type="text/javascript"></script>
+  <script src="searchlib.js" type="text/javascript"></script>
+  <script src="search.js" type="text/javascript"></script>
+
+</footer>
+  
     <script src="pydoctor.js" type="text/javascript"></script>
 
   </body>

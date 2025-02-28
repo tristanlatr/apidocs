@@ -7,23 +7,26 @@
   <head>
     
     <title>nltk.app.collocations_app.CollocationsView</title>
-    <meta name="generator" content="pydoctor 22.2.2.dev0"> 
+    <meta name="generator" content="pydoctor 24.11.2"> 
         
     </meta>
     <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=0.75" />
+    <meta name="viewport" content="width=device-width, initial-scale=1 maximum-scale=1" />
     <link rel="stylesheet" type="text/css" href="bootstrap.min.css" />
     <link rel="stylesheet" type="text/css" href="apidocs.css" />
     <link rel="stylesheet" type="text/css" href="extra.css" />
+    
 </head>
 
   <body>
 
     
 
-    <nav class="navbar navbar-default">
+    <nav class="navbar navbar-default mainnavbar">
+      
   
-  <div class="container">
+  <div class="container-fluid">
+
 
     <div class="navbar-header">
       
@@ -50,7 +53,7 @@
             
             <span class="input-group-btn">
               <a style="display: none;" class="btn btn-default" id="search-clear-button" title="Clear" onclick="clearSearch()"><img src="fonts/x-circle.svg" alt="Clear" /></a>
-              <a class="btn btn-default" id="search-help-button" title="Help" onclick="toggleSearchHelpText()"><img src="fonts/info.svg" alt="Help" /></a>
+              <a class="btn btn-default" id="apidocs-help-button" title="Help" href="apidocs-help.html"><img src="fonts/info.svg" alt="Help" /></a>
             </span>
           </div>
         </div>
@@ -58,50 +61,24 @@
       </div>
 
       <div id="search-results-container" style="display: none;">
-        <div>
+        
+        <div id="search-buttons">
           <span class="label label-default" id="search-docstrings-button">
-            <a title="Search in docstrings" onclick="toggleSearchInDocstrings()">search in docstrings</a></span>
+          <label class="checkbox-inline">
+            <input type="checkbox" id="toggle-search-in-docstrings-checkbox" value="false" onclick="toggleSearchInDocstrings()">
+              search in docstrings
+            </input>
+          </label>
+          </span>
+          
         </div>
-
+        
         <noscript>
             <h1>Cannot search: JavaScript is not supported/enabled in your browser.</h1>
         </noscript>
 
-        <div class="hint" id="search-help-box">
-          <p class="rst-last">
-      
-            Search bar offers the following options:
-            <ul>   
-                <li>
-                  <strong>Term presence.</strong> The below example searches for documents that 
-                    must contain “foo”, might contain “bar” and must not contain “baz”: <code>+foo bar -baz</code>
-                </li> 
-
-                <li>
-                  <strong>Wildcards.</strong> The below example searches for documents with words beginning with “foo”: <code>foo*</code>
-                </li> 
-
-                <li>
-                  <strong>Search in specific fields.</strong> The following search matches all objects 
-                  in "twisted.mail" that matches “search”: <code>+qname:twisted.mail.* +search</code>
-
-                  <p>
-                    Possible fields: 'name', 'qname' (fully qualified name), 'docstring', and 'kind'.
-                    Last two fields are only applicable if "search in docstrings" is enabled.
-                  </p>
-                </li>
-
-                <li>
-                  <strong>Fuzzy matches.</strong> The following search matches all documents 
-                  that have a word within 1 edit distance of “foo”: <code>foo~1</code>
-                </li>
-            </ul>
-
-          </p>
-        </div>
-
         <div id="search-status"> </div>
-        
+
         <div class="warning" id="search-warn-box" style="display: none;">
           <p class="rst-last"><span id="search-warn"></span></p>
         </div>
@@ -110,45 +87,597 @@
           <!-- Filled dynamically by JS -->
         </table>
         
-        <div style="margin-top: 8px;">
-          <p>Results provided by <a href="https://lunrjs.com">Lunr.js</a></p>
+        <div style="margin-top: 10px;">
+          <p>For more information on the search, visit the <a href="apidocs-help.html#rst-search">help page</a>.</p>
         </div>
       </div>
 
     </div>
+
+
+  </div>
+</nav>
+    
+    <div class="container-fluid">
+
+      <!-- Side navigation -->
+      <div class="sidebarcontainer" style="display: none;">
+        
+        <div class="sidebar"><nav class="sidebar">
+  
+
+  <div>
+
+      <div class="thingTitle">
+        <span>Class</span>
+        <code class="thisobject"><a href="nltk.app.collocations_app.CollocationsView.html" class="internal-link" title="This class"><wbr></wbr>Collocations<wbr></wbr>View</a></code> 
+      </div>
+      
+      <div>
+        
+
+        
+         
+
+        
+        
+
+        <div class="childrenKindTitle">Methods</div>
+        <ul>
+    
+    <li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="#__init__" class="internal-link" title="nltk.app.collocations_app.CollocationsView.__init__">__init__</a></code>
+            </div>
+        
+
+    </li><li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="#__next__" class="internal-link" title="nltk.app.collocations_app.CollocationsView.__next__">__next__</a></code>
+            </div>
+        
+
+    </li><li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="#clear_results_box" class="internal-link" title="nltk.app.collocations_app.CollocationsView.clear_results_box">clear<wbr></wbr>_results<wbr></wbr>_box</a></code>
+            </div>
+        
+
+    </li><li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="#corpus_selected" class="internal-link" title="nltk.app.collocations_app.CollocationsView.corpus_selected">corpus<wbr></wbr>_selected</a></code>
+            </div>
+        
+
+    </li><li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="#destroy" class="internal-link" title="nltk.app.collocations_app.CollocationsView.destroy">destroy</a></code>
+            </div>
+        
+
+    </li><li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="#fire_event" class="internal-link" title="nltk.app.collocations_app.CollocationsView.fire_event">fire<wbr></wbr>_event</a></code>
+            </div>
+        
+
+    </li><li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="#freeze_editable" class="internal-link" title="nltk.app.collocations_app.CollocationsView.freeze_editable">freeze<wbr></wbr>_editable</a></code>
+            </div>
+        
+
+    </li><li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="#handle_corpus_loaded" class="internal-link" title="nltk.app.collocations_app.CollocationsView.handle_corpus_loaded">handle<wbr></wbr>_corpus<wbr></wbr>_loaded</a></code>
+            </div>
+        
+
+    </li><li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="#handle_error_loading_corpus" class="internal-link" title="nltk.app.collocations_app.CollocationsView.handle_error_loading_corpus">handle<wbr></wbr>_error<wbr></wbr>_loading<wbr></wbr>_corpus</a></code>
+            </div>
+        
+
+    </li><li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="#load_corpus" class="internal-link" title="nltk.app.collocations_app.CollocationsView.load_corpus">load<wbr></wbr>_corpus</a></code>
+            </div>
+        
+
+    </li><li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="#mainloop" class="internal-link" title="nltk.app.collocations_app.CollocationsView.mainloop">mainloop</a></code>
+            </div>
+        
+
+    </li><li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="#previous" class="internal-link" title="nltk.app.collocations_app.CollocationsView.previous">previous</a></code>
+            </div>
+        
+
+    </li><li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="#reset_current_page" class="internal-link" title="nltk.app.collocations_app.CollocationsView.reset_current_page">reset<wbr></wbr>_current<wbr></wbr>_page</a></code>
+            </div>
+        
+
+    </li><li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="#set_paging_button_states" class="internal-link" title="nltk.app.collocations_app.CollocationsView.set_paging_button_states">set<wbr></wbr>_paging<wbr></wbr>_button<wbr></wbr>_states</a></code>
+            </div>
+        
+
+    </li><li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="#set_result_size" class="internal-link" title="nltk.app.collocations_app.CollocationsView.set_result_size">set<wbr></wbr>_result<wbr></wbr>_size</a></code>
+            </div>
+        
+
+    </li><li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="#unfreeze_editable" class="internal-link" title="nltk.app.collocations_app.CollocationsView.unfreeze_editable">unfreeze<wbr></wbr>_editable</a></code>
+            </div>
+        
+
+    </li><li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="#write_results" class="internal-link" title="nltk.app.collocations_app.CollocationsView.write_results">write<wbr></wbr>_results</a></code>
+            </div>
+        
+
+    </li><li class="private">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="#_init_corpus_select" class="internal-link" title="nltk.app.collocations_app.CollocationsView._init_corpus_select">_init<wbr></wbr>_corpus<wbr></wbr>_select</a></code>
+            </div>
+        
+
+    </li><li class="private">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="#_init_menubar" class="internal-link" title="nltk.app.collocations_app.CollocationsView._init_menubar">_init<wbr></wbr>_menubar</a></code>
+            </div>
+        
+
+    </li><li class="private">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="#_init_paging" class="internal-link" title="nltk.app.collocations_app.CollocationsView._init_paging">_init<wbr></wbr>_paging</a></code>
+            </div>
+        
+
+    </li><li class="private">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="#_init_results_box" class="internal-link" title="nltk.app.collocations_app.CollocationsView._init_results_box">_init<wbr></wbr>_results<wbr></wbr>_box</a></code>
+            </div>
+        
+
+    </li><li class="private">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="#_init_status" class="internal-link" title="nltk.app.collocations_app.CollocationsView._init_status">_init<wbr></wbr>_status</a></code>
+            </div>
+        
+
+    </li><li class="private">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="#_init_top" class="internal-link" title="nltk.app.collocations_app.CollocationsView._init_top">_init<wbr></wbr>_top</a></code>
+            </div>
+        
+
+    </li><li class="private">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="#_init_widgets" class="internal-link" title="nltk.app.collocations_app.CollocationsView._init_widgets">_init<wbr></wbr>_widgets</a></code>
+            </div>
+        
+
+    </li><li class="private">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="#_poll" class="internal-link" title="nltk.app.collocations_app.CollocationsView._poll">_poll</a></code>
+            </div>
+        
+
+    </li>
+</ul> 
+
+        
+         
+
+        <div class="childrenKindTitle">Attributes</div>
+        <ul>
+    
+    <li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="#after" class="internal-link" title="nltk.app.collocations_app.CollocationsView.after">after</a></code>
+            </div>
+        
+
+    </li><li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="#current_page" class="internal-link" title="nltk.app.collocations_app.CollocationsView.current_page">current<wbr></wbr>_page</a></code>
+            </div>
+        
+
+    </li><li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="#main_frame" class="internal-link" title="nltk.app.collocations_app.CollocationsView.main_frame">main<wbr></wbr>_frame</a></code>
+            </div>
+        
+
+    </li><li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="#model" class="internal-link" title="nltk.app.collocations_app.CollocationsView.model">model</a></code>
+            </div>
+        
+
+    </li><li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="#next" class="internal-link" title="nltk.app.collocations_app.CollocationsView.next">next</a></code>
+            </div>
+        
+
+    </li><li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="#prev" class="internal-link" title="nltk.app.collocations_app.CollocationsView.prev">prev</a></code>
+            </div>
+        
+
+    </li><li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="#queue" class="internal-link" title="nltk.app.collocations_app.CollocationsView.queue">queue</a></code>
+            </div>
+        
+
+    </li><li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="#results_box" class="internal-link" title="nltk.app.collocations_app.CollocationsView.results_box">results<wbr></wbr>_box</a></code>
+            </div>
+        
+
+    </li><li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="#status" class="internal-link" title="nltk.app.collocations_app.CollocationsView.status">status</a></code>
+            </div>
+        
+
+    </li><li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="#top" class="internal-link" title="nltk.app.collocations_app.CollocationsView.top">top</a></code>
+            </div>
+        
+
+    </li><li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="#var" class="internal-link" title="nltk.app.collocations_app.CollocationsView.var">var</a></code>
+            </div>
+        
+
+    </li><li class="private">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="#_BACKGROUND_COLOUR" class="internal-link" title="nltk.app.collocations_app.CollocationsView._BACKGROUND_COLOUR">_BACKGROUND<wbr></wbr>_COLOUR</a></code>
+            </div>
+        
+
+    </li><li class="private">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="#_result_size" class="internal-link" title="nltk.app.collocations_app.CollocationsView._result_size">_result<wbr></wbr>_size</a></code>
+            </div>
+        
+
+    </li>
+</ul> 
+
+        
+         
+        
+      </div>
+  </div><div>
+
+      <div class="thingTitle">
+        <span>Module</span>
+        <code><a href="nltk.app.collocations_app.html" class="internal-link" title="The parent of this class">collocations<wbr></wbr>_app</a></code> 
+      </div>
+      
+      <div>
+        
+
+        
+         
+
+        <div class="childrenKindTitle">Classes</div>
+        <ul>
+    
+    <li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="nltk.app.collocations_app.CollocationsModel.html" class="internal-link" title="nltk.app.collocations_app.CollocationsModel"><wbr></wbr>Collocations<wbr></wbr>Model</a></code>
+            </div>
+        
+
+    </li><li class=" thisobject">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="nltk.app.collocations_app.CollocationsView.html" class="internal-link" title="nltk.app.collocations_app.CollocationsView"><wbr></wbr>Collocations<wbr></wbr>View</a></code>
+            </div>
+        
+
+    </li>
+</ul>
+
+        <div class="childrenKindTitle">Functions</div>
+        <ul>
+    
+    <li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="nltk.app.collocations_app.html#app" class="internal-link" title="nltk.app.collocations_app.app">app</a></code>
+            </div>
+        
+
+    </li>
+</ul> 
+
+        
+         
+
+        <div class="childrenKindTitle">Variables</div>
+        <ul>
+    
+    <li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="nltk.app.collocations_app.html#CORPUS_LOADED_EVENT" class="internal-link" title="nltk.app.collocations_app.CORPUS_LOADED_EVENT">CORPUS<wbr></wbr>_LOADED<wbr></wbr>_EVENT</a></code>
+            </div>
+        
+
+    </li><li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="nltk.app.collocations_app.html#ERROR_LOADING_CORPUS_EVENT" class="internal-link" title="nltk.app.collocations_app.ERROR_LOADING_CORPUS_EVENT">ERROR<wbr></wbr>_LOADING<wbr></wbr>_CORPUS<wbr></wbr>_EVENT</a></code>
+            </div>
+        
+
+    </li><li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="nltk.app.collocations_app.html#POLL_INTERVAL" class="internal-link" title="nltk.app.collocations_app.POLL_INTERVAL">POLL<wbr></wbr>_INTERVAL</a></code>
+            </div>
+        
+
+    </li><li class="private">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="nltk.app.collocations_app.html#_CORPORA" class="internal-link" title="nltk.app.collocations_app._CORPORA">_CORPORA</a></code>
+            </div>
+        
+
+    </li><li class="private">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="nltk.app.collocations_app.html#_DEFAULT" class="internal-link" title="nltk.app.collocations_app._DEFAULT">_DEFAULT</a></code>
+            </div>
+        
+
+    </li>
+</ul> 
+
+        
+         
+        
+      </div>
   </div>
 
-  <script src="ajax.js" type="text/javascript"></script>
-  <script src="search.js" type="text/javascript"></script>
-
 </nav>
-
-    
-
-    <div class="container">
-
-      <div class="page-header">
-        <h1 class="class"><code><code><a href="index.html" class="internal-link">nltk</a></code><wbr></wbr>.<code><a href="nltk.app.html" class="internal-link" title="nltk.app">app</a></code><wbr></wbr>.<code><a href="nltk.app.collocations_app.html" class="internal-link" title="nltk.app.collocations_app">collocations_app</a></code><wbr></wbr>.<code><a href="nltk.app.collocations_app.CollocationsView.html" class="internal-link" title="nltk.app.collocations_app.CollocationsView">CollocationsView</a></code></code></h1>
-        <div id="showPrivate">
-          <button class="btn btn-link" onclick="togglePrivate()">Toggle Private API</button>
         </div>
+        <div id="collapseSideBar">
+          <a class="btn btn-link" onclick="toggleSideBarCollapse()" title="Toggle Sidebar Collapse">
+          </a>
+        </div> 
+        <script src="sidebartoggle.js" type="text/javascript"></script>
+       
       </div>
 
-      <div class="categoryHeader">
-        class documentation
-      </div>
+      <div id="main" class="">
+        
 
-      <div class="extrasDocstring">
-        <p><code><span class="py-keyword">class</span> <span class="py-defname">CollocationsView</span>: <a href="https://github.com/nltk/nltk/tree/3.6.2/nltk/app/collocations_app.py#L77" class="sourceLink">(source)</a></code></p>
-        <p><a href="classIndex.html#nltk.app.collocations_app.CollocationsView">View In Hierarchy</a></p>
-      </div>
+        
 
-      <div class="moduleDocstring">
-        <div><p class="undocumented">Undocumented</p></div>
-      </div>
+        <div class="page-header">
+          <h1 class="class"><code><code><a href="index.html" class="internal-link">nltk</a></code><wbr></wbr>.<code><a href="nltk.app.html" class="internal-link" title="nltk.app">app</a></code><wbr></wbr>.<code><a href="nltk.app.collocations_app.html" class="internal-link" title="nltk.app.collocations_app">collocations_app</a></code><wbr></wbr>.<code><a href="nltk.app.collocations_app.CollocationsView.html" class="internal-link" title="nltk.app.collocations_app.CollocationsView">CollocationsView</a></code></code></h1>
+          <div id="showPrivate">
+            <button class="btn btn-link" onclick="togglePrivate()">Toggle Private API</button>
+          </div>
+        </div>
 
-      <div id="splitTables">
-        <table class="children sortable" id="id28">
+        <div class="categoryHeader">
+          class documentation
+        </div>
+
+        <div class="extrasDocstring">
+          <p class="class-signature"><code><span class="py-keyword">class</span> <span class="py-defname">CollocationsView</span>: <a href="https://github.com/nltk/nltk/tree/3.6.2/nltk/app/collocations_app.py#L77" class="sourceLink">(source)</a></code></p>
+          <p><a href="classIndex.html#nltk.app.collocations_app.CollocationsView">View In Hierarchy</a></p>
+        </div>
+
+        <div class="moduleDocstring">
+          <div><p class="undocumented">Undocumented</p></div>
+        </div>
+
+        <div id="splitTables">
+          <table class="children sortable" id="id25">
   
   
   <tr class="method">
@@ -164,12 +693,12 @@
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#clear_results_box" class="internal-link" title="nltk.app.collocations_app.CollocationsView.clear_results_box">clear​_results​_box</a></code></td>
+    <td><code><a href="#clear_results_box" class="internal-link" title="nltk.app.collocations_app.CollocationsView.clear_results_box">clear<wbr></wbr>_results<wbr></wbr>_box</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#corpus_selected" class="internal-link" title="nltk.app.collocations_app.CollocationsView.corpus_selected">corpus​_selected</a></code></td>
+    <td><code><a href="#corpus_selected" class="internal-link" title="nltk.app.collocations_app.CollocationsView.corpus_selected">corpus<wbr></wbr>_selected</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method">
     
@@ -179,27 +708,27 @@
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#fire_event" class="internal-link" title="nltk.app.collocations_app.CollocationsView.fire_event">fire​_event</a></code></td>
+    <td><code><a href="#fire_event" class="internal-link" title="nltk.app.collocations_app.CollocationsView.fire_event">fire<wbr></wbr>_event</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#freeze_editable" class="internal-link" title="nltk.app.collocations_app.CollocationsView.freeze_editable">freeze​_editable</a></code></td>
+    <td><code><a href="#freeze_editable" class="internal-link" title="nltk.app.collocations_app.CollocationsView.freeze_editable">freeze<wbr></wbr>_editable</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#handle_corpus_loaded" class="internal-link" title="nltk.app.collocations_app.CollocationsView.handle_corpus_loaded">handle​_corpus​_loaded</a></code></td>
+    <td><code><a href="#handle_corpus_loaded" class="internal-link" title="nltk.app.collocations_app.CollocationsView.handle_corpus_loaded">handle<wbr></wbr>_corpus<wbr></wbr>_loaded</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#handle_error_loading_corpus" class="internal-link" title="nltk.app.collocations_app.CollocationsView.handle_error_loading_corpus">handle​_error​_loading​_corpus</a></code></td>
+    <td><code><a href="#handle_error_loading_corpus" class="internal-link" title="nltk.app.collocations_app.CollocationsView.handle_error_loading_corpus">handle<wbr></wbr>_error<wbr></wbr>_loading<wbr></wbr>_corpus</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#load_corpus" class="internal-link" title="nltk.app.collocations_app.CollocationsView.load_corpus">load​_corpus</a></code></td>
+    <td><code><a href="#load_corpus" class="internal-link" title="nltk.app.collocations_app.CollocationsView.load_corpus">load<wbr></wbr>_corpus</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method">
     
@@ -214,27 +743,27 @@
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#reset_current_page" class="internal-link" title="nltk.app.collocations_app.CollocationsView.reset_current_page">reset​_current​_page</a></code></td>
+    <td><code><a href="#reset_current_page" class="internal-link" title="nltk.app.collocations_app.CollocationsView.reset_current_page">reset<wbr></wbr>_current<wbr></wbr>_page</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#set_paging_button_states" class="internal-link" title="nltk.app.collocations_app.CollocationsView.set_paging_button_states">set​_paging​_button​_states</a></code></td>
+    <td><code><a href="#set_paging_button_states" class="internal-link" title="nltk.app.collocations_app.CollocationsView.set_paging_button_states">set<wbr></wbr>_paging<wbr></wbr>_button<wbr></wbr>_states</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#set_result_size" class="internal-link" title="nltk.app.collocations_app.CollocationsView.set_result_size">set​_result​_size</a></code></td>
+    <td><code><a href="#set_result_size" class="internal-link" title="nltk.app.collocations_app.CollocationsView.set_result_size">set<wbr></wbr>_result<wbr></wbr>_size</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#unfreeze_editable" class="internal-link" title="nltk.app.collocations_app.CollocationsView.unfreeze_editable">unfreeze​_editable</a></code></td>
+    <td><code><a href="#unfreeze_editable" class="internal-link" title="nltk.app.collocations_app.CollocationsView.unfreeze_editable">unfreeze<wbr></wbr>_editable</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#write_results" class="internal-link" title="nltk.app.collocations_app.CollocationsView.write_results">write​_results</a></code></td>
+    <td><code><a href="#write_results" class="internal-link" title="nltk.app.collocations_app.CollocationsView.write_results">write<wbr></wbr>_results</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="instancevariable">
     
@@ -244,12 +773,12 @@
   </tr><tr class="instancevariable">
     
     <td>Instance Variable</td>
-    <td><code><a href="#current_page" class="internal-link" title="nltk.app.collocations_app.CollocationsView.current_page">current​_page</a></code></td>
+    <td><code><a href="#current_page" class="internal-link" title="nltk.app.collocations_app.CollocationsView.current_page">current<wbr></wbr>_page</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="instancevariable">
     
     <td>Instance Variable</td>
-    <td><code><a href="#main_frame" class="internal-link" title="nltk.app.collocations_app.CollocationsView.main_frame">main​_frame</a></code></td>
+    <td><code><a href="#main_frame" class="internal-link" title="nltk.app.collocations_app.CollocationsView.main_frame">main<wbr></wbr>_frame</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="instancevariable">
     
@@ -274,7 +803,7 @@
   </tr><tr class="instancevariable">
     
     <td>Instance Variable</td>
-    <td><code><a href="#results_box" class="internal-link" title="nltk.app.collocations_app.CollocationsView.results_box">results​_box</a></code></td>
+    <td><code><a href="#results_box" class="internal-link" title="nltk.app.collocations_app.CollocationsView.results_box">results<wbr></wbr>_box</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="instancevariable">
     
@@ -294,37 +823,37 @@
   </tr><tr class="method private">
     
     <td>Method</td>
-    <td><code><a href="#_init_corpus_select" class="internal-link" title="nltk.app.collocations_app.CollocationsView._init_corpus_select">_init​_corpus​_select</a></code></td>
+    <td><code><a href="#_init_corpus_select" class="internal-link" title="nltk.app.collocations_app.CollocationsView._init_corpus_select">_init<wbr></wbr>_corpus<wbr></wbr>_select</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method private">
     
     <td>Method</td>
-    <td><code><a href="#_init_menubar" class="internal-link" title="nltk.app.collocations_app.CollocationsView._init_menubar">_init​_menubar</a></code></td>
+    <td><code><a href="#_init_menubar" class="internal-link" title="nltk.app.collocations_app.CollocationsView._init_menubar">_init<wbr></wbr>_menubar</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method private">
     
     <td>Method</td>
-    <td><code><a href="#_init_paging" class="internal-link" title="nltk.app.collocations_app.CollocationsView._init_paging">_init​_paging</a></code></td>
+    <td><code><a href="#_init_paging" class="internal-link" title="nltk.app.collocations_app.CollocationsView._init_paging">_init<wbr></wbr>_paging</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method private">
     
     <td>Method</td>
-    <td><code><a href="#_init_results_box" class="internal-link" title="nltk.app.collocations_app.CollocationsView._init_results_box">_init​_results​_box</a></code></td>
+    <td><code><a href="#_init_results_box" class="internal-link" title="nltk.app.collocations_app.CollocationsView._init_results_box">_init<wbr></wbr>_results<wbr></wbr>_box</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method private">
     
     <td>Method</td>
-    <td><code><a href="#_init_status" class="internal-link" title="nltk.app.collocations_app.CollocationsView._init_status">_init​_status</a></code></td>
+    <td><code><a href="#_init_status" class="internal-link" title="nltk.app.collocations_app.CollocationsView._init_status">_init<wbr></wbr>_status</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method private">
     
     <td>Method</td>
-    <td><code><a href="#_init_top" class="internal-link" title="nltk.app.collocations_app.CollocationsView._init_top">_init​_top</a></code></td>
+    <td><code><a href="#_init_top" class="internal-link" title="nltk.app.collocations_app.CollocationsView._init_top">_init<wbr></wbr>_top</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method private">
     
     <td>Method</td>
-    <td><code><a href="#_init_widgets" class="internal-link" title="nltk.app.collocations_app.CollocationsView._init_widgets">_init​_widgets</a></code></td>
+    <td><code><a href="#_init_widgets" class="internal-link" title="nltk.app.collocations_app.CollocationsView._init_widgets">_init<wbr></wbr>_widgets</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method private">
     
@@ -334,23 +863,22 @@
   </tr><tr class="constant private">
     
     <td>Constant</td>
-    <td><code><a href="#_BACKGROUND_COLOUR" class="internal-link" title="nltk.app.collocations_app.CollocationsView._BACKGROUND_COLOUR">_BACKGROUND​_COLOUR</a></code></td>
+    <td><code><a href="#_BACKGROUND_COLOUR" class="internal-link" title="nltk.app.collocations_app.CollocationsView._BACKGROUND_COLOUR">_BACKGROUND<wbr></wbr>_COLOUR</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="instancevariable private">
     
     <td>Instance Variable</td>
-    <td><code><a href="#_result_size" class="internal-link" title="nltk.app.collocations_app.CollocationsView._result_size">_result​_size</a></code></td>
+    <td><code><a href="#_result_size" class="internal-link" title="nltk.app.collocations_app.CollocationsView._result_size">_result<wbr></wbr>_size</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr>
 </table>
-        
-
           
-      </div>
 
-      <div id="childList">
+            
+        </div>
 
-        <div class="basemethod">
+        <div id="childList">
+          <div class="basemethod">
   
   
   <a name="nltk.app.collocations_app.CollocationsView.__init__">
@@ -361,14 +889,19 @@
   </a>
   <div class="functionHeader">
     
-    <span class="py-keyword">def</span> <span class="py-defname">__init__</span>(self):
+    
+    <span class="py-keyword">def</span> <span class="py-defname">__init__</span><span class="function-signature">(self)</span>:
     <a class="sourceLink" href="https://github.com/nltk/nltk/tree/3.6.2/nltk/app/collocations_app.py#L80">
       
       (source)
     </a>
+    <a class="headerLink" href="#__init__" title="nltk.app.collocations_app.CollocationsView.__init__">
+      
+      
+      ¶
+    </a>
   </div>
   <div class="docstring functionBody">
-    
     
     <div><p class="undocumented">Undocumented</p></div>
   </div>
@@ -383,14 +916,19 @@
   </a>
   <div class="functionHeader">
     
-    <span class="py-keyword">def</span> <span class="py-defname">__next__</span>(self):
+    
+    <span class="py-keyword">def</span> <span class="py-defname">__next__</span><span class="function-signature">(self)</span>:
     <a class="sourceLink" href="https://github.com/nltk/nltk/tree/3.6.2/nltk/app/collocations_app.py#L290">
       
       (source)
     </a>
+    <a class="headerLink" href="#__next__" title="nltk.app.collocations_app.CollocationsView.__next__">
+      
+      
+      ¶
+    </a>
   </div>
   <div class="docstring functionBody">
-    
     
     <div><p class="undocumented">Undocumented</p></div>
   </div>
@@ -405,14 +943,19 @@
   </a>
   <div class="functionHeader">
     
-    <span class="py-keyword">def</span> <span class="py-defname">clear_results_box</span>(self):
+    
+    <span class="py-keyword">def</span> <span class="py-defname">clear_results_box</span><span class="function-signature">(self)</span>:
     <a class="sourceLink" href="https://github.com/nltk/nltk/tree/3.6.2/nltk/app/collocations_app.py#L308">
       
       (source)
     </a>
+    <a class="headerLink" href="#clear_results_box" title="nltk.app.collocations_app.CollocationsView.clear_results_box">
+      
+      
+      ¶
+    </a>
   </div>
   <div class="docstring functionBody">
-    
     
     <div><p class="undocumented">Undocumented</p></div>
   </div>
@@ -427,14 +970,19 @@
   </a>
   <div class="functionHeader">
     
-    <span class="py-keyword">def</span> <span class="py-defname">corpus_selected</span>(self, *args):
+    
+    <span class="py-keyword">def</span> <span class="py-defname">corpus_selected</span><span class="function-signature">(self, *args)</span>:
     <a class="sourceLink" href="https://github.com/nltk/nltk/tree/3.6.2/nltk/app/collocations_app.py#L278">
       
       (source)
     </a>
+    <a class="headerLink" href="#corpus_selected" title="nltk.app.collocations_app.CollocationsView.corpus_selected">
+      
+      
+      ¶
+    </a>
   </div>
   <div class="docstring functionBody">
-    
     
     <div><p class="undocumented">Undocumented</p></div>
   </div>
@@ -449,14 +997,19 @@
   </a>
   <div class="functionHeader">
     
-    <span class="py-keyword">def</span> <span class="py-defname">destroy</span>(self, *e):
+    
+    <span class="py-keyword">def</span> <span class="py-defname">destroy</span><span class="function-signature">(self, *e)</span>:
     <a class="sourceLink" href="https://github.com/nltk/nltk/tree/3.6.2/nltk/app/collocations_app.py#L317">
       
       (source)
     </a>
+    <a class="headerLink" href="#destroy" title="nltk.app.collocations_app.CollocationsView.destroy">
+      
+      
+      ¶
+    </a>
   </div>
   <div class="docstring functionBody">
-    
     
     <div><p class="undocumented">Undocumented</p></div>
   </div>
@@ -471,14 +1024,19 @@
   </a>
   <div class="functionHeader">
     
-    <span class="py-keyword">def</span> <span class="py-defname">fire_event</span>(self, event):
+    
+    <span class="py-keyword">def</span> <span class="py-defname">fire_event</span><span class="function-signature">(self, event)</span>:
     <a class="sourceLink" href="https://github.com/nltk/nltk/tree/3.6.2/nltk/app/collocations_app.py#L313">
       
       (source)
     </a>
+    <a class="headerLink" href="#fire_event" title="nltk.app.collocations_app.CollocationsView.fire_event">
+      
+      
+      ¶
+    </a>
   </div>
   <div class="docstring functionBody">
-    
     
     <div><p class="undocumented">Undocumented</p></div>
   </div>
@@ -493,14 +1051,19 @@
   </a>
   <div class="functionHeader">
     
-    <span class="py-keyword">def</span> <span class="py-defname">freeze_editable</span>(self):
+    
+    <span class="py-keyword">def</span> <span class="py-defname">freeze_editable</span><span class="function-signature">(self)</span>:
     <a class="sourceLink" href="https://github.com/nltk/nltk/tree/3.6.2/nltk/app/collocations_app.py#L304">
       
       (source)
     </a>
+    <a class="headerLink" href="#freeze_editable" title="nltk.app.collocations_app.CollocationsView.freeze_editable">
+      
+      
+      ¶
+    </a>
   </div>
   <div class="docstring functionBody">
-    
     
     <div><p class="undocumented">Undocumented</p></div>
   </div>
@@ -515,14 +1078,19 @@
   </a>
   <div class="functionHeader">
     
-    <span class="py-keyword">def</span> <span class="py-defname">handle_corpus_loaded</span>(self, event):
+    
+    <span class="py-keyword">def</span> <span class="py-defname">handle_corpus_loaded</span><span class="function-signature">(self, event)</span>:
     <a class="sourceLink" href="https://github.com/nltk/nltk/tree/3.6.2/nltk/app/collocations_app.py#L268">
       
       (source)
     </a>
+    <a class="headerLink" href="#handle_corpus_loaded" title="nltk.app.collocations_app.CollocationsView.handle_corpus_loaded">
+      
+      
+      ¶
+    </a>
   </div>
   <div class="docstring functionBody">
-    
     
     <div><p class="undocumented">Undocumented</p></div>
   </div>
@@ -537,14 +1105,19 @@
   </a>
   <div class="functionHeader">
     
-    <span class="py-keyword">def</span> <span class="py-defname">handle_error_loading_corpus</span>(self, event):
+    
+    <span class="py-keyword">def</span> <span class="py-defname">handle_error_loading_corpus</span><span class="function-signature">(self, event)</span>:
     <a class="sourceLink" href="https://github.com/nltk/nltk/tree/3.6.2/nltk/app/collocations_app.py#L261">
       
       (source)
     </a>
+    <a class="headerLink" href="#handle_error_loading_corpus" title="nltk.app.collocations_app.CollocationsView.handle_error_loading_corpus">
+      
+      
+      ¶
+    </a>
   </div>
   <div class="docstring functionBody">
-    
     
     <div><p class="undocumented">Undocumented</p></div>
   </div>
@@ -559,14 +1132,19 @@
   </a>
   <div class="functionHeader">
     
-    <span class="py-keyword">def</span> <span class="py-defname">load_corpus</span>(self, selection):
+    
+    <span class="py-keyword">def</span> <span class="py-defname">load_corpus</span><span class="function-signature">(self, selection)</span>:
     <a class="sourceLink" href="https://github.com/nltk/nltk/tree/3.6.2/nltk/app/collocations_app.py#L298">
       
       (source)
     </a>
+    <a class="headerLink" href="#load_corpus" title="nltk.app.collocations_app.CollocationsView.load_corpus">
+      
+      
+      ¶
+    </a>
   </div>
   <div class="docstring functionBody">
-    
     
     <div><p class="undocumented">Undocumented</p></div>
   </div>
@@ -581,14 +1159,19 @@
   </a>
   <div class="functionHeader">
     
-    <span class="py-keyword">def</span> <span class="py-defname">mainloop</span>(self, *args, **kwargs):
+    
+    <span class="py-keyword">def</span> <span class="py-defname">mainloop</span><span class="function-signature">(self, *args, **kwargs)</span>:
     <a class="sourceLink" href="https://github.com/nltk/nltk/tree/3.6.2/nltk/app/collocations_app.py#L324">
       
       (source)
     </a>
+    <a class="headerLink" href="#mainloop" title="nltk.app.collocations_app.CollocationsView.mainloop">
+      
+      
+      ¶
+    </a>
   </div>
   <div class="docstring functionBody">
-    
     
     <div><p class="undocumented">Undocumented</p></div>
   </div>
@@ -603,14 +1186,19 @@
   </a>
   <div class="functionHeader">
     
-    <span class="py-keyword">def</span> <span class="py-defname">previous</span>(self):
+    
+    <span class="py-keyword">def</span> <span class="py-defname">previous</span><span class="function-signature">(self)</span>:
     <a class="sourceLink" href="https://github.com/nltk/nltk/tree/3.6.2/nltk/app/collocations_app.py#L282">
       
       (source)
     </a>
+    <a class="headerLink" href="#previous" title="nltk.app.collocations_app.CollocationsView.previous">
+      
+      
+      ¶
+    </a>
   </div>
   <div class="docstring functionBody">
-    
     
     <div><p class="undocumented">Undocumented</p></div>
   </div>
@@ -625,14 +1213,19 @@
   </a>
   <div class="functionHeader">
     
-    <span class="py-keyword">def</span> <span class="py-defname">reset_current_page</span>(self):
+    
+    <span class="py-keyword">def</span> <span class="py-defname">reset_current_page</span><span class="function-signature">(self)</span>:
     <a class="sourceLink" href="https://github.com/nltk/nltk/tree/3.6.2/nltk/app/collocations_app.py#L246">
       
       (source)
     </a>
+    <a class="headerLink" href="#reset_current_page" title="nltk.app.collocations_app.CollocationsView.reset_current_page">
+      
+      
+      ¶
+    </a>
   </div>
   <div class="docstring functionBody">
-    
     
     <div><p class="undocumented">Undocumented</p></div>
   </div>
@@ -647,14 +1240,19 @@
   </a>
   <div class="functionHeader">
     
-    <span class="py-keyword">def</span> <span class="py-defname">set_paging_button_states</span>(self):
+    
+    <span class="py-keyword">def</span> <span class="py-defname">set_paging_button_states</span><span class="function-signature">(self)</span>:
     <a class="sourceLink" href="https://github.com/nltk/nltk/tree/3.6.2/nltk/app/collocations_app.py#L332">
       
       (source)
     </a>
+    <a class="headerLink" href="#set_paging_button_states" title="nltk.app.collocations_app.CollocationsView.set_paging_button_states">
+      
+      
+      ¶
+    </a>
   </div>
   <div class="docstring functionBody">
-    
     
     <div><p class="undocumented">Undocumented</p></div>
   </div>
@@ -669,14 +1267,19 @@
   </a>
   <div class="functionHeader">
     
-    <span class="py-keyword">def</span> <span class="py-defname">set_result_size</span>(self, **kwargs):
+    
+    <span class="py-keyword">def</span> <span class="py-defname">set_result_size</span><span class="function-signature">(self, **kwargs)</span>:
     <a class="sourceLink" href="https://github.com/nltk/nltk/tree/3.6.2/nltk/app/collocations_app.py#L187">
       
       (source)
     </a>
+    <a class="headerLink" href="#set_result_size" title="nltk.app.collocations_app.CollocationsView.set_result_size">
+      
+      
+      ¶
+    </a>
   </div>
   <div class="docstring functionBody">
-    
     
     <div><p class="undocumented">Undocumented</p></div>
   </div>
@@ -691,14 +1294,19 @@
   </a>
   <div class="functionHeader">
     
-    <span class="py-keyword">def</span> <span class="py-defname">unfreeze_editable</span>(self):
+    
+    <span class="py-keyword">def</span> <span class="py-defname">unfreeze_editable</span><span class="function-signature">(self)</span>:
     <a class="sourceLink" href="https://github.com/nltk/nltk/tree/3.6.2/nltk/app/collocations_app.py#L329">
       
       (source)
     </a>
+    <a class="headerLink" href="#unfreeze_editable" title="nltk.app.collocations_app.CollocationsView.unfreeze_editable">
+      
+      
+      ¶
+    </a>
   </div>
   <div class="docstring functionBody">
-    
     
     <div><p class="undocumented">Undocumented</p></div>
   </div>
@@ -713,14 +1321,19 @@
   </a>
   <div class="functionHeader">
     
-    <span class="py-keyword">def</span> <span class="py-defname">write_results</span>(self, results):
+    
+    <span class="py-keyword">def</span> <span class="py-defname">write_results</span><span class="function-signature">(self, results)</span>:
     <a class="sourceLink" href="https://github.com/nltk/nltk/tree/3.6.2/nltk/app/collocations_app.py#L342">
       
       (source)
     </a>
+    <a class="headerLink" href="#write_results" title="nltk.app.collocations_app.CollocationsView.write_results">
+      
+      
+      ¶
+    </a>
   </div>
   <div class="docstring functionBody">
-    
     
     <div><p class="undocumented">Undocumented</p></div>
   </div>
@@ -740,9 +1353,13 @@
       
       (source)
     </a>
+    <a class="headerLink" href="#after" title="nltk.app.collocations_app.CollocationsView.after">
+      
+      
+      ¶
+    </a>
   </div>
   <div class="functionBody">
-    
     
     <div><p class="undocumented">Undocumented</p></div>
     
@@ -763,9 +1380,13 @@
       
       (source)
     </a>
+    <a class="headerLink" href="#current_page" title="nltk.app.collocations_app.CollocationsView.current_page">
+      
+      
+      ¶
+    </a>
   </div>
   <div class="functionBody">
-    
     
     <div><p class="undocumented">Undocumented</p></div>
     
@@ -786,9 +1407,13 @@
       
       (source)
     </a>
+    <a class="headerLink" href="#main_frame" title="nltk.app.collocations_app.CollocationsView.main_frame">
+      
+      
+      ¶
+    </a>
   </div>
   <div class="functionBody">
-    
     
     <div><p class="undocumented">Undocumented</p></div>
     
@@ -809,9 +1434,13 @@
       
       (source)
     </a>
+    <a class="headerLink" href="#model" title="nltk.app.collocations_app.CollocationsView.model">
+      
+      
+      ¶
+    </a>
   </div>
   <div class="functionBody">
-    
     
     <div><p class="undocumented">Undocumented</p></div>
     
@@ -832,9 +1461,13 @@
       
       (source)
     </a>
+    <a class="headerLink" href="#next" title="nltk.app.collocations_app.CollocationsView.next">
+      
+      
+      ¶
+    </a>
   </div>
   <div class="functionBody">
-    
     
     <div><p class="undocumented">Undocumented</p></div>
     
@@ -855,9 +1488,13 @@
       
       (source)
     </a>
+    <a class="headerLink" href="#prev" title="nltk.app.collocations_app.CollocationsView.prev">
+      
+      
+      ¶
+    </a>
   </div>
   <div class="functionBody">
-    
     
     <div><p class="undocumented">Undocumented</p></div>
     
@@ -878,9 +1515,13 @@
       
       (source)
     </a>
+    <a class="headerLink" href="#queue" title="nltk.app.collocations_app.CollocationsView.queue">
+      
+      
+      ¶
+    </a>
   </div>
   <div class="functionBody">
-    
     
     <div><p class="undocumented">Undocumented</p></div>
     
@@ -901,9 +1542,13 @@
       
       (source)
     </a>
+    <a class="headerLink" href="#results_box" title="nltk.app.collocations_app.CollocationsView.results_box">
+      
+      
+      ¶
+    </a>
   </div>
   <div class="functionBody">
-    
     
     <div><p class="undocumented">Undocumented</p></div>
     
@@ -924,9 +1569,13 @@
       
       (source)
     </a>
+    <a class="headerLink" href="#status" title="nltk.app.collocations_app.CollocationsView.status">
+      
+      
+      ¶
+    </a>
   </div>
   <div class="functionBody">
-    
     
     <div><p class="undocumented">Undocumented</p></div>
     
@@ -947,9 +1596,13 @@
       
       (source)
     </a>
+    <a class="headerLink" href="#top" title="nltk.app.collocations_app.CollocationsView.top">
+      
+      
+      ¶
+    </a>
   </div>
   <div class="functionBody">
-    
     
     <div><p class="undocumented">Undocumented</p></div>
     
@@ -970,9 +1623,13 @@
       
       (source)
     </a>
+    <a class="headerLink" href="#var" title="nltk.app.collocations_app.CollocationsView.var">
+      
+      
+      ¶
+    </a>
   </div>
   <div class="functionBody">
-    
     
     <div><p class="undocumented">Undocumented</p></div>
     
@@ -988,14 +1645,19 @@
   </a>
   <div class="functionHeader">
     
-    <span class="py-keyword">def</span> <span class="py-defname">_init_corpus_select</span>(self, parent):
+    
+    <span class="py-keyword">def</span> <span class="py-defname">_init_corpus_select</span><span class="function-signature">(self, parent)</span>:
     <a class="sourceLink" href="https://github.com/nltk/nltk/tree/3.6.2/nltk/app/collocations_app.py#L107">
       
       (source)
     </a>
+    <a class="headerLink" href="#_init_corpus_select" title="nltk.app.collocations_app.CollocationsView._init_corpus_select">
+      
+      
+      ¶
+    </a>
   </div>
   <div class="docstring functionBody">
-    
     
     <div><p class="undocumented">Undocumented</p></div>
   </div>
@@ -1010,14 +1672,19 @@
   </a>
   <div class="functionHeader">
     
-    <span class="py-keyword">def</span> <span class="py-defname">_init_menubar</span>(self):
+    
+    <span class="py-keyword">def</span> <span class="py-defname">_init_menubar</span><span class="function-signature">(self)</span>:
     <a class="sourceLink" href="https://github.com/nltk/nltk/tree/3.6.2/nltk/app/collocations_app.py#L148">
       
       (source)
     </a>
+    <a class="headerLink" href="#_init_menubar" title="nltk.app.collocations_app.CollocationsView._init_menubar">
+      
+      
+      ¶
+    </a>
   </div>
   <div class="docstring functionBody">
-    
     
     <div><p class="undocumented">Undocumented</p></div>
   </div>
@@ -1032,14 +1699,19 @@
   </a>
   <div class="functionHeader">
     
-    <span class="py-keyword">def</span> <span class="py-defname">_init_paging</span>(self, parent):
+    
+    <span class="py-keyword">def</span> <span class="py-defname">_init_paging</span><span class="function-signature">(self, parent)</span>:
     <a class="sourceLink" href="https://github.com/nltk/nltk/tree/3.6.2/nltk/app/collocations_app.py#L221">
       
       (source)
     </a>
+    <a class="headerLink" href="#_init_paging" title="nltk.app.collocations_app.CollocationsView._init_paging">
+      
+      
+      ¶
+    </a>
   </div>
   <div class="docstring functionBody">
-    
     
     <div><p class="undocumented">Undocumented</p></div>
   </div>
@@ -1054,14 +1726,19 @@
   </a>
   <div class="functionHeader">
     
-    <span class="py-keyword">def</span> <span class="py-defname">_init_results_box</span>(self, parent):
+    
+    <span class="py-keyword">def</span> <span class="py-defname">_init_results_box</span><span class="function-signature">(self, parent)</span>:
     <a class="sourceLink" href="https://github.com/nltk/nltk/tree/3.6.2/nltk/app/collocations_app.py#L190">
       
       (source)
     </a>
+    <a class="headerLink" href="#_init_results_box" title="nltk.app.collocations_app.CollocationsView._init_results_box">
+      
+      
+      ¶
+    </a>
   </div>
   <div class="docstring functionBody">
-    
     
     <div><p class="undocumented">Undocumented</p></div>
   </div>
@@ -1076,14 +1753,19 @@
   </a>
   <div class="functionHeader">
     
-    <span class="py-keyword">def</span> <span class="py-defname">_init_status</span>(self, parent):
+    
+    <span class="py-keyword">def</span> <span class="py-defname">_init_status</span><span class="function-signature">(self, parent)</span>:
     <a class="sourceLink" href="https://github.com/nltk/nltk/tree/3.6.2/nltk/app/collocations_app.py#L136">
       
       (source)
     </a>
+    <a class="headerLink" href="#_init_status" title="nltk.app.collocations_app.CollocationsView._init_status">
+      
+      
+      ¶
+    </a>
   </div>
   <div class="docstring functionBody">
-    
     
     <div><p class="undocumented">Undocumented</p></div>
   </div>
@@ -1098,14 +1780,19 @@
   </a>
   <div class="functionHeader">
     
-    <span class="py-keyword">def</span> <span class="py-defname">_init_top</span>(self, top):
+    
+    <span class="py-keyword">def</span> <span class="py-defname">_init_top</span><span class="function-signature">(self, top)</span>:
     <a class="sourceLink" href="https://github.com/nltk/nltk/tree/3.6.2/nltk/app/collocations_app.py#L90">
       
       (source)
     </a>
+    <a class="headerLink" href="#_init_top" title="nltk.app.collocations_app.CollocationsView._init_top">
+      
+      
+      ¶
+    </a>
   </div>
   <div class="docstring functionBody">
-    
     
     <div><p class="undocumented">Undocumented</p></div>
   </div>
@@ -1120,14 +1807,19 @@
   </a>
   <div class="functionHeader">
     
-    <span class="py-keyword">def</span> <span class="py-defname">_init_widgets</span>(self, parent):
+    
+    <span class="py-keyword">def</span> <span class="py-defname">_init_widgets</span><span class="function-signature">(self, parent)</span>:
     <a class="sourceLink" href="https://github.com/nltk/nltk/tree/3.6.2/nltk/app/collocations_app.py#L97">
       
       (source)
     </a>
+    <a class="headerLink" href="#_init_widgets" title="nltk.app.collocations_app.CollocationsView._init_widgets">
+      
+      
+      ¶
+    </a>
   </div>
   <div class="docstring functionBody">
-    
     
     <div><p class="undocumented">Undocumented</p></div>
   </div>
@@ -1142,14 +1834,19 @@
   </a>
   <div class="functionHeader">
     
-    <span class="py-keyword">def</span> <span class="py-defname">_poll</span>(self):
+    
+    <span class="py-keyword">def</span> <span class="py-defname">_poll</span><span class="function-signature">(self)</span>:
     <a class="sourceLink" href="https://github.com/nltk/nltk/tree/3.6.2/nltk/app/collocations_app.py#L249">
       
       (source)
     </a>
+    <a class="headerLink" href="#_poll" title="nltk.app.collocations_app.CollocationsView._poll">
+      
+      
+      ¶
+    </a>
   </div>
   <div class="docstring functionBody">
-    
     
     <div><p class="undocumented">Undocumented</p></div>
   </div>
@@ -1169,9 +1866,13 @@
       
       (source)
     </a>
+    <a class="headerLink" href="#_BACKGROUND_COLOUR" title="nltk.app.collocations_app.CollocationsView._BACKGROUND_COLOUR">
+      
+      
+      ¶
+    </a>
   </div>
   <div class="functionBody">
-    
     
     <div><p class="undocumented">Undocumented</p></div>
     <table class="valueTable"><tr class="fieldStart"><td class="fieldName">Value</td></tr><tr><td><pre class="constant-value"><code><span class="rst-variable-quote">'</span><span class="rst-variable-string">#FFF</span><span class="rst-variable-quote">'</span></code></pre></td></tr></table>
@@ -1192,27 +1893,40 @@
       
       (source)
     </a>
+    <a class="headerLink" href="#_result_size" title="nltk.app.collocations_app.CollocationsView._result_size">
+      
+      
+      ¶
+    </a>
   </div>
   <div class="functionBody">
-    
     
     <div><p class="undocumented">Undocumented</p></div>
     
   </div>
 </div>
-
+        </div>
+      
       </div>
     </div>
 
     <footer class="navbar navbar-default">
+
   
-  <div class="container">
+  <div class="container-fluid">
     <a href="index.html">API Documentation</a> for <a href="http://www.nltk.org/" class="projecthome">nltk-3.6.2</a>,
   generated by <a href="https://github.com/twisted/pydoctor/">pydoctor</a>
-    22.2.2.dev0 at 2025-02-28 00:01:09.
+    24.11.2 at 2025-02-28 00:02:28.
   </div>
-</footer>
 
+  <!-- Search related scripts needs to be loaded at the end of HTML 
+    parsing not to introduce overhead and display HTML data asap -->
+  <script src="ajax.js" type="text/javascript"></script>
+  <script src="searchlib.js" type="text/javascript"></script>
+  <script src="search.js" type="text/javascript"></script>
+
+</footer>
+  
     <script src="pydoctor.js" type="text/javascript"></script>
 
   </body>

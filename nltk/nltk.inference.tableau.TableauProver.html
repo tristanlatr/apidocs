@@ -7,23 +7,26 @@
   <head>
     
     <title>nltk.inference.tableau.TableauProver</title>
-    <meta name="generator" content="pydoctor 22.2.2.dev0"> 
+    <meta name="generator" content="pydoctor 24.11.2"> 
         
     </meta>
     <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=0.75" />
+    <meta name="viewport" content="width=device-width, initial-scale=1 maximum-scale=1" />
     <link rel="stylesheet" type="text/css" href="bootstrap.min.css" />
     <link rel="stylesheet" type="text/css" href="apidocs.css" />
     <link rel="stylesheet" type="text/css" href="extra.css" />
+    
 </head>
 
   <body>
 
     
 
-    <nav class="navbar navbar-default">
+    <nav class="navbar navbar-default mainnavbar">
+      
   
-  <div class="container">
+  <div class="container-fluid">
+
 
     <div class="navbar-header">
       
@@ -50,7 +53,7 @@
             
             <span class="input-group-btn">
               <a style="display: none;" class="btn btn-default" id="search-clear-button" title="Clear" onclick="clearSearch()"><img src="fonts/x-circle.svg" alt="Clear" /></a>
-              <a class="btn btn-default" id="search-help-button" title="Help" onclick="toggleSearchHelpText()"><img src="fonts/info.svg" alt="Help" /></a>
+              <a class="btn btn-default" id="apidocs-help-button" title="Help" href="apidocs-help.html"><img src="fonts/info.svg" alt="Help" /></a>
             </span>
           </div>
         </div>
@@ -58,50 +61,24 @@
       </div>
 
       <div id="search-results-container" style="display: none;">
-        <div>
+        
+        <div id="search-buttons">
           <span class="label label-default" id="search-docstrings-button">
-            <a title="Search in docstrings" onclick="toggleSearchInDocstrings()">search in docstrings</a></span>
+          <label class="checkbox-inline">
+            <input type="checkbox" id="toggle-search-in-docstrings-checkbox" value="false" onclick="toggleSearchInDocstrings()">
+              search in docstrings
+            </input>
+          </label>
+          </span>
+          
         </div>
-
+        
         <noscript>
             <h1>Cannot search: JavaScript is not supported/enabled in your browser.</h1>
         </noscript>
 
-        <div class="hint" id="search-help-box">
-          <p class="rst-last">
-      
-            Search bar offers the following options:
-            <ul>   
-                <li>
-                  <strong>Term presence.</strong> The below example searches for documents that 
-                    must contain “foo”, might contain “bar” and must not contain “baz”: <code>+foo bar -baz</code>
-                </li> 
-
-                <li>
-                  <strong>Wildcards.</strong> The below example searches for documents with words beginning with “foo”: <code>foo*</code>
-                </li> 
-
-                <li>
-                  <strong>Search in specific fields.</strong> The following search matches all objects 
-                  in "twisted.mail" that matches “search”: <code>+qname:twisted.mail.* +search</code>
-
-                  <p>
-                    Possible fields: 'name', 'qname' (fully qualified name), 'docstring', and 'kind'.
-                    Last two fields are only applicable if "search in docstrings" is enabled.
-                  </p>
-                </li>
-
-                <li>
-                  <strong>Fuzzy matches.</strong> The following search matches all documents 
-                  that have a word within 1 edit distance of “foo”: <code>foo~1</code>
-                </li>
-            </ul>
-
-          </p>
-        </div>
-
         <div id="search-status"> </div>
-        
+
         <div class="warning" id="search-warn-box" style="display: none;">
           <p class="rst-last"><span id="search-warn"></span></p>
         </div>
@@ -110,196 +87,660 @@
           <!-- Filled dynamically by JS -->
         </table>
         
-        <div style="margin-top: 8px;">
-          <p>Results provided by <a href="https://lunrjs.com">Lunr.js</a></p>
+        <div style="margin-top: 10px;">
+          <p>For more information on the search, visit the <a href="apidocs-help.html#rst-search">help page</a>.</p>
         </div>
       </div>
 
     </div>
+
+
+  </div>
+</nav>
+    
+    <div class="container-fluid">
+
+      <!-- Side navigation -->
+      <div class="sidebarcontainer" style="display: none;">
+        
+        <div class="sidebar"><nav class="sidebar">
+  
+
+  <div>
+
+      <div class="thingTitle">
+        <span>Class</span>
+        <code class="thisobject"><a href="nltk.inference.tableau.TableauProver.html" class="internal-link" title="This class"><wbr></wbr>Tableau<wbr></wbr>Prover</a></code> 
+      </div>
+      
+      <div>
+        
+
+        
+         
+
+        
+        
+
+        <div class="childrenKindTitle">Methods</div>
+        <ul>
+    
+    <li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="#is_atom" class="internal-link" title="nltk.inference.tableau.TableauProver.is_atom">is<wbr></wbr>_atom</a></code>
+            </div>
+        
+
+    </li><li class="private">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="#_attempt_proof" class="internal-link" title="nltk.inference.tableau.TableauProver._attempt_proof">_attempt<wbr></wbr>_proof</a></code>
+            </div>
+        
+
+    </li><li class="private">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="#_attempt_proof_all" class="internal-link" title="nltk.inference.tableau.TableauProver._attempt_proof_all">_attempt<wbr></wbr>_proof<wbr></wbr>_all</a></code>
+            </div>
+        
+
+    </li><li class="private">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="#_attempt_proof_and" class="internal-link" title="nltk.inference.tableau.TableauProver._attempt_proof_and">_attempt<wbr></wbr>_proof<wbr></wbr>_and</a></code>
+            </div>
+        
+
+    </li><li class="private">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="#_attempt_proof_app" class="internal-link" title="nltk.inference.tableau.TableauProver._attempt_proof_app">_attempt<wbr></wbr>_proof<wbr></wbr>_app</a></code>
+            </div>
+        
+
+    </li><li class="private">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="#_attempt_proof_atom" class="internal-link" title="nltk.inference.tableau.TableauProver._attempt_proof_atom">_attempt<wbr></wbr>_proof<wbr></wbr>_atom</a></code>
+            </div>
+        
+
+    </li><li class="private">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="#_attempt_proof_d_neg" class="internal-link" title="nltk.inference.tableau.TableauProver._attempt_proof_d_neg">_attempt<wbr></wbr>_proof<wbr></wbr>_d<wbr></wbr>_neg</a></code>
+            </div>
+        
+
+    </li><li class="private">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="#_attempt_proof_eq" class="internal-link" title="nltk.inference.tableau.TableauProver._attempt_proof_eq">_attempt<wbr></wbr>_proof<wbr></wbr>_eq</a></code>
+            </div>
+        
+
+    </li><li class="private">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="#_attempt_proof_iff" class="internal-link" title="nltk.inference.tableau.TableauProver._attempt_proof_iff">_attempt<wbr></wbr>_proof<wbr></wbr>_iff</a></code>
+            </div>
+        
+
+    </li><li class="private">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="#_attempt_proof_imp" class="internal-link" title="nltk.inference.tableau.TableauProver._attempt_proof_imp">_attempt<wbr></wbr>_proof<wbr></wbr>_imp</a></code>
+            </div>
+        
+
+    </li><li class="private">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="#_attempt_proof_n_all" class="internal-link" title="nltk.inference.tableau.TableauProver._attempt_proof_n_all">_attempt<wbr></wbr>_proof<wbr></wbr>_n<wbr></wbr>_all</a></code>
+            </div>
+        
+
+    </li><li class="private">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="#_attempt_proof_n_and" class="internal-link" title="nltk.inference.tableau.TableauProver._attempt_proof_n_and">_attempt<wbr></wbr>_proof<wbr></wbr>_n<wbr></wbr>_and</a></code>
+            </div>
+        
+
+    </li><li class="private">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="#_attempt_proof_n_app" class="internal-link" title="nltk.inference.tableau.TableauProver._attempt_proof_n_app">_attempt<wbr></wbr>_proof<wbr></wbr>_n<wbr></wbr>_app</a></code>
+            </div>
+        
+
+    </li><li class="private">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="#_attempt_proof_n_atom" class="internal-link" title="nltk.inference.tableau.TableauProver._attempt_proof_n_atom">_attempt<wbr></wbr>_proof<wbr></wbr>_n<wbr></wbr>_atom</a></code>
+            </div>
+        
+
+    </li><li class="private">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="#_attempt_proof_n_eq" class="internal-link" title="nltk.inference.tableau.TableauProver._attempt_proof_n_eq">_attempt<wbr></wbr>_proof<wbr></wbr>_n<wbr></wbr>_eq</a></code>
+            </div>
+        
+
+    </li><li class="private">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="#_attempt_proof_n_iff" class="internal-link" title="nltk.inference.tableau.TableauProver._attempt_proof_n_iff">_attempt<wbr></wbr>_proof<wbr></wbr>_n<wbr></wbr>_iff</a></code>
+            </div>
+        
+
+    </li><li class="private">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="#_attempt_proof_n_imp" class="internal-link" title="nltk.inference.tableau.TableauProver._attempt_proof_n_imp">_attempt<wbr></wbr>_proof<wbr></wbr>_n<wbr></wbr>_imp</a></code>
+            </div>
+        
+
+    </li><li class="private">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="#_attempt_proof_n_or" class="internal-link" title="nltk.inference.tableau.TableauProver._attempt_proof_n_or">_attempt<wbr></wbr>_proof<wbr></wbr>_n<wbr></wbr>_or</a></code>
+            </div>
+        
+
+    </li><li class="private">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="#_attempt_proof_n_prop" class="internal-link" title="nltk.inference.tableau.TableauProver._attempt_proof_n_prop">_attempt<wbr></wbr>_proof<wbr></wbr>_n<wbr></wbr>_prop</a></code>
+            </div>
+        
+
+    </li><li class="private">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="#_attempt_proof_n_some" class="internal-link" title="nltk.inference.tableau.TableauProver._attempt_proof_n_some">_attempt<wbr></wbr>_proof<wbr></wbr>_n<wbr></wbr>_some</a></code>
+            </div>
+        
+
+    </li><li class="private">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="#_attempt_proof_or" class="internal-link" title="nltk.inference.tableau.TableauProver._attempt_proof_or">_attempt<wbr></wbr>_proof<wbr></wbr>_or</a></code>
+            </div>
+        
+
+    </li><li class="private">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="#_attempt_proof_prop" class="internal-link" title="nltk.inference.tableau.TableauProver._attempt_proof_prop">_attempt<wbr></wbr>_proof<wbr></wbr>_prop</a></code>
+            </div>
+        
+
+    </li><li class="private">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="#_attempt_proof_some" class="internal-link" title="nltk.inference.tableau.TableauProver._attempt_proof_some">_attempt<wbr></wbr>_proof<wbr></wbr>_some</a></code>
+            </div>
+        
+
+    </li><li class="private">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="#_prove" class="internal-link" title="nltk.inference.tableau.TableauProver._prove">_prove</a></code>
+            </div>
+        
+
+    </li>
+</ul> 
+
+        <div class="childrenKindTitle">Inherited Methods</div>
+        <ul>
+    
+    <li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="nltk.inference.api.Prover.html#prove" class="internal-link" title="nltk.inference.api.Prover.prove">prove</a></code>
+            </div>
+        
+
+    </li>
+</ul> 
+
+        <div class="childrenKindTitle">Attributes</div>
+        <ul>
+    
+    <li class="private">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="#_assume_false" class="internal-link" title="nltk.inference.tableau.TableauProver._assume_false">_assume<wbr></wbr>_false</a></code>
+            </div>
+        
+
+    </li>
+</ul> 
+
+        
+         
+        
+      </div>
+  </div><div>
+
+      <div class="thingTitle">
+        <span>Module</span>
+        <code><a href="nltk.inference.tableau.html" class="internal-link" title="The parent of this class">tableau</a></code> 
+      </div>
+      
+      <div>
+        
+
+        
+         
+
+        <div class="childrenKindTitle">Classes</div>
+        <ul>
+    
+    <li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="nltk.inference.tableau.Agenda.html" class="internal-link" title="nltk.inference.tableau.Agenda"><wbr></wbr>Agenda</a></code>
+            </div>
+        
+
+    </li><li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="nltk.inference.tableau.Categories.html" class="internal-link" title="nltk.inference.tableau.Categories"><wbr></wbr>Categories</a></code>
+            </div>
+        
+
+    </li><li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="nltk.inference.tableau.Debug.html" class="internal-link" title="nltk.inference.tableau.Debug"><wbr></wbr>Debug</a></code>
+            </div>
+        
+
+    </li><li class=" thisobject">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="nltk.inference.tableau.TableauProver.html" class="internal-link" title="nltk.inference.tableau.TableauProver"><wbr></wbr>Tableau<wbr></wbr>Prover</a></code>
+            </div>
+        
+
+    </li><li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="nltk.inference.tableau.TableauProverCommand.html" class="internal-link" title="nltk.inference.tableau.TableauProverCommand"><wbr></wbr>Tableau<wbr></wbr>Prover<wbr></wbr>Command</a></code>
+            </div>
+        
+
+    </li><li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="nltk.inference.tableau.ProverParseError.html" class="internal-link" title="nltk.inference.tableau.ProverParseError"><wbr></wbr>Prover<wbr></wbr>Parse<wbr></wbr>Error</a></code>
+            </div>
+        
+
+    </li>
+</ul>
+
+        <div class="childrenKindTitle">Functions</div>
+        <ul>
+    
+    <li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="nltk.inference.tableau.html#demo" class="internal-link" title="nltk.inference.tableau.demo">demo</a></code>
+            </div>
+        
+
+    </li><li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="nltk.inference.tableau.html#tableau_test" class="internal-link" title="nltk.inference.tableau.tableau_test">tableau<wbr></wbr>_test</a></code>
+            </div>
+        
+
+    </li><li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="nltk.inference.tableau.html#testHigherOrderTableauProver" class="internal-link" title="nltk.inference.tableau.testHigherOrderTableauProver">test<wbr></wbr>Higher<wbr></wbr>Order<wbr></wbr>Tableau<wbr></wbr>Prover</a></code>
+            </div>
+        
+
+    </li><li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="nltk.inference.tableau.html#testTableauProver" class="internal-link" title="nltk.inference.tableau.testTableauProver">test<wbr></wbr>Tableau<wbr></wbr>Prover</a></code>
+            </div>
+        
+
+    </li>
+</ul> 
+
+        
+         
+
+        <div class="childrenKindTitle">Variables</div>
+        <ul>
+    
+    <li class="private">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="nltk.inference.tableau.html#_counter" class="internal-link" title="nltk.inference.tableau._counter">_counter</a></code>
+            </div>
+        
+
+    </li>
+</ul> 
+
+        
+         
+        
+      </div>
   </div>
 
-  <script src="ajax.js" type="text/javascript"></script>
-  <script src="search.js" type="text/javascript"></script>
-
 </nav>
-
-    
-
-    <div class="container">
-
-      <div class="page-header">
-        <h1 class="class"><code><code><a href="index.html" class="internal-link">nltk</a></code><wbr></wbr>.<code><a href="nltk.inference.html" class="internal-link" title="nltk.inference">inference</a></code><wbr></wbr>.<code><a href="nltk.inference.tableau.html" class="internal-link" title="nltk.inference.tableau">tableau</a></code><wbr></wbr>.<code><a href="nltk.inference.tableau.TableauProver.html" class="internal-link" title="nltk.inference.tableau.TableauProver">TableauProver</a></code></code></h1>
-        <div id="showPrivate">
-          <button class="btn btn-link" onclick="togglePrivate()">Toggle Private API</button>
         </div>
+        <div id="collapseSideBar">
+          <a class="btn btn-link" onclick="toggleSideBarCollapse()" title="Toggle Sidebar Collapse">
+          </a>
+        </div> 
+        <script src="sidebartoggle.js" type="text/javascript"></script>
+       
       </div>
 
-      <div class="categoryHeader">
-        class documentation
-      </div>
+      <div id="main" class="">
+        
 
-      <div class="extrasDocstring">
-        <p><code><span class="py-keyword">class</span> <span class="py-defname">TableauProver</span>(<a href="nltk.inference.api.Prover.html" class="internal-link" title="nltk.inference.api.Prover">Prover</a>): <a href="https://github.com/nltk/nltk/tree/3.6.2/nltk/inference/tableau.py#L43" class="sourceLink">(source)</a></code></p>
-        <p><a href="classIndex.html#nltk.inference.tableau.TableauProver">View In Hierarchy</a></p>
-      </div>
+        
 
-      <div class="moduleDocstring">
-        <div><p class="undocumented">Undocumented</p></div>
-      </div>
+        <div class="page-header">
+          <h1 class="class"><code><code><a href="index.html" class="internal-link">nltk</a></code><wbr></wbr>.<code><a href="nltk.inference.html" class="internal-link" title="nltk.inference">inference</a></code><wbr></wbr>.<code><a href="nltk.inference.tableau.html" class="internal-link" title="nltk.inference.tableau">tableau</a></code><wbr></wbr>.<code><a href="nltk.inference.tableau.TableauProver.html" class="internal-link" title="nltk.inference.tableau.TableauProver">TableauProver</a></code></code></h1>
+          <div id="showPrivate">
+            <button class="btn btn-link" onclick="togglePrivate()">Toggle Private API</button>
+          </div>
+        </div>
 
-      <div id="splitTables">
-        <table class="children sortable" id="id758">
+        <div class="categoryHeader">
+          class documentation
+        </div>
+
+        <div class="extrasDocstring">
+          <p class="class-signature"><code><span class="py-keyword">class</span> <span class="py-defname">TableauProver</span>(<a href="nltk.inference.api.Prover.html" class="internal-link" title="nltk.inference.api.Prover">Prover</a>): <a href="https://github.com/nltk/nltk/tree/3.6.2/nltk/inference/tableau.py#L43" class="sourceLink">(source)</a></code></p>
+          <p><a href="classIndex.html#nltk.inference.tableau.TableauProver">View In Hierarchy</a></p>
+        </div>
+
+        <div class="moduleDocstring">
+          <div><p class="undocumented">Undocumented</p></div>
+        </div>
+
+        <div id="splitTables">
+          <table class="children sortable" id="id737">
   
   
   <tr class="staticmethod">
     
     <td>Static Method</td>
-    <td><code><a href="#is_atom" class="internal-link" title="nltk.inference.tableau.TableauProver.is_atom">is​_atom</a></code></td>
+    <td><code><a href="#is_atom" class="internal-link" title="nltk.inference.tableau.TableauProver.is_atom">is<wbr></wbr>_atom</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method private">
     
     <td>Method</td>
-    <td><code><a href="#_attempt_proof" class="internal-link" title="nltk.inference.tableau.TableauProver._attempt_proof">_attempt​_proof</a></code></td>
+    <td><code><a href="#_attempt_proof" class="internal-link" title="nltk.inference.tableau.TableauProver._attempt_proof">_attempt<wbr></wbr>_proof</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method private">
     
     <td>Method</td>
-    <td><code><a href="#_attempt_proof_all" class="internal-link" title="nltk.inference.tableau.TableauProver._attempt_proof_all">_attempt​_proof​_all</a></code></td>
+    <td><code><a href="#_attempt_proof_all" class="internal-link" title="nltk.inference.tableau.TableauProver._attempt_proof_all">_attempt<wbr></wbr>_proof<wbr></wbr>_all</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method private">
     
     <td>Method</td>
-    <td><code><a href="#_attempt_proof_and" class="internal-link" title="nltk.inference.tableau.TableauProver._attempt_proof_and">_attempt​_proof​_and</a></code></td>
+    <td><code><a href="#_attempt_proof_and" class="internal-link" title="nltk.inference.tableau.TableauProver._attempt_proof_and">_attempt<wbr></wbr>_proof<wbr></wbr>_and</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method private">
     
     <td>Method</td>
-    <td><code><a href="#_attempt_proof_app" class="internal-link" title="nltk.inference.tableau.TableauProver._attempt_proof_app">_attempt​_proof​_app</a></code></td>
+    <td><code><a href="#_attempt_proof_app" class="internal-link" title="nltk.inference.tableau.TableauProver._attempt_proof_app">_attempt<wbr></wbr>_proof<wbr></wbr>_app</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method private">
     
     <td>Method</td>
-    <td><code><a href="#_attempt_proof_atom" class="internal-link" title="nltk.inference.tableau.TableauProver._attempt_proof_atom">_attempt​_proof​_atom</a></code></td>
+    <td><code><a href="#_attempt_proof_atom" class="internal-link" title="nltk.inference.tableau.TableauProver._attempt_proof_atom">_attempt<wbr></wbr>_proof<wbr></wbr>_atom</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method private">
     
     <td>Method</td>
-    <td><code><a href="#_attempt_proof_d_neg" class="internal-link" title="nltk.inference.tableau.TableauProver._attempt_proof_d_neg">_attempt​_proof​_d​_neg</a></code></td>
+    <td><code><a href="#_attempt_proof_d_neg" class="internal-link" title="nltk.inference.tableau.TableauProver._attempt_proof_d_neg">_attempt<wbr></wbr>_proof<wbr></wbr>_d<wbr></wbr>_neg</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method private">
     
     <td>Method</td>
-    <td><code><a href="#_attempt_proof_eq" class="internal-link" title="nltk.inference.tableau.TableauProver._attempt_proof_eq">_attempt​_proof​_eq</a></code></td>
+    <td><code><a href="#_attempt_proof_eq" class="internal-link" title="nltk.inference.tableau.TableauProver._attempt_proof_eq">_attempt<wbr></wbr>_proof<wbr></wbr>_eq</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method private">
     
     <td>Method</td>
-    <td><code><a href="#_attempt_proof_iff" class="internal-link" title="nltk.inference.tableau.TableauProver._attempt_proof_iff">_attempt​_proof​_iff</a></code></td>
+    <td><code><a href="#_attempt_proof_iff" class="internal-link" title="nltk.inference.tableau.TableauProver._attempt_proof_iff">_attempt<wbr></wbr>_proof<wbr></wbr>_iff</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method private">
     
     <td>Method</td>
-    <td><code><a href="#_attempt_proof_imp" class="internal-link" title="nltk.inference.tableau.TableauProver._attempt_proof_imp">_attempt​_proof​_imp</a></code></td>
+    <td><code><a href="#_attempt_proof_imp" class="internal-link" title="nltk.inference.tableau.TableauProver._attempt_proof_imp">_attempt<wbr></wbr>_proof<wbr></wbr>_imp</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method private">
     
     <td>Method</td>
-    <td><code><a href="#_attempt_proof_n_all" class="internal-link" title="nltk.inference.tableau.TableauProver._attempt_proof_n_all">_attempt​_proof​_n​_all</a></code></td>
+    <td><code><a href="#_attempt_proof_n_all" class="internal-link" title="nltk.inference.tableau.TableauProver._attempt_proof_n_all">_attempt<wbr></wbr>_proof<wbr></wbr>_n<wbr></wbr>_all</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method private">
     
     <td>Method</td>
-    <td><code><a href="#_attempt_proof_n_and" class="internal-link" title="nltk.inference.tableau.TableauProver._attempt_proof_n_and">_attempt​_proof​_n​_and</a></code></td>
+    <td><code><a href="#_attempt_proof_n_and" class="internal-link" title="nltk.inference.tableau.TableauProver._attempt_proof_n_and">_attempt<wbr></wbr>_proof<wbr></wbr>_n<wbr></wbr>_and</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method private">
     
     <td>Method</td>
-    <td><code><a href="#_attempt_proof_n_app" class="internal-link" title="nltk.inference.tableau.TableauProver._attempt_proof_n_app">_attempt​_proof​_n​_app</a></code></td>
+    <td><code><a href="#_attempt_proof_n_app" class="internal-link" title="nltk.inference.tableau.TableauProver._attempt_proof_n_app">_attempt<wbr></wbr>_proof<wbr></wbr>_n<wbr></wbr>_app</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method private">
     
     <td>Method</td>
-    <td><code><a href="#_attempt_proof_n_atom" class="internal-link" title="nltk.inference.tableau.TableauProver._attempt_proof_n_atom">_attempt​_proof​_n​_atom</a></code></td>
+    <td><code><a href="#_attempt_proof_n_atom" class="internal-link" title="nltk.inference.tableau.TableauProver._attempt_proof_n_atom">_attempt<wbr></wbr>_proof<wbr></wbr>_n<wbr></wbr>_atom</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method private">
     
     <td>Method</td>
-    <td><code><a href="#_attempt_proof_n_eq" class="internal-link" title="nltk.inference.tableau.TableauProver._attempt_proof_n_eq">_attempt​_proof​_n​_eq</a></code></td>
+    <td><code><a href="#_attempt_proof_n_eq" class="internal-link" title="nltk.inference.tableau.TableauProver._attempt_proof_n_eq">_attempt<wbr></wbr>_proof<wbr></wbr>_n<wbr></wbr>_eq</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method private">
     
     <td>Method</td>
-    <td><code><a href="#_attempt_proof_n_iff" class="internal-link" title="nltk.inference.tableau.TableauProver._attempt_proof_n_iff">_attempt​_proof​_n​_iff</a></code></td>
+    <td><code><a href="#_attempt_proof_n_iff" class="internal-link" title="nltk.inference.tableau.TableauProver._attempt_proof_n_iff">_attempt<wbr></wbr>_proof<wbr></wbr>_n<wbr></wbr>_iff</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method private">
     
     <td>Method</td>
-    <td><code><a href="#_attempt_proof_n_imp" class="internal-link" title="nltk.inference.tableau.TableauProver._attempt_proof_n_imp">_attempt​_proof​_n​_imp</a></code></td>
+    <td><code><a href="#_attempt_proof_n_imp" class="internal-link" title="nltk.inference.tableau.TableauProver._attempt_proof_n_imp">_attempt<wbr></wbr>_proof<wbr></wbr>_n<wbr></wbr>_imp</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method private">
     
     <td>Method</td>
-    <td><code><a href="#_attempt_proof_n_or" class="internal-link" title="nltk.inference.tableau.TableauProver._attempt_proof_n_or">_attempt​_proof​_n​_or</a></code></td>
+    <td><code><a href="#_attempt_proof_n_or" class="internal-link" title="nltk.inference.tableau.TableauProver._attempt_proof_n_or">_attempt<wbr></wbr>_proof<wbr></wbr>_n<wbr></wbr>_or</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method private">
     
     <td>Method</td>
-    <td><code><a href="#_attempt_proof_n_prop" class="internal-link" title="nltk.inference.tableau.TableauProver._attempt_proof_n_prop">_attempt​_proof​_n​_prop</a></code></td>
+    <td><code><a href="#_attempt_proof_n_prop" class="internal-link" title="nltk.inference.tableau.TableauProver._attempt_proof_n_prop">_attempt<wbr></wbr>_proof<wbr></wbr>_n<wbr></wbr>_prop</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method private">
     
     <td>Method</td>
-    <td><code><a href="#_attempt_proof_n_some" class="internal-link" title="nltk.inference.tableau.TableauProver._attempt_proof_n_some">_attempt​_proof​_n​_some</a></code></td>
+    <td><code><a href="#_attempt_proof_n_some" class="internal-link" title="nltk.inference.tableau.TableauProver._attempt_proof_n_some">_attempt<wbr></wbr>_proof<wbr></wbr>_n<wbr></wbr>_some</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method private">
     
     <td>Method</td>
-    <td><code><a href="#_attempt_proof_or" class="internal-link" title="nltk.inference.tableau.TableauProver._attempt_proof_or">_attempt​_proof​_or</a></code></td>
+    <td><code><a href="#_attempt_proof_or" class="internal-link" title="nltk.inference.tableau.TableauProver._attempt_proof_or">_attempt<wbr></wbr>_proof<wbr></wbr>_or</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method private">
     
     <td>Method</td>
-    <td><code><a href="#_attempt_proof_prop" class="internal-link" title="nltk.inference.tableau.TableauProver._attempt_proof_prop">_attempt​_proof​_prop</a></code></td>
+    <td><code><a href="#_attempt_proof_prop" class="internal-link" title="nltk.inference.tableau.TableauProver._attempt_proof_prop">_attempt<wbr></wbr>_proof<wbr></wbr>_prop</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method private">
     
     <td>Method</td>
-    <td><code><a href="#_attempt_proof_some" class="internal-link" title="nltk.inference.tableau.TableauProver._attempt_proof_some">_attempt​_proof​_some</a></code></td>
+    <td><code><a href="#_attempt_proof_some" class="internal-link" title="nltk.inference.tableau.TableauProver._attempt_proof_some">_attempt<wbr></wbr>_proof<wbr></wbr>_some</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method private">
     
     <td>Method</td>
     <td><code><a href="#_prove" class="internal-link" title="nltk.inference.tableau.TableauProver._prove">_prove</a></code></td>
-    <td></td>
+    <td><span class="undocumented">No summary</span></td>
   </tr><tr class="classvariable private">
     
     <td>Class Variable</td>
-    <td><code><a href="#_assume_false" class="internal-link" title="nltk.inference.tableau.TableauProver._assume_false">_assume​_false</a></code></td>
+    <td><code><a href="#_assume_false" class="internal-link" title="nltk.inference.tableau.TableauProver._assume_false">_assume<wbr></wbr>_false</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr>
 </table>
-        
-          <p class="inheritedFrom">
-            Inherited from <code><a href="nltk.inference.api.Prover.html" class="internal-link" title="nltk.inference.api.Prover">Prover</a></code>:
-          </p>
-          <table class="children sortable" id="id759">
+          
+            <p class="inheritedFrom">
+              Inherited from <code><a href="nltk.inference.api.Prover.html" class="internal-link" title="nltk.inference.api.Prover">Prover</a></code>:
+            </p>
+            <table class="children sortable" id="id738">
   
   
   <tr class="basemethod">
     
     <td>Method</td>
     <td><code><a href="nltk.inference.api.Prover.html#prove" class="internal-link" title="nltk.inference.api.Prover.prove">prove</a></code></td>
-    <td></td>
+    <td><span class="undocumented">No summary</span></td>
   </tr>
 </table>
-          
+            
 
-          
-      </div>
+            
+        </div>
 
-      <div id="childList">
-
-        <div class="basestaticmethod">
+        <div id="childList">
+          <div class="basestaticmethod">
   
   
   <a name="nltk.inference.tableau.TableauProver.is_atom">
@@ -309,15 +750,20 @@
     
   </a>
   <div class="functionHeader">
+    
     @staticmethod<br />
-    <span class="py-keyword">def</span> <span class="py-defname">is_atom</span>(e):
+    <span class="py-keyword">def</span> <span class="py-defname">is_atom</span><span class="function-signature">(e)</span>:
     <a class="sourceLink" href="https://github.com/nltk/nltk/tree/3.6.2/nltk/inference/tableau.py#L396">
       
       (source)
     </a>
+    <a class="headerLink" href="#is_atom" title="nltk.inference.tableau.TableauProver.is_atom">
+      
+      
+      ¶
+    </a>
   </div>
   <div class="docstring functionBody">
-    
     
     <div><p class="undocumented">Undocumented</p></div>
   </div>
@@ -332,14 +778,19 @@
   </a>
   <div class="functionHeader">
     
-    <span class="py-keyword">def</span> <span class="py-defname">_attempt_proof</span>(self, agenda, accessible_vars, atoms, debug):
+    
+    <span class="py-keyword">def</span> <span class="py-defname">_attempt_proof</span><span class="function-signature">(self, agenda, accessible_vars, atoms, debug)</span>:
     <a class="sourceLink" href="https://github.com/nltk/nltk/tree/3.6.2/nltk/inference/tableau.py#L70">
       
       (source)
     </a>
+    <a class="headerLink" href="#_attempt_proof" title="nltk.inference.tableau.TableauProver._attempt_proof">
+      
+      
+      ¶
+    </a>
   </div>
   <div class="docstring functionBody">
-    
     
     <div><p class="undocumented">Undocumented</p></div>
   </div>
@@ -354,14 +805,19 @@
   </a>
   <div class="functionHeader">
     
-    <span class="py-keyword">def</span> <span class="py-defname">_attempt_proof_all</span>(self, current, context, agenda, accessible_vars, atoms, debug):
+    
+    <span class="py-keyword">def</span> <span class="py-defname">_attempt_proof_all</span><span class="function-signature">(self, current, context, agenda, accessible_vars, atoms, debug)</span>:
     <a class="sourceLink" href="https://github.com/nltk/nltk/tree/3.6.2/nltk/inference/tableau.py#L353">
       
       (source)
     </a>
+    <a class="headerLink" href="#_attempt_proof_all" title="nltk.inference.tableau.TableauProver._attempt_proof_all">
+      
+      
+      ¶
+    </a>
   </div>
   <div class="docstring functionBody">
-    
     
     <div><p class="undocumented">Undocumented</p></div>
   </div>
@@ -376,14 +832,19 @@
   </a>
   <div class="functionHeader">
     
-    <span class="py-keyword">def</span> <span class="py-defname">_attempt_proof_and</span>(self, current, context, agenda, accessible_vars, atoms, debug):
+    
+    <span class="py-keyword">def</span> <span class="py-defname">_attempt_proof_and</span><span class="function-signature">(self, current, context, agenda, accessible_vars, atoms, debug)</span>:
     <a class="sourceLink" href="https://github.com/nltk/nltk/tree/3.6.2/nltk/inference/tableau.py#L255">
       
       (source)
     </a>
+    <a class="headerLink" href="#_attempt_proof_and" title="nltk.inference.tableau.TableauProver._attempt_proof_and">
+      
+      
+      ¶
+    </a>
   </div>
   <div class="docstring functionBody">
-    
     
     <div><p class="undocumented">Undocumented</p></div>
   </div>
@@ -398,14 +859,19 @@
   </a>
   <div class="functionHeader">
     
-    <span class="py-keyword">def</span> <span class="py-defname">_attempt_proof_app</span>(self, current, context, agenda, accessible_vars, atoms, debug):
+    
+    <span class="py-keyword">def</span> <span class="py-defname">_attempt_proof_app</span><span class="function-signature">(self, current, context, agenda, accessible_vars, atoms, debug)</span>:
     <a class="sourceLink" href="https://github.com/nltk/nltk/tree/3.6.2/nltk/inference/tableau.py#L179">
       
       (source)
     </a>
+    <a class="headerLink" href="#_attempt_proof_app" title="nltk.inference.tableau.TableauProver._attempt_proof_app">
+      
+      
+      ¶
+    </a>
   </div>
   <div class="docstring functionBody">
-    
     
     <div><p class="undocumented">Undocumented</p></div>
   </div>
@@ -420,14 +886,19 @@
   </a>
   <div class="functionHeader">
     
-    <span class="py-keyword">def</span> <span class="py-defname">_attempt_proof_atom</span>(self, current, context, agenda, accessible_vars, atoms, debug):
+    
+    <span class="py-keyword">def</span> <span class="py-defname">_attempt_proof_atom</span><span class="function-signature">(self, current, context, agenda, accessible_vars, atoms, debug)</span>:
     <a class="sourceLink" href="https://github.com/nltk/nltk/tree/3.6.2/nltk/inference/tableau.py#L105">
       
       (source)
     </a>
+    <a class="headerLink" href="#_attempt_proof_atom" title="nltk.inference.tableau.TableauProver._attempt_proof_atom">
+      
+      
+      ¶
+    </a>
   </div>
   <div class="docstring functionBody">
-    
     
     <div><p class="undocumented">Undocumented</p></div>
   </div>
@@ -442,14 +913,19 @@
   </a>
   <div class="functionHeader">
     
-    <span class="py-keyword">def</span> <span class="py-defname">_attempt_proof_d_neg</span>(self, current, context, agenda, accessible_vars, atoms, debug):
+    
+    <span class="py-keyword">def</span> <span class="py-defname">_attempt_proof_d_neg</span><span class="function-signature">(self, current, context, agenda, accessible_vars, atoms, debug)</span>:
     <a class="sourceLink" href="https://github.com/nltk/nltk/tree/3.6.2/nltk/inference/tableau.py#L233">
       
       (source)
     </a>
+    <a class="headerLink" href="#_attempt_proof_d_neg" title="nltk.inference.tableau.TableauProver._attempt_proof_d_neg">
+      
+      
+      ¶
+    </a>
   </div>
   <div class="docstring functionBody">
-    
     
     <div><p class="undocumented">Undocumented</p></div>
   </div>
@@ -464,14 +940,19 @@
   </a>
   <div class="functionHeader">
     
-    <span class="py-keyword">def</span> <span class="py-defname">_attempt_proof_eq</span>(self, current, context, agenda, accessible_vars, atoms, debug):
+    
+    <span class="py-keyword">def</span> <span class="py-defname">_attempt_proof_eq</span><span class="function-signature">(self, current, context, agenda, accessible_vars, atoms, debug)</span>:
     <a class="sourceLink" href="https://github.com/nltk/nltk/tree/3.6.2/nltk/inference/tableau.py#L330">
       
       (source)
     </a>
+    <a class="headerLink" href="#_attempt_proof_eq" title="nltk.inference.tableau.TableauProver._attempt_proof_eq">
+      
+      
+      ¶
+    </a>
   </div>
   <div class="docstring functionBody">
-    
     
     <div><p class="undocumented">Undocumented</p></div>
   </div>
@@ -486,14 +967,19 @@
   </a>
   <div class="functionHeader">
     
-    <span class="py-keyword">def</span> <span class="py-defname">_attempt_proof_iff</span>(self, current, context, agenda, accessible_vars, atoms, debug):
+    
+    <span class="py-keyword">def</span> <span class="py-defname">_attempt_proof_iff</span><span class="function-signature">(self, current, context, agenda, accessible_vars, atoms, debug)</span>:
     <a class="sourceLink" href="https://github.com/nltk/nltk/tree/3.6.2/nltk/inference/tableau.py#L306">
       
       (source)
     </a>
+    <a class="headerLink" href="#_attempt_proof_iff" title="nltk.inference.tableau.TableauProver._attempt_proof_iff">
+      
+      
+      ¶
+    </a>
   </div>
   <div class="docstring functionBody">
-    
     
     <div><p class="undocumented">Undocumented</p></div>
   </div>
@@ -508,14 +994,19 @@
   </a>
   <div class="functionHeader">
     
-    <span class="py-keyword">def</span> <span class="py-defname">_attempt_proof_imp</span>(self, current, context, agenda, accessible_vars, atoms, debug):
+    
+    <span class="py-keyword">def</span> <span class="py-defname">_attempt_proof_imp</span><span class="function-signature">(self, current, context, agenda, accessible_vars, atoms, debug)</span>:
     <a class="sourceLink" href="https://github.com/nltk/nltk/tree/3.6.2/nltk/inference/tableau.py#L286">
       
       (source)
     </a>
+    <a class="headerLink" href="#_attempt_proof_imp" title="nltk.inference.tableau.TableauProver._attempt_proof_imp">
+      
+      
+      ¶
+    </a>
   </div>
   <div class="docstring functionBody">
-    
     
     <div><p class="undocumented">Undocumented</p></div>
   </div>
@@ -530,14 +1021,19 @@
   </a>
   <div class="functionHeader">
     
-    <span class="py-keyword">def</span> <span class="py-defname">_attempt_proof_n_all</span>(self, current, context, agenda, accessible_vars, atoms, debug):
+    
+    <span class="py-keyword">def</span> <span class="py-defname">_attempt_proof_n_all</span><span class="function-signature">(self, current, context, agenda, accessible_vars, atoms, debug)</span>:
     <a class="sourceLink" href="https://github.com/nltk/nltk/tree/3.6.2/nltk/inference/tableau.py#L239">
       
       (source)
     </a>
+    <a class="headerLink" href="#_attempt_proof_n_all" title="nltk.inference.tableau.TableauProver._attempt_proof_n_all">
+      
+      
+      ¶
+    </a>
   </div>
   <div class="docstring functionBody">
-    
     
     <div><p class="undocumented">Undocumented</p></div>
   </div>
@@ -552,14 +1048,19 @@
   </a>
   <div class="functionHeader">
     
-    <span class="py-keyword">def</span> <span class="py-defname">_attempt_proof_n_and</span>(self, current, context, agenda, accessible_vars, atoms, debug):
+    
+    <span class="py-keyword">def</span> <span class="py-defname">_attempt_proof_n_and</span><span class="function-signature">(self, current, context, agenda, accessible_vars, atoms, debug)</span>:
     <a class="sourceLink" href="https://github.com/nltk/nltk/tree/3.6.2/nltk/inference/tableau.py#L296">
       
       (source)
     </a>
+    <a class="headerLink" href="#_attempt_proof_n_and" title="nltk.inference.tableau.TableauProver._attempt_proof_n_and">
+      
+      
+      ¶
+    </a>
   </div>
   <div class="docstring functionBody">
-    
     
     <div><p class="undocumented">Undocumented</p></div>
   </div>
@@ -574,14 +1075,19 @@
   </a>
   <div class="functionHeader">
     
-    <span class="py-keyword">def</span> <span class="py-defname">_attempt_proof_n_app</span>(self, current, context, agenda, accessible_vars, atoms, debug):
+    
+    <span class="py-keyword">def</span> <span class="py-defname">_attempt_proof_n_app</span><span class="function-signature">(self, current, context, agenda, accessible_vars, atoms, debug)</span>:
     <a class="sourceLink" href="https://github.com/nltk/nltk/tree/3.6.2/nltk/inference/tableau.py#L196">
       
       (source)
     </a>
+    <a class="headerLink" href="#_attempt_proof_n_app" title="nltk.inference.tableau.TableauProver._attempt_proof_n_app">
+      
+      
+      ¶
+    </a>
   </div>
   <div class="docstring functionBody">
-    
     
     <div><p class="undocumented">Undocumented</p></div>
   </div>
@@ -596,14 +1102,19 @@
   </a>
   <div class="functionHeader">
     
-    <span class="py-keyword">def</span> <span class="py-defname">_attempt_proof_n_atom</span>(self, current, context, agenda, accessible_vars, atoms, debug):
+    
+    <span class="py-keyword">def</span> <span class="py-defname">_attempt_proof_n_atom</span><span class="function-signature">(self, current, context, agenda, accessible_vars, atoms, debug)</span>:
     <a class="sourceLink" href="https://github.com/nltk/nltk/tree/3.6.2/nltk/inference/tableau.py#L128">
       
       (source)
     </a>
+    <a class="headerLink" href="#_attempt_proof_n_atom" title="nltk.inference.tableau.TableauProver._attempt_proof_n_atom">
+      
+      
+      ¶
+    </a>
   </div>
   <div class="docstring functionBody">
-    
     
     <div><p class="undocumented">Undocumented</p></div>
   </div>
@@ -618,14 +1129,19 @@
   </a>
   <div class="functionHeader">
     
-    <span class="py-keyword">def</span> <span class="py-defname">_attempt_proof_n_eq</span>(self, current, context, agenda, accessible_vars, atoms, debug):
+    
+    <span class="py-keyword">def</span> <span class="py-defname">_attempt_proof_n_eq</span><span class="function-signature">(self, current, context, agenda, accessible_vars, atoms, debug)</span>:
     <a class="sourceLink" href="https://github.com/nltk/nltk/tree/3.6.2/nltk/inference/tableau.py#L214">
       
       (source)
     </a>
+    <a class="headerLink" href="#_attempt_proof_n_eq" title="nltk.inference.tableau.TableauProver._attempt_proof_n_eq">
+      
+      
+      ¶
+    </a>
   </div>
   <div class="docstring functionBody">
-    
     
     <div><p class="undocumented">Undocumented</p></div>
   </div>
@@ -640,14 +1156,19 @@
   </a>
   <div class="functionHeader">
     
-    <span class="py-keyword">def</span> <span class="py-defname">_attempt_proof_n_iff</span>(self, current, context, agenda, accessible_vars, atoms, debug):
+    
+    <span class="py-keyword">def</span> <span class="py-defname">_attempt_proof_n_iff</span><span class="function-signature">(self, current, context, agenda, accessible_vars, atoms, debug)</span>:
     <a class="sourceLink" href="https://github.com/nltk/nltk/tree/3.6.2/nltk/inference/tableau.py#L318">
       
       (source)
     </a>
+    <a class="headerLink" href="#_attempt_proof_n_iff" title="nltk.inference.tableau.TableauProver._attempt_proof_n_iff">
+      
+      
+      ¶
+    </a>
   </div>
   <div class="docstring functionBody">
-    
     
     <div><p class="undocumented">Undocumented</p></div>
   </div>
@@ -662,14 +1183,19 @@
   </a>
   <div class="functionHeader">
     
-    <span class="py-keyword">def</span> <span class="py-defname">_attempt_proof_n_imp</span>(self, current, context, agenda, accessible_vars, atoms, debug):
+    
+    <span class="py-keyword">def</span> <span class="py-defname">_attempt_proof_n_imp</span><span class="function-signature">(self, current, context, agenda, accessible_vars, atoms, debug)</span>:
     <a class="sourceLink" href="https://github.com/nltk/nltk/tree/3.6.2/nltk/inference/tableau.py#L269">
       
       (source)
     </a>
+    <a class="headerLink" href="#_attempt_proof_n_imp" title="nltk.inference.tableau.TableauProver._attempt_proof_n_imp">
+      
+      
+      ¶
+    </a>
   </div>
   <div class="docstring functionBody">
-    
     
     <div><p class="undocumented">Undocumented</p></div>
   </div>
@@ -684,14 +1210,19 @@
   </a>
   <div class="functionHeader">
     
-    <span class="py-keyword">def</span> <span class="py-defname">_attempt_proof_n_or</span>(self, current, context, agenda, accessible_vars, atoms, debug):
+    
+    <span class="py-keyword">def</span> <span class="py-defname">_attempt_proof_n_or</span><span class="function-signature">(self, current, context, agenda, accessible_vars, atoms, debug)</span>:
     <a class="sourceLink" href="https://github.com/nltk/nltk/tree/3.6.2/nltk/inference/tableau.py#L262">
       
       (source)
     </a>
+    <a class="headerLink" href="#_attempt_proof_n_or" title="nltk.inference.tableau.TableauProver._attempt_proof_n_or">
+      
+      
+      ¶
+    </a>
   </div>
   <div class="docstring functionBody">
-    
     
     <div><p class="undocumented">Undocumented</p></div>
   </div>
@@ -706,14 +1237,19 @@
   </a>
   <div class="functionHeader">
     
-    <span class="py-keyword">def</span> <span class="py-defname">_attempt_proof_n_prop</span>(self, current, context, agenda, accessible_vars, atoms, debug):
+    
+    <span class="py-keyword">def</span> <span class="py-defname">_attempt_proof_n_prop</span><span class="function-signature">(self, current, context, agenda, accessible_vars, atoms, debug)</span>:
     <a class="sourceLink" href="https://github.com/nltk/nltk/tree/3.6.2/nltk/inference/tableau.py#L165">
       
       (source)
     </a>
+    <a class="headerLink" href="#_attempt_proof_n_prop" title="nltk.inference.tableau.TableauProver._attempt_proof_n_prop">
+      
+      
+      ¶
+    </a>
   </div>
   <div class="docstring functionBody">
-    
     
     <div><p class="undocumented">Undocumented</p></div>
   </div>
@@ -728,14 +1264,19 @@
   </a>
   <div class="functionHeader">
     
-    <span class="py-keyword">def</span> <span class="py-defname">_attempt_proof_n_some</span>(self, current, context, agenda, accessible_vars, atoms, debug):
+    
+    <span class="py-keyword">def</span> <span class="py-defname">_attempt_proof_n_some</span><span class="function-signature">(self, current, context, agenda, accessible_vars, atoms, debug)</span>:
     <a class="sourceLink" href="https://github.com/nltk/nltk/tree/3.6.2/nltk/inference/tableau.py#L247">
       
       (source)
     </a>
+    <a class="headerLink" href="#_attempt_proof_n_some" title="nltk.inference.tableau.TableauProver._attempt_proof_n_some">
+      
+      
+      ¶
+    </a>
   </div>
   <div class="docstring functionBody">
-    
     
     <div><p class="undocumented">Undocumented</p></div>
   </div>
@@ -750,14 +1291,19 @@
   </a>
   <div class="functionHeader">
     
-    <span class="py-keyword">def</span> <span class="py-defname">_attempt_proof_or</span>(self, current, context, agenda, accessible_vars, atoms, debug):
+    
+    <span class="py-keyword">def</span> <span class="py-defname">_attempt_proof_or</span><span class="function-signature">(self, current, context, agenda, accessible_vars, atoms, debug)</span>:
     <a class="sourceLink" href="https://github.com/nltk/nltk/tree/3.6.2/nltk/inference/tableau.py#L276">
       
       (source)
     </a>
+    <a class="headerLink" href="#_attempt_proof_or" title="nltk.inference.tableau.TableauProver._attempt_proof_or">
+      
+      
+      ¶
+    </a>
   </div>
   <div class="docstring functionBody">
-    
     
     <div><p class="undocumented">Undocumented</p></div>
   </div>
@@ -772,14 +1318,19 @@
   </a>
   <div class="functionHeader">
     
-    <span class="py-keyword">def</span> <span class="py-defname">_attempt_proof_prop</span>(self, current, context, agenda, accessible_vars, atoms, debug):
+    
+    <span class="py-keyword">def</span> <span class="py-defname">_attempt_proof_prop</span><span class="function-signature">(self, current, context, agenda, accessible_vars, atoms, debug)</span>:
     <a class="sourceLink" href="https://github.com/nltk/nltk/tree/3.6.2/nltk/inference/tableau.py#L151">
       
       (source)
     </a>
+    <a class="headerLink" href="#_attempt_proof_prop" title="nltk.inference.tableau.TableauProver._attempt_proof_prop">
+      
+      
+      ¶
+    </a>
   </div>
   <div class="docstring functionBody">
-    
     
     <div><p class="undocumented">Undocumented</p></div>
   </div>
@@ -794,14 +1345,19 @@
   </a>
   <div class="functionHeader">
     
-    <span class="py-keyword">def</span> <span class="py-defname">_attempt_proof_some</span>(self, current, context, agenda, accessible_vars, atoms, debug):
+    
+    <span class="py-keyword">def</span> <span class="py-defname">_attempt_proof_some</span><span class="function-signature">(self, current, context, agenda, accessible_vars, atoms, debug)</span>:
     <a class="sourceLink" href="https://github.com/nltk/nltk/tree/3.6.2/nltk/inference/tableau.py#L343">
       
       (source)
     </a>
+    <a class="headerLink" href="#_attempt_proof_some" title="nltk.inference.tableau.TableauProver._attempt_proof_some">
+      
+      
+      ¶
+    </a>
   </div>
   <div class="docstring functionBody">
-    
     
     <div><p class="undocumented">Undocumented</p></div>
   </div>
@@ -816,15 +1372,20 @@
   </a>
   <div class="functionHeader">
     
-    <span class="py-keyword">def</span> <span class="py-defname">_prove</span>(self, goal=None, assumptions=None, verbose=False):
+    
+    <span class="py-keyword">def</span> <span class="py-defname">_prove</span><span class="function-signature">(self, goal=None, assumptions=None, verbose=False)</span>:
     <a class="sourceLink" href="https://github.com/nltk/nltk/tree/3.6.2/nltk/inference/tableau.py#L46">
       
       (source)
     </a>
+    <a class="headerLink" href="#_prove" title="nltk.inference.tableau.TableauProver._prove">
+      
+      
+      ¶
+    </a>
   </div>
   <div class="docstring functionBody">
     <div class="interfaceinfo">overrides <code><a href="nltk.inference.api.Prover.html#_prove" class="internal-link">nltk.inference.api.Prover._prove</a></code></div>
-    
     <div><table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Returns</td></tr><tr><td class="fieldArgContainer">tuple: (bool, str)</td><td class="fieldArgDesc">Whether the proof was successful or not, along with the proof</td></tr></table></div>
   </div>
 </div><div class="baseclassvariable private">
@@ -843,27 +1404,40 @@
       
       (source)
     </a>
+    <a class="headerLink" href="#_assume_false" title="nltk.inference.tableau.TableauProver._assume_false">
+      
+      
+      ¶
+    </a>
   </div>
   <div class="functionBody">
-    
     
     <div><p class="undocumented">Undocumented</p></div>
     
   </div>
 </div>
-
+        </div>
+      
       </div>
     </div>
 
     <footer class="navbar navbar-default">
+
   
-  <div class="container">
+  <div class="container-fluid">
     <a href="index.html">API Documentation</a> for <a href="http://www.nltk.org/" class="projecthome">nltk-3.6.2</a>,
   generated by <a href="https://github.com/twisted/pydoctor/">pydoctor</a>
-    22.2.2.dev0 at 2025-02-28 00:01:09.
+    24.11.2 at 2025-02-28 00:02:28.
   </div>
-</footer>
 
+  <!-- Search related scripts needs to be loaded at the end of HTML 
+    parsing not to introduce overhead and display HTML data asap -->
+  <script src="ajax.js" type="text/javascript"></script>
+  <script src="searchlib.js" type="text/javascript"></script>
+  <script src="search.js" type="text/javascript"></script>
+
+</footer>
+  
     <script src="pydoctor.js" type="text/javascript"></script>
 
   </body>
