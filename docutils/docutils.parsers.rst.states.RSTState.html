@@ -7,23 +7,26 @@
   <head>
     
     <title>docutils.parsers.rst.states.RSTState</title>
-    <meta name="generator" content="pydoctor 22.2.2.dev0"> 
+    <meta name="generator" content="pydoctor 24.11.2"> 
         
     </meta>
     <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=0.75" />
+    <meta name="viewport" content="width=device-width, initial-scale=1 maximum-scale=1" />
     <link rel="stylesheet" type="text/css" href="bootstrap.min.css" />
     <link rel="stylesheet" type="text/css" href="apidocs.css" />
     <link rel="stylesheet" type="text/css" href="extra.css" />
+    
 </head>
 
   <body>
 
     
 
-    <nav class="navbar navbar-default">
+    <nav class="navbar navbar-default mainnavbar">
+      
   
-  <div class="container">
+  <div class="container-fluid">
+
 
     <div class="navbar-header">
       
@@ -50,7 +53,7 @@
             
             <span class="input-group-btn">
               <a style="display: none;" class="btn btn-default" id="search-clear-button" title="Clear" onclick="clearSearch()"><img src="fonts/x-circle.svg" alt="Clear" /></a>
-              <a class="btn btn-default" id="search-help-button" title="Help" onclick="toggleSearchHelpText()"><img src="fonts/info.svg" alt="Help" /></a>
+              <a class="btn btn-default" id="apidocs-help-button" title="Help" href="apidocs-help.html"><img src="fonts/info.svg" alt="Help" /></a>
             </span>
           </div>
         </div>
@@ -58,50 +61,24 @@
       </div>
 
       <div id="search-results-container" style="display: none;">
-        <div>
+        
+        <div id="search-buttons">
           <span class="label label-default" id="search-docstrings-button">
-            <a title="Search in docstrings" onclick="toggleSearchInDocstrings()">search in docstrings</a></span>
+          <label class="checkbox-inline">
+            <input type="checkbox" id="toggle-search-in-docstrings-checkbox" value="false" onclick="toggleSearchInDocstrings()">
+              search in docstrings
+            </input>
+          </label>
+          </span>
+          
         </div>
-
+        
         <noscript>
             <h1>Cannot search: JavaScript is not supported/enabled in your browser.</h1>
         </noscript>
 
-        <div class="hint" id="search-help-box">
-          <p class="rst-last">
-      
-            Search bar offers the following options:
-            <ul>   
-                <li>
-                  <strong>Term presence.</strong> The below example searches for documents that 
-                    must contain “foo”, might contain “bar” and must not contain “baz”: <code>+foo bar -baz</code>
-                </li> 
-
-                <li>
-                  <strong>Wildcards.</strong> The below example searches for documents with words beginning with “foo”: <code>foo*</code>
-                </li> 
-
-                <li>
-                  <strong>Search in specific fields.</strong> The following search matches all objects 
-                  in "twisted.mail" that matches “search”: <code>+qname:twisted.mail.* +search</code>
-
-                  <p>
-                    Possible fields: 'name', 'qname' (fully qualified name), 'docstring', and 'kind'.
-                    Last two fields are only applicable if "search in docstrings" is enabled.
-                  </p>
-                </li>
-
-                <li>
-                  <strong>Fuzzy matches.</strong> The following search matches all documents 
-                  that have a word within 1 edit distance of “foo”: <code>foo~1</code>
-                </li>
-            </ul>
-
-          </p>
-        </div>
-
         <div id="search-status"> </div>
-        
+
         <div class="warning" id="search-warn-box" style="display: none;">
           <p class="rst-last"><span id="search-warn"></span></p>
         </div>
@@ -110,47 +87,945 @@
           <!-- Filled dynamically by JS -->
         </table>
         
-        <div style="margin-top: 8px;">
-          <p>Results provided by <a href="https://lunrjs.com">Lunr.js</a></p>
+        <div style="margin-top: 10px;">
+          <p>For more information on the search, visit the <a href="apidocs-help.html#rst-search">help page</a>.</p>
         </div>
       </div>
 
     </div>
+
+
+  </div>
+</nav>
+    
+    <div class="container-fluid">
+
+      <!-- Side navigation -->
+      <div class="sidebarcontainer" style="display: none;">
+        
+        <div class="sidebar"><nav class="sidebar">
+  
+
+  <div>
+
+      <div class="thingTitle">
+        <span>Class</span>
+        <code class="thisobject"><a href="docutils.parsers.rst.states.RSTState.html" class="internal-link" title="This class"><wbr></wbr>RSTState</a></code> 
+      </div>
+      
+      <div>
+        
+
+        
+         
+
+        
+        
+
+        <div class="childrenKindTitle">Methods</div>
+        <ul>
+    
+    <li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="#__init__" class="internal-link" title="docutils.parsers.rst.states.RSTState.__init__">__init__</a></code>
+            </div>
+        
+
+    </li><li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="#bof" class="internal-link" title="docutils.parsers.rst.states.RSTState.bof">bof</a></code>
+            </div>
+        
+
+    </li><li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="#check_subsection" class="internal-link" title="docutils.parsers.rst.states.RSTState.check_subsection">check<wbr></wbr>_subsection</a></code>
+            </div>
+        
+
+    </li><li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="#goto_line" class="internal-link" title="docutils.parsers.rst.states.RSTState.goto_line">goto<wbr></wbr>_line</a></code>
+            </div>
+        
+
+    </li><li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="#inline_text" class="internal-link" title="docutils.parsers.rst.states.RSTState.inline_text">inline<wbr></wbr>_text</a></code>
+            </div>
+        
+
+    </li><li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="#nested_list_parse" class="internal-link" title="docutils.parsers.rst.states.RSTState.nested_list_parse">nested<wbr></wbr>_list<wbr></wbr>_parse</a></code>
+            </div>
+        
+
+    </li><li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="#nested_parse" class="internal-link" title="docutils.parsers.rst.states.RSTState.nested_parse">nested<wbr></wbr>_parse</a></code>
+            </div>
+        
+
+    </li><li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="#new_subsection" class="internal-link" title="docutils.parsers.rst.states.RSTState.new_subsection">new<wbr></wbr>_subsection</a></code>
+            </div>
+        
+
+    </li><li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="#no_match" class="internal-link" title="docutils.parsers.rst.states.RSTState.no_match">no<wbr></wbr>_match</a></code>
+            </div>
+        
+
+    </li><li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="#paragraph" class="internal-link" title="docutils.parsers.rst.states.RSTState.paragraph">paragraph</a></code>
+            </div>
+        
+
+    </li><li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="#runtime_init" class="internal-link" title="docutils.parsers.rst.states.RSTState.runtime_init">runtime<wbr></wbr>_init</a></code>
+            </div>
+        
+
+    </li><li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="#section" class="internal-link" title="docutils.parsers.rst.states.RSTState.section">section</a></code>
+            </div>
+        
+
+    </li><li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="#title_inconsistent" class="internal-link" title="docutils.parsers.rst.states.RSTState.title_inconsistent">title<wbr></wbr>_inconsistent</a></code>
+            </div>
+        
+
+    </li><li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="#unindent_warning" class="internal-link" title="docutils.parsers.rst.states.RSTState.unindent_warning">unindent<wbr></wbr>_warning</a></code>
+            </div>
+        
+
+    </li>
+</ul> 
+
+        <div class="childrenKindTitle">Inherited Methods</div>
+        <ul>
+    
+    <li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="docutils.statemachine.State.html#add_transition" class="internal-link" title="docutils.statemachine.State.add_transition">add<wbr></wbr>_transition</a></code>
+            </div>
+        
+
+    </li><li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="docutils.statemachine.State.html#add_transitions" class="internal-link" title="docutils.statemachine.State.add_transitions">add<wbr></wbr>_transitions</a></code>
+            </div>
+        
+
+    </li><li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="docutils.statemachine.State.html#eof" class="internal-link" title="docutils.statemachine.State.eof">eof</a></code>
+            </div>
+        
+
+    </li><li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="docutils.statemachine.State.html#make_transition" class="internal-link" title="docutils.statemachine.State.make_transition">make<wbr></wbr>_transition</a></code>
+            </div>
+        
+
+    </li><li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="docutils.statemachine.State.html#make_transitions" class="internal-link" title="docutils.statemachine.State.make_transitions">make<wbr></wbr>_transitions</a></code>
+            </div>
+        
+
+    </li><li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="docutils.statemachine.State.html#nop" class="internal-link" title="docutils.statemachine.State.nop">nop</a></code>
+            </div>
+        
+
+    </li><li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="docutils.statemachine.State.html#remove_transition" class="internal-link" title="docutils.statemachine.State.remove_transition">remove<wbr></wbr>_transition</a></code>
+            </div>
+        
+
+    </li><li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="docutils.statemachine.State.html#unlink" class="internal-link" title="docutils.statemachine.State.unlink">unlink</a></code>
+            </div>
+        
+
+    </li><li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="docutils.statemachine.StateWS.html#add_initial_transitions" class="internal-link" title="docutils.statemachine.StateWS.add_initial_transitions">add<wbr></wbr>_initial<wbr></wbr>_transitions</a></code>
+            </div>
+        
+
+    </li><li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="docutils.statemachine.StateWS.html#blank" class="internal-link" title="docutils.statemachine.StateWS.blank">blank</a></code>
+            </div>
+        
+
+    </li><li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="docutils.statemachine.StateWS.html#first_known_indent" class="internal-link" title="docutils.statemachine.StateWS.first_known_indent">first<wbr></wbr>_known<wbr></wbr>_indent</a></code>
+            </div>
+        
+
+    </li><li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="docutils.statemachine.StateWS.html#indent" class="internal-link" title="docutils.statemachine.StateWS.indent">indent</a></code>
+            </div>
+        
+
+    </li><li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="docutils.statemachine.StateWS.html#known_indent" class="internal-link" title="docutils.statemachine.StateWS.known_indent">known<wbr></wbr>_indent</a></code>
+            </div>
+        
+
+    </li>
+</ul> 
+
+        <div class="childrenKindTitle">Attributes</div>
+        <ul>
+    
+    <li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="#nested_sm_cache" class="internal-link" title="docutils.parsers.rst.states.RSTState.nested_sm_cache">nested<wbr></wbr>_sm<wbr></wbr>_cache</a></code>
+            </div>
+        
+
+    </li><li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="#document" class="internal-link" title="docutils.parsers.rst.states.RSTState.document">document</a></code>
+            </div>
+        
+
+    </li><li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="#inliner" class="internal-link" title="docutils.parsers.rst.states.RSTState.inliner">inliner</a></code>
+            </div>
+        
+
+    </li><li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="#memo" class="internal-link" title="docutils.parsers.rst.states.RSTState.memo">memo</a></code>
+            </div>
+        
+
+    </li><li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="#nested_sm_kwargs" class="internal-link" title="docutils.parsers.rst.states.RSTState.nested_sm_kwargs">nested<wbr></wbr>_sm<wbr></wbr>_kwargs</a></code>
+            </div>
+        
+
+    </li><li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="#parent" class="internal-link" title="docutils.parsers.rst.states.RSTState.parent">parent</a></code>
+            </div>
+        
+
+    </li><li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="#reporter" class="internal-link" title="docutils.parsers.rst.states.RSTState.reporter">reporter</a></code>
+            </div>
+        
+
+    </li>
+</ul> 
+
+        <div class="childrenKindTitle">Inherited Attributes</div>
+        <ul>
+    
+    <li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="docutils.statemachine.State.html#initial_transitions" class="internal-link" title="docutils.statemachine.State.initial_transitions">initial<wbr></wbr>_transitions</a></code>
+            </div>
+        
+
+    </li><li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="docutils.statemachine.StateWS.html#ws_initial_transitions" class="internal-link" title="docutils.statemachine.StateWS.ws_initial_transitions">ws<wbr></wbr>_initial<wbr></wbr>_transitions</a></code>
+            </div>
+        
+
+    </li><li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="docutils.statemachine.StateWS.html#ws_patterns" class="internal-link" title="docutils.statemachine.StateWS.ws_patterns">ws<wbr></wbr>_patterns</a></code>
+            </div>
+        
+
+    </li><li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="docutils.statemachine.State.html#debug" class="internal-link" title="docutils.statemachine.State.debug">debug</a></code>
+            </div>
+        
+
+    </li><li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="docutils.statemachine.State.html#nested_sm" class="internal-link" title="docutils.statemachine.State.nested_sm">nested<wbr></wbr>_sm</a></code>
+            </div>
+        
+
+    </li><li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="docutils.statemachine.State.html#state_machine" class="internal-link" title="docutils.statemachine.State.state_machine">state<wbr></wbr>_machine</a></code>
+            </div>
+        
+
+    </li><li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="docutils.statemachine.State.html#transition_order" class="internal-link" title="docutils.statemachine.State.transition_order">transition<wbr></wbr>_order</a></code>
+            </div>
+        
+
+    </li><li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="docutils.statemachine.State.html#transitions" class="internal-link" title="docutils.statemachine.State.transitions">transitions</a></code>
+            </div>
+        
+
+    </li><li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="docutils.statemachine.StateWS.html#indent_sm" class="internal-link" title="docutils.statemachine.StateWS.indent_sm">indent<wbr></wbr>_sm</a></code>
+            </div>
+        
+
+    </li><li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="docutils.statemachine.StateWS.html#indent_sm_kwargs" class="internal-link" title="docutils.statemachine.StateWS.indent_sm_kwargs">indent<wbr></wbr>_sm<wbr></wbr>_kwargs</a></code>
+            </div>
+        
+
+    </li><li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="docutils.statemachine.StateWS.html#known_indent_sm" class="internal-link" title="docutils.statemachine.StateWS.known_indent_sm">known<wbr></wbr>_indent<wbr></wbr>_sm</a></code>
+            </div>
+        
+
+    </li><li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="docutils.statemachine.StateWS.html#known_indent_sm_kwargs" class="internal-link" title="docutils.statemachine.StateWS.known_indent_sm_kwargs">known<wbr></wbr>_indent<wbr></wbr>_sm<wbr></wbr>_kwargs</a></code>
+            </div>
+        
+
+    </li><li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="docutils.statemachine.StateWS.html#patterns" class="internal-link" title="docutils.statemachine.StateWS.patterns">patterns</a></code>
+            </div>
+        
+
+    </li>
+</ul> 
+        
+      </div>
+  </div><div>
+
+      <div class="thingTitle">
+        <span>Module</span>
+        <code><a href="docutils.parsers.rst.states.html" class="internal-link" title="The parent of this class">states</a></code> 
+      </div>
+      
+      <div>
+        
+
+        
+         
+
+        <div class="childrenKindTitle">Classes</div>
+        <ul>
+    
+    <li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="docutils.parsers.rst.states.Body.html" class="internal-link" title="docutils.parsers.rst.states.Body"><wbr></wbr>Body</a></code>
+            </div>
+        
+
+    </li><li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="docutils.parsers.rst.states.BulletList.html" class="internal-link" title="docutils.parsers.rst.states.BulletList"><wbr></wbr>Bullet<wbr></wbr>List</a></code>
+            </div>
+        
+
+    </li><li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="docutils.parsers.rst.states.Definition.html" class="internal-link" title="docutils.parsers.rst.states.Definition"><wbr></wbr>Definition</a></code>
+            </div>
+        
+
+    </li><li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="docutils.parsers.rst.states.DefinitionList.html" class="internal-link" title="docutils.parsers.rst.states.DefinitionList"><wbr></wbr>Definition<wbr></wbr>List</a></code>
+            </div>
+        
+
+    </li><li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="docutils.parsers.rst.states.EnumeratedList.html" class="internal-link" title="docutils.parsers.rst.states.EnumeratedList"><wbr></wbr>Enumerated<wbr></wbr>List</a></code>
+            </div>
+        
+
+    </li><li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="docutils.parsers.rst.states.Explicit.html" class="internal-link" title="docutils.parsers.rst.states.Explicit"><wbr></wbr>Explicit</a></code>
+            </div>
+        
+
+    </li><li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="docutils.parsers.rst.states.ExtensionOptions.html" class="internal-link" title="docutils.parsers.rst.states.ExtensionOptions"><wbr></wbr>Extension<wbr></wbr>Options</a></code>
+            </div>
+        
+
+    </li><li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="docutils.parsers.rst.states.FieldList.html" class="internal-link" title="docutils.parsers.rst.states.FieldList"><wbr></wbr>Field<wbr></wbr>List</a></code>
+            </div>
+        
+
+    </li><li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="docutils.parsers.rst.states.Inliner.html" class="internal-link" title="docutils.parsers.rst.states.Inliner"><wbr></wbr>Inliner</a></code>
+            </div>
+        
+
+    </li><li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="docutils.parsers.rst.states.Line.html" class="internal-link" title="docutils.parsers.rst.states.Line"><wbr></wbr>Line</a></code>
+            </div>
+        
+
+    </li><li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="docutils.parsers.rst.states.LineBlock.html" class="internal-link" title="docutils.parsers.rst.states.LineBlock"><wbr></wbr>Line<wbr></wbr>Block</a></code>
+            </div>
+        
+
+    </li><li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="docutils.parsers.rst.states.NestedStateMachine.html" class="internal-link" title="docutils.parsers.rst.states.NestedStateMachine"><wbr></wbr>Nested<wbr></wbr>State<wbr></wbr>Machine</a></code>
+            </div>
+        
+
+    </li><li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="docutils.parsers.rst.states.OptionList.html" class="internal-link" title="docutils.parsers.rst.states.OptionList"><wbr></wbr>Option<wbr></wbr>List</a></code>
+            </div>
+        
+
+    </li><li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="docutils.parsers.rst.states.QuotedLiteralBlock.html" class="internal-link" title="docutils.parsers.rst.states.QuotedLiteralBlock"><wbr></wbr>Quoted<wbr></wbr>Literal<wbr></wbr>Block</a></code>
+            </div>
+        
+
+    </li><li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="docutils.parsers.rst.states.RFC2822Body.html" class="internal-link" title="docutils.parsers.rst.states.RFC2822Body"><wbr></wbr>RFC2822<wbr></wbr>Body</a></code>
+            </div>
+        
+
+    </li><li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="docutils.parsers.rst.states.RFC2822List.html" class="internal-link" title="docutils.parsers.rst.states.RFC2822List"><wbr></wbr>RFC2822<wbr></wbr>List</a></code>
+            </div>
+        
+
+    </li><li class=" thisobject">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="docutils.parsers.rst.states.RSTState.html" class="internal-link" title="docutils.parsers.rst.states.RSTState"><wbr></wbr>RSTState</a></code>
+            </div>
+        
+
+    </li><li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="docutils.parsers.rst.states.RSTStateMachine.html" class="internal-link" title="docutils.parsers.rst.states.RSTStateMachine"><wbr></wbr>RSTState<wbr></wbr>Machine</a></code>
+            </div>
+        
+
+    </li><li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="docutils.parsers.rst.states.SpecializedBody.html" class="internal-link" title="docutils.parsers.rst.states.SpecializedBody"><wbr></wbr>Specialized<wbr></wbr>Body</a></code>
+            </div>
+        
+
+    </li><li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="docutils.parsers.rst.states.SpecializedText.html" class="internal-link" title="docutils.parsers.rst.states.SpecializedText"><wbr></wbr>Specialized<wbr></wbr>Text</a></code>
+            </div>
+        
+
+    </li><li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="docutils.parsers.rst.states.Struct.html" class="internal-link" title="docutils.parsers.rst.states.Struct"><wbr></wbr>Struct</a></code>
+            </div>
+        
+
+    </li><li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="docutils.parsers.rst.states.SubstitutionDef.html" class="internal-link" title="docutils.parsers.rst.states.SubstitutionDef"><wbr></wbr>Substitution<wbr></wbr>Def</a></code>
+            </div>
+        
+
+    </li><li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="docutils.parsers.rst.states.Text.html" class="internal-link" title="docutils.parsers.rst.states.Text"><wbr></wbr>Text</a></code>
+            </div>
+        
+
+    </li><li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="docutils.parsers.rst.states.InterpretedRoleNotImplementedError.html" class="internal-link" title="docutils.parsers.rst.states.InterpretedRoleNotImplementedError"><wbr></wbr>Interpreted<wbr></wbr>Role<wbr></wbr>Not<wbr></wbr>Implemented<wbr></wbr>Error</a></code>
+            </div>
+        
+
+    </li><li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="docutils.parsers.rst.states.MarkupError.html" class="internal-link" title="docutils.parsers.rst.states.MarkupError"><wbr></wbr>Markup<wbr></wbr>Error</a></code>
+            </div>
+        
+
+    </li><li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="docutils.parsers.rst.states.MarkupMismatch.html" class="internal-link" title="docutils.parsers.rst.states.MarkupMismatch"><wbr></wbr>Markup<wbr></wbr>Mismatch</a></code>
+            </div>
+        
+
+    </li><li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="docutils.parsers.rst.states.ParserError.html" class="internal-link" title="docutils.parsers.rst.states.ParserError"><wbr></wbr>Parser<wbr></wbr>Error</a></code>
+            </div>
+        
+
+    </li><li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="docutils.parsers.rst.states.UnknownInterpretedRoleError.html" class="internal-link" title="docutils.parsers.rst.states.UnknownInterpretedRoleError"><wbr></wbr>Unknown<wbr></wbr>Interpreted<wbr></wbr>Role<wbr></wbr>Error</a></code>
+            </div>
+        
+
+    </li>
+</ul>
+
+        <div class="childrenKindTitle">Functions</div>
+        <ul>
+    
+    <li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="docutils.parsers.rst.states.html#build_regexp" class="internal-link" title="docutils.parsers.rst.states.build_regexp">build<wbr></wbr>_regexp</a></code>
+            </div>
+        
+
+    </li><li class="private">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="docutils.parsers.rst.states.html#_loweralpha_to_int" class="internal-link" title="docutils.parsers.rst.states._loweralpha_to_int">_loweralpha<wbr></wbr>_to<wbr></wbr>_int</a></code>
+            </div>
+        
+
+    </li><li class="private">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="docutils.parsers.rst.states.html#_lowerroman_to_int" class="internal-link" title="docutils.parsers.rst.states._lowerroman_to_int">_lowerroman<wbr></wbr>_to<wbr></wbr>_int</a></code>
+            </div>
+        
+
+    </li><li class="private">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="docutils.parsers.rst.states.html#_upperalpha_to_int" class="internal-link" title="docutils.parsers.rst.states._upperalpha_to_int">_upperalpha<wbr></wbr>_to<wbr></wbr>_int</a></code>
+            </div>
+        
+
+    </li>
+</ul> 
+
+        
+         
+
+        <div class="childrenKindTitle">Variables</div>
+        <ul>
+    
+    <li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="docutils.parsers.rst.states.html#state_classes" class="internal-link" title="docutils.parsers.rst.states.state_classes">state<wbr></wbr>_classes</a></code>
+            </div>
+        
+
+    </li>
+</ul> 
+
+        
+         
+        
+      </div>
   </div>
 
-  <script src="ajax.js" type="text/javascript"></script>
-  <script src="search.js" type="text/javascript"></script>
-
 </nav>
-
-    
-
-    <div class="container">
-
-      <div class="page-header">
-        <h1 class="class"><code><code><a href="index.html" class="internal-link">docutils</a></code><wbr></wbr>.<code><a href="docutils.parsers.html" class="internal-link" title="docutils.parsers">parsers</a></code><wbr></wbr>.<code><a href="docutils.parsers.rst.html" class="internal-link" title="docutils.parsers.rst">rst</a></code><wbr></wbr>.<code><a href="docutils.parsers.rst.states.html" class="internal-link" title="docutils.parsers.rst.states">states</a></code><wbr></wbr>.<code><a href="docutils.parsers.rst.states.RSTState.html" class="internal-link" title="docutils.parsers.rst.states.RSTState">RSTState</a></code></code></h1>
-        <div id="showPrivate">
-          <button class="btn btn-link" onclick="togglePrivate()">Toggle Private API</button>
         </div>
+        <div id="collapseSideBar">
+          <a class="btn btn-link" onclick="toggleSideBarCollapse()" title="Toggle Sidebar Collapse">
+          </a>
+        </div> 
+        <script src="sidebartoggle.js" type="text/javascript"></script>
+       
       </div>
 
-      <div class="categoryHeader">
-        class documentation
-      </div>
+      <div id="main" class="">
+        
 
-      <div class="extrasDocstring">
-        <p><code><span class="py-keyword">class</span> <span class="py-defname">RSTState</span>(<a href="docutils.statemachine.StateWS.html" class="internal-link" title="docutils.statemachine.StateWS">StateWS</a>): <a href="https://sourceforge.net/p/docutils/code/HEAD/tree/tags/docutils-0.17.1//docutils/parsers/rst/states.py#L202" class="sourceLink">(source)</a></code></p><p>Known subclasses: <code><a href="docutils.parsers.rst.states.Body.html" class="internal-link">docutils.parsers.rst.states.Body</a></code>, <code><a href="docutils.parsers.rst.states.QuotedLiteralBlock.html" class="internal-link">docutils.parsers.rst.states.QuotedLiteralBlock</a></code>, <code><a href="docutils.parsers.rst.states.Text.html" class="internal-link">docutils.parsers.rst.states.Text</a></code></p>
-        <p><a href="classIndex.html#docutils.parsers.rst.states.RSTState">View In Hierarchy</a></p>
-      </div>
+        
 
-      <div class="moduleDocstring">
-        <div><p>reStructuredText State superclass.</p>
+        <div class="page-header">
+          <h1 class="class"><code><code><a href="index.html" class="internal-link">docutils</a></code><wbr></wbr>.<code><a href="docutils.parsers.html" class="internal-link" title="docutils.parsers">parsers</a></code><wbr></wbr>.<code><a href="docutils.parsers.rst.html" class="internal-link" title="docutils.parsers.rst">rst</a></code><wbr></wbr>.<code><a href="docutils.parsers.rst.states.html" class="internal-link" title="docutils.parsers.rst.states">states</a></code><wbr></wbr>.<code><a href="docutils.parsers.rst.states.RSTState.html" class="internal-link" title="docutils.parsers.rst.states.RSTState">RSTState</a></code></code></h1>
+          <div id="showPrivate">
+            <button class="btn btn-link" onclick="togglePrivate()">Toggle Private API</button>
+          </div>
+        </div>
+
+        <div class="categoryHeader">
+          class documentation
+        </div>
+
+        <div class="extrasDocstring">
+          <p class="class-signature"><code><span class="py-keyword">class</span> <span class="py-defname">RSTState</span>(<a href="docutils.statemachine.StateWS.html" class="internal-link" title="docutils.statemachine.StateWS">StateWS</a>): <a href="https://sourceforge.net/p/docutils/code/HEAD/tree/tags/docutils-0.17.1//docutils/parsers/rst/states.py#l202" class="sourceLink">(source)</a></code></p><p>Known subclasses: <code><a href="docutils.parsers.rst.states.Body.html" class="internal-link">docutils.parsers.rst.states.Body</a></code>, <code><a href="docutils.parsers.rst.states.QuotedLiteralBlock.html" class="internal-link">docutils.parsers.rst.states.QuotedLiteralBlock</a></code>, <code><a href="docutils.parsers.rst.states.Text.html" class="internal-link">docutils.parsers.rst.states.Text</a></code></p><p>Constructor: <code><a href="#__init__" class="internal-link" title="docutils.parsers.rst.states.RSTState.__init__">RSTState(state_machine, debug)</a></code></p>
+          <p><a href="classIndex.html#docutils.parsers.rst.states.RSTState">View In Hierarchy</a></p>
+        </div>
+
+        <div class="moduleDocstring">
+          <div><p>reStructuredText State superclass.</p>
 <p>Contains methods used by all State subclasses.</p>
 </div>
-      </div>
+        </div>
 
-      <div id="splitTables">
-        <table class="children sortable" id="id542">
+        <div id="splitTables">
+          <table class="children sortable" id="id542">
   
   
   <tr class="method">
@@ -166,37 +1041,37 @@
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#check_subsection" class="internal-link" title="docutils.parsers.rst.states.RSTState.check_subsection">check​_subsection</a></code></td>
+    <td><code><a href="#check_subsection" class="internal-link" title="docutils.parsers.rst.states.RSTState.check_subsection">check<wbr></wbr>_subsection</a></code></td>
     <td>Check for a valid subsection header.  Return 1 (true) or None (false).</td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#goto_line" class="internal-link" title="docutils.parsers.rst.states.RSTState.goto_line">goto​_line</a></code></td>
+    <td><code><a href="#goto_line" class="internal-link" title="docutils.parsers.rst.states.RSTState.goto_line">goto<wbr></wbr>_line</a></code></td>
     <td>Jump to input line <code>abs_line_offset</code>, ignoring jumps past the end.</td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#inline_text" class="internal-link" title="docutils.parsers.rst.states.RSTState.inline_text">inline​_text</a></code></td>
+    <td><code><a href="#inline_text" class="internal-link" title="docutils.parsers.rst.states.RSTState.inline_text">inline<wbr></wbr>_text</a></code></td>
     <td>Return 2 lists: nodes (text and inline elements), and system_messages.</td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#nested_list_parse" class="internal-link" title="docutils.parsers.rst.states.RSTState.nested_list_parse">nested​_list​_parse</a></code></td>
+    <td><code><a href="#nested_list_parse" class="internal-link" title="docutils.parsers.rst.states.RSTState.nested_list_parse">nested<wbr></wbr>_list<wbr></wbr>_parse</a></code></td>
     <td>Create a new StateMachine rooted at <code>node</code> and run it over the input <code>block</code>. Also keep track of optional intermediate blank lines and the required final one.</td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#nested_parse" class="internal-link" title="docutils.parsers.rst.states.RSTState.nested_parse">nested​_parse</a></code></td>
+    <td><code><a href="#nested_parse" class="internal-link" title="docutils.parsers.rst.states.RSTState.nested_parse">nested<wbr></wbr>_parse</a></code></td>
     <td>Create a new StateMachine rooted at <code>node</code> and run it over the input <code>block</code>.</td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#new_subsection" class="internal-link" title="docutils.parsers.rst.states.RSTState.new_subsection">new​_subsection</a></code></td>
+    <td><code><a href="#new_subsection" class="internal-link" title="docutils.parsers.rst.states.RSTState.new_subsection">new<wbr></wbr>_subsection</a></code></td>
     <td>Append new subsection to document tree. On return, check level.</td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#no_match" class="internal-link" title="docutils.parsers.rst.states.RSTState.no_match">no​_match</a></code></td>
+    <td><code><a href="#no_match" class="internal-link" title="docutils.parsers.rst.states.RSTState.no_match">no<wbr></wbr>_match</a></code></td>
     <td>Override <code><a href="docutils.statemachine.State.html#no_match" class="internal-link" title="docutils.statemachine.State.no_match">StateWS.no_match</a></code> to generate a system message.</td>
   </tr><tr class="method">
     
@@ -206,7 +1081,7 @@
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#runtime_init" class="internal-link" title="docutils.parsers.rst.states.RSTState.runtime_init">runtime​_init</a></code></td>
+    <td><code><a href="#runtime_init" class="internal-link" title="docutils.parsers.rst.states.RSTState.runtime_init">runtime<wbr></wbr>_init</a></code></td>
     <td>Initialize this <code><a href="docutils.statemachine.State.html" class="internal-link" title="docutils.statemachine.State">State</a></code> before running the state machine; called from <code>self.state_machine.run()</code>.</td>
   </tr><tr class="method">
     
@@ -216,17 +1091,17 @@
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#title_inconsistent" class="internal-link" title="docutils.parsers.rst.states.RSTState.title_inconsistent">title​_inconsistent</a></code></td>
+    <td><code><a href="#title_inconsistent" class="internal-link" title="docutils.parsers.rst.states.RSTState.title_inconsistent">title<wbr></wbr>_inconsistent</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#unindent_warning" class="internal-link" title="docutils.parsers.rst.states.RSTState.unindent_warning">unindent​_warning</a></code></td>
+    <td><code><a href="#unindent_warning" class="internal-link" title="docutils.parsers.rst.states.RSTState.unindent_warning">unindent<wbr></wbr>_warning</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="classvariable">
     
     <td>Class Variable</td>
-    <td><code><a href="#nested_sm_cache" class="internal-link" title="docutils.parsers.rst.states.RSTState.nested_sm_cache">nested​_sm​_cache</a></code></td>
+    <td><code><a href="#nested_sm_cache" class="internal-link" title="docutils.parsers.rst.states.RSTState.nested_sm_cache">nested<wbr></wbr>_sm<wbr></wbr>_cache</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="instancevariable">
     
@@ -246,8 +1121,8 @@
   </tr><tr class="instancevariable">
     
     <td>Instance Variable</td>
-    <td><code><a href="#nested_sm_kwargs" class="internal-link" title="docutils.parsers.rst.states.RSTState.nested_sm_kwargs">nested​_sm​_kwargs</a></code></td>
-    <td>Keyword arguments dictionary, passed to the <code><a href="docutils.parsers.rst.states.NestedStateMachine.html" class="internal-link" title="docutils.parsers.rst.states.NestedStateMachine">nested_sm</a></code> constructor.</td>
+    <td><code><a href="#nested_sm_kwargs" class="internal-link" title="docutils.parsers.rst.states.RSTState.nested_sm_kwargs">nested<wbr></wbr>_sm<wbr></wbr>_kwargs</a></code></td>
+    <td>Keyword arguments dictionary, passed to the <code><a href="docutils.statemachine.State.html#nested_sm" class="internal-link" title="docutils.statemachine.State.nested_sm">nested_sm</a></code> constructor.</td>
   </tr><tr class="instancevariable">
     
     <td>Instance Variable</td>
@@ -260,17 +1135,17 @@
     <td><span class="undocumented">Undocumented</span></td>
   </tr>
 </table>
-        
-          <p class="inheritedFrom">
-            Inherited from <code><a href="docutils.statemachine.StateWS.html" class="internal-link" title="docutils.statemachine.StateWS">StateWS</a></code>:
-          </p>
-          <table class="children sortable" id="id543">
+          
+            <p class="inheritedFrom">
+              Inherited from <code><a href="docutils.statemachine.StateWS.html" class="internal-link" title="docutils.statemachine.StateWS">StateWS</a></code>:
+            </p>
+            <table class="children sortable" id="id543">
   
   
   <tr class="basemethod">
     
     <td>Method</td>
-    <td><code><a href="docutils.statemachine.StateWS.html#add_initial_transitions" class="internal-link" title="docutils.statemachine.StateWS.add_initial_transitions">add​_initial​_transitions</a></code></td>
+    <td><code><a href="docutils.statemachine.StateWS.html#add_initial_transitions" class="internal-link" title="docutils.statemachine.StateWS.add_initial_transitions">add<wbr></wbr>_initial<wbr></wbr>_transitions</a></code></td>
     <td>Add whitespace-specific transitions before those defined in subclass.</td>
   </tr><tr class="basemethod">
     
@@ -280,7 +1155,7 @@
   </tr><tr class="basemethod">
     
     <td>Method</td>
-    <td><code><a href="docutils.statemachine.StateWS.html#first_known_indent" class="internal-link" title="docutils.statemachine.StateWS.first_known_indent">first​_known​_indent</a></code></td>
+    <td><code><a href="docutils.statemachine.StateWS.html#first_known_indent" class="internal-link" title="docutils.statemachine.StateWS.first_known_indent">first<wbr></wbr>_known<wbr></wbr>_indent</a></code></td>
     <td>Handle an indented text block (first line's indent known).</td>
   </tr><tr class="basemethod">
     
@@ -290,62 +1165,61 @@
   </tr><tr class="basemethod">
     
     <td>Method</td>
-    <td><code><a href="docutils.statemachine.StateWS.html#known_indent" class="internal-link" title="docutils.statemachine.StateWS.known_indent">known​_indent</a></code></td>
+    <td><code><a href="docutils.statemachine.StateWS.html#known_indent" class="internal-link" title="docutils.statemachine.StateWS.known_indent">known<wbr></wbr>_indent</a></code></td>
     <td>Handle a known-indent text block. Extend or override in subclasses.</td>
   </tr><tr class="baseclassvariable">
     
     <td>Class Variable</td>
-    <td><code><a href="docutils.statemachine.StateWS.html#ws_initial_transitions" class="internal-link" title="docutils.statemachine.StateWS.ws_initial_transitions">ws​_initial​_transitions</a></code></td>
+    <td><code><a href="docutils.statemachine.StateWS.html#ws_initial_transitions" class="internal-link" title="docutils.statemachine.StateWS.ws_initial_transitions">ws<wbr></wbr>_initial<wbr></wbr>_transitions</a></code></td>
     <td>Default initial whitespace transitions, added before those listed in <code><a href="docutils.statemachine.State.html#initial_transitions" class="internal-link" title="docutils.statemachine.State.initial_transitions">State.initial_transitions</a></code>.  May be overridden in subclasses.</td>
   </tr><tr class="baseclassvariable">
     
     <td>Class Variable</td>
-    <td><code><a href="docutils.statemachine.StateWS.html#ws_patterns" class="internal-link" title="docutils.statemachine.StateWS.ws_patterns">ws​_patterns</a></code></td>
+    <td><code><a href="docutils.statemachine.StateWS.html#ws_patterns" class="internal-link" title="docutils.statemachine.StateWS.ws_patterns">ws<wbr></wbr>_patterns</a></code></td>
     <td>Patterns for default whitespace transitions.  May be overridden in subclasses.</td>
   </tr><tr class="baseinstancevariable">
     
     <td>Instance Variable</td>
-    <td><code><a href="docutils.statemachine.StateWS.html#indent_sm" class="internal-link" title="docutils.statemachine.StateWS.indent_sm">indent​_sm</a></code></td>
+    <td><code><a href="docutils.statemachine.StateWS.html#indent_sm" class="internal-link" title="docutils.statemachine.StateWS.indent_sm">indent<wbr></wbr>_sm</a></code></td>
     <td>The <code><a href="docutils.statemachine.StateMachine.html" class="internal-link" title="docutils.statemachine.StateMachine">StateMachine</a></code> class handling indented text blocks.</td>
   </tr><tr class="baseinstancevariable">
     
     <td>Instance Variable</td>
-    <td><code><a href="docutils.statemachine.StateWS.html#indent_sm_kwargs" class="internal-link" title="docutils.statemachine.StateWS.indent_sm_kwargs">indent​_sm​_kwargs</a></code></td>
-    <td>Keyword arguments dictionary, passed to the <code><a href="#indent_sm" class="internal-link" title="docutils.statemachine.StateWS.indent_sm">indent_sm</a></code> constructor.</td>
+    <td><code><a href="docutils.statemachine.StateWS.html#indent_sm_kwargs" class="internal-link" title="docutils.statemachine.StateWS.indent_sm_kwargs">indent<wbr></wbr>_sm<wbr></wbr>_kwargs</a></code></td>
+    <td>Keyword arguments dictionary, passed to the <code><a href="docutils.statemachine.StateWS.html#indent_sm" class="internal-link" title="docutils.statemachine.StateWS.indent_sm">indent_sm</a></code> constructor.</td>
   </tr><tr class="baseinstancevariable">
     
     <td>Instance Variable</td>
-    <td><code><a href="docutils.statemachine.StateWS.html#known_indent_sm" class="internal-link" title="docutils.statemachine.StateWS.known_indent_sm">known​_indent​_sm</a></code></td>
+    <td><code><a href="docutils.statemachine.StateWS.html#known_indent_sm" class="internal-link" title="docutils.statemachine.StateWS.known_indent_sm">known<wbr></wbr>_indent<wbr></wbr>_sm</a></code></td>
     <td>The <code><a href="docutils.statemachine.StateMachine.html" class="internal-link" title="docutils.statemachine.StateMachine">StateMachine</a></code> class handling known-indented text blocks.</td>
   </tr><tr class="baseinstancevariable">
     
     <td>Instance Variable</td>
-    <td><code><a href="docutils.statemachine.StateWS.html#known_indent_sm_kwargs" class="internal-link" title="docutils.statemachine.StateWS.known_indent_sm_kwargs">known​_indent​_sm​_kwargs</a></code></td>
-    <td>Keyword arguments dictionary, passed to the <code><a href="#known_indent_sm" class="internal-link" title="docutils.statemachine.StateWS.known_indent_sm">known_indent_sm</a></code> constructor.</td>
+    <td><code><a href="docutils.statemachine.StateWS.html#known_indent_sm_kwargs" class="internal-link" title="docutils.statemachine.StateWS.known_indent_sm_kwargs">known<wbr></wbr>_indent<wbr></wbr>_sm<wbr></wbr>_kwargs</a></code></td>
+    <td>Keyword arguments dictionary, passed to the <code><a href="docutils.statemachine.StateWS.html#known_indent_sm" class="internal-link" title="docutils.statemachine.StateWS.known_indent_sm">known_indent_sm</a></code> constructor.</td>
   </tr><tr class="baseinstancevariable">
     
     <td>Instance Variable</td>
     <td><code><a href="docutils.statemachine.StateWS.html#patterns" class="internal-link" title="docutils.statemachine.StateWS.patterns">patterns</a></code></td>
-    <td>{Name: pattern} mapping, used by <code><a href="docutils.statemachine.State.html#make_transition" class="internal-link" title="docutils.statemachine.State.make_transition">make_transition()</a></code>. Each pattern may
-be a string or a compiled <code>re</code> pattern. Override in subclasses.</td>
+    <td>{Name: pattern} mapping, used by <code><a href="docutils.statemachine.State.html#make_transition" class="internal-link" title="docutils.statemachine.State.make_transition">make_transition()</a></code>. Each pattern may be a string or a compiled <code>re</code> pattern. Override in subclasses.</td>
   </tr>
 </table>
-          
-          <p class="inheritedFrom">
-            Inherited from <code><a href="docutils.statemachine.State.html" class="internal-link" title="docutils.statemachine.State">State</a></code> (via <code><a href="docutils.statemachine.StateWS.html" class="internal-link" title="docutils.statemachine.StateWS">StateWS</a></code>):
-          </p>
-          <table class="children sortable" id="id544">
+            
+            <p class="inheritedFrom">
+              Inherited from <code><a href="docutils.statemachine.State.html" class="internal-link" title="docutils.statemachine.State">State</a></code> (via <code><a href="docutils.statemachine.StateWS.html" class="internal-link" title="docutils.statemachine.StateWS">StateWS</a></code>):
+            </p>
+            <table class="children sortable" id="id544">
   
   
   <tr class="basemethod">
     
     <td>Method</td>
-    <td><code><a href="docutils.statemachine.State.html#add_transition" class="internal-link" title="docutils.statemachine.State.add_transition">add​_transition</a></code></td>
+    <td><code><a href="docutils.statemachine.State.html#add_transition" class="internal-link" title="docutils.statemachine.State.add_transition">add<wbr></wbr>_transition</a></code></td>
     <td>Add a transition to the start of the transition list.</td>
   </tr><tr class="basemethod">
     
     <td>Method</td>
-    <td><code><a href="docutils.statemachine.State.html#add_transitions" class="internal-link" title="docutils.statemachine.State.add_transitions">add​_transitions</a></code></td>
+    <td><code><a href="docutils.statemachine.State.html#add_transitions" class="internal-link" title="docutils.statemachine.State.add_transitions">add<wbr></wbr>_transitions</a></code></td>
     <td>Add a list of transitions to the start of the transition list.</td>
   </tr><tr class="basemethod">
     
@@ -355,12 +1229,12 @@ be a string or a compiled <code>re</code> pattern. Override in subclasses.</td>
   </tr><tr class="basemethod">
     
     <td>Method</td>
-    <td><code><a href="docutils.statemachine.State.html#make_transition" class="internal-link" title="docutils.statemachine.State.make_transition">make​_transition</a></code></td>
+    <td><code><a href="docutils.statemachine.State.html#make_transition" class="internal-link" title="docutils.statemachine.State.make_transition">make<wbr></wbr>_transition</a></code></td>
     <td>Make &amp; return a transition tuple based on <code>name</code>.</td>
   </tr><tr class="basemethod">
     
     <td>Method</td>
-    <td><code><a href="docutils.statemachine.State.html#make_transitions" class="internal-link" title="docutils.statemachine.State.make_transitions">make​_transitions</a></code></td>
+    <td><code><a href="docutils.statemachine.State.html#make_transitions" class="internal-link" title="docutils.statemachine.State.make_transitions">make<wbr></wbr>_transitions</a></code></td>
     <td>Return a list of transition names and a transition mapping.</td>
   </tr><tr class="basemethod">
     
@@ -370,7 +1244,7 @@ be a string or a compiled <code>re</code> pattern. Override in subclasses.</td>
   </tr><tr class="basemethod">
     
     <td>Method</td>
-    <td><code><a href="docutils.statemachine.State.html#remove_transition" class="internal-link" title="docutils.statemachine.State.remove_transition">remove​_transition</a></code></td>
+    <td><code><a href="docutils.statemachine.State.html#remove_transition" class="internal-link" title="docutils.statemachine.State.remove_transition">remove<wbr></wbr>_transition</a></code></td>
     <td>Remove a transition by <code>name</code>.</td>
   </tr><tr class="basemethod">
     
@@ -380,8 +1254,8 @@ be a string or a compiled <code>re</code> pattern. Override in subclasses.</td>
   </tr><tr class="baseclassvariable">
     
     <td>Class Variable</td>
-    <td><code><a href="docutils.statemachine.State.html#initial_transitions" class="internal-link" title="docutils.statemachine.State.initial_transitions">initial​_transitions</a></code></td>
-    <td>A list of transitions to initialize when a <code><a href="docutils.statemachine.State.html" class="internal-link" title="docutils.statemachine.State">State</a></code> is instantiated. Each entry is either a transition name string, or a (transition name, next state name) pair. See <code><a href="#make_transitions" class="internal-link" title="docutils.statemachine.State.make_transitions">make_transitions()</a></code>. Override in subclasses.</td>
+    <td><code><a href="docutils.statemachine.State.html#initial_transitions" class="internal-link" title="docutils.statemachine.State.initial_transitions">initial<wbr></wbr>_transitions</a></code></td>
+    <td>A list of transitions to initialize when a <code><a href="docutils.statemachine.State.html" class="internal-link" title="docutils.statemachine.State">State</a></code> is instantiated. Each entry is either a transition name string, or a (transition name, next state name) pair. See <code><a href="docutils.statemachine.State.html#make_transitions" class="internal-link" title="docutils.statemachine.State.make_transitions">make_transitions()</a></code>. Override in subclasses.</td>
   </tr><tr class="baseinstancevariable">
     
     <td>Instance Variable</td>
@@ -390,33 +1264,32 @@ be a string or a compiled <code>re</code> pattern. Override in subclasses.</td>
   </tr><tr class="baseinstancevariable">
     
     <td>Instance Variable</td>
-    <td><code><a href="docutils.statemachine.State.html#nested_sm" class="internal-link" title="docutils.statemachine.State.nested_sm">nested​_sm</a></code></td>
+    <td><code><a href="docutils.statemachine.State.html#nested_sm" class="internal-link" title="docutils.statemachine.State.nested_sm">nested<wbr></wbr>_sm</a></code></td>
     <td>The <code><a href="docutils.statemachine.StateMachine.html" class="internal-link" title="docutils.statemachine.StateMachine">StateMachine</a></code> class for handling nested processing.</td>
   </tr><tr class="baseinstancevariable">
     
     <td>Instance Variable</td>
-    <td><code><a href="docutils.statemachine.State.html#state_machine" class="internal-link" title="docutils.statemachine.State.state_machine">state​_machine</a></code></td>
+    <td><code><a href="docutils.statemachine.State.html#state_machine" class="internal-link" title="docutils.statemachine.State.state_machine">state<wbr></wbr>_machine</a></code></td>
     <td>A reference to the controlling <code><a href="docutils.statemachine.StateMachine.html" class="internal-link" title="docutils.statemachine.StateMachine">StateMachine</a></code> object.</td>
   </tr><tr class="baseinstancevariable">
     
     <td>Instance Variable</td>
-    <td><code><a href="docutils.statemachine.State.html#transition_order" class="internal-link" title="docutils.statemachine.State.transition_order">transition​_order</a></code></td>
+    <td><code><a href="docutils.statemachine.State.html#transition_order" class="internal-link" title="docutils.statemachine.State.transition_order">transition<wbr></wbr>_order</a></code></td>
     <td>A list of transition names in search order.</td>
   </tr><tr class="baseinstancevariable">
     
     <td>Instance Variable</td>
     <td><code><a href="docutils.statemachine.State.html#transitions" class="internal-link" title="docutils.statemachine.State.transitions">transitions</a></code></td>
-    <td><span class="undocumented">No summary</span></td>
+    <td>A mapping of transition names to 3-tuples containing (compiled_pattern, transition_method, next_state_name). Initialized as an instance attribute dynamically (instead of as a class attribute) because it may make forward references to patterns and methods in this or other classes.</td>
   </tr>
 </table>
-          
+            
 
-          
-      </div>
+            
+        </div>
 
-      <div id="childList">
-
-        <div class="basemethod">
+        <div id="childList">
+          <div class="basemethod">
   
   
   <a name="docutils.parsers.rst.states.RSTState.__init__">
@@ -427,15 +1300,20 @@ be a string or a compiled <code>re</code> pattern. Override in subclasses.</td>
   </a>
   <div class="functionHeader">
     
-    <span class="py-keyword">def</span> <span class="py-defname">__init__</span>(self, state_machine, debug=False):
-    <a class="sourceLink" href="https://sourceforge.net/p/docutils/code/HEAD/tree/tags/docutils-0.17.1//docutils/parsers/rst/states.py#L213">
+    
+    <span class="py-keyword">def</span> <span class="py-defname">__init__</span><span class="function-signature">(self, state_machine, debug=False)</span>:
+    <a class="sourceLink" href="https://sourceforge.net/p/docutils/code/HEAD/tree/tags/docutils-0.17.1//docutils/parsers/rst/states.py#l213">
       
       (source)
+    </a>
+    <a class="headerLink" href="#__init__" title="docutils.parsers.rst.states.RSTState.__init__">
+      
+      
+      ¶
     </a>
   </div>
   <div class="docstring functionBody">
     <div class="interfaceinfo">overrides <code><a href="docutils.statemachine.StateWS.html#__init__" class="internal-link">docutils.statemachine.StateWS.__init__</a></code></div><div class="interfaceinfo">overridden in <code><a href="docutils.parsers.rst.states.QuotedLiteralBlock.html" class="internal-link">docutils.parsers.rst.states.QuotedLiteralBlock</a></code></div>
-    
     <div><p>Initialize a <code>StateSM</code> object; extends <code><a href="docutils.statemachine.State.html#__init__" class="internal-link" title="docutils.statemachine.State.__init__">State.__init__()</a></code>.</p>
 <p>Check for indent state machine attributes, set defaults if not set.</p>
 </div>
@@ -451,16 +1329,21 @@ be a string or a compiled <code>re</code> pattern. Override in subclasses.</td>
   </a>
   <div class="functionHeader">
     
-    <span class="py-keyword">def</span> <span class="py-defname">bof</span>(self, context):
-    <a class="sourceLink" href="https://sourceforge.net/p/docutils/code/HEAD/tree/tags/docutils-0.17.1//docutils/parsers/rst/states.py#L253">
+    
+    <span class="py-keyword">def</span> <span class="py-defname">bof</span><span class="function-signature">(self, context)</span>:
+    <a class="sourceLink" href="https://sourceforge.net/p/docutils/code/HEAD/tree/tags/docutils-0.17.1//docutils/parsers/rst/states.py#l253">
       
       (source)
+    </a>
+    <a class="headerLink" href="#bof" title="docutils.parsers.rst.states.RSTState.bof">
+      
+      
+      ¶
     </a>
   </div>
   <div class="docstring functionBody">
     <div class="interfaceinfo">overrides <code><a href="docutils.statemachine.State.html#bof" class="internal-link">docutils.statemachine.State.bof</a></code></div>
-    
-    <div>Called at beginning of file.</div>
+    <div><p>Called at beginning of file.</p></div>
   </div>
 </div><div class="basemethod">
   
@@ -473,19 +1356,24 @@ be a string or a compiled <code>re</code> pattern. Override in subclasses.</td>
   </a>
   <div class="functionHeader">
     
-    <span class="py-keyword">def</span> <span class="py-defname">check_subsection</span>(self, source, style, lineno):
-    <a class="sourceLink" href="https://sourceforge.net/p/docutils/code/HEAD/tree/tags/docutils-0.17.1//docutils/parsers/rst/states.py#L329">
+    
+    <span class="py-keyword">def</span> <span class="py-defname">check_subsection</span><span class="function-signature">(self, source, style, lineno)</span>:
+    <a class="sourceLink" href="https://sourceforge.net/p/docutils/code/HEAD/tree/tags/docutils-0.17.1//docutils/parsers/rst/states.py#l329">
       
       (source)
+    </a>
+    <a class="headerLink" href="#check_subsection" title="docutils.parsers.rst.states.RSTState.check_subsection">
+      
+      
+      ¶
     </a>
   </div>
   <div class="docstring functionBody">
     
-    
     <div><p>Check for a valid subsection header.  Return 1 (true) or None (false).</p>
 <p>When a new section is reached that isn't a subsection of the current
-section, back up the line count (use <tt class="rst-docutils literal"><span class="pre">previous_line(-x)</span></tt>), then
-<tt class="rst-docutils literal">raise EOFError</tt>.  The current StateMachine will finish, then the
+section, back up the line count (use <tt class="rst-docutils rst-literal"><span class="pre">previous_line(-x)</span></tt>), then
+<tt class="rst-docutils rst-literal">raise EOFError</tt>.  The current StateMachine will finish, then the
 calling StateMachine can re-examine the title.  This will work its way
 back up the calling chain until the correct section level isreached.</p>
 <p>@@@ Alternative: Evaluate the title, store the title info &amp; level, and
@@ -504,16 +1392,21 @@ return in results?</p>
   </a>
   <div class="functionHeader">
     
-    <span class="py-keyword">def</span> <span class="py-defname">goto_line</span>(self, abs_line_offset):
-    <a class="sourceLink" href="https://sourceforge.net/p/docutils/code/HEAD/tree/tags/docutils-0.17.1//docutils/parsers/rst/states.py#L231">
+    
+    <span class="py-keyword">def</span> <span class="py-defname">goto_line</span><span class="function-signature">(self, abs_line_offset)</span>:
+    <a class="sourceLink" href="https://sourceforge.net/p/docutils/code/HEAD/tree/tags/docutils-0.17.1//docutils/parsers/rst/states.py#l231">
       
       (source)
+    </a>
+    <a class="headerLink" href="#goto_line" title="docutils.parsers.rst.states.RSTState.goto_line">
+      
+      
+      ¶
     </a>
   </div>
   <div class="docstring functionBody">
     
-    
-    <div>Jump to input line <code>abs_line_offset</code>, ignoring jumps past the end.</div>
+    <div><p>Jump to input line <code>abs_line_offset</code>, ignoring jumps past the end.</p></div>
   </div>
 </div><div class="basemethod">
   
@@ -526,16 +1419,21 @@ return in results?</p>
   </a>
   <div class="functionHeader">
     
-    <span class="py-keyword">def</span> <span class="py-defname">inline_text</span>(self, text, lineno):
-    <a class="sourceLink" href="https://sourceforge.net/p/docutils/code/HEAD/tree/tags/docutils-0.17.1//docutils/parsers/rst/states.py#L423">
+    
+    <span class="py-keyword">def</span> <span class="py-defname">inline_text</span><span class="function-signature">(self, text, lineno)</span>:
+    <a class="sourceLink" href="https://sourceforge.net/p/docutils/code/HEAD/tree/tags/docutils-0.17.1//docutils/parsers/rst/states.py#l423">
       
       (source)
+    </a>
+    <a class="headerLink" href="#inline_text" title="docutils.parsers.rst.states.RSTState.inline_text">
+      
+      
+      ¶
     </a>
   </div>
   <div class="docstring functionBody">
     
-    
-    <div>Return 2 lists: nodes (text and inline elements), and system_messages.</div>
+    <div><p>Return 2 lists: nodes (text and inline elements), and system_messages.</p></div>
   </div>
 </div><div class="basemethod">
   
@@ -548,18 +1446,23 @@ return in results?</p>
   </a>
   <div class="functionHeader">
     
-    <span class="py-keyword">def</span> <span class="py-defname">nested_list_parse</span>(self, block, input_offset, node, initial_state, blank_finish, blank_finish_state=None, extra_settings={}, match_titles=False, state_machine_class=None, state_machine_kwargs=None):
-    <a class="sourceLink" href="https://sourceforge.net/p/docutils/code/HEAD/tree/tags/docutils-0.17.1//docutils/parsers/rst/states.py#L294">
+    
+    <span class="py-keyword">def</span> <span class="py-defname">nested_list_parse</span><span class="function-signature">(self, block, input_offset, node, initial_state, blank_finish, blank_finish_state=None, extra_settings={}, match_titles=False, state_machine_class=None, state_machine_kwargs=None)</span>:
+    <a class="sourceLink" href="https://sourceforge.net/p/docutils/code/HEAD/tree/tags/docutils-0.17.1//docutils/parsers/rst/states.py#l294">
       
       (source)
+    </a>
+    <a class="headerLink" href="#nested_list_parse" title="docutils.parsers.rst.states.RSTState.nested_list_parse">
+      
+      
+      ¶
     </a>
   </div>
   <div class="docstring functionBody">
     
-    
-    <div>Create a new StateMachine rooted at <code>node</code> and run it over the input
+    <div><p>Create a new StateMachine rooted at <code>node</code> and run it over the input
 <code>block</code>. Also keep track of optional intermediate blank lines and the
-required final one.</div>
+required final one.</p></div>
   </div>
 </div><div class="basemethod">
   
@@ -572,17 +1475,22 @@ required final one.</div>
   </a>
   <div class="functionHeader">
     
-    <span class="py-keyword">def</span> <span class="py-defname">nested_parse</span>(self, block, input_offset, node, match_titles=False, state_machine_class=None, state_machine_kwargs=None):
-    <a class="sourceLink" href="https://sourceforge.net/p/docutils/code/HEAD/tree/tags/docutils-0.17.1//docutils/parsers/rst/states.py#L257">
+    
+    <span class="py-keyword">def</span> <span class="py-defname">nested_parse</span><span class="function-signature">(self, block, input_offset, node, match_titles=False, state_machine_class=None, state_machine_kwargs=None)</span>:
+    <a class="sourceLink" href="https://sourceforge.net/p/docutils/code/HEAD/tree/tags/docutils-0.17.1//docutils/parsers/rst/states.py#l257">
       
       (source)
+    </a>
+    <a class="headerLink" href="#nested_parse" title="docutils.parsers.rst.states.RSTState.nested_parse">
+      
+      
+      ¶
     </a>
   </div>
   <div class="docstring functionBody">
     
-    
-    <div>Create a new StateMachine rooted at <code>node</code> and run it over the input
-<code>block</code>.</div>
+    <div><p>Create a new StateMachine rooted at <code>node</code> and run it over the input
+<code>block</code>.</p></div>
   </div>
 </div><div class="basemethod">
   
@@ -595,16 +1503,21 @@ required final one.</div>
   </a>
   <div class="functionHeader">
     
-    <span class="py-keyword">def</span> <span class="py-defname">new_subsection</span>(self, title, lineno, messages):
-    <a class="sourceLink" href="https://sourceforge.net/p/docutils/code/HEAD/tree/tags/docutils-0.17.1//docutils/parsers/rst/states.py#L376">
+    
+    <span class="py-keyword">def</span> <span class="py-defname">new_subsection</span><span class="function-signature">(self, title, lineno, messages)</span>:
+    <a class="sourceLink" href="https://sourceforge.net/p/docutils/code/HEAD/tree/tags/docutils-0.17.1//docutils/parsers/rst/states.py#l376">
       
       (source)
+    </a>
+    <a class="headerLink" href="#new_subsection" title="docutils.parsers.rst.states.RSTState.new_subsection">
+      
+      
+      ¶
     </a>
   </div>
   <div class="docstring functionBody">
     
-    
-    <div>Append new subsection to document tree. On return, check level.</div>
+    <div><p>Append new subsection to document tree. On return, check level.</p></div>
   </div>
 </div><div class="basemethod">
   
@@ -617,15 +1530,20 @@ required final one.</div>
   </a>
   <div class="functionHeader">
     
-    <span class="py-keyword">def</span> <span class="py-defname">no_match</span>(self, context, transitions):
-    <a class="sourceLink" href="https://sourceforge.net/p/docutils/code/HEAD/tree/tags/docutils-0.17.1//docutils/parsers/rst/states.py#L240">
+    
+    <span class="py-keyword">def</span> <span class="py-defname">no_match</span><span class="function-signature">(self, context, transitions)</span>:
+    <a class="sourceLink" href="https://sourceforge.net/p/docutils/code/HEAD/tree/tags/docutils-0.17.1//docutils/parsers/rst/states.py#l240">
       
       (source)
+    </a>
+    <a class="headerLink" href="#no_match" title="docutils.parsers.rst.states.RSTState.no_match">
+      
+      
+      ¶
     </a>
   </div>
   <div class="docstring functionBody">
     <div class="interfaceinfo">overrides <code><a href="docutils.statemachine.State.html#no_match" class="internal-link">docutils.statemachine.State.no_match</a></code></div>
-    
     <div><p>Override <code><a href="docutils.statemachine.State.html#no_match" class="internal-link" title="docutils.statemachine.State.no_match">StateWS.no_match</a></code> to generate a system message.</p>
 <p>This code should never be run.</p>
 </div>
@@ -641,16 +1559,21 @@ required final one.</div>
   </a>
   <div class="functionHeader">
     
-    <span class="py-keyword">def</span> <span class="py-defname">paragraph</span>(self, lines, lineno):
-    <a class="sourceLink" href="https://sourceforge.net/p/docutils/code/HEAD/tree/tags/docutils-0.17.1//docutils/parsers/rst/states.py#L402">
+    
+    <span class="py-keyword">def</span> <span class="py-defname">paragraph</span><span class="function-signature">(self, lines, lineno)</span>:
+    <a class="sourceLink" href="https://sourceforge.net/p/docutils/code/HEAD/tree/tags/docutils-0.17.1//docutils/parsers/rst/states.py#l402">
       
       (source)
+    </a>
+    <a class="headerLink" href="#paragraph" title="docutils.parsers.rst.states.RSTState.paragraph">
+      
+      
+      ¶
     </a>
   </div>
   <div class="docstring functionBody">
     
-    
-    <div>Return a list (paragraph &amp; messages) &amp; a boolean: literal_block next?</div>
+    <div><p>Return a list (paragraph &amp; messages) &amp; a boolean: literal_block next?</p></div>
   </div>
 </div><div class="basemethod">
   
@@ -663,17 +1586,22 @@ required final one.</div>
   </a>
   <div class="functionHeader">
     
-    <span class="py-keyword">def</span> <span class="py-defname">runtime_init</span>(self):
-    <a class="sourceLink" href="https://sourceforge.net/p/docutils/code/HEAD/tree/tags/docutils-0.17.1//docutils/parsers/rst/states.py#L218">
+    
+    <span class="py-keyword">def</span> <span class="py-defname">runtime_init</span><span class="function-signature">(self)</span>:
+    <a class="sourceLink" href="https://sourceforge.net/p/docutils/code/HEAD/tree/tags/docutils-0.17.1//docutils/parsers/rst/states.py#l218">
       
       (source)
+    </a>
+    <a class="headerLink" href="#runtime_init" title="docutils.parsers.rst.states.RSTState.runtime_init">
+      
+      
+      ¶
     </a>
   </div>
   <div class="docstring functionBody">
     <div class="interfaceinfo">overrides <code><a href="docutils.statemachine.State.html#runtime_init" class="internal-link">docutils.statemachine.State.runtime_init</a></code></div>
-    
-    <div>Initialize this <code><a href="docutils.statemachine.State.html" class="internal-link" title="docutils.statemachine.State">State</a></code> before running the state machine; called from
-<code>self.state_machine.run()</code>.</div>
+    <div><p>Initialize this <code><a href="docutils.statemachine.State.html" class="internal-link" title="docutils.statemachine.State">State</a></code> before running the state machine; called from
+<code>self.state_machine.run()</code>.</p></div>
   </div>
 </div><div class="basemethod">
   
@@ -686,16 +1614,21 @@ required final one.</div>
   </a>
   <div class="functionHeader">
     
-    <span class="py-keyword">def</span> <span class="py-defname">section</span>(self, title, source, style, lineno, messages):
-    <a class="sourceLink" href="https://sourceforge.net/p/docutils/code/HEAD/tree/tags/docutils-0.17.1//docutils/parsers/rst/states.py#L324">
+    
+    <span class="py-keyword">def</span> <span class="py-defname">section</span><span class="function-signature">(self, title, source, style, lineno, messages)</span>:
+    <a class="sourceLink" href="https://sourceforge.net/p/docutils/code/HEAD/tree/tags/docutils-0.17.1//docutils/parsers/rst/states.py#l324">
       
       (source)
+    </a>
+    <a class="headerLink" href="#section" title="docutils.parsers.rst.states.RSTState.section">
+      
+      
+      ¶
     </a>
   </div>
   <div class="docstring functionBody">
     
-    
-    <div>Check for a valid subsection and create one if it checks out.</div>
+    <div><p>Check for a valid subsection and create one if it checks out.</p></div>
   </div>
 </div><div class="basemethod">
   
@@ -708,14 +1641,19 @@ required final one.</div>
   </a>
   <div class="functionHeader">
     
-    <span class="py-keyword">def</span> <span class="py-defname">title_inconsistent</span>(self, sourcetext, lineno):
-    <a class="sourceLink" href="https://sourceforge.net/p/docutils/code/HEAD/tree/tags/docutils-0.17.1//docutils/parsers/rst/states.py#L370">
+    
+    <span class="py-keyword">def</span> <span class="py-defname">title_inconsistent</span><span class="function-signature">(self, sourcetext, lineno)</span>:
+    <a class="sourceLink" href="https://sourceforge.net/p/docutils/code/HEAD/tree/tags/docutils-0.17.1//docutils/parsers/rst/states.py#l370">
       
       (source)
     </a>
+    <a class="headerLink" href="#title_inconsistent" title="docutils.parsers.rst.states.RSTState.title_inconsistent">
+      
+      
+      ¶
+    </a>
   </div>
   <div class="docstring functionBody">
-    
     
     <div><p class="undocumented">Undocumented</p></div>
   </div>
@@ -730,14 +1668,19 @@ required final one.</div>
   </a>
   <div class="functionHeader">
     
-    <span class="py-keyword">def</span> <span class="py-defname">unindent_warning</span>(self, node_name):
-    <a class="sourceLink" href="https://sourceforge.net/p/docutils/code/HEAD/tree/tags/docutils-0.17.1//docutils/parsers/rst/states.py#L431">
+    
+    <span class="py-keyword">def</span> <span class="py-defname">unindent_warning</span><span class="function-signature">(self, node_name)</span>:
+    <a class="sourceLink" href="https://sourceforge.net/p/docutils/code/HEAD/tree/tags/docutils-0.17.1//docutils/parsers/rst/states.py#l431">
       
       (source)
     </a>
+    <a class="headerLink" href="#unindent_warning" title="docutils.parsers.rst.states.RSTState.unindent_warning">
+      
+      
+      ¶
+    </a>
   </div>
   <div class="docstring functionBody">
-    
     
     <div><p class="undocumented">Undocumented</p></div>
   </div>
@@ -753,13 +1696,17 @@ required final one.</div>
   <div class="functionHeader">
     
     <span class="py-defname">nested_sm_cache</span>: <code>list</code> =
-    <a class="sourceLink" href="https://sourceforge.net/p/docutils/code/HEAD/tree/tags/docutils-0.17.1//docutils/parsers/rst/states.py#L211">
+    <a class="sourceLink" href="https://sourceforge.net/p/docutils/code/HEAD/tree/tags/docutils-0.17.1//docutils/parsers/rst/states.py#l211">
       
       (source)
     </a>
+    <a class="headerLink" href="#nested_sm_cache" title="docutils.parsers.rst.states.RSTState.nested_sm_cache">
+      
+      
+      ¶
+    </a>
   </div>
   <div class="functionBody">
-    
     
     <div><p class="undocumented">Undocumented</p></div>
     
@@ -776,13 +1723,17 @@ required final one.</div>
   <div class="functionHeader">
     
     <span class="py-defname">document</span> =
-    <a class="sourceLink" href="https://sourceforge.net/p/docutils/code/HEAD/tree/tags/docutils-0.17.1//docutils/parsers/rst/states.py#L224">
+    <a class="sourceLink" href="https://sourceforge.net/p/docutils/code/HEAD/tree/tags/docutils-0.17.1//docutils/parsers/rst/states.py#l224">
       
       (source)
     </a>
+    <a class="headerLink" href="#document" title="docutils.parsers.rst.states.RSTState.document">
+      
+      
+      ¶
+    </a>
   </div>
   <div class="functionBody">
-    
     
     <div><p class="undocumented">Undocumented</p></div>
     
@@ -799,13 +1750,17 @@ required final one.</div>
   <div class="functionHeader">
     
     <span class="py-defname">inliner</span> =
-    <a class="sourceLink" href="https://sourceforge.net/p/docutils/code/HEAD/tree/tags/docutils-0.17.1//docutils/parsers/rst/states.py#L223">
+    <a class="sourceLink" href="https://sourceforge.net/p/docutils/code/HEAD/tree/tags/docutils-0.17.1//docutils/parsers/rst/states.py#l223">
       
       (source)
     </a>
+    <a class="headerLink" href="#inliner" title="docutils.parsers.rst.states.RSTState.inliner">
+      
+      
+      ¶
+    </a>
   </div>
   <div class="functionBody">
-    
     
     <div><p class="undocumented">Undocumented</p></div>
     
@@ -822,13 +1777,17 @@ required final one.</div>
   <div class="functionHeader">
     
     <span class="py-defname">memo</span> =
-    <a class="sourceLink" href="https://sourceforge.net/p/docutils/code/HEAD/tree/tags/docutils-0.17.1//docutils/parsers/rst/states.py#L221">
+    <a class="sourceLink" href="https://sourceforge.net/p/docutils/code/HEAD/tree/tags/docutils-0.17.1//docutils/parsers/rst/states.py#l221">
       
       (source)
     </a>
+    <a class="headerLink" href="#memo" title="docutils.parsers.rst.states.RSTState.memo">
+      
+      
+      ¶
+    </a>
   </div>
   <div class="functionBody">
-    
     
     <div><p class="undocumented">Undocumented</p></div>
     
@@ -845,21 +1804,25 @@ required final one.</div>
   <div class="functionHeader">
     
     <span class="py-defname">nested_sm_kwargs</span> =
-    <a class="sourceLink" href="https://sourceforge.net/p/docutils/code/HEAD/tree/tags/docutils-0.17.1//docutils/parsers/rst/states.py#L214">
+    <a class="sourceLink" href="https://sourceforge.net/p/docutils/code/HEAD/tree/tags/docutils-0.17.1//docutils/parsers/rst/states.py#l214">
       
       (source)
+    </a>
+    <a class="headerLink" href="#nested_sm_kwargs" title="docutils.parsers.rst.states.RSTState.nested_sm_kwargs">
+      
+      
+      ¶
     </a>
   </div>
   <div class="functionBody">
     <div class="interfaceinfo">overrides <code><a href="docutils.statemachine.State.html#nested_sm_kwargs" class="internal-link">docutils.statemachine.State.nested_sm_kwargs</a></code></div>
-    
-    <div><p>Keyword arguments dictionary, passed to the <code><a href="docutils.parsers.rst.states.NestedStateMachine.html" class="internal-link" title="docutils.parsers.rst.states.NestedStateMachine">nested_sm</a></code> constructor.</p>
+    <div><p>Keyword arguments dictionary, passed to the <code><a href="#nested_sm" class="internal-link" title="docutils.statemachine.State.nested_sm">nested_sm</a></code> constructor.</p>
 <p>Two keys must have entries in the dictionary:</p>
 <ul class="rst-simple">
 <li>Key 'state_classes' must be set to a list of <code><a href="docutils.statemachine.State.html" class="internal-link" title="docutils.statemachine.State">State</a></code> classes.</li>
 <li>Key 'initial_state' must be set to the name of the initial state class.</li>
 </ul>
-<p>If <code><a href="#nested_sm_kwargs" class="internal-link" title="docutils.parsers.rst.states.RSTState.nested_sm_kwargs">nested_sm_kwargs</a></code> is left as <tt class="rst-docutils literal">None</tt>, 'state_classes' defaults to the
+<p>If <code><a href="#nested_sm_kwargs" class="internal-link" title="docutils.statemachine.State.nested_sm_kwargs">nested_sm_kwargs</a></code> is left as <tt class="rst-docutils rst-literal">None</tt>, 'state_classes' defaults to the
 class of the current state, and 'initial_state' defaults to the name of
 the class of the current state. Override in subclasses to avoid the
 defaults.</p>
@@ -878,13 +1841,17 @@ defaults.</p>
   <div class="functionHeader">
     
     <span class="py-defname">parent</span> =
-    <a class="sourceLink" href="https://sourceforge.net/p/docutils/code/HEAD/tree/tags/docutils-0.17.1//docutils/parsers/rst/states.py#L225">
+    <a class="sourceLink" href="https://sourceforge.net/p/docutils/code/HEAD/tree/tags/docutils-0.17.1//docutils/parsers/rst/states.py#l225">
       
       (source)
     </a>
+    <a class="headerLink" href="#parent" title="docutils.parsers.rst.states.RSTState.parent">
+      
+      
+      ¶
+    </a>
   </div>
   <div class="functionBody">
-    
     
     <div><p class="undocumented">Undocumented</p></div>
     
@@ -901,31 +1868,44 @@ defaults.</p>
   <div class="functionHeader">
     
     <span class="py-defname">reporter</span> =
-    <a class="sourceLink" href="https://sourceforge.net/p/docutils/code/HEAD/tree/tags/docutils-0.17.1//docutils/parsers/rst/states.py#L222">
+    <a class="sourceLink" href="https://sourceforge.net/p/docutils/code/HEAD/tree/tags/docutils-0.17.1//docutils/parsers/rst/states.py#l222">
       
       (source)
     </a>
+    <a class="headerLink" href="#reporter" title="docutils.parsers.rst.states.RSTState.reporter">
+      
+      
+      ¶
+    </a>
   </div>
   <div class="functionBody">
-    
     
     <div><p class="undocumented">Undocumented</p></div>
     
   </div>
 </div>
-
+        </div>
+      
       </div>
     </div>
 
     <footer class="navbar navbar-default">
+
   
-  <div class="container">
+  <div class="container-fluid">
     <a href="index.html">API Documentation</a> for <a href="https://docutils.sourceforge.io/" class="projecthome">docutils-0.17.1</a>,
   generated by <a href="https://github.com/twisted/pydoctor/">pydoctor</a>
-    22.2.2.dev0 at 2025-02-28 00:01:05.
+    24.11.2 at 2025-02-28 00:02:26.
   </div>
-</footer>
 
+  <!-- Search related scripts needs to be loaded at the end of HTML 
+    parsing not to introduce overhead and display HTML data asap -->
+  <script src="ajax.js" type="text/javascript"></script>
+  <script src="searchlib.js" type="text/javascript"></script>
+  <script src="search.js" type="text/javascript"></script>
+
+</footer>
+  
     <script src="pydoctor.js" type="text/javascript"></script>
 
   </body>

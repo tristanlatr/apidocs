@@ -7,23 +7,26 @@
   <head>
     
     <title>docutils.utils.smartquotes</title>
-    <meta name="generator" content="pydoctor 22.2.2.dev0"> 
+    <meta name="generator" content="pydoctor 24.11.2"> 
         
     </meta>
     <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=0.75" />
+    <meta name="viewport" content="width=device-width, initial-scale=1 maximum-scale=1" />
     <link rel="stylesheet" type="text/css" href="bootstrap.min.css" />
     <link rel="stylesheet" type="text/css" href="apidocs.css" />
     <link rel="stylesheet" type="text/css" href="extra.css" />
+    
 </head>
 
   <body>
 
     
 
-    <nav class="navbar navbar-default">
+    <nav class="navbar navbar-default mainnavbar">
+      
   
-  <div class="container">
+  <div class="container-fluid">
+
 
     <div class="navbar-header">
       
@@ -50,7 +53,7 @@
             
             <span class="input-group-btn">
               <a style="display: none;" class="btn btn-default" id="search-clear-button" title="Clear" onclick="clearSearch()"><img src="fonts/x-circle.svg" alt="Clear" /></a>
-              <a class="btn btn-default" id="search-help-button" title="Help" onclick="toggleSearchHelpText()"><img src="fonts/info.svg" alt="Help" /></a>
+              <a class="btn btn-default" id="apidocs-help-button" title="Help" href="apidocs-help.html"><img src="fonts/info.svg" alt="Help" /></a>
             </span>
           </div>
         </div>
@@ -58,50 +61,24 @@
       </div>
 
       <div id="search-results-container" style="display: none;">
-        <div>
+        
+        <div id="search-buttons">
           <span class="label label-default" id="search-docstrings-button">
-            <a title="Search in docstrings" onclick="toggleSearchInDocstrings()">search in docstrings</a></span>
+          <label class="checkbox-inline">
+            <input type="checkbox" id="toggle-search-in-docstrings-checkbox" value="false" onclick="toggleSearchInDocstrings()">
+              search in docstrings
+            </input>
+          </label>
+          </span>
+          
         </div>
-
+        
         <noscript>
             <h1>Cannot search: JavaScript is not supported/enabled in your browser.</h1>
         </noscript>
 
-        <div class="hint" id="search-help-box">
-          <p class="rst-last">
-      
-            Search bar offers the following options:
-            <ul>   
-                <li>
-                  <strong>Term presence.</strong> The below example searches for documents that 
-                    must contain “foo”, might contain “bar” and must not contain “baz”: <code>+foo bar -baz</code>
-                </li> 
-
-                <li>
-                  <strong>Wildcards.</strong> The below example searches for documents with words beginning with “foo”: <code>foo*</code>
-                </li> 
-
-                <li>
-                  <strong>Search in specific fields.</strong> The following search matches all objects 
-                  in "twisted.mail" that matches “search”: <code>+qname:twisted.mail.* +search</code>
-
-                  <p>
-                    Possible fields: 'name', 'qname' (fully qualified name), 'docstring', and 'kind'.
-                    Last two fields are only applicable if "search in docstrings" is enabled.
-                  </p>
-                </li>
-
-                <li>
-                  <strong>Fuzzy matches.</strong> The following search matches all documents 
-                  that have a word within 1 edit distance of “foo”: <code>foo~1</code>
-                </li>
-            </ul>
-
-          </p>
-        </div>
-
         <div id="search-status"> </div>
-        
+
         <div class="warning" id="search-warn-box" style="display: none;">
           <p class="rst-last"><span id="search-warn"></span></p>
         </div>
@@ -110,73 +87,757 @@
           <!-- Filled dynamically by JS -->
         </table>
         
-        <div style="margin-top: 8px;">
-          <p>Results provided by <a href="https://lunrjs.com">Lunr.js</a></p>
+        <div style="margin-top: 10px;">
+          <p>For more information on the search, visit the <a href="apidocs-help.html#rst-search">help page</a>.</p>
         </div>
       </div>
 
     </div>
+
+
+  </div>
+</nav>
+    
+    <div class="container-fluid">
+
+      <!-- Side navigation -->
+      <div class="sidebarcontainer" style="display: none;">
+        
+        <div class="sidebar"><nav class="sidebar">
+  
+
+  <div>
+
+      <div class="thingTitle">
+        <span>Module</span>
+        <code class="thisobject"><a href="docutils.utils.smartquotes.html" class="internal-link" title="This module">smartquotes</a></code> 
+      </div>
+      
+      <div>
+         
+          <div class="childrenKindTitle">Contents</div>
+          <ul><li><a class="rst-internal rst-reference" href="#rst-synopsis" id="rst-toc-entry-1">Synopsis</a></li>
+<li><a class="rst-internal rst-reference" href="#rst-authors" id="rst-toc-entry-2">Authors</a></li>
+<li><a class="rst-internal rst-reference" href="#rst-additional-credits" id="rst-toc-entry-3">Additional Credits</a></li>
+<li><a class="rst-internal rst-reference" href="#rst-copyright-and-license" id="rst-toc-entry-4">Copyright and License</a></li>
+<li><a class="rst-internal rst-reference" href="#rst-description" id="rst-toc-entry-5">Description</a></li>
+<li><a class="rst-internal rst-reference" href="#rst-backslash-escapes" id="rst-toc-entry-6">Backslash Escapes</a></li>
+<li><p class="rst-first"><a class="rst-internal rst-reference" href="#rst-caveats" id="rst-toc-entry-7">Caveats</a></p>
+<ul class="rst-simple">
+<li><a class="rst-internal rst-reference" href="#rst-why-you-might-not-want-to-use-smart-quotes-in-your-weblog" id="rst-toc-entry-8">Why You Might Not Want to Use Smart Quotes in Your Weblog</a></li>
+<li><a class="rst-internal rst-reference" href="#rst-algorithmic-shortcomings" id="rst-toc-entry-9">Algorithmic Shortcomings</a></li>
+</ul>
+</li>
+<li><a class="rst-internal rst-reference" href="#rst-version-history" id="rst-toc-entry-10">Version History</a></li>
+</ul>
+        
+
+        
+         
+
+        <div class="childrenKindTitle">Classes</div>
+        <ul>
+    
+    <li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="docutils.utils.smartquotes.smartchars.html" class="internal-link" title="docutils.utils.smartquotes.smartchars">smartchars</a></code>
+            </div>
+        
+
+    </li>
+</ul>
+
+        <div class="childrenKindTitle">Functions</div>
+        <ul>
+    
+    <li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="#educate_tokens" class="internal-link" title="docutils.utils.smartquotes.educate_tokens">educate<wbr></wbr>_tokens</a></code>
+            </div>
+        
+
+    </li><li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="#educateBackticks" class="internal-link" title="docutils.utils.smartquotes.educateBackticks">educate<wbr></wbr>Backticks</a></code>
+            </div>
+        
+
+    </li><li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="#educateDashes" class="internal-link" title="docutils.utils.smartquotes.educateDashes">educate<wbr></wbr>Dashes</a></code>
+            </div>
+        
+
+    </li><li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="#educateDashesOldSchool" class="internal-link" title="docutils.utils.smartquotes.educateDashesOldSchool">educate<wbr></wbr>Dashes<wbr></wbr>Old<wbr></wbr>School</a></code>
+            </div>
+        
+
+    </li><li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="#educateDashesOldSchoolInverted" class="internal-link" title="docutils.utils.smartquotes.educateDashesOldSchoolInverted">educate<wbr></wbr>Dashes<wbr></wbr>Old<wbr></wbr>School<wbr></wbr>Inverted</a></code>
+            </div>
+        
+
+    </li><li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="#educateEllipses" class="internal-link" title="docutils.utils.smartquotes.educateEllipses">educate<wbr></wbr>Ellipses</a></code>
+            </div>
+        
+
+    </li><li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="#educateQuotes" class="internal-link" title="docutils.utils.smartquotes.educateQuotes">educate<wbr></wbr>Quotes</a></code>
+            </div>
+        
+
+    </li><li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="#educateSingleBackticks" class="internal-link" title="docutils.utils.smartquotes.educateSingleBackticks">educate<wbr></wbr>Single<wbr></wbr>Backticks</a></code>
+            </div>
+        
+
+    </li><li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="#processEscapes" class="internal-link" title="docutils.utils.smartquotes.processEscapes">process<wbr></wbr>Escapes</a></code>
+            </div>
+        
+
+    </li><li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="#smartyPants" class="internal-link" title="docutils.utils.smartquotes.smartyPants">smarty<wbr></wbr>Pants</a></code>
+            </div>
+        
+
+    </li><li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="#stupefyEntities" class="internal-link" title="docutils.utils.smartquotes.stupefyEntities">stupefy<wbr></wbr>Entities</a></code>
+            </div>
+        
+
+    </li><li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="#tokenize" class="internal-link" title="docutils.utils.smartquotes.tokenize">tokenize</a></code>
+            </div>
+        
+
+    </li>
+</ul> 
+
+        
+         
+
+        <div class="childrenKindTitle">Variables</div>
+        <ul>
+    
+    <li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="#default_smartypants_attr" class="internal-link" title="docutils.utils.smartquotes.default_smartypants_attr">default<wbr></wbr>_smartypants<wbr></wbr>_attr</a></code>
+            </div>
+        
+
+    </li><li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="#options" class="internal-link" title="docutils.utils.smartquotes.options">options</a></code>
+            </div>
+        
+
+    </li>
+</ul> 
+
+        
+         
+        
+      </div>
+  </div><div>
+
+      <div class="thingTitle">
+        <span>Package</span>
+        <code><a href="docutils.utils.html" class="internal-link" title="The parent of this module">utils</a></code> 
+      </div>
+      
+      <div>
+        
+
+        <div class="childrenKindTitle">Modules</div>
+        <ul>
+    
+    <li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="docutils.utils.code_analyzer.html" class="internal-link" title="docutils.utils.code_analyzer">code<wbr></wbr>_analyzer</a></code>
+            </div>
+        
+
+    </li><li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="docutils.utils.error_reporting.html" class="internal-link" title="docutils.utils.error_reporting">error<wbr></wbr>_reporting</a></code>
+            </div>
+        
+
+    </li><li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="docutils.utils.math.html" class="internal-link" title="docutils.utils.math">math</a></code>
+            </div>
+        
+
+    </li><li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="docutils.utils.punctuation_chars.html" class="internal-link" title="docutils.utils.punctuation_chars">punctuation<wbr></wbr>_chars</a></code>
+            </div>
+        
+
+    </li><li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="docutils.utils.roman.html" class="internal-link" title="docutils.utils.roman">roman</a></code>
+            </div>
+        
+
+    </li><li class=" thisobject">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="docutils.utils.smartquotes.html" class="internal-link" title="docutils.utils.smartquotes">smartquotes</a></code>
+            </div>
+        
+
+    </li><li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="docutils.utils.urischemes.html" class="internal-link" title="docutils.utils.urischemes">urischemes</a></code>
+            </div>
+        
+
+    </li>
+</ul> 
+
+        <div class="childrenKindTitle">Classes</div>
+        <ul>
+    
+    <li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="docutils.utils.DependencyList.html" class="internal-link" title="docutils.utils.DependencyList"><wbr></wbr>Dependency<wbr></wbr>List</a></code>
+            </div>
+        
+
+    </li><li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="docutils.utils.Reporter.html" class="internal-link" title="docutils.utils.Reporter"><wbr></wbr>Reporter</a></code>
+            </div>
+        
+
+    </li><li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="docutils.utils.BadOptionDataError.html" class="internal-link" title="docutils.utils.BadOptionDataError"><wbr></wbr>Bad<wbr></wbr>Option<wbr></wbr>Data<wbr></wbr>Error</a></code>
+            </div>
+        
+
+    </li><li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="docutils.utils.BadOptionError.html" class="internal-link" title="docutils.utils.BadOptionError"><wbr></wbr>Bad<wbr></wbr>Option<wbr></wbr>Error</a></code>
+            </div>
+        
+
+    </li><li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="docutils.utils.DuplicateOptionError.html" class="internal-link" title="docutils.utils.DuplicateOptionError"><wbr></wbr>Duplicate<wbr></wbr>Option<wbr></wbr>Error</a></code>
+            </div>
+        
+
+    </li><li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="docutils.utils.ExtensionOptionError.html" class="internal-link" title="docutils.utils.ExtensionOptionError"><wbr></wbr>Extension<wbr></wbr>Option<wbr></wbr>Error</a></code>
+            </div>
+        
+
+    </li><li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="docutils.utils.NameValueError.html" class="internal-link" title="docutils.utils.NameValueError"><wbr></wbr>Name<wbr></wbr>Value<wbr></wbr>Error</a></code>
+            </div>
+        
+
+    </li><li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="docutils.utils.SystemMessage.html" class="internal-link" title="docutils.utils.SystemMessage"><wbr></wbr>System<wbr></wbr>Message</a></code>
+            </div>
+        
+
+    </li><li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="docutils.utils.SystemMessagePropagation.html" class="internal-link" title="docutils.utils.SystemMessagePropagation"><wbr></wbr>System<wbr></wbr>Message<wbr></wbr>Propagation</a></code>
+            </div>
+        
+
+    </li>
+</ul>
+
+        <div class="childrenKindTitle">Functions</div>
+        <ul>
+    
+    <li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="docutils.utils.html#assemble_option_dict" class="internal-link" title="docutils.utils.assemble_option_dict">assemble<wbr></wbr>_option<wbr></wbr>_dict</a></code>
+            </div>
+        
+
+    </li><li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="docutils.utils.html#clean_rcs_keywords" class="internal-link" title="docutils.utils.clean_rcs_keywords">clean<wbr></wbr>_rcs<wbr></wbr>_keywords</a></code>
+            </div>
+        
+
+    </li><li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="docutils.utils.html#column_indices" class="internal-link" title="docutils.utils.column_indices">column<wbr></wbr>_indices</a></code>
+            </div>
+        
+
+    </li><li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="docutils.utils.html#column_width" class="internal-link" title="docutils.utils.column_width">column<wbr></wbr>_width</a></code>
+            </div>
+        
+
+    </li><li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="docutils.utils.html#decode_path" class="internal-link" title="docutils.utils.decode_path">decode<wbr></wbr>_path</a></code>
+            </div>
+        
+
+    </li><li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="docutils.utils.html#escape2null" class="internal-link" title="docutils.utils.escape2null">escape2null</a></code>
+            </div>
+        
+
+    </li><li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="docutils.utils.html#extract_extension_options" class="internal-link" title="docutils.utils.extract_extension_options">extract<wbr></wbr>_extension<wbr></wbr>_options</a></code>
+            </div>
+        
+
+    </li><li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="docutils.utils.html#extract_name_value" class="internal-link" title="docutils.utils.extract_name_value">extract<wbr></wbr>_name<wbr></wbr>_value</a></code>
+            </div>
+        
+
+    </li><li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="docutils.utils.html#extract_options" class="internal-link" title="docutils.utils.extract_options">extract<wbr></wbr>_options</a></code>
+            </div>
+        
+
+    </li><li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="docutils.utils.html#find_combining_chars" class="internal-link" title="docutils.utils.find_combining_chars">find<wbr></wbr>_combining<wbr></wbr>_chars</a></code>
+            </div>
+        
+
+    </li><li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="docutils.utils.html#find_file_in_dirs" class="internal-link" title="docutils.utils.find_file_in_dirs">find<wbr></wbr>_file<wbr></wbr>_in<wbr></wbr>_dirs</a></code>
+            </div>
+        
+
+    </li><li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="docutils.utils.html#get_source_line" class="internal-link" title="docutils.utils.get_source_line">get<wbr></wbr>_source<wbr></wbr>_line</a></code>
+            </div>
+        
+
+    </li><li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="docutils.utils.html#get_stylesheet_list" class="internal-link" title="docutils.utils.get_stylesheet_list">get<wbr></wbr>_stylesheet<wbr></wbr>_list</a></code>
+            </div>
+        
+
+    </li><li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="docutils.utils.html#get_stylesheet_reference" class="internal-link" title="docutils.utils.get_stylesheet_reference">get<wbr></wbr>_stylesheet<wbr></wbr>_reference</a></code>
+            </div>
+        
+
+    </li><li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="docutils.utils.html#get_trim_footnote_ref_space" class="internal-link" title="docutils.utils.get_trim_footnote_ref_space">get<wbr></wbr>_trim<wbr></wbr>_footnote<wbr></wbr>_ref<wbr></wbr>_space</a></code>
+            </div>
+        
+
+    </li><li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="docutils.utils.html#new_document" class="internal-link" title="docutils.utils.new_document">new<wbr></wbr>_document</a></code>
+            </div>
+        
+
+    </li><li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="docutils.utils.html#new_reporter" class="internal-link" title="docutils.utils.new_reporter">new<wbr></wbr>_reporter</a></code>
+            </div>
+        
+
+    </li><li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="docutils.utils.html#normalize_language_tag" class="internal-link" title="docutils.utils.normalize_language_tag">normalize<wbr></wbr>_language<wbr></wbr>_tag</a></code>
+            </div>
+        
+
+    </li><li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="docutils.utils.html#relative_path" class="internal-link" title="docutils.utils.relative_path">relative<wbr></wbr>_path</a></code>
+            </div>
+        
+
+    </li><li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="docutils.utils.html#split_escaped_whitespace" class="internal-link" title="docutils.utils.split_escaped_whitespace">split<wbr></wbr>_escaped<wbr></wbr>_whitespace</a></code>
+            </div>
+        
+
+    </li><li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="docutils.utils.html#strip_combining_chars" class="internal-link" title="docutils.utils.strip_combining_chars">strip<wbr></wbr>_combining<wbr></wbr>_chars</a></code>
+            </div>
+        
+
+    </li><li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="docutils.utils.html#uniq" class="internal-link" title="docutils.utils.uniq">uniq</a></code>
+            </div>
+        
+
+    </li><li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="docutils.utils.html#unique_combinations" class="internal-link" title="docutils.utils.unique_combinations">unique<wbr></wbr>_combinations</a></code>
+            </div>
+        
+
+    </li><li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="docutils.utils.html#version_identifier" class="internal-link" title="docutils.utils.version_identifier">version<wbr></wbr>_identifier</a></code>
+            </div>
+        
+
+    </li>
+</ul> 
+
+        
+         
+
+        <div class="childrenKindTitle">Variables</div>
+        <ul>
+    
+    <li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="docutils.utils.html#east_asian_widths" class="internal-link" title="docutils.utils.east_asian_widths">east<wbr></wbr>_asian<wbr></wbr>_widths</a></code>
+            </div>
+        
+
+    </li><li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="docutils.utils.html#release_level_abbreviations" class="internal-link" title="docutils.utils.release_level_abbreviations">release<wbr></wbr>_level<wbr></wbr>_abbreviations</a></code>
+            </div>
+        
+
+    </li>
+</ul> 
+
+        
+         
+        
+      </div>
   </div>
 
-  <script src="ajax.js" type="text/javascript"></script>
-  <script src="search.js" type="text/javascript"></script>
-
 </nav>
-
-    
-
-    <div class="container">
-
-      <div class="page-header">
-        <h1 class="module"><code><code><a href="index.html" class="internal-link">docutils</a></code><wbr></wbr>.<code><a href="docutils.utils.html" class="internal-link" title="docutils.utils">utils</a></code><wbr></wbr>.<code><a href="docutils.utils.smartquotes.html" class="internal-link" title="docutils.utils.smartquotes">smartquotes</a></code></code></h1>
-        <div id="showPrivate">
-          <button class="btn btn-link" onclick="togglePrivate()">Toggle Private API</button>
         </div>
+        <div id="collapseSideBar">
+          <a class="btn btn-link" onclick="toggleSideBarCollapse()" title="Toggle Sidebar Collapse">
+          </a>
+        </div> 
+        <script src="sidebartoggle.js" type="text/javascript"></script>
+       
       </div>
 
-      <div class="categoryHeader">
-        module documentation
-      </div>
+      <div id="main" class="">
+        
 
-      <div class="extrasDocstring">
-        <a href="https://sourceforge.net/p/docutils/code/HEAD/tree/tags/docutils-0.17.1//docutils/utils/smartquotes.py" class="sourceLink">(source)</a>
-        <p></p>
-      </div>
+        
 
-      <div class="moduleDocstring">
-        <div><div class="rst-section" id="rst-synopsis">
+        <div class="page-header">
+          <h1 class="module"><code><code><a href="index.html" class="internal-link">docutils</a></code><wbr></wbr>.<code><a href="docutils.utils.html" class="internal-link" title="docutils.utils">utils</a></code><wbr></wbr>.<code><a href="docutils.utils.smartquotes.html" class="internal-link" title="docutils.utils.smartquotes">smartquotes</a></code></code></h1>
+          <div id="showPrivate">
+            <button class="btn btn-link" onclick="togglePrivate()">Toggle Private API</button>
+          </div>
+        </div>
+
+        <div class="categoryHeader">
+          module documentation
+        </div>
+
+        <div class="extrasDocstring">
+          <a href="https://sourceforge.net/p/docutils/code/HEAD/tree/tags/docutils-0.17.1//docutils/utils/smartquotes.py" class="sourceLink">(source)</a>
+          <p></p>
+        </div>
+
+        <div class="moduleDocstring">
+          <div><p><div class="rst-section" id="rst-synopsis">
 <h2 class="heading">Synopsis</h2>
 <p>"SmartyPants" is a free web publishing plug-in for Movable Type, Blosxom, and
 BBEdit that easily translates plain ASCII punctuation characters into "smart"
 typographic punctuation characters.</p>
-<p><tt class="rst-docutils literal">smartquotes.py</tt> is an adaption of "SmartyPants" to <a class="rst-reference external" href="http://docutils.sf.net/" target="_top">Docutils</a>.</p>
+<p><tt class="rst-docutils rst-literal">smartquotes.py</tt> is an adaption of "SmartyPants" to <a class="rst-external rst-reference" href="http://docutils.sf.net/" target="_top">Docutils</a>.</p>
 <ul class="rst-simple">
 <li>Using Unicode instead of HTML entities for typographic punctuation
 characters, it works for any output format that supports Unicode.</li>
-<li>Supports <a class="rst-reference external" href="http://en.wikipedia.org/wiki/Non-English_usage_of_quotation_marks" target="_top">language specific quote characters</a>.</li>
+<li>Supports <a class="rst-external rst-reference" href="http://en.wikipedia.org/wiki/Non-English_usage_of_quotation_marks" target="_top">language specific quote characters</a>.</li>
 </ul>
 </div>
 <div class="rst-section" id="rst-authors">
 <h2 class="heading">Authors</h2>
-<p><a class="rst-reference external" href="http://daringfireball.net/" target="_top">John Gruber</a> did all of the hard work of writing this software in Perl for
-<a class="rst-reference external" href="http://www.movabletype.org/" target="_top">Movable Type</a> and almost all of this useful documentation.  <a class="rst-reference external" href="http://web.chad.org/" target="_top">Chad Miller</a>
-ported it to Python to use with <a class="rst-reference external" href="http://pyblosxom.bluesock.org/" target="_top">Pyblosxom</a>.
-Adapted to <a class="rst-reference external" href="http://docutils.sf.net/" target="_top">Docutils</a> by Günter Milde.</p>
+<p><a class="rst-external rst-reference" href="http://daringfireball.net/" target="_top">John Gruber</a> did all of the hard work of writing this software in Perl for
+<a class="rst-external rst-reference" href="http://www.movabletype.org/" target="_top">Movable Type</a> and almost all of this useful documentation.  <a class="rst-external rst-reference" href="http://web.chad.org/" target="_top">Chad Miller</a>
+ported it to Python to use with <a class="rst-external rst-reference" href="http://pyblosxom.bluesock.org/" target="_top">Pyblosxom</a>.
+Adapted to <a class="rst-external rst-reference" href="http://docutils.sf.net/" target="_top">Docutils</a> by Günter Milde.</p>
 </div>
 <div class="rst-section" id="rst-additional-credits">
 <h2 class="heading">Additional Credits</h2>
 <p>Portions of the SmartyPants original work are based on Brad Choate's nifty
-MTRegex plug-in.  <a class="rst-reference external" href="http://bradchoate.com/" target="_top">Brad Choate</a> also contributed a few bits of source code to
+MTRegex plug-in.  <a class="rst-external rst-reference" href="http://bradchoate.com/" target="_top">Brad Choate</a> also contributed a few bits of source code to
 this plug-in.  Brad Choate is a fine hacker indeed.</p>
-<p><a class="rst-reference external" href="http://antipixel.com/" target="_top">Jeremy Hedley</a> and <a class="rst-reference external" href="http://playbacktime.com/" target="_top">Charles Wiltgen</a> deserve mention for exemplary beta
+<p><a class="rst-external rst-reference" href="http://antipixel.com/" target="_top">Jeremy Hedley</a> and <a class="rst-external rst-reference" href="http://playbacktime.com/" target="_top">Charles Wiltgen</a> deserve mention for exemplary beta
 testing of the original SmartyPants.</p>
-<p><a class="rst-reference external" href="http://raelity.org/" target="_top">Rael Dornfest</a> ported SmartyPants to Blosxom.</p>
+<p><a class="rst-external rst-reference" href="http://raelity.org/" target="_top">Rael Dornfest</a> ported SmartyPants to Blosxom.</p>
 </div>
 <div class="rst-section" id="rst-copyright-and-license">
 <h2 class="heading">Copyright and License</h2>
-<p><a class="rst-reference external" href="http://daringfireball.net/projects/smartypants/" target="_top">SmartyPants</a> license (3-Clause BSD license):</p>
+<p><a class="rst-external rst-reference" href="http://daringfireball.net/projects/smartypants/" target="_top">SmartyPants</a> license (3-Clause BSD license):</p>
 <blockquote>
-<p>Copyright (c) 2003 John Gruber (<a class="rst-reference external" href="http://daringfireball.net/" target="_top">http://daringfireball.net/</a>)
+<p>Copyright (c) 2003 John Gruber (<a class="rst-external rst-reference" href="http://daringfireball.net/" target="_top">http://daringfireball.net/</a>)
 All rights reserved.</p>
 <p>Redistribution and use in source and binary forms, with or without
 modification, are permitted provided that the following conditions are
@@ -237,15 +898,15 @@ of this software, even if advised of the possibility of such damage.</p>
 <ul class="rst-simple">
 <li>Straight quotes ( " and ' ) into "curly" quote characters</li>
 <li>Backticks-style quotes (``like this'') into "curly" quote characters</li>
-<li>Dashes (<tt class="rst-docutils literal"><span class="pre">--</span></tt> and <tt class="rst-docutils literal"><span class="pre">---</span></tt>) into en- and em-dash entities</li>
-<li>Three consecutive dots (<tt class="rst-docutils literal">...</tt> or <tt class="rst-docutils literal">. . .</tt>) into an ellipsis entity</li>
+<li>Dashes (<tt class="rst-docutils rst-literal"><span class="pre">--</span></tt> and <tt class="rst-docutils rst-literal"><span class="pre">---</span></tt>) into en- and em-dash entities</li>
+<li>Three consecutive dots (<tt class="rst-docutils rst-literal">...</tt> or <tt class="rst-docutils rst-literal">. . .</tt>) into an ellipsis entity</li>
 </ul>
 <p>This means you can write, edit, and save your posts using plain old
 ASCII straight quotes, plain dashes, and plain dots, but your published
 posts (and final HTML output) will appear with smart quotes, em-dashes,
 and proper ellipses.</p>
-<p>SmartyPants does not modify characters within <tt class="rst-docutils literal">&lt;pre&gt;</tt>, <tt class="rst-docutils literal">&lt;code&gt;</tt>, <tt class="rst-docutils literal">&lt;kbd&gt;</tt>,
-<tt class="rst-docutils literal">&lt;math&gt;</tt> or <tt class="rst-docutils literal">&lt;script&gt;</tt> tag blocks. Typically, these tags are used to
+<p>SmartyPants does not modify characters within <tt class="rst-docutils rst-literal">&lt;pre&gt;</tt>, <tt class="rst-docutils rst-literal">&lt;code&gt;</tt>, <tt class="rst-docutils rst-literal">&lt;kbd&gt;</tt>,
+<tt class="rst-docutils rst-literal">&lt;math&gt;</tt> or <tt class="rst-docutils rst-literal">&lt;script&gt;</tt> tag blocks. Typically, these tags are used to
 display text where smart quotes and other "smart punctuation" would not be
 appropriate, such as source code or example markup.</p>
 </div>
@@ -266,22 +927,22 @@ too.</p>
 </tr>
 </thead>
 <tbody valign="top">
-<tr><td><tt class="rst-docutils literal">\\</tt></td>
+<tr><td><tt class="rst-docutils rst-literal">\\</tt></td>
 <td>\</td>
 </tr>
-<tr><td><tt class="rst-docutils literal">\\"</tt></td>
+<tr><td><tt class="rst-docutils rst-literal">\\"</tt></td>
 <td>\"</td>
 </tr>
-<tr><td><tt class="rst-docutils literal">\\'</tt></td>
+<tr><td><tt class="rst-docutils rst-literal">\\'</tt></td>
 <td>\'</td>
 </tr>
-<tr><td><tt class="rst-docutils literal">\\.</tt></td>
+<tr><td><tt class="rst-docutils rst-literal">\\.</tt></td>
 <td>\.</td>
 </tr>
-<tr><td><tt class="rst-docutils literal">\\-</tt></td>
+<tr><td><tt class="rst-docutils rst-literal">\\-</tt></td>
 <td>\-</td>
 </tr>
-<tr><td><tt class="rst-docutils literal">\\`</tt></td>
+<tr><td><tt class="rst-docutils rst-literal">\\`</tt></td>
 <td>\`</td>
 </tr>
 </tbody>
@@ -359,48 +1020,48 @@ the source:</p>
 <h2 class="heading">Version History</h2>
 <dl class="rst-docutils">
 <dt>1.8.1   2017-10-25</dt>
-<dd><ul class="rst-first rst-last rst-simple">
+<dd><ul class="rst-simple rst-first rst-last">
 <li>Use open quote after Unicode whitespace, ZWSP, and ZWNJ.</li>
 <li>Code cleanup.</li>
 </ul>
 </dd>
 <dt>1.8:    2017-04-24</dt>
-<dd><ul class="rst-first rst-last rst-simple">
+<dd><ul class="rst-simple rst-first rst-last">
 <li>Command line front-end.</li>
 </ul>
 </dd>
 <dt>1.7.1:  2017-03-19</dt>
-<dd><ul class="rst-first rst-last rst-simple">
+<dd><ul class="rst-simple rst-first rst-last">
 <li>Update and extend language-dependent quotes.</li>
 <li>Differentiate apostrophe from single quote.</li>
 </ul>
 </dd>
 <dt>1.7:    2012-11-19</dt>
-<dd><ul class="rst-first rst-last rst-simple">
+<dd><ul class="rst-simple rst-first rst-last">
 <li>Internationalization: language-dependent quotes.</li>
 </ul>
 </dd>
 <dt>1.6.1:  2012-11-06</dt>
-<dd><ul class="rst-first rst-last rst-simple">
+<dd><ul class="rst-simple rst-first rst-last">
 <li>Refactor code, code cleanup,</li>
 <li><code><a href="#educate_tokens" class="internal-link" title="docutils.utils.smartquotes.educate_tokens">educate_tokens()</a></code> generator as interface for Docutils.</li>
 </ul>
 </dd>
 <dt>1.6:    2010-08-26</dt>
-<dd><ul class="rst-first rst-last rst-simple">
+<dd><ul class="rst-simple rst-first rst-last">
 <li>Adaption to Docutils:
 - Use Unicode instead of HTML entities,
 - Remove code special to pyblosxom.</li>
 </ul>
 </dd>
 <dt>1.5_1.6: Fri, 27 Jul 2007 07:06:40 -0400</dt>
-<dd><ul class="rst-first rst-last rst-simple">
+<dd><ul class="rst-simple rst-first rst-last">
 <li>Fixed bug where blocks of precious unalterable text was instead
 interpreted.  Thanks to Le Roux and Dirk van Oosterbosch.</li>
 </ul>
 </dd>
 <dt>1.5_1.5: Sat, 13 Aug 2005 15:50:24 -0400</dt>
-<dd><ul class="rst-first rst-last rst-simple">
+<dd><ul class="rst-simple rst-first rst-last">
 <li>Fix bogus magical quotation when there is no hint that the
 user wants it, e.g., in "21st century".  Thanks to Nathan Hamblen.</li>
 <li>Be smarter about quotes before terminating numbers in an en-dash'ed
@@ -408,7 +1069,7 @@ range.</li>
 </ul>
 </dd>
 <dt>1.5_1.4: Thu, 10 Feb 2005 20:24:36 -0500</dt>
-<dd><ul class="rst-first rst-last rst-simple">
+<dd><ul class="rst-simple rst-first rst-last">
 <li>Fix a date-processing bug, as reported by jacob childress.</li>
 <li>Begin a test-suite for ensuring correct output.</li>
 <li>Removed import of "string", since I didn't really need it.
@@ -416,35 +1077,35 @@ range.</li>
 </ul>
 </dd>
 <dt>1.5_1.3: Wed, 15 Sep 2004 18:25:58 -0400</dt>
-<dd><ul class="rst-first rst-last rst-simple">
+<dd><ul class="rst-simple rst-first rst-last">
 <li>Abort processing if the flavour is in forbidden-list.  Default of
 [ "rss" ]   (Idea of Wolfgang SCHNERRING.)</li>
 <li>Remove stray virgules from en-dashes.  Patch by Wolfgang SCHNERRING.</li>
 </ul>
 </dd>
 <dt>1.5_1.2: Mon, 24 May 2004 08:14:54 -0400</dt>
-<dd><ul class="rst-first rst-last rst-simple">
+<dd><ul class="rst-simple rst-first rst-last">
 <li>Some single quotes weren't replaced properly.  Diff-tesuji played
 by Benjamin GEIGER.</li>
 </ul>
 </dd>
 <dt>1.5_1.1: Sun, 14 Mar 2004 14:38:28 -0500</dt>
-<dd><ul class="rst-first rst-last rst-simple">
+<dd><ul class="rst-simple rst-first rst-last">
 <li>Support upcoming pyblosxom 0.9 plugin verification feature.</li>
 </ul>
 </dd>
 <dt>1.5_1.0: Tue, 09 Mar 2004 08:08:35 -0500</dt>
-<dd><ul class="rst-first rst-last rst-simple">
+<dd><ul class="rst-simple rst-first rst-last">
 <li>Initial release</li>
 </ul>
 </dd>
 </dl>
 </div>
-</div>
-      </div>
+</p></div>
+        </div>
 
-      <div id="splitTables">
-        <table class="children sortable" id="id1241">
+        <div id="splitTables">
+          <table class="children sortable" id="id1237">
   
   
   <tr class="class">
@@ -455,67 +1116,67 @@ by Benjamin GEIGER.</li>
   </tr><tr class="function">
     
     <td>Function</td>
-    <td><code><a href="#educate_tokens" class="internal-link" title="docutils.utils.smartquotes.educate_tokens">educate​_tokens</a></code></td>
+    <td><code><a href="#educate_tokens" class="internal-link" title="docutils.utils.smartquotes.educate_tokens">educate<wbr></wbr>_tokens</a></code></td>
     <td>Return iterator that "educates" the items of <code>text_tokens</code>.</td>
   </tr><tr class="function">
     
     <td>Function</td>
-    <td><code><a href="#educateBackticks" class="internal-link" title="docutils.utils.smartquotes.educateBackticks">educate​Backticks</a></code></td>
-    <td><span class="undocumented">No summary</span></td>
+    <td><code><a href="#educateBackticks" class="internal-link" title="docutils.utils.smartquotes.educateBackticks">educate<wbr></wbr>Backticks</a></code></td>
+    <td>Parameter:  String (unicode or bytes). Returns:    The <code>text</code>, with ``backticks'' -style double quotes</td>
   </tr><tr class="function">
     
     <td>Function</td>
-    <td><code><a href="#educateDashes" class="internal-link" title="docutils.utils.smartquotes.educateDashes">educate​Dashes</a></code></td>
-    <td>Parameter:  String (unicode or bytes). Returns:    The <code>text</code>, with each instance of "--" translated to an em-dash character.</td>
+    <td><code><a href="#educateDashes" class="internal-link" title="docutils.utils.smartquotes.educateDashes">educate<wbr></wbr>Dashes</a></code></td>
+    <td>Parameter:  String (unicode or bytes). Returns:    The <code>text</code>, with each instance of "--" translated to</td>
   </tr><tr class="function">
     
     <td>Function</td>
-    <td><code><a href="#educateDashesOldSchool" class="internal-link" title="docutils.utils.smartquotes.educateDashesOldSchool">educate​Dashes​Old​School</a></code></td>
-    <td><span class="undocumented">No summary</span></td>
+    <td><code><a href="#educateDashesOldSchool" class="internal-link" title="docutils.utils.smartquotes.educateDashesOldSchool">educate<wbr></wbr>Dashes<wbr></wbr>Old<wbr></wbr>School</a></code></td>
+    <td>Parameter:  String (unicode or bytes). Returns:    The <code>text</code>, with each instance of "--" translated to</td>
   </tr><tr class="function">
     
     <td>Function</td>
-    <td><code><a href="#educateDashesOldSchoolInverted" class="internal-link" title="docutils.utils.smartquotes.educateDashesOldSchoolInverted">educate​Dashes​Old​School​Inverted</a></code></td>
-    <td><span class="undocumented">No summary</span></td>
+    <td><code><a href="#educateDashesOldSchoolInverted" class="internal-link" title="docutils.utils.smartquotes.educateDashesOldSchoolInverted">educate<wbr></wbr>Dashes<wbr></wbr>Old<wbr></wbr>School<wbr></wbr>Inverted</a></code></td>
+    <td>Parameter:  String (unicode or bytes). Returns:    The <code>text</code>, with each instance of "--" translated to</td>
   </tr><tr class="function">
     
     <td>Function</td>
-    <td><code><a href="#educateEllipses" class="internal-link" title="docutils.utils.smartquotes.educateEllipses">educate​Ellipses</a></code></td>
-    <td>Parameter:  String (unicode or bytes). Returns:    The <code>text</code>, with each instance of "..." translated to an ellipsis character.</td>
+    <td><code><a href="#educateEllipses" class="internal-link" title="docutils.utils.smartquotes.educateEllipses">educate<wbr></wbr>Ellipses</a></code></td>
+    <td>Parameter:  String (unicode or bytes). Returns:    The <code>text</code>, with each instance of "..." translated to</td>
   </tr><tr class="function">
     
     <td>Function</td>
-    <td><code><a href="#educateQuotes" class="internal-link" title="docutils.utils.smartquotes.educateQuotes">educate​Quotes</a></code></td>
-    <td>Parameter:  - text string (unicode or bytes). - language (<code>BCP 47</code> language tag.) Returns:    The <code>text</code>, with "educated" curly quote characters.</td>
+    <td><code><a href="#educateQuotes" class="internal-link" title="docutils.utils.smartquotes.educateQuotes">educate<wbr></wbr>Quotes</a></code></td>
+    <td>language (<code>BCP 47</code> language tag.)</td>
   </tr><tr class="function">
     
     <td>Function</td>
-    <td><code><a href="#educateSingleBackticks" class="internal-link" title="docutils.utils.smartquotes.educateSingleBackticks">educate​Single​Backticks</a></code></td>
-    <td>Parameter:  String (unicode or bytes). Returns:    The <code>text</code>, with `backticks' -style single quotes translated into HTML curly quote entities.</td>
+    <td><code><a href="#educateSingleBackticks" class="internal-link" title="docutils.utils.smartquotes.educateSingleBackticks">educate<wbr></wbr>Single<wbr></wbr>Backticks</a></code></td>
+    <td>Parameter:  String (unicode or bytes). Returns:    The <code>text</code>, with `backticks' -style single quotes</td>
   </tr><tr class="function">
     
     <td>Function</td>
-    <td><code><a href="#processEscapes" class="internal-link" title="docutils.utils.smartquotes.processEscapes">process​Escapes</a></code></td>
-    <td><span class="undocumented">No summary</span></td>
+    <td><code><a href="#processEscapes" class="internal-link" title="docutils.utils.smartquotes.processEscapes">process<wbr></wbr>Escapes</a></code></td>
+    <td>Parameter:  String (unicode or bytes). Returns:    The <code>text</code>, with after processing the following backslash</td>
   </tr><tr class="function">
     
     <td>Function</td>
-    <td><code><a href="#smartyPants" class="internal-link" title="docutils.utils.smartquotes.smartyPants">smarty​Pants</a></code></td>
+    <td><code><a href="#smartyPants" class="internal-link" title="docutils.utils.smartquotes.smartyPants">smarty<wbr></wbr>Pants</a></code></td>
     <td>Main function for "traditional" use.</td>
   </tr><tr class="function">
     
     <td>Function</td>
-    <td><code><a href="#stupefyEntities" class="internal-link" title="docutils.utils.smartquotes.stupefyEntities">stupefy​Entities</a></code></td>
-    <td>Parameter:  String (unicode or bytes). Returns:    The <code>text</code>, with each SmartyPants character translated to its ASCII counterpart.</td>
+    <td><code><a href="#stupefyEntities" class="internal-link" title="docutils.utils.smartquotes.stupefyEntities">stupefy<wbr></wbr>Entities</a></code></td>
+    <td>Parameter:  String (unicode or bytes). Returns:    The <code>text</code>, with each SmartyPants character translated to</td>
   </tr><tr class="function">
     
     <td>Function</td>
     <td><code><a href="#tokenize" class="internal-link" title="docutils.utils.smartquotes.tokenize">tokenize</a></code></td>
-    <td><span class="undocumented">No summary</span></td>
+    <td>Parameter:  String containing HTML markup. Returns:    An iterator that yields the tokens comprising the input</td>
   </tr><tr class="variable">
     
     <td>Variable</td>
-    <td><code><a href="#default_smartypants_attr" class="internal-link" title="docutils.utils.smartquotes.default_smartypants_attr">default​_smartypants​_attr</a></code></td>
+    <td><code><a href="#default_smartypants_attr" class="internal-link" title="docutils.utils.smartquotes.default_smartypants_attr">default<wbr></wbr>_smartypants<wbr></wbr>_attr</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="variable">
     
@@ -524,14 +1185,13 @@ by Benjamin GEIGER.</li>
     <td><span class="undocumented">Undocumented</span></td>
   </tr>
 </table>
-        
-
           
-      </div>
 
-      <div id="childList">
+            
+        </div>
 
-        <div class="basefunction">
+        <div id="childList">
+          <div class="basefunction">
   
   
   <a name="docutils.utils.smartquotes.educate_tokens">
@@ -542,16 +1202,21 @@ by Benjamin GEIGER.</li>
   </a>
   <div class="functionHeader">
     
-    <span class="py-keyword">def</span> <span class="py-defname">educate_tokens</span>(text_tokens, attr=<a href="#default_smartypants_attr" class="internal-link" title="docutils.utils.smartquotes.default_smartypants_attr">default_smartypants_attr</a>, language=<span class="rst-variable-quote">'</span><span class="rst-variable-string">en</span><span class="rst-variable-quote">'</span>):
-    <a class="sourceLink" href="https://sourceforge.net/p/docutils/code/HEAD/tree/tags/docutils-0.17.1//docutils/utils/smartquotes.py#L512">
+    
+    <span class="py-keyword">def</span> <span class="py-defname">educate_tokens</span><span class="function-signature">(text_tokens, attr=<a href="#default_smartypants_attr" class="internal-link" title="docutils.utils.smartquotes.default_smartypants_attr">default_smartypants_attr</a>, language=<span class="rst-variable-quote">'</span><span class="rst-variable-string">en</span><span class="rst-variable-quote">'</span>)</span>:
+    <a class="sourceLink" href="https://sourceforge.net/p/docutils/code/HEAD/tree/tags/docutils-0.17.1//docutils/utils/smartquotes.py#l512">
       
       (source)
+    </a>
+    <a class="headerLink" href="#educate_tokens" title="docutils.utils.smartquotes.educate_tokens">
+      
+      
+      ¶
     </a>
   </div>
   <div class="docstring functionBody">
     
-    
-    <div>Return iterator that "educates" the items of <code>text_tokens</code>.</div>
+    <div><p>Return iterator that "educates" the items of <code>text_tokens</code>.</p></div>
   </div>
 </div><div class="basefunction">
   
@@ -564,14 +1229,19 @@ by Benjamin GEIGER.</li>
   </a>
   <div class="functionHeader">
     
-    <span class="py-keyword">def</span> <span class="py-defname">educateBackticks</span>(text, language=<span class="rst-variable-quote">'</span><span class="rst-variable-string">en</span><span class="rst-variable-quote">'</span>):
-    <a class="sourceLink" href="https://sourceforge.net/p/docutils/code/HEAD/tree/tags/docutils-0.17.1//docutils/utils/smartquotes.py#L723">
+    
+    <span class="py-keyword">def</span> <span class="py-defname">educateBackticks</span><span class="function-signature">(text, language=<span class="rst-variable-quote">'</span><span class="rst-variable-string">en</span><span class="rst-variable-quote">'</span>)</span>:
+    <a class="sourceLink" href="https://sourceforge.net/p/docutils/code/HEAD/tree/tags/docutils-0.17.1//docutils/utils/smartquotes.py#l723">
       
       (source)
     </a>
+    <a class="headerLink" href="#educateBackticks" title="docutils.utils.smartquotes.educateBackticks">
+      
+      
+      ¶
+    </a>
   </div>
   <div class="docstring functionBody">
-    
     
     <div><p>Parameter:  String (unicode or bytes).
 Returns:    The <code>text</code>, with ``backticks'' -style double quotes</p>
@@ -592,14 +1262,19 @@ Example output: “Isn't this fun?“;</p>
   </a>
   <div class="functionHeader">
     
-    <span class="py-keyword">def</span> <span class="py-defname">educateDashes</span>(text):
-    <a class="sourceLink" href="https://sourceforge.net/p/docutils/code/HEAD/tree/tags/docutils-0.17.1//docutils/utils/smartquotes.py#L754">
+    
+    <span class="py-keyword">def</span> <span class="py-defname">educateDashes</span><span class="function-signature">(text)</span>:
+    <a class="sourceLink" href="https://sourceforge.net/p/docutils/code/HEAD/tree/tags/docutils-0.17.1//docutils/utils/smartquotes.py#l754">
       
       (source)
     </a>
+    <a class="headerLink" href="#educateDashes" title="docutils.utils.smartquotes.educateDashes">
+      
+      
+      ¶
+    </a>
   </div>
   <div class="docstring functionBody">
-    
     
     <div><p>Parameter:  String (unicode or bytes).
 Returns:    The <code>text</code>, with each instance of "--" translated to</p>
@@ -618,14 +1293,19 @@ an em-dash character.</blockquote>
   </a>
   <div class="functionHeader">
     
-    <span class="py-keyword">def</span> <span class="py-defname">educateDashesOldSchool</span>(text):
-    <a class="sourceLink" href="https://sourceforge.net/p/docutils/code/HEAD/tree/tags/docutils-0.17.1//docutils/utils/smartquotes.py#L766">
+    
+    <span class="py-keyword">def</span> <span class="py-defname">educateDashesOldSchool</span><span class="function-signature">(text)</span>:
+    <a class="sourceLink" href="https://sourceforge.net/p/docutils/code/HEAD/tree/tags/docutils-0.17.1//docutils/utils/smartquotes.py#l766">
       
       (source)
     </a>
+    <a class="headerLink" href="#educateDashesOldSchool" title="docutils.utils.smartquotes.educateDashesOldSchool">
+      
+      
+      ¶
+    </a>
   </div>
   <div class="docstring functionBody">
-    
     
     <div><p>Parameter:  String (unicode or bytes).
 Returns:    The <code>text</code>, with each instance of "--" translated to</p>
@@ -645,14 +1325,19 @@ an em-dash character.</blockquote>
   </a>
   <div class="functionHeader">
     
-    <span class="py-keyword">def</span> <span class="py-defname">educateDashesOldSchoolInverted</span>(text):
-    <a class="sourceLink" href="https://sourceforge.net/p/docutils/code/HEAD/tree/tags/docutils-0.17.1//docutils/utils/smartquotes.py#L779">
+    
+    <span class="py-keyword">def</span> <span class="py-defname">educateDashesOldSchoolInverted</span><span class="function-signature">(text)</span>:
+    <a class="sourceLink" href="https://sourceforge.net/p/docutils/code/HEAD/tree/tags/docutils-0.17.1//docutils/utils/smartquotes.py#l779">
       
       (source)
     </a>
+    <a class="headerLink" href="#educateDashesOldSchoolInverted" title="docutils.utils.smartquotes.educateDashesOldSchoolInverted">
+      
+      
+      ¶
+    </a>
   </div>
   <div class="docstring functionBody">
-    
     
     <div><p>Parameter:  String (unicode or bytes).
 Returns:    The <code>text</code>, with each instance of "--" translated to</p>
@@ -679,14 +1364,19 @@ Swartz for the idea.)</blockquote>
   </a>
   <div class="functionHeader">
     
-    <span class="py-keyword">def</span> <span class="py-defname">educateEllipses</span>(text):
-    <a class="sourceLink" href="https://sourceforge.net/p/docutils/code/HEAD/tree/tags/docutils-0.17.1//docutils/utils/smartquotes.py#L799">
+    
+    <span class="py-keyword">def</span> <span class="py-defname">educateEllipses</span><span class="function-signature">(text)</span>:
+    <a class="sourceLink" href="https://sourceforge.net/p/docutils/code/HEAD/tree/tags/docutils-0.17.1//docutils/utils/smartquotes.py#l799">
       
       (source)
     </a>
+    <a class="headerLink" href="#educateEllipses" title="docutils.utils.smartquotes.educateEllipses">
+      
+      
+      ¶
+    </a>
   </div>
   <div class="docstring functionBody">
-    
     
     <div><p>Parameter:  String (unicode or bytes).
 Returns:    The <code>text</code>, with each instance of "..." translated to</p>
@@ -707,18 +1397,23 @@ Example output: Huh&amp;#8230;?</p>
   </a>
   <div class="functionHeader">
     
-    <span class="py-keyword">def</span> <span class="py-defname">educateQuotes</span>(text, language=<span class="rst-variable-quote">'</span><span class="rst-variable-string">en</span><span class="rst-variable-quote">'</span>):
-    <a class="sourceLink" href="https://sourceforge.net/p/docutils/code/HEAD/tree/tags/docutils-0.17.1//docutils/utils/smartquotes.py#L628">
+    
+    <span class="py-keyword">def</span> <span class="py-defname">educateQuotes</span><span class="function-signature">(text, language=<span class="rst-variable-quote">'</span><span class="rst-variable-string">en</span><span class="rst-variable-quote">'</span>)</span>:
+    <a class="sourceLink" href="https://sourceforge.net/p/docutils/code/HEAD/tree/tags/docutils-0.17.1//docutils/utils/smartquotes.py#l628">
       
       (source)
+    </a>
+    <a class="headerLink" href="#educateQuotes" title="docutils.utils.smartquotes.educateQuotes">
+      
+      
+      ¶
     </a>
   </div>
   <div class="docstring functionBody">
     
-    
-    <div><dl class="rst-docutils">
+    <div><p><dl class="rst-docutils">
 <dt>Parameter:  - text string (unicode or bytes).</dt>
-<dd><ul class="rst-first rst-last rst-simple">
+<dd><ul class="rst-simple rst-first rst-last">
 <li>language (<code>BCP 47</code> language tag.)</li>
 </ul>
 </dd>
@@ -726,7 +1421,7 @@ Example output: Huh&amp;#8230;?</p>
 <p>Returns:    The <code>text</code>, with "educated" curly quote characters.</p>
 <p>Example input:  "Isn't this fun?"
 Example output: “Isn’t this fun?“;</p>
-</div>
+</p></div>
   </div>
 </div><div class="basefunction">
   
@@ -739,14 +1434,19 @@ Example output: “Isn’t this fun?“;</p>
   </a>
   <div class="functionHeader">
     
-    <span class="py-keyword">def</span> <span class="py-defname">educateSingleBackticks</span>(text, language=<span class="rst-variable-quote">'</span><span class="rst-variable-string">en</span><span class="rst-variable-quote">'</span>):
-    <a class="sourceLink" href="https://sourceforge.net/p/docutils/code/HEAD/tree/tags/docutils-0.17.1//docutils/utils/smartquotes.py#L738">
+    
+    <span class="py-keyword">def</span> <span class="py-defname">educateSingleBackticks</span><span class="function-signature">(text, language=<span class="rst-variable-quote">'</span><span class="rst-variable-string">en</span><span class="rst-variable-quote">'</span>)</span>:
+    <a class="sourceLink" href="https://sourceforge.net/p/docutils/code/HEAD/tree/tags/docutils-0.17.1//docutils/utils/smartquotes.py#l738">
       
       (source)
     </a>
+    <a class="headerLink" href="#educateSingleBackticks" title="docutils.utils.smartquotes.educateSingleBackticks">
+      
+      
+      ¶
+    </a>
   </div>
   <div class="docstring functionBody">
-    
     
     <div><p>Parameter:  String (unicode or bytes).
 Returns:    The <code>text</code>, with `backticks' -style single quotes</p>
@@ -767,14 +1467,19 @@ Example output: ‘Isn’t this fun?’</p>
   </a>
   <div class="functionHeader">
     
-    <span class="py-keyword">def</span> <span class="py-defname">processEscapes</span>(text, restore=False):
-    <a class="sourceLink" href="https://sourceforge.net/p/docutils/code/HEAD/tree/tags/docutils-0.17.1//docutils/utils/smartquotes.py#L839">
+    
+    <span class="py-keyword">def</span> <span class="py-defname">processEscapes</span><span class="function-signature">(text, restore=False)</span>:
+    <a class="sourceLink" href="https://sourceforge.net/p/docutils/code/HEAD/tree/tags/docutils-0.17.1//docutils/utils/smartquotes.py#l839">
       
       (source)
     </a>
+    <a class="headerLink" href="#processEscapes" title="docutils.utils.smartquotes.processEscapes">
+      
+      
+      ¶
+    </a>
   </div>
   <div class="docstring functionBody">
-    
     
     <div><p>Parameter:  String (unicode or bytes).
 Returns:    The <code>text</code>, with after processing the following backslash</p>
@@ -803,16 +1508,21 @@ quote or other character to appear.</p>
   </a>
   <div class="functionHeader">
     
-    <span class="py-keyword">def</span> <span class="py-defname">smartyPants</span>(text, attr=<a href="#default_smartypants_attr" class="internal-link" title="docutils.utils.smartquotes.default_smartypants_attr">default_smartypants_attr</a>, language=<span class="rst-variable-quote">'</span><span class="rst-variable-string">en</span><span class="rst-variable-quote">'</span>):
-    <a class="sourceLink" href="https://sourceforge.net/p/docutils/code/HEAD/tree/tags/docutils-0.17.1//docutils/utils/smartquotes.py#L505">
+    
+    <span class="py-keyword">def</span> <span class="py-defname">smartyPants</span><span class="function-signature">(text, attr=<a href="#default_smartypants_attr" class="internal-link" title="docutils.utils.smartquotes.default_smartypants_attr">default_smartypants_attr</a>, language=<span class="rst-variable-quote">'</span><span class="rst-variable-string">en</span><span class="rst-variable-quote">'</span>)</span>:
+    <a class="sourceLink" href="https://sourceforge.net/p/docutils/code/HEAD/tree/tags/docutils-0.17.1//docutils/utils/smartquotes.py#l505">
       
       (source)
+    </a>
+    <a class="headerLink" href="#smartyPants" title="docutils.utils.smartquotes.smartyPants">
+      
+      
+      ¶
     </a>
   </div>
   <div class="docstring functionBody">
     
-    
-    <div>Main function for "traditional" use.</div>
+    <div><p>Main function for "traditional" use.</p></div>
   </div>
 </div><div class="basefunction">
   
@@ -825,14 +1535,19 @@ quote or other character to appear.</p>
   </a>
   <div class="functionHeader">
     
-    <span class="py-keyword">def</span> <span class="py-defname">stupefyEntities</span>(text, language=<span class="rst-variable-quote">'</span><span class="rst-variable-string">en</span><span class="rst-variable-quote">'</span>):
-    <a class="sourceLink" href="https://sourceforge.net/p/docutils/code/HEAD/tree/tags/docutils-0.17.1//docutils/utils/smartquotes.py#L814">
+    
+    <span class="py-keyword">def</span> <span class="py-defname">stupefyEntities</span><span class="function-signature">(text, language=<span class="rst-variable-quote">'</span><span class="rst-variable-string">en</span><span class="rst-variable-quote">'</span>)</span>:
+    <a class="sourceLink" href="https://sourceforge.net/p/docutils/code/HEAD/tree/tags/docutils-0.17.1//docutils/utils/smartquotes.py#l814">
       
       (source)
     </a>
+    <a class="headerLink" href="#stupefyEntities" title="docutils.utils.smartquotes.stupefyEntities">
+      
+      
+      ¶
+    </a>
   </div>
   <div class="docstring functionBody">
-    
     
     <div><p>Parameter:  String (unicode or bytes).
 Returns:    The <code>text</code>, with each SmartyPants character translated to</p>
@@ -853,14 +1568,19 @@ Example output: "Hello -- world."</p>
   </a>
   <div class="functionHeader">
     
-    <span class="py-keyword">def</span> <span class="py-defname">tokenize</span>(text):
-    <a class="sourceLink" href="https://sourceforge.net/p/docutils/code/HEAD/tree/tags/docutils-0.17.1//docutils/utils/smartquotes.py#L871">
+    
+    <span class="py-keyword">def</span> <span class="py-defname">tokenize</span><span class="function-signature">(text)</span>:
+    <a class="sourceLink" href="https://sourceforge.net/p/docutils/code/HEAD/tree/tags/docutils-0.17.1//docutils/utils/smartquotes.py#l871">
       
       (source)
     </a>
+    <a class="headerLink" href="#tokenize" title="docutils.utils.smartquotes.tokenize">
+      
+      
+      ¶
+    </a>
   </div>
   <div class="docstring functionBody">
-    
     
     <div><p>Parameter:  String containing HTML markup.
 Returns:    An iterator that yields the tokens comprising the input</p>
@@ -872,7 +1592,7 @@ two-element tuple; the first is either 'tag' or 'text';
 the second is the actual value.</blockquote>
 <dl class="rst-docutils">
 <dt>Based on the _tokenize() subroutine from Brad Choate's MTRegex plugin.</dt>
-<dd>&lt;<a class="rst-reference external" href="http://www.bradchoate.com/past/mtregex.php" target="_top">http://www.bradchoate.com/past/mtregex.php</a>&gt;</dd>
+<dd>&lt;<a class="rst-external rst-reference" href="http://www.bradchoate.com/past/mtregex.php" target="_top">http://www.bradchoate.com/past/mtregex.php</a>&gt;</dd>
 </dl>
 </div>
   </div>
@@ -888,13 +1608,17 @@ the second is the actual value.</blockquote>
   <div class="functionHeader">
     
     <span class="py-defname">default_smartypants_attr</span>: <code>str</code> =
-    <a class="sourceLink" href="https://sourceforge.net/p/docutils/code/HEAD/tree/tags/docutils-0.17.1//docutils/utils/smartquotes.py#L382">
+    <a class="sourceLink" href="https://sourceforge.net/p/docutils/code/HEAD/tree/tags/docutils-0.17.1//docutils/utils/smartquotes.py#l382">
       
       (source)
     </a>
+    <a class="headerLink" href="#default_smartypants_attr" title="docutils.utils.smartquotes.default_smartypants_attr">
+      
+      
+      ¶
+    </a>
   </div>
   <div class="functionBody">
-    
     
     <div><p class="undocumented">Undocumented</p></div>
     
@@ -911,31 +1635,44 @@ the second is the actual value.</blockquote>
   <div class="functionHeader">
     
     <span class="py-defname">options</span>: <code>str</code> =
-    <a class="sourceLink" href="https://sourceforge.net/p/docutils/code/HEAD/tree/tags/docutils-0.17.1//docutils/utils/smartquotes.py#L320">
+    <a class="sourceLink" href="https://sourceforge.net/p/docutils/code/HEAD/tree/tags/docutils-0.17.1//docutils/utils/smartquotes.py#l320">
       
       (source)
     </a>
+    <a class="headerLink" href="#options" title="docutils.utils.smartquotes.options">
+      
+      
+      ¶
+    </a>
   </div>
   <div class="functionBody">
-    
     
     <div><p class="undocumented">Undocumented</p></div>
     
   </div>
 </div>
-
+        </div>
+      
       </div>
     </div>
 
     <footer class="navbar navbar-default">
+
   
-  <div class="container">
+  <div class="container-fluid">
     <a href="index.html">API Documentation</a> for <a href="https://docutils.sourceforge.io/" class="projecthome">docutils-0.17.1</a>,
   generated by <a href="https://github.com/twisted/pydoctor/">pydoctor</a>
-    22.2.2.dev0 at 2025-02-28 00:01:05.
+    24.11.2 at 2025-02-28 00:02:26.
   </div>
-</footer>
 
+  <!-- Search related scripts needs to be loaded at the end of HTML 
+    parsing not to introduce overhead and display HTML data asap -->
+  <script src="ajax.js" type="text/javascript"></script>
+  <script src="searchlib.js" type="text/javascript"></script>
+  <script src="search.js" type="text/javascript"></script>
+
+</footer>
+  
     <script src="pydoctor.js" type="text/javascript"></script>
 
   </body>
